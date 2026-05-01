@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/**
+ * Mister Pellets — Design Tokens
+ * Source : docs/mister-pellets-brief-fullcode.md §2
+ * Règle 60/30/10 : 60% beige, 30% vert deep, 10% orange flame, <1% bark
+ */
+
+:root {
+  /* === VERTS === */
+  --mp-green-darkest: #102916;
+  --mp-green-deep:    #174724;
+  --mp-green-mid:     #377038;
+  --mp-green-light:   #508943;
+
+  /* === ORANGES === */
+  --mp-orange-flame:  #F28A20;
+  --mp-orange-warm:   #FDB842;
+  --mp-orange-light:  #FFE4D1;
+
+  /* === BEIGES (FOND DOMINANT) === */
+  --mp-cream:         #FAF7F0;
+  --mp-beige:         #F4F1E8;
+  --mp-beige-warm:    #EAE0CB;
+  --mp-sand:          #C8B68F;
+
+  /* === NEUTRES === */
+  --mp-ink:           #14241B;
+  --mp-ink-soft:      #4A5A50;
+  --mp-white:         #FFFFFF;
+  --mp-bark:          #2A1F15;
+
+  /* === SEMANTIC ALIAS === */
+  --background: var(--mp-cream);
+  --foreground: var(--mp-ink);
+}
+
+@theme inline {
+  /* Couleurs exposées comme classes Tailwind : bg-mp-green-deep, text-mp-orange-flame, etc. */
+  --color-mp-green-darkest: var(--mp-green-darkest);
+  --color-mp-green-deep:    var(--mp-green-deep);
+  --color-mp-green-mid:     var(--mp-green-mid);
+  --color-mp-green-light:   var(--mp-green-light);
+
+  --color-mp-orange-flame:  var(--mp-orange-flame);
+  --color-mp-orange-warm:   var(--mp-orange-warm);
+  --color-mp-orange-light:  var(--mp-orange-light);
+
+  --color-mp-cream:         var(--mp-cream);
+  --color-mp-beige:         var(--mp-beige);
+  --color-mp-beige-warm:    var(--mp-beige-warm);
+  --color-mp-sand:          var(--mp-sand);
+
+  --color-mp-ink:           var(--mp-ink);
+  --color-mp-ink-soft:      var(--mp-ink-soft);
+  --color-mp-white:         var(--mp-white);
+  --color-mp-bark:          var(--mp-bark);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* === FONTS (next/font expose ces variables au html via layout.tsx) === */
+  --font-display: var(--font-fraunces);
+  --font-sans:    var(--font-inter-tight);
+
+  /* === RADIUS === */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-full: 9999px;
+
+  /* === SHADOWS === */
+  --shadow-sm:   0 2px 8px  rgba(20, 36, 27, 0.06);
+  --shadow-md:   0 8px 24px rgba(20, 36, 27, 0.10);
+  --shadow-lg:   0 16px 48px rgba(20, 36, 27, 0.16);
+  --shadow-glow: 0 8px 32px rgba(242, 138, 32, 0.32);
+
+  /* === BREAKPOINTS (info — Tailwind v4 défauts conviennent) === */
+  /* sm 640 / md 768 / lg 1024 / xl 1280 / 2xl 1536 */
+}
+
+/* === BASE === */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, .mp-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--mp-green-deep);
+}
+
+h2 { line-height: 1.1;  }
+h3 { line-height: 1.2;  font-weight: 600; }
+h4, h5, h6 {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 600;
+  color: var(--mp-green-deep);
+}
+
+/* Mots-clés italiques accentués (cf. brief : "le bon poêle, *installé chez vous*") */
+.mp-italic {
+  font-style: italic;
+  color: var(--mp-orange-flame);
+  font-weight: 500;
+}
+
+/* Liens par défaut */
+a {
+  color: var(--mp-green-deep);
+  text-decoration: none;
+  transition: color 200ms ease-out;
+}
+a:hover {
+  color: var(--mp-orange-flame);
+}
+
+/* Selection */
+::selection {
+  background: var(--mp-orange-light);
+  color: var(--mp-ink);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
