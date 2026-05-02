@@ -80,6 +80,34 @@
   /* sm 640 / md 768 / lg 1024 / xl 1280 / 2xl 1536 */
 }
 
+/* === PROTECTION VIEWPORT MOBILE — empêche tout débordement horizontal ===
+ * Hotfix V1.1 §H2 : régression de débordement horizontal observée sur mobile.
+ * Règles préventives strictes (cf. doc §H2.4).
+ */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Box-sizing universel (Tailwind preflight le fait déjà, redondance défensive). */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Tous les médias sont fluides par défaut. */
+img, video, iframe, embed, object {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Coupure des longues chaînes (URLs, emails, mots techniques) qui forceraient
+ * la viewport à s'élargir sur mobile. Volontairement limité aux conteneurs
+ * de texte courant (pas aux titres en display, pour préserver la hiérarchie
+ * visuelle). */
+p, li, blockquote, a, span.break-words-mp {
+  overflow-wrap: anywhere;
+}
+
 /* === BASE === */
 body {
   background: var(--background);
@@ -88,6 +116,21 @@ body {
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+/* === FOOTER (Hotfix V1.1 §H3) ===
+ * Padding-bottom mobile : 96 px (NavbarSticky flottante 72 px + 24 px de
+ * respiration) + safe-area iOS. Sur lg+ la navbar mobile disparaît, on revient
+ * à un padding standard.
+ */
+.footer-mp {
+  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+}
+@media (min-width: 1024px) {
+  .footer-mp {
+    padding-bottom: 2rem;
+  }
 }
 
 h1, h2, h3, .mp-display {
