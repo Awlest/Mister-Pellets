@@ -10,9 +10,9 @@ import { ARTICLES, ARTICLE_CATEGORIES, CATEGORY_LABELS } from "@/lib/articles";
 import { buildPageMetadata, buildBreadcrumbSchema, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Blog poêle à pellets — articles techniques & guides Wallonie",
+  title: "Blog poêle à pellets, articles techniques & guides Wallonie",
   description:
-    "Guides d'achat, comparatifs marques, primes Wallonie 2026, dépannage et entretien. Le blog technique de Mister Pellets, écrit par les techniciens — pas par un rédacteur générique.",
+    "Guides d'achat, comparatifs marques, primes Wallonie 2026, dépannage et entretien. Le blog technique de Mister Pellets, écrit par les techniciens, pas par un rédacteur générique.",
   path: "/blog",
   keywords: [
     "blog poêle à pellets",
@@ -103,7 +103,7 @@ export default function BlogHubPage() {
         </section>
       )}
 
-      {/* Filtres catégories (visuels uniquement, scroll vers articles) */}
+      {/* Filtres catégories, contraste WCAG AA (cf. doc §8) */}
       <section className="bg-mp-beige py-6">
         <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
           <div className="flex flex-wrap gap-2 items-center">
@@ -112,13 +112,13 @@ export default function BlogHubPage() {
               const count = ARTICLES.filter((a) => a.category === cat.value).length;
               if (count === 0) return null;
               return (
-                <Badge
+                <span
                   key={cat.value}
-                  variant="secondary"
-                  className="bg-mp-cream border border-mp-sand/40"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-mp-cream border border-mp-sand text-mp-green-deep px-3 py-1 text-xs font-semibold"
                 >
-                  {cat.label} <span className="ml-1 opacity-60">({count})</span>
-                </Badge>
+                  {cat.label}
+                  <span className="text-mp-ink-soft font-medium">({count})</span>
+                </span>
               );
             })}
           </div>

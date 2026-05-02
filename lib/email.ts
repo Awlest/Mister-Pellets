@@ -102,7 +102,7 @@ export async function notifyInternalQuote(quote: {
 
   return sendEmail({
     to: TO_INTERNAL,
-    subject: `[Devis] ${quote.name} (${quote.postalCode}) — ${quote.budget}`,
+    subject: `[Devis] ${quote.name} (${quote.postalCode}), ${quote.budget}`,
     html,
     replyTo: quote.email,
   });
@@ -145,7 +145,7 @@ export async function notifyInternalContact(message: {
 
   return sendEmail({
     to: TO_INTERNAL,
-    subject: `[Contact] ${message.name} — ${message.subject}`,
+    subject: `[Contact] ${message.name}, ${message.subject}`,
     html,
     replyTo: message.email,
   });
@@ -175,7 +175,7 @@ export async function confirmCustomerOrder(order: {
 
   return sendEmail({
     to: order.customerEmail,
-    subject: `Confirmation de commande ${order.orderNumber} — Mister Pellets`,
+    subject: `Confirmation de commande ${order.orderNumber}, Mister Pellets`,
     html,
   });
 }

@@ -40,7 +40,7 @@ interface TestimonialsProps {
 }
 
 /**
- * 3 témoignages clients (carrousel à venir Phase 5 — pour l'instant grid simple).
+ * 3 témoignages clients (carrousel à venir Phase 5, pour l'instant grid simple).
  * Cf. brief §3.2 sec 10.
  */
 export function Testimonials({

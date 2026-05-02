@@ -127,7 +127,7 @@ export function CartDrawer() {
                 <Link href="/demande-de-devis" className="text-mp-orange-flame underline" onClick={close}>
                   formulaire de devis
                 </Link>
-                {" "}— c'est plus précis et la prime Wallonie est calculée.
+                . C'est plus précis et la prime Wallonie est calculée.
               </p>
             </div>
 

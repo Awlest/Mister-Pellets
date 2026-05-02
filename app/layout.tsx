@@ -31,7 +31,7 @@ const allowIndex = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Poêle à pellets en Wallonie — Vente & pose | Mister Pellets",
+    default: "Poêle à pellets en Wallonie, Vente & pose | Mister Pellets",
     template: "%s | Mister Pellets",
   },
   description:
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     locale: SITE_LOCALE,
     siteName: SITE_NAME,
     url: SITE_URL,
-    title: "Poêle à pellets en Wallonie — Vente & pose | Mister Pellets",
+    title: "Poêle à pellets en Wallonie, Vente & pose | Mister Pellets",
     description:
       "61 modèles, pose en 1 jour, primes incluses, livraison gratuite 50 km autour de Fernelmont.",
     images: [
@@ -74,13 +74,13 @@ export const metadata: Metadata = {
         url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Mister Pellets — Poêle à pellets Wallonie",
+        alt: "Mister Pellets, Poêle à pellets Wallonie",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mister Pellets — Poêle à pellets Wallonie",
+    title: "Mister Pellets, Poêle à pellets Wallonie",
     description: "Vente, pose et entretien de poêles à pellets en Wallonie.",
     images: [DEFAULT_OG_IMAGE],
   },
@@ -132,7 +132,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${interTight.variable} h-full antialiased`}
     >
       <head>
-        {/* Schemas globaux SSR — chaque page peut ajouter ses propres schemas en plus */}
+        {/* Schemas globaux SSR, chaque page peut ajouter ses propres schemas en plus */}
         <JsonLd data={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]} />
       </head>
       <body className="min-h-full flex flex-col bg-mp-cream text-mp-ink">

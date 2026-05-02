@@ -19,8 +19,8 @@ const COOKIES = [
     category: "Analytiques",
     description: "Mesure d'audience anonyme. Activés uniquement après ton consentement.",
     items: [
-      { name: "_ga, _ga_*", purpose: "Google Analytics 4 — pages vues, durée, parcours", duration: "26 mois" },
-      { name: "_clck, _clsk", purpose: "Microsoft Clarity — heatmaps anonymes", duration: "12 mois" },
+      { name: "_ga, _ga_*", purpose: "Google Analytics 4, pages vues, durée, parcours", duration: "26 mois" },
+      { name: "_clck, _clsk", purpose: "Microsoft Clarity, heatmaps anonymes", duration: "12 mois" },
     ],
   },
   {

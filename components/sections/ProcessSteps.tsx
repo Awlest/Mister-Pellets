@@ -38,7 +38,7 @@ export function ProcessSteps({ title = "Comment ça marche", steps }: ProcessSte
                 {step.description}
               </p>
 
-              {/* Ligne connector — desktop only */}
+              {/* Ligne connector, desktop only */}
               {i < steps.length - 1 && (
                 <span
                   aria-hidden

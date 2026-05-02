@@ -124,7 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority: 0.6,
         }));
     } catch {
-      // Collection Articles pas encore migrée — fallback silencieux
+      // Collection Articles pas encore migrée, fallback silencieux
     }
   } catch (err) {
     // Payload non joignable au build → on retourne les pages statiques + demo

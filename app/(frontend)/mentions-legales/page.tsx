@@ -30,7 +30,7 @@ export default function MentionsLegalesPage() {
               <br />
               Rue des Fagotis 3A
               <br />
-              5380 Fernelmont — Belgique
+              5380 Fernelmont, Belgique
               <br />
               TVA : BE 0656.514.212
               <br />

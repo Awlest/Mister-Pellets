@@ -5,9 +5,9 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { StatsGrid } from "@/components/sections/StatsGrid";
 
 export const metadata: Metadata = {
-  title: "À propos — Mister Pellets, installateur poêles à pellets Wallonie",
+  title: "À propos, Mister Pellets, installateur poêles à pellets Wallonie",
   description:
-    "Mister Pellets installe des poêles à pellets en Wallonie depuis 2018. Basés à Fernelmont, équipe certifiée RGIE, 400+ installations, 4.9★ sur Google.",
+    "Mister Pellets installe des poêles à pellets en Wallonie depuis 2016. Basés à Fernelmont (Awlest SRL), 400+ installations, 4.9 étoiles sur Google.",
 };
 
 export default function AProposPage() {
@@ -20,7 +20,7 @@ export default function AProposPage() {
             Installer le bon poêle, <span className="mp-italic">comme il faut</span>, à Fernelmont
           </>
         }
-        description="Mister Pellets, c'est une petite équipe basée en Wallonie, qui prend le temps de bien faire le travail. Depuis 2018, on a installé plus de 400 poêles, dans des maisons de toutes tailles, avec des contraintes parfois compliquées. Voilà comment on bosse."
+        description="Mister Pellets, c'est une petite équipe basée en Wallonie, qui prend le temps de bien faire le travail. Depuis 2016, on a installé plus de 400 poêles, dans des maisons de toutes tailles, avec des contraintes parfois compliquées. Voilà comment on bosse."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "À propos" },
@@ -35,20 +35,20 @@ export default function AProposPage() {
           </h2>
           <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
             <p>
-              En 2018, on cherchait à installer un poêle à pellets pour une maison rurale en Hesbaye namuroise. On
-              voulait quelque chose de bien fait, qui dure, avec des conseils honnêtes — pas un commercial qui pousse
+              En 2016, on cherchait à installer un poêle à pellets pour une maison rurale en Hesbaye namuroise. On
+              voulait quelque chose de bien fait, qui dure, avec des conseils honnêtes, pas un commercial qui pousse
               le modèle qui rapporte le plus de marge.
             </p>
             <p>
-              Ce qu'on a trouvé sur le marché belge ne nous a pas convaincu : trop de promesses vagues, des installateurs
+              Ce qu'on a trouvé sur le marché belge ne nous a pas convaincu. Trop de promesses vagues, des installateurs
               débordés qui posaient sans vraiment regarder la maison, des SAV qui disparaissaient après la pose. On
-              s'est dit qu'on pouvait faire mieux — alors on a monté Mister Pellets.
+              s'est dit qu'on pouvait faire mieux. Alors on a monté Mister Pellets.
             </p>
             <p>
               Aujourd'hui, on est une petite équipe à Fernelmont. On installe entre 80 et 120 poêles par an, on connaît
               les maisons wallonnes (mosanes, fermettes rénovées, BBC modernes), et on dit non à un projet quand on
               pense que c'est pas le bon choix pour le client. Ça nous a coûté quelques ventes mais c'est ce qui fait
-              qu'on a 4.9 sur 200 avis Google. C'est ce qui nous fait rentrer le matin.
+              qu'on a 4,9 sur 200 avis Google. C'est ce qui nous fait rentrer le matin.
             </p>
           </div>
         </div>
@@ -57,12 +57,34 @@ export default function AProposPage() {
       <StatsGrid
         title="Quelques chiffres"
         stats={[
-          { value: "+400", label: "installations", detail: "depuis 2018" },
-          { value: "4.9", label: "/ 5 sur Google", detail: "200 avis" },
-          { value: "5", label: "ans de garantie", detail: "incluse" },
-          { value: "RGIE", label: "certifiés", detail: "obligatoire en Belgique" },
+          { value: "+400", label: "installations", detail: "depuis 2016" },
+          { value: "4,9", label: "/ 5 sur Google", detail: "200 avis" },
+          { value: "5 ans", label: "de garantie", detail: "incluse sur la pose" },
+          { value: "50 km", label: "autour de Fernelmont", detail: "livraison gratuite" },
         ]}
       />
+
+      {/* Mister Pellets / Awlest, clarification factuelle (autorisée ici, cf. brief §9.4) */}
+      <section className="bg-mp-cream py-16 md:py-20">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6 prose prose-lg max-w-none">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+            Mister Pellets et Awlest, c'est quoi le lien ?
+          </h2>
+          <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
+            <p>
+              Mister Pellets est la marque commerciale spécialisée dans les poêles à pellets d'Awlest SRL,
+              société active en Wallonie depuis 2016. Concrètement, quand tu reçois un devis ou une facture
+              de notre part, le nom <strong>Awlest</strong> apparaît sur le document, parce que c'est la
+              société qui porte juridiquement l'activité.
+            </p>
+            <p>
+              Mister Pellets, c'est le visage métier. Awlest, c'est la structure légale derrière. Même équipe,
+              même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale, pas de
+              sous-traitance cachée.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Comment on bosse */}
       <section className="bg-mp-beige py-16 md:py-24">
@@ -89,6 +111,34 @@ export default function AProposPage() {
             <p>
               <strong>On reste joignable.</strong> Le SAV n'est pas un service séparé qui demande 3 semaines pour passer.
               Si ton poêle a un souci 18 mois après la pose, tu nous appelles, on vient. C'est notre nom qu'on protège.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Cadre légal de l'activité */}
+      <section className="bg-mp-cream py-12 md:py-16">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6 prose prose-lg max-w-none">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+            Le cadre dans lequel on bosse
+          </h2>
+          <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
+            <p>
+              Awlest SRL est inscrite à la Banque-Carrefour des Entreprises sous le numéro
+              BE 0656.514.212, avec accès à la profession requis pour la pose et l'entretien d'appareils
+              de chauffage. Notre siège est au Rue des Fagotis 3A, 5380 Fernelmont (province de Namur).
+            </p>
+            <p>
+              Côté matériel, on ne distribue que des poêles à pellets conformes au règlement écoconception
+              2022 (lot 20), avec rendement saisonnier d'au moins 87 %. C'est la condition d'éligibilité aux
+              primes Région wallonne, et c'est aussi notre filtre de sélection à l'amont. Pas de stock B,
+              pas de modèles déclassés.
+            </p>
+            <p>
+              Pour la pose, l'attestation de conformité de l'installation et la facture détaillée te sont
+              remises à la fin du chantier. Ce sont les deux pièces que la Région demande pour traiter
+              ton dossier de prime. On rédige aussi le récapitulatif technique (puissance, type d'évacuation,
+              modèle exact) pour qu'il soit téléversable directement sur Mon Espace Wallonie.
             </p>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 
 export const metadata: Metadata = {
-  title: "Nos marques de poêles à pellets — Edilkamin · EK63 · Dielle · Ferlux",
+  title: "Nos marques de poêles à pellets, Edilkamin · EK63 · Dielle · Ferlux",
   description:
     "4 marques distribuées par Mister Pellets en Wallonie : Edilkamin (premium italien), EK63 (connecté), Dielle (hydro), Ferlux (budget). Comparaison et conseils.",
 };

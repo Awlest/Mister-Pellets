@@ -1,41 +1,383 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Star, Clock, MapPin, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { BrandsGrid } from "@/components/sections/BrandsGrid";
+import { ProcessSteps } from "@/components/sections/ProcessSteps";
+import { PrimesBlock } from "@/components/sections/PrimesBlock";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { FAQAccordion } from "@/components/sections/FAQAccordion";
+import { CTAFinal } from "@/components/sections/CTAFinal";
+import { JsonLd, LOCAL_BUSINESS_SCHEMA } from "@/components/seo/JsonLd";
+import { buildFAQSchema } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Poêle à pellets en Wallonie, vente, pose, entretien | Mister Pellets",
+  description:
+    "61 modèles Edilkamin, EK63, Dielle, Ferlux. Pose en 1 jour, prime Wallonie 2026 jusqu'à 960 €, livraison gratuite 50 km autour de Fernelmont. Devis en 60 secondes.",
+};
+
+const FAQ_HOMEPAGE = [
+  {
+    question: "Combien coûte un poêle à pellets installé en Wallonie ?",
+    answer:
+      "Pour une maison standard avec conduit existant, compte entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. La Prime Habitation Wallonie 2026 ramène 160 à 960 € de cette facture selon ta catégorie de revenus.",
+  },
+  {
+    question: "Quelle puissance de poêle pour quelle surface ?",
+    answer:
+      "La règle de base en Wallonie : 1 kW pour 10 m² si la maison est PEB B, 1 kW pour 12-15 m² en PEB A, 1 kW pour 7-8 m² en PEB E ou pire. Une maison de 100 m² PEB C demande donc autour de 12 kW. On affine toujours sur place avant le devis : surface, isolation, hauteur sous plafond, conduit existant, mode de vie.",
+  },
+  {
+    question: "Combien de temps prend la pose d'un poêle à pellets ?",
+    answer:
+      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec toi en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours.",
+  },
+  {
+    question: "Faut-il un audit logement pour la prime Wallonie 2026 ?",
+    answer:
+      "Oui, depuis le 14 février 2025, un audit logement préalable est obligatoire pour la quasi-totalité des primes Habitation, y compris pour un poêle à pellets isolé. Coût 800 à 1 200 € TVAC, validité 5 ans. C'est un changement majeur par rapport à l'ancien régime.",
+  },
+  {
+    question: "Le SAV est-il assuré après la pose ?",
+    answer:
+      "Oui. Garantie 5 ans pièces et main d'œuvre incluse, intervention SAV sous 48 à 72 heures dans la zone Fernelmont et 50 km autour. On reste l'interlocuteur unique pour l'entretien annuel obligatoire et les éventuelles révisions techniques. Pas de SAV sous-traité à un tiers.",
+  },
+  {
+    question: "Vous livrez et posez partout en Wallonie ?",
+    answer:
+      "Livraison gratuite dans un rayon de 50 km autour de notre showroom de Fernelmont (Namur, Andenne, Wavre, Charleroi, Huy, Liège partiellement). Au-delà, on se déplace toujours mais avec une participation aux frais de déplacement chiffrée dans le devis. On couvre les 5 provinces wallonnes au cas par cas.",
+  },
+  {
+    question: "Quelle marque de poêle est la plus fiable ?",
+    answer:
+      "On distribue 4 marques après les avoir vraiment testées sur la durée. Edilkamin (Italie, 1963) reste la référence premium pour la durabilité et le SAV pièces. EK63 offre le meilleur rapport qualité-prix avec connectivité native. Dielle est notre spécialiste hydro pour remplacer une chaudière. Ferlux est le choix budget fiable, sans gadget. Notre rôle est de te diriger vers celle qui colle à ton projet, pas de pousser celle qui rapporte le plus.",
+  },
+];
 
 export default function HomePage() {
+  const faqSchema = buildFAQSchema(FAQ_HOMEPAGE);
+
   return (
-    <main className="flex min-h-[80vh] flex-col items-center justify-center px-6 py-16 gap-10">
-      <Image
-        src="/logo-mister-pellets-full.svg"
-        alt="Mister Pellets"
-        width={280}
-        height={280}
-        priority
-        className="w-48 md:w-64 h-auto"
+    <>
+      <JsonLd data={[LOCAL_BUSINESS_SCHEMA, faqSchema]} />
+
+      {/* HERO, logo central agrandi, peu d'espace au-dessus, enchaîne directement */}
+      <section className="relative overflow-hidden bg-mp-cream">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 -top-24 h-[500px] w-[500px] rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(242,138,32,0.18) 0%, rgba(242,138,32,0) 70%)",
+          }}
+        />
+
+        <div className="container mx-auto max-w-[1280px] px-4 md:px-6 pt-8 md:pt-12 pb-10 md:pb-16 relative">
+          {/* Logo agrandi (cf. doc §1.2) */}
+          <div className="flex justify-center mb-6 md:mb-8">
+            <Image
+              src="/logo-mister-pellets-full.svg"
+              alt="Mister Pellets"
+              width={320}
+              height={320}
+              priority
+              className="w-40 sm:w-48 md:w-56 lg:w-64 h-auto"
+            />
+          </div>
+
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-mp-green-deep mb-5">
+              Le bon poêle à pellets, <span className="mp-italic">installé chez vous</span> en Wallonie
+            </h1>
+
+            <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 max-w-2xl mx-auto">
+              61 modèles Edilkamin, EK63, Dielle et Ferlux. Diagnostic à domicile gratuit, devis
+              chiffré sous 48 heures, pose en une journée, Prime Habitation Wallonie 2026 incluse
+              dans le calcul. Basés à Fernelmont, on couvre les 5 provinces wallonnes depuis 2016.
+            </p>
+
+            <div className="flex flex-wrap gap-3 justify-center mb-7">
+              <Button asChild variant="primary" size="lg">
+                <Link href="/demande-de-devis">Devis en 60 secondes</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/boutique">Voir la boutique</Link>
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap gap-x-5 gap-y-2 items-center justify-center text-sm font-medium text-mp-ink-soft">
+              <span className="inline-flex items-center gap-2">
+                <span className="font-bold text-mp-green-deep text-base">+400</span>
+                installations
+              </span>
+              <span className="text-mp-sand">·</span>
+              <span className="inline-flex items-center gap-2">
+                <Star className="h-4 w-4 text-mp-orange-warm fill-mp-orange-warm" />
+                <span className="font-bold text-mp-green-deep text-base">4,9</span>
+                <span>/ 200 avis</span>
+              </span>
+              <span className="text-mp-sand">·</span>
+              <span className="inline-flex items-center gap-2">
+                <Clock className="h-4 w-4 text-mp-green-mid" />
+                Pose en 1 jour
+              </span>
+              <span className="text-mp-sand">·</span>
+              <span className="inline-flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-mp-green-mid" />
+                50 km autour de Fernelmont
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION CHOIX, réponse directe en H2 (GEO) */}
+      <section className="bg-mp-beige py-12 md:py-16">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+            Comment choisir son poêle à pellets en Wallonie ?
+          </h2>
+          <div className="space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
+            <p>
+              Le bon choix dépend de quatre paramètres concrets : la surface à chauffer, le niveau
+              d'isolation (PEB), la présence ou non d'un conduit existant, et l'usage principal
+              (chauffage d'appoint d'une pièce de vie, chauffage central de la maison, ou
+              remplacement d'une vieille chaudière mazout).
+            </p>
+            <p>
+              Pour une pièce de vie ouverte de 60 à 100 m² bien isolée, un poêle à air pulsé étanche
+              de 6 à 10 kW suffit largement. Pour une maison de 100 à 150 m² avec étage, on passe
+              sur un canalisable qui distribue la chaleur dans 1 ou 2 chambres via des gaines
+              isolées. Pour remplacer une chaudière mazout sur une grande maison wallonne 4 façades,
+              on choisit un hydro de 18 à 24 kW raccordé aux radiateurs existants via un ballon
+              tampon.
+            </p>
+            <p>
+              La règle de dimensionnement la plus simple, valable pour le climat wallon : multiplie
+              ta surface par 0,10 si la PEB est bonne (A-B), par 0,12 si elle est moyenne (C-D), et
+              par 0,15 si elle est faible (E-G). Tu obtiens la puissance cible en kW. Sur le terrain
+              on affine toujours en regardant la maison : sous-dimensionner brûle le matériel,
+              sur-dimensionner provoque encrassement et inconfort.
+            </p>
+            <p>
+              Le diagnostic à domicile, qu'on fait gratuitement dans la zone Fernelmont et 50 km
+              autour, dure 30 à 45 minutes. On regarde la pièce d'installation, le conduit existant,
+              l'arrivée d'air comburant possible, l'isolation, l'évacuation des fumées la plus
+              naturelle. C'est de cette visite que sort le devis chiffré sous 48 heures, avec la
+              prime déjà déduite.
+            </p>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link
+              href="/guides/quelle-puissance-poele-pellets"
+              className="group block rounded-2xl bg-mp-cream border border-mp-sand/40 p-5 hover:border-mp-orange-flame transition-colors"
+            >
+              <span className="block text-sm font-semibold text-mp-green-deep mb-1">
+                Calculer la puissance
+              </span>
+              <span className="block text-xs text-mp-ink-soft mb-3">
+                Méthode complète selon PEB et surface
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-flame group-hover:gap-2.5 transition-all">
+                Voir le guide
+                <ArrowRight className="h-3 w-3" />
+              </span>
+            </Link>
+            <Link
+              href="/guides/poele-pellets-canalisable"
+              className="group block rounded-2xl bg-mp-cream border border-mp-sand/40 p-5 hover:border-mp-orange-flame transition-colors"
+            >
+              <span className="block text-sm font-semibold text-mp-green-deep mb-1">
+                Comprendre le canalisable
+              </span>
+              <span className="block text-xs text-mp-ink-soft mb-3">
+                Diffuser la chaleur sur 2-3 pièces
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-flame group-hover:gap-2.5 transition-all">
+                Voir le guide
+                <ArrowRight className="h-3 w-3" />
+              </span>
+            </Link>
+            <Link
+              href="/guides/poele-pellets-hydro"
+              className="group block rounded-2xl bg-mp-cream border border-mp-sand/40 p-5 hover:border-mp-orange-flame transition-colors"
+            >
+              <span className="block text-sm font-semibold text-mp-green-deep mb-1">
+                Remplacer une chaudière
+              </span>
+              <span className="block text-xs text-mp-ink-soft mb-3">
+                Passage mazout vers hydro pellets
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-flame group-hover:gap-2.5 transition-all">
+                Voir le guide
+                <ArrowRight className="h-3 w-3" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* TABLEAU COMPARATIF */}
+      <section className="bg-mp-cream py-12 md:py-16">
+        <div className="container mx-auto max-w-4xl px-4 md:px-6">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+            Poêle à pellets vs autres modes de chauffage
+          </h2>
+          <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed mb-8">
+            Quatre solutions dominent le résidentiel wallon. Voici comment elles se comparent en
+            2026 sur le coût d'usage, l'investissement initial et l'autonomie.
+          </p>
+          <div className="-mx-4 md:mx-0 overflow-x-auto">
+            <table className="w-full text-sm border-collapse rounded-2xl overflow-hidden bg-mp-cream border border-mp-sand/40">
+              <thead className="bg-mp-green-deep text-mp-cream">
+                <tr>
+                  <th className="p-3 md:p-4 text-left font-semibold">Solution</th>
+                  <th className="p-3 md:p-4 text-left font-semibold">Investissement</th>
+                  <th className="p-3 md:p-4 text-left font-semibold">Coût annuel*</th>
+                  <th className="p-3 md:p-4 text-left font-semibold">Autonomie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-mp-orange-light/30">
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">Poêle à pellets</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">4 000 à 14 000 €</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">700 à 1 100 €</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">2 à 7 jours</td>
+                </tr>
+                <tr className="bg-mp-cream">
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">Chaudière mazout</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">8 000 à 15 000 €</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">2 200 à 2 800 €</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">Cuve 2-3 ans</td>
+                </tr>
+                <tr className="bg-mp-beige/40">
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">Chaudière gaz</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">5 000 à 12 000 €</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">1 600 à 2 200 €</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">Réseau continu</td>
+                </tr>
+                <tr className="bg-mp-cream">
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">Pompe à chaleur air-eau</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">12 000 à 22 000 €</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">800 à 1 400 €</td>
+                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">Réseau continu</td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="mt-3 text-xs text-mp-ink-soft italic px-4 md:px-0">
+              * Estimation pour une maison wallonne 130 m² PEB C, prix combustibles avril 2026.
+              Le pellet et la pompe à chaleur sortent en tête sur le coût d'usage. La pompe à chaleur
+              demande plus d'investissement initial mais s'amortit sur 8-12 ans. Le pellet a l'avantage
+              du combustible local et d'une autonomie sans contrat fournisseur.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <BrandsGrid />
+
+      {/* SECTION COÛT */}
+      <section className="bg-mp-beige py-12 md:py-16">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+            Combien coûte un poêle à pellets installé ?
+          </h2>
+          <div className="space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
+            <p>
+              Le ticket d'entrée pour un poêle à air pulsé étanche posé en Wallonie démarre autour
+              de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
+              Sur ce segment, on conseille typiquement un Ferlux 8 kW ou un Edilkamin entrée de gamme.
+            </p>
+            <p>
+              Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
+              compte 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
+              étage. Les modèles EK63 et Edilkamin Mood ou Cherie Up dominent ce segment.
+            </p>
+            <p>
+              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévois 8 000 à
+              14 000 € TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
+              démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
+              aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
+              typiquement).
+            </p>
+            <p>
+              Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
+              l'écrasante majorité des logements wallons concernés ont plus de 10 ans. Cette TVA
+              réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
+              S'ajoutent ensuite la Prime Habitation Wallonie 2026 (160 à 960 € selon catégorie de
+              revenus) et d'éventuelles primes communales (cuve mazout, rénovation chauffage).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <ProcessSteps
+        steps={[
+          {
+            title: "Diagnostic à domicile",
+            description: "On vient sur place. Surface, isolation, conduit, accès. 30 à 45 minutes, sans engagement.",
+          },
+          {
+            title: "Devis chiffré sous 48h",
+            description: "Modèle adapté, prix TVAC, prime Wallonie déjà calculée, délai annoncé.",
+          },
+          {
+            title: "Pose en 1 journée",
+            description: "Bâches, plaques de protection, raccordement, premier feu avec toi en fin d'aprèm.",
+          },
+          {
+            title: "Mise en route + SAV",
+            description: "Garantie 5 ans pièces et main d'œuvre, intervention sous 48-72 h, entretien annuel.",
+          },
+        ]}
       />
 
-      <div className="max-w-2xl text-center space-y-4">
-        <h1 className="text-4xl md:text-6xl">
-          Le bon poêle à pellets, <span className="mp-italic">installé chez vous</span> en Wallonie.
-        </h1>
-        <p className="text-lg text-mp-ink-soft">
-          Edilkamin, EK63, Dielle, Ferlux. Conseils d&apos;experts, pose soignée, primes incluses.
-        </p>
-      </div>
+      <PrimesBlock />
 
-      <div className="flex flex-wrap items-center justify-center gap-4">
-        <Link
-          href="/demande-de-devis"
-          className="rounded-full bg-mp-orange-flame px-7 py-4 text-white font-semibold shadow-md hover:bg-mp-orange-warm hover:shadow-lg transition-all duration-200"
-        >
-          Devis en 60 sec
-        </Link>
-        <Link
-          href="/boutique"
-          className="rounded-full border-2 border-mp-green-deep px-7 py-4 text-mp-green-deep font-semibold hover:bg-mp-green-deep hover:text-white transition-all duration-200"
-        >
-          Voir la boutique
-        </Link>
-      </div>
-    </main>
+      {/* SECTION DÉLAIS */}
+      <section className="bg-mp-cream py-12 md:py-16">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+            Délais et déroulement d'une installation Mister Pellets
+          </h2>
+          <div className="space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
+            <p>
+              Du premier contact à la mise en service, compte 3 à 6 semaines en saison normale, un
+              peu plus long de septembre à décembre où la demande est forte. Le diagnostic à
+              domicile peut être planifié dans la semaine qui suit ton appel ou ton formulaire.
+              Le devis tombe sous 48 heures ouvrées après visite.
+            </p>
+            <p>
+              Une fois le devis signé, on commande le matériel (stock atelier ou usine selon
+              modèle). Les modèles courants sont disponibles sous 5 à 10 jours. Pour les
+              configurations spécifiques (couleurs rares, hydros sur-mesure), prévois 3 à 5 semaines.
+              On te donne une date de pose ferme dans le devis.
+            </p>
+            <p>
+              Le jour de la pose, l'équipe arrive entre 8 h et 9 h, démonte l'ancien appareil le
+              cas échéant, prépare la zone (bâches, plaques de protection). Le poêle est mis en
+              place, raccordé, étanchéifié. Le premier feu se fait avec toi en fin d'après-midi,
+              avec la formation à l'app si le poêle est connecté et le réglage de la programmation
+              hebdomadaire selon ton rythme de vie.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Testimonials />
+
+      <FAQAccordion
+        title="Questions fréquentes des Wallons"
+        description="Les sept questions que les clients nous posent en premier. Si tu as un cas particulier, le téléphone reste le moyen le plus rapide."
+        items={FAQ_HOMEPAGE}
+      />
+
+      <CTAFinal
+        title="Devis chiffré en 60 secondes"
+        description="Tu remplis surface, type d'usage, contraintes. On te recontacte sous 24 h ouvrées avec une fourchette de prix et un créneau de diagnostic. Sans engagement."
+      />
+    </>
   );
 }

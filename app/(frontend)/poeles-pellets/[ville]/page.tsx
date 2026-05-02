@@ -14,7 +14,7 @@ import { CITIES, getCityBySlug } from "@/lib/cities";
 import { PRODUCTS_DEMO } from "@/lib/products-demo";
 
 interface Props {
-  // Pattern : /poeles-pellets-[ville]/ — Next.js capture le segment après le préfixe.
+  // Pattern : /poeles-pellets-[ville]/, Next.js capture le segment après le préfixe.
   params: Promise<{ ville: string }>;
 }
 
@@ -174,7 +174,7 @@ export default async function CityPage({ params }: Props) {
           },
           {
             title: "Pose en 1 journée",
-            description: `Équipe certifiée RGIE qui se déplace à ${city.name}. On laisse l'endroit propre, le poêle réglé, prêt à l'emploi.`,
+            description: `Équipe Mister Pellets qui se déplace à ${city.name}. On laisse l'endroit propre, le poêle réglé, prêt à l'emploi.`,
           },
           {
             title: "Mise en route + SAV",
@@ -186,11 +186,11 @@ export default async function CityPage({ params }: Props) {
       <PrimesBlock />
 
       <CTAFinal
-        title={`Devis pour ${city.name} — gratuit, en 60 secondes`}
+        title={`Devis pour ${city.name}, gratuit, en 60 secondes`}
         description={
           city.distanceFromFernelmont <= 50
             ? "Livraison incluse, pose en 2-3 semaines après signature du devis."
-            : "Pas dans la zone gratuite mais on couvre — forfait livraison transparent dans le devis."
+            : "Pas dans la zone gratuite mais on couvre, forfait livraison transparent dans le devis."
         }
       />
     </>
