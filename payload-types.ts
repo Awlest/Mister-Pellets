@@ -73,6 +73,7 @@ export interface Config {
     orders: Order;
     quotes: Quote;
     'contact-messages': ContactMessage;
+    articles: Article;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     orders: OrdersSelect<false> | OrdersSelect<true>;
     quotes: QuotesSelect<false> | QuotesSelect<true>;
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -479,6 +481,102 @@ export interface ContactMessage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: number;
+  /**
+   * Titre H1 — max 70 chars
+   */
+  title: string;
+  /**
+   * URL : /blog/{slug}/
+   */
+  slug: string;
+  /**
+   * Résumé éditorial 1-2 phrases (max 200 chars)
+   */
+  excerpt: string;
+  category: 'guide-achat' | 'installation' | 'entretien' | 'pellets' | 'primes' | 'marques' | 'actualite';
+  /**
+   * Estimation lecture (min)
+   */
+  readingTimeMinutes?: number | null;
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  authorName?: string | null;
+  /**
+   * ex: Technicien certifié, Conseiller énergie
+   */
+  authorRole?: string | null;
+  /**
+   * Image de couverture (1200×630 idéal pour OG)
+   */
+  coverImage?: (number | null) | Media;
+  /**
+   * TL;DR — réponse directe pour les LLMs (3-4 phrases factuelles)
+   */
+  tldr?: string | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Génère un Schema FAQPage automatiquement
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Articles liés (max 4)
+   */
+  relatedArticles?: (number | Article)[] | null;
+  /**
+   * Produits liés (max 4)
+   */
+  relatedProducts?: (number | Product)[] | null;
+  /**
+   * max 70 chars (sinon = title)
+   */
+  metaTitle?: string | null;
+  /**
+   * max 160 chars (sinon = excerpt)
+   */
+  metaDescription?: string | null;
+  metaKeywords?:
+    | {
+        keyword: string;
+        id?: string | null;
+      }[]
+    | null;
+  isPublished?: boolean | null;
+  isFeatured?: boolean | null;
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -524,6 +622,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-messages';
         value: number | ContactMessage;
+      } | null)
+    | ({
+        relationTo: 'articles';
+        value: number | Article;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -786,6 +888,51 @@ export interface ContactMessagesSelect<T extends boolean = true> {
   message?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  category?: T;
+  readingTimeMinutes?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  authorName?: T;
+  authorRole?: T;
+  coverImage?: T;
+  tldr?: T;
+  content?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  relatedArticles?: T;
+  relatedProducts?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?:
+    | T
+    | {
+        keyword?: T;
+        id?: T;
+      };
+  isPublished?: T;
+  isFeatured?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

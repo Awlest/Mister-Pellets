@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter_Tight } from "next/font/google";
 import "./globals.css";
+import { JsonLd, ORGANIZATION_SCHEMA } from "@/components/seo/JsonLd";
+import { SITE_URL, SITE_NAME, SITE_LOCALE, DEFAULT_OG_IMAGE } from "@/lib/seo";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -24,39 +26,52 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const allowIndex = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mister-pellets.be"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Poêle à pellets en Wallonie — Vente & pose | Mister Pellets",
     template: "%s | Mister Pellets",
   },
   description:
-    "61 modèles Edilkamin, EK63, Dielle, Ferlux. Pose en 1 jour, primes incluses, livraison gratuite 50km autour de Fernelmont. Devis en 60 secondes.",
-  applicationName: "Mister Pellets",
-  authors: [{ name: "Mister Pellets" }],
+    "61 modèles Edilkamin, EK63, Dielle, Ferlux. Pose en 1 jour, primes incluses, livraison gratuite 50 km autour de Fernelmont. Devis en 60 secondes.",
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
   generator: "Next.js",
+  publisher: SITE_NAME,
   keywords: [
     "poêle à pellets",
-    "Wallonie",
-    "Belgique",
+    "poêle pellets Wallonie",
+    "poêle pellets Belgique",
     "Edilkamin",
     "EK63",
     "Dielle",
     "Ferlux",
-    "primes énergie",
+    "primes énergie Wallonie 2026",
+    "installation poêle pellets",
     "Fernelmont",
+    "Namur",
+    "Charleroi",
+    "Liège",
   ],
+  category: "Home Improvement",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: "website",
-    locale: "fr_BE",
-    siteName: "Mister Pellets",
-    url: "https://mister-pellets.be",
+    locale: SITE_LOCALE,
+    siteName: SITE_NAME,
+    url: SITE_URL,
     title: "Poêle à pellets en Wallonie — Vente & pose | Mister Pellets",
     description:
-      "61 modèles, pose en 1 jour, primes incluses, livraison gratuite 50km autour de Fernelmont.",
+      "61 modèles, pose en 1 jour, primes incluses, livraison gratuite 50 km autour de Fernelmont.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Mister Pellets — Poêle à pellets Wallonie",
@@ -67,16 +82,44 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mister Pellets — Poêle à pellets Wallonie",
     description: "Vente, pose et entretien de poêles à pellets en Wallonie.",
-    images: ["/og-image.jpg"],
+    images: [DEFAULT_OG_IMAGE],
   },
   alternates: {
-    canonical: "https://mister-pellets.be",
+    canonical: SITE_URL,
   },
   robots: {
-    // Pendant la phase preview Vercel, on bloque l'indexation via header dans next.config.
-    // En prod, ce sera reactivé via NEXT_PUBLIC_ALLOW_INDEXING.
-    index: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
-    follow: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
+    index: allowIndex,
+    follow: allowIndex,
+    googleBot: {
+      index: allowIndex,
+      follow: allowIndex,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  // Verification codes (à remplir Phase 8 quand on aura Search Console)
+  verification: {
+    // google: "TON-CODE-SEARCH-CONSOLE",
+  },
+};
+
+const WEBSITE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: SITE_NAME,
+  description: "Vente, installation et entretien de poêles à pellets en Wallonie.",
+  publisher: { "@id": `${SITE_URL}/#organization` },
+  inLanguage: "fr-BE",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_URL}/recherche?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
   },
 };
 
@@ -88,6 +131,10 @@ export default function RootLayout({
       lang="fr-BE"
       className={`${fraunces.variable} ${interTight.variable} h-full antialiased`}
     >
+      <head>
+        {/* Schemas globaux SSR — chaque page peut ajouter ses propres schemas en plus */}
+        <JsonLd data={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]} />
+      </head>
       <body className="min-h-full flex flex-col bg-mp-cream text-mp-ink">
         {children}
       </body>
