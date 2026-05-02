@@ -5,6 +5,12 @@
 
 ---
 
+## 📅 Journal des hotfixes critiques
+
+- **2026-05-03** Hotfix V1.1 appliqué (cf. `docs/mister-pellets-corrections-mobile-v1.1-hotfix.md`) : navbar mobile restaurée à la version stable d'avant `e3b0a73` (5 onglets avec drawer Menu, pastille active orange en motion.span), protections globales viewport overflow ajoutées dans `globals.css` (html/body overflow-x hidden + max-width 100vw, médias fluides par défaut, overflow-wrap sur les conteneurs de texte), footer entièrement refondu (fond vert deep + texte beige beige, contraste WCAG AAA, structure 4 blocs verticaux, padding-bottom 96 px pour libérer la NavbarSticky), logo footer remplacé par `logo-mister-pellets-full.svg` couleur dans une card cream pour préserver les couleurs du logo sur le fond vert. Validation visuelle preview Vercel à faire par le client. Reprise des corrections V1 normales possible à partir de maintenant.
+
+---
+
 ## ⚡ État du projet
 
 **Stack figée — ne pas remettre en question :**
