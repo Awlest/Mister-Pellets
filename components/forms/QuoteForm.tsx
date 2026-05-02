@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const STORAGE_KEY = "mp_quote_draft";
 
 /**
- * Validation téléphone — uniquement numéros belges (cf. doc §4.1).
+ * Validation téléphone, uniquement numéros belges (cf. doc §4.1).
  * Accepte : +32… / 0032… / 0X… avec espaces, points, tirets, parenthèses.
  * Refuse : tout autre indicatif international (+33, +352, +49, +31, etc.).
  */
@@ -204,7 +204,7 @@ export function QuoteForm() {
         )}
       </div>
 
-      {/* Footer actions — stack vertical sur mobile pour ne pas déborder, horizontal sm+ */}
+      {/* Footer actions, stack vertical sur mobile pour ne pas déborder, horizontal sm+ */}
       <div className="border-t border-mp-sand/40 px-4 sm:px-6 md:px-8 py-5 bg-mp-cream">
         <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <Button
@@ -316,7 +316,7 @@ function Step2({ value, onChange }: { value: QuoteState["peb"]; onChange: (v: Qu
         Quel est le PEB de ta maison ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
-        Le PEB (Performance Énergétique du Bâtiment) figure sur ton certificat. Si tu ne sais pas, choisis "Je ne sais pas" — on adapte.
+        Le PEB (Performance Énergétique du Bâtiment) figure sur ton certificat. Si tu ne sais pas, choisis "Je ne sais pas", on adapte.
       </p>
       <ChoiceGrid<QuoteState["peb"] & string>
         value={value}
@@ -394,7 +394,7 @@ function Step5({ value, onChange }: { value: QuoteState["budget"]; onChange: (v:
         Quel budget total (poêle + pose) ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
-        Hors prime — on calcule la prime ensuite et on te montre le net après déduction.
+        Hors prime, on calcule la prime ensuite et on te montre le net après déduction.
       </p>
       <ChoiceGrid<QuoteState["budget"] & string>
         value={value}
@@ -424,7 +424,7 @@ function Step6({
     "focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
   );
 
-  // Validation temps réel — on n'affiche l'erreur que si le champ a été touché
+  // Validation temps réel, on n'affiche l'erreur que si le champ a été touché
   const [touched, setTouched] = React.useState({
     postalCode: false,
     name: false,

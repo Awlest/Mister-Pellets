@@ -1,5 +1,5 @@
 /**
- * Articles éditoriaux du blog Mister Pellets — Phase 7.
+ * Articles éditoriaux du blog Mister Pellets, Phase 7.
  *
  * Stratégie GEO (Generative Engine Optimization) :
  * - Réponse directe en TL;DR (exploitable par les LLMs : ChatGPT, Perplexity, Claude, Gemini)
@@ -71,7 +71,7 @@ export interface ArticleData {
 }
 
 // =====================================================================
-// 5 ARTICLES PILIERS GEO — chacun ~1500-2000 mots, format réponse directe
+// 5 ARTICLES PILIERS GEO, chacun ~1500-2000 mots, format réponse directe
 // =====================================================================
 
 export const ARTICLES: ArticleData[] = [
@@ -85,7 +85,7 @@ export const ARTICLES: ArticleData[] = [
     metaDescription:
       "1 kW pour 10 m² PEB B, 1 kW pour 15 m² PEB A, 1 kW pour 7 m² PEB E. Méthode complète, exemples chiffrés, erreurs à éviter en Wallonie.",
     excerpt:
-      "La règle simple — 1 kW pour 10 m² — ne suffit pas. Voici le calcul exact selon ta PEB, ton plafond et ta zone climatique en Wallonie.",
+      "La règle simple, 1 kW pour 10 m², ne suffit pas. Voici le calcul exact selon ta PEB, ton plafond et ta zone climatique en Wallonie.",
     tldr:
       "Pour une maison wallonne PEB B de 100 m² avec hauteur sous plafond standard (2,50 m), un poêle de 8 à 10 kW suffit. Multiplie la surface par 0,10 si la PEB est bonne (A-B), par 0,12 si moyenne (C-D), et par 0,15 si faible (E-G). Ajoute 10 % par mètre au-dessus de 2,50 m de plafond. Sous-dimensionner brûle le matériel ; sur-dimensionner provoque encrassement et inconfort.",
     category: "guide-achat",
@@ -106,11 +106,11 @@ export const ARTICLES: ArticleData[] = [
         table: {
           headers: ["PEB du logement", "Coefficient", "Exemple 100 m²", "Exemple 150 m²"],
           rows: [
-            ["A — passif / quasi-passif", "0,07-0,08 kW/m²", "7-8 kW", "10-12 kW"],
-            ["B — performant", "0,10 kW/m²", "10 kW", "15 kW"],
-            ["C — D — standard", "0,12 kW/m²", "12 kW", "18 kW"],
-            ["E — F — moyen", "0,13-0,14 kW/m²", "13-14 kW", "20-21 kW"],
-            ["G — ancien non rénové", "0,15-0,18 kW/m²", "15-18 kW", "22-27 kW"],
+            ["A, passif / quasi-passif", "0,07-0,08 kW/m²", "7-8 kW", "10-12 kW"],
+            ["B, performant", "0,10 kW/m²", "10 kW", "15 kW"],
+            ["C, D, standard", "0,12 kW/m²", "12 kW", "18 kW"],
+            ["E, F, moyen", "0,13-0,14 kW/m²", "13-14 kW", "20-21 kW"],
+            ["G, ancien non rénové", "0,15-0,18 kW/m²", "15-18 kW", "22-27 kW"],
           ],
           caption: "Coefficients indicatifs pour la Wallonie (climat tempéré, 2 500 DJU). Hauteur sous plafond 2,50 m.",
         },
@@ -123,7 +123,7 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "warning",
-          text: "Selon les techniciens Mister Pellets, sur le terrain, environ 1 poêle sur 4 vu en SAV est mal dimensionné — le plus souvent surdimensionné parce que vendu sur surface brute sans tenir compte de la PEB.",
+          text: "Selon les techniciens Mister Pellets, sur le terrain, environ 1 poêle sur 4 vu en SAV est mal dimensionné, le plus souvent surdimensionné parce que vendu sur surface brute sans tenir compte de la PEB.",
         },
       },
       {
@@ -157,7 +157,7 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "info",
-          text: "Avant tout devis, Mister Pellets fait un diagnostic gratuit à domicile dans les 50 km autour de Fernelmont. Mesure des volumes, vérification du conduit, contrôle de l'arrivée d'air comburant — sans engagement.",
+          text: "Avant tout devis, Mister Pellets fait un diagnostic gratuit à domicile dans les 50 km autour de Fernelmont. Mesure des volumes, vérification du conduit, contrôle de l'arrivée d'air comburant, sans engagement.",
         },
       },
     ],
@@ -235,7 +235,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Pourquoi un pellet bas de gamme te coûte plus cher",
         paragraphs: [
           "Un sac à 4,50 € contre un ENplus A1 à 6,50 €, ça paraît avantageux. En réalité, le bas de gamme tape souvent à 3,8 kWh/kg réels au lieu de 4,8 : tu brûles 26 % de pellets en plus pour la même chaleur. À 800 kg/an de consommation moyenne, l'économie disparaît.",
-          "Pire, le taux de cendres élevé (2 %) sature le creuset 3 fois plus vite, encrasse l'échangeur de chaleur et finit par bloquer la sonde de fumée. Sur le terrain, on a vu des poêles 3 ans tomber en panne pour cause de pellets bon marché — la garantie ne couvre pas ce type de sinistre.",
+          "Pire, le taux de cendres élevé (2 %) sature le creuset 3 fois plus vite, encrasse l'échangeur de chaleur et finit par bloquer la sonde de fumée. Sur le terrain, on a vu des poêles 3 ans tomber en panne pour cause de pellets bon marché, la garantie ne couvre pas ce type de sinistre.",
         ],
         callout: {
           variant: "warning",
@@ -253,7 +253,7 @@ export const ARTICLES: ArticleData[] = [
           items: [
             "Achète en hiver pour de la combustion immédiate, en été pour profiter de stocks bas saison (-10 à -15 %).",
             "Vérifie la date d'ensachage : un pellet de plus de 18 mois a souvent perdu en cohésion.",
-            "Préfère les marques avec scieries traçables en Belgique, France ou Autriche — pas les pellets d'origine inconnue.",
+            "Préfère les marques avec scieries traçables en Belgique, France ou Autriche, pas les pellets d'origine inconnue.",
           ],
         },
       },
@@ -290,7 +290,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Que faire d'un sac de pellets éventré qui a pris l'humidité ?",
         answer:
-          "S'il est légèrement gondolé sans odeur de moisi, étale-le 48 h dans un endroit sec — il peut récupérer. S'il sent l'humide ou se transforme en bouillie au toucher, jette-le : il bloquerait la vis sans fin.",
+          "S'il est légèrement gondolé sans odeur de moisi, étale-le 48 h dans un endroit sec, il peut récupérer. S'il sent l'humide ou se transforme en bouillie au toucher, jette-le : il bloquerait la vis sans fin.",
       },
     ],
     related: {
@@ -301,13 +301,13 @@ export const ARTICLES: ArticleData[] = [
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // 3. PRIMES WALLONIE 2026 — RECTIFICATION FACTUELLE COMPLÈTE
+  // 3. PRIMES WALLONIE 2026, RECTIFICATION FACTUELLE COMPLÈTE
   //    Régime temporaire 14/02/2025 → 30/09/2026 (numéro démarche 3920)
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "primes-wallonie-2026-poele-pellets-combien-recuperer",
     title: "Prime poêle à pellets en Wallonie 2026 : combien pouvez-vous vraiment récupérer ?",
-    metaTitle: "Prime poêle à pellets Wallonie 2026 (160 à 960 €) — montants et conditions",
+    metaTitle: "Prime poêle à pellets Wallonie 2026 (160 à 960 €), montants et conditions",
     metaDescription:
       "Régime Prime Habitation 14/02/2025 au 30/09/2026 : 160 € de base × coefficient selon revenus. R1 = 960 €, R2 = 640 €, R3 = 320 €, R4 = 160 €. Conditions, audit, procédure SPW.",
     excerpt:
@@ -474,7 +474,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "remplacer-chaudiere-mazout-poele-hydro",
     title: "Remplacer sa chaudière mazout par un poêle hydro à pellets : ce qu'il faut savoir",
-    metaTitle: "Remplacer mazout par poêle pellets hydro — guide 2026",
+    metaTitle: "Remplacer mazout par poêle pellets hydro, guide 2026",
     metaDescription:
       "Coût total, primes cumulées, délai de retour, raccordement aux radiateurs : la transition mazout → pellets hydro expliquée par Mister Pellets.",
     excerpt:
@@ -545,7 +545,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Les 3 erreurs à éviter dans une transition mazout → pellets hydro",
         paragraphs: [
-          "Erreur 1 : ne pas désembouer le circuit. Tu importes 25 ans de boues dans un échangeur neuf — résultat, l'échangeur s'encrasse en 18 mois.",
+          "Erreur 1 : ne pas désembouer le circuit. Tu importes 25 ans de boues dans un échangeur neuf, résultat, l'échangeur s'encrasse en 18 mois.",
           "Erreur 2 : sous-dimensionner pour économiser. Un hydro 18 kW sur 200 m² PEB E, ça tourne à plein 24/7 en janvier et tu finis par allumer un appoint électrique. La marge utile est de 15-20 % au-dessus du calcul théorique.",
           "Erreur 3 : oublier le ballon tampon. Sans ballon, le poêle fait des cycles courts (allumage-extinction toutes les 30 min), use sa résistance d'allumage en une saison, et bruite la maison. Le ballon n'est pas une option, c'est un élément central.",
         ],
@@ -587,13 +587,13 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "poele-pellets-eteint-tout-seul-causes",
     title: "Pourquoi mon poêle à pellets s'éteint tout seul ? 7 causes courantes",
-    metaTitle: "Poêle pellets qui s'éteint seul — 7 causes et solutions (2026)",
+    metaTitle: "Poêle pellets qui s'éteint seul, 7 causes et solutions (2026)",
     metaDescription:
       "Creuset bouché, pellets humides, sonde encrassée, conduit obstrué… Voici comment diagnostiquer un poêle pellets qui s'arrête tout seul.",
     excerpt:
-      "Un poêle qui s'éteint sans qu'on lui demande, c'est rarement un défaut de fabrication. 7 causes couvrent 95 % des cas — la plupart se règlent en 30 minutes sans technicien.",
+      "Un poêle qui s'éteint sans qu'on lui demande, c'est rarement un défaut de fabrication. 7 causes couvrent 95 % des cas, la plupart se règlent en 30 minutes sans technicien.",
     tldr:
-      "Un poêle à pellets qui s'éteint tout seul a presque toujours une de ces 7 causes : creuset encrassé, pellets de mauvaise qualité ou humides, sonde de fumée encrassée, échangeur bouché, vis sans fin bloquée, prise d'air comburant obstruée, ou conduit non ramoné. Avant d'appeler un technicien, vérifie ces 7 points dans l'ordre — la cause est dans 80 % des cas un défaut d'entretien plutôt qu'une panne matérielle.",
+      "Un poêle à pellets qui s'éteint tout seul a presque toujours une de ces 7 causes : creuset encrassé, pellets de mauvaise qualité ou humides, sonde de fumée encrassée, échangeur bouché, vis sans fin bloquée, prise d'air comburant obstruée, ou conduit non ramoné. Avant d'appeler un technicien, vérifie ces 7 points dans l'ordre, la cause est dans 80 % des cas un défaut d'entretien plutôt qu'une panne matérielle.",
     category: "entretien",
     tags: ["panne", "diagnostic", "entretien", "extinction", "creuset"],
     readingTimeMinutes: 9,
@@ -606,7 +606,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Cause n°1 : creuset encrassé (40 % des cas)",
         paragraphs: [
-          "C'est la cause la plus fréquente. Le creuset (la coupelle où brûlent les pellets) accumule du mâchefer — résidu vitrifié de cendres et de minéraux — qui finit par boucher les trous d'admission d'air primaire. Sans air, la flamme s'étouffe et le poêle déclenche son extinction de sécurité.",
+          "C'est la cause la plus fréquente. Le creuset (la coupelle où brûlent les pellets) accumule du mâchefer, résidu vitrifié de cendres et de minéraux, qui finit par boucher les trous d'admission d'air primaire. Sans air, la flamme s'étouffe et le poêle déclenche son extinction de sécurité.",
           "Diagnostic : à froid, sors le creuset. Si tu vois des amas durs et brillants comme du verre, c'est du mâchefer. Solution : frappe le creuset à l'envers sur une surface dure pour décoller, brosse les trous avec une brosse métallique, vérifie qu'aucun trou n'est obstrué.",
         ],
         callout: {
@@ -646,7 +646,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Cause n°6 : prise d'air comburant obstruée (5 %)",
         paragraphs: [
           "Les modèles étanches prennent leur air de combustion à l'extérieur via un tuyau en façade. Une feuille morte, un nid, ou une grille obstruée bloque l'arrivée d'air. Le poêle ne peut plus brûler correctement et s'éteint.",
-          "Diagnostic : passe à l'extérieur, vérifie la grille de prise d'air. Solution : nettoie à la brosse. Sur les non-étanches, vérifie la grille de ventilation de la pièce — un meuble qui obstrue est aussi un classique.",
+          "Diagnostic : passe à l'extérieur, vérifie la grille de prise d'air. Solution : nettoie à la brosse. Sur les non-étanches, vérifie la grille de ventilation de la pièce, un meuble qui obstrue est aussi un classique.",
         ],
       },
       {
@@ -663,7 +663,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Si rien ne fonctionne : appelle ton SAV",
         paragraphs: [
-          "Si tu as vérifié les 7 points ci-dessus sans succès, c'est probablement une panne matérielle : résistance d'allumage HS (durée de vie typique 4-7 ans), motoréducteur de vis sans fin, carte électronique. Ces réparations dépassent les compétences classiques d'un utilisateur — appelle ton installateur.",
+          "Si tu as vérifié les 7 points ci-dessus sans succès, c'est probablement une panne matérielle : résistance d'allumage HS (durée de vie typique 4-7 ans), motoréducteur de vis sans fin, carte électronique. Ces réparations dépassent les compétences classiques d'un utilisateur, appelle ton installateur.",
           "Mister Pellets intervient en SAV dans les 50 km autour de Fernelmont. Pour les clients hors zone, on conseille toujours un installateur certifié local. Les pièces détachées Edilkamin, EK63, Dielle et Ferlux sont disponibles en stock chez nous sous 48 h.",
         ],
       },

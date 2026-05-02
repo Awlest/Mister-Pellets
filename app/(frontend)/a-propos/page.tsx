@@ -5,7 +5,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { StatsGrid } from "@/components/sections/StatsGrid";
 
 export const metadata: Metadata = {
-  title: "À propos — Mister Pellets, installateur poêles à pellets Wallonie",
+  title: "À propos, Mister Pellets, installateur poêles à pellets Wallonie",
   description:
     "Mister Pellets installe des poêles à pellets en Wallonie depuis 2016. Basés à Fernelmont (Awlest SRL), 400+ installations, 4.9 étoiles sur Google.",
 };
@@ -64,7 +64,7 @@ export default function AProposPage() {
         ]}
       />
 
-      {/* Mister Pellets / Awlest — clarification factuelle (autorisée ici, cf. brief §9.4) */}
+      {/* Mister Pellets / Awlest, clarification factuelle (autorisée ici, cf. brief §9.4) */}
       <section className="bg-mp-cream py-16 md:py-20">
         <div className="container mx-auto max-w-3xl px-4 md:px-6 prose prose-lg max-w-none">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">

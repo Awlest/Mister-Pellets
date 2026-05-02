@@ -13,7 +13,7 @@ interface HeroPrimaryProps {
 }
 
 /**
- * Hero d'accueil — sur fond beige cream avec halo orange flottant.
+ * Hero d'accueil, sur fond beige cream avec halo orange flottant.
  * Cf. brief §3.2 sec 1.
  */
 export function HeroPrimary({

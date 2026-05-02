@@ -61,7 +61,7 @@ export function Header() {
     >
       <div className="container mx-auto h-full max-w-[1280px] px-4 md:px-6 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="Mister Pellets — accueil">
+        <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="Mister Pellets, accueil">
           <Image
             src="/logo-mister-pellets-mascotte.svg"
             alt=""

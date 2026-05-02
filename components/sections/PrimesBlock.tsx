@@ -59,7 +59,7 @@ interface PrimesBlockProps {
 }
 
 /**
- * Bloc primes Wallonie 2026 — rectification factuelle complète (régime
+ * Bloc primes Wallonie 2026, rectification factuelle complète (régime
  * temporaire 14/02/2025 → 30/09/2026).
  */
 export function PrimesBlock({
@@ -79,7 +79,7 @@ export function PrimesBlock({
           )}
         </div>
 
-        {/* 4 cards — R1 (highlight) puis R2, R3, R4 */}
+        {/* 4 cards, R1 (highlight) puis R2, R3, R4 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {primes.map((prime) => (
             <Card

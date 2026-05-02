@@ -15,7 +15,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Boutique poêles à pellets — 61 modèles en Wallonie | Mister Pellets",
+  title: "Boutique poêles à pellets, 61 modèles en Wallonie | Mister Pellets",
   description:
     "Catalogue Mister Pellets : 61 modèles Edilkamin, EK63, Dielle, Ferlux. Filtres marque, puissance, type de diffusion, couleur. Devis avec pose et prime Wallonie 2026 incluse.",
 };
@@ -82,7 +82,7 @@ function buildHref(
   return qs ? `/boutique?${qs}` : "/boutique";
 }
 
-// Pill bouton de filtre — contraste WCAG AA garanti
+// Pill bouton de filtre, contraste WCAG AA garanti
 function FilterPill({
   href,
   active,
@@ -160,7 +160,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
             .
           </div>
 
-          {/* Filtres — 5 axes */}
+          {/* Filtres, 5 axes */}
           <div className="mb-8 space-y-5">
             {/* Marque */}
             <div>
@@ -198,7 +198,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
               </div>
             </div>
 
-            {/* Puissance — nouveau filtre #5a */}
+            {/* Puissance, nouveau filtre #5a */}
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft font-semibold mb-2 block">
                 Puissance
@@ -216,7 +216,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
               </div>
             </div>
 
-            {/* Diffusion — nouveau filtre #5b */}
+            {/* Diffusion, nouveau filtre #5b */}
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft font-semibold mb-2 block">
                 Diffusion de chaleur
@@ -234,7 +234,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
               </div>
             </div>
 
-            {/* Couleur — nouveau filtre #5c */}
+            {/* Couleur, nouveau filtre #5c */}
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft font-semibold mb-2 block">
                 Couleur
@@ -282,7 +282,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
                 <Link href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline">
                   demande un devis personnalisé
                 </Link>{" "}
-                — on couvre toute la gamme Edilkamin, EK63, Dielle, Ferlux.
+               , on couvre toute la gamme Edilkamin, EK63, Dielle, Ferlux.
               </p>
             </div>
           ) : (

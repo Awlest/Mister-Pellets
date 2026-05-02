@@ -13,7 +13,7 @@ import { JsonLd, LOCAL_BUSINESS_SCHEMA } from "@/components/seo/JsonLd";
 import { buildFAQSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Poêle à pellets en Wallonie — vente, pose, entretien | Mister Pellets",
+  title: "Poêle à pellets en Wallonie, vente, pose, entretien | Mister Pellets",
   description:
     "61 modèles Edilkamin, EK63, Dielle, Ferlux. Pose en 1 jour, prime Wallonie 2026 jusqu'à 960 €, livraison gratuite 50 km autour de Fernelmont. Devis en 60 secondes.",
 };
@@ -63,7 +63,7 @@ export default function HomePage() {
     <>
       <JsonLd data={[LOCAL_BUSINESS_SCHEMA, faqSchema]} />
 
-      {/* HERO — logo central agrandi, peu d'espace au-dessus, enchaîne directement */}
+      {/* HERO, logo central agrandi, peu d'espace au-dessus, enchaîne directement */}
       <section className="relative overflow-hidden bg-mp-cream">
         <div
           aria-hidden
@@ -132,7 +132,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION CHOIX — réponse directe en H2 (GEO) */}
+      {/* SECTION CHOIX, réponse directe en H2 (GEO) */}
       <section className="bg-mp-beige py-12 md:py-16">
         <div className="container mx-auto max-w-3xl px-4 md:px-6">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">

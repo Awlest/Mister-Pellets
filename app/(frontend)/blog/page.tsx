@@ -10,9 +10,9 @@ import { ARTICLES, ARTICLE_CATEGORIES, CATEGORY_LABELS } from "@/lib/articles";
 import { buildPageMetadata, buildBreadcrumbSchema, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Blog poêle à pellets — articles techniques & guides Wallonie",
+  title: "Blog poêle à pellets, articles techniques & guides Wallonie",
   description:
-    "Guides d'achat, comparatifs marques, primes Wallonie 2026, dépannage et entretien. Le blog technique de Mister Pellets, écrit par les techniciens — pas par un rédacteur générique.",
+    "Guides d'achat, comparatifs marques, primes Wallonie 2026, dépannage et entretien. Le blog technique de Mister Pellets, écrit par les techniciens, pas par un rédacteur générique.",
   path: "/blog",
   keywords: [
     "blog poêle à pellets",
@@ -103,7 +103,7 @@ export default function BlogHubPage() {
         </section>
       )}
 
-      {/* Filtres catégories — contraste WCAG AA (cf. doc §8) */}
+      {/* Filtres catégories, contraste WCAG AA (cf. doc §8) */}
       <section className="bg-mp-beige py-6">
         <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
           <div className="flex flex-wrap gap-2 items-center">

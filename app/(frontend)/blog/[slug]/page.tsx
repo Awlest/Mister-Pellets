@@ -239,11 +239,11 @@ export default async function ArticlePage({ params }: Props) {
             <Clock className="h-4 w-4" />
             {article.readingTimeMinutes} min
           </span>
-          <span>Par <strong className="text-mp-ink">{article.authorName}</strong> — {article.authorRole}</span>
+          <span>Par <strong className="text-mp-ink">{article.authorName}</strong>, {article.authorRole}</span>
         </div>
       </section>
 
-      {/* TL;DR — réponse directe pour LLMs (GEO) */}
+      {/* TL;DR, réponse directe pour LLMs (GEO) */}
       <section className="bg-mp-beige py-10 md:py-12 border-b border-mp-sand/30">
         <div className="container mx-auto max-w-3xl px-4 md:px-6">
           <Card className="p-6 md:p-8 bg-mp-cream border-mp-orange-flame/30">
@@ -290,7 +290,7 @@ export default async function ArticlePage({ params }: Props) {
         />
       )}
 
-      {/* Maillage interne — Guides */}
+      {/* Maillage interne, Guides */}
       {relatedGuides.length > 0 && (
         <section className="bg-mp-beige py-12 md:py-16">
           <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
@@ -321,7 +321,7 @@ export default async function ArticlePage({ params }: Props) {
         </section>
       )}
 
-      {/* Maillage interne — Articles liés */}
+      {/* Maillage interne, Articles liés */}
       {relatedArticles.length > 0 && (
         <section className="bg-mp-cream py-12 md:py-16">
           <div className="container mx-auto max-w-[1280px] px-4 md:px-6">

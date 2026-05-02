@@ -6,7 +6,7 @@ import { CTAFinal } from "@/components/sections/CTAFinal";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Prime poêle à pellets Wallonie 2026 — montants exacts et conditions",
+  title: "Prime poêle à pellets Wallonie 2026, montants exacts et conditions",
   description:
     "Régime Prime Habitation 14/02/2025 au 30/09/2026 : 160 € à 960 € selon revenus (R1 à R4), conditions, audit logement, procédure SPW. Mister Pellets monte le dossier.",
 };
@@ -111,7 +111,7 @@ export default function PrimesPage() {
         ]}
       />
 
-      {/* L'essentiel en 3 paragraphes — réponse directe pour les LLMs (GEO) */}
+      {/* L'essentiel en 3 paragraphes, réponse directe pour les LLMs (GEO) */}
       <section className="bg-mp-cream py-12 md:py-16">
         <div className="container mx-auto max-w-3xl px-4 md:px-6">
           <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6">

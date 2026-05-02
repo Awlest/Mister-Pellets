@@ -143,7 +143,7 @@ export default function ZonesDInterventionPage() {
           <p className="text-lg text-mp-ink-soft leading-relaxed mb-6">
             On intervient aussi sur Andenne, Eghezée, Jodoigne, Huy, Marche-en-Famenne, Bastogne,
             Florenville, La Louvière, Nivelles, Soignies, et beaucoup d'autres. Si ta commune n'est
-            pas listée explicitement, demande quand même — la zone est large.
+            pas listée explicitement, demande quand même, la zone est large.
           </p>
         </div>
       </section>

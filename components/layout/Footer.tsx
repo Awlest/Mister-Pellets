@@ -69,9 +69,9 @@ export function Footer() {
   return (
     <footer className="bg-mp-green-deep text-mp-cream pt-12 pb-6 lg:pt-16 lg:pb-8">
       <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-        {/* Brand block — centré mobile, aligné gauche desktop */}
+        {/* Brand block, centré mobile, aligné gauche desktop */}
         <div className="text-center lg:text-left mb-10 lg:mb-12">
-          <Link href="/" className="inline-flex items-center gap-3 mb-4" aria-label="Mister Pellets — accueil">
+          <Link href="/" className="inline-flex items-center gap-3 mb-4" aria-label="Mister Pellets, accueil">
             <Image
               src="/logo-mister-pellets-mascotte.svg"
               alt=""
@@ -92,7 +92,7 @@ export function Footer() {
           </p>
         </div>
 
-        {/* Coordonnées + réseaux sociaux — mobile compact */}
+        {/* Coordonnées + réseaux sociaux, mobile compact */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-10 lg:mb-12">
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-mp-orange-warm mb-4">
@@ -162,7 +162,7 @@ export function Footer() {
                   href={SOCIAL.google}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Mister Pellets sur Google — 4,9 sur 200 avis"
+                  aria-label="Mister Pellets sur Google, 4,9 sur 200 avis"
                   className="flex items-center justify-center h-11 w-11 rounded-full bg-mp-cream/10 hover:bg-mp-orange-flame transition-colors"
                 >
                   <Star className="h-5 w-5" />
@@ -175,7 +175,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Navigation secondaire — 3 petites colonnes mobile (scrollable horizontal si besoin) */}
+        {/* Navigation secondaire, 3 petites colonnes mobile (scrollable horizontal si besoin) */}
         <nav
           aria-label="Navigation footer"
           className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8 mb-10 lg:mb-12"
@@ -201,7 +201,7 @@ export function Footer() {
           ))}
         </nav>
 
-        {/* Liens légaux — wrap horizontal */}
+        {/* Liens légaux, wrap horizontal */}
         <div className="border-t border-mp-cream/10 pt-6 mb-4">
           <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-mp-cream/70">
             {LEGAL_LINKS.map((link) => (
@@ -217,7 +217,7 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* Bottom bar — copyright + cadre légal */}
+        {/* Bottom bar, copyright + cadre légal */}
         <div className="text-xs text-mp-cream/55 leading-relaxed space-y-1">
           <p>
             © {year} Mister Pellets. Tous droits réservés.

@@ -187,7 +187,7 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
 ];
 
 // =====================================================================
-// FILTRES BOUTIQUE — labels et helpers (cf. doc corrections-mobile-v1 §2.3)
+// FILTRES BOUTIQUE, labels et helpers (cf. doc corrections-mobile-v1 §2.3)
 // =====================================================================
 
 export const POWER_TRANCHES = [

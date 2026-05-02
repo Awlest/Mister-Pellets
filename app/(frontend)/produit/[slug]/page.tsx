@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = getProductBySlug(slug);
   if (!product) return { title: "Produit introuvable" };
   return {
-    title: `${product.name} — Poêle à pellets ${product.power}`,
+    title: `${product.name}, Poêle à pellets ${product.power}`,
     description: `${product.name} : ${product.power} pour ${product.surface}. Prix indicatif ${product.priceTTC ? formatPrice(product.priceTTC) : "sur devis"}. Pose Mister Pellets, primes incluses.`,
   };
 }
@@ -177,7 +177,7 @@ export default async function ProductPage({ params }: Props) {
               </div>
 
               <p className="text-xs text-mp-ink-soft mt-4 text-center">
-                🚧 Phase 5 — le panier et le paiement Stripe arrivent prochainement. Pour commander aujourd'hui, passe par le formulaire de devis.
+                🚧 Phase 5, le panier et le paiement Stripe arrivent prochainement. Pour commander aujourd'hui, passe par le formulaire de devis.
               </p>
             </div>
           </div>

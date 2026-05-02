@@ -139,7 +139,7 @@ export default function PanierPage() {
                 <Link href="/demande-de-devis" className="text-mp-orange-flame underline font-semibold">
                   formulaire de devis
                 </Link>
-                {" "}— les primes Wallonie sont calculées dans le devis final.
+                . Les primes Wallonie sont calculées dans le devis final.
               </div>
             </div>
 

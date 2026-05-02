@@ -8,7 +8,7 @@ import { Home, ShoppingBag, Flame, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * Navbar FLOTTANTE sticky bottom mobile only — UNIQUE point de navigation
+ * Navbar FLOTTANTE sticky bottom mobile only, UNIQUE point de navigation
  * sur mobile (cf. doc corrections-mobile-v1 §3.1 : aucun header mobile).
  *
  * 4 actions :
@@ -118,7 +118,7 @@ export function NavbarSticky() {
 
             return (
               <li key={tab.id} className={cn("relative", isQuote ? "flex-[1.1]" : "flex-1")}>
-                {/* Bouton DEVIS — surélevé, orange permanent, plus gros */}
+                {/* Bouton DEVIS, surélevé, orange permanent, plus gros */}
                 {isQuote ? (
                   <Link
                     href={tab.href}
@@ -140,7 +140,7 @@ export function NavbarSticky() {
                   </Link>
                 ) : (
                   <>
-                    {/* Pastille active (fond) — animation horizontale douce */}
+                    {/* Pastille active (fond), animation horizontale douce */}
                     {isActive && (
                       <motion.span
                         layoutId="navbar-active-pill"

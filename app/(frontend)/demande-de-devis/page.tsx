@@ -4,7 +4,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { QuoteForm } from "@/components/forms/QuoteForm";
 
 export const metadata: Metadata = {
-  title: "Devis gratuit — Poêle à pellets en Wallonie",
+  title: "Devis gratuit, Poêle à pellets en Wallonie",
   description:
     "Demande ton devis personnalisé en 60 secondes. 6 questions sur ton projet, on revient sous 48h avec un chiffrage clair, primes incluses.",
 };
@@ -47,7 +47,7 @@ export default function DevisPage() {
           <QuoteForm />
 
           <p className="text-xs text-mp-ink-soft text-center mt-8">
-            Tes réponses sont sauvegardées localement — tu peux fermer la page et revenir, le formulaire repartira où tu en étais.
+            Tes réponses sont sauvegardées localement, tu peux fermer la page et revenir, le formulaire repartira où tu en étais.
           </p>
         </div>
       </section>

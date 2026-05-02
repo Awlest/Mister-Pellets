@@ -16,7 +16,7 @@ import { AddToCartButton } from "@/components/product/AddToCartButton";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 
 export const metadata = {
-  title: "Styleguide — composants UI",
+  title: "Styleguide, composants UI",
   robots: { index: false, follow: false },
 };
 

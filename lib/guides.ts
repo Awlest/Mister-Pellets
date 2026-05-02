@@ -51,7 +51,7 @@ export const GUIDES: GuideData[] = [
         heading: "3. Choisir la marque",
         paragraphs: [
           "Edilkamin (Italie, 1963) reste la référence premium pour la durabilité. EK63 (Italie, 2010) offre le meilleur rapport qualité-prix avec connectivité native. Dielle (Italie, 1989) est le spécialiste hydro pour remplacer une chaudière. Ferlux (Espagne, 1995) est le choix budget fiable, sans gadget.",
-          "À Mister Pellets, on a sélectionné ces 4 marques après avoir testé une vingtaine de fabricants. Chacune a son créneau, on dirige selon le projet — pas selon la marge.",
+          "À Mister Pellets, on a sélectionné ces 4 marques après avoir testé une vingtaine de fabricants. Chacune a son créneau, on dirige selon le projet, pas selon la marge.",
         ],
       },
       {
@@ -78,7 +78,7 @@ export const GUIDES: GuideData[] = [
       {
         question: "Quelle marque est la plus fiable ?",
         answer:
-          "Edilkamin pour la durabilité long terme (15-20 ans). EK63 pour la connectivité moderne. Dielle pour l'hydro. Ferlux pour la simplicité budget. Aucune n'est mauvaise — c'est le choix selon ton usage.",
+          "Edilkamin pour la durabilité long terme (15-20 ans). EK63 pour la connectivité moderne. Dielle pour l'hydro. Ferlux pour la simplicité budget. Aucune n'est mauvaise, c'est le choix selon ton usage.",
       },
       {
         question: "Faut-il un audit énergétique ?",
@@ -86,7 +86,7 @@ export const GUIDES: GuideData[] = [
           "Non, pas pour un poêle seul. L'audit n'est obligatoire que pour les bouquets de travaux ou pour les primes plus élevées sur l'isolation.",
       },
     ],
-    metaTitle: "Guide d'achat poêle à pellets en Wallonie 2026 — Mister Pellets",
+    metaTitle: "Guide d'achat poêle à pellets en Wallonie 2026, Mister Pellets",
     metaDescription:
       "Le guide complet pour choisir ton poêle à pellets en Wallonie : technologies, marques, primes, pose, entretien. Conseils des techniciens Mister Pellets.",
   },
@@ -125,7 +125,7 @@ export const GUIDES: GuideData[] = [
       {
         question: "Le canalisable est-il bruyant ?",
         answer:
-          "Légèrement plus que l'air classique (le ventilateur force davantage). Sur les modèles modernes (EK63, Edilkamin), c'est minimal — entre 35 et 45 dB en fonctionnement, soit moins qu'une conversation normale.",
+          "Légèrement plus que l'air classique (le ventilateur force davantage). Sur les modèles modernes (EK63, Edilkamin), c'est minimal, entre 35 et 45 dB en fonctionnement, soit moins qu'une conversation normale.",
       },
       {
         question: "Peut-on canaliser à l'étage ?",
@@ -133,7 +133,7 @@ export const GUIDES: GuideData[] = [
           "Oui, c'est la configuration la plus fréquente. La gaine monte verticalement dans une cloison ou dans un coffrage, puis se distribue à l'étage. Compte 5-8m max de longueur de gaine pour conserver une bonne température en sortie.",
       },
     ],
-    metaTitle: "Poêle à pellets canalisable — Le guide complet | Mister Pellets",
+    metaTitle: "Poêle à pellets canalisable, Le guide complet | Mister Pellets",
     metaDescription:
       "Tout sur les poêles à pellets canalisables : fonctionnement, puissances, exemples wallons. Edilkamin Mood Plus, EK63 Tweed et Spy. Conseil Mister Pellets.",
   },
@@ -144,7 +144,7 @@ export const GUIDES: GuideData[] = [
     category: "Technique",
     readingTime: "10 min",
     excerpt:
-      "Si tu as une chaudière mazout vieillissante et un système radiateur ou plancher chauffant, l'hydro pellets est la solution la plus rentable pour passer aux énergies renouvelables — souvent rentabilisé en 4-7 ans.",
+      "Si tu as une chaudière mazout vieillissante et un système radiateur ou plancher chauffant, l'hydro pellets est la solution la plus rentable pour passer aux énergies renouvelables, souvent rentabilisé en 4-7 ans.",
     sections: [
       {
         heading: "Le principe",
@@ -172,7 +172,7 @@ export const GUIDES: GuideData[] = [
       {
         question: "Faut-il garder une chaudière en backup ?",
         answer:
-          "Pas obligatoire. Les hydros modernes sont fiables. Mais beaucoup gardent une vieille chaudière fioul ou gaz comme secours pour les très grands froids ou les pannes — utile mais pas indispensable. À discuter avec nous selon ton cas.",
+          "Pas obligatoire. Les hydros modernes sont fiables. Mais beaucoup gardent une vieille chaudière fioul ou gaz comme secours pour les très grands froids ou les pannes, utile mais pas indispensable. À discuter avec nous selon ton cas.",
       },
       {
         question: "Combien d'autonomie en pellets ?",
@@ -180,7 +180,7 @@ export const GUIDES: GuideData[] = [
           "Réservoir typique : 30-60 kg sur les hydros, soit 1.5 à 4 jours d'autonomie selon la puissance. Pour ne pas être contraint, beaucoup ajoutent un silo externe à pellets relié par aspiration : 500-2000 kg de stock, plusieurs semaines d'autonomie.",
       },
     ],
-    metaTitle: "Poêle hydro pour remplacer chaudière mazout — Guide | Mister Pellets",
+    metaTitle: "Poêle hydro pour remplacer chaudière mazout, Guide | Mister Pellets",
     metaDescription:
       "Le guide complet du poêle hydro pour remplacer une chaudière mazout : marques (Dielle, Edilkamin), dimensionnement, coûts, primes. Conseil Mister Pellets.",
   },
@@ -236,10 +236,10 @@ export const GUIDES: GuideData[] = [
       {
         question: "Que faire si le poêle s'éteint tout seul ?",
         answer:
-          "Causes courantes : réservoir vide, brûleur encrassé, capteur de tirage défaillant, fusible thermique qui a sauté à cause d'une surchauffe. Vérifier dans cet ordre. Si ça persiste, appelle-nous — c'est rarement grave mais ça nécessite un diagnostic.",
+          "Causes courantes : réservoir vide, brûleur encrassé, capteur de tirage défaillant, fusible thermique qui a sauté à cause d'une surchauffe. Vérifier dans cet ordre. Si ça persiste, appelle-nous, c'est rarement grave mais ça nécessite un diagnostic.",
       },
     ],
-    metaTitle: "Entretien d'un poêle à pellets — Check-list complète | Mister Pellets",
+    metaTitle: "Entretien d'un poêle à pellets, Check-list complète | Mister Pellets",
     metaDescription:
       "Comment entretenir ton poêle à pellets jour, semaine, saison, année. Check-list complète des techniciens Mister Pellets pour faire durer ton appareil.",
   },
