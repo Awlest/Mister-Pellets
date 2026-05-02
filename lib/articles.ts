@@ -301,134 +301,164 @@ export const ARTICLES: ArticleData[] = [
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // 3. PRIMES WALLONIE 2026 (intent : "primes poêle pellets Wallonie")
+  // 3. PRIMES WALLONIE 2026 — RECTIFICATION FACTUELLE COMPLÈTE
+  //    Régime temporaire 14/02/2025 → 30/09/2026 (numéro démarche 3920)
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "primes-wallonie-2026-poele-pellets-combien-recuperer",
-    title: "Primes poêle à pellets en Wallonie 2026 : combien pouvez-vous récupérer ?",
-    metaTitle: "Primes poêle à pellets Wallonie 2026 — montants et conditions",
+    title: "Prime poêle à pellets en Wallonie 2026 : combien pouvez-vous vraiment récupérer ?",
+    metaTitle: "Prime poêle à pellets Wallonie 2026 (160 à 960 €) — montants et conditions",
     metaDescription:
-      "1 500 € R1, 750 € R2, 375 € R3 + bonus PEB. Conditions techniques, dossier, délais. Le guide complet 2026 par Mister Pellets.",
+      "Régime Prime Habitation 14/02/2025 au 30/09/2026 : 160 € de base × coefficient selon revenus. R1 = 960 €, R2 = 640 €, R3 = 320 €, R4 = 160 €. Conditions, audit, procédure SPW.",
     excerpt:
-      "Trois catégories de revenus, trois montants. Plus un bonus si la maison est en PEB F ou G. Voici exactement combien tu touches et comment monter le dossier sans faire d'erreur.",
+      "Quatre catégories de revenus, quatre montants. Audit logement obligatoire et liste officielle de poêles éligibles. Voici exactement combien tu touches et comment ne pas se planter sur le dossier.",
     tldr:
-      "En Wallonie en 2026, l'installation d'un poêle à pellets ouvre droit à une prime de 375 €, 750 € ou 1 500 € selon ta catégorie de revenus (R3, R2, R1). Un bonus de 250 € s'ajoute si la PEB est F ou G. Conditions cumulatives : rendement ≥ 87 %, écodesign 2022 conforme, installateur certifié RGIE/Cerga, devis avant travaux. Délai moyen de versement : 4 à 8 mois après dépôt du dossier complet.",
+      "Depuis le 14 février 2025, la Région wallonne applique un régime temporaire jusqu'au 30 septembre 2026. La prime poêle à pellets vaut 160 € de base, multipliée par 6 pour la catégorie R1 (revenus de référence ≤ 24 600 €) soit 960 €, par 4 pour R2 (640 €), par 2 pour R3 (320 €), par 1 pour R4 (160 €). Les ménages R5 (au-delà de 122 800 €) ne sont plus éligibles. Plafond complémentaire : 70 % de la facture pour R1-R2, 50 % pour R3-R4. Conditions cumulatives : audit logement préalable obligatoire, logement de plus de 15 ans, poêle dans la liste officielle SPW, pose par un entrepreneur inscrit à la BCE.",
     category: "primes",
-    tags: ["primes", "Wallonie", "2026", "aide", "subvention"],
-    readingTimeMinutes: 10,
+    tags: ["primes", "Wallonie", "2026", "Prime Habitation", "SPW Logement"],
+    readingTimeMinutes: 11,
     publishedAt: "2026-02-10",
-    modifiedAt: "2026-04-29",
+    modifiedAt: "2026-05-02",
     authorName: "Équipe Mister Pellets",
     authorRole: "Conseillers primes énergie",
-    coverImageAlt: "Tableau récapitulatif des primes Wallonie 2026 pour poêle à pellets",
+    coverImageAlt: "Tableau récapitulatif de la Prime Habitation Wallonie 2026 pour poêle à pellets",
     sections: [
       {
-        heading: "Les 3 montants 2026 selon ton revenu",
+        heading: "Les 4 montants exacts 2026 selon tes revenus de référence",
         paragraphs: [
-          "La Wallonie module la prime selon le revenu imposable globalement attesté du ménage (RIG) sur le dernier avertissement-extrait de rôle disponible. Trois catégories : R1 (revenus modestes), R2 (revenus moyens), R3 (revenus supérieurs).",
-          "Pour 2026, les seuils RIG sont : R1 jusqu'à 26 700 € ; R2 entre 26 700,01 € et 60 000 € ; R3 au-delà. Ces seuils sont majorés de 3 700 € par personne à charge. Vérifie ta catégorie sur monespace.wallonie.be avant de déposer.",
+          "Depuis le 14 février 2025, la Région wallonne a remplacé les anciennes \"primes Chauffage et Eau Chaude\" par la Prime Habitation, dans un régime temporaire valable jusqu'au 30 septembre 2026. La méthode est la même pour la plupart des travaux subventionnés : un montant de base, multiplié par un coefficient lié à ta catégorie de revenus.",
+          "Pour un poêle à pellets, la base est de 160 €. Le coefficient va de 1 (R4) à 6 (R1). Au-delà de 122 800 € de revenus de référence (catégorie R5), tu n'es tout simplement plus éligible aux primes Habitation depuis le 14 février 2025.",
         ],
         table: {
-          headers: ["Catégorie", "Revenu RIG (couple)", "Prime 2026 poêle pellets"],
+          headers: ["Catégorie", "Revenus de référence", "Coefficient", "Prime poêle à pellets"],
           rows: [
-            ["R1 — Revenus modestes", "≤ 26 700 €", "1 500 €"],
-            ["R2 — Revenus moyens", "26 701 à 60 000 €", "750 €"],
-            ["R3 — Revenus supérieurs", "> 60 000 €", "375 €"],
+            ["R1", "≤ 24 600 €", "× 6", "960 €"],
+            ["R2", "24 601 à 39 300 €", "× 4", "640 €"],
+            ["R3", "39 301 à 58 900 €", "× 2", "320 €"],
+            ["R4", "> 58 900 €", "× 1", "160 €"],
+            ["R5", "> 122 800 €", "non éligible", "0 €"],
           ],
-          caption: "Montants Wallonie 2026 pour appareil pellets ≥ 87 % rendement (hors bonus PEB).",
+          caption: "Montants Prime Habitation Wallonie 2026, régime temporaire 14/02/2025 au 30/09/2026 (numéro démarche 3920).",
         },
       },
       {
-        heading: "Le bonus PEB qu'on oublie souvent",
+        heading: "Le plafond en pourcentage qu'il faut bien comprendre",
         paragraphs: [
-          "Si ton certificat PEB indique F ou G (label rouge), tu touches un bonus de 250 € en plus de la prime de base. C'est cumulatif. Concrètement, un ménage R1 dans une maison PEB G peut récupérer 1 750 € sur l'installation.",
-          "Le bonus n'est pas automatique : il faut joindre le certificat PEB au dossier (date de validité 10 ans après émission). Si tu n'en as pas, fais-en faire un avant le dépôt — ça coûte 200 à 300 € pour une maison standard et c'est rentable d'office.",
+          "La prime calculée ne peut jamais dépasser un certain pourcentage du coût total TVAC de l'opération. Pour les catégories R1 et R2, ce plafond est de 70 %. Pour R3 et R4, c'est 50 %. Le montant réellement versé est le plus bas entre la prime théorique et ce plafond.",
+          "Concrètement, si tu es en R1 (théorie 960 €) et que ta facture totale TVAC est de 1 200 €, le plafond 70 % vaut 840 € : tu reçois 840 € au lieu de 960 €. Sur une facture de 4 200 € TVAC, le plafond 70 % vaut 2 940 € : tu reçois bien tes 960 €.",
         ],
         callout: {
           variant: "success",
-          text: "Cumul exemple : ménage R1 + maison PEB G = 1 750 €. Sur un poêle Edilkamin 9 kW posé à 5 800 €, il reste 4 050 € à charge. Avec un canalisable de 12 kW à 7 200 €, il reste 5 450 €.",
+          text: "Sur la quasi-totalité des poses pellets en maison (4 000 € à 8 000 € TVAC), le plafond 70 % ou 50 % ne mord pas et tu reçois le montant nominal de ta catégorie.",
+        },
+      },
+      {
+        heading: "L'audit logement préalable obligatoire (le truc qui surprend tout le monde)",
+        paragraphs: [
+          "Depuis le 14 février 2025, un audit logement préalable est obligatoire pour la quasi-totalité des primes Habitation, y compris pour un poêle à pellets isolé. Tu ne peux plus décider lundi de poser un poêle et déposer la prime vendredi : il faut un audit enregistré avant le démarrage des travaux.",
+          "Le coût de l'audit est de 800 à 1 200 € TVAC selon la taille du logement et la complexité. Une prime audit séparée couvre une partie de ce coût (montant variable selon catégorie de revenus). L'audit est réalisé par un auditeur agréé en Région wallonne et reste valide 5 ans, donc un audit fait pour d'autres travaux récents reste utilisable.",
+        ],
+        callout: {
+          variant: "warning",
+          text: "Pas d'audit avant travaux = pas de prime. C'est le piège n°1 sur lequel les ménages tombent depuis le 14 février 2025. Mister Pellets ne signe pas un devis pellets seul sans avoir vérifié que tu as ton audit en cours ou planifié.",
         },
       },
       {
         heading: "Les conditions techniques à respecter strictement",
         paragraphs: [
-          "Toutes les conditions ci-dessous doivent être réunies, sinon la prime est refusée à l'instruction du dossier. Pas de tolérance.",
+          "En plus de l'audit, trois conditions cumulatives doivent être réunies sur le projet pellets lui-même. Sans cela, la prime est refusée à l'instruction du dossier.",
         ],
         list: {
           ordered: true,
           items: [
-            "Rendement énergétique saisonnier ≥ 87 % (figure sur la fiche technique constructeur).",
-            "Conformité écodesign 2022 / Lot 20 — quasiment tous les modèles vendus aujourd'hui le respectent.",
-            "Installation par un entrepreneur certifié RGIE et Cerga (ou équivalent reconnu en Wallonie).",
-            "Devis daté et signé avant le démarrage des travaux. Pas de prime sur facture rétroactive.",
-            "Logement situé en Wallonie, occupé en résidence principale ou destiné à la location.",
-            "Le poêle doit être l'appareil principal de la pièce desservie (pas un appoint annexe).",
+            "Logement situé en Région wallonne (hors Communauté germanophone), construit depuis plus de 15 ans, à usage principal d'habitation.",
+            "Poêle figurant dans la liste officielle des appareils éligibles publiée par le SPW Logement (mise à jour régulièrement). Tous les modèles que distribue Mister Pellets y figurent, mais on vérifie le numéro de modèle exact avant chaque devis.",
+            "Pose réalisée par un entrepreneur inscrit à la Banque-Carrefour des Entreprises (BCE) avec accès à la profession requis. Awlest SRL (la société qui porte Mister Pellets) est inscrite à la BCE sous le numéro BE 0656.514.212.",
           ],
         },
       },
       {
-        heading: "Le dossier : 7 pièces à réunir, 8 mois d'attente max",
+        heading: "Le dossier : pièces à réunir et délais à tenir",
         paragraphs: [
-          "Le dossier se dépose en ligne sur monespace.wallonie.be (rubrique Primes Habitation) après réalisation des travaux. Tu as 4 mois après la date de la facture finale pour déposer, donc ne traîne pas.",
+          "Le dossier se dépose sur Mon Espace Wallonie (mon.wallonie.be) avec connexion eID ou itsme. Alternative : envoi postal à la Direction des Aides aux Particuliers, Rue des Brigades d'Irlande 1, 5100 Jambes. Tu as 8 mois après la dernière facture pour déposer un dossier complet, ensuite c'est forclos.",
         ],
         list: {
           ordered: true,
           items: [
-            "Devis détaillé daté et signé avant travaux",
-            "Facture finale acquittée (avec mention « payée »)",
-            "Fiche technique constructeur du poêle (rendement et écodesign)",
-            "Certificat de conformité Cerga délivré par l'installateur",
-            "Avertissement-extrait de rôle du ménage (revenus N-2)",
-            "Certificat PEB du logement si bonus demandé",
-            "Photos avant/après de l'installation (parfois demandées en complément)",
+            "Rapport d'audit logement enregistré avant travaux (PDF officiel)",
+            "Devis détaillé daté et signé avant le démarrage des travaux",
+            "Facture finale acquittée TVAC, avec mention du modèle exact",
+            "Annexe 6 \"Chauffage et Eau Chaude Sanitaire\" complétée par l'installateur",
+            "Attestation de conformité de l'installation",
+            "Justificatifs des revenus de référence (avertissement-extrait de rôle)",
+            "Récépissé de l'inscription BCE de l'entrepreneur (le cas échéant)",
           ],
         },
       },
       {
-        heading: "Les autres aides cumulables qu'on regarde rarement",
+        heading: "Le délai de traitement : sois patient",
         paragraphs: [
-          "Outre la prime régionale Wallonie, certaines communes ajoutent leur propre prime communale : Namur, Charleroi, Liège, Mons et plusieurs communes du Brabant wallon ont des dispositifs de 100 à 500 €. Vérifie sur le site de ta commune ou demande-nous, on tient une base à jour pour la zone Fernelmont.",
-          "Côté fiscal, les intérêts d'un éventuel prêt à 0 % « Coup de pouce wallon » restent intéressants pour étaler l'investissement. La TVA réduite à 6 % s'applique d'office sur la pose si le logement a plus de 10 ans (cas le plus courant en Wallonie).",
+          "Honnêtement, c'est le point le plus difficile à expliquer aux clients. Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt du dossier complet. Le gouvernement wallon s'est engagé à raccourcir ce délai, mais on reste prudent dans nos annonces.",
+          "Pendant ces 12 à 24 mois, tu as déjà avancé la facture totale chez Mister Pellets. La prime arrive ensuite directement sur ton compte. Si tu as besoin d'étaler la dépense, le prêt à taux 0 % Renopack ou Rénoprêt (via la Société wallonne du Crédit social ou le Fonds du Logement) peut financer jusqu'à 60 000 € de travaux.",
         ],
       },
       {
-        heading: "Combien tu paies vraiment, exemples chiffrés",
+        heading: "Les cumuls qu'il faut connaître",
         paragraphs: [
-          "Cas A : ménage R2, maison PEB D à Andenne, poêle Ferlux 8 kW posé à 4 600 € TTC. Prime base 750 €, pas de bonus PEB. Coût net : 3 850 €.",
-          "Cas B : ménage R1, maison PEB G à Charleroi, canalisable EK63 12 kW posé à 7 100 € TTC. Prime base 1 500 € + bonus 250 € = 1 750 €. Coût net : 5 350 €.",
-          "Cas C : ménage R3, maison PEB B à Wavre, hydro Dielle Iride 22 kW posé à 11 800 € TTC. Prime base 375 €, pas de bonus. Coût net : 11 425 €. Ici, c'est le remplacement de chaudière mazout qui rentabilise — pas la prime.",
+          "Quatre éléments se cumulent avec la prime poêle à pellets sans la réduire. La TVA à 6 % au lieu de 21 % s'applique d'office si ton logement a plus de 10 ans : c'est appliqué directement sur ta facture par l'installateur, pas une prime à demander. Les primes isolation et châssis se cumulent sous un plafond global de 50 000 € par logement individuel, toutes primes confondues sur la durée. Le prêt 0 % Renopack se cumule librement. Et certaines communes wallonnes ajoutent leur propre prime communale (montants variables, à vérifier au cas par cas).",
         ],
         callout: {
           variant: "info",
-          text: "Mister Pellets monte le dossier complet pour ses clients : on collecte les pièces, on rédige les justificatifs et on dépose à ta place. Service inclus dans le devis, pas de frais additionnels.",
+          text: "Mister Pellets prépare le pack dossier complet pour ses clients : récapitulatif technique, attestation de conformité, annexe 6, facture détaillée. Tu uploades sur Mon Espace, pas besoin de gérer l'administratif côté SPW. Service inclus dans le devis, pas de frais additionnels.",
         },
+      },
+      {
+        heading: "Exemples chiffrés à jour (mai 2026)",
+        paragraphs: [
+          "Cas A. Ménage R2 (revenus de référence 36 000 €), maison à Andenne construite en 1985, audit récent valide. Pose d'un Ferlux 8 kW à 4 600 € TVAC. Prime calculée : 640 €. Plafond 70 % = 3 220 €, donc tu reçois bien 640 €. Coût net après prime : 3 960 €.",
+          "Cas B. Ménage R1 (revenus de référence 22 000 €), maison à Charleroi de 1962, audit en cours. Pose d'un canalisable EK63 12 kW à 7 100 € TVAC. Prime calculée : 960 €. Plafond 70 % = 4 970 €, donc tu reçois bien 960 €. Coût net : 6 140 €.",
+          "Cas C. Ménage R3 (revenus 50 000 €), maison à Wavre construite en 2002. Audit obligatoire à organiser avant pose. Hydro Dielle Iride 22 kW à 11 800 € TVAC. Prime calculée : 320 €. Plafond 50 % = 5 900 €, donc tu reçois bien 320 €. Coût net : 11 480 €. Ici, c'est le remplacement de la chaudière mazout existante qui rentabilise sur la durée, pas la prime.",
+          "Cas D. Ménage R5 (revenus 140 000 €). Non éligible aux primes Habitation depuis le 14 février 2025, quel que soit le projet. Pas de prime Wallonie sur le poêle à pellets, mais TVA 6 % et prêt 0 % restent accessibles.",
+        ],
+      },
+      {
+        heading: "Et après le 30 septembre 2026 ?",
+        paragraphs: [
+          "Le régime actuel est temporaire. À partir du 1er octobre 2026, un nouveau régime global devrait entrer en vigueur, avec des montants et conditions à confirmer (rien n'est publié au moment de la rédaction, mai 2026). Si ton projet n'est pas urgent, il peut être pertinent d'attendre les annonces officielles. Si l'hiver 2026-2027 te concerne, mieux vaut sécuriser maintenant sous le régime connu.",
+          "Mister Pellets met cette page à jour dès la publication officielle du nouveau régime. Tu peux aussi appeler le numéro gratuit 1718 (SPW) pour obtenir l'info la plus à jour, ou consulter un Guichet Énergie Wallonie de ta zone.",
+        ],
       },
     ],
     faqs: [
       {
-        question: "Quelle est la prime maximale en Wallonie pour un poêle à pellets en 2026 ?",
+        question: "Quel est le montant maximal de la prime poêle à pellets en Wallonie en 2026 ?",
         answer:
-          "1 750 € : 1 500 € de prime de base R1 (revenus modestes) + 250 € de bonus PEB F ou G. Sans bonus PEB, le plafond est 1 500 € pour les ménages R1, 750 € pour les R2 et 375 € pour les R3.",
+          "960 €, pour un ménage en catégorie R1 (revenus de référence inférieurs ou égaux à 24 600 €). C'est la prime de base de 160 € multipliée par le coefficient 6. Au-delà, le plafond en pourcentage de la facture peut s'appliquer (70 % pour R1 et R2).",
+      },
+      {
+        question: "L'audit logement préalable est-il vraiment obligatoire pour un simple poêle à pellets ?",
+        answer:
+          "Oui, depuis le 14 février 2025. C'est un changement majeur par rapport à l'ancien régime. L'audit doit être enregistré avant le démarrage des travaux, dure 5 ans, et coûte 800 à 1 200 € TVAC, partiellement couvert par une prime audit séparée. Sans audit, le dossier prime est rejeté.",
       },
       {
         question: "Faut-il déposer le dossier avant ou après les travaux ?",
         answer:
-          "Le devis doit être daté et signé avant les travaux, mais le dépôt du dossier complet se fait après la pose, dans un délai maximum de 4 mois après la facture finale acquittée.",
+          "L'audit logement et le devis doivent être réalisés avant les travaux. Le dépôt du dossier prime se fait après la pose, dans un délai maximum de 8 mois après la facture finale acquittée.",
       },
       {
-        question: "Combien de temps pour recevoir la prime ?",
+        question: "Combien de temps pour recevoir la prime sur mon compte ?",
         answer:
-          "En 2026, les délais d'instruction Wallonie sont de 4 à 8 mois en moyenne. Les dossiers complets et conformes du premier coup sont traités plus vite. Mister Pellets surveille l'état d'avancement et relance si besoin.",
+          "Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai. En attendant, tu paies normalement Mister Pellets et tu reçois la prime ensuite, directement sur ton compte.",
       },
       {
-        question: "Peut-on cumuler la prime Wallonie avec la prime de la commune ?",
+        question: "Peut-on cumuler avec la prime de la commune ?",
         answer:
-          "Oui, la plupart des communes wallonnes acceptent le cumul avec la prime régionale. Le montant communal vient en plus, sans réduire la prime régionale. Vérifie le règlement spécifique de ta commune.",
+          "Oui dans la plupart des cas. Plusieurs communes wallonnes ajoutent leur propre prime communale (Namur, Charleroi, Liège, certaines communes du Brabant wallon notamment), de 100 à 500 € selon les règlements locaux. Le cumul est possible avec la Prime Habitation régionale, sous le plafond global de 50 000 € par logement.",
       },
       {
-        question: "Et si je remplace une chaudière mazout par un poêle hydro ?",
+        question: "Et si mes revenus dépassent 122 800 € ?",
         answer:
-          "Tu cumules la prime « poêle pellets » et potentiellement la prime « démantèlement de cuve à mazout » (250 à 1 000 € selon la commune). Avec le bonus PEB, on monte facilement à 2 500 € de soutien total dans certaines communes.",
+          "Tu es en catégorie R5 et tu n'es plus éligible aux primes Habitation depuis le 14 février 2025. Tu peux toutefois bénéficier de la TVA réduite à 6 % (logement de plus de 10 ans) et du prêt à taux 0 % Renopack ou Rénoprêt.",
       },
     ],
     related: {
@@ -450,7 +480,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "Avec le mazout à 1,15 €/litre et la fin programmée des chaudières mazout d'ici 2035, le pellet hydro devient l'alternative la plus simple en Wallonie.",
     tldr:
-      "Remplacer une chaudière mazout par un poêle hydro à pellets coûte 8 000 à 14 000 € posé selon la puissance (16 à 24 kW) et la complexité du raccordement aux radiateurs existants. Avec les primes cumulées Wallonie (jusqu'à 1 750 €) et le démantèlement cuve mazout (250-1 000 €), le retour sur investissement se situe entre 6 et 9 ans pour une maison consommant 2 000 litres de mazout par an.",
+      "Remplacer une chaudière mazout par un poêle hydro à pellets coûte 8 000 à 14 000 € posé selon la puissance (16 à 24 kW) et la complexité du raccordement aux radiateurs existants. Avec la Prime Habitation Wallonie 2026 (160 à 960 € selon catégorie de revenus), le démantèlement cuve mazout (250 à 1 000 € selon la commune) et les économies de combustible, le retour sur investissement se situe entre 5 et 9 ans pour une maison consommant 2 000 litres de mazout par an.",
     category: "installation",
     tags: ["hydro", "mazout", "remplacement", "chaudière", "transition"],
     readingTimeMinutes: 11,
@@ -497,8 +527,8 @@ export const ARTICLES: ArticleData[] = [
         heading: "Coût total, primes incluses",
         paragraphs: [
           "Voici un cas réel de mars 2026 à Sombreffe : maison 4 façades 1978, 175 m², PEB E, chaudière mazout Junkers de 28 kW en fin de vie, cuve mazout 3 000 L à démanteler.",
-          "Devis Mister Pellets : Dielle Iride 22 hydro 22 kW (5 200 € matériel) + ballon tampon 500 L (1 100 €) + désembouage circuit (480 €) + raccordement et mise en service (1 600 €) + démantèlement et nettoyage cuve mazout (850 €) = 9 230 € TTC tout compris (TVA 6 %).",
-          "Primes obtenues : prime Wallonie R2 (750 €) + bonus PEB E ne s'applique pas (seulement F-G) + prime communale Sombreffe pour démantèlement cuve (300 €) + prime communale rénovation chauffage (200 €) = 1 250 € total. Coût net pour le client : 7 980 €.",
+          "Devis Mister Pellets : Dielle Iride 22 hydro 22 kW (5 200 € matériel) + ballon tampon 500 L (1 100 €) + désembouage circuit (480 €) + raccordement et mise en service (1 600 €) + démantèlement et nettoyage cuve mazout (850 €) = 9 230 € TVAC tout compris (TVA 6 %).",
+          "Primes obtenues : Prime Habitation Wallonie 2026 catégorie R2 (640 €, soit base 160 € × coefficient 4) + prime communale Sombreffe pour démantèlement cuve (300 €) + prime communale rénovation chauffage (200 €) = 1 140 € total. Coût net pour le client : 8 090 €.",
         ],
         callout: {
           variant: "success",
@@ -525,7 +555,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien coûte le passage du mazout au poêle hydro à pellets ?",
         answer:
-          "Compte 8 000 à 14 000 € TTC tout compris en Wallonie : matériel (poêle + ballon tampon), désembouage du circuit, raccordement, démantèlement de la cuve mazout. Avec les primes Wallonie + communales, on tombe souvent à 6 500-12 000 € net.",
+          "Compte 8 000 à 14 000 € TVAC tout compris en Wallonie : matériel (poêle + ballon tampon), désembouage du circuit, raccordement, démantèlement de la cuve mazout. Avec la Prime Habitation 2026 (160 à 960 € selon catégorie de revenus) et d'éventuelles primes communales (cuve mazout, rénovation chauffage), on tombe souvent à 6 500-12 500 € net.",
       },
       {
         question: "Faut-il garder une chaudière d'appoint en plus du poêle hydro ?",

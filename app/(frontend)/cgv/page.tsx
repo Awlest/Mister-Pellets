@@ -95,10 +95,11 @@ export default function CGVPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">8. Pose et installation</h2>
             <p>
-              La pose est réalisée par notre équipe certifiée RGIE. Une visite technique préalable
-              est obligatoire pour valider la faisabilité (conduit, distances de sécurité, accès).
-              La pose comprend le raccordement au conduit, la mise en service, et la formation
-              initiale du client.
+              La pose est réalisée par notre équipe (Awlest SRL, inscrite à la Banque-Carrefour
+              des Entreprises sous le numéro BE 0656.514.212, accès à la profession requis).
+              Une visite technique préalable est obligatoire pour valider la faisabilité (conduit,
+              distances de sécurité, accès). La pose comprend le raccordement au conduit, la mise
+              en service, et la formation initiale du client.
             </p>
           </section>
 

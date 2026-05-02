@@ -64,7 +64,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "5. Calculer les primes",
         paragraphs: [
-          "Wallonie 2026 : 1 500 € si revenus modestes (R1), 750 € si revenus moyens (R2), 375 € si revenus supérieurs (R3). Bonus 250 € si PEB F ou G. Conditions : rendement ≥ 87 %, écodesign 2022, installateur certifié. Détails sur la page primes.",
+          "Wallonie 2026 (régime temporaire 14/02/2025 au 30/09/2026) : prime de base 160 € multipliée par un coefficient selon revenus de référence. R1 (≤ 24 600 €) : 960 €. R2 (24 601-39 300 €) : 640 €. R3 (39 301-58 900 €) : 320 €. R4 (> 58 900 €) : 160 €. R5 (> 122 800 €) non éligible. Audit logement préalable obligatoire. Détails et procédure sur la page primes.",
           "Vérifie aussi les primes communales (certaines communes namuroises et hennuyères en ont) et la déductibilité fiscale éventuelle. Mister Pellets monte le dossier complet pour toi.",
         ],
       },
@@ -73,7 +73,7 @@ export const GUIDES: GuideData[] = [
       {
         question: "Combien coûte un poêle à pellets installé en 2026 ?",
         answer:
-          "Compte 4 000 à 8 000 € tout compris pour une maison standard avec conduit existant. Hydro complet : 7 000 à 12 000 €. Les primes Wallonie ramènent 750 à 1 750 € de cette facture selon ton revenu.",
+          "Compte 4 000 à 8 000 € tout compris pour une maison standard avec conduit existant. Hydro complet : 7 000 à 12 000 €. La Prime Habitation Wallonie 2026 ramène 160 à 960 € selon ta catégorie de revenus.",
       },
       {
         question: "Quelle marque est la plus fiable ?",
@@ -163,7 +163,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "Coûts et primes",
         paragraphs: [
-          "Un hydro complet (poêle + kit hydraulique + raccordement + main d'œuvre) coûte 7 000 à 12 000 € selon la puissance et la complexité. La prime Wallonie 2026 s'applique normalement (375 à 1 500 € + bonus PEB F-G).",
+          "Un hydro complet (poêle + kit hydraulique + raccordement + main d'œuvre) coûte 7 000 à 12 000 € selon la puissance et la complexité. La Prime Habitation Wallonie 2026 s'applique normalement (160 à 960 € selon catégorie de revenus, audit logement préalable obligatoire).",
           "Le retour sur investissement vs mazout : entre 4 et 7 ans selon la consommation actuelle et l'évolution des prix. Au-delà, c'est de l'économie nette tous les hivers.",
         ],
       },

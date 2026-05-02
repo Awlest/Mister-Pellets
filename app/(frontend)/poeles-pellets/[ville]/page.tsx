@@ -174,7 +174,7 @@ export default async function CityPage({ params }: Props) {
           },
           {
             title: "Pose en 1 journée",
-            description: `Équipe certifiée RGIE qui se déplace à ${city.name}. On laisse l'endroit propre, le poêle réglé, prêt à l'emploi.`,
+            description: `Équipe Mister Pellets qui se déplace à ${city.name}. On laisse l'endroit propre, le poêle réglé, prêt à l'emploi.`,
           },
           {
             title: "Mise en route + SAV",
