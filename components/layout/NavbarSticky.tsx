@@ -63,16 +63,50 @@ const MENU_LINKS = [
 
 export function NavbarSticky() {
   const pathname = usePathname();
-  const [visible, setVisible] = React.useState(false);
+  // Visible par défaut. Comportement iOS-like : hide on scroll down, show on scroll up.
+  const [visible, setVisible] = React.useState(true);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const reduceMotion = useReducedMotion();
 
   React.useEffect(() => {
-    const handle = () => setVisible(window.scrollY > 200);
-    handle();
+    const SCROLL_THRESHOLD = 8; // ignore micro-scrolls (rebond iOS, trackpad)
+    const TOP_ZONE = 80;        // toujours visible dans cette zone (haut de page)
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const handle = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const current = window.scrollY;
+        const delta = current - lastY;
+
+        if (current < TOP_ZONE) {
+          setVisible(true);
+        } else if (delta > SCROLL_THRESHOLD) {
+          // scroll down significatif → hide
+          setVisible(false);
+        } else if (delta < -SCROLL_THRESHOLD) {
+          // scroll up significatif → show
+          setVisible(true);
+        }
+
+        // Toujours visible si le drawer est ouvert (sécurité au cas où on ferme le drawer
+        // sans scroll : la nav doit rester accessible derrière)
+        lastY = current;
+        ticking = false;
+      });
+    };
+
     window.addEventListener("scroll", handle, { passive: true });
     return () => window.removeEventListener("scroll", handle);
   }, []);
+
+  // Force visible si le drawer Menu est ouvert (UX : on ne veut pas que la nav
+  // disparaisse pendant que le drawer est ouvert)
+  React.useEffect(() => {
+    if (menuOpen) setVisible(true);
+  }, [menuOpen]);
 
   const activeTabId: TabId = React.useMemo(() => {
     if (menuOpen) return "menu";
@@ -177,8 +211,26 @@ export function NavbarSticky() {
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
         <SheetContent
           side="bottom"
-          className="rounded-t-3xl border-t-0 max-h-[85vh] overflow-y-auto px-6 pt-8 pb-safe lg:hidden"
+          className={cn(
+            "rounded-t-3xl border-t-0",
+            // Hauteur max + scroll interne
+            "max-h-[88vh] overflow-y-auto overscroll-contain",
+            // Padding horizontal
+            "px-6",
+            "lg:hidden"
+          )}
+          // Padding vertical via style pour combiner valeur fixe + safe-area iOS
+          style={{
+            paddingTop: "max(2.5rem, env(safe-area-inset-top))",
+            paddingBottom: "calc(env(safe-area-inset-bottom) + 6.5rem)",
+            // ↑ 6.5rem = espace pour la NavbarSticky flottante (~88px) + air en bas
+          }}
         >
+          {/* Drag handle visuel */}
+          <div className="flex justify-center -mt-4 mb-4" aria-hidden>
+            <div className="h-1.5 w-12 rounded-full bg-mp-sand/60" />
+          </div>
+
           <div className="flex items-center justify-between mb-6">
             <h2
               className="text-2xl font-semibold text-mp-green-deep"
@@ -186,7 +238,7 @@ export function NavbarSticky() {
             >
               Plus d'options
             </h2>
-            <SheetClose className="rounded-full p-2 hover:bg-mp-beige" aria-label="Fermer">
+            <SheetClose className="rounded-full p-2 hover:bg-mp-beige transition-colors" aria-label="Fermer">
               <X className="h-5 w-5" />
             </SheetClose>
           </div>
