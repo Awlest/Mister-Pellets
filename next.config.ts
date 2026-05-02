@@ -17,6 +17,23 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  /**
+   * Rewrites SEO-friendly :
+   * - /poeles-pellets-{ville}/ (URL externe SEO, format historique WordPress)
+   *   → /poeles-pellets/{ville}/ (URL interne Next.js, route dynamique standard)
+   *
+   * Avantages : préserve les URLs SEO WP existantes, tout en respectant le pattern
+   * Next.js App Router (segment dynamique entièrement entre crochets).
+   */
+  async rewrites() {
+    return [
+      {
+        source: "/poeles-pellets-:ville",
+        destination: "/poeles-pellets/:ville",
+      },
+    ];
+  },
+
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
