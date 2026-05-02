@@ -3,14 +3,10 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { Menu, ChevronDown, Phone } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { CartTrigger } from "@/components/cart/CartDrawer";
-import { cn, formatPhone } from "@/lib/utils";
-
-const PHONE = "0472 04 32 22";
+import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { label: "Accueil", href: "/" },
@@ -41,7 +37,6 @@ const NAV_ITEMS = [
 ];
 
 export function Header() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState<string | null>(null);
 
@@ -52,13 +47,12 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Page d'accueil placeholder : on masque le header (logo + menu déjà rendus
-  // dans le hero de la home, pas de doublon visuel).
-  if (pathname === "/") return null;
-
   return (
     <header
       className={cn(
+        // ZÉRO header sur mobile (cf. doc corrections-mobile-v1 §3.1).
+        // Le header apparaît uniquement à partir de lg (1024 px).
+        "hidden lg:block",
         "sticky top-0 z-40 w-full transition-all duration-300",
         scrolled
           ? "h-16 bg-mp-cream/92 backdrop-blur-md shadow-sm"
@@ -137,77 +131,12 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Actions droite */}
+        {/* Actions droite (desktop uniquement, le Header est masqué sur mobile) */}
         <div className="flex items-center gap-2 shrink-0">
-          <CartTrigger className="hidden sm:inline-flex" />
-
-          <Button asChild variant="primary" size="default" className="hidden md:inline-flex">
+          <CartTrigger />
+          <Button asChild variant="primary" size="default">
             <Link href="/demande-de-devis">Devis →</Link>
           </Button>
-
-          {/* Hamburger mobile */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Ouvrir le menu">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:max-w-md p-6 flex flex-col">
-              <Link href="/" className="flex items-center gap-2 mb-8">
-                <Image src="/logo-mister-pellets-mascotte.svg" alt="" width={40} height={40} />
-                <span
-                  className="text-xl font-semibold text-mp-green-deep"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  Mister Pellets
-                </span>
-              </Link>
-
-              <nav className="flex flex-col gap-1 flex-1 overflow-y-auto">
-                {NAV_ITEMS.map((item) => (
-                  <div key={item.href}>
-                    <SheetClose asChild>
-                      <Link
-                        href={item.href}
-                        className="flex items-center justify-between py-3 px-2 text-lg font-medium text-mp-ink hover:text-mp-orange-flame border-b border-mp-sand/30"
-                      >
-                        {item.label}
-                      </Link>
-                    </SheetClose>
-                    {item.children && (
-                      <div className="pl-4 py-1 border-b border-mp-sand/30">
-                        {item.children.map((child) => (
-                          <SheetClose key={child.href} asChild>
-                            <Link
-                              href={child.href}
-                              className="block py-2 text-sm text-mp-ink-soft hover:text-mp-orange-flame"
-                            >
-                              {child.label}
-                            </Link>
-                          </SheetClose>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </nav>
-
-              <div className="flex flex-col gap-3 mt-6 pt-6 border-t border-mp-sand/30">
-                <SheetClose asChild>
-                  <Button asChild variant="primary" size="lg" className="w-full">
-                    <Link href="/demande-de-devis">Demander un devis</Link>
-                  </Button>
-                </SheetClose>
-                <a
-                  href={`tel:${formatPhone(PHONE)}`}
-                  className="inline-flex items-center justify-center gap-2 text-sm font-medium text-mp-green-deep py-2"
-                >
-                  <Phone className="h-4 w-4" />
-                  {PHONE}
-                </a>
-              </div>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
     </header>
