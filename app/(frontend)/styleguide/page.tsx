@@ -141,7 +141,12 @@ export default function StyleguidePage() {
             </div>
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft block mb-3">AddToCartButton (Phase 5 wiring)</span>
-              <AddToCartButton productId="demo-id" productName="Edilkamin Blade 9kW" />
+              <AddToCartButton
+                productId="demo-id"
+                productName="Edilkamin Blade 9kW"
+                productBrand="Edilkamin"
+                productPriceTTC={2890}
+              />
             </div>
           </div>
         </Section>

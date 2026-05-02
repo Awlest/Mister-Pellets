@@ -162,7 +162,15 @@ export default async function ProductPage({ params }: Props) {
               )}
 
               <div className="flex flex-col gap-3">
-                <AddToCartButton productId={product.slug} productName={product.name} className="w-full" />
+                {product.priceTTC ? (
+                  <AddToCartButton
+                    productId={product.slug}
+                    productName={product.name}
+                    productBrand={product.brand}
+                    productPriceTTC={product.priceTTC}
+                    className="w-full"
+                  />
+                ) : null}
                 <Button asChild variant="outline" size="lg" className="w-full">
                   <Link href="/demande-de-devis">Demander un devis avec pose</Link>
                 </Button>
