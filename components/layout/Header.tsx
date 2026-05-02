@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
@@ -40,6 +41,7 @@ const NAV_ITEMS = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState<string | null>(null);
 
@@ -49,6 +51,10 @@ export function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Page d'accueil placeholder : on masque le header (logo + menu déjà rendus
+  // dans le hero de la home, pas de doublon visuel).
+  if (pathname === "/") return null;
 
   return (
     <header
