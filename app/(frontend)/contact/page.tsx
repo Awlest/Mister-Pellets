@@ -5,7 +5,7 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { formatPhone } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Contact — Mister Pellets Wallonie",
+  title: "Contact, Mister Pellets Wallonie",
   description:
     "Contacte Mister Pellets à Fernelmont : téléphone, email, adresse showroom, horaires. On répond dans la journée pendant les heures ouvrées.",
 };
@@ -91,7 +91,7 @@ export default function ContactPage() {
                 <a href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline">
                   formulaire de devis
                 </a>{" "}
-                — c'est plus précis. Ce formulaire de contact est pour les questions générales.
+               , c'est plus précis. Ce formulaire de contact est pour les questions générales.
               </p>
               <ContactForm />
             </div>

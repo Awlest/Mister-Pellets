@@ -11,7 +11,7 @@ export default function PolitiqueConfidentialitePage() {
     <>
       <HeroSecondary
         title="Politique de confidentialité"
-        description="Conforme RGPD — règles de traitement de tes données personnelles."
+        description="Conforme RGPD, règles de traitement de tes données personnelles."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Politique de confidentialité" },

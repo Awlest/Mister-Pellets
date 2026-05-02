@@ -5,7 +5,7 @@ import { getPayloadClient } from "@/lib/payload-client";
 import { confirmCustomerOrder } from "@/lib/email";
 
 /**
- * Webhook Stripe — confirme le paiement d'une Checkout Session et met à jour
+ * Webhook Stripe, confirme le paiement d'une Checkout Session et met à jour
  * la commande Payload + envoie l'email de confirmation client.
  *
  * Setup côté Stripe Dashboard → Developers → Webhooks → Add endpoint :

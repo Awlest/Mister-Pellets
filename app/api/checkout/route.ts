@@ -55,7 +55,7 @@ export async function POST(request: Request) {
   // Calcul totaux
   const subtotal = items.reduce((acc, it) => acc + it.priceTTC * it.quantity, 0);
   const vat = subtotal - subtotal / 1.21;
-  const shipping = 0; // gratuit pour l'instant — Phase 7 : calcul dynamique selon zone
+  const shipping = 0; // gratuit pour l'instant, Phase 7 : calcul dynamique selon zone
   const total = subtotal + shipping;
 
   const orderNumber = generateOrderNumber();
@@ -101,7 +101,7 @@ export async function POST(request: Request) {
       return NextResponse.json({
         ok: true,
         orderId: order.id,
-        warning: "Stripe non configuré — commande enregistrée en attente de paiement (mode dev).",
+        warning: "Stripe non configuré, commande enregistrée en attente de paiement (mode dev).",
       });
     } catch (err) {
       console.error("[checkout] order creation failed", err);
@@ -117,7 +117,7 @@ export async function POST(request: Request) {
     const stripe = getStripe();
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-    // Créer la commande en base AVANT d'aller sur Stripe — statut "pending"
+    // Créer la commande en base AVANT d'aller sur Stripe, statut "pending"
     const payload = await getPayloadClient();
     const order = await payload.create({
       collection: "orders",

@@ -53,7 +53,7 @@ export const ORGANIZATION_SCHEMA = {
 };
 
 /**
- * Schema LocalBusiness (HomeAndConstructionBusiness) — page d'accueil.
+ * Schema LocalBusiness (HomeAndConstructionBusiness), page d'accueil.
  */
 export const LOCAL_BUSINESS_SCHEMA = {
   "@context": "https://schema.org",

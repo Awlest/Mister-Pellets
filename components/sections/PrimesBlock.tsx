@@ -10,30 +10,46 @@ interface PrimeRow {
   highlight?: boolean;
 }
 
+/**
+ * Régime Prime Habitation Wallonie 2026 (en vigueur du 14/02/2025 au 30/09/2026).
+ * Source : SPW Logement / SPW Énergie. Numéro de démarche 3920.
+ *
+ * Méthode : prime de base 160 € × coefficient selon revenus de référence.
+ *   R1 (≤ 24 600 €) × 6 = 960 €
+ *   R2 (24 601 à 39 300 €) × 4 = 640 €
+ *   R3 (39 301 à 58 900 €) × 2 = 320 €
+ *   R4 (> 58 900 €) × 1 = 160 € (montant de base)
+ *   R5 (> 122 800 €) : non éligible depuis le 14/02/2025
+ */
 const DEFAULT_PRIMES: PrimeRow[] = [
   {
-    amount: "1 500 €",
+    amount: "960 €",
     audience: "Revenus modestes",
-    detail: "Catégorie R1 · prime majorée",
+    detail: "Catégorie R1 · coefficient × 6",
     highlight: true,
   },
   {
-    amount: "750 €",
+    amount: "640 €",
     audience: "Revenus moyens",
-    detail: "Catégorie R2",
+    detail: "Catégorie R2 · coefficient × 4",
   },
   {
-    amount: "375 €",
+    amount: "320 €",
     audience: "Revenus supérieurs",
-    detail: "Catégorie R3 · prime de base",
+    detail: "Catégorie R3 · coefficient × 2",
+  },
+  {
+    amount: "160 €",
+    audience: "Au-delà",
+    detail: "Catégorie R4 · prime de base",
   },
 ];
 
 const CONDITIONS = [
-  "Rendement ≥ 87 %",
-  "Émissions CO ≤ 250 mg/m³",
-  "Certification écodesign 2022",
-  "Installation par un pro certifié",
+  "Logement de plus de 15 ans en Région wallonne",
+  "Audit logement préalable obligatoire",
+  "Poêle dans la liste officielle SPW Logement",
+  "Pose par entrepreneur inscrit à la BCE",
 ];
 
 interface PrimesBlockProps {
@@ -43,11 +59,12 @@ interface PrimesBlockProps {
 }
 
 /**
- * Bloc primes Wallonie 2026 avec les 3 montants. Cf. brief §3.2 sec 9.
+ * Bloc primes Wallonie 2026, rectification factuelle complète (régime
+ * temporaire 14/02/2025 → 30/09/2026).
  */
 export function PrimesBlock({
-  title = "Primes énergie Wallonie 2026",
-  description = "Calcul fait selon ton revenu et ta catégorie PEB. On monte le dossier pour toi, sans paperasse à gérer de ton côté.",
+  title = "Prime Habitation Wallonie 2026",
+  description = "Régime temporaire en vigueur jusqu'au 30 septembre 2026. Prime de base 160 € multipliée par un coefficient selon ta catégorie de revenus. On monte le dossier complet pour toi.",
   primes = DEFAULT_PRIMES,
 }: PrimesBlockProps) {
   return (
@@ -62,13 +79,14 @@ export function PrimesBlock({
           )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-10">
+        {/* 4 cards, R1 (highlight) puis R2, R3, R4 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {primes.map((prime) => (
             <Card
               key={prime.audience}
-              className={`lg:col-span-1 p-6 flex flex-col items-start ${
+              className={`p-6 flex flex-col items-start ${
                 prime.highlight
-                  ? "ring-2 ring-mp-orange-flame ring-offset-2 ring-offset-mp-cream lg:scale-105 lg:col-span-2"
+                  ? "ring-2 ring-mp-orange-flame ring-offset-2 ring-offset-mp-cream"
                   : ""
               }`}
             >
@@ -86,32 +104,37 @@ export function PrimesBlock({
               )}
             </Card>
           ))}
-
-          {/* Bonus PEB F-G */}
-          <Card className="lg:col-span-2 p-6 bg-mp-green-deep text-white border-mp-green-mid">
-            <div className="flex flex-col items-start">
-              <span className="text-xs font-semibold uppercase tracking-wider text-mp-orange-warm mb-1">
-                Bonus
-              </span>
-              <span
-                className="text-4xl md:text-5xl font-semibold mb-2 tabular-nums"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                +250 €
-              </span>
-              <span className="text-base font-semibold">PEB F ou G</span>
-              <span className="text-xs text-mp-cream/70 mt-1">
-                Cumulable avec la prime principale
-              </span>
-            </div>
-          </Card>
         </div>
 
+        {/* Plafonds + R5 */}
+        <Card className="p-6 mb-8 bg-mp-beige border-mp-sand/40">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-mp-ink leading-relaxed">
+            <div>
+              <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
+                Plafond R1 et R2
+              </span>
+              Maximum 70 % du coût total TVAC
+            </div>
+            <div>
+              <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
+                Plafond R3 et R4
+              </span>
+              Maximum 50 % du coût total TVAC
+            </div>
+            <div>
+              <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
+                Catégorie R5 (&gt; 122 800 €)
+              </span>
+              Non éligible depuis le 14/02/2025
+            </div>
+          </div>
+        </Card>
+
         {/* Conditions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mb-10 max-w-2xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mb-10 max-w-3xl">
           {CONDITIONS.map((c) => (
-            <div key={c} className="flex items-center gap-2 text-sm text-mp-ink">
-              <span className="flex items-center justify-center h-5 w-5 rounded-full bg-mp-green-light/20 text-mp-green-mid">
+            <div key={c} className="flex items-start gap-2 text-sm text-mp-ink">
+              <span className="flex items-center justify-center h-5 w-5 rounded-full bg-mp-green-light/20 text-mp-green-mid shrink-0 mt-0.5">
                 <Check className="h-3 w-3" />
               </span>
               {c}
@@ -120,8 +143,17 @@ export function PrimesBlock({
         </div>
 
         <Button asChild variant="outline" size="lg">
-          <Link href="/primes-energie-wallonie-2026">Voir les conditions complètes</Link>
+          <Link href="/primes-energie-wallonie-2026">
+            Voir les conditions complètes et la procédure
+          </Link>
         </Button>
+
+        <p className="mt-6 text-xs text-mp-ink-soft italic max-w-3xl">
+          Information à titre indicatif, basée sur le régime temporaire en vigueur du
+          14 février 2025 au 30 septembre 2026 (numéro de démarche 3920). Les montants
+          et conditions peuvent évoluer. Pour un calcul personnalisé et une vérification
+          officielle, contacte le SPW Énergie au 1718 ou sur energie.wallonie.be.
+        </p>
       </div>
     </section>
   );

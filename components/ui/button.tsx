@@ -8,16 +8,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // CTA principal — orange flame, le bouton "conversion"
+        // CTA principal, orange flame, le bouton "conversion"
         primary:
           "bg-mp-orange-flame text-white shadow-md hover:bg-mp-orange-warm hover:shadow-lg hover:-translate-y-0.5",
-        // CTA secondaire — outline vert deep
+        // CTA secondaire, outline vert deep
         outline:
           "bg-transparent text-mp-green-deep border-2 border-mp-green-deep hover:bg-mp-green-deep hover:text-white",
-        // Tertiaire — vert plein
+        // Tertiaire, vert plein
         secondary:
           "bg-mp-green-deep text-white hover:bg-mp-green-mid",
-        // Ghost — discret
+        // Ghost, discret
         ghost:
           "bg-transparent text-mp-ink hover:bg-mp-beige-warm",
         // Lien

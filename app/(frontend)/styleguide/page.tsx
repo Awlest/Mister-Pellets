@@ -16,7 +16,7 @@ import { AddToCartButton } from "@/components/product/AddToCartButton";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 
 export const metadata = {
-  title: "Styleguide — composants UI",
+  title: "Styleguide, composants UI",
   robots: { index: false, follow: false },
 };
 
@@ -99,7 +99,7 @@ export default function StyleguidePage() {
             </div>
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft">Body · Inter Tight 400</span>
-              <p>Mister Pellets est l'installateur agréé poêles à pellets pour la Wallonie. Basé à Fernelmont depuis 2018.</p>
+              <p>Mister Pellets est l'installateur spécialisé poêles à pellets pour la Wallonie. Basé à Fernelmont depuis 2016.</p>
             </div>
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft">Caption · Inter Tight 500 uppercase</span>
@@ -258,7 +258,7 @@ export default function StyleguidePage() {
         stats={[
           { value: "−40 %", label: "sur la facture", detail: "vs mazout" },
           { value: "90 %", label: "de rendement", detail: "écodesign 2022" },
-          { value: "1 750 €", label: "de primes", detail: "Wallonie 2026" },
+          { value: "960 €", label: "prime max", detail: "Wallonie 2026 R1" },
           { value: "−95 %", label: "d'émissions CO2", detail: "vs mazout" },
         ]}
       />
@@ -269,7 +269,7 @@ export default function StyleguidePage() {
         steps={[
           { title: "Diagnostic gratuit", description: "Visite à domicile ou visio." },
           { title: "Devis avec primes", description: "Chiffrage transparent en 48h." },
-          { title: "Pose en 1 journée", description: "Équipe certifiée RGIE." },
+          { title: "Pose en 1 journée", description: "Équipe Mister Pellets, pose soignée." },
           { title: "Mise en route", description: "Garantie 5 ans pièces et main d'œuvre." },
         ]}
       />

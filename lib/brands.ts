@@ -37,8 +37,8 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Aujourd'hui : leader européen sur le segment premium avec sa propre fonderie en Italie, présent dans plus de 40 pays.",
     ],
     specialties: [
-      "Combustion adaptive Leonardo® — meilleur rendement avec n'importe quel pellet",
-      "Fonderie interne — pièces détachées garanties 20 ans",
+      "Combustion adaptive Leonardo®, meilleur rendement avec n'importe quel pellet",
+      "Fonderie interne, pièces détachées garanties 20 ans",
       "Designs italiens travaillés (gammes Lena, Tally, Blade, Mood)",
       "Modèles étanches RT2012 pour maisons basse consommation",
       "Pilotage app smartphone (gamme connectée)",
@@ -51,7 +51,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     warranty: "5 ans constructeur, prolongée par notre service entretien annuel.",
     tags: ["Premium", "Italie", "Fonderie interne", "Garantie 5 ans"],
-    metaTitle: "Edilkamin en Belgique — Tous les modèles | Mister Pellets",
+    metaTitle: "Edilkamin en Belgique, Tous les modèles | Mister Pellets",
     metaDescription:
       "Découvrez la gamme Edilkamin en Wallonie : poêles à pellets premium italiens, technologie Leonardo®, durabilité 15-20 ans. Conseil expert, pose en 1 jour, garantie 5 ans.",
   },
@@ -84,7 +84,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     warranty: "5 ans constructeur sur l'électronique et la mécanique principale.",
     tags: ["Connecté", "Italie", "Compact", "Étanche"],
-    metaTitle: "EK63 en Belgique — Poêles connectés Smart Fire | Mister Pellets",
+    metaTitle: "EK63 en Belgique, Poêles connectés Smart Fire | Mister Pellets",
     metaDescription:
       "Découvrez la gamme EK63 en Wallonie : poêles à pellets connectés, Smart Fire WiFi inclus, étanches et canalisables. Conseil expert, pose en 1 jour, primes incluses.",
   },
@@ -104,7 +104,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Aujourd'hui : reconnu pour ses chaudières silencieuses (combustion descendante) et son intégration facile dans les installations existantes.",
     ],
     specialties: [
-      "100% hydro — chauffage central via radiateurs ou plancher chauffant",
+      "100% hydro, chauffage central via radiateurs ou plancher chauffant",
       "Production d'eau chaude sanitaire (ECS) en option",
       "Compatible avec ballon tampon, pompe à chaleur hybride, panneaux solaires thermiques",
       "Combustion descendante silencieuse (modèles haut de gamme)",
@@ -117,7 +117,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     warranty: "5 ans constructeur sur le corps de chauffe et la combustion.",
     tags: ["Hydro", "Italie", "Chauffage central", "Remplacement mazout"],
-    metaTitle: "Dielle en Belgique — Poêles et chaudières hydro | Mister Pellets",
+    metaTitle: "Dielle en Belgique, Poêles et chaudières hydro | Mister Pellets",
     metaDescription:
       "Découvrez la gamme Dielle en Wallonie : poêles et chaudières à pellets hydro pour remplacer une chaudière mazout. Pose certifiée, primes Wallonie incluses.",
   },
@@ -138,7 +138,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     specialties: [
       "Prix d'entrée parmi les plus bas du marché",
-      "Mécanique simple — moins de capteurs, moins de pannes électroniques",
+      "Mécanique simple, moins de capteurs, moins de pannes électroniques",
       "Pièces détachées disponibles longtemps (la marque ne renouvelle pas trop vite)",
       "Modèles compacts pour petites surfaces 50-90 m²",
       "Idéal résidence secondaire, location, primo-achat",
@@ -149,7 +149,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     warranty: "2 ans constructeur (garantie légale belge).",
     tags: ["Budget", "Espagne", "Simple", "Fiable"],
-    metaTitle: "Ferlux en Belgique — Poêles à pellets accessibles | Mister Pellets",
+    metaTitle: "Ferlux en Belgique, Poêles à pellets accessibles | Mister Pellets",
     metaDescription:
       "Découvrez la gamme Ferlux en Wallonie : poêles à pellets fiables et abordables, mécanique simple, idéal résidence secondaire ou primo-achat. Pose Mister Pellets.",
   },
