@@ -7,6 +7,30 @@ import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "mp_quote_draft";
 
+/**
+ * Validation téléphone — uniquement numéros belges (cf. doc §4.1).
+ * Accepte : +32… / 0032… / 0X… avec espaces, points, tirets, parenthèses.
+ * Refuse : tout autre indicatif international (+33, +352, +49, +31, etc.).
+ */
+function normalizeBelgianPhone(input: string): string {
+  return input.replace(/[\s.\-()/]/g, "");
+}
+
+function isValidBelgianPhone(input: string): boolean {
+  const cleaned = normalizeBelgianPhone(input);
+  if (cleaned === "") return false;
+  // Refuser tout indicatif international non-belge
+  if (/^\+(?!32)/.test(cleaned)) return false;
+  if (/^00(?!32)/.test(cleaned)) return false;
+  // Patterns acceptés
+  const patterns = [
+    /^\+32[1-9]\d{7,8}$/,       // +32 + 8 à 9 chiffres (premier non zéro)
+    /^0032[1-9]\d{7,8}$/,       // 0032 + 8 à 9 chiffres
+    /^0[1-9]\d{7,8}$/,          // 0X + 8 à 9 chiffres (formats nationaux)
+  ];
+  return patterns.some((re) => re.test(cleaned));
+}
+
 type QuoteState = {
   surface: "moins-80" | "80-120" | "120-180" | "180-plus" | "";
   peb: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "ne-sais-pas" | "";
@@ -80,10 +104,12 @@ export function QuoteForm() {
       case 5: return state.budget !== "";
       case 6:
         return (
-          state.postalCode.length >= 4 &&
+          state.postalCode.length === 4 &&
+          /^[1-9]\d{3}$/.test(state.postalCode) && // CP belge plausible (1000-9999)
           state.delay !== "" &&
-          state.name.length >= 2 &&
+          state.name.trim().length >= 2 &&
           /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email) &&
+          isValidBelgianPhone(state.phone) &&
           state.consent === true
         );
       default: return false;
@@ -178,36 +204,42 @@ export function QuoteForm() {
         )}
       </div>
 
-      {/* Footer actions */}
-      <div className="border-t border-mp-sand/40 px-6 md:px-8 py-5 flex items-center justify-between gap-4 bg-mp-cream">
-        <Button
-          variant="ghost"
-          size="default"
-          onClick={prev}
-          disabled={step === 1 || submitState === "loading"}
-          className={cn(step === 1 && "invisible")}
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Précédent
-        </Button>
+      {/* Footer actions — stack vertical sur mobile pour ne pas déborder, horizontal sm+ */}
+      <div className="border-t border-mp-sand/40 px-4 sm:px-6 md:px-8 py-5 bg-mp-cream">
+        <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+          <Button
+            variant="ghost"
+            size="default"
+            onClick={prev}
+            disabled={step === 1 || submitState === "loading"}
+            className={cn(
+              "w-full sm:w-auto justify-center",
+              step === 1 && "invisible h-0 sm:h-auto"
+            )}
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Précédent
+          </Button>
 
-        <Button
-          variant="primary"
-          size="default"
-          onClick={next}
-          disabled={!canGoNext() || submitState === "loading"}
-        >
-          {submitState === "loading" ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Envoi…
-            </>
-          ) : step === 6 ? (
-            <>Envoyer la demande <ArrowRight className="h-4 w-4" /></>
-          ) : (
-            <>Suivant <ArrowRight className="h-4 w-4" /></>
-          )}
-        </Button>
+          <Button
+            variant="primary"
+            size="default"
+            onClick={next}
+            disabled={!canGoNext() || submitState === "loading"}
+            className="w-full sm:w-auto justify-center"
+          >
+            {submitState === "loading" ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Envoi…
+              </>
+            ) : step === 6 ? (
+              <>Envoyer la demande <ArrowRight className="h-4 w-4" /></>
+            ) : (
+              <>Suivant <ArrowRight className="h-4 w-4" /></>
+            )}
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -392,13 +424,42 @@ function Step6({
     "focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
   );
 
+  // Validation temps réel — on n'affiche l'erreur que si le champ a été touché
+  const [touched, setTouched] = React.useState({
+    postalCode: false,
+    name: false,
+    email: false,
+    phone: false,
+  });
+  const markTouched = (field: keyof typeof touched) =>
+    setTouched((p) => ({ ...p, [field]: true }));
+
+  const errPostal =
+    touched.postalCode && state.postalCode !== "" && !/^[1-9]\d{3}$/.test(state.postalCode)
+      ? "Code postal belge invalide (4 chiffres entre 1000 et 9999)."
+      : "";
+  const errName =
+    touched.name && state.name !== "" && state.name.trim().length < 2
+      ? "Indique au moins ton prénom et ton nom."
+      : "";
+  const errEmail =
+    touched.email && state.email !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)
+      ? "Format email invalide (exemple : prenom@domaine.be)."
+      : "";
+  const errPhone =
+    touched.phone && state.phone !== "" && !isValidBelgianPhone(state.phone)
+      ? "Nous ne desservons que la Belgique. Merci de saisir un numéro belge (ex. 0470 12 34 56 ou +32 470 12 34 56)."
+      : "";
+
+  const errorClass = "mt-1.5 text-xs text-red-600 leading-relaxed";
+
   return (
     <>
       <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-2">
         Comment on te recontacte ?
       </h2>
       <p className="text-mp-ink-soft mb-6">
-        Réponse sous 48h ouvrées par email. Promis, pas de spam, pas de vente forcée.
+        Réponse sous 48h ouvrées par email ou téléphone. Promis, pas de spam, pas de vente forcée.
       </p>
 
       <div className="space-y-4">
@@ -416,10 +477,14 @@ function Step6({
               inputMode="numeric"
               value={state.postalCode}
               onChange={(e) => update("postalCode", e.target.value.replace(/[^0-9]/g, ""))}
-              className={inputClass}
+              onBlur={() => markTouched("postalCode")}
+              className={cn(inputClass, errPostal && "border-red-400 focus:border-red-500 focus:ring-red-200")}
               placeholder="5380"
               autoComplete="postal-code"
+              aria-invalid={Boolean(errPostal)}
+              aria-describedby={errPostal ? "postalCode-error" : undefined}
             />
+            {errPostal && <p id="postalCode-error" className={errorClass}>{errPostal}</p>}
           </div>
           <div>
             <label htmlFor="delay" className="block text-sm font-medium text-mp-ink mb-2">
@@ -449,12 +514,17 @@ function Step6({
             id="name"
             type="text"
             required
+            minLength={2}
             value={state.name}
             onChange={(e) => update("name", e.target.value)}
-            className={inputClass}
+            onBlur={() => markTouched("name")}
+            className={cn(inputClass, errName && "border-red-400 focus:border-red-500 focus:ring-red-200")}
             autoComplete="name"
             placeholder="Sophie Dupont"
+            aria-invalid={Boolean(errName)}
+            aria-describedby={errName ? "name-error" : undefined}
           />
+          {errName && <p id="name-error" className={errorClass}>{errName}</p>}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -468,24 +538,34 @@ function Step6({
               required
               value={state.email}
               onChange={(e) => update("email", e.target.value)}
-              className={inputClass}
+              onBlur={() => markTouched("email")}
+              className={cn(inputClass, errEmail && "border-red-400 focus:border-red-500 focus:ring-red-200")}
               autoComplete="email"
               placeholder="sophie@exemple.be"
+              aria-invalid={Boolean(errEmail)}
+              aria-describedby={errEmail ? "email-error" : undefined}
             />
+            {errEmail && <p id="email-error" className={errorClass}>{errEmail}</p>}
           </div>
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-mp-ink mb-2">
-              Téléphone (optionnel)
+              Téléphone <span className="text-mp-orange-flame">*</span>
+              <span className="text-xs text-mp-ink-soft font-normal ml-1">(BE uniquement)</span>
             </label>
             <input
               id="phone"
               type="tel"
+              required
               value={state.phone}
               onChange={(e) => update("phone", e.target.value)}
-              className={inputClass}
+              onBlur={() => markTouched("phone")}
+              className={cn(inputClass, errPhone && "border-red-400 focus:border-red-500 focus:ring-red-200")}
               autoComplete="tel"
               placeholder="0470 12 34 56"
+              aria-invalid={Boolean(errPhone)}
+              aria-describedby={errPhone ? "phone-error" : undefined}
             />
+            {errPhone && <p id="phone-error" className={errorClass}>{errPhone}</p>}
           </div>
         </div>
 
