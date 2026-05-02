@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { NavbarSticky } from "@/components/layout/NavbarSticky";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 
 export default function FrontendLayout({
   children,
@@ -11,6 +12,7 @@ export default function FrontendLayout({
       <main className="flex-1 pb-24 lg:pb-0">{children}</main>
       <Footer />
       <NavbarSticky />
+      <CartDrawer />
     </>
   );
 }

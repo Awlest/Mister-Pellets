@@ -3,36 +3,46 @@
 import * as React from "react";
 import { ShoppingBag, Check } from "lucide-react";
 import { Button, type ButtonProps } from "@/components/ui/button";
+import { useCart } from "@/lib/cart-store";
 
 interface AddToCartButtonProps extends Omit<ButtonProps, "children" | "onClick"> {
   productId: string;
-  productName?: string;
-  /** Hook pour brancher le panier réel (Zustand / Context / fetch). Phase 5. */
-  onAdd?: (productId: string) => Promise<void> | void;
+  productName: string;
+  productBrand: string;
+  productPriceTTC: number;
+  productImageSrc?: string;
 }
 
 /**
- * Bouton "Ajouter au panier" avec feedback de succès.
- * Le hook onAdd est branché Phase 5 sur le state global panier + Stripe.
+ * Bouton "Ajouter au panier" branché sur le store Zustand useCart.
+ * Affiche un feedback visuel "Ajouté" pendant 2s puis revient.
+ * Au premier ajout, le drawer panier s'ouvre automatiquement.
  */
 export function AddToCartButton({
   productId,
   productName,
-  onAdd,
+  productBrand,
+  productPriceTTC,
+  productImageSrc,
   className,
   ...rest
 }: AddToCartButtonProps) {
-  const [state, setState] = React.useState<"idle" | "loading" | "success">("idle");
+  const addItem = useCart((s) => s.addItem);
+  const [justAdded, setJustAdded] = React.useState(false);
 
-  const handleClick = async () => {
-    setState("loading");
-    try {
-      if (onAdd) await onAdd(productId);
-      setState("success");
-      setTimeout(() => setState("idle"), 2000);
-    } catch {
-      setState("idle");
-    }
+  const handleClick = () => {
+    addItem(
+      {
+        productId,
+        name: productName,
+        brand: productBrand,
+        priceTTC: productPriceTTC,
+        imageSrc: productImageSrc,
+      },
+      1
+    );
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 2000);
   };
 
   return (
@@ -41,20 +51,19 @@ export function AddToCartButton({
       variant="primary"
       size="lg"
       onClick={handleClick}
-      disabled={state === "loading"}
-      aria-label={productName ? `Ajouter ${productName} au panier` : "Ajouter au panier"}
+      aria-label={`Ajouter ${productName} au panier`}
       className={className}
       {...rest}
     >
-      {state === "success" ? (
+      {justAdded ? (
         <>
           <Check className="h-5 w-5" />
-          Ajouté
+          Ajouté au panier
         </>
       ) : (
         <>
           <ShoppingBag className="h-5 w-5" />
-          {state === "loading" ? "Ajout..." : "Ajouter au panier"}
+          Ajouter au panier
         </>
       )}
     </Button>

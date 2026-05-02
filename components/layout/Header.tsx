@@ -3,9 +3,10 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, ShoppingBag, ChevronDown, Phone } from "lucide-react";
+import { Menu, ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { CartTrigger } from "@/components/cart/CartDrawer";
 import { cn, formatPhone } from "@/lib/utils";
 
 const PHONE = "0472 04 32 22";
@@ -132,11 +133,7 @@ export function Header() {
 
         {/* Actions droite */}
         <div className="flex items-center gap-2 shrink-0">
-          <Button asChild variant="ghost" size="icon" aria-label="Panier" className="hidden sm:inline-flex">
-            <Link href="/panier">
-              <ShoppingBag className="h-5 w-5" />
-            </Link>
-          </Button>
+          <CartTrigger className="hidden sm:inline-flex" />
 
           <Button asChild variant="primary" size="default" className="hidden md:inline-flex">
             <Link href="/demande-de-devis">Devis →</Link>

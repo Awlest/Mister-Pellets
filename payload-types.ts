@@ -69,6 +69,10 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    products: Product;
+    orders: Order;
+    quotes: Quote;
+    'contact-messages': ContactMessage;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +82,10 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
+    quotes: QuotesSelect<false> | QuotesSelect<true>;
+    'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -200,6 +208,277 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  /**
+   * Référence interne unique
+   */
+  sku: string;
+  /**
+   * URL : /produit/{slug}/
+   */
+  slug: string;
+  /**
+   * Nom commercial complet (ex: Edilkamin Blade Plus 9 kW)
+   */
+  name: string;
+  brand: 'Edilkamin' | 'EK63' | 'Dielle' | 'Ferlux';
+  /**
+   * ex: Blade Plus, Tweed 90+, Iride 22
+   */
+  model: string;
+  productType: 'air' | 'canalisable' | 'hydro' | 'hybride' | 'insert';
+  /**
+   * Prix HTVA (€)
+   */
+  priceHT: number;
+  /**
+   * Prix TTC (€) — TVA 21%
+   */
+  priceTTC: number;
+  /**
+   * Prix promo TTC (optionnel)
+   */
+  promoPrice?: number | null;
+  /**
+   * Prix pose typique (€) — TVA 6%
+   */
+  installationPrice?: number | null;
+  /**
+   * Puissance (kW)
+   */
+  power: number;
+  /**
+   * Surface min (m²)
+   */
+  surfaceMin?: number | null;
+  /**
+   * Surface max (m²)
+   */
+  surfaceMax?: number | null;
+  /**
+   * Rendement (%)
+   */
+  efficiency?: number | null;
+  energyClass?: ('A++' | 'A+' | 'A' | 'B' | 'C') | null;
+  /**
+   * Émissions CO (mg/m³)
+   */
+  emissions?: number | null;
+  /**
+   * Réservoir pellets (kg)
+   */
+  hopperCapacity?: number | null;
+  /**
+   * Poids (kg)
+   */
+  weight?: number | null;
+  isAirtight?: boolean | null;
+  isCanalizable?: boolean | null;
+  isHydro?: boolean | null;
+  isConnected?: boolean | null;
+  /**
+   * Dimensions externes (cm)
+   */
+  dimensions?: {
+    width?: number | null;
+    height?: number | null;
+    depth?: number | null;
+  };
+  /**
+   * Code-barres EAN (optionnel mais recommandé Merchant)
+   */
+  gtin?: string | null;
+  /**
+   * Référence fabricant (Merchant required si pas de GTIN)
+   */
+  mpn?: string | null;
+  /**
+   * Taxonomie Google Merchant
+   */
+  googleProductCategory?: string | null;
+  /**
+   * Photo principale (carrée idéale 1200×1200)
+   */
+  mainImage?: (number | null) | Media;
+  galleryImages?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * 1-2 lignes pour les cards (max 200 chars)
+   */
+  shortDescription?: string | null;
+  /**
+   * Description longue éditable (markdown rich text)
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  features?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Fiche technique PDF (optionnel)
+   */
+  technicalSheet?: (number | null) | Media;
+  /**
+   * max 70 chars
+   */
+  metaTitle?: string | null;
+  /**
+   * max 160 chars
+   */
+  metaDescription?: string | null;
+  stock?: number | null;
+  stockStatus: 'in_stock' | 'on_order' | 'out_of_stock' | 'discontinued';
+  /**
+   * ex: 48-72h, 4-6 sem.
+   */
+  deliveryDelay?: string | null;
+  isBestseller?: boolean | null;
+  isFeatured?: boolean | null;
+  isNew?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: number;
+  /**
+   * ex: MP-2026-00042
+   */
+  orderNumber: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone?: string | null;
+  customerAddress?: string | null;
+  items: {
+    productSlug: string;
+    productName: string;
+    productBrand?: string | null;
+    quantity: number;
+    /**
+     * TTC unitaire
+     */
+    unitPrice: number;
+    /**
+     * TTC total ligne
+     */
+    totalPrice: number;
+    id?: string | null;
+  }[];
+  subtotal: number;
+  /**
+   * TVA 21%
+   */
+  vat: number;
+  shipping?: number | null;
+  total: number;
+  paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
+  fulfillmentStatus: 'new' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  stripePaymentIntentId?: string | null;
+  stripeCheckoutSessionId?: string | null;
+  /**
+   * Notes internes (visibles admin uniquement)
+   */
+  notes?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quotes".
+ */
+export interface Quote {
+  id: number;
+  name: string;
+  email: string;
+  phone?: string | null;
+  postalCode: string;
+  delay: 'asap' | '1-3-mois' | '3-6-mois' | '+6-mois';
+  status: 'new' | 'contacted' | 'quoted' | 'won' | 'lost';
+  surface: 'moins-80' | '80-120' | '120-180' | '180-plus';
+  peb: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'ne-sais-pas';
+  chimney: 'diam-80' | 'diam-100' | 'aucune' | 'ne-sais-pas';
+  style: 'moderne' | 'classique' | 'rustique' | 'design' | 'scandinave' | 'peu-importe';
+  budget: 'moins-3000' | '3000-5000' | '5000-7500' | '7500-plus';
+  message?: string | null;
+  /**
+   * Notes internes — historique du suivi commercial
+   */
+  internalNotes?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-messages".
+ */
+export interface ContactMessage {
+  id: number;
+  name: string;
+  email: string;
+  phone?: string | null;
+  subject: 'info-produit' | 'info-pose' | 'info-primes' | 'info-entretien' | 'info-other';
+  status: 'new' | 'replied' | 'archived';
+  message: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -229,6 +508,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'orders';
+        value: number | Order;
+      } | null)
+    | ({
+        relationTo: 'quotes';
+        value: number | Quote;
+      } | null)
+    | ({
+        relationTo: 'contact-messages';
+        value: number | ContactMessage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -358,6 +653,139 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  sku?: T;
+  slug?: T;
+  name?: T;
+  brand?: T;
+  model?: T;
+  productType?: T;
+  priceHT?: T;
+  priceTTC?: T;
+  promoPrice?: T;
+  installationPrice?: T;
+  power?: T;
+  surfaceMin?: T;
+  surfaceMax?: T;
+  efficiency?: T;
+  energyClass?: T;
+  emissions?: T;
+  hopperCapacity?: T;
+  weight?: T;
+  isAirtight?: T;
+  isCanalizable?: T;
+  isHydro?: T;
+  isConnected?: T;
+  dimensions?:
+    | T
+    | {
+        width?: T;
+        height?: T;
+        depth?: T;
+      };
+  gtin?: T;
+  mpn?: T;
+  googleProductCategory?: T;
+  mainImage?: T;
+  galleryImages?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  shortDescription?: T;
+  description?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  technicalSheet?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  stock?: T;
+  stockStatus?: T;
+  deliveryDelay?: T;
+  isBestseller?: T;
+  isFeatured?: T;
+  isNew?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  orderNumber?: T;
+  customerName?: T;
+  customerEmail?: T;
+  customerPhone?: T;
+  customerAddress?: T;
+  items?:
+    | T
+    | {
+        productSlug?: T;
+        productName?: T;
+        productBrand?: T;
+        quantity?: T;
+        unitPrice?: T;
+        totalPrice?: T;
+        id?: T;
+      };
+  subtotal?: T;
+  vat?: T;
+  shipping?: T;
+  total?: T;
+  paymentStatus?: T;
+  fulfillmentStatus?: T;
+  stripePaymentIntentId?: T;
+  stripeCheckoutSessionId?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quotes_select".
+ */
+export interface QuotesSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  postalCode?: T;
+  delay?: T;
+  status?: T;
+  surface?: T;
+  peb?: T;
+  chimney?: T;
+  style?: T;
+  budget?: T;
+  message?: T;
+  internalNotes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-messages_select".
+ */
+export interface ContactMessagesSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  subject?: T;
+  status?: T;
+  message?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
