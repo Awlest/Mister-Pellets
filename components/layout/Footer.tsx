@@ -70,8 +70,13 @@ export function Footer() {
       <div className="max-w-md mx-auto lg:max-w-3xl flex flex-col items-center text-center gap-6">
         {/* Bloc identité : logo (×2 = 160 px) côte à côte avec les sociaux.
           * Drop-shadow cream empilé pour un fin contour lumineux qui suit
-          * exactement les contours du SVG (vs un rectangle de bordure). */}
-        <div className="flex items-center justify-center gap-5 sm:gap-7">
+          * exactement les contours du SVG (vs un rectangle de bordure).
+          *
+          * justify-between + w-full : le logo est collé au bord gauche du
+          * conteneur, les sociaux au bord droit. L'espace gauche-au-logo et
+          * sociaux-au-bord-droit est strictement identique (= padding
+          * horizontal du footer), symétrie parfaite. */}
+        <div className="flex items-center justify-between gap-4 w-full">
           <Link href="/" aria-label="Mister Pellets, accueil" className="shrink-0">
             <Image
               src="/logo-mister-pellets-ref.svg"
