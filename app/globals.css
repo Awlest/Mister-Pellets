@@ -160,37 +160,48 @@ body {
   }
 }
 
-h1, h2, h3, .mp-display {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-  color: var(--mp-green-deep);
+@layer base {
+  /* Typographie de marque, dans @layer base pour que toute classe utility
+   * Tailwind (text-mp-cream, text-white, text-mp-orange-flame, etc.) puisse
+   * surcharger sans avoir à utiliser !important.
+   *
+   * BUG observé en V1.3.1 : la règle a { color: var(--mp-green-deep) } était
+   * hors layer et écrasait text-mp-cream sur les liens du footer (vert sur
+   * vert = invisible). Idem pour les autres règles globales d'éléments. */
+  h1, h2, h3, .mp-display {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--mp-green-deep);
+  }
+
+  h2 { line-height: 1.1; }
+  h3 { line-height: 1.2; font-weight: 600; }
+
+  h4, h5, h6 {
+    font-family: var(--font-sans), sans-serif;
+    font-weight: 600;
+    color: var(--mp-green-deep);
+  }
+
+  /* Liens par défaut */
+  a {
+    color: var(--mp-green-deep);
+    text-decoration: none;
+    transition: color 200ms ease-out;
+  }
+  a:hover {
+    color: var(--mp-orange-flame);
+  }
 }
 
-h2 { line-height: 1.1;  }
-h3 { line-height: 1.2;  font-weight: 600; }
-h4, h5, h6 {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 600;
-  color: var(--mp-green-deep);
-}
-
-/* Mots-clés italiques accentués (cf. brief : "le bon poêle, *installé chez vous*") */
+/* Classe publique réutilisable, pas de @layer (doit pouvoir gagner contre
+ * les couleurs de texte par défaut quand elle est appliquée explicitement). */
 .mp-italic {
   font-style: italic;
   color: var(--mp-orange-flame);
   font-weight: 500;
-}
-
-/* Liens par défaut */
-a {
-  color: var(--mp-green-deep);
-  text-decoration: none;
-  transition: color 200ms ease-out;
-}
-a:hover {
-  color: var(--mp-orange-flame);
 }
 
 /* Selection */
