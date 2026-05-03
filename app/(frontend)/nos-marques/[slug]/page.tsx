@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { BRANDS, BRAND_LIST, type BrandData } from "@/lib/brands";
+import { BRANDS, BRAND_LIST, brandFoundedLabel, type BrandData } from "@/lib/brands";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -33,22 +33,30 @@ export default async function BrandPage({ params }: Props) {
   const brand = BRANDS[slug as BrandData["slug"]];
   if (!brand) notFound();
 
-  const brandSchema = {
+  // Schema.org Brand mis à jour (cf. doc V1.2 §H7.10) avec sameAs pointant
+  // vers le site officiel de la marque, et foundingDate uniquement si l'année
+  // est officiellement connue.
+  const brandSchema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Brand",
     "@id": `https://mister-pellets.be/nos-marques/${brand.slug}/#brand`,
     name: brand.name,
     description: brand.intro,
     countryOfOrigin: brand.country,
-    foundingDate: String(brand.founded),
+    sameAs: [brand.officialUrl],
   };
+  if (brand.founded) {
+    brandSchema.foundingDate = String(brand.founded);
+  }
+
+  const foundedDisplay = brandFoundedLabel(brand);
 
   return (
     <>
       <JsonLd data={brandSchema} />
 
       <HeroSecondary
-        eyebrow={`${brand.country} · Depuis ${brand.founded}`}
+        eyebrow={[brand.country, foundedDisplay].filter(Boolean).join(" · ")}
         title={
           <>
             <span className="block">{brand.name}</span>
@@ -71,7 +79,9 @@ export default async function BrandPage({ params }: Props) {
           <div className="flex flex-wrap items-center gap-3">
             <Badge variant="secondary"><Award className="h-3.5 w-3.5" /> {brand.positioning}</Badge>
             <Badge variant="default"><MapPin className="h-3.5 w-3.5" /> {brand.country}</Badge>
-            <Badge variant="default"><Calendar className="h-3.5 w-3.5" /> Fondé en {brand.founded}</Badge>
+            {foundedDisplay && (
+              <Badge variant="default"><Calendar className="h-3.5 w-3.5" /> {foundedDisplay}</Badge>
+            )}
             {brand.tags.slice(2).map((tag) => (
               <Badge key={tag} variant="outline">{tag}</Badge>
             ))}

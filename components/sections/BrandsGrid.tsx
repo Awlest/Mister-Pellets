@@ -2,69 +2,23 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-interface Brand {
-  slug: string;
-  name: string;
-  country: string;
-  founded: number;
-  tagline: string;
-  positioning: string;
-  tags: string[];
-}
-
-const DEFAULT_BRANDS: Brand[] = [
-  {
-    slug: "edilkamin",
-    name: "Edilkamin",
-    country: "Italie",
-    founded: 1963,
-    tagline: "La référence premium",
-    positioning: "Durabilité 15-20 ans, technologie Leonardo® de combustion intelligente. Le choix de tête quand on veut un poêle qui tient sans drift sur la durée.",
-    tags: ["Premium", "Italie", "Garantie 5 ans"],
-  },
-  {
-    slug: "ek63",
-    name: "EK63",
-    country: "Italie",
-    founded: 2010,
-    tagline: "Connecté · qualité-prix",
-    positioning: "Smart Fire WiFi de série, étanche, canalisable. Le bon compromis entre tech moderne et budget maîtrisé.",
-    tags: ["Connecté", "Italie", "Compact"],
-  },
-  {
-    slug: "dielle",
-    name: "Dielle",
-    country: "Italie",
-    founded: 1989,
-    tagline: "Spécialiste 100% hydro",
-    positioning: "Toute la gamme chauffe un circuit d'eau. Choix naturel pour remplacer une chaudière mazout par un système pellets.",
-    tags: ["Hydro", "Italie", "Chauffage central"],
-  },
-  {
-    slug: "ferlux",
-    name: "Ferlux",
-    country: "Espagne",
-    founded: 1995,
-    tagline: "Budget maîtrisé, fiable",
-    positioning: "Mécanique simple, pas de gadget. Choix pertinent pour résidence secondaire, location, ou primo-achat.",
-    tags: ["Budget", "Espagne", "Simple"],
-  },
-];
+import { BRAND_LIST, brandFoundedLabel, type BrandData } from "@/lib/brands";
 
 interface BrandsGridProps {
   title?: string;
   description?: string;
-  brands?: Brand[];
+  brands?: BrandData[];
 }
 
 /**
- * 4 cartes longues marques. Cf. brief §3.2 sec 6.
+ * 4 cartes longues marques.
+ * Hotfix V1.2 §H7 : utilise désormais BRAND_LIST (lib/brands.ts) comme source
+ * unique de vérité, après rectification factuelle des positionnements.
  */
 export function BrandsGrid({
   title = "Les 4 marques que nous distribuons",
   description = "Chaque marque a son créneau. Notre rôle est de te diriger vers celle qui colle vraiment à ta maison et à ton budget.",
-  brands = DEFAULT_BRANDS,
+  brands = BRAND_LIST,
 }: BrandsGridProps) {
   return (
     <section className="py-16 md:py-24 bg-mp-beige">
@@ -93,8 +47,10 @@ export function BrandsGrid({
                     {brand.tagline}
                   </p>
                 </div>
-                <span className="text-xs text-mp-ink-soft tabular-nums">
-                  {brand.country} · {brand.founded}
+                <span className="text-xs text-mp-ink-soft tabular-nums text-right">
+                  {brand.country}
+                  <br />
+                  {brandFoundedLabel(brand)}
                 </span>
               </div>
 
