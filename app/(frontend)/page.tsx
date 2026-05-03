@@ -73,7 +73,9 @@ export default function HomePage() {
           }}
         />
 
-        {/* Bloc logo dédié : 35 px top + 35 px bottom strict (cf. doc §P7.3) */}
+        {/* Bloc logo dédié : 35 px top + 35 px bottom strict (cf. doc §P7.3).
+          * Logo doublé en taille (320 px mobile, 400 px desktop) sans toucher
+          * au padding autour, pour remplir plus l'espace du hero. */}
         <div
           className="flex justify-center relative"
           style={{ paddingTop: "35px", paddingBottom: "35px" }}
@@ -81,10 +83,10 @@ export default function HomePage() {
           <Image
             src="/logo-mister-pellets-full.svg"
             alt="Mister Pellets"
-            width={320}
-            height={320}
+            width={640}
+            height={640}
             priority
-            className="h-[160px] w-[160px] md:h-[200px] md:w-[200px] object-contain"
+            className="h-[320px] w-[320px] md:h-[400px] md:w-[400px] object-contain"
           />
         </div>
 
