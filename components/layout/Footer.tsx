@@ -68,17 +68,17 @@ export function Footer() {
   return (
     <footer className="footer-mp bg-mp-green-deep text-mp-cream w-full px-4 pt-8 lg:px-6 lg:pt-12">
       <div className="max-w-md mx-auto lg:max-w-3xl flex flex-col items-center text-center gap-6">
-        {/* Logo couleur dans card cream pour préserver les couleurs sur fond vert */}
+        {/* Logo Mister Pellets REF, sans card de fond, transparence directe sur
+          * le fond vert deep du footer. Le SVG REF est conçu pour rester visible
+          * sur fond sombre. */}
         <Link href="/" aria-label="Mister Pellets, accueil">
-          <span className="inline-block bg-mp-cream rounded-2xl p-2 shadow-sm">
-            <Image
-              src="/logo-mister-pellets-full.svg"
-              alt="Mister Pellets"
-              width={120}
-              height={120}
-              className="h-16 w-16 object-contain"
-            />
-          </span>
+          <Image
+            src="/logo-mister-pellets-ref.svg"
+            alt="Mister Pellets"
+            width={160}
+            height={160}
+            className="h-20 w-20 object-contain"
+          />
         </Link>
 
         {/* Réseaux sociaux : titre + 3 icônes BIEN VISIBLES (pleine opacité) */}
