@@ -73,12 +73,11 @@ export default function HomePage() {
           }}
         />
 
-        {/* Bloc logo dédié : 35 px top + 35 px bottom strict (cf. doc §P7.3).
-          * Logo doublé en taille (320 px mobile, 400 px desktop) sans toucher
-          * au padding autour, pour remplir plus l'espace du hero. */}
+        {/* Bloc logo dédié : padding vertical réduit de 50 % (35 → 17,5 px)
+          * suite validation client. Logo 320 px mobile / 400 px desktop. */}
         <div
           className="flex justify-center relative"
-          style={{ paddingTop: "35px", paddingBottom: "35px" }}
+          style={{ paddingTop: "17.5px", paddingBottom: "17.5px" }}
         >
           <Image
             src="/logo-mister-pellets-full.svg"
