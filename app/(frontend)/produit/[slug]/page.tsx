@@ -205,13 +205,20 @@ export default async function ProductPage({ params }: Props) {
             </Card>
 
             <Card className="p-6 flex flex-col gap-3">
-              {product.type === "hydro" ? <Droplet className="h-8 w-8 text-mp-orange-flame" /> : product.type === "canalisable" ? <Wind className="h-8 w-8 text-mp-orange-flame" /> : <Flame className="h-8 w-8 text-mp-orange-flame" />}
+              {product.type === "hydro" ? (
+                <Droplet className="h-8 w-8 text-mp-orange-flame" />
+              ) : product.type === "canalisable" ? (
+                <Wind className="h-8 w-8 text-mp-orange-flame" />
+              ) : (
+                <Flame className="h-8 w-8 text-mp-orange-flame" />
+              )}
               <h3 className="text-lg font-semibold text-mp-green-deep">Type {product.type}</h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
-                {product.type === "hydro" && "Chauffe un circuit d'eau, idéal pour remplacer une chaudière mazout."}
-                {product.type === "canalisable" && "Diffuse l'air chaud dans plusieurs pièces via un réseau de gaines."}
-                {product.type === "air" && "Diffusion d'air chaud par convection, simple à installer."}
-                {product.type === "insert" && "S'encastre dans une cheminée existante."}
+                {product.type === "hydro" && "Connecté au circuit de chauffage central, idéal pour remplacer une chaudière mazout."}
+                {product.type === "canalisable" && "Diffuse l'air chaud dans plusieurs pièces via un réseau de gaines isolées."}
+                {product.type === "standard" && "Poêle classique chauffant la pièce d'installation, sans gaines ni hydro."}
+                {product.type === "hybride" && "Fonctionne au pellets ET au bois. Polyvalence maximale."}
+                {product.type === "insert" && "S'encastre dans une cheminée existante pour valoriser un foyer ouvert."}
               </p>
             </Card>
           </div>
