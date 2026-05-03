@@ -146,13 +146,17 @@ body {
   max-width: calc(100% - 32px);
 }
 
-/* === FOOTER (Hotfix V1.1 §H3) ===
- * Padding-bottom mobile : 96 px (NavbarSticky flottante 72 px + 24 px de
- * respiration) + safe-area iOS. Sur lg+ la navbar mobile disparaît, on revient
- * à un padding standard.
+/* === FOOTER (Hotfix V1.3.5) ===
+ * Padding-bottom mobile : 30 px de respiration entre le copyright et le bord
+ * bas du footer (demande client), + safe-area iOS pour ne pas masquer le
+ * texte sous la barre Home iPhone. La NavbarSticky flottante (72 px) chevauche
+ * désormais légèrement le bas du footer mais le copyright et les liens
+ * légaux restent visibles dans le flux normal.
+ *
+ * Sur lg+ la navbar mobile disparaît, on revient à un padding standard.
  */
 .footer-mp {
-  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  padding-bottom: calc(30px + env(safe-area-inset-bottom));
 }
 @media (min-width: 1024px) {
   .footer-mp {
