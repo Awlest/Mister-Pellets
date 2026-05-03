@@ -72,58 +72,62 @@ export function Footer() {
           * Drop-shadow cream empilé pour un fin contour lumineux qui suit
           * exactement les contours du SVG (vs un rectangle de bordure).
           *
-          * justify-between + w-full : le logo est collé au bord gauche du
-          * conteneur, les sociaux au bord droit. L'espace gauche-au-logo et
-          * sociaux-au-bord-droit est strictement identique (= padding
-          * horizontal du footer), symétrie parfaite. */}
-        <div className="flex items-center justify-between gap-4 w-full">
-          <Link href="/" aria-label="Mister Pellets, accueil" className="shrink-0">
-            <Image
-              src="/logo-mister-pellets-ref.svg"
-              alt="Mister Pellets"
-              width={320}
-              height={320}
-              className="h-40 w-40 object-contain"
-              style={{
-                filter:
-                  "drop-shadow(0 0 1px #FAF7F0) drop-shadow(0 0 1px #FAF7F0) drop-shadow(0 0 0.5px #FAF7F0)",
-              }}
-            />
-          </Link>
+          * Symétrie visuelle équilibrée : deux moitiés égales (flex-1)
+          * avec contenu centré dans chacune. Le logo apparaît centré dans
+          * la moitié gauche, les sociaux centrés dans la moitié droite.
+          * L'ensemble paraît centré globalement avec un équilibre parfait. */}
+        <div className="flex items-center w-full">
+          <div className="flex-1 flex justify-center">
+            <Link href="/" aria-label="Mister Pellets, accueil">
+              <Image
+                src="/logo-mister-pellets-ref.svg"
+                alt="Mister Pellets"
+                width={320}
+                height={320}
+                className="h-32 w-32 sm:h-36 sm:w-36 object-contain"
+                style={{
+                  filter:
+                    "drop-shadow(0 0 1px #FAF7F0) drop-shadow(0 0 1px #FAF7F0) drop-shadow(0 0 0.5px #FAF7F0)",
+                }}
+              />
+            </Link>
+          </div>
 
           {/* Réseaux sociaux : titre + 3 icônes BIEN VISIBLES (pleine opacité) */}
-          <div className="flex flex-col items-center gap-3">
-            <p className="text-xs uppercase tracking-wider text-mp-cream/85">
-              Suivez-nous
-            </p>
-            <div className="flex items-center gap-4">
-              <a
-                href={SOCIAL.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Mister Pellets sur TikTok"
-                className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-              >
-                <TikTokIcon className="h-7 w-7" />
-              </a>
-              <a
-                href={SOCIAL.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Mister Pellets sur Instagram"
-                className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-              >
-                <InstagramIcon className="h-7 w-7" />
-              </a>
-              <a
-                href={SOCIAL.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Mister Pellets sur YouTube"
-                className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-              >
-                <YoutubeIcon className="h-7 w-7" />
-              </a>
+          <div className="flex-1 flex justify-center">
+            <div className="flex flex-col items-center gap-3">
+              <p className="text-xs uppercase tracking-wider text-mp-cream/85">
+                Suivez-nous
+              </p>
+              <div className="flex items-center gap-4">
+                <a
+                  href={SOCIAL.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Mister Pellets sur TikTok"
+                  className="text-mp-cream hover:text-mp-orange-flame transition-colors"
+                >
+                  <TikTokIcon className="h-7 w-7" />
+                </a>
+                <a
+                  href={SOCIAL.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Mister Pellets sur Instagram"
+                  className="text-mp-cream hover:text-mp-orange-flame transition-colors"
+                >
+                  <InstagramIcon className="h-7 w-7" />
+                </a>
+                <a
+                  href={SOCIAL.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Mister Pellets sur YouTube"
+                  className="text-mp-cream hover:text-mp-orange-flame transition-colors"
+                >
+                  <YoutubeIcon className="h-7 w-7" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
