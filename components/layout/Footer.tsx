@@ -1,31 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin } from "lucide-react";
-import { formatPhone } from "@/lib/utils";
 
 /**
- * Footer mobile MINIMALISTE (Hotfix V1.2 §H6).
+ * Footer mobile MINIMAL (Hotfix V1.3 §P1).
  *
- * Annule et remplace la spec V1.1 (4 sections complètes). La navbar flottante
- * mobile assure déjà la navigation principale (Accueil/Boutique/Devis/RDV +
- * drawer Menu), donc plus besoin d'une colonne navigation dans le footer.
+ * Annule et remplace les versions V1.1 et V1.2.
  *
- * Contenu strict :
- *   1. Logo couleur (taille modérée)
- *   2. Coordonnées (téléphone, email, adresse)
- *   3. 3 icônes réseaux sociaux (TikTok, Instagram, YouTube)
- *   4. Liens légaux compacts horizontaux séparés par "·"
- *   5. Copyright minimal Awlest SRL + TVA
+ * Contenu strict, UNIQUEMENT :
+ *   1. Logo couleur (60-70 px de hauteur)
+ *   2. Bloc "Suivez-nous" + 3 icônes sociales (TikTok, Instagram, YouTube)
+ *      en pleine opacité pour bonne visibilité
+ *   3. 4 liens légaux compacts horizontaux séparés par "·"
+ *   4. Copyright Awlest SRL + TVA + © year
  *
- * Couleurs : fond vert deep #174724 + texte beige #FAF7F0 (contraste WCAG AAA)
- * Hauteur cible : 280-350 px (vs 400-550 en V1.1)
- * Padding-bottom : 96 px sur mobile (libère NavbarSticky 72 + 24 respiration)
- *                  + safe-area iOS, retour à 32 px sur lg+ via globals.css.
+ * Retiré du V1.2 :
+ *   - Téléphone, email, adresse (déjà accessibles via la page Contact en 1 clic
+ *     depuis la navbar, pas de doublon dans le footer)
+ *
+ * Couleurs (WCAG AAA) :
+ *   - Fond vert deep #174724
+ *   - Texte / icônes / liens légaux : beige #FAF7F0 PLEINE OPACITÉ (11.8:1)
+ *   - Séparateurs "·" : beige opacité 60 % (7.1:1)
+ *   - Hover : orange flame #F28A20 (4.6:1)
+ *   - Texte légal en bas : beige opacité 75 % (8.8:1)
+ *
+ * Padding-bottom : 96 px sur mobile (libère NavbarSticky 72 + 24) + safe-area iOS
+ *                  via classe .footer-mp dans globals.css. 32 px sur lg+.
  */
-
-const PHONE = "0472 04 32 22";
-const EMAIL = "info@awlest.com";
-const ADDRESS = "Rue des Fagotis 3A, 5380 Fernelmont";
 
 // TODO : remplacer par les vraies URLs des profils Mister Pellets quand le
 // client les communiquera. Placeholder pour l'instant.
@@ -65,8 +66,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="footer-mp bg-mp-green-deep text-mp-cream w-full px-4 pt-6 lg:px-6 lg:pt-10">
-      <div className="max-w-md mx-auto lg:max-w-3xl flex flex-col items-center text-center gap-5">
+    <footer className="footer-mp bg-mp-green-deep text-mp-cream w-full px-4 pt-8 lg:px-6 lg:pt-12">
+      <div className="max-w-md mx-auto lg:max-w-3xl flex flex-col items-center text-center gap-6">
         {/* Logo couleur dans card cream pour préserver les couleurs sur fond vert */}
         <Link href="/" aria-label="Mister Pellets, accueil">
           <span className="inline-block bg-mp-cream rounded-2xl p-2 shadow-sm">
@@ -75,72 +76,51 @@ export function Footer() {
               alt="Mister Pellets"
               width={120}
               height={120}
-              className="h-14 w-14 object-contain"
+              className="h-16 w-16 object-contain"
             />
           </span>
         </Link>
 
-        {/* Coordonnées compactes */}
-        <ul className="flex flex-col gap-2 text-sm">
-          <li>
+        {/* Réseaux sociaux : titre + 3 icônes BIEN VISIBLES (pleine opacité) */}
+        <div className="flex flex-col items-center gap-3">
+          <p className="text-xs uppercase tracking-wider text-mp-cream/75">
+            Suivez-nous
+          </p>
+          <div className="flex items-center gap-6">
             <a
-              href={`tel:${formatPhone(PHONE)}`}
-              className="inline-flex items-center justify-center gap-2 text-mp-cream hover:text-mp-orange-flame transition-colors"
+              href={SOCIAL.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Mister Pellets sur TikTok"
+              className="text-mp-cream hover:text-mp-orange-flame transition-colors"
             >
-              <Phone className="h-4 w-4 text-mp-orange-warm" aria-hidden />
-              <span className="font-medium">{PHONE}</span>
+              <TikTokIcon className="h-8 w-8" />
             </a>
-          </li>
-          <li>
             <a
-              href={`mailto:${EMAIL}`}
-              className="inline-flex items-center justify-center gap-2 text-mp-cream hover:text-mp-orange-flame transition-colors break-all"
+              href={SOCIAL.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Mister Pellets sur Instagram"
+              className="text-mp-cream hover:text-mp-orange-flame transition-colors"
             >
-              <Mail className="h-4 w-4 text-mp-orange-warm" aria-hidden />
-              <span>{EMAIL}</span>
+              <InstagramIcon className="h-8 w-8" />
             </a>
-          </li>
-          <li className="inline-flex items-center justify-center gap-2 text-mp-cream/90">
-            <MapPin className="h-4 w-4 text-mp-orange-warm" aria-hidden />
-            <span>{ADDRESS}</span>
-          </li>
-        </ul>
-
-        {/* Réseaux sociaux : 3 icônes alignées */}
-        <div className="flex items-center justify-center gap-5 pt-1">
-          <a
-            href={SOCIAL.tiktok}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Mister Pellets sur TikTok"
-            className="flex items-center justify-center h-11 w-11 rounded-full bg-mp-cream/10 text-mp-cream hover:bg-mp-orange-flame hover:text-white transition-colors"
-          >
-            <TikTokIcon className="h-5 w-5" />
-          </a>
-          <a
-            href={SOCIAL.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Mister Pellets sur Instagram"
-            className="flex items-center justify-center h-11 w-11 rounded-full bg-mp-cream/10 text-mp-cream hover:bg-mp-orange-flame hover:text-white transition-colors"
-          >
-            <InstagramIcon className="h-5 w-5" />
-          </a>
-          <a
-            href={SOCIAL.youtube}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Mister Pellets sur YouTube"
-            className="flex items-center justify-center h-11 w-11 rounded-full bg-mp-cream/10 text-mp-cream hover:bg-mp-orange-flame hover:text-white transition-colors"
-          >
-            <YoutubeIcon className="h-5 w-5" />
-          </a>
+            <a
+              href={SOCIAL.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Mister Pellets sur YouTube"
+              className="text-mp-cream hover:text-mp-orange-flame transition-colors"
+            >
+              <YoutubeIcon className="h-8 w-8" />
+            </a>
+          </div>
         </div>
 
-        {/* Liens légaux compacts horizontaux */}
+        {/* Liens légaux compacts : pleine opacité pour la lisibilité */}
         <nav
           aria-label="Liens légaux"
-          className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-mp-cream/80 pt-3 border-t border-mp-cream/15 w-full"
+          className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm text-mp-cream pt-4 border-t border-mp-cream/25 w-full"
         >
           {LEGAL_LINKS.map((link, i) => (
             <span key={link.href} className="inline-flex items-center gap-2">
@@ -150,13 +130,15 @@ export function Footer() {
               >
                 {link.label}
               </Link>
-              {i < LEGAL_LINKS.length - 1 && <span aria-hidden>·</span>}
+              {i < LEGAL_LINKS.length - 1 && (
+                <span className="text-mp-cream/60" aria-hidden>·</span>
+              )}
             </span>
           ))}
         </nav>
 
-        {/* Copyright minimal */}
-        <div className="text-[10px] text-mp-cream/60 leading-relaxed">
+        {/* Copyright */}
+        <div className="text-xs text-mp-cream/75 leading-relaxed">
           <p>Awlest SRL · TVA BE 0656.514.212</p>
           <p>© {year} Mister Pellets</p>
         </div>

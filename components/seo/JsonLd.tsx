@@ -87,12 +87,11 @@ export const LOCAL_BUSINESS_SCHEMA = {
     { "@type": "AdministrativeArea", name: "Province du Brabant wallon" },
     { "@type": "AdministrativeArea", name: "Province du Luxembourg" },
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "200",
-    bestRating: "5",
-  },
+  // Hotfix V1.3 §P6 : aggregateRating retiré pour le lancement. Les avis
+  // Google 4,9/200 existent mais sur la fiche Awlest (maison mère), pas sur
+  // Mister Pellets directement. À réintroduire quand la marque commerciale
+  // Mister Pellets aura ses propres avis vérifiés (collection Payload
+  // Testimonials avec source datée).
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",

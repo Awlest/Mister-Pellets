@@ -119,6 +119,30 @@ body {
   min-height: 100vh;
 }
 
+/* === BOUTONS / IMAGES (Hotfix V1.3 §P5) ===
+ * Protection préventive contre les débordements de boutons et médias sur
+ * mobile, en complément des règles V1.1 sur html/body.
+ */
+button, a[role="button"] {
+  max-width: 100%;
+}
+
+img, video, picture, source {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Pattern image-overlay-btn : bouton positionné en absolu sur une image
+ * sans coordonnées négatives (utiliser bottom + left:50% + translate).
+ */
+.image-overlay-btn {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+}
+
 /* === FOOTER (Hotfix V1.1 §H3) ===
  * Padding-bottom mobile : 96 px (NavbarSticky flottante 72 px + 24 px de
  * respiration) + safe-area iOS. Sur lg+ la navbar mobile disparaît, on revient

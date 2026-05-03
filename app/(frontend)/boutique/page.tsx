@@ -6,18 +6,20 @@ import { ProductCard } from "@/components/product/ProductCard";
 import {
   PRODUCTS_DEMO,
   POWER_TRANCHES,
+  TYPE_LABELS,
   DIFFUSION_LABELS,
   COLOR_LABELS,
   powerToTranche,
+  type ProductType,
   type Diffusion,
-  type Color,
+  type ColorCategory,
 } from "@/lib/products-demo";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Boutique poêles à pellets, 61 modèles en Wallonie | Mister Pellets",
+  title: "Boutique poêles à pellets en Wallonie | Mister Pellets",
   description:
-    "Catalogue Mister Pellets : 61 modèles Edilkamin, EK63, Dielle, Ferlux. Filtres marque, puissance, type de diffusion, couleur. Devis avec pose et prime Wallonie 2026 incluse.",
+    "Catalogue Mister Pellets : Edilkamin, EK63, Dielle, Ferlux. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
 };
 
 interface Props {
@@ -38,19 +40,20 @@ const BRAND_FILTERS = [
   { value: "Ferlux", label: "Ferlux" },
 ];
 
+// Type V1.3 : 5 valeurs (ce qu'EST le poêle, séparé de la diffusion)
 const TYPE_FILTERS = [
   { value: "all", label: "Tous" },
-  { value: "air", label: "Air pulsé" },
-  { value: "canalisable", label: "Canalisable" },
-  { value: "hydro", label: "Hydro" },
+  ...(Object.entries(TYPE_LABELS) as [ProductType, string][]).map(
+    ([value, label]) => ({ value, label }),
+  ),
 ];
 
+// Diffusion V1.3 : 2 valeurs (COMMENT la chaleur sort)
 const DIFFUSION_FILTERS = [
   { value: "all", label: "Toutes" },
-  { value: "ventilation-forcee", label: DIFFUSION_LABELS["ventilation-forcee"] },
-  { value: "canalisable", label: DIFFUSION_LABELS.canalisable },
-  { value: "convection-naturelle", label: DIFFUSION_LABELS["convection-naturelle"] },
-  { value: "hydro", label: DIFFUSION_LABELS.hydro },
+  ...(Object.entries(DIFFUSION_LABELS) as [Diffusion, string][]).map(
+    ([value, label]) => ({ value, label }),
+  ),
 ];
 
 const POWER_FILTERS = [
@@ -58,12 +61,12 @@ const POWER_FILTERS = [
   ...POWER_TRANCHES.map((t) => ({ value: t.value, label: t.label })),
 ];
 
+// Couleur V1.3 : 3 catégories regroupées (clairs / foncés / naturels)
 const COLOR_FILTERS = [
   { value: "all", label: "Toutes" },
-  ...(Object.entries(COLOR_LABELS) as [Color, string][]).map(([value, label]) => ({
-    value,
-    label,
-  })),
+  ...(Object.entries(COLOR_LABELS) as [ColorCategory, string][]).map(
+    ([value, label]) => ({ value, label }),
+  ),
 ];
 
 // Construit l'URL en préservant les autres filtres
@@ -120,12 +123,13 @@ export default async function BoutiquePage({ searchParams }: Props) {
 
   const filtered = PRODUCTS_DEMO.filter((p) => {
     if (current.marque !== "all" && p.brand !== current.marque) return false;
-    if (current.type !== "all" && p.type !== current.type) return false;
+    if (current.type !== "all" && p.type !== (current.type as ProductType)) return false;
     if (current.puissance !== "all" && powerToTranche(p.powerKw) !== current.puissance)
       return false;
     if (current.diffusion !== "all" && p.diffusion !== (current.diffusion as Diffusion))
       return false;
-    if (current.couleur !== "all" && p.color !== (current.couleur as Color)) return false;
+    if (current.couleur !== "all" && p.color !== (current.couleur as ColorCategory))
+      return false;
     return true;
   });
 

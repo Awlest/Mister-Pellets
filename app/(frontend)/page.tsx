@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, Clock, MapPin, ArrowRight } from "lucide-react";
+import { Clock, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -63,7 +63,7 @@ export default function HomePage() {
     <>
       <JsonLd data={[LOCAL_BUSINESS_SCHEMA, faqSchema]} />
 
-      {/* HERO, logo central agrandi, peu d'espace au-dessus, enchaîne directement */}
+      {/* HERO, logo central doublé + spacing 35 px max (cf. doc V1.3 §P7) */}
       <section className="relative overflow-hidden bg-mp-cream">
         <div
           aria-hidden
@@ -73,19 +73,22 @@ export default function HomePage() {
           }}
         />
 
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6 pt-8 md:pt-12 pb-10 md:pb-16 relative">
-          {/* Logo agrandi (cf. doc §1.2) */}
-          <div className="flex justify-center mb-6 md:mb-8">
-            <Image
-              src="/logo-mister-pellets-full.svg"
-              alt="Mister Pellets"
-              width={320}
-              height={320}
-              priority
-              className="w-40 sm:w-48 md:w-56 lg:w-64 h-auto"
-            />
-          </div>
+        {/* Bloc logo dédié : 35 px top + 35 px bottom strict (cf. doc §P7.3) */}
+        <div
+          className="flex justify-center relative"
+          style={{ paddingTop: "35px", paddingBottom: "35px" }}
+        >
+          <Image
+            src="/logo-mister-pellets-full.svg"
+            alt="Mister Pellets"
+            width={320}
+            height={320}
+            priority
+            className="h-[160px] w-[160px] md:h-[200px] md:w-[200px] object-contain"
+          />
+        </div>
 
+        <div className="container mx-auto max-w-[1280px] px-4 md:px-6 pb-10 md:pb-16 relative">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-mp-green-deep mb-5">
               Le bon poêle à pellets, <span className="mp-italic">installé chez vous</span> en Wallonie
@@ -108,14 +111,8 @@ export default function HomePage() {
 
             <div className="flex flex-wrap gap-x-5 gap-y-2 items-center justify-center text-sm font-medium text-mp-ink-soft">
               <span className="inline-flex items-center gap-2">
-                <span className="font-bold text-mp-green-deep text-base">+400</span>
-                installations
-              </span>
-              <span className="text-mp-sand">·</span>
-              <span className="inline-flex items-center gap-2">
-                <Star className="h-4 w-4 text-mp-orange-warm fill-mp-orange-warm" />
-                <span className="font-bold text-mp-green-deep text-base">4,9</span>
-                <span>/ 200 avis</span>
+                <span className="font-bold text-mp-green-deep text-base">+800</span>
+                poêles vendus et installés depuis 2016
               </span>
               <span className="text-mp-sand">·</span>
               <span className="inline-flex items-center gap-2">
