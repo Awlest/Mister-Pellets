@@ -126,7 +126,7 @@ export function Footer() {
             <span key={link.href} className="inline-flex items-center gap-2">
               <Link
                 href={link.href}
-                className="hover:text-mp-orange-flame transition-colors"
+                className="text-mp-cream hover:text-mp-orange-flame transition-colors"
               >
                 {link.label}
               </Link>
