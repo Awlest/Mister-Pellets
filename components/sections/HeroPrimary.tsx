@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Flame, Star, Clock } from "lucide-react";
+import { Flame, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -62,14 +62,8 @@ export function HeroPrimary({
           {showStats && (
             <div className="flex flex-wrap gap-x-6 gap-y-3 items-center text-sm font-medium text-mp-ink-soft">
               <span className="inline-flex items-center gap-2">
-                <span className="font-bold text-mp-green-deep text-base">+400</span>
-                installés
-              </span>
-              <span className="text-mp-sand">·</span>
-              <span className="inline-flex items-center gap-2">
-                <Star className="h-4 w-4 text-mp-orange-warm fill-mp-orange-warm" />
-                <span className="font-bold text-mp-green-deep text-base">4.9</span>
-                <span className="text-mp-ink-soft/80">/ 200 avis</span>
+                <span className="font-bold text-mp-green-deep text-base">+800</span>
+                poêles vendus et installés depuis 2016
               </span>
               <span className="text-mp-sand">·</span>
               <span className="inline-flex items-center gap-2">

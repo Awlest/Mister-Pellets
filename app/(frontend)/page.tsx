@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, Clock, MapPin, ArrowRight } from "lucide-react";
+import { Clock, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -108,14 +108,8 @@ export default function HomePage() {
 
             <div className="flex flex-wrap gap-x-5 gap-y-2 items-center justify-center text-sm font-medium text-mp-ink-soft">
               <span className="inline-flex items-center gap-2">
-                <span className="font-bold text-mp-green-deep text-base">+400</span>
-                installations
-              </span>
-              <span className="text-mp-sand">·</span>
-              <span className="inline-flex items-center gap-2">
-                <Star className="h-4 w-4 text-mp-orange-warm fill-mp-orange-warm" />
-                <span className="font-bold text-mp-green-deep text-base">4,9</span>
-                <span>/ 200 avis</span>
+                <span className="font-bold text-mp-green-deep text-base">+800</span>
+                poêles vendus et installés depuis 2016
               </span>
               <span className="text-mp-sand">·</span>
               <span className="inline-flex items-center gap-2">

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { StatsGrid } from "@/components/sections/StatsGrid";
 
 export const metadata: Metadata = {
-  title: "À propos, Mister Pellets, installateur poêles à pellets Wallonie",
+  title: "À propos, Mister Pellets, installateur poêles à pellets en Wallonie",
   description:
-    "Mister Pellets installe des poêles à pellets en Wallonie depuis 2016. Basés à Fernelmont (Awlest SRL), 400+ installations, 4.9 étoiles sur Google.",
+    "Mister Pellets installe des poêles à pellets en Wallonie depuis 2016. Plus de 800 poêles vendus et installés. Basés à Fernelmont (Awlest SRL).",
 };
 
 export default function AProposPage() {
@@ -20,7 +19,7 @@ export default function AProposPage() {
             Installer le bon poêle, <span className="mp-italic">comme il faut</span>, à Fernelmont
           </>
         }
-        description="Mister Pellets, c'est une petite équipe basée en Wallonie, qui prend le temps de bien faire le travail. Depuis 2016, on a installé plus de 400 poêles, dans des maisons de toutes tailles, avec des contraintes parfois compliquées. Voilà comment on bosse."
+        description="Mister Pellets, c'est une petite équipe basée en Wallonie, qui prend le temps de bien faire le travail. Depuis 2016, plus de 800 poêles à pellets vendus et installés, dans des maisons de toutes tailles, avec des contraintes parfois compliquées. Voilà comment on bosse."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "À propos" },
@@ -29,7 +28,7 @@ export default function AProposPage() {
 
       {/* Notre histoire */}
       <section className="bg-mp-cream py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 prose prose-lg max-w-none">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             On a commencé avec une frustration
           </h2>
@@ -45,10 +44,10 @@ export default function AProposPage() {
               s'est dit qu'on pouvait faire mieux. Alors on a monté Mister Pellets.
             </p>
             <p>
-              Aujourd'hui, on est une petite équipe à Fernelmont. On installe entre 80 et 120 poêles par an, on connaît
-              les maisons wallonnes (mosanes, fermettes rénovées, BBC modernes), et on dit non à un projet quand on
-              pense que c'est pas le bon choix pour le client. Ça nous a coûté quelques ventes mais c'est ce qui fait
-              qu'on a 4,9 sur 200 avis Google. C'est ce qui nous fait rentrer le matin.
+              Aujourd'hui, on est une petite équipe à Fernelmont. On vend et on installe entre 80 et 120 poêles par an.
+              On connaît les maisons wallonnes (mosanes, fermettes rénovées, BBC modernes). Et on dit non à un projet
+              quand on pense que ce n'est pas le bon choix pour le client. Ça nous a coûté quelques ventes mais c'est
+              ce qui nous permet de tenir notre standard de qualité sur la durée.
             </p>
           </div>
         </div>
@@ -57,8 +56,8 @@ export default function AProposPage() {
       <StatsGrid
         title="Quelques chiffres"
         stats={[
-          { value: "+400", label: "installations", detail: "depuis 2016" },
-          { value: "4,9", label: "/ 5 sur Google", detail: "200 avis" },
+          { value: "+800", label: "poêles vendus et installés", detail: "depuis 2016" },
+          { value: "9 ans", label: "d'expérience", detail: "spécialisés pellets" },
           { value: "5 ans", label: "de garantie", detail: "incluse sur la pose" },
           { value: "50 km", label: "autour de Fernelmont", detail: "livraison gratuite" },
         ]}
@@ -66,7 +65,7 @@ export default function AProposPage() {
 
       {/* Mister Pellets / Awlest, clarification factuelle (autorisée ici, cf. brief §9.4) */}
       <section className="bg-mp-cream py-16 md:py-20">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 prose prose-lg max-w-none">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Mister Pellets et Awlest, c'est quoi le lien ?
           </h2>
@@ -82,13 +81,20 @@ export default function AProposPage() {
               même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale, pas de
               sous-traitance cachée.
             </p>
+            <p>
+              L'activité d'Awlest, qui couvre les poêles à pellets sous la marque Mister Pellets et d'autres
+              services connexes, est notée 4,9 sur 5 sur Google par les clients depuis 2016. Comme la marque
+              commerciale Mister Pellets a été lancée plus récemment, on préfère ne pas afficher ces avis
+              comme étant ceux de Mister Pellets directement. Ils existent, ils sont vérifiables sur la fiche
+              Google d'Awlest, mais on reste honnêtes sur la source.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Comment on bosse */}
       <section className="bg-mp-beige py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 prose prose-lg max-w-none">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Comment on bosse
           </h2>
@@ -99,9 +105,9 @@ export default function AProposPage() {
               ce que tu cherches. Ensuite seulement on parle de modèles.
             </p>
             <p>
-              <strong>On dit ce qu'on pense.</strong> Si ta maison n'a pas besoin d'un 14 kW connecté à 5 000 €, on te le
-              dit. Un Ferlux 8 kW à 1 800 € peut suffire. Notre rôle c'est pas de vendre le maximum, c'est de te diriger
-              vers ce qui va marcher chez toi pendant 15 ans.
+              <strong>On dit ce qu'on pense.</strong> Si ta maison n'a pas besoin d'un 14 kW connecté à 5 000 €, on te
+              le dit. Un Ferlux 8 kW à 1 800 € peut suffire. Notre rôle n'est pas de vendre le maximum, c'est de te
+              diriger vers ce qui va marcher chez toi pendant 15 ans.
             </p>
             <p>
               <strong>On pose proprement.</strong> Bâches, aspirateur, plaques de protection. On laisse l'endroit comme
@@ -118,7 +124,7 @@ export default function AProposPage() {
 
       {/* Cadre légal de l'activité */}
       <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 prose prose-lg max-w-none">
+        <div className="container mx-auto max-w-3xl px-4 md:px-6">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Le cadre dans lequel on bosse
           </h2>
