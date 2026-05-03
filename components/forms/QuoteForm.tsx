@@ -123,6 +123,11 @@ export function QuoteForm() {
 
   const prev = () => step > 1 && setStep(step - 1);
 
+  // Honeypot anti-spam (cf. audit V20260503 §3.BLOQUANT.2). Champ caché dans
+  // le DOM, invisible visuellement. Un humain ne le remplit jamais. Un bot
+  // qui remplit aveuglément tous les inputs déclenche le filtre côté serveur.
+  const [website, setWebsite] = React.useState("");
+
   async function handleSubmit() {
     setSubmitState("loading");
     setErrorMsg("");
@@ -130,7 +135,7 @@ export function QuoteForm() {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(state),
+        body: JSON.stringify({ ...state, website }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -165,6 +170,22 @@ export function QuoteForm() {
 
   return (
     <div className="rounded-3xl bg-white border border-mp-sand/40 shadow-md overflow-hidden">
+      {/* Honeypot anti-spam (audit V20260503 §3.BLOQUANT.2). Caché aux humains
+        * et aux lecteurs d'écran (aria-hidden), trompeur pour les bots qui
+        * remplissent tous les inputs. Ne jamais le retirer ni le rendre visible. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+        <label htmlFor="hp-website">Ne pas remplir ce champ</label>
+        <input
+          id="hp-website"
+          type="text"
+          name="website"
+          autoComplete="off"
+          tabIndex={-1}
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
+
       {/* Progress bar */}
       <div className="border-b border-mp-sand/40 bg-mp-cream px-6 md:px-8 py-5">
         <div className="flex items-center justify-between mb-3">

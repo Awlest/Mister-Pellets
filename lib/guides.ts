@@ -133,7 +133,7 @@ export const GUIDES: GuideData[] = [
           "Oui, c'est la configuration la plus fréquente. La gaine monte verticalement dans une cloison ou dans un coffrage, puis se distribue à l'étage. Compte 5-8m max de longueur de gaine pour conserver une bonne température en sortie.",
       },
     ],
-    metaTitle: "Poêle à pellets canalisable, Le guide complet | Mister Pellets",
+    metaTitle: "Poêle à pellets canalisable, Le guide complet",
     metaDescription:
       "Tout sur les poêles à pellets canalisables : fonctionnement, puissances, exemples wallons. Edilkamin Mood Plus, EK63 Tweed et Spy. Conseil Mister Pellets.",
   },
@@ -180,7 +180,7 @@ export const GUIDES: GuideData[] = [
           "Réservoir typique : 30-60 kg sur les hydros, soit 1.5 à 4 jours d'autonomie selon la puissance. Pour ne pas être contraint, beaucoup ajoutent un silo externe à pellets relié par aspiration : 500-2000 kg de stock, plusieurs semaines d'autonomie.",
       },
     ],
-    metaTitle: "Poêle hydro pour remplacer chaudière mazout, Guide | Mister Pellets",
+    metaTitle: "Poêle hydro pour remplacer chaudière mazout, Guide",
     metaDescription:
       "Le guide complet du poêle hydro pour remplacer une chaudière mazout : marques (Dielle, Edilkamin), dimensionnement, coûts, primes. Conseil Mister Pellets.",
   },
@@ -292,7 +292,7 @@ export const GUIDES: GuideData[] = [
           "Tu paies plus cher à l'achat (différence ~500-1500 €), et le poêle tourne presque toujours en mode mini. Pas idéal pour la combustion (rendement moindre, plus de cendres). Mais moins grave que le sous-dimensionnement.",
       },
     ],
-    metaTitle: "Quelle puissance de poêle à pellets pour ma maison ? | Mister Pellets",
+    metaTitle: "Quelle puissance de poêle à pellets pour ma maison ?",
     metaDescription:
       "Calculer la puissance de poêle à pellets selon ta surface et ton PEB. Tableau de correspondance pour 20 cas typiques wallons. Conseil Mister Pellets.",
   },

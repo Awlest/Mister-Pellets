@@ -13,7 +13,7 @@ import { JsonLd, LOCAL_BUSINESS_SCHEMA } from "@/components/seo/JsonLd";
 import { buildFAQSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Poêle à pellets en Wallonie, vente, pose, entretien | Mister Pellets",
+  title: "Poêle à pellets en Wallonie, vente, pose, entretien",
   description:
     "61 modèles Edilkamin, EK63, Dielle, Ferlux. Pose en 1 jour, prime Wallonie 2026 jusqu'à 960 €, livraison gratuite 50 km autour de Fernelmont. Devis en 60 secondes.",
 };

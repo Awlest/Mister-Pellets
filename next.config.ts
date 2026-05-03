@@ -1,18 +1,66 @@
 import type { NextConfig } from "next";
 import { withPayload } from "@payloadcms/next/withPayload";
 
+// =====================================================================
+// HEADERS HTTP DE SÉCURITÉ (cf. audit V20260503 §3.BLOQUANT.1)
+// =====================================================================
+// Defense-in-depth contre XSS, clickjacking, downgrade SSL, leak referrer.
+// Testable via Mozilla Observatory et securityheaders.com après prod.
+
+const SECURITY_HEADERS = [
+  // HSTS : force HTTPS + preload (à activer une fois certif Combell stable)
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  // Empêche le navigateur de "deviner" le MIME type d'une réponse
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  // Anti-clickjacking : seul mister-pellets.be peut iframe le site
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  // Limite la fuite d'URLs sensibles dans les headers Referer sortants
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  // Désactive les API navigateur sensibles par défaut
+  {
+    key: "Permissions-Policy",
+    value: "geolocation=(), camera=(), microphone=(), payment=(self), interest-cohort=()",
+  },
+  // CSP basique compatible Next.js + Stripe + Google Fonts + GA futur.
+  // Remarque : 'unsafe-inline' est encore nécessaire pour les styles Tailwind
+  // (CSS-in-HTML générées au build) et pour les script fragments injectés
+  // par Next.js/Payload. À durcir progressivement avec nonce-based CSP.
+  {
+    key: "Content-Security-Policy",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://*.vercel-scripts.com https://va.vercel-scripts.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "img-src 'self' data: blob: https: ",
+      "connect-src 'self' https://api.stripe.com https://*.supabase.co https://*.cellar-c2.services.clever-cloud.com https://*.vercel-scripts.com",
+      "frame-src https://js.stripe.com https://hooks.stripe.com",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self' https://checkout.stripe.com",
+      "frame-ancestors 'self'",
+      "upgrade-insecure-requests",
+    ].join("; "),
+  },
+];
+
 const nextConfig: NextConfig = {
   // Bloque l'indexation tant que NEXT_PUBLIC_ALLOW_INDEXING != "true"
+  // + headers de sécurité applicables sur toutes les routes.
   async headers() {
     const allowIndex = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
     return [
       {
         source: "/:path*",
-        headers: allowIndex
-          ? []
-          : [
-              { key: "X-Robots-Tag", value: "noindex, nofollow" },
-            ],
+        headers: [
+          ...SECURITY_HEADERS,
+          ...(allowIndex
+            ? []
+            : [{ key: "X-Robots-Tag", value: "noindex, nofollow" }]),
+        ],
       },
     ];
   },

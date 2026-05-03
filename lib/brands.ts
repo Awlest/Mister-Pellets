@@ -66,7 +66,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     warranty: "Garantie constructeur 5 ans, prolongée par notre service entretien annuel.",
     tags: ["Italie", "1963", "Gamme très large", "Wi-Fi de série"],
     officialUrl: "https://www.edilkamin.com/",
-    metaTitle: "Edilkamin en Belgique, gamme complète poêles à pellets | Mister Pellets",
+    metaTitle: "Edilkamin en Belgique, gamme complète poêles à pellets",
     metaDescription:
       "Edilkamin, référence italienne du chauffage biomasse depuis 1963. Air, canalisable, étanche, hydro, inserts. Wi-Fi de série. Pose en Wallonie par Mister Pellets, prime 2026 incluse.",
   },
@@ -103,7 +103,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     warranty: "Garantie constructeur 5 ans sur l'électronique et la mécanique principale.",
     tags: ["Italie", "Groupe Edilkamin", "Wi-Fi Smart", "Étanche"],
     officialUrl: "https://www.ek-63.com/",
-    metaTitle: "EK63 en Belgique, marque du groupe Edilkamin Wi-Fi Smart | Mister Pellets",
+    metaTitle: "EK63 en Belgique, marque du groupe Edilkamin Wi-Fi Smart",
     metaDescription:
       "EK63, marque accessible du groupe Edilkamin. Air, canalisable, étanche, hydro. Wi-Fi Smart de série. Pose en Wallonie par Mister Pellets, prime Habitation 2026 incluse.",
   },
@@ -143,7 +143,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     warranty: "Garantie constructeur sur le corps de chauffe et la combustion (durée à vérifier au modèle).",
     tags: ["Italie", "Combustion par le bas", "Gamme complète", "Hybride bois pellets"],
     officialUrl: "https://www.diellespa.it/",
-    metaTitle: "Dielle en Belgique, combustion brevetée par alimentation par le bas | Mister Pellets",
+    metaTitle: "Dielle en Belgique, combustion brevetée par alimentation par le bas",
     metaDescription:
       "Dielle, fabricant italien de poêles à pellets avec système breveté de combustion par alimentation par le bas. Air, canalisable, hydro, hybride bois pellets. Pose en Wallonie.",
   },
@@ -181,7 +181,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     warranty: "Garantie légale 2 ans (Belgique) + garantie commerciale Mister Pellets 5 ans sur la pose.",
     tags: ["Espagne", "Andalousie", "Gamme complète", "Rendement jusqu'à 94 %"],
     officialUrl: "https://ferlux.es/",
-    metaTitle: "Ferlux en Belgique, gamme complète poêles à pellets | Mister Pellets",
+    metaTitle: "Ferlux en Belgique, gamme complète poêles à pellets",
     metaDescription:
       "Ferlux, fabricant espagnol depuis plus de 28 ans, distribué dans 30+ pays. Air, canalisable, hydro. Rendement jusqu'à 94 %. Pose en Wallonie par Mister Pellets.",
   },
