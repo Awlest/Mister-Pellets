@@ -50,9 +50,9 @@ const FAQ_HOMEPAGE = [
       "Livraison gratuite dans un rayon de 50 km autour de notre showroom de Fernelmont (Namur, Andenne, Wavre, Charleroi, Huy, Liège partiellement). Au-delà, on se déplace toujours mais avec une participation aux frais de déplacement chiffrée dans le devis. On couvre les 5 provinces wallonnes au cas par cas.",
   },
   {
-    question: "Quelle marque de poêle est la plus fiable ?",
+    question: "Quelles marques de poêles distribuez-vous ?",
     answer:
-      "On distribue 4 marques après les avoir vraiment testées sur la durée. Edilkamin (Italie, 1963) reste la référence premium pour la durabilité et le SAV pièces. EK63 offre le meilleur rapport qualité-prix avec connectivité native. Dielle est notre spécialiste hydro pour remplacer une chaudière. Ferlux est le choix budget fiable, sans gadget. Notre rôle est de te diriger vers celle qui colle à ton projet, pas de pousser celle qui rapporte le plus.",
+      "Quatre marques sélectionnées pour couvrir l'ensemble des besoins wallons. Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse avec une gamme très large (air, canalisable, étanche, hydro, inserts) et le Wi-Fi de série. EK63 est la marque sœur du groupe Edilkamin, orientée moderne et connectée à un prix plus accessible. Dielle (Italie) se distingue par son système breveté de combustion par alimentation par le bas (flamme plus calme, auto-nettoyage, gamme complète y compris un modèle hybride bois et pellets). Ferlux (Espagne, plus de 28 ans d'activité) propose une gamme complète à excellent rapport qualité-prix. Notre rôle est de te diriger vers celle qui colle à ton projet, pas de pousser celle qui rapporte le plus.",
   },
 ];
 

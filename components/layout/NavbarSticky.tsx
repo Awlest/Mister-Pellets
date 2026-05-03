@@ -116,7 +116,7 @@ export function NavbarSticky() {
 
   return (
     <>
-      {/* WRAPPER FLOTTANT — marges externes + safe-area iOS */}
+      {/* WRAPPER FLOTTANT : marges externes + safe-area iOS */}
       <div
         className={cn(
           "fixed inset-x-0 bottom-0 z-30 lg:hidden",
@@ -156,7 +156,7 @@ export function NavbarSticky() {
 
               return (
                 <li key={tab.id} className="flex-1 relative">
-                  {/* Pastille active (fond) — animation horizontale douce */}
+                  {/* Pastille active (fond), animation horizontale douce */}
                   {isActive && (
                     <motion.span
                       layoutId="navbar-active-pill"
