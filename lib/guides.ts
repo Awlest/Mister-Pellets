@@ -50,7 +50,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "3. Choisir la marque",
         paragraphs: [
-          "Edilkamin (Italie, 1963) reste la référence premium pour la durabilité. EK63 (Italie, 2010) offre le meilleur rapport qualité-prix avec connectivité native. Dielle (Italie, 1989) est le spécialiste hydro pour remplacer une chaudière. Ferlux (Espagne, 1995) est le choix budget fiable, sans gadget.",
+          "Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse, avec une gamme très large (air, canalisable, étanche, hydro, inserts) et le Wi-Fi de série sur la plupart des modèles récents. EK63 (Italie) est la marque sœur du groupe Edilkamin, lancée pour proposer du connecté à un prix plus accessible, gamme complète air/canalisable/étanche/hydro. Dielle (Italie) se distingue par un système breveté de combustion par alimentation par le bas du brasero (flamme plus naturelle, auto-nettoyage, gamme complète air/canalisable/hydro/inserts/hybride bois-pellets). Ferlux (Espagne, plus de 28 ans d'activité) couvre toute la gamme à un excellent rapport qualité-prix, avec des rendements annoncés jusqu'à 94 %.",
           "À Mister Pellets, on a sélectionné ces 4 marques après avoir testé une vingtaine de fabricants. Chacune a son créneau, on dirige selon le projet, pas selon la marge.",
         ],
       },
@@ -156,7 +156,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "Marques et modèles",
         paragraphs: [
-          "Dielle (Italie) est notre marque de référence sur le segment : 100% hydro, robustes, silencieuses. Modèles courants : Iride 15 kW (maisons 100-150 m²), Iride 22 kW (150-220 m²), Iride 30 kW (250-400 m² ou ECS intégrée).",
+          "Dielle (Italie) propose une gamme hydro complète (série Bump Idro de 20 à 35 kW notamment) avec son système breveté de combustion par alimentation par le bas (flamme plus calme, auto-nettoyage du brasero, fonctionnement silencieux). Edilkamin (Italie, depuis 1963) propose aussi des modèles hydro (suffixe H, types Kira H, Vyda H) compatibles radiateurs, plancher chauffant et panneaux solaires thermiques. Ferlux (Espagne) couvre le segment hydro avec sa gamme Agua. À chaque marque sa logique technique, on oriente selon le projet.",
           "Edilkamin propose aussi des hydros (gamme Aqua Tiny, Acquatondo). Plus chères mais avec une finition premium et la fiabilité Edilkamin. EK63 ne fait pas d'hydro à l'heure actuelle.",
         ],
       },
