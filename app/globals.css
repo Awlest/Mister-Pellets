@@ -81,31 +81,46 @@
 }
 
 /* === PROTECTION VIEWPORT MOBILE — empêche tout débordement horizontal ===
- * Hotfix V1.1 §H2 : régression de débordement horizontal observée sur mobile.
- * Règles préventives strictes (cf. doc §H2.4).
+ * Hotfix V1.1 §H2 + V1.3 fix : régression de débordement horizontal observée
+ * sur mobile, mais le HOTFIX V1.3.1 a constaté que ces règles HORS LAYER
+ * écrasaient les utilities Tailwind (h-[160px], h-16, etc.) à cause de la
+ * cascade layers (les règles hors layer gagnent contre toutes les @layer).
+ *
+ * Solution : envelopper dans @layer base pour qu'elles servent de baseline
+ * mais que toute classe Tailwind utility puisse les surcharger.
+ *
+ * html/body restent hors layer car ce sont des règles globales de viewport
+ * qui doivent absolument tenir.
  */
 html, body {
   overflow-x: hidden;
   max-width: 100vw;
 }
 
-/* Box-sizing universel (Tailwind preflight le fait déjà, redondance défensive). */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+@layer base {
+  /* Box-sizing universel (Tailwind preflight le fait déjà, redondance défensive). */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
-/* Tous les médias sont fluides par défaut. */
-img, video, iframe, embed, object {
-  max-width: 100%;
-  height: auto;
-}
+  /* Tous les médias sont fluides par défaut, MAIS les utilitaires Tailwind
+   * (h-[160px], w-16, etc.) peuvent surcharger car ils sont dans la layer
+   * utilities qui bat la layer base. */
+  img, video, iframe, embed, object, picture, source {
+    max-width: 100%;
+    height: auto;
+  }
 
-/* Coupure des longues chaînes (URLs, emails, mots techniques) qui forceraient
- * la viewport à s'élargir sur mobile. Volontairement limité aux conteneurs
- * de texte courant (pas aux titres en display, pour préserver la hiérarchie
- * visuelle). */
-p, li, blockquote, a, span.break-words-mp {
-  overflow-wrap: anywhere;
+  /* Coupure des longues chaînes (URLs, emails, mots techniques) qui
+   * forceraient la viewport à s'élargir sur mobile. */
+  p, li, blockquote, a, span.break-words-mp {
+    overflow-wrap: anywhere;
+  }
+
+  /* Protection boutons (Hotfix V1.3 §P5) : ne dépassent jamais leur parent. */
+  button, a[role="button"] {
+    max-width: 100%;
+  }
 }
 
 /* === BASE === */
@@ -119,21 +134,9 @@ body {
   min-height: 100vh;
 }
 
-/* === BOUTONS / IMAGES (Hotfix V1.3 §P5) ===
- * Protection préventive contre les débordements de boutons et médias sur
- * mobile, en complément des règles V1.1 sur html/body.
- */
-button, a[role="button"] {
-  max-width: 100%;
-}
-
-img, video, picture, source {
-  max-width: 100%;
-  height: auto;
-}
-
 /* Pattern image-overlay-btn : bouton positionné en absolu sur une image
  * sans coordonnées négatives (utiliser bottom + left:50% + translate).
+ * Classe utilitaire publique, pas de @layer.
  */
 .image-overlay-btn {
   position: absolute;
