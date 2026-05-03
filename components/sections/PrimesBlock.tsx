@@ -142,9 +142,9 @@ export function PrimesBlock({
           ))}
         </div>
 
-        <Button asChild variant="outline" size="lg">
+        <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
           <Link href="/primes-energie-wallonie-2026">
-            Voir les conditions complètes et la procédure
+            Conditions complètes et procédure
           </Link>
         </Button>
 
