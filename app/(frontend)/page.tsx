@@ -219,7 +219,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TABLEAU COMPARATIF */}
+      {/* TABLEAU COMPARATIF, option B (cf. doc V1.2 §H5) :
+          cards empilées sur mobile, format tableau classique sur sm+ */}
       <section className="bg-mp-cream py-12 md:py-16">
         <div className="container mx-auto max-w-4xl px-4 md:px-6">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
@@ -229,50 +230,114 @@ export default function HomePage() {
             Quatre solutions dominent le résidentiel wallon. Voici comment elles se comparent en
             2026 sur le coût d'usage, l'investissement initial et l'autonomie.
           </p>
-          <div className="-mx-4 md:mx-0 overflow-x-auto">
-            <table className="w-full text-sm border-collapse rounded-2xl overflow-hidden bg-mp-cream border border-mp-sand/40">
-              <thead className="bg-mp-green-deep text-mp-cream">
-                <tr>
-                  <th className="p-3 md:p-4 text-left font-semibold">Solution</th>
-                  <th className="p-3 md:p-4 text-left font-semibold">Investissement</th>
-                  <th className="p-3 md:p-4 text-left font-semibold">Coût annuel*</th>
-                  <th className="p-3 md:p-4 text-left font-semibold">Autonomie</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="bg-mp-orange-light/30">
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">Poêle à pellets</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">4 000 à 14 000 €</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">700 à 1 100 €</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">2 à 7 jours</td>
-                </tr>
-                <tr className="bg-mp-cream">
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">Chaudière mazout</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">8 000 à 15 000 €</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">2 200 à 2 800 €</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">Cuve 2-3 ans</td>
-                </tr>
-                <tr className="bg-mp-beige/40">
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">Chaudière gaz</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">5 000 à 12 000 €</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">1 600 à 2 200 €</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">Réseau continu</td>
-                </tr>
-                <tr className="bg-mp-cream">
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">Pompe à chaleur air-eau</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">12 000 à 22 000 €</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">800 à 1 400 €</td>
-                  <td className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">Réseau continu</td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="mt-3 text-xs text-mp-ink-soft italic px-4 md:px-0">
-              * Estimation pour une maison wallonne 130 m² PEB C, prix combustibles avril 2026.
-              Le pellet et la pompe à chaleur sortent en tête sur le coût d'usage. La pompe à chaleur
-              demande plus d'investissement initial mais s'amortit sur 8-12 ans. Le pellet a l'avantage
-              du combustible local et d'une autonomie sans contrat fournisseur.
-            </p>
-          </div>
+
+          {(() => {
+            const rows = [
+              {
+                solution: "Poêle à pellets",
+                emoji: "🔥",
+                highlight: true,
+                investissement: "4 000 à 14 000 €",
+                coutAnnuel: "700 à 1 100 €",
+                autonomie: "2 à 7 jours",
+              },
+              {
+                solution: "Chaudière mazout",
+                emoji: "🛢️",
+                investissement: "8 000 à 15 000 €",
+                coutAnnuel: "2 200 à 2 800 €",
+                autonomie: "Cuve 2 à 3 ans",
+              },
+              {
+                solution: "Chaudière gaz",
+                emoji: "⛽",
+                investissement: "5 000 à 12 000 €",
+                coutAnnuel: "1 600 à 2 200 €",
+                autonomie: "Réseau continu",
+              },
+              {
+                solution: "Pompe à chaleur air-eau",
+                emoji: "💨",
+                investissement: "12 000 à 22 000 €",
+                coutAnnuel: "800 à 1 400 €",
+                autonomie: "Réseau continu",
+              },
+            ];
+
+            return (
+              <>
+                {/* Vue mobile : cards empilées (jusqu'à sm) */}
+                <div className="space-y-4 sm:hidden">
+                  {rows.map((r) => (
+                    <article
+                      key={r.solution}
+                      className={`rounded-2xl border p-5 ${
+                        r.highlight
+                          ? "bg-mp-orange-light/40 border-mp-orange-flame/40 ring-1 ring-mp-orange-flame/20"
+                          : "bg-mp-cream border-mp-sand/40"
+                      }`}
+                    >
+                      <h3 className="flex items-center gap-2 text-lg font-semibold text-mp-green-deep mb-3">
+                        <span aria-hidden>{r.emoji}</span>
+                        {r.solution}
+                      </h3>
+                      <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+                        <dt className="text-mp-ink-soft">Investissement</dt>
+                        <dd className="text-mp-ink font-medium text-right">{r.investissement}</dd>
+                        <dt className="text-mp-ink-soft">Coût annuel*</dt>
+                        <dd className="text-mp-ink font-medium text-right">{r.coutAnnuel}</dd>
+                        <dt className="text-mp-ink-soft">Autonomie</dt>
+                        <dd className="text-mp-ink font-medium text-right">{r.autonomie}</dd>
+                      </dl>
+                    </article>
+                  ))}
+                </div>
+
+                {/* Vue tablette/desktop : tableau classique (sm+) */}
+                <div className="hidden sm:block">
+                  <table className="w-full text-sm border-collapse rounded-2xl overflow-hidden bg-mp-cream border border-mp-sand/40">
+                    <thead className="bg-mp-green-deep text-mp-cream">
+                      <tr>
+                        <th className="p-4 text-left font-semibold">Solution</th>
+                        <th className="p-4 text-left font-semibold">Investissement</th>
+                        <th className="p-4 text-left font-semibold">Coût annuel*</th>
+                        <th className="p-4 text-left font-semibold">Autonomie</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rows.map((r, i) => (
+                        <tr
+                          key={r.solution}
+                          className={
+                            r.highlight
+                              ? "bg-mp-orange-light/30"
+                              : i % 2 === 0
+                                ? "bg-mp-cream"
+                                : "bg-mp-beige/40"
+                          }
+                        >
+                          <td className="p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">
+                            <span className="mr-1.5" aria-hidden>{r.emoji}</span>
+                            {r.solution}
+                          </td>
+                          <td className="p-4 border-t border-mp-sand/30 text-mp-ink">{r.investissement}</td>
+                          <td className="p-4 border-t border-mp-sand/30 text-mp-ink">{r.coutAnnuel}</td>
+                          <td className="p-4 border-t border-mp-sand/30 text-mp-ink">{r.autonomie}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            );
+          })()}
+
+          <p className="mt-4 text-xs text-mp-ink-soft italic">
+            * Estimation pour une maison wallonne 130 m² PEB C, prix combustibles avril 2026.
+            Le pellet et la pompe à chaleur sortent en tête sur le coût d'usage. La pompe à chaleur
+            demande plus d'investissement initial mais s'amortit sur 8 à 12 ans. Le pellet a l'avantage
+            du combustible local et d'une autonomie sans contrat fournisseur.
+          </p>
         </div>
       </section>
 
