@@ -45,7 +45,7 @@ interface TestimonialsProps {
  */
 export function Testimonials({
   title = "Ce que disent nos clients",
-  description = "4.9 / 5 sur Google après 200 avis. Quelques retours récents.",
+  description = "Plus de 800 installations réussies en Wallonie depuis 2016. Quelques retours récents.",
   items = DEFAULT_TESTIMONIALS,
 }: TestimonialsProps) {
   return (

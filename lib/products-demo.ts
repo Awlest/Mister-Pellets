@@ -6,36 +6,39 @@
 import type { ProductCardData } from "@/components/product/ProductCard";
 
 /**
- * Type de diffusion de chaleur (cf. doc corrections-mobile-v1 §2.3 b) :
- * - ventilation-forcee : poêle avec ventilateur (diffusion rapide et puissante)
+ * Taxonomie filtres boutique (Hotfix V1.3 §P3+P4) :
+ *
+ * Type (5 valeurs, ce qu'EST le poêle) :
+ * - standard : poêle classique chauffant la pièce, sans canal ni hydro
  * - canalisable : diffusion vers plusieurs pièces via gaines
- * - convection-naturelle : sans ventilateur, chaleur douce et silencieuse
- * - hydro : raccordé aux radiateurs (chauffage central)
+ * - hydro : connecté au circuit chauffage central (radiateurs/plancher)
+ * - hybride : fonctionnement bois + pellets (ex Dielle Ghibli Hybrid Idro)
+ * - insert : à encastrer dans une cheminée existante
+ *
+ * Diffusion (2 valeurs, COMMENT la chaleur sort) :
+ * - ventilation-forcee : avec ventilateur, diffusion rapide
+ * - convection-naturelle : sans ventilateur, chaleur douce silencieuse
+ *
+ * Couleur (3 catégories simples et inclusives) :
+ * - light : tons clairs (blanc, crème, ivoire, beige clair, gris clair)
+ * - dark : tons foncés (noir, gris anthracite, bordeaux, brun foncé)
+ * - natural : tons naturels (acier brossé, fonte, terracotta, bois/pierre)
  */
-export type Diffusion =
-  | "ventilation-forcee"
-  | "canalisable"
-  | "convection-naturelle"
-  | "hydro";
+export type ProductType = "standard" | "canalisable" | "hydro" | "hybride" | "insert";
 
-export type Color =
-  | "noir"
-  | "blanc"
-  | "creme"
-  | "bordeaux"
-  | "gris-anthracite"
-  | "beige"
-  | "acier"
-  | "fonte";
+export type Diffusion = "ventilation-forcee" | "convection-naturelle";
+
+export type ColorCategory = "light" | "dark" | "natural";
 
 export interface ProductDemo extends ProductCardData {
-  type: "air" | "canalisable" | "hydro" | "insert";
+  /** Type de poêle (5 valeurs taxonomie V1.3) */
+  type: ProductType;
   isAirtight: boolean;
   isConnected: boolean;
-  /** Type de diffusion de chaleur (cf. lib §filtre boutique) */
+  /** Mode de diffusion de la chaleur (2 valeurs) */
   diffusion: Diffusion;
-  /** Couleur principale visible */
-  color: Color;
+  /** Catégorie de couleur regroupée (3 valeurs) */
+  color: ColorCategory;
   /** Puissance en kW (numérique, dérivable de power mais on stocke pour filtrage rapide) */
   powerKw: number;
 }
@@ -49,11 +52,11 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     surface: "70-130 m²",
     priceTTC: 4290,
     isBestseller: true,
-    type: "air",
+    type: "standard",
     isAirtight: true,
     isConnected: false,
     diffusion: "ventilation-forcee",
-    color: "noir",
+    color: "dark", // noir
     powerKw: 9,
   },
   {
@@ -63,11 +66,11 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     power: "11 kW",
     surface: "90-160 m²",
     priceTTC: 5490,
-    type: "air",
+    type: "standard",
     isAirtight: true,
     isConnected: true,
     diffusion: "convection-naturelle",
-    color: "creme",
+    color: "light", // crème
     powerKw: 11,
   },
   {
@@ -80,8 +83,8 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     type: "canalisable",
     isAirtight: true,
     isConnected: true,
-    diffusion: "canalisable",
-    color: "noir",
+    diffusion: "ventilation-forcee",
+    color: "dark", // noir
     powerKw: 11,
   },
   {
@@ -95,8 +98,8 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     type: "canalisable",
     isAirtight: true,
     isConnected: true,
-    diffusion: "canalisable",
-    color: "gris-anthracite",
+    diffusion: "ventilation-forcee",
+    color: "dark", // gris anthracite
     powerKw: 9,
   },
   {
@@ -106,11 +109,11 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     power: "8 kW",
     surface: "60-100 m²",
     priceTTC: 1990,
-    type: "air",
+    type: "standard",
     isAirtight: true,
     isConnected: true,
     diffusion: "ventilation-forcee",
-    color: "blanc",
+    color: "light", // blanc
     powerKw: 8,
   },
   {
@@ -124,8 +127,8 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     type: "canalisable",
     isAirtight: true,
     isConnected: true,
-    diffusion: "canalisable",
-    color: "noir",
+    diffusion: "ventilation-forcee",
+    color: "dark", // noir
     powerKw: 11,
   },
   {
@@ -138,8 +141,8 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     type: "hydro",
     isAirtight: false,
     isConnected: false,
-    diffusion: "hydro",
-    color: "acier",
+    diffusion: "convection-naturelle",
+    color: "natural", // acier brossé
     powerKw: 22,
   },
   {
@@ -152,8 +155,8 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     type: "hydro",
     isAirtight: false,
     isConnected: false,
-    diffusion: "hydro",
-    color: "acier",
+    diffusion: "convection-naturelle",
+    color: "natural", // acier brossé
     powerKw: 30,
   },
   {
@@ -163,11 +166,11 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     power: "7 kW",
     surface: "50-90 m²",
     priceTTC: 1690,
-    type: "air",
+    type: "standard",
     isAirtight: false,
     isConnected: false,
     diffusion: "ventilation-forcee",
-    color: "bordeaux",
+    color: "dark", // bordeaux
     powerKw: 7,
   },
   {
@@ -177,18 +180,37 @@ export const PRODUCTS_DEMO: ProductDemo[] = [
     power: "10 kW",
     surface: "80-130 m²",
     priceTTC: 1990,
-    type: "air",
+    type: "standard",
     isAirtight: false,
     isConnected: false,
     diffusion: "ventilation-forcee",
-    color: "fonte",
+    color: "natural", // fonte
     powerKw: 10,
   },
 ];
 
 // =====================================================================
-// FILTRES BOUTIQUE, labels et helpers (cf. doc corrections-mobile-v1 §2.3)
+// FILTRES BOUTIQUE V1.3 (cf. doc V1.3 §P3+P4)
 // =====================================================================
+
+export const TYPE_LABELS: Record<ProductType, string> = {
+  standard:    "Standard",
+  canalisable: "Canalisable",
+  hydro:       "Hydro",
+  hybride:     "Hybride bois + pellets",
+  insert:      "Insert encastrable",
+};
+
+export const DIFFUSION_LABELS: Record<Diffusion, string> = {
+  "ventilation-forcee":   "Ventilation forcée",
+  "convection-naturelle": "Convection naturelle (silencieux)",
+};
+
+export const COLOR_LABELS: Record<ColorCategory, string> = {
+  light:   "Tons clairs",
+  dark:    "Tons foncés",
+  natural: "Tons naturels",
+};
 
 export const POWER_TRANCHES = [
   { value: "6-9",   label: "6 à 9 kW",   min: 6,  max: 9,  desc: "Compacts, petites pièces" },
@@ -196,24 +218,6 @@ export const POWER_TRANCHES = [
   { value: "12-18", label: "12 à 18 kW", min: 12, max: 18, desc: "Puissants, grandes surfaces" },
   { value: "18+",   label: "18 kW et +", min: 18, max: 999, desc: "Hydros et installations spécifiques" },
 ] as const;
-
-export const DIFFUSION_LABELS: Record<Diffusion, string> = {
-  "ventilation-forcee":   "Ventilation forcée",
-  "canalisable":          "Canalisable",
-  "convection-naturelle": "Convection naturelle",
-  "hydro":                "Hydro (radiateurs)",
-};
-
-export const COLOR_LABELS: Record<Color, string> = {
-  "noir":            "Noir",
-  "blanc":           "Blanc",
-  "creme":           "Crème / ivoire",
-  "bordeaux":        "Bordeaux / rouge",
-  "gris-anthracite": "Gris anthracite",
-  "beige":           "Beige / sable",
-  "acier":           "Acier / inox",
-  "fonte":           "Fonte (texture)",
-};
 
 export function powerToTranche(powerKw: number): string | null {
   for (const t of POWER_TRANCHES) {

@@ -81,8 +81,7 @@ const nextConfig: NextConfig = {
       { source: "/zones", destination: "/zones-d-intervention", permanent: true },
       { source: "/wallonie", destination: "/zones-d-intervention", permanent: true },
 
-      // FAQ — page pas encore créée mais on prépare
-      { source: "/faq", destination: "/contact", permanent: true },
+      // FAQ : page créée en V1.3 §P2, plus de redirection vers /contact
 
       // Trailing slash normalization (Vercel le gère mais redirect explicite OK)
     ];
