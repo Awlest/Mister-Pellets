@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, Flame, Award, Wifi, Wind, Droplet } from "lucide-react";
@@ -7,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { ProductCard } from "@/components/product/ProductCard";
+import { ProductGallery } from "@/components/product/ProductGallery";
 import { AddToCartButton } from "@/components/product/AddToCartButton";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
@@ -89,69 +89,18 @@ export default async function ProductPage({ params }: Props) {
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-            {/* Galerie : image principale Payload, fallback placeholder Phase 5 */}
+            {/* Galerie interactive : clic vignette = image principale change,
+                clic image principale = lightbox plein écran. Composant client. */}
             <div>
-              <div className="relative aspect-square rounded-3xl bg-mp-beige-warm border border-mp-sand/40 overflow-hidden">
-                {product.imageSrc ? (
-                  <Image
-                    src={product.imageSrc}
-                    alt={product.imageAlt ?? product.name}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center p-10">
-                      <Flame className="h-16 w-16 mx-auto text-mp-orange-flame mb-4" />
-                      <p className="text-mp-ink-soft text-sm">
-                        Photo en cours de préparation
-                        <br />
-                        (image disponible sur demande de devis)
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-              {/* Vignettes galerie : utilise galleryImages saisies en admin
-                  Payload, fallback sur cases vides si aucune image. */}
-              {product.galleryImages && product.galleryImages.length > 0 ? (
-                <div className="grid grid-cols-4 gap-2 mt-4">
-                  {product.galleryImages.slice(0, 4).map((img, i) => (
-                    <div
-                      key={i}
-                      className="relative aspect-square rounded-xl bg-mp-beige border border-mp-sand/40 overflow-hidden"
-                    >
-                      <Image
-                        src={img.url}
-                        alt={img.alt ?? `${product.name} — vue ${i + 1}`}
-                        fill
-                        sizes="(max-width: 1024px) 25vw, 12vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
-                  {/* Complète avec des cases vides si moins de 4 images */}
-                  {Array.from({
-                    length: Math.max(0, 4 - product.galleryImages.length),
-                  }).map((_, i) => (
-                    <div
-                      key={`empty-${i}`}
-                      className="aspect-square rounded-xl bg-mp-beige border border-mp-sand/40"
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="grid grid-cols-4 gap-2 mt-4">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="aspect-square rounded-xl bg-mp-beige border border-mp-sand/40"
-                    />
-                  ))}
-                </div>
-              )}
+              <ProductGallery
+                productName={product.name}
+                mainImage={
+                  product.imageSrc
+                    ? { url: product.imageSrc, alt: product.imageAlt ?? product.name }
+                    : undefined
+                }
+                galleryImages={product.galleryImages}
+              />
 
               {/* Lien fiche technique PDF si attachée au produit */}
               {product.technicalSheetUrl && (
@@ -263,13 +212,6 @@ export default async function ProductPage({ params }: Props) {
                       <li>
                         <span className="font-semibold">Pose non incluse</span> — devis chiffré
                         sous 48 h.
-                      </li>
-                      <li>
-                        Primes Wallonie 2026 déduites du devis final{" "}
-                        <span className="italic">
-                          (uniquement valables si pose par un professionnel certifié)
-                        </span>
-                        .
                       </li>
                       <li>
                         <span className="font-semibold">Livraison gratuite</span> sous conditions
