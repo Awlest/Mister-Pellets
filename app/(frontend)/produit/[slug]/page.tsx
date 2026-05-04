@@ -114,15 +114,72 @@ export default async function ProductPage({ params }: Props) {
                   </div>
                 )}
               </div>
-              {/* Vignettes thumbnails — placeholder Phase 5 (gallery multi-image) */}
-              <div className="grid grid-cols-4 gap-2 mt-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="aspect-square rounded-xl bg-mp-beige border border-mp-sand/40"
-                  />
-                ))}
-              </div>
+              {/* Vignettes galerie : utilise galleryImages saisies en admin
+                  Payload, fallback sur cases vides si aucune image. */}
+              {product.galleryImages && product.galleryImages.length > 0 ? (
+                <div className="grid grid-cols-4 gap-2 mt-4">
+                  {product.galleryImages.slice(0, 4).map((img, i) => (
+                    <div
+                      key={i}
+                      className="relative aspect-square rounded-xl bg-mp-beige border border-mp-sand/40 overflow-hidden"
+                    >
+                      <Image
+                        src={img.url}
+                        alt={img.alt ?? `${product.name} — vue ${i + 1}`}
+                        fill
+                        sizes="(max-width: 1024px) 25vw, 12vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                  {/* Complète avec des cases vides si moins de 4 images */}
+                  {Array.from({
+                    length: Math.max(0, 4 - product.galleryImages.length),
+                  }).map((_, i) => (
+                    <div
+                      key={`empty-${i}`}
+                      className="aspect-square rounded-xl bg-mp-beige border border-mp-sand/40"
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="grid grid-cols-4 gap-2 mt-4">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="aspect-square rounded-xl bg-mp-beige border border-mp-sand/40"
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Lien fiche technique PDF si attachée au produit */}
+              {product.technicalSheetUrl && (
+                <a
+                  href={product.technicalSheetUrl}
+                  target="_blank"
+                  rel="noopener"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-flame hover:text-mp-green-deep transition-colors underline-offset-4 hover:underline"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="12" y1="18" x2="12" y2="12" />
+                    <line x1="9" y1="15" x2="15" y2="15" />
+                  </svg>
+                  Télécharger la fiche technique (PDF)
+                </a>
+              )}
             </div>
 
             {/* Info produit */}
@@ -151,13 +208,14 @@ export default async function ProductPage({ params }: Props) {
                 </p>
               ) : product.surface ? (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
-                  {brand?.tagline}. {product.power} pour {product.surface}. Pose Mister Pellets
-                  en 1 jour, primes Wallonie incluses, garantie 5 ans.
+                  {brand?.tagline}. {product.power} pour chauffer {product.surface}. Pose par
+                  Mister Pellets en une journée, primes Wallonie 2026 déduites du devis et
+                  garantie 5 ans.
                 </p>
               ) : (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
-                  {brand?.tagline}. Pose Mister Pellets en 1 jour, primes Wallonie incluses,
-                  garantie 5 ans.
+                  {brand?.tagline}. Pose par Mister Pellets en une journée, primes Wallonie 2026
+                  déduites du devis et garantie 5 ans.
                 </p>
               )}
 
@@ -189,9 +247,11 @@ export default async function ProductPage({ params }: Props) {
               {/* Prix */}
               {product.priceTTC ? (
                 <div className="rounded-2xl bg-mp-beige border border-mp-sand/40 p-6 mb-6">
-                  <div className="flex items-end justify-between mb-2">
+                  <div className="flex flex-col gap-3">
                     <div>
-                      <span className="text-xs text-mp-ink-soft block">Prix TTC indicatif (poêle seul)</span>
+                      <span className="text-xs text-mp-ink-soft block">
+                        Prix TTC indicatif (poêle seul)
+                      </span>
                       <span
                         className="text-4xl font-semibold text-mp-green-deep"
                         style={{ fontFamily: "var(--font-display)" }}
@@ -199,16 +259,31 @@ export default async function ProductPage({ params }: Props) {
                         {formatPrice(product.priceTTC)}
                       </span>
                     </div>
-                    <span className="text-xs text-mp-ink-soft text-right max-w-[180px]">
-                      Pose en sus, primes Wallonie déduites du devis final
-                    </span>
+                    <ul className="text-xs text-mp-ink-soft space-y-1 leading-relaxed">
+                      <li>
+                        <span className="font-semibold">Pose non incluse</span> — devis chiffré
+                        sous 48 h.
+                      </li>
+                      <li>
+                        Primes Wallonie 2026 déduites du devis final{" "}
+                        <span className="italic">
+                          (uniquement valables si pose par un professionnel certifié)
+                        </span>
+                        .
+                      </li>
+                      <li>
+                        <span className="font-semibold">Livraison gratuite</span> sous conditions
+                        (zone Wallonie, palette accessible).
+                      </li>
+                    </ul>
                   </div>
                 </div>
               ) : (
                 <div className="rounded-2xl bg-mp-beige border border-mp-sand/40 p-6 mb-6">
                   <span className="text-xl font-semibold text-mp-green-deep">Sur devis</span>
                   <p className="text-sm text-mp-ink-soft mt-1">
-                    Prix dépendant de la configuration de pose (tubage, ventouse, etc.)
+                    Prix dépendant de la configuration de pose (tubage, ventouse, raccordement
+                    hydro, etc.).
                   </p>
                 </div>
               )}
@@ -229,10 +304,33 @@ export default async function ProductPage({ params }: Props) {
               </div>
 
               <p className="text-xs text-mp-ink-soft mt-4 text-center">
-                🚧 Phase 5, le panier et le paiement Stripe arrivent prochainement. Pour commander aujourd'hui, passe par le formulaire de devis.
+                Pour commander, utilise le formulaire de devis. Le paiement en
+                ligne (Mollie / Bancontact) arrive prochainement.
               </p>
             </div>
           </div>
+
+          {/* Points forts saisis dans Payload : grille 2 colonnes desktop */}
+          {product.features && product.features.length > 0 && (
+            <div className="mt-12 lg:mt-16">
+              <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6">
+                Les points forts du {product.name}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {product.features.map((f, i) => (
+                  <Card key={i} className="p-5 flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-mp-green-deep flex-shrink-0" />
+                      <h3 className="text-base font-semibold text-mp-green-deep leading-tight">
+                        {f.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-mp-ink-soft leading-relaxed">{f.description}</p>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -246,8 +344,12 @@ export default async function ProductPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="p-6 flex flex-col gap-3">
               <Award className="h-8 w-8 text-mp-orange-flame" />
-              <h3 className="text-lg font-semibold text-mp-green-deep">Marque {product.brand}</h3>
-              <p className="text-sm text-mp-ink-soft leading-relaxed">{brand?.tagline}. Distribué officiellement par Mister Pellets en Wallonie.</p>
+              <h3 className="text-lg font-semibold text-mp-green-deep">
+                Marque {product.brand}
+              </h3>
+              <p className="text-sm text-mp-ink-soft leading-relaxed">
+                {brand?.tagline}. Distribuée par Mister Pellets en Wallonie.
+              </p>
             </Card>
 
             <Card className="p-6 flex flex-col gap-3">
@@ -255,8 +357,8 @@ export default async function ProductPage({ params }: Props) {
               <h3 className="text-lg font-semibold text-mp-green-deep">Adapté à ta surface</h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
                 {product.surface
-                  ? `${product.power} taillés pour chauffer ${product.surface}, en mode principal ou en complément.`
-                  : `${product.power} de puissance, à dimensionner selon ta surface lors du devis Mister Pellets (gratuit).`}
+                  ? `Une puissance de ${product.power} idéale pour chauffer ${product.surface}, en chauffage principal ou en complément.`
+                  : `Une puissance de ${product.power}, à dimensionner sur mesure selon ta surface lors du devis gratuit Mister Pellets.`}
               </p>
             </Card>
 
@@ -268,13 +370,20 @@ export default async function ProductPage({ params }: Props) {
               ) : (
                 <Flame className="h-8 w-8 text-mp-orange-flame" />
               )}
-              <h3 className="text-lg font-semibold text-mp-green-deep">Type {product.type}</h3>
+              <h3 className="text-lg font-semibold text-mp-green-deep capitalize">
+                Modèle {product.type}
+              </h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
-                {product.type === "hydro" && "Connecté au circuit de chauffage central, idéal pour remplacer une chaudière mazout."}
-                {product.type === "canalisable" && "Diffuse l'air chaud dans plusieurs pièces via un réseau de gaines isolées."}
-                {product.type === "standard" && "Poêle classique chauffant la pièce d'installation, sans gaines ni hydro."}
-                {product.type === "hybride" && "Fonctionne au pellets ET au bois. Polyvalence maximale."}
-                {product.type === "insert" && "S'encastre dans une cheminée existante pour valoriser un foyer ouvert."}
+                {product.type === "hydro" &&
+                  "Raccordé au circuit de chauffage central. Idéal pour remplacer une chaudière au mazout ou au gaz."}
+                {product.type === "canalisable" &&
+                  "Diffuse l'air chaud dans plusieurs pièces via un réseau de gaines isolées."}
+                {product.type === "standard" &&
+                  "Poêle classique qui chauffe la pièce d'installation, sans réseau de gaines ni circuit hydraulique."}
+                {product.type === "hybride" &&
+                  "Fonctionne aussi bien au pellet qu'au bois bûche. La polyvalence maximale."}
+                {product.type === "insert" &&
+                  "S'encastre dans une cheminée existante pour valoriser un foyer ouvert."}
               </p>
             </Card>
           </div>
@@ -286,7 +395,7 @@ export default async function ProductPage({ params }: Props) {
         <section className="bg-mp-cream py-16 md:py-20">
           <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
             <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10">
-              Autres modèles {product.brand}
+              Autres modèles de la marque {product.brand}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {related.map((p) => (
@@ -299,7 +408,7 @@ export default async function ProductPage({ params }: Props) {
 
       <CTAFinal
         title={`Devis avec pose pour le ${product.name}`}
-        description="On chiffre le poêle + la pose + les primes en 48h. Pas d'engagement avant signature."
+        description="On chiffre le poêle, la pose et les primes en 48 heures. Sans engagement avant signature."
       />
     </>
   );

@@ -34,6 +34,7 @@ interface PayloadProduct {
   isBestseller?: boolean | null;
   isNew?: boolean | null;
   shortDescription?: string | null;
+  features?: Array<{ title?: string | null; description?: string | null }> | null;
   mainImage?:
     | number
     | {
@@ -41,6 +42,36 @@ interface PayloadProduct {
         alt?: string | null;
       }
     | null;
+  galleryImages?: Array<{
+    image?:
+      | number
+      | {
+          url?: string | null;
+          alt?: string | null;
+        }
+      | null;
+  }> | null;
+  technicalSheet?:
+    | number
+    | {
+        url?: string | null;
+        filename?: string | null;
+      }
+    | null;
+}
+
+/**
+ * Convertit une URL absolue same-origin en chemin relatif.
+ * Cf. fix images Next.js Image (commit 2b595fe).
+ */
+function toRelativeUrl(rawUrl: string): string {
+  try {
+    const u = new URL(rawUrl);
+    const isSameHost = u.host.includes("mister-pellets");
+    return isSameHost ? `${u.pathname}${u.search}` : rawUrl;
+  } catch {
+    return rawUrl;
+  }
 }
 
 /**
@@ -59,27 +90,34 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
   // Reconstruit la string power "9 kW" depuis power numeric
   const power = `${p.power} kW`;
 
-  // Si l'image principale est uploadée, on récupère l'URL.
-  // Payload retourne souvent une URL absolue avec le hostname (ex.
-  // "https://mister-pellets.be/api/media/file/foo.webp"). Pour Next.js Image,
-  // on convertit ce pattern en chemin relatif ("/api/media/file/foo.webp")
-  // afin qu'il soit traité comme same-origin et bypass remotePatterns.
+  // Si l'image principale est uploadée, on récupère l'URL same-origin
+  // relative (cf. helper toRelativeUrl pour le rationale Next.js Image).
   let imageSrc: string | undefined;
   let imageAlt: string | undefined;
   if (p.mainImage && typeof p.mainImage === "object" && p.mainImage.url) {
-    const rawUrl = p.mainImage.url;
-    // Strip protocol+host si même origine pour profiter du same-origin Next.js
-    try {
-      const u = new URL(rawUrl);
-      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
-      const sameHost =
-        siteUrl && (siteUrl.includes(u.host) || u.host.includes("mister-pellets"));
-      imageSrc = sameHost ? `${u.pathname}${u.search}` : rawUrl;
-    } catch {
-      // URL relative ou invalide : on garde tel quel
-      imageSrc = rawUrl;
-    }
+    imageSrc = toRelativeUrl(p.mainImage.url);
     imageAlt = p.mainImage.alt ?? p.name;
+  }
+
+  // Galerie : on filtre les entries valides et on convertit les URLs.
+  const galleryImages = Array.isArray(p.galleryImages)
+    ? p.galleryImages
+        .map((item) => {
+          if (!item.image || typeof item.image !== "object" || !item.image.url) return null;
+          return {
+            url: toRelativeUrl(item.image.url),
+            alt: item.image.alt ?? p.name,
+          };
+        })
+        .filter((x): x is { url: string; alt: string } => x !== null)
+    : undefined;
+
+  // Fiche technique PDF : URL relative + nom du fichier pour l'affichage du lien.
+  let technicalSheetUrl: string | undefined;
+  let technicalSheetFilename: string | undefined;
+  if (p.technicalSheet && typeof p.technicalSheet === "object" && p.technicalSheet.url) {
+    technicalSheetUrl = toRelativeUrl(p.technicalSheet.url);
+    technicalSheetFilename = p.technicalSheet.filename ?? "fiche-technique.pdf";
   }
 
   return {
@@ -100,6 +138,17 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     imageSrc,
     imageAlt,
     shortDescription: p.shortDescription ?? undefined,
+    features: Array.isArray(p.features)
+      ? p.features
+          .filter((f) => f && f.title && f.description)
+          .map((f) => ({
+            title: f.title as string,
+            description: f.description as string,
+          }))
+      : undefined,
+    galleryImages,
+    technicalSheetUrl,
+    technicalSheetFilename,
   };
 }
 

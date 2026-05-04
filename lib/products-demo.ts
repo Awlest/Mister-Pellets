@@ -47,6 +47,26 @@ export interface ProductDemo extends ProductCardData {
    * générique quand elle est définie. Optionnelle.
    */
   shortDescription?: string;
+  /**
+   * Points forts (jusqu'à 6) saisis dans l'admin Payload. Chaque point fort
+   * a un titre court et une description. Affichés en grille 2 colonnes sur
+   * la page produit pour mettre en valeur les bénéfices clés.
+   */
+  features?: Array<{ title: string; description: string }>;
+  /**
+   * Images additionnelles de la galerie (jusqu'à 8 dans Payload).
+   * Affichées en thumbnails sous l'image principale sur la page produit.
+   */
+  galleryImages?: Array<{ url: string; alt?: string }>;
+  /**
+   * URL de la fiche technique PDF, si attachée au produit dans Payload.
+   * Affichée comme lien de téléchargement sur la page produit.
+   */
+  technicalSheetUrl?: string;
+  /**
+   * Nom du fichier PDF (pour l'affichage du lien).
+   */
+  technicalSheetFilename?: string;
 }
 
 export const PRODUCTS_DEMO: ProductDemo[] = [
