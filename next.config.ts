@@ -138,6 +138,10 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
+      // Vercel Blob : storage actif pour les uploads admin (Phase 5).
+      // Tous les blobs créés sur le store mister-pellets-next-blob ont
+      // leurs URLs sur ce sous-domaine racine.
+      { protocol: "https", hostname: "**.public.blob.vercel-storage.com" },
       // Pour servir les médias Supabase Storage / S3 public plus tard
       { protocol: "https", hostname: "**.supabase.co" },
       { protocol: "https", hostname: "**.cellar-c2.services.clever-cloud.com" },

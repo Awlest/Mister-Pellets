@@ -1,14 +1,52 @@
 import type { CollectionConfig } from "payload";
 
 /**
+ * Slugifie une chaîne pour générer des URLs propres :
+ * - lowercase
+ * - retire les accents (é → e, è → e, …)
+ * - remplace tout caractère non alphanumérique par un tiret
+ * - dédoublonne les tirets, trim les tirets en bordure
+ *
+ * Utilisé en hook beforeChange pour normaliser le slug saisi par les
+ * éditeurs admin et éviter les URLs cassées (capitales, espaces, accents).
+ */
+function slugify(input: string): string {
+  return input
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "") // retire les diacritiques (accents)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
+/**
  * Products — collection des poêles à pellets distribués.
  * Phase 5 : schéma riche pour les 61 produits Wix à importer.
  *
  * Convention slug : {marque}-{modèle}-{puissance}kw-{type?}
  *   ex: edilkamin-blade-9kw, ek63-tweed-90, dielle-iride-22-hydro
+ *
+ * Le slug est auto-normalisé via hook beforeChange (lowercase + tirets, no
+ * accents) pour empêcher les URLs cassées si l'éditeur saisit des majuscules
+ * ou des accents.
  */
 export const Products: CollectionConfig = {
   slug: "products",
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        // Auto-slugify : si le slug est saisi avec des majuscules / accents /
+        // espaces, on le normalise. Si vide, on dérive depuis le name.
+        if (data.slug && typeof data.slug === "string") {
+          data.slug = slugify(data.slug);
+        } else if (data.name && typeof data.name === "string") {
+          data.slug = slugify(data.name);
+        }
+        return data;
+      },
+    ],
+  },
   // RLS Payload (cf. audit V14.1) : explicite chaque opération.
   access: {
     read: () => true, // public (la boutique consulte le catalogue)

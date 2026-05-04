@@ -127,18 +127,48 @@ export default async function ProductPage({ params }: Props) {
                 {product.name}
               </h1>
 
-              <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
-                {brand?.tagline}. {product.power} pour {product.surface}. Pose Mister Pellets en 1
-                jour, primes Wallonie incluses, garantie 5 ans.
-              </p>
+              {/* Description : priorité au shortDescription saisi dans l'admin.
+                  Fallback sur le template marketing seulement si vide ET que les
+                  données minimales (surface) sont présentes pour éviter "pour ." */}
+              {product.shortDescription ? (
+                <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
+                  {product.shortDescription}
+                </p>
+              ) : product.surface ? (
+                <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
+                  {brand?.tagline}. {product.power} pour {product.surface}. Pose Mister Pellets
+                  en 1 jour, primes Wallonie incluses, garantie 5 ans.
+                </p>
+              ) : (
+                <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
+                  {brand?.tagline}. Pose Mister Pellets en 1 jour, primes Wallonie incluses,
+                  garantie 5 ans.
+                </p>
+              )}
 
-              {/* Tags techniques */}
+              {/* Tags techniques — chaque badge n'apparaît que si la donnée existe */}
               <div className="flex flex-wrap gap-2 mb-8">
-                <Badge variant="default"><Flame className="h-3.5 w-3.5" /> {product.power}</Badge>
-                <Badge variant="default">{product.surface}</Badge>
-                <Badge variant="default" className="capitalize">{product.type}</Badge>
-                {product.isAirtight && <Badge variant="default"><Wind className="h-3.5 w-3.5" /> Étanche</Badge>}
-                {product.isConnected && <Badge variant="default"><Wifi className="h-3.5 w-3.5" /> WiFi</Badge>}
+                {product.power && (
+                  <Badge variant="default">
+                    <Flame className="h-3.5 w-3.5" /> {product.power}
+                  </Badge>
+                )}
+                {product.surface && <Badge variant="default">{product.surface}</Badge>}
+                {product.type && (
+                  <Badge variant="default" className="capitalize">
+                    {product.type}
+                  </Badge>
+                )}
+                {product.isAirtight && (
+                  <Badge variant="default">
+                    <Wind className="h-3.5 w-3.5" /> Étanche
+                  </Badge>
+                )}
+                {product.isConnected && (
+                  <Badge variant="default">
+                    <Wifi className="h-3.5 w-3.5" /> WiFi
+                  </Badge>
+                )}
               </div>
 
               {/* Prix */}
@@ -208,7 +238,11 @@ export default async function ProductPage({ params }: Props) {
             <Card className="p-6 flex flex-col gap-3">
               <Flame className="h-8 w-8 text-mp-orange-flame" />
               <h3 className="text-lg font-semibold text-mp-green-deep">Adapté à ta surface</h3>
-              <p className="text-sm text-mp-ink-soft leading-relaxed">{product.power} sont taillés pour chauffer {product.surface}, en mode principal ou en complément.</p>
+              <p className="text-sm text-mp-ink-soft leading-relaxed">
+                {product.surface
+                  ? `${product.power} taillés pour chauffer ${product.surface}, en mode principal ou en complément.`
+                  : `${product.power} de puissance, à dimensionner selon ta surface lors du devis Mister Pellets (gratuit).`}
+              </p>
             </Card>
 
             <Card className="p-6 flex flex-col gap-3">

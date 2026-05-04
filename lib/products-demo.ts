@@ -41,6 +41,12 @@ export interface ProductDemo extends ProductCardData {
   color: ColorCategory;
   /** Puissance en kW (numérique, dérivable de power mais on stocke pour filtrage rapide) */
   powerKw: number;
+  /**
+   * Description courte saisie dans l'admin Payload (max 200 chars).
+   * Affichée en haut de la page produit en remplacement du texte marketing
+   * générique quand elle est définie. Optionnelle.
+   */
+  shortDescription?: string;
 }
 
 export const PRODUCTS_DEMO: ProductDemo[] = [

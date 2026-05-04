@@ -33,6 +33,7 @@ interface PayloadProduct {
   isConnected?: boolean | null;
   isBestseller?: boolean | null;
   isNew?: boolean | null;
+  shortDescription?: string | null;
   mainImage?:
     | number
     | {
@@ -83,6 +84,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     isConnected: p.isConnected ?? false,
     imageSrc,
     imageAlt,
+    shortDescription: p.shortDescription ?? undefined,
   };
 }
 
