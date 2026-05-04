@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/rate-limit";
+import { getPayloadClient } from "@/lib/payload-client";
+import { notifyInternalContact } from "@/lib/email";
 
 interface ContactPayload {
   name: string;
@@ -75,13 +77,42 @@ export async function POST(request: Request) {
     return NextResponse.json({ error }, { status: 400 });
   }
 
-  // TODO Phase 5: send via Resend + save Payload
   // PII redactés dans les logs (cf. audit §3.H.1)
   console.log("[contact] new message", {
     name: redactName(body.name!),
     email: redactEmail(body.email!),
     subject: body.subject,
     timestamp: new Date().toISOString(),
+  });
+
+  // 4. Sauvegarde Payload (collection ContactMessages). Ne bloque pas
+  // l'envoi de l'email si la base est injoignable. Cast subject vers
+  // l'union type stricte (déjà validé par le formulaire + validate()).
+  try {
+    const payload = await getPayloadClient();
+    await payload.create({
+      collection: "contact-messages",
+      data: {
+        name: body.name!,
+        email: body.email!,
+        phone: body.phone ?? "",
+        subject: body.subject as never,
+        message: body.message!,
+        consent: true,
+        status: "new",
+      } as never,
+    });
+  } catch (err) {
+    console.error("[contact] payload save failed", err);
+  }
+
+  // 5. Notification email staff (info@awlest.com).
+  await notifyInternalContact({
+    name: body.name!,
+    email: body.email!,
+    phone: body.phone ?? undefined,
+    subject: body.subject!,
+    message: body.message!,
   });
 
   return NextResponse.json({ ok: true });
