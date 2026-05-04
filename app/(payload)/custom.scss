@@ -1,265 +1,64 @@
 /* =============================================================================
    Customisation visuelle de l'admin Payload — Mister Pellets
-   Objectif : fond BLANC partout + tous les textes foncés (contraste WCAG AA)
+   Objectif : fond BLANC + textes lisibles (WCAG AA), sans casser les éléments
+   à fond foncé volontaire (boutons primary, badges, headers).
+
+   Approche :
+   - Override les variables Payload (--theme-elevation-N) avec des hex valides.
+     Payload les utilise directement comme valeurs de couleur, donc hex OK.
+   - Force light mode (couvre data-theme="dark" → on neutralise).
+   - PAS de selector universel "* { color: ... }" : laisser Payload gérer
+     le contraste naturellement via ses propres règles.
    ============================================================================= */
 
 /* -----------------------------------------------------------------------------
-   1. Force le thème light (au cas où l'OS du user soit en dark mode)
+   1. Override les variables Payload pour TOUS les thèmes (light ET dark)
    ----------------------------------------------------------------------------- */
+html,
 html[data-theme="light"],
-html:not([data-theme]) {
-  /* Échelles d'élévation : du fond pur au plus foncé.
-     On garde une nuance de gris pour les éléments superposés (cards, modals)
-     mais le fond reste blanc pur. */
-  --theme-elevation-0: #ffffff;       /* fond principal */
-  --theme-elevation-50: #f8f9fa;      /* hover léger */
-  --theme-elevation-100: #f1f3f5;     /* cards, tables */
-  --theme-elevation-150: #e9ecef;     /* bordures légères */
-  --theme-elevation-200: #dee2e6;     /* bordures */
-  --theme-elevation-250: #ced4da;     /* bordures input focus */
-  --theme-elevation-300: #adb5bd;     /* texte placeholder */
-  --theme-elevation-400: #868e96;     /* labels secondaires */
-  --theme-elevation-500: #495057;     /* texte secondaire foncé */
-  --theme-elevation-600: #343a40;     /* texte body foncé */
-  --theme-elevation-700: #212529;     /* texte fort */
-  --theme-elevation-800: #14241b;     /* presque noir (vert Mister Pellets) */
-  --theme-elevation-900: #0a1410;     /* noir profond */
+html[data-theme="dark"] {
+  /* Force light color-scheme au navigateur (formulaires natifs etc.) */
+  color-scheme: light;
+
+  /* Échelle d'élévation : light mode order — 0 = clair, 1000 = foncé.
+     Quelques nuances de gris entre les deux pour les surfaces superposées. */
+  --theme-elevation-0: #ffffff;
+  --theme-elevation-50: #fafafa;
+  --theme-elevation-100: #f5f5f5;
+  --theme-elevation-150: #ebebeb;
+  --theme-elevation-200: #e0e0e0;
+  --theme-elevation-250: #d3d3d3;
+  --theme-elevation-300: #b5b5b5;
+  --theme-elevation-350: #9a9a9a;
+  --theme-elevation-400: #808080;
+  --theme-elevation-450: #666666;
+  --theme-elevation-500: #525252;
+  --theme-elevation-550: #404040;
+  --theme-elevation-600: #2f2f2f;
+  --theme-elevation-650: #262626;
+  --theme-elevation-700: #1f1f1f;
+  --theme-elevation-750: #1a1a1a;
+  --theme-elevation-800: #14241b; /* vert MP foncé — texte principal */
+  --theme-elevation-850: #0e1813;
+  --theme-elevation-900: #0a120e;
+  --theme-elevation-950: #050908;
   --theme-elevation-1000: #000000;
 
-  /* Couleurs sémantiques */
-  --theme-text: #14241b;              /* texte principal — vert MP foncé */
-  --theme-bg: #ffffff;                /* fond principal */
-
-  /* Inputs */
-  --theme-input-bg: #ffffff;
-  --theme-input-border: #ced4da;
-
-  /* Couleurs marque */
+  /* Couleurs sémantiques (mises au goût Mister Pellets) */
   --theme-success-500: #508943;
   --theme-warning-500: #fdb842;
   --theme-error-500: #c0392b;
-  --color-success: #508943;
-  --color-warning: #fdb842;
-  --color-error: #c0392b;
 
-  /* Hover/active states */
-  --theme-base-50: #f8f9fa;
-  --theme-base-100: #f1f3f5;
-  --theme-base-150: #e9ecef;
-  --theme-base-200: #dee2e6;
-  --theme-base-300: #adb5bd;
-  --theme-base-400: #868e96;
-  --theme-base-500: #495057;
-  --theme-base-600: #343a40;
-  --theme-base-700: #212529;
-  --theme-base-800: #14241b;
-  --theme-base-900: #0a1410;
-}
-
-/* -----------------------------------------------------------------------------
-   2. Force le fond blanc sur le body et conteneurs principaux
-   ----------------------------------------------------------------------------- */
-body,
-.payload__body,
-.template-default,
-.template-default__wrap,
-.dashboard,
-.collection-list,
-.collection-edit,
-.account,
-.global-edit,
-.app-header,
-nav.nav,
-.nav,
-.nav-wrapper {
-  background-color: #ffffff !important;
-}
-
-/* -----------------------------------------------------------------------------
-   3. Force les textes en couleur foncée sur l'ensemble de l'admin
-   Cible large mais limitée à l'admin Payload (pas le site frontend).
-   ----------------------------------------------------------------------------- */
-.payload__body,
-.payload__body * {
-  color: var(--theme-text);
-}
-
-/* Headings = vert MP foncé pour donner du caractère */
-.payload__body h1,
-.payload__body h2,
-.payload__body h3,
-.payload__body h4,
-.payload__body h5,
-.payload__body h6 {
-  color: #14241b !important;
-}
-
-/* Labels de champ = gris foncé bien lisible */
-.payload__body label,
-.payload__body .field-label,
-.field-label {
-  color: #343a40 !important;
-  font-weight: 500;
-}
-
-/* Inputs : texte foncé sur fond blanc, bordure visible */
-.payload__body input,
-.payload__body textarea,
-.payload__body select {
-  color: #212529 !important;
-  background-color: #ffffff !important;
-  border-color: #ced4da !important;
-}
-
-/* Placeholders : gris foncé (pas trop pâle) */
-.payload__body input::placeholder,
-.payload__body textarea::placeholder {
-  color: #6c757d !important;
-  opacity: 1;
-}
-
-/* Liens (sauf boutons) */
-.payload__body a:not(.btn):not(.btn--style-primary):not(.btn--style-secondary) {
-  color: #2f5e3a !important;
-  text-decoration: underline;
-}
-
-.payload__body a:not(.btn):hover {
-  color: #14241b !important;
-}
-
-/* -----------------------------------------------------------------------------
-   4. Sidebar (nav latérale) — fond légèrement teinté pour la séparer du contenu
-   ----------------------------------------------------------------------------- */
-.nav,
-.nav__wrap,
-nav.nav {
-  background-color: #f8f9fa !important;
-  border-right: 1px solid #e9ecef;
-}
-
-.nav a,
-.nav__link,
-.nav-group__indicator,
-.nav-group__label {
-  color: #343a40 !important;
-}
-
-.nav a:hover,
-.nav__link:hover {
-  background-color: #f1f3f5 !important;
-  color: #14241b !important;
-}
-
-.nav a.active,
-.nav__link--active {
-  background-color: #e9ecef !important;
-  color: #14241b !important;
-  font-weight: 600;
-}
-
-/* -----------------------------------------------------------------------------
-   5. Tables (collection list) : lignes bien séparées, texte foncé
-   ----------------------------------------------------------------------------- */
-.payload__body table,
-.payload__body .table {
-  background-color: #ffffff !important;
-  border: 1px solid #e9ecef;
-}
-
-.payload__body th,
-.payload__body .table-header__cell {
-  background-color: #f8f9fa !important;
-  color: #14241b !important;
-  font-weight: 600;
-  border-bottom: 2px solid #dee2e6;
-}
-
-.payload__body td,
-.payload__body .table-row__cell {
-  color: #343a40 !important;
-  border-bottom: 1px solid #f1f3f5;
-}
-
-.payload__body tr:hover td {
-  background-color: #f8f9fa !important;
-}
-
-/* -----------------------------------------------------------------------------
-   6. Cards / panels (édition de doc, sections collapsibles)
-   ----------------------------------------------------------------------------- */
-.payload__body .collapsible,
-.payload__body .field-type,
-.payload__body .doc-controls,
-.payload__body .field-description {
-  background-color: #ffffff !important;
-}
-
-.payload__body .field-description {
-  color: #6c757d !important;
-}
-
-/* -----------------------------------------------------------------------------
-   7. Boutons : rester lisibles (textes blancs sur fonds colorés OK, ne pas casser)
-   ----------------------------------------------------------------------------- */
-.payload__body .btn--style-primary {
-  background-color: #2f5e3a !important;
-  color: #ffffff !important;
-  border-color: #2f5e3a !important;
-}
-
-.payload__body .btn--style-primary:hover {
-  background-color: #14241b !important;
-  border-color: #14241b !important;
-}
-
-.payload__body .btn--style-secondary {
-  background-color: #ffffff !important;
-  color: #14241b !important;
-  border-color: #ced4da !important;
-}
-
-.payload__body .btn--style-secondary:hover {
-  background-color: #f1f3f5 !important;
-}
-
-/* -----------------------------------------------------------------------------
-   8. Badges de statut : conserver les couleurs sémantiques mais texte lisible
-   ----------------------------------------------------------------------------- */
-.payload__body .pill,
-.payload__body .status,
-.payload__body .badge {
-  font-weight: 600;
-}
-
-/* -----------------------------------------------------------------------------
-   9. Lexical editor (RichText) : fond blanc, texte foncé
-   ----------------------------------------------------------------------------- */
-.payload__body .rich-text-lexical,
-.payload__body .EditorTheme__paragraph,
-.payload__body [data-lexical-editor="true"] {
-  background-color: #ffffff !important;
-  color: #14241b !important;
-}
-
-.payload__body .rich-text-lexical [contenteditable="true"] {
-  color: #14241b !important;
-}
-
-/* -----------------------------------------------------------------------------
-   10. Force dark mode → light mode si l'user a OS en dark
-   (Payload détecte parfois prefers-color-scheme)
-   ----------------------------------------------------------------------------- */
-html[data-theme="dark"] {
-  /* Au cas où, on force aussi le dark mode à utiliser nos couleurs light */
-  --theme-elevation-0: #ffffff;
+  /* Texte et fond explicites (au cas où Payload bascule en dark) */
   --theme-text: #14241b;
   --theme-bg: #ffffff;
-  background-color: #ffffff !important;
-  color: #14241b !important;
+  --theme-input-bg: #ffffff;
 }
 
-html[data-theme="dark"] body {
-  background-color: #ffffff !important;
-  color: #14241b !important;
+/* -----------------------------------------------------------------------------
+   2. Body + html en blanc forcé (déjà fait par Payload mais on s'assure)
+   ----------------------------------------------------------------------------- */
+html,
+body {
+  background-color: #ffffff;
 }
