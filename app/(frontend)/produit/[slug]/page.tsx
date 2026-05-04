@@ -214,8 +214,9 @@ export default async function ProductPage({ params }: Props) {
                         sous 48 h.
                       </li>
                       <li>
-                        <span className="font-semibold">Livraison gratuite</span> sous conditions
-                        (zone Wallonie, palette accessible).
+                        <span className="font-semibold">Livraison gratuite</span> dans un rayon
+                        de 50 km autour de Fernelmont. Au-delà, forfait unique de 50 € pour le
+                        reste de la Belgique.
                       </li>
                     </ul>
                   </div>
