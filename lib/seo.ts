@@ -17,7 +17,10 @@ import type { Metadata } from "next";
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mister-pellets.be";
 export const SITE_NAME = "Mister Pellets";
 export const SITE_LOCALE = "fr_BE";
-export const DEFAULT_OG_IMAGE = "/og-image.jpg"; // 1200×630, à fournir Phase 8
+// OG image générée dynamiquement par app/opengraph-image.tsx (1200×630 PNG)
+// via @vercel/og. Le path stable est /opengraph-image (convention Next.js).
+// Cf. audit V20260503 §1.H.1 et §4.H.2.
+export const DEFAULT_OG_IMAGE = "/opengraph-image";
 
 interface SEOPageMetaInput {
   title: string;

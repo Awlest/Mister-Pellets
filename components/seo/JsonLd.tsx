@@ -32,6 +32,27 @@ export const ORGANIZATION_SCHEMA = {
   "@id": "https://mister-pellets.be/#organization",
   name: "Mister Pellets",
   legalName: "Awlest SRL",
+  alternateName: ["Mister Pellets", "Awlest", "Awlest SRL"],
+  foundingDate: "2016",
+  // Schema parentOrganization (audit V20260503 §5.H.1) : aide les LLM
+  // (ChatGPT, Perplexity, Claude, Gemini) à comprendre que Mister Pellets
+  // est la marque commerciale d'Awlest SRL, pas une entité indépendante.
+  parentOrganization: {
+    "@type": "Organization",
+    "@id": "https://mister-pellets.be/#awlest",
+    name: "Awlest SRL",
+    url: "https://mister-pellets.be",
+    description:
+      "Société commerciale belge active en Wallonie depuis 2016, opérant la marque Mister Pellets pour la vente, la pose et l'entretien de poêles à pellets.",
+    vatID: "BE0656514212",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Rue des Fagotis 3A",
+      postalCode: "5380",
+      addressLocality: "Fernelmont",
+      addressCountry: "BE",
+    },
+  },
   url: "https://mister-pellets.be",
   logo: "https://mister-pellets.be/logo-mister-pellets-full.svg",
   vatID: "BE0656514212",

@@ -31,6 +31,8 @@ export function ContactForm() {
       subject: formData.get("subject"),
       message: formData.get("message"),
       consent: formData.get("consent") === "on",
+      // Honeypot anti-spam (audit V20260503 §3.BLOQUANT.2)
+      website: formData.get("website"),
     };
 
     try {
@@ -77,6 +79,12 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {/* Honeypot anti-spam (audit V20260503 §3.BLOQUANT.2) */}
+      <div aria-hidden="true" className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+        <label htmlFor="hp-contact-website">Ne pas remplir ce champ</label>
+        <input id="hp-contact-website" type="text" name="website" autoComplete="off" tabIndex={-1} />
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-mp-ink mb-2">

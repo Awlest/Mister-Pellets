@@ -16,6 +16,30 @@ import { confirmCustomerOrder } from "@/lib/email";
 
 export const runtime = "nodejs"; // Stripe nécessite Node runtime (pas Edge)
 
+/**
+ * Cache in-memory des event.id Stripe déjà traités (cf. audit V20260503 §3.H.4).
+ * Stripe peut renvoyer le même webhook plusieurs fois en cas de retry. Sans
+ * idempotence, on enverrait l'email de confirmation 2-3 fois et on referait
+ * les mises à jour Payload. À migrer vers Vercel KV / Redis pour persister
+ * cross-instance. Limite mémoire : 1000 derniers events (FIFO simple).
+ */
+const processedEvents = new Map<string, number>();
+const MAX_PROCESSED = 1000;
+
+function markProcessed(eventId: string): boolean {
+  if (processedEvents.has(eventId)) return false; // déjà traité
+  if (processedEvents.size >= MAX_PROCESSED) {
+    // Évacue les 100 plus anciens
+    const oldest = [...processedEvents.entries()]
+      .sort((a, b) => a[1] - b[1])
+      .slice(0, 100)
+      .map(([id]) => id);
+    for (const id of oldest) processedEvents.delete(id);
+  }
+  processedEvents.set(eventId, Date.now());
+  return true;
+}
+
 export async function POST(request: Request) {
   const sig = request.headers.get("stripe-signature");
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -39,6 +63,12 @@ export async function POST(request: Request) {
       { error: "Signature webhook invalide." },
       { status: 400 }
     );
+  }
+
+  // Idempotence : Stripe peut renvoyer le même event en cas de retry
+  if (!markProcessed(event.id)) {
+    console.log(`[stripe-webhook] event ${event.id} already processed, skipping`);
+    return NextResponse.json({ ok: true, alreadyProcessed: true });
   }
 
   // Handle event
