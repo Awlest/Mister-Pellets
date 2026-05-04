@@ -7,8 +7,12 @@ import type { CollectionConfig } from "payload";
  */
 export const Media: CollectionConfig = {
   slug: "media",
+  // RLS Payload (cf. audit V14.1) : explicite chaque opération.
   access: {
-    read: () => true, // public
+    read: () => true, // public (les médias sont servis sur le frontend)
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
   },
   admin: {
     defaultColumns: ["filename", "alt", "mimeType", "filesize"],
