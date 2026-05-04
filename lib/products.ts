@@ -59,11 +59,26 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
   // Reconstruit la string power "9 kW" depuis power numeric
   const power = `${p.power} kW`;
 
-  // Si l'image principale est uploadée, sortir l'URL Cloudinary/S3
+  // Si l'image principale est uploadée, on récupère l'URL.
+  // Payload retourne souvent une URL absolue avec le hostname (ex.
+  // "https://mister-pellets.be/api/media/file/foo.webp"). Pour Next.js Image,
+  // on convertit ce pattern en chemin relatif ("/api/media/file/foo.webp")
+  // afin qu'il soit traité comme same-origin et bypass remotePatterns.
   let imageSrc: string | undefined;
   let imageAlt: string | undefined;
   if (p.mainImage && typeof p.mainImage === "object" && p.mainImage.url) {
-    imageSrc = p.mainImage.url;
+    const rawUrl = p.mainImage.url;
+    // Strip protocol+host si même origine pour profiter du same-origin Next.js
+    try {
+      const u = new URL(rawUrl);
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
+      const sameHost =
+        siteUrl && (siteUrl.includes(u.host) || u.host.includes("mister-pellets"));
+      imageSrc = sameHost ? `${u.pathname}${u.search}` : rawUrl;
+    } catch {
+      // URL relative ou invalide : on garde tel quel
+      imageSrc = rawUrl;
+    }
     imageAlt = p.mainImage.alt ?? p.name;
   }
 
