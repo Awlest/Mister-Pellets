@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/rate-limit";
+import { getPayloadClient } from "@/lib/payload-client";
+import { notifyInternalQuote, confirmCustomerQuote } from "@/lib/email";
 
 interface QuotePayload {
   surface: string;
@@ -109,7 +111,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error }, { status: 400 });
   }
 
-  // TODO Phase 5: payload save + Resend email
   // PII redactés dans les logs (cf. audit §3.H.1)
   console.log("[quote] new request", {
     name: redactName(body.name!),
@@ -120,6 +121,56 @@ export async function POST(request: Request) {
     delay: body.delay,
     timestamp: new Date().toISOString(),
   });
+
+  // 4. Sauvegarde Payload (collection Quotes) — leadtracking. Si la base est
+  // injoignable, on ne bloque pas l'envoi de l'email pour ne pas perdre
+  // le lead. On log l'erreur et on continue. Les valeurs des enums (surface,
+  // peb, etc.) sont déjà validées en amont par le formulaire client + le
+  // validate() serveur, on cast pour satisfaire les types Payload générés.
+  try {
+    const payload = await getPayloadClient();
+    await payload.create({
+      collection: "quotes",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: {
+        name: body.name!,
+        email: body.email!,
+        phone: body.phone ?? "",
+        postalCode: body.postalCode!,
+        surface: body.surface as never,
+        peb: body.peb as never,
+        chimney: body.chimney as never,
+        style: body.style as never,
+        budget: body.budget as never,
+        delay: body.delay as never,
+        message: body.message ?? "",
+        consent: true,
+        status: "new",
+      } as never,
+    });
+  } catch (err) {
+    console.error("[quote] payload save failed", err);
+    // On n'arrête pas le flux : le lead reste dans les logs Vercel + email.
+  }
+
+  // 5. Notifications email (Resend) en parallèle. Si Resend non configuré,
+  // le helper bascule sur console fallback (cf. lib/email.ts).
+  await Promise.allSettled([
+    notifyInternalQuote({
+      name: body.name!,
+      email: body.email!,
+      phone: body.phone ?? undefined,
+      postalCode: body.postalCode!,
+      surface: body.surface!,
+      peb: body.peb!,
+      chimney: body.chimney!,
+      style: body.style!,
+      budget: body.budget!,
+      delay: body.delay!,
+      message: body.message ?? undefined,
+    }),
+    confirmCustomerQuote({ name: body.name!, email: body.email! }),
+  ]);
 
   return NextResponse.json({ ok: true });
 }
