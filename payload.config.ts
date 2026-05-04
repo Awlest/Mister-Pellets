@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import sharp from "sharp";
 
 import { Users } from "./collections/Users";
@@ -58,6 +59,22 @@ export default buildConfig({
   }),
 
   sharp,
+
+  // Storage : Vercel Blob (CDN public, 5 GB free).
+  // Ne s'active que si BLOB_READ_WRITE_TOKEN est défini ; en dev local sans
+  // token, Payload retombe sur le filesystem local (./media/).
+  // Sur Vercel prod, le token est auto-injecté quand le Blob store est lié au
+  // projet via le dashboard Storage.
+  plugins: [
+    vercelBlobStorage({
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN ?? "",
+      // Pas besoin d'addRandomSuffix : Payload gère déjà des filenames uniques.
+    }),
+  ],
 
   // Le client browser est bloqué par défaut quand NEXT_PUBLIC_ALLOW_INDEXING != true.
   // Affecte uniquement les meta robots, pas l'admin Payload.
