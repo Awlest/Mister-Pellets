@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { rateLimitResponse, isHoneypotTriggered } from "@/lib/rate-limit";
+import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/rate-limit";
 
 interface ContactPayload {
   name: string;
@@ -48,7 +48,11 @@ function validate(payload: Partial<ContactPayload>): string | null {
  * Pour l'instant : log + accepte. On branche l'email plus tard quand RESEND_API_KEY sera configuré.
  */
 export async function POST(request: Request) {
-  // 1. Rate limit anti-spam (5 requêtes / heure / IP, cf. audit §3.BLOQUANT.2)
+  // 1. CSRF check : Origin ou Referer doit correspondre à notre site
+  const csrf = csrfOriginCheck(request);
+  if (csrf) return csrf;
+
+  // 2. Rate limit anti-spam (5 requêtes / heure / IP, cf. audit §3.BLOQUANT.2)
   const limited = rateLimitResponse(request, { routeKey: "contact", max: 5 });
   if (limited) return limited;
 

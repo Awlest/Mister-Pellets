@@ -212,6 +212,24 @@ export default function PrendreRendezVousPage() {
             </p>
           </div>
 
+          {/* Bandeau temporaire (audit V20260503 §1.M.2) tant que le sous-domaine
+            * Easy!Appointments n'est pas activé sur Combell. Évite les 404 sur
+            * les boutons "Réserver". À retirer une fois le sous-domaine actif. */}
+          <div className="mb-8 rounded-2xl bg-mp-orange-light/60 border border-mp-orange-flame/30 p-5 text-sm text-mp-ink leading-relaxed">
+            <strong className="text-mp-green-deep">
+              Système de réservation en cours d&apos;activation.
+            </strong>{" "}
+            En attendant la mise en service, contacte-nous directement au{" "}
+            <a href="tel:+32472043222" className="text-mp-orange-flame underline hover:no-underline font-semibold">
+              0472 04 32 22
+            </a>{" "}
+            ou par email à{" "}
+            <a href="mailto:info@awlest.com" className="text-mp-orange-flame underline hover:no-underline font-semibold">
+              info@awlest.com
+            </a>
+            , on cale un créneau dans la journée.
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {SERVICES.map((service) => {
               const Icon = service.icon;

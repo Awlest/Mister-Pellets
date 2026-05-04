@@ -120,6 +120,51 @@ export function rateLimitResponse(
 }
 
 /**
+ * CSRF protection basique (cf. audit V20260503 §3.H.2) : vérifie que la
+ * requête vient de notre propre origine. Pas une protection cryptographique
+ * forte (à compléter par cookies SameSite=Strict + token signé), mais
+ * bloque les requêtes cross-origin triviales.
+ *
+ * Retourne null si OK, NextResponse 403 sinon.
+ */
+export function csrfOriginCheck(request: Request): NextResponse | null {
+  const allowedOrigins = [
+    process.env.NEXT_PUBLIC_SITE_URL,
+    "http://localhost:3000",
+    "http://localhost:3001",
+  ].filter((x): x is string => Boolean(x));
+
+  const origin = request.headers.get("origin");
+  const referer = request.headers.get("referer");
+
+  // Si pas d'origin (requête same-origin via formulaire HTML classique),
+  // accepter mais vérifier le Referer si présent.
+  if (!origin) {
+    if (!referer) return null; // pas de signal exploitable, on laisse passer
+    try {
+      const refererUrl = new URL(referer);
+      const ok = allowedOrigins.some((o) => refererUrl.origin === o);
+      if (ok) return null;
+      return NextResponse.json(
+        { error: "Référent non autorisé." },
+        { status: 403 },
+      );
+    } catch {
+      return NextResponse.json(
+        { error: "Référent invalide." },
+        { status: 403 },
+      );
+    }
+  }
+
+  if (allowedOrigins.includes(origin)) return null;
+  return NextResponse.json(
+    { error: "Origin non autorisée." },
+    { status: 403 },
+  );
+}
+
+/**
  * Vérification honeypot : un champ caché côté client qui doit rester vide.
  * Tout bot qui remplit aveuglément les inputs sera détecté.
  *

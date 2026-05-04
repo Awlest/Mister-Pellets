@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { rateLimitResponse, isHoneypotTriggered } from "@/lib/rate-limit";
+import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/rate-limit";
 
 interface QuotePayload {
   surface: string;
@@ -81,7 +81,11 @@ function validate(payload: Partial<QuotePayload>): string | null {
  * Pour l'instant : log + accepte. Wiring complet plus tard.
  */
 export async function POST(request: Request) {
-  // 1. Rate limit anti-spam (5 requêtes / heure / IP, cf. audit §3.BLOQUANT.2)
+  // 1. CSRF check : Origin ou Referer doit correspondre à notre site
+  const csrf = csrfOriginCheck(request);
+  if (csrf) return csrf;
+
+  // 2. Rate limit anti-spam (5 requêtes / heure / IP, cf. audit §3.BLOQUANT.2)
   const limited = rateLimitResponse(request, { routeKey: "quote", max: 5 });
   if (limited) return limited;
 

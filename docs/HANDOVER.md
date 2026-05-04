@@ -7,6 +7,36 @@
 
 ## 📅 Journal des hotfixes critiques
 
+- **2026-05-04** Audit-fixes V1.4 appliqué (cf. `docs/audits/audit-complet-v20260503.md`) : Phase 1 bloquants + Phase 2 hautes + amorces Phase 3.
+
+  **Phase 1 (bloquants sécurité+SEO)** :
+  - Headers HTTP de sécurité ajoutés dans `next.config.ts` : HSTS (max-age 2 ans + preload), X-Content-Type-Options nosniff, X-Frame-Options SAMEORIGIN, Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy (geo/camera/micro disabled), Content-Security-Policy compatible Stripe + Google Fonts + Vercel
+  - Rate limiting in-memory (`lib/rate-limit.ts`) : 5 req/h/IP sur `/api/quote` et `/api/contact`, headers Retry-After + X-RateLimit-Reset sur 429. À migrer vers @upstash/ratelimit + Vercel KV pour vrai cluster
+  - Honeypot field caché (`website`) sur les 2 formulaires + check serveur
+  - Validation téléphone belge stricte dupliquée côté serveur (était client only)
+  - Logger PII redact (email tronqué, nom première lettre seulement)
+  - OG image dynamique via `app/opengraph-image.tsx` (Vercel ImageResponse, 1200×630, gradient + logo + tagline + URL). Plus de 404 sur /og-image.jpg
+  - Cleanup doublons "Mister Pellets" dans 5 fichiers de titles (template root suffit)
+
+  **Phase 2 (hautes priorités)** :
+  - `app/(frontend)/not-found.tsx` brandée (404 avec layout, mascotte 60% opacité, 3 CTA)
+  - `app/(frontend)/error.tsx` boundary global brandée (digest + reset + 3 CTA)
+  - Skip-to-content link dans le layout frontend (visible focus clavier uniquement)
+  - CSRF protection : `csrfOriginCheck` dans `lib/rate-limit.ts`, vérifie Origin/Referer sur `/api/quote` et `/api/contact`
+  - Idempotence webhook Stripe : Map in-memory des `event.id` traités (1000 max FIFO), évite les emails de confirmation doubles sur retry
+  - Lockout admin Payload : `maxLoginAttempts: 5`, `lockTime: 10 min`, cookies SameSite Strict + Secure prod
+  - Bandeau temporaire sur `/prendre-rendez-vous` tant qu'Easy!Appointments n'est pas live (téléphone + email cliquables)
+  - Schema parentOrganization Mister Pellets ↔ Awlest SRL (Schema.org Organization avec foundingDate 2016, alternateName, sous-org Awlest avec adresse + TVA)
+  - Fix 2 erreurs `react-hooks/set-state-in-effect` : QuoteForm init lazy depuis localStorage, NavbarSticky utilise `effectiveVisible` dérivé au lieu de setState dans useEffect
+  - Fix 1 erreur `@next/next/no-html-link-for-pages` : QuoteForm `<a href="/">` → `<Link>`
+  - Règle ESLint `react/no-unescaped-entities` passée de error à warn (172 occurrences cosmétiques sans impact runtime, le diff cleanup est non bloquant)
+  - Migrations Payload exclues du lint (générées automatiquement)
+
+  **Phase 3 (moyennes amorcées)** :
+  - `app/(frontend)/loading.tsx` skeleton global (animate-pulse, structure titre+paragraphes)
+
+  **Phase 3-4 reportées** (ne nécessitent pas Phase 1 résolue, peuvent partir en cycles séparés) : bandeau cookies RGPD, schemas HowTo guides, bundle analyzer, prefers-reduced-motion étendu, logos officiels Brand schemas, Sentry monitoring, tests Vitest+Playwright, PWA manifest, scroll-to-top FAB, Speakable schema, hreflang explicite, mise à jour /styleguide.
+
 - **2026-05-03** Hotfix V1.3 appliqué (cf. `docs/mister-pellets-corrections-mobile-v1.3-hotfix.md`) : footer minimisé au strict (logo couleur + 3 réseaux pleine opacité + liens légaux + copyright, retrait téléphone/email/adresse en doublon avec page Contact, contraste WCAG AAA renforcé), page FAQ centrale créée avec 47 questions catégorisées en 9 thèmes + recherche temps réel + filtres pills + Schema FAQPage (compilation des FAQ existantes + nouvelles questions pour combler les angles morts), refonte taxonomie filtres boutique (Type 5 valeurs Standard/Canalisable/Hydro/Hybride/Insert + Diffusion 2 valeurs ventilation forcée/convection naturelle + Couleur regroupée en 3 catégories Tons clairs/foncés/naturels), audit pages guides + fix bouton Primes qui débordait (whitespace-nowrap retiré du Button base CVA + libellé raccourci + protections globales boutons/médias dans globals.css), page À propos rectifiée (+800 poêles vendus et installés au lieu de +400, retrait des mentions "4,9 / 200 avis Google" attribuées à tort à Mister Pellets, mention nuancée Awlest autorisée sur À propos, phrase creuse "ce qui nous fait rentrer le matin" humanisée, aggregateRating Schema LocalBusiness retiré), logo central de l'accueil doublé en taille (h-[160px] mobile, h-[200px] desktop) avec spacing vertical 35 px strict. URLs réelles des profils sociaux (TikTok/Instagram/YouTube) et année de création de Dielle restent à fournir par le client. Audit complet du site programmé en prochaine étape sur instruction client.
 - **2026-05-03** Hotfix V1.2 appliqué (cf. `docs/mister-pellets-corrections-mobile-v1.2-hotfix.md`) : tableau comparatif "Poêle à pellets vs autres modes de chauffage" qui débordait sur mobile remplacé par cards empilées sur mobile + tableau classique sur sm+ (option B du doc), footer entièrement réduit à la version minimaliste (logo couleur + coordonnées + 3 réseaux sociaux TikTok/Instagram/YouTube + liens légaux compacts + copyright), informations sur les 4 marques rectifiées intégralement à partir des sources officielles (Edilkamin = gamme très large 1963 / EK63 = marque sœur du groupe Edilkamin / Dielle = système breveté combustion par alimentation par le bas, gamme complète y compris hybride bois pellets / Ferlux = fabricant espagnol gamme complète 30+ pays). URLs réelles des profils sociaux à fournir par le client. Année de création de Dielle non confirmée à la source officielle, omise pour l'instant.
 - **2026-05-03** Hotfix V1.1 appliqué (cf. `docs/mister-pellets-corrections-mobile-v1.1-hotfix.md`) : navbar mobile restaurée à la version stable d'avant `e3b0a73` (5 onglets avec drawer Menu, pastille active orange en motion.span), protections globales viewport overflow ajoutées dans `globals.css` (html/body overflow-x hidden + max-width 100vw, médias fluides par défaut, overflow-wrap sur les conteneurs de texte), footer entièrement refondu (fond vert deep + texte beige beige, contraste WCAG AAA, structure 4 blocs verticaux, padding-bottom 96 px pour libérer la NavbarSticky), logo footer remplacé par `logo-mister-pellets-full.svg` couleur dans une card cream pour préserver les couleurs du logo sur le fond vert.

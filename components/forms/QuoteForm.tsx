@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { Check, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -72,17 +73,20 @@ const STEPS = [
 
 export function QuoteForm() {
   const [step, setStep] = React.useState(1);
-  const [state, setState] = React.useState<QuoteState>(initialState);
+  // Audit V20260503 §2.H.2 : init lazy depuis localStorage pour éviter le
+  // setState dans useEffect (anti-pattern React 19, cascading renders).
+  const [state, setState] = React.useState<QuoteState>(() => {
+    if (typeof window === "undefined") return initialState;
+    try {
+      const draft = window.localStorage.getItem(STORAGE_KEY);
+      if (draft) return { ...initialState, ...JSON.parse(draft) };
+    } catch {
+      // localStorage indisponible ou JSON corrompu, on ignore
+    }
+    return initialState;
+  });
   const [submitState, setSubmitState] = React.useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = React.useState<string>("");
-
-  // Charger le brouillon localStorage
-  React.useEffect(() => {
-    try {
-      const draft = localStorage.getItem(STORAGE_KEY);
-      if (draft) setState((prev) => ({ ...prev, ...JSON.parse(draft) }));
-    } catch {}
-  }, []);
 
   // Sauvegarder le brouillon à chaque changement
   React.useEffect(() => {
@@ -162,7 +166,7 @@ export function QuoteForm() {
           Merci {state.name}, on a bien reçu ta demande. On revient vers toi par email à <strong>{state.email}</strong> sous 48h ouvrées avec un chiffrage personnalisé. Si c'est urgent, tu peux aussi nous appeler au 0472 04 32 22.
         </p>
         <Button asChild variant="outline" size="default">
-          <a href="/">Retour à l'accueil</a>
+          <Link href="/">Retour à l&apos;accueil</Link>
         </Button>
       </div>
     );
