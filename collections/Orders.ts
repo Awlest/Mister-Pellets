@@ -15,7 +15,7 @@ export const Orders: CollectionConfig = {
   admin: {
     useAsTitle: "orderNumber",
     defaultColumns: ["orderNumber", "customerEmail", "total", "paymentStatus", "fulfillmentStatus", "createdAt"],
-    listSearchableFields: ["orderNumber", "customerEmail", "customerName", "stripePaymentIntentId"],
+    listSearchableFields: ["orderNumber", "customerEmail", "customerName", "molliePaymentId"],
     group: "Boutique",
   },
   fields: [
@@ -105,16 +105,13 @@ export const Orders: CollectionConfig = {
           admin: { width: "33%" },
         },
         {
-          name: "stripePaymentIntentId",
+          // V1.6 : migration Stripe → Mollie. Champ unique pour l'ID
+          // payment Mollie (format tr_xxxxxxxxxxxxx).
+          name: "molliePaymentId",
           type: "text",
-          admin: { width: "33%", readOnly: true },
+          admin: { width: "33%", readOnly: true, description: "ID payment Mollie (tr_...)" },
         },
       ],
-    },
-    {
-      name: "stripeCheckoutSessionId",
-      type: "text",
-      admin: { readOnly: true },
     },
     {
       name: "notes",

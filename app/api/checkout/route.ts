@@ -1,7 +1,21 @@
 import { NextResponse } from "next/server";
-import { getStripe, isStripeConfigured, eurosToCents } from "@/lib/stripe";
+import { PaymentMethod, SequenceType, Locale, type Payment } from "@mollie/api-client";
+import { getMollie, isMollieConfigured, formatMollieAmount } from "@/lib/mollie";
 import { getPayloadClient } from "@/lib/payload-client";
 import { confirmCustomerOrder } from "@/lib/email";
+
+/**
+ * Checkout via Mollie (V1.6 — migration depuis Stripe).
+ *
+ * Flux :
+ *  1. Frontend POST /api/checkout avec {items, customer}
+ *  2. On valide, on calcule les totaux, on génère un orderNumber
+ *  3. On crée la commande Payload statut "pending"
+ *  4. On crée le paiement Mollie (POST /payments) avec redirectUrl + webhookUrl
+ *  5. On retourne checkoutUrl au front, qui redirige le user vers Mollie
+ *  6. Mollie traite le paiement, redirige vers /commande/{orderId}
+ *  7. En parallèle Mollie POST /api/webhooks/mollie qui finalise la commande
+ */
 
 interface CheckoutItem {
   productId: string;
@@ -55,13 +69,14 @@ export async function POST(request: Request) {
   // Calcul totaux
   const subtotal = items.reduce((acc, it) => acc + it.priceTTC * it.quantity, 0);
   const vat = subtotal - subtotal / 1.21;
-  const shipping = 0; // gratuit pour l'instant, Phase 7 : calcul dynamique selon zone
+  const shipping = 0; // gratuit pour l'instant, calcul dynamique selon zone à venir
   const total = subtotal + shipping;
 
   const orderNumber = generateOrderNumber();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-  // Stripe non configuré → mode dev : créer la commande directement avec payment status "pending"
-  if (!isStripeConfigured()) {
+  // Mode dev sans Mollie : créer la commande directement, pas de checkout url
+  if (!isMollieConfigured()) {
     try {
       const payload = await getPayloadClient();
       const order = await payload.create({
@@ -89,7 +104,6 @@ export async function POST(request: Request) {
         },
       });
 
-      // Email confirmation client (mode "commande à payer plus tard")
       await confirmCustomerOrder({
         customerName: customer.name,
         customerEmail: customer.email,
@@ -101,23 +115,22 @@ export async function POST(request: Request) {
       return NextResponse.json({
         ok: true,
         orderId: order.id,
-        warning: "Stripe non configuré, commande enregistrée en attente de paiement (mode dev).",
+        warning: "Mollie non configuré, commande enregistrée en attente de paiement (mode dev).",
       });
     } catch (err) {
       console.error("[checkout] order creation failed", err);
       return NextResponse.json(
         { error: "Erreur lors de la création de la commande." },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }
 
-  // Stripe configuré → créer une Checkout Session
+  // Mollie configuré : créer la commande Payload + le payment Mollie
   try {
-    const stripe = getStripe();
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+    const mollie = getMollie();
 
-    // Créer la commande en base AVANT d'aller sur Stripe, statut "pending"
+    // 1. Commande Payload statut pending (avant Mollie pour avoir un orderId)
     const payload = await getPayloadClient();
     const order = await payload.create({
       collection: "orders",
@@ -144,46 +157,63 @@ export async function POST(request: Request) {
       },
     });
 
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      payment_method_types: ["card", "bancontact"],
-      line_items: items.map((it) => ({
-        price_data: {
-          currency: "eur",
-          product_data: {
-            name: `${it.brand} ${it.name}`,
-            description: `Référence : ${it.productId}`,
-          },
-          unit_amount: eurosToCents(it.priceTTC),
-        },
-        quantity: it.quantity,
-      })),
-      customer_email: customer.email,
-      success_url: `${baseUrl}/commande/${order.id}?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/checkout`,
+    // 2. Création du payment Mollie
+    // Description visible sur le relevé bancaire du client (max 100 chars).
+    const description = `Mister Pellets ${orderNumber}`;
+    const itemsLabel = items
+      .slice(0, 3)
+      .map((it) => `${it.quantity}× ${it.brand} ${it.name}`)
+      .join(", ");
+
+    const payment = (await mollie.payments.create({
+      amount: formatMollieAmount(total),
+      description: description.slice(0, 100),
+      redirectUrl: `${baseUrl}/commande/${order.id}`,
+      webhookUrl: `${baseUrl}/api/webhooks/mollie`,
+      // Bancontact + Visa/Mastercard + Apple Pay prioritaires pour la
+      // Belgique. Forfait Bancontact à 0,39 € (vs 1,4 % + 0,25 € chez Stripe).
+      method: [
+        PaymentMethod.bancontact,
+        PaymentMethod.creditcard,
+        PaymentMethod.applepay,
+      ],
+      sequenceType: SequenceType.oneoff,
       metadata: {
         orderId: String(order.id),
         orderNumber,
+        itemsLabel: itemsLabel.slice(0, 200),
       },
-    });
+      billingEmail: customer.email,
+      locale: Locale.fr_BE,
+    })) as Payment;
 
-    // Mettre à jour la commande avec le sessionId
+    // 3. Lier le payment id à la commande
     await payload.update({
       collection: "orders",
       id: order.id,
-      data: { stripeCheckoutSessionId: session.id },
+      data: {
+        molliePaymentId: payment.id,
+      } as never,
     });
+
+    const checkoutUrl = payment.getCheckoutUrl();
+    if (!checkoutUrl) {
+      return NextResponse.json(
+        { error: "URL de paiement Mollie indisponible." },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json({
       ok: true,
       orderId: order.id,
-      checkoutUrl: session.url,
+      checkoutUrl,
     });
   } catch (err) {
-    console.error("[checkout] stripe failed", err);
+    console.error("[checkout] mollie failed", err);
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Erreur Stripe inconnue." },
-      { status: 500 }
+      { error: err instanceof Error ? err.message : "Erreur Mollie inconnue." },
+      { status: 500 },
     );
   }
 }

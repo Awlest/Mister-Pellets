@@ -402,8 +402,10 @@ export interface Order {
   total: number;
   paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
   fulfillmentStatus: 'new' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  stripePaymentIntentId?: string | null;
-  stripeCheckoutSessionId?: string | null;
+  /**
+   * ID payment Mollie (tr_...)
+   */
+  molliePaymentId?: string | null;
   /**
    * Notes internes (visibles admin uniquement)
    */
@@ -848,8 +850,7 @@ export interface OrdersSelect<T extends boolean = true> {
   total?: T;
   paymentStatus?: T;
   fulfillmentStatus?: T;
-  stripePaymentIntentId?: T;
-  stripeCheckoutSessionId?: T;
+  molliePaymentId?: T;
   notes?: T;
   updatedAt?: T;
   createdAt?: T;
