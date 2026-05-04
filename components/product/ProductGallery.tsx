@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,14 @@ interface GalleryImage {
   alt?: string;
 }
 
+interface ColorVariant {
+  colorName: string;
+  colorHex?: string;
+  gtin?: string;
+  mainImage?: GalleryImage;
+  galleryImages?: GalleryImage[];
+}
+
 interface ProductGalleryProps {
   /** Image principale du produit (mainImage Payload). Optionnelle. */
   mainImage?: GalleryImage;
@@ -17,48 +25,85 @@ interface ProductGalleryProps {
   galleryImages?: GalleryImage[];
   /** Nom du produit, pour l'alt par défaut quand l'image n'a pas de alt. */
   productName: string;
+  /**
+   * Déclinaisons de couleur. Si fournies, un picker s'affiche sous la
+   * galerie. Au clic, on remplace les images par celles de la variante
+   * (si elle a override) ou on garde celles du produit principal.
+   */
+  colorVariants?: ColorVariant[];
 }
 
 /**
- * Galerie interactive d'un produit :
+ * Galerie interactive d'un produit + sélecteur de couleur si déclinaisons.
+ *
+ * Comportement :
  * - Affiche l'image actuellement sélectionnée en grand
  * - Affiche les vignettes cliquables (4 par ligne)
  * - Au clic sur une vignette, l'image principale change
- * - Clic sur l'image principale ouvre un lightbox plein écran
- * - Le thumbnail actif a un ring orange visible
- * - Esc ferme le lightbox
- *
- * Toutes les images viennent de Payload (mainImage + galleryImages).
- * Si aucune image n'est dispo, on affiche un placeholder Flame.
+ * - Clic sur l'image principale : ouvre un lightbox plein écran (Esc/clavier)
+ * - Si colorVariants fourni : pastilles cliquables sous la galerie
+ * - Sélection d'une couleur :
+ *   · Si la variante a un mainImage et/ou galleryImages, on swap
+ *   · Sinon on garde les images du produit principal
+ *   · Le GTIN affiché change (visible dans data-gtin pour l'analytics)
  */
 export function ProductGallery({
   mainImage,
   galleryImages = [],
   productName,
+  colorVariants,
 }: ProductGalleryProps) {
-  // Construit la liste complète : mainImage en premier, puis la galerie.
-  const allImages: GalleryImage[] = [
-    ...(mainImage ? [mainImage] : []),
-    ...galleryImages,
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
+  // Index de la variante de couleur sélectionnée (-1 = aucune sélectionnée,
+  // on affiche les images "produit principal")
+  const [activeVariantIdx, setActiveVariantIdx] = useState(-1);
+  const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  // Esc ferme le lightbox
+  /**
+   * Calcule la liste d'images actuellement affichée selon la variante
+   * sélectionnée. Logique :
+   * - Aucune variante (-1) → mainImage + galleryImages du produit
+   * - Variante sans mainImage ni galleryImages → idem (fallback)
+   * - Variante avec mainImage seul → variantMainImage + galleryImages produit
+   * - Variante avec galleryImages → variantMainImage (ou mainImage produit) + variantGallery
+   */
+  const allImages: GalleryImage[] = useMemo(() => {
+    const variant =
+      activeVariantIdx >= 0 && colorVariants ? colorVariants[activeVariantIdx] : null;
+    const baseGallery = galleryImages ?? [];
+
+    if (!variant) {
+      return [...(mainImage ? [mainImage] : []), ...baseGallery];
+    }
+
+    const effectiveMain = variant.mainImage ?? mainImage;
+    const effectiveGallery =
+      variant.galleryImages && variant.galleryImages.length > 0
+        ? variant.galleryImages
+        : baseGallery;
+
+    return [...(effectiveMain ? [effectiveMain] : []), ...effectiveGallery];
+  }, [mainImage, galleryImages, colorVariants, activeVariantIdx]);
+
+  // Reset l'image active quand on change de variante (pour montrer la
+  // mainImage de la variante en premier)
+  useEffect(() => {
+    setActiveImageIdx(0);
+  }, [activeVariantIdx]);
+
+  // Esc ferme le lightbox + flèches naviguent
   useEffect(() => {
     if (!lightboxOpen) return;
     function handleKey(e: KeyboardEvent) {
       if (e.key === "Escape") setLightboxOpen(false);
       if (e.key === "ArrowRight") {
-        setActiveIndex((i) => (i + 1) % allImages.length);
+        setActiveImageIdx((i) => (i + 1) % allImages.length);
       }
       if (e.key === "ArrowLeft") {
-        setActiveIndex((i) => (i - 1 + allImages.length) % allImages.length);
+        setActiveImageIdx((i) => (i - 1 + allImages.length) % allImages.length);
       }
     }
     window.addEventListener("keydown", handleKey);
-    // Bloque le scroll body quand lightbox ouvert
     document.body.style.overflow = "hidden";
     return () => {
       window.removeEventListener("keydown", handleKey);
@@ -68,7 +113,10 @@ export function ProductGallery({
 
   const closeLightbox = useCallback(() => setLightboxOpen(false), []);
 
-  // Pas d'images → placeholder
+  const activeVariant =
+    activeVariantIdx >= 0 && colorVariants ? colorVariants[activeVariantIdx] : null;
+
+  // Pas d'images du tout → placeholder
   if (allImages.length === 0) {
     return (
       <div>
@@ -84,7 +132,6 @@ export function ProductGallery({
             </div>
           </div>
         </div>
-        {/* Cases vides pour la cohérence visuelle */}
         <div className="grid grid-cols-4 gap-2 mt-4">
           {[1, 2, 3, 4].map((i) => (
             <div
@@ -93,18 +140,23 @@ export function ProductGallery({
             />
           ))}
         </div>
+        {colorVariants && colorVariants.length > 0 && (
+          <ColorPicker
+            variants={colorVariants}
+            activeIdx={activeVariantIdx}
+            onChange={setActiveVariantIdx}
+          />
+        )}
       </div>
     );
   }
 
-  // allImages.length >= 1 ici (early return ci-dessus). On clamp l'index
-  // pour rester safe vis-à-vis de noUncheckedIndexedAccess.
-  const active = allImages[activeIndex] ?? allImages[0];
+  const active = allImages[activeImageIdx] ?? allImages[0];
   if (!active) return null;
 
   return (
     <>
-      <div>
+      <div data-active-gtin={activeVariant?.gtin ?? undefined}>
         {/* Image principale — clic pour ouvrir le lightbox */}
         <button
           type="button"
@@ -120,7 +172,6 @@ export function ProductGallery({
             priority
             className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           />
-          {/* Indicateur loupe en haut à droite, visible au hover */}
           <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-mp-ink/80 px-2.5 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -142,15 +193,15 @@ export function ProductGallery({
           </span>
         </button>
 
-        {/* Vignettes cliquables — 4 par ligne, max 8 (donc 2 lignes possibles) */}
+        {/* Vignettes cliquables */}
         <div className="grid grid-cols-4 gap-2 mt-4">
           {allImages.slice(0, 8).map((img, i) => {
-            const isActive = i === activeIndex;
+            const isActive = i === activeImageIdx;
             return (
               <button
                 key={i}
                 type="button"
-                onClick={() => setActiveIndex(i)}
+                onClick={() => setActiveImageIdx(i)}
                 className={cn(
                   "relative aspect-square rounded-xl bg-mp-beige border overflow-hidden transition-all focus:outline-none focus:ring-2 focus:ring-mp-orange-flame focus:ring-offset-1",
                   isActive
@@ -170,7 +221,6 @@ export function ProductGallery({
               </button>
             );
           })}
-          {/* Cases vides pour la cohérence visuelle si moins de 4 images */}
           {Array.from({ length: Math.max(0, 4 - allImages.length) }).map((_, i) => (
             <div
               key={`empty-${i}`}
@@ -178,6 +228,15 @@ export function ProductGallery({
             />
           ))}
         </div>
+
+        {/* Sélecteur de couleur si déclinaisons définies */}
+        {colorVariants && colorVariants.length > 0 && (
+          <ColorPicker
+            variants={colorVariants}
+            activeIdx={activeVariantIdx}
+            onChange={setActiveVariantIdx}
+          />
+        )}
       </div>
 
       {/* Lightbox plein écran */}
@@ -189,7 +248,6 @@ export function ProductGallery({
           aria-modal="true"
           aria-label="Photo agrandie"
         >
-          {/* Bouton close */}
           <button
             type="button"
             onClick={closeLightbox}
@@ -212,14 +270,13 @@ export function ProductGallery({
             </svg>
           </button>
 
-          {/* Flèches navigation si plusieurs images */}
           {allImages.length > 1 && (
             <>
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setActiveIndex((i) => (i - 1 + allImages.length) % allImages.length);
+                  setActiveImageIdx((i) => (i - 1 + allImages.length) % allImages.length);
                 }}
                 className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-12 w-12 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
                 aria-label="Photo précédente"
@@ -242,7 +299,7 @@ export function ProductGallery({
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setActiveIndex((i) => (i + 1) % allImages.length);
+                  setActiveImageIdx((i) => (i + 1) % allImages.length);
                 }}
                 className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-12 w-12 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
                 aria-label="Photo suivante"
@@ -264,8 +321,6 @@ export function ProductGallery({
             </>
           )}
 
-          {/* Image agrandie — bloque la propagation du clic pour ne pas
-              fermer en cliquant dessus */}
           <div
             onClick={(e) => e.stopPropagation()}
             className="relative max-w-6xl w-full aspect-square md:aspect-[4/3]"
@@ -280,14 +335,72 @@ export function ProductGallery({
             />
           </div>
 
-          {/* Compteur en bas */}
           {allImages.length > 1 && (
             <span className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/10 backdrop-blur-sm px-3 py-1 text-sm text-white">
-              {activeIndex + 1} / {allImages.length}
+              {activeImageIdx + 1} / {allImages.length}
             </span>
           )}
         </div>
       )}
     </>
+  );
+}
+
+/* -----------------------------------------------------------------------------
+   Sous-composant : pastilles de couleur cliquables
+   ----------------------------------------------------------------------------- */
+
+interface ColorPickerProps {
+  variants: ColorVariant[];
+  activeIdx: number;
+  onChange: (idx: number) => void;
+}
+
+function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
+  const activeName =
+    activeIdx >= 0 && variants[activeIdx] ? variants[activeIdx].colorName : null;
+
+  return (
+    <div className="mt-6">
+      <div className="flex items-baseline justify-between mb-3">
+        <span className="text-xs uppercase tracking-wider text-mp-ink-soft font-semibold">
+          Couleur
+        </span>
+        {activeName && (
+          <span className="text-xs text-mp-green-deep font-semibold">
+            Sélection : {activeName}
+          </span>
+        )}
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {variants.map((v, i) => {
+          const isActive = i === activeIdx;
+          const swatch = v.colorHex ?? "#A0A0A0";
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => onChange(isActive ? -1 : i)}
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full pl-1.5 pr-3 py-1.5 text-xs font-semibold border transition-all focus:outline-none focus:ring-2 focus:ring-mp-orange-flame focus:ring-offset-1",
+                isActive
+                  ? "border-mp-orange-flame bg-mp-orange-light text-mp-ink"
+                  : "border-mp-sand bg-mp-cream text-mp-green-deep hover:border-mp-orange-flame/60"
+              )}
+              aria-label={`Sélectionner la couleur ${v.colorName}`}
+              aria-pressed={isActive}
+              data-gtin={v.gtin}
+            >
+              <span
+                className="inline-block h-5 w-5 rounded-full border border-mp-sand/60 shadow-sm"
+                style={{ backgroundColor: swatch }}
+                aria-hidden="true"
+              />
+              {v.colorName}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }

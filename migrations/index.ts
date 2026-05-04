@@ -4,6 +4,7 @@ import * as migration_20260502_103121 from './20260502_103121';
 import * as migration_20260502_112806 from './20260502_112806';
 import * as migration_20260504_080000_mollie_migration from './20260504_080000_mollie_migration';
 import * as migration_20260504_140000_products_diffusion_color from './20260504_140000_products_diffusion_color';
+import * as migration_20260504_180000_products_color_variants from './20260504_180000_products_color_variants';
 
 export const migrations = [
   {
@@ -35,5 +36,10 @@ export const migrations = [
     up: migration_20260504_140000_products_diffusion_color.up,
     down: migration_20260504_140000_products_diffusion_color.down,
     name: '20260504_140000_products_diffusion_color',
+  },
+  {
+    up: migration_20260504_180000_products_color_variants.up,
+    down: migration_20260504_180000_products_color_variants.down,
+    name: '20260504_180000_products_color_variants',
   },
 ];

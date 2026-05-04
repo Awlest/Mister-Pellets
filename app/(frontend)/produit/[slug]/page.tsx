@@ -53,22 +53,54 @@ export default async function ProductPage({ params }: Props) {
     .filter((p) => p.brand === product.brand && p.slug !== product.slug)
     .slice(0, 3);
 
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: `${product.name} : poêle à pellets ${product.type} ${product.power} pour ${product.surface}.`,
-    brand: { "@type": "Brand", name: product.brand },
-    offers: product.priceTTC
-      ? {
+  // Schema.org Product : si le produit a des déclinaisons de couleur avec
+  // GTIN, on émet un AggregateOffer + un Offer par variante (chacune avec
+  // son propre GTIN, son nom et son URL #couleur). Sinon, un seul Offer.
+  const productPageUrl = `https://mister-pellets.be/produit/${product.slug}`;
+  const variantsWithGtin = (product.colorVariants ?? []).filter((v) => Boolean(v.gtin));
+
+  let offers: object | undefined;
+  if (product.priceTTC) {
+    if (variantsWithGtin.length > 0) {
+      offers = {
+        "@type": "AggregateOffer",
+        priceCurrency: "EUR",
+        price: product.priceTTC,
+        offerCount: variantsWithGtin.length,
+        offers: variantsWithGtin.map((v) => ({
           "@type": "Offer",
-          url: `https://mister-pellets.be/produit/${product.slug}`,
+          name: `${product.name} — ${v.colorName}`,
+          gtin13: v.gtin,
+          url: `${productPageUrl}#${encodeURIComponent(v.colorName.toLowerCase())}`,
           priceCurrency: "EUR",
           price: product.priceTTC,
           availability: "https://schema.org/InStock",
           itemCondition: "https://schema.org/NewCondition",
-        }
-      : undefined,
+        })),
+      };
+    } else {
+      offers = {
+        "@type": "Offer",
+        url: productPageUrl,
+        priceCurrency: "EUR",
+        price: product.priceTTC,
+        availability: "https://schema.org/InStock",
+        itemCondition: "https://schema.org/NewCondition",
+      };
+    }
+  }
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.shortDescription
+      ? product.shortDescription
+      : product.surface
+        ? `${product.name} : poêle à pellets ${product.type} de ${product.power} pour chauffer ${product.surface}.`
+        : `${product.name} : poêle à pellets ${product.type} de ${product.power}.`,
+    brand: { "@type": "Brand", name: product.brand },
+    offers,
   };
 
   return (
@@ -100,6 +132,7 @@ export default async function ProductPage({ params }: Props) {
                     : undefined
                 }
                 galleryImages={product.galleryImages}
+                colorVariants={product.colorVariants}
               />
 
               {/* Lien fiche technique PDF si attachée au produit */}

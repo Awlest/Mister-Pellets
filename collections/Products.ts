@@ -334,6 +334,74 @@ export const Products: CollectionConfig = {
       ],
     },
 
+    // ===== DÉCLINAISONS DE COULEUR =====
+    {
+      name: "colorVariants",
+      type: "array",
+      labels: { singular: "Couleur", plural: "Déclinaisons de couleur" },
+      maxRows: 8,
+      admin: {
+        description:
+          "Couleurs disponibles pour ce produit. Le prix et les options techniques restent identiques, seuls le code EAN et les photos peuvent varier.",
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          type: "row",
+          fields: [
+            {
+              name: "colorName",
+              type: "text",
+              required: true,
+              admin: { width: "40%", description: "ex: Noir, Crème, Bordeaux" },
+            },
+            {
+              name: "colorHex",
+              type: "text",
+              admin: {
+                width: "20%",
+                description: "Hexa pour la pastille (ex: #14241B, #F4F1E8)",
+              },
+            },
+            {
+              name: "gtin",
+              type: "text",
+              admin: {
+                width: "40%",
+                description: "Code EAN-13 spécifique à cette couleur",
+              },
+            },
+          ],
+        },
+        {
+          name: "mainImage",
+          type: "upload",
+          relationTo: "media",
+          admin: {
+            description:
+              "Photo principale de cette couleur. Si vide, la photo principale du produit est utilisée.",
+          },
+        },
+        {
+          name: "galleryImages",
+          type: "array",
+          labels: { singular: "Image", plural: "Galerie de la couleur" },
+          maxRows: 8,
+          admin: {
+            description: "Si vide, la galerie principale du produit est utilisée.",
+          },
+          fields: [
+            {
+              name: "image",
+              type: "upload",
+              relationTo: "media",
+              required: true,
+            },
+          ],
+        },
+      ],
+    },
+
     // ===== CONTENU RÉDACTIONNEL =====
     {
       name: "shortDescription",

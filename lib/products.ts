@@ -2,6 +2,7 @@ import "server-only";
 import { getPayloadClient } from "./payload-client";
 import type {
   ProductDemo,
+  ProductColorVariant,
   ProductType,
   Diffusion,
   ColorCategory,
@@ -58,6 +59,27 @@ interface PayloadProduct {
         filename?: string | null;
       }
     | null;
+  colorVariants?: Array<{
+    colorName?: string | null;
+    colorHex?: string | null;
+    gtin?: string | null;
+    mainImage?:
+      | number
+      | {
+          url?: string | null;
+          alt?: string | null;
+        }
+      | null;
+    galleryImages?: Array<{
+      image?:
+        | number
+        | {
+            url?: string | null;
+            alt?: string | null;
+          }
+        | null;
+    }> | null;
+  }> | null;
 }
 
 /**
@@ -149,6 +171,39 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     galleryImages,
     technicalSheetUrl,
     technicalSheetFilename,
+    colorVariants: Array.isArray(p.colorVariants)
+      ? p.colorVariants
+          .filter((cv) => cv && cv.colorName)
+          .map<ProductColorVariant>((cv) => {
+            const variantMainImage =
+              cv.mainImage && typeof cv.mainImage === "object" && cv.mainImage.url
+                ? {
+                    url: toRelativeUrl(cv.mainImage.url),
+                    alt: cv.mainImage.alt ?? `${p.name} — ${cv.colorName}`,
+                  }
+                : undefined;
+
+            const variantGallery = Array.isArray(cv.galleryImages)
+              ? cv.galleryImages
+                  .map((g) => {
+                    if (!g.image || typeof g.image !== "object" || !g.image.url) return null;
+                    return {
+                      url: toRelativeUrl(g.image.url),
+                      alt: g.image.alt ?? `${p.name} — ${cv.colorName}`,
+                    };
+                  })
+                  .filter((x): x is { url: string; alt: string } => x !== null)
+              : undefined;
+
+            return {
+              colorName: cv.colorName as string,
+              colorHex: cv.colorHex ?? undefined,
+              gtin: cv.gtin ?? undefined,
+              mainImage: variantMainImage,
+              galleryImages: variantGallery,
+            };
+          })
+      : undefined,
   };
 }
 

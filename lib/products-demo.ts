@@ -67,6 +67,23 @@ export interface ProductDemo extends ProductCardData {
    * Nom du fichier PDF (pour l'affichage du lien).
    */
   technicalSheetFilename?: string;
+  /**
+   * Déclinaisons de couleur disponibles. Chaque variante a son propre code
+   * EAN (gtin) et peut surcharger la photo principale + galerie.
+   * Le prix et les options techniques restent identiques entre variantes.
+   */
+  colorVariants?: ProductColorVariant[];
+}
+
+/** Variante de couleur d'un produit (cf. colorVariants ci-dessus). */
+export interface ProductColorVariant {
+  colorName: string;
+  colorHex?: string;
+  gtin?: string;
+  /** Override de la photo principale, sinon on utilise celle du produit. */
+  mainImage?: { url: string; alt?: string };
+  /** Override de la galerie, sinon on utilise celle du produit. */
+  galleryImages?: Array<{ url: string; alt?: string }>;
 }
 
 export const PRODUCTS_DEMO: ProductDemo[] = [

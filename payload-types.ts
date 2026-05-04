@@ -323,6 +323,39 @@ export interface Product {
       }[]
     | null;
   /**
+   * Couleurs disponibles pour ce produit. Le prix et les options techniques restent identiques, seuls le code EAN et les photos peuvent varier.
+   */
+  colorVariants?:
+    | {
+        /**
+         * ex: Noir, Crème, Bordeaux
+         */
+        colorName: string;
+        /**
+         * Hexa pour la pastille (ex: #14241B, #F4F1E8)
+         */
+        colorHex?: string | null;
+        /**
+         * Code EAN-13 spécifique à cette couleur
+         */
+        gtin?: string | null;
+        /**
+         * Photo principale de cette couleur. Si vide, la photo principale du produit est utilisée.
+         */
+        mainImage?: (number | null) | Media;
+        /**
+         * Si vide, la galerie principale du produit est utilisée.
+         */
+        galleryImages?:
+          | {
+              image: number | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
    * 1-2 lignes pour les cards (max 200 chars)
    */
   shortDescription?: string | null;
@@ -813,6 +846,21 @@ export interface ProductsSelect<T extends boolean = true> {
     | T
     | {
         image?: T;
+        id?: T;
+      };
+  colorVariants?:
+    | T
+    | {
+        colorName?: T;
+        colorHex?: T;
+        gtin?: T;
+        mainImage?: T;
+        galleryImages?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
         id?: T;
       };
   shortDescription?: T;
