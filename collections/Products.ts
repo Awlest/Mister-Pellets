@@ -9,8 +9,12 @@ import type { CollectionConfig } from "payload";
  */
 export const Products: CollectionConfig = {
   slug: "products",
+  // RLS Payload (cf. audit V14.1) : explicite chaque opération.
   access: {
-    read: () => true, // Public pour le frontend
+    read: () => true, // public (la boutique consulte le catalogue)
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
   },
   admin: {
     useAsTitle: "name",

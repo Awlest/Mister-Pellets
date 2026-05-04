@@ -20,9 +20,17 @@
 # production
 /build
 
-# misc
+# misc + secrets (defense in depth audit V20260503-V14.1)
 .DS_Store
 *.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+private/
+credentials.json
+service-account*.json
 
 # debug
 npm-debug.log*

@@ -16,8 +16,12 @@ import type { CollectionConfig } from "payload";
  */
 export const Articles: CollectionConfig = {
   slug: "articles",
+  // RLS Payload (cf. audit V14.1) : explicite chaque opération.
   access: {
-    read: () => true,
+    read: () => true, // public, le blog est en SSG
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
   },
   admin: {
     useAsTitle: "title",
