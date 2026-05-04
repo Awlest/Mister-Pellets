@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, Flame, Award, Wifi, Wind, Droplet } from "lucide-react";
@@ -88,18 +89,32 @@ export default async function ProductPage({ params }: Props) {
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-            {/* Galerie placeholder */}
+            {/* Galerie : image principale Payload, fallback placeholder Phase 5 */}
             <div>
-              <div className="aspect-square rounded-3xl bg-mp-beige-warm border border-mp-sand/40 overflow-hidden flex items-center justify-center">
-                <div className="text-center p-10">
-                  <Flame className="h-16 w-16 mx-auto text-mp-orange-flame mb-4" />
-                  <p className="text-mp-ink-soft text-sm">
-                    Photos produit disponibles en Phase 5
-                    <br />
-                    (import depuis Wix + upload Payload)
-                  </p>
-                </div>
+              <div className="relative aspect-square rounded-3xl bg-mp-beige-warm border border-mp-sand/40 overflow-hidden">
+                {product.imageSrc ? (
+                  <Image
+                    src={product.imageSrc}
+                    alt={product.imageAlt ?? product.name}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center p-10">
+                      <Flame className="h-16 w-16 mx-auto text-mp-orange-flame mb-4" />
+                      <p className="text-mp-ink-soft text-sm">
+                        Photo en cours de préparation
+                        <br />
+                        (image disponible sur demande de devis)
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
+              {/* Vignettes thumbnails — placeholder Phase 5 (gallery multi-image) */}
               <div className="grid grid-cols-4 gap-2 mt-4">
                 {[1, 2, 3, 4].map((i) => (
                   <div
