@@ -231,7 +231,18 @@ export interface Product {
    * ex: Blade Plus, Tweed 90+, Iride 22
    */
   model: string;
-  productType: 'air' | 'canalisable' | 'hydro' | 'hybride' | 'insert';
+  /**
+   * Ce qu'EST le poêle (taxonomie V1.3)
+   */
+  productType: 'standard' | 'canalisable' | 'hydro' | 'hybride' | 'insert';
+  /**
+   * COMMENT la chaleur sort
+   */
+  diffusion: 'ventilation-forcee' | 'convection-naturelle';
+  /**
+   * Catégorie de couleur regroupée
+   */
+  color: 'light' | 'dark' | 'natural';
   /**
    * Prix HTVA (€)
    */
@@ -769,6 +780,8 @@ export interface ProductsSelect<T extends boolean = true> {
   brand?: T;
   model?: T;
   productType?: T;
+  diffusion?: T;
+  color?: T;
   priceHT?: T;
   priceTTC?: T;
   promoPrice?: T;

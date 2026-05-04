@@ -11,7 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CITIES, getCityBySlug } from "@/lib/cities";
-import { PRODUCTS_DEMO } from "@/lib/products-demo";
+import { getAllProducts } from "@/lib/products";
 
 interface Props {
   // Pattern : /poeles-pellets-[ville]/, Next.js capture le segment après le préfixe.
@@ -39,8 +39,9 @@ export default async function CityPage({ params }: Props) {
 
   const free = city.distanceFromFernelmont <= 50;
 
-  // Produits recommandés pour cette ville
-  const products = PRODUCTS_DEMO.filter((p) => city.recommendedModels.includes(p.slug));
+  // Produits recommandés pour cette ville (Phase 5 : query Payload)
+  const allProducts = await getAllProducts();
+  const products = allProducts.filter((p) => city.recommendedModels.includes(p.slug));
 
   // Schema LocalBusiness ciblé sur la ville
   const localBusinessSchema = {

@@ -10,7 +10,11 @@ import { AddToCartButton } from "@/components/product/AddToCartButton";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { PRODUCTS_DEMO, getProductBySlug } from "@/lib/products-demo";
+import {
+  getAllProducts,
+  getAllProductSlugs,
+  getProductBySlug,
+} from "@/lib/products";
 import { BRANDS } from "@/lib/brands";
 import { formatPrice } from "@/lib/utils";
 
@@ -19,12 +23,14 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return PRODUCTS_DEMO.map((p) => ({ slug: p.slug }));
+  // Phase 5 : query Payload au build pour générer les routes statiques.
+  const slugs = await getAllProductSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return { title: "Produit introuvable" };
   return {
     title: `${product.name}, Poêle à pellets ${product.power}`,
@@ -34,14 +40,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
   const brandSlug = product.brand.toLowerCase() as keyof typeof BRANDS;
   const brand = BRANDS[brandSlug];
 
   // Modèles similaires (même marque, autres modèles)
-  const related = PRODUCTS_DEMO
+  const allProducts = await getAllProducts();
+  const related = allProducts
     .filter((p) => p.brand === product.brand && p.slug !== product.slug)
     .slice(0, 3);
 

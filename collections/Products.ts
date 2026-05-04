@@ -79,11 +79,42 @@ export const Products: CollectionConfig = {
       type: "select",
       required: true,
       options: [
-        { label: "Air pulsé", value: "air" },
+        { label: "Standard (air pulsé / convection)", value: "standard" },
         { label: "Canalisable", value: "canalisable" },
         { label: "Hydro", value: "hydro" },
-        { label: "Hybride", value: "hybride" },
+        { label: "Hybride bois + pellets", value: "hybride" },
         { label: "Insert encastrable", value: "insert" },
+      ],
+      admin: {
+        description: "Ce qu'EST le poêle (taxonomie V1.3)",
+      },
+    },
+    {
+      type: "row",
+      fields: [
+        {
+          name: "diffusion",
+          type: "select",
+          required: true,
+          defaultValue: "ventilation-forcee",
+          options: [
+            { label: "Ventilation forcée", value: "ventilation-forcee" },
+            { label: "Convection naturelle (silencieux)", value: "convection-naturelle" },
+          ],
+          admin: { width: "50%", description: "COMMENT la chaleur sort" },
+        },
+        {
+          name: "color",
+          type: "select",
+          required: true,
+          defaultValue: "dark",
+          options: [
+            { label: "Tons clairs (blanc, crème, ivoire)", value: "light" },
+            { label: "Tons foncés (noir, anthracite, bordeaux)", value: "dark" },
+            { label: "Tons naturels (acier, fonte, bois, pierre)", value: "natural" },
+          ],
+          admin: { width: "50%", description: "Catégorie de couleur regroupée" },
+        },
       ],
     },
 

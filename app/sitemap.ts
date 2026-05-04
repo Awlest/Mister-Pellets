@@ -3,7 +3,6 @@ import { SITE_URL } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
 import { GUIDES } from "@/lib/guides";
 import { BRAND_LIST } from "@/lib/brands";
-import { PRODUCTS_DEMO } from "@/lib/products-demo";
 import { ARTICLES } from "@/lib/articles";
 import { getPayloadClient } from "@/lib/payload-client";
 
@@ -78,16 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // ===== PRODUITS =====
-  // En attendant l'import des 61 produits réels en Payload, on liste les 10 demos
-  const demoProductPages: MetadataRoute.Sitemap = PRODUCTS_DEMO.map((p) => ({
-    url: `${SITE_URL}/produit/${p.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-
-  // Si la collection Products en Payload contient déjà des items, on les ajoute aussi
+  // ===== PRODUITS (Phase 5 : full Payload, plus de fallback statique) =====
   let payloadProductPages: MetadataRoute.Sitemap = [];
   let payloadArticlePages: MetadataRoute.Sitemap = [];
   try {
@@ -132,14 +122,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.warn("[sitemap] Payload non joignable, fallback statique :", err);
   }
 
-  // Dédoublonne par URL (les demos peuvent overlapper avec Payload Products)
   const merged = [
     ...staticPages,
     ...brandPages,
     ...cityPages,
     ...guidePages,
     ...blogPages,
-    ...demoProductPages,
     ...payloadProductPages,
     ...payloadArticlePages,
   ];

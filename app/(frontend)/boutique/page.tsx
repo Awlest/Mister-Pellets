@@ -4,7 +4,6 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { ProductCard } from "@/components/product/ProductCard";
 import {
-  PRODUCTS_DEMO,
   POWER_TRANCHES,
   TYPE_LABELS,
   DIFFUSION_LABELS,
@@ -14,6 +13,7 @@ import {
   type Diffusion,
   type ColorCategory,
 } from "@/lib/products-demo";
+import { getAllProducts } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -121,7 +121,10 @@ export default async function BoutiquePage({ searchParams }: Props) {
     couleur: sp.couleur ?? "all",
   };
 
-  const filtered = PRODUCTS_DEMO.filter((p) => {
+  // Phase 5 : query Payload CMS au lieu du tableau statique.
+  const products = await getAllProducts();
+
+  const filtered = products.filter((p) => {
     if (current.marque !== "all" && p.brand !== current.marque) return false;
     if (current.type !== "all" && p.type !== (current.type as ProductType)) return false;
     if (current.puissance !== "all" && powerToTranche(p.powerKw) !== current.puissance)
@@ -138,7 +141,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
   return (
     <>
       <HeroSecondary
-        eyebrow={`${PRODUCTS_DEMO.length} modèles · 4 marques · pellets uniquement`}
+        eyebrow={`${products.length} modèles · 4 marques · pellets uniquement`}
         title={
           <>
             Tous les <span className="mp-italic">poêles à pellets</span>
