@@ -6,7 +6,17 @@ import type { CollectionConfig } from "payload";
  */
 export const Users: CollectionConfig = {
   slug: "users",
-  auth: true,
+  // Lockout brute-force (cf. audit V20260503 §3.H.5) : après 5 tentatives
+  // ratées, compte verrouillé pendant 10 minutes. Protection minimale contre
+  // les bots qui tentent des combinaisons email+password.
+  auth: {
+    maxLoginAttempts: 5,
+    lockTime: 10 * 60 * 1000, // 10 minutes en ms
+    cookies: {
+      sameSite: "Strict",
+      secure: process.env.NODE_ENV === "production",
+    },
+  },
   admin: {
     useAsTitle: "email",
     defaultColumns: ["email", "name", "role", "createdAt"],

@@ -102,11 +102,9 @@ export function NavbarSticky() {
     return () => window.removeEventListener("scroll", handle);
   }, []);
 
-  // Force visible si le drawer Menu est ouvert (UX : on ne veut pas que la nav
-  // disparaisse pendant que le drawer est ouvert)
-  React.useEffect(() => {
-    if (menuOpen) setVisible(true);
-  }, [menuOpen]);
+  // Audit V20260503 §2.H.2 : forcer visible quand le drawer Menu s'ouvre,
+  // sans setState dans useEffect. On dérive l'état effectif via useMemo.
+  const effectiveVisible = visible || menuOpen;
 
   const activeTabId: TabId = React.useMemo(() => {
     if (menuOpen) return "menu";
@@ -122,7 +120,7 @@ export function NavbarSticky() {
           "fixed inset-x-0 bottom-0 z-30 lg:hidden",
           "px-3 pb-3",
           "transition-all duration-300",
-          visible ? "translate-y-0 opacity-100" : "translate-y-[120%] opacity-0 pointer-events-none"
+          effectiveVisible ? "translate-y-0 opacity-100" : "translate-y-[120%] opacity-0 pointer-events-none"
         )}
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       >

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { Check, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -72,17 +73,20 @@ const STEPS = [
 
 export function QuoteForm() {
   const [step, setStep] = React.useState(1);
-  const [state, setState] = React.useState<QuoteState>(initialState);
+  // Audit V20260503 §2.H.2 : init lazy depuis localStorage pour éviter le
+  // setState dans useEffect (anti-pattern React 19, cascading renders).
+  const [state, setState] = React.useState<QuoteState>(() => {
+    if (typeof window === "undefined") return initialState;
+    try {
+      const draft = window.localStorage.getItem(STORAGE_KEY);
+      if (draft) return { ...initialState, ...JSON.parse(draft) };
+    } catch {
+      // localStorage indisponible ou JSON corrompu, on ignore
+    }
+    return initialState;
+  });
   const [submitState, setSubmitState] = React.useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = React.useState<string>("");
-
-  // Charger le brouillon localStorage
-  React.useEffect(() => {
-    try {
-      const draft = localStorage.getItem(STORAGE_KEY);
-      if (draft) setState((prev) => ({ ...prev, ...JSON.parse(draft) }));
-    } catch {}
-  }, []);
 
   // Sauvegarder le brouillon à chaque changement
   React.useEffect(() => {
@@ -123,6 +127,11 @@ export function QuoteForm() {
 
   const prev = () => step > 1 && setStep(step - 1);
 
+  // Honeypot anti-spam (cf. audit V20260503 §3.BLOQUANT.2). Champ caché dans
+  // le DOM, invisible visuellement. Un humain ne le remplit jamais. Un bot
+  // qui remplit aveuglément tous les inputs déclenche le filtre côté serveur.
+  const [website, setWebsite] = React.useState("");
+
   async function handleSubmit() {
     setSubmitState("loading");
     setErrorMsg("");
@@ -130,7 +139,7 @@ export function QuoteForm() {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(state),
+        body: JSON.stringify({ ...state, website }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -157,7 +166,7 @@ export function QuoteForm() {
           Merci {state.name}, on a bien reçu ta demande. On revient vers toi par email à <strong>{state.email}</strong> sous 48h ouvrées avec un chiffrage personnalisé. Si c'est urgent, tu peux aussi nous appeler au 0472 04 32 22.
         </p>
         <Button asChild variant="outline" size="default">
-          <a href="/">Retour à l'accueil</a>
+          <Link href="/">Retour à l&apos;accueil</Link>
         </Button>
       </div>
     );
@@ -165,6 +174,22 @@ export function QuoteForm() {
 
   return (
     <div className="rounded-3xl bg-white border border-mp-sand/40 shadow-md overflow-hidden">
+      {/* Honeypot anti-spam (audit V20260503 §3.BLOQUANT.2). Caché aux humains
+        * et aux lecteurs d'écran (aria-hidden), trompeur pour les bots qui
+        * remplissent tous les inputs. Ne jamais le retirer ni le rendre visible. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+        <label htmlFor="hp-website">Ne pas remplir ce champ</label>
+        <input
+          id="hp-website"
+          type="text"
+          name="website"
+          autoComplete="off"
+          tabIndex={-1}
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
+
       {/* Progress bar */}
       <div className="border-b border-mp-sand/40 bg-mp-cream px-6 md:px-8 py-5">
         <div className="flex items-center justify-between mb-3">
