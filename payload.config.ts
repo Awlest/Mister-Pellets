@@ -16,8 +16,20 @@ import { Articles } from "./collections/Articles";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
+// CORS + CSRF restreints au domaine (audit V14.1) : NO WILDCARD.
+// Seuls notre domaine prod et localhost (dev) peuvent appeler l'API Payload
+// et accéder à l'admin. Tout autre origin est rejeté avec 403.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const ALLOWED_ORIGINS = [
+  SITE_URL,
+  "http://localhost:3000",
+  "http://localhost:3001",
+].filter((v, i, arr) => arr.indexOf(v) === i); // dédup
+
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  serverURL: SITE_URL,
+  cors: ALLOWED_ORIGINS,
+  csrf: ALLOWED_ORIGINS,
 
   admin: {
     user: Users.slug,
