@@ -60,36 +60,51 @@ export function ProductGallery({
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   /**
-   * Calcule la liste d'images actuellement affichée selon la variante
-   * sélectionnée. Logique :
-   * - Aucune variante (-1) → mainImage + galleryImages du produit
-   * - Variante sans mainImage ni galleryImages → idem (fallback)
-   * - Variante avec mainImage seul → variantMainImage + galleryImages produit
-   * - Variante avec galleryImages → variantMainImage (ou mainImage produit) + variantGallery
+   * Liste complète de toutes les images disponibles pour ce produit :
+   * - mainImage produit (base)
+   * - galleryImages produit
+   * - mainImage de chaque colorVariant
+   * - galleryImages de chaque colorVariant
+   *
+   * Toutes ces images sont affichées en thumbnails. L'utilisateur peut cliquer
+   * sur n'importe laquelle pour la voir en grand. Le picker de couleur en
+   * dessous (s'il existe) modifie indépendamment la variante "active" (pour
+   * tracking GTIN), mais n'influence pas la liste affichée.
+   *
+   * On dédoublonne par URL pour éviter les doublons quand une mainImage de
+   * variante est aussi listée comme mainImage produit.
    */
   const allImages: GalleryImage[] = useMemo(() => {
-    const variant =
-      activeVariantIdx >= 0 && colorVariants ? colorVariants[activeVariantIdx] : null;
-    const baseGallery = galleryImages ?? [];
+    const seen = new Set<string>();
+    const list: GalleryImage[] = [];
+    const push = (img: GalleryImage | undefined) => {
+      if (!img || !img.url || seen.has(img.url)) return;
+      seen.add(img.url);
+      list.push(img);
+    };
 
-    if (!variant) {
-      return [...(mainImage ? [mainImage] : []), ...baseGallery];
+    push(mainImage);
+    if (galleryImages) galleryImages.forEach(push);
+
+    if (colorVariants) {
+      for (const variant of colorVariants) {
+        push(variant.mainImage);
+        if (variant.galleryImages) variant.galleryImages.forEach(push);
+      }
     }
 
-    const effectiveMain = variant.mainImage ?? mainImage;
-    const effectiveGallery =
-      variant.galleryImages && variant.galleryImages.length > 0
-        ? variant.galleryImages
-        : baseGallery;
+    return list;
+  }, [mainImage, galleryImages, colorVariants]);
 
-    return [...(effectiveMain ? [effectiveMain] : []), ...effectiveGallery];
-  }, [mainImage, galleryImages, colorVariants, activeVariantIdx]);
-
-  // Reset l'image active quand on change de variante (pour montrer la
-  // mainImage de la variante en premier)
+  // Quand la variante change via le picker, on tente de basculer l'image
+  // affichée vers la mainImage de cette variante (si elle existe dans la liste).
   useEffect(() => {
-    setActiveImageIdx(0);
-  }, [activeVariantIdx]);
+    if (activeVariantIdx < 0 || !colorVariants) return;
+    const variant = colorVariants[activeVariantIdx];
+    if (!variant?.mainImage?.url) return;
+    const idx = allImages.findIndex((img) => img.url === variant.mainImage?.url);
+    if (idx >= 0) setActiveImageIdx(idx);
+  }, [activeVariantIdx, colorVariants, allImages]);
 
   // Esc ferme le lightbox + flèches naviguent
   useEffect(() => {
