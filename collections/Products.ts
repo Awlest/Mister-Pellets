@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { revalidatePath } from "next/cache";
 
 /**
  * Slugifie une chaîne pour générer des URLs propres :
@@ -44,6 +45,52 @@ export const Products: CollectionConfig = {
           data.slug = slugify(data.name);
         }
         return data;
+      },
+    ],
+    afterChange: [
+      ({ doc, previousDoc }) => {
+        // Revalidation instantanée des pages Next.js cachées dès qu'un produit
+        // est créé/modifié dans l'admin. Sans ce hook, les pages SSG du CDN
+        // Vercel restent figées jusqu'au prochain build, et l'éditeur croit
+        // que ses modifs ne s'appliquent pas.
+        try {
+          // Page produit (slug courant)
+          if (doc?.slug && typeof doc.slug === "string") {
+            revalidatePath(`/produit/${doc.slug}`);
+          }
+          // Si le slug a changé, on revalide aussi l'ancien (il restera en
+          // 404 sinon, car generateStaticParams a généré une page pour lui).
+          if (
+            previousDoc?.slug &&
+            typeof previousDoc.slug === "string" &&
+            previousDoc.slug !== doc?.slug
+          ) {
+            revalidatePath(`/produit/${previousDoc.slug}`);
+          }
+          // Liste boutique (compteur, vignettes, prix)
+          revalidatePath("/boutique");
+          // Pages villes qui peuvent référencer ce produit
+          revalidatePath("/poeles-pellets/[ville]", "page");
+        } catch (err) {
+          // En dev local le revalidatePath peut échouer ; ne bloque pas le save
+          console.warn("[products afterChange] revalidate failed:", err);
+        }
+        return doc;
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        // Idem au delete : revalide pour que la page produit disparaisse
+        // de la boutique et que l'URL retourne 404 immédiatement.
+        try {
+          if (doc?.slug && typeof doc.slug === "string") {
+            revalidatePath(`/produit/${doc.slug}`);
+          }
+          revalidatePath("/boutique");
+        } catch (err) {
+          console.warn("[products afterDelete] revalidate failed:", err);
+        }
+        return doc;
       },
     ],
   },

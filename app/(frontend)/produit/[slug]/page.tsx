@@ -23,6 +23,14 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+/**
+ * ISR : régénération max toutes les 60s pour que les modifications admin
+ * Payload remontent rapidement même sans hook revalidatePath manuel.
+ * Combiné au hook afterChange dans collections/Products.ts qui force la
+ * revalidation instantanée à chaque save.
+ */
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   // Phase 5 : query Payload au build pour générer les routes statiques.
   const slugs = await getAllProductSlugs();

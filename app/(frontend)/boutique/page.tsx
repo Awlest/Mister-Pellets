@@ -22,6 +22,12 @@ export const metadata: Metadata = {
     "Catalogue Mister Pellets : Edilkamin, EK63, Dielle, Ferlux. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
 };
 
+/**
+ * ISR : régénération max toutes les 60s pour que les ajouts/modifications
+ * de produits dans l'admin Payload remontent rapidement sur la liste boutique.
+ */
+export const revalidate = 60;
+
 interface Props {
   searchParams: Promise<{
     marque?: string;

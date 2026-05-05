@@ -114,18 +114,19 @@ const COLORS_HYDRO: SeedColorVariant[] = [
    Features mutualisés EK63
    ----------------------------------------------------------------------------- */
 
-const FEATURES_BBC: SeedFeature[] = [
-  {
-    title: "Compatible maison passive",
-    description:
-      "Étanche, prélève l'air comburant directement de l'extérieur. Idéal BBC et logements basse consommation.",
-  },
-  {
-    title: "Wi-Fi E-Smart intégré",
-    description:
-      "Pilotage à distance via l'app SmartEK63 (iOS/Android). Programmation hebdomadaire et fonction Easy Timer.",
-  },
-];
+const FEATURE_BBC_AIRTIGHT: SeedFeature = {
+  title: "Compatible maison passive",
+  description:
+    "Étanche, prélève l'air comburant directement de l'extérieur. Idéal BBC et logements basse consommation.",
+};
+
+const FEATURE_BBC_WIFI: SeedFeature = {
+  title: "Wi-Fi E-Smart intégré",
+  description:
+    "Pilotage à distance via l'app SmartEK63 (iOS/Android). Programmation hebdomadaire et fonction Easy Timer.",
+};
+
+const FEATURES_BBC: SeedFeature[] = [FEATURE_BBC_AIRTIGHT, FEATURE_BBC_WIFI];
 
 const FEATURE_VERMICULITE: SeedFeature = {
   title: "Foyer en vermiculite",
@@ -616,7 +617,7 @@ export const EK63_PRODUCTS: SeedProduct[] = [
     hopperCapacity: 12,
     shortDescription:
       "Insert à pellets 8 kW pour cheminée existante. Allie esthétique traditionnelle et performance pellets.",
-    features: [FEATURE_INSERT, FEATURE_VERMICULITE, FEATURE_BOUGIE_CERAMIQUE, FEATURES_BBC[1]],
+    features: [FEATURE_INSERT, FEATURE_VERMICULITE, FEATURE_BOUGIE_CERAMIQUE, FEATURE_BBC_WIFI],
     stockStatus: "on_order",
     deliveryDelay: "4-6 sem.",
   },
@@ -640,7 +641,7 @@ export const EK63_PRODUCTS: SeedProduct[] = [
     hopperCapacity: 12,
     shortDescription:
       "Insert à pellets 10 kW canalisable, jusqu'à 169 m². Pour cheminée existante avec diffusion étendue.",
-    features: [FEATURE_INSERT, FEATURE_VERMICULITE, FEATURE_CANAL_1, FEATURES_BBC[1]],
+    features: [FEATURE_INSERT, FEATURE_VERMICULITE, FEATURE_CANAL_1, FEATURE_BBC_WIFI],
     stockStatus: "on_order",
     deliveryDelay: "4-6 sem.",
   },
@@ -670,7 +671,7 @@ export const EK63_PRODUCTS: SeedProduct[] = [
       "Thermopoêle hydro 10,1 kW (6,5 kW eau). Raccord chauffage central, étanche, finition céramique.",
     features: [
       FEATURE_HYDRO,
-      FEATURES_BBC[0],
+      FEATURE_BBC_AIRTIGHT,
       FEATURE_VERMICULITE,
       {
         title: "Kit hydraulique intégré",
