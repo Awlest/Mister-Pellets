@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return { title: "Produit introuvable" };
   return {
     title: `${product.name}, Poêle à pellets ${product.power}`,
-    description: `${product.name} : ${product.power} pour ${product.surface}. Prix indicatif ${product.priceTTC ? formatPrice(product.priceTTC) : "sur devis"}. Pose Mister Pellets, primes incluses.`,
+    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. Prix indicatif ${product.priceTTC ? formatPrice(product.priceTTC) : "sur devis"}. Pose Mister Pellets, primes incluses.`,
   };
 }
 
@@ -104,8 +104,8 @@ export default async function ProductPage({ params }: Props) {
     name: product.name,
     description: product.shortDescription
       ? product.shortDescription
-      : product.surface
-        ? `${product.name} : poêle à pellets ${product.type} de ${product.power} pour chauffer ${product.surface}.`
+      : product.heatedVolume
+        ? `${product.name} : poêle à pellets ${product.type} de ${product.power} pour chauffer ${product.heatedVolume}.`
         : `${product.name} : poêle à pellets ${product.type} de ${product.power}.`,
     brand: { "@type": "Brand", name: product.brand },
     offers,
@@ -196,9 +196,9 @@ export default async function ProductPage({ params }: Props) {
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
                   {product.shortDescription}
                 </p>
-              ) : product.surface ? (
+              ) : product.heatedVolume ? (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
-                  {brand?.tagline}. {product.power} pour chauffer {product.surface}. Pose par
+                  {brand?.tagline}. {product.power} pour chauffer {product.heatedVolume}. Pose par
                   Mister Pellets en une journée, primes Wallonie 2026 déduites du devis et
                   garantie 5 ans.
                 </p>
@@ -216,7 +216,7 @@ export default async function ProductPage({ params }: Props) {
                     <Flame className="h-3.5 w-3.5" /> {product.power}
                   </Badge>
                 )}
-                {product.surface && <Badge variant="default">{product.surface}</Badge>}
+                {product.heatedVolume && <Badge variant="default">{product.heatedVolume}</Badge>}
                 {product.type && (
                   <Badge variant="default" className="capitalize">
                     {product.type}
@@ -340,8 +340,8 @@ export default async function ProductPage({ params }: Props) {
               <Flame className="h-8 w-8 text-mp-orange-flame" />
               <h3 className="text-lg font-semibold text-mp-green-deep">Adapté à ta surface</h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
-                {product.surface
-                  ? `Une puissance de ${product.power} idéale pour chauffer ${product.surface}, en chauffage principal ou en complément.`
+                {product.heatedVolume
+                  ? `Une puissance de ${product.power} idéale pour chauffer ${product.heatedVolume}, en chauffage principal ou en complément.`
                   : `Une puissance de ${product.power}, à dimensionner sur mesure selon ta surface lors du devis gratuit Mister Pellets.`}
               </p>
             </Card>

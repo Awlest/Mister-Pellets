@@ -4,17 +4,30 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice } from "@/lib/utils";
 
+export interface ProductColorPreview {
+  colorName: string;
+  colorHex?: string;
+}
+
 export interface ProductCardData {
   slug: string;
   name: string;
   brand: string;
   power?: string;
+  /**
+   * @deprecated — remplacé par `heatedVolume` (m³ max au lieu de m² min-max).
+   * Conservé pour compatibilité ascendante avec l'ancien shape demo.
+   */
   surface?: string;
+  /** Volume de chauffe maximal en m³, ex: "200 m³" */
+  heatedVolume?: string;
   priceTTC?: number;
   imageSrc?: string;
   imageAlt?: string;
   isBestseller?: boolean;
   isNew?: boolean;
+  /** Variantes de couleur disponibles (pour les pastilles sur la vignette). */
+  colorVariants?: ProductColorPreview[];
 }
 
 interface ProductCardProps {
@@ -32,13 +45,23 @@ export function ProductCard({ product, className }: ProductCardProps) {
     name,
     brand,
     power,
-    surface,
+    heatedVolume,
     priceTTC,
     imageSrc,
     imageAlt,
     isBestseller,
     isNew,
+    colorVariants,
   } = product;
+
+  // Filtre + dédup des pastilles par hex pour éviter doublons (ex: deux variantes
+  // qui partagent la même couleur de pastille). Limite à 6 pastilles affichées
+  // pour rester lisible, avec compteur "+N" si plus.
+  const swatches = (colorVariants ?? [])
+    .filter((v) => v.colorHex)
+    .filter((v, i, arr) => arr.findIndex((x) => x.colorHex === v.colorHex) === i);
+  const visibleSwatches = swatches.slice(0, 6);
+  const extraCount = swatches.length - visibleSwatches.length;
 
   return (
     <Link
@@ -94,10 +117,35 @@ export function ProductCard({ product, className }: ProductCardProps) {
             {name}
           </h3>
 
-          {(power || surface) && (
+          {(power || heatedVolume) && (
             <div className="flex flex-wrap gap-2 mt-1">
               {power && <Badge variant="default">{power}</Badge>}
-              {surface && <Badge variant="default">{surface}</Badge>}
+              {heatedVolume && <Badge variant="default">{heatedVolume}</Badge>}
+            </div>
+          )}
+
+          {/* Pastilles de couleur — laissent voir d'un coup d'œil les
+              finitions disponibles. Cliquer mène à la page produit où
+              le picker complet est dispo. */}
+          {visibleSwatches.length > 0 && (
+            <div
+              className="flex items-center gap-1.5 mt-1"
+              aria-label={`${swatches.length} couleur${swatches.length > 1 ? "s" : ""} disponible${swatches.length > 1 ? "s" : ""}`}
+            >
+              {visibleSwatches.map((v, i) => (
+                <span
+                  key={i}
+                  title={v.colorName}
+                  className="inline-block h-3.5 w-3.5 rounded-full border border-mp-sand/60 shadow-sm"
+                  style={{ backgroundColor: v.colorHex }}
+                  aria-hidden="true"
+                />
+              ))}
+              {extraCount > 0 && (
+                <span className="text-[10px] font-semibold text-mp-ink-soft ml-0.5">
+                  +{extraCount}
+                </span>
+              )}
             </div>
           )}
 

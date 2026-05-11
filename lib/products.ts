@@ -101,13 +101,16 @@ function toRelativeUrl(rawUrl: string): string {
  * attendu par les composants UI existants (ProductCard, filtres boutique).
  */
 function payloadToDemo(p: PayloadProduct): ProductDemo {
-  // Reconstruit la string surface "70-130 m²" depuis surfaceMin/Max
-  const surface =
-    p.surfaceMin && p.surfaceMax
-      ? `${p.surfaceMin}-${p.surfaceMax} m²`
-      : p.surfaceMin
-        ? `${p.surfaceMin}+ m²`
-        : undefined;
+  // Volume de chauffe MAX en m³ — affiché côté UI à la place de la surface m².
+  // Les catalogues constructeurs (EK63, Edilkamin, Dielle, Ferlux) expriment
+  // tous le volume chauffable en m³. Lors des seeds, on a converti volume ×
+  // 0,40 → surfaceMin et volume × 0,65 → surfaceMax. On reverse :
+  // volume = surfaceMax / 0,65, arrondi à la dizaine pour avoir un chiffre rond.
+  let heatedVolume: string | undefined;
+  if (p.surfaceMax && p.surfaceMax > 0) {
+    const volumeM3 = Math.round(p.surfaceMax / 0.65 / 10) * 10;
+    heatedVolume = `${volumeM3} m³`;
+  }
 
   // Reconstruit la string power "9 kW" depuis power numeric
   const power = `${p.power} kW`;
@@ -151,7 +154,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     color: p.color,
     powerKw: p.power,
     power,
-    surface,
+    heatedVolume,
     priceTTC: p.priceTTC,
     isBestseller: p.isBestseller ?? false,
     isNew: p.isNew ?? false,
