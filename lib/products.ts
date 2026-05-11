@@ -28,8 +28,7 @@ interface PayloadProduct {
   color: ColorCategory;
   power: number;
   priceTTC: number;
-  surfaceMin?: number | null;
-  surfaceMax?: number | null;
+  heatedVolumeM3?: number | null;
   isAirtight?: boolean | null;
   isConnected?: boolean | null;
   isBestseller?: boolean | null;
@@ -101,16 +100,10 @@ function toRelativeUrl(rawUrl: string): string {
  * attendu par les composants UI existants (ProductCard, filtres boutique).
  */
 function payloadToDemo(p: PayloadProduct): ProductDemo {
-  // Volume de chauffe MAX en m³ — affiché côté UI à la place de la surface m².
-  // Les catalogues constructeurs (EK63, Edilkamin, Dielle, Ferlux) expriment
-  // tous le volume chauffable en m³. Lors des seeds, on a converti volume ×
-  // 0,40 → surfaceMin et volume × 0,65 → surfaceMax. On reverse :
-  // volume = surfaceMax / 0,65, arrondi à la dizaine pour avoir un chiffre rond.
-  let heatedVolume: string | undefined;
-  if (p.surfaceMax && p.surfaceMax > 0) {
-    const volumeM3 = Math.round(p.surfaceMax / 0.65 / 10) * 10;
-    heatedVolume = `${volumeM3} m³`;
-  }
+  // Volume de chauffe MAX en m³ — donnée constructeur saisie directement par
+  // l'équipe Awlest dans l'admin Payload. Pas de conversion.
+  const heatedVolume =
+    p.heatedVolumeM3 && p.heatedVolumeM3 > 0 ? `${p.heatedVolumeM3} m³` : undefined;
 
   // Reconstruit la string power "9 kW" depuis power numeric
   const power = `${p.power} kW`;

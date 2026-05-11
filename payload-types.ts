@@ -264,13 +264,9 @@ export interface Product {
    */
   power: number;
   /**
-   * Surface min (m²)
+   * Volume de chauffe maximal (m³) — donnée constructeur, à saisir telle quelle.
    */
-  surfaceMin?: number | null;
-  /**
-   * Surface max (m²)
-   */
-  surfaceMax?: number | null;
+  heatedVolumeM3?: number | null;
   /**
    * Rendement (%)
    */
@@ -820,8 +816,7 @@ export interface ProductsSelect<T extends boolean = true> {
   promoPrice?: T;
   installationPrice?: T;
   power?: T;
-  surfaceMin?: T;
-  surfaceMax?: T;
+  heatedVolumeM3?: T;
   efficiency?: T;
   energyClass?: T;
   emissions?: T;

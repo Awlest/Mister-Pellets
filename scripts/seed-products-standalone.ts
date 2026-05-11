@@ -13,9 +13,13 @@ import config from "../payload.config";
 import { PRODUCTS_DEMO, type ProductDemo } from "../lib/products-demo";
 
 function mapDemoToPayload(p: ProductDemo) {
+  // Parse "70-130 m²" depuis l'ancien shape demo, convertit en volume m³.
   const surfaceMatch = p.surface?.match(/(\d+)\s*-\s*(\d+)/);
-  const surfaceMin = surfaceMatch ? Number(surfaceMatch[1]) : undefined;
   const surfaceMax = surfaceMatch ? Number(surfaceMatch[2]) : undefined;
+  const heatedVolumeM3 =
+    surfaceMax && surfaceMax > 0
+      ? Math.round(surfaceMax / 0.65 / 10) * 10
+      : undefined;
 
   if (typeof p.priceTTC !== "number") {
     throw new Error(`[seed] ${p.slug} sans priceTTC`);
@@ -37,8 +41,7 @@ function mapDemoToPayload(p: ProductDemo) {
     priceHT,
     priceTTC: p.priceTTC,
     power: p.powerKw,
-    surfaceMin,
-    surfaceMax,
+    heatedVolumeM3,
     isAirtight: p.isAirtight,
     isConnected: p.isConnected,
     isCanalizable: p.type === "canalisable",

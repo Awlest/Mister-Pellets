@@ -240,22 +240,21 @@ export const Products: CollectionConfig = {
           name: "power",
           type: "number",
           required: true,
-          admin: { width: "25%", description: "Puissance (kW)" },
+          admin: { width: "33%", description: "Puissance (kW)" },
         },
         {
-          name: "surfaceMin",
+          name: "heatedVolumeM3",
           type: "number",
-          admin: { width: "25%", description: "Surface min (m²)" },
-        },
-        {
-          name: "surfaceMax",
-          type: "number",
-          admin: { width: "25%", description: "Surface max (m²)" },
+          admin: {
+            width: "33%",
+            description:
+              "Volume de chauffe maximal (m³) — donnée constructeur, à saisir telle quelle.",
+          },
         },
         {
           name: "efficiency",
           type: "number",
-          admin: { width: "25%", description: "Rendement (%)" },
+          admin: { width: "33%", description: "Rendement (%)" },
         },
       ],
     },
