@@ -204,8 +204,10 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
 }
 
 /**
- * Retourne tous les produits visibles publiquement (la collection Products
- * est en read public via access.read=()=>true).
+ * Retourne tous les produits visibles publiquement DANS LA BOUTIQUE.
+ * Filtre les produits avec hiddenFromBoutique=true (cochés "Masquer de la
+ * boutique" par l'équipe Awlest). Ces produits restent accessibles via leur
+ * URL directe /produit/{slug} mais n'apparaissent plus dans le listing.
  *
  * Phase 5 : pas de pagination car catalogue ≤ 100 produits attendus.
  */
@@ -216,6 +218,11 @@ export async function getAllProducts(): Promise<ProductDemo[]> {
     limit: 200,
     depth: 1, // hydrate mainImage
     overrideAccess: false, // respecte la règle read public
+    where: {
+      // Les produits sans hiddenFromBoutique=true sont visibles (gère NULL,
+      // false, et undefined — utile pour les produits créés avant la migration)
+      hiddenFromBoutique: { not_equals: true },
+    },
   });
 
   return result.docs.map((d) => payloadToDemo(d as unknown as PayloadProduct));
@@ -223,6 +230,8 @@ export async function getAllProducts(): Promise<ProductDemo[]> {
 
 /**
  * Retourne un produit par son slug, ou undefined si pas trouvé.
+ * Pas de filtre sur hiddenFromBoutique — l'URL directe doit rester accessible
+ * même pour les produits masqués (favoris, liens externes, etc.).
  */
 export async function getProductBySlug(slug: string): Promise<ProductDemo | undefined> {
   const payload = await getPayloadClient();
@@ -239,8 +248,11 @@ export async function getProductBySlug(slug: string): Promise<ProductDemo | unde
 }
 
 /**
- * Retourne tous les slugs des produits publiés. Utilisé par sitemap.ts et
- * generateStaticParams() de la page produit.
+ * Retourne tous les slugs des produits VISIBLES dans la boutique. Utilisé par
+ * sitemap.ts (on ne référence pas les produits masqués dans Google) et
+ * generateStaticParams() de la page produit (pas besoin de pré-générer les
+ * pages masquées au build, elles seront rendues à la demande si quelqu'un
+ * arrive par URL directe).
  */
 export async function getAllProductSlugs(): Promise<string[]> {
   const payload = await getPayloadClient();
@@ -250,6 +262,9 @@ export async function getAllProductSlugs(): Promise<string[]> {
     pagination: false,
     overrideAccess: false,
     select: { slug: true },
+    where: {
+      hiddenFromBoutique: { not_equals: true },
+    },
   });
 
   return result.docs.map((d) => (d as unknown as PayloadProduct).slug);

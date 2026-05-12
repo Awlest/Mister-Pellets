@@ -103,11 +103,36 @@ export const Products: CollectionConfig = {
   },
   admin: {
     useAsTitle: "name",
-    defaultColumns: ["name", "brand", "power", "priceTTC", "stockStatus", "isBestseller"],
+    defaultColumns: [
+      "name",
+      "brand",
+      "power",
+      "priceTTC",
+      "stockStatus",
+      "hiddenFromBoutique",
+    ],
     listSearchableFields: ["name", "sku", "slug", "brand"],
     group: "Boutique",
   },
   fields: [
+    // ===== VISIBILITÉ BOUTIQUE =====
+    // Champ unique pour permettre à l'équipe de cacher un produit du listing
+    // sans le supprimer. La page produit (URL directe /produit/{slug}) reste
+    // accessible pour ne pas casser d'éventuels liens externes ou favoris.
+    // Pour masquer en masse : sélectionner plusieurs produits dans le listing
+    // admin → bouton "Edit" en haut → toggle ce champ → "Save changes".
+    {
+      name: "hiddenFromBoutique",
+      type: "checkbox",
+      defaultValue: false,
+      label: "Masquer de la boutique",
+      admin: {
+        description:
+          "Si coché, le produit n'apparaît plus dans la liste de la boutique ni dans les filtres. L'URL directe /produit/{slug} reste accessible.",
+        position: "sidebar",
+      },
+    },
+
     // ===== IDENTIFIANTS =====
     {
       type: "row",

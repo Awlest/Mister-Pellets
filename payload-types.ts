@@ -215,6 +215,10 @@ export interface Media {
 export interface Product {
   id: number;
   /**
+   * Si coché, le produit n'apparaît plus dans la liste de la boutique ni dans les filtres. L'URL directe /produit/{slug} reste accessible.
+   */
+  hiddenFromBoutique?: boolean | null;
+  /**
    * Référence interne unique
    */
   sku: string;
@@ -803,6 +807,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
+  hiddenFromBoutique?: T;
   sku?: T;
   slug?: T;
   name?: T;

@@ -6,6 +6,7 @@ import * as migration_20260504_080000_mollie_migration from './20260504_080000_m
 import * as migration_20260504_140000_products_diffusion_color from './20260504_140000_products_diffusion_color';
 import * as migration_20260504_180000_products_color_variants from './20260504_180000_products_color_variants';
 import * as migration_20260505_140000_products_heated_volume_m3 from './20260505_140000_products_heated_volume_m3';
+import * as migration_20260512_140000_products_hidden_from_boutique from './20260512_140000_products_hidden_from_boutique';
 
 export const migrations = [
   {
@@ -47,5 +48,10 @@ export const migrations = [
     up: migration_20260505_140000_products_heated_volume_m3.up,
     down: migration_20260505_140000_products_heated_volume_m3.down,
     name: '20260505_140000_products_heated_volume_m3',
+  },
+  {
+    up: migration_20260512_140000_products_hidden_from_boutique.up,
+    down: migration_20260512_140000_products_hidden_from_boutique.down,
+    name: '20260512_140000_products_hidden_from_boutique',
   },
 ];
