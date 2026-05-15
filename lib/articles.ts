@@ -200,6 +200,288 @@ export const ARTICLES: ArticleData[] = [
   },
 
   // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : Leonardo (Edilkamin)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "technologie-leonardo-edilkamin-combustion",
+    title: "Technologie Leonardo : comment Edilkamin auto-règle la combustion",
+    metaTitle: "Technologie Leonardo Edilkamin : la combustion auto-réglée",
+    metaDescription:
+      "Leonardo, le système d'autorégulation d'Edilkamin : sondes lambda, correction continue de l'air et des pellets. Ce que ça change vraiment au quotidien.",
+    excerpt:
+      "Leonardo, c'est le système qui règle la combustion à ta place. On explique comment il marche et ce qu'il change concrètement chez toi.",
+    tldr:
+      "Leonardo est le système d'autorégulation de combustion d'Edilkamin. Des sondes lambda et des capteurs de pression mesurent en continu la combustion, et le poêle corrige seul le débit de pellets et d'air. Résultat : la flamme reste optimale même si tu changes de marque de pellets, même quand l'humidité ou la température varient. Tu n'as rien à régler dans le menu. Leonardo est intégré aux modèles Edilkamin qui en sont équipés, ce n'est pas une option payante.",
+    category: "marques",
+    tags: ["Edilkamin", "Leonardo", "combustion", "autorégulation"],
+    readingTimeMinutes: 6,
+    publishedAt: "2026-05-15",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens certifiés Wallonie",
+    coverImageAlt:
+      "Schéma de la technologie Leonardo d'autorégulation de combustion sur un poêle Edilkamin",
+    sections: [
+      {
+        heading: "Leonardo, la combustion qui se règle toute seule",
+        paragraphs: [
+          "Leonardo est le système d'autorégulation d'Edilkamin. Plutôt que de te demander d'ajuster des paramètres dans un menu, le poêle ajuste lui-même la combustion, en continu, pendant qu'il tourne.",
+          "C'est une des raisons pour lesquelles on recommande Edilkamin quand un client cherche un poêle qu'on installe et qu'on oublie. Tu allumes, et le poêle se débrouille pour garder une combustion propre.",
+        ],
+      },
+      {
+        heading: "Des sondes qui mesurent, un poêle qui corrige",
+        paragraphs: [
+          "Leonardo s'appuie sur des sondes lambda, qui mesurent l'oxygène présent dans les fumées, et sur des capteurs de pression. Le poêle lit en permanence comment la combustion se déroule.",
+          "À partir de ces mesures, il corrige deux choses : le débit de pellets envoyé par la vis sans fin, et le débit d'air du ventilateur. La flamme reste dans sa zone idéale, sans intervention de ta part.",
+        ],
+      },
+      {
+        heading: "Ce que ça change concrètement",
+        paragraphs: [
+          "Il y a trois situations courantes où Leonardo travaille pour toi.",
+        ],
+        list: {
+          items: [
+            "Tu changes de marque de pellets : longueur, taux de cendres et densité varient d'un sac à l'autre, le poêle se recale seul.",
+            "L'humidité de la pièce change au fil de la saison : la combustion reste stable.",
+            "Il fait très froid dehors et le tirage du conduit se modifie : Leonardo compense.",
+          ],
+        },
+        callout: {
+          variant: "info",
+          text: "Tu n'as rien à toucher dans le menu. C'est tout l'intérêt : la combustion reste optimale sans que tu deviennes technicien de ton propre poêle.",
+        },
+      },
+      {
+        heading: "Leonardo et la qualité des pellets",
+        paragraphs: [
+          "Tous les sacs de pellets ne se valent pas. Sur un poêle classique, un lot un peu différent peut décaler la combustion et encrasser plus vite. Avec Leonardo, le poêle absorbe une bonne partie de cet écart.",
+          "Ça ne dispense pas d'acheter des pellets certifiés ENplus A1, c'est la base. Mais le système pardonne les variations normales d'un lot à l'autre.",
+        ],
+      },
+      {
+        heading: "Est-ce que ça vaut le surcoût Edilkamin ?",
+        paragraphs: [
+          "Leonardo n'est pas une option à cocher : il est intégré aux modèles Edilkamin qui en sont équipés. Le tarif Edilkamin est premium, et l'autorégulation fait partie de ce que tu paies.",
+          "Concrètement, une combustion bien réglée en permanence, c'est moins d'imbrûlés, moins d'encrassement de l'échangeur, et un poêle qui vieillit mieux. C'est un des arguments durée de vie de la marque.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Leonardo, c'est une option payante ?",
+        answer:
+          "Non. Leonardo est intégré d'usine aux modèles Edilkamin qui en sont équipés. Il n'y a pas de module à acheter ni d'abonnement.",
+      },
+      {
+        question: "Avec Leonardo, je n'ai plus besoin d'entretenir mon poêle ?",
+        answer:
+          "Si. Le ramonage et l'entretien annuel restent obligatoires et indispensables. Leonardo optimise la combustion, il ne remplace pas l'entretien mécanique.",
+      },
+      {
+        question: "Leonardo fonctionne avec n'importe quels pellets ?",
+        answer:
+          "Il encaisse bien les variations entre lots, mais on conseille toujours des pellets certifiés ENplus A1. Un bon combustible reste la base d'une combustion saine.",
+      },
+      {
+        question: "EK63 a-t-il aussi la technologie Leonardo ?",
+        answer:
+          "Non, Leonardo reste une technologie propre à Edilkamin. EK63, la marque sœur, mise plutôt sur le Wi-Fi Smart intégré de série.",
+      },
+    ],
+    related: {
+      articles: ["edilkamin-ek63-girolami-quelle-marque-choisir"],
+      brands: ["edilkamin"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : Wi-Fi de série (EK63)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "ek63-wifi-serie-poele-pellets-connecte",
+    title: "EK63 : pourquoi le Wi-Fi de série change la vie au quotidien",
+    metaTitle: "EK63 Wi-Fi de série : poêle à pellets connecté sans abonnement",
+    metaDescription:
+      "Le Wi-Fi Smart est intégré de série sur la majorité des EK63, sans abonnement. Allumage à distance, programmation, suivi conso. Ce que ça change vraiment.",
+    excerpt:
+      "Sur EK63, le Wi-Fi n'est ni une option ni un abonnement. Voici ce que ça change concrètement quand tu pilotes ton poêle depuis ton smartphone.",
+    tldr:
+      "La majorité des poêles EK63 intègrent le Wi-Fi Smart d'usine, sans abonnement. Tu pilotes l'allumage, la programmation horaire, la puissance et le suivi de consommation depuis ton smartphone. Le mot important, c'est de série : pas de module à acheter, pas de gamme haute à viser. Combiné à l'étanchéité de la plupart des modèles EK63, c'est le profil idéal d'une maison wallonne récente.",
+    category: "marques",
+    tags: ["EK63", "Wi-Fi", "connecté", "smartphone"],
+    readingTimeMinutes: 6,
+    publishedAt: "2026-05-15",
+    authorName: "Équipe Mister Pellets",
+    authorRole: "Conseillers chauffage biomasse",
+    coverImageAlt:
+      "Pilotage d'un poêle à pellets EK63 connecté en Wi-Fi depuis un smartphone",
+    sections: [
+      {
+        heading: "Le Wi-Fi de série, et sans abonnement",
+        paragraphs: [
+          "Sur la majorité des modèles EK63, le module Wi-Fi Smart est intégré dès l'usine. Ce n'est pas un accessoire à acheter en plus, et il n'y a aucun abonnement mensuel pour l'utiliser.",
+          "C'est un des vrais arguments de la marque. Chez beaucoup de fabricants, la connectivité est en option payante ou réservée aux gammes les plus chères. EK63 la met d'office.",
+        ],
+      },
+      {
+        heading: "Ce que tu pilotes depuis ton smartphone",
+        paragraphs: [
+          "L'application couvre l'essentiel des usages quotidiens.",
+        ],
+        list: {
+          items: [
+            "Allumer et éteindre le poêle à distance.",
+            "Programmer des plages horaires, jour par jour, sur la semaine.",
+            "Régler la puissance et passer en mode économique.",
+            "Suivre la consommation de pellets.",
+            "Recevoir les alertes : réservoir bas, entretien nécessaire.",
+          ],
+        },
+      },
+      {
+        heading: "Pourquoi de série change le quotidien",
+        paragraphs: [
+          "Le dimanche soir, tu programmes ta semaine en deux minutes. Depuis le bureau, tu lances le poêle pour rentrer dans un séjour déjà chaud. En week-end ou en vacances, tu vérifies d'un coup d'oeil que tout est éteint.",
+          "Ces usages ne sont utiles que s'ils sont disponibles tout le temps, sans surcoût. C'est exactement ce que veut dire de série.",
+        ],
+        callout: {
+          variant: "success",
+          text: "Pas d'abonnement, c'est important sur la durée : le pilotage reste gratuit pendant toute la vie du poêle, pas seulement la première année.",
+        },
+      },
+      {
+        heading: "Wi-Fi et étanchéité : le vrai combo EK63",
+        paragraphs: [
+          "Le Wi-Fi n'est pas le seul atout d'EK63. La plupart des modèles sont étanches : ils prennent l'air comburant directement à l'extérieur et n'aspirent pas l'air chaud de ta pièce.",
+          "Connecté plus étanche, c'est le profil idéal des maisons récentes wallonnes, à VMC double flux, BBC ou passives. Tu pilotes facilement, et le poêle respecte l'équilibre d'air de la maison.",
+        ],
+      },
+      {
+        heading: "Les modèles EK63 connectés",
+        paragraphs: [
+          "Le Wi-Fi équipe les best-sellers de la gamme : le Tweed 90+ canalisable étanche, le Spy 110+, le Daily 130++, et l'Entity 90+ ultra-fin de 31 cm de profondeur. Tous se pilotent depuis l'application.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Le Wi-Fi EK63 a-t-il un abonnement ?",
+        answer:
+          "Non. Le Wi-Fi Smart est intégré de série et son utilisation est gratuite, sans abonnement, pendant toute la vie du poêle.",
+      },
+      {
+        question: "Que se passe-t-il si je n'ai pas de Wi-Fi chez moi ?",
+        answer:
+          "Le poêle fonctionne normalement en local, avec son écran et sa programmation intégrée. Le Wi-Fi est un confort en plus, pas une condition de fonctionnement.",
+      },
+      {
+        question: "Le Wi-Fi remplace-t-il un thermostat ?",
+        answer:
+          "L'application gère la programmation horaire et la puissance. Selon le modèle, un thermostat d'ambiance peut aussi être ajouté. On en parle lors du devis selon ta configuration.",
+      },
+      {
+        question: "Tous les EK63 sont-ils connectés ?",
+        answer:
+          "La grande majorité des modèles EK63 intègrent le Wi-Fi Smart. On confirme toujours le détail modèle par modèle au moment du devis.",
+      },
+    ],
+    related: {
+      articles: ["edilkamin-ek63-girolami-quelle-marque-choisir"],
+      brands: ["ek63"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : Source Feeding (Girolami)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "source-feeding-girolami-brasier-auto-nettoyant",
+    title: "Source Feeding Girolami : pourquoi le brasier reste propre tout seul",
+    metaTitle: "Source Feeding Girolami : le brasier de poêle qui se nettoie seul",
+    metaDescription:
+      "Le brevet Source Feeding de Girolami pousse le pellet par le bas et chasse les cendres dans un bac. Fini le nettoyage quotidien du brasier. Explications.",
+    excerpt:
+      "Le brevet Source Feeding de Girolami change la corvée la plus détestée des poêles à pellets : le nettoyage quotidien du brasier.",
+    tldr:
+      "Source Feeding est le brevet d'alimentation par le bas de Girolami. Au lieu de tomber sur le brasier, le pellet est poussé sous le brasier, et les cendres sont chassées vers un bac de collecte sous le foyer. Concrètement, le brasier reste propre tout seul : tu ne grattes plus tous les jours, tu vides le cendrier environ une fois par semaine. L'entretien annuel, lui, reste nécessaire.",
+    category: "marques",
+    tags: ["Girolami", "Source Feeding", "entretien", "brasier"],
+    readingTimeMinutes: 6,
+    publishedAt: "2026-05-15",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens certifiés Wallonie",
+    coverImageAlt:
+      "Schéma du système Source Feeding de Girolami, alimentation du pellet par le bas du brasier",
+    sections: [
+      {
+        heading: "Le vrai sujet : le nettoyage quotidien du brasier",
+        paragraphs: [
+          "Sur un poêle à pellets classique, le pellet tombe par le haut sur le brasier. La combustion laisse un dépôt de cendres et d'imbrûlés, et il faut gratter le brasier régulièrement, souvent tous les jours en pleine saison de chauffe.",
+          "C'est la corvée que personne n'aime. Girolami a construit son brevet maison autour de ce problème précis.",
+        ],
+      },
+      {
+        heading: "Source Feeding : l'alimentation par le bas",
+        paragraphs: [
+          "Avec Source Feeding, le pellet n'est pas lâché sur le brasier : il est poussé par en dessous. Au fur et à mesure que le combustible neuf arrive, les cendres et les imbrûlés sont chassés vers un bac de collecte placé sous le foyer.",
+          "Le brasier reste donc dégagé en permanence. C'est mécanique, intégré au fonctionnement du poêle : il n'y a aucun mode à activer.",
+        ],
+      },
+      {
+        heading: "Ce que ça change : du quotidien à l'hebdomadaire",
+        paragraphs: [
+          "Le résultat se mesure très simplement. Tu ne grattes plus le brasier chaque jour. Tu vides le bac à cendres environ une fois par semaine, selon ton utilisation.",
+        ],
+        callout: {
+          variant: "success",
+          text: "Pour les clients qui en ont assez du nettoyage quotidien d'un poêle classique, c'est l'argument qui fait basculer le choix vers Girolami.",
+        },
+      },
+      {
+        heading: "Source Feeding et tolérance aux pellets",
+        paragraphs: [
+          "Comme le brasier ne s'encrasse pas de la même manière, le système encaisse mieux les pellets de qualité variable. La combustion reste régulière même si un lot est un peu différent.",
+          "On conseille quand même des pellets certifiés ENplus A1 : un bon combustible reste le meilleur allié de ton poêle, quel que soit le système d'alimentation.",
+        ],
+      },
+      {
+        heading: "Quels modèles Girolami profitent du Source Feeding",
+        paragraphs: [
+          "Le Source Feeding est la signature de Girolami, présente sur la gamme. La Soft, hybride bois-pellet hydro, est le best-seller, primée Good Design Award 2022. Les modèles Vert, Flow et Curvy l'embarquent aussi, chacun avec son style.",
+          "Sur la gamme hybride, Source Feeding se combine au Fuel Convert System, qui bascule automatiquement entre pellet et bois selon le combustible chargé.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Le brasier ne se nettoie vraiment jamais à la main ?",
+        answer:
+          "Le brasier reste propre seul au quotidien grâce au Source Feeding. Tu vides le bac à cendres environ une fois par semaine, et l'entretien annuel complet par un professionnel reste nécessaire.",
+      },
+      {
+        question: "Source Feeding consomme-t-il plus de pellets ?",
+        answer:
+          "Non. C'est un mode d'alimentation du brasier, pas une surconsommation. Le rendement des poêles Girolami reste élevé.",
+      },
+      {
+        question: "Tous les Girolami ont-ils le Source Feeding ?",
+        answer:
+          "C'est la signature de la marque, présente sur sa gamme de poêles. On confirme le détail modèle par modèle au moment du devis.",
+      },
+      {
+        question: "Et l'hybride bois-pellet, comment ça marche avec ?",
+        answer:
+          "Sur la gamme Soft, Source Feeding se combine au Fuel Convert System : une sonde reconnaît le combustible chargé et le poêle bascule seul entre pellet et bois, sans réglage manuel.",
+      },
+    ],
+    related: {
+      articles: ["edilkamin-ek63-girolami-quelle-marque-choisir"],
+      brands: ["girolami"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
   // 1. DIMENSIONNEMENT (intent : "quelle puissance poêle pellets ?")
   // ───────────────────────────────────────────────────────────────────
   {
