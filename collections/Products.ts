@@ -592,5 +592,144 @@ export const Products: CollectionConfig = {
         },
       ],
     },
+
+    // ===== VARIANTES PRODUIT (système générique multi-axes) =====
+    // AJOUT ADDITIF — ne remplace PAS le champ `colorVariants` ci-dessus.
+    // `colorVariants` reste le système simple « déclinaisons de couleur »
+    // utilisé par les ~118 produits déjà encodés (prix unique, photos par
+    // couleur). Ce bloc-ci est le système générique multi-axes (matériau,
+    // sortie des fumées, alimentation…) avec un prix/SKU par combinaison.
+    //
+    // Toute l'UI ci-dessous est masquée tant que `hasVariants` n'est pas
+    // coché : les produits existants ne voient AUCUN changement dans leur
+    // interface d'édition. Aucune donnée existante n'est touchée.
+    {
+      name: "hasVariants",
+      type: "checkbox",
+      defaultValue: false,
+      label: "Ce produit a des variantes",
+      admin: {
+        description:
+          "Active la gestion des variantes ci-dessous. Si décoché, le produit fonctionne avec son prix et son SKU principal (comportement actuel inchangé).",
+      },
+    },
+    {
+      name: "variantOptions",
+      type: "array",
+      label: "Options de variantes (axes de configuration)",
+      admin: {
+        condition: (_, siblingData) => siblingData?.hasVariants === true,
+        description:
+          "Définir les axes de variation. Exemple : Matériau, Couleur, Sortie des fumées.",
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: "optionType",
+          type: "relationship",
+          relationTo: "variant-option-types",
+          required: true,
+        },
+        {
+          name: "values",
+          type: "relationship",
+          relationTo: "variant-option-values",
+          hasMany: true,
+          required: true,
+          filterOptions: ({ siblingData }) => ({
+            optionType: {
+              equals: (siblingData as { optionType?: string | number } | undefined)
+                ?.optionType,
+            },
+          }),
+        },
+      ],
+    },
+    {
+      name: "variants",
+      type: "array",
+      label: "Combinaisons disponibles",
+      admin: {
+        condition: (_, siblingData) => siblingData?.hasVariants === true,
+        description:
+          "Une ligne par combinaison réelle disponible. Les combinaisons absentes ici sont automatiquement grisées sur le site.",
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: "optionValues",
+          type: "relationship",
+          relationTo: "variant-option-values",
+          hasMany: true,
+          required: true,
+          admin: {
+            description:
+              "Sélectionner UNE valeur par axe défini ci-dessus (ex : Acier + Noir + Sortie haute).",
+          },
+        },
+        {
+          type: "row",
+          fields: [
+            {
+              name: "sku",
+              type: "text",
+              required: true,
+              admin: { width: "40%", description: "Référence unique de la variante" },
+            },
+            {
+              name: "gtin",
+              type: "text",
+              admin: { width: "30%", description: "Code-barres EAN de la variante" },
+            },
+            {
+              name: "mpn",
+              type: "text",
+              admin: { width: "30%", description: "Référence fabricant de la variante" },
+            },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            {
+              name: "price",
+              type: "number",
+              required: true,
+              admin: { width: "33%", step: 0.01, description: "Prix TTC (€)" },
+            },
+            {
+              name: "salePrice",
+              type: "number",
+              admin: { width: "33%", step: 0.01, description: "Prix promo TTC (€)" },
+            },
+            {
+              name: "stockStatus",
+              type: "select",
+              defaultValue: "in_stock",
+              options: [
+                { label: "En stock", value: "in_stock" },
+                { label: "Sur commande", value: "on_order" },
+                { label: "Rupture temporaire", value: "out_of_stock" },
+              ],
+              admin: { width: "34%" },
+            },
+          ],
+        },
+        {
+          name: "leadTimeDays",
+          type: "number",
+          admin: { description: "Délai de livraison de cette variante (jours) — optionnel." },
+        },
+        {
+          name: "image",
+          type: "upload",
+          relationTo: "media",
+          admin: {
+            description:
+              "Optionnel. Si renseigné, l'image principale change quand cette variante est sélectionnée.",
+          },
+        },
+      ],
+    },
   ],
 };

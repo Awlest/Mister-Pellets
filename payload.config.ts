@@ -9,6 +9,8 @@ import sharp from "sharp";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Products } from "./collections/Products";
+import { VariantOptionTypes } from "./collections/VariantOptionTypes";
+import { VariantOptionValues } from "./collections/VariantOptionValues";
 import { Orders } from "./collections/Orders";
 import { Quotes } from "./collections/Quotes";
 import { ContactMessages } from "./collections/ContactMessages";
@@ -42,7 +44,17 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, Products, Orders, Quotes, ContactMessages, Articles],
+  collections: [
+    Users,
+    Media,
+    Products,
+    VariantOptionTypes,
+    VariantOptionValues,
+    Orders,
+    Quotes,
+    ContactMessages,
+    Articles,
+  ],
 
   editor: lexicalEditor(),
 
@@ -56,6 +68,12 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI ?? "",
     },
+    // Garde-fou : on DÉSACTIVE le push automatique de schéma. Tout changement
+    // de schéma DOIT passer par un fichier de migration explicite (dossier
+    // migrations/). Sans ce flag, exécuter un script via tsx (mode dev) avec
+    // DATABASE_URI pointant sur la prod pousse le schéma directement en base —
+    // exactement ce que le protocole de migration interdit.
+    push: false,
   }),
 
   sharp,

@@ -73,6 +73,24 @@ export interface ProductDemo extends ProductCardData {
    * Le prix et les options techniques restent identiques entre variantes.
    */
   colorVariants?: ProductColorVariant[];
+  /** Référence interne du produit (utilisée par le feed Google Merchant). */
+  sku?: string;
+  /** Code EAN au niveau produit — feed Merchant des produits sans variantes. */
+  gtin?: string;
+  /** Référence fabricant au niveau produit — feed Merchant. */
+  mpn?: string;
+  /** Catégorie Google Merchant (taxonomie officielle). */
+  googleProductCategory?: string;
+  /**
+   * Système de variantes générique multi-axes (matériau, sortie des fumées…).
+   * Indépendant de colorVariants. Activé via la case « Ce produit a des
+   * variantes » dans l'admin Payload.
+   */
+  hasVariants?: boolean;
+  /** Axes de variation configurés pour ce produit. */
+  variantOptions?: VariantOptionAxis[];
+  /** Combinaisons réelles disponibles (un prix/SKU/stock par variante). */
+  variants?: ProductVariantData[];
 }
 
 /** Variante de couleur d'un produit (cf. colorVariants ci-dessus). */
@@ -84,6 +102,53 @@ export interface ProductColorVariant {
   mainImage?: { url: string; alt?: string };
   /** Override de la galerie, sinon on utilise celle du produit. */
   galleryImages?: Array<{ url: string; alt?: string }>;
+}
+
+// =====================================================================
+// SYSTÈME DE VARIANTES GÉNÉRIQUE (multi-axes)
+// =====================================================================
+
+export type VariantDisplayMode = "text" | "color" | "icon";
+
+export type VariantStockStatus = "in_stock" | "on_order" | "out_of_stock";
+
+/** Une valeur possible d'un axe (ex: « Noir », « Acier », « 9 kW »). */
+export interface VariantOptionValueData {
+  id: number;
+  label: string;
+  slug: string;
+  /** Code hex — utilisé si l'axe est en mode « color ». */
+  colorHex?: string;
+  /** URL de l'icône SVG — utilisée si l'axe est en mode « icon ». */
+  iconUrl?: string;
+}
+
+/** Un axe de variation (ex: « Couleur ») et ses valeurs disponibles. */
+export interface VariantOptionAxis {
+  optionTypeId: number;
+  label: string;
+  slug: string;
+  displayMode: VariantDisplayMode;
+  sortOrder: number;
+  values: VariantOptionValueData[];
+}
+
+/** Une combinaison réelle disponible à l'achat. */
+export interface ProductVariantData {
+  id: string;
+  /** IDs des valeurs d'option qui composent cette combinaison. */
+  optionValueIds: number[];
+  sku?: string;
+  gtin?: string;
+  mpn?: string;
+  /** Prix TTC de la variante. */
+  price: number;
+  /** Prix promo TTC, si défini. */
+  salePrice?: number;
+  stockStatus?: VariantStockStatus;
+  leadTimeDays?: number;
+  /** Image propre à la variante, si renseignée. */
+  image?: { url: string; alt?: string };
 }
 
 export const PRODUCTS_DEMO: ProductDemo[] = [

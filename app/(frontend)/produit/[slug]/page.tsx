@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { AddToCartButton } from "@/components/product/AddToCartButton";
+import { ProductVariantPanel } from "@/components/product/ProductVariantPanel";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -66,9 +67,36 @@ export default async function ProductPage({ params }: Props) {
   // son propre GTIN, son nom et son URL #couleur). Sinon, un seul Offer.
   const productPageUrl = `https://mister-pellets.be/produit/${product.slug}`;
   const variantsWithGtin = (product.colorVariants ?? []).filter((v) => Boolean(v.gtin));
+  const genericVariants = product.hasVariants ? (product.variants ?? []) : [];
 
   let offers: object | undefined;
-  if (product.priceTTC) {
+  if (genericVariants.length > 0) {
+    // Mode variantes : un AggregateOffer + un Offer par combinaison réelle.
+    const variantPrices = genericVariants
+      .map((v) => (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price))
+      .filter((n) => n > 0);
+    offers = {
+      "@type": "AggregateOffer",
+      priceCurrency: "EUR",
+      lowPrice: variantPrices.length > 0 ? Math.min(...variantPrices) : undefined,
+      highPrice: variantPrices.length > 0 ? Math.max(...variantPrices) : undefined,
+      offerCount: genericVariants.length,
+      offers: genericVariants.map((v) => ({
+        "@type": "Offer",
+        ...(v.sku ? { sku: v.sku } : {}),
+        ...(v.gtin ? { gtin13: v.gtin } : {}),
+        ...(v.mpn ? { mpn: v.mpn } : {}),
+        url: productPageUrl,
+        priceCurrency: "EUR",
+        price: v.salePrice && v.salePrice > 0 ? v.salePrice : v.price,
+        availability:
+          v.stockStatus === "out_of_stock"
+            ? "https://schema.org/OutOfStock"
+            : "https://schema.org/InStock",
+        itemCondition: "https://schema.org/NewCondition",
+      })),
+    };
+  } else if (product.priceTTC) {
     if (variantsWithGtin.length > 0) {
       offers = {
         "@type": "AggregateOffer",
@@ -234,6 +262,30 @@ export default async function ProductPage({ params }: Props) {
                 )}
               </div>
 
+              {/* Mode variantes : panneau de sélection interactif (client).
+                  Sinon : bloc prix + ajout panier statiques (comportement
+                  historique inchangé). */}
+              {product.hasVariants &&
+              product.variants &&
+              product.variants.length > 0 ? (
+                <>
+                  <ProductVariantPanel
+                    productSlug={product.slug}
+                    productName={product.name}
+                    productBrand={product.brand}
+                    productImageSrc={product.imageSrc}
+                    basePriceTTC={product.priceTTC}
+                    variantOptions={product.variantOptions ?? []}
+                    variants={product.variants}
+                  />
+                  <div className="mt-3">
+                    <Button asChild variant="outline" size="lg" className="w-full">
+                      <Link href="/demande-de-devis">Demander un devis avec pose</Link>
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
               {/* Prix */}
               {product.priceTTC ? (
                 <div className="rounded-2xl bg-mp-beige border border-mp-sand/40 p-6 mb-6">
@@ -291,6 +343,8 @@ export default async function ProductPage({ params }: Props) {
                 Pour commander, utilise le formulaire de devis. Le paiement en
                 ligne (Mollie / Bancontact) arrive prochainement.
               </p>
+                </>
+              )}
             </div>
           </div>
 

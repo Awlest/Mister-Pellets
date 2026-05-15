@@ -6,6 +6,11 @@ import type {
   ProductType,
   Diffusion,
   ColorCategory,
+  VariantOptionAxis,
+  VariantOptionValueData,
+  ProductVariantData,
+  VariantDisplayMode,
+  VariantStockStatus,
 } from "./products-demo";
 
 /**
@@ -28,6 +33,10 @@ interface PayloadProduct {
   color: ColorCategory;
   power: number;
   priceTTC: number;
+  sku?: string | null;
+  gtin?: string | null;
+  mpn?: string | null;
+  googleProductCategory?: string | null;
   heatedVolumeM3?: number | null;
   isAirtight?: boolean | null;
   isConnected?: boolean | null;
@@ -79,6 +88,74 @@ interface PayloadProduct {
         | null;
     }> | null;
   }> | null;
+  hasVariants?: boolean | null;
+  variantOptions?: Array<{
+    optionType?:
+      | number
+      | {
+          id: number;
+          label?: string | null;
+          slug?: string | null;
+          displayMode?: VariantDisplayMode | null;
+          sortOrder?: number | null;
+        }
+      | null;
+    values?: Array<number | PayloadOptionValue> | null;
+  }> | null;
+  variants?: Array<{
+    id?: string | null;
+    optionValues?: Array<number | PayloadOptionValue> | null;
+    sku?: string | null;
+    gtin?: string | null;
+    mpn?: string | null;
+    price?: number | null;
+    salePrice?: number | null;
+    stockStatus?: VariantStockStatus | null;
+    leadTimeDays?: number | null;
+    image?:
+      | number
+      | {
+          url?: string | null;
+          alt?: string | null;
+        }
+      | null;
+  }> | null;
+}
+
+/** Document `variant-option-values` hydraté (depth ≥ 1). */
+interface PayloadOptionValue {
+  id: number;
+  label?: string | null;
+  slug?: string | null;
+  colorHex?: string | null;
+  icon?:
+    | number
+    | {
+        url?: string | null;
+        alt?: string | null;
+      }
+    | null;
+}
+
+/**
+ * Convertit une valeur d'option Payload (hydratée) vers VariantOptionValueData.
+ * Retourne null si la valeur n'est pas hydratée (juste un ID → depth insuffisant).
+ */
+function mapOptionValue(
+  v: number | PayloadOptionValue | null | undefined,
+): VariantOptionValueData | null {
+  if (!v || typeof v !== "object") return null;
+  const iconUrl =
+    v.icon && typeof v.icon === "object" && v.icon.url
+      ? toRelativeUrl(v.icon.url)
+      : undefined;
+  return {
+    id: v.id,
+    label: v.label ?? "",
+    slug: v.slug ?? "",
+    colorHex: v.colorHex ?? undefined,
+    iconUrl,
+  };
 }
 
 /**
@@ -200,6 +277,62 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
             };
           })
       : undefined,
+
+    // ===== IDENTIFIANTS MERCHANT =====
+    sku: p.sku ?? undefined,
+    gtin: p.gtin ?? undefined,
+    mpn: p.mpn ?? undefined,
+    googleProductCategory: p.googleProductCategory ?? undefined,
+
+    // ===== VARIANTES GÉNÉRIQUES (multi-axes) =====
+    hasVariants: p.hasVariants ?? false,
+    variantOptions: Array.isArray(p.variantOptions)
+      ? p.variantOptions
+          .map((vo): VariantOptionAxis | null => {
+            const ot = vo.optionType;
+            if (!ot || typeof ot !== "object") return null;
+            const values = Array.isArray(vo.values)
+              ? vo.values
+                  .map(mapOptionValue)
+                  .filter((x): x is VariantOptionValueData => x !== null)
+              : [];
+            return {
+              optionTypeId: ot.id,
+              label: ot.label ?? "",
+              slug: ot.slug ?? "",
+              displayMode: (ot.displayMode ?? "text") as VariantDisplayMode,
+              sortOrder: typeof ot.sortOrder === "number" ? ot.sortOrder : 100,
+              values,
+            };
+          })
+          .filter((x): x is VariantOptionAxis => x !== null)
+      : undefined,
+    variants: Array.isArray(p.variants)
+      ? p.variants.map((v): ProductVariantData => {
+          const optionValueIds = Array.isArray(v.optionValues)
+            ? v.optionValues
+                .map((ov) => (ov && typeof ov === "object" ? ov.id : ov))
+                .filter((x): x is number => typeof x === "number")
+            : [];
+          const variantImage =
+            v.image && typeof v.image === "object" && v.image.url
+              ? { url: toRelativeUrl(v.image.url), alt: v.image.alt ?? p.name }
+              : undefined;
+          return {
+            id: String(v.id ?? ""),
+            optionValueIds,
+            sku: v.sku ?? undefined,
+            gtin: v.gtin ?? undefined,
+            mpn: v.mpn ?? undefined,
+            price: typeof v.price === "number" ? v.price : 0,
+            salePrice: typeof v.salePrice === "number" ? v.salePrice : undefined,
+            stockStatus: v.stockStatus ?? undefined,
+            leadTimeDays:
+              typeof v.leadTimeDays === "number" ? v.leadTimeDays : undefined,
+            image: variantImage,
+          };
+        })
+      : undefined,
   };
 }
 
@@ -239,7 +372,9 @@ export async function getProductBySlug(slug: string): Promise<ProductDemo | unde
     collection: "products",
     where: { slug: { equals: slug } },
     limit: 1,
-    depth: 1,
+    // depth 2 : hydrate les variantes (optionType, values, optionValues) ET
+    // les icônes des valeurs (icon = upload imbriqué un niveau plus bas).
+    depth: 2,
     overrideAccess: false,
   });
 

@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     products: Product;
+    'variant-option-types': VariantOptionType;
+    'variant-option-values': VariantOptionValue;
     orders: Order;
     quotes: Quote;
     'contact-messages': ContactMessage;
@@ -84,6 +86,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    'variant-option-types': VariantOptionTypesSelect<false> | VariantOptionTypesSelect<true>;
+    'variant-option-values': VariantOptionValuesSelect<false> | VariantOptionValuesSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
     quotes: QuotesSelect<false> | QuotesSelect<true>;
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
@@ -405,6 +409,115 @@ export interface Product {
   isBestseller?: boolean | null;
   isFeatured?: boolean | null;
   isNew?: boolean | null;
+  /**
+   * Active la gestion des variantes ci-dessous. Si décoché, le produit fonctionne avec son prix et son SKU principal (comportement actuel inchangé).
+   */
+  hasVariants?: boolean | null;
+  /**
+   * Définir les axes de variation. Exemple : Matériau, Couleur, Sortie des fumées.
+   */
+  variantOptions?:
+    | {
+        optionType: number | VariantOptionType;
+        values: (number | VariantOptionValue)[];
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Une ligne par combinaison réelle disponible. Les combinaisons absentes ici sont automatiquement grisées sur le site.
+   */
+  variants?:
+    | {
+        /**
+         * Sélectionner UNE valeur par axe défini ci-dessus (ex : Acier + Noir + Sortie haute).
+         */
+        optionValues: (number | VariantOptionValue)[];
+        /**
+         * Référence unique de la variante
+         */
+        sku: string;
+        /**
+         * Code-barres EAN de la variante
+         */
+        gtin?: string | null;
+        /**
+         * Référence fabricant de la variante
+         */
+        mpn?: string | null;
+        /**
+         * Prix TTC (€)
+         */
+        price: number;
+        /**
+         * Prix promo TTC (€)
+         */
+        salePrice?: number | null;
+        stockStatus?: ('in_stock' | 'on_order' | 'out_of_stock') | null;
+        /**
+         * Délai de livraison de cette variante (jours) — optionnel.
+         */
+        leadTimeDays?: number | null;
+        /**
+         * Optionnel. Si renseigné, l'image principale change quand cette variante est sélectionnée.
+         */
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "variant-option-types".
+ */
+export interface VariantOptionType {
+  id: number;
+  /**
+   * Nom affiché de l'axe (ex: Matériau, Couleur)
+   */
+  label: string;
+  /**
+   * Identifiant technique (auto-normalisé). Utilisé dans les query params du feed Merchant.
+   */
+  slug: string;
+  /**
+   * Comment les valeurs de cet axe s'affichent sur la page produit.
+   */
+  displayMode: 'text' | 'color' | 'icon';
+  /**
+   * Ordre d'affichage des axes (plus petit = plus haut).
+   */
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "variant-option-values".
+ */
+export interface VariantOptionValue {
+  id: number;
+  /**
+   * Valeur affichée (ex: Noir, Acier, Sortie haute)
+   */
+  label: string;
+  /**
+   * Identifiant technique (auto-normalisé).
+   */
+  slug: string;
+  /**
+   * Axe de variation auquel cette valeur appartient.
+   */
+  optionType: number | VariantOptionType;
+  /**
+   * Code hex (ex: #1a1a1a). Utilisé si l'axe parent est en mode « Pastilles couleur ».
+   */
+  colorHex?: string | null;
+  /**
+   * Icône SVG. Utilisée si l'axe parent est en mode « Icônes ».
+   */
+  icon?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -658,6 +771,14 @@ export interface PayloadLockedDocument {
         value: number | Product;
       } | null)
     | ({
+        relationTo: 'variant-option-types';
+        value: number | VariantOptionType;
+      } | null)
+    | ({
+        relationTo: 'variant-option-values';
+        value: number | VariantOptionValue;
+      } | null)
+    | ({
         relationTo: 'orders';
         value: number | Order;
       } | null)
@@ -881,6 +1002,53 @@ export interface ProductsSelect<T extends boolean = true> {
   isBestseller?: T;
   isFeatured?: T;
   isNew?: T;
+  hasVariants?: T;
+  variantOptions?:
+    | T
+    | {
+        optionType?: T;
+        values?: T;
+        id?: T;
+      };
+  variants?:
+    | T
+    | {
+        optionValues?: T;
+        sku?: T;
+        gtin?: T;
+        mpn?: T;
+        price?: T;
+        salePrice?: T;
+        stockStatus?: T;
+        leadTimeDays?: T;
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "variant-option-types_select".
+ */
+export interface VariantOptionTypesSelect<T extends boolean = true> {
+  label?: T;
+  slug?: T;
+  displayMode?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "variant-option-values_select".
+ */
+export interface VariantOptionValuesSelect<T extends boolean = true> {
+  label?: T;
+  slug?: T;
+  optionType?: T;
+  colorHex?: T;
+  icon?: T;
   updatedAt?: T;
   createdAt?: T;
 }
