@@ -76,6 +76,130 @@ export interface ArticleData {
 
 export const ARTICLES: ArticleData[] = [
   // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : comparatif des 3 marques top-tier (pilier maillage)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "edilkamin-ek63-girolami-quelle-marque-choisir",
+    title: "Edilkamin, EK63, Girolami : quelle marque italienne choisir en 2026 ?",
+    metaTitle: "Edilkamin, EK63 ou Girolami : quelle marque choisir ? (2026)",
+    metaDescription:
+      "Trois marques italiennes, trois usages. Edilkamin pour la durée, EK63 pour le connecté accessible, Girolami pour l'auto-nettoyage. Le comparatif Mister Pellets.",
+    excerpt:
+      "Les trois marques qu'on met en avant sont toutes italiennes, mais elles ne visent pas le même besoin. Voici comment trancher selon ta maison et ton budget.",
+    tldr:
+      "Edilkamin, EK63 et Girolami sont nos trois marques premium, toutes italiennes. Choisis Edilkamin si tu veux une valeur sûre qui dure 15 à 20 ans. Choisis EK63 si tu veux un poêle connecté et étanche sans payer le surcoût premium, environ 15 à 25 % moins cher qu'un Edilkamin équivalent. Choisis Girolami si tu veux le pellet et le bois dans la même machine, avec un brasier qui se nettoie tout seul.",
+    category: "marques",
+    tags: ["Edilkamin", "EK63", "Girolami", "comparatif", "marques italiennes"],
+    readingTimeMinutes: 8,
+    publishedAt: "2026-05-15",
+    authorName: "Équipe Mister Pellets",
+    authorRole: "Conseillers chauffage biomasse",
+    coverImageAlt:
+      "Comparatif des poêles à pellets Edilkamin, EK63 et Girolami distribués par Mister Pellets",
+    sections: [
+      {
+        heading: "Trois marques italiennes, trois philosophies",
+        paragraphs: [
+          "On distribue cinq marques, mais on en met trois en avant : Edilkamin, EK63 et Girolami. Le point commun, c'est l'Italie. Toutes les trois conçoivent et fabriquent leurs poêles dans des ateliers italiens, avec le savoir-faire biomasse qui va avec.",
+          "Le reste change. Edilkamin, c'est la référence historique, fondée à Milan en 1963. EK63 est sa marque sœur, lancée pour proposer du connecté moderne à un prix plus doux. Girolami est une marque familiale fondée près de Rome en 1970, avec un brevet maison d'alimentation par le bas qui change le quotidien d'entretien.",
+          "Aucune n'est meilleure dans l'absolu. La bonne marque, c'est celle qui colle à ta maison, ton usage et ton budget. On détaille les trois ci-dessous.",
+        ],
+      },
+      {
+        heading: "Edilkamin : la valeur sûre qui dure 20 ans",
+        paragraphs: [
+          "Edilkamin a 60 ans, six sites de production et une fonderie interne. Tout est fabriqué en Italie, principalement à Lainate près de Milan. C'est la marque qu'on recommande quand le critère numéro un, c'est la longévité.",
+          "Sa technologie Leonardo ajuste en permanence l'air et le débit de pellets grâce à des sondes. La combustion reste stable même quand tu changes de marque de sacs ou quand l'humidité varie. Sur le terrain, les Edilkamin qu'on a posés tiennent couramment 15 à 20 ans.",
+          "Le revers, c'est le prix catalogue : Edilkamin est dans le haut de la fourchette. Mais ramené à la durée de vie réelle, le coût annuel reste bas, et le SAV pièces reste disponible longtemps après l'arrêt d'un modèle.",
+        ],
+      },
+      {
+        heading: "EK63 : le connecté accessible",
+        paragraphs: [
+          "EK63 est la marque sœur d'Edilkamin. Elle reprend la plateforme industrielle et le SAV du groupe, mais sous une marque pensée pour un prix d'attaque plus doux. À puissance équivalente, on est typiquement 15 à 25 % en dessous d'un Edilkamin.",
+          "Deux atouts concrets. D'abord le Wi-Fi Smart, intégré de série sur la majorité des modèles, sans abonnement : tu programmes et tu allumes ton poêle depuis ton smartphone. Ensuite l'étanchéité : la plupart des EK63 prennent l'air comburant à l'extérieur, ce qui les rend compatibles avec les maisons à VMC double flux, BBC et passives.",
+          "C'est le bon choix quand tu veux un poêle moderne et connecté sans viser le ticket premium.",
+        ],
+      },
+      {
+        heading: "Girolami : le polycombustible qui se nettoie tout seul",
+        paragraphs: [
+          "Girolami est une marque familiale italienne, fabriquée à Sant'Oreste près de Rome depuis 1970. Sa signature, c'est le brevet Source Feeding : le pellet est poussé par le bas du brasier au lieu de tomber dessus, et les cendres sont chassées dans un bac sous le foyer.",
+          "Concrètement, le brasier reste propre seul. Tu ne grattes plus tous les jours, tu vides le cendrier une fois par semaine. Pour les utilisateurs qui en ont assez du nettoyage quotidien, ça change vraiment le quotidien.",
+          "L'autre force de Girolami, c'est l'hybride bois-pellet sur la gamme Soft. Une sonde reconnaît le combustible chargé et bascule seule entre pellet et bûche. Tu allumes au pellet le matin, tu finis la soirée à la bûche, sans toucher au menu.",
+        ],
+      },
+      {
+        heading: "Le comparatif en un coup d'oeil",
+        paragraphs: [
+          "Voici les trois marques côte à côte sur les critères qui font la décision.",
+        ],
+        table: {
+          headers: ["Critère", "Edilkamin", "EK63", "Girolami"],
+          rows: [
+            ["Positionnement", "Référence premium", "Connecté accessible", "Polycombustible breveté"],
+            ["Techno phare", "Leonardo (autorégulation)", "Wi-Fi Smart de série", "Source Feeding (auto-nettoyage)"],
+            ["Combustible", "Pellet", "Pellet", "Pellet, bois, hybride"],
+            ["Hybride bois-pellet", "Non", "Non", "Oui"],
+            ["Wi-Fi de série", "Selon modèle", "Oui sur la majorité", "Oui sur gamme moderne"],
+            ["Étanchéité", "Sur gamme étanche", "Quasi toute la gamme", "Selon modèle"],
+            ["Hydro (chauffage central)", "Oui", "Oui", "Oui"],
+          ],
+          caption: "Comparatif des trois marques premium distribuées par Mister Pellets en Wallonie.",
+        },
+      },
+      {
+        heading: "Comment choisir selon ton profil",
+        paragraphs: [
+          "Si on devait résumer en trois phrases, ça donnerait ceci.",
+        ],
+        list: {
+          items: [
+            "Tu veux une marque qui a fait ses preuves et qui dure : Edilkamin, 60 ans d'historique et une durée de vie observée de 15 à 20 ans.",
+            "Tu veux un poêle connecté sans payer le surcoût premium : EK63, Wi-Fi de série, étanche, 15 à 25 % moins cher qu'un Edilkamin équivalent.",
+            "Tu veux pellet et bois dans la même machine, sans nettoyage quotidien : Girolami, brevet auto-nettoyant et bascule automatique des combustibles.",
+          ],
+        },
+        callout: {
+          variant: "info",
+          text: "Le plus simple reste le diagnostic à domicile. On regarde ta maison, ta PEB, ton conduit et ton usage, et on te dit franchement quelle marque et quelle puissance sont les bonnes. C'est gratuit et sans engagement.",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Ces trois marques sont-elles vraiment toutes italiennes ?",
+        answer:
+          "Oui. Edilkamin est fabriquée près de Milan depuis 1963, Girolami près de Rome depuis 1970, et EK63 est la marque sœur d'Edilkamin, produite sur la plateforme industrielle du groupe.",
+      },
+      {
+        question: "EK63 est-il moins bien qu'Edilkamin ?",
+        answer:
+          "Non, c'est différent. EK63 reprend l'industrie et le SAV d'Edilkamin, mais cible un prix plus accessible et le connecté de série. Edilkamin garde la gamme la plus large et des technologies comme Leonardo. EK63 n'est pas un sous-Edilkamin, c'est une marque pensée pour un autre budget.",
+      },
+      {
+        question: "Girolami est-il bien suivi en Belgique ?",
+        answer:
+          "On distribue et on pose Girolami en Wallonie avec le même service que pour Edilkamin et EK63 : visite technique, devis sous 48 h, pose en une journée et SAV pièces assuré localement.",
+      },
+      {
+        question: "Quelle marque pour une maison passive ou BBC ?",
+        answer:
+          "EK63 est le choix le plus naturel : la majorité de ses modèles sont étanches et prennent l'air comburant à l'extérieur, donc compatibles avec les VMC double flux. Edilkamin propose aussi une gamme étanche dédiée.",
+      },
+      {
+        question: "Quelle marque pour remplacer une chaudière mazout ?",
+        answer:
+          "Vise un modèle hydro, qui se raccorde au circuit de chauffage central. Les trois marques en proposent : Edilkamin (Cherie H, Blade H), EK63 et Girolami (gamme Soft hydro, chaudière Biotec).",
+      },
+    ],
+    related: {
+      articles: ["dimensionner-poele-pellets-surface-wallonie"],
+      brands: ["edilkamin", "ek63", "girolami"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
   // 1. DIMENSIONNEMENT (intent : "quelle puissance poêle pellets ?")
   // ───────────────────────────────────────────────────────────────────
   {
