@@ -171,6 +171,7 @@ export const Products: CollectionConfig = {
           options: [
             { label: "Edilkamin", value: "Edilkamin" },
             { label: "EK63", value: "EK63" },
+            { label: "Girolami", value: "Girolami" },
             { label: "Dielle", value: "Dielle" },
             { label: "Ferlux", value: "Ferlux" },
           ],

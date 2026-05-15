@@ -16,7 +16,7 @@ interface BrandsGridProps {
  * unique de vérité, après rectification factuelle des positionnements.
  */
 export function BrandsGrid({
-  title = "Les 4 marques que nous distribuons",
+  title = "Les 5 marques que nous distribuons",
   description = "Chaque marque a son créneau. Notre rôle est de te diriger vers celle qui colle vraiment à ta maison et à ton budget.",
   brands = BRAND_LIST,
 }: BrandsGridProps) {
