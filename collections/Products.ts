@@ -236,14 +236,12 @@ export const Products: CollectionConfig = {
         {
           name: "priceHT",
           type: "number",
-          required: true,
-          admin: { width: "33%", description: "Prix HTVA (€)" },
+          admin: { width: "33%", description: "Prix HTVA (€). Laisser vide = « sur devis »." },
         },
         {
           name: "priceTTC",
           type: "number",
-          required: true,
-          admin: { width: "33%", description: "Prix TTC (€) — TVA 21%" },
+          admin: { width: "33%", description: "Prix TTC (€) — TVA 21%. Laisser vide = « sur devis »." },
         },
         {
           name: "promoPrice",

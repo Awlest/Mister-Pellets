@@ -32,7 +32,7 @@ interface PayloadProduct {
   diffusion: Diffusion;
   color: ColorCategory;
   power: number;
-  priceTTC: number;
+  priceTTC?: number | null;
   sku?: string | null;
   gtin?: string | null;
   mpn?: string | null;
@@ -225,7 +225,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     powerKw: p.power,
     power,
     heatedVolume,
-    priceTTC: p.priceTTC,
+    priceTTC: p.priceTTC ?? undefined,
     isBestseller: p.isBestseller ?? false,
     isNew: p.isNew ?? false,
     isAirtight: p.isAirtight ?? false,

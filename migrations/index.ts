@@ -9,6 +9,7 @@ import * as migration_20260505_140000_products_heated_volume_m3 from './20260505
 import * as migration_20260512_140000_products_hidden_from_boutique from './20260512_140000_products_hidden_from_boutique';
 import * as migration_20260515_180000_products_variants from './20260515_180000_products_variants';
 import * as migration_20260515_190000_products_brand_girolami from './20260515_190000_products_brand_girolami';
+import * as migration_20260515_200000_products_price_optional from './20260515_200000_products_price_optional';
 
 export const migrations = [
   {
@@ -65,5 +66,10 @@ export const migrations = [
     up: migration_20260515_190000_products_brand_girolami.up,
     down: migration_20260515_190000_products_brand_girolami.down,
     name: '20260515_190000_products_brand_girolami',
+  },
+  {
+    up: migration_20260515_200000_products_price_optional.up,
+    down: migration_20260515_200000_products_price_optional.down,
+    name: '20260515_200000_products_price_optional',
   },
 ];
