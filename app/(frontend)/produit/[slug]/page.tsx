@@ -9,6 +9,8 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { AddToCartButton } from "@/components/product/AddToCartButton";
 import { ProductVariantPanel } from "@/components/product/ProductVariantPanel";
+import { ColorVariantAddToCart } from "@/components/product/ColorVariantAddToCart";
+import { ProductColorProvider } from "@/components/product/ProductColorContext";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -156,6 +158,9 @@ export default async function ProductPage({ params }: Props) {
             className="mb-8"
           />
 
+          {/* Provider couleur : partage la variante sélectionnée entre la
+              galerie (gauche) et le bloc d'achat (droite). */}
+          <ProductColorProvider>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
             {/* Galerie interactive : clic vignette = image principale change,
                 clic image principale = lightbox plein écran. Composant client. */}
@@ -326,13 +331,26 @@ export default async function ProductPage({ params }: Props) {
 
               <div className="flex flex-col gap-3">
                 {product.priceTTC ? (
-                  <AddToCartButton
-                    productId={product.slug}
-                    productName={product.name}
-                    productBrand={product.brand}
-                    productPriceTTC={product.priceTTC}
-                    className="w-full"
-                  />
+                  product.colorVariants && product.colorVariants.length > 0 ? (
+                    // Produit à déclinaisons de couleur : bouton conscient de
+                    // la couleur sélectionnée dans la galerie (via le contexte).
+                    <ColorVariantAddToCart
+                      productSlug={product.slug}
+                      productName={product.name}
+                      productBrand={product.brand}
+                      productPriceTTC={product.priceTTC}
+                      productImageSrc={product.imageSrc}
+                      colorVariants={product.colorVariants}
+                    />
+                  ) : (
+                    <AddToCartButton
+                      productId={product.slug}
+                      productName={product.name}
+                      productBrand={product.brand}
+                      productPriceTTC={product.priceTTC}
+                      className="w-full"
+                    />
+                  )
                 ) : null}
                 <Button asChild variant="outline" size="lg" className="w-full">
                   <Link href="/demande-de-devis">Demander un devis avec pose</Link>
@@ -347,6 +365,7 @@ export default async function ProductPage({ params }: Props) {
               )}
             </div>
           </div>
+          </ProductColorProvider>
 
           {/* Points forts saisis dans Payload : grille 2 colonnes desktop */}
           {product.features && product.features.length > 0 && (

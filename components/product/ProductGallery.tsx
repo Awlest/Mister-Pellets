@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useProductColor } from "./ProductColorContext";
 
 interface GalleryImage {
   url: string;
@@ -53,9 +54,13 @@ export function ProductGallery({
   productName,
   colorVariants,
 }: ProductGalleryProps) {
-  // Index de la variante de couleur sélectionnée (-1 = aucune sélectionnée,
-  // on affiche les images "produit principal")
-  const [activeVariantIdx, setActiveVariantIdx] = useState(-1);
+  // Index de la variante de couleur sélectionnée (-1 = aucune sélectionnée).
+  // On lit le contexte partagé s'il existe (page produit) pour que la couleur
+  // choisie remonte jusqu'au bouton d'achat. Sinon, état local (fallback).
+  const colorCtx = useProductColor();
+  const [localVariantIdx, setLocalVariantIdx] = useState(-1);
+  const activeVariantIdx = colorCtx ? colorCtx.index : localVariantIdx;
+  const setActiveVariantIdx = colorCtx ? colorCtx.setIndex : setLocalVariantIdx;
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 

@@ -14,12 +14,13 @@ import {
   type ColorCategory,
 } from "@/lib/products-demo";
 import { getAllProducts } from "@/lib/products";
+import { BRAND_LIST } from "@/lib/brands";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Boutique poêles à pellets en Wallonie",
   description:
-    "Catalogue Mister Pellets : Edilkamin, EK63, Dielle, Ferlux. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
+    "Catalogue Mister Pellets : Edilkamin, EK63, Girolami, Dielle, Ferlux. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
 };
 
 /**
@@ -38,12 +39,12 @@ interface Props {
   }>;
 }
 
+// Dérivé de lib/brands.ts (source unique) : le filtre reste toujours synchro
+// avec les marques distribuées. La valeur = nom de marque, qui correspond au
+// champ `brand` des produits Payload.
 const BRAND_FILTERS = [
   { value: "all", label: "Toutes" },
-  { value: "Edilkamin", label: "Edilkamin" },
-  { value: "EK63", label: "EK63" },
-  { value: "Dielle", label: "Dielle" },
-  { value: "Ferlux", label: "Ferlux" },
+  ...BRAND_LIST.map((b) => ({ value: b.name, label: b.name })),
 ];
 
 // Type V1.3 : 5 valeurs (ce qu'EST le poêle, séparé de la diffusion)
@@ -147,7 +148,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
   return (
     <>
       <HeroSecondary
-        eyebrow={`${products.length} modèles · 4 marques · pellets uniquement`}
+        eyebrow={`${products.length} modèles · ${BRAND_LIST.length} marques · pellets uniquement`}
         title={
           <>
             Tous les <span className="mp-italic">poêles à pellets</span>
@@ -295,7 +296,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
                 <Link href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline">
                   demande un devis personnalisé
                 </Link>{" "}
-               , on couvre toute la gamme Edilkamin, EK63, Dielle, Ferlux.
+               , on couvre toute la gamme Edilkamin, EK63, Girolami, Dielle, Ferlux.
               </p>
             </div>
           ) : (
