@@ -482,6 +482,583 @@ export const ARTICLES: ArticleData[] = [
   },
 
   // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : hybride bois-pellet (Girolami)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "girolami-hybride-bois-pellet-fuel-convert",
+    title: "Pellet ou bûche ? Avec un Girolami hybride, tu prends les deux",
+    metaTitle: "Girolami hybride bois-pellet : le Fuel Convert System",
+    metaDescription:
+      "Le Girolami hybride bascule seul entre pellet et bûche grâce au Fuel Convert System. Plus de choix à faire entre les deux combustibles. Explications.",
+    excerpt:
+      "Choisir entre le pellet et la bûche, c'est un faux dilemme avec un Girolami hybride. Le poêle reconnaît le combustible et s'adapte tout seul.",
+    tldr:
+      "Les Girolami hybrides (gamme Soft et Vert) fonctionnent au pellet comme à la bûche. Le Fuel Convert System utilise une sonde qui reconnaît le combustible chargé et bascule automatiquement entre les modes, sans aucun réglage manuel. Tu allumes au pellet le matin pour la programmation, tu finis la soirée à la bûche pour l'ambiance. Le système accepte aussi des combustibles broyés naturels comme les coques ou les noyaux.",
+    category: "marques",
+    tags: ["Girolami", "hybride", "bois", "pellet", "Fuel Convert System"],
+    readingTimeMinutes: 6,
+    publishedAt: "2026-05-16",
+    authorName: "Équipe Mister Pellets",
+    authorRole: "Conseillers chauffage biomasse",
+    coverImageAlt:
+      "Poêle Girolami hybride bois-pellet équipé du Fuel Convert System",
+    sections: [
+      {
+        heading: "Le faux dilemme du pellet contre la bûche",
+        paragraphs: [
+          "Quand on choisit un poêle, on tranche en général entre deux mondes. Le pellet, c'est l'autonomie et la programmation : tu remplis le réservoir, tu programmes, le poêle gère. La bûche, c'est l'ambiance, le geste, et un combustible parfois moins cher si tu as une source de bois.",
+          "Le Girolami hybride supprime ce choix. Tu n'as pas à décider une fois pour toutes : tu utilises l'un ou l'autre selon le moment, dans la même machine.",
+        ],
+      },
+      {
+        heading: "Le Fuel Convert System reconnaît le combustible",
+        paragraphs: [
+          "Le coeur de l'hybride Girolami, c'est le Fuel Convert System. Une sonde détecte ce que tu as chargé dans le poêle : du pellet, des bûches, ou des combustibles broyés.",
+          "À partir de cette lecture, le poêle bascule seul vers le bon mode de combustion. Tu n'ouvres aucun menu, tu ne changes aucun paramètre. Le poêle s'adapte, point.",
+        ],
+      },
+      {
+        heading: "Une journée type avec un Girolami hybride",
+        paragraphs: [
+          "Le matin, le poêle s'allume tout seul en mode pellet, à l'heure que tu as programmée. La maison est déjà chaude quand tu te lèves.",
+          "Le soir, tu as envie d'une vraie flambée. Tu charges des bûches, le poêle passe en mode bois, et tu profites de la flamme. Le lendemain, retour au pellet pour la programmation. Sans rien régler entre les deux.",
+        ],
+        callout: {
+          variant: "info",
+          text: "Un hybride peut aussi fonctionner uniquement au pellet si tu le souhaites. Le bois reste une possibilité, pas une obligation.",
+        },
+      },
+      {
+        heading: "Au-delà du bois : les combustibles broyés",
+        paragraphs: [
+          "Le Fuel Convert System ne se limite pas au pellet et à la bûche. Il accepte aussi des combustibles broyés naturels, comme des coques de fruits, des noyaux ou du marc.",
+          "C'est un atout si tu as accès à ce type de ressource. Le poêle adapte sa combustion à ce que tu lui donnes, dans la limite des combustibles prévus par le constructeur.",
+        ],
+      },
+      {
+        heading: "Quels modèles Girolami sont hybrides",
+        paragraphs: [
+          "L'hybride se trouve principalement sur la gamme Soft, le best-seller de Girolami, primé Good Design Award 2022. La Soft existe en version hydro, pour alimenter un chauffage central.",
+          "La gamme Vert propose aussi de l'hybride en version canalisable, pour diffuser la chaleur vers plusieurs pièces. On dimensionne le bon modèle ensemble lors du diagnostic à domicile.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Dois-je régler le poêle quand je change de combustible ?",
+        answer:
+          "Non. Le Fuel Convert System reconnaît seul le combustible chargé et bascule automatiquement entre les modes. Aucun réglage manuel n'est nécessaire.",
+      },
+      {
+        question: "Peut-on mettre du pellet et du bois en même temps ?",
+        answer:
+          "On utilise l'un puis l'autre, pas les deux simultanément. Le poêle fonctionne avec le combustible que tu as chargé et bascule au chargement suivant.",
+      },
+      {
+        question: "Un poêle hybride est-il plus cher qu'un poêle pellet simple ?",
+        answer:
+          "Un hybride embarque plus de technologie qu'un poêle pellet classique, ce qui se ressent au tarif. En contrepartie, tu n'es jamais bloqué sur un seul combustible. On chiffre le modèle adapté à ton besoin lors du devis.",
+      },
+      {
+        question: "L'hybride fonctionne-t-il si je n'utilise que du pellet ?",
+        answer:
+          "Oui. Tu peux très bien n'utiliser que le pellet et garder le bois comme option pour les soirées où tu en as envie.",
+      },
+    ],
+    related: {
+      articles: [
+        "edilkamin-ek63-girolami-quelle-marque-choisir",
+        "source-feeding-girolami-brasier-auto-nettoyant",
+      ],
+      brands: ["girolami"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : EK63 étanche maison passive / BBC
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "ek63-etanche-maison-passive-bbc",
+    title: "Maison passive ou BBC : quel poêle EK63 étanche choisir",
+    metaTitle: "Poêle EK63 étanche pour maison passive ou BBC : lequel choisir",
+    metaDescription:
+      "En maison passive ou BBC, le poêle doit être étanche. Quel modèle EK63 selon la surface : Like 80, Zone 80, Tweed 90+, Spy 110+, Daily 130++, Entity 90+.",
+    excerpt:
+      "En maison basse consommation, un poêle étanche n'est pas une option. Voici comment choisir le bon modèle EK63 selon ta maison.",
+    tldr:
+      "Dans une maison passive, BBC ou à VMC double flux, le poêle doit être étanche : il prélève l'air comburant directement à l'extérieur et n'aspire pas l'air chaud de la pièce. La majorité des modèles EK63 sont étanches. Pour les petites pièces, vise un Like 80 ou Zone 80 (environ 7,6 kW). Pour des volumes moyens à grands, le Tweed 90+, le Spy 110+ ou le Daily 130++. Pour un couloir, l'Entity 90+ ultra-fin.",
+    category: "marques",
+    tags: ["EK63", "étanche", "maison passive", "BBC", "VMC double flux"],
+    readingTimeMinutes: 7,
+    publishedAt: "2026-05-16",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens certifiés Wallonie",
+    coverImageAlt:
+      "Poêle à pellets EK63 étanche installé dans une maison basse consommation",
+    sections: [
+      {
+        heading: "Pourquoi un poêle étanche est obligatoire en maison BBC",
+        paragraphs: [
+          "Une maison passive ou BBC est conçue pour être très étanche à l'air, avec une ventilation mécanique contrôlée, souvent en double flux. L'air entre et sort par un circuit maîtrisé.",
+          "Un poêle classique, lui, aspire l'air de la pièce pour sa combustion. Dans une maison étanche, ça déséquilibre la ventilation et ça peut créer une dépression. C'est pour ça qu'un poêle étanche est nécessaire : il ne touche pas à l'air intérieur.",
+        ],
+      },
+      {
+        heading: "Comment fonctionne un poêle étanche EK63",
+        paragraphs: [
+          "Un EK63 étanche prélève l'air comburant directement à l'extérieur, via une prise d'air dédiée. La combustion se fait en circuit fermé : l'air entre du dehors, les fumées repartent dehors.",
+          "Conséquence concrète : le poêle ne consomme pas l'air chaud que tu as payé pour chauffer, et il ne perturbe pas la VMC. C'est ce qui le rend compatible avec les maisons à VMC double flux, BBC et passives.",
+        ],
+      },
+      {
+        heading: "Quel EK63 selon la taille de ta maison",
+        paragraphs: [
+          "La gamme EK63 couvre du petit appartement à la maison à étage. Voici les repères.",
+        ],
+        table: {
+          headers: ["Modèle EK63", "Puissance", "Pour quel espace"],
+          rows: [
+            ["Like 80", "7,6 kW", "Appartements et petites pièces"],
+            ["Zone 80", "7,6 kW", "Pièces compactes, jusqu'à 74 m²"],
+            ["Tweed 90+", "9,2 kW", "Volume moyen, canalisable, best-seller"],
+            ["Spy 110+", "10,5 kW", "Volume polyvalent, canalisable"],
+            ["Daily 130++", "12,5 kW", "Grandes surfaces, environ 120 m²"],
+            ["Entity 90+", "8,7 kW", "Couloirs et petits espaces, 31 cm de profondeur"],
+          ],
+          caption: "Repères indicatifs. La puissance exacte se valide au diagnostic selon la PEB et le volume réel.",
+        },
+      },
+      {
+        heading: "Le bonus : le Wi-Fi de série",
+        paragraphs: [
+          "En plus de l'étanchéité, la majorité des EK63 intègrent le Wi-Fi Smart de série, sans abonnement. Tu programmes et tu pilotes le poêle depuis ton smartphone.",
+          "Dans une maison récente, bien isolée, où le poêle tourne souvent en douceur, cette programmation fine est un vrai confort au quotidien.",
+        ],
+      },
+      {
+        heading: "Ce qu'on vérifie à la visite technique",
+        paragraphs: [
+          "Avant de poser un EK63 étanche, on contrôle le tracé de la prise d'air et de l'évacuation des fumées, souvent en ventouse pour ce type de maison. On valide aussi l'emplacement et la compatibilité avec ta VMC.",
+          "C'est l'étape qui garantit une installation propre et conforme. Le devis chiffré arrive sous 48 h après cette visite.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Tous les poêles EK63 sont-ils étanches ?",
+        answer:
+          "La grande majorité des modèles EK63 sont étanches. On confirme toujours le détail modèle par modèle au moment du devis, selon la maison.",
+      },
+      {
+        question: "Un poêle étanche peut-il être canalisable ?",
+        answer:
+          "Oui. Plusieurs EK63 sont à la fois étanches et canalisables, comme le Tweed 90+, le Spy 110+, le Daily 130++ et l'Entity 90+. Tu chauffes une pièce voisine tout en respectant l'étanchéité.",
+      },
+      {
+        question: "Faut-il une sortie en toiture ou une ventouse ?",
+        answer:
+          "Les deux sont possibles selon ta maison. En maison BBC ou passive, la ventouse est fréquente. On valide le tracé à la visite technique.",
+      },
+      {
+        question: "L'étanchéité change-t-elle l'entretien du poêle ?",
+        answer:
+          "Non. L'entretien annuel et le ramonage restent identiques et obligatoires, qu'un poêle soit étanche ou non.",
+      },
+    ],
+    related: {
+      articles: [
+        "edilkamin-ek63-girolami-quelle-marque-choisir",
+        "ek63-wifi-serie-poele-pellets-connecte",
+      ],
+      brands: ["ek63"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : remplacer une chaudière mazout (Edilkamin hydro)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "remplacer-chaudiere-mazout-edilkamin-hydro",
+    title: "Remplacer une chaudière mazout par un poêle Edilkamin hydro",
+    metaTitle: "Remplacer une chaudière mazout par un Edilkamin hydro",
+    metaDescription:
+      "Un poêle Edilkamin hydro se raccorde à tes radiateurs comme une chaudière. Principe, modèles, ballon tampon, eau chaude sanitaire et primes Wallonie 2026.",
+    excerpt:
+      "Un poêle hydro chauffe toute la maison via tes radiateurs existants. Voici comment il remplace une vieille chaudière mazout.",
+    tldr:
+      "Un poêle Edilkamin hydro se raccorde au circuit de chauffage central et alimente tes radiateurs ou ton plancher chauffant, exactement comme une chaudière. Couplé à un ballon tampon, il peut aussi produire l'eau chaude sanitaire. Les modèles comme la gamme Cherie H ou Blade H sont conçus pour ça. C'est une solution adaptée pour remplacer une chaudière mazout vieillissante, et la prime Habitation Wallonie 2026 réduit la facture.",
+    category: "marques",
+    tags: ["Edilkamin", "hydro", "chaudière mazout", "chauffage central"],
+    readingTimeMinutes: 7,
+    publishedAt: "2026-05-16",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens certifiés Wallonie",
+    coverImageAlt:
+      "Poêle à pellets hydro Edilkamin raccordé au chauffage central en remplacement d'une chaudière mazout",
+    sections: [
+      {
+        heading: "Pourquoi remplacer le mazout maintenant",
+        paragraphs: [
+          "Le mazout coûte cher et son prix reste volatil. Les vieilles chaudières au fioul perdent en rendement avec les années, et leur entretien devient un poste régulier.",
+          "Beaucoup de maisons wallonnes en sont encore équipées. Passer au pellet, c'est un combustible local, un coût plus stable, et l'accès à la prime Habitation Wallonie 2026 pour le remplacement d'un système de chauffage.",
+        ],
+      },
+      {
+        heading: "Le principe du poêle hydro",
+        paragraphs: [
+          "Un poêle hydro n'est pas qu'un poêle qui chauffe une pièce. Il chauffe l'eau d'un circuit, et cette eau circule dans tes radiateurs ou ton plancher chauffant. Côté résultat, c'est le même rôle qu'une chaudière.",
+          "La différence avec un poêle classique, c'est qu'une grande partie de la chaleur produite part dans le circuit d'eau plutôt que dans la pièce. Toute la maison est chauffée, pas seulement le séjour.",
+        ],
+      },
+      {
+        heading: "Les modèles Edilkamin hydro",
+        paragraphs: [
+          "Edilkamin a une gamme hydro dédiée, reconnaissable au suffixe H. Les modèles comme la Cherie H ou la Blade H se raccordent au chauffage central.",
+          "La puissance se choisit selon la surface à chauffer et le nombre de radiateurs. C'est un point qu'on dimensionne précisément, parce qu'un hydro mal calibré chauffe mal ou s'encrasse.",
+        ],
+      },
+      {
+        heading: "Ballon tampon et eau chaude sanitaire",
+        paragraphs: [
+          "Pour bien fonctionner, un poêle hydro est souvent couplé à un ballon tampon. Ce ballon stocke la chaleur et lisse le fonctionnement du poêle, ce qui le fait durer plus longtemps.",
+          "Avec un ballon adapté, l'installation peut aussi produire l'eau chaude sanitaire. Tu remplaces alors le chauffage et l'eau chaude de l'ancienne chaudière en une seule solution.",
+        ],
+        callout: {
+          variant: "success",
+          text: "Le remplacement d'un système de chauffage par un appareil biomasse est visé par la prime Habitation Wallonie 2026. On déduit la prime estimée directement du devis.",
+        },
+      },
+      {
+        heading: "Ce que comprend le remplacement",
+        paragraphs: [
+          "Un remplacement de chaudière mazout par un hydro, ce n'est pas juste poser un poêle. Il y a la dépose de l'ancienne chaudière, le raccordement au circuit existant, le ballon tampon, et le conduit d'évacuation.",
+          "On chiffre tout ça lors du diagnostic à domicile. Le devis détaille chaque poste pour que tu saches exactement ce que tu paies, primes déduites.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Un poêle hydro peut-il remplacer complètement ma chaudière mazout ?",
+        answer:
+          "Oui, c'est son rôle : il alimente les radiateurs ou le plancher chauffant. Couplé à un ballon, il gère aussi l'eau chaude sanitaire. Le dimensionnement se valide au diagnostic.",
+      },
+      {
+        question: "Faut-il garder mes radiateurs existants ?",
+        answer:
+          "Dans la majorité des cas oui, on se raccorde au circuit existant. On vérifie l'état et le dimensionnement des radiateurs lors de la visite technique.",
+      },
+      {
+        question: "Un poêle hydro chauffe-t-il aussi la pièce où il est installé ?",
+        answer:
+          "Oui, une partie de la chaleur reste dans la pièce d'installation, le reste part dans le circuit d'eau. C'est un point qu'on prend en compte au dimensionnement.",
+      },
+      {
+        question: "Le remplacement donne-t-il droit à une prime ?",
+        answer:
+          "Le remplacement d'un système de chauffage par un appareil biomasse est visé par la prime Habitation Wallonie 2026. On estime le montant et on le déduit du devis.",
+      },
+    ],
+    related: {
+      articles: [
+        "edilkamin-ek63-girolami-quelle-marque-choisir",
+        "technologie-leonardo-edilkamin-combustion",
+      ],
+      brands: ["edilkamin"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : canalisable intelligent (Girolami)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "girolami-canalisable-intelligent-trois-ventilateurs",
+    title: "Trois ventilateurs, trois pièces : le canalisable intelligent Girolami",
+    metaTitle: "Girolami canalisable : trois ventilateurs indépendants par pièce",
+    metaDescription:
+      "Le canalisable Girolami pilote trois ventilateurs indépendants, un par pièce, chacun ajusté à sa température. Thermostats sans fil TriKey. Explications.",
+    excerpt:
+      "Un canalisable classique souffle pareil partout. Le Girolami, lui, ajuste chaque pièce indépendamment. Voici comment.",
+    tldr:
+      "Les Girolami canalisables (gamme Vert) embarquent trois ventilateurs indépendants. Chacun dessert une pièce et ajuste son débit selon la température réellement mesurée dans cette pièce. Avec les thermostats sans fil TriKey en option, chaque pièce atteint sa propre consigne. Fini la pièce proche du poêle qui surchauffe pendant que la chambre à l'étage reste fraîche.",
+    category: "marques",
+    tags: ["Girolami", "canalisable", "ventilateurs", "TriKey"],
+    readingTimeMinutes: 6,
+    publishedAt: "2026-05-16",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens certifiés Wallonie",
+    coverImageAlt:
+      "Poêle Girolami canalisable diffusant la chaleur dans trois pièces via des ventilateurs indépendants",
+    sections: [
+      {
+        heading: "Le problème du canalisable classique",
+        paragraphs: [
+          "Un poêle canalisable diffuse l'air chaud vers plusieurs pièces via des gaines. Sur beaucoup de modèles, un seul ventilateur pousse l'air, et le débit est le même partout.",
+          "Résultat courant : la pièce où se trouve le poêle surchauffe, pendant que la chambre la plus éloignée reste trop fraîche. Tu te retrouves à ouvrir une fenêtre d'un côté et à mettre un pull de l'autre.",
+        ],
+      },
+      {
+        heading: "Trois ventilateurs indépendants",
+        paragraphs: [
+          "Sur les versions canalisables de Girolami, il y a trois ventilateurs distincts. Chacun dessert sa pièce et règle son propre débit.",
+          "Le poêle ne pousse plus un air identique partout. Il envoie plus d'air là où il en faut, moins là où la pièce est déjà à température. Chaque pièce est traitée pour elle-même.",
+        ],
+      },
+      {
+        heading: "Les thermostats sans fil TriKey",
+        paragraphs: [
+          "Pour que le système soit vraiment intelligent, Girolami propose les thermostats sans fil TriKey en option. Tu en places un dans chaque pièce desservie.",
+          "Chaque thermostat mesure la température réelle de sa pièce et communique avec le poêle. Le ventilateur correspondant ajuste son débit pour atteindre la consigne de cette pièce, pas une moyenne approximative.",
+        ],
+        callout: {
+          variant: "info",
+          text: "Concrètement, tu peux viser 21 °C dans le séjour et 19 °C dans une chambre, et le poêle gère les deux en même temps.",
+        },
+      },
+      {
+        heading: "Quelle maison pour un Girolami canalisable",
+        paragraphs: [
+          "Le canalisable intelligent prend tout son sens dans une maison ouverte où le poêle est dans le séjour, avec une ou deux pièces à chauffer en plus, par exemple une chambre à l'étage ou un bureau.",
+          "La gamme Vert de Girolami couvre ce besoin, en hybride canalisable. On valide le tracé des gaines et la puissance utile lors du diagnostic.",
+        ],
+      },
+      {
+        heading: "La pose : ce qui se passe sur le terrain",
+        paragraphs: [
+          "Canaliser, ça veut dire faire passer des gaines isolées du poêle vers les pièces à chauffer, avec une grille de sortie dans chaque pièce. Le tracé doit être le plus court et le plus direct possible.",
+          "On étudie ça à la visite technique : longueur des gaines, passages disponibles, position des grilles. C'est ce qui garantit que l'air arrive vraiment chaud au bout du parcours.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Combien de pièces peut chauffer un Girolami canalisable ?",
+        answer:
+          "Les versions canalisables pilotent trois ventilateurs, donc la pièce d'installation plus des pièces canalisées. Le nombre exact dépend du tracé des gaines, qu'on valide à la visite technique.",
+      },
+      {
+        question: "Les thermostats TriKey sont-ils inclus ?",
+        answer:
+          "Les thermostats sans fil TriKey sont proposés en option. On en discute au devis selon le confort recherché pièce par pièce.",
+      },
+      {
+        question: "Peut-on couper la canalisation vers une pièce ?",
+        answer:
+          "Oui. Comme les ventilateurs sont indépendants, tu peux moduler ou arrêter la diffusion vers une pièce qui n'a pas besoin d'être chauffée à un moment donné.",
+      },
+      {
+        question: "Le canalisable Girolami est-il aussi hybride ?",
+        answer:
+          "La gamme Vert combine le canalisable et l'hybride bois-pellet. Tu profites des trois ventilateurs indépendants et du Fuel Convert System sur le même appareil.",
+      },
+    ],
+    related: {
+      articles: [
+        "edilkamin-ek63-girolami-quelle-marque-choisir",
+        "girolami-hybride-bois-pellet-fuel-convert",
+      ],
+      brands: ["girolami"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : durée de vie (Edilkamin)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "duree-de-vie-poele-edilkamin",
+    title: "Combien de temps dure vraiment un poêle Edilkamin",
+    metaTitle: "Durée de vie d'un poêle Edilkamin : 15 à 20 ans, et pourquoi",
+    metaDescription:
+      "Un poêle Edilkamin bien entretenu dure couramment 15 à 20 ans. Fabrication, pièces d'usure, entretien annuel et coût ramené à l'année. Le point honnête.",
+    excerpt:
+      "Un Edilkamin coûte cher à l'achat, mais combien d'années tient-il vraiment ? Ce qu'on observe sur le terrain, sans enjoliver.",
+    tldr:
+      "Un poêle Edilkamin entretenu correctement dure couramment 15 à 20 ans, ce qu'on observe sur le parc qu'on suit en Wallonie. La longévité tient à la fabrication italienne (fonderie interne, fonte épaisse) et surtout à l'entretien annuel : aucun poêle ne dure sans ramonage et révision. Les pièces d'usure restent disponibles longtemps grâce au réseau Edilkamin. Ramené à l'année, le tarif premium devient raisonnable.",
+    category: "marques",
+    tags: ["Edilkamin", "durée de vie", "entretien", "fiabilité"],
+    readingTimeMinutes: 7,
+    publishedAt: "2026-05-16",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens certifiés Wallonie",
+    coverImageAlt:
+      "Poêle à pellets Edilkamin après plusieurs années d'utilisation, entretenu par Mister Pellets",
+    sections: [
+      {
+        heading: "15 à 20 ans, ce qu'on observe sur le terrain",
+        paragraphs: [
+          "On installe et on suit des Edilkamin depuis le début de l'atelier. Sur ce parc, un poêle entretenu correctement tient couramment 15 à 20 ans.",
+          "Ce n'est pas un argument marketing, c'est ce qu'on constate en SAV. Et la condition est toujours la même : l'entretien a été fait régulièrement. Un poêle négligé, quelle que soit la marque, ne tiendra pas cette durée.",
+        ],
+      },
+      {
+        heading: "Pourquoi un Edilkamin dure : la fabrication",
+        paragraphs: [
+          "Edilkamin fabrique en Italie, dans six sites de production, avec une fonderie interne. Les pièces de structure sont en fonte épaisse, conçues pour encaisser les cycles de chauffe pendant des années.",
+          "Une fabrication maîtrisée, sans sous-traitance opaque, ça se voit dans le temps : moins de jeu mécanique, des assemblages qui tiennent, une structure qui ne fatigue pas prématurément.",
+        ],
+      },
+      {
+        heading: "Le rôle décisif de l'entretien annuel",
+        paragraphs: [
+          "La durée de vie d'un poêle se joue surtout sur l'entretien. Le ramonage du conduit et la révision annuelle de l'appareil ne sont pas optionnels, ils sont la condition de la longévité.",
+          "Un entretien annuel, c'est le nettoyage de l'échangeur, le contrôle des joints, la vérification de la combustion et des organes mécaniques. C'est ce qui évite qu'une petite usure devienne une panne lourde.",
+        ],
+      },
+      {
+        heading: "Les pièces d'usure et leur disponibilité",
+        paragraphs: [
+          "Comme tout appareil, un poêle a des pièces d'usure. Voici les plus courantes et leur logique de remplacement.",
+        ],
+        table: {
+          headers: ["Pièce", "Rôle", "Logique de remplacement"],
+          rows: [
+            ["Bougie d'allumage", "Allume les pellets", "Pièce d'usure, remplacée selon l'usage"],
+            ["Joints de porte et de trappe", "Assurent l'étanchéité", "Contrôlés chaque année, remplacés si fatigués"],
+            ["Ventilateurs", "Air de combustion et diffusion", "Longue durée, surveillés en entretien"],
+            ["Motoréducteur de vis sans fin", "Achemine les pellets", "Longue durée, contrôlé en révision"],
+          ],
+          caption: "Edilkamin garde un stock de pièces disponible longtemps après l'arrêt d'un modèle, via son réseau de centres d'assistance.",
+        },
+      },
+      {
+        heading: "Le coût ramené à l'année",
+        paragraphs: [
+          "Edilkamin est dans le haut de la fourchette à l'achat. Mais le bon calcul, c'est le coût ramené à la durée de vie réelle.",
+          "Un poêle premium qui dure 18 ans revient, à l'année, moins cher qu'un poêle d'entrée de gamme qu'il faut remplacer après 8 ans. Sans compter le confort d'un appareil qui ne te lâche pas en plein hiver.",
+        ],
+        callout: {
+          variant: "info",
+          text: "Selon les techniciens Mister Pellets, la première cause de fin de vie prématurée d'un poêle n'est pas la marque, c'est l'entretien sauté pendant plusieurs années.",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Un Edilkamin dure-t-il vraiment 20 ans ?",
+        answer:
+          "Sur le parc qu'on suit, 15 à 20 ans est courant pour un poêle entretenu chaque année. Sans entretien régulier, aucune marque ne tient cette durée.",
+      },
+      {
+        question: "Que se passe-t-il si je saute un entretien annuel ?",
+        answer:
+          "Une année sautée se rattrape, mais sauter plusieurs entretiens use l'appareil bien plus vite et peut faire passer une simple révision à une réparation lourde. L'entretien annuel reste la base.",
+      },
+      {
+        question: "Trouve-t-on encore des pièces pour un vieux modèle Edilkamin ?",
+        answer:
+          "Edilkamin maintient un stock de pièces longtemps après l'arrêt d'un modèle, via son réseau de centres d'assistance. En Belgique, les pièces courantes sont disponibles rapidement.",
+      },
+      {
+        question: "L'achat d'un Edilkamin est-il rentable malgré le prix ?",
+        answer:
+          "Ramené à la durée de vie, oui. Un poêle qui dure deux fois plus longtemps qu'un modèle d'entrée de gamme revient moins cher à l'année, en plus du confort et de la fiabilité.",
+      },
+    ],
+    related: {
+      articles: [
+        "edilkamin-ek63-girolami-quelle-marque-choisir",
+        "technologie-leonardo-edilkamin-combustion",
+      ],
+      brands: ["edilkamin"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // MARQUES 2026 : Entity 90+ ultra-fin (EK63)
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "ek63-entity-90-poele-31-cm-couloir",
+    title: "Entity 90+ d'EK63 : le poêle qui passe partout (31 cm de profondeur)",
+    metaTitle: "EK63 Entity 90+ : le poêle à pellets de 31 cm de profondeur",
+    metaDescription:
+      "L'EK63 Entity 90+ ne fait que 31 cm de profondeur : il passe là où un poêle classique ne rentre pas. 8,7 kW, canalisable, étanche, Wi-Fi de série.",
+    excerpt:
+      "Un couloir, un hall, un mur étroit : l'Entity 90+ d'EK63 passe là où les autres poêles ne rentrent pas. Et il chauffe vraiment.",
+    tldr:
+      "L'EK63 Entity 90+ est un poêle à pellets canalisable et étanche de seulement 31 cm de profondeur, contre 50 à 60 cm pour un poêle classique. Il s'installe dans un couloir, un hall ou un petit espace où aucun poêle standard ne rentrerait. Malgré son format, il développe 8,7 kW et peut canaliser l'air chaud vers une pièce voisine. Le seul vrai prérequis est un emplacement avec un passage de fumée correct.",
+    category: "marques",
+    tags: ["EK63", "Entity 90+", "couloir", "poêle compact", "canalisable"],
+    readingTimeMinutes: 6,
+    publishedAt: "2026-05-16",
+    authorName: "Équipe Mister Pellets",
+    authorRole: "Conseillers chauffage biomasse",
+    coverImageAlt:
+      "Poêle à pellets EK63 Entity 90+ ultra-fin installé dans un couloir étroit",
+    sections: [
+      {
+        heading: "31 cm de profondeur : ce que ça veut dire concrètement",
+        paragraphs: [
+          "Un poêle à pellets classique fait en général 50 à 60 cm de profondeur. C'est encombrant, et ça suffit à exclure pas mal d'emplacements.",
+          "L'EK63 Entity 90+ ne fait que 31 cm de profondeur. Il se plaque contre un mur sans manger la pièce, et il ouvre des emplacements qui étaient impossibles avec un poêle standard.",
+        ],
+      },
+      {
+        heading: "Où l'Entity 90+ change la donne",
+        paragraphs: [
+          "Ce format ultra-fin a été pensé pour les espaces contraints. Quelques cas qu'on rencontre souvent en Wallonie.",
+        ],
+        list: {
+          items: [
+            "Un couloir étroit où un poêle classique bloquerait le passage.",
+            "Un hall d'entrée qu'on veut chauffer sans encombrer.",
+            "Un petit séjour où chaque centimètre compte.",
+            "Un mur de refend peu profond où poser un poêle paraissait impossible.",
+          ],
+        },
+      },
+      {
+        heading: "Compact ne veut pas dire faible : 8,7 kW canalisable",
+        paragraphs: [
+          "On pourrait croire qu'un poêle aussi fin ne chauffe pas grand-chose. C'est faux. L'Entity 90+ développe 8,7 kW, de quoi chauffer sérieusement.",
+          "Mieux : il est canalisable. Il peut envoyer une partie de l'air chaud vers une pièce adjacente. Posé dans un couloir, il chauffe le couloir et une chambre voisine.",
+        ],
+      },
+      {
+        heading: "Étanche et connecté, comme la gamme EK63",
+        paragraphs: [
+          "L'Entity 90+ n'est pas un modèle au rabais. Il reprend les atouts de la gamme EK63 : il est étanche, donc compatible avec les maisons à VMC double flux et BBC, et il intègre le Wi-Fi Smart de série.",
+          "Tu profites donc du format ultra-fin sans renoncer au pilotage smartphone ni à la compatibilité maison récente.",
+        ],
+      },
+      {
+        heading: "Le prérequis : un passage de fumée correct",
+        paragraphs: [
+          "Le seul vrai point à valider, c'est l'évacuation des fumées. Comme pour tout poêle, il faut un conduit ou une ventouse correctement dimensionné à l'emplacement choisi.",
+          "On vérifie ça à la visite technique. Sur le terrain, on a posé l'Entity 90+ dans plusieurs couloirs et halls wallons : quand le passage de fumée est bon, ça fonctionne très bien.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Un poêle de 31 cm chauffe-t-il vraiment ?",
+        answer:
+          "Oui. L'Entity 90+ développe 8,7 kW malgré sa faible profondeur, et il est canalisable vers une pièce voisine. La performance est au rendez-vous.",
+      },
+      {
+        question: "L'Entity 90+ peut-il s'installer dans un couloir ?",
+        answer:
+          "C'est exactement son terrain. Ses 31 cm de profondeur lui permettent de tenir dans un couloir sans bloquer le passage. Le point à valider est l'évacuation des fumées.",
+      },
+      {
+        question: "L'Entity 90+ est-il étanche ?",
+        answer:
+          "Oui, il est étanche, comme la majorité de la gamme EK63. Il est donc compatible avec les maisons à VMC double flux, BBC et passives.",
+      },
+      {
+        question: "Peut-on le piloter depuis le smartphone ?",
+        answer:
+          "Oui. L'Entity 90+ intègre le Wi-Fi Smart de série, sans abonnement, comme les autres modèles EK63.",
+      },
+    ],
+    related: {
+      articles: [
+        "edilkamin-ek63-girolami-quelle-marque-choisir",
+        "ek63-etanche-maison-passive-bbc",
+      ],
+      brands: ["ek63"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
   // 1. DIMENSIONNEMENT (intent : "quelle puissance poêle pellets ?")
   // ───────────────────────────────────────────────────────────────────
   {
