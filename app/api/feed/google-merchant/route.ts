@@ -1,6 +1,8 @@
 import { getAllProducts } from "@/lib/products";
+import { slugify } from "@/lib/slugify";
 import type {
   ProductDemo,
+  ProductColorVariant,
   ProductVariantData,
   VariantOptionAxis,
 } from "@/lib/products-demo";
@@ -12,9 +14,10 @@ import type {
  * Merchant Center. Route : /api/feed/google-merchant
  *
  * Règle variantes :
- *  - produit AVEC variantes  → une ligne <item> PAR combinaison, regroupées
- *    via `item_group_id` ;
- *  - produit SANS variantes  → une ligne <item> unique.
+ *  - produit AVEC variantes génériques → une ligne <item> PAR combinaison ;
+ *  - produit AVEC déclinaisons de couleur → une ligne <item> PAR couleur ;
+ *  - produit simple → une ligne <item> unique.
+ *  Les lignes d'un même produit sont regroupées via `item_group_id`.
  *
  * Ne référence que les produits visibles en boutique (getAllProducts filtre
  * déjà hiddenFromBoutique).
@@ -155,17 +158,55 @@ function variantItem(p: ProductDemo, variant: ProductVariantData): string | null
   ]);
 }
 
+/** <item> pour une déclinaison de couleur d'un produit. */
+function colorVariantItem(p: ProductDemo, cv: ProductColorVariant): string | null {
+  if (!p.priceTTC || p.priceTTC <= 0) return null;
+  // Chaque couleur a son propre GTIN (EAN). L'identifiant retombe sur le MPN
+  // produit si la couleur n'a pas de GTIN.
+  const hasIdentifier = Boolean(cv.gtin || p.mpn);
+  return buildItem([
+    ["id", cv.gtin || `${p.sku || p.slug}-${slugify(cv.colorName)}`],
+    ["item_group_id", p.sku || p.slug],
+    ["title", `${p.name} - ${cv.colorName}`],
+    [
+      "description",
+      p.shortDescription
+        ? `${p.shortDescription} Finition ${cv.colorName}.`
+        : `${p.name}, finition ${cv.colorName}. Poêle à pellets distribué et posé par Mister Pellets.`,
+    ],
+    ["link", `${SITE_URL}/produit/${p.slug}`],
+    ["image_link", absUrl(cv.mainImage?.url || p.imageSrc)],
+    ["availability", "in_stock"],
+    ["price", `${p.priceTTC.toFixed(2)} EUR`],
+    ["brand", p.brand],
+    ["gtin", cv.gtin],
+    ["mpn", p.mpn],
+    ["identifier_exists", hasIdentifier ? undefined : "no"],
+    ["condition", "new"],
+    ["google_product_category", p.googleProductCategory || DEFAULT_CATEGORY],
+    ["color", cv.colorName],
+  ]);
+}
+
 export async function GET(): Promise<Response> {
   const products = await getAllProducts();
 
   const items: string[] = [];
   for (const p of products) {
     if (p.hasVariants && p.variants && p.variants.length > 0) {
+      // Variantes génériques multi-axes : une ligne par combinaison.
       for (const variant of p.variants) {
         const item = variantItem(p, variant);
         if (item) items.push(item);
       }
+    } else if (p.colorVariants && p.colorVariants.length > 0) {
+      // Déclinaisons de couleur : une ligne par couleur, regroupées.
+      for (const cv of p.colorVariants) {
+        const item = colorVariantItem(p, cv);
+        if (item) items.push(item);
+      }
     } else {
+      // Produit simple : une seule ligne.
       const item = productItem(p);
       if (item) items.push(item);
     }
