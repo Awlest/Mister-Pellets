@@ -1070,7 +1070,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "La règle simple, 1 kW pour 10 m², ne suffit pas. Voici le calcul exact selon ta PEB, ton plafond et ta zone climatique en Wallonie.",
     tldr:
-      "Pour une maison wallonne PEB B de 100 m² avec hauteur sous plafond standard (2,50 m), un poêle de 8 à 10 kW suffit. Multiplie la surface par 0,10 si la PEB est bonne (A-B), par 0,12 si moyenne (C-D), et par 0,15 si faible (E-G). Ajoute 10 % par mètre au-dessus de 2,50 m de plafond. Sous-dimensionner brûle le matériel ; sur-dimensionner provoque encrassement et inconfort.",
+      "Pour une maison wallonne PEB B de 100 m² avec hauteur sous plafond standard (2,50 m), un poêle de 8 à 10 kW suffit. Le calcul tient en un coefficient appliqué à la surface : 0,10 quand la PEB est bonne (A-B), 0,12 pour une isolation moyenne (C-D), jusqu'à 0,15 si elle est faible (E-G). Ajoute 10 % par mètre au-dessus de 2,50 m de plafond. Sous-dimensionner brûle le matériel ; sur-dimensionner provoque encrassement et inconfort.",
     category: "guide-achat",
     tags: ["dimensionnement", "puissance", "PEB", "kW", "surface"],
     readingTimeMinutes: 9,
@@ -1349,7 +1349,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Les conditions techniques à respecter strictement",
         paragraphs: [
-          "En plus de l'audit, trois conditions cumulatives doivent être réunies sur le projet pellets lui-même. Sans cela, la prime est refusée à l'instruction du dossier.",
+          "En plus de l'audit, le projet pellets lui-même doit remplir des conditions cumulatives. Si l'une manque, la prime est refusée à l'instruction du dossier.",
         ],
         list: {
           ordered: true,
@@ -1388,7 +1388,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Les cumuls qu'il faut connaître",
         paragraphs: [
-          "Quatre éléments se cumulent avec la prime poêle à pellets sans la réduire. La TVA à 6 % au lieu de 21 % s'applique d'office si ton logement a plus de 10 ans : c'est appliqué directement sur ta facture par l'installateur, pas une prime à demander. Les primes isolation et châssis se cumulent sous un plafond global de 50 000 € par logement individuel, toutes primes confondues sur la durée. Le prêt 0 % Renopack se cumule librement. Et certaines communes wallonnes ajoutent leur propre prime communale (montants variables, à vérifier au cas par cas).",
+          "Plusieurs avantages se cumulent avec la prime poêle à pellets sans la réduire. La TVA à 6 % au lieu de 21 % s'applique d'office si ton logement a plus de 10 ans : c'est appliqué directement sur ta facture par l'installateur, pas une prime à demander. Les primes isolation et châssis se cumulent sous un plafond global de 50 000 € par logement individuel, toutes primes confondues sur la durée. Le prêt 0 % Renopack se cumule librement. Et certaines communes wallonnes ajoutent leur propre prime communale (montants variables, à vérifier au cas par cas).",
         ],
         callout: {
           variant: "info",
