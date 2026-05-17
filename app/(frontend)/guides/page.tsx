@@ -8,9 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import { GUIDES } from "@/lib/guides";
 
 export const metadata: Metadata = {
-  title: "Guides poêle à pellets, 5 guides complets",
+  title: "Guides poêle à pellets en Wallonie",
   description:
-    "Le guide d'achat 2026, le canalisable, l'hydro, l'entretien, le dimensionnement. Conseils complets et indépendants par les techniciens Mister Pellets.",
+    "Le guide d'achat 2026, le canalisable, l'hydro, l'entretien, le dimensionnement. Des conseils complets et indépendants, avec les vrais chiffres pour la Wallonie.",
 };
 
 export default function GuidesHubPage() {
@@ -23,7 +23,7 @@ export default function GuidesHubPage() {
             Tout savoir avant <span className="mp-italic">d'acheter</span>
           </>
         }
-        description="5 guides complets écrits par nos techniciens, pas par un rédacteur générique. Choix de marques, technologies, dimensionnement, entretien, primes, sans bullshit, avec les vrais chiffres."
+        description="Des guides complets sur le poêle à pellets en Wallonie : choix de marques, technologies, dimensionnement, entretien, primes. Sans bullshit, avec les vrais chiffres."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Guides" },
