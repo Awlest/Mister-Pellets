@@ -731,7 +731,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Ce que comprend le remplacement",
         paragraphs: [
-          "Un remplacement de chaudière mazout par un hydro, ce n'est pas juste poser un poêle. Il y a la dépose de l'ancienne chaudière, le raccordement au circuit existant, le ballon tampon, et le conduit d'évacuation.",
+          "Un remplacement de chaudière mazout par un hydro, ce n'est pas juste poser un poêle. Il faut déposer l'ancienne chaudière, se raccorder au circuit existant, puis prévoir le ballon tampon et le conduit d'évacuation.",
           "On chiffre tout ça lors du diagnostic à domicile. Le devis détaille chaque poste pour que tu saches exactement ce que tu paies, primes déduites.",
         ],
       },
@@ -906,7 +906,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Les pièces d'usure et leur disponibilité",
         paragraphs: [
-          "Comme tout appareil, un poêle a des pièces d'usure. Voici les plus courantes et leur logique de remplacement.",
+          "Comme tout appareil, un poêle a des pièces d'usure. Les plus courantes suivent chacune leur propre logique de remplacement.",
         ],
         table: {
           headers: ["Pièce", "Rôle", "Logique de remplacement"],
@@ -994,7 +994,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Où l'Entity 90+ change la donne",
         paragraphs: [
-          "Ce format ultra-fin a été pensé pour les espaces contraints. Quelques cas qu'on rencontre souvent en Wallonie.",
+          "Ce format ultra-fin a été pensé pour les espaces contraints, le genre d'emplacement qu'on rencontre souvent en Wallonie.",
         ],
         list: {
           items: [
