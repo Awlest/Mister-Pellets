@@ -431,7 +431,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Ce que ça change : du quotidien à l'hebdomadaire",
         paragraphs: [
-          "Le résultat se mesure très simplement. Tu ne grattes plus le brasier chaque jour. Tu vides le bac à cendres environ une fois par semaine, selon ton utilisation.",
+          "Le changement est net au quotidien : tu ne grattes plus le brasier chaque jour. Reste à vider le bac à cendres, environ une fois par semaine selon ton utilisation.",
         ],
         callout: {
           variant: "success",
@@ -514,7 +514,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Le Fuel Convert System reconnaît le combustible",
         paragraphs: [
           "Le coeur de l'hybride Girolami, c'est le Fuel Convert System. Une sonde détecte ce que tu as chargé dans le poêle : du pellet, des bûches, ou des combustibles broyés.",
-          "À partir de cette lecture, le poêle bascule seul vers le bon mode de combustion. Tu n'ouvres aucun menu, tu ne changes aucun paramètre. Le poêle s'adapte, point.",
+          "À partir de cette lecture, le poêle bascule seul vers le bon mode de combustion. Aucun menu à ouvrir, rien à régler : il s'occupe du reste.",
         ],
       },
       {
@@ -586,7 +586,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "En maison basse consommation, un poêle étanche n'est pas une option. Voici comment choisir le bon modèle EK63 selon ta maison.",
     tldr:
-      "Dans une maison passive, BBC ou à VMC double flux, le poêle doit être étanche : il prélève l'air comburant directement à l'extérieur et n'aspire pas l'air chaud de la pièce. La majorité des modèles EK63 sont étanches. Pour les petites pièces, vise un Like 80 ou Zone 80 (environ 7,6 kW). Pour des volumes moyens à grands, le Tweed 90+, le Spy 110+ ou le Daily 130++. Pour un couloir, l'Entity 90+ ultra-fin.",
+      "Dans une maison passive, BBC ou à VMC double flux, le poêle doit être étanche : il prélève l'air comburant directement à l'extérieur et n'aspire pas l'air chaud de la pièce. La majorité des modèles EK63 sont étanches. Sur une petite pièce, un Like 80 ou un Zone 80 suffit (environ 7,6 kW) ; pour des volumes moyens à grands, on passe au Tweed 90+, au Spy 110+ ou au Daily 130++. L'Entity 90+ ultra-fin, lui, est pensé pour les couloirs.",
     category: "marques",
     tags: ["EK63", "étanche", "maison passive", "BBC", "VMC double flux"],
     readingTimeMinutes: 7,
@@ -613,7 +613,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Quel EK63 selon la taille de ta maison",
         paragraphs: [
-          "La gamme EK63 couvre du petit appartement à la maison à étage. Voici les repères.",
+          "La gamme EK63 couvre du petit appartement à la maison à étage. Le tableau ci-dessous donne les repères de puissance modèle par modèle.",
         ],
         table: {
           headers: ["Modèle EK63", "Puissance", "Pour quel espace"],
