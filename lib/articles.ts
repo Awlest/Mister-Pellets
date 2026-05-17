@@ -87,7 +87,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "Les trois marques qu'on met en avant sont toutes italiennes, mais elles ne visent pas le même besoin. Voici comment trancher selon ta maison et ton budget.",
     tldr:
-      "Edilkamin, EK63 et Girolami sont nos trois marques premium, toutes italiennes. Choisis Edilkamin si tu veux une valeur sûre qui dure 15 à 20 ans. Choisis EK63 si tu veux un poêle connecté et étanche sans payer le surcoût premium, environ 15 à 25 % moins cher qu'un Edilkamin équivalent. Choisis Girolami si tu veux le pellet et le bois dans la même machine, avec un brasier qui se nettoie tout seul.",
+      "Edilkamin, EK63 et Girolami sont nos trois marques premium, toutes italiennes. Edilkamin, c'est la valeur sûre, celle qui tient 15 à 20 ans. EK63 vise le même sérieux en version connectée et étanche, mais autour de 15 à 25 % moins cher à puissance égale. Girolami fait autre chose : il brûle le pellet comme le bois, et son brasier se nettoie seul.",
     category: "marques",
     tags: ["Edilkamin", "EK63", "Girolami", "comparatif", "marques italiennes"],
     readingTimeMinutes: 8,
@@ -102,7 +102,7 @@ export const ARTICLES: ArticleData[] = [
         paragraphs: [
           "On distribue cinq marques, mais on en met trois en avant : Edilkamin, EK63 et Girolami. Le point commun, c'est l'Italie. Toutes les trois conçoivent et fabriquent leurs poêles dans des ateliers italiens, avec le savoir-faire biomasse qui va avec.",
           "Le reste change. Edilkamin, c'est la référence historique, fondée à Milan en 1963. EK63 est sa marque sœur, lancée pour proposer du connecté moderne à un prix plus doux. Girolami est une marque familiale fondée près de Rome en 1970, avec un brevet maison d'alimentation par le bas qui change le quotidien d'entretien.",
-          "Aucune n'est meilleure dans l'absolu. La bonne marque, c'est celle qui colle à ta maison, ton usage et ton budget. On détaille les trois ci-dessous.",
+          "Aucune n'est meilleure dans l'absolu. La bonne, c'est celle qui colle à ta maison et à ton budget.",
         ],
       },
       {
@@ -151,7 +151,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Comment choisir selon ton profil",
         paragraphs: [
-          "Si on devait résumer en trois phrases, ça donnerait ceci.",
+          "En pratique, tout se joue sur ton besoin principal.",
         ],
         list: {
           items: [
@@ -238,7 +238,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Ce que ça change concrètement",
         paragraphs: [
-          "Il y a trois situations courantes où Leonardo travaille pour toi.",
+          "Concrètement, Leonardo travaille pour toi dans plusieurs situations courantes.",
         ],
         list: {
           items: [
@@ -342,7 +342,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Pourquoi de série change le quotidien",
         paragraphs: [
-          "Le dimanche soir, tu programmes ta semaine en deux minutes. Depuis le bureau, tu lances le poêle pour rentrer dans un séjour déjà chaud. En week-end ou en vacances, tu vérifies d'un coup d'oeil que tout est éteint.",
+          "Le dimanche soir, tu programmes ta semaine en deux minutes. Tu lances le poêle depuis le bureau pour rentrer dans un séjour déjà chaud. Et quand tu pars en week-end, un coup d'oeil sur l'app suffit pour vérifier que tout est bien coupé.",
           "Ces usages ne sont utiles que s'ils sont disponibles tout le temps, sans surcoût. C'est exactement ce que veut dire de série.",
         ],
         callout: {
