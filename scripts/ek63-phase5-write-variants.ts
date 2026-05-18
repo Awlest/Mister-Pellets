@@ -125,7 +125,7 @@ async function main(): Promise<void> {
   const before: Record<string, unknown>[] = [];
   for (const t of TARGETS) {
     const doc = await payload.findByID({ collection: "products", id: t.id, depth: 2 });
-    before.push(doc as Record<string, unknown>);
+    before.push(doc as unknown as Record<string, unknown>);
   }
   fs.writeFileSync(snapPath, JSON.stringify(before, null, 2));
   console.log(`[phase5] Snapshot écrit : ${path.relative(process.cwd(), snapPath)}`);
@@ -148,17 +148,17 @@ async function main(): Promise<void> {
   // 3. DIFF ------------------------------------------------------------------
   let anomaly = false;
   for (const t of TARGETS) {
-    const after = await payload.findByID({ collection: "products", id: t.id, depth: 2 });
+    const after = await payload.findByID({ collection: "products", id: t.id, depth: 2 }) as unknown as Record<string, unknown>;
     const fpBefore = fingerprintBefore.get(t.id);
-    const fpAfter = fieldFingerprint(after as Record<string, unknown>);
+    const fpAfter = fieldFingerprint(after);
     if (fpBefore !== fpAfter) {
       anomaly = true;
       console.error(`[phase5] ⚠️ ANOMALIE — un champ protégé de ${t.slug} a changé !`);
       console.error(`  avant : ${fpBefore}`);
       console.error(`  après : ${fpAfter}`);
     } else {
-      const vn = Array.isArray((after as Record<string, unknown>).variants)
-        ? ((after as Record<string, unknown>).variants as unknown[]).length : 0;
+      const vn = Array.isArray(after.variants)
+        ? (after.variants as unknown[]).length : 0;
       console.log(`[phase5] ${t.slug} : OK — champs protégés intacts, ${vn} variantes en base.`);
     }
   }
