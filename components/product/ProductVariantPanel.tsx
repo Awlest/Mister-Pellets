@@ -94,6 +94,11 @@ export function ProductVariantPanel({
     );
   }, [allChosen, variants, axes, selected]);
 
+  // Une variante peut exister sans prix encodé (prix à compléter par l'équipe).
+  // Dans ce cas on affiche « Sur devis » et l'ajout au panier est désactivé.
+  const activePriced =
+    activeVariant != null && effectivePrice(activeVariant) > 0;
+
   const minPrice = React.useMemo(
     () => Math.min(...variants.map(effectivePrice).filter((n) => n > 0)),
     [variants],
@@ -115,7 +120,7 @@ export function ProductVariantPanel({
   }
 
   function handleAddToCart() {
-    if (!activeVariant) return;
+    if (!activeVariant || !activePriced) return;
     const config = axes
       .map((a) => valueLabel(a, selected[a.optionTypeId]))
       .filter(Boolean)
@@ -172,14 +177,20 @@ export function ProductVariantPanel({
       {/* Bloc prix dynamique */}
       <div className="rounded-2xl bg-mp-beige border border-mp-sand/40 p-6">
         <span className="text-xs text-mp-ink-soft block">
-          {activeVariant ? "Prix TTC de la configuration choisie" : "Prix TTC indicatif"}
+          {activeVariant
+            ? activePriced
+              ? "Prix TTC de la configuration choisie"
+              : "Configuration choisie"
+            : "Prix TTC indicatif"}
         </span>
         <span
           className="text-4xl font-semibold text-mp-green-deep"
           style={{ fontFamily: "var(--font-display)" }}
         >
           {activeVariant
-            ? formatPrice(effectivePrice(activeVariant))
+            ? activePriced
+              ? formatPrice(effectivePrice(activeVariant))
+              : "Sur devis"
             : Number.isFinite(minPrice)
               ? `À partir de ${formatPrice(minPrice)}`
               : basePriceTTC
@@ -221,11 +232,13 @@ export function ProductVariantPanel({
         variant="primary"
         size="lg"
         className="w-full"
-        disabled={!activeVariant}
+        disabled={!activeVariant || !activePriced}
         onClick={handleAddToCart}
         aria-label={
           activeVariant
-            ? `Ajouter ${productName} au panier`
+            ? activePriced
+              ? `Ajouter ${productName} au panier`
+              : "Configuration sur devis"
             : "Sélectionner une configuration"
         }
       >
@@ -234,11 +247,13 @@ export function ProductVariantPanel({
             <Check className="h-5 w-5" />
             Ajouté au panier
           </>
-        ) : activeVariant ? (
+        ) : activeVariant && activePriced ? (
           <>
             <ShoppingBag className="h-5 w-5" />
             Ajouter au panier
           </>
+        ) : activeVariant ? (
+          "Configuration sur devis"
         ) : (
           "Sélectionner une configuration"
         )}

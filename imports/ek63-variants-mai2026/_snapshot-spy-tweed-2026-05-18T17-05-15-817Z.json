@@ -1,0 +1,1828 @@
+[
+  {
+    "id": 4,
+    "hiddenFromBoutique": true,
+    "sku": "EK63_TWEED90_PLUS",
+    "slug": "ek63-tweed-90",
+    "name": "EK63 Tweed 90+ Evo ",
+    "brand": "EK63",
+    "model": "Tweed 90+ Evo",
+    "productType": "canalisable",
+    "diffusion": "ventilation-forcee",
+    "color": "dark",
+    "priceHT": 2360,
+    "priceTTC": 2855,
+    "promoPrice": null,
+    "installationPrice": null,
+    "power": 9.2,
+    "heatedVolumeM3": 240,
+    "efficiency": 90.9,
+    "energyClass": "A+",
+    "emissions": null,
+    "hopperCapacity": 15,
+    "weight": 95,
+    "isAirtight": true,
+    "isCanalizable": true,
+    "isHydro": false,
+    "isConnected": true,
+    "dimensions": {
+      "width": 50,
+      "height": 101,
+      "depth": 50
+    },
+    "gtin": "817600",
+    "mpn": "817600",
+    "googleProductCategory": "Home & Garden > Household Appliances > Heating > Pellet Stoves",
+    "mainImage": {
+      "id": 131,
+      "alt": "EK63 TWEED90+ ACIER NOIR 9,2 kW ",
+      "caption": null,
+      "updatedAt": "2026-05-15T10:03:56.844Z",
+      "createdAt": "2026-05-15T10:03:55.537Z",
+      "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero.webp",
+      "thumbnailURL": null,
+      "filename": "TWEED_90_acciaio_nero.webp",
+      "mimeType": "image/webp",
+      "filesize": 165456,
+      "width": 1600,
+      "height": 1200,
+      "focalX": 50,
+      "focalY": 50,
+      "sizes": {
+        "thumbnail": {
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-200x200.jpg",
+          "width": 200,
+          "height": 200,
+          "mimeType": "image/jpeg",
+          "filesize": 7921,
+          "filename": "TWEED_90_acciaio_nero-200x200.jpg"
+        },
+        "card": {
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-400x300.jpg",
+          "width": 400,
+          "height": 300,
+          "mimeType": "image/jpeg",
+          "filesize": 20800,
+          "filename": "TWEED_90_acciaio_nero-400x300.jpg"
+        },
+        "display": {
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-800x600.jpg",
+          "width": 800,
+          "height": 600,
+          "mimeType": "image/jpeg",
+          "filesize": 65648,
+          "filename": "TWEED_90_acciaio_nero-800x600.jpg"
+        },
+        "full": {
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-1600x1200.jpg",
+          "width": 1600,
+          "height": 1200,
+          "mimeType": "image/jpeg",
+          "filesize": 228883,
+          "filename": "TWEED_90_acciaio_nero-1600x1200.jpg"
+        }
+      }
+    },
+    "galleryImages": [],
+    "colorVariants": [
+      {
+        "id": "6a01c61801d35201c0933234",
+        "colorName": "Acier Blanc perle",
+        "colorHex": "#F5F5F0",
+        "gtin": "817570",
+        "mainImage": {
+          "id": 132,
+          "alt": "EK63 TWEED90+ ACIER BLANC 9,2 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-15T10:04:28.812Z",
+          "createdAt": "2026-05-15T10:04:27.742Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_acciaio_bianco.webp",
+          "mimeType": "image/webp",
+          "filesize": 165942,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7963,
+              "filename": "TWEED_90_acciaio_bianco-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20873,
+              "filename": "TWEED_90_acciaio_bianco-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 65797,
+              "filename": "TWEED_90_acciaio_bianco-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 229497,
+              "filename": "TWEED_90_acciaio_bianco-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      },
+      {
+        "id": "6a01c61801d35201c0933235",
+        "colorName": "Acier Tourterelle",
+        "colorHex": "#B0A89A",
+        "gtin": "817580",
+        "mainImage": {
+          "id": 133,
+          "alt": "EK63 TWEED90+ ACIER BEIGE 9,2 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-15T10:04:51.929Z",
+          "createdAt": "2026-05-15T10:04:51.113Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_acciaio_tortora.webp",
+          "mimeType": "image/webp",
+          "filesize": 166272,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7933,
+              "filename": "TWEED_90_acciaio_tortora-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20877,
+              "filename": "TWEED_90_acciaio_tortora-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 65878,
+              "filename": "TWEED_90_acciaio_tortora-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 229840,
+              "filename": "TWEED_90_acciaio_tortora-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      },
+      {
+        "id": "6a01c61801d35201c0933236",
+        "colorName": "Acier Noir opaque",
+        "colorHex": "#1A1A1A",
+        "gtin": "817600",
+        "mainImage": {
+          "id": 134,
+          "alt": "EK63 TWEED90+ ACIER NOIR 9,2 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-15T10:05:08.225Z",
+          "createdAt": "2026-05-15T10:05:07.066Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-1.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_acciaio_nero-1.webp",
+          "mimeType": "image/webp",
+          "filesize": 165456,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-1-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7921,
+              "filename": "TWEED_90_acciaio_nero-1-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-1-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20800,
+              "filename": "TWEED_90_acciaio_nero-1-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-1-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 65648,
+              "filename": "TWEED_90_acciaio_nero-1-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-1-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 228883,
+              "filename": "TWEED_90_acciaio_nero-1-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      },
+      {
+        "id": "6a01c61801d35201c0933237",
+        "colorName": "Acier Bordeaux",
+        "colorHex": "#722F37",
+        "gtin": "817590",
+        "mainImage": {
+          "id": 135,
+          "alt": "EK63 TWEED90+ ACIER BORDEAUX 9,2 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-15T10:05:30.075Z",
+          "createdAt": "2026-05-15T10:05:28.900Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_acciaio_bordeaux.webp",
+          "mimeType": "image/webp",
+          "filesize": 165670,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7955,
+              "filename": "TWEED_90_acciaio_bordeaux-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20874,
+              "filename": "TWEED_90_acciaio_bordeaux-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 65908,
+              "filename": "TWEED_90_acciaio_bordeaux-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 229592,
+              "filename": "TWEED_90_acciaio_bordeaux-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      },
+      {
+        "id": "6a0aea170dd863473322584d",
+        "colorName": "Acier Noir opaque (sortie arrière)",
+        "colorHex": "#1A1A1A",
+        "gtin": "817630",
+        "mainImage": {
+          "id": 149,
+          "alt": "EK63 TWEED90+ ACIER NOIR 9,2 kW SORTIE ARRIERE",
+          "caption": null,
+          "updatedAt": "2026-05-18T10:31:37.653Z",
+          "createdAt": "2026-05-18T10:31:36.579Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-1.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_ACCIAO_PARTICOLARE-1.webp",
+          "mimeType": "image/webp",
+          "filesize": 106834,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-1-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 4830,
+              "filename": "TWEED_90_ACCIAO_PARTICOLARE-1-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-1-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 13640,
+              "filename": "TWEED_90_ACCIAO_PARTICOLARE-1-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-1-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 43194,
+              "filename": "TWEED_90_ACCIAO_PARTICOLARE-1-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-1-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 160739,
+              "filename": "TWEED_90_ACCIAO_PARTICOLARE-1-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      }
+    ],
+    "shortDescription": "Poêle à pellets canalisable 9,2 kW. Disponible en acier, étanche, pilotage Wi-Fi.",
+    "description": null,
+    "features": [
+      {
+        "id": "6a01c61801d35201c093323a",
+        "title": "Compatible maison passive",
+        "description": "Étanche, prélève l'air comburant directement de l'extérieur. Idéal BBC et logements basse consommation."
+      },
+      {
+        "id": "6a01c61801d35201c093323b",
+        "title": "Wi-Fi E-Smart intégré",
+        "description": "Pilotage à distance via l'app SmartEK63 (iOS/Android). Programmation hebdomadaire et fonction Easy Timer."
+      },
+      {
+        "id": "6a01c61801d35201c093323c",
+        "title": "Foyer en vermiculite",
+        "description": "Matériau réfractaire haute température, restitution optimale de la chaleur et durabilité éprouvée."
+      },
+      {
+        "id": "6a01c61801d35201c093323d",
+        "title": "Canalisable vers une autre pièce",
+        "description": "1 sortie d'air chaud canalisable Ø 8 cm pour chauffer une pièce supplémentaire (kit en option)."
+      },
+      {
+        "id": "6a01c61801d35201c093323e",
+        "title": "Ventilation air chaud frontale",
+        "description": "Diffusion homogène et silencieuse de la chaleur dans la pièce de vie."
+      }
+    ],
+    "technicalSheet": {
+      "id": 136,
+      "alt": "Fiche technique du poêle à granulés étanche EK63 Tweed 90+ 9,2 kW",
+      "caption": null,
+      "updatedAt": "2026-05-15T10:07:25.967Z",
+      "createdAt": "2026-05-15T10:07:25.143Z",
+      "url": "http://localhost:3000/api/media/file/fiche_technique_EK63_Tweed_90%2B.pdf",
+      "thumbnailURL": null,
+      "filename": "fiche_technique_EK63_Tweed_90+.pdf",
+      "mimeType": "application/pdf",
+      "filesize": 52710,
+      "width": null,
+      "height": null,
+      "focalX": null,
+      "focalY": null,
+      "sizes": {
+        "thumbnail": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "card": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "display": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "full": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        }
+      }
+    },
+    "metaTitle": "Poêle à Granulés Étanche EK63 Tweed 90+ 9,2 kW | Wallonie",
+    "metaDescription": "Poêle à granulés étanche canalisable EK63 Tweed 90+ 9,2 kW. Design rond acier ou verre, Wi-Fi, classe A+. Livraison et installation en Wallonie.",
+    "stock": 0,
+    "stockStatus": "in_stock",
+    "deliveryDelay": "48-72h",
+    "isBestseller": true,
+    "isFeatured": null,
+    "isNew": false,
+    "hasVariants": true,
+    "variantOptions": [
+      {
+        "id": "6a0ae41f0dd8634733225849",
+        "optionType": {
+          "id": 4,
+          "label": "Sortie des fumées",
+          "slug": "sortie-fumees",
+          "displayMode": "text",
+          "sortOrder": 40,
+          "updatedAt": "2026-05-15T17:48:30.264Z",
+          "createdAt": "2026-05-15T17:48:30.264Z"
+        },
+        "values": [
+          {
+            "id": 22,
+            "label": "Haute",
+            "slug": "haute",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.489Z",
+            "createdAt": "2026-05-15T17:48:30.489Z"
+          },
+          {
+            "id": 23,
+            "label": "Arrière",
+            "slug": "arriere",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.764Z",
+            "createdAt": "2026-05-15T17:48:30.764Z"
+          }
+        ]
+      },
+      {
+        "id": "6a0ae4360dd863473322584a",
+        "optionType": {
+          "id": 2,
+          "label": "Couleur",
+          "slug": "couleur",
+          "displayMode": "color",
+          "sortOrder": 20,
+          "updatedAt": "2026-05-15T17:48:25.768Z",
+          "createdAt": "2026-05-15T17:48:25.767Z"
+        },
+        "values": [
+          {
+            "id": 7,
+            "label": "Noir",
+            "slug": "noir",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#1a1a1a",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.001Z",
+            "createdAt": "2026-05-15T17:48:26.001Z"
+          },
+          {
+            "id": 8,
+            "label": "Blanc",
+            "slug": "blanc",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#f5f3ee",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.275Z",
+            "createdAt": "2026-05-15T17:48:26.275Z"
+          },
+          {
+            "id": 11,
+            "label": "Bordeaux",
+            "slug": "bordeaux",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#6b1f2e",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:27.085Z",
+            "createdAt": "2026-05-15T17:48:27.085Z"
+          },
+          {
+            "id": 14,
+            "label": "Tourterelle",
+            "slug": "tourterelle",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#d9c9a8",
+            "icon": null,
+            "updatedAt": "2026-05-18T10:20:37.524Z",
+            "createdAt": "2026-05-15T17:48:27.896Z"
+          }
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "6a0ae4410dd863473322584b",
+        "sku": "817630",
+        "gtin": "817630",
+        "mpn": "817630",
+        "price": 2855,
+        "salePrice": null,
+        "stockStatus": "in_stock",
+        "leadTimeDays": null,
+        "image": {
+          "id": 150,
+          "alt": "EK63 TWEED90+ ACIER NOIR 9,2 KW SORTIE ARRIERE ",
+          "caption": null,
+          "updatedAt": "2026-05-18T10:34:11.825Z",
+          "createdAt": "2026-05-18T10:34:10.856Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-2.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_ACCIAO_PARTICOLARE-2.webp",
+          "mimeType": "image/webp",
+          "filesize": 106834,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-2-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 4830,
+              "filename": "TWEED_90_ACCIAO_PARTICOLARE-2-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-2-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 13640,
+              "filename": "TWEED_90_ACCIAO_PARTICOLARE-2-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-2-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 43194,
+              "filename": "TWEED_90_ACCIAO_PARTICOLARE-2-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_ACCIAO_PARTICOLARE-2-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 160739,
+              "filename": "TWEED_90_ACCIAO_PARTICOLARE-2-1600x1200.jpg"
+            }
+          }
+        },
+        "optionValues": [
+          {
+            "id": 23,
+            "label": "Arrière",
+            "slug": "arriere",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.764Z",
+            "createdAt": "2026-05-15T17:48:30.764Z"
+          },
+          {
+            "id": 7,
+            "label": "Noir",
+            "slug": "noir",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#1a1a1a",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.001Z",
+            "createdAt": "2026-05-15T17:48:26.001Z"
+          }
+        ]
+      },
+      {
+        "id": "6a0ae8b80dd863473322584c",
+        "sku": "817570",
+        "gtin": "817570",
+        "mpn": "817570",
+        "price": 2855,
+        "salePrice": null,
+        "stockStatus": "in_stock",
+        "leadTimeDays": null,
+        "image": {
+          "id": 151,
+          "alt": "EK63 TWEED90+ ACIER BLANC 9,2 KW SORTIE HAUTE",
+          "caption": null,
+          "updatedAt": "2026-05-18T10:34:45.221Z",
+          "createdAt": "2026-05-18T10:34:44.367Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco%202.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_acciaio_bianco 2.webp",
+          "mimeType": "image/webp",
+          "filesize": 165942,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco%202-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7963,
+              "filename": "TWEED_90_acciaio_bianco 2-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco%202-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20873,
+              "filename": "TWEED_90_acciaio_bianco 2-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco%202-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 65797,
+              "filename": "TWEED_90_acciaio_bianco 2-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bianco%202-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 229497,
+              "filename": "TWEED_90_acciaio_bianco 2-1600x1200.jpg"
+            }
+          }
+        },
+        "optionValues": [
+          {
+            "id": 22,
+            "label": "Haute",
+            "slug": "haute",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.489Z",
+            "createdAt": "2026-05-15T17:48:30.489Z"
+          },
+          {
+            "id": 8,
+            "label": "Blanc",
+            "slug": "blanc",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#f5f3ee",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.275Z",
+            "createdAt": "2026-05-15T17:48:26.275Z"
+          }
+        ]
+      },
+      {
+        "id": "6a0aeb4b0dd863473322584e",
+        "sku": "817570",
+        "gtin": "817570",
+        "mpn": "817570",
+        "price": 2855,
+        "salePrice": null,
+        "stockStatus": "in_stock",
+        "leadTimeDays": null,
+        "image": {
+          "id": 152,
+          "alt": "EK63 TWEED90+ ACIER BEIGE 9,2 KW SORTIE HAUTE",
+          "caption": null,
+          "updatedAt": "2026-05-18T10:38:04.739Z",
+          "createdAt": "2026-05-18T10:36:36.437Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora%204.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_acciaio_tortora 4.webp",
+          "mimeType": "image/webp",
+          "filesize": 166272,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora%204-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7933,
+              "filename": "TWEED_90_acciaio_tortora 4-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora%204-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20877,
+              "filename": "TWEED_90_acciaio_tortora 4-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora%204-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 65878,
+              "filename": "TWEED_90_acciaio_tortora 4-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_tortora%204-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 229840,
+              "filename": "TWEED_90_acciaio_tortora 4-1600x1200.jpg"
+            }
+          }
+        },
+        "optionValues": [
+          {
+            "id": 22,
+            "label": "Haute",
+            "slug": "haute",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.489Z",
+            "createdAt": "2026-05-15T17:48:30.489Z"
+          },
+          {
+            "id": 14,
+            "label": "Tourterelle",
+            "slug": "tourterelle",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#d9c9a8",
+            "icon": null,
+            "updatedAt": "2026-05-18T10:20:37.524Z",
+            "createdAt": "2026-05-15T17:48:27.896Z"
+          }
+        ]
+      },
+      {
+        "id": "6a0aebba0dd863473322584f",
+        "sku": "817600",
+        "gtin": "817600",
+        "mpn": "817600",
+        "price": 2855,
+        "salePrice": null,
+        "stockStatus": "in_stock",
+        "leadTimeDays": null,
+        "image": {
+          "id": 153,
+          "alt": "EK63 TWEED90+ ACIER NOIR 9,2 kW SORTIE HAUTE",
+          "caption": null,
+          "updatedAt": "2026-05-18T10:37:49.596Z",
+          "createdAt": "2026-05-18T10:37:48.550Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-2.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_acciaio_nero-2.webp",
+          "mimeType": "image/webp",
+          "filesize": 165456,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-2-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7921,
+              "filename": "TWEED_90_acciaio_nero-2-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-2-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20800,
+              "filename": "TWEED_90_acciaio_nero-2-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-2-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 65648,
+              "filename": "TWEED_90_acciaio_nero-2-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_nero-2-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 228883,
+              "filename": "TWEED_90_acciaio_nero-2-1600x1200.jpg"
+            }
+          }
+        },
+        "optionValues": [
+          {
+            "id": 22,
+            "label": "Haute",
+            "slug": "haute",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.489Z",
+            "createdAt": "2026-05-15T17:48:30.489Z"
+          },
+          {
+            "id": 7,
+            "label": "Noir",
+            "slug": "noir",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#1a1a1a",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.001Z",
+            "createdAt": "2026-05-15T17:48:26.001Z"
+          }
+        ]
+      },
+      {
+        "id": "6a0aec1b0dd8634733225850",
+        "sku": "817590",
+        "gtin": "817590",
+        "mpn": "817590",
+        "price": 2855,
+        "salePrice": null,
+        "stockStatus": "in_stock",
+        "leadTimeDays": null,
+        "image": {
+          "id": 154,
+          "alt": "EK63 TWEED90+ ACIER BORDEAUX 9,2 kW SORTIE HAUTE",
+          "caption": null,
+          "updatedAt": "2026-05-18T10:38:53.191Z",
+          "createdAt": "2026-05-18T10:38:52.214Z",
+          "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-1.webp",
+          "thumbnailURL": null,
+          "filename": "TWEED_90_acciaio_bordeaux-1.webp",
+          "mimeType": "image/webp",
+          "filesize": 165670,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-1-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7955,
+              "filename": "TWEED_90_acciaio_bordeaux-1-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-1-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20874,
+              "filename": "TWEED_90_acciaio_bordeaux-1-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-1-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 65908,
+              "filename": "TWEED_90_acciaio_bordeaux-1-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/TWEED_90_acciaio_bordeaux-1-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 229592,
+              "filename": "TWEED_90_acciaio_bordeaux-1-1600x1200.jpg"
+            }
+          }
+        },
+        "optionValues": [
+          {
+            "id": 22,
+            "label": "Haute",
+            "slug": "haute",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.489Z",
+            "createdAt": "2026-05-15T17:48:30.489Z"
+          },
+          {
+            "id": 11,
+            "label": "Bordeaux",
+            "slug": "bordeaux",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#6b1f2e",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:27.085Z",
+            "createdAt": "2026-05-15T17:48:27.085Z"
+          }
+        ]
+      }
+    ],
+    "updatedAt": "2026-05-18T12:37:46.130Z",
+    "createdAt": "2026-05-04T11:19:21.625Z"
+  },
+  {
+    "id": 6,
+    "hiddenFromBoutique": true,
+    "sku": "EK63_SPY110_PLUS",
+    "slug": "ek63-spy-110",
+    "name": "EK63 Spy 110+ Evo",
+    "brand": "EK63",
+    "model": "Spy 110+ Evo",
+    "productType": "canalisable",
+    "diffusion": "ventilation-forcee",
+    "color": "dark",
+    "priceHT": 2670,
+    "priceTTC": 3230,
+    "promoPrice": null,
+    "installationPrice": null,
+    "power": 10.5,
+    "heatedVolumeM3": 275,
+    "efficiency": 91.9,
+    "energyClass": "A+",
+    "emissions": null,
+    "hopperCapacity": 22,
+    "weight": 130,
+    "isAirtight": true,
+    "isCanalizable": true,
+    "isHydro": false,
+    "isConnected": true,
+    "dimensions": {
+      "width": 55,
+      "height": 121,
+      "depth": 56
+    },
+    "gtin": "817920",
+    "mpn": "817920",
+    "googleProductCategory": "Home & Garden > Household Appliances > Heating > Pellet Stoves",
+    "mainImage": {
+      "id": 125,
+      "alt": "EK63 SPY110+ EVO ACIER NOIR 10,5 kW ",
+      "caption": null,
+      "updatedAt": "2026-05-15T09:03:07.115Z",
+      "createdAt": "2026-05-15T09:03:05.611Z",
+      "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1).webp",
+      "thumbnailURL": null,
+      "filename": "SPY_110_acciaio_nero (1).webp",
+      "mimeType": "image/webp",
+      "filesize": 265594,
+      "width": 1600,
+      "height": 1200,
+      "focalX": 50,
+      "focalY": 50,
+      "sizes": {
+        "thumbnail": {
+          "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-200x200.jpg",
+          "width": 200,
+          "height": 200,
+          "mimeType": "image/jpeg",
+          "filesize": 7957,
+          "filename": "SPY_110_acciaio_nero (1)-200x200.jpg"
+        },
+        "card": {
+          "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-400x300.jpg",
+          "width": 400,
+          "height": 300,
+          "mimeType": "image/jpeg",
+          "filesize": 20851,
+          "filename": "SPY_110_acciaio_nero (1)-400x300.jpg"
+        },
+        "display": {
+          "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-800x600.jpg",
+          "width": 800,
+          "height": 600,
+          "mimeType": "image/jpeg",
+          "filesize": 74319,
+          "filename": "SPY_110_acciaio_nero (1)-800x600.jpg"
+        },
+        "full": {
+          "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-1600x1200.jpg",
+          "width": 1600,
+          "height": 1200,
+          "mimeType": "image/jpeg",
+          "filesize": 310961,
+          "filename": "SPY_110_acciaio_nero (1)-1600x1200.jpg"
+        }
+      }
+    },
+    "galleryImages": [],
+    "colorVariants": [
+      {
+        "id": "6a01c61901d35201c0933251",
+        "colorName": "Acier Blanc perle",
+        "colorHex": "#F5F5F0",
+        "gtin": "817920+1193870",
+        "mainImage": {
+          "id": 126,
+          "alt": "EK63 SPY110+ EVO ACIER BLANC 10,5 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-15T09:03:34.354Z",
+          "createdAt": "2026-05-15T09:03:33.097Z",
+          "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_bianco.webp",
+          "thumbnailURL": null,
+          "filename": "SPY_110_acciaio_bianco.webp",
+          "mimeType": "image/webp",
+          "filesize": 266076,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_bianco-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 8021,
+              "filename": "SPY_110_acciaio_bianco-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_bianco-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20932,
+              "filename": "SPY_110_acciaio_bianco-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_bianco-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 74549,
+              "filename": "SPY_110_acciaio_bianco-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_bianco-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 311347,
+              "filename": "SPY_110_acciaio_bianco-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      },
+      {
+        "id": "6a01c61901d35201c0933252",
+        "colorName": "Acier Tourterelle",
+        "colorHex": "#B0A89A",
+        "gtin": "817920+1193880",
+        "mainImage": {
+          "id": 127,
+          "alt": "EK63 SPY110+ EVO ACIER BEIGE 10,5 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-15T09:03:58.339Z",
+          "createdAt": "2026-05-15T09:03:57.081Z",
+          "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_tortora.webp",
+          "thumbnailURL": null,
+          "filename": "SPY_110_acciaio_tortora.webp",
+          "mimeType": "image/webp",
+          "filesize": 266116,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_tortora-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7968,
+              "filename": "SPY_110_acciaio_tortora-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_tortora-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20856,
+              "filename": "SPY_110_acciaio_tortora-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_tortora-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 74355,
+              "filename": "SPY_110_acciaio_tortora-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_tortora-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 311392,
+              "filename": "SPY_110_acciaio_tortora-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      },
+      {
+        "id": "6a01c61901d35201c0933253",
+        "colorName": "Acier Noir opaque",
+        "colorHex": "#1A1A1A",
+        "gtin": "817920+1193900",
+        "mainImage": {
+          "id": 128,
+          "alt": "EK63 SPY110+ EVO ACIER NOIR 10,5 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-15T09:04:17.503Z",
+          "createdAt": "2026-05-15T09:04:16.200Z",
+          "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-1.webp",
+          "thumbnailURL": null,
+          "filename": "SPY_110_acciaio_nero (1)-1.webp",
+          "mimeType": "image/webp",
+          "filesize": 265594,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-1-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7957,
+              "filename": "SPY_110_acciaio_nero (1)-1-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-1-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 20851,
+              "filename": "SPY_110_acciaio_nero (1)-1-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-1-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 74319,
+              "filename": "SPY_110_acciaio_nero (1)-1-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_acciaio_nero%20(1)-1-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 310961,
+              "filename": "SPY_110_acciaio_nero (1)-1-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      },
+      {
+        "id": "6a01c61901d35201c0933255",
+        "colorName": "Verre blanc",
+        "colorHex": "#FFFFFF",
+        "gtin": "817920+1193910",
+        "mainImage": {
+          "id": 155,
+          "alt": "EK63 SPY110+ VERRE BLANC 10,5 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-18T10:58:10.070Z",
+          "createdAt": "2026-05-18T10:58:08.697Z",
+          "url": "http://localhost:3000/api/media/file/SPY_110_vetro_bianco.webp",
+          "thumbnailURL": null,
+          "filename": "SPY_110_vetro_bianco.webp",
+          "mimeType": "image/webp",
+          "filesize": 259302,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_vetro_bianco-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 9948,
+              "filename": "SPY_110_vetro_bianco-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_vetro_bianco-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 23728,
+              "filename": "SPY_110_vetro_bianco-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_vetro_bianco-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 83652,
+              "filename": "SPY_110_vetro_bianco-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_vetro_bianco-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 304462,
+              "filename": "SPY_110_vetro_bianco-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      },
+      {
+        "id": "6a01c61901d35201c0933256",
+        "colorName": "Verre noir",
+        "colorHex": "#0A0A0A",
+        "gtin": "817920+1193920",
+        "mainImage": {
+          "id": 156,
+          "alt": "EK63 SPY110+ VERRE NOIR 10,5 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-18T10:58:30.943Z",
+          "createdAt": "2026-05-18T10:58:29.806Z",
+          "url": "http://localhost:3000/api/media/file/SPY_110_vetro_nero.webp",
+          "thumbnailURL": null,
+          "filename": "SPY_110_vetro_nero.webp",
+          "mimeType": "image/webp",
+          "filesize": 259362,
+          "width": 1600,
+          "height": 1200,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_vetro_nero-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 9908,
+              "filename": "SPY_110_vetro_nero-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_vetro_nero-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 23710,
+              "filename": "SPY_110_vetro_nero-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_vetro_nero-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 83640,
+              "filename": "SPY_110_vetro_nero-800x600.jpg"
+            },
+            "full": {
+              "url": "http://localhost:3000/api/media/file/SPY_110_vetro_nero-1600x1200.jpg",
+              "width": 1600,
+              "height": 1200,
+              "mimeType": "image/jpeg",
+              "filesize": 304842,
+              "filename": "SPY_110_vetro_nero-1600x1200.jpg"
+            }
+          }
+        },
+        "galleryImages": []
+      }
+    ],
+    "shortDescription": "Poêle à pellets canalisable 10,5 kW jusqu'à 179 m². Vitre Magic noire éteinte, étanche, Wi-Fi.",
+    "description": null,
+    "features": [
+      {
+        "id": "6a01c61901d35201c0933257",
+        "title": "Compatible maison passive",
+        "description": "Étanche, prélève l'air comburant directement de l'extérieur. Idéal BBC et logements basse consommation."
+      },
+      {
+        "id": "6a01c61901d35201c0933258",
+        "title": "Wi-Fi E-Smart intégré",
+        "description": "Pilotage à distance via l'app SmartEK63 (iOS/Android). Programmation hebdomadaire et fonction Easy Timer."
+      },
+      {
+        "id": "6a01c61901d35201c0933259",
+        "title": "Foyer en vermiculite",
+        "description": "Matériau réfractaire haute température, restitution optimale de la chaleur et durabilité éprouvée."
+      },
+      {
+        "id": "6a01c61901d35201c093325a",
+        "title": "Canalisable vers une autre pièce",
+        "description": "1 sortie d'air chaud canalisable Ø 8 cm pour chauffer une pièce supplémentaire (kit en option)."
+      },
+      {
+        "id": "6a01c61901d35201c093325b",
+        "title": "Vitre Magic noire éteinte",
+        "description": "La vitre devient totalement noire à l'arrêt, esthétique épurée qui s'intègre à tout intérieur."
+      }
+    ],
+    "technicalSheet": {
+      "id": 130,
+      "alt": "Fiche technique du poêle à granulés étanche EK63 Spy 110+ Evo 10,5 kW",
+      "caption": null,
+      "updatedAt": "2026-05-15T09:08:56.952Z",
+      "createdAt": "2026-05-15T09:08:56.085Z",
+      "url": "http://localhost:3000/api/media/file/fiche_technique_EK63_Spy_110%2B_Evo.pdf",
+      "thumbnailURL": null,
+      "filename": "fiche_technique_EK63_Spy_110+_Evo.pdf",
+      "mimeType": "application/pdf",
+      "filesize": 52798,
+      "width": null,
+      "height": null,
+      "focalX": null,
+      "focalY": null,
+      "sizes": {
+        "thumbnail": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "card": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "display": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "full": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        }
+      }
+    },
+    "metaTitle": "Poêle à Granulés Étanche EK63 Spy 110+ Evo 10,5 kW | Wallonie",
+    "metaDescription": "Poêle à granulés étanche canalisable EK63 Spy 110+ Evo 10,5 kW. Vitre Magic, double porte, Wi-Fi, classe A+. Livraison et installation en Wallonie.",
+    "stock": 0,
+    "stockStatus": "in_stock",
+    "deliveryDelay": "48-72h",
+    "isBestseller": true,
+    "isFeatured": true,
+    "isNew": false,
+    "hasVariants": true,
+    "variantOptions": [
+      {
+        "id": "6a0af174dd0f3d3616996024",
+        "optionType": {
+          "id": 1,
+          "label": "Matériau",
+          "slug": "materiau",
+          "displayMode": "text",
+          "sortOrder": 10,
+          "updatedAt": "2026-05-15T17:48:23.880Z",
+          "createdAt": "2026-05-15T17:48:23.879Z"
+        },
+        "values": [
+          {
+            "id": 5,
+            "label": "Verre",
+            "slug": "verre",
+            "optionType": {
+              "id": 1,
+              "label": "Matériau",
+              "slug": "materiau",
+              "displayMode": "text",
+              "sortOrder": 10,
+              "updatedAt": "2026-05-15T17:48:23.880Z",
+              "createdAt": "2026-05-15T17:48:23.879Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:25.210Z",
+            "createdAt": "2026-05-15T17:48:25.210Z"
+          },
+          {
+            "id": 1,
+            "label": "Acier",
+            "slug": "acier",
+            "optionType": {
+              "id": 1,
+              "label": "Matériau",
+              "slug": "materiau",
+              "displayMode": "text",
+              "sortOrder": 10,
+              "updatedAt": "2026-05-15T17:48:23.880Z",
+              "createdAt": "2026-05-15T17:48:23.879Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:24.121Z",
+            "createdAt": "2026-05-15T17:48:24.121Z"
+          }
+        ]
+      },
+      {
+        "id": "6a0af188dd0f3d3616996025",
+        "optionType": {
+          "id": 4,
+          "label": "Sortie des fumées",
+          "slug": "sortie-fumees",
+          "displayMode": "text",
+          "sortOrder": 40,
+          "updatedAt": "2026-05-15T17:48:30.264Z",
+          "createdAt": "2026-05-15T17:48:30.264Z"
+        },
+        "values": [
+          {
+            "id": 22,
+            "label": "Haute",
+            "slug": "haute",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.489Z",
+            "createdAt": "2026-05-15T17:48:30.489Z"
+          },
+          {
+            "id": 23,
+            "label": "Arrière",
+            "slug": "arriere",
+            "optionType": {
+              "id": 4,
+              "label": "Sortie des fumées",
+              "slug": "sortie-fumees",
+              "displayMode": "text",
+              "sortOrder": 40,
+              "updatedAt": "2026-05-15T17:48:30.264Z",
+              "createdAt": "2026-05-15T17:48:30.264Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:30.764Z",
+            "createdAt": "2026-05-15T17:48:30.764Z"
+          }
+        ]
+      },
+      {
+        "id": "6a0af266dd0f3d3616996028",
+        "optionType": {
+          "id": 2,
+          "label": "Couleur",
+          "slug": "couleur",
+          "displayMode": "color",
+          "sortOrder": 20,
+          "updatedAt": "2026-05-15T17:48:25.768Z",
+          "createdAt": "2026-05-15T17:48:25.767Z"
+        },
+        "values": [
+          {
+            "id": 7,
+            "label": "Noir",
+            "slug": "noir",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#1a1a1a",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.001Z",
+            "createdAt": "2026-05-15T17:48:26.001Z"
+          },
+          {
+            "id": 8,
+            "label": "Blanc",
+            "slug": "blanc",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#f5f3ee",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.275Z",
+            "createdAt": "2026-05-15T17:48:26.275Z"
+          },
+          {
+            "id": 14,
+            "label": "Tourterelle",
+            "slug": "tourterelle",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#d9c9a8",
+            "icon": null,
+            "updatedAt": "2026-05-18T10:20:37.524Z",
+            "createdAt": "2026-05-15T17:48:27.896Z"
+          }
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": "6a0af1d8dd0f3d3616996027",
+        "sku": "1193910",
+        "gtin": "1193910",
+        "mpn": "1193910",
+        "price": 3726,
+        "salePrice": null,
+        "stockStatus": "in_stock",
+        "leadTimeDays": null,
+        "image": null,
+        "optionValues": [
+          {
+            "id": 5,
+            "label": "Verre",
+            "slug": "verre",
+            "optionType": {
+              "id": 1,
+              "label": "Matériau",
+              "slug": "materiau",
+              "displayMode": "text",
+              "sortOrder": 10,
+              "updatedAt": "2026-05-15T17:48:23.880Z",
+              "createdAt": "2026-05-15T17:48:23.879Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:25.210Z",
+            "createdAt": "2026-05-15T17:48:25.210Z"
+          },
+          {
+            "id": 8,
+            "label": "Blanc",
+            "slug": "blanc",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#f5f3ee",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.275Z",
+            "createdAt": "2026-05-15T17:48:26.275Z"
+          }
+        ]
+      },
+      {
+        "id": "6a0af39bdd0f3d3616996029",
+        "sku": "1193920",
+        "gtin": "1193920",
+        "mpn": "1193920",
+        "price": 3726,
+        "salePrice": null,
+        "stockStatus": "in_stock",
+        "leadTimeDays": null,
+        "image": null,
+        "optionValues": [
+          {
+            "id": 5,
+            "label": "Verre",
+            "slug": "verre",
+            "optionType": {
+              "id": 1,
+              "label": "Matériau",
+              "slug": "materiau",
+              "displayMode": "text",
+              "sortOrder": 10,
+              "updatedAt": "2026-05-15T17:48:23.880Z",
+              "createdAt": "2026-05-15T17:48:23.879Z"
+            },
+            "colorHex": null,
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:25.210Z",
+            "createdAt": "2026-05-15T17:48:25.210Z"
+          },
+          {
+            "id": 7,
+            "label": "Noir",
+            "slug": "noir",
+            "optionType": {
+              "id": 2,
+              "label": "Couleur",
+              "slug": "couleur",
+              "displayMode": "color",
+              "sortOrder": 20,
+              "updatedAt": "2026-05-15T17:48:25.768Z",
+              "createdAt": "2026-05-15T17:48:25.767Z"
+            },
+            "colorHex": "#1a1a1a",
+            "icon": null,
+            "updatedAt": "2026-05-15T17:48:26.001Z",
+            "createdAt": "2026-05-15T17:48:26.001Z"
+          }
+        ]
+      }
+    ],
+    "updatedAt": "2026-05-18T12:37:33.728Z",
+    "createdAt": "2026-05-04T11:19:22.083Z"
+  }
+]

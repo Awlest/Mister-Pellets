@@ -1,0 +1,92 @@
+=== Produits marque EK63 (19) ===
+  id=16 | ek63-berry-90 | "EK63 Berry 90+ Evo" | model="Berry 90+ Evo" | has_variants=false | variants=0
+  id=15 | ek63-cell-80 | "EK63 Cell 80+ Evo Top" | model="Cell 80+ Evo " | has_variants=false | variants=0
+  id=22 | ek63-daily-130 | "EK63 Daily 130++ Evo" | model="Daily 130++ Evo Back" | has_variants=false | variants=0
+  id=21 | ek63-dub-100 | "EK63 Dub 100++ Evo Top" | model="Dub 100++ Evo Top" | has_variants=false | variants=0
+  id=19 | ek63-entity-90 | "EK63 Entity 90+ Evo Top" | model="Entity 90+ Evo" | has_variants=false | variants=0
+  id=11 | ek63-gotha-70 | "EK63 Gotha 70 Evo Top" | model="Gotha 70 Evo" | has_variants=false | variants=0
+  id=12 | ek63-like-80 | "EK63 Like 80 Evo" | model="Like 80 Evo" | has_variants=false | variants=0
+  id=17 | ek63-like-90 | "EK63 Like 90+ Evo" | model="Like 90+ Evo" | has_variants=false | variants=0
+  id=20 | ek63-metro-110 | "EK63 Metro 110+ Evo" | model="Metro 110+ Evo" | has_variants=false | variants=0
+  id=24 | ek63-monday-130 | "EK63 Monday 130++ Evo" | model="Monday 130++ Evo Back" | has_variants=false | variants=0
+  id=28 | ek63-monday-190h | "EK63 Monday H 190 Evo" | model="Monday H 190 Evo" | has_variants=false | variants=0
+  id=29 | ek63-monday-230h | "EK63 Monday H 230 Evo" | model="Monday H 230 Evo" | has_variants=false | variants=0
+  id=26 | ek63-pellek-110 | "EK63 Pellek 110+ Evo²" | model="Pellek 110+ Evo²" | has_variants=false | variants=0
+  id=25 | ek63-pellek-80 | "EK63 Pellek 80 Evo²" | model="Pellek 80 Evo²" | has_variants=false | variants=0
+  id=27 | ek63-spot-100h | "EK63 Spot 100 H Evo" | model="Spot 100 H Evo" | has_variants=false | variants=0
+  id=6 | ek63-spy-110 | "EK63 Spy 110+ Evo" | model="Spy 110+ Evo" | has_variants=true | variants=2
+  id=4 | ek63-tweed-90 | "EK63 Tweed 90+ Evo " | model="Tweed 90+ Evo" | has_variants=true | variants=5
+  id=23 | ek63-yung-130 | "EK63 Yung 130++ Evo" | model="Yung 130++ Evo Back" | has_variants=false | variants=0
+  id=13 | ek63-zone-80 | "EK63 Zone 80 Evo" | model="Zone 80 Evo" | has_variants=false | variants=0
+
+=== products_variants colonnes ===
+  _order, _parent_id, id, sku, gtin, mpn, price, sale_price, stock_status, lead_time_days, image_id
+
+=== Variantes existantes : ek63-spy-110 (id=6) ===
+  {"_order":1,"_parent_id":6,"id":"6a0af1d8dd0f3d3616996027","sku":"1193910","gtin":"1193910","mpn":"1193910","price":"3726","sale_price":null,"stock_status":"in_stock","lead_time_days":null,"image_id":null}
+      rel: variants.0.optionValues → [Matériau] Verre (vov_id=5, slug=verre)
+      rel: variants.1.optionValues → [Matériau] Verre (vov_id=5, slug=verre)
+      rel: variants.0.optionValues → [Couleur] Blanc (vov_id=8, slug=blanc)
+      rel: variants.1.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+  {"_order":2,"_parent_id":6,"id":"6a0af39bdd0f3d3616996029","sku":"1193920","gtin":"1193920","mpn":"1193920","price":"3726","sale_price":null,"stock_status":"in_stock","lead_time_days":null,"image_id":null}
+      rel: variants.0.optionValues → [Matériau] Verre (vov_id=5, slug=verre)
+      rel: variants.1.optionValues → [Matériau] Verre (vov_id=5, slug=verre)
+      rel: variants.0.optionValues → [Couleur] Blanc (vov_id=8, slug=blanc)
+      rel: variants.1.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+
+=== Variantes existantes : ek63-tweed-90 (id=4) ===
+  {"_order":1,"_parent_id":4,"id":"6a0ae4410dd863473322584b","sku":"817630","gtin":"817630","mpn":"817630","price":"2855","sale_price":null,"stock_status":"in_stock","lead_time_days":null,"image_id":150}
+      rel: variants.1.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.3.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.2.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.4.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.0.optionValues → [Sortie des fumées] Arrière (vov_id=23, slug=arriere)
+      rel: variants.4.optionValues → [Couleur] Bordeaux (vov_id=11, slug=bordeaux)
+      rel: variants.0.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+      rel: variants.1.optionValues → [Couleur] Blanc (vov_id=8, slug=blanc)
+      rel: variants.2.optionValues → [Couleur] Tourterelle (vov_id=14, slug=tourterelle)
+      rel: variants.3.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+  {"_order":2,"_parent_id":4,"id":"6a0ae8b80dd863473322584c","sku":"817570","gtin":"817570","mpn":"817570","price":"2855","sale_price":null,"stock_status":"in_stock","lead_time_days":null,"image_id":151}
+      rel: variants.1.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.3.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.2.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.4.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.0.optionValues → [Sortie des fumées] Arrière (vov_id=23, slug=arriere)
+      rel: variants.4.optionValues → [Couleur] Bordeaux (vov_id=11, slug=bordeaux)
+      rel: variants.0.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+      rel: variants.1.optionValues → [Couleur] Blanc (vov_id=8, slug=blanc)
+      rel: variants.2.optionValues → [Couleur] Tourterelle (vov_id=14, slug=tourterelle)
+      rel: variants.3.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+  {"_order":3,"_parent_id":4,"id":"6a0aeb4b0dd863473322584e","sku":"817570","gtin":"817570","mpn":"817570","price":"2855","sale_price":null,"stock_status":"in_stock","lead_time_days":null,"image_id":152}
+      rel: variants.1.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.3.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.2.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.4.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.0.optionValues → [Sortie des fumées] Arrière (vov_id=23, slug=arriere)
+      rel: variants.4.optionValues → [Couleur] Bordeaux (vov_id=11, slug=bordeaux)
+      rel: variants.0.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+      rel: variants.1.optionValues → [Couleur] Blanc (vov_id=8, slug=blanc)
+      rel: variants.2.optionValues → [Couleur] Tourterelle (vov_id=14, slug=tourterelle)
+      rel: variants.3.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+  {"_order":4,"_parent_id":4,"id":"6a0aebba0dd863473322584f","sku":"817600","gtin":"817600","mpn":"817600","price":"2855","sale_price":null,"stock_status":"in_stock","lead_time_days":null,"image_id":153}
+      rel: variants.1.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.3.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.2.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.4.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.0.optionValues → [Sortie des fumées] Arrière (vov_id=23, slug=arriere)
+      rel: variants.4.optionValues → [Couleur] Bordeaux (vov_id=11, slug=bordeaux)
+      rel: variants.0.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+      rel: variants.1.optionValues → [Couleur] Blanc (vov_id=8, slug=blanc)
+      rel: variants.2.optionValues → [Couleur] Tourterelle (vov_id=14, slug=tourterelle)
+      rel: variants.3.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+  {"_order":5,"_parent_id":4,"id":"6a0aec1b0dd8634733225850","sku":"817590","gtin":"817590","mpn":"817590","price":"2855","sale_price":null,"stock_status":"in_stock","lead_time_days":null,"image_id":154}
+      rel: variants.1.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.3.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.2.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.4.optionValues → [Sortie des fumées] Haute (vov_id=22, slug=haute)
+      rel: variants.0.optionValues → [Sortie des fumées] Arrière (vov_id=23, slug=arriere)
+      rel: variants.4.optionValues → [Couleur] Bordeaux (vov_id=11, slug=bordeaux)
+      rel: variants.0.optionValues → [Couleur] Noir (vov_id=7, slug=noir)
+      rel: variants.1.optionValues → [Couleur] Blanc (vov_id=8, slug=blanc)
+      rel: variants.2.optionValues → [Couleur] Tourterelle (vov_id=14, slug=tourterelle)
+      rel: variants.3.optionValues → [Couleur] Noir (vov_id=7, slug=noir)

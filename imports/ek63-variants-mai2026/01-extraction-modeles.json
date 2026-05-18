@@ -1,0 +1,251 @@
+{
+  "_meta": {
+    "source": "Tarif Public_Prijslijst - Mai_Mei 2026_EK63 FR-NL.pdf",
+    "tariffSource": "EK63 Mai 2026 (945904 0,7.05.2026/A)",
+    "verification": "Titre 'IL FUOCO 5.0' + 'TARIF PUBLIC PRIJSLIJST MAI MEI' + 'edilkamin.com' présents → source confirmée",
+    "extractedBy": "pdftotext -layout",
+    "tousPrixHT": true,
+    "note": "Modèles bois (Fancy/Decor/Decor C/Firek) et chaudières (Kappa) présents au tarif mais hors catalogue Payload EK63 (pellet uniquement) — non détaillés ici."
+  },
+  "modeles": [
+    {
+      "nom": "Zone 80 Evo", "page": 7, "codingSystem": "B",
+      "detection": "structure 817340 (81xxxx) + série couleur 7 chiffres 11921xx",
+      "sorties": [{ "label": "Back", "structureSku": "817340", "prixStructureHT": 1530 }],
+      "serie": { "label": "série acier", "prixSerieHT": 210, "couleurs": [
+        { "couleur": "Blanc perle", "colorSku": "1192110" },
+        { "couleur": "Tourterelle", "colorSku": "1192120" },
+        { "couleur": "Bordeaux", "colorSku": "1192130" },
+        { "couleur": "Noire opaque", "colorSku": "1192140" }
+      ]}
+    },
+    {
+      "nom": "Berry 90+ Evo", "page": 9, "codingSystem": "B",
+      "detection": "structure 816440 + série céramique 7 chiffres 11479xx/11480xx",
+      "sorties": [{ "label": "Back", "structureSku": "816440", "prixStructureHT": 1920 }],
+      "serie": { "label": "série céramique", "prixSerieHT": 300, "couleurs": [
+        { "couleur": "Blanc opaque", "colorSku": "1147990" },
+        { "couleur": "Tourterelle", "colorSku": "1148000" },
+        { "couleur": "Bordeaux", "colorSku": "1148010" }
+      ]}
+    },
+    {
+      "nom": "Metro 110+ Evo", "page": 11, "codingSystem": "A",
+      "detection": "codes couleur complets 81xxxx, aucune série séparée",
+      "sorties": [{ "label": "Back", "couleurs": [
+        { "couleur": "Blanc perle", "code": "817650", "prixHT": 2360 },
+        { "couleur": "Tourterelle", "code": "817660", "prixHT": 2360 },
+        { "couleur": "Bordeaux", "code": "817670", "prixHT": 2360 },
+        { "couleur": "Noire opaque", "code": "817680", "prixHT": 2360 }
+      ]}]
+    },
+    {
+      "nom": "Daily 130++ Evo", "page": 13, "codingSystem": "B",
+      "detection": "structure 817150 + série céramique 11480xx",
+      "sorties": [{ "label": "Back", "structureSku": "817150", "prixStructureHT": 2630 }],
+      "serie": { "label": "série céramique", "prixSerieHT": 660, "couleurs": [
+        { "couleur": "Blanc opaque", "colorSku": "1148050" },
+        { "couleur": "Tourterelle", "colorSku": "1148060" },
+        { "couleur": "Bordeaux", "colorSku": "1148070" }
+      ]}
+    },
+    {
+      "nom": "Monday 130++ Evo", "page": 15, "codingSystem": "B",
+      "detection": "structure 816490 + série 11463xx",
+      "sorties": [{ "label": "Back", "structureSku": "816490", "prixStructureHT": 2900 }],
+      "serie": { "label": "série acier+céramique", "prixSerieHT": 390, "couleurs": [
+        { "couleur": "Blanc opaque", "colorSku": "1146350" },
+        { "couleur": "Bordeaux", "colorSku": "1146360" },
+        { "couleur": "Gris foncé", "colorSku": "1146370" }
+      ]}
+    },
+    {
+      "nom": "Like 80 Evo", "page": 17, "codingSystem": "B",
+      "detection": "structures 817510/817530/817550 + séries 1190xxx (acier) et 1193xxx (céramique)",
+      "sorties": [
+        { "label": "Top", "structureSku": "817510", "prixStructureHT": 1910 },
+        { "label": "Back", "structureSku": "817530", "prixStructureHT": 1910 },
+        { "label": "Coax", "structureSku": "817550", "prixStructureHT": 2420 }
+      ],
+      "series": [
+        { "label": "série acier", "prixSerieHT": 250, "couleurs": [
+          { "couleur": "Blanc perle", "colorSku": "1190110" },
+          { "couleur": "Tourterelle", "colorSku": "1190120" },
+          { "couleur": "Bordeaux", "colorSku": "1190130" },
+          { "couleur": "Noire opaque", "colorSku": "1190140" }
+        ]},
+        { "label": "série céramique", "prixSerieHT": 560, "couleurs": [
+          { "couleur": "Blanc opaque", "colorSku": "1193230" },
+          { "couleur": "Tourterelle", "colorSku": "1193240" },
+          { "couleur": "Bordeaux", "colorSku": "1193250" }
+        ]}
+      ]
+    },
+    {
+      "nom": "Like 90+ Evo", "page": 19, "codingSystem": "B",
+      "detection": "structures 817520/817540/817560 + séries 1190xxx (acier) et 1193xxx (céramique)",
+      "sorties": [
+        { "label": "Top", "structureSku": "817520", "prixStructureHT": 2110 },
+        { "label": "Back", "structureSku": "817540", "prixStructureHT": 2110 },
+        { "label": "Coax", "structureSku": "817560", "prixStructureHT": 2320 }
+      ],
+      "series": [
+        { "label": "série acier", "prixSerieHT": 250, "couleurs": [
+          { "couleur": "Blanc perle", "colorSku": "1190110" },
+          { "couleur": "Tourterelle", "colorSku": "1190120" },
+          { "couleur": "Bordeaux", "colorSku": "1190130" },
+          { "couleur": "Noire opaque", "colorSku": "1190140" }
+        ]},
+        { "label": "série céramique", "prixSerieHT": 560, "couleurs": [
+          { "couleur": "Blanc opaque", "colorSku": "1193230" },
+          { "couleur": "Tourterelle", "colorSku": "1193240" },
+          { "couleur": "Bordeaux", "colorSku": "1193250" }
+        ]}
+      ]
+    },
+    {
+      "nom": "Tweed 90+ Evo", "page": 21, "codingSystem": "A",
+      "detection": "codes couleur complets 81xxxx par sortie, aucune série 7 chiffres",
+      "sorties": [
+        { "label": "Top", "couleurs": [
+          { "couleur": "Blanc perle", "code": "817570", "prixHT": 2360 },
+          { "couleur": "Tourterelle", "code": "817580", "prixHT": 2360 },
+          { "couleur": "Bordeaux", "code": "817590", "prixHT": 2360 },
+          { "couleur": "Noire opaque", "code": "817600", "prixHT": 2360 }
+        ]},
+        { "label": "Back", "couleurs": [
+          { "couleur": "Noire opaque", "code": "817630", "prixHT": 2360 }
+        ]}
+      ]
+    },
+    {
+      "nom": "Spy 110+ Evo", "page": 23, "codingSystem": "B",
+      "detection": "structures 817920 (Back) / 817930 (Top) + séries 1193xxx (acier) et 1193xxx (verre)",
+      "sorties": [
+        { "label": "Back", "structureSku": "817920", "prixStructureHT": 2520 },
+        { "label": "Top", "structureSku": "817930", "prixStructureHT": null,
+          "remarque": "prix structure Top illisible dans le PDF → a verifier" }
+      ],
+      "series": [
+        { "label": "série acier", "prixSerieHT": 150, "couleurs": [
+          { "couleur": "Blanc perle", "colorSku": "1193870" },
+          { "couleur": "Tourterelle", "colorSku": "1193880" },
+          { "couleur": "Noire opaque", "colorSku": "1193900" }
+        ]},
+        { "label": "série verre", "prixSerieHT": 560, "couleurs": [
+          { "couleur": "Verre Blanc", "colorSku": "1193910" },
+          { "couleur": "Verre Noir", "colorSku": "1193920" }
+        ]}
+      ]
+    },
+    {
+      "nom": "Yung 130++ Evo", "page": 25, "codingSystem": "B",
+      "detection": "structure 817160 + série céramique 11480xx/11484xx",
+      "sorties": [{ "label": "Back", "structureSku": "817160", "prixStructureHT": 2980 }],
+      "serie": { "label": "série céramique", "prixSerieHT": 300, "couleurs": [
+        { "couleur": "Blanc opaque", "colorSku": "1148080" },
+        { "couleur": "Tourterelle", "colorSku": "1148090" },
+        { "couleur": "Bordeaux", "colorSku": "1148100" },
+        { "couleur": "Noire opaque", "colorSku": "1148440" }
+      ]}
+    },
+    {
+      "nom": "Gotha 70 Evo", "page": 27, "codingSystem": "A",
+      "detection": "codes couleur complets 81xxxx",
+      "sorties": [{ "label": "Top", "couleurs": [
+        { "couleur": "Blanc perle", "code": "817180", "prixHT": 1950 },
+        { "couleur": "Tourterelle", "code": "817190", "prixHT": 1950 },
+        { "couleur": "Bordeaux", "code": "817200", "prixHT": 1950 },
+        { "couleur": "Noire opaque", "code": "817210", "prixHT": 1950 }
+      ]}]
+    },
+    {
+      "nom": "Cell 80+ Evo", "page": 29, "codingSystem": "A",
+      "detection": "codes couleur complets 81xxxx par sortie",
+      "sorties": [
+        { "label": "Top", "couleurs": [
+          { "couleur": "Blanc perle", "code": "817220", "prixHT": 2150 },
+          { "couleur": "Tourterelle", "code": "817230", "prixHT": 2150 },
+          { "couleur": "Bordeaux", "code": "817240", "prixHT": 2150 },
+          { "couleur": "Noire opaque", "code": "817250", "prixHT": 2150 }
+        ]},
+        { "label": "Coax", "couleurs": [
+          { "couleur": "Blanc perle", "code": "817260", "prixHT": 2360 },
+          { "couleur": "Noire opaque", "code": "817270", "prixHT": 2360 }
+        ]}
+      ]
+    },
+    {
+      "nom": "Entity 90+ Evo", "page": 31, "codingSystem": "A",
+      "detection": "codes couleur complets 81xxxx",
+      "remarque": "Seuls 3 codes lisibles (817280/817290/817310) ; 817300 non lu — couleur Bordeaux possiblement manquante, à vérifier",
+      "sorties": [{ "label": "Top", "couleurs": [
+        { "couleur": "Blanc perle", "code": "817280", "prixHT": 2560 },
+        { "couleur": "Tourterelle", "code": "817290", "prixHT": 2560 },
+        { "couleur": "Noire opaque", "code": "817310", "prixHT": 2560 }
+      ]}]
+    },
+    {
+      "nom": "Dub 100++ Evo", "page": 33, "codingSystem": "B",
+      "detection": "structure 816450 + série céramique 11481xx/11484xx",
+      "sorties": [{ "label": "Top", "structureSku": "816450", "prixStructureHT": 2910 }],
+      "serie": { "label": "série céramique", "prixSerieHT": 230, "couleurs": [
+        { "couleur": "Blanc opaque", "colorSku": "1148110" },
+        { "couleur": "Tourterelle", "colorSku": "1148120" },
+        { "couleur": "Bordeaux", "colorSku": "1148130" },
+        { "couleur": "Noire opaque", "colorSku": "1148450" }
+      ]}
+    },
+    {
+      "nom": "Pellek 80 Evo2", "page": 35, "codingSystem": "B",
+      "detection": "structure 817970 + séries kit de chargement 7 chiffres",
+      "remarque": "L'axe série n'est pas une couleur mais un kit de chargement — mapping vers 'color' inadapté, à arbitrer",
+      "sorties": [{ "label": "Top", "structureSku": "817970", "prixStructureHT": 3180 }],
+      "serie": { "label": "série kit chargement", "couleurs": [
+        { "couleur": "Kit tiroir frontal rectangulaire", "colorSku": "1167410", "prixSerieHT": 340 },
+        { "couleur": "Kit tiroir frontal carré", "colorSku": "1194130", "prixSerieHT": 340 },
+        { "couleur": "Kit chargement par trappe", "colorSku": "1167450", "prixSerieHT": 300 }
+      ]}
+    },
+    {
+      "nom": "Pellek 100+ Evo2", "page": 35, "codingSystem": "B",
+      "detection": "structure 817960 + séries kit de chargement 7 chiffres",
+      "remarque": "Idem Pellek 80 : axe série = kit, pas couleur. Modèle Payload existant nommé 'Pellek 110+ Evo²' (110 ≠ 100) — rapprochement de nom incertain",
+      "sorties": [{ "label": "Top", "structureSku": "817960", "prixStructureHT": 3390 }],
+      "serie": { "label": "série kit chargement", "couleurs": [
+        { "couleur": "Kit tiroir frontal rectangulaire", "colorSku": "1167410", "prixSerieHT": 340 },
+        { "couleur": "Kit tiroir frontal carré", "colorSku": "1194130", "prixSerieHT": 340 },
+        { "couleur": "Kit chargement par trappe", "colorSku": "1167450", "prixSerieHT": 300 }
+      ]}
+    },
+    {
+      "nom": "Spot100 H Evo", "page": 37, "codingSystem": "A",
+      "detection": "codes couleur complets 81xxxx (815xxx)",
+      "sorties": [{ "label": "Back", "couleurs": [
+        { "couleur": "Blanc crème", "code": "815670", "prixHT": 3020 },
+        { "couleur": "Bordeaux", "code": "815680", "prixHT": 3020 },
+        { "couleur": "Gris foncé", "code": "815690", "prixHT": 3020 }
+      ]}]
+    },
+    {
+      "nom": "Monday H 190 Evo", "page": 39, "codingSystem": "B",
+      "detection": "structure 813740 + série 11463xx",
+      "sorties": [{ "label": "Back", "structureSku": "813740", "prixStructureHT": 3500 }],
+      "serie": { "label": "série acier+céramique", "prixSerieHT": 390, "couleurs": [
+        { "couleur": "Blanc opaque", "colorSku": "1146350" },
+        { "couleur": "Bordeaux", "colorSku": "1146360" },
+        { "couleur": "Gris foncé", "colorSku": "1146370", "remarque": "prix série Gris foncé affiché '--' → a verifier" }
+      ]}
+    },
+    {
+      "nom": "Monday H 230 Evo", "page": 39, "codingSystem": "B",
+      "detection": "structure 813770 + série 11463xx",
+      "sorties": [{ "label": "Back", "structureSku": "813770", "prixStructureHT": 3830 }],
+      "serie": { "label": "série acier+céramique", "prixSerieHT": 390, "couleurs": [
+        { "couleur": "Blanc opaque", "colorSku": "1146350" },
+        { "couleur": "Bordeaux", "colorSku": "1146360" },
+        { "couleur": "Gris foncé", "colorSku": "1146370", "remarque": "prix série Gris foncé affiché '--' → a verifier" }
+      ]}
+    }
+  ]
+}
