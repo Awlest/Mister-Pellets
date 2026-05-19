@@ -1,0 +1,458 @@
+[
+  {
+    "id": 25,
+    "hiddenFromBoutique": true,
+    "sku": "EK63_PELLEK80_EVO2",
+    "slug": "ek63-pellek-80",
+    "name": "EK63 Pellek 80 Evo²",
+    "brand": "EK63",
+    "model": "Pellek 80 Evo²",
+    "productType": "insert",
+    "diffusion": "ventilation-forcee",
+    "color": "dark",
+    "priceHT": 3390,
+    "priceTTC": 4101,
+    "promoPrice": null,
+    "installationPrice": null,
+    "power": 8,
+    "heatedVolumeM3": 210,
+    "efficiency": 91.9,
+    "energyClass": "A+",
+    "emissions": null,
+    "hopperCapacity": 11,
+    "weight": 151,
+    "isAirtight": false,
+    "isCanalizable": false,
+    "isHydro": false,
+    "isConnected": true,
+    "dimensions": {
+      "width": 73.5,
+      "height": 49,
+      "depth": 49
+    },
+    "gtin": "817970 + 1167410",
+    "mpn": "817970 + 1167410",
+    "googleProductCategory": "Home & Garden > Household Appliances > Heating > Pellet Stoves",
+    "mainImage": {
+      "id": 90,
+      "alt": "EK63 PELLEK80 NOIR 8 kW ",
+      "caption": null,
+      "updatedAt": "2026-05-11T14:34:24.341Z",
+      "createdAt": "2026-05-11T14:34:23.243Z",
+      "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1).webp",
+      "thumbnailURL": null,
+      "filename": "PELLEK_con_cassetto_ambientato (1).webp",
+      "mimeType": "image/webp",
+      "filesize": 172294,
+      "width": 1600,
+      "height": 1200,
+      "focalX": 50,
+      "focalY": 50,
+      "sizes": {
+        "thumbnail": {
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-200x200.jpg",
+          "width": 200,
+          "height": 200,
+          "mimeType": "image/jpeg",
+          "filesize": 7844,
+          "filename": "PELLEK_con_cassetto_ambientato (1)-200x200.jpg"
+        },
+        "card": {
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-400x300.jpg",
+          "width": 400,
+          "height": 300,
+          "mimeType": "image/jpeg",
+          "filesize": 21928,
+          "filename": "PELLEK_con_cassetto_ambientato (1)-400x300.jpg"
+        },
+        "display": {
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-800x600.jpg",
+          "width": 800,
+          "height": 600,
+          "mimeType": "image/jpeg",
+          "filesize": 69358,
+          "filename": "PELLEK_con_cassetto_ambientato (1)-800x600.jpg"
+        },
+        "full": {
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-1600x1200.jpg",
+          "width": 1600,
+          "height": 1200,
+          "mimeType": "image/jpeg",
+          "filesize": 234832,
+          "filename": "PELLEK_con_cassetto_ambientato (1)-1600x1200.jpg"
+        }
+      }
+    },
+    "galleryImages": [
+      {
+        "id": "6a01e92a3e8d0c98232c6355",
+        "image": {
+          "id": 91,
+          "alt": "EK63 PELLEK80 NOIR 8 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-11T14:35:50.386Z",
+          "createdAt": "2026-05-11T14:35:49.586Z",
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_aperto%20(2).webp",
+          "thumbnailURL": null,
+          "filename": "PELLEK_con_cassetto_aperto (2).webp",
+          "mimeType": "image/webp",
+          "filesize": 39754,
+          "width": 800,
+          "height": 600,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_aperto%20(2)-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7277,
+              "filename": "PELLEK_con_cassetto_aperto (2)-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_aperto%20(2)-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 15420,
+              "filename": "PELLEK_con_cassetto_aperto (2)-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_aperto%20(2)-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 53590,
+              "filename": "PELLEK_con_cassetto_aperto (2)-800x600.jpg"
+            },
+            "full": {
+              "url": null,
+              "width": null,
+              "height": null,
+              "mimeType": null,
+              "filesize": null,
+              "filename": null
+            }
+          }
+        }
+      }
+    ],
+    "colorVariants": [],
+    "shortDescription": "Insert à pellets 8 kW pour cheminée existante. Allie esthétique traditionnelle et performance pellets.",
+    "description": null,
+    "features": [
+      {
+        "id": "6a01c61d01d35201c0933289",
+        "title": "Encastrable dans une cheminée",
+        "description": "Conçu pour s'intégrer dans un foyer existant. Valorise une cheminée traditionnelle avec la performance des pellets."
+      },
+      {
+        "id": "6a01c61d01d35201c093328a",
+        "title": "Foyer en vermiculite",
+        "description": "Matériau réfractaire haute température, restitution optimale de la chaleur et durabilité éprouvée."
+      },
+      {
+        "id": "6a01c61d01d35201c093328b",
+        "title": "Bougie d'allumage céramique",
+        "description": "Allumage rapide et fiable, durée de vie supérieure aux résistances métalliques classiques."
+      },
+      {
+        "id": "6a01c61d01d35201c093328c",
+        "title": "Wi-Fi E-Smart intégré",
+        "description": "Pilotage à distance via l'app SmartEK63 (iOS/Android). Programmation hebdomadaire et fonction Easy Timer."
+      }
+    ],
+    "technicalSheet": {
+      "id": 110,
+      "alt": "Fiche technique de l'insert à granulés EK63 Pellek 80 Evo 8,1 kW",
+      "caption": null,
+      "updatedAt": "2026-05-11T15:28:15.812Z",
+      "createdAt": "2026-05-11T15:28:14.654Z",
+      "url": "http://localhost:3000/api/media/file/fiche_technique_EK63_Pellek_80_Evo.pdf",
+      "thumbnailURL": null,
+      "filename": "fiche_technique_EK63_Pellek_80_Evo.pdf",
+      "mimeType": "application/pdf",
+      "filesize": 52284,
+      "width": null,
+      "height": null,
+      "focalX": null,
+      "focalY": null,
+      "sizes": {
+        "thumbnail": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "card": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "display": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "full": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        }
+      }
+    },
+    "metaTitle": "Insert à Pellets EK63 Pellek 80 Evo 8,1 kW | Wallonie",
+    "metaDescription": "Insert à granulés EK63 Pellek 80 Evo 8,1 kW pour cheminée. Wi-Fi, classe A+, idéal récupération cheminée. Livraison et installation en Wallonie.",
+    "stock": 0,
+    "stockStatus": "on_order",
+    "deliveryDelay": "4-6 sem.",
+    "isBestseller": null,
+    "isFeatured": null,
+    "isNew": null,
+    "hasVariants": false,
+    "variantOptions": [],
+    "variants": [],
+    "updatedAt": "2026-05-18T12:38:23.179Z",
+    "createdAt": "2026-05-04T19:45:06.397Z"
+  },
+  {
+    "id": 26,
+    "hiddenFromBoutique": true,
+    "sku": "EK63_PELLEK100_EVO2",
+    "slug": "ek63-pellek-110",
+    "name": "EK63 Pellek 110+ Evo²",
+    "brand": "EK63",
+    "model": "Pellek 110+ Evo²",
+    "productType": "insert",
+    "diffusion": "ventilation-forcee",
+    "color": "dark",
+    "priceHT": 3590,
+    "priceTTC": 4343,
+    "promoPrice": null,
+    "installationPrice": null,
+    "power": 10,
+    "heatedVolumeM3": 260,
+    "efficiency": 90.9,
+    "energyClass": "A+",
+    "emissions": null,
+    "hopperCapacity": 11,
+    "weight": 155,
+    "isAirtight": false,
+    "isCanalizable": true,
+    "isHydro": false,
+    "isConnected": true,
+    "dimensions": {
+      "width": 49,
+      "height": 73.5,
+      "depth": 49
+    },
+    "gtin": "817960 + 1167410",
+    "mpn": "817960 + 1167410",
+    "googleProductCategory": "Home & Garden > Household Appliances > Heating > Pellet Stoves",
+    "mainImage": {
+      "id": 107,
+      "alt": "EK63 PELLEK100+ EVO NOIR 10 kW ",
+      "caption": null,
+      "updatedAt": "2026-05-11T15:22:42.823Z",
+      "createdAt": "2026-05-11T15:22:41.818Z",
+      "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-1.webp",
+      "thumbnailURL": null,
+      "filename": "PELLEK_con_cassetto_ambientato (1)-1.webp",
+      "mimeType": "image/webp",
+      "filesize": 172294,
+      "width": 1600,
+      "height": 1200,
+      "focalX": 50,
+      "focalY": 50,
+      "sizes": {
+        "thumbnail": {
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-1-200x200.jpg",
+          "width": 200,
+          "height": 200,
+          "mimeType": "image/jpeg",
+          "filesize": 7844,
+          "filename": "PELLEK_con_cassetto_ambientato (1)-1-200x200.jpg"
+        },
+        "card": {
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-1-400x300.jpg",
+          "width": 400,
+          "height": 300,
+          "mimeType": "image/jpeg",
+          "filesize": 21928,
+          "filename": "PELLEK_con_cassetto_ambientato (1)-1-400x300.jpg"
+        },
+        "display": {
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-1-800x600.jpg",
+          "width": 800,
+          "height": 600,
+          "mimeType": "image/jpeg",
+          "filesize": 69358,
+          "filename": "PELLEK_con_cassetto_ambientato (1)-1-800x600.jpg"
+        },
+        "full": {
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_ambientato%20(1)-1-1600x1200.jpg",
+          "width": 1600,
+          "height": 1200,
+          "mimeType": "image/jpeg",
+          "filesize": 234832,
+          "filename": "PELLEK_con_cassetto_ambientato (1)-1-1600x1200.jpg"
+        }
+      }
+    },
+    "galleryImages": [
+      {
+        "id": "6a01f4453e8d0c98232c6356",
+        "image": {
+          "id": 108,
+          "alt": "EK63 PELLEK100+ EVO NOIR 10 kW ",
+          "caption": null,
+          "updatedAt": "2026-05-11T15:23:03.122Z",
+          "createdAt": "2026-05-11T15:23:02.132Z",
+          "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_aperto%20(2)-1.webp",
+          "thumbnailURL": null,
+          "filename": "PELLEK_con_cassetto_aperto (2)-1.webp",
+          "mimeType": "image/webp",
+          "filesize": 39754,
+          "width": 800,
+          "height": 600,
+          "focalX": 50,
+          "focalY": 50,
+          "sizes": {
+            "thumbnail": {
+              "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_aperto%20(2)-1-200x200.jpg",
+              "width": 200,
+              "height": 200,
+              "mimeType": "image/jpeg",
+              "filesize": 7277,
+              "filename": "PELLEK_con_cassetto_aperto (2)-1-200x200.jpg"
+            },
+            "card": {
+              "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_aperto%20(2)-1-400x300.jpg",
+              "width": 400,
+              "height": 300,
+              "mimeType": "image/jpeg",
+              "filesize": 15420,
+              "filename": "PELLEK_con_cassetto_aperto (2)-1-400x300.jpg"
+            },
+            "display": {
+              "url": "http://localhost:3000/api/media/file/PELLEK_con_cassetto_aperto%20(2)-1-800x600.jpg",
+              "width": 800,
+              "height": 600,
+              "mimeType": "image/jpeg",
+              "filesize": 53590,
+              "filename": "PELLEK_con_cassetto_aperto (2)-1-800x600.jpg"
+            },
+            "full": {
+              "url": null,
+              "width": null,
+              "height": null,
+              "mimeType": null,
+              "filesize": null,
+              "filename": null
+            }
+          }
+        }
+      }
+    ],
+    "colorVariants": [],
+    "shortDescription": "Insert à pellets 10 kW canalisable, jusqu'à 260 m³. Pour cheminée existante avec diffusion étendue.",
+    "description": null,
+    "features": [
+      {
+        "id": "6a01c61e01d35201c093328d",
+        "title": "Encastrable dans une cheminée",
+        "description": "Conçu pour s'intégrer dans un foyer existant. Valorise une cheminée traditionnelle avec la performance des pellets."
+      },
+      {
+        "id": "6a01c61e01d35201c093328e",
+        "title": "Foyer en vermiculite",
+        "description": "Matériau réfractaire haute température, restitution optimale de la chaleur et durabilité éprouvée."
+      },
+      {
+        "id": "6a01c61e01d35201c093328f",
+        "title": "Canalisable vers une autre pièce",
+        "description": "1 sortie d'air chaud canalisable Ø 8 cm pour chauffer une pièce supplémentaire (kit en option)."
+      },
+      {
+        "id": "6a01c61e01d35201c0933290",
+        "title": "Wi-Fi E-Smart intégré",
+        "description": "Pilotage à distance via l'app SmartEK63 (iOS/Android). Programmation hebdomadaire et fonction Easy Timer."
+      }
+    ],
+    "technicalSheet": {
+      "id": 109,
+      "alt": "Fiche technique de l'insert à granulés canalisable EK63 Pellek 110+ Evo2",
+      "caption": null,
+      "updatedAt": "2026-05-11T15:26:48.530Z",
+      "createdAt": "2026-05-11T15:26:47.664Z",
+      "url": "http://localhost:3000/api/media/file/fiche_technique_EK63_Pellek_110%2B_Evo2.pdf",
+      "thumbnailURL": null,
+      "filename": "fiche_technique_EK63_Pellek_110+_Evo2.pdf",
+      "mimeType": "application/pdf",
+      "filesize": 52279,
+      "width": null,
+      "height": null,
+      "focalX": null,
+      "focalY": null,
+      "sizes": {
+        "thumbnail": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "card": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "display": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        },
+        "full": {
+          "url": null,
+          "width": null,
+          "height": null,
+          "mimeType": null,
+          "filesize": null,
+          "filename": null
+        }
+      }
+    },
+    "metaTitle": "Insert à Pellets Canalisable EK63 Pellek 110+ Evo2 | Wallonie",
+    "metaDescription": "Insert à granulés canalisable EK63 Pellek 110+ Evo2 10 kW. Distribution air dans pièce voisine, Wi-Fi, classe A+. Livraison et installation en Wallonie.",
+    "stock": 0,
+    "stockStatus": "on_order",
+    "deliveryDelay": "4-6 sem.",
+    "isBestseller": null,
+    "isFeatured": null,
+    "isNew": null,
+    "hasVariants": false,
+    "variantOptions": [],
+    "variants": [],
+    "updatedAt": "2026-05-18T12:39:59.969Z",
+    "createdAt": "2026-05-04T19:45:06.655Z"
+  }
+]
