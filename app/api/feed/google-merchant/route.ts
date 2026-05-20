@@ -49,6 +49,20 @@ function absUrl(url: string | undefined): string | undefined {
   return `${SITE_URL}${url.startsWith("/") ? "" : "/"}${url}`;
 }
 
+/**
+ * Google Merchant impose 50 caractères max pour l'attribut `id`. Certains
+ * skus internes de variantes (ex. "EDK-CHERIE-11-EVO-TOP-PIERRE-OLLAIRE-
+ * PIERRE-OLLAIRE") dépassent. On tronque à 50 en conservant un suffixe de
+ * hash court pour préserver l'unicité.
+ */
+function safeMerchantId(raw: string): string {
+  if (raw.length <= 50) return raw;
+  let h = 0;
+  for (let i = 0; i < raw.length; i++) h = (h * 31 + raw.charCodeAt(i)) | 0;
+  const tag = Math.abs(h).toString(36).slice(0, 5);
+  return `${raw.slice(0, 44)}-${tag}`;
+}
+
 /** stockStatus interne → valeur d'availability Google Merchant. */
 function availability(status: string | undefined): string {
   if (status === "out_of_stock") return "out_of_stock";
@@ -86,7 +100,7 @@ function productItem(p: ProductDemo): string | null {
   if (!p.priceTTC || p.priceTTC <= 0) return null;
   const hasIdentifier = Boolean(p.gtin || p.mpn);
   return buildItem([
-    ["id", p.sku || p.slug],
+    ["id", safeMerchantId(p.sku || p.slug)],
     ["title", p.name],
     [
       "description",
@@ -134,7 +148,7 @@ function variantItem(p: ProductDemo, variant: ProductVariantData): string | null
       : undefined;
 
   return buildItem([
-    ["id", variant.sku || `${p.slug}-v-${variant.id}`],
+    ["id", safeMerchantId(variant.sku || `${p.slug}-v-${variant.id}`)],
     ["item_group_id", p.sku || p.slug],
     ["title", config ? `${p.name} — ${config}` : p.name],
     [
@@ -165,7 +179,7 @@ function colorVariantItem(p: ProductDemo, cv: ProductColorVariant): string | nul
   // produit si la couleur n'a pas de GTIN.
   const hasIdentifier = Boolean(cv.gtin || p.mpn);
   return buildItem([
-    ["id", cv.gtin || `${p.sku || p.slug}-${slugify(cv.colorName)}`],
+    ["id", safeMerchantId(cv.gtin || `${p.sku || p.slug}-${slugify(cv.colorName)}`)],
     ["item_group_id", p.sku || p.slug],
     ["title", `${p.name} - ${cv.colorName}`],
     [
