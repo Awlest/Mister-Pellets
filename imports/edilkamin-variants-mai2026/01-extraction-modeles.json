@@ -1,0 +1,1027 @@
+{
+  "_meta": {
+    "source": "Tarif Public_Prijslijst - Mai_Mei 2026_Edilkamin FR-NL.pdf",
+    "tariffSource": "Edilkamin Mai 2026",
+    "extractedBy": "subagent"
+  },
+  "modeles": [
+    {
+      "slugPayload": "edilkamin-sense-6",
+      "nom": "Sense 6",
+      "page": 44,
+      "codingSystem": "A",
+      "matchCertain": true,
+      "note": "Système A : une seule couleur (acier noir) avec code complet 816590. PDF mentionne 'Jusqu'à épuisement des stocks'.",
+      "branches": [
+        {
+          "sortie": "Top",
+          "finition": "Acier",
+          "couleurs": [
+            { "couleur": "Acier noir", "code": "816590", "prixHT": 2880 }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-slide-5",
+      "nom": "Slide 5",
+      "page": 12,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B avec 2 séries (acier noir, pierre ollaire). La série acier n'a qu'une couleur (noir). La série pierre ollaire n'a pas de code couleur 11xxxxx visible — c'est probablement une finition monochrome. 'Jusqu'à épuisement des stocks'.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "816300", "prixStructureHT": 2260 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "série acier noir",
+          "prixSerieHT": 180,
+          "couleurs": [
+            { "couleur": "Noir", "colorSku": "1050660" }
+          ]
+        },
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série pierre ollaire",
+          "prixSerieHT": 280,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1036520" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-dania-6",
+      "nom": "Dania 6",
+      "page": 26,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B avec 2 sorties (Top, Coax). Tariff utilise 'Dania 6' (sans suffixe AT/ATC). Une seule série 'flancs en acier + partie supérieure en verre' avec 3 couleurs (gris, verre blanc, verre noir). Les codes série 1190370/1190380 affichent ensemble un seul prix 550 — ce sont 2 SKUs pour la même série verre (blanc/noir) au même tarif.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "817040", "prixStructureHT": 3240 },
+        { "sortie": "Coax", "structureSku": "817060", "prixStructureHT": 3430 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier + verre",
+          "serieLabel": "Série flancs en acier et partie supérieure en verre - acier gris",
+          "prixSerieHT": 240,
+          "couleurs": [
+            { "couleur": "Gris", "colorSku": "1190360" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Flancs et partie supérieure en verre",
+          "prixSerieHT": 550,
+          "couleurs": [
+            { "couleur": "Verre blanc", "colorSku": "1190370" },
+            { "couleur": "Verre noir", "colorSku": "1190380" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-lumea-7",
+      "nom": "Lumea 7",
+      "page": 29,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B, 2 sorties (Top, Coax). 2 séries: acier (1 couleur noir) et verre (2 couleurs blanc/noir au même tarif série). Structures marquées '*Jusqu'à épuisement des stocks'.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "816980", "prixStructureHT": 3660 },
+        { "sortie": "Coax", "structureSku": "817000", "prixStructureHT": 3870 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "Série flancs en acier",
+          "prixSerieHT": 330,
+          "couleurs": [
+            { "couleur": "Noir", "colorSku": "1188180" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Série flancs en verre",
+          "prixSerieHT": 720,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1188190" },
+            { "couleur": "Noir", "colorSku": "1188200" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-libra-7",
+      "nom": "Libra 7",
+      "page": 30,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B, sortie Back uniquement (kit conversion Top disponible en option). 2 séries: acier (4 couleurs: blanc/noir/moka/sable) et verre (2 couleurs blanc/noir). Le code structure est marqué 814980.A dans la première occurrence puis 814980 (sans .A) dans la version *épuisement de stocks — le .A désigne la version courante. Prix structure 3.210 identique.",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "814980.A", "prixStructureHT": 3210 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "Série flancs en acier",
+          "prixSerieHT": 400,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1198420" },
+            { "couleur": "Noir", "colorSku": "1199910" },
+            { "couleur": "Moka", "colorSku": "1199920" },
+            { "couleur": "Sable", "colorSku": "1199930" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Série flancs en verre",
+          "prixSerieHT": 690,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1176030" },
+            { "couleur": "Noir", "colorSku": "1176040" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-lena-8",
+      "nom": "Lena 8",
+      "page": 16,
+      "codingSystem": "B",
+      "matchCertain": false,
+      "note": "AMBIGUITÉ: Le tarif Mai 2026 ne propose pas 'Lena 8' mais 'Lena 7 Evo' (3-6.9 kW, SKU 818590) et 'Lena 9+ Evo' (4.3-9.2 kW, SKU 815430). 'Lena 8' n'apparaît pas. Marqué matchCertain=false. Pas trouvé tel quel ; mapping le plus proche serait Lena 7 Evo si Payload 'Lena 8' fait référence à l'entrée de gamme. À confirmer par l'équipe métier.",
+      "sorties": [],
+      "finitions": []
+    },
+    {
+      "slugPayload": "edilkamin-evia-8",
+      "nom": "Evia 8",
+      "page": 33,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B, 1 sortie Top (sortie back disponible via kit optionnel 1077590 à 70€). Une seule série 'Acier' avec 2 couleurs (blanc opaque, noir, bronze).",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "816580", "prixStructureHT": 3150 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "Série Acier",
+          "prixSerieHT": 380,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1095260" },
+            { "couleur": "Noir", "colorSku": "1081080" },
+            { "couleur": "Bronze", "colorSku": "1081070" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-celia-7",
+      "nom": "Celia 7 (AT/ATC)",
+      "page": 28,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Au tarif Mai 2026 il n'y a qu'UN produit Celia: 'Celia Air tight C' (817450) avec sortie coaxiale 8/13 — c'est donc une seule version ATC. Le tableau de spécifications mentionne 'Celia AT 7.2 kW' mais le produit physique propose la sortie coax (ATC) uniquement. Pas de distinction AT/ATC au tariff — seul ATC est commercialisé. Le suffixe 'Magic' (verre Magic) est traité comme une option de série (Glas panelen serie + Magic) avec 2 SKUs 1161700/1161680. '*Jusqu'à épuisement des stocks'.",
+      "sorties": [
+        { "sortie": "Coax", "structureSku": "817450", "prixStructureHT": 3870 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "Série flancs en acier",
+          "prixSerieHT": 330,
+          "couleurs": [
+            { "couleur": "Noir", "colorSku": "1161710" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Série flancs en verre",
+          "prixSerieHT": 740,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1161690" },
+            { "couleur": "Noir", "colorSku": "1161700" }
+          ]
+        },
+        {
+          "finition": "Verre Magic",
+          "serieLabel": "Série flancs en verre (Celia Air Tight C Magic)",
+          "prixSerieHT": 800,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1161670" },
+            { "couleur": "Noir", "colorSku": "1161680" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-dania-8-plus",
+      "nom": "Dania 8+ (AT/ATC = Top/Coax)",
+      "page": 26,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Le tarif appelle ce modèle 'Dania 8+' (sans Plus textuel mais avec +). 2 sorties distinctes Top (817050) et Coax (817070) — au sens du brief, ces 2 sorties correspondent à AT (Top, sortie supérieure) et ATC (Coax, plus polyvalent), traitées ici comme deux sorties. Mêmes séries que Dania 6.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "817050", "prixStructureHT": 3450 },
+        { "sortie": "Coax", "structureSku": "817070", "prixStructureHT": 3630 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier + verre",
+          "serieLabel": "Série flancs en acier et partie supérieure en verre - acier gris",
+          "prixSerieHT": 240,
+          "couleurs": [
+            { "couleur": "Gris", "colorSku": "1190360" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Flancs et partie supérieure en verre",
+          "prixSerieHT": 550,
+          "couleurs": [
+            { "couleur": "Verre blanc", "colorSku": "1190370" },
+            { "couleur": "Verre noir", "colorSku": "1190380" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-celia-9-plus",
+      "nom": "Celia 9 AT Plus / ATC Plus",
+      "page": null,
+      "codingSystem": "B",
+      "matchCertain": false,
+      "note": "Pas trouvé dans le tarif Mai 2026. Le seul Celia présent est Celia Air tight C (~7 kW). Pas de version 9+ identifiée.",
+      "sorties": [],
+      "finitions": []
+    },
+    {
+      "slugPayload": "edilkamin-lumea-9-plus",
+      "nom": "Lumea 9+ Evo",
+      "page": 29,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. Au tarif: 'Lumea 9+' (pas '9+ Evo' explicite mais c'est le même modèle, partage la page avec Lumea 7). 2 sorties (Top, Coax). Séries identiques à Lumea 7. '*Jusqu'à épuisement des stocks'.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "816990", "prixStructureHT": 3810 },
+        { "sortie": "Coax", "structureSku": "817010", "prixStructureHT": 4070 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "Série flancs en acier",
+          "prixSerieHT": 330,
+          "couleurs": [
+            { "couleur": "Noir", "colorSku": "1188180" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Série flancs en verre",
+          "prixSerieHT": 720,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1188190" },
+            { "couleur": "Noir", "colorSku": "1188200" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-libra-9-plus",
+      "nom": "Libra 9+",
+      "page": 30,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. Sortie Back uniquement (kit conversion Top en option). Mêmes séries que Libra 7 (acier + verre, mêmes SKUs couleur car partagés).",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "814990.A", "prixStructureHT": 3790 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "Série flancs en acier",
+          "prixSerieHT": 400,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1198420" },
+            { "couleur": "Noir", "colorSku": "1199910" },
+            { "couleur": "Moka", "colorSku": "1199920" },
+            { "couleur": "Sable", "colorSku": "1199930" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Série flancs en verre",
+          "prixSerieHT": 690,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1176030" },
+            { "couleur": "Noir", "colorSku": "1176040" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-lena-9-evo",
+      "nom": "Lena 9+ Evo",
+      "page": 16,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. 1 sortie back (rookgasafvoer achteraan 8 cm m�le). Séries TOP/FLANCS sont des séries combinables. Le tarif présente deux variantes de présentation (céramique blanc opaque OU pierre ollaire) avec inserts en céramique/pierre. La sortie n'est pas explicite — la fiche dit 'sortie fumées 8 cm par l'arrière, mâle' = Back.",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "815430", "prixStructureHT": 2640 }
+      ],
+      "finitions": [
+        {
+          "finition": "Top céramique blanc opaque",
+          "serieLabel": "Série top inzetframe (céramique mat wit)",
+          "prixSerieHT": 450,
+          "couleurs": [
+            { "couleur": "Blanc opaque (céramique)", "colorSku": "1148140" }
+          ]
+        },
+        {
+          "finition": "Flancs acier noir",
+          "serieLabel": "Série flancs (acier noir)",
+          "prixSerieHT": 280,
+          "couleurs": [
+            { "couleur": "Acier noir", "colorSku": "1148160" }
+          ]
+        },
+        {
+          "finition": "Top pierre ollaire",
+          "serieLabel": "Série top inzetframe (pierre ollaire)",
+          "prixSerieHT": 560,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1148150" }
+          ]
+        },
+        {
+          "finition": "Flancs pierre ollaire",
+          "serieLabel": "Série flancs (pierre ollaire)",
+          "prixSerieHT": 1050,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1148170" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-yana-9-evo",
+      "nom": "Yana 9+ Evo",
+      "page": 13,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. 1 sortie Top. Séries: céramique (2 couleurs) et pierre ollaire (1 SKU).",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "815410", "prixStructureHT": 2730 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramiek serie",
+          "prixSerieHT": 420,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1105180" },
+            { "couleur": "Noir opaque", "colorSku": "1105190" }
+          ]
+        },
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série pierre ollaire / speksteen serie",
+          "prixSerieHT": 970,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1143800" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-nara-9-evo",
+      "nom": "Nara 9+ Evo",
+      "page": 15,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. 1 sortie Back (sortie fumées arrière, mâle). Une seule série céramique avec 3 couleurs.",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "815420", "prixStructureHT": 2430 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramische serie",
+          "prixSerieHT": 220,
+          "couleurs": [
+            { "couleur": "Noir brillant", "colorSku": "1021380" },
+            { "couleur": "Bordeaux", "colorSku": "1021370" },
+            { "couleur": "Blanc opaque", "colorSku": "1021360" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-cherie-9-evo",
+      "nom": "Cherie 9+ Evo",
+      "page": 34,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. 3 sorties (Top, Back, Coax). 2 séries principales + 1 pierre ollaire. La série pierre ollaire 1136070 marquée '*Jusqu'à épuisement des stocks' et remplacée par 1197180 au même prix 1.520.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "816110", "prixStructureHT": 3490 },
+        { "sortie": "Back", "structureSku": "816050", "prixStructureHT": 3490 },
+        { "sortie": "Coax", "structureSku": "816130", "prixStructureHT": 3890 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "série Acier / staal serie",
+          "prixSerieHT": 860,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1136000" },
+            { "couleur": "Bronze", "colorSku": "1136010" },
+            { "couleur": "Gris foncé", "colorSku": "1136020" }
+          ]
+        },
+        {
+          "finition": "Céramique",
+          "serieLabel": "série Céramique / keramiek serie",
+          "prixSerieHT": 1050,
+          "couleurs": [
+            { "couleur": "Blanc crème", "colorSku": "1136030" },
+            { "couleur": "Bordeaux", "colorSku": "1136040" },
+            { "couleur": "Gris foncé", "colorSku": "1136050" }
+          ]
+        },
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série Pierre ollaire / Speksteen serie",
+          "prixSerieHT": 1520,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1197180" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-bild-9-plus",
+      "nom": "Bild 9+ (Top / Back / Coax)",
+      "page": 36,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B, 3 sorties (Top, Back, Coax). Brief demande 'Back / Coax' mais le tarif présente aussi Top — listées toutes. Séries communes aux 3 sorties: verre, céramique, pierre ollaire.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "817120", "prixStructureHT": 3810 },
+        { "sortie": "Back", "structureSku": "817130", "prixStructureHT": 3810 },
+        { "sortie": "Coax", "structureSku": "817110", "prixStructureHT": 4490 }
+      ],
+      "finitions": [
+        {
+          "finition": "Verre",
+          "serieLabel": "série verre / glas serie",
+          "prixSerieHT": 270,
+          "couleurs": [
+            { "couleur": "Noir", "colorSku": "1086320" }
+          ]
+        },
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramiek serie",
+          "prixSerieHT": 300,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1086290" },
+            { "couleur": "Noir opaque", "colorSku": "1086300" }
+          ]
+        },
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série pierre ollaire / Speksteen serie",
+          "prixSerieHT": 470,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1086310" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-libra-11-plus-int",
+      "nom": "Libra 11+ Int",
+      "page": 32,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B, 1 sortie Back. 2 séries partagées avec Libra 13++ Int (acier 4 couleurs, verre 2 couleurs). Le code structure se termine par '.A'.",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "818260.A", "prixStructureHT": 3910 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "Série flancs en acier",
+          "prixSerieHT": 480,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1198430" },
+            { "couleur": "Noir", "colorSku": "1199940" },
+            { "couleur": "Moka", "colorSku": "1199950" },
+            { "couleur": "Sable", "colorSku": "1199960" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Série flancs en verre",
+          "prixSerieHT": 770,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1188800" },
+            { "couleur": "Noir", "colorSku": "1188810" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-cherie-11-evo",
+      "nom": "Cherie 11++ Evo",
+      "page": 35,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. 3 sorties (Top, Back, Coax). Mêmes séries que Cherie 9+ Evo (codes couleur partagés).",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "816120", "prixStructureHT": 3540 },
+        { "sortie": "Back", "structureSku": "816060", "prixStructureHT": 3540 },
+        { "sortie": "Coax", "structureSku": "816140", "prixStructureHT": 4050 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "série Acier / staal serie",
+          "prixSerieHT": 860,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1136000" },
+            { "couleur": "Bronze", "colorSku": "1136010" },
+            { "couleur": "Gris foncé", "colorSku": "1136020" }
+          ]
+        },
+        {
+          "finition": "Céramique",
+          "serieLabel": "série Céramique / keramiek serie",
+          "prixSerieHT": 1050,
+          "couleurs": [
+            { "couleur": "Blanc crème", "colorSku": "1136030" },
+            { "couleur": "Bordeaux", "colorSku": "1136040" },
+            { "couleur": "Gris foncé", "colorSku": "1136050" }
+          ]
+        },
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série Pierre ollaire / Speksteen serie",
+          "prixSerieHT": 1520,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1197180" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-libra-13-int",
+      "nom": "Libra 13++ Int",
+      "page": 32,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B, 1 sortie Back. Partage les séries acier/verre avec Libra 11+ Int (mêmes prix de série).",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "818270.A", "prixStructureHT": 4210 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "Série flancs en acier",
+          "prixSerieHT": 480,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1198430" },
+            { "couleur": "Noir", "colorSku": "1199940" },
+            { "couleur": "Moka", "colorSku": "1199950" },
+            { "couleur": "Sable", "colorSku": "1199960" }
+          ]
+        },
+        {
+          "finition": "Verre",
+          "serieLabel": "Série flancs en verre",
+          "prixSerieHT": 770,
+          "couleurs": [
+            { "couleur": "Blanc", "colorSku": "1188800" },
+            { "couleur": "Noir", "colorSku": "1188810" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-blade-12-evo",
+      "nom": "Blade 12++ Evo",
+      "page": 42,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. 1 sortie Top (kit pour Back/latéral gauche en option 1059990 60€). 2 séries: pierre ollaire (1 SKU sans détail couleur) et acier (4 couleurs).",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "815440", "prixStructureHT": 3300 }
+      ],
+      "finitions": [
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série pierre ollaire / speksteen serie",
+          "prixSerieHT": 1440,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1044420" }
+          ]
+        },
+        {
+          "finition": "Acier",
+          "serieLabel": "série acier / staal serie",
+          "prixSerieHT": 670,
+          "couleurs": [
+            { "couleur": "Bordeaux", "colorSku": "1170200" },
+            { "couleur": "Noir", "colorSku": "1170210" },
+            { "couleur": "Blanc opaque", "colorSku": "1170220" },
+            { "couleur": "Bronze", "colorSku": "1170230" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-kira-13",
+      "nom": "Kira 13++ Evo",
+      "page": 22,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. 1 sortie Back. Une seule série céramique avec 3 couleurs. SKUs couleur partagés avec Kira H 19/23 Evo (codes 1049310-1049330).",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "816800", "prixStructureHT": 3640 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramische serie",
+          "prixSerieHT": 1220,
+          "couleurs": [
+            { "couleur": "Blanc crème", "colorSku": "1049320" },
+            { "couleur": "Bordeaux", "colorSku": "1049310" },
+            { "couleur": "Parchemin", "colorSku": "1049330" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-vyda-13",
+      "nom": "Vyda 13++ Evo",
+      "page": 23,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. 1 sortie Back. 2 séries: céramique (3 couleurs dont 'gris foncé' sans prix indiqué — possiblement épuisé) et pierre ollaire (1 SKU sans prix visible). AMBIGUITÉ: la série céramique affiche 2 prix (490 et 1.020) à côté de 2 SKUs (1049560 blanc opaque, 1152650 matte witte = NL pour blanc opaque) — il s'agit possiblement de 2 nuances de blanc à des tarifs distincts ou d'un format mal extrait. Le SKU pierre ollaire 1136980 n'a pas de prix de série visible (null).",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "816810", "prixStructureHT": 4230 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramische serie",
+          "prixSerieHT": null,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1049560", "prixSerieHT_indicatif": 490 },
+            { "couleur": "Matte witte", "colorSku": "1152650", "prixSerieHT_indicatif": 1020 },
+            { "couleur": "Gris foncé", "colorSku": null, "prixSerieHT_indicatif": null }
+          ]
+        },
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série pierre ollaire / speksteen serie",
+          "prixSerieHT": null,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1136980" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-rada-12-atc",
+      "nom": "Rada 12 ATC (Rada Air Tight C)",
+      "page": 25,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Système B. Tariff utilise 'Rada ATC' (sortie coaxiale 8/13 cm = ATC). 1 sortie Coax. Une seule série céramique avec 2 couleurs. '*Jusqu'à épuisement des stocks'.",
+      "sorties": [
+        { "sortie": "Coax", "structureSku": "814500", "prixStructureHT": 3970 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramiek serie",
+          "prixSerieHT": 220,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1094970" },
+            { "couleur": "Noir", "colorSku": "1094980" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-pellkamin-8",
+      "nom": "Pellkamin 8 Evo2",
+      "page": 46,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "axe finition = kit de chargement. Insert: pas de couleur. 4 kits de chargement obligatoires (A/B/C/D) qui jouent le rôle de 'finition'. Couleur unique 'Standard'.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "817950", "prixStructureHT": 3730 }
+      ],
+      "finitions": [
+        {
+          "finition": "Kit A - Cadre d'encadrement",
+          "serieLabel": "Cadre d'encadrement / Gelakte conische lijst",
+          "prixSerieHT": 120,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1133080" }
+          ]
+        },
+        {
+          "finition": "Kit B - Tiroir frontal cadre rectangulaire",
+          "serieLabel": "Kit tiroir de chargement frontal et cadre d'encadrement rectangulaire",
+          "prixSerieHT": 340,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1167410" }
+          ]
+        },
+        {
+          "finition": "Kit C - Tiroir frontal cadre carré",
+          "serieLabel": "Kit tiroir de chargement frontal et cadre d'encadrement carré",
+          "prixSerieHT": 340,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1194130" }
+          ]
+        },
+        {
+          "finition": "Kit D - Chargement par trappe",
+          "serieLabel": "Kit de chargement par trappe et cadre d'encadrement",
+          "prixSerieHT": 300,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1167450" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-pellkamin-10-plus",
+      "nom": "Pellkamin 10+ Evo2",
+      "page": 47,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "axe finition = kit de chargement. Insert: pas de couleur. Mêmes 4 kits A/B/C/D que Pellkamin 8 Evo2.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "817940", "prixStructureHT": 3890 }
+      ],
+      "finitions": [
+        {
+          "finition": "Kit A - Cadre d'encadrement",
+          "serieLabel": "Cadre d'encadrement / Gelakte conische lijst",
+          "prixSerieHT": 120,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1133080" }
+          ]
+        },
+        {
+          "finition": "Kit B - Tiroir frontal cadre rectangulaire",
+          "serieLabel": "Kit tiroir de chargement frontal et cadre d'encadrement rectangulaire",
+          "prixSerieHT": 340,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1167410" }
+          ]
+        },
+        {
+          "finition": "Kit C - Tiroir frontal cadre carré",
+          "serieLabel": "Kit tiroir de chargement frontal et cadre d'encadrement carré",
+          "prixSerieHT": 340,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1194130" }
+          ]
+        },
+        {
+          "finition": "Kit D - Chargement par trappe",
+          "serieLabel": "Kit de chargement par trappe et cadre d'encadrement",
+          "prixSerieHT": 300,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1167450" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-pellkamin-12-evo",
+      "nom": "Pellkamin 12++ Evo",
+      "page": 49,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "axe finition = kit de chargement. Insert: pas de couleur. 2 kits de chargement (trappe ou tiroir frontal). Le code structure 816860 inclut 2 bouches LABEL cm 90x7 de série.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "816860", "prixStructureHT": 4590 }
+      ],
+      "finitions": [
+        {
+          "finition": "Kit chargement par trappe",
+          "serieLabel": "Kit de chargement par trappe et cadre d'encadrement",
+          "prixSerieHT": 480,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1132260" }
+          ]
+        },
+        {
+          "finition": "Kit chargement frontal tiroir",
+          "serieLabel": "Kit tiroir de chargement frontal et cadre d'encadrement",
+          "prixSerieHT": 640,
+          "couleurs": [
+            { "couleur": "Standard", "colorSku": "1132290" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-milla-h12-evo",
+      "nom": "Milla H 12 Evo",
+      "page": 52,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Hydro. Système B. 1 sortie Back. Une seule série mixte 'acier/céramique' avec 4 couleurs (blanc crème, bordeaux, noir brillant, parchemin). Mêmes SKUs partagés avec Milla H 15 Evo (la série est commune aux 2 puissances).",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "816360", "prixStructureHT": 3400 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier / Céramique",
+          "serieLabel": "série acier/céramique - staal keramiek serie",
+          "prixSerieHT": 380,
+          "couleurs": [
+            { "couleur": "Blanc crème", "colorSku": "1141320" },
+            { "couleur": "Bordeaux", "colorSku": "1141330" },
+            { "couleur": "Noir brillant", "colorSku": "1141340" },
+            { "couleur": "Parchemin", "colorSku": "1141350" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-kira2-h18-up",
+      "nom": "Kira² H 18 Up",
+      "page": 55,
+      "codingSystem": "B",
+      "matchCertain": false,
+      "note": "AMBIGUITÉ: la table de spécifications mentionne 'Kira2 H 18 Up' (5.4-19.2 kW) mais le bloc structure ne liste que 'Kira H 19 Evo' (816340) et 'Kira H 23 Evo' (816350). Il est très probable que Kira² H 18 Up = Kira H 19 Evo (mêmes specs 5.4-19.2 kW, mêmes dimensions). À confirmer. J'ai mappé sur structure Kira H 19 Evo (816340) à 3.730€.",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "816340", "prixStructureHT": 3730 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramische serie",
+          "prixSerieHT": 1220,
+          "couleurs": [
+            { "couleur": "Blanc crème", "colorSku": "1049320" },
+            { "couleur": "Bordeaux", "colorSku": "1049310" },
+            { "couleur": "Parchemin", "colorSku": "1049330" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-kira-h23-evo",
+      "nom": "Kira H 23 Evo",
+      "page": 55,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Hydro. Système B. 1 sortie Back. Une seule série céramique avec 3 couleurs. SKUs couleur partagés avec Kira H 19 Evo et Kira 13++ Evo.",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "816350", "prixStructureHT": 4030 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramische serie",
+          "prixSerieHT": 1220,
+          "couleurs": [
+            { "couleur": "Blanc crème", "colorSku": "1049320" },
+            { "couleur": "Bordeaux", "colorSku": "1049310" },
+            { "couleur": "Parchemin", "colorSku": "1049330" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-vyda-h19-evo",
+      "nom": "Vyda H 19 Evo",
+      "page": 54,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Hydro. Système B. 1 sortie Back. 2 séries (céramique + pierre ollaire). AMBIGUITÉ: la série céramique a 2 SKUs avec prix 490/1020 (blanc opaque 1049560 et 'matte witte' 1152650 = traduction NL = même couleur). Gris foncé sans prix. Pierre ollaire 1136980 sans prix de série visible.",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "816410", "prixStructureHT": 4240 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramische serie",
+          "prixSerieHT": null,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1049560", "prixSerieHT_indicatif": 490 },
+            { "couleur": "Matte witte", "colorSku": "1152650", "prixSerieHT_indicatif": 1020 },
+            { "couleur": "Gris foncé", "colorSku": null, "prixSerieHT_indicatif": null }
+          ]
+        },
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série pierre ollaire / speksteen serie",
+          "prixSerieHT": null,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1136980" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-vyda-h23-evo",
+      "nom": "Vyda H 23 Evo",
+      "page": 54,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Hydro. Système B. 1 sortie Back. Mêmes séries que Vyda H 19 Evo (mêmes ambiguïtés céramique).",
+      "sorties": [
+        { "sortie": "Back", "structureSku": "816420", "prixStructureHT": 4500 }
+      ],
+      "finitions": [
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramische serie",
+          "prixSerieHT": null,
+          "couleurs": [
+            { "couleur": "Blanc opaque", "colorSku": "1049560", "prixSerieHT_indicatif": 490 },
+            { "couleur": "Matte witte", "colorSku": "1152650", "prixSerieHT_indicatif": 1020 },
+            { "couleur": "Gris foncé", "colorSku": null, "prixSerieHT_indicatif": null }
+          ]
+        },
+        {
+          "finition": "Pierre ollaire",
+          "serieLabel": "série pierre ollaire / speksteen serie",
+          "prixSerieHT": null,
+          "couleurs": [
+            { "couleur": "Pierre ollaire", "colorSku": "1136980" }
+          ]
+        }
+      ]
+    },
+    {
+      "slugPayload": "edilkamin-blade-h19-evo",
+      "nom": "Blade H 19 Evo",
+      "page": 61,
+      "codingSystem": "B",
+      "matchCertain": true,
+      "note": "Hydro. Système B. 1 sortie Top (kit Back/latéral en option 1122810 60€). 2 séries: acier (3 couleurs partagées avec Blade H 23) et céramique (3 couleurs). AMBIGUITÉ sur les prix de série: structures Blade H 19/23 affichent série acier 770 et série céramique 1330 — mais le tableau montre aussi 1.005 qui semble être un kit hydraulique. Prix de série acier=770, céramique=1330 sont les plus probables, mais le format extraction est confus. Couleurs acier: bordeaux, noir, blanc opaque, bronze.",
+      "sorties": [
+        { "sortie": "Top", "structureSku": "816820", "prixStructureHT": 4200 }
+      ],
+      "finitions": [
+        {
+          "finition": "Acier",
+          "serieLabel": "série acier / staal serie",
+          "prixSerieHT": 770,
+          "couleurs": [
+            { "couleur": "Bordeaux", "colorSku": "1146080" },
+            { "couleur": "Noir", "colorSku": "1146090" },
+            { "couleur": "Blanc opaque", "colorSku": "1146100" },
+            { "couleur": "Bronze", "colorSku": "1146110" }
+          ]
+        },
+        {
+          "finition": "Céramique",
+          "serieLabel": "série céramique / keramiek serie",
+          "prixSerieHT": 1330,
+          "couleurs": [
+            { "couleur": "Bordeaux", "colorSku": "1148390" },
+            { "couleur": "Blanc opaque", "colorSku": "1148410" },
+            { "couleur": "Beige", "colorSku": "1148420" }
+          ]
+        }
+      ]
+    }
+  ],
+  "_recap": {
+    "totalModeles": 33,
+    "systemA": 1,
+    "systemB": 30,
+    "nonTrouves": 2,
+    "matchCertainTrue": 30,
+    "matchCertainFalse": 3,
+    "anomalies": [
+      "Lena 8 (edilkamin-lena-8): non présent au tarif Mai 2026 — seuls Lena 7 Evo et Lena 9+ Evo existent.",
+      "Celia 9+ AT/ATC Plus (edilkamin-celia-9-plus): non présent au tarif — seul Celia Air tight C (~7 kW) existe.",
+      "Kira² H 18 Up (edilkamin-kira2-h18-up): ambiguïté — table specs mentionne 'Kira2 H 18 Up' mais la section structure ne liste que Kira H 19/23 Evo. Mapping probable mais non confirmé sur Kira H 19 Evo (816340).",
+      "Vyda H 19 Evo & Vyda H 23 Evo: la série céramique a 2 SKUs (blanc opaque + matte witte) à des prix différents (490/1020) — possiblement deux nuances de blanc ou un format mal extrait du PDF. Le prix de série céramique 'global' n'est pas clair (mis à null).",
+      "Vyda 13++ Evo: même ambiguïté céramique que Vyda H 19/23. Prix série pierre ollaire non visible (null).",
+      "Blade H 19 Evo: prix séries probables 770 (acier) / 1330 (céramique), mais le format PDF mélange plusieurs blocs (incluant kits hydrauliques 490/690/1005). À valider.",
+      "Celia: au tarif il n'y a qu'une seule structure 'Celia Air tight C' (sortie coaxiale = ATC) — pas de distinction AT vs ATC produite. Le 'Magic' (verre Magic) est traité comme une 3e variante de série de finition."
+    ]
+  }
+}
