@@ -234,7 +234,7 @@ export interface Product {
    * Nom commercial complet (ex: Edilkamin Blade Plus 9 kW)
    */
   name: string;
-  brand: 'Edilkamin' | 'EK63' | 'Dielle' | 'Ferlux';
+  brand: 'Edilkamin' | 'EK63' | 'Girolami' | 'Dielle' | 'Ferlux';
   /**
    * ex: Blade Plus, Tweed 90+, Iride 22
    */
@@ -252,13 +252,13 @@ export interface Product {
    */
   color: 'light' | 'dark' | 'natural';
   /**
-   * Prix HTVA (€)
+   * Prix HTVA (€). Laisser vide = « sur devis ».
    */
-  priceHT: number;
+  priceHT?: number | null;
   /**
-   * Prix TTC (€) — TVA 21%
+   * Prix TTC (€) — TVA 21%. Laisser vide = « sur devis ».
    */
-  priceTTC: number;
+  priceTTC?: number | null;
   /**
    * Prix promo TTC (optionnel)
    */
@@ -461,6 +461,34 @@ export interface Product {
          * Optionnel. Si renseigné, l'image principale change quand cette variante est sélectionnée.
          */
         image?: (number | null) | Media;
+        /**
+         * Code structure fabricant (6 chiffres, ex. 817920)
+         */
+        manufacturerStructureSku?: string | null;
+        /**
+         * Code série couleur (7 chiffres, système B uniquement)
+         */
+        manufacturerColorSku?: string | null;
+        /**
+         * Système de codage détecté au tarif
+         */
+        codingSystem?: ('A' | 'B') | null;
+        /**
+         * Prix HT calculé depuis le tarif
+         */
+        computedPriceHT?: number | null;
+        /**
+         * Trace du calcul (ex. structure 2520 + serie 150)
+         */
+        priceSource?: string | null;
+        /**
+         * Édition du tarif (ex. Edilkamin Mai 2026)
+         */
+        tariffSource?: string | null;
+        /**
+         * Identifiant du lot d'import (annulation ciblée)
+         */
+        importBatchId?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1022,6 +1050,13 @@ export interface ProductsSelect<T extends boolean = true> {
         stockStatus?: T;
         leadTimeDays?: T;
         image?: T;
+        manufacturerStructureSku?: T;
+        manufacturerColorSku?: T;
+        codingSystem?: T;
+        computedPriceHT?: T;
+        priceSource?: T;
+        tariffSource?: T;
+        importBatchId?: T;
         id?: T;
       };
   updatedAt?: T;

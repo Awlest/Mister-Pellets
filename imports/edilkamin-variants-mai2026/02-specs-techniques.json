@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "source": "Tarif Edilkamin Mai 2026",
+    "extractedBy": "subagent-specs",
+    "notes": "Le tarif Edilkamin Mai 2026 ne donne ni les emissions CO ni la classe energetique par modele : la colonne 'm3' est le volume de chauffe et l'etiquetage energetique est decrit globalement. Tous les emissions et energyClass sont donc null. Dimensions = width x depth x height (cm). Quand deux poids sont indiques au tarif, le premier (config de base) est retenu."
+  },
+  "modeles": [
+    { "slugPayload": "edilkamin-sense-6", "nom": "Sense 6", "weight": 142, "dimensions": { "width": 58, "height": 80, "depth": 58 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-slide-5", "nom": "Slide 5", "weight": 121, "dimensions": { "width": 46, "height": 99.5, "depth": 49 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-dania-6", "nom": "Dania 6", "weight": 133, "dimensions": { "width": 57, "height": 97, "depth": 54 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-lumea-7", "nom": "Lumea 7", "weight": 138, "dimensions": { "width": 54, "height": 112, "depth": 57 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-libra-7", "nom": "Libra 7", "weight": 130, "dimensions": { "width": 55, "height": 115, "depth": 58 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-evia-8", "nom": "Evia 8", "weight": 150, "dimensions": { "width": 56, "height": 113, "depth": 57 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-celia-7", "nom": "Celia 7", "weight": 142, "dimensions": { "width": 54, "height": 111, "depth": 58.5 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-dania-8-plus", "nom": "Dania 8+", "weight": 137, "dimensions": { "width": 57, "height": 97, "depth": 54 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-lumea-9-plus", "nom": "Lumea 9+", "weight": 138, "dimensions": { "width": 54, "height": 112, "depth": 57 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-libra-9-plus", "nom": "Libra 9+", "weight": 141, "dimensions": { "width": 55, "height": 115, "depth": 58 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-yana-9-evo", "nom": "Yana 9+ Evo", "weight": 125, "dimensions": { "width": 52, "height": 102, "depth": 53 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-nara-9-evo", "nom": "Nara 9+ Evo", "weight": 125, "dimensions": { "width": 46, "height": 99, "depth": 49 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-cherie-9-evo", "nom": "Cherie 9+ Evo", "weight": 216, "dimensions": { "width": 63, "height": 116, "depth": 58 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-bild-9-plus", "nom": "Bild 9+ Evo", "weight": 130, "dimensions": { "width": 80, "height": 110, "depth": 30 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-libra-11-plus-int", "nom": "Libra 11+ Int", "weight": 177, "dimensions": { "width": 57, "height": 121, "depth": 59 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-cherie-11-evo", "nom": "Cherie 11++ Evo", "weight": 218, "dimensions": { "width": 63, "height": 116, "depth": 58 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-libra-13-int", "nom": "Libra 13++ Int", "weight": 188, "dimensions": { "width": 57, "height": 121, "depth": 59 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-blade-12-evo", "nom": "Blade 12++ Evo", "weight": 175, "dimensions": { "width": 90, "height": 113, "depth": 34.5 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-kira-13", "nom": "Kira 13++", "weight": 267, "dimensions": { "width": 65, "height": 123.5, "depth": 63 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-vyda-13", "nom": "Vyda 13++", "weight": 280, "dimensions": { "width": 62.5, "height": 121.5, "depth": 61.5 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-rada-12-atc", "nom": "Rada 12 ATC", "weight": 142, "dimensions": { "width": 55, "height": 112.5, "depth": 55 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-pellkamin-8", "nom": "Pellkamin 8", "weight": 151, "dimensions": { "width": 73.5, "height": 49, "depth": 49 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-pellkamin-10-plus", "nom": "Pellkamin 10+", "weight": 155, "dimensions": { "width": 73.5, "height": 49, "depth": 49 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-pellkamin-12-evo", "nom": "Pellkamin 12++ Evo", "weight": 211, "dimensions": { "width": 93, "height": 63, "depth": 61 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-milla-h12-evo", "nom": "Milla H 12 Evo", "weight": 189, "dimensions": { "width": 52, "height": 110, "depth": 56 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-kira2-h18-up", "nom": "Kira2 H 18 Up", "weight": 280, "dimensions": { "width": 65, "height": 123.5, "depth": 63 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-kira-h23-evo", "nom": "Kira H 23 Evo", "weight": 280, "dimensions": { "width": 65, "height": 123.5, "depth": 63 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-vyda-h19-evo", "nom": "Vyda H 19 Evo", "weight": 260, "dimensions": { "width": 62.5, "height": 121.5, "depth": 61.5 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-vyda-h23-evo", "nom": "Vyda H 23 Evo", "weight": 260, "dimensions": { "width": 62.5, "height": 121.5, "depth": 61.5 }, "emissions": null, "energyClass": null },
+    { "slugPayload": "edilkamin-blade-h19-evo", "nom": "Blade H 19 Evo", "weight": 259, "dimensions": { "width": 104, "height": 120.5, "depth": 39 }, "emissions": null, "energyClass": null }
+  ],
+  "recap": {
+    "totalModeles": 30,
+    "avecWeight": 30,
+    "avecDimensions": 30,
+    "avecEmissions": 0,
+    "avecEnergyClass": 0
+  }
+}

@@ -241,7 +241,23 @@ async function main(): Promise<void> {
   console.log(`[edk] Snapshot : ${path.relative(process.cwd(), snapPath)}`);
 
   // 5. Écriture.
-  type VariantInput = { optionValues: number[]; sku: string; mpn: string; price: number; stockStatus: "in_stock" };
+  type VariantInput = {
+    optionValues: number[];
+    sku: string;
+    mpn: string;
+    gtin?: string;
+    price: number;
+    stockStatus: "in_stock";
+    manufacturerStructureSku?: string;
+    manufacturerColorSku?: string;
+    codingSystem?: "A" | "B";
+    computedPriceHT?: number | null;
+    priceSource?: string;
+    tariffSource?: string;
+    importBatchId?: string;
+  };
+  const TARIFF_SOURCE = "Edilkamin Mai 2026";
+  const BATCH_ID = `edilkamin-mai2026-${Date.now()}`;
 
   for (const m of targets) {
     const id = idBySlug.get(m.slugPayload)!;
@@ -264,6 +280,12 @@ async function main(): Promise<void> {
             optionValues: [so, fi, co],
             sku: `EDK-${tok}-${up(b.sortie)}-${up(b.finition)}-${up(c.couleur)}`,
             mpn: c.code, price, stockStatus: "in_stock",
+            manufacturerStructureSku: c.code,
+            codingSystem: "A",
+            computedPriceHT: c.prixHT,
+            priceSource: c.prixHT != null ? `code complet ${c.code}` : "a verifier",
+            tariffSource: TARIFF_SOURCE,
+            importBatchId: BATCH_ID,
           });
         }
       }
@@ -280,12 +302,20 @@ async function main(): Promise<void> {
             process.exit(1);
           }
           kitIds.add(kitId);
-          const ht = (s.prixStructureHT ?? 0) + (f.prixSerieHT ?? 0);
-          const price = ht > 0 ? ttc(ht) : 0;
+          const sPrice = s.prixStructureHT, fPrice = f.prixSerieHT;
+          const ht = sPrice != null && fPrice != null ? sPrice + fPrice : null;
+          const price = ht != null && ht > 0 ? ttc(ht) : 0;
           variants.push({
             optionValues: [so, kitId],
             sku: `EDK-${tok}-${up(s.sortie)}-KIT-${c.colorSku}`,
             mpn: s.structureSku, price, stockStatus: "in_stock",
+            manufacturerStructureSku: s.structureSku,
+            manufacturerColorSku: c.colorSku,
+            codingSystem: "B",
+            computedPriceHT: ht,
+            priceSource: ht != null ? `structure ${sPrice} + serie ${fPrice}` : "a verifier",
+            tariffSource: TARIFF_SOURCE,
+            importBatchId: BATCH_ID,
           });
         }
       }
@@ -304,6 +334,13 @@ async function main(): Promise<void> {
               optionValues: [so, fi, co],
               sku: `EDK-${tok}-${up(s.sortie)}-${up(f.finition)}-${up(c.couleur)}`,
               mpn: s.structureSku, price, stockStatus: "in_stock",
+              manufacturerStructureSku: s.structureSku,
+              manufacturerColorSku: c.colorSku,
+              codingSystem: "B",
+              computedPriceHT: ht,
+              priceSource: ht != null ? `structure ${sPrice} + serie ${fPrice}` : "a verifier",
+              tariffSource: TARIFF_SOURCE,
+              importBatchId: BATCH_ID,
             });
           }
         }

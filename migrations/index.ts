@@ -10,6 +10,7 @@ import * as migration_20260512_140000_products_hidden_from_boutique from './2026
 import * as migration_20260515_180000_products_variants from './20260515_180000_products_variants';
 import * as migration_20260515_190000_products_brand_girolami from './20260515_190000_products_brand_girolami';
 import * as migration_20260515_200000_products_price_optional from './20260515_200000_products_price_optional';
+import * as migration_20260520_120000_products_variants_metadata from './20260520_120000_products_variants_metadata';
 
 export const migrations = [
   {
@@ -71,5 +72,10 @@ export const migrations = [
     up: migration_20260515_200000_products_price_optional.up,
     down: migration_20260515_200000_products_price_optional.down,
     name: '20260515_200000_products_price_optional',
+  },
+  {
+    up: migration_20260520_120000_products_variants_metadata.up,
+    down: migration_20260520_120000_products_variants_metadata.down,
+    name: '20260520_120000_products_variants_metadata',
   },
 ];

@@ -728,6 +728,65 @@ export const Products: CollectionConfig = {
               "Optionnel. Si renseigné, l'image principale change quand cette variante est sélectionnée.",
           },
         },
+        // ===== MÉTADONNÉES D'IMPORT TARIF =====
+        // Sous-champs additifs (section 5 du brief variantes EK63/Edilkamin).
+        // Tracent le calcul de la variante depuis le tarif fabricant. Optionnels
+        // — les variantes encodées avant la migration 20260520 ont ces champs
+        // à null.
+        {
+          type: "row",
+          fields: [
+            {
+              name: "manufacturerStructureSku",
+              type: "text",
+              admin: { width: "50%", description: "Code structure fabricant (6 chiffres, ex. 817920)" },
+            },
+            {
+              name: "manufacturerColorSku",
+              type: "text",
+              admin: { width: "50%", description: "Code série couleur (7 chiffres, système B uniquement)" },
+            },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            {
+              name: "codingSystem",
+              type: "select",
+              options: [
+                { label: "A (code complet par couleur)", value: "A" },
+                { label: "B (structure + série couleur)", value: "B" },
+              ],
+              admin: { width: "33%", description: "Système de codage détecté au tarif" },
+            },
+            {
+              name: "computedPriceHT",
+              type: "number",
+              admin: { width: "33%", step: 0.01, description: "Prix HT calculé depuis le tarif" },
+            },
+            {
+              name: "priceSource",
+              type: "text",
+              admin: { width: "34%", description: "Trace du calcul (ex. structure 2520 + serie 150)" },
+            },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            {
+              name: "tariffSource",
+              type: "text",
+              admin: { width: "70%", description: "Édition du tarif (ex. Edilkamin Mai 2026)" },
+            },
+            {
+              name: "importBatchId",
+              type: "text",
+              admin: { width: "30%", description: "Identifiant du lot d'import (annulation ciblée)" },
+            },
+          ],
+        },
       ],
     },
   ],
