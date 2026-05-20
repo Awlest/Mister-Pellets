@@ -98,9 +98,10 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  // Verification codes (à remplir Phase 8 quand on aura Search Console)
+  // Vérification Google Search Console / Merchant Center
+  // (injecte <meta name="google-site-verification" content="..." /> dans <head>)
   verification: {
-    // google: "TON-CODE-SEARCH-CONSOLE",
+    google: "qEXfmw1AUj80W-8VJGP9Dmabbu3Lomqix0sgGkedpPc",
   },
 };
 
