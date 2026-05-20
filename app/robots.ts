@@ -22,7 +22,14 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        // L'ordre des Allow / Disallow respecte le longest-match : on autorise
+        // explicitement /api/media/ (images produit Payload) et le flux
+        // Google Merchant, puis on bloque le reste de /api/ et /admin/.
+        allow: [
+          "/",
+          "/api/media/",
+          "/api/feed/",
+        ],
         disallow: [
           "/admin/",
           "/api/",
@@ -32,6 +39,13 @@ export default function robots(): MetadataRoute.Robots {
           "/_next/",
           "/*.json$",
         ],
+      },
+      // Googlebot-Image doit pouvoir crawler les images servies par Payload
+      // (chemin /api/media/file/...) pour valider les annonces Merchant.
+      {
+        userAgent: "Googlebot-Image",
+        allow: ["/", "/api/media/"],
+        disallow: ["/admin/", "/checkout/", "/commande/"],
       },
       // Bloquer les bots aggressifs (optionnel)
       { userAgent: "GPTBot", allow: "/" },         // Autorise OpenAI (GEO friendly)
