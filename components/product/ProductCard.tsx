@@ -24,6 +24,9 @@ export interface ProductCardData {
   priceTTC?: number;
   imageSrc?: string;
   imageAlt?: string;
+  /** Point focal de l'image (0-100 %) défini dans l'admin Media Payload. */
+  imageFocalX?: number;
+  imageFocalY?: number;
   isBestseller?: boolean;
   isNew?: boolean;
   /** Variantes de couleur disponibles (pour les pastilles sur la vignette). */
@@ -49,10 +52,15 @@ export function ProductCard({ product, className }: ProductCardProps) {
     priceTTC,
     imageSrc,
     imageAlt,
+    imageFocalX,
+    imageFocalY,
     isBestseller,
     isNew,
     colorVariants,
   } = product;
+
+  // CSS object-position depuis le focal point Payload (défaut centre).
+  const objectPosition = `${imageFocalX ?? 50}% ${imageFocalY ?? 50}%`;
 
   // Filtre + dédup des pastilles par hex pour éviter doublons (ex: deux variantes
   // qui partagent la même couleur de pastille). Limite à 6 pastilles affichées
@@ -79,6 +87,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
+              style={{ objectPosition }}
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center text-mp-sand">

@@ -49,6 +49,8 @@ interface PayloadProduct {
     | {
         url?: string | null;
         alt?: string | null;
+        focalX?: number | null;
+        focalY?: number | null;
       }
     | null;
   galleryImages?: Array<{
@@ -57,6 +59,8 @@ interface PayloadProduct {
       | {
           url?: string | null;
           alt?: string | null;
+          focalX?: number | null;
+          focalY?: number | null;
         }
       | null;
   }> | null;
@@ -76,6 +80,8 @@ interface PayloadProduct {
       | {
           url?: string | null;
           alt?: string | null;
+          focalX?: number | null;
+          focalY?: number | null;
         }
       | null;
     galleryImages?: Array<{
@@ -84,6 +90,8 @@ interface PayloadProduct {
         | {
             url?: string | null;
             alt?: string | null;
+            focalX?: number | null;
+            focalY?: number | null;
           }
         | null;
     }> | null;
@@ -117,6 +125,8 @@ interface PayloadProduct {
       | {
           url?: string | null;
           alt?: string | null;
+          focalX?: number | null;
+          focalY?: number | null;
         }
       | null;
   }> | null;
@@ -133,6 +143,8 @@ interface PayloadOptionValue {
     | {
         url?: string | null;
         alt?: string | null;
+        focalX?: number | null;
+        focalY?: number | null;
       }
     | null;
 }
@@ -187,11 +199,18 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
 
   // Si l'image principale est uploadée, on récupère l'URL same-origin
   // relative (cf. helper toRelativeUrl pour le rationale Next.js Image).
+  // On remonte aussi focalX/focalY (pourcentages 0-100 saisis dans l'admin
+  // Media) pour positionner l'image correctement dans la carte boutique et
+  // la galerie produit.
   let imageSrc: string | undefined;
   let imageAlt: string | undefined;
+  let imageFocalX: number | undefined;
+  let imageFocalY: number | undefined;
   if (p.mainImage && typeof p.mainImage === "object" && p.mainImage.url) {
     imageSrc = toRelativeUrl(p.mainImage.url);
     imageAlt = p.mainImage.alt ?? p.name;
+    if (typeof p.mainImage.focalX === "number") imageFocalX = p.mainImage.focalX;
+    if (typeof p.mainImage.focalY === "number") imageFocalY = p.mainImage.focalY;
   }
 
   // Galerie : on filtre les entries valides et on convertit les URLs.
@@ -202,9 +221,11 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
           return {
             url: toRelativeUrl(item.image.url),
             alt: item.image.alt ?? p.name,
+            ...(typeof item.image.focalX === "number" ? { focalX: item.image.focalX } : {}),
+            ...(typeof item.image.focalY === "number" ? { focalY: item.image.focalY } : {}),
           };
         })
-        .filter((x): x is { url: string; alt: string } => x !== null)
+        .filter((x): x is NonNullable<typeof x> => x !== null)
     : undefined;
 
   // Fiche technique PDF : URL relative + nom du fichier pour l'affichage du lien.
@@ -232,6 +253,8 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     isConnected: p.isConnected ?? false,
     imageSrc,
     imageAlt,
+    imageFocalX,
+    imageFocalY,
     shortDescription: p.shortDescription ?? undefined,
     features: Array.isArray(p.features)
       ? p.features
@@ -253,6 +276,8 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
                 ? {
                     url: toRelativeUrl(cv.mainImage.url),
                     alt: cv.mainImage.alt ?? `${p.name} — ${cv.colorName}`,
+                    focalX: typeof cv.mainImage.focalX === "number" ? cv.mainImage.focalX : undefined,
+                    focalY: typeof cv.mainImage.focalY === "number" ? cv.mainImage.focalY : undefined,
                   }
                 : undefined;
 
@@ -263,9 +288,11 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
                     return {
                       url: toRelativeUrl(g.image.url),
                       alt: g.image.alt ?? `${p.name} — ${cv.colorName}`,
+                      ...(typeof g.image.focalX === "number" ? { focalX: g.image.focalX } : {}),
+                      ...(typeof g.image.focalY === "number" ? { focalY: g.image.focalY } : {}),
                     };
                   })
-                  .filter((x): x is { url: string; alt: string } => x !== null)
+                  .filter((x): x is NonNullable<typeof x> => x !== null)
               : undefined;
 
             return {

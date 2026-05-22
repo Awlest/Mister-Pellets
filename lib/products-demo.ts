@@ -57,7 +57,10 @@ export interface ProductDemo extends ProductCardData {
    * Images additionnelles de la galerie (jusqu'à 8 dans Payload).
    * Affichées en thumbnails sous l'image principale sur la page produit.
    */
-  galleryImages?: Array<{ url: string; alt?: string }>;
+  galleryImages?: Array<{ url: string; alt?: string; focalX?: number; focalY?: number }>;
+  /** Point focal de l'image principale (0-100 %), si défini dans l'admin Media. */
+  imageFocalX?: number;
+  imageFocalY?: number;
   /**
    * URL de la fiche technique PDF, si attachée au produit dans Payload.
    * Affichée comme lien de téléchargement sur la page produit.
@@ -99,9 +102,9 @@ export interface ProductColorVariant {
   colorHex?: string;
   gtin?: string;
   /** Override de la photo principale, sinon on utilise celle du produit. */
-  mainImage?: { url: string; alt?: string };
+  mainImage?: { url: string; alt?: string; focalX?: number; focalY?: number };
   /** Override de la galerie, sinon on utilise celle du produit. */
-  galleryImages?: Array<{ url: string; alt?: string }>;
+  galleryImages?: Array<{ url: string; alt?: string; focalX?: number; focalY?: number }>;
 }
 
 // =====================================================================

@@ -33,6 +33,11 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: "media",
     mimeTypes: ["image/*", "application/pdf"],
+    // Active le sélecteur visuel de point focal dans l'admin. Les valeurs
+    // focalX/focalY (0-100 %) sont stockées sur le doc Media et utilisées
+    // côté frontend pour positionner l'image dans la carte boutique et la
+    // galerie produit (CSS object-position).
+    focalPoint: true,
     imageSizes: [
       { name: "thumbnail", width: 200, height: 200, position: "centre" },
       { name: "card",      width: 400 },

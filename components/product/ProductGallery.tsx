@@ -9,6 +9,9 @@ import { useProductColor } from "./ProductColorContext";
 interface GalleryImage {
   url: string;
   alt?: string;
+  /** Point focal (0-100 %) issu de l'admin Media Payload — CSS object-position. */
+  focalX?: number;
+  focalY?: number;
 }
 
 interface ColorVariant {
@@ -191,6 +194,7 @@ export function ProductGallery({
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
             className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            style={{ objectPosition: `${active.focalX ?? 50}% ${active.focalY ?? 50}%` }}
           />
           <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-mp-ink/80 px-2.5 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
             <svg
@@ -237,6 +241,7 @@ export function ProductGallery({
                   fill
                   sizes="(max-width: 1024px) 25vw, 12vw"
                   className="object-cover"
+                  style={{ objectPosition: `${img.focalX ?? 50}% ${img.focalY ?? 50}%` }}
                 />
               </button>
             );
