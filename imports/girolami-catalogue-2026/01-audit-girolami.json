@@ -1,0 +1,143 @@
+{
+  "_meta": {
+    "source": "Catalogue Girolami 2026 (CATALISTINO 2026, valid 01/05/2026)",
+    "sourceFile": "imports/girolami-catalogue-2026/catalogue-girolami-2026.txt",
+    "rule": "Jamais d'invention. Donnee non visible/ambigue = null + note.",
+    "date": "2026-05-22",
+    "currency": "EUR",
+    "priceType": "PREZZO / PRICE = HT (hors TVA) selon convention Girolami"
+  },
+  "modeles": [
+    {
+      "slugPayload": "girolami-curvy",
+      "nomCatalogue": "Curvy 9",
+      "power": 8.65,
+      "powerNominal": 8.31,
+      "efficiency": 96.01,
+      "heatedVolumeM3": 276,
+      "hopperCapacity": 15,
+      "weight": null,
+      "dimensions": { "width": 59, "height": 118, "depth": 58 },
+      "finitions": ["Ceramique"],
+      "couleurs": {
+        "Ceramique": [
+          { "couleur": "Blanc", "code": "8030", "prixHT": 4130 },
+          { "couleur": "Gris anthracite", "code": "8030/GR", "prixHT": 4300 }
+        ]
+      },
+      "found": true
+    },
+    {
+      "slugPayload": "girolami-flow",
+      "nomCatalogue": "Flow 9",
+      "power": 8.65,
+      "powerNominal": 8.31,
+      "efficiency": 96.01,
+      "heatedVolumeM3": 276,
+      "hopperCapacity": 15,
+      "weight": null,
+      "dimensions": { "width": 62, "height": 114, "depth": 53 },
+      "finitions": ["Acier"],
+      "couleurs": {
+        "Acier": [
+          { "couleur": "Blanc", "code": "8040", "prixHT": 3620 },
+          { "couleur": "Gris anthracite", "code": "8040/GR", "prixHT": 3780 },
+          { "couleur": "Noir", "code": "8040/NE", "prixHT": null, "priceNote": "Prix NERO non extractible avec certitude (3 prix lisibles pour 4 couleurs)." },
+          { "couleur": "Bronze", "code": "8040/DB", "prixHT": 4080 }
+        ]
+      },
+      "found": true
+    },
+    {
+      "slugPayload": "girolami-vert",
+      "nomCatalogue": "Vert 9",
+      "power": 8.65,
+      "powerNominal": 8.31,
+      "efficiency": 96.01,
+      "heatedVolumeM3": 276,
+      "hopperCapacity": 15,
+      "weight": null,
+      "dimensions": { "width": 58, "height": 122, "depth": 54 },
+      "finitions": ["Majolique"],
+      "couleurs": {
+        "Majolique": [
+          { "couleur": "Blanc", "code": "8010", "prixHT": 3700 },
+          { "couleur": "Bordeaux", "code": "8010/BO", "prixHT": 3860 },
+          { "couleur": "Noir", "code": "8010/NE", "prixHT": 4160 }
+        ]
+      },
+      "found": true
+    },
+    {
+      "slugPayload": "girolami-split",
+      "nomCatalogue": "Split 9",
+      "power": 8.65,
+      "powerNominal": 8.31,
+      "efficiency": 96.01,
+      "heatedVolumeM3": 276,
+      "hopperCapacity": 15,
+      "weight": null,
+      "dimensions": { "width": 58, "height": 119, "depth": 54 },
+      "finitions": ["Acier"],
+      "couleurs": {
+        "Acier": [
+          { "couleur": "Blanc", "code": "8000", "prixHT": 3520 },
+          { "couleur": "Bordeaux", "code": "8000/BO", "prixHT": 3670 },
+          { "couleur": "Noir", "code": "8000/NE", "prixHT": 3980 }
+        ]
+      },
+      "found": true
+    },
+    {
+      "slugPayload": "girolami-soft",
+      "nomCatalogue": "Soft 14 Pellet",
+      "power": 15.02,
+      "powerNominal": 13.47,
+      "powerNominalNote": "13.47 est la puissance H2O (a l'eau), pas la puissance nominale air. Convention catalogue Girolami.",
+      "efficiency": 96.44,
+      "heatedVolumeM3": 375,
+      "hopperCapacity": 25,
+      "weight": 250,
+      "dimensions": { "width": 63, "height": 125, "depth": 66 },
+      "finitions": ["Acier"],
+      "couleurs": {
+        "Acier": [
+          { "couleur": "Blanc", "code": "7008-P", "prixHT": 4480 },
+          { "couleur": "Ivoire", "code": "7008-P/AV", "prixHT": null, "priceNote": "Catalogue affiche 4 prix pour SOFT 14/18/22/26 PELLET (4480/4640/4790/4950). Seul 4480 clairement associe a SOFT 14. Prix par couleur non distinct dans le PDF." },
+          { "couleur": "Bordeaux", "code": "7008-P/BO", "prixHT": null, "priceNote": "voir Ivoire" },
+          { "couleur": "Noir", "code": "7008-P/NE", "prixHT": null, "priceNote": "voir Ivoire" }
+        ]
+      },
+      "found": true
+    },
+    {
+      "slugPayload": "girolami-biotec",
+      "nomCatalogue": "Biotec Evo 26 Pellet",
+      "power": 25.3,
+      "powerNominal": 23.5,
+      "efficiency": 93.0,
+      "efficiencyNote": "Catalogue affiche range 'DA 93 A 95,1 %'. 93% = rendement a puissance max ; 95.1% = a puissance min.",
+      "heatedVolumeM3": 577,
+      "hopperCapacity": 65,
+      "weight": 400,
+      "dimensions": { "width": 68, "height": 136, "depth": 87 },
+      "finitions": [],
+      "couleurs": {},
+      "noteVariants": "Chaudiere sans variante de couleur. Code unique 6015, prix 6490 EUR HT.",
+      "code": "6015",
+      "prixHT": 6490,
+      "found": true
+    }
+  ],
+  "recap": {
+    "totalAuditees": 6,
+    "trouvees": 6,
+    "specsCompletes": ["girolami-soft", "girolami-biotec"],
+    "specsPartielles": {
+      "girolami-curvy": ["weight=null (absent du catalogue)"],
+      "girolami-flow": ["weight=null (absent du catalogue)", "prix NERO non extractible"],
+      "girolami-vert": ["weight=null (absent du catalogue)"],
+      "girolami-split": ["weight=null (absent du catalogue)"]
+    }
+  }
+}
