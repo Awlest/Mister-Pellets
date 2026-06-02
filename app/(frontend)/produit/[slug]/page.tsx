@@ -129,10 +129,21 @@ export default async function ProductPage({ params }: Props) {
     }
   }
 
+  // Images absolues : recommande pour Schema.org Product.image et PREREQUIS
+  // Google Merchant (image_link). Les URLs produits sont stockees en relatif
+  // (same-origin pour Next/Image), on les repasse en absolu ici.
+  const schemaImages = [
+    product.imageSrc,
+    ...(product.galleryImages ?? []).map((g) => g.url),
+  ]
+    .filter((u): u is string => Boolean(u))
+    .map((u) => (u.startsWith("http") ? u : `https://mister-pellets.be${u}`));
+
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
+    ...(schemaImages.length > 0 ? { image: schemaImages } : {}),
     description: product.shortDescription
       ? product.shortDescription
       : product.heatedVolume

@@ -6,6 +6,7 @@ import { BRAND_LIST, TOP_TIER_BRANDS } from "@/lib/brands";
 import { PROVINCES } from "@/lib/local-seo";
 import { ARTICLES } from "@/lib/articles";
 import { getPayloadClient } from "@/lib/payload-client";
+import { getAllProductSlugs } from "@/lib/products";
 
 /**
  * Sitemap dynamique généré au build + revalidé toutes les heures.
@@ -88,49 +89,46 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // ===== PRODUITS (Phase 5 : full Payload, plus de fallback statique) =====
+  // ===== PRODUITS : on s'aligne EXACTEMENT sur la boutique. getAllProductSlugs
+  // filtre hiddenFromBoutique (produits masques exclus) et desactive la
+  // pagination (plus de plafond a 100). Le sitemap ne doit lister QUE les
+  // produits reellement vendables : les masques (ex. Dielle/Ferlux/Girolami en
+  // cours d'encodage) en sont exclus tant qu'ils ne sont pas publies. =====
   let payloadProductPages: MetadataRoute.Sitemap = [];
   let payloadArticlePages: MetadataRoute.Sitemap = [];
   try {
-    const payload = await getPayloadClient();
-
-    const products = await payload.find({
-      collection: "products",
-      limit: 100,
-      depth: 0,
-    });
-    const productDocs = products.docs as Array<{ slug?: string; updatedAt?: string }>;
-    payloadProductPages = productDocs
-      .filter((p) => Boolean(p.slug))
-      .map((p) => ({
-        url: `${SITE_URL}/produit/${p.slug}`,
-        lastModified: p.updatedAt ? new Date(p.updatedAt) : now,
+    const slugs = await getAllProductSlugs();
+    payloadProductPages = slugs
+      .filter(Boolean)
+      .map((slug) => ({
+        url: `${SITE_URL}/produit/${slug}`,
+        lastModified: now,
         changeFrequency: "monthly" as const,
         priority: 0.7,
       }));
-
-    // Articles si la collection existe (Phase 7)
-    try {
-      const articles = await payload.find({
-        collection: "articles",
-        limit: 100,
-        depth: 0,
-      });
-      const articleDocs = articles.docs as Array<{ slug?: string; updatedAt?: string }>;
-      payloadArticlePages = articleDocs
-        .filter((a) => Boolean(a.slug))
-        .map((a) => ({
-          url: `${SITE_URL}/blog/${a.slug}`,
-          lastModified: a.updatedAt ? new Date(a.updatedAt) : now,
-          changeFrequency: "monthly" as const,
-          priority: 0.6,
-        }));
-    } catch {
-      // Collection Articles pas encore migrée, fallback silencieux
-    }
   } catch (err) {
-    // Payload non joignable au build → on retourne les pages statiques + demo
-    console.warn("[sitemap] Payload non joignable, fallback statique :", err);
+    console.warn("[sitemap] produits non joignables :", err);
+  }
+
+  // Articles (Phase 7) si la collection existe
+  try {
+    const payload = await getPayloadClient();
+    const articles = await payload.find({
+      collection: "articles",
+      limit: 100,
+      depth: 0,
+    });
+    const articleDocs = articles.docs as Array<{ slug?: string; updatedAt?: string }>;
+    payloadArticlePages = articleDocs
+      .filter((a) => Boolean(a.slug))
+      .map((a) => ({
+        url: `${SITE_URL}/blog/${a.slug}`,
+        lastModified: a.updatedAt ? new Date(a.updatedAt) : now,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      }));
+  } catch {
+    // Collection Articles pas encore migree, fallback silencieux
   }
 
   const merged = [
