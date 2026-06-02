@@ -28,8 +28,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const province = getProvince(provinceSlug);
   if (!brand || !province) return { title: "Page introuvable" };
   return {
-    title: `Installation poêle ${brand.name} en ${province.name} | Mister Pellets`,
+    // pas de suffixe " | Mister Pellets" ici : le template du layout racine l'ajoute déjà
+    title: `Installation poêle ${brand.name} en ${province.name}`,
     description: `Pose de poêle à pellets ${brand.name} dans ${province.longName} par Mister Pellets : devis sous 48 h, prime Habitation Wallonie 2026 incluse, équipes basées à Fernelmont. ${province.cities.slice(0, 4).join(", ")} et environs.`,
+    alternates: { canonical: `https://mister-pellets.be/installation/${brandSlug}/${provinceSlug}` },
   };
 }
 

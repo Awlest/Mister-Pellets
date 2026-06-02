@@ -47,6 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${product.name}, Poêle à pellets ${product.power}`,
     description: `${product.name} : ${product.power} pour ${product.heatedVolume}. Prix indicatif ${product.priceTTC ? formatPrice(product.priceTTC) : "sur devis"}. Pose Mister Pellets, primes incluses.`,
+    alternates: { canonical: `https://mister-pellets.be/produit/${product.slug}` },
   };
 }
 

@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: "Boutique poêles à pellets en Wallonie",
   description:
     "Catalogue Mister Pellets : Edilkamin, EK63, Girolami, Dielle, Ferlux. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
+  alternates: { canonical: "https://mister-pellets.be/boutique" },
 };
 
 /**

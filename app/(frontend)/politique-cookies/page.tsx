@@ -4,6 +4,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 export const metadata: Metadata = {
   title: "Politique cookies",
   description: "Liste détaillée des cookies utilisés par Mister Pellets et comment les paramétrer.",
+  alternates: { canonical: "https://mister-pellets.be/politique-cookies" },
 };
 
 const COOKIES = [

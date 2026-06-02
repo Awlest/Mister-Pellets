@@ -30,8 +30,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = BRANDS[slug as BrandData["slug"]];
   if (!brand) return { title: "Marque introuvable" };
   return {
-    title: brand.metaTitle,
+    // absolute : brand.metaTitle contient déjà " | Mister Pellets", on évite le double suffixe du template
+    title: { absolute: brand.metaTitle },
     description: brand.metaDescription,
+    alternates: { canonical: `https://mister-pellets.be/nos-marques/${slug}` },
   };
 }
 

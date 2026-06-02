@@ -4,6 +4,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description: "Comment Mister Pellets traite tes données personnelles, conformément au RGPD.",
+  alternates: { canonical: "https://mister-pellets.be/politique-confidentialite" },
 };
 
 export default function PolitiqueConfidentialitePage() {

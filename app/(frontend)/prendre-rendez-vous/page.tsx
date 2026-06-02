@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   title: "Prendre rendez-vous, Showroom Fernelmont & services Mister Pellets",
   description:
     "Showroom Fernelmont (5380), modèles d'exposition tournants. Devis sur place, visite, entretien annuel, dépannage, ramonage : 5 services Mister Pellets pour poêles à pellets en Wallonie.",
+  alternates: { canonical: "https://mister-pellets.be/prendre-rendez-vous" },
 };
 
 const PHONE = "0472 04 32 22";

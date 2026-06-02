@@ -4,6 +4,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 export const metadata: Metadata = {
   title: "Mentions légales",
   description: "Mentions légales de Mister Pellets / Awlest SRL.",
+  alternates: { canonical: "https://mister-pellets.be/mentions-legales" },
 };
 
 export default function MentionsLegalesPage() {

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "Nos marques de poêles à pellets : Edilkamin · EK63 · Girolami · Dielle · Ferlux",
   description:
     "Les 5 marques distribuées par Mister Pellets en Wallonie. Trois marques premium mises en avant : Edilkamin (référence italienne 1963), EK63 (groupe Edilkamin, Wi-Fi de série), Girolami (polycombustible breveté auto-nettoyant). Plus Dielle et Ferlux.",
+  alternates: { canonical: "https://mister-pellets.be/nos-marques" },
 };
 
 /** Comparatif des 3 marques premium — brief marques §E.1. */

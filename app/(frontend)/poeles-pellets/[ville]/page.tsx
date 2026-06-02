@@ -29,6 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: city.metaTitle,
     description: city.metaDescription,
+    // URL externe avec tiret (rewrite next.config : /poeles-pellets-{ville} -> /poeles-pellets/{ville})
+    alternates: { canonical: `https://mister-pellets.be/poeles-pellets-${ville}` },
   };
 }
 

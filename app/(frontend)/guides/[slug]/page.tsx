@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: guide.metaTitle,
     description: guide.metaDescription,
+    alternates: { canonical: `https://mister-pellets.be/guides/${slug}` },
   };
 }
 

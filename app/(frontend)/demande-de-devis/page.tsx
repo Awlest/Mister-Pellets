@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Devis gratuit, Poêle à pellets en Wallonie",
   description:
     "Demande ton devis personnalisé en 60 secondes. 6 questions sur ton projet, on revient sous 48h avec un chiffrage clair, primes incluses.",
+  alternates: { canonical: "https://mister-pellets.be/demande-de-devis" },
 };
 
 export default function DevisPage() {

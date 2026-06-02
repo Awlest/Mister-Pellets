@@ -4,6 +4,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
   description: "Conditions générales de vente, Awlest SRL / Mister Pellets.",
+  alternates: { canonical: "https://mister-pellets.be/cgv" },
 };
 
 export default function CGVPage() {

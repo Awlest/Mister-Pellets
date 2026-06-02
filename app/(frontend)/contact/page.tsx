@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Contact, Mister Pellets Wallonie",
   description:
     "Contacte Mister Pellets à Fernelmont : téléphone, email, adresse showroom, horaires. On répond dans la journée pendant les heures ouvrées.",
+  alternates: { canonical: "https://mister-pellets.be/contact" },
 };
 
 const PHONE = "0472 04 32 22";

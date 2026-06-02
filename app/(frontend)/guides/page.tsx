@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Guides poêle à pellets en Wallonie",
   description:
     "Le guide d'achat 2026, le canalisable, l'hydro, l'entretien, le dimensionnement. Des conseils complets et indépendants, avec les vrais chiffres pour la Wallonie.",
+  alternates: { canonical: "https://mister-pellets.be/guides" },
 };
 
 export default function GuidesHubPage() {

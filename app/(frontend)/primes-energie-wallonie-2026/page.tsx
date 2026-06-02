@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Prime poêle à pellets Wallonie 2026, montants exacts et conditions",
   description:
     "Régime Prime Habitation 14/02/2025 au 30/09/2026 : 160 € à 960 € selon revenus (R1 à R4), conditions, audit logement, procédure SPW. Mister Pellets monte le dossier.",
+  alternates: { canonical: "https://mister-pellets.be/primes-energie-wallonie-2026" },
 };
 
 const FAQ_ITEMS = [
