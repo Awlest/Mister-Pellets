@@ -28,8 +28,8 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
     name: "Claire V.",
     city: "Liège",
     rating: 5,
-    quote: "Remplacement de la vieille chaudière fioul par un Dielle hydro. Économies dès le premier hiver, sans paperasse à gérer.",
-    brand: "Dielle",
+    quote: "Remplacement de la vieille chaudière fioul par un Girolami hydro. Économies dès le premier hiver, sans paperasse à gérer.",
+    brand: "Girolami",
   },
 ];
 
