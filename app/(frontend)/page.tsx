@@ -15,7 +15,7 @@ import { buildFAQSchema } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Poêle à pellets en Wallonie, vente, pose, entretien",
   description:
-    "61 modèles Edilkamin, EK63, Dielle, Ferlux. Pose en 1 jour, prime Wallonie 2026 jusqu'à 960 €, livraison gratuite 50 km autour de Fernelmont. Devis en 60 secondes.",
+    "Edilkamin, EK63 et Girolami : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, prime Wallonie 2026 jusqu'à 960 €, livraison gratuite 50 km autour de Fernelmont. Devis en 60 secondes.",
 };
 
 const FAQ_HOMEPAGE = [
@@ -52,7 +52,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Quelles marques de poêles distribuez-vous ?",
     answer:
-      "Quatre marques sélectionnées pour couvrir l'ensemble des besoins wallons. Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse avec une gamme très large (air, canalisable, étanche, hydro, inserts) et le Wi-Fi de série. EK63 est la marque sœur du groupe Edilkamin, orientée moderne et connectée à un prix plus accessible. Dielle (Italie) se distingue par son système breveté de combustion par alimentation par le bas (flamme plus calme, auto-nettoyage, gamme complète y compris un modèle hybride bois et pellets). Ferlux (Espagne, plus de 28 ans d'activité) propose une gamme complète à excellent rapport qualité-prix. Notre rôle est de te diriger vers celle qui colle à ton projet, pas de pousser celle qui rapporte le plus.",
+      "On distribue trois marques italiennes, choisies parce qu'on les connaît à fond. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi de série. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Nous, on te dirige vers celle qui colle à ton projet, pas vers celle qui rapporte le plus.",
   },
 ];
 
@@ -96,9 +96,10 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 max-w-2xl mx-auto">
-              61 modèles Edilkamin, EK63, Dielle et Ferlux. Diagnostic à domicile gratuit, devis
-              chiffré sous 48 heures, pose en une journée, Prime Habitation Wallonie 2026 incluse
-              dans le calcul. Basés à Fernelmont, on couvre les 5 provinces wallonnes depuis 2016.
+              Edilkamin, EK63 et Girolami : trois marques italiennes, et on ne pose que celles-là.
+              Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
+              prime Habitation Wallonie 2026 déjà déduite. Basés à Fernelmont, on couvre les 5
+              provinces wallonnes depuis 2016.
             </p>
 
             <div className="flex flex-wrap gap-3 justify-center mb-7">
@@ -351,7 +352,7 @@ export default function HomePage() {
             <p>
               Le ticket d'entrée pour un poêle à air pulsé étanche posé en Wallonie démarre autour
               de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
-              Sur ce segment, on conseille typiquement un Ferlux 8 kW ou un Edilkamin entrée de gamme.
+              Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin d'entrée de gamme.
             </p>
             <p>
               Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,

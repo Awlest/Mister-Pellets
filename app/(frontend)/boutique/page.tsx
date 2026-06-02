@@ -14,13 +14,13 @@ import {
   type ColorCategory,
 } from "@/lib/products-demo";
 import { getAllProducts } from "@/lib/products";
-import { BRAND_LIST } from "@/lib/brands";
+import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Boutique poêles à pellets en Wallonie",
   description:
-    "Catalogue Mister Pellets : Edilkamin, EK63, Girolami, Dielle, Ferlux. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
+    "Catalogue Mister Pellets : Edilkamin, EK63, Girolami. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
   alternates: { canonical: "https://mister-pellets.be/boutique" },
 };
 
@@ -45,7 +45,7 @@ interface Props {
 // champ `brand` des produits Payload.
 const BRAND_FILTERS = [
   { value: "all", label: "Toutes" },
-  ...BRAND_LIST.map((b) => ({ value: b.name, label: b.name })),
+  ...TOP_TIER_BRANDS.map((b) => ({ value: b.name, label: b.name })),
 ];
 
 // Type V1.3 : 5 valeurs (ce qu'EST le poêle, séparé de la diffusion)
@@ -149,7 +149,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
   return (
     <>
       <HeroSecondary
-        eyebrow={`${products.length} modèles · ${BRAND_LIST.length} marques · pellets uniquement`}
+        eyebrow={`${products.length} modèles · ${TOP_TIER_BRANDS.length} marques · pellets uniquement`}
         title={
           <>
             Tous les <span className="mp-italic">poêles à pellets</span>

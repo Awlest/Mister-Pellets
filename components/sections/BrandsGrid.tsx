@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BRAND_LIST, brandFoundedLabel, type BrandData } from "@/lib/brands";
+import { TOP_TIER_BRANDS, brandFoundedLabel, type BrandData } from "@/lib/brands";
 
 interface BrandsGridProps {
   title?: string;
@@ -16,9 +16,9 @@ interface BrandsGridProps {
  * unique de vérité, après rectification factuelle des positionnements.
  */
 export function BrandsGrid({
-  title = "Les 5 marques que nous distribuons",
+  title = "Les 3 marques que nous distribuons",
   description = "Chaque marque a son créneau. Notre rôle est de te diriger vers celle qui colle vraiment à ta maison et à ton budget.",
-  brands = BRAND_LIST,
+  brands = TOP_TIER_BRANDS,
 }: BrandsGridProps) {
   return (
     <section className="py-16 md:py-24 bg-mp-beige">

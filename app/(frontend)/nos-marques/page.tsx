@@ -7,9 +7,9 @@ import { Card } from "@/components/ui/card";
 
 export const metadata: Metadata = {
   title:
-    "Nos marques de poêles à pellets : Edilkamin · EK63 · Girolami · Dielle · Ferlux",
+    "Nos marques de poêles à pellets : Edilkamin, EK63, Girolami",
   description:
-    "Les 5 marques distribuées par Mister Pellets en Wallonie. Trois marques premium mises en avant : Edilkamin (référence italienne 1963), EK63 (groupe Edilkamin, Wi-Fi de série), Girolami (polycombustible breveté auto-nettoyant). Plus Dielle et Ferlux.",
+    "Les 3 marques italiennes distribuées par Mister Pellets en Wallonie : Edilkamin (référence depuis 1963), EK63 (groupe Edilkamin, Wi-Fi de série) et Girolami (polycombustible breveté, brasier auto-nettoyant).",
   alternates: { canonical: "https://mister-pellets.be/nos-marques" },
 };
 
@@ -93,13 +93,13 @@ export default function NosMarquesHubPage() {
   return (
     <>
       <HeroSecondary
-        eyebrow="5 marques sélectionnées"
+        eyebrow="3 marques sélectionnées"
         title={
           <>
             Les marques que <span className="mp-italic">nous distribuons</span>
           </>
         }
-        description="Plutôt que de tout vendre, on a sélectionné cinq marques qui couvrent l'ensemble des besoins wallons. Trois marques premium qu'on met en avant : Edilkamin pour la profondeur de gamme italienne, EK63 (sa marque sœur) pour les modèles connectés accessibles, Girolami pour son brevet polycombustible auto-nettoyant. Et deux marques solides en complément : Dielle et Ferlux. À chaque marque son créneau."
+        description="Plutôt que de tout vendre, on s'est limités à trois marques italiennes qui couvrent les besoins qu'on voit sur le terrain en Wallonie. Edilkamin pour la profondeur de gamme, EK63 (sa marque sœur) pour le connecté à prix accessible, Girolami pour son brevet polycombustible qui nettoie le brasier tout seul. Chaque marque a son créneau, on te dit franchement laquelle est faite pour toi."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Nos marques" },

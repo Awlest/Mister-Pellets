@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
 import { GUIDES } from "@/lib/guides";
-import { BRAND_LIST, TOP_TIER_BRANDS } from "@/lib/brands";
+import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { PROVINCES } from "@/lib/local-seo";
 import { ARTICLES } from "@/lib/articles";
 import { getPayloadClient } from "@/lib/payload-client";
@@ -48,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // ===== PAGES MARQUES =====
-  const brandPages: MetadataRoute.Sitemap = BRAND_LIST.map((brand) => ({
+  const brandPages: MetadataRoute.Sitemap = TOP_TIER_BRANDS.map((brand) => ({
     url: `${SITE_URL}/nos-marques/${brand.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
