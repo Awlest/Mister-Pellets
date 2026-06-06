@@ -44,7 +44,7 @@ export function ContactForm() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error ?? "Une erreur est survenue. Réessaie ou téléphone-nous.");
+        throw new Error(data.error ?? "Une erreur est survenue. Réessayez ou téléphonez-nous.");
       }
 
       setState("success");
@@ -60,7 +60,7 @@ export function ContactForm() {
       <div className="rounded-2xl bg-mp-green-light/15 border border-mp-green-light/40 p-8 text-mp-green-deep">
         <h3 className="text-2xl font-semibold mb-2">Message reçu, merci !</h3>
         <p className="leading-relaxed">
-          On revient vers toi dans la journée pendant les heures ouvrées. Si c'est urgent, tu peux
+          On revient vers vous dans la journée pendant les heures ouvrées. Si c'est urgent, vous pouvez
           aussi appeler le 0472 04 32 22.
         </p>
         <Button variant="outline" size="default" className="mt-6" onClick={() => setState("idle")}>
@@ -146,7 +146,7 @@ export function ContactForm() {
             defaultValue=""
           >
             <option value="" disabled>
-              Choisis un sujet…
+              Choisissez un sujet…
             </option>
             {SUBJECTS.map((s) => (
               <option key={s.value} value={s.value}>
@@ -168,7 +168,7 @@ export function ContactForm() {
           rows={5}
           disabled={state === "loading"}
           className={cn(inputClass, "resize-y")}
-          placeholder="Décris ta question, ton projet, ou tout ce qui pourrait nous aider à te répondre."
+          placeholder="Décrivez votre question, votre projet, ou tout ce qui pourrait nous aider à vous répondre."
         />
       </div>
 

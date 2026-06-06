@@ -30,7 +30,7 @@ export default function FrontendError({
           On a une erreur sur cette page
         </h1>
         <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 max-w-xl mx-auto">
-          Notre équipe a été notifiée. En attendant, tu peux réessayer ou
+          Notre équipe a été notifiée. En attendant, vous pouvez réessayer ou
           repartir d&apos;une page connue.
         </p>
         {error.digest && (

@@ -16,12 +16,12 @@ const FAQ_ITEMS = [
   {
     question: "Quel est le montant exact de la prime pour un poêle à pellets en 2026 ?",
     answer:
-      "La prime de base est de 160 €, multipliée par un coefficient lié à ta catégorie de revenus de référence. R1 (revenus modestes, ≤ 24 600 €) : × 6, soit 960 €. R2 (24 601 à 39 300 €) : × 4, soit 640 €. R3 (39 301 à 58 900 €) : × 2, soit 320 €. R4 (au-delà de 58 900 €) : × 1, soit 160 €. Au-delà de 122 800 € de revenus (catégorie R5), le ménage n'est plus éligible aux primes Habitation depuis le 14 février 2025.",
+      "La prime de base est de 160 €, multipliée par un coefficient lié à votre catégorie de revenus de référence. R1 (revenus modestes, ≤ 24 600 €) : × 6, soit 960 €. R2 (24 601 à 39 300 €) : × 4, soit 640 €. R3 (39 301 à 58 900 €) : × 2, soit 320 €. R4 (au-delà de 58 900 €) : × 1, soit 160 €. Au-delà de 122 800 € de revenus (catégorie R5), le ménage n'est plus éligible aux primes Habitation depuis le 14 février 2025.",
   },
   {
     question: "Comment savoir dans quelle catégorie de revenus je tombe ?",
     answer:
-      "La catégorie est définie par le revenu de référence du ménage, qui figure sur l'avertissement-extrait de rôle de l'avant-dernière année (pour une demande en 2026, on regarde les revenus 2024). C'est un revenu net imposable globalisé du ménage. Si tu as un doute, le numéro gratuit 1718 (SPW) te donne la catégorie en quelques minutes.",
+      "La catégorie est définie par le revenu de référence du ménage, qui figure sur l'avertissement-extrait de rôle de l'avant-dernière année (pour une demande en 2026, on regarde les revenus 2024). C'est un revenu net imposable globalisé du ménage. Si vous avez un doute, le numéro gratuit 1718 (SPW) vous donne la catégorie en quelques minutes.",
   },
   {
     question: "L'audit logement est-il vraiment obligatoire ?",
@@ -31,27 +31,27 @@ const FAQ_ITEMS = [
   {
     question: "Le poêle qu'on m'a conseillé est-il éligible ?",
     answer:
-      "Tous les modèles que nous distribuons (Edilkamin, EK63, Dielle, Ferlux) répondent aux critères techniques de base : rendement saisonnier ≥ 87 %, conformité écodesign 2022, émissions sous les seuils réglementaires. Mais l'éligibilité finale dépend de la liste officielle des appareils publiée par le SPW Logement, qui est mise à jour régulièrement. On vérifie systématiquement le numéro de modèle exact dans cette liste avant de signer le devis.",
+      "Tous les modèles que nous distribuons (Edilkamin, EK63, Girolami) répondent aux critères techniques de base : rendement saisonnier ≥ 87 %, conformité écodesign 2022, émissions sous les seuils réglementaires. Mais l'éligibilité finale dépend de la liste officielle des appareils publiée par le SPW Logement, qui est mise à jour régulièrement. On vérifie systématiquement le numéro de modèle exact dans cette liste avant de signer le devis.",
   },
   {
     question: "Quel est le plafond en pourcentage de la facture ?",
     answer:
-      "La prime calculée ne peut pas dépasser un certain pourcentage du coût total TVAC. Pour les catégories R1 et R2, le plafond est de 70 %. Pour R3 et R4, c'est 50 %. Le montant réellement versé est le plus bas entre la prime théorique et ce plafond. Sur une pose à 4 200 € TVAC en R1, le plafond 70 % vaut 2 940 €, donc tu reçois bien les 960 € prévus. Sur une pose à 1 100 € TVAC en R1, le plafond 70 % vaut 770 €, donc tu reçois 770 € au lieu de 960 €.",
+      "La prime calculée ne peut pas dépasser un certain pourcentage du coût total TVAC. Pour les catégories R1 et R2, le plafond est de 70 %. Pour R3 et R4, c'est 50 %. Le montant réellement versé est le plus bas entre la prime théorique et ce plafond. Sur une pose à 4 200 € TVAC en R1, le plafond 70 % vaut 2 940 €, donc vous recevez bien les 960 € prévus. Sur une pose à 1 100 € TVAC en R1, le plafond 70 % vaut 770 €, donc vous recevez 770 € au lieu de 960 €.",
   },
   {
     question: "Quel est le délai pour recevoir la prime ?",
     answer:
-      "Il faut introduire le dossier au plus tard 8 mois après la dernière facture. Le délai de traitement actuel est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai mais on reste prudent dans les annonces. Tu paies normalement Mister Pellets, tu reçois la prime ensuite, directement sur ton compte.",
+      "Il faut introduire le dossier au plus tard 8 mois après la dernière facture. Le délai de traitement actuel est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai mais on reste prudent dans les annonces. Vous payez normalement Mister Pellets, vous recevez la prime ensuite, directement sur votre compte.",
   },
   {
     question: "Peut-on cumuler avec d'autres aides ?",
     answer:
-      "Oui. La TVA réduite à 6 % s'applique d'office pour les logements de plus de 10 ans (au lieu de 21 %). Tu peux aussi cumuler avec un prêt à taux 0 %, le Renopack ou Rénoprêt via la Société wallonne du Crédit social ou le Fonds du Logement, qui finance jusqu'à 60 000 €. Le cumul avec d'autres primes Habitation (isolation, châssis) est possible sous le plafond global de 50 000 € par logement, toutes primes confondues sur la durée.",
+      "Oui. La TVA réduite à 6 % s'applique d'office pour les logements de plus de 10 ans (au lieu de 21 %). Vous pouvez aussi cumuler avec un prêt à taux 0 %, le Renopack ou Rénoprêt via la Société wallonne du Crédit social ou le Fonds du Logement, qui finance jusqu'à 60 000 €. Le cumul avec d'autres primes Habitation (isolation, châssis) est possible sous le plafond global de 50 000 € par logement, toutes primes confondues sur la durée.",
   },
   {
     question: "Vous montez vraiment le dossier pour moi ?",
     answer:
-      "On prépare le récapitulatif technique du chantier, l'attestation de conformité, la facture détaillée, et l'annexe 6 Chauffage et ECS sous une forme téléversable directement sur Mon Espace Wallonie. Tu te connectes avec ton eID ou itsme, tu uploades les pièces qu'on t'a fournies, tu valides. Compte 10 à 15 minutes si tu as ton compte CSAM déjà actif.",
+      "On prépare le récapitulatif technique du chantier, l'attestation de conformité, la facture détaillée, et l'annexe 6 Chauffage et ECS sous une forme téléversable directement sur Mon Espace Wallonie. Vous vous connectez avec votre eID ou itsme, vous uploadez les pièces qu'on vous a fournies, vous validez. Comptez 10 à 15 minutes si vous avez votre compte CSAM déjà actif.",
   },
 ];
 
@@ -102,10 +102,10 @@ export default function PrimesPage() {
         eyebrow="Prime Habitation Wallonie 2026"
         title={
           <>
-            De 160 à <span className="mp-italic">960 €</span> de prime sur ton poêle à pellets
+            De 160 à <span className="mp-italic">960 €</span> de prime sur votre poêle à pellets
           </>
         }
-        description="Régime temporaire en vigueur du 14 février 2025 au 30 septembre 2026. Le montant dépend de tes revenus de référence. Mister Pellets prépare le dossier complet, conforme aux exigences SPW Logement, prêt à téléverser sur Mon Espace Wallonie."
+        description="Régime temporaire en vigueur du 14 février 2025 au 30 septembre 2026. Le montant dépend de vos revenus de référence. Mister Pellets prépare le dossier complet, conforme aux exigences SPW Logement, prêt à téléverser sur Mon Espace Wallonie."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Prime poêle à pellets 2026" },
@@ -123,7 +123,7 @@ export default function PrimesPage() {
               Depuis le 14 février 2025, la Région wallonne applique un régime temporaire
               d'aides à l'habitat, en vigueur jusqu'au 30 septembre 2026. Pour l'installation
               d'un poêle à pellets, la prime est calculée sur une base de 160 €, multipliée par
-              un coefficient lié à tes revenus de référence.
+              un coefficient lié à vos revenus de référence.
             </p>
             <p>
               Concrètement, un ménage en catégorie R1 (revenus de référence sous 24 600 €) reçoit
@@ -214,8 +214,8 @@ export default function PrimesPage() {
                 <h3 className="text-lg font-semibold text-mp-green-deep mb-1">Audit logement</h3>
                 <p>
                   À faire réaliser par un auditeur agréé avant tout devis travaux. On peut
-                  t'orienter vers des auditeurs de la zone Fernelmont si tu n'as pas déjà
-                  ton interlocuteur.
+                  vous orienter vers des auditeurs de la zone Fernelmont si vous n'avez pas déjà
+                  votre interlocuteur.
                 </p>
               </div>
             </li>
@@ -224,7 +224,7 @@ export default function PrimesPage() {
               <div>
                 <h3 className="text-lg font-semibold text-mp-green-deep mb-1">Sélection du poêle dans la liste officielle</h3>
                 <p>
-                  On vérifie ensemble que le modèle qui te convient figure bien dans la liste
+                  On vérifie ensemble que le modèle qui vous convient figure bien dans la liste
                   SPW Logement à jour. Sur les 61 références qu'on distribue, la quasi-totalité
                   y figure, mais on ne signe pas un devis sans cette vérification.
                 </p>
@@ -235,7 +235,7 @@ export default function PrimesPage() {
               <div>
                 <h3 className="text-lg font-semibold text-mp-green-deep mb-1">Pose et facturation</h3>
                 <p>
-                  Pose en une journée. À la fin du chantier, tu reçois la facture détaillée TVAC,
+                  Pose en une journée. À la fin du chantier, vous recevez la facture détaillée TVAC,
                   l'attestation de conformité, le récapitulatif technique du modèle posé, et
                   l'annexe 6 Chauffage et ECS pré-remplie.
                 </p>
@@ -246,9 +246,9 @@ export default function PrimesPage() {
               <div>
                 <h3 className="text-lg font-semibold text-mp-green-deep mb-1">Dépôt sur Mon Espace Wallonie</h3>
                 <p>
-                  Tu te connectes sur mon.wallonie.be avec ton eID ou itsme. Tu uploades le
-                  rapport d'audit, les factures, les annexes techniques, et tes justificatifs
-                  de revenus. Compte 10 à 15 minutes si ton compte CSAM est déjà actif.
+                  Vous vous connectez sur mon.wallonie.be avec votre eID ou itsme. Vous uploadez le
+                  rapport d'audit, les factures, les annexes techniques, et vos justificatifs
+                  de revenus. Comptez 10 à 15 minutes si votre compte CSAM est déjà actif.
                   Alternative : envoi postal à la Direction des Aides aux Particuliers, Rue des
                   Brigades d'Irlande 1, 5100 Jambes.
                 </p>
@@ -260,7 +260,7 @@ export default function PrimesPage() {
                 <h3 className="text-lg font-semibold text-mp-green-deep mb-1">Versement de la prime</h3>
                 <p>
                   Délai actuel de traitement : 1 à 2 ans après dépôt complet. Versement
-                  directement sur ton compte. On suit ton dossier et on t'aide à répondre
+                  directement sur votre compte. On suit votre dossier et on vous aide à répondre
                   aux éventuelles demandes de pièces complémentaires du SPW.
                 </p>
               </div>
@@ -357,8 +357,8 @@ export default function PrimesPage() {
             et conditions peuvent évoluer. À partir du 1er octobre 2026, un nouveau
             régime global devrait entrer en vigueur (détails non publiés au moment de la
             rédaction). Pour un calcul personnalisé et une vérification officielle,
-            contacte le SPW Énergie au 1718 ou sur energie.wallonie.be, ou consulte un
-            Guichet Énergie Wallonie de ta zone. Mister Pellets ne se substitue pas à
+            contactez le SPW Énergie au 1718 ou sur energie.wallonie.be, ou consultez un
+            Guichet Énergie Wallonie de votre zone. Mister Pellets ne se substitue pas à
             l'administration et ne garantit pas l'octroi d'une prime, qui reste à la
             discrétion du SPW Logement après instruction du dossier.
           </p>
@@ -367,7 +367,7 @@ export default function PrimesPage() {
 
       <CTAFinal
         title="Devis chiffré avec la prime déjà déduite"
-        description="On calcule ton montant exact en fonction de tes revenus et du modèle. Tu sais combien tu vas vraiment payer net, sans surprise."
+        description="On calcule votre montant exact en fonction de vos revenus et du modèle. Vous savez combien vous allez vraiment payer net, sans surprise."
       />
     </>
   );

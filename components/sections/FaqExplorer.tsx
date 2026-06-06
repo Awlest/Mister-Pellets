@@ -134,7 +134,7 @@ export function FaqExplorer() {
           <p className="text-mp-ink-soft">
             <strong className="text-mp-green-deep">{filtered.length}</strong>{" "}
             {filtered.length === 1 ? "question" : "questions"}
-            {hasFilters && " correspondant à ta recherche"}
+            {hasFilters && " correspondant à votre recherche"}
           </p>
           {hasFilters && (
             <button
@@ -154,7 +154,7 @@ export function FaqExplorer() {
               Aucune question ne correspond à cette recherche.
             </p>
             <p className="text-sm text-mp-ink-soft">
-              Essaie avec un autre mot, ou contacte-nous directement au{" "}
+              Essayez avec un autre mot, ou contactez-nous directement au{" "}
               <a
                 href="tel:+32472043222"
                 className="text-mp-orange-flame underline hover:no-underline font-semibold"

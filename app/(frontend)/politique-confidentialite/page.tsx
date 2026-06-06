@@ -3,7 +3,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
-  description: "Comment Mister Pellets traite tes données personnelles, conformément au RGPD.",
+  description: "Comment Mister Pellets traite vos données personnelles, conformément au RGPD.",
   alternates: { canonical: "https://mister-pellets.be/politique-confidentialite" },
 };
 
@@ -12,7 +12,7 @@ export default function PolitiqueConfidentialitePage() {
     <>
       <HeroSecondary
         title="Politique de confidentialité"
-        description="Conforme RGPD, règles de traitement de tes données personnelles."
+        description="Conforme RGPD, règles de traitement de vos données personnelles."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Politique de confidentialité" },
@@ -35,11 +35,11 @@ export default function PolitiqueConfidentialitePage() {
             <ul className="list-disc list-outside ml-5 space-y-2">
               <li>
                 <strong>Données d'identification</strong> : nom, prénom, email, téléphone, adresse
-                postale (collectées uniquement quand tu remplis un formulaire ou passes commande).
+                postale (collectées uniquement quand vous remplissez un formulaire ou passez commande).
               </li>
               <li>
-                <strong>Données de projet</strong> : informations sur ta maison (surface, PEB,
-                cheminée, etc.) collectées via le formulaire de devis pour t'établir une proposition
+                <strong>Données de projet</strong> : informations sur votre maison (surface, PEB,
+                cheminée, etc.) collectées via le formulaire de devis pour vous établir une proposition
                 pertinente.
               </li>
               <li>
@@ -53,21 +53,21 @@ export default function PolitiqueConfidentialitePage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Pourquoi on collecte ces données</h2>
             <ul className="list-disc list-outside ml-5 space-y-2">
-              <li>Te répondre quand tu nous contactes (base légale : ton consentement / exécution du contrat).</li>
-              <li>Te fournir un devis personnalisé (base légale : exécution précontractuelle).</li>
-              <li>Traiter et livrer tes commandes (base légale : exécution du contrat).</li>
+              <li>Vous répondre quand vous nous contactez (base légale : votre consentement / exécution du contrat).</li>
+              <li>Vous fournir un devis personnalisé (base légale : exécution précontractuelle).</li>
+              <li>Traiter et livrer vos commandes (base légale : exécution du contrat).</li>
               <li>Respecter nos obligations comptables et fiscales (base légale : obligation légale, conservation 7 ans).</li>
-              <li>Améliorer notre site (base légale : ton consentement aux cookies analytiques).</li>
+              <li>Améliorer notre site (base légale : votre consentement aux cookies analytiques).</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Avec qui on partage tes données</h2>
+            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Avec qui on partage vos données</h2>
             <p>
-              Tes données ne sont <strong>jamais vendues</strong> à des tiers. Elles sont partagées
+              Vos données ne sont <strong>jamais vendues</strong> à des tiers. Elles sont partagées
               uniquement avec nos sous-traitants techniques (hébergeur Combell, prestataire de
-              paiement Stripe, fournisseur d'email Resend), tous engagés contractuellement à
-              respecter la confidentialité. Pour les commandes, tes données peuvent être transmises
+              paiement Mollie, fournisseur d'email Resend), tous engagés contractuellement à
+              respecter la confidentialité. Pour les commandes, vos données peuvent être transmises
               au fabricant pour les besoins de garantie et SAV.
             </p>
           </section>
@@ -78,28 +78,28 @@ export default function PolitiqueConfidentialitePage() {
               <li>Données de devis non concrétisé : 12 mois après dernier contact.</li>
               <li>Données client (commande/installation) : 10 ans (obligation légale comptable + garantie).</li>
               <li>Données de navigation analytiques : 26 mois (Google Analytics).</li>
-              <li>Newsletter : tant que tu n'as pas demandé la désinscription.</li>
+              <li>Newsletter : tant que vous n'avez pas demandé la désinscription.</li>
             </ul>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Tes droits RGPD</h2>
-            <p>Tu as le droit, à tout moment, et gratuitement, de :</p>
+            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Vos droits RGPD</h2>
+            <p>Vous avez le droit, à tout moment, et gratuitement, de :</p>
             <ul className="list-disc list-outside ml-5 space-y-2 mt-3">
-              <li><strong>Accéder</strong> à tes données et en obtenir une copie</li>
-              <li><strong>Rectifier</strong> tes données si elles sont incorrectes</li>
-              <li><strong>Effacer</strong> tes données (« droit à l'oubli »), sauf obligations légales contraires</li>
+              <li><strong>Accéder</strong> à vos données et en obtenir une copie</li>
+              <li><strong>Rectifier</strong> vos données si elles sont incorrectes</li>
+              <li><strong>Effacer</strong> vos données (« droit à l'oubli »), sauf obligations légales contraires</li>
               <li><strong>Limiter</strong> le traitement</li>
-              <li><strong>Récupérer</strong> tes données dans un format portable</li>
-              <li><strong>T'opposer</strong> au traitement pour motif légitime</li>
-              <li><strong>Retirer</strong> ton consentement à tout moment</li>
+              <li><strong>Récupérer</strong> vos données dans un format portable</li>
+              <li><strong>Vous opposer</strong> au traitement pour motif légitime</li>
+              <li><strong>Retirer</strong> votre consentement à tout moment</li>
             </ul>
             <p className="mt-4">
-              Pour exercer ces droits : email à <strong>info@awlest.com</strong> avec ta demande et
+              Pour exercer ces droits : email à <strong>info@awlest.com</strong> avec votre demande et
               une preuve d'identité. Réponse dans un délai de 30 jours.
             </p>
             <p className="mt-3">
-              En cas de désaccord, tu peux saisir l'Autorité de protection des données (APD)
+              En cas de désaccord, vous pouvez saisir l'Autorité de protection des données (APD)
               belge :{" "}
               <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener noreferrer" className="text-mp-orange-flame underline hover:no-underline">
                 autoriteprotectiondonnees.be

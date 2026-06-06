@@ -9,7 +9,7 @@ import { useProductColor } from "./ProductColorContext";
 interface GalleryImage {
   url: string;
   alt?: string;
-  /** Point focal (0-100 %) issu de l'admin Media Payload — CSS object-position. */
+  /** Point focal (0-100 %) issu de l'admin Media Payload (CSS object-position). */
   focalX?: number;
   focalY?: number;
 }
@@ -180,7 +180,7 @@ export function ProductGallery({
   return (
     <>
       <div data-active-gtin={activeVariant?.gtin ?? undefined}>
-        {/* Image principale — clic pour ouvrir le lightbox */}
+        {/* Image principale : clic pour ouvrir le lightbox */}
         <button
           type="button"
           onClick={() => setLightboxOpen(true)}
@@ -237,7 +237,7 @@ export function ProductGallery({
               >
                 <Image
                   src={img.url}
-                  alt={img.alt || `${productName} — vue ${i + 1}`}
+                  alt={img.alt || `${productName}, vue ${i + 1}`}
                   fill
                   sizes="(max-width: 1024px) 25vw, 12vw"
                   className="object-cover"

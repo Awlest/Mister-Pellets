@@ -34,7 +34,7 @@ function effectivePrice(v: ProductVariantData): number {
 }
 
 /**
- * Panneau de sélection des variantes — page produit (§4 du brief).
+ * Panneau de sélection des variantes, page produit (§4 du brief).
  *
  * Affiché à la place du bloc prix + bouton d'achat statiques quand le produit
  * a `hasVariants`. Gère :
@@ -128,7 +128,7 @@ export function ProductVariantPanel({
     addItem(
       {
         productId: `${productSlug}::${activeVariant.sku ?? activeVariant.id}`,
-        name: config ? `${productName} — ${config}` : productName,
+        name: config ? `${productName}, ${config}` : productName,
         brand: productBrand,
         priceTTC: effectivePrice(activeVariant),
         imageSrc: activeVariant.image?.url ?? productImageSrc,
@@ -260,14 +260,14 @@ export function ProductVariantPanel({
       </Button>
 
       <p className="text-xs text-mp-ink-soft text-center">
-        Pose non incluse — devis chiffré sous 48 h. Le paiement en ligne
+        Pose non incluse : devis chiffré sous 48 h. Le paiement en ligne
         (Mollie / Bancontact) arrive prochainement.
       </p>
     </div>
   );
 }
 
-/** Bouton d'une valeur d'option — rendu selon le displayMode de l'axe. */
+/** Bouton d'une valeur d'option, rendu selon le displayMode de l'axe. */
 function VariantValueButton({
   axis,
   value,
@@ -340,7 +340,7 @@ function VariantValueButton({
     );
   }
 
-  // Mode texte (défaut) — pill
+  // Mode texte (défaut) : pill
   return (
     <button
       type="button"

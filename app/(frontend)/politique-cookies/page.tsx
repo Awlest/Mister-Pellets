@@ -13,12 +13,12 @@ const COOKIES = [
     description: "Indispensables au fonctionnement du site. Pas de consentement requis.",
     items: [
       { name: "mp_session", purpose: "Session utilisateur (panier, login admin)", duration: "Session" },
-      { name: "mp_cookie_consent", purpose: "Mémorise ton choix sur le bandeau cookies", duration: "12 mois" },
+      { name: "mp_cookie_consent", purpose: "Mémorise votre choix sur le bandeau cookies", duration: "12 mois" },
     ],
   },
   {
     category: "Analytiques",
-    description: "Mesure d'audience anonyme. Activés uniquement après ton consentement.",
+    description: "Mesure d'audience anonyme. Activés uniquement après votre consentement.",
     items: [
       { name: "_ga, _ga_*", purpose: "Google Analytics 4, pages vues, durée, parcours", duration: "26 mois" },
       { name: "_clck, _clsk", purpose: "Microsoft Clarity, heatmaps anonymes", duration: "12 mois" },
@@ -26,7 +26,7 @@ const COOKIES = [
   },
   {
     category: "Fonctionnels",
-    description: "Améliorent l'expérience. Activés uniquement après ton consentement.",
+    description: "Améliorent l'expérience. Activés uniquement après votre consentement.",
     items: [
       { name: "youtube_*", purpose: "Lecture des vidéos YouTube intégrées (si applicable)", duration: "Variable" },
     ],
@@ -51,8 +51,8 @@ export default function PolitiqueCookiesPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Qu'est-ce qu'un cookie ?</h2>
             <p>
-              Un cookie est un petit fichier texte déposé sur ton appareil (ordinateur, mobile,
-              tablette) lors de la visite d'un site. Il permet de mémoriser des informations sur ta
+              Un cookie est un petit fichier texte déposé sur votre appareil (ordinateur, mobile,
+              tablette) lors de la visite d'un site. Il permet de mémoriser des informations sur votre
               navigation : préférences, panier, session. Certains sont indispensables au
               fonctionnement, d'autres servent à mesurer l'audience ou à proposer des fonctionnalités
               optionnelles.
@@ -98,12 +98,12 @@ export default function PolitiqueCookiesPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Comment paramétrer ou refuser les cookies</h2>
             <p>
-              Sur ta première visite, un bandeau te demande ton choix : accepter, refuser, ou
-              personnaliser par catégorie. Tu peux modifier tes préférences à tout moment en cliquant
+              Sur votre première visite, un bandeau vous demande votre choix : accepter, refuser, ou
+              personnaliser par catégorie. Vous pouvez modifier vos préférences à tout moment en cliquant
               sur le lien « Cookies » en bas de chaque page.
             </p>
             <p className="mt-3">
-              Tu peux aussi gérer les cookies directement depuis ton navigateur :
+              Vous pouvez aussi gérer les cookies directement depuis votre navigateur :
             </p>
             <ul className="list-disc list-outside ml-5 space-y-1 mt-3">
               <li>Chrome : Paramètres → Confidentialité et sécurité → Cookies</li>
@@ -121,7 +121,7 @@ export default function PolitiqueCookiesPage() {
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Modification de la politique</h2>
             <p>
               Cette politique peut évoluer pour s'adapter aux nouveaux outils ou à la réglementation.
-              Toute modification significative te sera signalée via le bandeau cookies.
+              Toute modification significative vous sera signalée via le bandeau cookies.
             </p>
           </section>
 

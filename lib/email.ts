@@ -112,9 +112,9 @@ export async function confirmCustomerQuote(quote: { name: string; email: string 
   const html = `
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
       <h1 style="color:#174724;font-family:Georgia,serif">Bonjour ${quote.name.split(" ")[0]},</h1>
-      <p>On a bien reçu ta demande de devis. Notre équipe l'examine et te recontacte par email
+      <p>On a bien reçu votre demande de devis. Notre équipe l'examine et vous recontacte par email
       sous <strong>48h ouvrées</strong> avec un chiffrage personnalisé.</p>
-      <p>Si c'est urgent, tu peux nous appeler directement au <a href="tel:+32472043222" style="color:#F28A20">0472 04 32 22</a>.</p>
+      <p>Si c'est urgent, vous pouvez nous appeler directement au <a href="tel:+32472043222" style="color:#F28A20">0472 04 32 22</a>.</p>
       <p style="margin-top:32px;padding-top:16px;border-top:1px solid #EAE0CB;color:#4A5A50;font-size:13px">
         Mister Pellets · Awlest SRL · Rue des Fagotis 3A, 5380 Fernelmont · TVA BE 0656.514.212
       </p>
@@ -123,7 +123,7 @@ export async function confirmCustomerQuote(quote: { name: string; email: string 
 
   return sendEmail({
     to: quote.email,
-    subject: "Ta demande de devis Mister Pellets a bien été reçue",
+    subject: "Votre demande de devis Mister Pellets a bien été reçue",
     html,
   });
 }
@@ -165,11 +165,11 @@ export async function confirmCustomerOrder(order: {
   const html = `
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
       <h1 style="color:#174724;font-family:Georgia,serif">Merci ${order.customerName.split(" ")[0]} !</h1>
-      <p>Ta commande <strong>${order.orderNumber}</strong> est confirmée.</p>
+      <p>Votre commande <strong>${order.orderNumber}</strong> est confirmée.</p>
       <h3 style="color:#174724">Récap</h3>
       <ul style="padding-left:20px">${itemsHtml}</ul>
       <p style="font-size:18px;margin-top:16px"><strong>Total TTC : ${new Intl.NumberFormat("fr-BE", { style: "currency", currency: "EUR" }).format(order.total)}</strong></p>
-      <p>On t'envoie un mail dès que la livraison est en route. Pour toute question : <a href="tel:+32472043222" style="color:#F28A20">0472 04 32 22</a> ou <a href="mailto:info@awlest.com" style="color:#F28A20">info@awlest.com</a>.</p>
+      <p>On vous envoie un mail dès que la livraison est en route. Pour toute question : <a href="tel:+32472043222" style="color:#F28A20">0472 04 32 22</a> ou <a href="mailto:info@awlest.com" style="color:#F28A20">info@awlest.com</a>.</p>
     </div>
   `;
 

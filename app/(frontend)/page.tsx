@@ -22,7 +22,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Combien coûte un poêle à pellets installé en Wallonie ?",
     answer:
-      "Pour une maison standard avec conduit existant, compte entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. La Prime Habitation Wallonie 2026 ramène 160 à 960 € de cette facture selon ta catégorie de revenus.",
+      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. La Prime Habitation Wallonie 2026 ramène 160 à 960 € de cette facture selon votre catégorie de revenus.",
   },
   {
     question: "Quelle puissance de poêle pour quelle surface ?",
@@ -32,7 +32,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Combien de temps prend la pose d'un poêle à pellets ?",
     answer:
-      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec toi en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours.",
+      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours.",
   },
   {
     question: "Faut-il un audit logement pour la prime Wallonie 2026 ?",
@@ -52,7 +52,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Quelles marques de poêles distribuez-vous ?",
     answer:
-      "On distribue trois marques italiennes, choisies parce qu'on les connaît à fond. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi de série. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Nous, on te dirige vers celle qui colle à ton projet, pas vers celle qui rapporte le plus.",
+      "On distribue trois marques italiennes, choisies parce qu'on les connaît à fond. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi de série. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Nous, on vous dirige vers celle qui colle à votre projet, pas vers celle qui rapporte le plus.",
   },
 ];
 
@@ -153,9 +153,9 @@ export default function HomePage() {
               tampon.
             </p>
             <p>
-              La règle de dimensionnement la plus simple, valable pour le climat wallon : multiplie
-              ta surface par 0,10 si la PEB est bonne (A-B), par 0,12 si elle est moyenne (C-D), et
-              par 0,15 si elle est faible (E-G). Tu obtiens la puissance cible en kW. Sur le terrain
+              La règle de dimensionnement la plus simple, valable pour le climat wallon : multipliez
+              votre surface par 0,10 si la PEB est bonne (A-B), par 0,12 si elle est moyenne (C-D), et
+              par 0,15 si elle est faible (E-G). Vous obtenez la puissance cible en kW. Sur le terrain
               on affine toujours en regardant la maison : sous-dimensionner brûle le matériel,
               sur-dimensionner provoque encrassement et inconfort.
             </p>
@@ -360,7 +360,7 @@ export default function HomePage() {
               étage. Les modèles EK63 et Edilkamin Mood ou Cherie Up dominent ce segment.
             </p>
             <p>
-              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévois 8 000 à
+              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez 8 000 à
               14 000 € TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
               démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
               aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
@@ -389,7 +389,7 @@ export default function HomePage() {
           },
           {
             title: "Pose en 1 journée",
-            description: "Bâches, plaques de protection, raccordement, premier feu avec toi en fin d'aprèm.",
+            description: "Bâches, plaques de protection, raccordement, premier feu avec vous en fin d'aprèm.",
           },
           {
             title: "Mise en route + SAV",
@@ -408,23 +408,23 @@ export default function HomePage() {
           </h2>
           <div className="space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
-              Du premier contact à la mise en service, compte 3 à 6 semaines en saison normale, un
+              Du premier contact à la mise en service, comptez 3 à 6 semaines en saison normale, un
               peu plus long de septembre à décembre où la demande est forte. Le diagnostic à
-              domicile peut être planifié dans la semaine qui suit ton appel ou ton formulaire.
+              domicile peut être planifié dans la semaine qui suit votre appel ou votre formulaire.
               Le devis tombe sous 48 heures ouvrées après visite.
             </p>
             <p>
               Une fois le devis signé, on commande le matériel (stock atelier ou usine selon
               modèle). Les modèles courants sont disponibles sous 5 à 10 jours. Pour les
-              configurations spécifiques (couleurs rares, hydros sur-mesure), prévois 3 à 5 semaines.
-              On te donne une date de pose ferme dans le devis.
+              configurations spécifiques (couleurs rares, hydros sur-mesure), prévoyez 3 à 5 semaines.
+              On vous donne une date de pose ferme dans le devis.
             </p>
             <p>
               Le jour de la pose, l'équipe arrive entre 8 h et 9 h, démonte l'ancien appareil le
               cas échéant, prépare la zone (bâches, plaques de protection). Le poêle est mis en
-              place, raccordé, étanchéifié. Le premier feu se fait avec toi en fin d'après-midi,
+              place, raccordé, étanchéifié. Le premier feu se fait avec vous en fin d'après-midi,
               avec la formation à l'app si le poêle est connecté et le réglage de la programmation
-              hebdomadaire selon ton rythme de vie.
+              hebdomadaire selon votre rythme de vie.
             </p>
           </div>
         </div>
@@ -434,13 +434,13 @@ export default function HomePage() {
 
       <FAQAccordion
         title="Questions fréquentes des Wallons"
-        description="Les sept questions que les clients nous posent en premier. Si tu as un cas particulier, le téléphone reste le moyen le plus rapide."
+        description="Les sept questions que les clients nous posent en premier. Si vous avez un cas particulier, le téléphone reste le moyen le plus rapide."
         items={FAQ_HOMEPAGE}
       />
 
       <CTAFinal
         title="Devis chiffré en 60 secondes"
-        description="Tu remplis surface, type d'usage, contraintes. On te recontacte sous 24 h ouvrées avec une fourchette de prix et un créneau de diagnostic. Sans engagement."
+        description="Vous remplissez surface, type d'usage, contraintes. On vous recontacte sous 24 h ouvrées avec une fourchette de prix et un créneau de diagnostic. Sans engagement."
       />
     </>
   );

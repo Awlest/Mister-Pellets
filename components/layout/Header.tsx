@@ -17,8 +17,7 @@ const NAV_ITEMS = [
     children: [
       { label: "Edilkamin", href: "/nos-marques/edilkamin", desc: "Premium · Italie" },
       { label: "EK63", href: "/nos-marques/ek63", desc: "Connecté · Italie" },
-      { label: "Dielle", href: "/nos-marques/dielle", desc: "Hydro · Italie" },
-      { label: "Ferlux", href: "/nos-marques/ferlux", desc: "Budget · Espagne" },
+      { label: "Girolami", href: "/nos-marques/girolami", desc: "Polycombustible · Italie" },
     ],
   },
   {

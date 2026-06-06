@@ -36,7 +36,7 @@ export default function FAQPage() {
             Trouvez vite la réponse à <span className="mp-italic">votre question</span>
           </>
         }
-        description="Toutes les questions que les clients nous posent en premier, compilées et catégorisées. Recherche en temps réel et filtres par catégorie. Si tu ne trouves pas, le téléphone reste le moyen le plus rapide."
+        description="Toutes les questions que les clients nous posent en premier, compilées et catégorisées. Recherche en temps réel et filtres par catégorie. Si vous ne trouvez pas, le téléphone reste le moyen le plus rapide."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "FAQ" },
@@ -46,7 +46,7 @@ export default function FAQPage() {
       <FaqExplorer />
 
       <CTAFinal
-        title="Pas trouvé ta réponse ?"
+        title="Pas trouvé votre réponse ?"
         description="Le téléphone reste le moyen le plus rapide pour les cas particuliers. Sinon le formulaire de contact, on revient sous 48 heures ouvrées."
         primaryCta={{ label: "Nous contacter", href: "/contact" }}
       />

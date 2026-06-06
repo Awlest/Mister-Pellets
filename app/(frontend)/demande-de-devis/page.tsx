@@ -6,7 +6,7 @@ import { QuoteForm } from "@/components/forms/QuoteForm";
 export const metadata: Metadata = {
   title: "Devis gratuit, Poêle à pellets en Wallonie",
   description:
-    "Demande ton devis personnalisé en 60 secondes. 6 questions sur ton projet, on revient sous 48h avec un chiffrage clair, primes incluses.",
+    "Demandez votre devis personnalisé en 60 secondes. 6 questions sur votre projet, on revient sous 48h avec un chiffrage clair, primes incluses.",
   alternates: { canonical: "https://mister-pellets.be/demande-de-devis" },
 };
 
@@ -20,7 +20,7 @@ export default function DevisPage() {
             Devis personnalisé en <span className="mp-italic">6 questions</span>
           </>
         }
-        description="Plus précis que le devis générique : on adapte au PEB de ta maison, à ton budget, et au délai. Réponse sous 48h ouvrées avec un chiffrage net incluant les primes Wallonie."
+        description="Plus précis que le devis générique : on adapte au PEB de votre maison, à votre budget, et au délai. Réponse sous 48h ouvrées avec un chiffrage net incluant les primes Wallonie."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Demande de devis" },
@@ -48,7 +48,7 @@ export default function DevisPage() {
           <QuoteForm />
 
           <p className="text-xs text-mp-ink-soft text-center mt-8">
-            Tes réponses sont sauvegardées localement, tu peux fermer la page et revenir, le formulaire repartira où tu en étais.
+            Vos réponses sont sauvegardées localement, vous pouvez fermer la page et revenir, le formulaire repartira où vous en étiez.
           </p>
         </div>
       </section>

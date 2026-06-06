@@ -73,7 +73,7 @@ export default function AProposPage() {
           <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
             <p>
               Mister Pellets est la marque commerciale spécialisée dans les poêles à pellets d'Awlest SRL,
-              société active en Wallonie depuis 2016. Concrètement, quand tu reçois un devis ou une facture
+              société active en Wallonie depuis 2016. Concrètement, quand vous recevez un devis ou une facture
               de notre part, le nom <strong>Awlest</strong> apparaît sur le document, parce que c'est la
               société qui porte juridiquement l'activité.
             </p>
@@ -102,22 +102,22 @@ export default function AProposPage() {
           <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
             <p>
               <strong>On commence par regarder la maison.</strong> Pas au téléphone, pas sur photos. On vient sur place
-              ou en visio si tu préfères. On regarde la pièce, le conduit existant ou pas, l'isolation, comment tu vis,
-              ce que tu cherches. Ensuite seulement on parle de modèles.
+              ou en visio si vous préférez. On regarde la pièce, le conduit existant ou pas, l'isolation, comment vous vivez,
+              ce que vous cherchez. Ensuite seulement on parle de modèles.
             </p>
             <p>
-              <strong>On dit ce qu'on pense.</strong> Si ta maison n'a pas besoin d'un 14 kW connecté à 5 000 €, on te
-              le dit. Un Ferlux 8 kW à 1 800 € peut suffire. Notre rôle n'est pas de vendre le maximum, c'est de te
-              diriger vers ce qui va marcher chez toi pendant 15 ans.
+              <strong>On dit ce qu'on pense.</strong> Si votre maison n'a pas besoin d'un 14 kW connecté à 5 000 €, on vous
+              le dit. Un EK63 d'entrée de gamme autour de 2 000 € peut suffire. Notre rôle n'est pas de vendre le maximum, c'est de vous
+              diriger vers ce qui va marcher chez vous pendant 15 ans.
             </p>
             <p>
               <strong>On pose proprement.</strong> Bâches, aspirateur, plaques de protection. On laisse l'endroit comme
-              on l'a trouvé. Le premier feu est fait avec toi, on t'explique l'app si le poêle est connecté, on règle la
+              on l'a trouvé. Le premier feu est fait avec vous, on vous explique l'app si le poêle est connecté, on règle la
               programmation. Pas de "on file la doc et au revoir".
             </p>
             <p>
               <strong>On reste joignable.</strong> Le SAV n'est pas un service séparé qui demande 3 semaines pour passer.
-              Si ton poêle a un souci 18 mois après la pose, tu nous appelles, on vient. C'est notre nom qu'on protège.
+              Si votre poêle a un souci 18 mois après la pose, vous nous appelez, on vient. C'est notre nom qu'on protège.
             </p>
           </div>
         </div>
@@ -142,9 +142,9 @@ export default function AProposPage() {
               pas de modèles déclassés.
             </p>
             <p>
-              Pour la pose, l'attestation de conformité de l'installation et la facture détaillée te sont
+              Pour la pose, l'attestation de conformité de l'installation et la facture détaillée vous sont
               remises à la fin du chantier. Ce sont les deux pièces que la Région demande pour traiter
-              ton dossier de prime. On rédige aussi le récapitulatif technique (puissance, type d'évacuation,
+              votre dossier de prime. On rédige aussi le récapitulatif technique (puissance, type d'évacuation,
               modèle exact) pour qu'il soit téléversable directement sur Mon Espace Wallonie.
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function AProposPage() {
 
       <CTAFinal
         title="On se rencontre ?"
-        description="Visite du showroom, visio, ou on vient chez toi pour le diagnostic. Aucune obligation derrière, juste une discussion concrète sur ton projet."
+        description="Visite du showroom, visio, ou on vient chez vous pour le diagnostic. Aucune obligation derrière, juste une discussion concrète sur votre projet."
       />
     </>
   );

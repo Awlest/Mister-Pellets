@@ -17,7 +17,7 @@ interface BrandsGridProps {
  */
 export function BrandsGrid({
   title = "Les 3 marques que nous distribuons",
-  description = "Chaque marque a son créneau. Notre rôle est de te diriger vers celle qui colle vraiment à ta maison et à ton budget.",
+  description = "Chaque marque a son créneau. Notre rôle est de vous diriger vers celle qui colle vraiment à votre maison et à votre budget.",
   brands = TOP_TIER_BRANDS,
 }: BrandsGridProps) {
   return (

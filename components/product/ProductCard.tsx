@@ -15,7 +15,7 @@ export interface ProductCardData {
   brand: string;
   power?: string;
   /**
-   * @deprecated — remplacé par `heatedVolume` (m³ max au lieu de m² min-max).
+   * @deprecated remplacé par `heatedVolume` (m³ max au lieu de m² min-max).
    * Conservé pour compatibilité ascendante avec l'ancien shape demo.
    */
   surface?: string;
@@ -133,7 +133,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
             </div>
           )}
 
-          {/* Pastilles de couleur — laissent voir d'un coup d'œil les
+          {/* Pastilles de couleur : laissent voir d'un coup d'œil les
               finitions disponibles. Cliquer mène à la page produit où
               le picker complet est dispo. */}
           {visibleSwatches.length > 0 && (

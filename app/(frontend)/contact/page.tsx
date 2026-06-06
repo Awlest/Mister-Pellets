@@ -7,7 +7,7 @@ import { formatPhone } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Contact, Mister Pellets Wallonie",
   description:
-    "Contacte Mister Pellets à Fernelmont : téléphone, email, adresse showroom, horaires. On répond dans la journée pendant les heures ouvrées.",
+    "Contactez Mister Pellets à Fernelmont : téléphone, email, adresse showroom, horaires. On répond dans la journée pendant les heures ouvrées.",
   alternates: { canonical: "https://mister-pellets.be/contact" },
 };
 
@@ -19,7 +19,7 @@ export default function ContactPage() {
     <>
       <HeroSecondary
         title="Une question ? On répond."
-        description="Téléphone, email ou formulaire. On revient vers toi dans la journée pendant les heures ouvrées (lun-ven 9h-18h, sam 9h-13h)."
+        description="Téléphone, email ou formulaire. On revient vers vous dans la journée pendant les heures ouvrées (lun-ven 9h-18h, sam 9h-13h)."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Contact" },
@@ -85,10 +85,10 @@ export default function ContactPage() {
             {/* Form */}
             <div className="lg:col-span-8">
               <h2 className="text-2xl font-semibold text-mp-green-deep mb-2">
-                Ou écris-nous directement
+                Ou écrivez-nous directement
               </h2>
               <p className="text-mp-ink-soft mb-8">
-                Pour un devis personnalisé, prends 60 secondes pour remplir le{" "}
+                Pour un devis personnalisé, prenez 60 secondes pour remplir le{" "}
                 <a href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline">
                   formulaire de devis
                 </a>{" "}

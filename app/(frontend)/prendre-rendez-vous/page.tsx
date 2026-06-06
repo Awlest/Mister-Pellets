@@ -56,9 +56,9 @@ const SERVICES: Service[] = [
   {
     slug: "devis-sur-place",
     name: "Devis sur place",
-    shortDescription: "Diagnostic à domicile pour chiffrer ton projet pellets.",
+    shortDescription: "Diagnostic à domicile pour chiffrer votre projet pellets.",
     longDescription:
-      "On vient chez toi, on regarde la pièce, le conduit existant, l'isolation, l'arrivée d'air comburant. Sortie : un devis chiffré sous 48 heures avec le modèle adapté, la prime Wallonie déjà calculée, et le délai de pose.",
+      "On vient chez vous, on regarde la pièce, le conduit existant, l'isolation, l'arrivée d'air comburant. Sortie : un devis chiffré sous 48 heures avec le modèle adapté, la prime Wallonie déjà calculée, et le délai de pose.",
     durationLabel: "60 minutes",
     priceLabel: "Gratuit",
     location: "domicile",
@@ -70,7 +70,7 @@ const SERVICES: Service[] = [
     name: "Visite showroom + conseils",
     shortDescription: "Voir les modèles d'exposition à Fernelmont, comparer en vrai.",
     longDescription:
-      "On t'accueille au showroom de Fernelmont, café, tu vois les flammes, tu compares les designs, on parle puissance et budget. La sélection en exposition tourne régulièrement, donc on peut te confirmer quels modèles seront sur place le jour de ta visite.",
+      "On vous accueille au showroom de Fernelmont, café, vous voyez les flammes, vous comparez les designs, on parle puissance et budget. La sélection en exposition tourne régulièrement, donc on peut vous confirmer quels modèles seront sur place le jour de votre visite.",
     durationLabel: "45 minutes",
     priceLabel: "Gratuit",
     location: "showroom",
@@ -106,7 +106,7 @@ const SERVICES: Service[] = [
     name: "Ramonage",
     shortDescription: "Ramonage du conduit annuel, certificat fourni.",
     longDescription:
-      "Ramonage mécanique du conduit de fumée, contrôle du chapeau, vérification des distances de sécurité. Certificat de ramonage remis sur place (à conserver pour ton assurance habitation). Service réservé aux poêles à pellets.",
+      "Ramonage mécanique du conduit de fumée, contrôle du chapeau, vérification des distances de sécurité. Certificat de ramonage remis sur place (à conserver pour votre assurance habitation). Service réservé aux poêles à pellets.",
     durationLabel: "Environ 60 minutes",
     priceLabel: "Sur devis",
     location: "domicile",
@@ -148,7 +148,7 @@ export default function PrendreRendezVousPage() {
             Voir nos poêles, <span className="mp-italic">faire chiffrer</span>, ou nous appeler en SAV
           </>
         }
-        description="Notre showroom à Fernelmont accueille plusieurs modèles d'exposition (sélection tournante, on confirme avant ta visite). Devis à domicile, visite showroom, entretien annuel, dépannage, ramonage : 5 services pour poêles à pellets en Wallonie."
+        description="Notre showroom à Fernelmont accueille plusieurs modèles d'exposition (sélection tournante, on confirme avant votre visite). Devis à domicile, visite showroom, entretien annuel, dépannage, ramonage : 5 services pour poêles à pellets en Wallonie."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Prendre rendez-vous" },
@@ -165,16 +165,16 @@ export default function PrendreRendezVousPage() {
             <p>
               Notre showroom est situé Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre
               et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On
-              y expose plusieurs modèles parmi les 4 marques que nous distribuons (Edilkamin, EK63,
-              Dielle, Ferlux).
+              y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63,
+              Girolami).
             </p>
             <p>
               La sélection en exposition tourne régulièrement selon les nouveautés de saison et les
               modèles que nous testons en condition réelle. Pour cette raison, on ne peut pas
-              garantir à l'avance qu'un modèle précis sera physiquement présent au moment de ta
-              visite. Si tu vises un modèle particulier, prends rendez-vous : on te confirme la
+              garantir à l'avance qu'un modèle précis sera physiquement présent au moment de votre
+              visite. Si vous visez un modèle particulier, prenez rendez-vous : on vous confirme la
               veille les références effectivement en exposition, et au besoin on en sort un du
-              stock atelier pour ta visite.
+              stock atelier pour votre visite.
             </p>
             <p>
               <strong className="text-mp-green-deep">Pour être certain d'être reçu</strong> et
@@ -207,9 +207,9 @@ export default function PrendreRendezVousPage() {
               Cinq raisons de nous voir
             </h2>
             <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed">
-              Choisis le service qui correspond à ton besoin. Le créneau se réserve sur notre
-              système de prise de rendez-vous en ligne. Tu reçois une confirmation par email,
-              avec une option d'ajout direct à ton agenda Google ou Apple.
+              Choisissez le service qui correspond à votre besoin. Le créneau se réserve sur notre
+              système de prise de rendez-vous en ligne. Vous recevez une confirmation par email,
+              avec une option d'ajout direct à votre agenda Google ou Apple.
             </p>
           </div>
 
@@ -220,7 +220,7 @@ export default function PrendreRendezVousPage() {
             <strong className="text-mp-green-deep">
               Système de réservation en cours d&apos;activation.
             </strong>{" "}
-            En attendant la mise en service, contacte-nous directement au{" "}
+            En attendant la mise en service, contactez-nous directement au{" "}
             <a href="tel:+32472043222" className="text-mp-orange-flame underline hover:no-underline font-semibold">
               0472 04 32 22
             </a>{" "}
@@ -306,11 +306,11 @@ export default function PrendreRendezVousPage() {
       <section className="bg-mp-cream py-12 md:py-16">
         <div className="container mx-auto max-w-3xl px-4 md:px-6 text-center">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
-            Plus simple : appelle-nous
+            Plus simple : appelez-nous
           </h2>
           <p className="text-base md:text-lg text-mp-ink-soft mb-8 leading-relaxed max-w-2xl mx-auto">
-            Si tu préfères le téléphone (souvent plus rapide), on cale un créneau en 30 secondes.
-            Ou par email si tu veux écrire à tête reposée.
+            Si vous préférez le téléphone (souvent plus rapide), on cale un créneau en 30 secondes.
+            Ou par email si vous voulez écrire à tête reposée.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
@@ -333,7 +333,7 @@ export default function PrendreRendezVousPage() {
 
       <CTAFinal
         title="Pas envie de venir au showroom ?"
-        description="On peut aussi se voir en visio (15 minutes) ou directement chez toi pour un diagnostic. Au choix selon ce qui t'arrange."
+        description="On peut aussi se voir en visio (15 minutes) ou directement chez vous pour un diagnostic. Au choix selon ce qui vous arrange."
         primaryCta={{ label: "Demander un devis", href: "/demande-de-devis" }}
       />
     </>

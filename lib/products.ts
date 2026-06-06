@@ -275,7 +275,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
               cv.mainImage && typeof cv.mainImage === "object" && cv.mainImage.url
                 ? {
                     url: toRelativeUrl(cv.mainImage.url),
-                    alt: cv.mainImage.alt ?? `${p.name} — ${cv.colorName}`,
+                    alt: cv.mainImage.alt ?? `${p.name}, ${cv.colorName}`,
                     focalX: typeof cv.mainImage.focalX === "number" ? cv.mainImage.focalX : undefined,
                     focalY: typeof cv.mainImage.focalY === "number" ? cv.mainImage.focalY : undefined,
                   }
@@ -287,7 +287,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
                     if (!g.image || typeof g.image !== "object" || !g.image.url) return null;
                     return {
                       url: toRelativeUrl(g.image.url),
-                      alt: g.image.alt ?? `${p.name} — ${cv.colorName}`,
+                      alt: g.image.alt ?? `${p.name}, ${cv.colorName}`,
                       ...(typeof g.image.focalX === "number" ? { focalX: g.image.focalX } : {}),
                       ...(typeof g.image.focalY === "number" ? { focalY: g.image.focalY } : {}),
                     };

@@ -13,9 +13,13 @@ commercial creux, jamais donneur de leçons.
 
 ## Ton
 
-- **Tutoiement.** Le contenu du blog s'adresse au lecteur en « tu » (« choisis
-  Edilkamin si tu veux », « ta maison »). C'est l'usage en place dans tous
-  les articles ; le respecter pour la cohérence.
+- **Vouvoiement.** On s'adresse au lecteur en « vous » (« choisissez Edilkamin
+  si vous voulez », « votre maison »). Décision de juin 2026 : tout le site
+  passe en « vous », c'est plus pro et plus respectueux pour un achat réfléchi
+  à 3 000 - 6 500 €, et c'est le standard commercial en Belgique. Cette règle
+  REMPLACE l'ancien tutoiement et s'applique partout (blog, FAQ, fiches,
+  pages). Ne plus jamais écrire tu, ton, ta, tes, toi, t', te adressés au
+  client.
 - **Première personne du pluriel** pour la marque : « chez Mister Pellets, on
   installe… », « on a posé… », « les techniciens Mister Pellets… ».
 - Français de Belgique. Références locales fréquentes : Fernelmont, Namur,
@@ -88,3 +92,38 @@ Ne PAS confondre avec les listicles éditoriaux assumés (« 7 causes »,
 - La page blog affiche que les articles sont rédigés par les techniciens,
   sans IA. Tant que cette mention est en ligne, chaque article généré reste
   un brouillon : relecture humaine obligatoire avant fusion de la PR.
+- Exception sanctionnée à la règle Awlest : la FAQ « différence entre Mister
+  Pellets et Awlest » répond à une vraie question client (le nom apparaît sur
+  les devis et factures). C'est la seule mention d'Awlest tolérée hors pages
+  légales. Ne pas en créer d'autres.
+
+## Cohérence des faits (révision juin 2026)
+
+Garde-fous factuels à tenir sur tout le contenu visible. Une contradiction ici
+casse la confiance et le SEO.
+
+- **3 marques mises en avant** : Edilkamin, EK63, Girolami. Ne plus écrire
+  « 4 marques », ne plus présenter Dielle ni Ferlux comme marques distribuées
+  par défaut. Leurs pages `/nos-marques/{dielle,ferlux}` existent toujours
+  (tier 2), mais elles sortent du discours et des recommandations par défaut.
+- **Paiement = Mollie** (migration V1.6), plus Stripe. Corriger toute mention
+  « Stripe » dans le contenu rendu, y compris CGV et politique de
+  confidentialité. Moyens acceptés : Bancontact, Visa/Mastercard via Mollie.
+- **Coordonnées figées** : Awlest SRL, TVA BE 0656.514.212, Rue des Fagotis
+  3A, 5380 Fernelmont, 0472 04 32 22, info@awlest.com. Showroom lun-ven
+  9h-18h, sam 9h-13h.
+- **SEO/GEO, ne pas casser** : mots-clés cibles, metaTitle / metaDescription
+  (sauf correction d'un fait : Stripe, marque), chiffres (prix, primes,
+  puissances, %, années), slugs et canonical restent intacts. On humanise le
+  style, pas les données.
+
+## Fiches produit Girolami (Payload)
+
+- On enrichit **uniquement la description générale** (le texte) et les atouts.
+- On ne touche **jamais** aux données : prix, specs, dimensions, variantes,
+  couleurs, classe énergie, méta. Ce sont d'autres champs.
+- Toutes les options réelles du catalogue (puissances, couleurs, canalisable,
+  étanche, hydro, hybride, maïolique, coaxiale, panorama) sont nommées, sans
+  rien inventer. Pas de liste de specs chiffrées dans la prose.
+- Fiche de référence `girolami-split-9` (validée par l'équipe) : on ne
+  réécrit que sa description, rien d'autre.

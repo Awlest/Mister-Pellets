@@ -122,7 +122,7 @@ export default async function BrandPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Pourquoi on aime travailler avec X (tier 1) — sinon Histoire (tier 2) */}
+      {/* Pourquoi on aime travailler avec X (tier 1), sinon Histoire (tier 2) */}
       {brand.whyWeLove ? (
         <section className="bg-mp-cream py-16 md:py-20">
           <div className="container mx-auto max-w-3xl px-4 md:px-6">
@@ -151,7 +151,7 @@ export default async function BrandPage({ params }: Props) {
         </section>
       ) : null}
 
-      {/* X en quelques repères — timeline */}
+      {/* X en quelques repères (timeline) */}
       {brand.milestones && brand.milestones.length > 0 && (
         <section className="bg-mp-beige py-16 md:py-24">
           <div className="container mx-auto max-w-3xl px-4 md:px-6">
@@ -176,7 +176,7 @@ export default async function BrandPage({ params }: Props) {
         </section>
       )}
 
-      {/* Ce qui distingue X (tier 1) — sinon Spécialités techniques (tier 2) */}
+      {/* Ce qui distingue X (tier 1), sinon Spécialités techniques (tier 2) */}
       {brand.distinctions && brand.distinctions.length > 0 ? (
         <section className="bg-mp-cream py-16 md:py-24">
           <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
@@ -357,7 +357,7 @@ export default async function BrandPage({ params }: Props) {
 
       <CTAFinal
         title={`Devis sur un modèle ${brand.name} ?`}
-        description="Donne-nous quelques infos sur ta maison, on chiffre la pose en 48h avec primes incluses."
+        description="Donnez-nous quelques infos sur votre maison, on chiffre la pose en 48h avec primes incluses."
       />
     </>
   );

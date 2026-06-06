@@ -85,7 +85,7 @@ export const ARTICLES: ArticleData[] = [
     metaDescription:
       "Trois marques italiennes, trois usages. Edilkamin pour la durée, EK63 pour le connecté accessible, Girolami pour l'auto-nettoyage. Le comparatif Mister Pellets.",
     excerpt:
-      "Les trois marques qu'on met en avant sont toutes italiennes, mais elles ne visent pas le même besoin. Voici comment trancher selon ta maison et ton budget.",
+      "Les trois marques qu'on met en avant sont toutes italiennes, mais elles ne visent pas le même besoin. Voici comment trancher selon votre maison et votre budget.",
     tldr:
       "Edilkamin, EK63 et Girolami sont nos trois marques premium, toutes italiennes. Edilkamin, c'est la valeur sûre, celle qui tient 15 à 20 ans. EK63 vise le même sérieux en version connectée et étanche, mais autour de 15 à 25 % moins cher à puissance égale. Girolami fait autre chose : il brûle le pellet comme le bois, et son brasier se nettoie seul.",
     category: "marques",
@@ -102,14 +102,14 @@ export const ARTICLES: ArticleData[] = [
         paragraphs: [
           "On distribue cinq marques, mais on en met trois en avant : Edilkamin, EK63 et Girolami. Le point commun, c'est l'Italie. Toutes les trois conçoivent et fabriquent leurs poêles dans des ateliers italiens, avec le savoir-faire biomasse qui va avec.",
           "Le reste change. Edilkamin, c'est la référence historique, fondée à Milan en 1963. EK63 est sa marque sœur, lancée pour proposer du connecté moderne à un prix plus doux. Girolami est une marque familiale fondée près de Rome en 1970, avec un brevet maison d'alimentation par le bas qui change le quotidien d'entretien.",
-          "Aucune n'est meilleure dans l'absolu. La bonne, c'est celle qui colle à ta maison et à ton budget.",
+          "Aucune n'est meilleure dans l'absolu. La bonne, c'est celle qui colle à votre maison et à votre budget.",
         ],
       },
       {
         heading: "Edilkamin : la valeur sûre qui dure 20 ans",
         paragraphs: [
           "Edilkamin a 60 ans, six sites de production et une fonderie interne. Tout est fabriqué en Italie, principalement à Lainate près de Milan. C'est la marque qu'on recommande quand le critère numéro un, c'est la longévité.",
-          "Sa technologie Leonardo ajuste en permanence l'air et le débit de pellets grâce à des sondes. La combustion reste stable même quand tu changes de marque de sacs ou quand l'humidité varie. Sur le terrain, les Edilkamin qu'on a posés tiennent couramment 15 à 20 ans.",
+          "Sa technologie Leonardo ajuste en permanence l'air et le débit de pellets grâce à des sondes. La combustion reste stable même quand vous changez de marque de sacs ou quand l'humidité varie. Sur le terrain, les Edilkamin qu'on a posés tiennent couramment 15 à 20 ans.",
           "Le revers, c'est le prix catalogue : Edilkamin est dans le haut de la fourchette. Mais ramené à la durée de vie réelle, le coût annuel reste bas, et le SAV pièces reste disponible longtemps après l'arrêt d'un modèle.",
         ],
       },
@@ -117,16 +117,16 @@ export const ARTICLES: ArticleData[] = [
         heading: "EK63 : le connecté accessible",
         paragraphs: [
           "EK63 est la marque sœur d'Edilkamin. Elle reprend la plateforme industrielle et le SAV du groupe, mais sous une marque pensée pour un prix d'attaque plus doux. À puissance équivalente, on est typiquement 15 à 25 % en dessous d'un Edilkamin.",
-          "Deux atouts concrets. D'abord le Wi-Fi Smart, intégré de série sur la majorité des modèles, sans abonnement : tu programmes et tu allumes ton poêle depuis ton smartphone. Ensuite l'étanchéité : la plupart des EK63 prennent l'air comburant à l'extérieur, ce qui les rend compatibles avec les maisons à VMC double flux, BBC et passives.",
-          "C'est le bon choix quand tu veux un poêle moderne et connecté sans viser le ticket premium.",
+          "Deux atouts concrets. D'abord le Wi-Fi Smart, intégré de série sur la majorité des modèles, sans abonnement : vous programmez et vous allumez votre poêle depuis votre smartphone. Ensuite l'étanchéité : la plupart des EK63 prennent l'air comburant à l'extérieur, ce qui les rend compatibles avec les maisons à VMC double flux, BBC et passives.",
+          "C'est le bon choix quand vous voulez un poêle moderne et connecté sans viser le ticket premium.",
         ],
       },
       {
         heading: "Girolami : le polycombustible qui se nettoie tout seul",
         paragraphs: [
           "Girolami est une marque familiale italienne, fabriquée à Sant'Oreste près de Rome depuis 1970. Sa signature, c'est le brevet Source Feeding : le pellet est poussé par le bas du brasier au lieu de tomber dessus, et les cendres sont chassées dans un bac sous le foyer.",
-          "Concrètement, le brasier reste propre seul. Tu ne grattes plus tous les jours, tu vides le cendrier une fois par semaine. Pour les utilisateurs qui en ont assez du nettoyage quotidien, ça change vraiment le quotidien.",
-          "L'autre force de Girolami, c'est l'hybride bois-pellet sur la gamme Soft. Une sonde reconnaît le combustible chargé et bascule seule entre pellet et bûche. Tu allumes au pellet le matin, tu finis la soirée à la bûche, sans toucher au menu.",
+          "Concrètement, le brasier reste propre seul. Vous ne grattez plus tous les jours, vous videz le cendrier une fois par semaine. Pour les utilisateurs qui en ont assez du nettoyage quotidien, ça change vraiment le quotidien.",
+          "L'autre force de Girolami, c'est l'hybride bois-pellet sur la gamme Soft. Une sonde reconnaît le combustible chargé et bascule seule entre pellet et bûche. Vous allumez au pellet le matin, vous finissez la soirée à la bûche, sans toucher au menu.",
         ],
       },
       {
@@ -149,20 +149,20 @@ export const ARTICLES: ArticleData[] = [
         },
       },
       {
-        heading: "Comment choisir selon ton profil",
+        heading: "Comment choisir selon votre profil",
         paragraphs: [
-          "En pratique, tout se joue sur ton besoin principal.",
+          "En pratique, tout se joue sur votre besoin principal.",
         ],
         list: {
           items: [
-            "Tu veux une marque qui a fait ses preuves et qui dure : Edilkamin, 60 ans d'historique et une durée de vie observée de 15 à 20 ans.",
-            "Tu veux un poêle connecté sans payer le surcoût premium : EK63, Wi-Fi de série, étanche, 15 à 25 % moins cher qu'un Edilkamin équivalent.",
-            "Tu veux pellet et bois dans la même machine, sans nettoyage quotidien : Girolami, brevet auto-nettoyant et bascule automatique des combustibles.",
+            "Vous voulez une marque qui a fait ses preuves et qui dure : Edilkamin, 60 ans d'historique et une durée de vie observée de 15 à 20 ans.",
+            "Vous voulez un poêle connecté sans payer le surcoût premium : EK63, Wi-Fi de série, étanche, 15 à 25 % moins cher qu'un Edilkamin équivalent.",
+            "Vous voulez pellet et bois dans la même machine, sans nettoyage quotidien : Girolami, brevet auto-nettoyant et bascule automatique des combustibles.",
           ],
         },
         callout: {
           variant: "info",
-          text: "Le plus simple reste le diagnostic à domicile. On regarde ta maison, ta PEB, ton conduit et ton usage, et on te dit franchement quelle marque et quelle puissance sont les bonnes. C'est gratuit et sans engagement.",
+          text: "Le plus simple reste le diagnostic à domicile. On regarde votre maison, votre PEB, votre conduit et votre usage, et on vous dit franchement quelle marque et quelle puissance sont les bonnes. C'est gratuit et sans engagement.",
         },
       },
     ],
@@ -190,7 +190,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Quelle marque pour remplacer une chaudière mazout ?",
         answer:
-          "Vise un modèle hydro, qui se raccorde au circuit de chauffage central. Les trois marques en proposent : Edilkamin (Cherie H, Blade H), EK63 et Girolami (gamme Soft hydro, chaudière Biotec).",
+          "Visez un modèle hydro, qui se raccorde au circuit de chauffage central. Les trois marques en proposent : Edilkamin (Cherie H, Blade H), EK63 et Girolami (gamme Soft hydro, chaudière Biotec).",
       },
     ],
     related: {
@@ -209,9 +209,9 @@ export const ARTICLES: ArticleData[] = [
     metaDescription:
       "Leonardo, le système d'autorégulation d'Edilkamin : sondes lambda, correction continue de l'air et des pellets. Ce que ça change vraiment au quotidien.",
     excerpt:
-      "Leonardo, c'est le système qui règle la combustion à ta place. On explique comment il marche et ce qu'il change concrètement chez toi.",
+      "Leonardo, c'est le système qui règle la combustion à votre place. On explique comment il marche et ce qu'il change concrètement chez vous.",
     tldr:
-      "Leonardo est le système d'autorégulation de combustion d'Edilkamin. Des sondes lambda et des capteurs de pression mesurent en continu la combustion, et le poêle corrige seul le débit de pellets et d'air. Résultat : la flamme reste optimale même si tu changes de marque de pellets, même quand l'humidité ou la température varient. Tu n'as rien à régler dans le menu. Leonardo est intégré aux modèles Edilkamin qui en sont équipés, ce n'est pas une option payante.",
+      "Leonardo est le système d'autorégulation de combustion d'Edilkamin. Des sondes lambda et des capteurs de pression mesurent en continu la combustion, et le poêle corrige seul le débit de pellets et d'air. Résultat : la flamme reste optimale même si vous changez de marque de pellets, même quand l'humidité ou la température varient. Vous n'avez rien à régler dans le menu. Leonardo est intégré aux modèles Edilkamin qui en sont équipés, ce n'est pas une option payante.",
     category: "marques",
     tags: ["Edilkamin", "Leonardo", "combustion", "autorégulation"],
     readingTimeMinutes: 6,
@@ -224,32 +224,32 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Leonardo, la combustion qui se règle toute seule",
         paragraphs: [
-          "Leonardo est le système d'autorégulation d'Edilkamin. Plutôt que de te demander d'ajuster des paramètres dans un menu, le poêle ajuste lui-même la combustion, en continu, pendant qu'il tourne.",
-          "C'est une des raisons pour lesquelles on recommande Edilkamin quand un client cherche un poêle qu'on installe et qu'on oublie. Tu allumes, et le poêle se débrouille pour garder une combustion propre.",
+          "Leonardo est le système d'autorégulation d'Edilkamin. Plutôt que de vous demander d'ajuster des paramètres dans un menu, le poêle ajuste lui-même la combustion, en continu, pendant qu'il tourne.",
+          "C'est une des raisons pour lesquelles on recommande Edilkamin quand un client cherche un poêle qu'on installe et qu'on oublie. Vous allumez, et le poêle se débrouille pour garder une combustion propre.",
         ],
       },
       {
         heading: "Des sondes qui mesurent, un poêle qui corrige",
         paragraphs: [
           "Leonardo s'appuie sur des sondes lambda, qui mesurent l'oxygène présent dans les fumées, et sur des capteurs de pression. Le poêle lit en permanence comment la combustion se déroule.",
-          "À partir de ces mesures, il corrige deux choses : le débit de pellets envoyé par la vis sans fin, et le débit d'air du ventilateur. La flamme reste dans sa zone idéale, sans intervention de ta part.",
+          "À partir de ces mesures, il corrige deux choses : le débit de pellets envoyé par la vis sans fin, et le débit d'air du ventilateur. La flamme reste dans sa zone idéale, sans intervention de votre part.",
         ],
       },
       {
         heading: "Ce que ça change concrètement",
         paragraphs: [
-          "Concrètement, Leonardo travaille pour toi dans plusieurs situations courantes.",
+          "Concrètement, Leonardo travaille pour vous dans plusieurs situations courantes.",
         ],
         list: {
           items: [
-            "Tu changes de marque de pellets : longueur, taux de cendres et densité varient d'un sac à l'autre, le poêle se recale seul.",
+            "Vous changez de marque de pellets : longueur, taux de cendres et densité varient d'un sac à l'autre, le poêle se recale seul.",
             "L'humidité de la pièce change au fil de la saison : la combustion reste stable.",
             "Il fait très froid dehors et le tirage du conduit se modifie : Leonardo compense.",
           ],
         },
         callout: {
           variant: "info",
-          text: "Tu n'as rien à toucher dans le menu. C'est tout l'intérêt : la combustion reste optimale sans que tu deviennes technicien de ton propre poêle.",
+          text: "Vous n'avez rien à toucher dans le menu. C'est tout l'intérêt : la combustion reste optimale sans que vous deveniez technicien de votre propre poêle.",
         },
       },
       {
@@ -262,7 +262,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Est-ce que ça vaut le surcoût Edilkamin ?",
         paragraphs: [
-          "Leonardo n'est pas une option à cocher : il est intégré aux modèles Edilkamin qui en sont équipés. Le tarif Edilkamin est premium, et l'autorégulation fait partie de ce que tu paies.",
+          "Leonardo n'est pas une option à cocher : il est intégré aux modèles Edilkamin qui en sont équipés. Le tarif Edilkamin est premium, et l'autorégulation fait partie de ce que vous payez.",
           "Concrètement, une combustion bien réglée en permanence, c'est moins d'imbrûlés, moins d'encrassement de l'échangeur, et un poêle qui vieillit mieux. C'est un des arguments durée de vie de la marque.",
         ],
       },
@@ -305,9 +305,9 @@ export const ARTICLES: ArticleData[] = [
     metaDescription:
       "Le Wi-Fi Smart est intégré de série sur la majorité des EK63, sans abonnement. Allumage à distance, programmation, suivi conso. Ce que ça change vraiment.",
     excerpt:
-      "Sur EK63, le Wi-Fi n'est ni une option ni un abonnement. Voici ce que ça change concrètement quand tu pilotes ton poêle depuis ton smartphone.",
+      "Sur EK63, le Wi-Fi n'est ni une option ni un abonnement. Voici ce que ça change concrètement quand vous pilotez votre poêle depuis votre smartphone.",
     tldr:
-      "La majorité des poêles EK63 intègrent le Wi-Fi Smart d'usine, sans abonnement. Tu pilotes l'allumage, la programmation horaire, la puissance et le suivi de consommation depuis ton smartphone. Le mot important, c'est de série : pas de module à acheter, pas de gamme haute à viser. Combiné à l'étanchéité de la plupart des modèles EK63, c'est le profil idéal d'une maison wallonne récente.",
+      "La majorité des poêles EK63 intègrent le Wi-Fi Smart d'usine, sans abonnement. Vous pilotez l'allumage, la programmation horaire, la puissance et le suivi de consommation depuis votre smartphone. Le mot important, c'est de série : pas de module à acheter, pas de gamme haute à viser. Combiné à l'étanchéité de la plupart des modèles EK63, c'est le profil idéal d'une maison wallonne récente.",
     category: "marques",
     tags: ["EK63", "Wi-Fi", "connecté", "smartphone"],
     readingTimeMinutes: 6,
@@ -325,7 +325,7 @@ export const ARTICLES: ArticleData[] = [
         ],
       },
       {
-        heading: "Ce que tu pilotes depuis ton smartphone",
+        heading: "Ce que vous pilotez depuis votre smartphone",
         paragraphs: [
           "L'application couvre l'essentiel des usages quotidiens.",
         ],
@@ -342,7 +342,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Pourquoi de série change le quotidien",
         paragraphs: [
-          "Le dimanche soir, tu programmes ta semaine en deux minutes. Tu lances le poêle depuis le bureau pour rentrer dans un séjour déjà chaud. Et quand tu pars en week-end, un coup d'oeil sur l'app suffit pour vérifier que tout est bien coupé.",
+          "Le dimanche soir, vous programmez votre semaine en deux minutes. Vous lancez le poêle depuis le bureau pour rentrer dans un séjour déjà chaud. Et quand vous partez en week-end, un coup d'oeil sur l'app suffit pour vérifier que tout est bien coupé.",
           "Ces usages ne sont utiles que s'ils sont disponibles tout le temps, sans surcoût. C'est exactement ce que veut dire de série.",
         ],
         callout: {
@@ -353,8 +353,8 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Wi-Fi et étanchéité : le vrai combo EK63",
         paragraphs: [
-          "Le Wi-Fi n'est pas le seul atout d'EK63. La plupart des modèles sont étanches : ils prennent l'air comburant directement à l'extérieur et n'aspirent pas l'air chaud de ta pièce.",
-          "Connecté plus étanche, c'est le profil idéal des maisons récentes wallonnes, à VMC double flux, BBC ou passives. Tu pilotes facilement, et le poêle respecte l'équilibre d'air de la maison.",
+          "Le Wi-Fi n'est pas le seul atout d'EK63. La plupart des modèles sont étanches : ils prennent l'air comburant directement à l'extérieur et n'aspirent pas l'air chaud de votre pièce.",
+          "Connecté plus étanche, c'est le profil idéal des maisons récentes wallonnes, à VMC double flux, BBC ou passives. Vous pilotez facilement, et le poêle respecte l'équilibre d'air de la maison.",
         ],
       },
       {
@@ -378,7 +378,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Le Wi-Fi remplace-t-il un thermostat ?",
         answer:
-          "L'application gère la programmation horaire et la puissance. Selon le modèle, un thermostat d'ambiance peut aussi être ajouté. On en parle lors du devis selon ta configuration.",
+          "L'application gère la programmation horaire et la puissance. Selon le modèle, un thermostat d'ambiance peut aussi être ajouté. On en parle lors du devis selon votre configuration.",
       },
       {
         question: "Tous les EK63 sont-ils connectés ?",
@@ -404,7 +404,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "Le brevet Source Feeding de Girolami change la corvée la plus détestée des poêles à pellets : le nettoyage quotidien du brasier.",
     tldr:
-      "Source Feeding est le brevet d'alimentation par le bas de Girolami. Au lieu de tomber sur le brasier, le pellet est poussé sous le brasier, et les cendres sont chassées vers un bac de collecte sous le foyer. Concrètement, le brasier reste propre tout seul : tu ne grattes plus tous les jours, tu vides le cendrier environ une fois par semaine. L'entretien annuel, lui, reste nécessaire.",
+      "Source Feeding est le brevet d'alimentation par le bas de Girolami. Au lieu de tomber sur le brasier, le pellet est poussé sous le brasier, et les cendres sont chassées vers un bac de collecte sous le foyer. Concrètement, le brasier reste propre tout seul : vous ne grattez plus tous les jours, vous videz le cendrier environ une fois par semaine. L'entretien annuel, lui, reste nécessaire.",
     category: "marques",
     tags: ["Girolami", "Source Feeding", "entretien", "brasier"],
     readingTimeMinutes: 6,
@@ -431,7 +431,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Ce que ça change : du quotidien à l'hebdomadaire",
         paragraphs: [
-          "Le changement est net au quotidien : tu ne grattes plus le brasier chaque jour. Reste à vider le bac à cendres, environ une fois par semaine selon ton utilisation.",
+          "Le changement est net au quotidien : vous ne grattez plus le brasier chaque jour. Reste à vider le bac à cendres, environ une fois par semaine selon votre utilisation.",
         ],
         callout: {
           variant: "success",
@@ -442,7 +442,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Source Feeding et tolérance aux pellets",
         paragraphs: [
           "Comme le brasier ne s'encrasse pas de la même manière, le système encaisse mieux les pellets de qualité variable. La combustion reste régulière même si un lot est un peu différent.",
-          "On conseille quand même des pellets certifiés ENplus A1 : un bon combustible reste le meilleur allié de ton poêle, quel que soit le système d'alimentation.",
+          "On conseille quand même des pellets certifiés ENplus A1 : un bon combustible reste le meilleur allié de votre poêle, quel que soit le système d'alimentation.",
         ],
       },
       {
@@ -457,7 +457,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Le brasier ne se nettoie vraiment jamais à la main ?",
         answer:
-          "Le brasier reste propre seul au quotidien grâce au Source Feeding. Tu vides le bac à cendres environ une fois par semaine, et l'entretien annuel complet par un professionnel reste nécessaire.",
+          "Le brasier reste propre seul au quotidien grâce au Source Feeding. Vous videz le bac à cendres environ une fois par semaine, et l'entretien annuel complet par un professionnel reste nécessaire.",
       },
       {
         question: "Source Feeding consomme-t-il plus de pellets ?",
@@ -486,14 +486,14 @@ export const ARTICLES: ArticleData[] = [
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "girolami-hybride-bois-pellet-fuel-convert",
-    title: "Pellet ou bûche ? Avec un Girolami hybride, tu prends les deux",
+    title: "Pellet ou bûche ? Avec un Girolami hybride, vous prenez les deux",
     metaTitle: "Girolami hybride bois-pellet : le Fuel Convert System",
     metaDescription:
       "Le Girolami hybride bascule seul entre pellet et bûche grâce au Fuel Convert System. Plus de choix à faire entre les deux combustibles. Explications.",
     excerpt:
       "Choisir entre le pellet et la bûche, c'est un faux dilemme avec un Girolami hybride. Le poêle reconnaît le combustible et s'adapte tout seul.",
     tldr:
-      "Les Girolami hybrides (gamme Soft et Vert) fonctionnent au pellet comme à la bûche. Le Fuel Convert System utilise une sonde qui reconnaît le combustible chargé et bascule automatiquement entre les modes, sans aucun réglage manuel. Tu allumes au pellet le matin pour la programmation, tu finis la soirée à la bûche pour l'ambiance. Le système accepte aussi des combustibles broyés naturels comme les coques ou les noyaux.",
+      "Les Girolami hybrides (gamme Soft et Vert) fonctionnent au pellet comme à la bûche. Le Fuel Convert System utilise une sonde qui reconnaît le combustible chargé et bascule automatiquement entre les modes, sans aucun réglage manuel. Vous allumez au pellet le matin pour la programmation, vous finissez la soirée à la bûche pour l'ambiance. Le système accepte aussi des combustibles broyés naturels comme les coques ou les noyaux.",
     category: "marques",
     tags: ["Girolami", "hybride", "bois", "pellet", "Fuel Convert System"],
     readingTimeMinutes: 6,
@@ -506,33 +506,33 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le faux dilemme du pellet contre la bûche",
         paragraphs: [
-          "Quand on choisit un poêle, on tranche en général entre deux mondes. Le pellet, c'est l'autonomie et la programmation : tu remplis le réservoir, tu programmes, le poêle gère. La bûche, c'est l'ambiance, le geste, et un combustible parfois moins cher si tu as une source de bois.",
-          "Le Girolami hybride supprime ce choix. Tu n'as pas à décider une fois pour toutes : tu utilises l'un ou l'autre selon le moment, dans la même machine.",
+          "Quand on choisit un poêle, on tranche en général entre deux mondes. Le pellet, c'est l'autonomie et la programmation : vous remplissez le réservoir, vous programmez, le poêle gère. La bûche, c'est l'ambiance, le geste, et un combustible parfois moins cher si vous avez une source de bois.",
+          "Le Girolami hybride supprime ce choix. Vous n'avez pas à décider une fois pour toutes : vous utilisez l'un ou l'autre selon le moment, dans la même machine.",
         ],
       },
       {
         heading: "Le Fuel Convert System reconnaît le combustible",
         paragraphs: [
-          "Le coeur de l'hybride Girolami, c'est le Fuel Convert System. Une sonde détecte ce que tu as chargé dans le poêle : du pellet, des bûches, ou des combustibles broyés.",
+          "Le coeur de l'hybride Girolami, c'est le Fuel Convert System. Une sonde détecte ce que vous avez chargé dans le poêle : du pellet, des bûches, ou des combustibles broyés.",
           "À partir de cette lecture, le poêle bascule seul vers le bon mode de combustion. Aucun menu à ouvrir, rien à régler : il s'occupe du reste.",
         ],
       },
       {
         heading: "Une journée type avec un Girolami hybride",
         paragraphs: [
-          "Le matin, le poêle s'allume tout seul en mode pellet, à l'heure que tu as programmée. La maison est déjà chaude quand tu te lèves.",
-          "Le soir, tu as envie d'une vraie flambée. Tu charges des bûches, le poêle passe en mode bois, et tu profites de la flamme. Le lendemain, retour au pellet pour la programmation. Sans rien régler entre les deux.",
+          "Le matin, le poêle s'allume tout seul en mode pellet, à l'heure que vous avez programmée. La maison est déjà chaude quand vous vous levez.",
+          "Le soir, vous avez envie d'une vraie flambée. Vous chargez des bûches, le poêle passe en mode bois, et vous profitez de la flamme. Le lendemain, retour au pellet pour la programmation. Sans rien régler entre les deux.",
         ],
         callout: {
           variant: "info",
-          text: "Un hybride peut aussi fonctionner uniquement au pellet si tu le souhaites. Le bois reste une possibilité, pas une obligation.",
+          text: "Un hybride peut aussi fonctionner uniquement au pellet si vous le souhaitez. Le bois reste une possibilité, pas une obligation.",
         },
       },
       {
         heading: "Au-delà du bois : les combustibles broyés",
         paragraphs: [
           "Le Fuel Convert System ne se limite pas au pellet et à la bûche. Il accepte aussi des combustibles broyés naturels, comme des coques de fruits, des noyaux ou du marc.",
-          "C'est un atout si tu as accès à ce type de ressource. Le poêle adapte sa combustion à ce que tu lui donnes, dans la limite des combustibles prévus par le constructeur.",
+          "C'est un atout si vous avez accès à ce type de ressource. Le poêle adapte sa combustion à ce que vous lui donnez, dans la limite des combustibles prévus par le constructeur.",
         ],
       },
       {
@@ -552,17 +552,17 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Peut-on mettre du pellet et du bois en même temps ?",
         answer:
-          "On utilise l'un puis l'autre, pas les deux simultanément. Le poêle fonctionne avec le combustible que tu as chargé et bascule au chargement suivant.",
+          "On utilise l'un puis l'autre, pas les deux simultanément. Le poêle fonctionne avec le combustible que vous avez chargé et bascule au chargement suivant.",
       },
       {
         question: "Un poêle hybride est-il plus cher qu'un poêle pellet simple ?",
         answer:
-          "Un hybride embarque plus de technologie qu'un poêle pellet classique, ce qui se ressent au tarif. En contrepartie, tu n'es jamais bloqué sur un seul combustible. On chiffre le modèle adapté à ton besoin lors du devis.",
+          "Un hybride embarque plus de technologie qu'un poêle pellet classique, ce qui se ressent au tarif. En contrepartie, vous n'êtes jamais bloqué sur un seul combustible. On chiffre le modèle adapté à votre besoin lors du devis.",
       },
       {
         question: "L'hybride fonctionne-t-il si je n'utilise que du pellet ?",
         answer:
-          "Oui. Tu peux très bien n'utiliser que le pellet et garder le bois comme option pour les soirées où tu en as envie.",
+          "Oui. Vous pouvez très bien n'utiliser que le pellet et garder le bois comme option pour les soirées où vous en avez envie.",
       },
     ],
     related: {
@@ -584,7 +584,7 @@ export const ARTICLES: ArticleData[] = [
     metaDescription:
       "En maison passive ou BBC, le poêle doit être étanche. Quel modèle EK63 selon la surface : Like 80, Zone 80, Tweed 90+, Spy 110+, Daily 130++, Entity 90+.",
     excerpt:
-      "En maison basse consommation, un poêle étanche n'est pas une option. Voici comment choisir le bon modèle EK63 selon ta maison.",
+      "En maison basse consommation, un poêle étanche n'est pas une option. Voici comment choisir le bon modèle EK63 selon votre maison.",
     tldr:
       "Dans une maison passive, BBC ou à VMC double flux, le poêle doit être étanche : il prélève l'air comburant directement à l'extérieur et n'aspire pas l'air chaud de la pièce. La majorité des modèles EK63 sont étanches. Sur une petite pièce, un Like 80 ou un Zone 80 suffit (environ 7,6 kW) ; pour des volumes moyens à grands, on passe au Tweed 90+, au Spy 110+ ou au Daily 130++. L'Entity 90+ ultra-fin, lui, est pensé pour les couloirs.",
     category: "marques",
@@ -607,11 +607,11 @@ export const ARTICLES: ArticleData[] = [
         heading: "Comment fonctionne un poêle étanche EK63",
         paragraphs: [
           "Un EK63 étanche prélève l'air comburant directement à l'extérieur, via une prise d'air dédiée. La combustion se fait en circuit fermé : l'air entre du dehors, les fumées repartent dehors.",
-          "Conséquence concrète : le poêle ne consomme pas l'air chaud que tu as payé pour chauffer, et il ne perturbe pas la VMC. C'est ce qui le rend compatible avec les maisons à VMC double flux, BBC et passives.",
+          "Conséquence concrète : le poêle ne consomme pas l'air chaud que vous avez payé pour chauffer, et il ne perturbe pas la VMC. C'est ce qui le rend compatible avec les maisons à VMC double flux, BBC et passives.",
         ],
       },
       {
-        heading: "Quel EK63 selon la taille de ta maison",
+        heading: "Quel EK63 selon la taille de votre maison",
         paragraphs: [
           "La gamme EK63 couvre du petit appartement à la maison à étage. Le tableau ci-dessous donne les repères de puissance modèle par modèle.",
         ],
@@ -631,14 +631,14 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le bonus : le Wi-Fi de série",
         paragraphs: [
-          "En plus de l'étanchéité, la majorité des EK63 intègrent le Wi-Fi Smart de série, sans abonnement. Tu programmes et tu pilotes le poêle depuis ton smartphone.",
+          "En plus de l'étanchéité, la majorité des EK63 intègrent le Wi-Fi Smart de série, sans abonnement. Vous programmez et vous pilotez le poêle depuis votre smartphone.",
           "Dans une maison récente, bien isolée, où le poêle tourne souvent en douceur, cette programmation fine est un vrai confort au quotidien.",
         ],
       },
       {
         heading: "Ce qu'on vérifie à la visite technique",
         paragraphs: [
-          "Avant de poser un EK63 étanche, on contrôle le tracé de la prise d'air et de l'évacuation des fumées, souvent en ventouse pour ce type de maison. On valide aussi l'emplacement et la compatibilité avec ta VMC.",
+          "Avant de poser un EK63 étanche, on contrôle le tracé de la prise d'air et de l'évacuation des fumées, souvent en ventouse pour ce type de maison. On valide aussi l'emplacement et la compatibilité avec votre VMC.",
           "C'est l'étape qui garantit une installation propre et conforme. Le devis chiffré arrive sous 48 h après cette visite.",
         ],
       },
@@ -652,12 +652,12 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Un poêle étanche peut-il être canalisable ?",
         answer:
-          "Oui. Plusieurs EK63 sont à la fois étanches et canalisables, comme le Tweed 90+, le Spy 110+, le Daily 130++ et l'Entity 90+. Tu chauffes une pièce voisine tout en respectant l'étanchéité.",
+          "Oui. Plusieurs EK63 sont à la fois étanches et canalisables, comme le Tweed 90+, le Spy 110+, le Daily 130++ et l'Entity 90+. Vous chauffez une pièce voisine tout en respectant l'étanchéité.",
       },
       {
         question: "Faut-il une sortie en toiture ou une ventouse ?",
         answer:
-          "Les deux sont possibles selon ta maison. En maison BBC ou passive, la ventouse est fréquente. On valide le tracé à la visite technique.",
+          "Les deux sont possibles selon votre maison. En maison BBC ou passive, la ventouse est fréquente. On valide le tracé à la visite technique.",
       },
       {
         question: "L'étanchéité change-t-elle l'entretien du poêle ?",
@@ -682,11 +682,11 @@ export const ARTICLES: ArticleData[] = [
     title: "Remplacer une chaudière mazout par un poêle Edilkamin hydro",
     metaTitle: "Remplacer une chaudière mazout par un Edilkamin hydro",
     metaDescription:
-      "Un poêle Edilkamin hydro se raccorde à tes radiateurs comme une chaudière. Principe, modèles, ballon tampon, eau chaude sanitaire et primes Wallonie 2026.",
+      "Un poêle Edilkamin hydro se raccorde à vos radiateurs comme une chaudière. Principe, modèles, ballon tampon, eau chaude sanitaire et primes Wallonie 2026.",
     excerpt:
-      "Un poêle hydro chauffe toute la maison via tes radiateurs existants. Voici comment il remplace une vieille chaudière mazout.",
+      "Un poêle hydro chauffe toute la maison via vos radiateurs existants. Voici comment il remplace une vieille chaudière mazout.",
     tldr:
-      "Un poêle Edilkamin hydro se raccorde au circuit de chauffage central et alimente tes radiateurs ou ton plancher chauffant, exactement comme une chaudière. Couplé à un ballon tampon, il peut aussi produire l'eau chaude sanitaire. Les modèles comme la gamme Cherie H ou Blade H sont conçus pour ça. C'est une solution adaptée pour remplacer une chaudière mazout vieillissante, et la prime Habitation Wallonie 2026 réduit la facture.",
+      "Un poêle Edilkamin hydro se raccorde au circuit de chauffage central et alimente vos radiateurs ou votre plancher chauffant, exactement comme une chaudière. Couplé à un ballon tampon, il peut aussi produire l'eau chaude sanitaire. Les modèles comme la gamme Cherie H ou Blade H sont conçus pour ça. C'est une solution adaptée pour remplacer une chaudière mazout vieillissante, et la prime Habitation Wallonie 2026 réduit la facture.",
     category: "marques",
     tags: ["Edilkamin", "hydro", "chaudière mazout", "chauffage central"],
     readingTimeMinutes: 7,
@@ -706,7 +706,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le principe du poêle hydro",
         paragraphs: [
-          "Un poêle hydro n'est pas qu'un poêle qui chauffe une pièce. Il chauffe l'eau d'un circuit, et cette eau circule dans tes radiateurs ou ton plancher chauffant. Côté résultat, c'est le même rôle qu'une chaudière.",
+          "Un poêle hydro n'est pas qu'un poêle qui chauffe une pièce. Il chauffe l'eau d'un circuit, et cette eau circule dans vos radiateurs ou votre plancher chauffant. Côté résultat, c'est le même rôle qu'une chaudière.",
           "La différence avec un poêle classique, c'est qu'une grande partie de la chaleur produite part dans le circuit d'eau plutôt que dans la pièce. Toute la maison est chauffée, pas seulement le séjour.",
         ],
       },
@@ -721,7 +721,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Ballon tampon et eau chaude sanitaire",
         paragraphs: [
           "Pour bien fonctionner, un poêle hydro est souvent couplé à un ballon tampon. Ce ballon stocke la chaleur et lisse le fonctionnement du poêle, ce qui le fait durer plus longtemps.",
-          "Avec un ballon adapté, l'installation peut aussi produire l'eau chaude sanitaire. Tu remplaces alors le chauffage et l'eau chaude de l'ancienne chaudière en une seule solution.",
+          "Avec un ballon adapté, l'installation peut aussi produire l'eau chaude sanitaire. Vous remplacez alors le chauffage et l'eau chaude de l'ancienne chaudière en une seule solution.",
         ],
         callout: {
           variant: "success",
@@ -732,7 +732,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Ce que comprend le remplacement",
         paragraphs: [
           "Un remplacement de chaudière mazout par un hydro, ce n'est pas juste poser un poêle. Il faut déposer l'ancienne chaudière, se raccorder au circuit existant, puis prévoir le ballon tampon et le conduit d'évacuation.",
-          "On chiffre tout ça lors du diagnostic à domicile. Le devis détaille chaque poste pour que tu saches exactement ce que tu paies, primes déduites.",
+          "On chiffre tout ça lors du diagnostic à domicile. Le devis détaille chaque poste pour que vous sachiez exactement ce que vous payez, primes déduites.",
         ],
       },
     ],
@@ -793,7 +793,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Le problème du canalisable classique",
         paragraphs: [
           "Un poêle canalisable diffuse l'air chaud vers plusieurs pièces via des gaines. Sur beaucoup de modèles, un seul ventilateur pousse l'air, et le débit est le même partout.",
-          "Résultat courant : la pièce où se trouve le poêle surchauffe, pendant que la chambre la plus éloignée reste trop fraîche. Tu te retrouves à ouvrir une fenêtre d'un côté et à mettre un pull de l'autre.",
+          "Résultat courant : la pièce où se trouve le poêle surchauffe, pendant que la chambre la plus éloignée reste trop fraîche. Vous vous retrouvez à ouvrir une fenêtre d'un côté et à mettre un pull de l'autre.",
         ],
       },
       {
@@ -806,12 +806,12 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Les thermostats sans fil TriKey",
         paragraphs: [
-          "Pour que le système soit vraiment intelligent, Girolami propose les thermostats sans fil TriKey en option. Tu en places un dans chaque pièce desservie.",
+          "Pour que le système soit vraiment intelligent, Girolami propose les thermostats sans fil TriKey en option. Vous en placez un dans chaque pièce desservie.",
           "Chaque thermostat mesure la température réelle de sa pièce et communique avec le poêle. Le ventilateur correspondant ajuste son débit pour atteindre la consigne de cette pièce, pas une moyenne approximative.",
         ],
         callout: {
           variant: "info",
-          text: "Concrètement, tu peux viser 21 °C dans le séjour et 19 °C dans une chambre, et le poêle gère les deux en même temps.",
+          text: "Concrètement, vous pouvez viser 21 °C dans le séjour et 19 °C dans une chambre, et le poêle gère les deux en même temps.",
         },
       },
       {
@@ -843,12 +843,12 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Peut-on couper la canalisation vers une pièce ?",
         answer:
-          "Oui. Comme les ventilateurs sont indépendants, tu peux moduler ou arrêter la diffusion vers une pièce qui n'a pas besoin d'être chauffée à un moment donné.",
+          "Oui. Comme les ventilateurs sont indépendants, vous pouvez moduler ou arrêter la diffusion vers une pièce qui n'a pas besoin d'être chauffée à un moment donné.",
       },
       {
         question: "Le canalisable Girolami est-il aussi hybride ?",
         answer:
-          "La gamme Vert combine le canalisable et l'hybride bois-pellet. Tu profites des trois ventilateurs indépendants et du Fuel Convert System sur le même appareil.",
+          "La gamme Vert combine le canalisable et l'hybride bois-pellet. Vous profitez des trois ventilateurs indépendants et du Fuel Convert System sur le même appareil.",
       },
     ],
     related: {
@@ -923,7 +923,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Le coût ramené à l'année",
         paragraphs: [
           "Edilkamin est dans le haut de la fourchette à l'achat. Mais le bon calcul, c'est le coût ramené à la durée de vie réelle.",
-          "Un poêle premium qui dure 18 ans revient, à l'année, moins cher qu'un poêle d'entrée de gamme qu'il faut remplacer après 8 ans. Sans compter le confort d'un appareil qui ne te lâche pas en plein hiver.",
+          "Un poêle premium qui dure 18 ans revient, à l'année, moins cher qu'un poêle d'entrée de gamme qu'il faut remplacer après 8 ans. Sans compter le confort d'un appareil qui ne vous lâche pas en plein hiver.",
         ],
         callout: {
           variant: "info",
@@ -1016,7 +1016,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Étanche et connecté, comme la gamme EK63",
         paragraphs: [
           "L'Entity 90+ n'est pas un modèle au rabais. Il reprend les atouts de la gamme EK63 : il est étanche, donc compatible avec les maisons à VMC double flux et BBC, et il intègre le Wi-Fi Smart de série.",
-          "Tu profites donc du format ultra-fin sans renoncer au pilotage smartphone ni à la compatibilité maison récente.",
+          "Vous profitez donc du format ultra-fin sans renoncer au pilotage smartphone ni à la compatibilité maison récente.",
         ],
       },
       {
@@ -1068,9 +1068,9 @@ export const ARTICLES: ArticleData[] = [
     metaDescription:
       "1 kW pour 10 m² PEB B, 1 kW pour 15 m² PEB A, 1 kW pour 7 m² PEB E. Méthode complète, exemples chiffrés, erreurs à éviter en Wallonie.",
     excerpt:
-      "La règle simple, 1 kW pour 10 m², ne suffit pas. Voici le calcul exact selon ta PEB, ton plafond et ta zone climatique en Wallonie.",
+      "La règle simple, 1 kW pour 10 m², ne suffit pas. Voici le calcul exact selon votre PEB, votre plafond et votre zone climatique en Wallonie.",
     tldr:
-      "Pour une maison wallonne PEB B de 100 m² avec hauteur sous plafond standard (2,50 m), un poêle de 8 à 10 kW suffit. Le calcul tient en un coefficient appliqué à la surface : 0,10 quand la PEB est bonne (A-B), 0,12 pour une isolation moyenne (C-D), jusqu'à 0,15 si elle est faible (E-G). Ajoute 10 % par mètre au-dessus de 2,50 m de plafond. Sous-dimensionner brûle le matériel ; sur-dimensionner provoque encrassement et inconfort.",
+      "Pour une maison wallonne PEB B de 100 m² avec hauteur sous plafond standard (2,50 m), un poêle de 8 à 10 kW suffit. Le calcul tient en un coefficient appliqué à la surface : 0,10 quand la PEB est bonne (A-B), 0,12 pour une isolation moyenne (C-D), jusqu'à 0,15 si elle est faible (E-G). Ajoutez 10 % par mètre au-dessus de 2,50 m de plafond. Sous-dimensionner brûle le matériel ; sur-dimensionner provoque encrassement et inconfort.",
     category: "guide-achat",
     tags: ["dimensionnement", "puissance", "PEB", "kW", "surface"],
     readingTimeMinutes: 9,
@@ -1084,7 +1084,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "La méthode rapide : 3 multiplicateurs selon la PEB",
         paragraphs: [
           "Le calcul de base part de la surface chauffée et d'un coefficient lié à l'isolation thermique de la maison (PEB en Belgique). Plus la PEB est mauvaise, plus la maison perd des calories par les murs et la toiture, et plus le poêle doit avoir de réserve de puissance.",
-          "Multiplie la surface en m² par le coefficient correspondant à ta PEB pour obtenir la puissance cible en kW. C'est volontairement simplifié : sur du résidentiel wallon classique, cette méthode donne un résultat à ±15 % de la charge thermique réelle.",
+          "Multipliez la surface en m² par le coefficient correspondant à votre PEB pour obtenir la puissance cible en kW. C'est volontairement simplifié : sur du résidentiel wallon classique, cette méthode donne un résultat à ±15 % de la charge thermique réelle.",
         ],
         table: {
           headers: ["PEB du logement", "Coefficient", "Exemple 100 m²", "Exemple 150 m²"],
@@ -1112,7 +1112,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Hauteur sous plafond : la correction qu'on oublie tout le temps",
         paragraphs: [
-          "Le calcul standard suppose 2,50 m sous plafond. Si tu as 3 m (rénovations dans des fermettes, lofts, vieux corps de logis namurois), tu dois ajouter 10 % de puissance par 25 cm supplémentaires. Un volume plus grand, c'est plus d'air à brasser et à maintenir en température.",
+          "Le calcul standard suppose 2,50 m sous plafond. Si vous avez 3 m (rénovations dans des fermettes, lofts, vieux corps de logis namurois), vous devez ajouter 10 % de puissance par 25 cm supplémentaires. Un volume plus grand, c'est plus d'air à brasser et à maintenir en température.",
           "Cas classique : une maison de 90 m² PEB C avec mezzanine ouverte sous toit à 4,50 m. Sur le papier, 11 kW suffisent. En réalité, il faut 13-14 kW pour stabiliser la température sans bruit excessif. C'est typiquement le genre de cas où on conseille un canalisable plutôt qu'un air pulsé.",
         ],
       },
@@ -1148,7 +1148,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Quelle puissance de poêle à pellets pour 100 m² ?",
         answer:
-          "Pour 100 m² en Wallonie, vise 7-8 kW si la maison est très bien isolée (PEB A), 10 kW pour une PEB B, 12 kW pour une PEB C-D, et 13-15 kW pour une PEB E-F. Ajoute 10 % par 25 cm de plafond au-dessus de 2,50 m.",
+          "Pour 100 m² en Wallonie, visez 7-8 kW si la maison est très bien isolée (PEB A), 10 kW pour une PEB B, 12 kW pour une PEB C-D, et 13-15 kW pour une PEB E-F. Ajoutez 10 % par 25 cm de plafond au-dessus de 2,50 m.",
       },
       {
         question: "Peut-on chauffer toute une maison avec un seul poêle à pellets ?",
@@ -1215,28 +1215,28 @@ export const ARTICLES: ArticleData[] = [
         },
       },
       {
-        heading: "Pourquoi un pellet bas de gamme te coûte plus cher",
+        heading: "Pourquoi un pellet bas de gamme vous coûte plus cher",
         paragraphs: [
-          "Un sac à 4,50 € contre un ENplus A1 à 6,50 €, ça paraît avantageux. En réalité, le bas de gamme tape souvent à 3,8 kWh/kg réels au lieu de 4,8 : tu brûles 26 % de pellets en plus pour la même chaleur. À 800 kg/an de consommation moyenne, l'économie disparaît.",
+          "Un sac à 4,50 € contre un ENplus A1 à 6,50 €, ça paraît avantageux. En réalité, le bas de gamme tape souvent à 3,8 kWh/kg réels au lieu de 4,8 : vous brûlez 26 % de pellets en plus pour la même chaleur. À 800 kg/an de consommation moyenne, l'économie disparaît.",
           "Pire, le taux de cendres élevé (2 %) sature le creuset 3 fois plus vite, encrasse l'échangeur de chaleur et finit par bloquer la sonde de fumée. Sur le terrain, on a vu des poêles 3 ans tomber en panne pour cause de pellets bon marché, la garantie ne couvre pas ce type de sinistre.",
         ],
         callout: {
           variant: "warning",
-          text: "Si le sac n'affiche ni logo ENplus A1 (avec ID type BE001), ni logo DINplus (avec n° de lot), ne l'achète pas. Tous les distributeurs sérieux en Belgique sont certifiés.",
+          text: "Si le sac n'affiche ni logo ENplus A1 (avec ID type BE001), ni logo DINplus (avec n° de lot), ne l'achetez pas. Tous les distributeurs sérieux en Belgique sont certifiés.",
         },
       },
       {
         heading: "Combien coûte un sac en 2026 et comment stocker",
         paragraphs: [
           "Prix indicatifs Wallonie au 29 avril 2026 : 6,20 à 7,00 € le sac de 15 kg en grande surface bricolage, 5,50 à 6,30 € en achat groupé palette (66 sacs = 990 kg). En vrac livré (pour ceux qui ont un silo), compte 360 à 410 € la tonne TTC.",
-          "Stockage : sec, ventilé, à l'abri du gel intense (< -10 °C les fragilise). Pour 800 kg/an, prévoir 4 m² de palette dans un garage ou un abri. Évite les sous-sols humides : le pellet absorbe vite l'humidité et perd en pouvoir calorifique dès 12 %.",
+          "Stockage : sec, ventilé, à l'abri du gel intense (< -10 °C les fragilise). Pour 800 kg/an, prévoir 4 m² de palette dans un garage ou un abri. Évitez les sous-sols humides : le pellet absorbe vite l'humidité et perd en pouvoir calorifique dès 12 %.",
         ],
         list: {
           ordered: true,
           items: [
-            "Achète en hiver pour de la combustion immédiate, en été pour profiter de stocks bas saison (-10 à -15 %).",
-            "Vérifie la date d'ensachage : un pellet de plus de 18 mois a souvent perdu en cohésion.",
-            "Préfère les marques avec scieries traçables en Belgique, France ou Autriche, pas les pellets d'origine inconnue.",
+            "Achetez en hiver pour de la combustion immédiate, en été pour profiter de stocks bas saison (-10 à -15 %).",
+            "Vérifiez la date d'ensachage : un pellet de plus de 18 mois a souvent perdu en cohésion.",
+            "Préférez les marques avec scieries traçables en Belgique, France ou Autriche, pas les pellets d'origine inconnue.",
           ],
         },
       },
@@ -1250,7 +1250,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "La règle simple à retenir",
         paragraphs: [
-          "Logo ENplus A1 ou DINplus visible, n° de lot lisible, prix entre 5,50 et 7 € le sac de 15 kg, achat chez un revendeur établi : tu es à l'abri d'une mauvaise surprise. Tout le reste, c'est de la roulette russe avec ton matériel.",
+          "Logo ENplus A1 ou DINplus visible, n° de lot lisible, prix entre 5,50 et 7 € le sac de 15 kg, achat chez un revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Tout le reste, c'est de la roulette russe avec votre matériel.",
         ],
       },
     ],
@@ -1258,7 +1258,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Faut-il choisir ENplus A1 plutôt que DINplus ?",
         answer:
-          "Les deux certifications sont équivalentes pour un usage domestique en Belgique. ENplus est plus répandue (et plus faciles à trouver dans les enseignes wallonnes), DINplus impose un seuil de cendres légèrement plus strict. Choisis selon disponibilité et prix.",
+          "Les deux certifications sont équivalentes pour un usage domestique en Belgique. ENplus est plus répandue (et plus facile à trouver dans les enseignes wallonnes), DINplus impose un seuil de cendres légèrement plus strict. Choisissez selon disponibilité et prix.",
       },
       {
         question: "Combien de pellets faut-il par an pour chauffer une maison wallonne ?",
@@ -1268,12 +1268,12 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Peut-on stocker des pellets dans un garage non chauffé ?",
         answer:
-          "Oui, à condition que le garage soit sec et ventilé. Évite le contact direct avec un sol béton humide en posant les sacs sur palette bois. Le pellet supporte le froid jusqu'à -10 °C sans dégradation.",
+          "Oui, à condition que le garage soit sec et ventilé. Évitez le contact direct avec un sol béton humide en posant les sacs sur palette bois. Le pellet supporte le froid jusqu'à -10 °C sans dégradation.",
       },
       {
         question: "Que faire d'un sac de pellets éventré qui a pris l'humidité ?",
         answer:
-          "S'il est légèrement gondolé sans odeur de moisi, étale-le 48 h dans un endroit sec, il peut récupérer. S'il sent l'humide ou se transforme en bouillie au toucher, jette-le : il bloquerait la vis sans fin.",
+          "S'il est légèrement gondolé sans odeur de moisi, étalez-le 48 h dans un endroit sec, il peut récupérer. S'il sent l'humide ou se transforme en bouillie au toucher, jetez-le : il bloquerait la vis sans fin.",
       },
     ],
     related: {
@@ -1294,7 +1294,7 @@ export const ARTICLES: ArticleData[] = [
     metaDescription:
       "Régime Prime Habitation 14/02/2025 au 30/09/2026 : 160 € de base × coefficient selon revenus. R1 = 960 €, R2 = 640 €, R3 = 320 €, R4 = 160 €. Conditions, audit, procédure SPW.",
     excerpt:
-      "Quatre catégories de revenus, quatre montants. Audit logement obligatoire et liste officielle de poêles éligibles. Voici exactement combien tu touches et comment ne pas se planter sur le dossier.",
+      "Quatre catégories de revenus, quatre montants. Audit logement obligatoire et liste officielle de poêles éligibles. Voici exactement combien vous touchez et comment ne pas se planter sur le dossier.",
     tldr:
       "Depuis le 14 février 2025, la Région wallonne applique un régime temporaire jusqu'au 30 septembre 2026. La prime poêle à pellets vaut 160 € de base, multipliée par 6 pour la catégorie R1 (revenus de référence ≤ 24 600 €) soit 960 €, par 4 pour R2 (640 €), par 2 pour R3 (320 €), par 1 pour R4 (160 €). Les ménages R5 (au-delà de 122 800 €) ne sont plus éligibles. Plafond complémentaire : 70 % de la facture pour R1-R2, 50 % pour R3-R4. Conditions cumulatives : audit logement préalable obligatoire, logement de plus de 15 ans, poêle dans la liste officielle SPW, pose par un entrepreneur inscrit à la BCE.",
     category: "primes",
@@ -1307,10 +1307,10 @@ export const ARTICLES: ArticleData[] = [
     coverImageAlt: "Tableau récapitulatif de la Prime Habitation Wallonie 2026 pour poêle à pellets",
     sections: [
       {
-        heading: "Les 4 montants exacts 2026 selon tes revenus de référence",
+        heading: "Les 4 montants exacts 2026 selon vos revenus de référence",
         paragraphs: [
-          "Depuis le 14 février 2025, la Région wallonne a remplacé les anciennes \"primes Chauffage et Eau Chaude\" par la Prime Habitation, dans un régime temporaire valable jusqu'au 30 septembre 2026. La méthode est la même pour la plupart des travaux subventionnés : un montant de base, multiplié par un coefficient lié à ta catégorie de revenus.",
-          "Pour un poêle à pellets, la base est de 160 €. Le coefficient va de 1 (R4) à 6 (R1). Au-delà de 122 800 € de revenus de référence (catégorie R5), tu n'es tout simplement plus éligible aux primes Habitation depuis le 14 février 2025.",
+          "Depuis le 14 février 2025, la Région wallonne a remplacé les anciennes \"primes Chauffage et Eau Chaude\" par la Prime Habitation, dans un régime temporaire valable jusqu'au 30 septembre 2026. La méthode est la même pour la plupart des travaux subventionnés : un montant de base, multiplié par un coefficient lié à votre catégorie de revenus.",
+          "Pour un poêle à pellets, la base est de 160 €. Le coefficient va de 1 (R4) à 6 (R1). Au-delà de 122 800 € de revenus de référence (catégorie R5), vous n'êtes tout simplement plus éligible aux primes Habitation depuis le 14 février 2025.",
         ],
         table: {
           headers: ["Catégorie", "Revenus de référence", "Coefficient", "Prime poêle à pellets"],
@@ -1328,22 +1328,22 @@ export const ARTICLES: ArticleData[] = [
         heading: "Le plafond en pourcentage qu'il faut bien comprendre",
         paragraphs: [
           "La prime calculée ne peut jamais dépasser un certain pourcentage du coût total TVAC de l'opération. Pour les catégories R1 et R2, ce plafond est de 70 %. Pour R3 et R4, c'est 50 %. Le montant réellement versé est le plus bas entre la prime théorique et ce plafond.",
-          "Concrètement, si tu es en R1 (théorie 960 €) et que ta facture totale TVAC est de 1 200 €, le plafond 70 % vaut 840 € : tu reçois 840 € au lieu de 960 €. Sur une facture de 4 200 € TVAC, le plafond 70 % vaut 2 940 € : tu reçois bien tes 960 €.",
+          "Concrètement, si vous êtes en R1 (théorie 960 €) et que votre facture totale TVAC est de 1 200 €, le plafond 70 % vaut 840 € : vous recevez 840 € au lieu de 960 €. Sur une facture de 4 200 € TVAC, le plafond 70 % vaut 2 940 € : vous recevez bien vos 960 €.",
         ],
         callout: {
           variant: "success",
-          text: "Sur la quasi-totalité des poses pellets en maison (4 000 € à 8 000 € TVAC), le plafond 70 % ou 50 % ne mord pas et tu reçois le montant nominal de ta catégorie.",
+          text: "Sur la quasi-totalité des poses pellets en maison (4 000 € à 8 000 € TVAC), le plafond 70 % ou 50 % ne mord pas et vous recevez le montant nominal de votre catégorie.",
         },
       },
       {
         heading: "L'audit logement préalable obligatoire (le truc qui surprend tout le monde)",
         paragraphs: [
-          "Depuis le 14 février 2025, un audit logement préalable est obligatoire pour la quasi-totalité des primes Habitation, y compris pour un poêle à pellets isolé. Tu ne peux plus décider lundi de poser un poêle et déposer la prime vendredi : il faut un audit enregistré avant le démarrage des travaux.",
+          "Depuis le 14 février 2025, un audit logement préalable est obligatoire pour la quasi-totalité des primes Habitation, y compris pour un poêle à pellets isolé. Vous ne pouvez plus décider lundi de poser un poêle et déposer la prime vendredi : il faut un audit enregistré avant le démarrage des travaux.",
           "Le coût de l'audit est de 800 à 1 200 € TVAC selon la taille du logement et la complexité. Une prime audit séparée couvre une partie de ce coût (montant variable selon catégorie de revenus). L'audit est réalisé par un auditeur agréé en Région wallonne et reste valide 5 ans, donc un audit fait pour d'autres travaux récents reste utilisable.",
         ],
         callout: {
           variant: "warning",
-          text: "Pas d'audit avant travaux = pas de prime. C'est le piège n°1 sur lequel les ménages tombent depuis le 14 février 2025. Mister Pellets ne signe pas un devis pellets seul sans avoir vérifié que tu as ton audit en cours ou planifié.",
+          text: "Pas d'audit avant travaux = pas de prime. C'est le piège n°1 sur lequel les ménages tombent depuis le 14 février 2025. Mister Pellets ne signe pas un devis pellets seul sans avoir vérifié que vous avez votre audit en cours ou planifié.",
         },
       },
       {
@@ -1363,7 +1363,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le dossier : pièces à réunir et délais à tenir",
         paragraphs: [
-          "Le dossier se dépose sur Mon Espace Wallonie (mon.wallonie.be) avec connexion eID ou itsme. Alternative : envoi postal à la Direction des Aides aux Particuliers, Rue des Brigades d'Irlande 1, 5100 Jambes. Tu as 8 mois après la dernière facture pour déposer un dossier complet, ensuite c'est forclos.",
+          "Le dossier se dépose sur Mon Espace Wallonie (mon.wallonie.be) avec connexion eID ou itsme. Alternative : envoi postal à la Direction des Aides aux Particuliers, Rue des Brigades d'Irlande 1, 5100 Jambes. Vous avez 8 mois après la dernière facture pour déposer un dossier complet, ensuite c'est forclos.",
         ],
         list: {
           ordered: true,
@@ -1382,33 +1382,33 @@ export const ARTICLES: ArticleData[] = [
         heading: "Le délai de traitement : sois patient",
         paragraphs: [
           "Honnêtement, c'est le point le plus difficile à expliquer aux clients. Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt du dossier complet. Le gouvernement wallon s'est engagé à raccourcir ce délai, mais on reste prudent dans nos annonces.",
-          "Pendant ces 12 à 24 mois, tu as déjà avancé la facture totale chez Mister Pellets. La prime arrive ensuite directement sur ton compte. Si tu as besoin d'étaler la dépense, le prêt à taux 0 % Renopack ou Rénoprêt (via la Société wallonne du Crédit social ou le Fonds du Logement) peut financer jusqu'à 60 000 € de travaux.",
+          "Pendant ces 12 à 24 mois, vous avez déjà avancé la facture totale chez Mister Pellets. La prime arrive ensuite directement sur votre compte. Si vous avez besoin d'étaler la dépense, le prêt à taux 0 % Renopack ou Rénoprêt (via la Société wallonne du Crédit social ou le Fonds du Logement) peut financer jusqu'à 60 000 € de travaux.",
         ],
       },
       {
         heading: "Les cumuls qu'il faut connaître",
         paragraphs: [
-          "Plusieurs avantages se cumulent avec la prime poêle à pellets sans la réduire. La TVA à 6 % au lieu de 21 % s'applique d'office si ton logement a plus de 10 ans : c'est appliqué directement sur ta facture par l'installateur, pas une prime à demander. Les primes isolation et châssis se cumulent sous un plafond global de 50 000 € par logement individuel, toutes primes confondues sur la durée. Le prêt 0 % Renopack se cumule librement. Et certaines communes wallonnes ajoutent leur propre prime communale (montants variables, à vérifier au cas par cas).",
+          "Plusieurs avantages se cumulent avec la prime poêle à pellets sans la réduire. La TVA à 6 % au lieu de 21 % s'applique d'office si votre logement a plus de 10 ans : c'est appliqué directement sur votre facture par l'installateur, pas une prime à demander. Les primes isolation et châssis se cumulent sous un plafond global de 50 000 € par logement individuel, toutes primes confondues sur la durée. Le prêt 0 % Renopack se cumule librement. Et certaines communes wallonnes ajoutent leur propre prime communale (montants variables, à vérifier au cas par cas).",
         ],
         callout: {
           variant: "info",
-          text: "Mister Pellets prépare le pack dossier complet pour ses clients : récapitulatif technique, attestation de conformité, annexe 6, facture détaillée. Tu uploades sur Mon Espace, pas besoin de gérer l'administratif côté SPW. Service inclus dans le devis, pas de frais additionnels.",
+          text: "Mister Pellets prépare le pack dossier complet pour ses clients : récapitulatif technique, attestation de conformité, annexe 6, facture détaillée. Vous uploadez sur Mon Espace, pas besoin de gérer l'administratif côté SPW. Service inclus dans le devis, pas de frais additionnels.",
         },
       },
       {
         heading: "Exemples chiffrés à jour (mai 2026)",
         paragraphs: [
-          "Cas A. Ménage R2 (revenus de référence 36 000 €), maison à Andenne construite en 1985, audit récent valide. Pose d'un Ferlux 8 kW à 4 600 € TVAC. Prime calculée : 640 €. Plafond 70 % = 3 220 €, donc tu reçois bien 640 €. Coût net après prime : 3 960 €.",
-          "Cas B. Ménage R1 (revenus de référence 22 000 €), maison à Charleroi de 1962, audit en cours. Pose d'un canalisable EK63 12 kW à 7 100 € TVAC. Prime calculée : 960 €. Plafond 70 % = 4 970 €, donc tu reçois bien 960 €. Coût net : 6 140 €.",
-          "Cas C. Ménage R3 (revenus 50 000 €), maison à Wavre construite en 2002. Audit obligatoire à organiser avant pose. Hydro Dielle Iride 22 kW à 11 800 € TVAC. Prime calculée : 320 €. Plafond 50 % = 5 900 €, donc tu reçois bien 320 €. Coût net : 11 480 €. Ici, c'est le remplacement de la chaudière mazout existante qui rentabilise sur la durée, pas la prime.",
+          "Cas A. Ménage R2 (revenus de référence 36 000 €), maison à Andenne construite en 1985, audit récent valide. Pose d'un Edilkamin 8 kW à 4 600 € TVAC. Prime calculée : 640 €. Plafond 70 % = 3 220 €, donc vous recevez bien 640 €. Coût net après prime : 3 960 €.",
+          "Cas B. Ménage R1 (revenus de référence 22 000 €), maison à Charleroi de 1962, audit en cours. Pose d'un canalisable EK63 12 kW à 7 100 € TVAC. Prime calculée : 960 €. Plafond 70 % = 4 970 €, donc vous recevez bien 960 €. Coût net : 6 140 €.",
+          "Cas C. Ménage R3 (revenus 50 000 €), maison à Wavre construite en 2002. Audit obligatoire à organiser avant pose. Hydro Girolami Soft 22 kW à 11 800 € TVAC. Prime calculée : 320 €. Plafond 50 % = 5 900 €, donc vous recevez bien 320 €. Coût net : 11 480 €. Ici, c'est le remplacement de la chaudière mazout existante qui rentabilise sur la durée, pas la prime.",
           "Cas D. Ménage R5 (revenus 140 000 €). Non éligible aux primes Habitation depuis le 14 février 2025, quel que soit le projet. Pas de prime Wallonie sur le poêle à pellets, mais TVA 6 % et prêt 0 % restent accessibles.",
         ],
       },
       {
         heading: "Et après le 30 septembre 2026 ?",
         paragraphs: [
-          "Le régime actuel est temporaire. À partir du 1er octobre 2026, un nouveau régime global devrait entrer en vigueur, avec des montants et conditions à confirmer (rien n'est publié au moment de la rédaction, mai 2026). Si ton projet n'est pas urgent, il peut être pertinent d'attendre les annonces officielles. Si l'hiver 2026-2027 te concerne, mieux vaut sécuriser maintenant sous le régime connu.",
-          "Mister Pellets met cette page à jour dès la publication officielle du nouveau régime. Tu peux aussi appeler le numéro gratuit 1718 (SPW) pour obtenir l'info la plus à jour, ou consulter un Guichet Énergie Wallonie de ta zone.",
+          "Le régime actuel est temporaire. À partir du 1er octobre 2026, un nouveau régime global devrait entrer en vigueur, avec des montants et conditions à confirmer (rien n'est publié au moment de la rédaction, mai 2026). Si votre projet n'est pas urgent, il peut être pertinent d'attendre les annonces officielles. Si l'hiver 2026-2027 vous concerne, mieux vaut sécuriser maintenant sous le régime connu.",
+          "Mister Pellets met cette page à jour dès la publication officielle du nouveau régime. Vous pouvez aussi appeler le numéro gratuit 1718 (SPW) pour obtenir l'info la plus à jour, ou consulter un Guichet Énergie Wallonie de votre zone.",
         ],
       },
     ],
@@ -1431,7 +1431,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien de temps pour recevoir la prime sur mon compte ?",
         answer:
-          "Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai. En attendant, tu paies normalement Mister Pellets et tu reçois la prime ensuite, directement sur ton compte.",
+          "Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai. En attendant, vous payez normalement Mister Pellets et vous recevez la prime ensuite, directement sur votre compte.",
       },
       {
         question: "Peut-on cumuler avec la prime de la commune ?",
@@ -1441,7 +1441,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Et si mes revenus dépassent 122 800 € ?",
         answer:
-          "Tu es en catégorie R5 et tu n'es plus éligible aux primes Habitation depuis le 14 février 2025. Tu peux toutefois bénéficier de la TVA réduite à 6 % (logement de plus de 10 ans) et du prêt à taux 0 % Renopack ou Rénoprêt.",
+          "Vous êtes en catégorie R5 et vous n'êtes plus éligible aux primes Habitation depuis le 14 février 2025. Vous pouvez toutefois bénéficier de la TVA réduite à 6 % (logement de plus de 10 ans) et du prêt à taux 0 % Renopack ou Rénoprêt.",
       },
     ],
     related: {
@@ -1483,7 +1483,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Quelle puissance hydro pour quelle maison",
         paragraphs: [
-          "Le calcul est différent du poêle d'air : ici, la puissance doit suivre le besoin total de chauffage de la maison + l'eau chaude sanitaire si tu choisis cette option. Compte généralement 0,15 à 0,18 kW par m² pour une maison wallonne 4 façades non passive.",
+          "Le calcul est différent du poêle d'air : ici, la puissance doit suivre le besoin total de chauffage de la maison + l'eau chaude sanitaire si vous choisissez cette option. Comptez généralement 0,15 à 0,18 kW par m² pour une maison wallonne 4 façades non passive.",
         ],
         table: {
           headers: ["Surface chauffée", "PEB", "Puissance hydro", "Ballon tampon recommandé"],
@@ -1502,7 +1502,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le raccordement aux radiateurs existants",
         paragraphs: [
-          "Bonne nouvelle : tes radiateurs existants restent en place. Le poêle hydro se raccorde au circuit primaire via un ballon tampon (200 à 800 litres selon la puissance) qui sert de volume d'inertie. Ce ballon est obligatoire : il évite les cycles courts qui usent prématurément le poêle.",
+          "Bonne nouvelle : vos radiateurs existants restent en place. Le poêle hydro se raccorde au circuit primaire via un ballon tampon (200 à 800 litres selon la puissance) qui sert de volume d'inertie. Ce ballon est obligatoire : il évite les cycles courts qui usent prématurément le poêle.",
           "Le circuit doit être désembouée (rinçage du tartre et boues accumulés en 20-30 ans de mazout) avant raccordement. Coût du désemboueage : 350 à 600 € selon la longueur du circuit et le nombre de radiateurs. C'est non négociable : un circuit emboué pollue le nouveau matériel en quelques mois.",
         ],
       },
@@ -1510,7 +1510,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Coût total, primes incluses",
         paragraphs: [
           "Voici un cas réel de mars 2026 à Sombreffe : maison 4 façades 1978, 175 m², PEB E, chaudière mazout Junkers de 28 kW en fin de vie, cuve mazout 3 000 L à démanteler.",
-          "Devis Mister Pellets : Dielle Iride 22 hydro 22 kW (5 200 € matériel) + ballon tampon 500 L (1 100 €) + désembouage circuit (480 €) + raccordement et mise en service (1 600 €) + démantèlement et nettoyage cuve mazout (850 €) = 9 230 € TVAC tout compris (TVA 6 %).",
+          "Devis Mister Pellets : Girolami Soft hydro 22 kW (5 200 € matériel) + ballon tampon 500 L (1 100 €) + désembouage circuit (480 €) + raccordement et mise en service (1 600 €) + démantèlement et nettoyage cuve mazout (850 €) = 9 230 € TVAC tout compris (TVA 6 %).",
           "Primes obtenues : Prime Habitation Wallonie 2026 catégorie R2 (640 €, soit base 160 € × coefficient 4) + prime communale Sombreffe pour démantèlement cuve (300 €) + prime communale rénovation chauffage (200 €) = 1 140 € total. Coût net pour le client : 8 090 €.",
         ],
         callout: {
@@ -1521,15 +1521,15 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le démantèlement de la cuve mazout : étape souvent oubliée",
         paragraphs: [
-          "Tu ne peux pas laisser une cuve mazout vide sur place : la réglementation wallonne impose le dégazage et soit le retrait soit la neutralisation par remplissage à la mousse polyuréthane. Coût : 600 à 1 200 € selon volume (1 500, 3 000, 5 000 litres) et accessibilité (extérieure ou enterrée).",
+          "Vous ne pouvez pas laisser une cuve mazout vide sur place : la réglementation wallonne impose le dégazage et soit le retrait soit la neutralisation par remplissage à la mousse polyuréthane. Coût : 600 à 1 200 € selon volume (1 500, 3 000, 5 000 litres) et accessibilité (extérieure ou enterrée).",
           "Plusieurs communes wallonnes (Namur, Charleroi, Wavre, Andenne, Sombreffe) accordent une prime communale spécifique de 100 à 500 € pour ce démantèlement. À cumuler avec la prime régionale poêle pellets. Mister Pellets coordonne avec un opérateur agréé pour l'évacuation conforme.",
         ],
       },
       {
         heading: "Les 3 erreurs à éviter dans une transition mazout → pellets hydro",
         paragraphs: [
-          "Erreur 1 : ne pas désembouer le circuit. Tu importes 25 ans de boues dans un échangeur neuf, résultat, l'échangeur s'encrasse en 18 mois.",
-          "Erreur 2 : sous-dimensionner pour économiser. Un hydro 18 kW sur 200 m² PEB E, ça tourne à plein 24/7 en janvier et tu finis par allumer un appoint électrique. La marge utile est de 15-20 % au-dessus du calcul théorique.",
+          "Erreur 1 : ne pas désembouer le circuit. Vous importez 25 ans de boues dans un échangeur neuf, résultat, l'échangeur s'encrasse en 18 mois.",
+          "Erreur 2 : sous-dimensionner pour économiser. Un hydro 18 kW sur 200 m² PEB E, ça tourne à plein 24/7 en janvier et vous finissez par allumer un appoint électrique. La marge utile est de 15-20 % au-dessus du calcul théorique.",
           "Erreur 3 : oublier le ballon tampon. Sans ballon, le poêle fait des cycles courts (allumage-extinction toutes les 30 min), use sa résistance d'allumage en une saison, et bruite la maison. Le ballon n'est pas une option, c'est un élément central.",
         ],
       },
@@ -1538,7 +1538,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien coûte le passage du mazout au poêle hydro à pellets ?",
         answer:
-          "Compte 8 000 à 14 000 € TVAC tout compris en Wallonie : matériel (poêle + ballon tampon), désembouage du circuit, raccordement, démantèlement de la cuve mazout. Avec la Prime Habitation 2026 (160 à 960 € selon catégorie de revenus) et d'éventuelles primes communales (cuve mazout, rénovation chauffage), on tombe souvent à 6 500-12 500 € net.",
+          "Comptez 8 000 à 14 000 € TVAC tout compris en Wallonie : matériel (poêle + ballon tampon), désembouage du circuit, raccordement, démantèlement de la cuve mazout. Avec la Prime Habitation 2026 (160 à 960 € selon catégorie de revenus) et d'éventuelles primes communales (cuve mazout, rénovation chauffage), on tombe souvent à 6 500-12 500 € net.",
       },
       {
         question: "Faut-il garder une chaudière d'appoint en plus du poêle hydro ?",
@@ -1560,7 +1560,7 @@ export const ARTICLES: ArticleData[] = [
       articles: ["dimensionner-poele-pellets-surface-wallonie", "primes-wallonie-2026-poele-pellets-combien-recuperer"],
       guides: ["poele-pellets-hydro", "guide-achat-poele-pellets-wallonie"],
       cities: ["namur", "charleroi", "wavre", "andenne"],
-      brands: ["dielle", "edilkamin"],
+      brands: ["edilkamin", "girolami"],
     },
   },
 
@@ -1590,64 +1590,64 @@ export const ARTICLES: ArticleData[] = [
         heading: "Cause n°1 : creuset encrassé (40 % des cas)",
         paragraphs: [
           "C'est la cause la plus fréquente. Le creuset (la coupelle où brûlent les pellets) accumule du mâchefer, résidu vitrifié de cendres et de minéraux, qui finit par boucher les trous d'admission d'air primaire. Sans air, la flamme s'étouffe et le poêle déclenche son extinction de sécurité.",
-          "Diagnostic : à froid, sors le creuset. Si tu vois des amas durs et brillants comme du verre, c'est du mâchefer. Solution : frappe le creuset à l'envers sur une surface dure pour décoller, brosse les trous avec une brosse métallique, vérifie qu'aucun trou n'est obstrué.",
+          "Diagnostic : à froid, sortez le creuset. Si vous voyez des amas durs et brillants comme du verre, c'est du mâchefer. Solution : frappez le creuset à l'envers sur une surface dure pour décoller, brossez les trous avec une brosse métallique, vérifiez qu'aucun trou n'est obstrué.",
         ],
         callout: {
           variant: "info",
-          text: "Vide les cendres tous les 2-3 jours en pleine saison, brosse le creuset toutes les semaines. C'est l'entretien le plus important d'un poêle à pellets.",
+          text: "Videz les cendres tous les 2-3 jours en pleine saison, brossez le creuset toutes les semaines. C'est l'entretien le plus important d'un poêle à pellets.",
         },
       },
       {
         heading: "Cause n°2 : pellets humides ou de mauvaise qualité (20 %)",
         paragraphs: [
           "Un pellet à 12 % d'humidité (au lieu de < 10 %) brûle moins bien, fait plus de cendres, encrasse l'échangeur. À partir de 14 %, le poêle peut s'éteindre faute de combustion stable.",
-          "Diagnostic : prends une poignée de pellets, frotte-les. Ils doivent être durs, lisses, sans poussière. Cassés, friables, ou poussiéreux = mauvais lot ou stockage humide. Solution : passe à un sac neuf certifié ENplus A1 ou DINplus, vide entièrement le réservoir et la vis sans fin avant.",
+          "Diagnostic : prenez une poignée de pellets, frottez-les. Ils doivent être durs, lisses, sans poussière. Cassés, friables, ou poussiéreux = mauvais lot ou stockage humide. Solution : passez à un sac neuf certifié ENplus A1 ou DINplus, videz entièrement le réservoir et la vis sans fin avant.",
         ],
       },
       {
         heading: "Cause n°3 : sonde de fumée encrassée (15 %)",
         paragraphs: [
           "La sonde thermocouple mesure la température des fumées en sortie d'échangeur. Si elle est couverte de suie, elle envoie une fausse lecture : le poêle croit qu'il fait trop froid et déclenche une extinction par sécurité.",
-          "Diagnostic : le code erreur affiché est souvent E101, E110 ou « température fumée basse » selon la marque. Solution : à froid, retire la sonde (1 vis) et essuie-la avec un chiffon sec. Pas de produit chimique. Remonte. 80 % des cas se résolvent en 5 minutes.",
+          "Diagnostic : le code erreur affiché est souvent E101, E110 ou « température fumée basse » selon la marque. Solution : à froid, retirez la sonde (1 vis) et essuyez-la avec un chiffon sec. Pas de produit chimique. Remontez. 80 % des cas se résolvent en 5 minutes.",
         ],
       },
       {
         heading: "Cause n°4 : échangeur bouché (10 %)",
         paragraphs: [
           "L'échangeur (les conduits internes par où passent les fumées avant la sortie) accumule de la suie. Quand le passage rétrécit trop, le tirage chute, la combustion devient mauvaise, le poêle s'éteint.",
-          "Diagnostic : ouvre la porte du foyer. Si les parois sont noires de suie épaisse, l'échangeur l'est aussi probablement. Solution : ramonage interne avec la canne fournie (action sur le levier en façade pour les Edilkamin/EK63) toutes les 2-3 semaines en saison. Ramonage technique annuel par un professionnel obligatoire.",
+          "Diagnostic : ouvrez la porte du foyer. Si les parois sont noires de suie épaisse, l'échangeur l'est aussi probablement. Solution : ramonage interne avec la canne fournie (action sur le levier en façade pour les Edilkamin/EK63) toutes les 2-3 semaines en saison. Ramonage technique annuel par un professionnel obligatoire.",
         ],
       },
       {
         heading: "Cause n°5 : vis sans fin bloquée (8 %)",
         paragraphs: [
           "La vis sans fin descend les pellets du réservoir vers le creuset. Si un pellet trop long, un débris (vis, bois, plastique) ou un amas humide se coince, la vis force, le moteur déclenche sa sécurité thermique et le poêle s'arrête.",
-          "Diagnostic : tu entends le moteur grogner au démarrage sans pellets qui descendent dans le creuset. Solution : vide le réservoir, démonte la vis (1-2 vis selon modèle), retire l'obstacle. Profite-en pour vérifier qu'aucun élément étranger n'est présent.",
+          "Diagnostic : vous entendez le moteur grogner au démarrage sans pellets qui descendent dans le creuset. Solution : videz le réservoir, démontez la vis (1-2 vis selon modèle), retirez l'obstacle. Profitez-en pour vérifier qu'aucun élément étranger n'est présent.",
         ],
       },
       {
         heading: "Cause n°6 : prise d'air comburant obstruée (5 %)",
         paragraphs: [
           "Les modèles étanches prennent leur air de combustion à l'extérieur via un tuyau en façade. Une feuille morte, un nid, ou une grille obstruée bloque l'arrivée d'air. Le poêle ne peut plus brûler correctement et s'éteint.",
-          "Diagnostic : passe à l'extérieur, vérifie la grille de prise d'air. Solution : nettoie à la brosse. Sur les non-étanches, vérifie la grille de ventilation de la pièce, un meuble qui obstrue est aussi un classique.",
+          "Diagnostic : passez à l'extérieur, vérifiez la grille de prise d'air. Solution : nettoyez à la brosse. Sur les non-étanches, vérifiez la grille de ventilation de la pièce, un meuble qui obstrue est aussi un classique.",
         ],
       },
       {
         heading: "Cause n°7 : conduit non ramoné ou refoulement (2 %)",
         paragraphs: [
           "En Wallonie, le ramonage du conduit de fumée est obligatoire 1 fois par an pour un poêle à pellets. Sans ramonage, la suie accumulée réduit le tirage. Par grand vent, un refoulement temporaire peut aussi déclencher l'extinction.",
-          "Diagnostic : si le poêle s'éteint surtout par temps venteux ou si tu sens une odeur de fumée intermittente, c'est probablement le conduit. Solution : appel d'un ramoneur certifié (50 à 90 € en Wallonie). Vérifie aussi le chapeau du conduit : nid d'oiseau, mousse, c'est fréquent.",
+          "Diagnostic : si le poêle s'éteint surtout par temps venteux ou si vous sentez une odeur de fumée intermittente, c'est probablement le conduit. Solution : appel d'un ramoneur certifié (50 à 90 € en Wallonie). Vérifiez aussi le chapeau du conduit : nid d'oiseau, mousse, c'est fréquent.",
         ],
         callout: {
           variant: "warning",
-          text: "Sans certificat de ramonage annuel, ton assurance habitation peut refuser de couvrir un sinistre lié au poêle. Garde toujours la facture du ramoneur.",
+          text: "Sans certificat de ramonage annuel, votre assurance habitation peut refuser de couvrir un sinistre lié au poêle. Gardez toujours la facture du ramoneur.",
         },
       },
       {
-        heading: "Si rien ne fonctionne : appelle ton SAV",
+        heading: "Si rien ne fonctionne : appelez votre SAV",
         paragraphs: [
-          "Si tu as vérifié les 7 points ci-dessus sans succès, c'est probablement une panne matérielle : résistance d'allumage HS (durée de vie typique 4-7 ans), motoréducteur de vis sans fin, carte électronique. Ces réparations dépassent les compétences classiques d'un utilisateur, appelle ton installateur.",
-          "Mister Pellets intervient en SAV dans les 50 km autour de Fernelmont. Pour les clients hors zone, on conseille toujours un installateur certifié local. Les pièces détachées Edilkamin, EK63, Dielle et Ferlux sont disponibles en stock chez nous sous 48 h.",
+          "Si vous avez vérifié les 7 points ci-dessus sans succès, c'est probablement une panne matérielle : résistance d'allumage HS (durée de vie typique 4-7 ans), motoréducteur de vis sans fin, carte électronique. Ces réparations dépassent les compétences classiques d'un utilisateur, appelez votre installateur.",
+          "Mister Pellets intervient en SAV dans les 50 km autour de Fernelmont. Pour les clients hors zone, on conseille toujours un installateur certifié local. Les pièces détachées Edilkamin, EK63 et Girolami sont disponibles en stock chez nous sous 48 h.",
         ],
       },
     ],
@@ -1655,7 +1655,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Mon poêle à pellets s'éteint au bout de 30 minutes, que faire ?",
         answer:
-          "C'est typique d'un creuset encrassé qui ne laisse plus passer l'air primaire. Vide le creuset à froid, brosse les trous avec une brosse métallique, et vérifie que les pellets sont certifiés ENplus A1. Si le problème persiste après 2-3 cycles, contrôle la sonde de fumée.",
+          "C'est typique d'un creuset encrassé qui ne laisse plus passer l'air primaire. Videz le creuset à froid, brossez les trous avec une brosse métallique, et vérifiez que les pellets sont certifiés ENplus A1. Si le problème persiste après 2-3 cycles, contrôlez la sonde de fumée.",
       },
       {
         question: "Combien coûte une intervention SAV en Wallonie ?",
@@ -1665,7 +1665,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Est-ce normal que mon poêle s'éteigne quand le réservoir est vide ?",
         answer:
-          "Oui, c'est une sécurité normale. Le poêle détecte l'absence de pellets via la chute de température et déclenche une extinction propre. Remplis le réservoir, attends 5 minutes que la vis se réamorce, redémarre.",
+          "Oui, c'est une sécurité normale. Le poêle détecte l'absence de pellets via la chute de température et déclenche une extinction propre. Remplissez le réservoir, attendez 5 minutes que la vis se réamorce, redémarrez.",
       },
       {
         question: "Mon poêle s'éteint surtout par temps de vent, pourquoi ?",
@@ -1677,7 +1677,7 @@ export const ARTICLES: ArticleData[] = [
       articles: ["pellets-enplus-a1-vs-dinplus", "entretien-poele-pellets-saison"],
       guides: ["comment-entretenir-poele-pellets"],
       cities: ["namur", "charleroi", "liege", "fernelmont"],
-      brands: ["edilkamin", "ek63", "dielle", "ferlux"],
+      brands: ["edilkamin", "ek63", "girolami"],
     },
   },
 ];

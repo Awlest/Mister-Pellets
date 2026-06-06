@@ -59,7 +59,7 @@ export const PROVINCES: Province[] = [
     longName: "la province de Liège",
     cities: ["Liège", "Verviers", "Seraing", "Huy", "Waremme", "Spa", "Eupen"],
     localAngle:
-      "La province de Liège, de Liège à Verviers en passant par Huy, Waremme et Spa, fait partie de nos zones d'intervention régulières. Hivers plus rudes vers les hauteurs : on dimensionne la puissance en conséquence et on gère le tubage, la ventouse et le raccordement hydro selon ta maison.",
+      "La province de Liège, de Liège à Verviers en passant par Huy, Waremme et Spa, fait partie de nos zones d'intervention régulières. Hivers plus rudes vers les hauteurs : on dimensionne la puissance en conséquence et on gère le tubage, la ventouse et le raccordement hydro selon votre maison.",
     delivery:
       "Livraison assurée sur toute la province de Liège. Forfait unique de 50 € au-delà de 50 km de Fernelmont.",
   },

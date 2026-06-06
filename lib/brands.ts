@@ -59,14 +59,14 @@ export interface BrandData {
   /** Sous-titre du hero (sinon on retombe sur `intro`). */
   heroSubtitle?: string;
 
-  // ----- Blocs enrichis (tier 1) — tous optionnels -----
-  /** "Pourquoi on aime travailler avec X" — 2 à 3 paragraphes. */
+  // ----- Blocs enrichis (tier 1), tous optionnels -----
+  /** "Pourquoi on aime travailler avec X", 2 à 3 paragraphes. */
   whyWeLove?: string[];
-  /** "X en quelques repères" — timeline. */
+  /** "X en quelques repères", timeline. */
   milestones?: BrandMilestone[];
-  /** "Ce qui distingue X" — 6 cartes. */
+  /** "Ce qui distingue X", 6 cartes. */
   distinctions?: BrandDistinction[];
-  /** "Modèles disponibles" — tableau enrichi. */
+  /** "Modèles disponibles", tableau enrichi. */
   modelsTable?: BrandModelRow[];
   /** FAQ "Ce qu'on nous demande souvent". */
   faq?: BrandFaqItem[];
@@ -86,7 +86,7 @@ export interface BrandData {
 
 export const BRANDS: Record<BrandData["slug"], BrandData> = {
   // ───────────────────────────────────────────────────────────────────
-  // EDILKAMIN — tier 1, référence italienne historique
+  // EDILKAMIN , tier1, référence italienne historique
   // ───────────────────────────────────────────────────────────────────
   edilkamin: {
     slug: "edilkamin",
@@ -116,7 +116,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     distinctions: [
       { emoji: "🇮🇹", title: "Fonderie italienne", description: "Production dans 6 sites maison, principalement à Lainate (Milan). Fonderie interne, bureau R&D interne. Pas de sous-traitance opaque, pas de pièces venues d'ailleurs." },
-      { emoji: "🧠", title: "Combustion Leonardo", description: "Sondes lambda et capteurs de pression qui ajustent en permanence l'air et le débit de pellets. La combustion reste stable même si tu changes de marque de sacs, même quand l'humidité ambiante varie." },
+      { emoji: "🧠", title: "Combustion Leonardo", description: "Sondes lambda et capteurs de pression qui ajustent en permanence l'air et le débit de pellets. La combustion reste stable même si vous changez de marque de sacs, même quand l'humidité ambiante varie." },
       { emoji: "🔇", title: "Silence de fonctionnement", description: "Ventilateurs montés sur amortisseurs, fonte épaisse qui amortit les bruits de combustion. On en met dans un séjour ouvert sur les chambres sans souci." },
       { emoji: "🌬", title: "Technologie airKare", description: "Ionisation et ozonisation actives qui améliorent la qualité de l'air ambiant. Disponible sur certaines gammes. Une fonction qui agit même quand le poêle est éteint." },
       { emoji: "💧", title: "Gamme hydro complète", description: "Les modèles Cherie H et Blade H se raccordent au chauffage central comme une chaudière. Production d'eau chaude sanitaire avec ballon dédié. Adaptée au remplacement d'une vieille chaudière mazout." },
@@ -134,7 +134,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { question: "Edilkamin, c'est cher par rapport aux autres marques ?", answer: "Sur le tarif catalogue oui, c'est dans le haut de la fourchette. Mais quand on intègre la durée de vie réelle (15 à 20 ans courants chez nos clients), le coût ramené à l'année est plus bas qu'un poêle d'entrée de gamme qu'il faut remplacer après 8 ans. Et le SAV pièces reste dispo 15 ans après l'arrêt du modèle." },
       { question: "Les pièces détachées, c'est facile à trouver ?", answer: "Edilkamin a un réseau de 450+ centres d'assistance dans le monde. En Belgique, les consommables courants (joints, bougies, sondes, ventilateurs) sont chez nous en stock. Les pièces spécifiques arrivent en 48 à 72 h." },
       { question: "Quelle différence entre la gamme Cherie et la gamme Blade ?", answer: "Cherie est le format compact à poser contre un mur, design céramique chaleureux. Blade est plus large, plus puissant, avec une face vitrée imposante. Cherie convient à une pièce, Blade à un grand volume ouvert." },
-      { question: "La technologie Leonardo, c'est utile en pratique ?", answer: "Très utile. Concrètement, le poêle s'auto-règle quand tu changes de marque de pellets, quand l'humidité ambiante varie, quand il fait très froid dehors. Tu n'as rien à toucher dans le menu, la combustion reste optimale." },
+      { question: "La technologie Leonardo, c'est utile en pratique ?", answer: "Très utile. Concrètement, le poêle s'auto-règle quand vous changez de marque de pellets, quand l'humidité ambiante varie, quand il fait très froid dehors. Vous n'avez rien à toucher dans le menu, la combustion reste optimale." },
       { question: "Edilkamin est compatible avec une cheminée ancienne ?", answer: "Oui dans la majorité des cas, avec un tubage inox flexible ou rigide. On vérifie la géométrie du conduit à la visite technique pour valider le diamètre minimum (80 mm pour la plupart des modèles, 100 mm pour les hydro)." },
       { question: "Est-ce qu'Edilkamin propose des modèles canalisables ?", answer: "Oui, la majorité de la gamme l'est. Le Kira2 Evo distribue même l'air chaud sur deux gaines indépendantes. Pratique pour chauffer une chambre à l'étage en plus du salon." },
     ],
@@ -148,7 +148,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // EK63 — tier 1, marque connectée du groupe Edilkamin
+  // EK63 , tier1, marque connectée du groupe Edilkamin
   // ───────────────────────────────────────────────────────────────────
   ek63: {
     slug: "ek63",
@@ -164,8 +164,8 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     heroSubtitle:
       "EK63, c'est la marque sœur d'Edilkamin. Pensée pour des poêles modernes, étanches, Wi-Fi de série, à un prix qui passe en Wallonie. On l'installe partout, du studio jusqu'à la maison à étage qui veut canaliser deux pièces.",
     whyWeLove: [
-      "EK63 a été lancée par Edilkamin pour une raison simple : tout le monde veut un Edilkamin, mais tout le monde n'a pas le budget Edilkamin. La marque sœur reprend l'industrie, les méthodes, le service après-vente du groupe, et livre des poêles modernes à un tarif plus accessible. Le Wi-Fi Smart est intégré de série sur la majorité des modèles, donc tu pilotes depuis ton smartphone sans abonnement et sans option payante.",
-      "L'autre point qui fait la différence en Wallonie, c'est l'étanchéité. La plupart des EK63 sont des poêles étanches. Concrètement, ils prennent l'air comburant directement à l'extérieur et n'aspirent pas l'air chaud de ta pièce. C'est ce qui les rend compatibles avec les maisons à VMC double flux, les BBC et les passives.",
+      "EK63 a été lancée par Edilkamin pour une raison simple : tout le monde veut un Edilkamin, mais tout le monde n'a pas le budget Edilkamin. La marque sœur reprend l'industrie, les méthodes, le service après-vente du groupe, et livre des poêles modernes à un tarif plus accessible. Le Wi-Fi Smart est intégré de série sur la majorité des modèles, donc vous pilotez depuis votre smartphone sans abonnement et sans option payante.",
+      "L'autre point qui fait la différence en Wallonie, c'est l'étanchéité. La plupart des EK63 sont des poêles étanches. Concrètement, ils prennent l'air comburant directement à l'extérieur et n'aspirent pas l'air chaud de votre pièce. C'est ce qui les rend compatibles avec les maisons à VMC double flux, les BBC et les passives.",
       "Sur le canalisable, EK63 a sorti un modèle qui nous sort souvent du pétrin chez les clients à couloir étroit : l'Entity 90+, seulement 31 cm de profondeur, qu'on glisse là où on ne pourrait pas faire entrer un poêle classique.",
     ],
     milestones: [
@@ -194,8 +194,8 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     faq: [
       { question: "EK63 et Edilkamin, c'est la même chose ?", answer: "Pas tout à fait. EK63 est une marque distincte du groupe Edilkamin, créée pour proposer des poêles modernes connectés à un prix plus accessible. La plateforme industrielle et le SAV sont communs. Le design et certaines technologies (Leonardo notamment) restent l'apanage d'Edilkamin." },
       { question: "Pourquoi choisir un EK63 plutôt qu'un Edilkamin ?", answer: "Pour deux raisons concrètes. D'abord le prix : à puissance équivalente, on est typiquement 15 à 25 % en dessous d'un Edilkamin. Ensuite la connectivité : le Wi-Fi est de série sur EK63, alors que c'est parfois en option ou sur les gammes supérieures chez Edilkamin." },
-      { question: "Le Wi-Fi de série, c'est vraiment utile ?", answer: "Très. Tu programmes ton poêle à distance le dimanche soir pour le lendemain, tu l'allumes depuis le bureau pour rentrer dans un séjour chaud, tu surveilles la consommation de pellets. Et tu reçois les alertes (réservoir bas, entretien nécessaire) en direct." },
-      { question: "EK63 fonctionne dans une maison BBC ou passive ?", answer: "Oui, c'est même là que la marque excelle. La majorité des modèles sont étanches : ils prennent l'air comburant à l'extérieur via une prise d'air dédiée. Ils sont donc compatibles avec les VMC double flux et n'aspirent pas l'air chaud de ta maison." },
+      { question: "Le Wi-Fi de série, c'est vraiment utile ?", answer: "Très. Vous programmez votre poêle à distance le dimanche soir pour le lendemain, vous l'allumez depuis le bureau pour rentrer dans un séjour chaud, vous surveillez la consommation de pellets. Et vous recevez les alertes (réservoir bas, entretien nécessaire) en direct." },
+      { question: "EK63 fonctionne dans une maison BBC ou passive ?", answer: "Oui, c'est même là que la marque excelle. La majorité des modèles sont étanches : ils prennent l'air comburant à l'extérieur via une prise d'air dédiée. Ils sont donc compatibles avec les VMC double flux et n'aspirent pas l'air chaud de votre maison." },
       { question: "Quelle est la garantie sur un EK63 ?", answer: "Garantie constructeur officielle EK63 : 2 ans. Mister Pellets ajoute son service local : intervention sous 48 à 72 h, stock pièces courantes en atelier." },
       { question: "L'Entity 90+ à 31 cm, ça chauffe vraiment ?", answer: "Oui, 8,7 kW pour une chambre 31 cm de profondeur. On l'a posé dans plusieurs couloirs et halls en Wallonie. La performance est là, la canalisation distribue l'air chaud vers une pièce adjacente. Le seul vrai prérequis est un emplacement avec passage de fumée correct." },
     ],
@@ -209,7 +209,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // GIROLAMI — tier 1, polycombustible breveté (intégration neuve)
+  // GIROLAMI , tier1, polycombustible breveté (intégration neuve)
   // ───────────────────────────────────────────────────────────────────
   girolami: {
     slug: "girolami",
@@ -238,7 +238,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     distinctions: [
       { emoji: "🔄", title: "Source Feeding breveté", description: "Le pellet est poussé par le bas au lieu de tomber sur le brasier. Les cendres sont chassées dans un bac sous le foyer. Le brasier reste propre seul. Plus de nettoyage quotidien à la main." },
-      { emoji: "🪵", title: "Fuel Convert System", description: "Une sonde reconnaît si tu as chargé du pellet, des bûches ou des broyés (coques, noyaux, marc). Le poêle bascule seul entre les modes. Aucun réglage manuel." },
+      { emoji: "🪵", title: "Fuel Convert System", description: "Une sonde reconnaît si vous avez chargé du pellet, des bûches ou des broyés (coques, noyaux, marc). Le poêle bascule seul entre les modes. Aucun réglage manuel." },
       { emoji: "🌑", title: "Vitre Crystal Magic", description: "La vitre devient totalement opaque quand la flamme est éteinte. Plus de fond noir visible. Le poêle s'efface dans le mobilier quand il ne tourne pas." },
       { emoji: "🔇", title: "Mode SuperSilent", description: "Les ventilateurs s'arrêtent à la demande. La chaleur diffuse par convection naturelle, sans souffle audible. Idéal le soir dans un séjour ouvert sur les chambres." },
       { emoji: "🎛", title: "Canalisable intelligent", description: "Trois ventilateurs indépendants sur les versions canalisables. Chacun ajuste son débit selon la température mesurée dans la pièce qu'il dessert. Thermostats sans fil TriKey en option." },
@@ -254,8 +254,8 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     faq: [
       { question: "Girolami, c'est qui ?", answer: "Une famille italienne qui fabrique des poêles à Sant'Oreste, près de Rome, depuis 1970. Deux générations. Tout est fait dans la même usine. La marque a environ 65 % de part de marché en Italie sur le segment des poêles multicombustibles." },
-      { question: "C'est quoi exactement le Source Feeding ?", answer: "C'est leur brevet d'alimentation par le bas. Au lieu de tomber sur le brasier, le pellet est poussé sous le brasier. Les cendres sont chassées dans un bac de collecte. Concrètement, tu ne nettoies plus le brasier tous les jours, tu vides le cendrier une fois par semaine." },
-      { question: "Un Girolami peut-il fonctionner au pellet et au bois ?", answer: "Oui, sur la gamme hybride (Soft notamment). Le Fuel Convert System détecte automatiquement le combustible chargé. Tu mets du pellet, ça fonctionne au pellet. Tu mets des bûches, ça bascule en mode bois. Sans toucher au menu." },
+      { question: "C'est quoi exactement le Source Feeding ?", answer: "C'est leur brevet d'alimentation par le bas. Au lieu de tomber sur le brasier, le pellet est poussé sous le brasier. Les cendres sont chassées dans un bac de collecte. Concrètement, vous ne nettoyez plus le brasier tous les jours, vous videz le cendrier une fois par semaine." },
+      { question: "Un Girolami peut-il fonctionner au pellet et au bois ?", answer: "Oui, sur la gamme hybride (Soft notamment). Le Fuel Convert System détecte automatiquement le combustible chargé. Vous mettez du pellet, ça fonctionne au pellet. Vous mettez des bûches, ça bascule en mode bois. Sans toucher au menu." },
       { question: "C'est silencieux ?", answer: "La fonction SuperSilent coupe les ventilateurs et fait diffuser la chaleur par convection naturelle, sans aucun souffle audible. Utile le soir, dans un séjour ouvert sur les chambres." },
       { question: "On peut piloter un Girolami depuis le smartphone ?", answer: "Oui. Wi-Fi de série sur les modèles modernes (Vert, Flow, Curvy). Application smartphone, programmation horaire, commande vocale via Alexa." },
       { question: "Quel modèle pour une maison de 150 m² ?", answer: "Pour un chauffage à air, un Vert 12 ou Vert 15 canalisable couvre confortablement, avec deux pièces canalisées. Pour un raccordement aux radiateurs, le Soft hydro 14 ou 18 kW est mieux adapté. On dimensionne ça gratuitement lors du diagnostic à domicile." },
@@ -270,7 +270,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // DIELLE — tier 2, combustion brevetée par alimentation par le bas
+  // DIELLE , tier2, combustion brevetée par alimentation par le bas
   // ───────────────────────────────────────────────────────────────────
   dielle: {
     slug: "dielle",
@@ -310,7 +310,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // FERLUX — tier 2, fabricant espagnol, rapport qualité-prix
+  // FERLUX , tier2, fabricant espagnol, rapport qualité-prix
   // ───────────────────────────────────────────────────────────────────
   ferlux: {
     slug: "ferlux",

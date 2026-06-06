@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://mister-pellets.be/nos-marques" },
 };
 
-/** Comparatif des 3 marques premium — brief marques §E.1. */
+/** Comparatif des 3 marques premium, brief marques §E.1. */
 const COMPARISON: { criterion: string; edilkamin: string; ek63: string; girolami: string }[] = [
   {
     criterion: "Positionnement",
@@ -99,7 +99,7 @@ export default function NosMarquesHubPage() {
             Les marques que <span className="mp-italic">nous distribuons</span>
           </>
         }
-        description="Plutôt que de tout vendre, on s'est limités à trois marques italiennes qui couvrent les besoins qu'on voit sur le terrain en Wallonie. Edilkamin pour la profondeur de gamme, EK63 (sa marque sœur) pour le connecté à prix accessible, Girolami pour son brevet polycombustible qui nettoie le brasier tout seul. Chaque marque a son créneau, on te dit franchement laquelle est faite pour toi."
+        description="Plutôt que de tout vendre, on s'est limités à trois marques italiennes qui couvrent les besoins qu'on voit sur le terrain en Wallonie. Edilkamin pour la profondeur de gamme, EK63 (sa marque sœur) pour le connecté à prix accessible, Girolami pour son brevet polycombustible qui nettoie le brasier tout seul. Chaque marque a son créneau, on vous dit franchement laquelle est faite pour vous."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Nos marques" },
@@ -163,7 +163,7 @@ export default function NosMarquesHubPage() {
       <section className="bg-mp-beige py-16 md:py-24">
         <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 max-w-3xl">
-            Tu hésites ? On résume
+            Vous hésitez ? On résume
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {ADVICE.map((a) => (
@@ -188,8 +188,8 @@ export default function NosMarquesHubPage() {
       </section>
 
       <CTAFinal
-        title="Pas sûr de la marque qui te correspond ?"
-        description="On t'oriente en 5 minutes selon ta maison, ton budget et ton usage. Aucune obligation."
+        title="Pas sûr de la marque qui vous correspond ?"
+        description="On vous oriente en 5 minutes selon votre maison, votre budget et votre usage. Aucune obligation."
       />
     </>
   );

@@ -107,7 +107,7 @@ export default async function InstallationLocalePage({ params }: Props) {
       <section className="bg-mp-beige py-16 md:py-20">
         <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-4">
-            On t&apos;installe ton {brand.name} partout en {province.name}
+            On vous installe votre {brand.name} partout en {province.name}
           </h2>
           <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 max-w-3xl">
             {province.delivery}
@@ -187,7 +187,7 @@ export default async function InstallationLocalePage({ params }: Props) {
 
       <CTAFinal
         title={`Devis pour un ${brand.name} en ${province.name}`}
-        description="Donne-nous quelques infos sur ta maison, on chiffre la pose en 48h avec primes incluses."
+        description="Donnez-nous quelques infos sur votre maison, on chiffre la pose en 48h avec primes incluses."
       />
     </>
   );

@@ -41,10 +41,10 @@ export function CartDrawer() {
           <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
             <ShoppingBag className="h-16 w-16 text-mp-sand mb-4" />
             <h3 className="text-xl font-semibold text-mp-green-deep mb-2">
-              Ton panier est vide
+              Votre panier est vide
             </h3>
             <p className="text-mp-ink-soft mb-6 leading-relaxed">
-              Ajoute un poêle depuis la boutique ou demande un devis sur mesure.
+              Ajoutez un poêle depuis la boutique ou demandez un devis sur mesure.
             </p>
             <div className="flex flex-col gap-2 w-full max-w-xs">
               <SheetClose asChild>
@@ -123,7 +123,7 @@ export function CartDrawer() {
 
               <p className="text-xs text-mp-ink-soft pt-2">
                 ⚠️ La <strong>pose</strong> n'est pas incluse dans les prix produits ci-dessus.
-                Pour un projet avec installation, on te recommande de passer plutôt par le{" "}
+                Pour un projet avec installation, on vous recommande de passer plutôt par le{" "}
                 <Link href="/demande-de-devis" className="text-mp-orange-flame underline" onClick={close}>
                   formulaire de devis
                 </Link>

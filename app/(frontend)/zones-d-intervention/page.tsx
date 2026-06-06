@@ -143,15 +143,15 @@ export default function ZonesDInterventionPage() {
           </h2>
           <p className="text-lg text-mp-ink-soft leading-relaxed mb-6">
             On intervient aussi sur Andenne, Eghezée, Jodoigne, Huy, Marche-en-Famenne, Bastogne,
-            Florenville, La Louvière, Nivelles, Soignies, et beaucoup d'autres. Si ta commune n'est
-            pas listée explicitement, demande quand même, la zone est large.
+            Florenville, La Louvière, Nivelles, Soignies, et beaucoup d'autres. Si votre commune n'est
+            pas listée explicitement, demandez quand même, la zone est large.
           </p>
         </div>
       </section>
 
       <CTAFinal
-        title="Ta commune n'est pas listée ?"
-        description="Tape ton code postal dans le devis, on te dit immédiatement si on intervient et combien ça coûte."
+        title="Votre commune n'est pas listée ?"
+        description="Tapez votre code postal dans le devis, on vous dit immédiatement si on intervient et combien ça coûte."
       />
     </>
   );

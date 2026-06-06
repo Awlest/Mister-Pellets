@@ -167,8 +167,8 @@ export default async function BoutiquePage({ searchParams }: Props) {
           {/* Disclaimer Phase 5 */}
           <div className="mb-8 rounded-xl bg-mp-orange-light/50 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink">
             <strong>Catalogue en construction.</strong> La boutique complète avec 61 modèles, panier
-            et paiement Stripe sera enrichie progressivement. En attendant, voici un échantillon
-            représentatif. Pour un devis sur n'importe quel modèle (même non listé), utilise le{" "}
+            et paiement Mollie sera enrichie progressivement. En attendant, voici un échantillon
+            représentatif. Pour un devis sur n'importe quel modèle (même non listé), utilisez le{" "}
             <Link href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline font-semibold">
               formulaire de devis
             </Link>
@@ -284,7 +284,7 @@ export default async function BoutiquePage({ searchParams }: Props) {
           <div className="mb-6 text-sm text-mp-ink-soft">
             <strong className="text-mp-green-deep">{filtered.length}</strong>{" "}
             {filtered.length === 1 ? "modèle" : "modèles"}
-            {activeFilterCount > 0 && ` correspondant à ta sélection`}
+            {activeFilterCount > 0 && ` correspondant à votre sélection`}
           </div>
 
           {filtered.length === 0 ? (
@@ -295,9 +295,9 @@ export default async function BoutiquePage({ searchParams }: Props) {
               <p className="text-sm text-mp-ink-soft">
                 Notre catalogue complet couvre 61 modèles. En attendant l'import complet,{" "}
                 <Link href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline">
-                  demande un devis personnalisé
+                  demandez un devis personnalisé
                 </Link>{" "}
-               , on couvre toute la gamme Edilkamin, EK63, Girolami, Dielle, Ferlux.
+               , on couvre toute la gamme Edilkamin, EK63 et Girolami.
               </p>
             </div>
           ) : (
@@ -311,8 +311,8 @@ export default async function BoutiquePage({ searchParams }: Props) {
       </section>
 
       <CTAFinal
-        title="Pas trouvé le modèle qu'il te faut ?"
-        description="Notre catalogue complet couvre 61 modèles. Décris ton projet, on te propose 2 ou 3 options pertinentes, prime Wallonie déjà calculée."
+        title="Pas trouvé le modèle qu'il vous faut ?"
+        description="Notre catalogue complet couvre 61 modèles. Décrivez votre projet, on vous propose 2 ou 3 options pertinentes, prime Wallonie déjà calculée."
       />
     </>
   );

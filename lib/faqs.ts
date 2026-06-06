@@ -5,6 +5,8 @@
  * page d'accueil, guides, articles blog) + nouvelles questions ajoutées
  * pour combler les angles morts (cf. doc §P2.5).
  *
+ * Voix : vouvoiement (charte juin 2026), installateur wallon, zéro tiret long.
+ * 3 marques mises en avant : Edilkamin, EK63, Girolami. Paiement Mollie.
  * Stratégie GEO : première phrase de chaque réponse = la réponse complète,
  * le reste détaille. Réponses 50 à 200 mots. Mention naturelle de la marque
  * et de la zone géographique (Mister Pellets, Wallonie). Schema FAQPage
@@ -57,14 +59,14 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Quelle est la différence entre Mister Pellets et Awlest ?",
     answer:
-      "Mister Pellets est la marque commerciale spécialisée dans les poêles à pellets d'Awlest SRL, société active en Wallonie depuis 2016. Concrètement, quand tu reçois un devis ou une facture de notre part, le nom Awlest apparaît sur le document, parce que c'est la société qui porte juridiquement l'activité. Mister Pellets, c'est le visage métier. Awlest, c'est la structure légale derrière. Même équipe, même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212).",
+      "Mister Pellets est la marque commerciale spécialisée dans les poêles à pellets d'Awlest SRL, société active en Wallonie depuis 2016. Concrètement, quand vous recevez un devis ou une facture de notre part, le nom Awlest apparaît sur le document, parce que c'est la société qui porte juridiquement l'activité. Mister Pellets, c'est le visage métier. Awlest, c'est la structure légale derrière. Même équipe, même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212).",
   },
   {
     id: "general-delai",
     category: "general",
     question: "Combien de temps entre la demande de devis et la pose ?",
     answer:
-      "Compte 3 à 6 semaines en saison normale, plus long de septembre à décembre où la demande est forte. Le diagnostic à domicile est planifiable dans la semaine qui suit ta demande. Le devis tombe sous 48 heures ouvrées après visite. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours, les configurations spécifiques (couleurs rares, hydros sur-mesure) en 3 à 5 semaines.",
+      "Comptez 3 à 6 semaines en saison normale, plus long de septembre à décembre où la demande est forte. Le diagnostic à domicile est planifiable dans la semaine qui suit votre demande. Le devis tombe sous 48 heures ouvrées après visite. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours, les configurations spécifiques (couleurs rares, hydros sur-mesure) en 3 à 5 semaines.",
   },
   {
     id: "general-volume",
@@ -96,14 +98,14 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Quelle puissance de poêle pour 100 m² bien isolés ?",
     answer:
-      "Pour 100 m² PEB B, vise 8 à 10 kW. Pour la même surface en PEB A (passif ou quasi-passif), 7 à 8 kW suffisent. Pour PEB C-D, monte à 10-12 kW. Pour PEB E ou pire, prévois 12 à 15 kW. Multiplie ta surface par 0,10 si la PEB est bonne (A-B), par 0,12 si moyenne (C-D), par 0,15 si faible (E-G). Ajoute 10 % par 25 cm de plafond au-dessus de 2,50 m. Sur le terrain, on affine toujours en regardant la maison.",
+      "Pour 100 m² PEB B, visez 8 à 10 kW. Pour la même surface en PEB A (passif ou quasi-passif), 7 à 8 kW suffisent. Pour PEB C-D, montez à 10-12 kW. Pour PEB E ou pire, prévoyez 12 à 15 kW. Multipliez votre surface par 0,10 si la PEB est bonne (A-B), par 0,12 si moyenne (C-D), par 0,15 si faible (E-G). Ajoutez 10 % par 25 cm de plafond au-dessus de 2,50 m. Sur le terrain, on affine toujours en regardant la maison.",
   },
   {
     id: "choisir-puissance-150",
     category: "choisir",
     question: "Quelle puissance pour 150 m² mal isolés ?",
     answer:
-      "Pour 150 m² en PEB E ou F, vise 18 à 22 kW. À ce niveau de puissance et de surface, mieux vaut passer sur un canalisable qui distribue la chaleur dans plusieurs pièces, voire un hydro raccordé aux radiateurs si la maison a déjà un circuit central. Un seul poêle d'air à 22 kW dans une grande maison mal isolée chauffera essentiellement la pièce d'installation et laissera les autres au froid. Le diagnostic à domicile valide la stratégie avant signature du devis.",
+      "Pour 150 m² en PEB E ou F, visez 18 à 22 kW. À ce niveau de puissance et de surface, mieux vaut passer sur un canalisable qui distribue la chaleur dans plusieurs pièces, voire un hydro raccordé aux radiateurs si la maison a déjà un circuit central. Un seul poêle d'air à 22 kW dans une grande maison mal isolée chauffera essentiellement la pièce d'installation et laissera les autres au froid. Le diagnostic à domicile valide la stratégie avant signature du devis.",
   },
   {
     id: "choisir-poele-vs-chaudiere",
@@ -117,14 +119,14 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Mon poêle peut-il fonctionner pendant une coupure de courant ?",
     answer:
-      "Non. Un poêle à pellets a besoin d'électricité pour faire fonctionner sa résistance d'allumage, son motoréducteur de vis sans fin et son ventilateur d'extraction des fumées. En cas de coupure, le poêle s'éteint en sécurité et redémarre tout seul au retour du courant si tu l'avais laissé en mode automatique. Pour une autonomie totale, il faudrait coupler avec un onduleur ou un groupe électrogène, ce qu'on déconseille pour un usage résidentiel classique.",
+      "Non. Un poêle à pellets a besoin d'électricité pour faire fonctionner sa résistance d'allumage, son motoréducteur de vis sans fin et son ventilateur d'extraction des fumées. En cas de coupure, le poêle s'éteint en sécurité et redémarre tout seul au retour du courant si vous l'aviez laissé en mode automatique. Pour une autonomie totale, il faudrait coupler avec un onduleur ou un groupe électrogène, ce qu'on déconseille pour un usage résidentiel classique.",
   },
   {
     id: "choisir-sans-cheminee",
     category: "choisir",
     question: "Peut-on installer un poêle à pellets sans cheminée existante ?",
     answer:
-      "Oui, deux options. Première : ventouse en façade, possible uniquement avec les modèles étanches certifiés. C'est la solution la plus simple et la moins chère (pas de tubage en toiture, pas de complexité d'étanchéité). Deuxième : conduit en toiture, plus cher (1 200 à 2 500 € selon la complexité du toit) mais utilisable avec tous les modèles. Le diagnostic à domicile valide quelle option est techniquement faisable chez toi.",
+      "Oui, deux options. Première : ventouse en façade, possible uniquement avec les modèles étanches certifiés. C'est la solution la plus simple et la moins chère (pas de tubage en toiture, pas de complexité d'étanchéité). Deuxième : conduit en toiture, plus cher (1 200 à 2 500 € selon la complexité du toit) mais utilisable avec tous les modèles. Le diagnostic à domicile valide quelle option est techniquement faisable chez vous.",
   },
   {
     id: "choisir-etanche",
@@ -138,7 +140,7 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Canalisable ou hydro, comment choisir ?",
     answer:
-      "Canalisable si tu veux chauffer ta pièce de vie principale + 1 ou 2 pièces secondaires (chambres, bureau) via un réseau de gaines isolées. Hydro si tu veux chauffer toute la maison via le circuit existant de radiateurs ou de plancher chauffant, typiquement en remplacement d'une chaudière mazout. Hydro est nettement plus cher (8 000 à 14 000 € posé contre 5 500 à 8 000 € pour un canalisable) mais c'est la seule solution pour un chauffage central complet.",
+      "Canalisable si vous voulez chauffer votre pièce de vie principale plus 1 ou 2 pièces secondaires (chambres, bureau) via un réseau de gaines isolées. Hydro si vous voulez chauffer toute la maison via le circuit existant de radiateurs ou de plancher chauffant, typiquement en remplacement d'une chaudière mazout. Hydro est nettement plus cher (8 000 à 14 000 € posé contre 5 500 à 8 000 € pour un canalisable) mais c'est la seule solution pour un chauffage central complet.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -149,7 +151,7 @@ export const FAQS: FaqItem[] = [
     category: "marques",
     question: "Quelles marques distribuez-vous ?",
     answer:
-      "Quatre marques sélectionnées pour couvrir l'ensemble des besoins wallons. Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse avec une gamme très large et le Wi-Fi de série. EK63 est la marque sœur du groupe Edilkamin, orientée moderne et connectée à un prix plus accessible. Dielle (Italie) se distingue par son système breveté de combustion par alimentation par le bas (flamme plus calme, auto-nettoyage, gamme complète y compris hybride bois et pellets). Ferlux (Espagne, plus de 28 ans) propose une gamme complète à excellent rapport qualité-prix.",
+      "Trois marques, choisies pour couvrir l'ensemble des besoins wallons. Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse, gamme très large et Wi-Fi de série sur les modèles récents. EK63, la marque sœur du groupe Edilkamin, vise le moderne et le connecté à un prix plus accessible. Girolami (Italie, depuis 1970) est un fabricant familial au brevet Source Feeding autonettoyant, avec une gamme hybride bois-pellet et des thermopoêles hydro pour remplacer une chaudière. Les trois sont posées et suivies par notre équipe, avec le même SAV de proximité.",
   },
   {
     id: "marques-edilkamin-vs-ek63",
@@ -159,25 +161,25 @@ export const FAQS: FaqItem[] = [
       "EK63 est la marque sœur d'Edilkamin, créée par le même groupe italien. EK63 propose des modèles modernes et connectés à un prix plus accessible. Edilkamin garde une gamme plus large (notamment les modèles haut de gamme et les inserts) et un positionnement plus traditionnel. Côté technique, les deux marques partagent les mêmes standards de qualité et les mêmes certifications (CE, EN 14785, écodesign 2022). Le choix se fait souvent sur le design et le budget.",
   },
   {
-    id: "marques-dielle-particularite",
+    id: "marques-girolami-particularite",
     category: "marques",
-    question: "Qu'est-ce qui rend Dielle différent des autres ?",
+    question: "Qu'est-ce qui rend Girolami différent des autres ?",
     answer:
-      "Dielle utilise un système breveté de combustion par alimentation par le bas du brasero (vis sans fin en inox depuis le bas), alors que la majorité des poêles alimentent par le haut. Conséquences concrètes : flamme plus naturelle et plus calme (proche d'un poêle à bois traditionnel), auto-nettoyage du brasero (moins d'entretien), tolérance accrue aux pellets de qualité variable, fonctionnement plus silencieux. La gamme inclut aussi un modèle hybride qui fonctionne au pellets ET au bois (Ghibli Hybrid Idro), unique sur le marché.",
+      "Girolami a un brevet maison, le Source Feeding : le pellet est poussé sous le brasier au lieu de tomber dessus, et les cendres sont chassées dans un bac sous le foyer. Concrètement, le brasier reste propre tout seul, vous ne grattez plus tous les jours, vous videz le cendrier une fois par semaine. C'est un fabricant familial italien de Sant'Oreste, près de Rome, depuis 1970, avec environ 65 % de part de marché en Italie sur le multicombustible domestique. Autre signature : la gamme hybride bois-pellet (le Soft, Good Design Award 2022), où une sonde reconnaît seule le combustible chargé et bascule entre bûche et pellet sans toucher au menu.",
   },
   {
-    id: "marques-ferlux-budget",
+    id: "marques-girolami-bois-pellet",
     category: "marques",
-    question: "Ferlux est-il vraiment moins cher que les marques italiennes ?",
+    question: "Un Girolami fonctionne-t-il au bois et aux pellets ?",
     answer:
-      "Oui, Ferlux propose un excellent rapport qualité-prix avec des poêles à partir de 1 600 à 2 500 € matériel seul. C'est un fabricant espagnol établi depuis plus de 28 ans, distribué dans plus de 30 pays, avec une gamme complète (air, canalisable, hydro). Le rendement annoncé monte jusqu'à 94 %, parmi les meilleurs du marché. Made in Spain, certifications CE et EN 13240. Pour une résidence principale ou secondaire avec un budget maîtrisé, Ferlux tient parfaitement la route.",
+      "Oui, sur la gamme hybride, le Soft en tête. Le Fuel Convert System détecte tout seul le combustible chargé : des pellets, ça tourne au pellet ; des bûches, ça bascule en mode bois, sans toucher au menu. Vous allumez au pellet le matin pour l'automatique, vous finissez la soirée à la bûche si l'envie vous prend. Le reste de la gamme (Vert, Flow, Curvy, Split) est en pellet, avec le brasier autonettoyant et un poêle étanche compatible avec les maisons bien isolées.",
   },
   {
     id: "marques-best-seller",
     category: "marques",
     question: "Quels sont vos modèles best-sellers ?",
     answer:
-      "Côté Edilkamin : la Blade Plus 9 kW (étanche moderne pour BBC) et la Cherie Up 11 kW (polyvalente). Côté EK63 : la Tweed 90+ canalisable 9 kW (très populaire en Wallonie) et la Like 80 pour les appartements. Côté Dielle : la série Round (air design rond) et la série Bump Idro pour les hydros. Côté Ferlux : la Helen pour l'air et la Lyra pour le canalisable. Le diagnostic à domicile précise quel modèle correspond le mieux à ta configuration.",
+      "Côté Edilkamin : la Blade Plus 9 kW (étanche moderne pour BBC) et la Cherie Up 11 kW (polyvalente). Côté EK63 : la Tweed 90+ canalisable 9 kW (très populaire en Wallonie) et la Like 80 pour les appartements. Côté Girolami : le Soft hydro (best-seller de la marque, Good Design Award 2022) pour remplacer une chaudière, et le Vert canalisable pour chauffer deux pièces. Le diagnostic à domicile précise quel modèle correspond le mieux à votre configuration.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -188,14 +190,14 @@ export const FAQS: FaqItem[] = [
     category: "pellets",
     question: "Combien de pellets consomme un poêle de 10 kW par an ?",
     answer:
-      "Pour une maison wallonne PEB B-C de 120 m² avec un poêle 10 kW en chauffage principal, compte 1,5 à 2 tonnes par saison de chauffe (octobre à avril). En appoint sur les 3 mois d'hiver les plus froids, plutôt 600 à 900 kg. La consommation réelle dépend de l'isolation, de la température de consigne, du nombre d'occupants, et de la rigueur de l'hiver. Sur 5 ans, un Wallon moyen consomme entre 7 et 10 tonnes de pellets pour un usage chauffage principal.",
+      "Pour une maison wallonne PEB B-C de 120 m² avec un poêle 10 kW en chauffage principal, comptez 1,5 à 2 tonnes par saison de chauffe (octobre à avril). En appoint sur les 3 mois d'hiver les plus froids, plutôt 600 à 900 kg. La consommation réelle dépend de l'isolation, de la température de consigne, du nombre d'occupants, et de la rigueur de l'hiver. Sur 5 ans, un Wallon moyen consomme entre 7 et 10 tonnes de pellets pour un usage chauffage principal.",
   },
   {
     id: "pellets-enplus-vs-dinplus",
     category: "pellets",
     question: "ENplus A1 ou DINplus : quelle différence ?",
     answer:
-      "Les deux certifications garantissent la même qualité pour un usage domestique en Belgique. ENplus A1 et DINplus livrent ≥ 4,6 kWh/kg, ≤ 0,7 % de cendres, ≤ 10 % d'humidité, traçabilité du sac jusqu'à la scierie. ENplus est plus répandue dans les enseignes wallonnes. DINplus impose un seuil de cendres légèrement plus strict (≤ 0,5 %). Choisis selon disponibilité et prix. Refuse tout sac sans certification visible : un pellet douteux peut faire 3,5 kWh/kg avec 2 % de cendres et casse l'échangeur en 2 saisons.",
+      "Les deux certifications garantissent la même qualité pour un usage domestique en Belgique. ENplus A1 et DINplus livrent ≥ 4,6 kWh/kg, ≤ 0,7 % de cendres, ≤ 10 % d'humidité, traçabilité du sac jusqu'à la scierie. ENplus est plus répandue dans les enseignes wallonnes. DINplus impose un seuil de cendres légèrement plus strict (≤ 0,5 %). Choisissez selon disponibilité et prix. Refusez tout sac sans certification visible : un pellet douteux peut faire 3,5 kWh/kg avec 2 % de cendres et casse l'échangeur en 2 saisons.",
   },
   {
     id: "pellets-prix-tonne",
@@ -209,14 +211,14 @@ export const FAQS: FaqItem[] = [
     category: "pellets",
     question: "Comment stocker les pellets correctement ?",
     answer:
-      "Stockage sec, ventilé, à l'abri du gel intense (sous -10 °C, les pellets se fragilisent). Pour 800 kg/an de consommation, prévois 4 m² de palette dans un garage ou un abri. Évite les sous-sols humides : le pellet absorbe vite l'humidité et perd en pouvoir calorifique dès 12 % d'eau. Pose les sacs sur palette bois pour éviter le contact direct avec un sol béton humide. Vérifie la date d'ensachage : un pellet de plus de 18 mois a souvent perdu en cohésion.",
+      "Stockage sec, ventilé, à l'abri du gel intense (sous -10 °C, les pellets se fragilisent). Pour 800 kg/an de consommation, prévoyez 4 m² de palette dans un garage ou un abri. Évitez les sous-sols humides : le pellet absorbe vite l'humidité et perd en pouvoir calorifique dès 12 % d'eau. Posez les sacs sur palette bois pour éviter le contact direct avec un sol béton humide. Vérifiez la date d'ensachage : un pellet de plus de 18 mois a souvent perdu en cohésion.",
   },
   {
     id: "pellets-mauvaise-qualite",
     category: "pellets",
     question: "Quels sont les risques avec un pellet de mauvaise qualité ?",
     answer:
-      "Trois risques : combustion plus mauvaise (rendement réduit de 20 à 30 %, donc tu brûles plus de pellets pour la même chaleur), encrassement de l'échangeur 3 fois plus rapide (mâchefer dans le creuset, blocage de la sonde de fumée), et casse prématurée des composants. Sur le terrain, on a vu des poêles 3 ans tomber en panne pour cause de pellets bon marché non certifiés. La garantie ne couvre pas ce type de sinistre. L'économie apparente de 2 € le sac est largement perdue en surconsommation et en SAV.",
+      "Trois risques : combustion plus mauvaise (rendement réduit de 20 à 30 %, donc vous brûlez plus de pellets pour la même chaleur), encrassement de l'échangeur 3 fois plus rapide (mâchefer dans le creuset, blocage de la sonde de fumée), et casse prématurée des composants. Sur le terrain, on a vu des poêles de 3 ans tomber en panne à cause de pellets bon marché non certifiés. La garantie ne couvre pas ce type de sinistre. L'économie apparente de 2 € le sac est largement perdue en surconsommation et en SAV.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -227,7 +229,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Combien de temps prend la pose d'un poêle à pellets ?",
     answer:
-      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec toi en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours. L'équipe arrive entre 8h et 9h, prépare la zone (bâches, plaques de protection), pose, raccorde, étanchéifie, met en service.",
+      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours. L'équipe arrive entre 8h et 9h, prépare la zone (bâches, plaques de protection), pose, raccorde, étanchéifie, met en service.",
   },
   {
     id: "installation-plafond",
@@ -248,7 +250,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Quelle distance entre le poêle et un mur en bois ?",
     answer:
-      "La distance minimale réglementaire dépend du modèle et figure sur la fiche constructeur. Typiquement, compte 20 cm latéralement et 30 à 40 cm à l'arrière pour un poêle à pellets moderne (ces distances sont nettement réduites par rapport aux poêles à bois grâce à l'enveloppe mieux isolée). Pour un mur sensible (bois, papier peint, placo non protégé), une plaque de protection murale incombustible est ajoutée si la distance ne peut pas être respectée.",
+      "La distance minimale réglementaire dépend du modèle et figure sur la fiche constructeur. Typiquement, comptez 20 cm latéralement et 30 à 40 cm à l'arrière pour un poêle à pellets moderne (ces distances sont nettement réduites par rapport aux poêles à bois grâce à l'enveloppe mieux isolée). Pour un mur sensible (bois, papier peint, placo non protégé), une plaque de protection murale incombustible est ajoutée si la distance ne peut pas être respectée.",
   },
   {
     id: "installation-appartement",
@@ -280,7 +282,7 @@ export const FAQS: FaqItem[] = [
     category: "primes",
     question: "Comment savoir dans quelle catégorie de revenus je tombe ?",
     answer:
-      "La catégorie est définie par le revenu de référence du ménage figurant sur l'avertissement-extrait de rôle de l'avant-dernière année (pour une demande en 2026, on regarde les revenus 2024). C'est un revenu net imposable globalisé du ménage. R1 : ≤ 24 600 €. R2 : 24 601 à 39 300 €. R3 : 39 301 à 58 900 €. R4 : > 58 900 €. R5 (non éligible) : > 122 800 €. Le numéro gratuit 1718 du SPW te donne ta catégorie en quelques minutes.",
+      "La catégorie est définie par le revenu de référence du ménage figurant sur l'avertissement-extrait de rôle de l'avant-dernière année (pour une demande en 2026, on regarde les revenus 2024). C'est un revenu net imposable globalisé du ménage. R1 : ≤ 24 600 €. R2 : 24 601 à 39 300 €. R3 : 39 301 à 58 900 €. R4 : > 58 900 €. R5 (non éligible) : > 122 800 €. Le numéro gratuit 1718 du SPW vous donne votre catégorie en quelques minutes.",
   },
   {
     id: "primes-audit-obligatoire",
@@ -294,28 +296,28 @@ export const FAQS: FaqItem[] = [
     category: "primes",
     question: "Comment savoir si mon poêle est sur la liste officielle SPW ?",
     answer:
-      "La liste officielle des appareils éligibles est publiée par le SPW Logement (logement.wallonie.be) et mise à jour régulièrement. Tous les modèles que distribue Mister Pellets (Edilkamin, EK63, Dielle, Ferlux) répondent aux critères techniques de base : rendement saisonnier ≥ 87 %, conformité écodesign 2022. On vérifie systématiquement le numéro de modèle exact dans la liste avant de signer le devis. Si un modèle n'y figure pas, on te dirige vers une référence équivalente éligible.",
+      "La liste officielle des appareils éligibles est publiée par le SPW Logement (logement.wallonie.be) et mise à jour régulièrement. Tous les modèles que distribue Mister Pellets (Edilkamin, EK63, Girolami) répondent aux critères techniques de base : rendement saisonnier ≥ 87 %, conformité écodesign 2022. On vérifie systématiquement le numéro de modèle exact dans la liste avant de signer le devis. Si un modèle n'y figure pas, on vous dirige vers une référence équivalente éligible.",
   },
   {
     id: "primes-delai-versement",
     category: "primes",
     question: "Combien de temps pour recevoir la prime sur mon compte ?",
     answer:
-      "Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai. En attendant, tu paies normalement Mister Pellets et tu reçois la prime ensuite, directement sur ton compte. Tu as 8 mois après la dernière facture pour déposer un dossier complet, ensuite c'est forclos.",
+      "Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai. En attendant, vous payez normalement Mister Pellets et vous recevez la prime ensuite, directement sur votre compte. Vous avez 8 mois après la dernière facture pour déposer un dossier complet, ensuite c'est forclos.",
   },
   {
     id: "primes-cumul-tva",
     category: "primes",
     question: "Puis-je cumuler la prime poêle pellets avec la TVA réduite à 6 % ?",
     answer:
-      "Oui, automatiquement. La TVA à 6 % au lieu de 21 % s'applique d'office sur la pose si ton logement a plus de 10 ans (cas le plus fréquent en Wallonie). C'est appliqué directement par l'installateur sur la facture, ce n'est pas une prime à demander. Tu peux aussi cumuler avec un prêt à taux 0 % (Renopack ou Rénoprêt) jusqu'à 60 000 €, et avec d'éventuelles primes communales (cuve mazout, rénovation chauffage). Le cumul global est plafonné à 50 000 € par logement.",
+      "Oui, automatiquement. La TVA à 6 % au lieu de 21 % s'applique d'office sur la pose si votre logement a plus de 10 ans (cas le plus fréquent en Wallonie). C'est appliqué directement par l'installateur sur la facture, ce n'est pas une prime à demander. Vous pouvez aussi cumuler avec un prêt à taux 0 % (Renopack ou Rénoprêt) jusqu'à 60 000 €, et avec d'éventuelles primes communales (cuve mazout, rénovation chauffage). Le cumul global est plafonné à 50 000 € par logement.",
   },
   {
     id: "primes-r5",
     category: "primes",
     question: "Et si mes revenus dépassent 122 800 € ?",
     answer:
-      "Tu es en catégorie R5 et tu n'es plus éligible aux primes Habitation depuis le 14 février 2025. Tu peux toutefois bénéficier de la TVA réduite à 6 % (logement de plus de 10 ans) et du prêt à taux 0 % Renopack ou Rénoprêt. La prime régionale poêle pellets est exclue, mais l'opération reste rentable sur le long terme grâce à la TVA réduite et aux économies de combustible (pellets vs mazout vs gaz).",
+      "Vous êtes en catégorie R5 et vous n'êtes plus éligible aux primes Habitation depuis le 14 février 2025. Vous pouvez toutefois bénéficier de la TVA réduite à 6 % (logement de plus de 10 ans) et du prêt à taux 0 % Renopack ou Rénoprêt. La prime régionale poêle pellets est exclue, mais l'opération reste rentable sur le long terme grâce à la TVA réduite et aux économies de combustible (pellets vs mazout vs gaz).",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -326,35 +328,35 @@ export const FAQS: FaqItem[] = [
     category: "entretien",
     question: "À quelle fréquence faire ramoner mon poêle ?",
     answer:
-      "Une fois par an minimum en Wallonie, c'est obligatoire pour tous les poêles à pellets et requis par les compagnies d'assurance habitation. Le ramonage du conduit de fumée se fait par un ramoneur certifié (50 à 90 € en Wallonie). Garde toujours la facture : sans certificat de ramonage annuel, ton assurance peut refuser de couvrir un sinistre lié au poêle. Mister Pellets coordonne le ramonage avec l'entretien annuel sur demande.",
+      "Une fois par an minimum en Wallonie, c'est obligatoire pour tous les poêles à pellets et requis par les compagnies d'assurance habitation. Le ramonage du conduit de fumée se fait par un ramoneur certifié (50 à 90 € en Wallonie). Gardez toujours la facture : sans certificat de ramonage annuel, votre assurance peut refuser de couvrir un sinistre lié au poêle. Mister Pellets coordonne le ramonage avec l'entretien annuel sur demande.",
   },
   {
     id: "entretien-poele-eteint",
     category: "entretien",
     question: "Mon poêle s'éteint tout seul, que faire ?",
     answer:
-      "Sept causes couvrent 95 % des cas, dans l'ordre de fréquence : creuset encrassé (40 %), pellets humides ou de mauvaise qualité (20 %), sonde de fumée encrassée (15 %), échangeur bouché (10 %), vis sans fin bloquée (8 %), prise d'air comburant obstruée (5 %), conduit non ramoné ou refoulement (2 %). À froid, vide et brosse le creuset, contrôle la qualité des pellets, essuie la sonde de fumée. Si rien ne fonctionne après ces 3 vérifications, appelle le SAV.",
+      "Sept causes couvrent 95 % des cas, dans l'ordre de fréquence : creuset encrassé (40 %), pellets humides ou de mauvaise qualité (20 %), sonde de fumée encrassée (15 %), échangeur bouché (10 %), vis sans fin bloquée (8 %), prise d'air comburant obstruée (5 %), conduit non ramoné ou refoulement (2 %). À froid, videz et brossez le creuset, contrôlez la qualité des pellets, essuyez la sonde de fumée. Si rien ne fonctionne après ces 3 vérifications, appelez le SAV.",
   },
   {
     id: "entretien-cout-annuel",
     category: "entretien",
     question: "Quel est le coût moyen d'un entretien annuel ?",
     answer:
-      "À titre indicatif, un entretien annuel complet à domicile coûte sur devis selon la zone et la complexité. L'opération dure environ 90 minutes : démontage, nettoyage du creuset, de l'échangeur, de la chambre de combustion, du conduit interne, de la sonde de fumée, du ventilateur d'extraction, vérification des joints et des paramètres de combustion. Compte aussi 50 à 90 € pour le ramonage du conduit par un ramoneur certifié, à programmer en parallèle.",
+      "À titre indicatif, un entretien annuel complet à domicile coûte sur devis selon la zone et la complexité. L'opération dure environ 90 minutes : démontage, nettoyage du creuset, de l'échangeur, de la chambre de combustion, du conduit interne, de la sonde de fumée, du ventilateur d'extraction, vérification des joints et des paramètres de combustion. Comptez aussi 50 à 90 € pour le ramonage du conduit par un ramoneur certifié, à programmer en parallèle.",
   },
   {
     id: "entretien-quotidien",
     category: "entretien",
     question: "Quel entretien quotidien est nécessaire ?",
     answer:
-      "Vide les cendres tous les 2 à 3 jours en pleine saison de chauffe. Brosse le creuset toutes les semaines avec une brosse métallique pour décoller le mâchefer (résidu vitrifié qui bouche les trous d'admission d'air). Essuie la vitre avec un chiffon humide ou un produit dégraissant à froid. Tous les 15 jours, actionne la canne de ramonage interne (levier en façade sur les Edilkamin et EK63). C'est l'entretien le plus important pour préserver la durée de vie du poêle.",
+      "Videz les cendres tous les 2 à 3 jours en pleine saison de chauffe. Brossez le creuset toutes les semaines avec une brosse métallique pour décoller le mâchefer (résidu vitrifié qui bouche les trous d'admission d'air). Essuyez la vitre avec un chiffon humide ou un produit dégraissant à froid. Tous les 15 jours, actionnez la canne de ramonage interne (levier en façade sur les Edilkamin et EK63). C'est l'entretien le plus important pour préserver la durée de vie du poêle.",
   },
   {
     id: "entretien-sav-delai",
     category: "entretien",
     question: "Quel est le délai d'intervention SAV ?",
     answer:
-      "48 à 72 heures dans la zone Fernelmont et 50 km autour, hors période de pic hivernal où le délai peut s'étendre à 5 à 7 jours. Le SAV est assuré directement par notre équipe (pas de sous-traitance), avec stock de pièces détachées Edilkamin, EK63, Dielle et Ferlux disponibles sous 48 heures. Coût intervention SAV : déplacement + main d'œuvre 1 à 2 h en moyenne, plus pièces si remplacement nécessaire.",
+      "48 à 72 heures dans la zone Fernelmont et 50 km autour, hors période de pic hivernal où le délai peut s'étendre à 5 à 7 jours. Le SAV est assuré directement par notre équipe (pas de sous-traitance), avec stock de pièces détachées Edilkamin, EK63 et Girolami disponibles sous 48 heures. Coût intervention SAV : déplacement + main d'œuvre 1 à 2 h en moyenne, plus pièces si remplacement nécessaire.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -365,28 +367,28 @@ export const FAQS: FaqItem[] = [
     category: "boutique",
     question: "Livrez-vous au-delà de 50 km de Fernelmont ?",
     answer:
-      "Oui, on couvre toute la Wallonie au cas par cas. La livraison est gratuite dans un rayon de 50 km autour de notre showroom de Fernelmont (Namur, Andenne, Wavre, Charleroi, Huy, Liège partiellement). Au-delà, une participation aux frais de déplacement est chiffrée transparente dans le devis (typiquement 85 € forfait pour le reste de la Belgique). On n'intervient pas en Flandre ni à Bruxelles faute d'équipe SAV de proximité.",
+      "Oui, on couvre toute la Wallonie au cas par cas. La livraison est gratuite dans un rayon de 50 km autour de notre showroom de Fernelmont (Namur, Andenne, Wavre, Charleroi, Huy, Liège partiellement). Au-delà, une participation aux frais de déplacement est chiffrée de façon transparente dans le devis (typiquement 85 € forfait pour le reste de la Belgique). On n'intervient pas en Flandre ni à Bruxelles faute d'équipe SAV de proximité.",
   },
   {
     id: "boutique-pose-en-ligne",
     category: "boutique",
     question: "Puis-je acheter le poêle en ligne et le faire poser par Mister Pellets ?",
     answer:
-      "Oui, c'est même la configuration la plus fréquente. Tu commandes le poêle sur la boutique en ligne (paiement Stripe sécurisé), puis on convient d'un rendez-vous de pose dans la foulée. La pose est facturée séparément (TVA 6 % si logement de plus de 10 ans, contre 21 % sur le matériel). Le diagnostic à domicile préalable reste recommandé pour valider la faisabilité (conduit, distances, accès) avant la commande définitive.",
+      "Oui, c'est même la configuration la plus fréquente. Vous commandez le poêle sur la boutique en ligne (paiement sécurisé Mollie : Bancontact, Visa, Mastercard), puis on convient d'un rendez-vous de pose dans la foulée. La pose est facturée séparément (TVA 6 % si logement de plus de 10 ans, contre 21 % sur le matériel). Le diagnostic à domicile préalable reste recommandé pour valider la faisabilité (conduit, distances, accès) avant la commande définitive.",
   },
   {
     id: "boutique-paiement",
     category: "boutique",
     question: "Quels moyens de paiement acceptez-vous ?",
     answer:
-      "Pour les ventes en ligne : paiement intégral à la commande via Stripe (cartes bancaires Visa/Mastercard, Bancontact). Pour les devis avec pose : acompte de 30 % à la signature (virement, carte ou Bancontact), solde à la fin de la pose. On accepte aussi les paiements en plusieurs fois via le prêt à taux 0 % Renopack ou Rénoprêt (Société wallonne du Crédit social ou Fonds du Logement) pour les projets éligibles.",
+      "Pour les ventes en ligne : paiement intégral à la commande via Mollie (Bancontact, cartes Visa/Mastercard). Pour les devis avec pose : acompte de 30 % à la signature (virement, carte ou Bancontact), solde à la fin de la pose. On accepte aussi les paiements en plusieurs fois via le prêt à taux 0 % Renopack ou Rénoprêt (Société wallonne du Crédit social ou Fonds du Logement) pour les projets éligibles.",
   },
   {
     id: "boutique-retour",
     category: "boutique",
     question: "Quel est le droit de rétractation sur un achat en ligne ?",
     answer:
-      "Conformément au Code de droit économique belge, tu disposes d'un délai de 14 jours à compter de la réception du produit pour exercer ton droit de rétractation, sans avoir à motiver ta décision. Les frais de retour sont à ta charge. Ce droit ne s'applique pas aux produits déjà installés ni aux prestations de pose déjà exécutées. Pour les commandes en ligne sans pose, le retour est simple : tu nous contactes, on récupère.",
+      "Conformément au Code de droit économique belge, vous disposez d'un délai de 14 jours à compter de la réception du produit pour exercer votre droit de rétractation, sans avoir à motiver votre décision. Les frais de retour sont à votre charge. Ce droit ne s'applique pas aux produits déjà installés ni aux prestations de pose déjà exécutées. Pour les commandes en ligne sans pose, le retour est simple : vous nous contactez, on récupère.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -397,14 +399,14 @@ export const FAQS: FaqItem[] = [
     category: "showroom",
     question: "Où se trouve votre showroom ?",
     answer:
-      "Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles parmi les 4 marques que nous distribuons (Edilkamin, EK63, Dielle, Ferlux). Horaires : du lundi au vendredi 9h à 18h, samedi 9h à 13h. La prise de rendez-vous est fortement recommandée pour garantir la disponibilité d'un conseiller.",
+      "Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). Horaires : du lundi au vendredi 9h à 18h, samedi 9h à 13h. La prise de rendez-vous est fortement recommandée pour garantir la disponibilité d'un conseiller.",
   },
   {
     id: "showroom-modeles",
     category: "showroom",
     question: "Tous les modèles de poêles sont-ils visibles au showroom ?",
     answer:
-      "Non, la sélection en exposition tourne régulièrement selon les nouveautés de saison et les modèles que nous testons en condition réelle. Si tu vises un modèle particulier, prends rendez-vous : on te confirme la veille les références effectivement en exposition, et au besoin on en sort un du stock atelier pour ta visite. Les visites sans RDV restent possibles aux heures d'ouverture mais on ne peut pas garantir la disponibilité d'un conseiller selon la charge du jour.",
+      "Non, la sélection en exposition tourne régulièrement selon les nouveautés de saison et les modèles que nous testons en condition réelle. Si vous visez un modèle particulier, prenez rendez-vous : on vous confirme la veille les références effectivement en exposition, et au besoin on en sort un du stock atelier pour votre visite. Les visites sans RDV restent possibles aux heures d'ouverture mais on ne peut pas garantir la disponibilité d'un conseiller selon la charge du jour.",
   },
   {
     id: "showroom-services",

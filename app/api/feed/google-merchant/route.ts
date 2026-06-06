@@ -105,7 +105,7 @@ function productItem(p: ProductDemo): string | null {
     [
       "description",
       p.shortDescription ||
-        `${p.name} — poêle à pellets ${p.type}${
+        `${p.name}, poêle à pellets ${p.type}${
           p.heatedVolume ? ` pour ${p.heatedVolume}` : ""
         }. Distribué et posé par Mister Pellets.`,
     ],
@@ -150,11 +150,11 @@ function variantItem(p: ProductDemo, variant: ProductVariantData): string | null
   return buildItem([
     ["id", safeMerchantId(variant.sku || `${p.slug}-v-${variant.id}`)],
     ["item_group_id", p.sku || p.slug],
-    ["title", config ? `${p.name} — ${config}` : p.name],
+    ["title", config ? `${p.name}, ${config}` : p.name],
     [
       "description",
       p.shortDescription ||
-        `${p.name}${config ? ` (${config})` : ""} — poêle à pellets distribué et posé par Mister Pellets.`,
+        `${p.name}${config ? ` (${config})` : ""}, poêle à pellets distribué et posé par Mister Pellets.`,
     ],
     ["link", link],
     ["image_link", absUrl(variant.image?.url || p.imageSrc)],
@@ -229,7 +229,7 @@ export async function GET(): Promise<Response> {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
   <channel>
-    <title>Mister Pellets — Catalogue poêles à pellets</title>
+    <title>Mister Pellets, Catalogue poêles à pellets</title>
     <link>${SITE_URL}</link>
     <description>Flux produits Mister Pellets pour Google Merchant Center.</description>
 ${items.join("\n")}

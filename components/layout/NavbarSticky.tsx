@@ -51,7 +51,7 @@ const TABS: Tab[] = [
 ];
 
 const MENU_LINKS = [
-  { href: "/nos-marques",                  label: "Nos marques",          desc: "Edilkamin · EK63 · Dielle · Ferlux" },
+  { href: "/nos-marques",                  label: "Nos marques",          desc: "Edilkamin · EK63 · Girolami" },
   { href: "/guides",                       label: "Guides",               desc: "Conseils, comparatifs, dimensionnement" },
   { href: "/primes-energie-wallonie-2026", label: "Prime 2026",           desc: "Jusqu'à 960 € selon revenus" },
   { href: "/zones-d-intervention",         label: "Zones d'intervention", desc: "10 villes en Wallonie" },

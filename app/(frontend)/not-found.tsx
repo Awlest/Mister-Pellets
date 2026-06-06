@@ -31,8 +31,8 @@ export default function NotFound() {
             Cette page n&apos;existe pas, ou plus
           </h1>
           <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 max-w-xl mx-auto">
-            Le lien que tu as suivi est cassé, ou la page a été déplacée. Pas
-            grave, voici de quoi retomber sur tes pattes.
+            Le lien que vous avez suivi est cassé, ou la page a été déplacée. Pas
+            grave, voici de quoi retomber sur vos pattes.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Button asChild variant="primary" size="lg">
@@ -57,8 +57,8 @@ export default function NotFound() {
         </div>
       </section>
       <CTAFinal
-        title="Tu cherchais quelque chose de précis ?"
-        description="Si tu sais ce que tu cherches mais que tu ne le trouves plus, dis-nous, on retrouve la bonne page ou on ouvre un nouveau projet ensemble."
+        title="Vous cherchiez quelque chose de précis ?"
+        description="Si vous savez ce que vous cherchez mais que vous ne le trouvez plus, dites-nous, on retrouve la bonne page ou on ouvre un nouveau projet ensemble."
       />
     </>
   );

@@ -42,10 +42,10 @@ export default function PanierPage() {
               className="text-2xl font-semibold text-mp-green-deep mb-3"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Ton panier est vide
+              Votre panier est vide
             </h2>
             <p className="text-mp-ink-soft leading-relaxed mb-8 max-w-md mx-auto">
-              Parcours notre boutique pour ajouter un poêle, ou demande un devis sur mesure pour
+              Parcourez notre boutique pour ajouter un poêle, ou demandez un devis sur mesure pour
               une installation avec pose.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -135,7 +135,7 @@ export default function PanierPage() {
 
               <div className="rounded-xl bg-mp-orange-light/40 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink leading-relaxed">
                 ⚠️ <strong>La pose n'est pas incluse</strong> dans les prix produits. Pour un projet
-                avec installation, on te recommande de passer par le{" "}
+                avec installation, on vous recommande de passer par le{" "}
                 <Link href="/demande-de-devis" className="text-mp-orange-flame underline font-semibold">
                   formulaire de devis
                 </Link>

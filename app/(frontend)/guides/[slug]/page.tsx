@@ -169,7 +169,7 @@ export default async function GuidePage({ params }: Props) {
 
       <CTAFinal
         title="Devis personnalisé après lecture ?"
-        description="Maintenant que tu sais ce qui te convient, on chiffre la pose en 48h avec primes incluses."
+        description="Maintenant que vous savez ce qui vous convient, on chiffre la pose en 48h avec primes incluses."
       />
     </>
   );

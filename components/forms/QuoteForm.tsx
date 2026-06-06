@@ -163,7 +163,7 @@ export function QuoteForm() {
         </div>
         <h2 className="text-3xl md:text-4xl font-semibold mb-4">Demande reçue !</h2>
         <p className="text-lg leading-relaxed mb-6 max-w-2xl mx-auto">
-          Merci {state.name}, on a bien reçu ta demande. On revient vers toi par email à <strong>{state.email}</strong> sous 48h ouvrées avec un chiffrage personnalisé. Si c'est urgent, tu peux aussi nous appeler au 0472 04 32 22.
+          Merci {state.name}, on a bien reçu votre demande. On revient vers vous par email à <strong>{state.email}</strong> sous 48h ouvrées avec un chiffrage personnalisé. Si c'est urgent, vous pouvez aussi nous appeler au 0472 04 32 22.
         </p>
         <Button asChild variant="outline" size="default">
           <Link href="/">Retour à l&apos;accueil</Link>
@@ -314,10 +314,10 @@ function Step1({ value, onChange }: { value: QuoteState["surface"]; onChange: (v
   return (
     <>
       <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-2">
-        Quelle surface veux-tu chauffer ?
+        Quelle surface voulez-vous chauffer ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
-        Si tu hésites, donne plutôt la surface du rez-de-chaussée si tu veux chauffer le bas, ou la surface totale habitable si tu veux du canalisable.
+        Si vous hésitez, donnez plutôt la surface du rez-de-chaussée si vous voulez chauffer le bas, ou la surface totale habitable si vous voulez du canalisable.
       </p>
       <ChoiceGrid<QuoteState["surface"] & string>
         value={value}
@@ -338,10 +338,10 @@ function Step2({ value, onChange }: { value: QuoteState["peb"]; onChange: (v: Qu
   return (
     <>
       <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-2">
-        Quel est le PEB de ta maison ?
+        Quel est le PEB de votre maison ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
-        Le PEB (Performance Énergétique du Bâtiment) figure sur ton certificat. Si tu ne sais pas, choisis "Je ne sais pas", on adapte.
+        Le PEB (Performance Énergétique du Bâtiment) figure sur votre certificat. Si vous ne savez pas, choisissez "Je ne sais pas", on adapte.
       </p>
       <ChoiceGrid<QuoteState["peb"] & string>
         value={value}
@@ -366,7 +366,7 @@ function Step3({ value, onChange }: { value: QuoteState["chimney"]; onChange: (v
   return (
     <>
       <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-2">
-        Tu as déjà une cheminée ?
+        Vous avez déjà une cheminée ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
         Si oui, son diamètre intérieur. Sinon, pas de souci, on peut tirer une ventouse en façade ou en toiture.
@@ -390,10 +390,10 @@ function Step4({ value, onChange }: { value: QuoteState["style"]; onChange: (v: 
   return (
     <>
       <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-2">
-        Quel style esthétique tu préfères ?
+        Quel style esthétique préférez-vous ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
-        Pour orienter notre sélection. Tu pourras affiner sur les modèles précis ensuite.
+        Pour orienter notre sélection. Vous pourrez affiner sur les modèles précis ensuite.
       </p>
       <ChoiceGrid<QuoteState["style"] & string>
         value={value}
@@ -419,14 +419,14 @@ function Step5({ value, onChange }: { value: QuoteState["budget"]; onChange: (v:
         Quel budget total (poêle + pose) ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
-        Hors prime, on calcule la prime ensuite et on te montre le net après déduction.
+        Hors prime, on calcule la prime ensuite et on vous montre le net après déduction.
       </p>
       <ChoiceGrid<QuoteState["budget"] & string>
         value={value}
         onChange={onChange}
         cols={2}
         options={[
-          { value: "moins-3000", label: "Moins de 3 000 €", sub: "Ferlux ou EK63 entrée gamme" },
+          { value: "moins-3000", label: "Moins de 3 000 €", sub: "EK63 entrée de gamme" },
           { value: "3000-5000", label: "3 000 à 5 000 €", sub: "Best-sellers EK63 / Edilkamin" },
           { value: "5000-7500", label: "5 000 à 7 500 €", sub: "Edilkamin premium ou hydro" },
           { value: "7500-plus", label: "Plus de 7 500 €", sub: "Hydros puissants, design premium" },
@@ -465,7 +465,7 @@ function Step6({
       : "";
   const errName =
     touched.name && state.name !== "" && state.name.trim().length < 2
-      ? "Indique au moins ton prénom et ton nom."
+      ? "Indiquez au moins votre prénom et votre nom."
       : "";
   const errEmail =
     touched.email && state.email !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)
@@ -481,7 +481,7 @@ function Step6({
   return (
     <>
       <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-2">
-        Comment on te recontacte ?
+        Comment on vous recontacte ?
       </h2>
       <p className="text-mp-ink-soft mb-6">
         Réponse sous 48h ouvrées par email ou téléphone. Promis, pas de spam, pas de vente forcée.
@@ -522,7 +522,7 @@ function Step6({
               onChange={(e) => update("delay", e.target.value as QuoteState["delay"])}
               className={inputClass}
             >
-              <option value="" disabled>Choisis…</option>
+              <option value="" disabled>Choisissez…</option>
               <option value="asap">Le plus vite possible</option>
               <option value="1-3-mois">Dans 1 à 3 mois</option>
               <option value="3-6-mois">Dans 3 à 6 mois</option>

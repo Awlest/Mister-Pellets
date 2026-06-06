@@ -338,7 +338,7 @@ export default function CheckoutPage() {
               </Button>
 
               <p className="text-xs text-mp-ink-soft text-center mt-4">
-                Paiement chiffré via Stripe.
+                Paiement chiffré via Mollie.
                 <br />
                 Bancontact, cartes Visa/Mastercard.
               </p>

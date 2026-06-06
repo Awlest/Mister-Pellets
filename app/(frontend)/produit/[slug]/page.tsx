@@ -108,7 +108,7 @@ export default async function ProductPage({ params }: Props) {
         offerCount: variantsWithGtin.length,
         offers: variantsWithGtin.map((v) => ({
           "@type": "Offer",
-          name: `${product.name} — ${v.colorName}`,
+          name: `${product.name}, ${v.colorName}`,
           gtin13: v.gtin,
           url: `${productPageUrl}#${encodeURIComponent(v.colorName.toLowerCase())}`,
           priceCurrency: "EUR",
@@ -254,7 +254,7 @@ export default async function ProductPage({ params }: Props) {
                 </p>
               )}
 
-              {/* Tags techniques — chaque badge n'apparaît que si la donnée existe */}
+              {/* Tags techniques : chaque badge n'apparaît que si la donnée existe */}
               <div className="flex flex-wrap gap-2 mb-8">
                 {product.power && (
                   <Badge variant="default">
@@ -320,7 +320,7 @@ export default async function ProductPage({ params }: Props) {
                     </div>
                     <ul className="text-xs text-mp-ink-soft space-y-1 leading-relaxed">
                       <li>
-                        <span className="font-semibold">Pose non incluse</span> — devis chiffré
+                        <span className="font-semibold">Pose non incluse</span> : devis chiffré
                         sous 48 h.
                       </li>
                       <li>
@@ -423,11 +423,11 @@ export default async function ProductPage({ params }: Props) {
 
             <Card className="p-6 flex flex-col gap-3">
               <Flame className="h-8 w-8 text-mp-orange-flame" />
-              <h3 className="text-lg font-semibold text-mp-green-deep">Adapté à ta surface</h3>
+              <h3 className="text-lg font-semibold text-mp-green-deep">Adapté à votre surface</h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
                 {product.heatedVolume
                   ? `Une puissance de ${product.power} idéale pour chauffer ${product.heatedVolume}, en chauffage principal ou en complément.`
-                  : `Une puissance de ${product.power}, à dimensionner sur mesure selon ta surface lors du devis gratuit Mister Pellets.`}
+                  : `Une puissance de ${product.power}, à dimensionner sur mesure selon votre surface lors du devis gratuit Mister Pellets.`}
               </p>
             </Card>
 

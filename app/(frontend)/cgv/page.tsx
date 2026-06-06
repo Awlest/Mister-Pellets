@@ -47,8 +47,8 @@ export default function CGVPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">3. Produits et services</h2>
             <p>
-              Mister Pellets distribue des poêles à pellets des marques Edilkamin, EK63, Dielle et
-              Ferlux. Mister Pellets propose également des prestations de pose, mise en service,
+              Mister Pellets distribue des poêles à pellets des marques Edilkamin, EK63 et
+              Girolami. Mister Pellets propose également des prestations de pose, mise en service,
               entretien annuel et tubage de cheminée. Les caractéristiques techniques sont fournies
               à titre indicatif d'après les données fabricant.
             </p>
@@ -77,7 +77,7 @@ export default function CGVPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">6. Paiement</h2>
             <p>
-              Pour les ventes en ligne : paiement intégral à la commande via Stripe (cartes,
+              Pour les ventes en ligne : paiement intégral à la commande via Mollie (cartes,
               Bancontact). Pour les devis avec pose : acompte de 30 % à la signature, solde à la fin
               de la pose.
             </p>

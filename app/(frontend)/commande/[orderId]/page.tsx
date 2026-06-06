@@ -81,7 +81,7 @@ export default async function OrderConfirmationPage({ params }: Props) {
           </h1>
 
           <p className="text-lg text-mp-ink-soft leading-relaxed max-w-xl mx-auto mb-2">
-            Merci {orderData.customerName.split(" ")[0]}. Ta commande{" "}
+            Merci {orderData.customerName.split(" ")[0]}. Votre commande{" "}
             <strong className="text-mp-green-deep">#{orderData.orderNumber}</strong> est{" "}
             {isPaid ? "confirmée" : "en attente de finalisation"}.
           </p>
@@ -89,14 +89,14 @@ export default async function OrderConfirmationPage({ params }: Props) {
           {isPaid && (
             <p className="text-mp-ink-soft mb-6">
               Un email de confirmation arrive sur <strong>{orderData.customerEmail}</strong> dans
-              quelques minutes. On te tient au courant pour la livraison.
+              quelques minutes. On vous tient au courant pour la livraison.
             </p>
           )}
 
           {isPending && (
             <div className="rounded-xl bg-mp-orange-light/40 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink leading-relaxed mt-4 max-w-xl mx-auto">
-              Le paiement n'est pas encore confirmé (Stripe webhook pas encore reçu, ou mode dev).
-              On te recontacte rapidement pour finaliser.
+              Le paiement n'est pas encore confirmé (webhook Mollie pas encore reçu, ou mode dev).
+              On vous recontacte rapidement pour finaliser.
             </div>
           )}
         </Card>
@@ -163,12 +163,12 @@ export default async function OrderConfirmationPage({ params }: Props) {
           <ol className="space-y-3 text-sm text-mp-ink leading-relaxed mb-6">
             <li className="flex gap-3">
               <span className="font-bold text-mp-orange-flame">1.</span>
-              <span>On vérifie le stock et on te recontacte sous 24h ouvrées.</span>
+              <span>On vérifie le stock et on vous recontacte sous 24h ouvrées.</span>
             </li>
             <li className="flex gap-3">
               <span className="font-bold text-mp-orange-flame">2.</span>
               <span>
-                Si tu as besoin d'une <strong>pose</strong>, on te recommande de remplir le{" "}
+                Si vous avez besoin d'une <strong>pose</strong>, on vous recommande de remplir le{" "}
                 <Link href="/demande-de-devis" className="text-mp-orange-flame underline">
                   formulaire de devis
                 </Link>{" "}

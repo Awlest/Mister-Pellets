@@ -64,7 +64,7 @@ interface PrimesBlockProps {
  */
 export function PrimesBlock({
   title = "Prime Habitation Wallonie 2026",
-  description = "Régime temporaire en vigueur jusqu'au 30 septembre 2026. Prime de base 160 € multipliée par un coefficient selon ta catégorie de revenus. On monte le dossier complet pour toi.",
+  description = "Régime temporaire en vigueur jusqu'au 30 septembre 2026. Prime de base 160 € multipliée par un coefficient selon votre catégorie de revenus. On monte le dossier complet pour vous.",
   primes = DEFAULT_PRIMES,
 }: PrimesBlockProps) {
   return (
@@ -152,7 +152,7 @@ export function PrimesBlock({
           Information à titre indicatif, basée sur le régime temporaire en vigueur du
           14 février 2025 au 30 septembre 2026 (numéro de démarche 3920). Les montants
           et conditions peuvent évoluer. Pour un calcul personnalisé et une vérification
-          officielle, contacte le SPW Énergie au 1718 ou sur energie.wallonie.be.
+          officielle, contactez le SPW Énergie au 1718 ou sur energie.wallonie.be.
         </p>
       </div>
     </section>

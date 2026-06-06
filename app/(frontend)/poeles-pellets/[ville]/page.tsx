@@ -169,11 +169,11 @@ export default async function CityPage({ params }: Props) {
         steps={[
           {
             title: "Diagnostic gratuit",
-            description: `Visite à domicile à ${city.name} ou visio si tu préfères. On regarde la pièce, le conduit, l'isolation. Aucune obligation.`,
+            description: `Visite à domicile à ${city.name} ou visio si vous préférez. On regarde la pièce, le conduit, l'isolation. Aucune obligation.`,
           },
           {
             title: "Devis avec primes",
-            description: "Chiffrage transparent sous 48h, primes Wallonie déjà déduites. Tu vois exactement combien tu paies net.",
+            description: "Chiffrage transparent sous 48h, primes Wallonie déjà déduites. Vous voyez exactement combien vous payez net.",
           },
           {
             title: "Pose en 1 journée",
@@ -181,7 +181,7 @@ export default async function CityPage({ params }: Props) {
           },
           {
             title: "Mise en route + SAV",
-            description: "Premier feu avec toi, formation à l'usage, garantie 5 ans pièces et main d'œuvre, intervention SAV sous 48-72h.",
+            description: "Premier feu avec vous, formation à l'usage, garantie 5 ans pièces et main d'œuvre, intervention SAV sous 48-72h.",
           },
         ]}
       />

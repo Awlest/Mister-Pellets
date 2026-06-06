@@ -83,7 +83,7 @@ export function ColorVariantAddToCart({
             Ajouter au panier
           </>
         ) : (
-          "Choisis une couleur"
+          "Choisissez une couleur"
         )}
       </Button>
       <p className="text-xs text-mp-ink-soft text-center">
