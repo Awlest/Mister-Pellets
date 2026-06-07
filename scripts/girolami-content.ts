@@ -4,12 +4,14 @@
  * Référence : modèle Split 9 validé par l'équipe Awlest (couleurs, specs).
  * Voix installateur Mister Pellets, charte éditoriale + humanizer : vouvoiement,
  * zéro tiret long, pas de règle de trois mécanique, phrases courtes et
- * concrètes, humour avec parcimonie. Descriptions générales enrichies, fidèles
- * aux spécificités du CATALISTINO 2026 (alimentation autonettoyante, poêle
- * étanche, verre Cristal Magik, convection naturelle, radiocommande LCD,
- * canalisation, raccordement hydro, sortie coaxiale...). Toutes les options
- * réelles sont nommées. Aucune donnée inventée, aucune spec chiffrée dans la
- * prose (les chiffres vivent dans les autres champs de la fiche).
+ * concrètes, humour avec parcimonie. Descriptions générales enrichies des infos
+ * principales : fonctionnement ultra silencieux (alimentation par le bas qui
+ * évite le bruit des pellets qui tombent + convection naturelle soufflerie
+ * coupée), pilotage Wi-Fi sur les modèles pellet / hybride / hydro-pellet (PAS
+ * sur le lot 100 % bois), canalisation de l'air chaud vers une ou deux pièces
+ * sur les versions canalisables (nombre exact de sorties non figé, donnée non
+ * disponible au catalogue). Le reste fidèle au CATALISTINO 2026. Aucune donnée
+ * inventée, aucune spec chiffrée dans la prose.
  */
 
 export interface Feature { title: string; description: string }
@@ -70,8 +72,10 @@ const F_AUTO: Feature = { title: "Brasier autonettoyant", description: "L'alimen
 const F_ETANCHE: Feature = { title: "Poêle étanche", description: "Il prend l'air de combustion dehors, pas dans la pièce. C'est ce qu'il faut pour une maison récente bien isolée ou une basse énergie." };
 const F_CONVECTION: Feature = { title: "Marche aussi en convection naturelle", description: "Vous coupez la soufflerie et il continue à chauffer en silence. Pratique le soir dans un salon ou une chambre." };
 const F_RADIO: Feature = { title: "Radiocommande LCD avec sonde", description: "Écran et sonde de température d'ambiance fournis. Vous réglez la consigne depuis le canapé, le poêle ajuste sa puissance tout seul." };
+const F_WIFI: Feature = { title: "Pilotage Wi-Fi", description: "Vous allumez, réglez et programmez le poêle depuis l'appli sur votre smartphone. Pratique pour lancer la chauffe avant de rentrer." };
+const F_SILENCE: Feature = { title: "Fonctionnement ultra silencieux", description: "L'alimentation par le bas évite le bruit des pellets qui tombent dans le brasier. En convection naturelle, soufflerie coupée, on ne l'entend quasiment plus." };
 const F_VERRE: Feature = { title: "Top et vitre Cristal Magik", description: "Dessus en verre et vitre courbe qui s'assombrit dès que la flamme s'éteint. Belle vue sur le feu allumé, look sobre éteint." };
-const F_CANAL: Feature = { title: "Canalisable vers une autre pièce", description: "Deux ventilateurs arrière indépendants, réglables chacun au thermostat, pour pousser la chaleur dans la pièce voisine ou à l'étage." };
+const F_CANAL: Feature = { title: "Canalisable vers une autre pièce", description: "Des ventilateurs arrière indépendants, réglables au thermostat, pour pousser la chaleur dans une ou deux pièces voisines ou à l'étage." };
 const F_COAX: Feature = { title: "Sortie coaxiale", description: "Un seul conduit concentrique pour l'air et les fumées. La pose étanche est plus simple, surtout en sortie de façade sur une maison récente." };
 const F_HYDRO: Feature = { title: "Raccordé au chauffage central", description: "Il chauffe l'eau de vos radiateurs ou de votre plancher chauffant. C'est l'appareil pour remplacer une chaudière mazout sans tout casser." };
 const F_HYBRID: Feature = { title: "Bois ou pellets, au choix", description: "Des bûches quand vous en avez, des pellets quand vous voulez l'automatique et la tranquillité. Le même appareil fait les deux." };
@@ -86,219 +90,219 @@ export const FAMILY_CONTENT: Record<string, FamilyContent> = {
     tagline: "Poêle à pellets galbé, top en verre",
     paras: [
       "Le Curvy joue les formes rondes et le verre. Le dessus est vitré, et la vitre Cristal Magik, courbe, s'obscurcit complètement quand la flamme s'éteint. Vous avez une grande visibilité du feu quand ça chauffe, et un bloc élégant qui s'efface dans la pièce une fois coupé.",
-      "Sous le capot, c'est un vrai Girolami : alimentation à source autonettoyante, poêle étanche qui prend l'air dehors, rendement qui monte jusqu'à 96 %. Il marche aussi en convection naturelle quand vous voulez du silence, et la radiocommande LCD avec sonde d'ambiance gère la consigne à votre place.",
-      "Il existe de 9 à 14 kW, en finition céramique, dans plusieurs couleurs. La version canalisable envoie l'air chaud dans une pièce de plus grâce à ses deux sorties arrière indépendantes. Valve stellaire et soupape antiéclatement de série.",
+      "Sous le capot, c'est un vrai Girolami : alimentation à source autonettoyante, poêle étanche qui prend l'air dehors, rendement qui monte jusqu'à 96 %. Il est aussi très discret : l'alimentation par le bas évite le bruit des pellets qui tombent, et en convection naturelle, soufflerie coupée, on ne l'entend quasiment plus. Vous le pilotez au Wi-Fi depuis l'appli, et la radiocommande LCD avec sonde d'ambiance est fournie.",
+      "Il existe de 9 à 14 kW, en finition céramique, dans plusieurs couleurs. La version canalisable envoie l'air chaud dans une ou deux pièces voisines. Valve stellaire et soupape antiéclatement de série.",
     ],
-    features: [F_VERRE, F_AUTO, F_ETANCHE, F_RADIO, F_CONVECTION],
+    features: [F_VERRE, F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
   },
   "flow": {
     tagline: "Poêle à pellets aux lignes droites, top en verre",
     paras: [
       "Le Flow, c'est l'esprit Curvy en version droite. Lignes nettes, dessus en verre, vitre Cristal Magik qui se fonce à l'arrêt. Il vise les intérieurs contemporains qui veulent un poêle discret mais bien dessiné.",
-      "Même base technique que toute la gamme : brasier autonettoyant, poêle étanche, rendement jusqu'à 96 %, fonctionnement possible en convection naturelle. La radiocommande LCD et la sonde d'ambiance sont fournies, vous pilotez sans vous lever.",
-      "De 9 à 14 kW, habillage acier, plusieurs couleurs au catalogue. La version canalisable pousse l'air chaud dans une seconde pièce grâce à ses deux ventilateurs arrière réglables séparément.",
+      "Même base technique que toute la gamme : brasier autonettoyant, poêle étanche, rendement jusqu'à 96 %, fonctionnement possible en convection naturelle. Et il tient ses promesses côté bruit : pellets amenés par le bas, donc pas de cliquetis, et soufflerie coupée il devient quasi silencieux. Wi-Fi pour le piloter depuis le smartphone, radiocommande LCD avec sonde fournie.",
+      "De 9 à 14 kW, habillage acier, plusieurs couleurs au catalogue. La version canalisable pousse l'air chaud vers une ou deux pièces voisines.",
     ],
-    features: [F_VERRE, F_AUTO, F_ETANCHE, F_RADIO, F_CONVECTION],
+    features: [F_VERRE, F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
   },
   "round": {
     tagline: "Poêle à pellets cylindrique",
     paras: [
       "Le Round mise sur une silhouette ronde qui passe partout, contre un mur comme au milieu d'une pièce. La sortie d'air se fait à l'avant et en partie haute, la chaleur se répartit bien autour de l'appareil.",
-      "C'est un poêle étanche à alimentation autonettoyante, rendement jusqu'à 96 %, qui sait aussi tourner en convection naturelle pour les soirées au calme. Radiocommande LCD avec sonde de série.",
-      "De 9 à 14 kW, large choix de couleurs. Il existe en version canalisable pour chauffer une pièce voisine, et en sortie coaxiale selon votre configuration de pose.",
+      "C'est un poêle étanche à alimentation autonettoyante, rendement jusqu'à 96 %. Il sait tourner en convection naturelle pour les soirées au calme, et comme tout Girolami, l'alimentation par le bas le rend silencieux, sans le bruit des pellets qui tombent. Pilotage Wi-Fi depuis l'appli, radiocommande LCD avec sonde de série.",
+      "De 9 à 14 kW, large choix de couleurs. Il existe en version canalisable pour chauffer une ou deux pièces voisines, et en sortie coaxiale selon votre configuration de pose.",
     ],
-    features: [F_AUTO, F_ETANCHE, F_RADIO, F_CONVECTION],
+    features: [F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
   },
   "slim": {
     tagline: "Poêle à pellets de faible profondeur",
     paras: [
       "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : à peine 36 cm de profondeur pour près de 90 cm de large, mais la puissance d'un poêle normal. Le bon plan quand le passage est compté.",
-      "Brasier autonettoyant, poêle étanche, rendement jusqu'à 96 %, convection naturelle possible. La radiocommande LCD avec sonde d'ambiance est fournie.",
-      "De 9 à 14 kW, plusieurs couleurs. Versions canalisable et coaxiale au catalogue, selon la sortie de fumées prévue chez vous.",
+      "Brasier autonettoyant, poêle étanche, rendement jusqu'à 96 %, convection naturelle possible. Et il est discret : alimentation par le bas, donc pas de bruit de pellets, et silence complet soufflerie coupée. Vous le pilotez au Wi-Fi, la radiocommande LCD avec sonde d'ambiance est fournie.",
+      "De 9 à 14 kW, plusieurs couleurs. Versions canalisable (une ou deux pièces) et coaxiale au catalogue, selon la sortie de fumées prévue chez vous.",
     ],
-    features: [F_AUTO, F_ETANCHE, F_RADIO, F_CONVECTION],
+    features: [F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
   },
   "mini": {
     tagline: "Poêle à pellets compact",
     paras: [
       "Le Mini, c'est le petit format de la gamme. Parfait pour un séjour modeste, un studio ou un chalet où chaque centimètre compte, sans renoncer à la mécanique Girolami.",
-      "Malgré la taille, on garde le brasier autonettoyant, le côté étanche et la vitre céramique sérigraphiée. Sortie de fumées arrière ou par le dessus selon la pièce, et fonctionnement possible en convection naturelle.",
-      "Disponible en 6 et 9 kW, en plusieurs couleurs. Radiocommande LCD avec sonde fournie.",
+      "Malgré la taille, on garde le brasier autonettoyant, le côté étanche et la vitre céramique sérigraphiée. L'alimentation par le bas le rend silencieux, et il tourne aussi en convection naturelle. Sortie de fumées arrière ou par le dessus selon la pièce. Pilotage Wi-Fi et radiocommande LCD avec sonde fournie.",
+      "Disponible en 6 et 9 kW, en plusieurs couleurs.",
     ],
-    features: [F_AUTO, F_ETANCHE, F_RADIO, { title: "Format compact", description: "Petit encombrement au sol pour les petites surfaces. Il chauffe sans prendre toute la place." }],
+    features: [F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO, { title: "Format compact", description: "Petit encombrement au sol pour les petites surfaces. Il chauffe sans prendre toute la place." }],
   },
   "vert": {
     tagline: "Poêle à pellets vertical en acier",
     paras: [
       "Le Vert est un poêle élancé, habillage acier, qui tient peu de place au sol grâce à sa ligne verticale. Il se glisse là où un poêle large ne rentrerait pas.",
-      "Alimentation autonettoyante, poêle étanche, rendement jusqu'à 96 %, convection naturelle possible. La radiocommande LCD avec sonde gère la température à votre place.",
-      "De 9 à 14 kW, en blanc, bordeaux ou noir. La version canalisable est disponible pour chauffer une pièce voisine.",
+      "Alimentation autonettoyante, poêle étanche, rendement jusqu'à 96 %, convection naturelle possible. Côté bruit, l'alimentation par le bas évite le cliquetis des pellets et il devient quasi silencieux soufflerie coupée. Wi-Fi pour le piloter depuis le smartphone, radiocommande LCD avec sonde fournie.",
+      "De 9 à 14 kW, en blanc, bordeaux ou noir. La version canalisable envoie l'air chaud vers une ou deux pièces voisines.",
     ],
-    features: [F_AUTO, F_ETANCHE, F_RADIO, F_CONVECTION],
+    features: [F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
   },
   "vert maiolica": {
     tagline: "Poêle à pellets vertical, habillage maïolique",
     paras: [
       "Le Vert Maiolica reprend la ligne verticale du Vert, mais habillé de maïolique, la céramique émaillée italienne. Disponible en blanc, bordeaux et noir.",
-      "La céramique accumule la chaleur et la restitue doucement, même une fois le poêle éteint. Dessous, c'est la mécanique Girolami : brasier autonettoyant, poêle étanche, rendement jusqu'à 96 %, convection naturelle possible.",
-      "De 9 à 14 kW, en version standard ou canalisable. Radiocommande LCD avec sonde fournie.",
+      "La céramique accumule la chaleur et la restitue doucement, même une fois le poêle éteint. Dessous, c'est la mécanique Girolami : brasier autonettoyant, poêle étanche, rendement jusqu'à 96 %, convection naturelle possible, et le silence de l'alimentation par le bas. Pilotage Wi-Fi et radiocommande LCD avec sonde fournie.",
+      "De 9 à 14 kW, en version standard ou canalisable (une ou deux pièces).",
     ],
-    features: [F_MAIOLICA, F_AUTO, F_ETANCHE, F_RADIO],
+    features: [F_MAIOLICA, F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
   },
   "split": {
     tagline: "Poêle à pellets à chambre céramique",
     paras: [
       "Le Split travaille avec une chambre de combustion céramique qui pousse le rendement et garde la chaleur plus longtemps. Une ligne sobre, disponible en blanc, bordeaux et noir.",
-      "Comme toute la gamme Girolami : alimentation à source autonettoyante, poêle étanche qui prélève l'air dehors, rendement de 96 % à 9 kW, et fonctionnement possible en pure convection naturelle pour les soirées au calme. Radiocommande LCD avec sonde d'ambiance fournie.",
-      "De 9 à 14 kW, en version standard ou canalisable. Valve stellaire et soupape de sécurité antiéclatement de série.",
+      "Comme toute la gamme Girolami : alimentation à source autonettoyante, poêle étanche qui prélève l'air dehors, rendement de 96 % à 9 kW. Il est aussi très silencieux, l'alimentation par le bas évite le bruit des pellets qui tombent, et en pure convection naturelle, soufflerie coupée, on ne l'entend plus. Vous le pilotez au Wi-Fi depuis l'appli, et la radiocommande LCD avec sonde d'ambiance est fournie.",
+      "De 9 à 14 kW, en version standard ou canalisable (une ou deux pièces voisines). Valve stellaire et soupape de sécurité antiéclatement de série.",
     ],
-    features: [{ title: "Chambre de combustion céramique", description: "La céramique du foyer pousse le rendement et restitue la chaleur plus longtemps." }, F_AUTO, F_ETANCHE, F_RADIO, F_CONVECTION],
+    features: [{ title: "Chambre de combustion céramique", description: "La céramique du foyer pousse le rendement et restitue la chaleur plus longtemps." }, F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
   },
   "twin mini": {
     tagline: "Poêle à pellets compact haut de gamme",
     paras: [
       "Le Twin Mini, c'est le petit format de la ligne Twin, en finition noire soignée. Pour qui veut du beau matériel sans encombrer la pièce.",
-      "Brasier autonettoyant, poêle étanche, convection naturelle possible, radiocommande LCD avec sonde : la base technique Girolami dans un format réduit.",
+      "Brasier autonettoyant, poêle étanche, convection naturelle possible, et le silence de l'alimentation par le bas. Pilotage Wi-Fi et radiocommande LCD avec sonde : la base technique Girolami dans un format réduit.",
       "Proposé en 6 kW.",
     ],
-    features: [F_AUTO, F_ETANCHE, F_RADIO, { title: "Format compact premium", description: "Petite empreinte au sol, finition haut de gamme. Pour les petites pièces exigeantes." }],
+    features: [F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO, { title: "Format compact premium", description: "Petite empreinte au sol, finition haut de gamme. Pour les petites pièces exigeantes." }],
   },
   "twin slim": {
     tagline: "Poêle à pellets slim haut de gamme",
     paras: [
       "Le Twin Slim est le poêle de faible profondeur de la ligne Twin : large, plat, fait pour habiller un mur. Noir de série, ou en finitions Materia (corten, ivoire, gris anthracite) en option payante.",
-      "Brasier autonettoyant, poêle étanche, convection naturelle possible, radiocommande LCD avec sonde. Du matériel haut de gamme à profondeur réduite.",
-      "De 9 à 12 kW, en version standard ou canalisable.",
+      "Brasier autonettoyant, poêle étanche, convection naturelle possible, fonctionnement silencieux grâce à l'alimentation par le bas. Wi-Fi et radiocommande LCD avec sonde fournis. Du matériel haut de gamme à profondeur réduite.",
+      "De 9 à 12 kW, en version standard ou canalisable (une ou deux pièces).",
     ],
-    features: [{ title: "Finitions Materia en option", description: "Corten, ivoire ou gris anthracite en plus du noir de série, à vous de choisir le rendu." }, F_AUTO, F_ETANCHE, F_RADIO],
+    features: [{ title: "Finitions Materia en option", description: "Corten, ivoire ou gris anthracite en plus du noir de série, à vous de choisir le rendu." }, F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
   },
   "grid verticale": {
     tagline: "Insert à pellets, vision verticale",
     paras: [
       "Le Grid Verticale est un insert à pellets pour cheminée, avec une vitre haute qui met le feu en valeur sur toute la hauteur.",
-      "Il s'encastre dans un foyer existant et lui rend un vrai rendement, avec l'automatisme et la propreté du pellet. Alimentation autonettoyante et radiocommande LCD avec sonde.",
-      "De 9 à 12 kW, en version standard ou canalisable pour diffuser la chaleur dans une autre pièce.",
+      "Il s'encastre dans un foyer existant et lui rend un vrai rendement, avec l'automatisme et la propreté du pellet. Alimentation autonettoyante, fonctionnement silencieux, pilotage Wi-Fi et radiocommande LCD avec sonde.",
+      "De 9 à 12 kW, en version standard ou canalisable pour diffuser la chaleur vers une ou deux pièces voisines.",
     ],
-    features: [F_INSERT, F_AUTO, F_RADIO, { title: "Vision verticale de la flamme", description: "Vitre haute qui montre le feu sur toute la hauteur." }],
+    features: [F_INSERT, F_AUTO, F_SILENCE, F_WIFI, F_RADIO, { title: "Vision verticale de la flamme", description: "Vitre haute qui montre le feu sur toute la hauteur." }],
   },
   "grid panorama": {
     tagline: "Insert à pellets, vision panoramique",
     paras: [
       "Le Grid Panorama est l'insert à pellets en version large, avec une vitre panoramique pour une vue généreuse sur le feu : l'effet cheminée ouverte, mais avec le rendement des pellets.",
-      "Il s'encastre dans une cheminée existante. Alimentation autonettoyante, radiocommande LCD avec sonde, et version canalisable disponible.",
-      "Proposé de 9 à 12 kW.",
+      "Il s'encastre dans une cheminée existante. Alimentation autonettoyante, fonctionnement silencieux, pilotage Wi-Fi et radiocommande LCD avec sonde.",
+      "Proposé de 9 à 12 kW, en version standard ou canalisable (une ou deux pièces).",
     ],
-    features: [F_INSERT, F_AUTO, F_RADIO, { title: "Vitre panoramique", description: "Large vision du feu, l'effet cheminée avec la commodité des pellets." }],
+    features: [F_INSERT, F_AUTO, F_SILENCE, F_WIFI, F_RADIO, { title: "Vitre panoramique", description: "Large vision du feu, l'effet cheminée avec la commodité des pellets." }],
   },
   "soft": {
     tagline: "Thermopoêle hydro raccordé au chauffage central",
     paras: [
       "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la pièce, il alimente le circuit d'eau de la maison : radiateurs ou plancher chauffant. C'est le best-seller de la marque, et il a décroché un Good Design Award en 2022.",
-      "C'est l'appareil pour remplacer une chaudière mazout vieillissante ou compléter une installation. Rendement jusqu'à 96 %, gros réservoir de pellets pour de l'autonomie, alimentation autonettoyante et radiocommande LCD avec sonde.",
+      "C'est l'appareil pour remplacer une chaudière mazout vieillissante ou compléter une installation. Rendement jusqu'à 96 %, gros réservoir de pellets pour de l'autonomie, alimentation autonettoyante qui tourne sans le bruit des pellets qui tombent. Vous le pilotez au Wi-Fi depuis l'appli, et la radiocommande LCD avec sonde est fournie.",
       "De 14 à 26 kW. En version hybride bois-pellet, qui accepte les deux combustibles, ou en version pellet seul, plus simple et moins chère. Disponible en blanc, ivoire, bordeaux et noir.",
     ],
-    features: [F_HYDRO, F_HYBRID, F_AUTO, F_RADIO],
+    features: [F_HYDRO, F_HYBRID, F_AUTO, F_WIFI, F_RADIO],
   },
   "soft maiolica": {
     tagline: "Thermopoêle hydro, habillage maïolique",
     paras: [
       "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la céramique émaillée. Blanc, bordeaux ou noir, avec ce supplément de caractère et d'inertie thermique.",
-      "Il chauffe l'eau du circuit central, radiateurs ou plancher. Rendement jusqu'à 96 %, alimentation autonettoyante, radiocommande LCD avec sonde.",
+      "Il chauffe l'eau du circuit central, radiateurs ou plancher. Rendement jusqu'à 96 %, alimentation autonettoyante et silencieuse, pilotage Wi-Fi et radiocommande LCD avec sonde.",
       "De 14 à 26 kW, en hybride bois-pellet ou en pellet seul.",
     ],
-    features: [F_HYDRO, F_MAIOLICA, F_HYBRID, F_AUTO],
+    features: [F_HYDRO, F_MAIOLICA, F_HYBRID, F_AUTO, F_WIFI],
   },
   "soft slim": {
     tagline: "Thermopoêle hydro de faible profondeur",
     paras: [
       "Le Soft Slim, c'est le thermopoêle Soft en version peu profonde : large et plat, il se plaque contre un mur tout en chauffant le circuit d'eau de la maison.",
-      "Raccordé aux radiateurs ou au plancher chauffant, rendement jusqu'à 96 %, alimentation autonettoyante, radiocommande LCD avec sonde.",
+      "Raccordé aux radiateurs ou au plancher chauffant, rendement jusqu'à 96 %, alimentation autonettoyante et silencieuse, pilotage Wi-Fi et radiocommande LCD avec sonde.",
       "De 14 à 26 kW, en hybride bois-pellet. Disponible en blanc, ivoire, bordeaux et noir.",
     ],
-    features: [F_HYDRO, F_HYBRID, F_AUTO, { title: "Faible profondeur", description: "Le chauffage central de la maison sans empiéter sur la pièce." }],
+    features: [F_HYDRO, F_HYBRID, F_AUTO, F_WIFI, { title: "Faible profondeur", description: "Le chauffage central de la maison sans empiéter sur la pièce." }],
   },
   "sharp": {
     tagline: "Thermopoêle hydro au design anguleux",
     paras: [
       "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. Il raccorde la maison au chauffage central via le poêle, pour qui veut que l'appareil se voie tout en chauffant tout le logement.",
-      "Rendement jusqu'à 96 %, alimentation autonettoyante, radiocommande LCD avec sonde.",
+      "Rendement jusqu'à 96 %, alimentation autonettoyante et silencieuse, pilotage Wi-Fi et radiocommande LCD avec sonde.",
       "De 14 à 26 kW, en hybride bois-pellet ou en pellet seul. Disponible en blanc, gris anthracite, noir et bronze.",
     ],
-    features: [F_HYDRO, F_HYBRID, F_AUTO, F_RADIO],
+    features: [F_HYDRO, F_HYBRID, F_AUTO, F_WIFI, F_RADIO],
   },
   "edge": {
     tagline: "Thermopoêle hydro",
     paras: [
       "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : radiateurs, plancher chauffant, il alimente le circuit complet. Une vraie alternative à la chaudière classique.",
-      "Rendement jusqu'à 96 %, alimentation autonettoyante, radiocommande LCD avec sonde.",
+      "Rendement jusqu'à 96 %, alimentation autonettoyante et silencieuse, pilotage Wi-Fi et radiocommande LCD avec sonde.",
       "De 14 à 26 kW, en version hybride bois-pellet ou pellet seul. Disponible en blanc et gris anthracite.",
     ],
-    features: [F_HYDRO, F_HYBRID, F_AUTO, F_RADIO],
+    features: [F_HYDRO, F_HYBRID, F_AUTO, F_WIFI, F_RADIO],
   },
   "furni": {
     tagline: "Thermopoêle hydro",
     paras: [
       "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend le relais d'une vieille chaudière ou complète une installation existante.",
-      "Rendement jusqu'à 96 %, alimentation autonettoyante, gros réservoir pour l'autonomie, radiocommande LCD avec sonde.",
+      "Rendement jusqu'à 96 %, alimentation autonettoyante et silencieuse, gros réservoir pour l'autonomie, pilotage Wi-Fi et radiocommande LCD avec sonde.",
       "De 14 à 26 kW, en hybride bois-pellet ou pellet seul, en blanc, ivoire, bordeaux et noir.",
     ],
-    features: [F_HYDRO, F_HYBRID, F_AUTO, F_RADIO],
+    features: [F_HYDRO, F_HYBRID, F_AUTO, F_WIFI, F_RADIO],
   },
   "ti": {
     tagline: "Insert thermo-cheminée hydro",
     paras: [
       "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée et raccorde le foyer au chauffage central : votre cheminée chauffe alors toute la maison via les radiateurs.",
-      "On récupère un vieux foyer pour en faire une source de chaleur centrale, sans gros chantier. Rendement jusqu'à 96 %, alimentation autonettoyante.",
+      "On récupère un vieux foyer pour en faire une source de chaleur centrale, sans gros chantier. Rendement jusqu'à 96 %, alimentation autonettoyante et silencieuse, pilotage Wi-Fi.",
       "De 14 à 26 kW, en hybride bois-pellet ou pellet seul.",
     ],
-    features: [F_INSERT, F_HYDRO, F_HYBRID],
+    features: [F_INSERT, F_HYDRO, F_HYBRID, F_WIFI],
   },
   "ti panorama": {
     tagline: "Insert thermo-cheminée hydro, vitre panoramique",
     paras: [
       "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large. Une vue généreuse sur le feu, et le raccordement au chauffage central de la maison.",
-      "Encastrable dans un foyer existant, rendement jusqu'à 96 %, alimentation autonettoyante.",
+      "Encastrable dans un foyer existant, rendement jusqu'à 96 %, alimentation autonettoyante et silencieuse, pilotage Wi-Fi.",
       "De 14 à 26 kW, en hybride bois-pellet ou pellet seul.",
     ],
-    features: [F_INSERT, F_HYDRO, { title: "Vitre panoramique", description: "Large vision du feu tout en chauffant le circuit d'eau." }],
+    features: [F_INSERT, F_HYDRO, F_WIFI, { title: "Vitre panoramique", description: "Large vision du feu tout en chauffant le circuit d'eau." }],
   },
   "ti plus": {
     tagline: "Insert thermo-cheminée hydro, puissance étendue",
     paras: [
       "Le TI Plus pousse la puissance de l'insert thermo-cheminée pour les grandes installations qui demandent plus de débit de chaleur.",
-      "Encastrable, raccordé au chauffage central, alimentation autonettoyante. En hybride bois-pellet.",
+      "Encastrable, raccordé au chauffage central, alimentation autonettoyante, pilotage Wi-Fi. En hybride bois-pellet.",
       "Disponible en version 26 Plus.",
     ],
-    features: [F_INSERT, F_HYDRO, F_HYBRID],
+    features: [F_INSERT, F_HYDRO, F_HYBRID, F_WIFI],
   },
   "ti plus panorama": {
     tagline: "Insert thermo-cheminée hydro Plus, vitre panoramique",
     paras: [
       "Le TI Plus Panorama combine la puissance étendue et la vitre large. Pour les grandes maisons qui veulent à la fois le débit de chaleur et la vue sur le feu.",
-      "Encastrable, raccordé au chauffage central, hybride bois-pellet.",
+      "Encastrable, raccordé au chauffage central, alimentation autonettoyante, pilotage Wi-Fi, hybride bois-pellet.",
     ],
-    features: [F_INSERT, F_HYDRO, { title: "Vitre panoramique", description: "Grande vision du feu sur une version puissante." }],
+    features: [F_INSERT, F_HYDRO, F_WIFI, { title: "Vitre panoramique", description: "Grande vision du feu sur une version puissante." }],
   },
   "ti slim": {
     tagline: "Insert thermo-cheminée hydro compact",
     paras: [
       "Le TI Slim est l'insert thermo-cheminée en version compacte. Il se loge dans un foyer de dimensions réduites tout en chauffant le circuit d'eau de la maison.",
-      "Encastrable, rendement jusqu'à 96 %, alimentation autonettoyante. Hybride bois-pellet.",
+      "Encastrable, rendement jusqu'à 96 %, alimentation autonettoyante et silencieuse, pilotage Wi-Fi. Hybride bois-pellet.",
       "De 14 à 26 kW.",
     ],
-    features: [F_INSERT, F_HYDRO, { title: "Format compact", description: "Pour les foyers de cheminée plus petits, sans renoncer au chauffage central." }],
+    features: [F_INSERT, F_HYDRO, F_WIFI, { title: "Format compact", description: "Pour les foyers de cheminée plus petits, sans renoncer au chauffage central." }],
   },
   "ti slim panorama": {
     tagline: "Insert thermo-cheminée hydro compact, vitre panoramique",
     paras: [
       "Le TI Slim Panorama, c'est l'insert compact avec la vitre large. Encombrement réduit, belle vue sur le feu, et raccordement au chauffage central.",
-      "Encastrable dans un foyer existant, hybride bois-pellet.",
+      "Encastrable dans un foyer existant, alimentation autonettoyante, pilotage Wi-Fi, hybride bois-pellet.",
       "De 14 à 26 kW.",
     ],
-    features: [F_INSERT, F_HYDRO, { title: "Compact et panoramique", description: "Petit logement, grande vitre, chauffage central." }],
+    features: [F_INSERT, F_HYDRO, F_WIFI, { title: "Compact et panoramique", description: "Petit logement, grande vitre, chauffage central." }],
   },
 
-  // ===== LOT BOIS =====
+  // ===== LOT BOIS (pas de Wi-Fi, pas d'alimentation pellet) =====
   "tc evo": {
     tagline: "Cheminée hydro à bois",
     paras: [
@@ -311,9 +315,9 @@ export const FAMILY_CONTENT: Record<string, FamilyContent> = {
     tagline: "Insert thermo-cheminée multicombustible bois et pellets",
     paras: [
       "Le TC Bio Evo est un insert thermo-cheminée qui accepte le bois et les pellets. Vous faites du feu de bûches quand vous voulez, et le kit pellet prend le relais en automatique quand vous n'êtes pas là.",
-      "Il chauffe l'eau du circuit central de la maison. C'est la solution pour qui hésite entre bois et pellet : il fait vraiment les deux, avec un seul appareil encastré.",
+      "Il chauffe l'eau du circuit central de la maison. En mode pellet, l'alimentation autonettoyante tourne sans bruit et vous le pilotez au Wi-Fi. C'est la solution pour qui hésite entre bois et pellet : il fait vraiment les deux, avec un seul appareil encastré.",
     ],
-    features: [F_INSERT, F_HYDRO, F_HYBRID],
+    features: [F_INSERT, F_HYDRO, F_HYBRID, F_WIFI],
   },
   "frame": {
     tagline: "Monobloc à bois encastrable",
@@ -351,8 +355,8 @@ export const FAMILY_CONTENT: Record<string, FamilyContent> = {
 
 export const DEFAULT_CONTENT: FamilyContent = {
   tagline: "Poêle à pellets Girolami",
-  paras: ["Poêle à pellets Girolami, fabrication italienne, alimentation autonettoyante et poêle étanche."],
-  features: [F_AUTO, F_ETANCHE, F_RADIO],
+  paras: ["Poêle à pellets Girolami, fabrication italienne. Alimentation par le bas autonettoyante et silencieuse, poêle étanche, pilotage Wi-Fi et radiocommande LCD avec sonde."],
+  features: [F_AUTO, F_SILENCE, F_WIFI, F_ETANCHE, F_RADIO],
 };
 
 /** shortDescription <=200 caractères, fidèle à la config réelle du produit. */
