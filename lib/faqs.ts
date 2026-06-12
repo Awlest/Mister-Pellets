@@ -52,7 +52,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Mister Pellets installe-t-il en dehors de la Wallonie ?",
     answer:
-      "Notre cœur de zone est la Wallonie, avec livraison gratuite dans un rayon de 50 km autour de notre showroom de Fernelmont. Au-delà, on couvre les 5 provinces wallonnes au cas par cas (Namur, Liège, Hainaut, Brabant wallon, Luxembourg) avec une participation aux frais de déplacement chiffrée dans le devis. On n'intervient pas en Flandre ni à Bruxelles, faute d'avoir une équipe SAV de proximité dans ces régions.",
+      "Pour la livraison d'un poêle, on couvre toute la Belgique : gratuite dans un rayon de 20 km autour de notre showroom de Fernelmont, puis forfait de 50 € en Wallonie, 100 € à Bruxelles et 100 € en Flandre. Pour la pose et le SAV, c'est différent : notre équipe est basée à Fernelmont et reste concentrée sur les 5 provinces wallonnes (Namur, Liège, Hainaut, Brabant wallon, Luxembourg), là où on peut garantir un suivi de proximité. En Flandre et à Bruxelles, on livre le matériel mais on ne fait pas la pose ni le SAV.",
   },
   {
     id: "general-awlest",
@@ -363,11 +363,11 @@ export const FAQS: FaqItem[] = [
   // BOUTIQUE EN LIGNE
   // ───────────────────────────────────────────────────────────────────
   {
-    id: "boutique-livraison-50km",
+    id: "boutique-livraison",
     category: "boutique",
-    question: "Livrez-vous au-delà de 50 km de Fernelmont ?",
+    question: "Livrez-vous partout en Belgique ?",
     answer:
-      "Oui, on couvre toute la Wallonie au cas par cas. La livraison est gratuite dans un rayon de 50 km autour de notre showroom de Fernelmont (Namur, Andenne, Wavre, Charleroi, Huy, Liège partiellement). Au-delà, une participation aux frais de déplacement est chiffrée de façon transparente dans le devis (typiquement 85 € forfait pour le reste de la Belgique). On n'intervient pas en Flandre ni à Bruxelles faute d'équipe SAV de proximité.",
+      "Oui, on livre nos poêles partout en Belgique. La livraison est gratuite dans un rayon de 20 km autour de notre showroom de Fernelmont (Namur et les communes voisines). Au-delà, le forfait est simple et transparent : 50 € pour le reste de la Wallonie, 100 € à Bruxelles, 100 € en Flandre. La pose et le SAV, eux, restent concentrés sur la Wallonie où notre équipe est basée : en Flandre et à Bruxelles, on livre le matériel mais on ne pose pas et on n'assure pas le SAV.",
   },
   {
     id: "boutique-pose-en-ligne",

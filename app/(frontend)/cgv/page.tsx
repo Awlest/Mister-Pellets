@@ -86,8 +86,8 @@ export default function CGVPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">7. Livraison</h2>
             <p>
-              Livraison gratuite des poêles dans un rayon de 50 km autour de Fernelmont. Au-delà, un
-              forfait de 85 € s'applique pour la Belgique. Les délais de livraison sont indicatifs :
+              Livraison gratuite des poêles dans un rayon de 20 km autour de Fernelmont. Au-delà : 50 €
+              en Wallonie, 100 € à Bruxelles, 100 € en Flandre. Les délais de livraison sont indicatifs :
               48h à 4-6 semaines selon la disponibilité du modèle. Mister Pellets informe le client
               de tout retard significatif.
             </p>

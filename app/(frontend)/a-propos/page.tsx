@@ -60,7 +60,7 @@ export default function AProposPage() {
           { value: "+800", label: "poêles vendus et installés", detail: "depuis 2016" },
           { value: "9 ans", label: "d'expérience", detail: "spécialisés pellets" },
           { value: "5 ans", label: "de garantie", detail: "incluse sur la pose" },
-          { value: "50 km", label: "autour de Fernelmont", detail: "livraison gratuite" },
+          { value: "20 km", label: "autour de Fernelmont", detail: "livraison gratuite" },
         ]}
       />
 

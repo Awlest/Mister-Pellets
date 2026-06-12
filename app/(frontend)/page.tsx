@@ -15,7 +15,7 @@ import { buildFAQSchema } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Poêle à pellets en Wallonie, vente, pose, entretien",
   description:
-    "Edilkamin, EK63 et Girolami : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, prime Wallonie 2026 jusqu'à 960 €, livraison gratuite 50 km autour de Fernelmont. Devis en 60 secondes.",
+    "Edilkamin, EK63 et Girolami : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, prime Wallonie 2026 jusqu'à 960 €, livraison gratuite dans 20 km autour de Fernelmont. Devis en 60 secondes.",
 };
 
 const FAQ_HOMEPAGE = [
@@ -47,7 +47,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Vous livrez et posez partout en Wallonie ?",
     answer:
-      "Livraison gratuite dans un rayon de 50 km autour de notre showroom de Fernelmont (Namur, Andenne, Wavre, Charleroi, Huy, Liège partiellement). Au-delà, on se déplace toujours mais avec une participation aux frais de déplacement chiffrée dans le devis. On couvre les 5 provinces wallonnes au cas par cas.",
+      "Livraison gratuite dans un rayon de 20 km autour de notre showroom de Fernelmont. Au-delà : 50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre. On livre partout en Belgique, et côté pose on couvre les 5 provinces wallonnes au cas par cas.",
   },
   {
     question: "Quelles marques de poêles distribuez-vous ?",

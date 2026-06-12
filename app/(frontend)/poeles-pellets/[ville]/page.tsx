@@ -40,7 +40,7 @@ export default async function CityPage({ params }: Props) {
   const city = getCityBySlug(ville);
   if (!city) notFound();
 
-  const free = city.distanceFromFernelmont <= 50;
+  const free = city.distanceFromFernelmont <= 20;
 
   // Produits recommandés pour cette ville (Phase 5 : query Payload)
   const allProducts = await getAllProducts();
@@ -192,9 +192,9 @@ export default async function CityPage({ params }: Props) {
       <CTAFinal
         title={`Devis pour ${city.name}, gratuit, en 60 secondes`}
         description={
-          city.distanceFromFernelmont <= 50
-            ? "Livraison incluse, pose en 2-3 semaines après signature du devis."
-            : "Pas dans la zone gratuite mais on couvre, forfait livraison transparent dans le devis."
+          free
+            ? "Livraison gratuite incluse, pose en 2-3 semaines après signature du devis."
+            : "Pas dans la zone gratuite des 20 km, mais on couvre : forfait livraison transparent dans le devis (50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre)."
         }
       />
     </>

@@ -247,7 +247,7 @@ export default function StyleguidePage() {
 
       <TripleChoice
         choices={[
-          { icon: ShoppingBag, title: "Acheter en boutique", description: "61 modèles, livraison gratuite 50km.", cta: { label: "Voir la boutique", href: "/boutique" } },
+          { icon: ShoppingBag, title: "Acheter en boutique", description: "61 modèles, livraison gratuite 20km.", cta: { label: "Voir la boutique", href: "/boutique" } },
           { icon: FileText, title: "Devis avec pose", description: "Chiffrage en 48h, primes incluses.", cta: { label: "Demander un devis", href: "/demande-de-devis" }, highlight: true },
           { icon: Calendar, title: "RDV showroom", description: "Voir les modèles à Fernelmont.", cta: { label: "Prendre RDV", href: "/prendre-rendez-vous" } },
         ]}

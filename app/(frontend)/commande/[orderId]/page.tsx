@@ -196,7 +196,7 @@ export default async function OrderConfirmationPage({ params, searchParams }: Pr
             </li>
             <li className="flex gap-3">
               <span className="font-bold text-mp-orange-flame">3.</span>
-              <span>Livraison gratuite dans un rayon de 50 km autour de Fernelmont.</span>
+              <span>Livraison gratuite dans un rayon de 20 km autour de Fernelmont. Au-delà : 50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre.</span>
             </li>
           </ol>
 

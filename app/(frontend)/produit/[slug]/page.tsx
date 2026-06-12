@@ -76,7 +76,7 @@ export default async function ProductPage({ params }: Props) {
   // Merchant : priceValidUntil + politique de retour (droit de rétractation
   // belge 14 jours) ajoutés à chaque Offer pour calmer les warnings Google
   // Merchant. La livraison se paramètre au niveau du COMPTE Merchant Center
-  // (zones : gratuit dans 50 km autour de Fernelmont, forfait au-delà) — pas
+  // (zones : gratuit dans 20 km autour de Fernelmont, forfait au-delà) — pas
   // exprimable proprement par produit ici.
   const priceValidUntil = `${new Date().getFullYear()}-12-31`;
   const offerExtras = {
@@ -353,8 +353,8 @@ export default async function ProductPage({ params }: Props) {
                       </li>
                       <li>
                         <span className="font-semibold">Livraison gratuite</span> dans un rayon
-                        de 50 km autour de Fernelmont. Au-delà, forfait unique de 50 € pour le
-                        reste de la Belgique.
+                        de 20 km autour de Fernelmont. Au-delà : 50 € en Wallonie, 100 € à
+                        Bruxelles, 100 € en Flandre.
                       </li>
                     </ul>
                   </div>

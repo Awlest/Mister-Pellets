@@ -10,7 +10,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Zones d'intervention en Wallonie",
   description:
-    "Mister Pellets intervient à Namur, Charleroi, Liège, Wavre, Mons, Arlon, Tournai, Verviers, Gembloux, Dinant. Livraison gratuite 50 km autour de Fernelmont.",
+    "Mister Pellets intervient à Namur, Charleroi, Liège, Wavre, Mons, Arlon, Tournai, Verviers, Gembloux, Dinant. Livraison gratuite dans 20 km autour de Fernelmont.",
   path: "/zones-d-intervention",
 });
 
@@ -29,7 +29,7 @@ export default function ZonesDInterventionPage() {
             Où on <span className="mp-italic">intervient</span> en Wallonie
           </>
         }
-        description="Basés à Fernelmont, en plein centre de la province de Namur, on rayonne sur toute la Wallonie. Livraison gratuite des poêles dans un rayon de 50 km autour de l'atelier. Pour les villes plus éloignées (Arlon, Tournai), on regroupe les RDV pour limiter les trajets."
+        description="Basés à Fernelmont, en plein centre de la province de Namur, on rayonne sur toute la Wallonie. Livraison gratuite des poêles dans un rayon de 20 km autour de l'atelier. Au-delà : 50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre. Pour les villes plus éloignées (Arlon, Tournai), on regroupe les RDV pour limiter les trajets."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Zones d'intervention" },
@@ -48,10 +48,10 @@ export default function ZonesDInterventionPage() {
                 className="text-lg font-semibold text-mp-green-deep mb-2"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Livraison gratuite 50 km
+                Livraison gratuite 20 km
               </h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
-                Toute la province de Namur, sud de Liège, est du Brabant wallon, nord du Hainaut. Au-delà, forfait 85 € sur la Belgique.
+                Gratuite dans 20 km autour de Fernelmont (Namur et communes voisines). Au-delà : 50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre.
               </p>
             </Card>
 
@@ -93,7 +93,7 @@ export default function ZonesDInterventionPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {SORTED_CITIES.map((city) => {
-              const free = city.distanceFromFernelmont <= 50;
+              const free = city.distanceFromFernelmont <= 20;
               return (
                 <Link
                   key={city.slug}
