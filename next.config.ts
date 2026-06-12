@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { withPayload } from "@payloadcms/next/withPayload";
+import { girolamiVariantRedirects } from "./config/girolami-variant-redirects";
 
 // =====================================================================
 // HEADERS HTTP DE SÉCURITÉ (cf. audit V20260503 §3.BLOQUANT.1)
@@ -131,6 +132,10 @@ const nextConfig: NextConfig = {
       { source: "/wallonie", destination: "/zones-d-intervention", permanent: true },
 
       // FAQ : page créée en V1.3 §P2, plus de redirection vers /contact
+
+      // Anciennes fiches Girolami (par puissance/canalisation/coaxiale/combustible)
+      // regroupées en produits à variantes le 2026-06-12 → 301 vers le parent.
+      ...girolamiVariantRedirects,
 
       // Trailing slash normalization (Vercel le gère mais redirect explicite OK)
     ];
