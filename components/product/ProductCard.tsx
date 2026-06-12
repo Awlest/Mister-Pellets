@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, formatPriceHT } from "@/lib/utils";
 
 export interface ProductColorPreview {
   colorName: string;
@@ -74,10 +74,10 @@ export function ProductCard({ product, className }: ProductCardProps) {
   return (
     <Link
       href={`/produit/${slug}`}
-      className={`group block ${className ?? ""}`}
+      className={`group block rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-flame focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream ${className ?? ""}`}
       aria-label={`Voir ${name}`}
     >
-      <Card className="overflow-hidden h-full flex flex-col transition-all hover:-translate-y-1">
+      <Card className="overflow-hidden h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         {/* Image */}
         <div className="relative aspect-square bg-mp-beige-warm overflow-hidden">
           {imageSrc ? (
@@ -166,9 +166,12 @@ export function ProductCard({ product, className }: ProductCardProps) {
                   className="text-xl font-semibold text-mp-green-deep"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  {formatPrice(priceTTC)}
+                  {formatPriceHT(priceTTC)}
                 </span>
-                <span className="text-xs text-mp-ink-soft ml-1">TTC</span>
+                <span className="text-xs text-mp-ink-soft ml-1">HTVA</span>
+                <span className="block text-[11px] text-mp-ink-soft">
+                  soit {formatPrice(priceTTC)} TVAC
+                </span>
               </div>
             ) : (
               <span className="text-sm text-mp-ink-soft italic">Sur devis</span>

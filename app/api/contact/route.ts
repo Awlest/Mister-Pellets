@@ -92,6 +92,7 @@ export async function POST(request: Request) {
     const payload = await getPayloadClient();
     await payload.create({
       collection: "contact-messages",
+      overrideAccess: true, // création serveur de confiance (REST public verrouillé côté collection)
       data: {
         name: body.name!,
         email: body.email!,

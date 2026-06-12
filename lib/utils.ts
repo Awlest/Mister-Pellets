@@ -32,6 +32,21 @@ export function formatPrice(amountInEuros: number): string {
 }
 
 /**
+ * Taux de TVA standard belge. Les prix produit sont stockés TTC (TVAC) ;
+ * on en dérive le prix HTVA pour l'affichage catalogue (le prix affiché est
+ * HTVA, la mention TVAC reste indiquée à côté pour la transparence).
+ */
+export const VAT_RATE = 1.21;
+
+/**
+ * Formate le prix HTVA (hors TVA) à partir d'un prix TTC stocké.
+ * Ex. 2890 (TTC) → "2 388 €" (HTVA), arrondi à l'euro comme formatPrice.
+ */
+export function formatPriceHT(amountTTC: number): string {
+  return formatPrice(amountTTC / VAT_RATE);
+}
+
+/**
  * Slugifie une string (pour URL produits, etc.)
  */
 export function slugify(input: string): string {

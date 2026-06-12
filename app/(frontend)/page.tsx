@@ -226,7 +226,7 @@ export default function HomePage() {
             Poêle à pellets vs autres modes de chauffage
           </h2>
           <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed mb-8">
-            Quatre solutions dominent le résidentiel wallon. Voici comment elles se comparent en
+            Quatre modes de chauffage dominent le résidentiel wallon. Voici comment ils se comparent en
             2026 sur le coût d'usage, l'investissement initial et l'autonomie.
           </p>
 

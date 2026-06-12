@@ -7,7 +7,7 @@ export const Quotes: CollectionConfig = {
   slug: "quotes",
   access: {
     read: ({ req }) => Boolean(req.user),
-    create: () => true, // public via API route /api/quote
+    create: ({ req }) => Boolean(req.user), // REST public verrouillé ; création via /api/quote (Local API)
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
   },

@@ -198,6 +198,20 @@ body {
   a:hover {
     color: var(--mp-orange-flame);
   }
+
+  /* Accessibilité clavier : anneau de focus visible et de marque sur tout
+   * élément interactif (audit 2026-06-12, UX §1 focus-states). Uniquement en
+   * navigation clavier via :focus-visible (pas au clic souris/tactile). Les
+   * composants shadcn qui posent déjà `outline-none` gardent leur propre ring ;
+   * cette règle couvre les éléments custom (cartes, liens) jusqu'ici sans
+   * indicateur de focus. */
+  :focus-visible {
+    outline: 2px solid var(--mp-orange-flame);
+    outline-offset: 2px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 /* Classe publique réutilisable, pas de @layer (doit pouvoir gagner contre

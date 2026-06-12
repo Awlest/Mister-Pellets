@@ -8,7 +8,7 @@ export const ContactMessages: CollectionConfig = {
   slug: "contact-messages",
   access: {
     read: ({ req }) => Boolean(req.user),
-    create: () => true, // public via API route /api/contact
+    create: ({ req }) => Boolean(req.user), // REST public verrouillé ; création via /api/contact (Local API)
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
   },

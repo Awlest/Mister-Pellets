@@ -24,23 +24,24 @@ const SECURITY_HEADERS = [
     key: "Permissions-Policy",
     value: "geolocation=(), camera=(), microphone=(), payment=(self), interest-cohort=()",
   },
-  // CSP basique compatible Next.js + Stripe + Google Fonts + GA futur.
-  // Remarque : 'unsafe-inline' est encore nécessaire pour les styles Tailwind
-  // (CSS-in-HTML générées au build) et pour les script fragments injectés
-  // par Next.js/Payload. À durcir progressivement avec nonce-based CSP.
+  // CSP compatible Next.js + Google Fonts. Le paiement (Mollie) se fait par
+  // redirection pleine page, sans iframe ni JS embarqué : aucun domaine Mollie
+  // à whitelister ici. Reliquats Stripe + Supabase retirés (audit 2026-06-12
+  // §P2-1). 'unsafe-inline' encore nécessaire pour les styles Tailwind et les
+  // fragments Next.js/Payload — à durcir via nonce-based CSP plus tard.
   {
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://*.vercel-scripts.com https://va.vercel-scripts.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com https://va.vercel-scripts.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' data: https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https: ",
-      "connect-src 'self' https://api.stripe.com https://*.supabase.co https://*.cellar-c2.services.clever-cloud.com https://*.vercel-scripts.com",
-      "frame-src https://js.stripe.com https://hooks.stripe.com",
+      "img-src 'self' data: blob: https:",
+      "connect-src 'self' https://*.vercel-scripts.com",
+      "frame-src 'self'",
       "object-src 'none'",
       "base-uri 'self'",
-      "form-action 'self' https://checkout.stripe.com",
+      "form-action 'self'",
       "frame-ancestors 'self'",
       "upgrade-insecure-requests",
     ].join("; "),

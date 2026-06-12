@@ -113,14 +113,10 @@ const WEBSITE_SCHEMA = {
   description: "Vente, installation et entretien de poêles à pellets en Wallonie.",
   publisher: { "@id": `${SITE_URL}/#organization` },
   inLanguage: "fr-BE",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${SITE_URL}/recherche?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
+  // SearchAction retiré : la page /recherche n'existe pas encore, et un
+  // SearchAction qui pointe vers une 404 est signalé en erreur par Google
+  // (audit 2026-06-12 §P0-2). À réintroduire le jour où une vraie page de
+  // recherche existe.
 };
 
 export default function RootLayout({

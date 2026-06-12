@@ -15,11 +15,21 @@ export const metadata: Metadata = {
 
 interface Props {
   params: Promise<{ orderId: string }>;
-  searchParams?: Promise<{ session_id?: string }>;
+  searchParams?: Promise<{ t?: string }>;
 }
 
-export default async function OrderConfirmationPage({ params }: Props) {
+/** Masque une adresse email (defense-in-depth si le lien tokenisé fuite). */
+function maskEmail(email: string): string {
+  const at = email.indexOf("@");
+  if (at < 1) return "votre adresse";
+  const name = email.slice(0, at);
+  const shown = name.length <= 2 ? name.slice(0, 1) : name.slice(0, 2);
+  return `${shown}${"*".repeat(Math.max(2, name.length - shown.length))}${email.slice(at)}`;
+}
+
+export default async function OrderConfirmationPage({ params, searchParams }: Props) {
   const { orderId } = await params;
+  const { t: accessToken } = (await searchParams) ?? {};
 
   let order: Awaited<ReturnType<typeof getPayloadClient>> extends infer P ? unknown : never;
   try {
@@ -44,7 +54,16 @@ export default async function OrderConfirmationPage({ params }: Props) {
     total: number;
     paymentStatus: "pending" | "paid" | "failed" | "refunded";
     fulfillmentStatus: string;
+    accessToken: string;
   };
+
+  // Anti-IDOR : sans le bon jeton (fourni par la redirection Mollie et l'email
+  // de confirmation), on renvoie un 404. Les ids de commande étant séquentiels,
+  // ce contrôle empêche d'énumérer /commande/1, /commande/2… et de lire les
+  // données personnelles de tous les clients.
+  if (!accessToken || !orderData.accessToken || accessToken !== orderData.accessToken) {
+    notFound();
+  }
 
   const isPaid = orderData.paymentStatus === "paid";
   const isPending = orderData.paymentStatus === "pending";
@@ -88,7 +107,7 @@ export default async function OrderConfirmationPage({ params }: Props) {
 
           {isPaid && (
             <p className="text-mp-ink-soft mb-6">
-              Un email de confirmation arrive sur <strong>{orderData.customerEmail}</strong> dans
+              Un email de confirmation arrive sur <strong>{maskEmail(orderData.customerEmail)}</strong> dans
               quelques minutes. On vous tient au courant pour la livraison.
             </p>
           )}

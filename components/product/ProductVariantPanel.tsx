@@ -4,7 +4,7 @@ import * as React from "react";
 import { ShoppingBag, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart-store";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, formatPriceHT } from "@/lib/utils";
 import type {
   VariantOptionAxis,
   VariantOptionValueData,
@@ -26,6 +26,7 @@ const STOCK_LABELS: Record<VariantStockStatus, string> = {
   in_stock: "En stock",
   on_order: "Sur commande",
   out_of_stock: "Rupture temporaire",
+  discontinued: "Fin de série",
 };
 
 /** Prix effectif d'une variante : prix promo s'il existe, sinon prix normal. */
@@ -179,9 +180,9 @@ export function ProductVariantPanel({
         <span className="text-xs text-mp-ink-soft block">
           {activeVariant
             ? activePriced
-              ? "Prix TTC de la configuration choisie"
+              ? "Prix HTVA de la configuration choisie"
               : "Configuration choisie"
-            : "Prix TTC indicatif"}
+            : "Prix HTVA indicatif"}
         </span>
         <span
           className="text-4xl font-semibold text-mp-green-deep"
@@ -189,14 +190,28 @@ export function ProductVariantPanel({
         >
           {activeVariant
             ? activePriced
-              ? formatPrice(effectivePrice(activeVariant))
+              ? formatPriceHT(effectivePrice(activeVariant))
               : "Sur devis"
             : Number.isFinite(minPrice)
-              ? `À partir de ${formatPrice(minPrice)}`
+              ? `À partir de ${formatPriceHT(minPrice)}`
               : basePriceTTC
-                ? `À partir de ${formatPrice(basePriceTTC)}`
+                ? `À partir de ${formatPriceHT(basePriceTTC)}`
                 : "Sur devis"}
         </span>
+        {(() => {
+          const ttc = activeVariant
+            ? activePriced
+              ? effectivePrice(activeVariant)
+              : null
+            : Number.isFinite(minPrice)
+              ? minPrice
+              : basePriceTTC ?? null;
+          return ttc != null ? (
+            <span className="mt-1 block text-sm text-mp-ink-soft">
+              soit {formatPrice(ttc)} TVAC
+            </span>
+          ) : null;
+        })()}
 
         {activeVariant && (
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-mp-ink-soft">

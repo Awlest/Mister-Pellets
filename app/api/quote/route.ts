@@ -131,6 +131,7 @@ export async function POST(request: Request) {
     const payload = await getPayloadClient();
     await payload.create({
       collection: "quotes",
+      overrideAccess: true, // création serveur de confiance (REST public verrouillé côté collection)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       data: {
         name: body.name!,

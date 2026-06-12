@@ -80,11 +80,12 @@ export default function CheckoutPage() {
       }
 
       if (data.checkoutUrl) {
-        // Redirection vers Stripe Checkout
+        // Redirection vers la page de paiement Mollie
         window.location.href = data.checkoutUrl;
       } else if (data.orderId) {
-        // Mode dev (Stripe non configuré) : commande créée directement
-        router.push(`/commande/${data.orderId}`);
+        // Mode dev (Mollie non configuré) : commande créée directement.
+        // On passe le jeton anti-IDOR pour accéder à la page de confirmation.
+        router.push(`/commande/${data.orderId}${data.accessToken ? `?t=${data.accessToken}` : ""}`);
       } else {
         throw new Error("Réponse inattendue du serveur.");
       }

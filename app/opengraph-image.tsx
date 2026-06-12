@@ -113,7 +113,7 @@ export default async function OpengraphImage() {
             lineHeight: 1.4,
           }}
         >
-          Edilkamin · EK63 · Dielle · Ferlux
+          Edilkamin · EK63 · Girolami
           <br />
           Pose en 1 jour · Prime Wallonie 2026 jusqu&apos;à 960 €
         </div>

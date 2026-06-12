@@ -592,6 +592,10 @@ export interface Order {
    */
   molliePaymentId?: string | null;
   /**
+   * Jeton de la page de confirmation client (anti-IDOR). Généré automatiquement, ne pas partager.
+   */
+  accessToken?: string | null;
+  /**
    * Notes internes (visibles admin uniquement)
    */
   notes?: {
@@ -1115,6 +1119,7 @@ export interface OrdersSelect<T extends boolean = true> {
   paymentStatus?: T;
   fulfillmentStatus?: T;
   molliePaymentId?: T;
+  accessToken?: T;
   notes?: T;
   updatedAt?: T;
   createdAt?: T;

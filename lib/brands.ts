@@ -264,7 +264,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur Girolami. Mister Pellets assure le SAV pièces localement : intervention sous 48 à 72 h et stock des consommables courants en atelier.",
     tags: ["Italie", "Depuis 1970", "Source Feeding breveté", "Hybride bois-pellet"],
     officialUrl: "https://www.girolami.eu/",
-    metaTitle: "Girolami en Wallonie, poêles italiens auto-nettoyants | Mister Pellets",
+    metaTitle: "Girolami en Wallonie, poêle hybride bois-pellet auto-nettoyant | Mister Pellets",
     metaDescription:
       "Girolami, fabricant italien familial depuis 1970, brevet Source Feeding auto-nettoyant. Hybrides bois-pellet, canalisables, hydro. Pose en Wallonie par Mister Pellets, prime 2026 incluse.",
   },

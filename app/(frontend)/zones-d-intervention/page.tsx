@@ -29,7 +29,7 @@ export default function ZonesDInterventionPage() {
             Où on <span className="mp-italic">intervient</span> en Wallonie
           </>
         }
-        description="Basés à Fernelmont au cœur de la province de Namur, on rayonne sur toute la Wallonie. Livraison gratuite des poêles dans un rayon de 50 km autour de l'atelier. Pour les villes plus éloignées (Arlon, Tournai), on regroupe les RDV pour optimiser."
+        description="Basés à Fernelmont, en plein centre de la province de Namur, on rayonne sur toute la Wallonie. Livraison gratuite des poêles dans un rayon de 50 km autour de l'atelier. Pour les villes plus éloignées (Arlon, Tournai), on regroupe les RDV pour limiter les trajets."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Zones d'intervention" },

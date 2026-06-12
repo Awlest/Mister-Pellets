@@ -37,6 +37,7 @@ interface PayloadProduct {
   gtin?: string | null;
   mpn?: string | null;
   googleProductCategory?: string | null;
+  stockStatus?: VariantStockStatus | null;
   heatedVolumeM3?: number | null;
   isAirtight?: boolean | null;
   isConnected?: boolean | null;
@@ -247,6 +248,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     power,
     heatedVolume,
     priceTTC: p.priceTTC ?? undefined,
+    stockStatus: p.stockStatus ?? undefined,
     isBestseller: p.isBestseller ?? false,
     isNew: p.isNew ?? false,
     isAirtight: p.isAirtight ?? false,

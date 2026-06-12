@@ -10,6 +10,20 @@ import { Resend } from "resend";
 const FROM = process.env.EMAIL_FROM ?? "Mister Pellets <info@awlest.com>";
 const TO_INTERNAL = process.env.EMAIL_TO_QUOTES ?? "info@awlest.com";
 
+/**
+ * Échappe les caractères HTML avant interpolation dans un email.
+ * Empêche un visiteur d'injecter du HTML/lien dans les emails internes
+ * (phishing interne) ou dans sa propre confirmation (audit 2026-06-12 §P2-2).
+ */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 let _resend: Resend | null = null;
 
 function getResend(): Resend | null {
@@ -86,7 +100,7 @@ export async function notifyInternalQuote(quote: {
 }) {
   const html = `
     <h2 style="color:#174724;font-family:Georgia,serif">Nouvelle demande de devis</h2>
-    <p><strong>${quote.name}</strong> · ${quote.email}${quote.phone ? ` · ${quote.phone}` : ""}</p>
+    <p><strong>${escapeHtml(quote.name)}</strong> · ${escapeHtml(quote.email)}${quote.phone ? ` · ${escapeHtml(quote.phone)}` : ""}</p>
     <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
       <tr><td style="background:#FAF7F0;width:40%"><strong>Code postal</strong></td><td>${quote.postalCode}</td></tr>
       <tr><td style="background:#FAF7F0"><strong>Surface</strong></td><td>${quote.surface}</td></tr>
@@ -96,7 +110,7 @@ export async function notifyInternalQuote(quote: {
       <tr><td style="background:#FAF7F0"><strong>Budget</strong></td><td>${quote.budget}</td></tr>
       <tr><td style="background:#FAF7F0"><strong>Délai souhaité</strong></td><td>${quote.delay}</td></tr>
     </table>
-    ${quote.message ? `<h3 style="color:#174724">Message :</h3><p>${quote.message.replace(/\n/g, "<br>")}</p>` : ""}
+    ${quote.message ? `<h3 style="color:#174724">Message :</h3><p>${escapeHtml(quote.message).replace(/\n/g, "<br>")}</p>` : ""}
     <p style="color:#6B7280;font-size:12px;margin-top:24px">Reçu le ${new Date().toLocaleString("fr-BE", { dateStyle: "long", timeStyle: "short" })}</p>
   `;
 
@@ -111,7 +125,7 @@ export async function notifyInternalQuote(quote: {
 export async function confirmCustomerQuote(quote: { name: string; email: string }) {
   const html = `
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
-      <h1 style="color:#174724;font-family:Georgia,serif">Bonjour ${quote.name.split(" ")[0]},</h1>
+      <h1 style="color:#174724;font-family:Georgia,serif">Bonjour ${escapeHtml(quote.name.split(" ")[0] ?? quote.name)},</h1>
       <p>On a bien reçu votre demande de devis. Notre équipe l'examine et vous recontacte par email
       sous <strong>48h ouvrées</strong> avec un chiffrage personnalisé.</p>
       <p>Si c'est urgent, vous pouvez nous appeler directement au <a href="tel:+32472043222" style="color:#F28A20">0472 04 32 22</a>.</p>
@@ -137,10 +151,10 @@ export async function notifyInternalContact(message: {
 }) {
   const html = `
     <h2 style="color:#174724;font-family:Georgia,serif">Nouveau message de contact</h2>
-    <p><strong>${message.name}</strong> · ${message.email}${message.phone ? ` · ${message.phone}` : ""}</p>
-    <p><strong>Sujet :</strong> ${message.subject}</p>
+    <p><strong>${escapeHtml(message.name)}</strong> · ${escapeHtml(message.email)}${message.phone ? ` · ${escapeHtml(message.phone)}` : ""}</p>
+    <p><strong>Sujet :</strong> ${escapeHtml(message.subject)}</p>
     <hr style="border:none;border-top:1px solid #EAE0CB;margin:16px 0">
-    <div style="font-family:sans-serif;font-size:14px;line-height:1.6">${message.message.replace(/\n/g, "<br>")}</div>
+    <div style="font-family:sans-serif;font-size:14px;line-height:1.6">${escapeHtml(message.message).replace(/\n/g, "<br>")}</div>
   `;
 
   return sendEmail({
@@ -157,18 +171,25 @@ export async function confirmCustomerOrder(order: {
   orderNumber: string;
   total: number;
   items: { name: string; quantity: number }[];
+  /** Lien tokenisé vers la page de confirmation (anti-IDOR). */
+  orderUrl?: string;
 }) {
   const itemsHtml = order.items
-    .map((it) => `<li>${it.quantity}× ${it.name}</li>`)
+    .map((it) => `<li>${it.quantity}× ${escapeHtml(it.name)}</li>`)
     .join("");
+
+  const ctaHtml = order.orderUrl
+    ? `<p style="margin-top:20px"><a href="${escapeHtml(order.orderUrl)}" style="display:inline-block;background:#174724;color:#fff;text-decoration:none;padding:12px 22px;border-radius:9999px;font-weight:600">Voir ma commande</a></p>`
+    : "";
 
   const html = `
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
-      <h1 style="color:#174724;font-family:Georgia,serif">Merci ${order.customerName.split(" ")[0]} !</h1>
-      <p>Votre commande <strong>${order.orderNumber}</strong> est confirmée.</p>
+      <h1 style="color:#174724;font-family:Georgia,serif">Merci ${escapeHtml(order.customerName.split(" ")[0] ?? order.customerName)} !</h1>
+      <p>Votre commande <strong>${escapeHtml(order.orderNumber)}</strong> est confirmée.</p>
       <h3 style="color:#174724">Récap</h3>
       <ul style="padding-left:20px">${itemsHtml}</ul>
       <p style="font-size:18px;margin-top:16px"><strong>Total TTC : ${new Intl.NumberFormat("fr-BE", { style: "currency", currency: "EUR" }).format(order.total)}</strong></p>
+      ${ctaHtml}
       <p>On vous envoie un mail dès que la livraison est en route. Pour toute question : <a href="tel:+32472043222" style="color:#F28A20">0472 04 32 22</a> ou <a href="mailto:info@awlest.com" style="color:#F28A20">info@awlest.com</a>.</p>
     </div>
   `;

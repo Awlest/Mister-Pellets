@@ -1,16 +1,32 @@
 import type { CollectionConfig } from "payload";
+import { randomUUID } from "crypto";
 
 /**
- * Orders — commandes boutique reçues via Stripe Checkout.
- * L'item est créé par le webhook Stripe après confirmation de paiement.
+ * Orders — commandes boutique créées par la route /api/checkout (Mollie).
+ * Le statut de paiement est finalisé par le webhook Mollie après confirmation.
  */
 export const Orders: CollectionConfig = {
   slug: "orders",
   access: {
     read: ({ req }) => Boolean(req.user), // admin uniquement
-    create: () => true, // créé par le webhook (server side)
+    // REST public verrouillé : empêche un POST /api/orders direct d'injecter
+    // une fausse commande "payée". La création légitime passe par /api/checkout
+    // (Local API, overrideAccess) — voir app/api/checkout/route.ts.
+    create: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
+  },
+  hooks: {
+    beforeChange: [
+      ({ data, operation }) => {
+        // Jeton anti-IDOR : généré une seule fois à la création. Sert de preuve
+        // de possession pour la page de confirmation publique /commande/[id].
+        if (operation === "create" && !data.accessToken) {
+          data.accessToken = randomUUID();
+        }
+        return data;
+      },
+    ],
   },
   admin: {
     useAsTitle: "orderNumber",
@@ -112,6 +128,15 @@ export const Orders: CollectionConfig = {
           admin: { width: "33%", readOnly: true, description: "ID payment Mollie (tr_...)" },
         },
       ],
+    },
+    {
+      name: "accessToken",
+      type: "text",
+      admin: {
+        readOnly: true,
+        description:
+          "Jeton de la page de confirmation client (anti-IDOR). Généré automatiquement, ne pas partager.",
+      },
     },
     {
       name: "notes",

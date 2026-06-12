@@ -84,6 +84,8 @@ export interface ProductDemo extends ProductCardData {
   mpn?: string;
   /** Catégorie Google Merchant (taxonomie officielle). */
   googleProductCategory?: string;
+  /** Statut de stock au niveau produit (feed Merchant + page produit). */
+  stockStatus?: VariantStockStatus;
   /**
    * Système de variantes générique multi-axes (matériau, sortie des fumées…).
    * Indépendant de colorVariants. Activé via la case « Ce produit a des
@@ -113,7 +115,7 @@ export interface ProductColorVariant {
 
 export type VariantDisplayMode = "text" | "color" | "icon";
 
-export type VariantStockStatus = "in_stock" | "on_order" | "out_of_stock";
+export type VariantStockStatus = "in_stock" | "on_order" | "out_of_stock" | "discontinued";
 
 /** Une valeur possible d'un axe (ex: « Noir », « Acier », « 9 kW »). */
 export interface VariantOptionValueData {

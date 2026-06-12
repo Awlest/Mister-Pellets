@@ -20,7 +20,7 @@ import {
   getProductBySlug,
 } from "@/lib/products";
 import { BRANDS } from "@/lib/brands";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, formatPriceHT } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return { title: "Produit introuvable" };
   return {
     title: `${product.name}, Poêle à pellets ${product.power}`,
-    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. Prix indicatif ${product.priceTTC ? formatPrice(product.priceTTC) : "sur devis"}. Pose Mister Pellets, primes incluses.`,
+    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. Prix indicatif ${product.priceTTC ? `${formatPriceHT(product.priceTTC)} HTVA` : "sur devis"}. Pose Mister Pellets, primes incluses.`,
     alternates: { canonical: `https://mister-pellets.be/produit/${product.slug}` },
   };
 }
@@ -309,13 +309,19 @@ export default async function ProductPage({ params }: Props) {
                   <div className="flex flex-col gap-3">
                     <div>
                       <span className="text-xs text-mp-ink-soft block">
-                        Prix TTC indicatif (poêle seul)
+                        Prix HTVA indicatif (poêle seul)
                       </span>
                       <span
                         className="text-4xl font-semibold text-mp-green-deep"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
-                        {formatPrice(product.priceTTC)}
+                        {formatPriceHT(product.priceTTC)}
+                        <span className="text-base font-medium text-mp-ink-soft ml-1">
+                          HTVA
+                        </span>
+                      </span>
+                      <span className="block text-sm text-mp-ink-soft mt-1">
+                        soit {formatPrice(product.priceTTC)} TVAC (21 %)
                       </span>
                     </div>
                     <ul className="text-xs text-mp-ink-soft space-y-1 leading-relaxed">

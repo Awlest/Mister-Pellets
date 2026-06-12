@@ -34,6 +34,13 @@ export default buildConfig({
   cors: ALLOWED_ORIGINS,
   csrf: ALLOWED_ORIGINS,
 
+  // GraphQL : playground + introspection coupés en prod (réduit la surface
+  // d'exploration du schéma). Ce sont les défauts Payload, rendus explicites.
+  graphQL: {
+    disablePlaygroundInProduction: true,
+    disableIntrospectionInProduction: true,
+  },
+
   admin: {
     user: Users.slug,
     importMap: {

@@ -65,7 +65,7 @@ function safeMerchantId(raw: string): string {
 
 /** stockStatus interne → valeur d'availability Google Merchant. */
 function availability(status: string | undefined): string {
-  if (status === "out_of_stock") return "out_of_stock";
+  if (status === "out_of_stock" || status === "discontinued") return "out_of_stock";
   if (status === "on_order") return "backorder";
   return "in_stock";
 }
@@ -98,6 +98,8 @@ function buildItem(fields: Array<[string, string | undefined]>): string {
 /** <item> pour un produit sans variantes. */
 function productItem(p: ProductDemo): string | null {
   if (!p.priceTTC || p.priceTTC <= 0) return null;
+  const imageLink = absUrl(p.imageSrc);
+  if (!imageLink) return null; // image obligatoire chez Google Merchant
   const hasIdentifier = Boolean(p.gtin || p.mpn);
   return buildItem([
     ["id", safeMerchantId(p.sku || p.slug)],
@@ -110,8 +112,8 @@ function productItem(p: ProductDemo): string | null {
         }. Distribué et posé par Mister Pellets.`,
     ],
     ["link", `${SITE_URL}/produit/${p.slug}`],
-    ["image_link", absUrl(p.imageSrc)],
-    ["availability", "in_stock"],
+    ["image_link", imageLink],
+    ["availability", availability(p.stockStatus)],
     ["price", `${p.priceTTC.toFixed(2)} EUR`],
     ["brand", p.brand],
     ["gtin", p.gtin],
@@ -126,6 +128,8 @@ function productItem(p: ProductDemo): string | null {
 function variantItem(p: ProductDemo, variant: ProductVariantData): string | null {
   const price = variant.price;
   if (!price || price <= 0) return null;
+  const imageLink = absUrl(variant.image?.url || p.imageSrc);
+  if (!imageLink) return null; // image obligatoire chez Google Merchant
 
   const axes = [...(p.variantOptions ?? [])].sort(
     (a, b) => a.sortOrder - b.sortOrder,
@@ -157,7 +161,7 @@ function variantItem(p: ProductDemo, variant: ProductVariantData): string | null
         `${p.name}${config ? ` (${config})` : ""}, poêle à pellets distribué et posé par Mister Pellets.`,
     ],
     ["link", link],
-    ["image_link", absUrl(variant.image?.url || p.imageSrc)],
+    ["image_link", imageLink],
     ["availability", availability(variant.stockStatus)],
     ["price", `${price.toFixed(2)} EUR`],
     ["sale_price", salePrice],
@@ -175,6 +179,8 @@ function variantItem(p: ProductDemo, variant: ProductVariantData): string | null
 /** <item> pour une déclinaison de couleur d'un produit. */
 function colorVariantItem(p: ProductDemo, cv: ProductColorVariant): string | null {
   if (!p.priceTTC || p.priceTTC <= 0) return null;
+  const imageLink = absUrl(cv.mainImage?.url || p.imageSrc);
+  if (!imageLink) return null; // image obligatoire chez Google Merchant
   // Chaque couleur a son propre GTIN (EAN). L'identifiant retombe sur le MPN
   // produit si la couleur n'a pas de GTIN.
   const hasIdentifier = Boolean(cv.gtin || p.mpn);
@@ -189,8 +195,8 @@ function colorVariantItem(p: ProductDemo, cv: ProductColorVariant): string | nul
         : `${p.name}, finition ${cv.colorName}. Poêle à pellets distribué et posé par Mister Pellets.`,
     ],
     ["link", `${SITE_URL}/produit/${p.slug}`],
-    ["image_link", absUrl(cv.mainImage?.url || p.imageSrc)],
-    ["availability", "in_stock"],
+    ["image_link", imageLink],
+    ["availability", availability(p.stockStatus)],
     ["price", `${p.priceTTC.toFixed(2)} EUR`],
     ["brand", p.brand],
     ["gtin", cv.gtin],
@@ -207,6 +213,8 @@ export async function GET(): Promise<Response> {
 
   const items: string[] = [];
   for (const p of products) {
+    // Produit discontinué : exclu du feed (pas de valeur availability Google).
+    if (p.stockStatus === "discontinued") continue;
     if (p.hasVariants && p.variants && p.variants.length > 0) {
       // Variantes génériques multi-axes : une ligne par combinaison.
       for (const variant of p.variants) {

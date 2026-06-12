@@ -113,6 +113,8 @@ export async function POST(request: Request) {
 
     // Email confirmation client uniquement si paid (transition pending → paid)
     if (newPaymentStatus === "paid" && existing.paymentStatus !== "paid") {
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
+      const orderToken = (order as { accessToken?: string }).accessToken ?? "";
       await confirmCustomerOrder({
         customerName: order.customerName,
         customerEmail: order.customerEmail,
@@ -122,6 +124,7 @@ export async function POST(request: Request) {
           name: it.productName,
           quantity: it.quantity,
         })),
+        orderUrl: orderToken ? `${siteUrl}/commande/${order.id}?t=${orderToken}` : undefined,
       }).catch((err) => console.error("[mollie-webhook] confirm email failed", err));
 
       console.log(`[mollie-webhook] order ${order.orderNumber} marked as paid`);
