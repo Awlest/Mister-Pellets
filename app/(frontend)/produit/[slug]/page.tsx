@@ -73,6 +73,24 @@ export default async function ProductPage({ params }: Props) {
   const variantsWithGtin = (product.colorVariants ?? []).filter((v) => Boolean(v.gtin));
   const genericVariants = product.hasVariants ? (product.variants ?? []) : [];
 
+  // Merchant : priceValidUntil + politique de retour (droit de rétractation
+  // belge 14 jours) ajoutés à chaque Offer pour calmer les warnings Google
+  // Merchant. La livraison se paramètre au niveau du COMPTE Merchant Center
+  // (zones : gratuit dans 50 km autour de Fernelmont, forfait au-delà) — pas
+  // exprimable proprement par produit ici.
+  const priceValidUntil = `${new Date().getFullYear()}-12-31`;
+  const offerExtras = {
+    priceValidUntil,
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: "BE",
+      returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+      merchantReturnDays: 14,
+      returnMethod: "https://schema.org/ReturnByMail",
+      returnFees: "https://schema.org/ReturnShippingFees",
+    },
+  };
+
   let offers: object | undefined;
   if (genericVariants.length > 0) {
     // Mode variantes : un AggregateOffer + un Offer par combinaison réelle.
@@ -98,6 +116,7 @@ export default async function ProductPage({ params }: Props) {
             ? "https://schema.org/OutOfStock"
             : "https://schema.org/InStock",
         itemCondition: "https://schema.org/NewCondition",
+        ...offerExtras,
       })),
     };
   } else if (product.priceTTC) {
@@ -116,6 +135,7 @@ export default async function ProductPage({ params }: Props) {
           price: product.priceTTC,
           availability: "https://schema.org/InStock",
           itemCondition: "https://schema.org/NewCondition",
+        ...offerExtras,
         })),
       };
     } else {
@@ -126,6 +146,7 @@ export default async function ProductPage({ params }: Props) {
         price: product.priceTTC,
         availability: "https://schema.org/InStock",
         itemCondition: "https://schema.org/NewCondition",
+        ...offerExtras,
       };
     }
   }
