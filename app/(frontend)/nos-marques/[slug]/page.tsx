@@ -16,6 +16,7 @@ import {
   brandFoundedLabel,
   type BrandData,
 } from "@/lib/brands";
+import { buildPageMetadata } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -28,13 +29,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const brand = BRANDS[slug as BrandData["slug"]];
-  if (!brand) return { title: "Marque introuvable" };
-  return {
-    // absolute : brand.metaTitle contient déjà " | Mister Pellets", on évite le double suffixe du template
-    title: { absolute: brand.metaTitle },
+  if (!brand) return { title: "Marque introuvable", robots: { index: false } };
+  return buildPageMetadata({
+    // absoluteTitle : brand.metaTitle contient déjà " | Mister Pellets", on évite le double suffixe du template
+    title: brand.metaTitle,
+    absoluteTitle: true,
     description: brand.metaDescription,
-    alternates: { canonical: `https://mister-pellets.be/nos-marques/${slug}` },
-  };
+    path: `/nos-marques/${slug}`,
+  });
 }
 
 export default async function BrandPage({ params }: Props) {

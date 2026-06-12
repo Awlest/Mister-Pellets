@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MapPin, Truck, Zap } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
@@ -6,13 +5,14 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { CITIES } from "@/lib/cities";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Zones d'intervention en Wallonie",
   description:
     "Mister Pellets intervient à Namur, Charleroi, Liège, Wavre, Mons, Arlon, Tournai, Verviers, Gembloux, Dinant. Livraison gratuite 50 km autour de Fernelmont.",
-  alternates: { canonical: "https://mister-pellets.be/zones-d-intervention" },
-};
+  path: "/zones-d-intervention",
+});
 
 // Tri par distance pour mettre les villes les plus proches en premier
 const SORTED_CITIES = [...CITIES].sort(

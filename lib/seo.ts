@@ -29,6 +29,12 @@ interface SEOPageMetaInput {
   image?: string;            // override OG image
   type?: "website" | "article";
   noindex?: boolean;
+  /**
+   * Si true, le titre n'est PAS passé dans le template "%s | Mister Pellets"
+   * du root layout (à utiliser quand le titre contient déjà le suffixe marque,
+   * ex. les metaTitle de marques). Évite le double " | Mister Pellets".
+   */
+  absoluteTitle?: boolean;
   publishedTime?: string;    // ISO date pour articles
   modifiedTime?: string;
   authors?: string[];
@@ -45,7 +51,7 @@ export function buildPageMetadata(input: SEOPageMetaInput): Metadata {
   const allowIndex = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
 
   return {
-    title: input.title,
+    title: input.absoluteTitle ? { absolute: input.title } : input.title,
     description: input.description,
     keywords: input.keywords,
     authors: input.authors?.map((name) => ({ name })),

@@ -8,6 +8,7 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GUIDES, getGuideBySlug } from "@/lib/guides";
+import { buildPageMetadata } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -20,12 +21,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
-  if (!guide) return { title: "Guide introuvable" };
-  return {
+  if (!guide) return { title: "Guide introuvable", robots: { index: false } };
+  // Certains metaTitle de guides contiennent déjà " | Mister Pellets" : dans ce
+  // cas on passe le titre en absolu pour éviter le double suffixe du template racine.
+  const hasBrandSuffix = guide.metaTitle.includes("| Mister Pellets");
+  return buildPageMetadata({
     title: guide.metaTitle,
+    absoluteTitle: hasBrandSuffix,
     description: guide.metaDescription,
-    alternates: { canonical: `https://mister-pellets.be/guides/${slug}` },
-  };
+    path: `/guides/${slug}`,
+    type: "article",
+  });
 }
 
 export default async function GuidePage({ params }: Props) {

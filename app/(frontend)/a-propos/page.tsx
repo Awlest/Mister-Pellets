@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { StatsGrid } from "@/components/sections/StatsGrid";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "À propos, Mister Pellets, installateur poêles à pellets en Wallonie",
   description:
     "Mister Pellets installe des poêles à pellets en Wallonie depuis 2016. Plus de 800 poêles vendus et installés. Basés à Fernelmont (Awlest SRL).",
-  alternates: { canonical: "https://mister-pellets.be/a-propos" },
-};
+  path: "/a-propos",
+});
 
 export default function AProposPage() {
   return (

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { CTAFinal } from "@/components/sections/CTAFinal";
@@ -16,13 +15,14 @@ import {
 import { getAllProducts } from "@/lib/products";
 import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { cn } from "@/lib/utils";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Boutique poêles à pellets en Wallonie",
   description:
     "Catalogue Mister Pellets : Edilkamin, EK63, Girolami. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
-  alternates: { canonical: "https://mister-pellets.be/boutique" },
-};
+  path: "/boutique",
+});
 
 /**
  * ISR : régénération max toutes les 60s pour que les ajouts/modifications

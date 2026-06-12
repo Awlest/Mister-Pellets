@@ -21,6 +21,7 @@ import {
 } from "@/lib/products";
 import { BRANDS } from "@/lib/brands";
 import { formatPrice, formatPriceHT } from "@/lib/utils";
+import { buildPageMetadata } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -43,12 +44,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  if (!product) return { title: "Produit introuvable" };
-  return {
+  if (!product) return { title: "Produit introuvable", robots: { index: false } };
+  return buildPageMetadata({
     title: `${product.name}, Poêle à pellets ${product.power}`,
     description: `${product.name} : ${product.power} pour ${product.heatedVolume}. Prix indicatif ${product.priceTTC ? `${formatPriceHT(product.priceTTC)} HTVA` : "sur devis"}. Pose Mister Pellets, primes incluses.`,
-    alternates: { canonical: `https://mister-pellets.be/produit/${product.slug}` },
-  };
+    path: `/produit/${product.slug}`,
+  });
 }
 
 export default async function ProductPage({ params }: Props) {

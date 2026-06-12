@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CITIES, getCityBySlug } from "@/lib/cities";
 import { getAllProducts } from "@/lib/products";
+import { buildPageMetadata } from "@/lib/seo";
 
 interface Props {
   // Pattern : /poeles-pellets-[ville]/, Next.js capture le segment après le préfixe.
@@ -25,13 +26,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { ville } = await params;
   const city = getCityBySlug(ville);
-  if (!city) return { title: "Ville introuvable" };
-  return {
+  if (!city) return { title: "Ville introuvable", robots: { index: false } };
+  return buildPageMetadata({
     title: city.metaTitle,
     description: city.metaDescription,
     // URL externe avec tiret (rewrite next.config : /poeles-pellets-{ville} -> /poeles-pellets/{ville})
-    alternates: { canonical: `https://mister-pellets.be/poeles-pellets-${ville}` },
-  };
+    path: `/poeles-pellets-${ville}`,
+  });
 }
 
 export default async function CityPage({ params }: Props) {

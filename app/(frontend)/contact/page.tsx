@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { formatPhone } from "@/lib/utils";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Contact, Mister Pellets Wallonie",
   description:
     "Contactez Mister Pellets à Fernelmont : téléphone, email, adresse showroom, horaires. On répond dans la journée pendant les heures ouvrées.",
-  alternates: { canonical: "https://mister-pellets.be/contact" },
-};
+  path: "/contact",
+});
 
 const PHONE = "0472 04 32 22";
 const EMAIL = "info@awlest.com";

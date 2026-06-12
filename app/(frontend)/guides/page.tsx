@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clock, BookOpen } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
@@ -6,13 +5,14 @@ import { CTAFinal } from "@/components/sections/CTAFinal";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GUIDES } from "@/lib/guides";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Guides poêle à pellets en Wallonie",
   description:
     "Le guide d'achat 2026, le canalisable, l'hydro, l'entretien, le dimensionnement. Des conseils complets et indépendants, avec les vrais chiffres pour la Wallonie.",
-  alternates: { canonical: "https://mister-pellets.be/guides" },
-};
+  path: "/guides",
+});
 
 export default function GuidesHubPage() {
   return (

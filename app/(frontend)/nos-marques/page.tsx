@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { Card } from "@/components/ui/card";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title:
     "Nos marques de poêles à pellets : Edilkamin, EK63, Girolami",
   description:
     "Les 3 marques italiennes distribuées par Mister Pellets en Wallonie : Edilkamin (référence depuis 1963), EK63 (groupe Edilkamin, Wi-Fi de série) et Girolami (polycombustible breveté, brasier auto-nettoyant).",
-  alternates: { canonical: "https://mister-pellets.be/nos-marques" },
-};
+  path: "/nos-marques",
+});
 
 /** Comparatif des 3 marques premium, brief marques §E.1. */
 const COMPARISON: { criterion: string; edilkamin: string; ek63: string; girolami: string }[] = [
