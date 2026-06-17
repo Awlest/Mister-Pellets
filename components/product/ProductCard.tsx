@@ -21,6 +21,17 @@ export interface ProductCardData {
   surface?: string;
   /** Volume de chauffe maximal en m³, ex: "200 m³" */
   heatedVolume?: string;
+  /**
+   * Toutes les puissances (kW) disponibles quand le modèle regroupe plusieurs
+   * puissances en variantes (ex: [9, 12, 14]). Permet d'afficher l'éventail
+   * complet dans les pastilles et de filtrer sur chaque puissance.
+   */
+  powers?: number[];
+  /**
+   * Volumes de chauffe (m³) correspondant à chaque puissance ci-dessus, triés.
+   * Affiché en fourchette dans les pastilles (ex: 276–373 m³).
+   */
+  heatedVolumes?: number[];
   priceTTC?: number;
   imageSrc?: string;
   imageAlt?: string;
@@ -57,7 +68,18 @@ export function ProductCard({ product, className }: ProductCardProps) {
     isBestseller,
     isNew,
     colorVariants,
+    powers,
+    heatedVolumes,
   } = product;
+
+  // Fiche regroupée multi-puissances : on affiche l'éventail complet
+  // (ex: "9 · 12 · 14 kW" + "276–373 m³") au lieu de la seule valeur du parent.
+  const multiPower = powers && powers.length > 1;
+  const multiVolume = heatedVolumes && heatedVolumes.length > 1;
+  const powerLabel = multiPower ? `${powers!.join(" · ")} kW` : power;
+  const volumeLabel = multiVolume
+    ? `${heatedVolumes![0]}–${heatedVolumes![heatedVolumes!.length - 1]} m³`
+    : heatedVolume;
 
   // CSS object-position depuis le focal point Payload (défaut centre).
   const objectPosition = `${imageFocalX ?? 50}% ${imageFocalY ?? 50}%`;
@@ -126,10 +148,10 @@ export function ProductCard({ product, className }: ProductCardProps) {
             {name}
           </h3>
 
-          {(power || heatedVolume) && (
+          {(powerLabel || volumeLabel) && (
             <div className="flex flex-wrap gap-2 mt-1">
-              {power && <Badge variant="default">{power}</Badge>}
-              {heatedVolume && <Badge variant="default">{heatedVolume}</Badge>}
+              {powerLabel && <Badge variant="default">{powerLabel}</Badge>}
+              {volumeLabel && <Badge variant="default">{volumeLabel}</Badge>}
             </div>
           )}
 

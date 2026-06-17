@@ -37,6 +37,8 @@ export default async function BoutiquePage() {
     brand: p.brand,
     power: p.power,
     heatedVolume: p.heatedVolume,
+    powers: p.powers,
+    heatedVolumes: p.heatedVolumes,
     priceTTC: p.priceTTC,
     imageSrc: p.imageSrc,
     imageAlt: p.imageAlt,

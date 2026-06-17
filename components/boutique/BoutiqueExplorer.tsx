@@ -116,7 +116,16 @@ export function BoutiqueExplorer({
       products.filter((p) => {
         if (current.marque !== "all" && p.brand !== current.marque) return false;
         if (current.type !== "all" && p.type !== (current.type as ProductType)) return false;
-        if (current.puissance !== "all" && powerToTranche(p.powerKw) !== current.puissance) return false;
+        if (current.puissance !== "all") {
+          // Fiche regroupée multi-puissances : elle correspond au filtre si
+          // l'UNE de ses puissances tombe dans la tranche choisie (sinon le
+          // client cherchant 12/14 kW ne trouverait pas un modèle parent à 9 kW).
+          const tranches =
+            p.powers && p.powers.length > 0
+              ? p.powers.map((kw) => powerToTranche(kw))
+              : [powerToTranche(p.powerKw)];
+          if (!tranches.includes(current.puissance)) return false;
+        }
         if (current.diffusion !== "all" && p.diffusion !== (current.diffusion as Diffusion)) return false;
         if (current.couleur !== "all" && p.color !== (current.couleur as ColorCategory)) return false;
         return true;

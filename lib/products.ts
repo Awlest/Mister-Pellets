@@ -186,6 +186,64 @@ function toRelativeUrl(rawUrl: string): string {
 }
 
 /**
+ * Volume de chauffe maximal (m³) par puissance — gamme Girolami, CATALISTINO
+ * 2026. Pour une puissance donnée, la valeur est identique sur toute la gamme
+ * (relevé sur les fiches produit avant regroupement). Sert UNIQUEMENT à
+ * enrichir les fiches regroupées (plusieurs puissances sur une seule fiche) :
+ * pastilles d'infos + filtre boutique. Aucune valeur inventée.
+ */
+const GIROLAMI_VOLUME_BY_POWER_KW: Record<number, number> = {
+  6: 165,
+  9: 276,
+  12: 310,
+  14: 375,
+  18: 452,
+  22: 551,
+  26: 584,
+};
+
+/**
+ * Pour une fiche regroupée par puissance, retourne toutes les puissances (kW)
+ * et les volumes de chauffe (m³) correspondants, lus sur l'axe de variante
+ * « Puissance ». Retourne {} si la fiche n'a pas plusieurs puissances.
+ *
+ * - `powers` : lu directement sur les libellés de l'axe (ex: "12 kW" → 12),
+ *   valable pour toutes les marques.
+ * - `heatedVolumes` : déduit du barème Girolami ci-dessus (scopé à la marque
+ *   pour ne pas attribuer un volume Girolami à une autre marque).
+ */
+function deriveVariantPowers(p: PayloadProduct): {
+  powers?: number[];
+  heatedVolumes?: number[];
+} {
+  if (!p.hasVariants || !Array.isArray(p.variantOptions)) return {};
+  const powerAxis = p.variantOptions.find((vo) => {
+    const ot = vo.optionType;
+    return (
+      ot &&
+      typeof ot === "object" &&
+      (ot.slug === "puissance" || ot.label === "Puissance")
+    );
+  });
+  if (!powerAxis || !Array.isArray(powerAxis.values)) return {};
+  const kws = powerAxis.values
+    .map((v) => (v && typeof v === "object" ? v.label : null))
+    .map((label) => (typeof label === "string" ? parseInt(label, 10) : NaN))
+    .filter((n): n is number => Number.isFinite(n));
+  const powers = [...new Set(kws)].sort((a, b) => a - b);
+  if (powers.length < 2) return {};
+
+  let heatedVolumes: number[] | undefined;
+  if (p.brand === "Girolami") {
+    const vols = powers
+      .map((kw) => GIROLAMI_VOLUME_BY_POWER_KW[kw])
+      .filter((v): v is number => typeof v === "number");
+    if (vols.length > 0) heatedVolumes = [...new Set(vols)].sort((a, b) => a - b);
+  }
+  return { powers, heatedVolumes };
+}
+
+/**
  * Convertit un document Payload `products` vers le shape ProductDemo
  * attendu par les composants UI existants (ProductCard, filtres boutique).
  */
@@ -197,6 +255,10 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
 
   // Reconstruit la string power "9 kW" depuis power numeric
   const power = `${p.power} kW`;
+
+  // Fiche regroupée multi-puissances : éventail complet des puissances +
+  // volumes, pour les pastilles et le filtre boutique.
+  const { powers, heatedVolumes } = deriveVariantPowers(p);
 
   // Si l'image principale est uploadée, on récupère l'URL same-origin
   // relative (cf. helper toRelativeUrl pour le rationale Next.js Image).
@@ -247,6 +309,8 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     powerKw: p.power,
     power,
     heatedVolume,
+    powers,
+    heatedVolumes,
     priceTTC: p.priceTTC ?? undefined,
     stockStatus: p.stockStatus ?? undefined,
     isBestseller: p.isBestseller ?? false,
