@@ -4,6 +4,7 @@ import type {
   ProductDemo,
   ProductColorVariant,
   ProductType,
+  Combustible,
   Diffusion,
   ColorCategory,
   VariantOptionAxis,
@@ -29,6 +30,7 @@ interface PayloadProduct {
   name: string;
   brand: string;
   productType: ProductType;
+  combustible?: Combustible | null;
   diffusion: Diffusion;
   color: ColorCategory;
   power: number;
@@ -40,6 +42,7 @@ interface PayloadProduct {
   stockStatus?: VariantStockStatus | null;
   heatedVolumeM3?: number | null;
   isAirtight?: boolean | null;
+  isHydro?: boolean | null;
   isConnected?: boolean | null;
   isBestseller?: boolean | null;
   isNew?: boolean | null;
@@ -304,6 +307,8 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     name: p.name,
     brand: p.brand,
     type: p.productType,
+    combustible: p.combustible ?? "pellet",
+    isHydro: p.isHydro ?? false,
     diffusion: p.diffusion,
     color: p.color,
     powerKw: p.power,

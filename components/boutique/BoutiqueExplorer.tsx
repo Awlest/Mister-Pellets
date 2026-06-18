@@ -4,11 +4,13 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ProductCard, type ProductCardData } from "@/components/product/ProductCard";
 import {
-  TYPE_LABELS,
+  COMBUSTIBLE_LABELS,
+  CHAUFFAGE_LABELS,
   DIFFUSION_LABELS,
   COLOR_LABELS,
   POWER_TRANCHES,
   powerToTranche,
+  type Combustible,
   type ProductType,
   type Diffusion,
   type ColorCategory,
@@ -21,6 +23,9 @@ import { cn } from "@/lib/utils";
  */
 export interface BoutiqueProduct extends ProductCardData {
   type: ProductType;
+  combustible?: Combustible;
+  /** Raccordé à l'eau (thermo) → pilote le filtre « Chauffage ». */
+  isHydro?: boolean;
   powerKw: number;
   diffusion: Diffusion;
   color: ColorCategory;
@@ -38,16 +43,18 @@ export interface BoutiqueProduct extends ProductCardData {
 
 interface Filters {
   marque: string;
-  type: string;
+  combustible: string;
+  chauffage: string;
   puissance: string;
   diffusion: string;
   couleur: string;
 }
 
-const DEFAULT: Filters = { marque: "all", type: "all", puissance: "all", diffusion: "all", couleur: "all" };
+const DEFAULT: Filters = { marque: "all", combustible: "all", chauffage: "all", puissance: "all", diffusion: "all", couleur: "all" };
 const PAGE_SIZE = 24;
 
-const TYPE_FILTERS = [{ value: "all", label: "Tous" }, ...(Object.entries(TYPE_LABELS) as [ProductType, string][]).map(([value, label]) => ({ value, label }))];
+const COMBUSTIBLE_FILTERS = [{ value: "all", label: "Tous" }, ...(Object.entries(COMBUSTIBLE_LABELS) as [Combustible, string][]).map(([value, label]) => ({ value, label }))];
+const CHAUFFAGE_FILTERS = [{ value: "all", label: "Tous" }, ...Object.entries(CHAUFFAGE_LABELS).map(([value, label]) => ({ value, label }))];
 const DIFFUSION_FILTERS = [{ value: "all", label: "Toutes" }, ...(Object.entries(DIFFUSION_LABELS) as [Diffusion, string][]).map(([value, label]) => ({ value, label }))];
 const COLOR_FILTERS = [{ value: "all", label: "Toutes" }, ...(Object.entries(COLOR_LABELS) as [ColorCategory, string][]).map(([value, label]) => ({ value, label }))];
 const POWER_FILTERS = [{ value: "all", label: "Toutes" }, ...POWER_TRANCHES.map((t) => ({ value: t.value, label: t.label }))];
@@ -86,7 +93,8 @@ export function BoutiqueExplorer({
     const p = new URLSearchParams(window.location.search);
     setCurrent({
       marque: p.get("marque") ?? "all",
-      type: p.get("type") ?? "all",
+      combustible: p.get("combustible") ?? "all",
+      chauffage: p.get("chauffage") ?? "all",
       puissance: p.get("puissance") ?? "all",
       diffusion: p.get("diffusion") ?? "all",
       couleur: p.get("couleur") ?? "all",
@@ -115,7 +123,8 @@ export function BoutiqueExplorer({
     () =>
       products.filter((p) => {
         if (current.marque !== "all" && p.brand !== current.marque) return false;
-        if (current.type !== "all" && p.type !== (current.type as ProductType)) return false;
+        if (current.combustible !== "all" && p.combustible !== (current.combustible as Combustible)) return false;
+        if (current.chauffage !== "all" && (p.isHydro ? "hydro" : "ventile") !== current.chauffage) return false;
         if (current.puissance !== "all") {
           // Fiche regroupée multi-puissances : elle correspond au filtre si
           // l'UNE de ses puissances tombe dans la tranche choisie (sinon le
@@ -138,7 +147,8 @@ export function BoutiqueExplorer({
 
   const GROUPS: { label: string; key: keyof Filters; options: { value: string; label: string }[] }[] = [
     { label: "Marque", key: "marque", options: brandFilters },
-    { label: "Type", key: "type", options: TYPE_FILTERS },
+    { label: "Combustible", key: "combustible", options: COMBUSTIBLE_FILTERS },
+    { label: "Chauffage", key: "chauffage", options: CHAUFFAGE_FILTERS },
     { label: "Puissance", key: "puissance", options: POWER_FILTERS },
     { label: "Diffusion de chaleur", key: "diffusion", options: DIFFUSION_FILTERS },
     { label: "Couleur", key: "couleur", options: COLOR_FILTERS },

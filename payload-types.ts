@@ -244,6 +244,10 @@ export interface Product {
    */
   productType: 'standard' | 'canalisable' | 'hydro' | 'hybride' | 'insert';
   /**
+   * Combustible — filtre boutique. Pour un modèle proposé en plusieurs combustibles, choisir le combustible principal (le choix pellet/hybride à l'achat se gère en variante). Le caractère hydro/ventilé se règle via la case « Hydro » ci-dessous.
+   */
+  combustible: 'pellet' | 'bois' | 'hybride';
+  /**
    * COMMENT la chaleur sort
    */
   diffusion: 'ventilation-forcee' | 'convection-naturelle';
@@ -967,6 +971,7 @@ export interface ProductsSelect<T extends boolean = true> {
   brand?: T;
   model?: T;
   productType?: T;
+  combustible?: T;
   diffusion?: T;
   color?: T;
   priceHT?: T;

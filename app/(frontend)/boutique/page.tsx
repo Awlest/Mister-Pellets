@@ -48,6 +48,8 @@ export default async function BoutiquePage() {
     isNew: p.isNew,
     colorVariants: p.colorVariants?.map((c) => ({ colorName: c.colorName, colorHex: c.colorHex })),
     type: p.type,
+    combustible: p.combustible,
+    isHydro: p.isHydro,
     powerKw: p.powerKw,
     diffusion: p.diffusion,
     color: p.color,

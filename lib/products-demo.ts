@@ -30,9 +30,26 @@ export type Diffusion = "ventilation-forcee" | "convection-naturelle";
 
 export type ColorCategory = "light" | "dark" | "natural";
 
+/**
+ * Combustible (V1.4) — axe de filtre dédié, séparé du mode de chauffage.
+ * Un modèle « hybride » brûle bois ET pellets (souvent au choix via variante).
+ */
+export type Combustible = "pellet" | "bois" | "hybride";
+
+/**
+ * Mode de chauffage (V1.4) — air (ventilé) vs hydro (raccordé à l'eau / thermo).
+ * Dérivé du booléen `isHydro` du produit. Remplace, avec `Combustible`,
+ * l'ancien filtre « Type » qui mélangeait les deux notions.
+ */
+export type Chauffage = "ventile" | "hydro";
+
 export interface ProductDemo extends ProductCardData {
   /** Type de poêle (5 valeurs taxonomie V1.3) */
   type: ProductType;
+  /** Combustible (pellet/bois/hybride) — filtre boutique V1.4. */
+  combustible?: Combustible;
+  /** Raccordé à l'eau (thermo). Pilote le filtre « Chauffage » ventilé/hydro. */
+  isHydro?: boolean;
   isAirtight: boolean;
   isConnected: boolean;
   /** Mode de diffusion de la chaleur (2 valeurs) */
@@ -312,6 +329,19 @@ export const TYPE_LABELS: Record<ProductType, string> = {
   hydro:       "Hydro",
   hybride:     "Hybride bois + pellets",
   insert:      "Insert encastrable",
+};
+
+/** Filtre « Combustible » (V1.4) — remplace une partie de l'ancien « Type ». */
+export const COMBUSTIBLE_LABELS: Record<Combustible, string> = {
+  pellet:  "Pellets",
+  bois:    "Bois",
+  hybride: "Hybride bois + pellets",
+};
+
+/** Filtre « Chauffage » (V1.4) — air ventilé vs raccordé à l'eau (thermo). */
+export const CHAUFFAGE_LABELS: Record<Chauffage, string> = {
+  ventile: "Air (ventilé)",
+  hydro:   "Hydro (thermo)",
 };
 
 export const DIFFUSION_LABELS: Record<Diffusion, string> = {
