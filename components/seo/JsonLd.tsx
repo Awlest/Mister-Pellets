@@ -84,6 +84,8 @@ export const LOCAL_BUSINESS_SCHEMA = {
   alternateName: "Awlest SRL",
   url: "https://mister-pellets.be",
   image: "https://mister-pellets.be/logo-mister-pellets-full.svg",
+  hasMap:
+    "https://www.google.com/maps/search/?api=1&query=Mister+Pellets+Rue+des+Fagotis+3A+5380+Fernelmont",
   telephone: "+32472043222",
   email: "info@awlest.com",
   vatID: "BE0656514212",

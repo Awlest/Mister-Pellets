@@ -1,6 +1,7 @@
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { JsonLd, LOCAL_BUSINESS_SCHEMA } from "@/components/seo/JsonLd";
 import { formatPhone } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -13,10 +14,13 @@ export const metadata = buildPageMetadata({
 
 const PHONE = "0472 04 32 22";
 const EMAIL = "info@awlest.com";
+const MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Mister+Pellets+Rue+des+Fagotis+3A+5380+Fernelmont";
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={LOCAL_BUSINESS_SCHEMA} />
       <HeroSecondary
         title="Une question ? On répond."
         description="Téléphone, email ou formulaire. On revient vers vous dans la journée pendant les heures ouvrées (lun-ven 9h-18h, sam 9h-13h)."
@@ -66,6 +70,14 @@ export default function ContactPage() {
                     <br />
                     Belgique
                   </address>
+                  <a
+                    href={MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-2 text-sm text-mp-orange-flame underline hover:no-underline"
+                  >
+                    Itinéraire sur Google Maps
+                  </a>
                 </div>
               </div>
 

@@ -317,7 +317,7 @@ export interface Product {
    */
   mpn?: string | null;
   /**
-   * Taxonomie Google Merchant
+   * Taxonomie Google Merchant officielle. Laisser vide = auto : « Home & Garden > Wood Stoves » (poêles) ou « Home & Garden > Fireplaces » (inserts).
    */
   googleProductCategory?: string | null;
   /**

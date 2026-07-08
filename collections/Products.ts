@@ -393,8 +393,10 @@ export const Products: CollectionConfig = {
     {
       name: "googleProductCategory",
       type: "text",
-      defaultValue: "Home & Garden > Household Appliances > Heating > Pellet Stoves",
-      admin: { description: "Taxonomie Google Merchant" },
+      admin: {
+        description:
+          "Taxonomie Google Merchant officielle. Laisser vide = auto : « Home & Garden > Wood Stoves » (poêles) ou « Home & Garden > Fireplaces » (inserts).",
+      },
     },
 
     // ===== MÉDIAS =====

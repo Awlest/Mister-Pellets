@@ -6,7 +6,7 @@ import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { PROVINCES } from "@/lib/local-seo";
 import { ARTICLES } from "@/lib/articles";
 import { getPayloadClient } from "@/lib/payload-client";
-import { getAllProductSlugs } from "@/lib/products";
+import { getProductSitemapEntries } from "@/lib/products";
 
 /**
  * Sitemap dynamique généré au build + revalidé toutes les heures.
@@ -89,20 +89,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // ===== PRODUITS : on s'aligne EXACTEMENT sur la boutique. getAllProductSlugs
-  // filtre hiddenFromBoutique (produits masques exclus) et desactive la
-  // pagination (plus de plafond a 100). Le sitemap ne doit lister QUE les
-  // produits reellement vendables : les masques (ex. Dielle/Ferlux/Girolami en
-  // cours d'encodage) en sont exclus tant qu'ils ne sont pas publies. =====
+  // ===== PRODUITS : on s'aligne EXACTEMENT sur la boutique.
+  // getProductSitemapEntries filtre hiddenFromBoutique (produits masques
+  // exclus) et desactive la pagination (plus de plafond a 100). Le sitemap ne
+  // doit lister QUE les produits reellement vendables : les masques (ex.
+  // Dielle/Ferlux/Girolami en cours d'encodage) en sont exclus tant qu'ils ne
+  // sont pas publies. lastmod = updatedAt Payload (vrai signal de fraicheur
+  // pour Google, plutot que la date de generation du sitemap). =====
   let payloadProductPages: MetadataRoute.Sitemap = [];
   let payloadArticlePages: MetadataRoute.Sitemap = [];
   try {
-    const slugs = await getAllProductSlugs();
-    payloadProductPages = slugs
-      .filter(Boolean)
-      .map((slug) => ({
-        url: `${SITE_URL}/produit/${slug}`,
-        lastModified: now,
+    const entries = await getProductSitemapEntries();
+    payloadProductPages = entries
+      .filter((e) => Boolean(e.slug))
+      .map((e) => ({
+        url: `${SITE_URL}/produit/${e.slug}`,
+        lastModified: e.updatedAt ? new Date(e.updatedAt) : now,
         changeFrequency: "monthly" as const,
         priority: 0.7,
       }));

@@ -502,3 +502,29 @@ export async function getAllProductSlugs(): Promise<string[]> {
 
   return result.docs.map((d) => (d as unknown as PayloadProduct).slug);
 }
+
+/**
+ * Slug + date de dernière modification des produits visibles en boutique.
+ * Utilisé par sitemap.ts pour émettre un lastmod réel (updatedAt Payload)
+ * plutôt que la date de génération du sitemap.
+ */
+export type ProductSitemapEntry = { slug: string; updatedAt?: string };
+
+export async function getProductSitemapEntries(): Promise<ProductSitemapEntry[]> {
+  const payload = await getPayloadClient();
+  const result = await payload.find({
+    collection: "products",
+    limit: 200,
+    pagination: false,
+    overrideAccess: false,
+    select: { slug: true, updatedAt: true },
+    where: {
+      hiddenFromBoutique: { not_equals: true },
+    },
+  });
+
+  return result.docs.map((d) => {
+    const doc = d as unknown as PayloadProduct & { updatedAt?: string };
+    return { slug: doc.slug, updatedAt: doc.updatedAt };
+  });
+}
