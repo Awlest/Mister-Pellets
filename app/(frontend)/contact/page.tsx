@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Contact, Mister Pellets Wallonie",
   description:
-    "Contactez Mister Pellets à Fernelmont : téléphone, email, adresse showroom, horaires. On répond dans la journée pendant les heures ouvrées.",
+    "Contactez Mister Pellets à Fernelmont : téléphone, email, adresse et horaires. Showroom accessible sur rendez-vous. On répond dans la journée pendant les heures ouvrées.",
   path: "/contact",
 });
 
@@ -90,6 +90,19 @@ export default function ContactPage() {
                     <li>Samedi : 9h - 13h</li>
                     <li className="text-mp-ink-soft">Dimanche : fermé</li>
                   </ul>
+                  <p className="mt-3 text-sm font-medium text-mp-orange-flame">
+                    Showroom accessible uniquement sur rendez-vous.
+                  </p>
+                  <p className="mt-1 text-sm text-mp-ink-soft">
+                    Appelez-nous ou{" "}
+                    <a
+                      href="/prendre-rendez-vous"
+                      className="text-mp-orange-flame underline hover:no-underline"
+                    >
+                      réservez votre créneau en ligne
+                    </a>{" "}
+                    avant de passer.
+                  </p>
                 </div>
               </div>
             </div>

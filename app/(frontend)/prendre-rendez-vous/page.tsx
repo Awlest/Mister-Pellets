@@ -195,6 +195,8 @@ export default function PrendreRendezVousPage() {
               <Clock className="h-4 w-4 text-mp-orange-flame" />
               Lun-Ven 9h-18h, Sam 9h-13h
             </span>
+            <span className="text-mp-sand">·</span>
+            <span className="font-medium text-mp-orange-flame">Sur rendez-vous uniquement</span>
           </div>
         </div>
       </section>

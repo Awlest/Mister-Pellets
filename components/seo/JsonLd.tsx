@@ -82,6 +82,11 @@ export const LOCAL_BUSINESS_SCHEMA = {
   "@id": "https://mister-pellets.be/#business",
   name: "Mister Pellets",
   alternateName: "Awlest SRL",
+  // Le showroom n'accueille que sur rendez-vous : l'info doit figurer partout où
+  // les horaires apparaissent (site, fiche Google), sinon un visiteur se déplace
+  // pour rien pendant les créneaux annoncés.
+  description:
+    "Vente et installation de poêles à pellets en Wallonie (Edilkamin, EK63, Girolami) : tubage de cheminée, sortie ventouse, conduit neuf, entretien annuel et dépannage. Showroom à Fernelmont accessible uniquement sur rendez-vous.",
   url: "https://mister-pellets.be",
   image: "https://mister-pellets.be/logo-mister-pellets-full.svg",
   hasMap:
