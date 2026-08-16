@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Clock, Shield, FileCheck } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { QuoteForm } from "@/components/forms/QuoteForm";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Devis gratuit, Poêle à pellets en Wallonie",
@@ -43,6 +45,21 @@ export default function DevisPage() {
               <FileCheck className="h-4 w-4 text-mp-orange-flame" />
               Primes calculées
             </span>
+          </div>
+
+          {/* Parcours alternatif : celui qui sait déjà quel poêle l'intéresse
+              préfère souvent voir un chiffre tout de suite. */}
+          <div className="mb-8 rounded-2xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-5 md:p-6">
+            <h2 className="mb-1 text-lg font-semibold text-mp-green-deep">
+              Vous voulez un chiffre tout de suite ?
+            </h2>
+            <p className="mb-4 text-sm text-mp-ink-soft">
+              Notre estimation en ligne compose votre installation à partir des poêles du catalogue :
+              prix du modèle, pose, TVA, prime Wallonie et mensualité à 0 %, affichés en direct.
+            </p>
+            <Button asChild variant="primary" size="default">
+              <Link href="/estimation">Estimer mon installation →</Link>
+            </Button>
           </div>
 
           <QuoteForm />

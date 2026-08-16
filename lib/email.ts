@@ -128,7 +128,7 @@ export async function confirmCustomerQuote(quote: { name: string; email: string 
       <h1 style="color:#174724;font-family:Georgia,serif">Bonjour ${escapeHtml(quote.name.split(" ")[0] ?? quote.name)},</h1>
       <p>On a bien reçu votre demande de devis. Notre équipe l'examine et vous recontacte par email
       sous <strong>48h ouvrées</strong> avec un chiffrage personnalisé.</p>
-      <p>Si c'est urgent, vous pouvez nous appeler directement au <a href="tel:+32472043222" style="color:#F28A20">0472 04 32 22</a>.</p>
+      <p>Si c'est urgent, vous pouvez nous appeler directement au <a href="tel:+3281138309" style="color:#F28A20">081 13 83 09</a>.</p>
       <p style="margin-top:32px;padding-top:16px;border-top:1px solid #EAE0CB;color:#4A5A50;font-size:13px">
         Mister Pellets · Awlest SRL · Rue des Fagotis 3A, 5380 Fernelmont · TVA BE 0656.514.212
       </p>
@@ -138,6 +138,106 @@ export async function confirmCustomerQuote(quote: { name: string; email: string 
   return sendEmail({
     to: quote.email,
     subject: "Votre demande de devis Mister Pellets a bien été reçue",
+    html,
+  });
+}
+
+/**
+ * Récap interne d'une estimation configurée en ligne (/estimation).
+ * Plus riche que le devis en 6 questions : on a le modèle choisi, le détail de
+ * la main d'œuvre et le total chiffré, de quoi rappeler le client en connaissant
+ * déjà son projet.
+ */
+export async function notifyInternalEstimate(est: {
+  name: string;
+  email: string;
+  phone?: string;
+  postalCode: string;
+  delay: string;
+  productName: string;
+  productSlug: string;
+  powerKw: number;
+  needKw: number;
+  installType: string;
+  stoveKind: string;
+  surface: number;
+  iso: string;
+  level: string;
+  vatRate: number;
+  lines: { label: string; amountHT: number }[];
+  materialHT: number;
+  totalTTC: number;
+  prime: number;
+  netAfterPrime: number;
+  months?: number | null;
+  monthly?: number | null;
+  message?: string;
+}) {
+  const fmt = (n: number) => `${Math.round(n).toLocaleString("fr-BE")} €`;
+  const linesHtml = est.lines
+    .map(
+      (l) =>
+        `<tr><td style="background:#FAF7F0">${escapeHtml(l.label)}</td><td>${fmt(l.amountHT)} HT</td></tr>`,
+    )
+    .join("");
+
+  const html = `
+    <h2 style="color:#174724;font-family:Georgia,serif">Nouvelle estimation configurée en ligne</h2>
+    <p><strong>${escapeHtml(est.name)}</strong> · ${escapeHtml(est.email)}${est.phone ? ` · ${escapeHtml(est.phone)}` : ""} · ${escapeHtml(est.postalCode)}</p>
+    <p style="font-size:18px;color:#174724"><strong>${fmt(est.totalTTC)} TTC</strong> (TVA ${Math.round(est.vatRate * 100)} %)${est.prime > 0 ? ` · ${fmt(est.netAfterPrime)} après prime estimée de ${fmt(est.prime)}` : ""}${est.monthly ? ` · ${fmt(est.monthly)}/mois sur ${est.months} mois` : ""}</p>
+    <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
+      <tr><td style="background:#FAF7F0;width:45%"><strong>Poêle choisi</strong></td><td>${escapeHtml(est.productName)} (${est.powerKw} kW) — /produit/${escapeHtml(est.productSlug)}</td></tr>
+      <tr><td style="background:#FAF7F0"><strong>Matériel</strong></td><td>${fmt(est.materialHT)} HT</td></tr>
+      ${linesHtml}
+      <tr><td style="background:#FAF7F0"><strong>Type de poêle</strong></td><td>${escapeHtml(est.stoveKind)}</td></tr>
+      <tr><td style="background:#FAF7F0"><strong>Évacuation</strong></td><td>${escapeHtml(est.installType)}</td></tr>
+      <tr><td style="background:#FAF7F0"><strong>Surface / isolation</strong></td><td>${est.surface} m² · ${escapeHtml(est.iso)} · besoin ~${est.needKw} kW</td></tr>
+      <tr><td style="background:#FAF7F0"><strong>Niveau</strong></td><td>${escapeHtml(est.level)}</td></tr>
+      <tr><td style="background:#FAF7F0"><strong>Délai souhaité</strong></td><td>${escapeHtml(est.delay)}</td></tr>
+    </table>
+    ${est.message ? `<h3 style="color:#174724">Précisions :</h3><p>${escapeHtml(est.message).replace(/\n/g, "<br>")}</p>` : ""}
+    <p style="color:#6B7280;font-size:12px;margin-top:24px">Reçu le ${new Date().toLocaleString("fr-BE", { dateStyle: "long", timeStyle: "short" })} · montants de pose issus des forfaits indicatifs de lib/estimate.ts</p>
+  `;
+
+  return sendEmail({
+    to: TO_INTERNAL,
+    subject: `[Estimation] ${est.name} (${est.postalCode}) — ${fmt(est.totalTTC)} · ${est.productName}`,
+    html,
+    replyTo: est.email,
+  });
+}
+
+/** Confirmation client d'une estimation configurée en ligne. */
+export async function confirmCustomerEstimate(est: {
+  name: string;
+  email: string;
+  productName: string;
+  totalTTC: number;
+  monthly?: number | null;
+  months?: number | null;
+}) {
+  const fmt = (n: number) => `${Math.round(n).toLocaleString("fr-BE")} €`;
+  const html = `
+    <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
+      <h1 style="color:#174724;font-family:Georgia,serif">Bonjour ${escapeHtml(est.name.split(" ")[0] ?? est.name)},</h1>
+      <p>Nous avons bien reçu votre configuration autour du <strong>${escapeHtml(est.productName)}</strong>.</p>
+      <p style="font-size:18px"><strong>Estimation : ${fmt(est.totalTTC)} TTC</strong>, poêle et pose compris.${
+        est.monthly ? ` Soit environ ${fmt(est.monthly)} par mois sur ${est.months} mois à 0 %.` : ""
+      }</p>
+      <p>C'est une estimation, pas encore un devis : nous vous recontactons sous <strong>48h ouvrées</strong>
+      pour convenir de la visite technique gratuite, seule façon de confirmer le prix ferme (état du
+      conduit, accès, raccordements).</p>
+      <p>Une question d'ici là ? <a href="tel:+3281138309" style="color:#F28A20">081 13 83 09</a>.</p>
+      <p style="color:#4A5A50;font-size:12px">Attention, emprunter de l'argent coûte aussi de l'argent.</p>
+      <p style="margin-top:32px;padding-top:16px;border-top:1px solid #EAE0CB;color:#4A5A50;font-size:13px">
+        Mister Pellets · Awlest SRL · Rue des Fagotis 3A, 5380 Fernelmont · TVA BE 0656.514.212
+      </p>
+    </div>
+  `;
+
+  return sendEmail({
+    to: est.email,
+    subject: "Votre estimation Mister Pellets",
     html,
   });
 }
@@ -190,7 +290,7 @@ export async function confirmCustomerOrder(order: {
       <ul style="padding-left:20px">${itemsHtml}</ul>
       <p style="font-size:18px;margin-top:16px"><strong>Total TTC : ${new Intl.NumberFormat("fr-BE", { style: "currency", currency: "EUR" }).format(order.total)}</strong></p>
       ${ctaHtml}
-      <p>On vous envoie un mail dès que la livraison est en route. Pour toute question : <a href="tel:+32472043222" style="color:#F28A20">0472 04 32 22</a> ou <a href="mailto:info@awlest.com" style="color:#F28A20">info@awlest.com</a>.</p>
+      <p>On vous envoie un mail dès que la livraison est en route. Pour toute question : <a href="tel:+3281138309" style="color:#F28A20">081 13 83 09</a> ou <a href="mailto:info@awlest.com" style="color:#F28A20">info@awlest.com</a>.</p>
     </div>
   `;
 

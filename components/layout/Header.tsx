@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { label: "Accueil", href: "/" },
   { label: "Boutique", href: "/boutique" },
+  { label: "Estimation", href: "/estimation" },
   {
     label: "Nos marques",
     href: "/nos-marques",

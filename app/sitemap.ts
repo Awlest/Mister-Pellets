@@ -32,6 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: SITE_URL,                                       lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
     { url: `${SITE_URL}/boutique`,                          lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
     { url: `${SITE_URL}/demande-de-devis`,                  lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE_URL}/estimation`,                        lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
     { url: `${SITE_URL}/primes-energie-wallonie-2026`,      lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/nos-marques`,                       lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/guides`,                            lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
