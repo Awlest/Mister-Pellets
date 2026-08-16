@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://mister-pellets.be/prendre-rendez-vous" },
 };
 
-const PHONE = "0472 04 32 22";
+const PHONE = "081 13 83 09";
 // Sous-domaine Easy!Appointments, à activer via DNS Combell + install PHP/MySQL
 const BOOKING_BASE = "https://booking.mister-pellets.be";
 
@@ -221,8 +221,8 @@ export default function PrendreRendezVousPage() {
               Système de réservation en cours d&apos;activation.
             </strong>{" "}
             En attendant la mise en service, contactez-nous directement au{" "}
-            <a href="tel:+32472043222" className="text-mp-orange-flame underline hover:no-underline font-semibold">
-              0472 04 32 22
+            <a href="tel:+3281138309" className="text-mp-orange-flame underline hover:no-underline font-semibold">
+              081 13 83 09
             </a>{" "}
             ou par email à{" "}
             <a href="mailto:info@awlest.com" className="text-mp-orange-flame underline hover:no-underline font-semibold">

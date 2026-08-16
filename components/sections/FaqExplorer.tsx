@@ -156,10 +156,10 @@ export function FaqExplorer() {
             <p className="text-sm text-mp-ink-soft">
               Essayez avec un autre mot, ou contactez-nous directement au{" "}
               <a
-                href="tel:+32472043222"
+                href="tel:+3281138309"
                 className="text-mp-orange-flame underline hover:no-underline font-semibold"
               >
-                0472 04 32 22
+                081 13 83 09
               </a>
               .
             </p>

@@ -58,7 +58,7 @@ export const ORGANIZATION_SCHEMA = {
   vatID: "BE0656514212",
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+32472043222",
+    telephone: "+3281138309",
     email: "info@awlest.com",
     contactType: "customer service",
     areaServed: "BE",
@@ -86,7 +86,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
   image: "https://mister-pellets.be/logo-mister-pellets-full.svg",
   hasMap:
     "https://www.google.com/maps/search/?api=1&query=Mister+Pellets+Rue+des+Fagotis+3A+5380+Fernelmont",
-  telephone: "+32472043222",
+  telephone: "+3281138309",
   email: "info@awlest.com",
   vatID: "BE0656514212",
   priceRange: "€€",

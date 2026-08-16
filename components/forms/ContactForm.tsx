@@ -61,7 +61,7 @@ export function ContactForm() {
         <h3 className="text-2xl font-semibold mb-2">Message reçu, merci !</h3>
         <p className="leading-relaxed">
           On revient vers vous dans la journée pendant les heures ouvrées. Si c'est urgent, vous pouvez
-          aussi appeler le 0472 04 32 22.
+          aussi appeler le 081 13 83 09.
         </p>
         <Button variant="outline" size="default" className="mt-6" onClick={() => setState("idle")}>
           Envoyer un autre message

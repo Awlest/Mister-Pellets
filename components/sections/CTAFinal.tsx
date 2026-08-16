@@ -10,7 +10,7 @@ interface CTAFinalProps {
   showPhone?: boolean;
 }
 
-const PHONE = "0472 04 32 22";
+const PHONE = "081 13 83 09";
 
 /**
  * Bloc CTA final sur fond beige avec halo orange. Cf. brief §3.2 sec 12.

@@ -107,7 +107,7 @@ export function rateLimitResponse(
   return NextResponse.json(
     {
       error:
-        "Trop de requêtes envoyées depuis cette adresse. Merci de réessayer dans quelques minutes ou de nous contacter par téléphone au 0472 04 32 22.",
+        "Trop de requêtes envoyées depuis cette adresse. Merci de réessayer dans quelques minutes ou de nous contacter par téléphone au 081 13 83 09.",
     },
     {
       status: 429,

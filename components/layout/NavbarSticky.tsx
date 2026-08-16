@@ -30,7 +30,7 @@ import { cn, formatPhone } from "@/lib/utils";
  * - Animation : spring purement horizontal, doux, léger overshoot
  */
 
-const PHONE = "0472 04 32 22";
+const PHONE = "081 13 83 09";
 
 type TabId = "home" | "shop" | "quote" | "rdv" | "menu";
 

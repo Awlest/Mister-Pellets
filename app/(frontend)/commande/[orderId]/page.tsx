@@ -202,9 +202,9 @@ export default async function OrderConfirmationPage({ params, searchParams }: Pr
 
           <div className="flex flex-wrap gap-3">
             <Button asChild variant="primary" size="default">
-              <a href="tel:+32472043222">
+              <a href="tel:+3281138309">
                 <Phone className="h-4 w-4" />
-                0472 04 32 22
+                081 13 83 09
               </a>
             </Button>
             <Button asChild variant="outline" size="default">

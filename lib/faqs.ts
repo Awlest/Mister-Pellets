@@ -87,7 +87,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Comment vous contacter ?",
     answer:
-      "Trois canaux : téléphone au 0472 04 32 22 (le plus rapide, du lundi au vendredi 9h-18h et samedi 9h-13h), email à info@awlest.com, ou formulaire de devis en ligne avec réponse sous 48 heures ouvrées. Pour une visite en personne, le showroom de Fernelmont accueille sur rendez-vous (recommandé pour garantir la disponibilité d'un conseiller).",
+      "Trois canaux : téléphone au 081 13 83 09 (le plus rapide, du lundi au vendredi 9h-18h et samedi 9h-13h), email à info@awlest.com, ou formulaire de devis en ligne avec réponse sous 48 heures ouvrées. Pour une visite en personne, le showroom de Fernelmont accueille sur rendez-vous (recommandé pour garantir la disponibilité d'un conseiller).",
   },
 
   // ───────────────────────────────────────────────────────────────────

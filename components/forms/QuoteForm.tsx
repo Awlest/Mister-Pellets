@@ -163,7 +163,7 @@ export function QuoteForm() {
         </div>
         <h2 className="text-3xl md:text-4xl font-semibold mb-4">Demande reçue !</h2>
         <p className="text-lg leading-relaxed mb-6 max-w-2xl mx-auto">
-          Merci {state.name}, on a bien reçu votre demande. On revient vers vous par email à <strong>{state.email}</strong> sous 48h ouvrées avec un chiffrage personnalisé. Si c'est urgent, vous pouvez aussi nous appeler au 0472 04 32 22.
+          Merci {state.name}, on a bien reçu votre demande. On revient vers vous par email à <strong>{state.email}</strong> sous 48h ouvrées avec un chiffrage personnalisé. Si c'est urgent, vous pouvez aussi nous appeler au 081 13 83 09.
         </p>
         <Button asChild variant="outline" size="default">
           <Link href="/">Retour à l&apos;accueil</Link>

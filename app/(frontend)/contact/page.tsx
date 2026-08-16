@@ -12,7 +12,7 @@ export const metadata = buildPageMetadata({
   path: "/contact",
 });
 
-const PHONE = "0472 04 32 22";
+const PHONE = "081 13 83 09";
 const EMAIL = "info@awlest.com";
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Mister+Pellets+Rue+des+Fagotis+3A+5380+Fernelmont";
