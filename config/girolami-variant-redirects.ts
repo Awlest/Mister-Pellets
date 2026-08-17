@@ -697,29 +697,13 @@ export const girolamiVariantRedirects: { source: string; destination: string; pe
     "destination": "/produit/girolami-vert-maiolica",
     "permanent": true
   },
-  {
-    "source": "/produit/girolami-vision-evo-100",
-    "destination": "/produit/girolami-vision-evo",
-    "permanent": true
-  },
-  {
-    "source": "/produit/girolami-vision-evo-60",
-    "destination": "/produit/girolami-vision-evo",
-    "permanent": true
-  },
-  {
-    "source": "/produit/girolami-vision-evo-70",
-    "destination": "/produit/girolami-vision-evo",
-    "permanent": true
-  },
-  {
-    "source": "/produit/girolami-vision-evo-80",
-    "destination": "/produit/girolami-vision-evo",
-    "permanent": true
-  },
-  {
-    "source": "/produit/girolami-vision-evo-90",
-    "destination": "/produit/girolami-vision-evo",
-    "permanent": true
-  }
+  // Les 5 redirections « girolami-vision-evo-XX → girolami-vision-evo » ont été
+  // retirées le 17/08/2026 : le produit parent `girolami-vision-evo` N'A JAMAIS
+  // ÉTÉ CRÉÉ en base. Résultat, les 4 Vision Evo encore publiées (70, 80, 90 et
+  // 100, de 2 662 à 3 182 €) redirigeaient vers une page « Produit introuvable »
+  // renvoyée en HTTP 200 : invendables sur la boutique, et 4 liens du flux
+  // Google Merchant annonçaient un prix pour une page sans produit — exactement
+  // ce que Google qualifie de déclaration trompeuse.
+  // Si le regroupement Vision Evo est repris un jour, créer d'abord la fiche
+  // parente, PUIS remettre ces redirections.
 ];
