@@ -113,6 +113,26 @@ export default function CGVPage() {
               du consommateur. Ce droit ne s'applique pas aux produits installés ou aux prestations
               de pose déjà exécutées.
             </p>
+            <p className="mt-3">
+              Pour exercer ce droit, écrivez-nous à{" "}
+              <a
+                href="mailto:info@awlest.com"
+                className="text-mp-orange-flame underline hover:no-underline"
+              >
+                info@awlest.com
+              </a>{" "}
+              ou par courrier à Awlest SRL, Rue des Fagotis 3A, 5380 Fernelmont, avant la fin du
+              délai de 14 jours. Le produit doit nous être renvoyé complet, dans son emballage
+              d&apos;origine et en état de revente.
+            </p>
+            <p className="mt-3">
+              <strong>Remboursement.</strong> Nous vous remboursons la totalité des sommes versées,
+              frais de livraison standard compris, au plus tard 14 jours après la réception de votre
+              demande de rétractation. Nous pouvons différer le remboursement jusqu&apos;à la
+              récupération du produit ou jusqu&apos;à ce que vous ayez fourni une preuve de son
+              expédition. Le remboursement est effectué par le même moyen de paiement que celui
+              utilisé lors de la commande, sans frais pour vous.
+            </p>
           </section>
 
           <section>
