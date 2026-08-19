@@ -124,6 +124,30 @@ function availability(status: string | undefined): string {
   return "in_stock";
 }
 
+/**
+ * Délai annoncé pour un produit « sur commande », en jours.
+ *
+ * Google REFUSE tout article en `backorder` sans `availability_date` : c'est ce
+ * qui bloquait 141 de nos articles (36 % du flux). La valeur ci-dessous reprend
+ * la fourchette haute déjà publiée dans la FAQ du site (« les configurations
+ * spécifiques en 3 à 5 semaines ») pour ne rien promettre à Google que le site
+ * ne dise déjà. À ajuster si les délais fournisseurs changent.
+ */
+const BACKORDER_LEAD_DAYS = 35;
+
+/**
+ * Date de disponibilité exigée par Google pour les articles en backorder,
+ * au format ISO 8601 avec fuseau. Renvoie undefined pour les autres statuts
+ * (l'attribut est alors omis du flux).
+ */
+function availabilityDate(status: string | undefined): string | undefined {
+  if (availability(status) !== "backorder") return undefined;
+  const d = new Date();
+  d.setDate(d.getDate() + BACKORDER_LEAD_DAYS);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T00:00:00+02:00`;
+}
+
 /** Pour une variante, retourne la valeur choisie sur chaque axe. */
 function variantAxisValues(
   axes: VariantOptionAxis[],
@@ -186,6 +210,7 @@ function productEntry(p: ProductDemo): FeedEntry | null {
       ["link", `${SITE_URL}/produit/${p.slug}`],
       ["image_link", imageLink],
       ["availability", availability(p.stockStatus)],
+      ["availability_date", availabilityDate(p.stockStatus)],
       ["price", `${p.priceTTC.toFixed(2)} EUR`],
       ["brand", p.brand],
       ["gtin", p.gtin],
@@ -243,6 +268,7 @@ function variantEntry(
       ["link", link],
       ["image_link", imageLink],
       ["availability", availability(variant.stockStatus)],
+      ["availability_date", availabilityDate(variant.stockStatus)],
       ["price", `${price.toFixed(2)} EUR`],
       ["sale_price", salePrice],
       ["brand", p.brand],
@@ -288,6 +314,7 @@ function colorVariantEntry(
       ["link", `${SITE_URL}/produit/${p.slug}`],
       ["image_link", imageLink],
       ["availability", availability(p.stockStatus)],
+      ["availability_date", availabilityDate(p.stockStatus)],
       ["price", `${p.priceTTC.toFixed(2)} EUR`],
       ["brand", p.brand],
       ["gtin", cv.gtin],
