@@ -25,6 +25,9 @@ export default function robots(): MetadataRoute.Robots {
         // L'ordre des Allow / Disallow respecte le longest-match : on autorise
         // explicitement /api/media/ (images produit Payload) et le flux
         // Google Merchant, puis on bloque le reste de /api/ et /admin/.
+        // /_next/ n'est PAS bloqué : les images produit sont servies par
+        // /_next/image et le CSS/JS par /_next/static. Les bloquer empêchait
+        // Googlebot de rendre les pages et d'indexer les visuels.
         allow: [
           "/",
           "/api/media/",
@@ -36,15 +39,15 @@ export default function robots(): MetadataRoute.Robots {
           "/panier/",
           "/checkout/",
           "/commande/",
-          "/_next/",
           "/*.json$",
         ],
       },
       // Googlebot-Image doit pouvoir crawler les images servies par Payload
-      // (chemin /api/media/file/...) pour valider les annonces Merchant.
+      // (chemin /api/media/file/...) pour valider les annonces Merchant,
+      // ainsi que les images optimisées par Next (/_next/image?url=...).
       {
         userAgent: "Googlebot-Image",
-        allow: ["/", "/api/media/"],
+        allow: ["/", "/api/media/", "/_next/image"],
         disallow: ["/admin/", "/checkout/", "/commande/"],
       },
       // Bloquer les bots aggressifs (optionnel)
