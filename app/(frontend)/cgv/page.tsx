@@ -21,11 +21,13 @@ export default function CGVPage() {
 
       <article className="bg-mp-cream py-12 md:py-16">
         <div className="container mx-auto max-w-3xl px-4 md:px-6 space-y-8 text-mp-ink leading-relaxed">
-          <p className="text-sm text-mp-ink-soft p-4 rounded-xl bg-mp-orange-light/40 border border-mp-orange-warm/40">
-            ⚠️ <strong>Document à finaliser</strong> avant la mise en production officielle. Le client doit
-            faire valider ces conditions par un juriste belge. Cette version est un brouillon de référence.
-          </p>
-
+          {/*
+            NE PAS remettre d'avertissement "brouillon / à finaliser" sur cette page.
+            Elle est publique et sert de référence à Google Merchant Center pour
+            vérifier la politique de retour et de remboursement : un texte disant
+            que les conditions ne sont pas en vigueur declenche un refus.
+            La relecture par un juriste belge reste à faire — c'est suivi hors site.
+          */}
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">1. Objet</h2>
             <p>
