@@ -6,6 +6,7 @@ import { getPayloadClient } from "@/lib/payload-client";
 import { getProductBySlug } from "@/lib/products";
 import { rateLimitResponse, csrfOriginCheck, isHoneypotTriggered } from "@/lib/rate-limit";
 import { confirmCustomerOrder } from "@/lib/email";
+import { shippingCostFor } from "@/lib/shipping";
 import type { ProductDemo } from "@/lib/products-demo";
 
 /**
@@ -185,7 +186,9 @@ export async function POST(request: Request) {
   const subtotalTTC = round2(serverItems.reduce((acc, l) => acc + l.totalPrice, 0));
   const vat = round2(subtotalTTC - subtotalTTC / 1.21);
   const subtotalHT = round2(subtotalTTC - vat);
-  const shipping = 0; // gratuit pour l'instant, calcul dynamique selon zone à venir
+  // Frais de port selon le code postal de livraison, barème CGV §7.
+  // Calculé côté serveur : le client ne choisit pas ce qu'il paie.
+  const shipping = shippingCostFor(customer.postalCode);
   const total = round2(subtotalTTC + shipping);
 
   const orderNumber = generateOrderNumber();

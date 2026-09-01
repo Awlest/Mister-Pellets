@@ -32,11 +32,17 @@ export function formatPrice(amountInEuros: number): string {
 }
 
 /**
- * Taux de TVA standard belge. Les prix produit sont stockés TTC (TVAC) ;
- * on en dérive le prix HTVA pour l'affichage catalogue (le prix affiché est
- * HTVA, la mention TVAC reste indiquée à côté pour la transparence).
+ * Taux de TVA belge. Les prix produit sont stockés TTC au taux standard.
+ *
+ * ⚠️ Le prix mis en avant auprès d'un consommateur doit être le prix TOTAL,
+ * TVA comprise (art. VI.3 CDE). C'est aussi le prix que Google Merchant exige
+ * pour la Belgique et celui que le panier facture. Le HTVA ne s'affiche donc
+ * qu'en mention secondaire, à l'intention des professionnels.
  */
 export const VAT_RATE = 1.21;
+
+/** TVA réduite : pose sur une habitation privée de plus de 10 ans. */
+export const VAT_RATE_REDUCED = 1.06;
 
 /**
  * Formate le prix HTVA (hors TVA) à partir d'un prix TTC stocké.
@@ -44,6 +50,17 @@ export const VAT_RATE = 1.21;
  */
 export function formatPriceHT(amountTTC: number): string {
   return formatPrice(amountTTC / VAT_RATE);
+}
+
+/**
+ * Prix TVAC au taux réduit de 6 %, applicable quand le poêle est posé par nos
+ * soins sur une habitation privée de plus de 10 ans. C'est le prix réellement
+ * payé par la grande majorité des clients, et le seul argument tarifaire
+ * honnête face aux concurrents qui affichent du HTVA.
+ * Ex. 3182 (TTC 21 %) → 2 630 HTVA → "2 788 €" (TVAC 6 %).
+ */
+export function formatPriceReducedVat(amountTTC: number): string {
+  return formatPrice((amountTTC / VAT_RATE) * VAT_RATE_REDUCED);
 }
 
 /**

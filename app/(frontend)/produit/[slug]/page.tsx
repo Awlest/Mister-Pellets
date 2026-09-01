@@ -20,7 +20,7 @@ import {
   getProductBySlug,
 } from "@/lib/products";
 import { BRANDS } from "@/lib/brands";
-import { formatPrice, formatPriceHT } from "@/lib/utils";
+import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 
 interface Props {
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return { title: "Produit introuvable", robots: { index: false } };
   return buildPageMetadata({
     title: `${product.name}, Poêle à pellets ${product.power}`,
-    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. Prix indicatif ${product.priceTTC ? `${formatPriceHT(product.priceTTC)} HTVA` : "sur devis"}. Pose Mister Pellets, primes incluses.`,
+    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. ${product.priceTTC ? `${formatPrice(product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets, primes incluses.`,
     path: `/produit/${product.slug}`,
   });
 }
@@ -346,20 +346,27 @@ export default async function ProductPage({ params }: Props) {
                   <div className="flex flex-col gap-3">
                     <div>
                       <span className="text-xs text-mp-ink-soft block">
-                        Prix HTVA indicatif (poêle seul)
+                        Prix du poêle seul, TVA comprise
                       </span>
                       <span
                         className="text-4xl font-semibold text-mp-green-deep"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
-                        {formatPriceHT(product.priceTTC)}
+                        {formatPrice(product.priceTTC)}
                         <span className="text-base font-medium text-mp-ink-soft ml-1">
-                          HTVA
+                          TVAC
                         </span>
                       </span>
                       <span className="block text-sm text-mp-ink-soft mt-1">
-                        soit {formatPrice(product.priceTTC)} TVAC (21 %)
+                        soit {formatPriceHT(product.priceTTC)} HTVA
                       </span>
+                      <p className="mt-3 text-sm text-mp-green-deep">
+                        <span className="font-semibold">
+                          {formatPriceReducedVat(product.priceTTC)} TVAC
+                        </span>{" "}
+                        si nous le posons sur une habitation de plus de 10 ans
+                        <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
+                      </p>
                     </div>
                     <ul className="text-xs text-mp-ink-soft space-y-1 leading-relaxed">
                       <li>
@@ -412,9 +419,18 @@ export default async function ProductPage({ params }: Props) {
                 </Button>
               </div>
 
+              {/*
+                NE PAS réintroduire de mention du type « le paiement en ligne
+                arrive prochainement » : le checkout Mollie est en service
+                (Bancontact, Visa, Mastercard). Annoncer le contraire dit au
+                client comme à Google Merchant que la boutique ne permet pas
+                d'acheter, ce qui est faux et compte comme une déclaration
+                trompeuse.
+              */}
               <p className="text-xs text-mp-ink-soft mt-4 text-center">
-                Pour commander, utilise le formulaire de devis. Le paiement en
-                ligne (Mollie / Bancontact) arrive prochainement.
+                Paiement sécurisé par Bancontact, Visa ou Mastercard via Mollie.
+                Pour un projet avec pose, passez par le devis : les primes et la
+                TVA à 6 % y sont calculées.
               </p>
                 </>
               )}

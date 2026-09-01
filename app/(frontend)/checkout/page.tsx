@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { formatPrice, cn } from "@/lib/utils";
+import { shippingCostFor } from "@/lib/shipping";
 
 interface FormState {
   name: string;
@@ -38,9 +39,17 @@ export default function CheckoutPage() {
   const router = useRouter();
   const items = useCart((s) => s.items);
   const total = useCartTotal();
+
   const [form, setForm] = React.useState<FormState>(initialForm);
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+
+  // Frais de port affichés en direct dès que le code postal est complet.
+  // Même barème que le serveur (`lib/shipping.ts`) : le montant annoncé ici
+  // doit être exactement celui qui sera débité, sinon on retombe dans l'écart
+  // de déclaration qui a fait suspendre le compte Merchant.
+  const postalCodeComplete = /^[0-9]{4}$/.test(form.postalCode);
+  const shipping = postalCodeComplete ? shippingCostFor(form.postalCode) : 0;
 
   // Redirect si panier vide
   React.useEffect(() => {
@@ -317,13 +326,35 @@ export default function CheckoutPage() {
                 ))}
               </ul>
 
+              <div className="border-t border-mp-sand/40 pt-4 mb-4 space-y-2 text-sm">
+                <div className="flex items-baseline justify-between">
+                  <span className="text-mp-ink-soft">Sous-total</span>
+                  <span className="tabular-nums">{formatPrice(total)}</span>
+                </div>
+                <div className="flex items-baseline justify-between">
+                  <span className="text-mp-ink-soft">Livraison</span>
+                  <span className="tabular-nums">
+                    {postalCodeComplete
+                      ? shipping === 0
+                        ? "Offerte"
+                        : formatPrice(shipping)
+                      : "Selon le code postal"}
+                  </span>
+                </div>
+                {postalCodeComplete && shipping === 0 && (
+                  <p className="text-xs text-mp-ink-soft">
+                    Vous êtes dans notre zone de livraison offerte.
+                  </p>
+                )}
+              </div>
+
               <div className="border-t border-mp-sand/40 pt-4 mb-6 flex items-baseline justify-between">
                 <span className="text-base font-semibold text-mp-green-deep">Total TTC</span>
                 <span
                   className="text-2xl font-semibold text-mp-green-deep tabular-nums"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  {formatPrice(total)}
+                  {formatPrice(total + shipping)}
                 </span>
               </div>
 

@@ -1,5 +1,11 @@
 import { getAllProducts } from "@/lib/products";
 import { slugify } from "@/lib/slugify";
+import {
+  FREE_ZONE_POSTAL_CODES,
+  SHIPPING_LOCAL,
+  SHIPPING_WALLONIA,
+  SHIPPING_BRUSSELS_FLANDERS,
+} from "@/lib/shipping";
 import type {
   ProductDemo,
   ProductColorVariant,
@@ -179,30 +185,52 @@ type FeedEntry = {
 /**
  * Frais de port déclarés au niveau de l'article.
  *
- * Valeur = ce que le client paie RÉELLEMENT en commandant en ligne, c'est-à-dire
- * zéro : `app/api/checkout/route.ts` fixe `const shipping = 0` quelle que soit
- * l'adresse. C'est cette valeur que Google compare au panier, donc c'est elle
- * qu'on déclare.
+ * Les montants viennent de `lib/shipping.ts`, le même module que celui utilisé
+ * par `app/api/checkout/route.ts` pour facturer : le flux ne peut donc pas
+ * diverger de ce que le client paie au panier. C'est cette concordance que
+ * Google vérifie, et son absence est ce qui a fait suspendre le compte.
  *
- * ⚠️ Les CGV §7 et l'encart des fiches produit annoncent, eux, 50 € en Wallonie
- * et 100 € à Bruxelles et en Flandre au-delà de 20 km — un tarif que le checkout
- * n'applique pas. Cette contradiction reste à trancher côté métier : soit le
- * checkout facture vraiment ces montants, soit les CGV doivent dire que la
- * livraison des commandes en ligne est offerte. Tant que ce n'est pas tranché,
- * on aligne le flux sur le comportement réel du panier, jamais sur un tarif que
- * le client ne se verra pas facturer.
+ * L'interface Merchant ne sait pas exprimer un tarif par région — son tableau
+ * des coûts avancés n'accepte que prix / poids / quantité — d'où la
+ * déclaration ici, par plages de codes postaux.
  *
- * Le jour où le checkout calculera les frais par zone, repasser ici à une
- * déclaration par `g:postal_code` (l'interface Merchant, elle, ne sait pas
- * faire de tarif par région : son tableau des coûts avancés n'accepte que
- * prix / poids / quantité).
+ * La zone de livraison offerte est une liste de codes postaux, pas un rayon :
+ * chacun est déclaré individuellement pour que le tarif annoncé soit exact et
+ * jamais inférieur au tarif réel.
  */
-const SHIPPING_XML =
-  `      <g:shipping>\n` +
-  `        <g:country>BE</g:country>\n` +
-  `        <g:service>Livraison standard</g:service>\n` +
-  `        <g:price>0.00 EUR</g:price>\n` +
-  `      </g:shipping>`;
+function shippingBlock(price: number, postalCode?: string): string {
+  return (
+    `      <g:shipping>\n` +
+    `        <g:country>BE</g:country>\n` +
+    (postalCode ? `        <g:postal_code>${esc(postalCode)}</g:postal_code>\n` : "") +
+    `        <g:service>Livraison standard</g:service>\n` +
+    `        <g:price>${price.toFixed(2)} EUR</g:price>\n` +
+    `      </g:shipping>`
+  );
+}
+
+/**
+ * Plages postales belges hors zone offerte.
+ *   1000-1299 Bruxelles · 1300-1499 Brabant wallon · 1500-3999 Flandre
+ *   4000-7999 Wallonie  · 8000-9999 Flandre
+ * Couverture complète de 1000 à 9999, sans trou ni chevauchement.
+ */
+const SHIPPING_RANGES: ReadonlyArray<{ range: string; price: number }> = [
+  { range: "1000-1299", price: SHIPPING_BRUSSELS_FLANDERS },
+  { range: "1300-1499", price: SHIPPING_WALLONIA },
+  { range: "1500-3999", price: SHIPPING_BRUSSELS_FLANDERS },
+  { range: "4000-7999", price: SHIPPING_WALLONIA },
+  { range: "8000-9999", price: SHIPPING_BRUSSELS_FLANDERS },
+];
+
+const SHIPPING_XML = [
+  ...SHIPPING_RANGES.map((r) => shippingBlock(r.price, r.range)),
+  // Les codes postaux offerts sont déclarés APRÈS les plages : plus spécifiques,
+  // ils priment sur la plage qui les contient.
+  ...[...FREE_ZONE_POSTAL_CODES]
+    .sort((a, b) => a - b)
+    .map((code) => shippingBlock(SHIPPING_LOCAL, String(code))),
+].join("\n");
 
 /** Construit un bloc <item> à partir de paires clé/valeur (valeurs déjà prêtes). */
 function buildItem(fields: Array<[string, string | undefined]>): string {

@@ -4,7 +4,7 @@ import * as React from "react";
 import { ShoppingBag, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart-store";
-import { formatPrice, formatPriceHT } from "@/lib/utils";
+import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import type {
   VariantOptionAxis,
   VariantOptionValueData,
@@ -180,9 +180,9 @@ export function ProductVariantPanel({
         <span className="text-xs text-mp-ink-soft block">
           {activeVariant
             ? activePriced
-              ? "Prix HTVA de la configuration choisie"
+              ? "Configuration choisie, TVA comprise"
               : "Configuration choisie"
-            : "Prix HTVA indicatif"}
+            : "Prix du poêle seul, TVA comprise"}
         </span>
         <span
           className="text-4xl font-semibold text-mp-green-deep"
@@ -190,12 +190,12 @@ export function ProductVariantPanel({
         >
           {activeVariant
             ? activePriced
-              ? formatPriceHT(effectivePrice(activeVariant))
+              ? formatPrice(effectivePrice(activeVariant))
               : "Sur devis"
             : Number.isFinite(minPrice)
-              ? `À partir de ${formatPriceHT(minPrice)}`
+              ? `À partir de ${formatPrice(minPrice)}`
               : basePriceTTC
-                ? `À partir de ${formatPriceHT(basePriceTTC)}`
+                ? `À partir de ${formatPrice(basePriceTTC)}`
                 : "Sur devis"}
         </span>
         {(() => {
@@ -207,9 +207,16 @@ export function ProductVariantPanel({
               ? minPrice
               : basePriceTTC ?? null;
           return ttc != null ? (
-            <span className="mt-1 block text-sm text-mp-ink-soft">
-              soit {formatPrice(ttc)} TVAC
-            </span>
+            <>
+              <span className="mt-1 block text-sm text-mp-ink-soft">
+                soit {formatPriceHT(ttc)} HTVA
+              </span>
+              <p className="mt-3 text-sm text-mp-green-deep">
+                <span className="font-semibold">{formatPriceReducedVat(ttc)} TVAC</span> si
+                nous le posons sur une habitation de plus de 10 ans
+                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
+              </p>
+            </>
           ) : null;
         })()}
 
@@ -274,9 +281,12 @@ export function ProductVariantPanel({
         )}
       </Button>
 
+      {/* Voir le commentaire de app/(frontend)/produit/[slug]/page.tsx :
+          ne pas réintroduire de « paiement en ligne à venir », le checkout
+          Mollie est en service. */}
       <p className="text-xs text-mp-ink-soft text-center">
-        Pose non incluse : devis chiffré sous 48 h. Le paiement en ligne
-        (Mollie / Bancontact) arrive prochainement.
+        Pose non incluse : devis chiffré sous 48 h. Paiement sécurisé par
+        Bancontact, Visa ou Mastercard via Mollie.
       </p>
     </div>
   );
