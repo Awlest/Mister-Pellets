@@ -84,7 +84,7 @@ export default function AProposPage() {
             </p>
             <p>
               L'activité d'Awlest, qui couvre les poêles à pellets sous la marque Mister Pellets et d'autres
-              services connexes, est notée 4,9 sur 5 sur Google par les clients depuis 2016. Comme la marque
+              services connexes, est notée 5,0 sur 5 sur Google par les clients depuis 2016. Comme la marque
               commerciale Mister Pellets a été lancée plus récemment, on préfère ne pas afficher ces avis
               comme étant ceux de Mister Pellets directement. Ils existent, ils sont vérifiables sur la fiche
               Google d'Awlest, mais on reste honnêtes sur la source.
