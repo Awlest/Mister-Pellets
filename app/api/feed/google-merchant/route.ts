@@ -179,48 +179,30 @@ type FeedEntry = {
 /**
  * Frais de port déclarés au niveau de l'article.
  *
- * Le compte Merchant annonçait « livraison gratuite » pour toute la Belgique
- * alors que les CGV §7 facturent 50 € en Wallonie et 100 € à Bruxelles et en
- * Flandre au-delà de 20 km. Cet écart entre le compte et la boutique est un
- * motif direct de « déclarations trompeuses » : Google compare les deux.
+ * Valeur = ce que le client paie RÉELLEMENT en commandant en ligne, c'est-à-dire
+ * zéro : `app/api/checkout/route.ts` fixe `const shipping = 0` quelle que soit
+ * l'adresse. C'est cette valeur que Google compare au panier, donc c'est elle
+ * qu'on déclare.
  *
- * L'interface Merchant ne permet pas de tarif par région (son tableau des coûts
- * avancés n'accepte que prix / poids / quantité comme dimensions, et le compte
- * n'expose pas de page « régions »), d'où la déclaration ici, par plages de
- * codes postaux.
+ * ⚠️ Les CGV §7 et l'encart des fiches produit annoncent, eux, 50 € en Wallonie
+ * et 100 € à Bruxelles et en Flandre au-delà de 20 km — un tarif que le checkout
+ * n'applique pas. Cette contradiction reste à trancher côté métier : soit le
+ * checkout facture vraiment ces montants, soit les CGV doivent dire que la
+ * livraison des commandes en ligne est offerte. Tant que ce n'est pas tranché,
+ * on aligne le flux sur le comportement réel du panier, jamais sur un tarif que
+ * le client ne se verra pas facturer.
  *
- * Découpage postal belge :
- *   1000-1299  Bruxelles-Capitale  → 100 €
- *   1300-1499  Brabant wallon      →  50 €
- *   1500-3999  Flandre             → 100 €
- *   4000-7999  Wallonie            →  50 €
- *   8000-9999  Flandre             → 100 €
- * Couverture complète de 1000 à 9999, sans trou ni chevauchement.
- *
- * La gratuité dans un rayon de 20 km autour de Fernelmont n'est PAS déclarée :
- * un rayon ne se traduit pas en plages postales sans risquer d'annoncer un
- * tarif inférieur au tarif réel, ce que Google sanctionne. Un client de cette
- * zone se voit donc annoncer 50 € et facturer 0 € — l'écart joue en sa faveur,
- * ce qui est sans risque côté règles. Pour l'annoncer exactement, il faudrait
- * la liste des codes postaux de la zone.
+ * Le jour où le checkout calculera les frais par zone, repasser ici à une
+ * déclaration par `g:postal_code` (l'interface Merchant, elle, ne sait pas
+ * faire de tarif par région : son tableau des coûts avancés n'accepte que
+ * prix / poids / quantité).
  */
-const SHIPPING_ZONES: ReadonlyArray<{ postalCode: string; price: string }> = [
-  { postalCode: "1000-1299", price: "100.00 EUR" },
-  { postalCode: "1300-1499", price: "50.00 EUR" },
-  { postalCode: "1500-3999", price: "100.00 EUR" },
-  { postalCode: "4000-7999", price: "50.00 EUR" },
-  { postalCode: "8000-9999", price: "100.00 EUR" },
-];
-
-const SHIPPING_XML = SHIPPING_ZONES.map(
-  (z) =>
-    `      <g:shipping>\n` +
-    `        <g:country>BE</g:country>\n` +
-    `        <g:postal_code>${esc(z.postalCode)}</g:postal_code>\n` +
-    `        <g:service>Livraison standard</g:service>\n` +
-    `        <g:price>${esc(z.price)}</g:price>\n` +
-    `      </g:shipping>`,
-).join("\n");
+const SHIPPING_XML =
+  `      <g:shipping>\n` +
+  `        <g:country>BE</g:country>\n` +
+  `        <g:service>Livraison standard</g:service>\n` +
+  `        <g:price>0.00 EUR</g:price>\n` +
+  `      </g:shipping>`;
 
 /** Construit un bloc <item> à partir de paires clé/valeur (valeurs déjà prêtes). */
 function buildItem(fields: Array<[string, string | undefined]>): string {
