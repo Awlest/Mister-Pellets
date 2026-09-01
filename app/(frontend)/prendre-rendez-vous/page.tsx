@@ -1,23 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Phone,
-  MapPin,
-  Calendar,
-  Coffee,
-  Wrench,
-  Flame,
-  Brush,
-  Home,
-  Clock,
-  ArrowRight,
-} from "lucide-react";
+import { Phone, MapPin, Clock, ArrowRight } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { formatPhone } from "@/lib/utils";
+import {
+  SERVICES,
+  ONLINE_SERVICES,
+  PHONE_SERVICES,
+  BOOKING_URL,
+  canBookOnline,
+} from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Prendre rendez-vous, Showroom Fernelmont & services Mister Pellets",
@@ -27,93 +23,6 @@ export const metadata: Metadata = {
 };
 
 const PHONE = "081 13 83 09";
-// Sous-domaine Easy!Appointments, à activer via DNS Combell + install PHP/MySQL
-const BOOKING_BASE = "https://booking.mister-pellets.be";
-
-type ServiceLocation = "domicile" | "showroom";
-
-interface Service {
-  slug: string;
-  name: string;
-  shortDescription: string;
-  longDescription: string;
-  durationLabel: string;
-  priceLabel: string;
-  location: ServiceLocation;
-  icon: typeof Calendar;
-  // ID du service correspondant dans Easy!Appointments (à configurer côté admin E!A)
-  easyAppointmentsServiceId: string;
-}
-
-/**
- * 5 services Mister Pellets exposés via Easy!Appointments self-hosté
- * (cf. doc corrections-mobile-v1 §5.2 et §5.4).
- *
- * Configuration finale via collection Payload `Services` (Phase 8).
- * Tarifs "Sur devis" = à compléter par le client dans l'admin Payload.
- */
-const SERVICES: Service[] = [
-  {
-    slug: "devis-sur-place",
-    name: "Devis sur place",
-    shortDescription: "Diagnostic à domicile pour chiffrer votre projet pellets.",
-    longDescription:
-      "On vient chez vous, on regarde la pièce, le conduit existant, l'isolation, l'arrivée d'air comburant. Sortie : un devis chiffré sous 48 heures avec le modèle adapté, la prime Wallonie déjà calculée, et le délai de pose.",
-    durationLabel: "60 minutes",
-    priceLabel: "Gratuit",
-    location: "domicile",
-    icon: Home,
-    easyAppointmentsServiceId: "1",
-  },
-  {
-    slug: "visite-showroom",
-    name: "Visite showroom + conseils",
-    shortDescription: "Voir les modèles d'exposition à Fernelmont, comparer en vrai.",
-    longDescription:
-      "On vous accueille au showroom de Fernelmont, café, vous voyez les flammes, vous comparez les designs, on parle puissance et budget. La sélection en exposition tourne régulièrement, donc on peut vous confirmer quels modèles seront sur place le jour de votre visite.",
-    durationLabel: "45 minutes",
-    priceLabel: "Gratuit",
-    location: "showroom",
-    icon: Coffee,
-    easyAppointmentsServiceId: "2",
-  },
-  {
-    slug: "entretien-annuel",
-    name: "Entretien annuel",
-    shortDescription: "Révision complète obligatoire chaque année (poêles à pellets).",
-    longDescription:
-      "Démontage, nettoyage du creuset, de l'échangeur de chaleur, de la chambre de combustion, du conduit interne, de la sonde de fumée, du ventilateur d'extraction. Vérification des joints, du tirage, des paramètres de combustion. Service réservé aux poêles à pellets.",
-    durationLabel: "Environ 90 minutes",
-    priceLabel: "Sur devis",
-    location: "domicile",
-    icon: Wrench,
-    easyAppointmentsServiceId: "3",
-  },
-  {
-    slug: "depannage",
-    name: "Dépannage",
-    shortDescription: "Intervention rapide en cas de panne ou d'extinction répétée.",
-    longDescription:
-      "Diagnostic sur place, remplacement éventuel de pièces (résistance d'allumage, motoréducteur, sonde de fumée, carte électronique). Intervention sous 48 à 72 heures dans la zone Fernelmont et 50 km autour. Service réservé aux poêles à pellets.",
-    durationLabel: "Variable selon la cause",
-    priceLabel: "Sur devis",
-    location: "domicile",
-    icon: Flame,
-    easyAppointmentsServiceId: "4",
-  },
-  {
-    slug: "ramonage",
-    name: "Ramonage",
-    shortDescription: "Ramonage du conduit annuel, certificat fourni.",
-    longDescription:
-      "Ramonage mécanique du conduit de fumée, contrôle du chapeau, vérification des distances de sécurité. Certificat de ramonage remis sur place (à conserver pour votre assurance habitation). Service réservé aux poêles à pellets.",
-    durationLabel: "Environ 60 minutes",
-    priceLabel: "Sur devis",
-    location: "domicile",
-    icon: Brush,
-    easyAppointmentsServiceId: "5",
-  },
-];
 
 export default function PrendreRendezVousPage() {
   // Schema.org : un Service par offre, agrégés en CollectionPage
@@ -201,49 +110,38 @@ export default function PrendreRendezVousPage() {
         </div>
       </section>
 
-      {/* Les 5 services */}
+      {/* Rendez-vous commerciaux : réservables en ligne */}
       <section className="bg-mp-beige py-12 md:py-16">
         <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
           <div className="max-w-3xl mb-10">
             <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
-              Cinq raisons de nous voir
+              Réserver un rendez-vous en ligne
             </h2>
             <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed">
-              Choisissez le service qui correspond à votre besoin. Le créneau se réserve sur notre
-              système de prise de rendez-vous en ligne. Vous recevez une confirmation par email,
-              avec une option d'ajout direct à votre agenda Google ou Apple.
+              Pour chiffrer un projet ou venir voir les modèles, choisissez directement votre
+              créneau dans notre agenda. Vous recevez l&apos;invitation par email, et le
+              rendez-vous se pose dans le nôtre.
             </p>
           </div>
 
-          {/* Bandeau temporaire (audit V20260503 §1.M.2) tant que le sous-domaine
-            * Easy!Appointments n'est pas activé sur Combell. Évite les 404 sur
-            * les boutons "Réserver". À retirer une fois le sous-domaine actif. */}
-          <div className="mb-8 rounded-2xl bg-mp-orange-light/60 border border-mp-orange-flame/30 p-5 text-sm text-mp-ink leading-relaxed">
-            <strong className="text-mp-green-deep">
-              Système de réservation en cours d&apos;activation.
-            </strong>{" "}
-            En attendant la mise en service, contactez-nous directement au{" "}
-            <a href="tel:+3281138309" className="text-mp-orange-flame underline hover:no-underline font-semibold">
-              081 13 83 09
-            </a>{" "}
-            ou par email à{" "}
-            <a href="mailto:info@awlest.com" className="text-mp-orange-flame underline hover:no-underline font-semibold">
-              info@awlest.com
-            </a>
-            , on cale un créneau dans la journée.
-          </div>
+          {!canBookOnline && (
+            <div className="mb-8 rounded-2xl bg-mp-orange-light/60 border border-mp-orange-flame/30 p-5 text-sm text-mp-ink leading-relaxed">
+              <strong className="text-mp-green-deep">
+                Réservation en ligne momentanément indisponible.
+              </strong>{" "}
+              Appelez le{" "}
+              <a href="tel:+3281138309" className="text-mp-orange-flame underline hover:no-underline font-semibold">
+                081 13 83 09
+              </a>
+              , on cale un créneau dans la journée.
+            </div>
+          )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {SERVICES.map((service) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {ONLINE_SERVICES.map((service) => {
               const Icon = service.icon;
-              const bookingHref = `${BOOKING_BASE}/?service=${service.easyAppointmentsServiceId}`;
-              const isTechnical = ["entretien-annuel", "depannage", "ramonage"].includes(service.slug);
-
               return (
-                <Card
-                  key={service.slug}
-                  className="p-6 flex flex-col h-full"
-                >
+                <Card key={service.slug} className="p-6 flex flex-col h-full">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center justify-center h-11 w-11 rounded-xl bg-mp-orange-light text-mp-orange-flame">
                       <Icon className="h-5 w-5" />
@@ -275,32 +173,92 @@ export default function PrendreRendezVousPage() {
                     </span>
                   </div>
 
-                  {isTechnical && (
-                    <p className="text-xs text-mp-ink-soft italic mb-3 -mt-2">
-                      Pour les poêles à pellets uniquement.
-                    </p>
+                  {canBookOnline ? (
+                    <Button asChild variant="primary" size="default" className="w-full justify-center">
+                      <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                        Choisir un créneau
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button asChild variant="primary" size="default" className="w-full justify-center">
+                      <a href={`tel:${formatPhone(PHONE)}`}>
+                        <Phone className="h-4 w-4" />
+                        {PHONE}
+                      </a>
+                    </Button>
                   )}
-
-                  <Button asChild variant="primary" size="default" className="w-full justify-center">
-                    <a
-                      href={bookingHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Réserver
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </Button>
                 </Card>
               );
             })}
           </div>
+        </div>
+      </section>
 
-          <p className="mt-8 text-xs text-mp-ink-soft italic max-w-3xl">
-            Le système de prise de rendez-vous repose sur Easy!Appointments, hébergé sur notre
-            sous-domaine <code className="text-mp-green-deep not-italic">booking.mister-pellets.be</code>.
-            Confirmation automatique par email, synchronisation native avec notre agenda Google.
-          </p>
+      {/* Interventions techniques : par téléphone uniquement */}
+      <section className="bg-mp-cream py-12 md:py-16">
+        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+          <div className="max-w-3xl mb-10">
+            <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
+              Entretien, ramonage, dépannage
+            </h2>
+            <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed">
+              Ces trois interventions se calent <strong className="text-mp-green-deep">par
+              téléphone</strong>, et pas en ligne. On a besoin de connaître la marque, le modèle
+              et l&apos;accès au conduit avant de bloquer un créneau : c&apos;est ce qui permet
+              d&apos;arriver avec les bonnes pièces et le bon matériel.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {PHONE_SERVICES.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Card key={service.slug} className="p-6 flex flex-col h-full">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center justify-center h-11 w-11 rounded-xl bg-mp-orange-light text-mp-orange-flame">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <span className="text-xs font-semibold text-mp-orange-flame uppercase tracking-wider">
+                      {service.priceLabel}
+                    </span>
+                  </div>
+
+                  <h3
+                    className="text-xl font-semibold text-mp-green-deep mb-2"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {service.name}
+                  </h3>
+
+                  <p className="text-sm text-mp-ink-soft leading-relaxed mb-4 flex-1">
+                    {service.shortDescription}
+                  </p>
+
+                  <p className="text-xs text-mp-ink-soft italic mb-4">
+                    Pour les poêles et inserts à pellets uniquement.
+                  </p>
+
+                  <div className="flex flex-col gap-2 mt-auto">
+                    <Button asChild variant="primary" size="default" className="w-full justify-center">
+                      <a href={`tel:${formatPhone(PHONE)}`}>
+                        <Phone className="h-4 w-4" />
+                        {PHONE}
+                      </a>
+                    </Button>
+                    {service.href && (
+                      <Button asChild variant="outline" size="default" className="w-full justify-center">
+                        <Link href={service.href}>
+                          En savoir plus
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       </section>
 

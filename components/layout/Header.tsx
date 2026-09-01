@@ -22,6 +22,16 @@ const NAV_ITEMS = [
     ],
   },
   {
+    label: "Services",
+    href: "/prendre-rendez-vous",
+    children: [
+      { label: "Entretien annuel", href: "/entretien-poele-a-pellets", desc: "Révision complète, par téléphone" },
+      { label: "Ramonage", href: "/ramonage", desc: "Certificat remis sur place" },
+      { label: "Dépannage", href: "/depannage-poele-a-pellets", desc: "Panne, code erreur, extinction" },
+      { label: "Prendre rendez-vous", href: "/prendre-rendez-vous", desc: "Devis et showroom, en ligne" },
+    ],
+  },
+  {
     label: "Guides",
     href: "/guides",
     children: [
