@@ -7,12 +7,13 @@ import { Card } from "@/components/ui/card";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { formatPhone } from "@/lib/utils";
+import { BookingWidget } from "@/components/booking/BookingWidget";
 import {
   SERVICES,
   ONLINE_SERVICES,
   PHONE_SERVICES,
-  BOOKING_URL,
-  canBookOnline,
+  PHONE_DISPLAY,
+  PHONE_HREF,
 } from "@/lib/services";
 
 export const metadata: Metadata = {
@@ -124,74 +125,16 @@ export default function PrendreRendezVousPage() {
             </p>
           </div>
 
-          {!canBookOnline && (
-            <div className="mb-8 rounded-2xl bg-mp-orange-light/60 border border-mp-orange-flame/30 p-5 text-sm text-mp-ink leading-relaxed">
-              <strong className="text-mp-green-deep">
-                Réservation en ligne momentanément indisponible.
-              </strong>{" "}
-              Appelez le{" "}
-              <a href="tel:+3281138309" className="text-mp-orange-flame underline hover:no-underline font-semibold">
-                081 13 83 09
-              </a>
-              , on cale un créneau dans la journée.
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {ONLINE_SERVICES.map((service) => {
-              const Icon = service.icon;
-              return (
-                <Card key={service.slug} className="p-6 flex flex-col h-full">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center justify-center h-11 w-11 rounded-xl bg-mp-orange-light text-mp-orange-flame">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <span className="text-xs font-semibold text-mp-orange-flame uppercase tracking-wider">
-                      {service.priceLabel}
-                    </span>
-                  </div>
-
-                  <h3
-                    className="text-xl font-semibold text-mp-green-deep mb-2"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {service.name}
-                  </h3>
-
-                  <p className="text-sm text-mp-ink-soft leading-relaxed mb-4 flex-1">
-                    {service.longDescription}
-                  </p>
-
-                  <div className="flex flex-wrap gap-3 mb-5 text-xs text-mp-ink-soft">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Clock className="h-3.5 w-3.5" />
-                      {service.durationLabel}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <MapPin className="h-3.5 w-3.5" />
-                      {service.location === "domicile" ? "À domicile" : "Showroom Fernelmont"}
-                    </span>
-                  </div>
-
-                  {canBookOnline ? (
-                    <Button asChild variant="primary" size="default" className="w-full justify-center">
-                      <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                        Choisir un créneau
-                        <ArrowRight className="h-4 w-4" />
-                      </a>
-                    </Button>
-                  ) : (
-                    <Button asChild variant="primary" size="default" className="w-full justify-center">
-                      <a href={`tel:${formatPhone(PHONE)}`}>
-                        <Phone className="h-4 w-4" />
-                        {PHONE}
-                      </a>
-                    </Button>
-                  )}
-                </Card>
-              );
-            })}
-          </div>
+          <BookingWidget
+            services={ONLINE_SERVICES.map((s) => ({
+              slug: s.slug,
+              name: s.name,
+              durationLabel: s.durationLabel,
+              location: s.location,
+            }))}
+            phoneDisplay={PHONE_DISPLAY}
+            phoneHref={PHONE_HREF}
+          />
         </div>
       </section>
 
