@@ -27,7 +27,16 @@ export interface Service {
   shortDescription: string;
   longDescription: string;
   durationLabel: string;
+  /** Tarif court, pour les cartes et les pastilles. */
   priceLabel: string;
+  /** Tarif détaillé, une phrase complète. Affiché sur la page de service. */
+  priceDetail?: string;
+  /**
+   * Montant à baliser en Schema.org, en euros TTC. Pour une prestation au
+   * temps passé, c'est le montant de départ — d'où `priceFrom`.
+   */
+  price?: number;
+  priceFrom?: boolean;
   location: ServiceLocation;
   booking: BookingMode;
   icon: LucideIcon;
@@ -83,7 +92,10 @@ export const SERVICES: Service[] = [
     longDescription:
       "Démontage, nettoyage du creuset, de l'échangeur de chaleur, de la chambre de combustion, du conduit interne, de la sonde de fumée, du ventilateur d'extraction. Vérification des joints, du tirage, des paramètres de combustion.",
     durationLabel: "Environ 90 minutes",
-    priceLabel: "Sur devis",
+    priceLabel: "175 € TVAC",
+    priceDetail:
+      "175 € TVAC, ramonage du conduit compris. Déplacement inclus dans la zone d'intervention.",
+    price: 175,
     location: "domicile",
     booking: "phone",
     icon: Wrench,
@@ -96,7 +108,11 @@ export const SERVICES: Service[] = [
     longDescription:
       "Diagnostic sur place, remplacement éventuel de pièces : résistance d'allumage, motoréducteur, sonde de fumée, carte électronique. Intervention sous 48 à 72 heures autour de Fernelmont.",
     durationLabel: "Variable selon la cause",
-    priceLabel: "Sur devis",
+    priceLabel: "Dès 110 € TVAC",
+    priceDetail:
+      "110 € TVAC la première heure, puis 60 € TVAC par heure supplémentaire. Déplacement inclus, pièces en supplément.",
+    price: 110,
+    priceFrom: true,
     location: "domicile",
     booking: "phone",
     icon: Flame,
@@ -109,7 +125,10 @@ export const SERVICES: Service[] = [
     longDescription:
       "Ramonage mécanique du conduit de fumée, contrôle du chapeau, vérification des distances de sécurité. Certificat de ramonage remis sur place, à conserver pour votre assurance habitation.",
     durationLabel: "Environ 60 minutes",
-    priceLabel: "Sur devis",
+    priceLabel: "90 € TVAC",
+    priceDetail:
+      "90 € TVAC, certificat de ramonage compris. Déplacement inclus dans la zone d'intervention.",
+    price: 90,
     location: "domicile",
     booking: "phone",
     icon: Brush,

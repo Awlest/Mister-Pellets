@@ -5,7 +5,7 @@ import { getService } from "@/lib/services";
 export const metadata: Metadata = {
   title: "Entretien de poêle à pellets à Namur et en Wallonie",
   description:
-    "Entretien annuel complet de votre poêle à pellets : creuset, échangeur, sonde de fumée, joints, paramètres de combustion. Rendez-vous par téléphone au 081 13 83 09.",
+    "Entretien annuel de poêle à pellets à 175 € TVAC, ramonage et certificat compris. Namur et 50 km autour de Fernelmont. Rendez-vous au 081 13 83 09.",
   alternates: { canonical: "https://mister-pellets.be/entretien-poele-a-pellets" },
 };
 
@@ -17,7 +17,7 @@ export default function EntretienPage() {
     <ServiceLanding
       service={service}
       title="Entretien annuel de poêle à pellets"
-      intro="Une révision complète une fois par an : l'appareil consomme moins, tombe moins en panne, et votre garantie reste valable. C'est la seule maintenance dont un poêle à pellets a réellement besoin."
+      intro="Une révision complète une fois par an, ramonage du conduit compris, à 175 € TVAC. L'appareil consomme moins, tombe moins en panne, et votre garantie reste valable."
       included={[
         "Démontage et nettoyage du creuset et du cendrier",
         "Nettoyage de l'échangeur de chaleur et de la chambre de combustion",
@@ -25,6 +25,7 @@ export default function EntretienPage() {
         "Contrôle et nettoyage de la sonde de fumée",
         "Vérification et remplacement des joints usés",
         "Contrôle du tirage et réglage des paramètres de combustion",
+        "Ramonage du conduit et certificat, compris dans le tarif",
         "Test de fonctionnement complet avant départ",
       ]}
       sections={[
@@ -71,7 +72,8 @@ export default function EntretienPage() {
           heading: "Quand le faire",
           body: (
             <p>
-              L&apos;idéal est de le faire avant la saison de chauffe, entre mai et septembre :
+              Le forfait est de 175 € TVAC, ramonage compris, déplacement inclus dans notre
+              zone d&apos;intervention. L&apos;idéal est de le faire avant la saison de chauffe, entre mai et septembre :
               les délais sont courts et vous démarrez l&apos;hiver sur un appareil propre. À
               partir d&apos;octobre, la demande grimpe et les créneaux se remplissent. Si votre
               poêle tourne toute l&apos;année ou chauffe une grande surface, un second passage
@@ -96,11 +98,15 @@ export default function EntretienPage() {
         },
         {
           q: "L'entretien et le ramonage, c'est la même chose ?",
-          a: "Non. L'entretien porte sur l'appareil, le ramonage sur le conduit. Les deux sont annuels et se regroupent en général sur le même passage, ce qui revient moins cher que deux déplacements.",
+          a: "Non. L'entretien porte sur l'appareil, le ramonage sur le conduit. Notre entretien complet à 175 € TVAC comprend les deux, sur le même passage.",
         },
         {
-          q: "Combien ça coûte ?",
-          a: "Le tarif dépend du modèle et de l'accessibilité de l'appareil. On vous l'annonce au téléphone avant de fixer le rendez-vous, pas après l'intervention.",
+          q: "Combien coûte un entretien annuel ?",
+          a: "175 € TVAC, ramonage du conduit et certificat compris, déplacement inclus dans notre zone. C'est un forfait : vous connaissez le montant avant qu'on vienne.",
+        },
+        {
+          q: "L'entretien à 175 € inclut vraiment le ramonage ?",
+          a: "Oui. Le ramonage seul coûte 90 € TVAC. En prenant l'entretien complet à 175 €, vous ajoutez la révision de l'appareil pour 85 € de plus, sur le même passage.",
         },
       ]}
     />

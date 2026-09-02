@@ -5,7 +5,7 @@ import { getService } from "@/lib/services";
 export const metadata: Metadata = {
   title: "Ramonage de poêle à pellets à Namur et en Wallonie",
   description:
-    "Ramonage annuel de votre poêle à pellets, certificat remis sur place. Fernelmont, Namur, Andenne, Gembloux, Huy. Rendez-vous par téléphone au 081 13 83 09.",
+    "Ramonage de poêle à pellets à 90 € TVAC, certificat remis sur place. Namur, Andenne, Gembloux, Huy, 50 km autour de Fernelmont. Rendez-vous au 081 13 83 09.",
   alternates: { canonical: "https://mister-pellets.be/ramonage" },
 };
 
@@ -17,7 +17,7 @@ export default function RamonagePage() {
     <ServiceLanding
       service={service}
       title="Ramonage de poêle à pellets"
-      intro="Le ramonage annuel du conduit est obligatoire, et c'est la première chose que votre assurance demandera en cas de sinistre. On le fait, et on vous remet le certificat sur place."
+      intro="Le ramonage annuel du conduit est obligatoire, et c'est la première chose que votre assurance demandera en cas de sinistre. 90 € TVAC, certificat remis sur place."
       included={[
         "Ramonage mécanique complet du conduit de fumée",
         "Contrôle du chapeau et de la sortie en toiture",
@@ -69,13 +69,20 @@ export default function RamonagePage() {
         {
           heading: "Ramonage seul ou avec l'entretien",
           body: (
-            <p>
-              Le ramonage traite le conduit, l&apos;entretien traite l&apos;appareil. Les deux
-              se font au même rythme, une fois par an, et la plupart de nos clients les
-              regroupent sur le même passage : c&apos;est un seul déplacement, donc moins cher
-              que deux interventions séparées. Dites-le au téléphone, on cale les deux
-              ensemble.
-            </p>
+            <>
+              <p>
+                Le ramonage traite le conduit, l&apos;entretien traite l&apos;appareil. Les deux
+                se font au même rythme, une fois par an.
+              </p>
+              <p>
+                Le calcul est vite fait&nbsp;: le ramonage seul est à 90 € TVAC, et notre
+                entretien complet à <strong>175 € TVAC comprend déjà le ramonage</strong>. Pour
+                85 € de plus, vous ajoutez la révision de l&apos;appareil sur le même passage —
+                nettoyage de l&apos;échangeur, contrôle de la sonde de fumée, réglage de la
+                combustion, remplacement des joints usés. C&apos;est ce que prennent la plupart
+                de nos clients.
+              </p>
+            </>
           ),
         },
       ]}
@@ -83,6 +90,10 @@ export default function RamonagePage() {
         {
           q: "Le ramonage est-il vraiment obligatoire pour un poêle à pellets ?",
           a: "Oui. Le pellet est un combustible solide, le ramonage annuel du conduit s'applique comme pour un poêle à bois. Le certificat vous sera demandé par votre assurance en cas de sinistre.",
+        },
+        {
+          q: "Combien coûte un ramonage ?",
+          a: "90 € TVAC, certificat de ramonage compris et déplacement inclus dans notre zone d'intervention. Si vous prenez l'entretien complet à 175 € TVAC, le ramonage y est déjà compris.",
         },
         {
           q: "Combien de temps ça prend ?",

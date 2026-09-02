@@ -5,7 +5,7 @@ import { getService } from "@/lib/services";
 export const metadata: Metadata = {
   title: "Dépannage de poêle à pellets à Namur et en Wallonie",
   description:
-    "Votre poêle à pellets ne démarre plus, s'éteint seul ou affiche un code erreur ? Diagnostic et réparation sous 48 à 72 h autour de Fernelmont. Appelez le 081 13 83 09.",
+    "Poêle à pellets en panne ? Dépannage toutes marques à 110 € TVAC la première heure, déplacement inclus. Intervention sous 48 à 72 h. Appelez le 081 13 83 09.",
   alternates: { canonical: "https://mister-pellets.be/depannage-poele-a-pellets" },
 };
 
@@ -17,7 +17,7 @@ export default function DepannagePage() {
     <ServiceLanding
       service={service}
       title="Dépannage de poêle à pellets"
-      intro="Votre poêle ne s'allume plus, s'éteint tout seul ou affiche un code erreur. On diagnostique sur place et on répare, en général sous 48 à 72 heures."
+      intro="Votre poêle ne s'allume plus, s'éteint tout seul ou affiche un code erreur. On diagnostique sur place et on répare, en général sous 48 à 72 heures. 110 € TVAC la première heure, déplacement inclus."
       included={[
         "Diagnostic complet sur place",
         "Lecture et interprétation des codes erreur",
@@ -79,6 +79,12 @@ export default function DepannagePage() {
                 plutôt que de promettre le lendemain.
               </p>
               <p>
+                Côté tarif&nbsp;: 110 € TVAC la première heure, puis 60 € TVAC par heure
+                supplémentaire, déplacement compris. Les pièces remplacées sont facturées en
+                plus, et on vous annonce leur prix avant de les poser. La majorité des
+                interventions tient dans la première heure.
+              </p>
+              <p>
                 Le dépannage concerne uniquement les poêles et inserts à pellets. Pour une
                 chaudière, une cuisinière ou un poêle à bûches, il faut passer par un autre
                 intervenant.
@@ -97,8 +103,12 @@ export default function DepannagePage() {
           a: "En général sous 48 à 72 heures. En période de grand froid, le délai peut s'allonger, on vous l'annonce lors de l'appel.",
         },
         {
+          q: "Combien coûte une intervention ?",
+          a: "110 € TVAC pour la première heure, puis 60 € TVAC par heure supplémentaire. Le déplacement est compris dans ce tarif. Les pièces éventuellement remplacées sont facturées en plus.",
+        },
+        {
           q: "Le déplacement est-il facturé si vous ne réparez pas ?",
-          a: "Le diagnostic sur place est facturé même si la réparation nécessite une pièce à commander. Le montant vous est annoncé au téléphone avant qu'on se déplace.",
+          a: "La première heure à 110 € TVAC couvre le déplacement et le diagnostic, même si la réparation nécessite une pièce à commander. Vous connaissez donc le montant minimum avant qu'on se déplace.",
         },
         {
           q: "Mon poêle est encore sous garantie, que faire ?",

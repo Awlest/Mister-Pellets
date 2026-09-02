@@ -68,8 +68,29 @@ export function ServiceLanding({
         },
         geoRadius: 50000,
       },
-      // Pas d'offre chiffrée : le tarif dépend de l'appareil et de l'accès.
-      // Ne rien annoncer plutôt qu'annoncer un prix qui ne sera pas tenu.
+      // Tarifs TTC annoncés publiquement. Pour le dépannage, facturé au temps
+      // passé, on balise le montant de la première heure en prix plancher
+      // plutôt qu'un prix ferme qui serait faux dès la deuxième heure.
+      ...(service.price
+        ? {
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "EUR",
+              ...(service.priceFrom
+                ? {
+                    priceSpecification: {
+                      "@type": "PriceSpecification",
+                      minPrice: service.price,
+                      priceCurrency: "EUR",
+                      valueAddedTaxIncluded: true,
+                    },
+                  }
+                : { price: service.price, valueAddedTaxIncluded: true }),
+              availability: "https://schema.org/InStock",
+              areaServed: "Wallonie",
+            },
+          }
+        : {}),
     },
     {
       "@context": "https://schema.org",
@@ -153,6 +174,26 @@ export function ServiceLanding({
 
             <aside className="lg:col-span-5 flex flex-col gap-5">
               <Card className="p-6">
+                {service.price && (
+                  <div className="mb-5 pb-5 border-b border-mp-sand/40">
+                    <span className="text-xs text-mp-ink-soft block mb-1">
+                      {service.priceFrom ? "À partir de" : "Tarif"}
+                    </span>
+                    <span
+                      className="text-4xl font-semibold text-mp-green-deep"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {service.price}&nbsp;€
+                      <span className="text-base font-medium text-mp-ink-soft ml-1">TVAC</span>
+                    </span>
+                    {service.priceDetail && (
+                      <p className="text-sm text-mp-ink-soft mt-2 leading-relaxed">
+                        {service.priceDetail}
+                      </p>
+                    )}
+                  </div>
+                )}
+
                 <h2 className="text-xl font-semibold text-mp-green-deep mb-4">
                   Ce que comprend la prestation
                 </h2>
@@ -183,7 +224,7 @@ export function ServiceLanding({
                   </a>
                 </Button>
                 <p className="text-xs text-mp-ink-soft mt-3 text-center">
-                  Tarif communiqué au téléphone, selon le modèle et l&apos;accès au conduit.
+                  Tarif confirmé au téléphone avant de fixer le rendez-vous.
                 </p>
               </Card>
 
