@@ -5,7 +5,7 @@ import { getMollie, isMollieConfigured, formatMollieAmount } from "@/lib/mollie"
 import { getPayloadClient } from "@/lib/payload-client";
 import { getProductBySlug } from "@/lib/products";
 import { rateLimitResponse, csrfOriginCheck, isHoneypotTriggered } from "@/lib/rate-limit";
-import { confirmCustomerOrder } from "@/lib/email";
+import { confirmCustomerOrder, sendEmail } from "@/lib/email";
 import { shippingCostFor } from "@/lib/shipping";
 import type { ProductDemo } from "@/lib/products-demo";
 
@@ -245,6 +245,7 @@ export async function POST(request: Request) {
   }
 
   // Mollie configuré : commande Payload (pending) + payment Mollie
+  let createdOrderId: string | number | null = null;
   try {
     const mollie = getMollie();
 
@@ -253,6 +254,7 @@ export async function POST(request: Request) {
       data: orderData as never,
       overrideAccess: true, // création serveur de confiance (REST public verrouillé)
     });
+    createdOrderId = order.id;
 
     // Description visible sur le relevé bancaire du client (max 100 chars).
     const description = `Mister Pellets ${orderNumber}`;
@@ -303,10 +305,44 @@ export async function POST(request: Request) {
     // navigateur : quand l'insertion en base échouait, le client voyait la
     // requête SQL complète avec son nom, son email et son adresse.
     console.error("[checkout] commande ou paiement en echec", err);
+
+    // La commande peut être enregistrée alors que Mollie a refusé (compte en
+    // cours d'activation, moyen de paiement indisponible). Sans alerte, ce
+    // client serait purement et simplement perdu : il a rempli tout le
+    // formulaire, il a vu une erreur, et personne chez Awlest ne le sait.
+    if (createdOrderId !== null) {
+      await sendEmail({
+        to: process.env.EMAIL_TO_QUOTES ?? "info@mister-pellets.be",
+        replyTo: customer.email,
+        subject: `⚠️ Commande ${orderNumber} enregistrée SANS paiement`,
+        text: [
+          `Le paiement Mollie n'a pas pu être créé. La commande est en base, en statut « pending ».`,
+          `Le client a vu un message d'erreur : à rappeler.`,
+          ``,
+          `Commande : ${orderNumber} (id ${createdOrderId})`,
+          `Client   : ${customer.name}`,
+          `Email    : ${customer.email}`,
+          customer.phone ? `Téléphone: ${customer.phone}` : null,
+          `Adresse  : ${orderData.customerAddress}`,
+          `Total    : ${total.toFixed(2)} EUR (dont ${shipping.toFixed(2)} EUR de port)`,
+          ``,
+          ...serverItems.map((l) => `  ${l.quantity}× ${l.productBrand} ${l.productName}`),
+        ]
+          .filter((l) => l !== null)
+          .join("\n"),
+        html: `<p>Le paiement Mollie n'a pas pu être créé. La commande <strong>${orderNumber}</strong> est enregistrée en base, en statut « pending », et le client a vu un message d'erreur.</p>
+<p><strong>${customer.name}</strong><br>${customer.email}${customer.phone ? `<br>${customer.phone}` : ""}<br>${orderData.customerAddress}</p>
+<p>Total ${total.toFixed(2)} EUR (dont ${shipping.toFixed(2)} EUR de port)</p>
+<ul>${serverItems.map((l) => `<li>${l.quantity}× ${l.productBrand} ${l.productName}</li>`).join("")}</ul>`,
+      }).catch((mailErr) => console.error("[checkout] alerte interne non envoyee", mailErr));
+    }
+
     return NextResponse.json(
       {
         error:
-          "Le paiement n'a pas pu être lancé. Aucun montant n'a été débité. Réessayez, ou appelez-nous au 081 13 83 09.",
+          createdOrderId !== null
+            ? "Votre commande est bien enregistrée, mais le paiement en ligne n'a pas pu démarrer et aucun montant n'a été débité. Nous vous rappelons pour finaliser — ou appelez-nous au 081 13 83 09."
+            : "La commande n'a pas pu être enregistrée. Aucun montant n'a été débité. Réessayez, ou appelez-nous au 081 13 83 09.",
       },
       { status: 500 },
     );
