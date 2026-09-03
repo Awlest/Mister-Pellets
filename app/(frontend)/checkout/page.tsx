@@ -38,6 +38,7 @@ const initialForm: FormState = {
 export default function CheckoutPage() {
   const router = useRouter();
   const items = useCart((s) => s.items);
+  const hasHydrated = useCart((s) => s.hasHydrated);
   const total = useCartTotal();
 
   const [form, setForm] = React.useState<FormState>(initialForm);
@@ -51,12 +52,15 @@ export default function CheckoutPage() {
   const postalCodeComplete = /^[0-9]{4}$/.test(form.postalCode);
   const shipping = postalCodeComplete ? shippingCostFor(form.postalCode) : 0;
 
-  // Redirect si panier vide
+  // Redirect si panier vide — mais SEULEMENT une fois le panier relu depuis
+  // localStorage. Sans cette garde, `items` valait [] au premier rendu et la
+  // page renvoyait systématiquement vers /panier : le paiement en ligne était
+  // inatteignable, quel que soit le contenu du panier.
   React.useEffect(() => {
-    if (items.length === 0 && !submitting) {
+    if (hasHydrated && items.length === 0 && !submitting) {
       router.replace("/panier");
     }
-  }, [items.length, submitting, router]);
+  }, [hasHydrated, items.length, submitting, router]);
 
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((s) => ({ ...s, [key]: value }));
@@ -104,8 +108,10 @@ export default function CheckoutPage() {
     }
   }
 
-  if (items.length === 0) {
-    return null; // redirect en cours
+  // Tant que le panier n'est pas relu, on n'affiche rien plutôt que de laisser
+  // croire à un panier vide ; ensuite seulement, le vide vaut redirection.
+  if (!hasHydrated || items.length === 0) {
+    return null;
   }
 
   const inputClass = cn(

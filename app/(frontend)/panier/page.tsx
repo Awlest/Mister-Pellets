@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingBag, Minus, Plus, Trash2, ArrowRight } from "lucide-react";
 import { useCart, useCartTotal } from "@/lib/cart-store";
 import { Button } from "@/components/ui/button";
@@ -17,8 +18,11 @@ export default function PanierPage() {
   const items = useCart((s) => s.items);
   const updateQuantity = useCart((s) => s.updateQuantity);
   const removeItem = useCart((s) => s.removeItem);
+  const hasHydrated = useCart((s) => s.hasHydrated);
   const total = useCartTotal();
-  const empty = items.length === 0;
+  // Avant relecture du localStorage, `items` est vide sans que le panier le
+  // soit : on n'annonce « panier vide » qu'une fois la relecture terminée.
+  const empty = hasHydrated && items.length === 0;
 
   return (
     <section className="bg-mp-cream py-10 md:py-16 min-h-[60vh]">
@@ -64,9 +68,20 @@ export default function PanierPage() {
               {items.map((item) => (
                 <Card key={item.productId} className="p-5 md:p-6">
                   <div className="flex flex-col sm:flex-row gap-4">
-                    {/* Image placeholder */}
-                    <div className="h-24 w-24 sm:h-28 sm:w-28 shrink-0 rounded-xl bg-mp-beige border border-mp-sand/40 flex items-center justify-center self-start">
-                      <ShoppingBag className="h-10 w-10 text-mp-sand" />
+                    {/* Visuel du produit, avec repli sur l'icône si l'article
+                        a été mis au panier avant que l'image soit enregistrée. */}
+                    <div className="relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-xl bg-mp-beige border border-mp-sand/40 flex items-center justify-center self-start">
+                      {item.imageSrc ? (
+                        <Image
+                          src={item.imageSrc}
+                          alt={item.name}
+                          fill
+                          sizes="112px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <ShoppingBag className="h-10 w-10 text-mp-sand" />
+                      )}
                     </div>
 
                     <div className="flex-1 min-w-0">

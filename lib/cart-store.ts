@@ -15,6 +15,16 @@ export interface CartItem {
 interface CartState {
   items: CartItem[];
   isOpen: boolean;
+  /**
+   * Passe à true une fois le panier relu depuis localStorage.
+   *
+   * Indispensable : au premier rendu client, `items` vaut [] même quand le
+   * panier n'est pas vide. Une page qui décide quelque chose à cet instant
+   * (le checkout redirigeait vers /panier) le fait sur une lecture fausse.
+   * Toute logique du type « si le panier est vide alors… » doit d'abord
+   * attendre ce drapeau.
+   */
+  hasHydrated: boolean;
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
@@ -29,6 +39,7 @@ export const useCart = create<CartState>()(
     (set) => ({
       items: [],
       isOpen: false,
+      hasHydrated: false,
 
       addItem: (item, quantity = 1) =>
         set((state) => {
@@ -83,6 +94,12 @@ export const useCart = create<CartState>()(
         return localStorage;
       }),
       partialize: (state) => ({ items: state.items }), // ne persiste pas isOpen
+      // Appelé à la fin de la relecture, y compris en cas d'échec (storage
+      // plein, mode privé) : on débloque l'interface dans tous les cas.
+      onRehydrateStorage: () => (state) => {
+        useCart.setState({ hasHydrated: true });
+        void state;
+      },
     }
   )
 );

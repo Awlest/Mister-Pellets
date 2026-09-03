@@ -415,6 +415,7 @@ export default async function ProductPage({ params }: Props) {
                       productName={product.name}
                       productBrand={product.brand}
                       productPriceTTC={product.priceTTC}
+                      productImageSrc={product.imageSrc}
                       className="w-full"
                     />
                   )
