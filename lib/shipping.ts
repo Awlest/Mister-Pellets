@@ -50,6 +50,11 @@ export type ShippingZone = "local" | "wallonia" | "brussels-flanders";
  *   1000-1299 Bruxelles-Capitale · 1300-1499 Brabant wallon
  *   1500-3999 Flandre            · 4000-7999 Wallonie
  *   8000-9999 Flandre
+ *
+ * Ces bornes servent au calcul interne. Elles ne sont PAS transposables telles
+ * quelles dans le flux Merchant : 1299, 1499, 3999, 7999 et 9999 ne sont pas
+ * des codes postaux attribués, et Google refuse toute plage dont une borne
+ * n'existe pas. Le flux utilise des préfixes (cf. SHIPPING_PREFIXES).
  */
 export function shippingZoneFor(postalCode: number): ShippingZone {
   if (FREE_ZONE_POSTAL_CODES.has(postalCode)) return "local";
