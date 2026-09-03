@@ -25,6 +25,7 @@ interface CartState {
    * attendre ce drapeau.
    */
   hasHydrated: boolean;
+  setHasHydrated: (value: boolean) => void;
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
@@ -40,6 +41,7 @@ export const useCart = create<CartState>()(
       items: [],
       isOpen: false,
       hasHydrated: false,
+      setHasHydrated: (value) => set({ hasHydrated: value }),
 
       addItem: (item, quantity = 1) =>
         set((state) => {
@@ -95,14 +97,25 @@ export const useCart = create<CartState>()(
       }),
       partialize: (state) => ({ items: state.items }), // ne persiste pas isOpen
       // Appelé à la fin de la relecture, y compris en cas d'échec (storage
-      // plein, mode privé) : on débloque l'interface dans tous les cas.
+      // plein, navigation privée). On passe par l'action du store et non par
+      // `useCart.setState` : localStorage étant synchrone, ce rappel peut
+      // s'exécuter PENDANT `create()`, quand la constante `useCart` n'existe
+      // pas encore.
       onRehydrateStorage: () => (state) => {
-        useCart.setState({ hasHydrated: true });
-        void state;
+        state?.setHasHydrated(true);
       },
     }
   )
 );
+
+// Filet de sécurité : si la relecture ne rappelle jamais, on débloque
+// l'interface au tick suivant. Sans ça, une panne de storage laisserait le
+// panier et le checkout sur une page blanche au lieu d'un panier vide.
+if (typeof window !== "undefined") {
+  setTimeout(() => {
+    if (!useCart.getState().hasHydrated) useCart.setState({ hasHydrated: true });
+  }, 0);
+}
 
 // Sélecteurs utilitaires (perfs : évite re-renders inutiles)
 export function useCartCount() {
