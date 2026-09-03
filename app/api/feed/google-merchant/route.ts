@@ -6,6 +6,7 @@ import {
   SHIPPING_WALLONIA,
   SHIPPING_BRUSSELS_FLANDERS,
 } from "@/lib/shipping";
+import { merchantAvailability as availability } from "@/lib/availability";
 import type {
   ProductDemo,
   ProductColorVariant,
@@ -121,13 +122,6 @@ function shortHash(raw: string): string {
 function safeMerchantId(raw: string): string {
   if (raw.length <= 50) return raw;
   return `${raw.slice(0, 44)}-${shortHash(raw)}`;
-}
-
-/** stockStatus interne → valeur d'availability Google Merchant. */
-function availability(status: string | undefined): string {
-  if (status === "out_of_stock" || status === "discontinued") return "out_of_stock";
-  if (status === "on_order") return "backorder";
-  return "in_stock";
 }
 
 /**

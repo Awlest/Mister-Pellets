@@ -19,6 +19,12 @@ interface Props {
   params: Promise<{ ville: string }>;
 }
 
+/**
+ * Les villes sont compilées dans lib/cities.ts : un slug hors liste doit
+ * donner un vrai 404, pas une page « Ville introuvable » en HTTP 200.
+ */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return CITIES.map((c) => ({ ville: c.slug }));
 }

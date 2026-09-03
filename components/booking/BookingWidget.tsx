@@ -64,29 +64,49 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
 
   const service = services.find((s) => s.slug === serviceSlug);
 
-  const loadSlots = React.useCallback(async (slug: string) => {
-    setLoadingSlots(true);
-    setSlotsError(null);
+  // Remise à zéro PENDANT LE RENDU quand le service change, et non dans un
+  // effet : c'est le motif recommandé par React pour réagir à un changement
+  // d'entrée, et ça évite le rendu en cascade que provoquerait un setState
+  // synchrone dans un useEffect.
+  const [loadedFor, setLoadedFor] = React.useState<string | null>(null);
+  // Incrémenté pour forcer un rechargement des créneaux à service constant
+  // (cas « ce créneau vient d'être pris »).
+  const [reloadToken, setReloadToken] = React.useState(0);
+  if (serviceSlug !== loadedFor) {
+    setLoadedFor(serviceSlug);
     setDays(null);
     setActiveDay(null);
     setChosenStart(null);
-    try {
-      const res = await fetch(`/api/rdv/slots?service=${encodeURIComponent(slug)}`);
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Erreur inattendue.");
-      setConfigured(data.configured !== false);
-      setDays(data.days ?? []);
-      setActiveDay(data.days?.[0]?.date ?? null);
-    } catch (e) {
-      setSlotsError(e instanceof Error ? e.message : "Erreur inattendue.");
-    } finally {
-      setLoadingSlots(false);
-    }
-  }, []);
+    setSlotsError(null);
+    setLoadingSlots(Boolean(serviceSlug));
+  }
 
   React.useEffect(() => {
-    if (serviceSlug) void loadSlots(serviceSlug);
-  }, [serviceSlug, loadSlots]);
+    if (!serviceSlug) return;
+    // Sans annulation, changer de service deux fois de suite pouvait laisser
+    // la réponse la plus lente écraser la plus récente : les créneaux affichés
+    // n'auraient plus correspondu au service sélectionné.
+    const controller = new AbortController();
+    (async () => {
+      try {
+        const res = await fetch(`/api/rdv/slots?service=${encodeURIComponent(serviceSlug)}`, {
+          signal: controller.signal,
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? "Erreur inattendue.");
+        if (controller.signal.aborted) return;
+        setConfigured(data.configured !== false);
+        setDays(data.days ?? []);
+        setActiveDay(data.days?.[0]?.date ?? null);
+      } catch (e) {
+        if (controller.signal.aborted) return;
+        setSlotsError(e instanceof Error ? e.message : "Erreur inattendue.");
+      } finally {
+        if (!controller.signal.aborted) setLoadingSlots(false);
+      }
+    })();
+    return () => controller.abort();
+  }, [serviceSlug, reloadToken]);
 
   const update = <K extends keyof typeof form>(k: K, v: string) =>
     setForm((s) => ({ ...s, [k]: v }));
@@ -112,7 +132,10 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
       if (!res.ok) {
         if (data.code === "SLOT_TAKEN") {
           setChosenStart(null);
-          void loadSlots(serviceSlug);
+          setDays(null);
+          setActiveDay(null);
+          setLoadingSlots(true);
+          setReloadToken((t) => t + 1);
         }
         throw new Error(data.error ?? "La réservation n'a pas abouti.");
       }

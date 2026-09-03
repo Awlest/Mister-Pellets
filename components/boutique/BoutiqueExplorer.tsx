@@ -89,8 +89,14 @@ export function BoutiqueExplorer({
 
   // Au montage : initialise les filtres depuis l'URL (liens partageables).
   // Évite le hook useSearchParams (qui forcerait la page en dynamique).
+  //
+  // Le setState est volontairement synchrone dans l'effet : l'URL n'existe
+  // pas au rendu serveur, la lire dans un initialiseur d'état provoquerait
+  // une divergence d'hydratation. Un seul rendu supplémentaire au montage,
+  // uniquement quand la page est ouverte avec des filtres dans l'URL.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrent({
       marque: p.get("marque") ?? "all",
       combustible: p.get("combustible") ?? "all",

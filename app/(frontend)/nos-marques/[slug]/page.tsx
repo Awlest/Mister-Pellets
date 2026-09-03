@@ -22,6 +22,12 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+/**
+ * Les marques sont compilées dans lib/brands.ts : un slug hors liste doit
+ * donner un vrai 404, pas une page « Marque introuvable » en HTTP 200.
+ */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return BRAND_LIST.map((b) => ({ slug: b.slug }));
 }

@@ -104,15 +104,22 @@ export function ProductGallery({
     return list;
   }, [mainImage, galleryImages, colorVariants]);
 
-  // Quand la variante change via le picker, on tente de basculer l'image
-  // affichée vers la mainImage de cette variante (si elle existe dans la liste).
-  useEffect(() => {
-    if (activeVariantIdx < 0 || !colorVariants) return;
-    const variant = colorVariants[activeVariantIdx];
-    if (!variant?.mainImage?.url) return;
-    const idx = allImages.findIndex((img) => img.url === variant.mainImage?.url);
-    if (idx >= 0) setActiveImageIdx(idx);
-  }, [activeVariantIdx, colorVariants, allImages]);
+  // Quand la variante change via le picker, on bascule l'image affichée vers
+  // la mainImage de cette variante (si elle figure dans la liste).
+  //
+  // L'ajustement se fait PENDANT LE RENDU et non dans un effet : c'est le
+  // motif React pour réagir au changement d'une prop, et il évite le rendu
+  // en cascade (l'ancienne image s'affichait une frame avant la bonne).
+  const [lastVariantIdx, setLastVariantIdx] = useState(activeVariantIdx);
+  if (activeVariantIdx !== lastVariantIdx) {
+    setLastVariantIdx(activeVariantIdx);
+    const url =
+      activeVariantIdx >= 0 ? colorVariants?.[activeVariantIdx]?.mainImage?.url : undefined;
+    if (url) {
+      const idx = allImages.findIndex((img) => img.url === url);
+      if (idx >= 0) setActiveImageIdx(idx);
+    }
+  }
 
   // Esc ferme le lightbox + flèches naviguent
   useEffect(() => {

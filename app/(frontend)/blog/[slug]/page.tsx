@@ -30,6 +30,14 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+/**
+ * Les articles sont compilés dans lib/articles.ts. Sans ce réglage, un slug
+ * inconnu renvoyait « Article introuvable » en HTTP 200 ET en `index, follow` :
+ * Google était invité à indexer une page vide. Tout slug hors liste donne
+ * désormais un vrai 404.
+ */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return ARTICLES.map((a) => ({ slug: a.slug }));
 }

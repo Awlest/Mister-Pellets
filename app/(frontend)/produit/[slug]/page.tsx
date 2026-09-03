@@ -22,6 +22,7 @@ import {
 import { BRANDS } from "@/lib/brands";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
+import { schemaAvailability } from "@/lib/availability";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -44,7 +45,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  if (!product) return { title: "Produit introuvable", robots: { index: false } };
+  // Contrairement aux guides/marques/villes, on NE PEUT PAS mettre
+  // `dynamicParams = false` ici : le catalogue vit dans Payload et un produit
+  // créé en admin doit sortir sans redéploiement. Un slug inconnu renvoie donc
+  // une page en HTTP 200 ; le noindex/nofollow évite qu'elle serve à quoi que
+  // ce soit côté Google.
+  if (!product)
+    return { title: "Produit introuvable", robots: { index: false, follow: false } };
   return buildPageMetadata({
     title: `${product.name}, Poêle à pellets ${product.power}`,
     description: `${product.name} : ${product.power} pour ${product.heatedVolume}. ${product.priceTTC ? `${formatPrice(product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets, primes incluses.`,
@@ -74,10 +81,11 @@ export default async function ProductPage({ params }: Props) {
   const genericVariants = product.hasVariants ? (product.variants ?? []) : [];
 
   // Merchant : priceValidUntil + politique de retour (droit de rétractation
-  // belge 14 jours) ajoutés à chaque Offer pour calmer les warnings Google
-  // Merchant. La livraison se paramètre au niveau du COMPTE Merchant Center
-  // (zones : gratuit dans 20 km autour de Fernelmont, forfait au-delà) — pas
-  // exprimable proprement par produit ici.
+  // belge 14 jours) ajoutés à chaque Offer. La livraison, elle, est déclarée
+  // par article dans le flux (`g:shipping`, cf. app/api/feed/google-merchant)
+  // à partir de lib/shipping.ts, la même source que le panier.
+  // La disponibilité vient de lib/availability.ts pour rester identique à
+  // celle du flux : un écart entre les deux fait refuser le compte Merchant.
   const priceValidUntil = `${new Date().getFullYear()}-12-31`;
   const offerExtras = {
     priceValidUntil,
@@ -111,10 +119,7 @@ export default async function ProductPage({ params }: Props) {
         url: productPageUrl,
         priceCurrency: "EUR",
         price: v.salePrice && v.salePrice > 0 ? v.salePrice : v.price,
-        availability:
-          v.stockStatus === "out_of_stock"
-            ? "https://schema.org/OutOfStock"
-            : "https://schema.org/InStock",
+        availability: schemaAvailability(v.stockStatus ?? product.stockStatus),
         itemCondition: "https://schema.org/NewCondition",
         ...offerExtras,
       })),
@@ -133,7 +138,7 @@ export default async function ProductPage({ params }: Props) {
           url: `${productPageUrl}#${encodeURIComponent(v.colorName.toLowerCase())}`,
           priceCurrency: "EUR",
           price: product.priceTTC,
-          availability: "https://schema.org/InStock",
+          availability: schemaAvailability(product.stockStatus),
           itemCondition: "https://schema.org/NewCondition",
         ...offerExtras,
         })),
@@ -144,7 +149,7 @@ export default async function ProductPage({ params }: Props) {
         url: productPageUrl,
         priceCurrency: "EUR",
         price: product.priceTTC,
-        availability: "https://schema.org/InStock",
+        availability: schemaAvailability(product.stockStatus),
         itemCondition: "https://schema.org/NewCondition",
         ...offerExtras,
       };

@@ -14,6 +14,14 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+/**
+ * Les guides sont compilés dans lib/guides.ts : la liste ne bouge qu'au
+ * déploiement. Sans ce réglage, un slug inconnu renvoyait une page « Guide
+ * introuvable » en HTTP 200 — un soft 404 que Search Console remonte comme
+ * une erreur. Ici, tout slug hors liste donne un vrai 404.
+ */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }));
 }
