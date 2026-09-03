@@ -12,6 +12,7 @@ import * as migration_20260515_190000_products_brand_girolami from './20260515_1
 import * as migration_20260515_200000_products_price_optional from './20260515_200000_products_price_optional';
 import * as migration_20260520_120000_products_variants_metadata from './20260520_120000_products_variants_metadata';
 import * as migration_20260617_140000_products_combustible from './20260617_140000_products_combustible';
+import * as migration_20260903_180000_orders_access_token from './20260903_180000_orders_access_token';
 
 export const migrations = [
   {
@@ -83,5 +84,10 @@ export const migrations = [
     up: migration_20260617_140000_products_combustible.up,
     down: migration_20260617_140000_products_combustible.down,
     name: '20260617_140000_products_combustible',
+  },
+  {
+    up: migration_20260903_180000_orders_access_token.up,
+    down: migration_20260903_180000_orders_access_token.down,
+    name: '20260903_180000_orders_access_token',
   },
 ];

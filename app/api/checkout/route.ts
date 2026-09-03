@@ -299,9 +299,15 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, orderId: order.id, accessToken, checkoutUrl });
   } catch (err) {
-    console.error("[checkout] mollie failed", err);
+    // Le détail reste dans les logs Vercel. Ne JAMAIS le renvoyer au
+    // navigateur : quand l'insertion en base échouait, le client voyait la
+    // requête SQL complète avec son nom, son email et son adresse.
+    console.error("[checkout] commande ou paiement en echec", err);
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Erreur Mollie inconnue." },
+      {
+        error:
+          "Le paiement n'a pas pu être lancé. Aucun montant n'a été débité. Réessayez, ou appelez-nous au 081 13 83 09.",
+      },
       { status: 500 },
     );
   }
