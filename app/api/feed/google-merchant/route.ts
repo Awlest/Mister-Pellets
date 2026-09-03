@@ -3,8 +3,7 @@ import { slugify } from "@/lib/slugify";
 import {
   FREE_ZONE_POSTAL_CODES,
   SHIPPING_LOCAL,
-  SHIPPING_WALLONIA,
-  SHIPPING_BRUSSELS_FLANDERS,
+  SHIPPING_PREFIXES,
 } from "@/lib/shipping";
 import { merchantAvailability as availability } from "@/lib/availability";
 import type {
@@ -202,41 +201,6 @@ function shippingBlock(price: number, postalCode?: string): string {
     `      </g:shipping>`
   );
 }
-
-/**
- * Zones postales belges hors zone offerte, exprimées en PRÉFIXES.
- *
- * ⚠️ Ne pas revenir à des plages « 1000-1299 ». Google exige que les deux
- * bornes d'une plage soient des codes postaux réellement attribués : 1299,
- * 1499, 3999, 7999 et 9999 n'existent pas en Belgique, et le flux entier était
- * refusé pour « Code postal non valide » — 242 produits sur 242, plus aucune
- * diffusion en Belgique (constaté le 03/09/2026). Le préfixe suivi de `*` est
- * l'autre forme documentée, et il ne peut pas contenir de code inexistant.
- *
- *   10-12 Bruxelles · 13-14 Brabant wallon · 15-19, 2, 3 Flandre
- *   4 à 7 Wallonie  · 8, 9 Flandre
- * Couverture complète de 1000 à 9999, sans trou ni chevauchement.
- */
-const SHIPPING_PREFIXES: ReadonlyArray<{ prefix: string; price: number }> = [
-  { prefix: "10", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "11", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "12", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "13", price: SHIPPING_WALLONIA },
-  { prefix: "14", price: SHIPPING_WALLONIA },
-  { prefix: "15", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "16", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "17", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "18", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "19", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "2", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "3", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "4", price: SHIPPING_WALLONIA },
-  { prefix: "5", price: SHIPPING_WALLONIA },
-  { prefix: "6", price: SHIPPING_WALLONIA },
-  { prefix: "7", price: SHIPPING_WALLONIA },
-  { prefix: "8", price: SHIPPING_BRUSSELS_FLANDERS },
-  { prefix: "9", price: SHIPPING_BRUSSELS_FLANDERS },
-];
 
 const SHIPPING_XML = [
   ...SHIPPING_PREFIXES.map((p) => shippingBlock(p.price, `${p.prefix}*`)),
