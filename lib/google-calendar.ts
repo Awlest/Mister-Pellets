@@ -8,15 +8,23 @@ import type { Interval } from "@/lib/booking";
  * l'API REST. Deux appels suffisent (freeBusy et events.insert), et ça évite
  * d'embarquer une dépendance de plusieurs mégaoctets dans le bundle serveur.
  *
- * Le compte de service n'a aucun accès par défaut : c'est le PARTAGE de
- * l'agenda avec son adresse e-mail, côté Google Agenda, qui lui ouvre les
- * droits. C'est ce qui permet à ce montage de fonctionner que le compte soit
- * Google Workspace ou un simple compte Gmail.
+ * Le compte de service n'a aucun accès par défaut. Deux façons de lui en
+ * donner, gérées toutes les deux ici :
+ *
+ *  1. PARTAGE de l'agenda avec son adresse e-mail, depuis Google Agenda.
+ *     Fonctionne avec un simple compte Gmail, mais Google refuse alors
+ *     d'ajouter des invités à l'événement (« Service accounts cannot invite
+ *     attendees without Domain-Wide Delegation »), et un domaine Workspace peut
+ *     interdire le partage externe.
+ *  2. DÉLÉGATION AU NIVEAU DU DOMAINE (Workspace) : le compte de service
+ *     emprunte l'identité de GOOGLE_SA_SUBJECT. Rien à partager, et les
+ *     invitations client partent normalement.
  *
  * Variables d'environnement attendues :
  *   GOOGLE_SA_EMAIL        adresse du compte de service
  *   GOOGLE_SA_PRIVATE_KEY  clé privée du fichier JSON (les \n peuvent être échappés)
  *   GOOGLE_CALENDAR_ID     identifiant de l'agenda, ex. dorian@awlest.com
+ *   GOOGLE_SA_SUBJECT      (facultatif) utilisateur à impersonnaliser, mode 2
  */
 
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
@@ -33,6 +41,12 @@ export function isCalendarConfigured(): boolean {
 
 function calendarId(): string {
   return process.env.GOOGLE_CALENDAR_ID as string;
+}
+
+/** Utilisateur emprunté par le compte de service, si la délégation est active. */
+function impersonatedSubject(): string | null {
+  const sub = process.env.GOOGLE_SA_SUBJECT?.trim();
+  return sub ? sub : null;
 }
 
 function base64url(input: Buffer | string): string {
@@ -54,6 +68,7 @@ async function getAccessToken(): Promise<string> {
   const key = (process.env.GOOGLE_SA_PRIVATE_KEY as string).replace(/\\n/g, "\n");
 
   const iat = Math.floor(Date.now() / 1000);
+  const subject = impersonatedSubject();
   const header = base64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
   const claims = base64url(
     JSON.stringify({
@@ -62,6 +77,9 @@ async function getAccessToken(): Promise<string> {
       aud: TOKEN_URL,
       iat,
       exp: iat + 3600,
+      // `sub` n'est accepté que si la délégation au niveau du domaine autorise
+      // ce compte de service sur ce scope ; sinon Google renvoie unauthorized_client.
+      ...(subject ? { sub: subject } : {}),
     }),
   );
 
@@ -169,8 +187,13 @@ export async function createEvent(details: BookingDetails): Promise<{ id: string
     details.notes ? details.notes : null,
   ].filter((l): l is string => l !== null);
 
+  // Sans délégation, Google refuse tout événement comportant des invités.
+  // On garde alors l'email du client dans la description : le rendez-vous est
+  // enregistré, seule l'invitation automatique manque.
+  const canInvite = impersonatedSubject() !== null;
+
   const res = await fetch(
-    `${API}/calendars/${encodeURIComponent(calendarId())}/events?sendUpdates=all`,
+    `${API}/calendars/${encodeURIComponent(calendarId())}/events?sendUpdates=${canInvite ? "all" : "none"}`,
     {
       method: "POST",
       headers: {
@@ -183,7 +206,9 @@ export async function createEvent(details: BookingDetails): Promise<{ id: string
         location: details.address || details.locationLabel,
         start: { dateTime: new Date(details.startInstant).toISOString() },
         end: { dateTime: new Date(details.endInstant).toISOString() },
-        attendees: [{ email: details.customerEmail, displayName: details.customerName }],
+        ...(canInvite
+          ? { attendees: [{ email: details.customerEmail, displayName: details.customerName }] }
+          : {}),
         reminders: {
           useDefault: false,
           overrides: [
