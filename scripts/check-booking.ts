@@ -1,7 +1,7 @@
 import {
   belgianWallTimeToInstant, belgianParts, generateCandidateSlots,
   filterAvailable, availableSlots, formatSlotTime, belgianDayKey,
-  BUSINESS_HOURS, GAP_AFTER_EVENT_MIN,
+  BUSINESS_HOURS, GAP_AFTER_EVENT_MIN, GAP_BEFORE_EVENT_MIN,
 } from "@/lib/booking";
 
 let ko = 0;
@@ -35,20 +35,24 @@ const dimSlots = generateCandidateSlots(dim, dim + 86400000, 60)
   .filter(s => belgianDayKey(s.start) === "2026-09-06");
 check("dimanche 06/09, aucun creneau", dimSlots.length, 0);
 
-// 6. Regle des 30 min : RDV existant 10:00-11:00 le mardi 08/09
+// 6. Regle des 30 min, SYMETRIQUE : RDV existant 12:00-13:00 le mardi 08/09.
+// On doit avoir 30 min de route avant comme apres.
 const jour = belgianWallTimeToInstant(2026, 9, 8, 0, 0);
 const busy = [{
-  start: belgianWallTimeToInstant(2026, 9, 8, 10, 0),
-  end:   belgianWallTimeToInstant(2026, 9, 8, 11, 0),
+  start: belgianWallTimeToInstant(2026, 9, 8, 12, 0),
+  end:   belgianWallTimeToInstant(2026, 9, 8, 13, 0),
 }];
 const libres = filterAvailable(
   generateCandidateSlots(jour, jour + 86400000, 60).filter(s => belgianDayKey(s.start) === "2026-09-08"),
   busy,
 ).map(s => formatSlotTime(s.start));
-check("apres un RDV 10:00-11:00, premier creneau a 11:30", libres.includes("11:00"), false);
-check("  ... et 11:30 est bien propose", libres.includes("11:30"), true);
-check("  ... 09:00 reste libre (avant le RDV)", libres.includes("09:00"), true);
-check("  ... 09:30 chevauche le RDV de 60 min, exclu", libres.includes("09:30"), false);
+check("apres un RDV 12:00-13:00, 13:00 est exclu", libres.includes("13:00"), false);
+check("  ... 13:30 est bien propose (30 min apres)", libres.includes("13:30"), true);
+check("  ... 11:00 est exclu (finirait a 12:00, sans route)", libres.includes("11:00"), false);
+check("  ... 10:30 est bien propose (finit a 11:30)", libres.includes("10:30"), true);
+check("  ... 11:30 chevauche le RDV, exclu", libres.includes("11:30"), false);
+check("  ... 09:00 reste libre (loin du RDV)", libres.includes("09:00"), true);
+check("les deux tampons valent bien 30 min", [GAP_BEFORE_EVENT_MIN, GAP_AFTER_EVENT_MIN], [30, 30]);
 
 // 7. Delai de prevenance : rien dans les 24 h
 const now = belgianWallTimeToInstant(2026, 9, 8, 10, 0);

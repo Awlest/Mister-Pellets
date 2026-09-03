@@ -25,10 +25,10 @@ export const GAP_AFTER_EVENT_MIN = 30;
 
 /**
  * Écart exigé entre la fin d'un créneau proposé et le DÉBUT du rendez-vous
- * suivant. Laissé à 0 : la consigne ne portait que sur le rendez-vous
- * précédent. Passer cette valeur à 30 suffit à rendre le tampon symétrique.
+ * suivant. Même valeur que ci-dessus : sans elle, un rendez-vous à domicile
+ * pouvait se terminer à l'heure pile du chantier suivant, sans temps de route.
  */
-export const GAP_BEFORE_EVENT_MIN = 0;
+export const GAP_BEFORE_EVENT_MIN = 30;
 
 /** Délai de prévenance : on ne propose rien avant ce nombre d'heures. */
 export const MIN_NOTICE_HOURS = 24;
