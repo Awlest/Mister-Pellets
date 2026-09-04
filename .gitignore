@@ -57,3 +57,10 @@ Thumbs.db
 
 # logs locaux
 *.log
+
+# Artefacts d import ajoutes par erreur (snapshots, extractions, pages PDF) :
+# volumineux et regenerables, ils n ont rien a faire dans le depot.
+imports/girolami-catalogue-2026/
+imports/edilkamin-variants-mai2026/_snapshot-fix-specs-*
+imports/edilkamin-variants-mai2026/_snapshot-rebuild-*
+prod.html
