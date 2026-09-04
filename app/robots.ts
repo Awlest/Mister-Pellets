@@ -36,9 +36,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/admin/",
           "/api/",
-          "/panier/",
-          "/checkout/",
-          "/commande/",
           "/*.json$",
         ],
       },
@@ -48,7 +45,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "Googlebot-Image",
         allow: ["/", "/api/media/", "/_next/image"],
-        disallow: ["/admin/", "/checkout/", "/commande/"],
+        disallow: ["/admin/"],
       },
       // Bloquer les bots aggressifs (optionnel)
       { userAgent: "GPTBot", allow: "/" },         // Autorise OpenAI (GEO friendly)

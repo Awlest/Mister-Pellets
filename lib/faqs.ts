@@ -6,7 +6,7 @@
  * pour combler les angles morts (cf. doc §P2.5).
  *
  * Voix : vouvoiement (charte juin 2026), installateur wallon, zéro tiret long.
- * 3 marques mises en avant : Edilkamin, EK63, Girolami. Paiement Mollie.
+ * 3 marques mises en avant : Edilkamin, EK63, Girolami. Aucun paiement en ligne : devis, visite, acompte.
  * Stratégie GEO : première phrase de chaque réponse = la réponse complète,
  * le reste détaille. Réponses 50 à 200 mots. Mention naturelle de la marque
  * et de la zone géographique (Mister Pellets, Wallonie). Schema FAQPage
@@ -374,14 +374,14 @@ export const FAQS: FaqItem[] = [
     category: "boutique",
     question: "Puis-je acheter le poêle en ligne et le faire poser par Mister Pellets ?",
     answer:
-      "Oui, c'est même la configuration la plus fréquente. Vous commandez le poêle sur la boutique en ligne (paiement sécurisé Mollie : Bancontact, Visa, Mastercard), puis on convient d'un rendez-vous de pose dans la foulée. La pose est facturée séparément (TVA 6 % si logement de plus de 10 ans, contre 21 % sur le matériel). Le diagnostic à domicile préalable reste recommandé pour valider la faisabilité (conduit, distances, accès) avant la commande définitive.",
+      "Oui, c'est même la configuration la plus fréquente. Vous chiffrez votre installation sur le configurateur, on cale une visite technique, et c'est elle qui transforme l'estimation en prix ferme : on valide le conduit, les distances et l'accès avant tout engagement. La pose est facturée séparément du matériel (TVA 6 % si le logement a plus de 10 ans, contre 21 % sur le matériel). Une fois le devis accepté, vous recevez la facture d'acompte et on planifie la pose.",
   },
   {
     id: "boutique-paiement",
     category: "boutique",
     question: "Quels moyens de paiement acceptez-vous ?",
     answer:
-      "Pour les ventes en ligne : paiement intégral à la commande via Mollie (Bancontact, cartes Visa/Mastercard). Pour les devis avec pose : acompte de 30 % à la signature (virement, carte ou Bancontact), solde à la fin de la pose. On accepte aussi les paiements en plusieurs fois via le prêt à taux 0 % Renopack ou Rénoprêt (Société wallonne du Crédit social ou Fonds du Logement) pour les projets éligibles.",
+      "Rien ne se paie en ligne. Après la visite technique et l'acceptation du devis, vous recevez une facture d'acompte de 30 %, puis le solde à la fin de la pose. Virement, carte ou Bancontact. On accepte aussi les paiements en plusieurs fois via le prêt à taux 0 % Renopack ou Rénoprêt (Société wallonne du Crédit social ou Fonds du Logement) pour les projets éligibles.",
   },
   {
     id: "boutique-retour",

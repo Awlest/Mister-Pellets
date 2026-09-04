@@ -79,9 +79,10 @@ export default function CGVPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">6. Paiement</h2>
             <p>
-              Pour les ventes en ligne : paiement intégral à la commande via Mollie (cartes,
-              Bancontact). Pour les devis avec pose : acompte de 30 % à la signature, solde à la fin
-              de la pose.
+              Aucun paiement ne se fait en ligne. Toute commande passe par un devis :
+              acompte de 30 % à la signature, facturé après la visite technique qui confirme
+              la faisabilité de la pose, puis solde à la fin du chantier. Acompte et solde se
+              règlent par virement, carte ou Bancontact.
             </p>
           </section>
 

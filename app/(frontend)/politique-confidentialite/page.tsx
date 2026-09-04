@@ -65,8 +65,8 @@ export default function PolitiqueConfidentialitePage() {
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Avec qui on partage vos données</h2>
             <p>
               Vos données ne sont <strong>jamais vendues</strong> à des tiers. Elles sont partagées
-              uniquement avec nos sous-traitants techniques (hébergeur Combell, prestataire de
-              paiement Mollie, fournisseur d'email Resend), tous engagés contractuellement à
+              uniquement avec nos sous-traitants techniques (hébergement, fournisseur d&apos;email
+              Resend, agenda Google pour les rendez-vous), tous engagés contractuellement à
               respecter la confidentialité. Pour les commandes, vos données peuvent être transmises
               au fabricant pour les besoins de garantie et SAV.
             </p>

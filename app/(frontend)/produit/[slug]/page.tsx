@@ -7,9 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
-import { AddToCartButton } from "@/components/product/AddToCartButton";
 import { ProductVariantPanel } from "@/components/product/ProductVariantPanel";
-import { ColorVariantAddToCart } from "@/components/product/ColorVariantAddToCart";
 import { ProductColorProvider } from "@/components/product/ProductColorContext";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
@@ -337,9 +335,12 @@ export default async function ProductPage({ params }: Props) {
                     variantOptions={product.variantOptions ?? []}
                     variants={product.variants}
                   />
-                  <div className="mt-3">
+                  <div className="mt-3 flex flex-col gap-3">
+                    <Button asChild variant="primary" size="lg" className="w-full">
+                      <Link href="/estimation">Chiffrer mon installation</Link>
+                    </Button>
                     <Button asChild variant="outline" size="lg" className="w-full">
-                      <Link href="/demande-de-devis">Demander un devis avec pose</Link>
+                      <Link href="/prendre-rendez-vous">Prendre rendez-vous</Link>
                     </Button>
                   </div>
                 </>
@@ -397,46 +398,25 @@ export default async function ProductPage({ params }: Props) {
               )}
 
               <div className="flex flex-col gap-3">
-                {product.priceTTC ? (
-                  product.colorVariants && product.colorVariants.length > 0 ? (
-                    // Produit à déclinaisons de couleur : bouton conscient de
-                    // la couleur sélectionnée dans la galerie (via le contexte).
-                    <ColorVariantAddToCart
-                      productSlug={product.slug}
-                      productName={product.name}
-                      productBrand={product.brand}
-                      productPriceTTC={product.priceTTC}
-                      productImageSrc={product.imageSrc}
-                      colorVariants={product.colorVariants}
-                    />
-                  ) : (
-                    <AddToCartButton
-                      productId={product.slug}
-                      productName={product.name}
-                      productBrand={product.brand}
-                      productPriceTTC={product.priceTTC}
-                      productImageSrc={product.imageSrc}
-                      className="w-full"
-                    />
-                  )
-                ) : null}
+                <Button asChild variant="primary" size="lg" className="w-full">
+                  <Link href="/estimation">Chiffrer mon installation</Link>
+                </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
-                  <Link href="/demande-de-devis">Demander un devis avec pose</Link>
+                  <Link href="/prendre-rendez-vous">Prendre rendez-vous</Link>
                 </Button>
               </div>
 
               {/*
-                NE PAS réintroduire de mention du type « le paiement en ligne
-                arrive prochainement » : le checkout Mollie est en service
-                (Bancontact, Visa, Mastercard). Annoncer le contraire dit au
-                client comme à Google Merchant que la boutique ne permet pas
-                d'acheter, ce qui est faux et compte comme une déclaration
-                trompeuse.
+                Le paiement en ligne a été retiré (04/09/2026). Un poêle ne se
+                vend pas sans avoir vu le conduit : le parcours passe par le
+                chiffrage, puis la visite qui confirme la pose, puis la facture
+                d'acompte. Ne PAS réintroduire de bouton « acheter » ni de
+                mention de paiement tant que ce n'est pas redevenu vrai.
               */}
               <p className="text-xs text-mp-ink-soft mt-4 text-center">
-                Paiement sécurisé par Bancontact, Visa ou Mastercard via Mollie.
-                Pour un projet avec pose, passez par le devis : les primes et la
-                TVA à 6 % y sont calculées.
+                Prix du matériel seul. La pose se chiffre après une visite sur
+                place : c'est là qu'on valide le conduit, l'évacuation et
+                l'accès. Les primes et la TVA à 6 % sont calculées dans le devis.
               </p>
                 </>
               )}

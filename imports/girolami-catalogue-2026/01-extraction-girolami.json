@@ -1,0 +1,6277 @@
+{
+ "_meta": {
+  "source": "CATALISTINO 2026 Girolami (valid 01/05/2026)",
+  "rule": "Aucune invention. Donnee absente = null.",
+  "priceConvention": "PREZZO catalogue = HT. priceTTC = round(HT*1.21).",
+  "specsSource": "Fiches techniques p163-171 (volume/reservoir/poids/rendement)",
+  "scope": "Tout sauf chaudieres (CALDAIE exclues). Coeur pellet."
+ },
+ "count": 131,
+ "variantCount": 389,
+ "products": [
+  {
+   "base": "8000",
+   "slug": "girolami-split-9",
+   "sku": "GIR-8000",
+   "name": "Girolami Split 9",
+   "family": "Split",
+   "model": "SPLIT 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3520.0,
+   "priceTTC": 4259,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8000/BNNE",
+     "priceHT": 3520.0,
+     "priceTTC": 4259
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8000/BONE",
+     "priceHT": 3520.0,
+     "priceTTC": 4259
+    },
+    {
+     "color": "Noir",
+     "code": "8000/NE",
+     "priceHT": 3520.0,
+     "priceTTC": 4259
+    }
+   ]
+  },
+  {
+   "base": "8001",
+   "slug": "girolami-split-12",
+   "sku": "GIR-8001",
+   "name": "Girolami Split 12",
+   "family": "Split",
+   "model": "SPLIT 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3670.0,
+   "priceTTC": 4441,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8001/BNNE",
+     "priceHT": 3670.0,
+     "priceTTC": 4441
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8001/BONE",
+     "priceHT": 3670.0,
+     "priceTTC": 4441
+    },
+    {
+     "color": "Noir",
+     "code": "8001/NE",
+     "priceHT": 3670.0,
+     "priceTTC": 4441
+    }
+   ]
+  },
+  {
+   "base": "8002",
+   "slug": "girolami-split-12-canalisable",
+   "sku": "GIR-8002",
+   "name": "Girolami Split 12 canalisable",
+   "family": "Split",
+   "model": "SPLIT 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3980.0,
+   "priceTTC": 4816,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8002/BNNE",
+     "priceHT": 3980.0,
+     "priceTTC": 4816
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8002/BONE",
+     "priceHT": 3980.0,
+     "priceTTC": 4816
+    },
+    {
+     "color": "Noir",
+     "code": "8002/NE",
+     "priceHT": 3980.0,
+     "priceTTC": 4816
+    }
+   ]
+  },
+  {
+   "base": "8003",
+   "slug": "girolami-split-14",
+   "sku": "GIR-8003",
+   "name": "Girolami Split 14",
+   "family": "Split",
+   "model": "SPLIT 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3830.0,
+   "priceTTC": 4634,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8003/BNNE",
+     "priceHT": 3830.0,
+     "priceTTC": 4634
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8003/BONE",
+     "priceHT": 3830.0,
+     "priceTTC": 4634
+    },
+    {
+     "color": "Noir",
+     "code": "8003/NE",
+     "priceHT": 3830.0,
+     "priceTTC": 4634
+    }
+   ]
+  },
+  {
+   "base": "8004",
+   "slug": "girolami-split-14-canalisable",
+   "sku": "GIR-8004",
+   "name": "Girolami Split 14 canalisable",
+   "family": "Split",
+   "model": "SPLIT 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4130.0,
+   "priceTTC": 4997,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8004/BNNE",
+     "priceHT": 4130.0,
+     "priceTTC": 4997
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8004/BONE",
+     "priceHT": 4130.0,
+     "priceTTC": 4997
+    },
+    {
+     "color": "Noir",
+     "code": "8004/NE",
+     "priceHT": 4130.0,
+     "priceTTC": 4997
+    }
+   ]
+  },
+  {
+   "base": "8010",
+   "slug": "girolami-vert-9",
+   "sku": "GIR-8010",
+   "name": "Girolami Vert 9",
+   "family": "Vert",
+   "model": "VERT 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3700.0,
+   "priceTTC": 4477,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8010",
+     "priceHT": 3700.0,
+     "priceTTC": 4477
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8010/BO",
+     "priceHT": 3700.0,
+     "priceTTC": 4477
+    },
+    {
+     "color": "Noir",
+     "code": "8010/NE",
+     "priceHT": 3700.0,
+     "priceTTC": 4477
+    }
+   ]
+  },
+  {
+   "base": "8011",
+   "slug": "girolami-vert-12",
+   "sku": "GIR-8011",
+   "name": "Girolami Vert 12",
+   "family": "Vert",
+   "model": "VERT 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3860.0,
+   "priceTTC": 4671,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8011",
+     "priceHT": 3860.0,
+     "priceTTC": 4671
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8011/BO",
+     "priceHT": 3860.0,
+     "priceTTC": 4671
+    },
+    {
+     "color": "Noir",
+     "code": "8011/NE",
+     "priceHT": 3860.0,
+     "priceTTC": 4671
+    }
+   ]
+  },
+  {
+   "base": "8012",
+   "slug": "girolami-vert-12-canalisable",
+   "sku": "GIR-8012",
+   "name": "Girolami Vert 12 canalisable",
+   "family": "Vert",
+   "model": "VERT 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4160.0,
+   "priceTTC": 5034,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8012",
+     "priceHT": 4160.0,
+     "priceTTC": 5034
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8012/BO",
+     "priceHT": 4160.0,
+     "priceTTC": 5034
+    },
+    {
+     "color": "Noir",
+     "code": "8012/NE",
+     "priceHT": 4160.0,
+     "priceTTC": 5034
+    }
+   ]
+  },
+  {
+   "base": "8013",
+   "slug": "girolami-vert-14",
+   "sku": "GIR-8013",
+   "name": "Girolami Vert 14",
+   "family": "Vert",
+   "model": "VERT 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4000.0,
+   "priceTTC": 4840,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8013",
+     "priceHT": 4000.0,
+     "priceTTC": 4840
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8013/BO",
+     "priceHT": 4000.0,
+     "priceTTC": 4840
+    },
+    {
+     "color": "Noir",
+     "code": "8013/NE",
+     "priceHT": 4000.0,
+     "priceTTC": 4840
+    }
+   ]
+  },
+  {
+   "base": "8014",
+   "slug": "girolami-vert-14-canalisable",
+   "sku": "GIR-8014",
+   "name": "Girolami Vert 14 canalisable",
+   "family": "Vert",
+   "model": "VERT 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4320.0,
+   "priceTTC": 5227,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8014",
+     "priceHT": 4320.0,
+     "priceTTC": 5227
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8014/BO",
+     "priceHT": 4320.0,
+     "priceTTC": 5227
+    },
+    {
+     "color": "Noir",
+     "code": "8014/NE",
+     "priceHT": 4320.0,
+     "priceTTC": 5227
+    }
+   ]
+  },
+  {
+   "base": "8020",
+   "slug": "girolami-vert-maiolica-9",
+   "sku": "GIR-8020",
+   "name": "Girolami Vert Maiolica 9",
+   "family": "Vert Maiolica",
+   "model": "VERT MAIOLICA 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4340.0,
+   "priceTTC": 5251,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8020",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8020/BO",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Noir",
+     "code": "8020/NE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    }
+   ]
+  },
+  {
+   "base": "8021",
+   "slug": "girolami-vert-maiolica-12",
+   "sku": "GIR-8021",
+   "name": "Girolami Vert Maiolica 12",
+   "family": "Vert Maiolica",
+   "model": "VERT MAIOLICA 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4500.0,
+   "priceTTC": 5445,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8021",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8021/BO",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Noir",
+     "code": "8021/NE",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    }
+   ]
+  },
+  {
+   "base": "8022",
+   "slug": "girolami-vert-maiolica-12-canalisable",
+   "sku": "GIR-8022",
+   "name": "Girolami Vert Maiolica 12 canalisable",
+   "family": "Vert Maiolica",
+   "model": "VERT MAIOLICA 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4800.0,
+   "priceTTC": 5808,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8022",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8022/BO",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Noir",
+     "code": "8022/NE",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    }
+   ]
+  },
+  {
+   "base": "8023",
+   "slug": "girolami-vert-maiolica-14",
+   "sku": "GIR-8023",
+   "name": "Girolami Vert Maiolica 14",
+   "family": "Vert Maiolica",
+   "model": "VERT MAIOLICA 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4640.0,
+   "priceTTC": 5614,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8023",
+     "priceHT": 4640.0,
+     "priceTTC": 5614
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8023/BO",
+     "priceHT": 4640.0,
+     "priceTTC": 5614
+    },
+    {
+     "color": "Noir",
+     "code": "8023/NE",
+     "priceHT": 4640.0,
+     "priceTTC": 5614
+    }
+   ]
+  },
+  {
+   "base": "8024",
+   "slug": "girolami-vert-maiolica-14-canalisable",
+   "sku": "GIR-8024",
+   "name": "Girolami Vert Maiolica 14 canalisable",
+   "family": "Vert Maiolica",
+   "model": "VERT MAIOLICA 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4950.0,
+   "priceTTC": 5990,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8024",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Bordeaux",
+     "code": "8024/BO",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Noir",
+     "code": "8024/NE",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    }
+   ]
+  },
+  {
+   "base": "8030",
+   "slug": "girolami-curvy-9",
+   "sku": "GIR-8030",
+   "name": "Girolami Curvy 9",
+   "family": "Curvy",
+   "model": "CURVY 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4130.0,
+   "priceTTC": 4997,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8030",
+     "priceHT": 4130.0,
+     "priceTTC": 4997
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8030/GR",
+     "priceHT": 4130.0,
+     "priceTTC": 4997
+    }
+   ]
+  },
+  {
+   "base": "8031",
+   "slug": "girolami-curvy-12",
+   "sku": "GIR-8031",
+   "name": "Girolami Curvy 12",
+   "family": "Curvy",
+   "model": "CURVY 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4300.0,
+   "priceTTC": 5203,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8031",
+     "priceHT": 4300.0,
+     "priceTTC": 5203
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8031/GR",
+     "priceHT": 4300.0,
+     "priceTTC": 5203
+    }
+   ]
+  },
+  {
+   "base": "8032",
+   "slug": "girolami-curvy-12-canalisable",
+   "sku": "GIR-8032",
+   "name": "Girolami Curvy 12 canalisable",
+   "family": "Curvy",
+   "model": "CURVY 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4600.0,
+   "priceTTC": 5566,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8032",
+     "priceHT": 4600.0,
+     "priceTTC": 5566
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8032/GR",
+     "priceHT": 4600.0,
+     "priceTTC": 5566
+    }
+   ]
+  },
+  {
+   "base": "8033",
+   "slug": "girolami-curvy-14",
+   "sku": "GIR-8033",
+   "name": "Girolami Curvy 14",
+   "family": "Curvy",
+   "model": "CURVY 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4450.0,
+   "priceTTC": 5384,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8033",
+     "priceHT": 4450.0,
+     "priceTTC": 5384
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8033/GR",
+     "priceHT": 4450.0,
+     "priceTTC": 5384
+    }
+   ]
+  },
+  {
+   "base": "8034",
+   "slug": "girolami-curvy-14-canalisable",
+   "sku": "GIR-8034",
+   "name": "Girolami Curvy 14 canalisable",
+   "family": "Curvy",
+   "model": "CURVY 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4750.0,
+   "priceTTC": 5748,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8034",
+     "priceHT": 4750.0,
+     "priceTTC": 5748
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8034/GR",
+     "priceHT": 4750.0,
+     "priceTTC": 5748
+    }
+   ]
+  },
+  {
+   "base": "8040",
+   "slug": "girolami-flow-9",
+   "sku": "GIR-8040",
+   "name": "Girolami Flow 9",
+   "family": "Flow",
+   "model": "FLOW 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3620.0,
+   "priceTTC": 4380,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8040",
+     "priceHT": 3620.0,
+     "priceTTC": 4380
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8040/GR",
+     "priceHT": 3620.0,
+     "priceTTC": 4380
+    },
+    {
+     "color": "Noir",
+     "code": "8040/NE",
+     "priceHT": 3620.0,
+     "priceTTC": 4380
+    },
+    {
+     "color": "Bronze",
+     "code": "8040/DB",
+     "priceHT": 3620.0,
+     "priceTTC": 4380
+    }
+   ]
+  },
+  {
+   "base": "8041",
+   "slug": "girolami-flow-12",
+   "sku": "GIR-8041",
+   "name": "Girolami Flow 12",
+   "family": "Flow",
+   "model": "FLOW 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3780.0,
+   "priceTTC": 4574,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8041",
+     "priceHT": 3780.0,
+     "priceTTC": 4574
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8041/GR",
+     "priceHT": 3780.0,
+     "priceTTC": 4574
+    },
+    {
+     "color": "Noir",
+     "code": "8041/NE",
+     "priceHT": 3780.0,
+     "priceTTC": 4574
+    },
+    {
+     "color": "Bronze",
+     "code": "8041/DB",
+     "priceHT": 3780.0,
+     "priceTTC": 4574
+    }
+   ]
+  },
+  {
+   "base": "8042",
+   "slug": "girolami-flow-12-canalisable",
+   "sku": "GIR-8042",
+   "name": "Girolami Flow 12 canalisable",
+   "family": "Flow",
+   "model": "FLOW 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4080.0,
+   "priceTTC": 4937,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8042",
+     "priceHT": 4080.0,
+     "priceTTC": 4937
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8042/GR",
+     "priceHT": 4080.0,
+     "priceTTC": 4937
+    },
+    {
+     "color": "Noir",
+     "code": "8042/NE",
+     "priceHT": 4080.0,
+     "priceTTC": 4937
+    },
+    {
+     "color": "Bronze",
+     "code": "8042/DB",
+     "priceHT": 4080.0,
+     "priceTTC": 4937
+    }
+   ]
+  },
+  {
+   "base": "8043",
+   "slug": "girolami-flow-14",
+   "sku": "GIR-8043",
+   "name": "Girolami Flow 14",
+   "family": "Flow",
+   "model": "FLOW 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4030.0,
+   "priceTTC": 4876,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8043",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8043/GR",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Noir",
+     "code": "8043/NE",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Bronze",
+     "code": "8043/DB",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    }
+   ]
+  },
+  {
+   "base": "8044",
+   "slug": "girolami-flow-14-canalisable",
+   "sku": "GIR-8044",
+   "name": "Girolami Flow 14 canalisable",
+   "family": "Flow",
+   "model": "FLOW 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4340.0,
+   "priceTTC": 5251,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8044",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8044/GR",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Noir",
+     "code": "8044/NE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Bronze",
+     "code": "8044/DB",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    }
+   ]
+  },
+  {
+   "base": "8050",
+   "slug": "girolami-round-9",
+   "sku": "GIR-8050",
+   "name": "Girolami Round 9",
+   "family": "Round",
+   "model": "ROUND 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4030.0,
+   "priceTTC": 4876,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8050",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Bronze",
+     "code": "8050/DB",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Noir",
+     "code": "8050/NE",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Vert",
+     "code": "8050/VE",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8050/GR",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    }
+   ]
+  },
+  {
+   "base": "8050C",
+   "slug": "girolami-round-9-coaxiale",
+   "sku": "GIR-8050C",
+   "name": "Girolami Round 9 coaxiale",
+   "family": "Round",
+   "model": "ROUND 9 COASSIALE",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4340.0,
+   "priceTTC": 5251,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8050C",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Bronze",
+     "code": "8050C/DB",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Noir",
+     "code": "8050C/NE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Vert",
+     "code": "8050C/VE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8050C/GR",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    }
+   ]
+  },
+  {
+   "base": "8051",
+   "slug": "girolami-round-12",
+   "sku": "GIR-8051",
+   "name": "Girolami Round 12",
+   "family": "Round",
+   "model": "ROUND 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4200.0,
+   "priceTTC": 5082,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8051",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Bronze",
+     "code": "8051/DB",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Noir",
+     "code": "8051/NE",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Vert",
+     "code": "8051/VE",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8051/GR",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    }
+   ]
+  },
+  {
+   "base": "8051C",
+   "slug": "girolami-round-12-coaxiale",
+   "sku": "GIR-8051C",
+   "name": "Girolami Round 12 coaxiale",
+   "family": "Round",
+   "model": "ROUND 12 COASSIALE",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4500.0,
+   "priceTTC": 5445,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8051C",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Bronze",
+     "code": "8051C/DB",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Noir",
+     "code": "8051C/NE",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Vert",
+     "code": "8051C/VE",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8051C/GR",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    }
+   ]
+  },
+  {
+   "base": "8052",
+   "slug": "girolami-round-12-canalisable",
+   "sku": "GIR-8052",
+   "name": "Girolami Round 12 canalisable",
+   "family": "Round",
+   "model": "ROUND 12 CANALIZZATA",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4500.0,
+   "priceTTC": 5445,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8052",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Bronze",
+     "code": "8052/DB",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Noir",
+     "code": "8052/NE",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Vert",
+     "code": "8052/VE",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8052/GR",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    }
+   ]
+  },
+  {
+   "base": "8052C",
+   "slug": "girolami-round-12-canalisable-coaxiale",
+   "sku": "GIR-8052C",
+   "name": "Girolami Round 12 canalisable, coaxiale",
+   "family": "Round",
+   "model": "ROUND 12 CANALIZZATA",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4800.0,
+   "priceTTC": 5808,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8052C",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Bronze",
+     "code": "8052C/DB",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Noir",
+     "code": "8052C/NE",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Vert",
+     "code": "8052C/VE",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8052C/GR",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    }
+   ]
+  },
+  {
+   "base": "8053",
+   "slug": "girolami-round-14",
+   "sku": "GIR-8053",
+   "name": "Girolami Round 14",
+   "family": "Round",
+   "model": "ROUND 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4340.0,
+   "priceTTC": 5251,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8053",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Bronze",
+     "code": "8053/DB",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Noir",
+     "code": "8053/NE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Vert",
+     "code": "8053/VE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8053/GR",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    }
+   ]
+  },
+  {
+   "base": "8053C",
+   "slug": "girolami-round-14-coaxiale",
+   "sku": "GIR-8053C",
+   "name": "Girolami Round 14 coaxiale",
+   "family": "Round",
+   "model": "ROUND 14 COASSIALE",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4650.0,
+   "priceTTC": 5626,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8053C",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Bronze",
+     "code": "8053C/DB",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Noir",
+     "code": "8053C/NE",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Vert",
+     "code": "8053C/VE",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8053C/GR",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    }
+   ]
+  },
+  {
+   "base": "8054",
+   "slug": "girolami-round-14-canalisable",
+   "sku": "GIR-8054",
+   "name": "Girolami Round 14 canalisable",
+   "family": "Round",
+   "model": "ROUND 14 CANALIZZATA",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4650.0,
+   "priceTTC": 5626,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8054",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Bronze",
+     "code": "8054/DB",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Noir",
+     "code": "8054/NE",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Vert",
+     "code": "8054/VE",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8054/GR",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    }
+   ]
+  },
+  {
+   "base": "8054C",
+   "slug": "girolami-round-14-canalisable-coaxiale",
+   "sku": "GIR-8054C",
+   "name": "Girolami Round 14 canalisable, coaxiale",
+   "family": "Round",
+   "model": "ROUND 14 CANALIZZATA",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4950.0,
+   "priceTTC": 5990,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8054C",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Bronze",
+     "code": "8054C/DB",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Noir",
+     "code": "8054C/NE",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Vert",
+     "code": "8054C/VE",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8054C/GR",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    }
+   ]
+  },
+  {
+   "base": "8060",
+   "slug": "girolami-slim-9",
+   "sku": "GIR-8060",
+   "name": "Girolami Slim 9",
+   "family": "Slim",
+   "model": "SLIM 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3880.0,
+   "priceTTC": 4695,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8060",
+     "priceHT": 3880.0,
+     "priceTTC": 4695
+    },
+    {
+     "color": "Bronze",
+     "code": "8060/DB",
+     "priceHT": 3880.0,
+     "priceTTC": 4695
+    },
+    {
+     "color": "Noir",
+     "code": "8060/NE",
+     "priceHT": 3880.0,
+     "priceTTC": 4695
+    },
+    {
+     "color": "Vert",
+     "code": "8060/VE",
+     "priceHT": 3880.0,
+     "priceTTC": 4695
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8060/GR",
+     "priceHT": 3880.0,
+     "priceTTC": 4695
+    }
+   ]
+  },
+  {
+   "base": "8060C",
+   "slug": "girolami-slim-9-coaxiale",
+   "sku": "GIR-8060C",
+   "name": "Girolami Slim 9 coaxiale",
+   "family": "Slim",
+   "model": "SLIM 9 COASSIALE",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4200.0,
+   "priceTTC": 5082,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8060C",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Bronze",
+     "code": "8060C/DB",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Noir",
+     "code": "8060C/NE",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Vert",
+     "code": "8060C/VE",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8060C/GR",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    }
+   ]
+  },
+  {
+   "base": "8061",
+   "slug": "girolami-slim-12",
+   "sku": "GIR-8061",
+   "name": "Girolami Slim 12",
+   "family": "Slim",
+   "model": "SLIM 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4030.0,
+   "priceTTC": 4876,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8061",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Bronze",
+     "code": "8061/DB",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Noir",
+     "code": "8061/NE",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Vert",
+     "code": "8061/VE",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8061/GR",
+     "priceHT": 4030.0,
+     "priceTTC": 4876
+    }
+   ]
+  },
+  {
+   "base": "8061C",
+   "slug": "girolami-slim-12-coaxiale",
+   "sku": "GIR-8061C",
+   "name": "Girolami Slim 12 coaxiale",
+   "family": "Slim",
+   "model": "SLIM 12 COASSIALE",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4340.0,
+   "priceTTC": 5251,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8061C",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Bronze",
+     "code": "8061C/DB",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Noir",
+     "code": "8061C/NE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Vert",
+     "code": "8061C/VE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8061C/GR",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    }
+   ]
+  },
+  {
+   "base": "8062",
+   "slug": "girolami-slim-12-canalisable",
+   "sku": "GIR-8062",
+   "name": "Girolami Slim 12 canalisable",
+   "family": "Slim",
+   "model": "SLIM 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4340.0,
+   "priceTTC": 5251,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8062",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Bronze",
+     "code": "8062/DB",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Noir",
+     "code": "8062/NE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Vert",
+     "code": "8062/VE",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8062/GR",
+     "priceHT": 4340.0,
+     "priceTTC": 5251
+    }
+   ]
+  },
+  {
+   "base": "8062C",
+   "slug": "girolami-slim-12-canalisable-coaxiale",
+   "sku": "GIR-8062C",
+   "name": "Girolami Slim 12 canalisable, coaxiale",
+   "family": "Slim",
+   "model": "SLIM 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4650.0,
+   "priceTTC": 5626,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8062C",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Bronze",
+     "code": "8062C/DB",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Noir",
+     "code": "8062C/NE",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Vert",
+     "code": "8062C/VE",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8062C/GR",
+     "priceHT": 4650.0,
+     "priceTTC": 5626
+    }
+   ]
+  },
+  {
+   "base": "8063",
+   "slug": "girolami-slim-14",
+   "sku": "GIR-8063",
+   "name": "Girolami Slim 14",
+   "family": "Slim",
+   "model": "SLIM 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4200.0,
+   "priceTTC": 5082,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8063",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Bronze",
+     "code": "8063/DB",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Noir",
+     "code": "8063/NE",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Vert",
+     "code": "8063/VE",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8063/GR",
+     "priceHT": 4200.0,
+     "priceTTC": 5082
+    }
+   ]
+  },
+  {
+   "base": "8063C",
+   "slug": "girolami-slim-14-coaxiale",
+   "sku": "GIR-8063C",
+   "name": "Girolami Slim 14 coaxiale",
+   "family": "Slim",
+   "model": "SLIM 14 COASSIALE",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4500.0,
+   "priceTTC": 5445,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8063C",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Bronze",
+     "code": "8063C/DB",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Noir",
+     "code": "8063C/NE",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Vert",
+     "code": "8063C/VE",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8063C/GR",
+     "priceHT": 4500.0,
+     "priceTTC": 5445
+    }
+   ]
+  },
+  {
+   "base": "8064",
+   "slug": "girolami-slim-14-canalisable",
+   "sku": "GIR-8064",
+   "name": "Girolami Slim 14 canalisable",
+   "family": "Slim",
+   "model": "SLIM 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4490.0,
+   "priceTTC": 5433,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8064",
+     "priceHT": 4490.0,
+     "priceTTC": 5433
+    },
+    {
+     "color": "Bronze",
+     "code": "8064/DB",
+     "priceHT": 4490.0,
+     "priceTTC": 5433
+    },
+    {
+     "color": "Noir",
+     "code": "8064/NE",
+     "priceHT": 4490.0,
+     "priceTTC": 5433
+    },
+    {
+     "color": "Vert",
+     "code": "8064/VE",
+     "priceHT": 4490.0,
+     "priceTTC": 5433
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8064/GR",
+     "priceHT": 4490.0,
+     "priceTTC": 5433
+    }
+   ]
+  },
+  {
+   "base": "8064C",
+   "slug": "girolami-slim-14-canalisable-coaxiale",
+   "sku": "GIR-8064C",
+   "name": "Girolami Slim 14 canalisable, coaxiale",
+   "family": "Slim",
+   "model": "SLIM 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": true,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 13.65,
+   "powerNomKW": 13.03,
+   "efficiency": 95.46,
+   "heatedVolumeM3": 373,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 4800.0,
+   "priceTTC": 5808,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8064C",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Bronze",
+     "code": "8064C/DB",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Noir",
+     "code": "8064C/NE",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Vert",
+     "code": "8064C/VE",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8064C/GR",
+     "priceHT": 4800.0,
+     "priceTTC": 5808
+    }
+   ]
+  },
+  {
+   "base": "8070",
+   "slug": "girolami-mini-6",
+   "sku": "GIR-8070",
+   "name": "Girolami Mini 6",
+   "family": "Mini",
+   "model": "MINI 6",
+   "powerClass": 6,
+   "power": 6,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 6.02,
+   "powerNomKW": 5.77,
+   "efficiency": 95.8,
+   "heatedVolumeM3": 165,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3300.0,
+   "priceTTC": 3993,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8070",
+     "priceHT": 3300.0,
+     "priceTTC": 3993
+    },
+    {
+     "color": "Bronze",
+     "code": "8070/DB",
+     "priceHT": 3300.0,
+     "priceTTC": 3993
+    },
+    {
+     "color": "Noir",
+     "code": "8070/NE",
+     "priceHT": 3300.0,
+     "priceTTC": 3993
+    },
+    {
+     "color": "Vert",
+     "code": "8070/VE",
+     "priceHT": 3300.0,
+     "priceTTC": 3993
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8070/GR",
+     "priceHT": 3300.0,
+     "priceTTC": 3993
+    }
+   ]
+  },
+  {
+   "base": "8071",
+   "slug": "girolami-mini-9",
+   "sku": "GIR-8071",
+   "name": "Girolami Mini 9",
+   "family": "Mini",
+   "model": "MINI 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 15,
+   "weight": null,
+   "smokeOutletMm": 80,
+   "waterL": null,
+   "priceHT": 3470.0,
+   "priceTTC": 4199,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "8071",
+     "priceHT": 3470.0,
+     "priceTTC": 4199
+    },
+    {
+     "color": "Bronze",
+     "code": "8071/DB",
+     "priceHT": 3470.0,
+     "priceTTC": 4199
+    },
+    {
+     "color": "Noir",
+     "code": "8071/NE",
+     "priceHT": 3470.0,
+     "priceTTC": 4199
+    },
+    {
+     "color": "Vert",
+     "code": "8071/VE",
+     "priceHT": 3470.0,
+     "priceTTC": 4199
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8071/GR",
+     "priceHT": 3470.0,
+     "priceTTC": 4199
+    }
+   ]
+  },
+  {
+   "base": "8100",
+   "slug": "girolami-twin-mini-6",
+   "sku": "GIR-8100",
+   "name": "Girolami Twin Mini 6",
+   "family": "Twin Mini",
+   "model": "TWIN MINI 6",
+   "powerClass": 6,
+   "power": 6,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 6.02,
+   "powerNomKW": 5.77,
+   "efficiency": 95.8,
+   "heatedVolumeM3": 165,
+   "hopperCapacity": 15,
+   "weight": 150,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 4950.0,
+   "priceTTC": 5990,
+   "variants": [
+    {
+     "color": "Noir",
+     "code": "8100",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    }
+   ]
+  },
+  {
+   "base": "8130",
+   "slug": "girolami-twin-slim-9",
+   "sku": "GIR-8130",
+   "name": "Girolami Twin Slim 9",
+   "family": "Twin Slim",
+   "model": "TWIN SLIM 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5100.0,
+   "priceTTC": 6171,
+   "variants": [
+    {
+     "color": "Noir",
+     "code": "8130",
+     "priceHT": 5100.0,
+     "priceTTC": 6171
+    },
+    {
+     "color": "Corten",
+     "code": "8130-SC",
+     "priceHT": 5350.0,
+     "priceTTC": 6474
+    },
+    {
+     "color": "Ivoire",
+     "code": "8130-SA",
+     "priceHT": 5350.0,
+     "priceTTC": 6474
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8130-SG",
+     "priceHT": 5350.0,
+     "priceTTC": 6474
+    }
+   ]
+  },
+  {
+   "base": "8131",
+   "slug": "girolami-twin-slim-12",
+   "sku": "GIR-8131",
+   "name": "Girolami Twin Slim 12",
+   "family": "Twin Slim",
+   "model": "TWIN SLIM 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "standard",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5250.0,
+   "priceTTC": 6352,
+   "variants": [
+    {
+     "color": "Noir",
+     "code": "8131",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    },
+    {
+     "color": "Corten",
+     "code": "8131-SC",
+     "priceHT": 5500.0,
+     "priceTTC": 6655
+    },
+    {
+     "color": "Ivoire",
+     "code": "8131-SA",
+     "priceHT": 5500.0,
+     "priceTTC": 6655
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8131-SG",
+     "priceHT": 5500.0,
+     "priceTTC": 6655
+    }
+   ]
+  },
+  {
+   "base": "8132",
+   "slug": "girolami-twin-slim-9-canalisable",
+   "sku": "GIR-8132",
+   "name": "Girolami Twin Slim 9 canalisable",
+   "family": "Twin Slim",
+   "model": "TWIN SLIM 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5400.0,
+   "priceTTC": 6534,
+   "variants": [
+    {
+     "color": "Noir",
+     "code": "8132",
+     "priceHT": 5400.0,
+     "priceTTC": 6534
+    },
+    {
+     "color": "Corten",
+     "code": "8132-SC",
+     "priceHT": 5660.0,
+     "priceTTC": 6849
+    },
+    {
+     "color": "Ivoire",
+     "code": "8132-SA",
+     "priceHT": 5660.0,
+     "priceTTC": 6849
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8132-SG",
+     "priceHT": 5660.0,
+     "priceTTC": 6849
+    }
+   ]
+  },
+  {
+   "base": "8133",
+   "slug": "girolami-twin-slim-12-canalisable",
+   "sku": "GIR-8133",
+   "name": "Girolami Twin Slim 12 canalisable",
+   "family": "Twin Slim",
+   "model": "TWIN SLIM 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "canalisable",
+   "category": "AIR_STOVES",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": true,
+   "isInsert": false,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5560.0,
+   "priceTTC": 6728,
+   "variants": [
+    {
+     "color": "Noir",
+     "code": "8133",
+     "priceHT": 5560.0,
+     "priceTTC": 6728
+    },
+    {
+     "color": "Corten",
+     "code": "8133-SC",
+     "priceHT": 5820.0,
+     "priceTTC": 7042
+    },
+    {
+     "color": "Ivoire",
+     "code": "8133-SA",
+     "priceHT": 5820.0,
+     "priceTTC": 7042
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "8133-SG",
+     "priceHT": 5820.0,
+     "priceTTC": 7042
+    }
+   ]
+  },
+  {
+   "base": "3035",
+   "slug": "girolami-ti-plus-26-hybride",
+   "sku": "GIR-3035",
+   "name": "Girolami TI Plus 26 Hybride bois-pellet",
+   "family": "TI Plus",
+   "model": "TI 26 PLUS HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6540.0,
+   "priceTTC": 7913,
+   "variants": [
+    {
+     "color": null,
+     "code": "3035",
+     "priceHT": 6540.0,
+     "priceTTC": 7913
+    }
+   ]
+  },
+  {
+   "base": "3038",
+   "slug": "girolami-ti-14-hybride",
+   "sku": "GIR-3038",
+   "name": "Girolami TI 14 Hybride bois-pellet",
+   "family": "TI",
+   "model": "TI 14 HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5820.0,
+   "priceTTC": 7042,
+   "variants": [
+    {
+     "color": null,
+     "code": "3038",
+     "priceHT": 5820.0,
+     "priceTTC": 7042
+    }
+   ]
+  },
+  {
+   "base": "3038-P",
+   "slug": "girolami-ti-14-pellet",
+   "sku": "GIR-3038-P",
+   "name": "Girolami TI 14 Pellet",
+   "family": "TI",
+   "model": "TI 14 PELLET",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4630.0,
+   "priceTTC": 5602,
+   "variants": [
+    {
+     "color": null,
+     "code": "3038-P",
+     "priceHT": 4630.0,
+     "priceTTC": 5602
+    }
+   ]
+  },
+  {
+   "base": "3039",
+   "slug": "girolami-ti-18-hybride",
+   "sku": "GIR-3039",
+   "name": "Girolami TI 18 Hybride bois-pellet",
+   "family": "TI",
+   "model": "TI 18 HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5970.0,
+   "priceTTC": 7224,
+   "variants": [
+    {
+     "color": null,
+     "code": "3039",
+     "priceHT": 5970.0,
+     "priceTTC": 7224
+    }
+   ]
+  },
+  {
+   "base": "3039-P",
+   "slug": "girolami-ti-18-pellet",
+   "sku": "GIR-3039-P",
+   "name": "Girolami TI 18 Pellet",
+   "family": "TI",
+   "model": "TI 18 PELLET",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4790.0,
+   "priceTTC": 5796,
+   "variants": [
+    {
+     "color": null,
+     "code": "3039-P",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    }
+   ]
+  },
+  {
+   "base": "3040",
+   "slug": "girolami-ti-22-hybride",
+   "sku": "GIR-3040",
+   "name": "Girolami TI 22 Hybride bois-pellet",
+   "family": "TI",
+   "model": "TI 22 HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6130.0,
+   "priceTTC": 7417,
+   "variants": [
+    {
+     "color": null,
+     "code": "3040",
+     "priceHT": 6130.0,
+     "priceTTC": 7417
+    }
+   ]
+  },
+  {
+   "base": "3040-P",
+   "slug": "girolami-ti-22-pellet",
+   "sku": "GIR-3040-P",
+   "name": "Girolami TI 22 Pellet",
+   "family": "TI",
+   "model": "TI 22 PELLET",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4950.0,
+   "priceTTC": 5990,
+   "variants": [
+    {
+     "color": null,
+     "code": "3040-P",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    }
+   ]
+  },
+  {
+   "base": "3041",
+   "slug": "girolami-ti-26-hybride",
+   "sku": "GIR-3041",
+   "name": "Girolami TI 26 Hybride bois-pellet",
+   "family": "TI",
+   "model": "TI 26 HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6280.0,
+   "priceTTC": 7599,
+   "variants": [
+    {
+     "color": null,
+     "code": "3041",
+     "priceHT": 6280.0,
+     "priceTTC": 7599
+    }
+   ]
+  },
+  {
+   "base": "3041-P",
+   "slug": "girolami-ti-26-pellet",
+   "sku": "GIR-3041-P",
+   "name": "Girolami TI 26 Pellet",
+   "family": "TI",
+   "model": "TI 26 PELLET",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5100.0,
+   "priceTTC": 6171,
+   "variants": [
+    {
+     "color": null,
+     "code": "3041-P",
+     "priceHT": 5100.0,
+     "priceTTC": 6171
+    }
+   ]
+  },
+  {
+   "base": "3042",
+   "slug": "girolami-ti-slim-panorama-14-hybride",
+   "sku": "GIR-3042",
+   "name": "Girolami TI Slim Panorama 14 Hybride bois-pellet",
+   "family": "TI Slim Panorama",
+   "model": "TI SLIM PANORAMA 14 HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6030.0,
+   "priceTTC": 7296,
+   "variants": [
+    {
+     "color": null,
+     "code": "3042",
+     "priceHT": 6030.0,
+     "priceTTC": 7296
+    }
+   ]
+  },
+  {
+   "base": "3043",
+   "slug": "girolami-ti-slim-panorama-18-hybride",
+   "sku": "GIR-3043",
+   "name": "Girolami TI Slim Panorama 18 Hybride bois-pellet",
+   "family": "TI Slim Panorama",
+   "model": "TI SLIM PANORAMA 18 HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6180.0,
+   "priceTTC": 7478,
+   "variants": [
+    {
+     "color": null,
+     "code": "3043",
+     "priceHT": 6180.0,
+     "priceTTC": 7478
+    }
+   ]
+  },
+  {
+   "base": "3044",
+   "slug": "girolami-ti-slim-panorama-22-hybride",
+   "sku": "GIR-3044",
+   "name": "Girolami TI Slim Panorama 22 Hybride bois-pellet",
+   "family": "TI Slim Panorama",
+   "model": "TI SLIM PANORAMA 22 HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6330.0,
+   "priceTTC": 7659,
+   "variants": [
+    {
+     "color": null,
+     "code": "3044",
+     "priceHT": 6330.0,
+     "priceTTC": 7659
+    }
+   ]
+  },
+  {
+   "base": "3045",
+   "slug": "girolami-ti-slim-panorama-26-hybride",
+   "sku": "GIR-3045",
+   "name": "Girolami TI Slim Panorama 26 Hybride bois-pellet",
+   "family": "TI Slim Panorama",
+   "model": "TI SLIM PANORAMA 26 HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6490.0,
+   "priceTTC": 7853,
+   "variants": [
+    {
+     "color": null,
+     "code": "3045",
+     "priceHT": 6490.0,
+     "priceTTC": 7853
+    }
+   ]
+  },
+  {
+   "base": "3046",
+   "slug": "girolami-ti-panorama-14-hybride",
+   "sku": "GIR-3046",
+   "name": "Girolami TI Panorama 14 Hybride bois-pellet",
+   "family": "TI Panorama",
+   "model": "TI 14 PANORAMA HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6080.0,
+   "priceTTC": 7357,
+   "variants": [
+    {
+     "color": null,
+     "code": "3046",
+     "priceHT": 6080.0,
+     "priceTTC": 7357
+    }
+   ]
+  },
+  {
+   "base": "3046-P",
+   "slug": "girolami-ti-panorama-14-pellet",
+   "sku": "GIR-3046-P",
+   "name": "Girolami TI Panorama 14 Pellet",
+   "family": "TI Panorama",
+   "model": "TI 14 PANORAMA PELLET",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4840.0,
+   "priceTTC": 5856,
+   "variants": [
+    {
+     "color": null,
+     "code": "3046-P",
+     "priceHT": 4840.0,
+     "priceTTC": 5856
+    }
+   ]
+  },
+  {
+   "base": "3047",
+   "slug": "girolami-ti-panorama-18-hybride",
+   "sku": "GIR-3047",
+   "name": "Girolami TI Panorama 18 Hybride bois-pellet",
+   "family": "TI Panorama",
+   "model": "TI 18 PANORAMA HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6230.0,
+   "priceTTC": 7538,
+   "variants": [
+    {
+     "color": null,
+     "code": "3047",
+     "priceHT": 6230.0,
+     "priceTTC": 7538
+    }
+   ]
+  },
+  {
+   "base": "3047-P",
+   "slug": "girolami-ti-panorama-18-pellet",
+   "sku": "GIR-3047-P",
+   "name": "Girolami TI Panorama 18 Pellet",
+   "family": "TI Panorama",
+   "model": "TI 18 PANORAMA PELLET",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5000.0,
+   "priceTTC": 6050,
+   "variants": [
+    {
+     "color": null,
+     "code": "3047-P",
+     "priceHT": 5000.0,
+     "priceTTC": 6050
+    }
+   ]
+  },
+  {
+   "base": "3048",
+   "slug": "girolami-ti-panorama-22-hybride",
+   "sku": "GIR-3048",
+   "name": "Girolami TI Panorama 22 Hybride bois-pellet",
+   "family": "TI Panorama",
+   "model": "TI 22 PANORAMA HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6390.0,
+   "priceTTC": 7732,
+   "variants": [
+    {
+     "color": null,
+     "code": "3048",
+     "priceHT": 6390.0,
+     "priceTTC": 7732
+    }
+   ]
+  },
+  {
+   "base": "3048-P",
+   "slug": "girolami-ti-panorama-22-pellet",
+   "sku": "GIR-3048-P",
+   "name": "Girolami TI Panorama 22 Pellet",
+   "family": "TI Panorama",
+   "model": "TI 22 PANORAMA PELLET",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5150.0,
+   "priceTTC": 6232,
+   "variants": [
+    {
+     "color": null,
+     "code": "3048-P",
+     "priceHT": 5150.0,
+     "priceTTC": 6232
+    }
+   ]
+  },
+  {
+   "base": "3049",
+   "slug": "girolami-ti-panorama-26-hybride",
+   "sku": "GIR-3049",
+   "name": "Girolami TI Panorama 26 Hybride bois-pellet",
+   "family": "TI Panorama",
+   "model": "TI 26 PANORAMA HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6540.0,
+   "priceTTC": 7913,
+   "variants": [
+    {
+     "color": null,
+     "code": "3049",
+     "priceHT": 6540.0,
+     "priceTTC": 7913
+    }
+   ]
+  },
+  {
+   "base": "3049-P",
+   "slug": "girolami-ti-panorama-26-pellet",
+   "sku": "GIR-3049-P",
+   "name": "Girolami TI Panorama 26 Pellet",
+   "family": "TI Panorama",
+   "model": "TI 26 PANORAMA PELLET",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5300.0,
+   "priceTTC": 6413,
+   "variants": [
+    {
+     "color": null,
+     "code": "3049-P",
+     "priceHT": 5300.0,
+     "priceTTC": 6413
+    }
+   ]
+  },
+  {
+   "base": "3051",
+   "slug": "girolami-ti-plus-panorama-26",
+   "sku": "GIR-3051",
+   "name": "Girolami TI Plus Panorama 26",
+   "family": "TI Plus Panorama",
+   "model": "TI 26 PLUS PANORAMA",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_INSERTS",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6800.0,
+   "priceTTC": 8228,
+   "variants": [
+    {
+     "color": null,
+     "code": "3051",
+     "priceHT": 6800.0,
+     "priceTTC": 8228
+    }
+   ]
+  },
+  {
+   "base": "3052",
+   "slug": "girolami-ti-slim-14-hybride",
+   "sku": "GIR-3052",
+   "name": "Girolami TI Slim 14 Hybride bois-pellet",
+   "family": "TI Slim",
+   "model": "TI SLIM 14 HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5820.0,
+   "priceTTC": 7042,
+   "variants": [
+    {
+     "color": null,
+     "code": "3052",
+     "priceHT": 5820.0,
+     "priceTTC": 7042
+    }
+   ]
+  },
+  {
+   "base": "3053",
+   "slug": "girolami-ti-slim-18-hybride",
+   "sku": "GIR-3053",
+   "name": "Girolami TI Slim 18 Hybride bois-pellet",
+   "family": "TI Slim",
+   "model": "TI SLIM 18 HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5980.0,
+   "priceTTC": 7236,
+   "variants": [
+    {
+     "color": null,
+     "code": "3053",
+     "priceHT": 5980.0,
+     "priceTTC": 7236
+    }
+   ]
+  },
+  {
+   "base": "3054",
+   "slug": "girolami-ti-slim-22-hybride",
+   "sku": "GIR-3054",
+   "name": "Girolami TI Slim 22 Hybride bois-pellet",
+   "family": "TI Slim",
+   "model": "TI SLIM 22 HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6130.0,
+   "priceTTC": 7417,
+   "variants": [
+    {
+     "color": null,
+     "code": "3054",
+     "priceHT": 6130.0,
+     "priceTTC": 7417
+    }
+   ]
+  },
+  {
+   "base": "3055",
+   "slug": "girolami-ti-slim-26-hybride",
+   "sku": "GIR-3055",
+   "name": "Girolami TI Slim 26 Hybride bois-pellet",
+   "family": "TI Slim",
+   "model": "TI SLIM 26 HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_INSERTS",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6280.0,
+   "priceTTC": 7599,
+   "variants": [
+    {
+     "color": null,
+     "code": "3055",
+     "priceHT": 6280.0,
+     "priceTTC": 7599
+    }
+   ]
+  },
+  {
+   "base": "7002",
+   "slug": "girolami-furni-14-hybride",
+   "sku": "GIR-7002",
+   "name": "Girolami Furni 14 Hybride bois-pellet",
+   "family": "Furni",
+   "model": "FURNI 14 HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6000.0,
+   "priceTTC": 7260,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7002",
+     "priceHT": 6000.0,
+     "priceTTC": 7260
+    },
+    {
+     "color": "Ivoire",
+     "code": "7002/AV",
+     "priceHT": 6000.0,
+     "priceTTC": 7260
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7002/BO",
+     "priceHT": 6000.0,
+     "priceTTC": 7260
+    },
+    {
+     "color": "Noir",
+     "code": "7002/NE",
+     "priceHT": 6000.0,
+     "priceTTC": 7260
+    }
+   ]
+  },
+  {
+   "base": "7002-P",
+   "slug": "girolami-furni-14-pellet",
+   "sku": "GIR-7002-P",
+   "name": "Girolami Furni 14 Pellet",
+   "family": "Furni",
+   "model": "FURNI 14 PELLET",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4790.0,
+   "priceTTC": 5796,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7002-P",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    },
+    {
+     "color": "Ivoire",
+     "code": "7002-P/AV",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7002-P/BO",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    },
+    {
+     "color": "Noir",
+     "code": "7002-P/NE",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    }
+   ]
+  },
+  {
+   "base": "7003",
+   "slug": "girolami-furni-18-hybride",
+   "sku": "GIR-7003",
+   "name": "Girolami Furni 18 Hybride bois-pellet",
+   "family": "Furni",
+   "model": "FURNI 18 HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6160.0,
+   "priceTTC": 7454,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7003",
+     "priceHT": 6160.0,
+     "priceTTC": 7454
+    },
+    {
+     "color": "Ivoire",
+     "code": "7003/AV",
+     "priceHT": 6160.0,
+     "priceTTC": 7454
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7003/BO",
+     "priceHT": 6160.0,
+     "priceTTC": 7454
+    },
+    {
+     "color": "Noir",
+     "code": "7003/NE",
+     "priceHT": 6160.0,
+     "priceTTC": 7454
+    }
+   ]
+  },
+  {
+   "base": "7003-P",
+   "slug": "girolami-furni-18-pellet",
+   "sku": "GIR-7003-P",
+   "name": "Girolami Furni 18 Pellet",
+   "family": "Furni",
+   "model": "FURNI 18 PELLET",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4950.0,
+   "priceTTC": 5990,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7003-P",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Ivoire",
+     "code": "7003-P/AV",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7003-P/BO",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Noir",
+     "code": "7003-P/NE",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    }
+   ]
+  },
+  {
+   "base": "7004",
+   "slug": "girolami-furni-22-hybride",
+   "sku": "GIR-7004",
+   "name": "Girolami Furni 22 Hybride bois-pellet",
+   "family": "Furni",
+   "model": "FURNI 22 HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6300.0,
+   "priceTTC": 7623,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7004",
+     "priceHT": 6300.0,
+     "priceTTC": 7623
+    },
+    {
+     "color": "Ivoire",
+     "code": "7004/AV",
+     "priceHT": 6300.0,
+     "priceTTC": 7623
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7004/BO",
+     "priceHT": 6300.0,
+     "priceTTC": 7623
+    },
+    {
+     "color": "Noir",
+     "code": "7004/NE",
+     "priceHT": 6300.0,
+     "priceTTC": 7623
+    }
+   ]
+  },
+  {
+   "base": "7004-P",
+   "slug": "girolami-furni-22-pellet",
+   "sku": "GIR-7004-P",
+   "name": "Girolami Furni 22 Pellet",
+   "family": "Furni",
+   "model": "FURNI 22 PELLET",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5100.0,
+   "priceTTC": 6171,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7004-P",
+     "priceHT": 5100.0,
+     "priceTTC": 6171
+    },
+    {
+     "color": "Ivoire",
+     "code": "7004-P/AV",
+     "priceHT": 5100.0,
+     "priceTTC": 6171
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7004-P/BO",
+     "priceHT": 5100.0,
+     "priceTTC": 6171
+    },
+    {
+     "color": "Noir",
+     "code": "7004-P/NE",
+     "priceHT": 5100.0,
+     "priceTTC": 6171
+    }
+   ]
+  },
+  {
+   "base": "7008",
+   "slug": "girolami-soft-14-hybride",
+   "sku": "GIR-7008",
+   "name": "Girolami Soft 14 Hybride bois-pellet",
+   "family": "Soft",
+   "model": "SOFT 14 HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5700.0,
+   "priceTTC": 6897,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7008",
+     "priceHT": 5700.0,
+     "priceTTC": 6897
+    },
+    {
+     "color": "Ivoire",
+     "code": "7008/AV",
+     "priceHT": 5700.0,
+     "priceTTC": 6897
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7008/BO",
+     "priceHT": 5700.0,
+     "priceTTC": 6897
+    },
+    {
+     "color": "Noir",
+     "code": "7008/NE",
+     "priceHT": 5700.0,
+     "priceTTC": 6897
+    }
+   ]
+  },
+  {
+   "base": "7008-P",
+   "slug": "girolami-soft-14-pellet",
+   "sku": "GIR-7008-P",
+   "name": "Girolami Soft 14 Pellet",
+   "family": "Soft",
+   "model": "SOFT 14 PELLET",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4480.0,
+   "priceTTC": 5421,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7008-P",
+     "priceHT": 4480.0,
+     "priceTTC": 5421
+    },
+    {
+     "color": "Ivoire",
+     "code": "7008-P/AV",
+     "priceHT": 4480.0,
+     "priceTTC": 5421
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7008-P/BO",
+     "priceHT": 4480.0,
+     "priceTTC": 5421
+    },
+    {
+     "color": "Noir",
+     "code": "7008-P/NE",
+     "priceHT": 4480.0,
+     "priceTTC": 5421
+    }
+   ]
+  },
+  {
+   "base": "7009",
+   "slug": "girolami-soft-18-hybride",
+   "sku": "GIR-7009",
+   "name": "Girolami Soft 18 Hybride bois-pellet",
+   "family": "Soft",
+   "model": "SOFT 18 HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5870.0,
+   "priceTTC": 7103,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7009",
+     "priceHT": 5870.0,
+     "priceTTC": 7103
+    },
+    {
+     "color": "Ivoire",
+     "code": "7009/AV",
+     "priceHT": 5870.0,
+     "priceTTC": 7103
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7009/BO",
+     "priceHT": 5870.0,
+     "priceTTC": 7103
+    },
+    {
+     "color": "Noir",
+     "code": "7009/NE",
+     "priceHT": 5870.0,
+     "priceTTC": 7103
+    }
+   ]
+  },
+  {
+   "base": "7009-P",
+   "slug": "girolami-soft-18-pellet",
+   "sku": "GIR-7009-P",
+   "name": "Girolami Soft 18 Pellet",
+   "family": "Soft",
+   "model": "SOFT 18 PELLET",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4640.0,
+   "priceTTC": 5614,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7009-P",
+     "priceHT": 4640.0,
+     "priceTTC": 5614
+    },
+    {
+     "color": "Ivoire",
+     "code": "7009-P/AV",
+     "priceHT": 4640.0,
+     "priceTTC": 5614
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7009-P/BO",
+     "priceHT": 4640.0,
+     "priceTTC": 5614
+    },
+    {
+     "color": "Noir",
+     "code": "7009-P/NE",
+     "priceHT": 4640.0,
+     "priceTTC": 5614
+    }
+   ]
+  },
+  {
+   "base": "7010",
+   "slug": "girolami-soft-22-hybride",
+   "sku": "GIR-7010",
+   "name": "Girolami Soft 22 Hybride bois-pellet",
+   "family": "Soft",
+   "model": "SOFT 22 HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6030.0,
+   "priceTTC": 7296,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7010",
+     "priceHT": 6030.0,
+     "priceTTC": 7296
+    },
+    {
+     "color": "Ivoire",
+     "code": "7010/AV",
+     "priceHT": 6030.0,
+     "priceTTC": 7296
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7010/BO",
+     "priceHT": 6030.0,
+     "priceTTC": 7296
+    },
+    {
+     "color": "Noir",
+     "code": "7010/NE",
+     "priceHT": 6030.0,
+     "priceTTC": 7296
+    }
+   ]
+  },
+  {
+   "base": "7010-P",
+   "slug": "girolami-soft-22-pellet",
+   "sku": "GIR-7010-P",
+   "name": "Girolami Soft 22 Pellet",
+   "family": "Soft",
+   "model": "SOFT 22 PELLET",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4790.0,
+   "priceTTC": 5796,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7010-P",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    },
+    {
+     "color": "Ivoire",
+     "code": "7010-P/AV",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7010-P/BO",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    },
+    {
+     "color": "Noir",
+     "code": "7010-P/NE",
+     "priceHT": 4790.0,
+     "priceTTC": 5796
+    }
+   ]
+  },
+  {
+   "base": "7011",
+   "slug": "girolami-soft-slim-14-hybride",
+   "sku": "GIR-7011",
+   "name": "Girolami Soft Slim 14 Hybride bois-pellet",
+   "family": "Soft Slim",
+   "model": "SOFT SLIM 14 HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6330.0,
+   "priceTTC": 7659,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7011",
+     "priceHT": 6330.0,
+     "priceTTC": 7659
+    },
+    {
+     "color": "Ivoire",
+     "code": "7011/AV",
+     "priceHT": 6330.0,
+     "priceTTC": 7659
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7011/BO",
+     "priceHT": 6330.0,
+     "priceTTC": 7659
+    },
+    {
+     "color": "Noir",
+     "code": "7011/NE",
+     "priceHT": 6330.0,
+     "priceTTC": 7659
+    }
+   ]
+  },
+  {
+   "base": "7012",
+   "slug": "girolami-soft-slim-18-hybride",
+   "sku": "GIR-7012",
+   "name": "Girolami Soft Slim 18 Hybride bois-pellet",
+   "family": "Soft Slim",
+   "model": "SOFT SLIM 18 HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6480.0,
+   "priceTTC": 7841,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7012",
+     "priceHT": 6480.0,
+     "priceTTC": 7841
+    },
+    {
+     "color": "Ivoire",
+     "code": "7012/AV",
+     "priceHT": 6480.0,
+     "priceTTC": 7841
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7012/BO",
+     "priceHT": 6480.0,
+     "priceTTC": 7841
+    },
+    {
+     "color": "Noir",
+     "code": "7012/NE",
+     "priceHT": 6480.0,
+     "priceTTC": 7841
+    }
+   ]
+  },
+  {
+   "base": "7013",
+   "slug": "girolami-soft-slim-22-hybride",
+   "sku": "GIR-7013",
+   "name": "Girolami Soft Slim 22 Hybride bois-pellet",
+   "family": "Soft Slim",
+   "model": "SOFT SLIM 22 HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6630.0,
+   "priceTTC": 8022,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7013",
+     "priceHT": 6630.0,
+     "priceTTC": 8022
+    },
+    {
+     "color": "Ivoire",
+     "code": "7013/AV",
+     "priceHT": 6630.0,
+     "priceTTC": 8022
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7013/BO",
+     "priceHT": 6630.0,
+     "priceTTC": 8022
+    },
+    {
+     "color": "Noir",
+     "code": "7013/NE",
+     "priceHT": 6630.0,
+     "priceTTC": 8022
+    }
+   ]
+  },
+  {
+   "base": "7014",
+   "slug": "girolami-soft-slim-26-hybride",
+   "sku": "GIR-7014",
+   "name": "Girolami Soft Slim 26 Hybride bois-pellet",
+   "family": "Soft Slim",
+   "model": "SOFT SLIM 26 HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6790.0,
+   "priceTTC": 8216,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7014",
+     "priceHT": 6790.0,
+     "priceTTC": 8216
+    },
+    {
+     "color": "Ivoire",
+     "code": "7014/AV",
+     "priceHT": 6790.0,
+     "priceTTC": 8216
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7014/BO",
+     "priceHT": 6790.0,
+     "priceTTC": 8216
+    },
+    {
+     "color": "Noir",
+     "code": "7014/NE",
+     "priceHT": 6790.0,
+     "priceTTC": 8216
+    }
+   ]
+  },
+  {
+   "base": "7015",
+   "slug": "girolami-soft-26-hybride",
+   "sku": "GIR-7015",
+   "name": "Girolami Soft 26 Hybride bois-pellet",
+   "family": "Soft",
+   "model": "SOFT 26 HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6180.0,
+   "priceTTC": 7478,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7015",
+     "priceHT": 6180.0,
+     "priceTTC": 7478
+    },
+    {
+     "color": "Ivoire",
+     "code": "7015/AV",
+     "priceHT": 6180.0,
+     "priceTTC": 7478
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7015/BO",
+     "priceHT": 6180.0,
+     "priceTTC": 7478
+    },
+    {
+     "color": "Noir",
+     "code": "7015/NE",
+     "priceHT": 6180.0,
+     "priceTTC": 7478
+    }
+   ]
+  },
+  {
+   "base": "7015-P",
+   "slug": "girolami-soft-26-pellet",
+   "sku": "GIR-7015-P",
+   "name": "Girolami Soft 26 Pellet",
+   "family": "Soft",
+   "model": "SOFT 26 PELLET",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4950.0,
+   "priceTTC": 5990,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7015-P",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Ivoire",
+     "code": "7015-P/AV",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7015-P/BO",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    },
+    {
+     "color": "Noir",
+     "code": "7015-P/NE",
+     "priceHT": 4950.0,
+     "priceTTC": 5990
+    }
+   ]
+  },
+  {
+   "base": "7016",
+   "slug": "girolami-furni-26-hybride",
+   "sku": "GIR-7016",
+   "name": "Girolami Furni 26 Hybride bois-pellet",
+   "family": "Furni",
+   "model": "FURNI 26 HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6470.0,
+   "priceTTC": 7829,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7016",
+     "priceHT": 6470.0,
+     "priceTTC": 7829
+    },
+    {
+     "color": "Ivoire",
+     "code": "7016/AV",
+     "priceHT": 6470.0,
+     "priceTTC": 7829
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7016/BO",
+     "priceHT": 6470.0,
+     "priceTTC": 7829
+    },
+    {
+     "color": "Noir",
+     "code": "7016/NE",
+     "priceHT": 6470.0,
+     "priceTTC": 7829
+    }
+   ]
+  },
+  {
+   "base": "7016-P",
+   "slug": "girolami-furni-26-pellet",
+   "sku": "GIR-7016-P",
+   "name": "Girolami Furni 26 Pellet",
+   "family": "Furni",
+   "model": "FURNI 26 PELLET",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5250.0,
+   "priceTTC": 6352,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7016-P",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    },
+    {
+     "color": "Ivoire",
+     "code": "7016-P/AV",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7016-P/BO",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    },
+    {
+     "color": "Noir",
+     "code": "7016-P/NE",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    }
+   ]
+  },
+  {
+   "base": "7020",
+   "slug": "girolami-soft-maiolica-14",
+   "sku": "GIR-7020",
+   "name": "Girolami Soft Maiolica 14",
+   "family": "Soft Maiolica",
+   "model": "SOFT MAIOLICA 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6330.0,
+   "priceTTC": 7659,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7020",
+     "priceHT": 6330.0,
+     "priceTTC": 7659
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7020/BO",
+     "priceHT": 6330.0,
+     "priceTTC": 7659
+    },
+    {
+     "color": "Noir",
+     "code": "7020/NE",
+     "priceHT": 6330.0,
+     "priceTTC": 7659
+    }
+   ]
+  },
+  {
+   "base": "7020-P",
+   "slug": "girolami-soft-maiolica-14-pellet",
+   "sku": "GIR-7020-P",
+   "name": "Girolami Soft Maiolica 14 Pellet",
+   "family": "Soft Maiolica",
+   "model": "SOFT MAIOLICA 14",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5250.0,
+   "priceTTC": 6352,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7020-P",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7020-P/BO",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    },
+    {
+     "color": "Noir",
+     "code": "7020-P/NE",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    }
+   ]
+  },
+  {
+   "base": "7021",
+   "slug": "girolami-soft-maiolica-18",
+   "sku": "GIR-7021",
+   "name": "Girolami Soft Maiolica 18",
+   "family": "Soft Maiolica",
+   "model": "SOFT MAIOLICA 18",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6490.0,
+   "priceTTC": 7853,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7021",
+     "priceHT": 6490.0,
+     "priceTTC": 7853
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7021/BO",
+     "priceHT": 6490.0,
+     "priceTTC": 7853
+    },
+    {
+     "color": "Noir",
+     "code": "7021/NE",
+     "priceHT": 6490.0,
+     "priceTTC": 7853
+    }
+   ]
+  },
+  {
+   "base": "7021-P",
+   "slug": "girolami-soft-maiolica-18-pellet",
+   "sku": "GIR-7021-P",
+   "name": "Girolami Soft Maiolica 18 Pellet",
+   "family": "Soft Maiolica",
+   "model": "SOFT MAIOLICA 18",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5400.0,
+   "priceTTC": 6534,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7021-P",
+     "priceHT": 5400.0,
+     "priceTTC": 6534
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7021-P/BO",
+     "priceHT": 5400.0,
+     "priceTTC": 6534
+    },
+    {
+     "color": "Noir",
+     "code": "7021-P/NE",
+     "priceHT": 5400.0,
+     "priceTTC": 6534
+    }
+   ]
+  },
+  {
+   "base": "7022",
+   "slug": "girolami-soft-maiolica-22",
+   "sku": "GIR-7022",
+   "name": "Girolami Soft Maiolica 22",
+   "family": "Soft Maiolica",
+   "model": "SOFT MAIOLICA 22",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6650.0,
+   "priceTTC": 8046,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7022",
+     "priceHT": 6650.0,
+     "priceTTC": 8046
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7022/BO",
+     "priceHT": 6650.0,
+     "priceTTC": 8046
+    },
+    {
+     "color": "Noir",
+     "code": "7022/NE",
+     "priceHT": 6650.0,
+     "priceTTC": 8046
+    }
+   ]
+  },
+  {
+   "base": "7022-P",
+   "slug": "girolami-soft-maiolica-22-pellet",
+   "sku": "GIR-7022-P",
+   "name": "Girolami Soft Maiolica 22 Pellet",
+   "family": "Soft Maiolica",
+   "model": "SOFT MAIOLICA 22",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5560.0,
+   "priceTTC": 6728,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7022-P",
+     "priceHT": 5560.0,
+     "priceTTC": 6728
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7022-P/BO",
+     "priceHT": 5560.0,
+     "priceTTC": 6728
+    },
+    {
+     "color": "Noir",
+     "code": "7022-P/NE",
+     "priceHT": 5560.0,
+     "priceTTC": 6728
+    }
+   ]
+  },
+  {
+   "base": "7023",
+   "slug": "girolami-soft-maiolica-26",
+   "sku": "GIR-7023",
+   "name": "Girolami Soft Maiolica 26",
+   "family": "Soft Maiolica",
+   "model": "SOFT MAIOLICA 26",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6800.0,
+   "priceTTC": 8228,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7023",
+     "priceHT": 6800.0,
+     "priceTTC": 8228
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7023/BO",
+     "priceHT": 6800.0,
+     "priceTTC": 8228
+    },
+    {
+     "color": "Noir",
+     "code": "7023/NE",
+     "priceHT": 6800.0,
+     "priceTTC": 8228
+    }
+   ]
+  },
+  {
+   "base": "7023-P",
+   "slug": "girolami-soft-maiolica-26-pellet",
+   "sku": "GIR-7023-P",
+   "name": "Girolami Soft Maiolica 26 Pellet",
+   "family": "Soft Maiolica",
+   "model": "SOFT MAIOLICA 26",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5700.0,
+   "priceTTC": 6897,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7023-P",
+     "priceHT": 5700.0,
+     "priceTTC": 6897
+    },
+    {
+     "color": "Bordeaux",
+     "code": "7023-P/BO",
+     "priceHT": 5700.0,
+     "priceTTC": 6897
+    },
+    {
+     "color": "Noir",
+     "code": "7023-P/NE",
+     "priceHT": 5700.0,
+     "priceTTC": 6897
+    }
+   ]
+  },
+  {
+   "base": "7030",
+   "slug": "girolami-edge-14-hybride",
+   "sku": "GIR-7030",
+   "name": "Girolami Edge 14 Hybride bois-pellet",
+   "family": "Edge",
+   "model": "EDGE 14 HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6390.0,
+   "priceTTC": 7732,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7030",
+     "priceHT": 6390.0,
+     "priceTTC": 7732
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7030/GR",
+     "priceHT": 6390.0,
+     "priceTTC": 7732
+    }
+   ]
+  },
+  {
+   "base": "7030-P",
+   "slug": "girolami-edge-14-pellet",
+   "sku": "GIR-7030-P",
+   "name": "Girolami Edge 14 Pellet",
+   "family": "Edge",
+   "model": "EDGE 14 PELLET",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5190.0,
+   "priceTTC": 6280,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7030-P",
+     "priceHT": 5190.0,
+     "priceTTC": 6280
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7030-P/GR",
+     "priceHT": 5190.0,
+     "priceTTC": 6280
+    }
+   ]
+  },
+  {
+   "base": "7031",
+   "slug": "girolami-edge-18-hybride",
+   "sku": "GIR-7031",
+   "name": "Girolami Edge 18 Hybride bois-pellet",
+   "family": "Edge",
+   "model": "EDGE 18 HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6540.0,
+   "priceTTC": 7913,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7031",
+     "priceHT": 6540.0,
+     "priceTTC": 7913
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7031/GR",
+     "priceHT": 6540.0,
+     "priceTTC": 7913
+    }
+   ]
+  },
+  {
+   "base": "7031-P",
+   "slug": "girolami-edge-18-pellet",
+   "sku": "GIR-7031-P",
+   "name": "Girolami Edge 18 Pellet",
+   "family": "Edge",
+   "model": "EDGE18 PELLET",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5350.0,
+   "priceTTC": 6474,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7031-P",
+     "priceHT": 5350.0,
+     "priceTTC": 6474
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7031-P/GR",
+     "priceHT": 5350.0,
+     "priceTTC": 6474
+    }
+   ]
+  },
+  {
+   "base": "7032",
+   "slug": "girolami-edge-22-hybride",
+   "sku": "GIR-7032",
+   "name": "Girolami Edge 22 Hybride bois-pellet",
+   "family": "Edge",
+   "model": "EDGE 22 HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6700.0,
+   "priceTTC": 8107,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7032",
+     "priceHT": 6700.0,
+     "priceTTC": 8107
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7032/GR",
+     "priceHT": 6700.0,
+     "priceTTC": 8107
+    }
+   ]
+  },
+  {
+   "base": "7032-P",
+   "slug": "girolami-edge-22-pellet",
+   "sku": "GIR-7032-P",
+   "name": "Girolami Edge 22 Pellet",
+   "family": "Edge",
+   "model": "EDGE 22 PELLET",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5500.0,
+   "priceTTC": 6655,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7032-P",
+     "priceHT": 5500.0,
+     "priceTTC": 6655
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7032-P/GR",
+     "priceHT": 5500.0,
+     "priceTTC": 6655
+    }
+   ]
+  },
+  {
+   "base": "7033",
+   "slug": "girolami-edge-26-hybride",
+   "sku": "GIR-7033",
+   "name": "Girolami Edge 26 Hybride bois-pellet",
+   "family": "Edge",
+   "model": "EDGE 26 HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6850.0,
+   "priceTTC": 8288,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7033",
+     "priceHT": 6850.0,
+     "priceTTC": 8288
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7033/GR",
+     "priceHT": 6850.0,
+     "priceTTC": 8288
+    }
+   ]
+  },
+  {
+   "base": "7033-P",
+   "slug": "girolami-edge-26-pellet",
+   "sku": "GIR-7033-P",
+   "name": "Girolami Edge 26 Pellet",
+   "family": "Edge",
+   "model": "EDGE 26 PELLET",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5650.0,
+   "priceTTC": 6836,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7033-P",
+     "priceHT": 5650.0,
+     "priceTTC": 6836
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7033-P/GR",
+     "priceHT": 5650.0,
+     "priceTTC": 6836
+    }
+   ]
+  },
+  {
+   "base": "7040",
+   "slug": "girolami-sharp-14-hybride",
+   "sku": "GIR-7040",
+   "name": "Girolami Sharp 14 Hybride bois-pellet",
+   "family": "Sharp",
+   "model": "SHARP 14 HYBRID",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5600.0,
+   "priceTTC": 6776,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7040",
+     "priceHT": 5600.0,
+     "priceTTC": 6776
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7040/GR",
+     "priceHT": 5600.0,
+     "priceTTC": 6776
+    },
+    {
+     "color": "Noir",
+     "code": "7040/NE",
+     "priceHT": 5600.0,
+     "priceTTC": 6776
+    },
+    {
+     "color": "Bronze",
+     "code": "7040/DB",
+     "priceHT": 5600.0,
+     "priceTTC": 6776
+    }
+   ]
+  },
+  {
+   "base": "7040-P",
+   "slug": "girolami-sharp-14-pellet",
+   "sku": "GIR-7040-P",
+   "name": "Girolami Sharp 14 Pellet",
+   "family": "Sharp",
+   "model": "SHARP 14 PELLET",
+   "powerClass": 14,
+   "power": 14,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 15.02,
+   "powerNomKW": 13.47,
+   "efficiency": 96.44,
+   "heatedVolumeM3": 375,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4400.0,
+   "priceTTC": 5324,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7040-P",
+     "priceHT": 4400.0,
+     "priceTTC": 5324
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7040-P/GR",
+     "priceHT": 4400.0,
+     "priceTTC": 5324
+    },
+    {
+     "color": "Noir",
+     "code": "7040-P/NE",
+     "priceHT": 4400.0,
+     "priceTTC": 5324
+    },
+    {
+     "color": "Bronze",
+     "code": "7040-P/DB",
+     "priceHT": 4400.0,
+     "priceTTC": 5324
+    }
+   ]
+  },
+  {
+   "base": "7041",
+   "slug": "girolami-sharp-18-hybride",
+   "sku": "GIR-7041",
+   "name": "Girolami Sharp 18 Hybride bois-pellet",
+   "family": "Sharp",
+   "model": "SHARP 18 HYBRID",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5770.0,
+   "priceTTC": 6982,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7041",
+     "priceHT": 5770.0,
+     "priceTTC": 6982
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7041/GR",
+     "priceHT": 5770.0,
+     "priceTTC": 6982
+    },
+    {
+     "color": "Noir",
+     "code": "7041/NE",
+     "priceHT": 5770.0,
+     "priceTTC": 6982
+    },
+    {
+     "color": "Bronze",
+     "code": "7041/DB",
+     "priceHT": 5770.0,
+     "priceTTC": 6982
+    }
+   ]
+  },
+  {
+   "base": "7041-P",
+   "slug": "girolami-sharp-18-pellet",
+   "sku": "GIR-7041-P",
+   "name": "Girolami Sharp 18 Pellet",
+   "family": "Sharp",
+   "model": "SHARP 18 PELLET",
+   "powerClass": 18,
+   "power": 18,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 18.1,
+   "powerNomKW": 15.92,
+   "efficiency": 96.22,
+   "heatedVolumeM3": 452,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4560.0,
+   "priceTTC": 5518,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7041-P",
+     "priceHT": 4560.0,
+     "priceTTC": 5518
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7041-P/GR",
+     "priceHT": 4560.0,
+     "priceTTC": 5518
+    },
+    {
+     "color": "Noir",
+     "code": "7041-P/NE",
+     "priceHT": 4560.0,
+     "priceTTC": 5518
+    },
+    {
+     "color": "Bronze",
+     "code": "7041-P/DB",
+     "priceHT": 4560.0,
+     "priceTTC": 5518
+    }
+   ]
+  },
+  {
+   "base": "7042",
+   "slug": "girolami-sharp-22-hybride",
+   "sku": "GIR-7042",
+   "name": "Girolami Sharp 22 Hybride bois-pellet",
+   "family": "Sharp",
+   "model": "SHARP 22 HYBRID",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 5920.0,
+   "priceTTC": 7163,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7042",
+     "priceHT": 5920.0,
+     "priceTTC": 7163
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7042/GR",
+     "priceHT": 5920.0,
+     "priceTTC": 7163
+    },
+    {
+     "color": "Noir",
+     "code": "7042/NE",
+     "priceHT": 5920.0,
+     "priceTTC": 7163
+    },
+    {
+     "color": "Bronze",
+     "code": "7042/DB",
+     "priceHT": 5920.0,
+     "priceTTC": 7163
+    }
+   ]
+  },
+  {
+   "base": "7042-P",
+   "slug": "girolami-sharp-22-pellet",
+   "sku": "GIR-7042-P",
+   "name": "Girolami Sharp 22 Pellet",
+   "family": "Sharp",
+   "model": "SHARP 22 PELLET",
+   "powerClass": 22,
+   "power": 22,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 22.07,
+   "powerNomKW": 19.09,
+   "efficiency": 95.93,
+   "heatedVolumeM3": 551,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4720.0,
+   "priceTTC": 5711,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7042-P",
+     "priceHT": 4720.0,
+     "priceTTC": 5711
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7042-P/GR",
+     "priceHT": 4720.0,
+     "priceTTC": 5711
+    },
+    {
+     "color": "Noir",
+     "code": "7042-P/NE",
+     "priceHT": 4720.0,
+     "priceTTC": 5711
+    },
+    {
+     "color": "Bronze",
+     "code": "7042-P/DB",
+     "priceHT": 4720.0,
+     "priceTTC": 5711
+    }
+   ]
+  },
+  {
+   "base": "7043",
+   "slug": "girolami-sharp-26-hybride",
+   "sku": "GIR-7043",
+   "name": "Girolami Sharp 26 Hybride bois-pellet",
+   "family": "Sharp",
+   "model": "SHARP 26 HYBRID",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hybride",
+   "category": "HYDRO_STOVES",
+   "combustible": "hybrid",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 6080.0,
+   "priceTTC": 7357,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7043",
+     "priceHT": 6080.0,
+     "priceTTC": 7357
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7043/GR",
+     "priceHT": 6080.0,
+     "priceTTC": 7357
+    },
+    {
+     "color": "Noir",
+     "code": "7043/NE",
+     "priceHT": 6080.0,
+     "priceTTC": 7357
+    },
+    {
+     "color": "Bronze",
+     "code": "7043/DB",
+     "priceHT": 6080.0,
+     "priceTTC": 7357
+    }
+   ]
+  },
+  {
+   "base": "7043-P",
+   "slug": "girolami-sharp-26-pellet",
+   "sku": "GIR-7043-P",
+   "name": "Girolami Sharp 26 Pellet",
+   "family": "Sharp",
+   "model": "SHARP 26 PELLET",
+   "powerClass": 26,
+   "power": 26,
+   "productType": "hydro",
+   "category": "HYDRO_STOVES",
+   "combustible": "pellet",
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": true,
+   "isAirtight": false,
+   "isInsert": false,
+   "powerMaxKW": 24.06,
+   "powerNomKW": 20.67,
+   "efficiency": 95.78,
+   "heatedVolumeM3": 584,
+   "hopperCapacity": 25,
+   "weight": 250,
+   "smokeOutletMm": 100,
+   "waterL": 43,
+   "priceHT": 4870.0,
+   "priceTTC": 5893,
+   "variants": [
+    {
+     "color": "Blanc",
+     "code": "7043-P",
+     "priceHT": 4870.0,
+     "priceTTC": 5893
+    },
+    {
+     "color": "Gris anthracite",
+     "code": "7043-P/GR",
+     "priceHT": 4870.0,
+     "priceTTC": 5893
+    },
+    {
+     "color": "Noir",
+     "code": "7043-P/NE",
+     "priceHT": 4870.0,
+     "priceTTC": 5893
+    },
+    {
+     "color": "Bronze",
+     "code": "7043-P/DB",
+     "priceHT": 4870.0,
+     "priceTTC": 5893
+    }
+   ]
+  },
+  {
+   "base": "3015",
+   "slug": "girolami-alfa-bio",
+   "sku": "GIR-3015",
+   "name": "Girolami Alfa Bio",
+   "family": "Alfa Bio",
+   "model": "ALFA BIO",
+   "powerClass": null,
+   "power": 11,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 10.7,
+   "powerNomKW": null,
+   "efficiency": 85.1,
+   "heatedVolumeM3": null,
+   "hopperCapacity": null,
+   "weight": null,
+   "smokeOutletMm": null,
+   "waterL": null,
+   "priceHT": 3860.0,
+   "priceTTC": 4671,
+   "variants": [
+    {
+     "color": null,
+     "code": "3015",
+     "priceHT": 3860.0,
+     "priceTTC": 4671
+    }
+   ]
+  },
+  {
+   "base": "8140",
+   "slug": "girolami-grid-verticale-9",
+   "sku": "GIR-8140",
+   "name": "Girolami Grid Verticale 9",
+   "family": "Grid Verticale",
+   "model": "GRID VERTICALE 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5000.0,
+   "priceTTC": 6050,
+   "variants": [
+    {
+     "color": null,
+     "code": "8140",
+     "priceHT": 5000.0,
+     "priceTTC": 6050
+    }
+   ]
+  },
+  {
+   "base": "8141",
+   "slug": "girolami-grid-verticale-9-canalisable",
+   "sku": "GIR-8141",
+   "name": "Girolami Grid Verticale 9 canalisable",
+   "family": "Grid Verticale",
+   "model": "GRID VERTICALE 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5300.0,
+   "priceTTC": 6413,
+   "variants": [
+    {
+     "color": null,
+     "code": "8141",
+     "priceHT": 5300.0,
+     "priceTTC": 6413
+    }
+   ]
+  },
+  {
+   "base": "8142",
+   "slug": "girolami-grid-verticale-12",
+   "sku": "GIR-8142",
+   "name": "Girolami Grid Verticale 12",
+   "family": "Grid Verticale",
+   "model": "GRID VERTICALE 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5150.0,
+   "priceTTC": 6232,
+   "variants": [
+    {
+     "color": null,
+     "code": "8142",
+     "priceHT": 5150.0,
+     "priceTTC": 6232
+    }
+   ]
+  },
+  {
+   "base": "8143",
+   "slug": "girolami-grid-verticale-12-canalisable",
+   "sku": "GIR-8143",
+   "name": "Girolami Grid Verticale 12 canalisable",
+   "family": "Grid Verticale",
+   "model": "GRID VERTICALE 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5460.0,
+   "priceTTC": 6607,
+   "variants": [
+    {
+     "color": null,
+     "code": "8143",
+     "priceHT": 5460.0,
+     "priceTTC": 6607
+    }
+   ]
+  },
+  {
+   "base": "8144",
+   "slug": "girolami-grid-panorama-9",
+   "sku": "GIR-8144",
+   "name": "Girolami Grid Panorama 9",
+   "family": "Grid Panorama",
+   "model": "GRID PANORAMA 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5100.0,
+   "priceTTC": 6171,
+   "variants": [
+    {
+     "color": null,
+     "code": "8144",
+     "priceHT": 5100.0,
+     "priceTTC": 6171
+    }
+   ]
+  },
+  {
+   "base": "8145",
+   "slug": "girolami-grid-panorama-9-canalisable",
+   "sku": "GIR-8145",
+   "name": "Girolami Grid Panorama 9 canalisable",
+   "family": "Grid Panorama",
+   "model": "GRID PANORAMA 9",
+   "powerClass": 9,
+   "power": 9,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 8.65,
+   "powerNomKW": 8.31,
+   "efficiency": 96.01,
+   "heatedVolumeM3": 276,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5400.0,
+   "priceTTC": 6534,
+   "variants": [
+    {
+     "color": null,
+     "code": "8145",
+     "priceHT": 5400.0,
+     "priceTTC": 6534
+    }
+   ]
+  },
+  {
+   "base": "8146",
+   "slug": "girolami-grid-panorama-12",
+   "sku": "GIR-8146",
+   "name": "Girolami Grid Panorama 12",
+   "family": "Grid Panorama",
+   "model": "GRID PANORAMA 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": false,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5250.0,
+   "priceTTC": 6352,
+   "variants": [
+    {
+     "color": null,
+     "code": "8146",
+     "priceHT": 5250.0,
+     "priceTTC": 6352
+    }
+   ]
+  },
+  {
+   "base": "8147",
+   "slug": "girolami-grid-panorama-12-canalisable",
+   "sku": "GIR-8147",
+   "name": "Girolami Grid Panorama 12 canalisable",
+   "family": "Grid Panorama",
+   "model": "GRID PANORAMA 12",
+   "powerClass": 12,
+   "power": 12,
+   "productType": "insert",
+   "category": "PELLET_INSERTS",
+   "combustible": null,
+   "isCanalizable": true,
+   "isCoassiale": false,
+   "isHydro": false,
+   "isAirtight": false,
+   "isInsert": true,
+   "powerMaxKW": 11.26,
+   "powerNomKW": 10.84,
+   "efficiency": 96.21,
+   "heatedVolumeM3": 310,
+   "hopperCapacity": 30,
+   "weight": 170,
+   "smokeOutletMm": 130,
+   "waterL": null,
+   "priceHT": 5560.0,
+   "priceTTC": 6728,
+   "variants": [
+    {
+     "color": null,
+     "code": "8147",
+     "priceHT": 5560.0,
+     "priceTTC": 6728
+    }
+   ]
+  }
+ ]
+}

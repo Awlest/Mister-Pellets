@@ -12,7 +12,6 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { ProductCard } from "@/components/product/ProductCard";
-import { AddToCartButton } from "@/components/product/AddToCartButton";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 
 export const metadata = {
@@ -138,15 +137,6 @@ export default function StyleguidePage() {
                 <Button variant="outline"><ShoppingBag /> Boutique</Button>
                 <Button variant="secondary"><Calendar /> Prendre RDV</Button>
               </div>
-            </div>
-            <div>
-              <span className="text-xs uppercase tracking-wider text-mp-ink-soft block mb-3">AddToCartButton (Phase 5 wiring)</span>
-              <AddToCartButton
-                productId="demo-id"
-                productName="Edilkamin Blade 9kW"
-                productBrand="Edilkamin"
-                productPriceTTC={2890}
-              />
             </div>
           </div>
         </Section>

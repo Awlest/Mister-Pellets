@@ -1,0 +1,286 @@
+
+================================================================================
+AIR_STOVES
+================================================================================
+  p24 base=8100       'TWIN MINI 6' PWR=None/None EFF=None HT=4950.0 []
+        colors[1]: Noir=8100
+  p26 base=8130       'TWIN SLIM 9' PWR=8.65/None EFF=None HT=5100.0 []
+        colors[1]: Noir=8130
+  p26 base=8131       'TWIN SLIM 12' PWR=11.26/None EFF=None HT=5250.0 []
+        colors[1]: Noir=8131
+  p26 base=8132       'TWIN SLIM 9' PWR=8.65/None EFF=None HT=5400.0 [CANAL]
+        colors[1]: Noir=8132
+  p26 base=8133       'TWIN SLIM 12' PWR=11.26/None EFF=None HT=5560.0 [CANAL]
+        colors[1]: Noir=8133
+  p28 base=8130       'TWIN SLIM 9' PWR=8.65/8.31 EFF=96.01 HT=5350.0 []
+        colors[3]: Corten=8130-SC, Ivoire=8130-SA, Gris anthracite=8130-SG
+  p28 base=8131       'TWIN SLIM 12' PWR=11.26/10.84 EFF=96.21 HT=5500.0 []
+        colors[3]: Corten=8131-SC, Ivoire=8131-SA, Gris anthracite=8131-SG
+  p28 base=8132       'TWIN SLIM 9' PWR=8.65/8.31 EFF=96.01 HT=5660.0 [CANAL]
+        colors[3]: Corten=8132-SC, Ivoire=8132-SA, Gris anthracite=8132-SG
+  p28 base=8133       'TWIN SLIM 12' PWR=11.26/10.84 EFF=96.21 HT=5820.0 [CANAL]
+        colors[3]: Corten=8133-SC, Ivoire=8133-SA, Gris anthracite=8133-SG
+  p30 base=8050       'ROUND 9' PWR=8.65/None EFF=96.01 HT=4030.0 []
+        colors[5]: Blanc=8050, Bronze=8050/DB, Noir=8050/NE, Vert=8050/VE, Gris anthracite=8050/GR
+  p30 base=8051       'ROUND 12' PWR=11.26/None EFF=96.21 HT=4200.0 []
+        colors[5]: Blanc=8051, Bronze=8051/DB, Noir=8051/NE, Vert=8051/VE, Gris anthracite=8051/GR
+  p30 base=8052       'ROUND 12 CANALIZZATA' PWR=11.26/None EFF=96.21 HT=4500.0 [CANAL]
+        colors[5]: Blanc=8052, Bronze=8052/DB, Noir=8052/NE, Vert=8052/VE, Gris anthracite=8052/GR
+  p30 base=8053       'ROUND 14' PWR=13.65/None EFF=95.46 HT=4340.0 []
+        colors[5]: Blanc=8053, Bronze=8053/DB, Noir=8053/NE, Vert=8053/VE, Gris anthracite=8053/GR
+  p30 base=8054       'ROUND 14 CANALIZZATA' PWR=13.65/None EFF=95.46 HT=4650.0 [CANAL]
+        colors[5]: Blanc=8054, Bronze=8054/DB, Noir=8054/NE, Vert=8054/VE, Gris anthracite=8054/GR
+  p32 base=8050C      'ROUND 9 COASSIALE' PWR=8.65/None EFF=96.01 HT=4340.0 [COAX]
+        colors[5]: Blanc=8050C, Bronze=8050C/DB, Noir=8050C/NE, Vert=8050C/VE, Gris anthracite=8050C/GR
+  p32 base=8051C      'ROUND 12 COASSIALE' PWR=11.26/None EFF=96.21 HT=4500.0 [COAX]
+        colors[5]: Blanc=8051C, Bronze=8051C/DB, Noir=8051C/NE, Vert=8051C/VE, Gris anthracite=8051C/GR
+  p32 base=8052C      'ROUND 12 CANALIZZATA' PWR=11.26/None EFF=96.21 HT=4800.0 [CANAL,COAX]
+        colors[5]: Blanc=8052C, Bronze=8052C/DB, Noir=8052C/NE, Vert=8052C/VE, Gris anthracite=8052C/GR
+  p32 base=8053C      'ROUND 14 COASSIALE' PWR=13.65/None EFF=95.46 HT=4650.0 [COAX]
+        colors[5]: Blanc=8053C, Bronze=8053C/DB, Noir=8053C/NE, Vert=8053C/VE, Gris anthracite=8053C/GR
+  p32 base=8054C      'ROUND 14 CANALIZZATA' PWR=13.65/None EFF=95.46 HT=4950.0 [CANAL,COAX]
+        colors[5]: Blanc=8054C, Bronze=8054C/DB, Noir=8054C/NE, Vert=8054C/VE, Gris anthracite=8054C/GR
+  p34 base=8060       'SLIM 9' PWR=8.65/None EFF=96.01 HT=3880.0 []
+        colors[5]: Blanc=8060, Bronze=8060/DB, Noir=8060/NE, Vert=8060/VE, Gris anthracite=8060/GR
+  p34 base=8061       'SLIM 12' PWR=11.26/None EFF=96.21 HT=4030.0 []
+        colors[5]: Blanc=8061, Bronze=8061/DB, Noir=8061/NE, Vert=8061/VE, Gris anthracite=8061/GR
+  p34 base=8062       'SLIM 12' PWR=11.26/None EFF=96.21 HT=4340.0 [CANAL]
+        colors[5]: Blanc=8062, Bronze=8062/DB, Noir=8062/NE, Vert=8062/VE, Gris anthracite=8062/GR
+  p34 base=8063       'SLIM 14' PWR=13.65/None EFF=95.46 HT=4200.0 []
+        colors[5]: Blanc=8063, Bronze=8063/DB, Noir=8063/NE, Vert=8063/VE, Gris anthracite=8063/GR
+  p34 base=8064       'SLIM 14' PWR=13.65/None EFF=95.46 HT=4490.0 [CANAL]
+        colors[5]: Blanc=8064, Bronze=8064/DB, Noir=8064/NE, Vert=8064/VE, Gris anthracite=8064/GR
+  p36 base=8060C      'SLIM 9 COASSIALE' PWR=8.65/None EFF=96.01 HT=4200.0 [COAX]
+        colors[5]: Blanc=8060C, Bronze=8060C/DB, Noir=8060C/NE, Vert=8060C/VE, Gris anthracite=8060C/GR
+  p36 base=8061C      'SLIM 12 COASSIALE' PWR=11.26/None EFF=96.21 HT=4340.0 [COAX]
+        colors[5]: Blanc=8061C, Bronze=8061C/DB, Noir=8061C/NE, Vert=8061C/VE, Gris anthracite=8061C/GR
+  p36 base=8062C      'SLIM 12' PWR=11.26/None EFF=96.21 HT=4650.0 [CANAL,COAX]
+        colors[5]: Blanc=8062C, Bronze=8062C/DB, Noir=8062C/NE, Vert=8062C/VE, Gris anthracite=8062C/GR
+  p36 base=8063C      'SLIM 14 COASSIALE' PWR=13.65/None EFF=95.46 HT=4500.0 [COAX]
+        colors[5]: Blanc=8063C, Bronze=8063C/DB, Noir=8063C/NE, Vert=8063C/VE, Gris anthracite=8063C/GR
+  p36 base=8064C      'SLIM 14' PWR=13.65/None EFF=95.46 HT=4800.0 [CANAL,COAX]
+        colors[5]: Blanc=8064C, Bronze=8064C/DB, Noir=8064C/NE, Vert=8064C/VE, Gris anthracite=8064C/GR
+  p38 base=8030       'CURVY 9' PWR=8.65/None EFF=96.01 HT=4130.0 []
+        colors[2]: Blanc=8030, Gris anthracite=8030/GR
+  p38 base=8031       'CURVY 12' PWR=11.26/None EFF=96.21 HT=4300.0 []
+        colors[2]: Blanc=8031, Gris anthracite=8031/GR
+  p38 base=8032       'CURVY 12' PWR=11.26/None EFF=96.21 HT=4600.0 [CANAL]
+        colors[2]: Blanc=8032, Gris anthracite=8032/GR
+  p38 base=8033       'CURVY 14' PWR=13.65/None EFF=95.46 HT=4450.0 []
+        colors[2]: Blanc=8033, Gris anthracite=8033/GR
+  p38 base=8034       'CURVY 14' PWR=13.65/None EFF=95.46 HT=4750.0 [CANAL]
+        colors[2]: Blanc=8034, Gris anthracite=8034/GR
+  p40 base=8040       'FLOW 9' PWR=8.65/None EFF=96.01 HT=3620.0 []
+        colors[4]: Blanc=8040, Gris anthracite=8040/GR, Noir=8040/NE, Bronze=8040/DB
+  p40 base=8041       'FLOW 12' PWR=11.26/None EFF=96.21 HT=3780.0 []
+        colors[4]: Blanc=8041, Gris anthracite=8041/GR, Noir=8041/NE, Bronze=8041/DB
+  p40 base=8042       'FLOW 12' PWR=11.26/None EFF=96.21 HT=4080.0 [CANAL]
+        colors[4]: Blanc=8042, Gris anthracite=8042/GR, Noir=8042/NE, Bronze=8042/DB
+  p40 base=8043       'FLOW 14' PWR=13.65/None EFF=95.46 HT=4030.0 []
+        colors[4]: Blanc=8043, Gris anthracite=8043/GR, Noir=8043/NE, Bronze=8043/DB
+  p40 base=8044       'FLOW 14' PWR=13.65/None EFF=95.46 HT=4340.0 [CANAL]
+        colors[4]: Blanc=8044, Gris anthracite=8044/GR, Noir=8044/NE, Bronze=8044/DB
+  p42 base=8070       'MINI 6' PWR=6.02/None EFF=95.8 HT=3300.0 []
+        colors[5]: Blanc=8070, Bronze=8070/DB, Noir=8070/NE, Vert=8070/VE, Gris anthracite=8070/GR
+  p42 base=8071       'MINI 9' PWR=8.65/None EFF=96.01 HT=3470.0 []
+        colors[5]: Blanc=8071, Bronze=8071/DB, Noir=8071/NE, Vert=8071/VE, Gris anthracite=8071/GR
+  p44 base=8020       'VERT MAIOLICA 9' PWR=8.65/None EFF=96.01 HT=4340.0 []
+        colors[3]: Blanc=8020, Bordeaux=8020/BO, Noir=8020/NE
+  p44 base=8021       'VERT MAIOLICA 12' PWR=11.26/None EFF=96.21 HT=4500.0 []
+        colors[3]: Blanc=8021, Bordeaux=8021/BO, Noir=8021/NE
+  p44 base=8022       'VERT MAIOLICA 12' PWR=11.26/None EFF=96.21 HT=4800.0 [CANAL]
+        colors[3]: Blanc=8022, Bordeaux=8022/BO, Noir=8022/NE
+  p44 base=8023       'VERT MAIOLICA 14' PWR=13.65/None EFF=95.46 HT=4640.0 []
+        colors[3]: Blanc=8023, Bordeaux=8023/BO, Noir=8023/NE
+  p44 base=8024       'VERT MAIOLICA 14' PWR=13.65/None EFF=95.46 HT=4950.0 [CANAL]
+        colors[3]: Blanc=8024, Bordeaux=8024/BO, Noir=8024/NE
+  p46 base=8010       'VERT 9' PWR=8.65/None EFF=96.01 HT=3700.0 []
+        colors[3]: Blanc=8010, Bordeaux=8010/BO, Noir=8010/NE
+  p46 base=8011       'VERT 12' PWR=11.26/None EFF=96.21 HT=3860.0 []
+        colors[3]: Blanc=8011, Bordeaux=8011/BO, Noir=8011/NE
+  p46 base=8012       'VERT 12' PWR=11.26/None EFF=96.21 HT=4160.0 [CANAL]
+        colors[3]: Blanc=8012, Bordeaux=8012/BO, Noir=8012/NE
+  p46 base=8013       'VERT 14' PWR=13.65/None EFF=95.46 HT=4000.0 []
+        colors[3]: Blanc=8013, Bordeaux=8013/BO, Noir=8013/NE
+  p46 base=8014       'VERT 14' PWR=13.65/None EFF=95.46 HT=4320.0 [CANAL]
+        colors[3]: Blanc=8014, Bordeaux=8014/BO, Noir=8014/NE
+  p48 base=8000       'SPLIT 9' PWR=8.65/None EFF=96.01 HT=3520.0 []
+        colors[3]: Blanc=8000/BNNE, Bordeaux=8000/BONE, Noir=8000/NE
+  p48 base=8001       'SPLIT 12' PWR=11.26/None EFF=96.21 HT=3670.0 []
+        colors[3]: Blanc=8001/BNNE, Bordeaux=8001/BONE, Noir=8001/NE
+  p48 base=8002       'SPLIT 12' PWR=11.26/None EFF=96.21 HT=3980.0 [CANAL]
+        colors[3]: Blanc=8002/BNNE, Bordeaux=8002/BONE, Noir=8002/NE
+  p48 base=8003       'SPLIT 14' PWR=13.65/None EFF=95.46 HT=3830.0 []
+        colors[3]: Blanc=8003/BNNE, Bordeaux=8003/BONE, Noir=8003/NE
+  p48 base=8004       'SPLIT 14' PWR=13.65/None EFF=95.46 HT=4130.0 [CANAL]
+        colors[3]: Blanc=8004/BNNE, Bordeaux=8004/BONE, Noir=8004/NE
+
+================================================================================
+PELLET_INSERTS
+================================================================================
+  p58 base=8140       'GRID VERTICALE 9' PWR=8.65/8.31 EFF=None HT=5000.0 []
+        colors[1]: None=8140
+  p58 base=8141       'GRID VERTICALE 9' PWR=8.65/8.31 EFF=None HT=5300.0 [CANAL]
+        colors[1]: None=8141
+  p58 base=8142       'GRID VERTICALE 12' PWR=11.26/None EFF=None HT=5150.0 []
+        colors[1]: None=8142
+  p58 base=8143       'GRID VERTICALE 12' PWR=11.26/None EFF=None HT=5460.0 [CANAL]
+        colors[1]: None=8143
+  p60 base=8144       'GRID PANORAMA 9' PWR=8.65/8.31 EFF=None HT=5100.0 []
+        colors[1]: None=8144
+  p60 base=8145       'GRID PANORAMA 9' PWR=8.65/8.31 EFF=None HT=5400.0 [CANAL]
+        colors[1]: None=8145
+  p60 base=8146       'GRID PANORAMA 12' PWR=11.26/None EFF=None HT=5250.0 []
+        colors[1]: None=8146
+  p60 base=8147       'GRID PANORAMA 12' PWR=11.26/None EFF=None HT=5560.0 [CANAL]
+        colors[1]: None=8147
+  p62 base=3015       'None' PWR=10.7/None EFF=85.1 HT=3860.0 []
+        colors[1]: None=3015
+
+================================================================================
+HYDRO_STOVES
+================================================================================
+  p66 base=7020       'SOFT MAIOLICA 14' PWR=15.02/None EFF=None HT=6330.0 []
+        colors[3]: Blanc=7020, Bordeaux=7020/BO, Noir=7020/NE
+  p66 base=7020-P     'SOFT MAIOLICA 14' PWR=15.02/None EFF=None HT=5250.0 [PELLET]
+        colors[3]: Blanc=7020-P, Bordeaux=7020-P/BO, Noir=7020-P/NE
+  p66 base=7021       'SOFT MAIOLICA 18' PWR=18.1/None EFF=None HT=6490.0 []
+        colors[3]: Blanc=7021, Bordeaux=7021/BO, Noir=7021/NE
+  p66 base=7021-P     'SOFT MAIOLICA 18' PWR=18.1/None EFF=None HT=5400.0 [PELLET]
+        colors[3]: Blanc=7021-P, Bordeaux=7021-P/BO, Noir=7021-P/NE
+  p66 base=7022       'SOFT MAIOLICA 22' PWR=22.07/None EFF=None HT=6650.0 []
+        colors[3]: Blanc=7022, Bordeaux=7022/BO, Noir=7022/NE
+  p66 base=7022-P     'SOFT MAIOLICA 22' PWR=22.07/None EFF=None HT=5560.0 [PELLET]
+        colors[3]: Blanc=7022-P, Bordeaux=7022-P/BO, Noir=7022-P/NE
+  p66 base=7023       'SOFT MAIOLICA 26' PWR=24.06/None EFF=None HT=6800.0 []
+        colors[3]: Blanc=7023, Bordeaux=7023/BO, Noir=7023/NE
+  p66 base=7023-P     'SOFT MAIOLICA 26' PWR=24.06/None EFF=None HT=5700.0 [PELLET]
+        colors[3]: Blanc=7023-P, Bordeaux=7023-P/BO, Noir=7023-P/NE
+  p68 base=7008       'SOFT 14 HYBRID' PWR=15.02/None EFF=None HT=5700.0 [HYBRID]
+        colors[4]: Blanc=7008, Ivoire=7008/AV, Bordeaux=7008/BO, Noir=7008/NE
+  p68 base=7008-P     'SOFT 14 PELLET' PWR=15.02/None EFF=None HT=4480.0 [PELLET]
+        colors[4]: Blanc=7008-P, Ivoire=7008-P/AV, Bordeaux=7008-P/BO, Noir=7008-P/NE
+  p68 base=7009       'SOFT 18 HYBRID' PWR=18.1/None EFF=None HT=5870.0 [HYBRID]
+        colors[4]: Blanc=7009, Ivoire=7009/AV, Bordeaux=7009/BO, Noir=7009/NE
+  p68 base=7009-P     'SOFT 18 PELLET' PWR=18.1/None EFF=None HT=4640.0 [PELLET]
+        colors[4]: Blanc=7009-P, Ivoire=7009-P/AV, Bordeaux=7009-P/BO, Noir=7009-P/NE
+  p68 base=7010       'SOFT 22 HYBRID' PWR=22.07/None EFF=None HT=6030.0 [HYBRID]
+        colors[4]: Blanc=7010, Ivoire=7010/AV, Bordeaux=7010/BO, Noir=7010/NE
+  p68 base=7010-P     'SOFT 22 PELLET' PWR=22.07/None EFF=None HT=4790.0 [PELLET]
+        colors[4]: Blanc=7010-P, Ivoire=7010-P/AV, Bordeaux=7010-P/BO, Noir=7010-P/NE
+  p68 base=7015       'SOFT 26 HYBRID' PWR=24.06/None EFF=None HT=6180.0 [HYBRID]
+        colors[4]: Blanc=7015, Ivoire=7015/AV, Bordeaux=7015/BO, Noir=7015/NE
+  p68 base=7015-P     'SOFT 26 PELLET' PWR=24.06/None EFF=None HT=4950.0 [PELLET]
+        colors[4]: Blanc=7015-P, Ivoire=7015-P/AV, Bordeaux=7015-P/BO, Noir=7015-P/NE
+  p70 base=7040       'SHARP 14 HYBRID' PWR=15.02/None EFF=None HT=5600.0 [HYBRID]
+        colors[4]: Blanc=7040, Gris anthracite=7040/GR, Noir=7040/NE, Bronze=7040/DB
+  p70 base=7040-P     'SHARP 14 PELLET' PWR=15.02/None EFF=None HT=4400.0 [PELLET]
+        colors[4]: Blanc=7040-P, Gris anthracite=7040-P/GR, Noir=7040-P/NE, Bronze=7040-P/DB
+  p70 base=7041       'SHARP 18 HYBRID' PWR=18.1/None EFF=None HT=5770.0 [HYBRID]
+        colors[4]: Blanc=7041, Gris anthracite=7041/GR, Noir=7041/NE, Bronze=7041/DB
+  p70 base=7041-P     'SHARP 18 PELLET' PWR=18.1/None EFF=None HT=4560.0 [PELLET]
+        colors[4]: Blanc=7041-P, Gris anthracite=7041-P/GR, Noir=7041-P/NE, Bronze=7041-P/DB
+  p70 base=7042       'SHARP 22 HYBRID' PWR=22.07/None EFF=None HT=5920.0 [HYBRID]
+        colors[4]: Blanc=7042, Gris anthracite=7042/GR, Noir=7042/NE, Bronze=7042/DB
+  p70 base=7042-P     'SHARP 22 PELLET' PWR=22.07/None EFF=None HT=4720.0 [PELLET]
+        colors[4]: Blanc=7042-P, Gris anthracite=7042-P/GR, Noir=7042-P/NE, Bronze=7042-P/DB
+  p70 base=7043       'SHARP 26 HYBRID' PWR=24.06/None EFF=None HT=6080.0 [HYBRID]
+        colors[4]: Blanc=7043, Gris anthracite=7043/GR, Noir=7043/NE, Bronze=7043/DB
+  p70 base=7043-P     'SHARP 26 PELLET' PWR=24.06/None EFF=None HT=4870.0 [PELLET]
+        colors[4]: Blanc=7043-P, Gris anthracite=7043-P/GR, Noir=7043-P/NE, Bronze=7043-P/DB
+  p72 base=7030       'EDGE 14 HYBRID' PWR=15.02/None EFF=None HT=6390.0 [HYBRID]
+        colors[2]: Blanc=7030, Gris anthracite=7030/GR
+  p72 base=7030-P     'EDGE 14 PELLET' PWR=15.02/None EFF=None HT=5190.0 [PELLET]
+        colors[2]: Blanc=7030-P, Gris anthracite=7030-P/GR
+  p72 base=7031       'EDGE 18 HYBRID' PWR=18.1/None EFF=None HT=6540.0 [HYBRID]
+        colors[2]: Blanc=7031, Gris anthracite=7031/GR
+  p72 base=7031-P     'EDGE18 PELLET' PWR=18.1/None EFF=None HT=5350.0 [PELLET]
+        colors[2]: Blanc=7031-P, Gris anthracite=7031-P/GR
+  p72 base=7032       'EDGE 22 HYBRID' PWR=22.07/None EFF=None HT=6700.0 [HYBRID]
+        colors[2]: Blanc=7032, Gris anthracite=7032/GR
+  p72 base=7032-P     'EDGE 22 PELLET' PWR=22.07/None EFF=None HT=5500.0 [PELLET]
+        colors[2]: Blanc=7032-P, Gris anthracite=7032-P/GR
+  p72 base=7033       'EDGE 26 HYBRID' PWR=24.06/None EFF=None HT=6850.0 [HYBRID]
+        colors[2]: Blanc=7033, Gris anthracite=7033/GR
+  p72 base=7033-P     'EDGE 26 PELLET' PWR=24.06/None EFF=None HT=5650.0 [PELLET]
+        colors[2]: Blanc=7033-P, Gris anthracite=7033-P/GR
+  p74 base=7002       'FURNI 14 HYBRID' PWR=15.02/None EFF=None HT=6000.0 [HYBRID]
+        colors[4]: Blanc=7002, Ivoire=7002/AV, Bordeaux=7002/BO, Noir=7002/NE
+  p74 base=7002-P     'FURNI 14 PELLET' PWR=15.02/None EFF=None HT=4790.0 [PELLET]
+        colors[4]: Blanc=7002-P, Ivoire=7002-P/AV, Bordeaux=7002-P/BO, Noir=7002-P/NE
+  p74 base=7003       'FURNI 18 HYBRID' PWR=18.1/None EFF=None HT=6160.0 [HYBRID]
+        colors[4]: Blanc=7003, Ivoire=7003/AV, Bordeaux=7003/BO, Noir=7003/NE
+  p74 base=7003-P     'FURNI 18 PELLET' PWR=18.1/None EFF=None HT=4950.0 [PELLET]
+        colors[4]: Blanc=7003-P, Ivoire=7003-P/AV, Bordeaux=7003-P/BO, Noir=7003-P/NE
+  p74 base=7004       'FURNI 22 HYBRID' PWR=22.07/None EFF=None HT=6300.0 [HYBRID]
+        colors[4]: Blanc=7004, Ivoire=7004/AV, Bordeaux=7004/BO, Noir=7004/NE
+  p74 base=7004-P     'FURNI 22 PELLET' PWR=22.07/None EFF=None HT=5100.0 [PELLET]
+        colors[4]: Blanc=7004-P, Ivoire=7004-P/AV, Bordeaux=7004-P/BO, Noir=7004-P/NE
+  p74 base=7016       'FURNI 26 HYBRID' PWR=24.06/None EFF=None HT=6470.0 [HYBRID]
+        colors[4]: Blanc=7016, Ivoire=7016/AV, Bordeaux=7016/BO, Noir=7016/NE
+  p74 base=7016-P     'FURNI 26 PELLET' PWR=24.06/None EFF=None HT=5250.0 [PELLET]
+        colors[4]: Blanc=7016-P, Ivoire=7016-P/AV, Bordeaux=7016-P/BO, Noir=7016-P/NE
+  p76 base=7011       'SOFT SLIM 14 HYBRID' PWR=15.02/None EFF=None HT=6330.0 [HYBRID]
+        colors[4]: Blanc=7011, Ivoire=7011/AV, Bordeaux=7011/BO, Noir=7011/NE
+  p76 base=7012       'SOFT SLIM 18 HYBRID' PWR=18.1/None EFF=None HT=6480.0 [HYBRID]
+        colors[4]: Blanc=7012, Ivoire=7012/AV, Bordeaux=7012/BO, Noir=7012/NE
+  p76 base=7013       'SOFT SLIM 22 HYBRID' PWR=22.07/None EFF=None HT=6630.0 [HYBRID]
+        colors[4]: Blanc=7013, Ivoire=7013/AV, Bordeaux=7013/BO, Noir=7013/NE
+  p76 base=7014       'SOFT SLIM 26 HYBRID' PWR=24.06/None EFF=None HT=6790.0 [HYBRID]
+        colors[4]: Blanc=7014, Ivoire=7014/AV, Bordeaux=7014/BO, Noir=7014/NE
+
+================================================================================
+HYDRO_INSERTS
+================================================================================
+  p86 base=3038       'TI 14 HYBRID' PWR=15.02/13.47 EFF=96.44 HT=5820.0 [HYBRID]
+        colors[1]: None=3038
+  p86 base=3038-P     'TI 14 PELLET' PWR=15.02/13.47 EFF=96.44 HT=4630.0 [PELLET]
+        colors[1]: None=3038-P
+  p86 base=3039       'TI 18 HYBRID' PWR=18.1/15.92 EFF=96.22 HT=5970.0 [HYBRID]
+        colors[1]: None=3039
+  p86 base=3039-P     'TI 18 PELLET' PWR=18.1/15.92 EFF=96.22 HT=4790.0 [PELLET]
+        colors[1]: None=3039-P
+  p86 base=3040       'TI 22 HYBRID' PWR=22.07/19.09 EFF=95.93 HT=6130.0 [HYBRID]
+        colors[1]: None=3040
+  p86 base=3040-P     'TI 22 PELLET' PWR=22.07/19.09 EFF=95.93 HT=4950.0 [PELLET]
+        colors[1]: None=3040-P
+  p86 base=3041       'TI 26 HYBRID' PWR=24.06/20.67 EFF=97.78 HT=6280.0 [HYBRID]
+        colors[1]: None=3041
+  p86 base=3041-P     'TI 26 PELLET' PWR=24.06/20.67 EFF=97.78 HT=5100.0 [PELLET]
+        colors[1]: None=3041-P
+  p88 base=3046       'TI 14 PANORAMA HYBRID' PWR=15.02/13.47 EFF=96.44 HT=6080.0 [HYBRID]
+        colors[1]: None=3046
+  p88 base=3046-P     'TI 14 PANORAMA PELLET' PWR=15.02/13.47 EFF=96.44 HT=4840.0 [PELLET]
+        colors[1]: None=3046-P
+  p88 base=3047       'TI 18 PANORAMA HYBRID' PWR=18.1/15.92 EFF=96.22 HT=6230.0 [HYBRID]
+        colors[1]: None=3047
+  p88 base=3047-P     'TI 18 PANORAMA PELLET' PWR=18.1/15.92 EFF=96.22 HT=5000.0 [PELLET]
+        colors[1]: None=3047-P
+  p88 base=3048       'TI 22 PANORAMA HYBRID' PWR=22.07/19.09 EFF=95.93 HT=6390.0 [HYBRID]
+        colors[1]: None=3048
+  p88 base=3048-P     'TI 22 PANORAMA PELLET' PWR=22.07/19.09 EFF=95.93 HT=5150.0 [PELLET]
+        colors[1]: None=3048-P
+  p88 base=3049       'TI 26 PANORAMA HYBRID' PWR=24.06/20.67 EFF=97.78 HT=6540.0 [HYBRID]
+        colors[1]: None=3049
+  p88 base=3049-P     'TI 26 PANORAMA PELLET' PWR=24.06/20.67 EFF=97.78 HT=5300.0 [PELLET]
+        colors[1]: None=3049-P
+  p90 base=3035       'TI 26 PLUS HYBRID' PWR=24.06/20.67 EFF=97.78 HT=6540.0 [HYBRID]
+        colors[1]: None=3035
+  p92 base=3051       'TI 26 PLUS PANORAMA' PWR=24.06/20.67 EFF=97.78 HT=6800.0 []
+        colors[1]: None=3051
+  p94 base=3052       'TI SLIM 14 HYBRID' PWR=15.02/13.47 EFF=96.44 HT=5820.0 [HYBRID]
+        colors[1]: None=3052
+  p94 base=3053       'TI SLIM 18 HYBRID' PWR=18.1/15.92 EFF=96.22 HT=5980.0 [HYBRID]
+        colors[1]: None=3053
+  p94 base=3054       'TI SLIM 22 HYBRID' PWR=22.07/19.09 EFF=95.93 HT=6130.0 [HYBRID]
+        colors[1]: None=3054
+  p94 base=3055       'TI SLIM 26 HYBRID' PWR=24.06/20.67 EFF=97.78 HT=6280.0 [HYBRID]
+        colors[1]: None=3055
+  p96 base=3042       'None' PWR=15.02/13.47 EFF=96.44 HT=6030.0 []
+        colors[1]: None=3042
+  p96 base=3043       'None' PWR=18.1/15.92 EFF=96.22 HT=6180.0 []
+        colors[1]: None=3043
+  p96 base=3044       'None' PWR=22.07/19.09 EFF=95.93 HT=6330.0 []
+        colors[1]: None=3044
+  p96 base=3045       'None' PWR=24.06/20.67 EFF=97.78 HT=6490.0 []
+        colors[1]: None=3045

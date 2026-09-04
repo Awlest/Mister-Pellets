@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CartTrigger } from "@/components/cart/CartDrawer";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -143,7 +142,6 @@ export function Header() {
 
         {/* Actions droite (desktop uniquement, le Header est masqué sur mobile) */}
         <div className="flex items-center gap-2 shrink-0">
-          <CartTrigger />
           <Button asChild variant="primary" size="default">
             <Link href="/demande-de-devis">Devis →</Link>
           </Button>

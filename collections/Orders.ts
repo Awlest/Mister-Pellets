@@ -2,8 +2,12 @@ import type { CollectionConfig } from "payload";
 import { randomUUID } from "crypto";
 
 /**
- * Orders — commandes boutique créées par la route /api/checkout (Mollie).
- * Le statut de paiement est finalisé par le webhook Mollie après confirmation.
+ * Orders — historique des commandes boutique.
+ *
+ * ⚠️ Plus alimentée depuis le 04/09/2026 : le paiement en ligne et le panier
+ * ont été retirés, le parcours passe par le chiffrage puis la visite technique
+ * puis la facture d'acompte. La collection reste en place pour conserver
+ * l'historique et pour ne pas perdre le schéma si la vente en ligne revient.
  */
 export const Orders: CollectionConfig = {
   slug: "orders",

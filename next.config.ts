@@ -102,7 +102,11 @@ const nextConfig: NextConfig = {
       { source: "/ferlux", destination: "/nos-marques/ferlux", permanent: true },
 
       // Anciennes URLs WP courantes
-      { source: "/cart", destination: "/panier", permanent: true },
+      // Le panier a été retiré avec le paiement en ligne : les anciennes URL
+      // de panier et de checkout renvoient vers le chiffrage.
+      { source: "/cart", destination: "/estimation", permanent: true },
+      { source: "/panier", destination: "/estimation", permanent: true },
+      { source: "/checkout", destination: "/estimation", permanent: true },
       { source: "/shop", destination: "/boutique", permanent: true },
       { source: "/devis", destination: "/demande-de-devis", permanent: true },
       { source: "/quote", destination: "/demande-de-devis", permanent: true },

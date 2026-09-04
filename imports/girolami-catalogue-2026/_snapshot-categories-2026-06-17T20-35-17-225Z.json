@@ -1,0 +1,1338 @@
+[
+  {
+    "id": 289,
+    "slug": "girolami-vision-evo-100",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 288,
+    "slug": "girolami-vision-evo-90",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 287,
+    "slug": "girolami-vision-evo-80",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 286,
+    "slug": "girolami-vision-evo-70",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 284,
+    "slug": "girolami-mbs-f-120",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 283,
+    "slug": "girolami-mbs-f-100",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 282,
+    "slug": "girolami-mbs-f",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 281,
+    "slug": "girolami-alfa-double",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 280,
+    "slug": "girolami-alfa",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 279,
+    "slug": "girolami-frame-120-dx-sx",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 278,
+    "slug": "girolami-frame-120",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 277,
+    "slug": "girolami-frame-100-dx-sx",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 276,
+    "slug": "girolami-frame-100",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 275,
+    "slug": "girolami-frame-80-dx-sx",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 274,
+    "slug": "girolami-frame",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 273,
+    "slug": "girolami-tc-bio-evo-80",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 272,
+    "slug": "girolami-tc-evo-75-curvo",
+    "brand": "Girolami",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 271,
+    "slug": "girolami-tc-evo-75-dx-sx",
+    "brand": "Girolami",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 270,
+    "slug": "girolami-tc-evo",
+    "brand": "Girolami",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 269,
+    "slug": "girolami-tc-evo-plus-80",
+    "brand": "Girolami",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 265,
+    "slug": "girolami-grid-panorama",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 261,
+    "slug": "girolami-grid-verticale",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 260,
+    "slug": "girolami-alfa-bio",
+    "brand": "Girolami",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 252,
+    "slug": "girolami-sharp",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 244,
+    "slug": "girolami-edge",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 236,
+    "slug": "girolami-soft-maiolica",
+    "brand": "Girolami",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 228,
+    "slug": "girolami-soft-slim",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 222,
+    "slug": "girolami-soft",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 216,
+    "slug": "girolami-furni",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 212,
+    "slug": "girolami-ti-slim",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 211,
+    "slug": "girolami-ti-plus-panorama-26",
+    "brand": "Girolami",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 203,
+    "slug": "girolami-ti-panorama",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 199,
+    "slug": "girolami-ti-slim-panorama",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 191,
+    "slug": "girolami-ti",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 190,
+    "slug": "girolami-ti-plus-26-hybride",
+    "brand": "Girolami",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 186,
+    "slug": "girolami-twin-slim",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 185,
+    "slug": "girolami-twin-mini-6",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 183,
+    "slug": "girolami-mini",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 173,
+    "slug": "girolami-slim",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 163,
+    "slug": "girolami-round",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 158,
+    "slug": "girolami-flow",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 153,
+    "slug": "girolami-curvy",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 148,
+    "slug": "girolami-vert-maiolica",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 143,
+    "slug": "girolami-vert",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 138,
+    "slug": "girolami-split",
+    "brand": "Girolami",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 137,
+    "slug": "edilkamin-celia-air-tight-c-magic",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 136,
+    "slug": "edilkamin-lena-9-evo-pierre-ollaire",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 135,
+    "slug": "edilkamin-cherie-9-evo",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 134,
+    "slug": "girolami-biotec",
+    "brand": "Girolami",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 126,
+    "slug": "ferlux-hidromatic-18",
+    "brand": "Ferlux",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 125,
+    "slug": "ferlux-selena-hidro",
+    "brand": "Ferlux",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 124,
+    "slug": "ferlux-iris-hidro",
+    "brand": "Ferlux",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 123,
+    "slug": "ferlux-silo-hidro",
+    "brand": "Ferlux",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 122,
+    "slug": "ferlux-f-hidro",
+    "brand": "Ferlux",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 121,
+    "slug": "ferlux-phoenix-glass-canalisable",
+    "brand": "Ferlux",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 120,
+    "slug": "ferlux-phoenix-acier-canalisable",
+    "brand": "Ferlux",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 119,
+    "slug": "ferlux-ikaro-canalisable",
+    "brand": "Ferlux",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 118,
+    "slug": "ferlux-lyra-canalisable",
+    "brand": "Ferlux",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 117,
+    "slug": "ferlux-osiris-canalisable",
+    "brand": "Ferlux",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 116,
+    "slug": "ferlux-maia-10",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 115,
+    "slug": "ferlux-estela-10",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 114,
+    "slug": "ferlux-flora-10",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 113,
+    "slug": "ferlux-fanny-10",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 112,
+    "slug": "ferlux-ulyses-8",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 111,
+    "slug": "ferlux-natalia-8",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 110,
+    "slug": "ferlux-nerea-8",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 109,
+    "slug": "ferlux-elisa-8",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 108,
+    "slug": "ferlux-helen-glass-8",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 107,
+    "slug": "ferlux-helen-acier-8",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 106,
+    "slug": "ferlux-shara-8",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 105,
+    "slug": "ferlux-ares-8",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 104,
+    "slug": "ferlux-venus",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 103,
+    "slug": "ferlux-odin",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 102,
+    "slug": "ferlux-perla",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 101,
+    "slug": "ferlux-milena",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 100,
+    "slug": "dielle-fbx-s-70",
+    "brand": "Dielle",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 99,
+    "slug": "dielle-fbx-s-50",
+    "brand": "Dielle",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 98,
+    "slug": "dielle-garbin-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 97,
+    "slug": "dielle-borea-80",
+    "brand": "Dielle",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 96,
+    "slug": "dielle-borea-60",
+    "brand": "Dielle",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 95,
+    "slug": "dielle-ponente-hybrid-80",
+    "brand": "Dielle",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 94,
+    "slug": "dielle-ponente-hybrid-50",
+    "brand": "Dielle",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 93,
+    "slug": "dielle-ponente-hybrid-easy-80",
+    "brand": "Dielle",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 92,
+    "slug": "dielle-ponente-hybrid-easy-50",
+    "brand": "Dielle",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 91,
+    "slug": "dielle-ethesia-glass-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 90,
+    "slug": "dielle-ethesia-glass-70",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 89,
+    "slug": "dielle-ethesia-glass-50",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 88,
+    "slug": "dielle-ethesia-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 87,
+    "slug": "dielle-ethesia-70",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 86,
+    "slug": "dielle-ethesia-50",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 85,
+    "slug": "dielle-scirocco-idro-30",
+    "brand": "Dielle",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 84,
+    "slug": "dielle-scirocco-idro-25",
+    "brand": "Dielle",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 83,
+    "slug": "dielle-levante-idro-22",
+    "brand": "Dielle",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 82,
+    "slug": "dielle-levante-idro-18",
+    "brand": "Dielle",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 81,
+    "slug": "dielle-levante-idro-14",
+    "brand": "Dielle",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 80,
+    "slug": "dielle-bump-insert-r-80",
+    "brand": "Dielle",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 79,
+    "slug": "dielle-bump-insert-r-50",
+    "brand": "Dielle",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 78,
+    "slug": "dielle-bump-insert-t-50",
+    "brand": "Dielle",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 77,
+    "slug": "dielle-grecale-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 76,
+    "slug": "dielle-ostro-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 75,
+    "slug": "dielle-scirocco-stone-80",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 74,
+    "slug": "dielle-scirocco-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 73,
+    "slug": "dielle-zefiro-70",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 72,
+    "slug": "dielle-maestrale-glass-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 71,
+    "slug": "dielle-levante-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 70,
+    "slug": "dielle-levante-80",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 69,
+    "slug": "dielle-round-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 68,
+    "slug": "dielle-round-70",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 67,
+    "slug": "dielle-bump-100",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 66,
+    "slug": "dielle-bump-80",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 65,
+    "slug": "dielle-bump-50",
+    "brand": "Dielle",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 64,
+    "slug": "dielle-ghibli-hybrid-80",
+    "brand": "Dielle",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 63,
+    "slug": "dielle-ghibli-hybrid-50",
+    "brand": "Dielle",
+    "productType": "hybride",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 62,
+    "slug": "edilkamin-kira-h23-evo",
+    "brand": "Edilkamin",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 61,
+    "slug": "edilkamin-kira2-h18-up",
+    "brand": "Edilkamin",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 60,
+    "slug": "edilkamin-blade-h19-evo",
+    "brand": "Edilkamin",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 59,
+    "slug": "edilkamin-vyda-h23-evo",
+    "brand": "Edilkamin",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 58,
+    "slug": "edilkamin-vyda-h19-evo",
+    "brand": "Edilkamin",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 57,
+    "slug": "edilkamin-milla-h12-evo",
+    "brand": "Edilkamin",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 56,
+    "slug": "edilkamin-pellkamin-12-evo",
+    "brand": "Edilkamin",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 55,
+    "slug": "edilkamin-pellkamin-10-plus",
+    "brand": "Edilkamin",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 54,
+    "slug": "edilkamin-pellkamin-8",
+    "brand": "Edilkamin",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 53,
+    "slug": "edilkamin-rada-12-atc",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 52,
+    "slug": "edilkamin-vyda-13",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 51,
+    "slug": "edilkamin-kira-13",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 50,
+    "slug": "edilkamin-blade-12-evo",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 49,
+    "slug": "edilkamin-libra-13-int",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 48,
+    "slug": "edilkamin-cherie-11-evo",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 47,
+    "slug": "edilkamin-libra-11-plus-int",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 46,
+    "slug": "edilkamin-bild-9-plus",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 44,
+    "slug": "edilkamin-nara-9-evo",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 43,
+    "slug": "edilkamin-yana-9-evo",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 42,
+    "slug": "edilkamin-lena-9-evo",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 41,
+    "slug": "edilkamin-libra-9-plus",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 40,
+    "slug": "edilkamin-lumea-9-plus",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 39,
+    "slug": "edilkamin-celia-air-tight-c",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 38,
+    "slug": "edilkamin-dania-8-plus",
+    "brand": "Edilkamin",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 37,
+    "slug": "edilkamin-evia-8",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 36,
+    "slug": "edilkamin-lena-8",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 35,
+    "slug": "edilkamin-libra-7",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 34,
+    "slug": "edilkamin-lumea-7",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 32,
+    "slug": "edilkamin-dania-6",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 31,
+    "slug": "edilkamin-sense-6",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 30,
+    "slug": "edilkamin-slide-5",
+    "brand": "Edilkamin",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 29,
+    "slug": "ek63-monday-230h",
+    "brand": "EK63",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 28,
+    "slug": "ek63-monday-190h",
+    "brand": "EK63",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 27,
+    "slug": "ek63-spot-100h",
+    "brand": "EK63",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 26,
+    "slug": "ek63-pellek-110",
+    "brand": "EK63",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 25,
+    "slug": "ek63-pellek-80",
+    "brand": "EK63",
+    "productType": "insert",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 24,
+    "slug": "ek63-monday-130",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 23,
+    "slug": "ek63-yung-130",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 22,
+    "slug": "ek63-daily-130",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 21,
+    "slug": "ek63-dub-100",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 20,
+    "slug": "ek63-metro-110",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 19,
+    "slug": "ek63-entity-90",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 17,
+    "slug": "ek63-like-90",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 16,
+    "slug": "ek63-berry-90",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 15,
+    "slug": "ek63-cell-80",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 13,
+    "slug": "ek63-zone-80",
+    "brand": "EK63",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 12,
+    "slug": "ek63-like-80",
+    "brand": "EK63",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 11,
+    "slug": "ek63-gotha-70",
+    "brand": "EK63",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 10,
+    "slug": "ferlux-pyl-10",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 9,
+    "slug": "ferlux-pyl-7",
+    "brand": "Ferlux",
+    "productType": "standard",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 8,
+    "slug": "dielle-iride-30",
+    "brand": "Dielle",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 7,
+    "slug": "dielle-iride-22",
+    "brand": "Dielle",
+    "productType": "hydro",
+    "combustible": "pellet",
+    "isHydro": true
+  },
+  {
+    "id": 6,
+    "slug": "ek63-spy-110",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  },
+  {
+    "id": 4,
+    "slug": "ek63-tweed-90",
+    "brand": "EK63",
+    "productType": "canalisable",
+    "combustible": "pellet",
+    "isHydro": false
+  }
+]

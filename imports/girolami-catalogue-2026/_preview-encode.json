@@ -1,0 +1,5182 @@
+[
+  {
+    "slug": "girolami-split-9",
+    "name": "Girolami Split 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 4259,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 119,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets à chambre céramique. 9 kW.",
+    "metaTitle": "Girolami Split 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Split travaille avec une chambre de combustion céramique qui pousse",
+    "features": [
+      "Chambre de combustion céramique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-split-12",
+    "name": "Girolami Split 12",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 4441,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 119,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets à chambre céramique. 12 kW.",
+    "metaTitle": "Girolami Split 12 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Split travaille avec une chambre de combustion céramique qui pousse",
+    "features": [
+      "Chambre de combustion céramique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-split-12-canalisable",
+    "name": "Girolami Split 12 canalisable",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 4816,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 119,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets à chambre céramique. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Split 12 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Split travaille avec une chambre de combustion céramique qui pousse",
+    "features": [
+      "Chambre de combustion céramique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-split-14",
+    "name": "Girolami Split 14",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 4634,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 119,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets à chambre céramique. 14 kW.",
+    "metaTitle": "Girolami Split 14 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Split travaille avec une chambre de combustion céramique qui pousse",
+    "features": [
+      "Chambre de combustion céramique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-split-14-canalisable",
+    "name": "Girolami Split 14 canalisable",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 4997,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 119,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets à chambre céramique. 14 kW. Version canalisable.",
+    "metaTitle": "Girolami Split 14 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Split travaille avec une chambre de combustion céramique qui pousse",
+    "features": [
+      "Chambre de combustion céramique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-vert-9",
+    "name": "Girolami Vert 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 4477,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical en acier. 9 kW.",
+    "metaTitle": "Girolami Vert 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert est un poêle élancé, habillage acier, qui tient peu de place a",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-vert-12",
+    "name": "Girolami Vert 12",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 4671,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical en acier. 12 kW.",
+    "metaTitle": "Girolami Vert 12 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert est un poêle élancé, habillage acier, qui tient peu de place a",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-vert-12-canalisable",
+    "name": "Girolami Vert 12 canalisable",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 5034,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical en acier. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Vert 12 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert est un poêle élancé, habillage acier, qui tient peu de place a",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-vert-14",
+    "name": "Girolami Vert 14",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 4840,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical en acier. 14 kW.",
+    "metaTitle": "Girolami Vert 14 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert est un poêle élancé, habillage acier, qui tient peu de place a",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-vert-14-canalisable",
+    "name": "Girolami Vert 14 canalisable",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 5227,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical en acier. 14 kW. Version canalisable.",
+    "metaTitle": "Girolami Vert 14 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert est un poêle élancé, habillage acier, qui tient peu de place a",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-vert-maiolica-9",
+    "name": "Girolami Vert Maiolica 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 5251,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical, habillage maïolique. 9 kW.",
+    "metaTitle": "Girolami Vert Maiolica 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert Maiolica reprend la ligne verticale du Vert, mais habillé de m",
+    "features": [
+      "Habillage maïolique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-vert-maiolica-12",
+    "name": "Girolami Vert Maiolica 12",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 5445,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical, habillage maïolique. 12 kW.",
+    "metaTitle": "Girolami Vert Maiolica 12 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert Maiolica reprend la ligne verticale du Vert, mais habillé de m",
+    "features": [
+      "Habillage maïolique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-vert-maiolica-12-canalisable",
+    "name": "Girolami Vert Maiolica 12 canalisable",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 5808,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical, habillage maïolique. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Vert Maiolica 12 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert Maiolica reprend la ligne verticale du Vert, mais habillé de m",
+    "features": [
+      "Habillage maïolique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-vert-maiolica-14",
+    "name": "Girolami Vert Maiolica 14",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 5614,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical, habillage maïolique. 14 kW.",
+    "metaTitle": "Girolami Vert Maiolica 14 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert Maiolica reprend la ligne verticale du Vert, mais habillé de m",
+    "features": [
+      "Habillage maïolique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-vert-maiolica-14-canalisable",
+    "name": "Girolami Vert Maiolica 14 canalisable",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 5990,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 58,
+      "height": 122,
+      "depth": 54
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets vertical, habillage maïolique. 14 kW. Version canalisable.",
+    "metaTitle": "Girolami Vert Maiolica 14 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Vert Maiolica reprend la ligne verticale du Vert, mais habillé de m",
+    "features": [
+      "Habillage maïolique",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-curvy-9",
+    "name": "Girolami Curvy 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 4997,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 59,
+      "height": 118,
+      "depth": 58
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets galbé, top en verre. 9 kW.",
+    "metaTitle": "Girolami Curvy 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Curvy joue les formes rondes et le verre. Le dessus est vitré, et l",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-curvy-12",
+    "name": "Girolami Curvy 12",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 5203,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 59,
+      "height": 118,
+      "depth": 58
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets galbé, top en verre. 12 kW.",
+    "metaTitle": "Girolami Curvy 12 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Curvy joue les formes rondes et le verre. Le dessus est vitré, et l",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-curvy-12-canalisable",
+    "name": "Girolami Curvy 12 canalisable",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 5566,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 59,
+      "height": 118,
+      "depth": 58
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets galbé, top en verre. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Curvy 12 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Curvy joue les formes rondes et le verre. Le dessus est vitré, et l",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-curvy-14",
+    "name": "Girolami Curvy 14",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 5384,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 59,
+      "height": 118,
+      "depth": 58
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets galbé, top en verre. 14 kW.",
+    "metaTitle": "Girolami Curvy 14 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Curvy joue les formes rondes et le verre. Le dessus est vitré, et l",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-curvy-14-canalisable",
+    "name": "Girolami Curvy 14 canalisable",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 5748,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 59,
+      "height": 118,
+      "depth": 58
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets galbé, top en verre. 14 kW. Version canalisable.",
+    "metaTitle": "Girolami Curvy 14 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Curvy joue les formes rondes et le verre. Le dessus est vitré, et l",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-flow-9",
+    "name": "Girolami Flow 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 4380,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 62,
+      "height": 114,
+      "depth": 53
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Poêle à pellets aux lignes droites, top en verre. 9 kW.",
+    "metaTitle": "Girolami Flow 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Flow, c'est l'esprit Curvy en version droite. Lignes nettes, dessus",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-flow-12",
+    "name": "Girolami Flow 12",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 4574,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 62,
+      "height": 114,
+      "depth": 53
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Poêle à pellets aux lignes droites, top en verre. 12 kW.",
+    "metaTitle": "Girolami Flow 12 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Flow, c'est l'esprit Curvy en version droite. Lignes nettes, dessus",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-flow-12-canalisable",
+    "name": "Girolami Flow 12 canalisable",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 4937,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 62,
+      "height": 114,
+      "depth": 53
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Poêle à pellets aux lignes droites, top en verre. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Flow 12 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Flow, c'est l'esprit Curvy en version droite. Lignes nettes, dessus",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-flow-14",
+    "name": "Girolami Flow 14",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 4876,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 62,
+      "height": 114,
+      "depth": 53
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Poêle à pellets aux lignes droites, top en verre. 14 kW.",
+    "metaTitle": "Girolami Flow 14 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Flow, c'est l'esprit Curvy en version droite. Lignes nettes, dessus",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-flow-14-canalisable",
+    "name": "Girolami Flow 14 canalisable",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 5251,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 62,
+      "height": 114,
+      "depth": 53
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Poêle à pellets aux lignes droites, top en verre. 14 kW. Version canalisable.",
+    "metaTitle": "Girolami Flow 14 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Flow, c'est l'esprit Curvy en version droite. Lignes nettes, dessus",
+    "features": [
+      "Top et vitre Cristal Magik",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-9",
+    "name": "Girolami Round 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 4876,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 9 kW.",
+    "metaTitle": "Girolami Round 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-9-coaxiale",
+    "name": "Girolami Round 9 coaxiale",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 5251,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 9 kW. Sortie coaxiale.",
+    "metaTitle": "Girolami Round 9 coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-12",
+    "name": "Girolami Round 12",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 5082,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 12 kW.",
+    "metaTitle": "Girolami Round 12 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-12-coaxiale",
+    "name": "Girolami Round 12 coaxiale",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 5445,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 12 kW. Sortie coaxiale.",
+    "metaTitle": "Girolami Round 12 coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-12-canalisable",
+    "name": "Girolami Round 12 canalisable",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 5445,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Round 12 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-12-canalisable-coaxiale",
+    "name": "Girolami Round 12 canalisable, coaxiale",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 5808,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 12 kW. Sortie coaxiale, version canalisable.",
+    "metaTitle": "Girolami Round 12 canalisable, coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-14",
+    "name": "Girolami Round 14",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 5251,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 14 kW.",
+    "metaTitle": "Girolami Round 14 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-14-coaxiale",
+    "name": "Girolami Round 14 coaxiale",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 5626,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 14 kW. Sortie coaxiale.",
+    "metaTitle": "Girolami Round 14 coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-14-canalisable",
+    "name": "Girolami Round 14 canalisable",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 5626,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 14 kW. Version canalisable.",
+    "metaTitle": "Girolami Round 14 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-round-14-canalisable-coaxiale",
+    "name": "Girolami Round 14 canalisable, coaxiale",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 5990,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 54,
+      "height": 112,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets cylindrique. 14 kW. Sortie coaxiale, version canalisable.",
+    "metaTitle": "Girolami Round 14 canalisable, coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Round mise sur une silhouette ronde qui passe partout, contre un mu",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-9",
+    "name": "Girolami Slim 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 4695,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 9 kW.",
+    "metaTitle": "Girolami Slim 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-9-coaxiale",
+    "name": "Girolami Slim 9 coaxiale",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 5082,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 9 kW. Sortie coaxiale.",
+    "metaTitle": "Girolami Slim 9 coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-12",
+    "name": "Girolami Slim 12",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 4876,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 12 kW.",
+    "metaTitle": "Girolami Slim 12 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-12-coaxiale",
+    "name": "Girolami Slim 12 coaxiale",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 5251,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 12 kW. Sortie coaxiale.",
+    "metaTitle": "Girolami Slim 12 coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-12-canalisable",
+    "name": "Girolami Slim 12 canalisable",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 5251,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Slim 12 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-12-canalisable-coaxiale",
+    "name": "Girolami Slim 12 canalisable, coaxiale",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 5626,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 12 kW. Sortie coaxiale, version canalisable.",
+    "metaTitle": "Girolami Slim 12 canalisable, coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-14",
+    "name": "Girolami Slim 14",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 5082,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 14 kW.",
+    "metaTitle": "Girolami Slim 14 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-14-coaxiale",
+    "name": "Girolami Slim 14 coaxiale",
+    "productType": "standard",
+    "power": 14,
+    "priceTTC": 5445,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 14 kW. Sortie coaxiale.",
+    "metaTitle": "Girolami Slim 14 coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-14-canalisable",
+    "name": "Girolami Slim 14 canalisable",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 5433,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 14 kW. Version canalisable.",
+    "metaTitle": "Girolami Slim 14 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-slim-14-canalisable-coaxiale",
+    "name": "Girolami Slim 14 canalisable, coaxiale",
+    "productType": "canalisable",
+    "power": 14,
+    "priceTTC": 5808,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 90,
+      "height": 115,
+      "depth": 36
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets de faible profondeur. 14 kW. Sortie coaxiale, version canalisable.",
+    "metaTitle": "Girolami Slim 14 canalisable, coaxiale | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Slim est fait pour se plaquer contre un mur sans manger la pièce : ",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Marche aussi en convection naturelle"
+    ]
+  },
+  {
+    "slug": "girolami-mini-6",
+    "name": "Girolami Mini 6",
+    "productType": "standard",
+    "power": 6,
+    "priceTTC": 3993,
+    "energyClass": "A++",
+    "weight": 150,
+    "dimensions": {
+      "width": 59,
+      "height": 76
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets compact. 6 kW.",
+    "metaTitle": "Girolami Mini 6 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Mini, c'est le petit format de la gamme. Parfait pour un séjour mod",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Format compact"
+    ]
+  },
+  {
+    "slug": "girolami-mini-9",
+    "name": "Girolami Mini 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 4199,
+    "energyClass": "A++",
+    "weight": 150,
+    "dimensions": {
+      "width": 59,
+      "height": 76
+    },
+    "hasVariants": true,
+    "variantCount": 5,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Vert",
+        "colorHex": "#2E5A34"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets compact. 9 kW.",
+    "metaTitle": "Girolami Mini 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Mini, c'est le petit format de la gamme. Parfait pour un séjour mod",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Format compact"
+    ]
+  },
+  {
+    "slug": "girolami-twin-mini-6",
+    "name": "Girolami Twin Mini 6",
+    "productType": "standard",
+    "power": 6,
+    "priceTTC": 5990,
+    "energyClass": "A++",
+    "weight": 150,
+    "dimensions": {
+      "width": 63,
+      "height": 73,
+      "depth": 61
+    },
+    "hasVariants": true,
+    "variantCount": 1,
+    "colorVariants": [
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Poêle à pellets compact haut de gamme. 6 kW.",
+    "metaTitle": "Girolami Twin Mini 6 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Twin Mini, c'est le petit format de la ligne Twin, en finition noir",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde",
+      "Format compact premium"
+    ]
+  },
+  {
+    "slug": "girolami-twin-slim-9",
+    "name": "Girolami Twin Slim 9",
+    "productType": "standard",
+    "power": 9,
+    "priceTTC": 6171,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 91,
+      "height": 110,
+      "depth": 40
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Corten",
+        "colorHex": "#9C5A34"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets slim haut de gamme. 9 kW.",
+    "metaTitle": "Girolami Twin Slim 9 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Twin Slim est le poêle de faible profondeur de la ligne Twin : larg",
+    "features": [
+      "Finitions Materia en option",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-twin-slim-12",
+    "name": "Girolami Twin Slim 12",
+    "productType": "standard",
+    "power": 12,
+    "priceTTC": 6352,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 91,
+      "height": 110,
+      "depth": 40
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Corten",
+        "colorHex": "#9C5A34"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets slim haut de gamme. 12 kW.",
+    "metaTitle": "Girolami Twin Slim 12 | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Twin Slim est le poêle de faible profondeur de la ligne Twin : larg",
+    "features": [
+      "Finitions Materia en option",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-twin-slim-9-canalisable",
+    "name": "Girolami Twin Slim 9 canalisable",
+    "productType": "canalisable",
+    "power": 9,
+    "priceTTC": 6534,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 91,
+      "height": 110,
+      "depth": 40
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Corten",
+        "colorHex": "#9C5A34"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets slim haut de gamme. 9 kW. Version canalisable.",
+    "metaTitle": "Girolami Twin Slim 9 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Twin Slim est le poêle de faible profondeur de la ligne Twin : larg",
+    "features": [
+      "Finitions Materia en option",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-twin-slim-12-canalisable",
+    "name": "Girolami Twin Slim 12 canalisable",
+    "productType": "canalisable",
+    "power": 12,
+    "priceTTC": 6728,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 91,
+      "height": 110,
+      "depth": 40
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Corten",
+        "colorHex": "#9C5A34"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Poêle à pellets slim haut de gamme. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Twin Slim 12 canalisable | Poêle à pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Twin Slim est le poêle de faible profondeur de la ligne Twin : larg",
+    "features": [
+      "Finitions Materia en option",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-ti-plus-26-hybride",
+    "name": "Girolami TI Plus 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 7913,
+    "energyClass": "A++",
+    "weight": 250,
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, puissance étendue. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Plus 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Plus pousse la puissance de l'insert thermo-cheminée pour les gr",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-14-hybride",
+    "name": "Girolami TI 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 7042,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 73,
+      "height": 121,
+      "depth": 66
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI 14 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée e",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-14-pellet",
+    "name": "Girolami TI 14 Pellet",
+    "productType": "hydro",
+    "power": 14,
+    "priceTTC": 5602,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 73,
+      "height": 121,
+      "depth": 66
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro. 14 kW.",
+    "metaTitle": "Girolami TI 14 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée e",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-18-hybride",
+    "name": "Girolami TI 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 7224,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 73,
+      "height": 121,
+      "depth": 66
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI 18 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée e",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-18-pellet",
+    "name": "Girolami TI 18 Pellet",
+    "productType": "hydro",
+    "power": 18,
+    "priceTTC": 5796,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 73,
+      "height": 121,
+      "depth": 66
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro. 18 kW.",
+    "metaTitle": "Girolami TI 18 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée e",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-22-hybride",
+    "name": "Girolami TI 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 7417,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 73,
+      "height": 121,
+      "depth": 66
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI 22 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée e",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-22-pellet",
+    "name": "Girolami TI 22 Pellet",
+    "productType": "hydro",
+    "power": 22,
+    "priceTTC": 5990,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 73,
+      "height": 121,
+      "depth": 66
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro. 22 kW.",
+    "metaTitle": "Girolami TI 22 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée e",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-26-hybride",
+    "name": "Girolami TI 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 7599,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 73,
+      "height": 121,
+      "depth": 66
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée e",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-26-pellet",
+    "name": "Girolami TI 26 Pellet",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 6171,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 73,
+      "height": 121,
+      "depth": 66
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro. 26 kW.",
+    "metaTitle": "Girolami TI 26 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI est un insert thermo-cheminée. Il s'encastre dans une cheminée e",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-ti-slim-panorama-14-hybride",
+    "name": "Girolami TI Slim Panorama 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 7296,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 115,
+      "height": 121,
+      "depth": 64
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro compact, vitre panoramique. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Slim Panorama 14 Hybride bois-pellet | Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Slim Panorama, c'est l'insert compact avec la vitre large. Encom",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Compact et panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-slim-panorama-18-hybride",
+    "name": "Girolami TI Slim Panorama 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 7478,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 115,
+      "height": 121,
+      "depth": 64
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro compact, vitre panoramique. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Slim Panorama 18 Hybride bois-pellet | Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Slim Panorama, c'est l'insert compact avec la vitre large. Encom",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Compact et panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-slim-panorama-22-hybride",
+    "name": "Girolami TI Slim Panorama 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 7659,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 115,
+      "height": 121,
+      "depth": 64
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro compact, vitre panoramique. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Slim Panorama 22 Hybride bois-pellet | Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Slim Panorama, c'est l'insert compact avec la vitre large. Encom",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Compact et panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-slim-panorama-26-hybride",
+    "name": "Girolami TI Slim Panorama 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 7853,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 115,
+      "height": 121,
+      "depth": 64
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro compact, vitre panoramique. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Slim Panorama 26 Hybride bois-pellet | Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Slim Panorama, c'est l'insert compact avec la vitre large. Encom",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Compact et panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-panorama-14-hybride",
+    "name": "Girolami TI Panorama 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 7357,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 104,
+      "height": 122,
+      "depth": 74
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, vitre panoramique. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Panorama 14 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large.",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-panorama-14-pellet",
+    "name": "Girolami TI Panorama 14 Pellet",
+    "productType": "hydro",
+    "power": 14,
+    "priceTTC": 5856,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 104,
+      "height": 122,
+      "depth": 74
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, vitre panoramique. 14 kW.",
+    "metaTitle": "Girolami TI Panorama 14 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large.",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-panorama-18-hybride",
+    "name": "Girolami TI Panorama 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 7538,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 104,
+      "height": 122,
+      "depth": 74
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, vitre panoramique. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Panorama 18 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large.",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-panorama-18-pellet",
+    "name": "Girolami TI Panorama 18 Pellet",
+    "productType": "hydro",
+    "power": 18,
+    "priceTTC": 6050,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 104,
+      "height": 122,
+      "depth": 74
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, vitre panoramique. 18 kW.",
+    "metaTitle": "Girolami TI Panorama 18 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large.",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-panorama-22-hybride",
+    "name": "Girolami TI Panorama 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 7732,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 104,
+      "height": 122,
+      "depth": 74
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, vitre panoramique. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Panorama 22 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large.",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-panorama-22-pellet",
+    "name": "Girolami TI Panorama 22 Pellet",
+    "productType": "hydro",
+    "power": 22,
+    "priceTTC": 6232,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 104,
+      "height": 122,
+      "depth": 74
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, vitre panoramique. 22 kW.",
+    "metaTitle": "Girolami TI Panorama 22 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large.",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-panorama-26-hybride",
+    "name": "Girolami TI Panorama 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 7913,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 104,
+      "height": 122,
+      "depth": 74
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, vitre panoramique. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Panorama 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large.",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-panorama-26-pellet",
+    "name": "Girolami TI Panorama 26 Pellet",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 6413,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 104,
+      "height": 122,
+      "depth": 74
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro, vitre panoramique. 26 kW.",
+    "metaTitle": "Girolami TI Panorama 26 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Panorama, c'est l'insert thermo-cheminée en version vitre large.",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-plus-panorama-26",
+    "name": "Girolami TI Plus Panorama 26",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 8228,
+    "energyClass": "A++",
+    "weight": 250,
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro Plus, vitre panoramique. 26 kW.",
+    "metaTitle": "Girolami TI Plus Panorama 26 | Poêle hydro Wallonie",
+    "descParas": 2,
+    "descFirst": "Le TI Plus Panorama combine la puissance étendue et la vitre large. Po",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-ti-slim-14-hybride",
+    "name": "Girolami TI Slim 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 7042,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 93,
+      "height": 121,
+      "depth": 54
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro compact. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Slim 14 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Slim est l'insert thermo-cheminée en version compacte. Il se log",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Format compact"
+    ]
+  },
+  {
+    "slug": "girolami-ti-slim-18-hybride",
+    "name": "Girolami TI Slim 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 7236,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 93,
+      "height": 121,
+      "depth": 54
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro compact. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Slim 18 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Slim est l'insert thermo-cheminée en version compacte. Il se log",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Format compact"
+    ]
+  },
+  {
+    "slug": "girolami-ti-slim-22-hybride",
+    "name": "Girolami TI Slim 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 7417,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 93,
+      "height": 121,
+      "depth": 54
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro compact. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Slim 22 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Slim est l'insert thermo-cheminée en version compacte. Il se log",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Format compact"
+    ]
+  },
+  {
+    "slug": "girolami-ti-slim-26-hybride",
+    "name": "Girolami TI Slim 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 7599,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 93,
+      "height": 121,
+      "depth": 54
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert thermo-cheminée hydro compact. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami TI Slim 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le TI Slim est l'insert thermo-cheminée en version compacte. Il se log",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Raccordé au chauffage central",
+      "Pilotage Wi-Fi",
+      "Format compact"
+    ]
+  },
+  {
+    "slug": "girolami-furni-14-hybride",
+    "name": "Girolami Furni 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 7260,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 123,
+      "depth": 65
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Furni 14 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-furni-14-pellet",
+    "name": "Girolami Furni 14 Pellet",
+    "productType": "hydro",
+    "power": 14,
+    "priceTTC": 5796,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 123,
+      "depth": 65
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 14 kW.",
+    "metaTitle": "Girolami Furni 14 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-furni-18-hybride",
+    "name": "Girolami Furni 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 7454,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 123,
+      "depth": 65
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Furni 18 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-furni-18-pellet",
+    "name": "Girolami Furni 18 Pellet",
+    "productType": "hydro",
+    "power": 18,
+    "priceTTC": 5990,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 123,
+      "depth": 65
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 18 kW.",
+    "metaTitle": "Girolami Furni 18 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-furni-22-hybride",
+    "name": "Girolami Furni 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 7623,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 123,
+      "depth": 65
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Furni 22 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-furni-22-pellet",
+    "name": "Girolami Furni 22 Pellet",
+    "productType": "hydro",
+    "power": 22,
+    "priceTTC": 6171,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 123,
+      "depth": 65
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 22 kW.",
+    "metaTitle": "Girolami Furni 22 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-14-hybride",
+    "name": "Girolami Soft 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 6897,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro raccordé au chauffage central. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Soft 14 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-14-pellet",
+    "name": "Girolami Soft 14 Pellet",
+    "productType": "hydro",
+    "power": 14,
+    "priceTTC": 5421,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro raccordé au chauffage central. 14 kW.",
+    "metaTitle": "Girolami Soft 14 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-18-hybride",
+    "name": "Girolami Soft 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 7103,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro raccordé au chauffage central. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Soft 18 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-18-pellet",
+    "name": "Girolami Soft 18 Pellet",
+    "productType": "hydro",
+    "power": 18,
+    "priceTTC": 5614,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro raccordé au chauffage central. 18 kW.",
+    "metaTitle": "Girolami Soft 18 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-22-hybride",
+    "name": "Girolami Soft 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 7296,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro raccordé au chauffage central. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Soft 22 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-22-pellet",
+    "name": "Girolami Soft 22 Pellet",
+    "productType": "hydro",
+    "power": 22,
+    "priceTTC": 5796,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro raccordé au chauffage central. 22 kW.",
+    "metaTitle": "Girolami Soft 22 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-slim-14-hybride",
+    "name": "Girolami Soft Slim 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 7659,
+    "energyClass": "A++",
+    "weight": 285,
+    "dimensions": {
+      "width": 97,
+      "height": 126,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro de faible profondeur. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Soft Slim 14 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Slim, c'est le thermopoêle Soft en version peu profonde : larg",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Faible profondeur"
+    ]
+  },
+  {
+    "slug": "girolami-soft-slim-18-hybride",
+    "name": "Girolami Soft Slim 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 7841,
+    "energyClass": "A++",
+    "weight": 285,
+    "dimensions": {
+      "width": 97,
+      "height": 126,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro de faible profondeur. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Soft Slim 18 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Slim, c'est le thermopoêle Soft en version peu profonde : larg",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Faible profondeur"
+    ]
+  },
+  {
+    "slug": "girolami-soft-slim-22-hybride",
+    "name": "Girolami Soft Slim 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 8022,
+    "energyClass": "A++",
+    "weight": 285,
+    "dimensions": {
+      "width": 97,
+      "height": 126,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro de faible profondeur. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Soft Slim 22 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Slim, c'est le thermopoêle Soft en version peu profonde : larg",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Faible profondeur"
+    ]
+  },
+  {
+    "slug": "girolami-soft-slim-26-hybride",
+    "name": "Girolami Soft Slim 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 8216,
+    "energyClass": "A++",
+    "weight": 285,
+    "dimensions": {
+      "width": 97,
+      "height": 126,
+      "depth": 56
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro de faible profondeur. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Soft Slim 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Slim, c'est le thermopoêle Soft en version peu profonde : larg",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Faible profondeur"
+    ]
+  },
+  {
+    "slug": "girolami-soft-26-hybride",
+    "name": "Girolami Soft 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 7478,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro raccordé au chauffage central. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Soft 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-26-pellet",
+    "name": "Girolami Soft 26 Pellet",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 5990,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro raccordé au chauffage central. 26 kW.",
+    "metaTitle": "Girolami Soft 26 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft est un thermopoêle hydro. Il ne se contente pas de chauffer la",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-furni-26-hybride",
+    "name": "Girolami Furni 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 7829,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 123,
+      "depth": 65
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Furni 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-furni-26-pellet",
+    "name": "Girolami Furni 26 Pellet",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 6352,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 123,
+      "depth": 65
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Ivoire",
+        "colorHex": "#EFE6D0"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 26 kW.",
+    "metaTitle": "Girolami Furni 26 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Furni est un thermopoêle hydro pour le chauffage central. Il prend ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-soft-maiolica-14",
+    "name": "Girolami Soft Maiolica 14",
+    "productType": "hydro",
+    "power": 14,
+    "priceTTC": 7659,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro, habillage maïolique. 14 kW.",
+    "metaTitle": "Girolami Soft Maiolica 14 | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la c",
+    "features": [
+      "Raccordé au chauffage central",
+      "Habillage maïolique",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-soft-maiolica-14-pellet",
+    "name": "Girolami Soft Maiolica 14 Pellet",
+    "productType": "hydro",
+    "power": 14,
+    "priceTTC": 6352,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro, habillage maïolique. 14 kW.",
+    "metaTitle": "Girolami Soft Maiolica 14 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la c",
+    "features": [
+      "Raccordé au chauffage central",
+      "Habillage maïolique",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-soft-maiolica-18",
+    "name": "Girolami Soft Maiolica 18",
+    "productType": "hydro",
+    "power": 18,
+    "priceTTC": 7853,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro, habillage maïolique. 18 kW.",
+    "metaTitle": "Girolami Soft Maiolica 18 | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la c",
+    "features": [
+      "Raccordé au chauffage central",
+      "Habillage maïolique",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-soft-maiolica-18-pellet",
+    "name": "Girolami Soft Maiolica 18 Pellet",
+    "productType": "hydro",
+    "power": 18,
+    "priceTTC": 6534,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro, habillage maïolique. 18 kW.",
+    "metaTitle": "Girolami Soft Maiolica 18 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la c",
+    "features": [
+      "Raccordé au chauffage central",
+      "Habillage maïolique",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-soft-maiolica-22",
+    "name": "Girolami Soft Maiolica 22",
+    "productType": "hydro",
+    "power": 22,
+    "priceTTC": 8046,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro, habillage maïolique. 22 kW.",
+    "metaTitle": "Girolami Soft Maiolica 22 | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la c",
+    "features": [
+      "Raccordé au chauffage central",
+      "Habillage maïolique",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-soft-maiolica-22-pellet",
+    "name": "Girolami Soft Maiolica 22 Pellet",
+    "productType": "hydro",
+    "power": 22,
+    "priceTTC": 6728,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro, habillage maïolique. 22 kW.",
+    "metaTitle": "Girolami Soft Maiolica 22 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la c",
+    "features": [
+      "Raccordé au chauffage central",
+      "Habillage maïolique",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-soft-maiolica-26",
+    "name": "Girolami Soft Maiolica 26",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 8228,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro, habillage maïolique. 26 kW.",
+    "metaTitle": "Girolami Soft Maiolica 26 | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la c",
+    "features": [
+      "Raccordé au chauffage central",
+      "Habillage maïolique",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-soft-maiolica-26-pellet",
+    "name": "Girolami Soft Maiolica 26 Pellet",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 6897,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 63,
+      "height": 125,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 3,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Bordeaux",
+        "colorHex": "#6D071A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro, habillage maïolique. 26 kW.",
+    "metaTitle": "Girolami Soft Maiolica 26 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Soft Maiolica, c'est le thermopoêle Soft habillé de maïolique, la c",
+    "features": [
+      "Raccordé au chauffage central",
+      "Habillage maïolique",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi"
+    ]
+  },
+  {
+    "slug": "girolami-edge-14-hybride",
+    "name": "Girolami Edge 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 7732,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 66,
+      "height": 118,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Edge 14 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-edge-14-pellet",
+    "name": "Girolami Edge 14 Pellet",
+    "productType": "hydro",
+    "power": 14,
+    "priceTTC": 6280,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 66,
+      "height": 118,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 14 kW.",
+    "metaTitle": "Girolami Edge 14 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-edge-18-hybride",
+    "name": "Girolami Edge 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 7913,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 66,
+      "height": 118,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Edge 18 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-edge-18-pellet",
+    "name": "Girolami Edge 18 Pellet",
+    "productType": "hydro",
+    "power": 18,
+    "priceTTC": 6474,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 66,
+      "height": 118,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 18 kW.",
+    "metaTitle": "Girolami Edge 18 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-edge-22-hybride",
+    "name": "Girolami Edge 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 8107,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 66,
+      "height": 118,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Edge 22 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-edge-22-pellet",
+    "name": "Girolami Edge 22 Pellet",
+    "productType": "hydro",
+    "power": 22,
+    "priceTTC": 6655,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 66,
+      "height": 118,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 22 kW.",
+    "metaTitle": "Girolami Edge 22 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-edge-26-hybride",
+    "name": "Girolami Edge 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 8288,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 66,
+      "height": 118,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Edge 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-edge-26-pellet",
+    "name": "Girolami Edge 26 Pellet",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 6836,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 66,
+      "height": 118,
+      "depth": 66
+    },
+    "hasVariants": true,
+    "variantCount": 2,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro. 26 kW.",
+    "metaTitle": "Girolami Edge 26 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "L'Edge est un thermopoêle hydro qui chauffe l'eau de l'installation : ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-sharp-14-hybride",
+    "name": "Girolami Sharp 14 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 14,
+    "priceTTC": 6776,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 60,
+      "height": 120,
+      "depth": 68
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro au design anguleux. 14 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Sharp 14 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-sharp-14-pellet",
+    "name": "Girolami Sharp 14 Pellet",
+    "productType": "hydro",
+    "power": 14,
+    "priceTTC": 5324,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 60,
+      "height": 120,
+      "depth": 68
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro au design anguleux. 14 kW.",
+    "metaTitle": "Girolami Sharp 14 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-sharp-18-hybride",
+    "name": "Girolami Sharp 18 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 18,
+    "priceTTC": 6982,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 60,
+      "height": 120,
+      "depth": 68
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro au design anguleux. 18 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Sharp 18 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-sharp-18-pellet",
+    "name": "Girolami Sharp 18 Pellet",
+    "productType": "hydro",
+    "power": 18,
+    "priceTTC": 5518,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 60,
+      "height": 120,
+      "depth": 68
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro au design anguleux. 18 kW.",
+    "metaTitle": "Girolami Sharp 18 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-sharp-22-hybride",
+    "name": "Girolami Sharp 22 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 22,
+    "priceTTC": 7163,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 60,
+      "height": 120,
+      "depth": 68
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro au design anguleux. 22 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Sharp 22 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-sharp-22-pellet",
+    "name": "Girolami Sharp 22 Pellet",
+    "productType": "hydro",
+    "power": 22,
+    "priceTTC": 5711,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 60,
+      "height": 120,
+      "depth": 68
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro au design anguleux. 22 kW.",
+    "metaTitle": "Girolami Sharp 22 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-sharp-26-hybride",
+    "name": "Girolami Sharp 26 Hybride bois-pellet",
+    "productType": "hybride",
+    "power": 26,
+    "priceTTC": 7357,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 60,
+      "height": 120,
+      "depth": 68
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro au design anguleux. 26 kW. Fonctionne au bois comme aux pellets.",
+    "metaTitle": "Girolami Sharp 26 Hybride bois-pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-sharp-26-pellet",
+    "name": "Girolami Sharp 26 Pellet",
+    "productType": "hydro",
+    "power": 26,
+    "priceTTC": 5893,
+    "energyClass": "A++",
+    "weight": 250,
+    "dimensions": {
+      "width": 60,
+      "height": 120,
+      "depth": 68
+    },
+    "hasVariants": true,
+    "variantCount": 4,
+    "colorVariants": [
+      {
+        "colorName": "Blanc",
+        "colorHex": "#FFFFFF"
+      },
+      {
+        "colorName": "Gris anthracite",
+        "colorHex": "#3A3A3A"
+      },
+      {
+        "colorName": "Noir",
+        "colorHex": "#000000"
+      },
+      {
+        "colorName": "Bronze",
+        "colorHex": "#5C4A35"
+      }
+    ],
+    "shortDescription": "Thermopoêle hydro au design anguleux. 26 kW.",
+    "metaTitle": "Girolami Sharp 26 Pellet | Poêle hydro Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Sharp est un thermopoêle hydro à la ligne plus marquée, anguleuse. ",
+    "features": [
+      "Raccordé au chauffage central",
+      "Bois ou pellets, au choix",
+      "Brasier autonettoyant",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-alfa-bio",
+    "name": "Girolami Alfa Bio",
+    "productType": "insert",
+    "power": 11,
+    "priceTTC": 4671,
+    "dimensions": {
+      "width": 125,
+      "height": 153,
+      "depth": 65
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Poêle à pellets Girolami. 11 kW.",
+    "metaTitle": "Girolami Alfa Bio | Insert pellets Wallonie",
+    "descParas": 1,
+    "descFirst": "Poêle à pellets Girolami, fabrication italienne. Alimentation par le b",
+    "features": [
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Poêle étanche",
+      "Radiocommande LCD avec sonde"
+    ]
+  },
+  {
+    "slug": "girolami-grid-verticale-9",
+    "name": "Girolami Grid Verticale 9",
+    "productType": "insert",
+    "power": 9,
+    "priceTTC": 6050,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 89,
+      "height": 126,
+      "depth": 43
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert à pellets, vision verticale. 9 kW.",
+    "metaTitle": "Girolami Grid Verticale 9 | Insert pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Grid Verticale est un insert à pellets pour cheminée, avec une vitr",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde",
+      "Vision verticale de la flamme"
+    ]
+  },
+  {
+    "slug": "girolami-grid-verticale-9-canalisable",
+    "name": "Girolami Grid Verticale 9 canalisable",
+    "productType": "insert",
+    "power": 9,
+    "priceTTC": 6413,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 89,
+      "height": 126,
+      "depth": 43
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert à pellets, vision verticale. 9 kW. Version canalisable.",
+    "metaTitle": "Girolami Grid Verticale 9 canalisable | Insert pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Grid Verticale est un insert à pellets pour cheminée, avec une vitr",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde",
+      "Vision verticale de la flamme"
+    ]
+  },
+  {
+    "slug": "girolami-grid-verticale-12",
+    "name": "Girolami Grid Verticale 12",
+    "productType": "insert",
+    "power": 12,
+    "priceTTC": 6232,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 89,
+      "height": 126,
+      "depth": 43
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert à pellets, vision verticale. 12 kW.",
+    "metaTitle": "Girolami Grid Verticale 12 | Insert pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Grid Verticale est un insert à pellets pour cheminée, avec une vitr",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde",
+      "Vision verticale de la flamme"
+    ]
+  },
+  {
+    "slug": "girolami-grid-verticale-12-canalisable",
+    "name": "Girolami Grid Verticale 12 canalisable",
+    "productType": "insert",
+    "power": 12,
+    "priceTTC": 6607,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 89,
+      "height": 126,
+      "depth": 43
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert à pellets, vision verticale. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Grid Verticale 12 canalisable | Insert pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Grid Verticale est un insert à pellets pour cheminée, avec une vitr",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde",
+      "Vision verticale de la flamme"
+    ]
+  },
+  {
+    "slug": "girolami-grid-panorama-9",
+    "name": "Girolami Grid Panorama 9",
+    "productType": "insert",
+    "power": 9,
+    "priceTTC": 6171,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 101,
+      "height": 126,
+      "depth": 46
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert à pellets, vision panoramique. 9 kW.",
+    "metaTitle": "Girolami Grid Panorama 9 | Insert pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Grid Panorama est l'insert à pellets en version large, avec une vit",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-grid-panorama-9-canalisable",
+    "name": "Girolami Grid Panorama 9 canalisable",
+    "productType": "insert",
+    "power": 9,
+    "priceTTC": 6534,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 101,
+      "height": 126,
+      "depth": 46
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert à pellets, vision panoramique. 9 kW. Version canalisable.",
+    "metaTitle": "Girolami Grid Panorama 9 canalisable | Insert pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Grid Panorama est l'insert à pellets en version large, avec une vit",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-grid-panorama-12",
+    "name": "Girolami Grid Panorama 12",
+    "productType": "insert",
+    "power": 12,
+    "priceTTC": 6352,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 101,
+      "height": 126,
+      "depth": 46
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert à pellets, vision panoramique. 12 kW.",
+    "metaTitle": "Girolami Grid Panorama 12 | Insert pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Grid Panorama est l'insert à pellets en version large, avec une vit",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde",
+      "Vitre panoramique"
+    ]
+  },
+  {
+    "slug": "girolami-grid-panorama-12-canalisable",
+    "name": "Girolami Grid Panorama 12 canalisable",
+    "productType": "insert",
+    "power": 12,
+    "priceTTC": 6728,
+    "energyClass": "A++",
+    "weight": 170,
+    "dimensions": {
+      "width": 101,
+      "height": 126,
+      "depth": 46
+    },
+    "hasVariants": false,
+    "variantCount": 0,
+    "shortDescription": "Insert à pellets, vision panoramique. 12 kW. Version canalisable.",
+    "metaTitle": "Girolami Grid Panorama 12 canalisable | Insert pellets Wallonie",
+    "descParas": 3,
+    "descFirst": "Le Grid Panorama est l'insert à pellets en version large, avec une vit",
+    "features": [
+      "S'encastre dans une cheminée",
+      "Brasier autonettoyant",
+      "Fonctionnement ultra silencieux",
+      "Pilotage Wi-Fi",
+      "Radiocommande LCD avec sonde",
+      "Vitre panoramique"
+    ]
+  }
+]

@@ -208,17 +208,62 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
         <h2 className="mb-4 text-3xl font-semibold md:text-4xl">Estimation envoyée</h2>
         <p className="mx-auto mb-6 max-w-2xl text-lg leading-relaxed">
           Merci {customer.name}, nous avons votre configuration
-          {product ? ` autour du ${product.name}` : ""}. Nous revenons vers vous sous 48h ouvrées
-          pour convenir de la visite technique et confirmer le prix ferme. Si c&apos;est urgent,
-          appelez-nous au 081 13 83 09.
+          {product ? ` autour du ${product.name}` : ""}.
         </p>
         <p className="mb-8 text-xl font-semibold">
           Estimation : {eur(r.totalTTC)} TTC
           {r.prime > 0 ? ` · ${eur(r.netAfterPrime)} après prime estimée` : ""}
         </p>
-        <Button asChild variant="outline" size="default">
-          <Link href="/">Retour à l&apos;accueil</Link>
-        </Button>
+
+        {/*
+          Le paiement en ligne a été retiré : on explique franchement la suite
+          plutôt que de laisser le client attendre un bouton « payer ». Un
+          poêle ne se commande pas sans avoir vu le conduit, et cette étape
+          évite les mauvaises surprises des deux côtés.
+        */}
+        <div className="mx-auto mb-8 max-w-2xl rounded-2xl border border-mp-sand/60 bg-white/70 p-6 text-left">
+          <p className="mb-4 font-semibold">La suite, en trois temps</p>
+          <ol className="space-y-3 text-mp-ink">
+            <li className="flex gap-3">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mp-green-deep text-xs font-bold text-mp-cream">1</span>
+              <span>
+                On vous rappelle sous 48 h ouvrées pour caler la{" "}
+                <strong>visite technique</strong> — vous pouvez aussi{" "}
+                <Link href="/prendre-rendez-vous" className="text-mp-orange-flame underline underline-offset-2 hover:no-underline">
+                  choisir votre créneau tout de suite
+                </Link>
+                .
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mp-green-deep text-xs font-bold text-mp-cream">2</span>
+              <span>
+                Sur place, on valide le conduit, l&apos;évacuation et l&apos;accès. C&apos;est ce
+                qui transforme l&apos;estimation en <strong>prix ferme</strong>, pose comprise.
+              </span>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mp-green-deep text-xs font-bold text-mp-cream">3</span>
+              <span>
+                Une fois le devis accepté, vous recevez la{" "}
+                <strong>facture d&apos;acompte</strong> et on planifie la pose. Rien à payer
+                en ligne, rien n&apos;est engagé avant votre accord.
+              </span>
+            </li>
+          </ol>
+          <p className="mt-4 text-sm text-mp-ink-soft">
+            Une question dans l&apos;intervalle ? 081 13 83 09.
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button asChild variant="primary" size="default">
+            <Link href="/prendre-rendez-vous">Choisir mon créneau</Link>
+          </Button>
+          <Button asChild variant="outline" size="default">
+            <Link href="/">Retour à l&apos;accueil</Link>
+          </Button>
+        </div>
       </div>
     );
   }

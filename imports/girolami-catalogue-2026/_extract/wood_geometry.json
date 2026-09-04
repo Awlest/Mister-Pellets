@@ -1,0 +1,353 @@
+[
+ {
+  "slug": "girolami-alfa",
+  "model": "Alfa",
+  "page": 61,
+  "W": 125,
+  "H": 153,
+  "D": 65,
+  "weight": null,
+  "all_bodies": [
+   [
+    "125",
+    "65",
+    "153"
+   ],
+   [
+    "74",
+    "48",
+    "52"
+   ],
+   [
+    "130",
+    "80",
+    "165"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-tc-bio-evo-80",
+  "model": "Tc Bio Evo 80",
+  "page": 97,
+  "W": 115,
+  "H": 161,
+  "D": 77,
+  "weight": 52,
+  "all_bodies": [
+   [
+    "115",
+    "77",
+    "161"
+   ],
+   [
+    "131",
+    "77",
+    "182"
+   ],
+   [
+    "68",
+    "52",
+    "49"
+   ],
+   [
+    "120",
+    "80",
+    "195"
+   ]
+  ],
+  "kg_found": [
+   "52"
+  ]
+ },
+ {
+  "slug": "girolami-tc-evo-75",
+  "model": "Tc Evo 75",
+  "page": 124,
+  "W": 81,
+  "H": 116,
+  "D": 71,
+  "weight": null,
+  "all_bodies": [
+   [
+    "81",
+    "71",
+    "116"
+   ],
+   [
+    "68",
+    "52",
+    "49"
+   ],
+   [
+    "120",
+    "80",
+    "130"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-frame-80",
+  "model": "Frame 80",
+  "page": 133,
+  "W": 92,
+  "H": 156,
+  "D": 56,
+  "weight": null,
+  "all_bodies": [
+   [
+    "92",
+    "56",
+    "156"
+   ],
+   [
+    "120",
+    "80",
+    "180"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-frame-100",
+  "model": "Frame 100",
+  "page": 137,
+  "W": 112,
+  "H": 156,
+  "D": 56,
+  "weight": null,
+  "all_bodies": [
+   [
+    "112",
+    "56",
+    "156"
+   ],
+   [
+    "120",
+    "80",
+    "180"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-frame-120",
+  "model": "Frame 120",
+  "page": 141,
+  "W": 132,
+  "H": 156,
+  "D": 56,
+  "weight": null,
+  "all_bodies": [
+   [
+    "132",
+    "56",
+    "156"
+   ],
+   [
+    "135",
+    "80",
+    "180"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-alfa-double",
+  "model": "Alfa Double",
+  "page": 146,
+  "W": 90,
+  "H": 152,
+  "D": 60,
+  "weight": null,
+  "all_bodies": [
+   [
+    "90",
+    "60",
+    "152"
+   ],
+   [
+    "120",
+    "80",
+    "165"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-mbs-f-80",
+  "model": "Mbs F 80",
+  "page": 147,
+  "W": 81,
+  "H": 154,
+  "D": 60,
+  "weight": 202,
+  "all_bodies": [
+   [
+    "81",
+    "60",
+    "154"
+   ],
+   [
+    "67",
+    "46",
+    "38"
+   ],
+   [
+    "100",
+    "70",
+    "170"
+   ]
+  ],
+  "kg_found": [
+   "196",
+   "202"
+  ]
+ },
+ {
+  "slug": "girolami-mbs-f-100",
+  "model": "Mbs F 100",
+  "page": 148,
+  "W": 96,
+  "H": 170,
+  "D": 61,
+  "weight": 248,
+  "all_bodies": [
+   [
+    "96",
+    "61",
+    "170"
+   ],
+   [
+    "88",
+    "47",
+    "45"
+   ],
+   [
+    "115",
+    "70",
+    "185"
+   ]
+  ],
+  "kg_found": [
+   "230",
+   "248"
+  ]
+ },
+ {
+  "slug": "girolami-mbs-f-120",
+  "model": "Mbs F 120",
+  "page": 149,
+  "W": 107,
+  "H": 170,
+  "D": 61,
+  "weight": 263,
+  "all_bodies": [
+   [
+    "107",
+    "61",
+    "170"
+   ],
+   [
+    "93",
+    "47",
+    "54"
+   ],
+   [
+    "115",
+    "70",
+    "185"
+   ]
+  ],
+  "kg_found": [
+   "248",
+   "263"
+  ]
+ },
+ {
+  "slug": "girolami-vision-evo-60",
+  "model": "Vision Evo 60",
+  "page": 157,
+  "W": 80,
+  "H": 70,
+  "D": 60,
+  "weight": null,
+  "all_bodies": [
+   [
+    "80",
+    "60",
+    "70"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-vision-evo-70",
+  "model": "Vision Evo 70",
+  "page": 158,
+  "W": 90,
+  "H": 70,
+  "D": 60,
+  "weight": null,
+  "all_bodies": [
+   [
+    "90",
+    "60",
+    "70"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-vision-evo-80",
+  "model": "Vision Evo 80",
+  "page": 159,
+  "W": 100,
+  "H": 70,
+  "D": 60,
+  "weight": null,
+  "all_bodies": [
+   [
+    "100",
+    "60",
+    "70"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-vision-evo-90",
+  "model": "Vision Evo 90",
+  "page": 160,
+  "W": 110,
+  "H": 70,
+  "D": 60,
+  "weight": null,
+  "all_bodies": [
+   [
+    "110",
+    "60",
+    "70"
+   ]
+  ],
+  "kg_found": []
+ },
+ {
+  "slug": "girolami-vision-evo-100",
+  "model": "Vision Evo 100",
+  "page": 161,
+  "W": 120,
+  "H": 70,
+  "D": 60,
+  "weight": null,
+  "all_bodies": [
+   [
+    "120",
+    "60",
+    "70"
+   ]
+  ],
+  "kg_found": []
+ }
+]

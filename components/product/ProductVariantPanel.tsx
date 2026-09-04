@@ -1,9 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ShoppingBag, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/lib/cart-store";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import type {
   VariantOptionAxis,
@@ -62,8 +60,6 @@ export function ProductVariantPanel({
   const [selected, setSelected] = React.useState<Record<number, number | null>>(
     () => Object.fromEntries(axes.map((a) => [a.optionTypeId, null])),
   );
-  const [justAdded, setJustAdded] = React.useState(false);
-  const addItem = useCart((s) => s.addItem);
 
   /** Une variante est compatible avec une sélection partielle donnée. */
   const matchesSelection = React.useCallback(
@@ -118,26 +114,6 @@ export function ProductVariantPanel({
   ): string {
     if (valueId == null) return "";
     return axis.values.find((v) => v.id === valueId)?.label ?? "";
-  }
-
-  function handleAddToCart() {
-    if (!activeVariant || !activePriced) return;
-    const config = axes
-      .map((a) => valueLabel(a, selected[a.optionTypeId]))
-      .filter(Boolean)
-      .join(", ");
-    addItem(
-      {
-        productId: `${productSlug}::${activeVariant.sku ?? activeVariant.id}`,
-        name: config ? `${productName}, ${config}` : productName,
-        brand: productBrand,
-        priceTTC: effectivePrice(activeVariant),
-        imageSrc: activeVariant.image?.url ?? productImageSrc,
-      },
-      1,
-    );
-    setJustAdded(true);
-    setTimeout(() => setJustAdded(false), 2000);
   }
 
   return (
@@ -248,45 +224,20 @@ export function ProductVariantPanel({
         )}
       </div>
 
-      {/* Bouton d'achat */}
-      <Button
-        type="button"
-        variant="primary"
-        size="lg"
-        className="w-full"
-        disabled={!activeVariant || !activePriced}
-        onClick={handleAddToCart}
-        aria-label={
-          activeVariant
-            ? activePriced
-              ? `Ajouter ${productName} au panier`
-              : "Configuration sur devis"
-            : "Sélectionner une configuration"
-        }
-      >
-        {justAdded ? (
-          <>
-            <Check className="h-5 w-5" />
-            Ajouté au panier
-          </>
-        ) : activeVariant && activePriced ? (
-          <>
-            <ShoppingBag className="h-5 w-5" />
-            Ajouter au panier
-          </>
-        ) : activeVariant ? (
-          "Configuration sur devis"
-        ) : (
-          "Sélectionner une configuration"
-        )}
-      </Button>
+      {/* La configuration choisie sert au chiffrage, pas à un panier :
+          la pose se confirme lors de la visite technique. */}
+      <p className="text-sm text-mp-ink-soft">
+        {activeVariant
+          ? activePriced
+            ? "Configuration disponible. Le prix de la pose se chiffre après la visite sur place."
+            : "Cette configuration se chiffre sur devis."
+          : "Sélectionnez une configuration pour voir le prix."}
+      </p>
 
-      {/* Voir le commentaire de app/(frontend)/produit/[slug]/page.tsx :
-          ne pas réintroduire de « paiement en ligne à venir », le checkout
-          Mollie est en service. */}
+      {/* Le paiement en ligne a été retiré le 04/09/2026 : ne pas
+          réintroduire de bouton d'achat ni de mention de paiement ici. */}
       <p className="text-xs text-mp-ink-soft text-center">
-        Pose non incluse : devis chiffré sous 48 h. Paiement sécurisé par
-        Bancontact, Visa ou Mastercard via Mollie.
+        Pose non incluse : devis chiffré sous 48 h, après la visite sur place.
       </p>
     </div>
   );
