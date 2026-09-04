@@ -61,7 +61,7 @@ export default async function CityPage({ params }: Props) {
     description: city.metaDescription,
     provider: {
       "@type": "HomeAndConstructionBusiness",
-      "@id": "https://mister-pellets.be/#business",
+      "@id": "https://mister-pellets.be/#organization",
       name: "Mister Pellets",
       address: {
         "@type": "PostalAddress",

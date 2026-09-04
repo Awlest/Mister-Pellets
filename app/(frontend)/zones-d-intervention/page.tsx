@@ -26,7 +26,7 @@ export default function ZonesDInterventionPage() {
         eyebrow="10 villes · 5 provinces · toute la Wallonie"
         title={
           <>
-            Où on <span className="mp-italic">intervient</span> en Wallonie
+            Installateur de poêles à pellets <span className="mp-italic">en Wallonie</span>
           </>
         }
         description="Basés à Fernelmont, en plein centre de la province de Namur, on rayonne sur toute la Wallonie. Livraison gratuite des poêles dans un rayon de 20 km autour de l'atelier. Au-delà : 50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre. Pour les villes plus éloignées (Arlon, Tournai), on regroupe les RDV pour limiter les trajets."

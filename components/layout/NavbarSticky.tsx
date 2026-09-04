@@ -45,7 +45,10 @@ interface Tab {
 const TABS: Tab[] = [
   { id: "home",  href: "/",                    icon: Home,        label: "Accueil",  matches: (p) => p === "/" },
   { id: "shop",  href: "/boutique",            icon: ShoppingBag, label: "Boutique", matches: (p) => p.startsWith("/boutique") || p.startsWith("/produit/") },
-  { id: "quote", href: "/demande-de-devis",    icon: Flame,       label: "Devis",    matches: (p) => p === "/demande-de-devis" },
+  // L'onglet Devis mène au configurateur : il chiffre, calcule la mensualité et
+  // déduit la prime. Le formulaire /demande-de-devis reste accessible, mais il
+  // n'est plus le chemin par défaut depuis le retrait du paiement en ligne.
+  { id: "quote", href: "/estimation",          icon: Flame,       label: "Devis",    matches: (p) => p === "/estimation" || p === "/demande-de-devis" },
   { id: "rdv",   href: "/prendre-rendez-vous", icon: Calendar,    label: "RDV",      matches: (p) => p === "/prendre-rendez-vous" },
   { id: "menu",                                icon: MenuIcon,    label: "Menu",     matches: () => false },
 ];

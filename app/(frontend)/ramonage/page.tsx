@@ -16,7 +16,7 @@ export default function RamonagePage() {
   return (
     <ServiceLanding
       service={service}
-      title="Ramonage de poêle à pellets"
+      title="Ramonage de poêle à pellets en Wallonie"
       intro="Le ramonage annuel du conduit est obligatoire, et c'est la première chose que votre assurance demandera en cas de sinistre. 90 € TVAC, certificat remis sur place."
       included={[
         "Ramonage mécanique complet du conduit de fumée",

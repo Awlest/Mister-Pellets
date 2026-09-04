@@ -27,7 +27,7 @@ export default async function EstimationPage() {
         eyebrow="2 minutes"
         title={
           <>
-            Votre poêle posé, <span className="mp-italic">chiffré en direct</span>
+            Votre poêle à pellets posé, <span className="mp-italic">chiffré en direct</span>
           </>
         }
         description="Vous choisissez le poêle dans notre catalogue, nous ajoutons la pose, la TVA applicable, la prime Wallonie estimée et la mensualité à 0 %. Le tout sans attendre un rappel."

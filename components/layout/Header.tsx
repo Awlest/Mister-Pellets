@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -140,10 +140,19 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Actions droite (desktop uniquement, le Header est masqué sur mobile) */}
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Actions droite (desktop uniquement, le Header est masqué sur mobile).
+          * Le numéro est cliquable : sur ce métier, l'appel reste le premier
+          * réflexe, et il n'apparaissait jusqu'ici nulle part dans la navigation. */}
+        <div className="flex items-center gap-3 shrink-0">
+          <a
+            href="tel:+3281138309"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-mp-green-deep transition-colors hover:text-mp-orange-flame"
+          >
+            <Phone className="h-4 w-4" aria-hidden />
+            081 13 83 09
+          </a>
           <Button asChild variant="primary" size="default">
-            <Link href="/demande-de-devis">Devis →</Link>
+            <Link href="/estimation">Chiffrer mon poêle →</Link>
           </Button>
         </div>
       </div>

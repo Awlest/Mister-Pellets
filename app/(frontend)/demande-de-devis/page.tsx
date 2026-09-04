@@ -19,7 +19,7 @@ export default function DevisPage() {
         eyebrow="60 secondes"
         title={
           <>
-            Devis personnalisé en <span className="mp-italic">6 questions</span>
+            Devis poêle à pellets en <span className="mp-italic">6 questions</span>
           </>
         }
         description="Plus précis que le devis générique : on adapte au PEB de votre maison, à votre budget, et au délai. Réponse sous 48h ouvrées avec un chiffrage net incluant les primes Wallonie."

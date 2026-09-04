@@ -21,7 +21,7 @@ export default function GuidesHubPage() {
         eyebrow="Guides éditoriaux"
         title={
           <>
-            Tout savoir avant <span className="mp-italic">d'acheter</span>
+            Poêle à pellets : tout savoir avant <span className="mp-italic">d'acheter</span>
           </>
         }
         description="Des guides complets sur le poêle à pellets en Wallonie : choix de marques, technologies, dimensionnement, entretien, primes. Sans bullshit, avec les vrais chiffres."

@@ -7,6 +7,8 @@ interface CTAFinalProps {
   title?: string;
   description?: string;
   primaryCta?: { label: string; href: string };
+  /** Action secondaire, typiquement la réservation en ligne d'un créneau. */
+  secondaryCta?: { label: string; href: string };
   showPhone?: boolean;
 }
 
@@ -18,7 +20,8 @@ const PHONE = "081 13 83 09";
 export function CTAFinal({
   title = "Une question ? Un projet ?",
   description = "Devis gratuit en 60 secondes, ou échange direct au téléphone. Notre équipe répond personnellement, on est basés à Fernelmont.",
-  primaryCta = { label: "Demander un devis", href: "/demande-de-devis" },
+  primaryCta = { label: "Chiffrer mon installation", href: "/estimation" },
+  secondaryCta,
   showPhone = true,
 }: CTAFinalProps) {
   return (
@@ -44,6 +47,11 @@ export function CTAFinal({
           <Button asChild variant="primary" size="lg">
             <Link href={primaryCta.href}>{primaryCta.label}</Link>
           </Button>
+          {secondaryCta && (
+            <Button asChild variant="outline" size="lg">
+              <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
+            </Button>
+          )}
           {showPhone && (
             <a
               href={`tel:${formatPhone(PHONE)}`}

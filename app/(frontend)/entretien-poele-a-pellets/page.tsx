@@ -16,7 +16,7 @@ export default function EntretienPage() {
   return (
     <ServiceLanding
       service={service}
-      title="Entretien annuel de poêle à pellets"
+      title="Entretien annuel de poêle à pellets en Wallonie"
       intro="Une révision complète une fois par an, ramonage du conduit compris, à 175 € TVAC. L'appareil consomme moins, tombe moins en panne, et votre garantie reste valable."
       included={[
         "Démontage et nettoyage du creuset et du cendrier",

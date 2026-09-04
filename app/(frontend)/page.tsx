@@ -9,8 +9,9 @@ import { PrimesBlock } from "@/components/sections/PrimesBlock";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
-import { JsonLd, LOCAL_BUSINESS_SCHEMA } from "@/components/seo/JsonLd";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { buildFAQSchema } from "@/lib/seo";
+import { CITIES } from "@/lib/cities";
 
 export const metadata: Metadata = {
   title: "Poêle à pellets en Wallonie, vente, pose, entretien",
@@ -56,12 +57,36 @@ const FAQ_HOMEPAGE = [
   },
 ];
 
+const SERVICES = [
+  {
+    href: "/entretien-poele-a-pellets",
+    title: "Entretien annuel",
+    description:
+      "Révision complète : nettoyage du corps de chauffe, contrôle des joints, des sondes et de l'extracteur, réglage de la combustion. C'est ce qui garde la garantie constructeur valable.",
+    cta: "Voir l'entretien",
+  },
+  {
+    href: "/ramonage",
+    title: "Ramonage",
+    description:
+      "Obligatoire une fois par an en Wallonie sur un appareil à combustible solide. Certificat remis sur place, celui que votre assureur vous demandera après un sinistre.",
+    cta: "Voir le ramonage",
+  },
+  {
+    href: "/depannage-poele-a-pellets",
+    title: "Dépannage",
+    description:
+      "Poêle qui s'éteint, code erreur, allumage qui échoue, bruit anormal. Donnez-nous la marque et le code affiché : on gagne souvent un déplacement.",
+    cta: "Voir le dépannage",
+  },
+];
+
 export default function HomePage() {
   const faqSchema = buildFAQSchema(FAQ_HOMEPAGE);
 
   return (
     <>
-      <JsonLd data={[LOCAL_BUSINESS_SCHEMA, faqSchema]} />
+      <JsonLd data={faqSchema} />
 
       {/* HERO, logo central doublé + spacing 35 px max (cf. doc V1.3 §P7) */}
       <section className="relative overflow-hidden bg-mp-cream">
@@ -73,8 +98,11 @@ export default function HomePage() {
           }}
         />
 
-        {/* Bloc logo dédié : padding vertical réduit de 50 % (35 → 17,5 px)
-          * suite validation client. Logo 320 px mobile / 400 px desktop. */}
+        {/* Bloc logo dédié. Taille divisée par deux (320/400 → 160/200 px) :
+          * au format précédent, le premier écran ne contenait que le logo, et
+          * le titre, les boutons et la ligne de preuves n'apparaissaient
+          * qu'après un défilement. Sur du trafic payant, c'est un visiteur
+          * acheté puis perdu avant d'avoir lu la proposition. */}
         <div
           className="flex justify-center relative"
           style={{ paddingTop: "17.5px", paddingBottom: "17.5px" }}
@@ -82,10 +110,10 @@ export default function HomePage() {
           <Image
             src="/logo-mister-pellets-full.svg"
             alt="Mister Pellets"
-            width={640}
-            height={640}
+            width={400}
+            height={400}
             priority
-            className="h-[320px] w-[320px] md:h-[400px] md:w-[400px] object-contain"
+            className="h-[160px] w-[160px] md:h-[200px] md:w-[200px] object-contain"
           />
         </div>
 
@@ -102,14 +130,35 @@ export default function HomePage() {
               provinces wallonnes depuis 2016.
             </p>
 
-            <div className="flex flex-wrap gap-3 justify-center mb-7">
+            {/* Le configurateur passe en action principale : depuis le retrait du
+              * paiement en ligne, c'est lui qui chiffre, calcule la mensualité et
+              * déduit la prime, alors que le formulaire ne fait que transmettre
+              * une demande. Un seul chemin par intention. */}
+            <div className="flex flex-wrap gap-3 justify-center mb-4">
               <Button asChild variant="primary" size="lg">
-                <Link href="/demande-de-devis">Devis en 60 secondes</Link>
+                <Link href="/estimation">Chiffrer mon installation</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link href="/boutique">Voir la boutique</Link>
               </Button>
             </div>
+
+            <p className="mb-7 text-sm text-mp-ink-soft">
+              Vous préférez parler à quelqu&apos;un ?{" "}
+              <a
+                href="tel:+3281138309"
+                className="font-semibold text-mp-green-deep underline underline-offset-4 hover:text-mp-orange-flame"
+              >
+                081 13 83 09
+              </a>{" "}
+              · ou{" "}
+              <Link
+                href="/prendre-rendez-vous"
+                className="font-semibold text-mp-green-deep underline underline-offset-4 hover:text-mp-orange-flame"
+              >
+                choisissez votre créneau en ligne
+              </Link>
+            </p>
 
             <div className="flex flex-wrap gap-x-5 gap-y-2 items-center justify-center text-sm font-medium text-mp-ink-soft">
               <span className="inline-flex items-center gap-2">
@@ -430,6 +479,97 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* SERVICES + RÉSERVATION EN LIGNE.
+        * Les trois pages service ne recevaient aucun lien depuis l'accueil, et
+        * la prise de rendez-vous en direct sur l'agenda n'était jamais
+        * expliquée alors que c'est l'argument le plus concret face à un
+        * concurrent qui rappelle « dans la semaine ». */}
+      <section className="bg-mp-cream py-12 md:py-16">
+        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-3">
+            Une fois le poêle posé, on reste votre interlocuteur
+          </h2>
+          <p className="text-mp-ink-soft leading-relaxed mb-8 max-w-2xl">
+            Entretien annuel, ramonage avec certificat, dépannage : trois prestations que nous
+            assurons nous-mêmes, y compris sur des appareils que nous n&apos;avons pas posés.
+          </p>
+          <div className="grid gap-4 md:grid-cols-3">
+            {SERVICES.map((service) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="group rounded-2xl border border-mp-sand/60 bg-mp-beige-warm p-6 transition-colors hover:border-mp-orange-flame"
+              >
+                <h3 className="text-lg font-semibold text-mp-green-deep">{service.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-mp-ink-soft">{service.description}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-mp-orange-flame">
+                  {service.cta}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-mp-sand/60 bg-mp-beige-warm p-6 md:p-8">
+            <h3 className="text-xl md:text-2xl font-semibold text-mp-green-deep">
+              Choisissez votre créneau, maintenant
+            </h3>
+            <p className="mt-3 max-w-2xl leading-relaxed text-mp-ink-soft">
+              Notre agenda est en ligne. Vous voyez nos disponibilités réelles, vous réservez
+              l&apos;heure qui vous arrange pour un diagnostic à domicile, un entretien ou une visite
+              du showroom, et vous recevez la confirmation par e-mail. Pas de rappel à attendre,
+              pas de créneau « dans la semaine ».
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <Button asChild variant="primary" size="lg">
+                <Link href="/prendre-rendez-vous">Choisir mon créneau</Link>
+              </Button>
+              <a
+                href="tel:+3281138309"
+                className="inline-flex items-center gap-2 text-base font-semibold text-mp-green-deep transition-colors hover:text-mp-orange-flame"
+              >
+                081 13 83 09
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MAILLAGE LOCAL : les pages ville n'étaient liées depuis aucune page forte. */}
+      <section className="bg-mp-beige py-12 md:py-16">
+        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-3">
+            Où on intervient
+          </h2>
+          <p className="text-mp-ink-soft leading-relaxed mb-8 max-w-2xl">
+            Basés à Fernelmont, nous couvrons les cinq provinces wallonnes. Chaque ville a sa page :
+            distance, délai, contraintes de conduit les plus courantes et modèles que nous y posons
+            le plus souvent.
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            {CITIES.map((city) => (
+              <li key={city.slug}>
+                <Link
+                  href={`/poeles-pellets/${city.slug}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-mp-sand/60 bg-mp-cream px-4 py-2 text-sm font-medium text-mp-ink transition-colors hover:border-mp-orange-flame hover:text-mp-orange-flame"
+                >
+                  Poêle à pellets {city.name}
+                  <span className="text-xs text-mp-ink-soft">{city.distanceFromFernelmont} km</span>
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href="/zones-d-intervention"
+                className="inline-flex items-center gap-1 px-4 py-2 text-sm font-semibold text-mp-orange-flame"
+              >
+                Toute la zone <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <Testimonials />
 
       <FAQAccordion
@@ -439,8 +579,9 @@ export default function HomePage() {
       />
 
       <CTAFinal
-        title="Devis chiffré en 60 secondes"
-        description="Vous remplissez surface, type d'usage, contraintes. On vous recontacte sous 24 h ouvrées avec une fourchette de prix et un créneau de diagnostic. Sans engagement."
+        title="Chiffrez votre installation en 2 minutes"
+        description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris, la mensualité à 0 % et la prime déjà déduite. Le prix ferme est confirmé après la visite technique, sans engagement."
+        secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous" }}
       />
     </>
   );

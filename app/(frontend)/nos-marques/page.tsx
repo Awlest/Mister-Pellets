@@ -96,7 +96,7 @@ export default function NosMarquesHubPage() {
         eyebrow="3 marques sélectionnées"
         title={
           <>
-            Les marques que <span className="mp-italic">nous distribuons</span>
+            Les marques de poêles à pellets que <span className="mp-italic">nous distribuons</span>
           </>
         }
         description="Plutôt que de tout vendre, on s'est limités à trois marques italiennes qui couvrent les besoins qu'on voit sur le terrain en Wallonie. Edilkamin pour la profondeur de gamme, EK63 (sa marque sœur) pour le connecté à prix accessible, Girolami pour son brevet polycombustible qui nettoie le brasier tout seul. Chaque marque a son créneau, on vous dit franchement laquelle est faite pour vous."

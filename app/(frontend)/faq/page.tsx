@@ -33,7 +33,7 @@ export default function FAQPage() {
         eyebrow={`${FAQS.length} questions, 9 catégories`}
         title={
           <>
-            Trouvez vite la réponse à <span className="mp-italic">votre question</span>
+            Questions fréquentes sur les <span className="mp-italic">poêles à pellets</span>
           </>
         }
         description="Toutes les questions que les clients nous posent en premier, compilées et catégorisées. Recherche en temps réel et filtres par catégorie. Si vous ne trouvez pas, le téléphone reste le moyen le plus rapide."

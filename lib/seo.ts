@@ -183,7 +183,7 @@ export function buildServiceSchema(input: ServiceSchemaInput): Record<string, un
     description: input.description,
     provider: {
       "@type": "HomeAndConstructionBusiness",
-      "@id": `${SITE_URL}/#business`,
+      "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
     },
     areaServed: {

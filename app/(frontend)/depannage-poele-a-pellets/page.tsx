@@ -16,7 +16,7 @@ export default function DepannagePage() {
   return (
     <ServiceLanding
       service={service}
-      title="Dépannage de poêle à pellets"
+      title="Dépannage de poêle à pellets en Wallonie"
       intro="Votre poêle ne s'allume plus, s'éteint tout seul ou affiche un code erreur. On diagnostique sur place et on répare, en général sous 48 à 72 heures. 110 € TVAC la première heure, déplacement inclus."
       included={[
         "Diagnostic complet sur place",

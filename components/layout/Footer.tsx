@@ -28,13 +28,18 @@ import Image from "next/image";
  *                  via classe .footer-mp dans globals.css. 32 px sur lg+.
  */
 
-// TODO : remplacer par les vraies URLs des profils Mister Pellets quand le
-// client les communiquera. Placeholder pour l'instant.
+// Réseaux sociaux. Tant qu'une URL reste vide, l'icône correspondante n'est
+// pas rendue : trois liens morts vers "#tiktok" pointaient jusqu'ici vers
+// nulle part, ce qui dégrade l'expérience et la confiance. Dès que les profils
+// existent, coller l'URL complète ici et compléter SAME_AS dans
+// components/seo/JsonLd.tsx pour que le balisage les déclare aussi.
 const SOCIAL = {
-  tiktok: "#tiktok",
-  instagram: "#instagram",
-  youtube: "#youtube",
+  tiktok: "",
+  instagram: "",
+  youtube: "",
 };
+
+const hasSocial = Object.values(SOCIAL).some(Boolean);
 
 const LEGAL_LINKS = [
   { label: "Mentions légales", href: "/mentions-legales" },
@@ -93,43 +98,51 @@ export function Footer() {
             </Link>
           </div>
 
-          {/* Réseaux sociaux : titre + 3 icônes BIEN VISIBLES (pleine opacité) */}
+          {/* Réseaux sociaux : masqués tant qu'aucun profil n'est renseigné. */}
+          {hasSocial && (
           <div className="flex-1 flex justify-center">
             <div className="flex flex-col items-center gap-3">
               <p className="text-xs uppercase tracking-wider text-mp-cream/85">
                 Suivez-nous
               </p>
               <div className="flex items-center gap-4">
-                <a
-                  href={SOCIAL.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Mister Pellets sur TikTok"
-                  className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-                >
-                  <TikTokIcon className="h-7 w-7" />
-                </a>
-                <a
-                  href={SOCIAL.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Mister Pellets sur Instagram"
-                  className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-                >
-                  <InstagramIcon className="h-7 w-7" />
-                </a>
-                <a
-                  href={SOCIAL.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Mister Pellets sur YouTube"
-                  className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-                >
-                  <YoutubeIcon className="h-7 w-7" />
-                </a>
+                {SOCIAL.tiktok && (
+                  <a
+                    href={SOCIAL.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Mister Pellets sur TikTok"
+                    className="text-mp-cream hover:text-mp-orange-flame transition-colors"
+                  >
+                    <TikTokIcon className="h-7 w-7" />
+                  </a>
+                )}
+                {SOCIAL.instagram && (
+                  <a
+                    href={SOCIAL.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Mister Pellets sur Instagram"
+                    className="text-mp-cream hover:text-mp-orange-flame transition-colors"
+                  >
+                    <InstagramIcon className="h-7 w-7" />
+                  </a>
+                )}
+                {SOCIAL.youtube && (
+                  <a
+                    href={SOCIAL.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Mister Pellets sur YouTube"
+                    className="text-mp-cream hover:text-mp-orange-flame transition-colors"
+                  >
+                    <YoutubeIcon className="h-7 w-7" />
+                  </a>
+                )}
               </div>
             </div>
           </div>
+          )}
         </div>
 
         {/* Liens légaux compacts : pleine opacité pour la lisibilité */}

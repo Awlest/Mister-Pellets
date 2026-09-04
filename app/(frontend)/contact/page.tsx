@@ -1,7 +1,6 @@
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { JsonLd, LOCAL_BUSINESS_SCHEMA } from "@/components/seo/JsonLd";
 import { formatPhone } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -20,7 +19,6 @@ const MAPS_URL =
 export default function ContactPage() {
   return (
     <>
-      <JsonLd data={LOCAL_BUSINESS_SCHEMA} />
       <HeroSecondary
         title="Une question ? On répond."
         description="Téléphone, email ou formulaire. On revient vers vous dans la journée pendant les heures ouvrées (lun-ven 9h-18h, sam 9h-13h)."
