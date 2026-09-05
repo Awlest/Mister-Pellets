@@ -66,12 +66,12 @@ export default function PrendreRendezVousPage() {
       />
 
       {/* Présentation du showroom */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Showroom Mister Pellets à Fernelmont
           </h2>
-          <div className="space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
+          <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
               Notre showroom est situé Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre
               et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On
@@ -112,9 +112,9 @@ export default function PrendreRendezVousPage() {
       </section>
 
       {/* Rendez-vous commerciaux : réservables en ligne */}
-      <section className="bg-mp-beige py-12 md:py-16">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-          <div className="max-w-3xl mb-10">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
+          <div className="mp-measure mb-10">
             <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
               Réserver un rendez-vous en ligne
             </h2>
@@ -139,9 +139,9 @@ export default function PrendreRendezVousPage() {
       </section>
 
       {/* Interventions techniques : par téléphone uniquement */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-          <div className="max-w-3xl mb-10">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <div className="mp-measure mb-10">
             <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
               Entretien, ramonage, dépannage
             </h2>
@@ -206,17 +206,17 @@ export default function PrendreRendezVousPage() {
       </section>
 
       {/* Alternative téléphone (toujours utile pour qui n'aime pas le formulaire) */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 text-center">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell text-center">
+          <h2 className="mp-measure mx-auto text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
             Plus simple : appelez-nous
           </h2>
-          <p className="text-base md:text-lg text-mp-ink-soft mb-8 leading-relaxed max-w-2xl mx-auto">
+          <p className="mp-measure mx-auto text-base md:text-lg text-mp-ink-soft mb-8 leading-relaxed">
             Si vous préférez le téléphone (souvent plus rapide), on cale un créneau en 30 secondes.
             Ou par email si vous voulez écrire à tête reposée.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
+          <div className="mp-measure mx-auto flex flex-col sm:flex-row gap-3 items-center justify-center">
             <Button asChild variant="primary" size="lg">
               <a href={`tel:${formatPhone(PHONE)}`}>
                 <Phone className="h-5 w-5" />
@@ -228,7 +228,7 @@ export default function PrendreRendezVousPage() {
             </Button>
           </div>
 
-          <p className="text-sm text-mp-ink-soft mt-8">
+          <p className="mp-measure mx-auto text-sm text-mp-ink-soft mt-8">
             Lun-Ven 9h-18h, Sam 9h-13h
           </p>
         </div>

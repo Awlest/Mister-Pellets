@@ -18,7 +18,7 @@ import { Sheet, SheetContent, SheetClose } from "@/components/ui/sheet";
 import { cn, formatPhone } from "@/lib/utils";
 
 /**
- * Navbar FLOTTANTE sticky bottom mobile only.
+ * Navbar FLOTTANTE sticky bottom, mobile ET tablette (jusqu'à xl / 1280 px).
  * 5 onglets : Accueil / Boutique / Devis / RDV / Menu (drawer)
  * La pastille orange est un FOND ACTIF derrière l'onglet courant qui glisse
  * latéralement avec un overshoot doux dans le sens du déplacement.
@@ -120,7 +120,7 @@ export function NavbarSticky() {
       {/* WRAPPER FLOTTANT : marges externes + safe-area iOS */}
       <div
         className={cn(
-          "fixed inset-x-0 bottom-0 z-30 lg:hidden",
+          "fixed inset-x-0 bottom-0 z-30 xl:hidden",
           "px-3 pb-3",
           "transition-all duration-300",
           effectiveVisible ? "translate-y-0 opacity-100" : "translate-y-[120%] opacity-0 pointer-events-none"
@@ -218,7 +218,7 @@ export function NavbarSticky() {
             "max-h-[88vh] overflow-y-auto overscroll-contain",
             // Padding horizontal
             "px-6",
-            "lg:hidden"
+            "xl:hidden"
           )}
           // Padding vertical via style pour combiner valeur fixe + safe-area iOS
           style={{

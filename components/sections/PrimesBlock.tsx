@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { toneClass, type SectionTone } from "@/lib/section-tone";
 
 interface PrimeRow {
   amount: string;
@@ -53,6 +55,8 @@ const CONDITIONS = [
 ];
 
 interface PrimesBlockProps {
+  /** Fond de la section. La page decide de l alternance creme / beige. */
+  tone?: SectionTone;
   title?: string;
   description?: string;
   primes?: PrimeRow[];
@@ -63,14 +67,15 @@ interface PrimesBlockProps {
  * temporaire 14/02/2025 → 30/09/2026).
  */
 export function PrimesBlock({
+  tone = "cream",
   title = "Prime Habitation Wallonie 2026",
   description = "Régime temporaire en vigueur jusqu'au 30 septembre 2026. Prime de base 160 € multipliée par un coefficient selon votre catégorie de revenus. On monte le dossier complet pour vous.",
   primes = DEFAULT_PRIMES,
 }: PrimesBlockProps) {
   return (
-    <section className="py-16 md:py-24 bg-mp-cream">
-      <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-        <div className="max-w-3xl mb-12">
+    <section className={cn("mp-band", toneClass(tone))}>
+      <div className="mp-shell">
+        <div className="mp-measure mb-12">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
             {title}
           </h2>
@@ -131,7 +136,7 @@ export function PrimesBlock({
         </Card>
 
         {/* Conditions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mb-10 max-w-3xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mb-10 mp-measure">
           {CONDITIONS.map((c) => (
             <div key={c} className="flex items-start gap-2 text-sm text-mp-ink">
               <span className="flex items-center justify-center h-5 w-5 rounded-full bg-mp-green-light/20 text-mp-green-mid shrink-0 mt-0.5">
@@ -148,7 +153,7 @@ export function PrimesBlock({
           </Link>
         </Button>
 
-        <p className="mt-6 text-xs text-mp-ink-soft italic max-w-3xl">
+        <p className="mt-6 text-xs text-mp-ink-soft italic mp-measure">
           Information à titre indicatif, basée sur le régime temporaire en vigueur du
           14 février 2025 au 30 septembre 2026 (numéro de démarche 3920). Les montants
           et conditions peuvent évoluer. Pour un calcul personnalisé et une vérification

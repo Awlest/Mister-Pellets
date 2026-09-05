@@ -36,7 +36,7 @@ const COLORS = [
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="py-12 border-b border-mp-sand/40">
+    <section className="mp-band-sm border-b border-mp-sand/40">
       <h2
         className="text-2xl font-semibold text-mp-green-deep mb-6"
         style={{ fontFamily: "var(--font-display)" }}
@@ -61,7 +61,47 @@ export default function StyleguidePage() {
         ]}
       />
 
-      <div className="container mx-auto max-w-[1280px] px-4 md:px-6 py-12">
+      <div className="mp-shell py-12">
+        {/* Grille de page */}
+        <Section title="Grille de page">
+          <div className="space-y-4 text-sm text-mp-ink leading-relaxed">
+            <p className="mp-measure">
+              Toutes les sections du site partagent la même gouttière. C&apos;est ce qui fait que
+              les bords gauche et droit des blocs ne bougent pas quand on scrolle. Trois classes
+              suffisent, elles sont définies dans <code className="font-mono text-xs">app/globals.css</code>.
+            </p>
+            <dl className="mp-measure space-y-3">
+              <div>
+                <dt className="font-mono text-xs font-semibold text-mp-orange-flame">.mp-shell</dt>
+                <dd className="text-mp-ink-soft">
+                  La gouttière : 1280 px maximum, centrée, 16 px de marge latérale (24 px dès 768 px).
+                  Une seule par section, jamais accompagnée d&apos;un <code className="font-mono text-xs">max-w-*</code> concurrent.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-xs font-semibold text-mp-orange-flame">.mp-measure</dt>
+                <dd className="text-mp-ink-soft">
+                  La colonne de lecture : 720 px, soit ~70 caractères par ligne. S&apos;applique aux
+                  titres et aux paragraphes <em>à l&apos;intérieur</em> d&apos;un .mp-shell. Les grilles de
+                  cartes, elles, occupent toute la gouttière.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-xs font-semibold text-mp-orange-flame">.mp-band / .mp-band-sm</dt>
+                <dd className="text-mp-ink-soft">
+                  Le rythme vertical : 56 px (80 px dès 768 px) pour une section standard,
+                  40/56 px pour un bandeau utilitaire. Pas d&apos;autre valeur.
+                </dd>
+              </div>
+            </dl>
+            <div className="rounded-xl border border-mp-sand/60 bg-mp-beige/60 p-4">
+              <div className="mp-measure rounded-lg border border-dashed border-mp-orange-flame/60 bg-white/70 p-3 text-xs text-mp-ink-soft">
+                Bloc à la largeur .mp-measure (720 px) dans une section .mp-shell.
+              </div>
+            </div>
+          </div>
+        </Section>
+
         {/* Couleurs */}
         <Section title="Palette officielle (60/30/10)">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -230,7 +270,7 @@ export default function StyleguidePage() {
 
       {/* Sections en pleine largeur */}
       <Section title="">
-        <div className="text-xs uppercase tracking-wider text-mp-ink-soft px-4 md:px-6 max-w-[1280px] mx-auto mb-2">
+        <div className="text-xs uppercase tracking-wider text-mp-ink-soft mp-shell mb-2">
           Sections (pleine largeur)
         </div>
       </Section>

@@ -21,15 +21,15 @@ export default function FrontendError({
   }, [error]);
 
   return (
-    <section className="bg-mp-cream py-16 md:py-24">
-      <div className="container mx-auto max-w-3xl px-4 md:px-6 text-center">
-        <p className="text-sm uppercase tracking-wider font-semibold text-mp-orange-flame mb-3">
+    <section className="bg-mp-cream mp-band">
+      <div className="mp-shell text-center">
+        <p className="mp-measure mx-auto text-sm uppercase tracking-wider font-semibold text-mp-orange-flame mb-3">
           Quelque chose s&apos;est mal passé
         </p>
-        <h1 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4 leading-tight">
+        <h1 className="mp-measure mx-auto text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4 leading-tight">
           On a une erreur sur cette page
         </h1>
-        <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 max-w-xl mx-auto">
+        <p className="mp-measure mx-auto text-lg text-mp-ink-soft leading-relaxed mb-8 max-w-xl mx-auto">
           Notre équipe a été notifiée. En attendant, vous pouvez réessayer ou
           repartir d&apos;une page connue.
         </p>

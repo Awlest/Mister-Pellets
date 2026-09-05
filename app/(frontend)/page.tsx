@@ -117,13 +117,13 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6 pb-10 md:pb-16 relative">
-          <div className="max-w-3xl mx-auto text-center">
+        <div className="mp-shell pb-10 md:pb-16 relative">
+          <div className="mp-measure mx-auto text-center">
             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-mp-green-deep mb-5">
               Le bon poêle à pellets, <span className="mp-italic">installé chez vous</span> en Wallonie
             </h1>
 
-            <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 max-w-2xl mx-auto">
+            <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 mp-measure mx-auto">
               Edilkamin, EK63 et Girolami : trois marques italiennes, et on ne pose que celles-là.
               Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
               prime Habitation Wallonie 2026 déjà déduite. Basés à Fernelmont, on couvre les 5
@@ -181,12 +181,12 @@ export default function HomePage() {
       </section>
 
       {/* SECTION CHOIX, réponse directe en H2 (GEO) */}
-      <section className="bg-mp-beige py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Comment choisir son poêle à pellets en Wallonie ?
           </h2>
-          <div className="space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
+          <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
               Le bon choix dépend de quatre paramètres concrets : la surface à chauffer, le niveau
               d'isolation (PEB), la présence ou non d'un conduit existant, et l'usage principal
@@ -269,12 +269,12 @@ export default function HomePage() {
 
       {/* TABLEAU COMPARATIF, option B (cf. doc V1.2 §H5) :
           cards empilées sur mobile, format tableau classique sur sm+ */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-4xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Poêle à pellets vs autres modes de chauffage
           </h2>
-          <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed mb-8">
+          <p className="mp-measure text-base md:text-lg text-mp-ink-soft leading-relaxed mb-8">
             Quatre modes de chauffage dominent le résidentiel wallon. Voici comment ils se comparent en
             2026 sur le coût d'usage, l'investissement initial et l'autonomie.
           </p>
@@ -392,12 +392,12 @@ export default function HomePage() {
       <BrandsGrid />
 
       {/* SECTION COÛT */}
-      <section className="bg-mp-beige py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Combien coûte un poêle à pellets installé ?
           </h2>
-          <div className="space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
+          <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
               Le ticket d'entrée pour un poêle à air pulsé étanche posé en Wallonie démarre autour
               de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
@@ -447,15 +447,15 @@ export default function HomePage() {
         ]}
       />
 
-      <PrimesBlock />
+      <PrimesBlock tone="beige" />
 
       {/* SECTION DÉLAIS */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Délais et déroulement d'une installation Mister Pellets
           </h2>
-          <div className="space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
+          <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
               Du premier contact à la mise en service, comptez 3 à 6 semaines en saison normale, un
               peu plus long de septembre à décembre où la demande est forte. Le diagnostic à
@@ -484,12 +484,12 @@ export default function HomePage() {
         * la prise de rendez-vous en direct sur l'agenda n'était jamais
         * expliquée alors que c'est l'argument le plus concret face à un
         * concurrent qui rappelle « dans la semaine ». */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-3">
             Une fois le poêle posé, on reste votre interlocuteur
           </h2>
-          <p className="text-mp-ink-soft leading-relaxed mb-8 max-w-2xl">
+          <p className="text-mp-ink-soft leading-relaxed mb-8 mp-measure">
             Entretien annuel, ramonage avec certificat, dépannage : trois prestations que nous
             assurons nous-mêmes, y compris sur des appareils que nous n&apos;avons pas posés.
           </p>
@@ -514,7 +514,7 @@ export default function HomePage() {
             <h3 className="text-xl md:text-2xl font-semibold text-mp-green-deep">
               Choisissez votre créneau, maintenant
             </h3>
-            <p className="mt-3 max-w-2xl leading-relaxed text-mp-ink-soft">
+            <p className="mt-3 mp-measure leading-relaxed text-mp-ink-soft">
               Notre agenda est en ligne. Vous voyez nos disponibilités réelles, vous réservez
               l&apos;heure qui vous arrange pour un diagnostic à domicile, un entretien ou une visite
               du showroom, et vous recevez la confirmation par e-mail. Pas de rappel à attendre,
@@ -536,12 +536,12 @@ export default function HomePage() {
       </section>
 
       {/* MAILLAGE LOCAL : les pages ville n'étaient liées depuis aucune page forte. */}
-      <section className="bg-mp-beige py-12 md:py-16">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
           <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-3">
             Où on intervient
           </h2>
-          <p className="text-mp-ink-soft leading-relaxed mb-8 max-w-2xl">
+          <p className="text-mp-ink-soft leading-relaxed mb-8 mp-measure">
             Basés à Fernelmont, nous couvrons les cinq provinces wallonnes. Chaque ville a sa page :
             distance, délai, contraintes de conduit les plus courantes et modèles que nous y posons
             le plus souvent.

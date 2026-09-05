@@ -71,8 +71,8 @@ export default async function BoutiquePage() {
         ]}
       />
 
-      <section className="bg-mp-cream py-10 md:py-16">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
           {/* Note devis : on couvre toute la gamme, même les références non listées. */}
           <div className="mb-8 rounded-xl bg-mp-orange-light/50 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink">
             <strong>Besoin d&apos;un modèle précis ?</strong> On distribue toute la gamme Edilkamin, EK63

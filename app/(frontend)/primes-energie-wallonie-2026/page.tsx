@@ -113,12 +113,12 @@ export default function PrimesPage() {
       />
 
       {/* L'essentiel en 3 paragraphes, réponse directe pour les LLMs (GEO) */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6">
             L'essentiel en 30 secondes
           </h2>
-          <div className="space-y-4 text-mp-ink leading-relaxed text-lg">
+          <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-lg">
             <p>
               Depuis le 14 février 2025, la Région wallonne applique un régime temporaire
               d'aides à l'habitat, en vigueur jusqu'au 30 septembre 2026. Pour l'installation
@@ -146,13 +146,13 @@ export default function PrimesPage() {
       <PrimesBlock />
 
       {/* Conditions d'éligibilité détaillées */}
-      <section className="bg-mp-beige py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
             Les conditions à réunir
           </h2>
 
-          <div className="space-y-8">
+          <div className="mp-measure space-y-8">
             <div>
               <h3 className="text-xl font-semibold text-mp-green-deep mb-3">
                 Côté logement
@@ -202,12 +202,12 @@ export default function PrimesPage() {
       </section>
 
       {/* Procédure pas à pas */}
-      <section className="bg-mp-cream py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
             Comment on monte le dossier ensemble
           </h2>
-          <ol className="space-y-6 text-mp-ink leading-relaxed">
+          <ol className="mp-measure space-y-6 text-mp-ink leading-relaxed">
             <li className="flex gap-4">
               <span className="flex items-center justify-center h-8 w-8 rounded-full bg-mp-orange-flame text-white font-bold text-sm shrink-0">1</span>
               <div>
@@ -267,7 +267,7 @@ export default function PrimesPage() {
             </li>
           </ol>
 
-          <p className="mt-8 text-sm text-mp-ink-soft italic">
+          <p className="mp-measure mt-8 text-sm text-mp-ink-soft italic">
             Délai d'introduction du dossier : au plus tard 8 mois après la dernière facture.
             Au-delà, le dossier est forclos.
           </p>
@@ -275,12 +275,12 @@ export default function PrimesPage() {
       </section>
 
       {/* Cumul d'aides */}
-      <section className="bg-mp-beige py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Ce qui se cumule avec la prime
           </h2>
-          <ul className="space-y-3 text-mp-ink leading-relaxed text-lg">
+          <ul className="mp-measure space-y-3 text-mp-ink leading-relaxed text-lg">
             <li className="flex gap-3">
               <span className="text-mp-orange-flame font-semibold shrink-0">TVA 6 %</span>
               au lieu de 21 % pour les logements de plus de 10 ans (appliquée d'office sur la pose).
@@ -300,12 +300,12 @@ export default function PrimesPage() {
       </section>
 
       {/* Contacts officiels SPW */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Contacts officiels Région wallonne
           </h2>
-          <ul className="space-y-3 text-mp-ink leading-relaxed text-lg">
+          <ul className="mp-measure space-y-3 text-mp-ink leading-relaxed text-lg">
             <li>
               <strong className="text-mp-green-deep">Numéro gratuit :</strong>{" "}
               <a href="tel:1718" className="text-mp-orange-flame hover:underline">1718</a> (du
@@ -349,9 +349,9 @@ export default function PrimesPage() {
       <FAQAccordion title="Questions fréquentes sur la prime" items={FAQ_ITEMS} />
 
       {/* Avertissement légal */}
-      <section className="bg-mp-cream py-8">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <p className="text-xs text-mp-ink-soft italic leading-relaxed">
+      <section className="bg-mp-cream mp-band-sm">
+        <div className="mp-shell">
+          <p className="mp-measure text-xs text-mp-ink-soft italic leading-relaxed">
             Information à titre indicatif, basée sur le régime temporaire en vigueur du
             14 février 2025 au 30 septembre 2026 (numéro de démarche 3920). Les montants
             et conditions peuvent évoluer. À partir du 1er octobre 2026, un nouveau

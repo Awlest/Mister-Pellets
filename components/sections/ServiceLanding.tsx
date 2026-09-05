@@ -119,8 +119,8 @@ export function ServiceLanding({
       />
 
       {/* Appel : c'est la seule action possible sur cette page. */}
-      <section className="bg-mp-green-deep py-8">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-green-deep mp-band-sm">
+        <div className="mp-shell">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
             <div>
               <p className="text-mp-cream text-lg font-semibold">
@@ -141,8 +141,8 @@ export function ServiceLanding({
         </div>
       </section>
 
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
             <div className="lg:col-span-7 flex flex-col gap-10">

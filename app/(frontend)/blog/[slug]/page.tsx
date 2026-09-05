@@ -237,8 +237,8 @@ export default async function ArticlePage({ params }: Props) {
       />
 
       {/* Méta-infos auteur + date */}
-      <section className="bg-mp-cream py-6 border-b border-mp-sand/30">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 flex flex-wrap items-center gap-4 text-sm text-mp-ink-soft">
+      <section className="bg-mp-cream mp-band-sm border-b border-mp-sand/30">
+        <div className="mp-shell flex flex-wrap items-center gap-4 text-sm text-mp-ink-soft">
           <span className="inline-flex items-center gap-1.5">
             <Calendar className="h-4 w-4" />
             <time dateTime={article.publishedAt}>{formattedDate}</time>
@@ -252,9 +252,9 @@ export default async function ArticlePage({ params }: Props) {
       </section>
 
       {/* TL;DR, réponse directe pour LLMs (GEO) */}
-      <section className="bg-mp-beige py-10 md:py-12 border-b border-mp-sand/30">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <Card className="p-6 md:p-8 bg-mp-cream border-mp-orange-flame/30">
+      <section className="bg-mp-beige mp-band-sm border-b border-mp-sand/30">
+        <div className="mp-shell">
+          <Card className="mp-measure p-6 md:p-8 bg-mp-cream border-mp-orange-flame/30">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xs font-bold uppercase tracking-wider text-mp-orange-flame">
                 Réponse directe
@@ -268,25 +268,27 @@ export default async function ArticlePage({ params }: Props) {
       </section>
 
       {/* Corps de l'article */}
-      <article className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          {article.sections.map((section, i) => (
-            <SectionRenderer key={i} section={section} />
-          ))}
+      <article className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <div className="mp-measure">
+            {article.sections.map((section, i) => (
+              <SectionRenderer key={i} section={section} />
+            ))}
 
-          {/* Tags */}
-          {article.tags.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-mp-sand/40">
-              <span className="text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mr-2">
-                Sujets :
-              </span>
-              {article.tags.map((tag) => (
-                <Badge key={tag} variant="secondary" className="mr-2 mb-2">
-                  #{tag}
-                </Badge>
-              ))}
-            </div>
-          )}
+            {/* Tags */}
+            {article.tags.length > 0 && (
+              <div className="mt-12 pt-8 border-t border-mp-sand/40">
+                <span className="text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mr-2">
+                  Sujets :
+                </span>
+                {article.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="mr-2 mb-2">
+                    #{tag}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </article>
 
@@ -300,8 +302,8 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Maillage interne, Guides */}
       {relatedGuides.length > 0 && (
-        <section className="bg-mp-beige py-12 md:py-16">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <section className="bg-mp-beige mp-band">
+          <div className="mp-shell">
             <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8">
               Approfondir avec un guide
             </h2>
@@ -331,8 +333,8 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Maillage interne, Articles liés */}
       {relatedArticles.length > 0 && (
-        <section className="bg-mp-cream py-12 md:py-16">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
             <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8">
               Continuer la lecture
             </h2>

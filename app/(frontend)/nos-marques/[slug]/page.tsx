@@ -108,7 +108,7 @@ export default async function BrandPage({ params }: Props) {
 
       {/* Stats badges */}
       <section className="bg-mp-cream pb-8 -mt-4">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <div className="mp-shell">
           <div className="flex flex-wrap items-center gap-3">
             <Badge variant="secondary">
               <Award className="h-3.5 w-3.5" /> {brand.positioning}
@@ -132,12 +132,12 @@ export default async function BrandPage({ params }: Props) {
 
       {/* Pourquoi on aime travailler avec X (tier 1), sinon Histoire (tier 2) */}
       {brand.whyWeLove ? (
-        <section className="bg-mp-cream py-16 md:py-20">
-          <div className="container mx-auto max-w-3xl px-4 md:px-6">
-            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
+            <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
               Pourquoi on aime travailler avec {brand.name}
             </h2>
-            <div className="space-y-4 text-lg text-mp-ink leading-relaxed">
+            <div className="mp-measure space-y-4 text-lg text-mp-ink leading-relaxed">
               {brand.whyWeLove.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
@@ -145,12 +145,12 @@ export default async function BrandPage({ params }: Props) {
           </div>
         </section>
       ) : brand.history ? (
-        <section className="bg-mp-cream py-16 md:py-20">
-          <div className="container mx-auto max-w-3xl px-4 md:px-6">
-            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
+            <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
               L&apos;histoire de {brand.name}
             </h2>
-            <div className="space-y-4 text-lg text-mp-ink leading-relaxed">
+            <div className="mp-measure space-y-4 text-lg text-mp-ink leading-relaxed">
               {brand.history.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
@@ -161,12 +161,12 @@ export default async function BrandPage({ params }: Props) {
 
       {/* X en quelques repères (timeline) */}
       {brand.milestones && brand.milestones.length > 0 && (
-        <section className="bg-mp-beige py-16 md:py-24">
-          <div className="container mx-auto max-w-3xl px-4 md:px-6">
-            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12">
+        <section className="bg-mp-beige mp-band">
+          <div className="mp-shell">
+            <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12">
               {brand.name} en quelques repères
             </h2>
-            <ol className="relative border-l-2 border-mp-sand space-y-8 pl-8">
+            <ol className="mp-measure relative border-l-2 border-mp-sand space-y-8 pl-8">
               {brand.milestones.map((m, i) => (
                 <li key={i} className="relative">
                   <span className="absolute -left-[2.6rem] flex h-6 w-6 items-center justify-center rounded-full bg-mp-orange-flame ring-4 ring-mp-beige" />
@@ -186,9 +186,9 @@ export default async function BrandPage({ params }: Props) {
 
       {/* Ce qui distingue X (tier 1), sinon Spécialités techniques (tier 2) */}
       {brand.distinctions && brand.distinctions.length > 0 ? (
-        <section className="bg-mp-cream py-16 md:py-24">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 max-w-3xl">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
+            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 mp-measure">
               Ce qui distingue {brand.name}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -209,9 +209,9 @@ export default async function BrandPage({ params }: Props) {
           </div>
         </section>
       ) : brand.specialties && brand.specialties.length > 0 ? (
-        <section className="bg-mp-beige py-16 md:py-24">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 max-w-3xl">
+        <section className="bg-mp-beige mp-band">
+          <div className="mp-shell">
+            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 mp-measure">
               Spécialités techniques
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -230,9 +230,9 @@ export default async function BrandPage({ params }: Props) {
 
       {/* Modèles disponibles */}
       {brand.modelsTable && brand.modelsTable.length > 0 ? (
-        <section className="bg-mp-beige py-16 md:py-24">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-            <div className="max-w-3xl mb-12">
+        <section className="bg-mp-beige mp-band">
+          <div className="mp-shell">
+            <div className="mp-measure mb-12">
               <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
                 Modèles {brand.name} disponibles
               </h2>
@@ -271,9 +271,9 @@ export default async function BrandPage({ params }: Props) {
           </div>
         </section>
       ) : brand.modelHighlights && brand.modelHighlights.length > 0 ? (
-        <section className="bg-mp-cream py-16 md:py-24">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-            <div className="max-w-3xl mb-12">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
+            <div className="mp-measure mb-12">
               <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
                 Modèles phares de {brand.name}
               </h2>
@@ -316,22 +316,22 @@ export default async function BrandPage({ params }: Props) {
       )}
 
       {/* Garantie */}
-      <section className="bg-mp-green-deep text-white py-16 md:py-20">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 text-center">
+      <section className="bg-mp-green-deep text-white mp-band">
+        <div className="mp-shell text-center">
           <h2
-            className="text-3xl md:text-4xl font-semibold mb-4"
+            className="mp-measure mx-auto text-3xl md:text-4xl font-semibold mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Garantie sur les {brand.name}
           </h2>
-          <p className="text-mp-cream/90 text-lg leading-relaxed">{brand.warranty}</p>
+          <p className="mp-measure mx-auto text-mp-cream/90 text-lg leading-relaxed">{brand.warranty}</p>
         </div>
       </section>
 
       {/* Maillage : autres marques premium */}
       {otherTopTier.length > 0 && (
-        <section className="bg-mp-beige py-16 md:py-20">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <section className="bg-mp-beige mp-band">
+          <div className="mp-shell">
             <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8">
               Autres marques premium
             </h2>

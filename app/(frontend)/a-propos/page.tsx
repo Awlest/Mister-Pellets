@@ -28,12 +28,12 @@ export default function AProposPage() {
       />
 
       {/* Notre histoire */}
-      <section className="bg-mp-cream py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             On a commencé avec une frustration
           </h2>
-          <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
+          <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">
             <p>
               En 2016, on cherchait à installer un poêle à pellets pour une maison rurale en Hesbaye namuroise. On
               voulait quelque chose de bien fait, qui dure, avec des conseils honnêtes, pas un commercial qui pousse
@@ -65,12 +65,12 @@ export default function AProposPage() {
       />
 
       {/* Mister Pellets / Awlest, clarification factuelle (autorisée ici, cf. brief §9.4) */}
-      <section className="bg-mp-cream py-16 md:py-20">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Mister Pellets et Awlest, c'est quoi le lien ?
           </h2>
-          <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
+          <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">
             <p>
               Mister Pellets est la marque commerciale spécialisée dans les poêles à pellets d'Awlest SRL,
               société active en Wallonie depuis 2016. Concrètement, quand vous recevez un devis ou une facture
@@ -94,12 +94,12 @@ export default function AProposPage() {
       </section>
 
       {/* Comment on bosse */}
-      <section className="bg-mp-beige py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Comment on bosse
           </h2>
-          <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
+          <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">
             <p>
               <strong>On commence par regarder la maison.</strong> Pas au téléphone, pas sur photos. On vient sur place
               ou en visio si vous préférez. On regarde la pièce, le conduit existant ou pas, l'isolation, comment vous vivez,
@@ -124,12 +124,12 @@ export default function AProposPage() {
       </section>
 
       {/* Cadre légal de l'activité */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Le cadre dans lequel on bosse
           </h2>
-          <div className="space-y-5 text-mp-ink leading-relaxed text-lg">
+          <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">
             <p>
               Awlest SRL est inscrite à la Banque-Carrefour des Entreprises sous le numéro
               BE 0656.514.212, avec accès à la profession requis pour la pose et l'entretien d'appareils

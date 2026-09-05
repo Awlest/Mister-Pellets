@@ -15,8 +15,8 @@ export const metadata = {
 export default function NotFound() {
   return (
     <>
-      <section className="bg-mp-cream py-16 md:py-24">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 text-center">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell text-center">
           <Image
             src="/logo-mister-pellets-mascotte.svg"
             alt=""
@@ -24,13 +24,13 @@ export default function NotFound() {
             height={120}
             className="mx-auto mb-6 h-24 w-24 opacity-60"
           />
-          <p className="text-sm uppercase tracking-wider font-semibold text-mp-orange-flame mb-3">
+          <p className="mp-measure mx-auto text-sm uppercase tracking-wider font-semibold text-mp-orange-flame mb-3">
             Erreur 404
           </p>
-          <h1 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4 leading-tight">
+          <h1 className="mp-measure mx-auto text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4 leading-tight">
             Cette page n&apos;existe pas, ou plus
           </h1>
-          <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 max-w-xl mx-auto">
+          <p className="mp-measure mx-auto text-lg text-mp-ink-soft leading-relaxed mb-8 max-w-xl mx-auto">
             Le lien que vous avez suivi est cassé, ou la page a été déplacée. Pas
             grave, voici de quoi retomber sur vos pattes.
           </p>

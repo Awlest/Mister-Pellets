@@ -69,8 +69,9 @@ export function FaqExplorer() {
   };
 
   return (
-    <section className="bg-mp-cream py-10 md:py-16">
-      <div className="container mx-auto max-w-3xl px-4 md:px-6">
+    <section className="bg-mp-cream mp-band">
+      <div className="mp-shell">
+        <div className="mx-auto mp-measure">
         {/* Recherche */}
         <div className="mb-6">
           <label htmlFor="faq-search" className="sr-only">
@@ -198,6 +199,7 @@ export function FaqExplorer() {
             ))}
           </ul>
         )}
+        </div>
       </div>
     </section>
   );

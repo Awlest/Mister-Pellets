@@ -31,8 +31,8 @@ export default function GuidesHubPage() {
         ]}
       />
 
-      <section className="bg-mp-cream py-16 md:py-20">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {GUIDES.map((guide) => (
               <Link

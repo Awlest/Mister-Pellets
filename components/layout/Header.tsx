@@ -59,16 +59,20 @@ export function Header() {
   return (
     <header
       className={cn(
-        // ZÉRO header sur mobile (cf. doc corrections-mobile-v1 §3.1).
-        // Le header apparaît uniquement à partir de lg (1024 px).
-        "hidden lg:block",
+        // ZÉRO header sur mobile et tablette (cf. doc corrections-mobile-v1 §3.1).
+        // Le header n'apparaît qu'à partir de xl (1280 px) : c'est la première
+        // largeur où logo + 8 entrées + téléphone + CTA tiennent sur une ligne.
+        // À 1024 px (iPad paysage) la barre débordait et les libellés se
+        // cassaient lettre par lettre — audit 2026-09-05. En dessous de xl,
+        // c'est la NavbarSticky du bas qui porte la navigation.
+        "hidden xl:block",
         "sticky top-0 z-40 w-full transition-all duration-300",
         scrolled
           ? "h-16 bg-mp-cream/92 backdrop-blur-md shadow-sm"
           : "h-20 md:h-24 bg-mp-cream"
       )}
     >
-      <div className="container mx-auto h-full max-w-[1280px] px-4 md:px-6 flex items-center justify-between gap-4">
+      <div className="mp-shell h-full flex items-center justify-between gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="Mister Pellets, accueil">
           <Image
@@ -91,7 +95,7 @@ export function Header() {
         </Link>
 
         {/* Nav desktop */}
-        <nav className="hidden lg:flex items-center gap-1 mx-auto">
+        <nav className="hidden xl:flex items-center gap-1 mx-auto">
           {NAV_ITEMS.map((item) => (
             <div
               key={item.href}
@@ -102,8 +106,10 @@ export function Header() {
               <Link
                 href={item.href}
                 className={cn(
-                  "inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium",
-                  "text-mp-ink hover:text-mp-orange-flame transition-colors"
+                  "inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium 2xl:px-4",
+                  // whitespace-nowrap : sans ça, un libellé comme « Nos marques »
+                  // se casse en colonne dès que la barre manque de place.
+                  "whitespace-nowrap text-mp-ink hover:text-mp-orange-flame transition-colors"
                 )}
               >
                 {item.label}
@@ -146,7 +152,7 @@ export function Header() {
         <div className="flex items-center gap-3 shrink-0">
           <a
             href="tel:+3281138309"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-mp-green-deep transition-colors hover:text-mp-orange-flame"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-mp-green-deep transition-colors hover:text-mp-orange-flame"
           >
             <Phone className="h-4 w-4" aria-hidden />
             081 13 83 09

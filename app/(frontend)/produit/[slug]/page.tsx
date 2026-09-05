@@ -184,7 +184,7 @@ export default async function ProductPage({ params }: Props) {
 
       {/* Breadcrumb + content */}
       <section className="bg-mp-cream pt-8 pb-12 md:pb-16 border-b border-mp-sand/30">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <div className="mp-shell">
           <Breadcrumb
             items={[
               { label: "Accueil", href: "/" },
@@ -449,9 +449,9 @@ export default async function ProductPage({ params }: Props) {
       </section>
 
       {/* Pourquoi ce modèle */}
-      <section className="bg-mp-beige py-16 md:py-20">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-10 max-w-3xl">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
+          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-10 mp-measure">
             Pourquoi choisir le {product.name}
           </h2>
 
@@ -512,8 +512,8 @@ export default async function ProductPage({ params }: Props) {
 
       {/* Modèles similaires */}
       {related.length > 0 && (
-        <section className="bg-mp-cream py-16 md:py-20">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
             <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10">
               Autres modèles de la marque {product.brand}
             </h2>

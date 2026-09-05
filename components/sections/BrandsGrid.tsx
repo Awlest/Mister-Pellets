@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { toneClass, type SectionTone } from "@/lib/section-tone";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TOP_TIER_BRANDS, brandFoundedLabel, type BrandData } from "@/lib/brands";
 
 interface BrandsGridProps {
+  /** Fond de la section. La page decide de l alternance creme / beige. */
+  tone?: SectionTone;
   title?: string;
   description?: string;
   brands?: BrandData[];
@@ -16,14 +20,15 @@ interface BrandsGridProps {
  * unique de vérité, après rectification factuelle des positionnements.
  */
 export function BrandsGrid({
+  tone = "beige",
   title = "Les 3 marques que nous distribuons",
   description = "Chaque marque a son créneau. Notre rôle est de vous diriger vers celle qui colle vraiment à votre maison et à votre budget.",
   brands = TOP_TIER_BRANDS,
 }: BrandsGridProps) {
   return (
-    <section className="py-16 md:py-24 bg-mp-beige">
-      <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-        <div className="max-w-3xl mb-12">
+    <section className={cn("mp-band", toneClass(tone))}>
+      <div className="mp-shell">
+        <div className="mp-measure mb-12">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
             {title}
           </h2>

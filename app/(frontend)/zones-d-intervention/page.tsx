@@ -37,8 +37,8 @@ export default function ZonesDInterventionPage() {
       />
 
       {/* 3 cartes infos */}
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <Card className="p-6">
               <div className="flex items-center justify-center h-12 w-12 rounded-2xl bg-mp-orange-light text-mp-orange-flame mb-4">
@@ -136,12 +136,12 @@ export default function ZonesDInterventionPage() {
       </section>
 
       {/* Autres communes */}
-      <section className="bg-mp-beige py-16 md:py-20">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-4">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell text-center">
+          <h2 className="mp-measure mx-auto text-3xl md:text-4xl font-semibold text-mp-green-deep mb-4">
             Et les autres communes ?
           </h2>
-          <p className="text-lg text-mp-ink-soft leading-relaxed mb-6">
+          <p className="mp-measure mx-auto text-lg text-mp-ink-soft leading-relaxed mb-6">
             On intervient aussi sur Andenne, Eghezée, Jodoigne, Huy, Marche-en-Famenne, Bastogne,
             Florenville, La Louvière, Nivelles, Soignies, et beaucoup d'autres. Si votre commune n'est
             pas listée explicitement, demandez quand même, la zone est large.

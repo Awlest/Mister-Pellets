@@ -4,6 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
+import { toneClass, type SectionTone } from "@/lib/section-tone";
 
 interface FAQItem {
   question: string;
@@ -11,19 +13,23 @@ interface FAQItem {
 }
 
 interface FAQAccordionProps {
+  /** Fond de la section. La page decide de l alternance creme / beige. */
+  tone?: SectionTone;
   title?: string;
   description?: string;
   items: FAQItem[];
 }
 
 export function FAQAccordion({
+  tone = "cream",
   title = "Questions fréquentes",
   description,
   items,
 }: FAQAccordionProps) {
   return (
-    <section className="py-16 md:py-24 bg-mp-cream">
-      <div className="container mx-auto max-w-3xl px-4 md:px-6">
+    <section className={cn("mp-band", toneClass(tone))}>
+      <div className="mp-shell">
+        <div className="mp-measure">
         <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
           {title}
         </h2>
@@ -39,6 +45,7 @@ export function FAQAccordion({
             </AccordionItem>
           ))}
         </Accordion>
+        </div>
       </div>
     </section>
   );

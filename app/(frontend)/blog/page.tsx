@@ -66,8 +66,8 @@ export default function BlogHubPage() {
 
       {/* Article featured (le plus récent) */}
       {featured && (
-        <section className="bg-mp-cream py-12 md:py-16">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
             <Link href={`/blog/${featured.slug}`} className="group block">
               <Card className="p-8 md:p-12 bg-mp-green-deep text-mp-cream border-mp-green-deep hover:-translate-y-0.5 transition-all">
                 <div className="flex items-center gap-3 mb-5">
@@ -89,7 +89,7 @@ export default function BlogHubPage() {
                   {featured.title}
                 </h2>
 
-                <p className="text-lg text-mp-cream/85 leading-relaxed mb-6 max-w-3xl">
+                <p className="text-lg text-mp-cream/85 leading-relaxed mb-6 mp-measure">
                   {featured.excerpt}
                 </p>
 
@@ -104,8 +104,8 @@ export default function BlogHubPage() {
       )}
 
       {/* Filtres catégories, contraste WCAG AA (cf. doc §8) */}
-      <section className="bg-mp-beige py-6">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-beige mp-band-sm">
+        <div className="mp-shell">
           <div className="flex flex-wrap gap-2 items-center">
             <span className="text-sm font-semibold text-mp-ink mr-2">Catégories :</span>
             {ARTICLE_CATEGORIES.map((cat) => {
@@ -126,8 +126,8 @@ export default function BlogHubPage() {
       </section>
 
       {/* Liste des autres articles */}
-      <section className="bg-mp-cream py-16 md:py-20">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
           <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8">
             Tous les articles
           </h2>

@@ -206,7 +206,7 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
           </span>
         </div>
         <h2 className="mb-4 text-3xl font-semibold md:text-4xl">Estimation envoyée</h2>
-        <p className="mx-auto mb-6 max-w-2xl text-lg leading-relaxed">
+        <p className="mx-auto mb-6 mp-measure text-lg leading-relaxed">
           Merci {customer.name}, nous avons votre configuration
           {product ? ` autour du ${product.name}` : ""}.
         </p>
@@ -221,7 +221,7 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
           poêle ne se commande pas sans avoir vu le conduit, et cette étape
           évite les mauvaises surprises des deux côtés.
         */}
-        <div className="mx-auto mb-8 max-w-2xl rounded-2xl border border-mp-sand/60 bg-white/70 p-6 text-left">
+        <div className="mx-auto mb-8 mp-measure rounded-2xl border border-mp-sand/60 bg-white/70 p-6 text-left">
           <p className="mb-4 font-semibold">La suite, en trois temps</p>
           <ol className="space-y-3 text-mp-ink">
             <li className="flex gap-3">

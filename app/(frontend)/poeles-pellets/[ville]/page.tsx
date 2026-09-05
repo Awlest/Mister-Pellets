@@ -99,7 +99,7 @@ export default async function CityPage({ params }: Props) {
 
       {/* Stats locales */}
       <section className="bg-mp-cream pb-8 -mt-4">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <div className="mp-shell">
           <div className="flex flex-wrap items-center gap-3">
             <Badge variant="secondary">
               <MapPin className="h-3.5 w-3.5" /> {city.distanceFromFernelmont} km de Fernelmont
@@ -118,20 +118,20 @@ export default async function CityPage({ params }: Props) {
       </section>
 
       {/* Contexte local */}
-      <section className="bg-mp-cream py-16 md:py-20">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-6">
             Ce qu'on installe à {city.name}
           </h2>
-          <p className="text-lg text-mp-ink leading-relaxed">{city.context}</p>
+          <p className="mp-measure text-lg text-mp-ink leading-relaxed">{city.context}</p>
         </div>
       </section>
 
       {/* Témoignage local */}
       {city.testimonial && (
-        <section className="bg-mp-beige py-16 md:py-20">
-          <div className="container mx-auto max-w-3xl px-4 md:px-6">
-            <Card className="p-8 md:p-12">
+        <section className="bg-mp-beige mp-band">
+          <div className="mp-shell">
+            <Card className="mp-measure p-8 md:p-12">
               <div className="flex gap-0.5 mb-4">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <Star key={i} className="h-5 w-5 text-mp-orange-warm fill-mp-orange-warm" />
@@ -150,9 +150,9 @@ export default async function CityPage({ params }: Props) {
 
       {/* Modèles recommandés */}
       {products.length > 0 && (
-        <section className="bg-mp-cream py-16 md:py-20">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-            <div className="max-w-3xl mb-10">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
+            <div className="mp-measure mb-10">
               <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
                 Nos modèles recommandés à {city.name}
               </h2>

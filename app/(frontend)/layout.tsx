@@ -16,7 +16,7 @@ export default function FrontendLayout({
         Aller au contenu principal
       </a>
       <Header />
-      <main id="main-content" className="flex-1 pb-24 lg:pb-0">{children}</main>
+      <main id="main-content" className="flex-1 pb-24 xl:pb-0">{children}</main>
       <Footer />
       <NavbarSticky />
     </>

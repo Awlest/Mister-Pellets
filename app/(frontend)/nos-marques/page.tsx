@@ -109,9 +109,9 @@ export default function NosMarquesHubPage() {
       <BrandsGrid title="" description="" />
 
       {/* Comparatif des 3 marques premium */}
-      <section className="bg-mp-cream py-16 md:py-24">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-          <div className="max-w-3xl mb-10">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <div className="mp-measure mb-10">
             <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
               Edilkamin, EK63, Girolami : le comparatif
             </h2>
@@ -160,9 +160,9 @@ export default function NosMarquesHubPage() {
       </section>
 
       {/* Argumentaire : quelle marque selon le besoin */}
-      <section className="bg-mp-beige py-16 md:py-24">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 max-w-3xl">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
+          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 mp-measure">
             Vous hésitez ? On résume
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

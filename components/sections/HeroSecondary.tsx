@@ -25,7 +25,7 @@ export function HeroSecondary({
 }: HeroSecondaryProps) {
   return (
     <section className="bg-mp-cream pt-12 pb-16 md:pt-20 md:pb-24 border-b border-mp-sand/30">
-      <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <div className="mp-shell">
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav aria-label="Fil d'Ariane" className="mb-6">
@@ -49,7 +49,7 @@ export function HeroSecondary({
           </nav>
         )}
 
-        <div className="max-w-3xl">
+        <div className="mp-measure">
           {eyebrow && (
             <Badge variant="eyebrow" className="mb-4">
               {eyebrow}

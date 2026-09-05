@@ -34,8 +34,8 @@ export default async function EstimationPage() {
         breadcrumbs={[{ label: "Accueil", href: "/" }, { label: "Estimation en ligne" }]}
       />
 
-      <section className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
           <div className="mb-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-mp-ink-soft">
             <span className="inline-flex items-center gap-2">
               <Calculator className="h-4 w-4 text-mp-orange-flame" />
@@ -71,7 +71,7 @@ export default async function EstimationPage() {
             <EstimateConfigurator products={products} />
           )}
 
-          <div className="mx-auto mt-10 max-w-3xl space-y-4 text-sm text-mp-ink-soft">
+          <div className="mx-auto mt-10 mp-measure space-y-4 text-sm text-mp-ink-soft">
             <p>
               <strong className="text-mp-green-deep">Ce que couvre l&apos;estimation.</strong> Le
               poêle au prix de notre catalogue, la pose et le raccordement selon votre type

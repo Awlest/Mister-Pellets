@@ -28,8 +28,8 @@ export default function ContactPage() {
         ]}
       />
 
-      <section className="bg-mp-cream py-12 md:py-20">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             {/* Coordonnées */}
             <div className="lg:col-span-4 space-y-6">

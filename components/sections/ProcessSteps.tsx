@@ -13,9 +13,9 @@ interface ProcessStepsProps {
  */
 export function ProcessSteps({ title = "Comment ça marche", steps }: ProcessStepsProps) {
   return (
-    <section className="py-16 md:py-24 bg-mp-green-deep text-white">
-      <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-        <h2 className="text-3xl md:text-5xl font-semibold mb-12 max-w-3xl text-white">
+    <section className="mp-band bg-mp-green-deep text-white">
+      <div className="mp-shell">
+        <h2 className="text-3xl md:text-5xl font-semibold mb-12 mp-measure text-white">
           {title}
         </h2>
 

@@ -101,34 +101,36 @@ export default async function GuidePage({ params }: Props) {
         ]}
       />
 
-      <article className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          {guide.sections.map((section, i) => (
-            <section key={i} className="mb-12">
-              <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 mt-2">
-                {section.heading}
-              </h2>
+      <article className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <div className="mp-measure">
+              {guide.sections.map((section, i) => (
+              <section key={i} className="mb-12">
+                <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 mt-2">
+                  {section.heading}
+                </h2>
 
-              {section.paragraphs?.map((p, k) => (
-                <p key={k} className="text-lg text-mp-ink leading-relaxed mb-4">
-                  {p}
-                </p>
-              ))}
+                {section.paragraphs?.map((p, k) => (
+                  <p key={k} className="text-lg text-mp-ink leading-relaxed mb-4">
+                    {p}
+                  </p>
+                ))}
 
-              {section.list && (
-                <ul className="space-y-3">
-                  {section.list.map((item, k) => (
-                    <li key={k} className="flex items-start gap-3 text-mp-ink leading-relaxed">
-                      <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-flame font-bold text-xs shrink-0 mt-0.5">
-                        {k + 1}
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </section>
-          ))}
+                {section.list && (
+                  <ul className="space-y-3">
+                    {section.list.map((item, k) => (
+                      <li key={k} className="flex items-start gap-3 text-mp-ink leading-relaxed">
+                        <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-flame font-bold text-xs shrink-0 mt-0.5">
+                          {k + 1}
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+          </div>
         </div>
       </article>
 
@@ -141,8 +143,8 @@ export default async function GuidePage({ params }: Props) {
 
       {/* Autres guides */}
       {others.length > 0 && (
-        <section className="bg-mp-beige py-16 md:py-20">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <section className="bg-mp-beige mp-band">
+          <div className="mp-shell">
             <h2 className="text-3xl font-semibold text-mp-green-deep mb-8">
               Continuer sur le sujet
             </h2>

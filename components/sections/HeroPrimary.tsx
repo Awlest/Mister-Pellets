@@ -35,8 +35,8 @@ export function HeroPrimary({
         }}
       />
 
-      <div className="container mx-auto max-w-[1280px] px-4 md:px-6 py-16 md:py-24 lg:py-32 relative">
-        <div className="max-w-3xl">
+      <div className="mp-shell py-16 md:py-24 lg:py-32 relative">
+        <div className="mp-measure">
           <Badge variant="eyebrow" className="mb-6">
             <Flame className="h-3 w-3 text-mp-orange-flame" />
             {eyebrow}
@@ -46,7 +46,7 @@ export function HeroPrimary({
             {title}
           </h1>
 
-          <p className="text-lg md:text-xl text-mp-ink-soft leading-relaxed mb-8 max-w-2xl">
+          <p className="text-lg md:text-xl text-mp-ink-soft leading-relaxed mb-8 mp-measure">
             {description}
           </p>
 

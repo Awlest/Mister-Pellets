@@ -19,15 +19,15 @@ export function StatsGrid({ title, stats, variant = "light" }: StatsGridProps) {
   return (
     <section
       className={cn(
-        "py-16 md:py-24",
+        "mp-band",
         variant === "dark" ? "bg-mp-green-deep text-white" : "bg-mp-beige"
       )}
     >
-      <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <div className="mp-shell">
         {title && (
           <h2
             className={cn(
-              "text-3xl md:text-5xl font-semibold mb-12 max-w-3xl",
+              "text-3xl md:text-5xl font-semibold mb-12 mp-measure",
               variant === "dark" ? "text-white" : "text-mp-green-deep"
             )}
           >

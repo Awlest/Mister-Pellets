@@ -1,5 +1,7 @@
 import { Star } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { toneClass, type SectionTone } from "@/lib/section-tone";
 
 interface Testimonial {
   /** Prénom + initiale, tels que publiés sur la fiche Google. */
@@ -65,6 +67,8 @@ const GOOGLE_TESTIMONIALS: Testimonial[] = [
 ];
 
 interface TestimonialsProps {
+  /** Fond de la section. La page decide de l alternance creme / beige. */
+  tone?: SectionTone;
   title?: string;
   description?: string;
   items?: Testimonial[];
@@ -79,14 +83,15 @@ interface TestimonialsProps {
  * avec un lien vers la source pour qu'elle reste vérifiable.
  */
 export function Testimonials({
+  tone = "beige",
   title = "Ce que disent nos clients",
   description,
   items = GOOGLE_TESTIMONIALS,
 }: TestimonialsProps) {
   return (
-    <section className="py-16 md:py-24 bg-mp-beige">
-      <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
-        <div className="max-w-3xl mb-12">
+    <section className={cn("mp-band", toneClass(tone))}>
+      <div className="mp-shell">
+        <div className="mp-measure mb-12">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
             {title}
           </h2>

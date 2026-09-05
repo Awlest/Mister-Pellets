@@ -19,8 +19,9 @@ export default function PolitiqueConfidentialitePage() {
         ]}
       />
 
-      <article className="bg-mp-cream py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6 space-y-8 text-mp-ink leading-relaxed">
+      <article className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <div className="mp-measure space-y-8 text-mp-ink leading-relaxed">
 
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Responsable du traitement</h2>
@@ -117,9 +118,10 @@ export default function PolitiqueConfidentialitePage() {
             </p>
           </section>
 
-          <p className="text-sm text-mp-ink-soft pt-6 border-t border-mp-sand/40">
+          <p className="mp-measure text-sm text-mp-ink-soft pt-6 border-t border-mp-sand/40">
             Dernière mise à jour : {new Date().toLocaleDateString("fr-BE", { year: "numeric", month: "long" })}
           </p>
+          </div>
         </div>
       </article>
     </>

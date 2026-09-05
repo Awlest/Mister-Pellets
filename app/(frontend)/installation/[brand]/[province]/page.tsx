@@ -92,12 +92,12 @@ export default async function InstallationLocalePage({ params }: Props) {
       />
 
       {/* Pourquoi cette marque dans cette province */}
-      <section className="bg-mp-cream py-16 md:py-20">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+      <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-3xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Un {brand.name} dans {province.longName}
           </h2>
-          <div className="space-y-4 text-lg text-mp-ink leading-relaxed">
+          <div className="mp-measure space-y-4 text-lg text-mp-ink leading-relaxed">
             <p>{province.localAngle}</p>
             <p>{brand.whyWeLove?.[0] ?? brand.intro}</p>
           </div>
@@ -105,12 +105,12 @@ export default async function InstallationLocalePage({ params }: Props) {
       </section>
 
       {/* Zone d'intervention : villes */}
-      <section className="bg-mp-beige py-16 md:py-20">
-        <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
           <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-4">
             On vous installe votre {brand.name} partout en {province.name}
           </h2>
-          <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 max-w-3xl">
+          <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 mp-measure">
             {province.delivery}
           </p>
           <div className="flex flex-wrap gap-3">
@@ -125,8 +125,8 @@ export default async function InstallationLocalePage({ params }: Props) {
 
       {/* Modèles de la marque */}
       {models.length > 0 && (
-        <section className="bg-mp-cream py-16 md:py-24">
-          <div className="container mx-auto max-w-[1280px] px-4 md:px-6">
+        <section className="bg-mp-cream mp-band">
+          <div className="mp-shell">
             <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10">
               Modèles {brand.name} qu&apos;on pose le plus en {province.name}
             </h2>
@@ -165,12 +165,12 @@ export default async function InstallationLocalePage({ params }: Props) {
       )}
 
       {/* Ce qu'on fait sur place */}
-      <section className="bg-mp-beige py-16 md:py-20">
-        <div className="container mx-auto max-w-3xl px-4 md:px-6">
-          <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-8">
+      <section className="bg-mp-beige mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-3xl md:text-4xl font-semibold text-mp-green-deep mb-8">
             Notre service en {province.name}
           </h2>
-          <ul className="space-y-3 text-lg text-mp-ink leading-relaxed">
+          <ul className="mp-measure space-y-3 text-lg text-mp-ink leading-relaxed">
             {[
               "Visite technique pour valider le conduit, le tubage et l'emplacement.",
               "Devis chiffré sous 48 h, prime Habitation Wallonie 2026 déduite.",
