@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import Script from "next/script";
 import {
-  CONSENT_KEY,
   EVENTS,
   GA_MEASUREMENT_ID,
   readConsent,
@@ -24,36 +23,10 @@ import {
  * campagnes sur des chiffres amputés de la moitié du trafic. Le passage à
  * `granted` ne se fait qu'après un clic explicite sur Accepter.
  *
- * Le bootstrap tient en un seul script inline plutôt qu'en trois balises :
- * l'ordre d'exécution des scripts `afterInteractive` n'est pas garanti par
- * Next, et un `consent default` qui arriverait après le premier hit serait
- * inutile.
+ * L'amorce (dataLayer, consentement par défaut, restauration du choix stocké)
+ * vit dans app/layout.tsx, rendue en clair dans le `<head>` : c'est la seule
+ * façon de garantir qu'elle s'exécute avant la bibliothèque Google.
  */
-
-const BOOTSTRAP = `
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-window.gtag = gtag;
-gtag('consent', 'default', {
-  ad_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
-  analytics_storage: 'denied',
-  wait_for_update: 500
-});
-try {
-  if (localStorage.getItem('${CONSENT_KEY}') === 'granted') {
-    gtag('consent', 'update', {
-      ad_storage: 'granted',
-      ad_user_data: 'granted',
-      ad_personalization: 'granted',
-      analytics_storage: 'granted'
-    });
-  }
-} catch (e) {}
-gtag('js', new Date());
-gtag('config', '${GA_MEASUREMENT_ID}');
-`;
 
 /**
  * Le choix de l'utilisateur vit dans localStorage, pas dans React. On le lit
@@ -102,9 +75,8 @@ export function Analytics() {
 
   return (
     <>
-      <Script id="ga-bootstrap" strategy="afterInteractive">
-        {BOOTSTRAP}
-      </Script>
+      {/* L'amorce du consentement est rendue en <head> par app/layout.tsx :
+        * elle doit s'exécuter avant cette bibliothèque, pas après. */}
       <Script
         id="ga-lib"
         strategy="afterInteractive"

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { JsonLd, ORGANIZATION_SCHEMA } from "@/components/seo/JsonLd";
+import { GA_BOOTSTRAP } from "@/lib/analytics";
 import { SITE_URL, SITE_NAME, SITE_LOCALE, DEFAULT_OG_IMAGE } from "@/lib/seo";
 
 const fraunces = Fraunces({
@@ -130,6 +131,8 @@ export default function RootLayout({
       <head>
         {/* Schemas globaux SSR, chaque page peut ajouter ses propres schemas en plus */}
         <JsonLd data={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]} />
+        {/* Consentement Google : doit precéder tout chargement de gtag.js. */}
+        <script dangerouslySetInnerHTML={{ __html: GA_BOOTSTRAP }} />
       </head>
       <body className="min-h-full flex flex-col bg-mp-cream text-mp-ink">
         {children}

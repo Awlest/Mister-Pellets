@@ -90,3 +90,38 @@ export function writeConsent(choice: ConsentChoice): void {
     // Navigation privée ou stockage bloqué : le bandeau réapparaîtra, tant pis.
   }
 }
+
+/**
+ * Script d'amorce du mode consentement, à rendre en clair dans le `<head>`.
+ *
+ * Il DOIT s'exécuter avant que la bibliothèque Google ne s'initialise, sinon
+ * un identifiant peut être stocké avant le refus par défaut. Passé par
+ * `next/script`, il n'apparaissait pas dans le HTML servi et son ordre face au
+ * chargement de gtag.js n'était pas garanti : constaté en production le
+ * 5 septembre 2026. Un `<script>` inline dans le `<head>` est le seul moyen
+ * d'avoir la garantie d'ordre.
+ */
+export const GA_BOOTSTRAP = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+window.gtag = gtag;
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied',
+  wait_for_update: 500
+});
+try {
+  if (localStorage.getItem('${CONSENT_KEY}') === 'granted') {
+    gtag('consent', 'update', {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted'
+    });
+  }
+} catch (e) {}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');
+`;
