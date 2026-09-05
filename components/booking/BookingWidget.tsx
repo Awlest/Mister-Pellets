@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { EVENTS, trackEvent } from "@/lib/analytics";
 import { Calendar, Check, Loader2, Phone, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -140,6 +141,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
         throw new Error(data.error ?? "La réservation n'a pas abouti.");
       }
       setConfirmed({ date: data.date, time: data.time });
+      trackEvent(EVENTS.rdvReserve, { service: serviceSlug, date: data.date });
     } catch (e) {
       setSubmitError(e instanceof Error ? e.message : "Erreur inattendue.");
     } finally {

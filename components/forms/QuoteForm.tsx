@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { EVENTS, trackEvent } from "@/lib/analytics";
 import Link from "next/link";
 import { Check, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -146,6 +147,7 @@ export function QuoteForm() {
         throw new Error(data.error ?? "Erreur lors de l'envoi.");
       }
       setSubmitState("success");
+      trackEvent(EVENTS.formulaireDevis, { source: "formulaire" });
       try { localStorage.removeItem(STORAGE_KEY); } catch {}
     } catch (e) {
       setSubmitState("error");

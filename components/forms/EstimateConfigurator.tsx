@@ -33,6 +33,8 @@ import {
 } from "@/lib/estimate";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
+import { EVENTS, trackEvent } from "@/lib/analytics";
+
 const STORAGE_KEY = "mp_estimate_draft";
 
 const STEPS = [
@@ -188,6 +190,14 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
         throw new Error(data.error ?? "Erreur lors de l'envoi.");
       }
       setSubmitState("success");
+      // Conversion principale du site : le visiteur a un prix chiffré et nous a
+      // laissé ses coordonnées. La valeur permet à Google Ads d'optimiser sur le
+      // montant du projet et pas seulement sur le nombre de formulaires.
+      trackEvent(EVENTS.devisChiffre, {
+        currency: "EUR",
+        value: Math.round(r.totalTTC),
+        source: "configurateur",
+      });
       try {
         localStorage.removeItem(STORAGE_KEY);
       } catch {}

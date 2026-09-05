@@ -34,11 +34,14 @@ const SECURITY_HEADERS = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com https://va.vercel-scripts.com",
+      // googletagmanager sert la bibliothèque gtag.js ; google-analytics.com reçoit
+      // les hits. Sans ces deux origines, la mesure est bloquée par la CSP sans
+      // aucune erreur visible sur le site.
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com https://va.vercel-scripts.com https://www.googletagmanager.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' data: https://fonts.gstatic.com",
       "img-src 'self' data: blob: https:",
-      "connect-src 'self' https://*.vercel-scripts.com",
+      "connect-src 'self' https://*.vercel-scripts.com https://www.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
       "frame-src 'self'",
       "object-src 'none'",
       "base-uri 'self'",

@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { NavbarSticky } from "@/components/layout/NavbarSticky";
+import { Analytics } from "@/components/layout/Analytics";
 
 export default function FrontendLayout({
   children,
@@ -19,6 +20,7 @@ export default function FrontendLayout({
       <main id="main-content" className="flex-1 pb-24 xl:pb-0">{children}</main>
       <Footer />
       <NavbarSticky />
+      <Analytics />
     </>
   );
 }
