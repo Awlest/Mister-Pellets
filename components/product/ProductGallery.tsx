@@ -1,18 +1,17 @@
 "use client";
 
 import { useState, useCallback, useEffect, useMemo } from "react";
-import Image from "next/image";
 import { Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-image";
 import { useProductColor } from "./ProductColorContext";
 
-interface GalleryImage {
-  url: string;
-  alt?: string;
-  /** Point focal (0-100 %) issu de l'admin Media Payload (CSS object-position). */
-  focalX?: number;
-  focalY?: number;
-}
+/**
+ * Image de la galerie : URL originale + point focal + déclinaisons Payload
+ * (srcset). Les photos sont servies sans l'optimiseur d'images de Vercel,
+ * plafonné sur le plan Hobby (cf. lib/product-image.ts).
+ */
+type GalleryImage = ProductImage;
 
 interface ColorVariant {
   colorName: string;
@@ -194,13 +193,15 @@ export function ProductGallery({
           className="relative aspect-square w-full rounded-3xl bg-mp-beige-warm border border-mp-sand/40 overflow-hidden cursor-zoom-in group focus:outline-none focus:ring-2 focus:ring-mp-orange-flame focus:ring-offset-2"
           aria-label="Agrandir la photo"
         >
-          <Image
-            src={active.url}
-            alt={active.alt || productName}
-            fill
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={pickImageSrc(active, 800)}
+            srcSet={buildSrcSet(active)}
             sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            alt={active.alt || productName}
+            fetchPriority="high"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             style={{ objectPosition: `${active.focalX ?? 50}% ${active.focalY ?? 50}%` }}
           />
           <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-mp-ink/80 px-2.5 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
@@ -242,12 +243,15 @@ export function ProductGallery({
                 aria-label={`Voir la photo ${i + 1}`}
                 aria-pressed={isActive}
               >
-                <Image
-                  src={img.url}
-                  alt={img.alt || `${productName}, vue ${i + 1}`}
-                  fill
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={pickImageSrc(img, 400)}
+                  srcSet={buildSrcSet(img)}
                   sizes="(max-width: 1024px) 25vw, 12vw"
-                  className="object-cover"
+                  alt={img.alt || `${productName}, vue ${i + 1}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover"
                   style={{ objectPosition: `${img.focalX ?? 50}% ${img.focalY ?? 50}%` }}
                 />
               </button>
@@ -357,13 +361,14 @@ export function ProductGallery({
             onClick={(e) => e.stopPropagation()}
             className="relative max-w-6xl w-full aspect-square md:aspect-[4/3]"
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={active.url}
-              alt={active.alt || productName}
-              fill
+              srcSet={buildSrcSet(active)}
               sizes="(max-width: 1280px) 100vw, 1280px"
-              className="object-contain"
-              priority
+              alt={active.alt || productName}
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-contain"
             />
           </div>
 

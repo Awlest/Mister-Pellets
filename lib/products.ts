@@ -12,6 +12,7 @@ import type {
   ProductVariantData,
   VariantDisplayMode,
   VariantStockStatus,
+  ProductImage,
 } from "./products-demo";
 
 /**
@@ -23,6 +24,27 @@ import type {
  *
  * Toutes les fonctions sont server-only (use Payload Local API → DB direct).
  */
+
+/**
+ * Document `media` hydraté (depth ≥ 1). `sizes` = déclinaisons générées par
+ * Payload à l'upload (collections/Media.ts → imageSizes : thumbnail 200×200
+ * recadrée, card 400 px, display 800 px, full 1600 px). Une taille n'existe
+ * que si l'original est au moins aussi large (pas d'agrandissement).
+ */
+interface PayloadMedia {
+  url?: string | null;
+  alt?: string | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  width?: number | null;
+  height?: number | null;
+  sizes?: {
+    thumbnail?: { url?: string | null; width?: number | null } | null;
+    card?: { url?: string | null; width?: number | null } | null;
+    display?: { url?: string | null; width?: number | null } | null;
+    full?: { url?: string | null; width?: number | null } | null;
+  } | null;
+}
 
 interface PayloadProduct {
   id: number;
@@ -48,26 +70,8 @@ interface PayloadProduct {
   isNew?: boolean | null;
   shortDescription?: string | null;
   features?: Array<{ title?: string | null; description?: string | null }> | null;
-  mainImage?:
-    | number
-    | {
-        url?: string | null;
-        alt?: string | null;
-        focalX?: number | null;
-        focalY?: number | null;
-      }
-    | null;
-  galleryImages?: Array<{
-    image?:
-      | number
-      | {
-          url?: string | null;
-          alt?: string | null;
-          focalX?: number | null;
-          focalY?: number | null;
-        }
-      | null;
-  }> | null;
+  mainImage?: number | PayloadMedia | null;
+  galleryImages?: Array<{ image?: number | PayloadMedia | null }> | null;
   technicalSheet?:
     | number
     | {
@@ -79,26 +83,8 @@ interface PayloadProduct {
     colorName?: string | null;
     colorHex?: string | null;
     gtin?: string | null;
-    mainImage?:
-      | number
-      | {
-          url?: string | null;
-          alt?: string | null;
-          focalX?: number | null;
-          focalY?: number | null;
-        }
-      | null;
-    galleryImages?: Array<{
-      image?:
-        | number
-        | {
-            url?: string | null;
-            alt?: string | null;
-            focalX?: number | null;
-            focalY?: number | null;
-          }
-        | null;
-    }> | null;
+    mainImage?: number | PayloadMedia | null;
+    galleryImages?: Array<{ image?: number | PayloadMedia | null }> | null;
   }> | null;
   hasVariants?: boolean | null;
   variantOptions?: Array<{
@@ -189,6 +175,33 @@ function toRelativeUrl(rawUrl: string): string {
 }
 
 /**
+ * Convertit un média Payload hydraté en ProductImage : URL originale relative
+ * + déclinaisons pré-calculées (card/display/full) quand elles existent, pour
+ * que les composants construisent un srcset sans passer par l'optimiseur
+ * d'images de Vercel (cf. lib/product-image.ts).
+ * Retourne undefined si le média n'est pas hydraté ou n'a pas d'URL.
+ */
+function mapMedia(
+  m: number | PayloadMedia | null | undefined,
+  fallbackAlt: string,
+): ProductImage | undefined {
+  if (!m || typeof m !== "object" || !m.url) return undefined;
+  const sizes: NonNullable<ProductImage["sizes"]> = {};
+  for (const key of ["card", "display", "full"] as const) {
+    const s = m.sizes?.[key];
+    if (s?.url) sizes[key] = toRelativeUrl(s.url);
+  }
+  return {
+    url: toRelativeUrl(m.url),
+    alt: m.alt ?? fallbackAlt,
+    ...(typeof m.focalX === "number" ? { focalX: m.focalX } : {}),
+    ...(typeof m.focalY === "number" ? { focalY: m.focalY } : {}),
+    ...(typeof m.width === "number" && m.width > 0 ? { width: m.width } : {}),
+    ...(Object.keys(sizes).length > 0 ? { sizes } : {}),
+  };
+}
+
+/**
  * Volume de chauffe maximal (m³) par puissance — gamme Girolami, CATALISTINO
  * 2026. Pour une puissance donnée, la valeur est identique sur toute la gamme
  * (relevé sur les fiches produit avant regroupement). Sert UNIQUEMENT à
@@ -268,30 +281,17 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
   // On remonte aussi focalX/focalY (pourcentages 0-100 saisis dans l'admin
   // Media) pour positionner l'image correctement dans la carte boutique et
   // la galerie produit.
-  let imageSrc: string | undefined;
-  let imageAlt: string | undefined;
-  let imageFocalX: number | undefined;
-  let imageFocalY: number | undefined;
-  if (p.mainImage && typeof p.mainImage === "object" && p.mainImage.url) {
-    imageSrc = toRelativeUrl(p.mainImage.url);
-    imageAlt = p.mainImage.alt ?? p.name;
-    if (typeof p.mainImage.focalX === "number") imageFocalX = p.mainImage.focalX;
-    if (typeof p.mainImage.focalY === "number") imageFocalY = p.mainImage.focalY;
-  }
+  const image = mapMedia(p.mainImage, p.name);
+  const imageSrc = image?.url;
+  const imageAlt = image?.alt;
+  const imageFocalX = image?.focalX;
+  const imageFocalY = image?.focalY;
 
   // Galerie : on filtre les entries valides et on convertit les URLs.
   const galleryImages = Array.isArray(p.galleryImages)
     ? p.galleryImages
-        .map((item) => {
-          if (!item.image || typeof item.image !== "object" || !item.image.url) return null;
-          return {
-            url: toRelativeUrl(item.image.url),
-            alt: item.image.alt ?? p.name,
-            ...(typeof item.image.focalX === "number" ? { focalX: item.image.focalX } : {}),
-            ...(typeof item.image.focalY === "number" ? { focalY: item.image.focalY } : {}),
-          };
-        })
-        .filter((x): x is NonNullable<typeof x> => x !== null)
+        .map((item) => mapMedia(item.image, p.name))
+        .filter((x): x is ProductImage => x !== undefined)
     : undefined;
 
   // Fiche technique PDF : URL relative + nom du fichier pour l'affichage du lien.
@@ -326,6 +326,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     imageAlt,
     imageFocalX,
     imageFocalY,
+    image,
     shortDescription: p.shortDescription ?? undefined,
     features: Array.isArray(p.features)
       ? p.features
@@ -342,28 +343,12 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
       ? p.colorVariants
           .filter((cv) => cv && cv.colorName)
           .map<ProductColorVariant>((cv) => {
-            const variantMainImage =
-              cv.mainImage && typeof cv.mainImage === "object" && cv.mainImage.url
-                ? {
-                    url: toRelativeUrl(cv.mainImage.url),
-                    alt: cv.mainImage.alt ?? `${p.name}, ${cv.colorName}`,
-                    focalX: typeof cv.mainImage.focalX === "number" ? cv.mainImage.focalX : undefined,
-                    focalY: typeof cv.mainImage.focalY === "number" ? cv.mainImage.focalY : undefined,
-                  }
-                : undefined;
-
+            const variantAlt = `${p.name}, ${cv.colorName}`;
+            const variantMainImage = mapMedia(cv.mainImage, variantAlt);
             const variantGallery = Array.isArray(cv.galleryImages)
               ? cv.galleryImages
-                  .map((g) => {
-                    if (!g.image || typeof g.image !== "object" || !g.image.url) return null;
-                    return {
-                      url: toRelativeUrl(g.image.url),
-                      alt: g.image.alt ?? `${p.name}, ${cv.colorName}`,
-                      ...(typeof g.image.focalX === "number" ? { focalX: g.image.focalX } : {}),
-                      ...(typeof g.image.focalY === "number" ? { focalY: g.image.focalY } : {}),
-                    };
-                  })
-                  .filter((x): x is NonNullable<typeof x> => x !== null)
+                  .map((g) => mapMedia(g.image, variantAlt))
+                  .filter((x): x is ProductImage => x !== undefined)
               : undefined;
 
             return {

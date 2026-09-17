@@ -33,7 +33,10 @@ interface PayloadEstimateRow {
   installationPrice?: number | null;
   isHydro?: boolean | null;
   heatedVolumeM3?: number | null;
-  mainImage?: number | { url?: string | null } | null;
+  mainImage?:
+    | number
+    | { url?: string | null; sizes?: { card?: { url?: string | null } | null } | null }
+    | null;
   hasVariants?: boolean | null;
   variantOptions?: Array<{
     optionType?: number | { id: number; label?: string | null; slug?: string | null } | null;
@@ -170,11 +173,16 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
             ? Math.round(baseTTC / 1.21)
             : 0;
 
+    // Vignette 64 px dans le configurateur : la taille « card » (400 px)
+    // pré-générée par Payload suffit, l'original (souvent > 300 Ko) alourdirait
+    // la page pour rien. Servie sans l'optimiseur Vercel (cf. lib/product-image.ts).
     const img = doc.mainImage;
-    const imageSrc =
-      img && typeof img === "object" && typeof img.url === "string" && img.url.length > 0
-        ? toImageSrc(img.url)
+    const rawUrl =
+      img && typeof img === "object"
+        ? (img.sizes?.card?.url && img.sizes.card.url.length > 0 ? img.sizes.card.url : img.url)
         : undefined;
+    const imageSrc =
+      typeof rawUrl === "string" && rawUrl.length > 0 ? toImageSrc(rawUrl) : undefined;
 
     const options = powerOptions(doc);
     const multi = options.length > 1;

@@ -205,9 +205,10 @@ export default async function ProductPage({ params }: Props) {
               <ProductGallery
                 productName={product.name}
                 mainImage={
-                  product.imageSrc
+                  product.image ??
+                  (product.imageSrc
                     ? { url: product.imageSrc, alt: product.imageAlt ?? product.name }
-                    : undefined
+                    : undefined)
                 }
                 galleryImages={product.galleryImages}
                 colorVariants={product.colorVariants}

@@ -149,6 +149,15 @@ const nextConfig: NextConfig = {
   },
 
   images: {
+    // ⚠️ NE PAS RETIRER. Le 17/09/2026, toutes les photos du site étaient
+    // cassées : Vercel répondait « 402 OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED »
+    // sur chaque /_next/image, le quota d'optimisation d'images du plan Hobby
+    // étant épuisé. Les photos produit sont désormais servies via un srcset
+    // construit sur les tailles pré-générées par Payload (lib/product-image.ts),
+    // et plus aucune image ne passe par l'optimiseur : `unoptimized` garantit
+    // que les <Image> restants (logos SVG, vignettes du configurateur) servent
+    // directement leur fichier.
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       // Vercel Blob : storage actif pour les uploads admin (Phase 5).

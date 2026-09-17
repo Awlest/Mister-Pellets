@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Card } from "@/components/ui/card";
+import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-image";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice, formatPriceHT } from "@/lib/utils";
 
@@ -38,6 +38,12 @@ export interface ProductCardData {
   /** Point focal de l'image (0-100 %) défini dans l'admin Media Payload. */
   imageFocalX?: number;
   imageFocalY?: number;
+  /**
+   * Image principale avec ses déclinaisons pré-calculées par Payload (srcset,
+   * cf. lib/product-image.ts). Absente sur les données de démo : la carte
+   * retombe alors sur `imageSrc` seul.
+   */
+  image?: ProductImage;
   isBestseller?: boolean;
   isNew?: boolean;
   /** Variantes de couleur disponibles (pour les pastilles sur la vignette). */
@@ -65,12 +71,19 @@ export function ProductCard({ product, className }: ProductCardProps) {
     imageAlt,
     imageFocalX,
     imageFocalY,
+    image,
     isBestseller,
     isNew,
     colorVariants,
     powers,
     heatedVolumes,
   } = product;
+
+  // Photo servie depuis les tailles pré-générées par Payload (srcset), jamais
+  // via /_next/image : l'optimiseur Vercel est plafonné sur le plan Hobby et
+  // renvoyait 402 sur toutes les photos le 17/09/2026 (cf. lib/product-image.ts).
+  const cardImage: ProductImage | undefined =
+    image ?? (imageSrc ? { url: imageSrc, focalX: imageFocalX, focalY: imageFocalY } : undefined);
 
   // Fiche regroupée multi-puissances : on affiche l'éventail complet
   // (ex: "9 · 12 · 14 kW" + "276–373 m³") au lieu de la seule valeur du parent.
@@ -102,13 +115,16 @@ export function ProductCard({ product, className }: ProductCardProps) {
       <Card className="overflow-hidden h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         {/* Image */}
         <div className="relative aspect-square bg-mp-beige-warm overflow-hidden">
-          {imageSrc ? (
-            <Image
-              src={imageSrc}
-              alt={imageAlt ?? name}
-              fill
+          {cardImage ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={pickImageSrc(cardImage, 800)}
+              srcSet={buildSrcSet(cardImage)}
               sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              alt={imageAlt ?? name}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               style={{ objectPosition }}
             />
           ) : (

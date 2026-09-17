@@ -4,6 +4,9 @@
  */
 
 import type { ProductCardData } from "@/components/product/ProductCard";
+import type { ProductImage } from "./product-image";
+
+export type { ProductImage };
 
 /**
  * Taxonomie filtres boutique (Hotfix V1.3 §P3+P4) :
@@ -74,7 +77,7 @@ export interface ProductDemo extends ProductCardData {
    * Images additionnelles de la galerie (jusqu'à 8 dans Payload).
    * Affichées en thumbnails sous l'image principale sur la page produit.
    */
-  galleryImages?: Array<{ url: string; alt?: string; focalX?: number; focalY?: number }>;
+  galleryImages?: ProductImage[];
   /** Point focal de l'image principale (0-100 %), si défini dans l'admin Media. */
   imageFocalX?: number;
   imageFocalY?: number;
@@ -121,9 +124,9 @@ export interface ProductColorVariant {
   colorHex?: string;
   gtin?: string;
   /** Override de la photo principale, sinon on utilise celle du produit. */
-  mainImage?: { url: string; alt?: string; focalX?: number; focalY?: number };
+  mainImage?: ProductImage;
   /** Override de la galerie, sinon on utilise celle du produit. */
-  galleryImages?: Array<{ url: string; alt?: string; focalX?: number; focalY?: number }>;
+  galleryImages?: ProductImage[];
 }
 
 // =====================================================================
