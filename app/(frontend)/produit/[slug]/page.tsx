@@ -484,7 +484,7 @@ export default async function ProductPage({ params }: Props) {
             </Card>
 
             <Card className="p-6 flex flex-col gap-3">
-              {product.type === "hydro" ? (
+              {product.type === "hydro" || product.type === "hybride-hydro" ? (
                 <Droplet className="h-8 w-8 text-mp-orange-flame" />
               ) : product.type === "canalisable" ? (
                 <Wind className="h-8 w-8 text-mp-orange-flame" />
@@ -492,7 +492,7 @@ export default async function ProductPage({ params }: Props) {
                 <Flame className="h-8 w-8 text-mp-orange-flame" />
               )}
               <h3 className="text-lg font-semibold text-mp-green-deep capitalize">
-                Modèle {product.type}
+                Modèle {product.type.replace("-", " ")}
               </h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
                 {product.type === "hydro" &&
@@ -503,6 +503,8 @@ export default async function ProductPage({ params }: Props) {
                   "Poêle classique qui chauffe la pièce d'installation, sans réseau de gaines ni circuit hydraulique."}
                 {product.type === "hybride" &&
                   "Fonctionne aussi bien au pellet qu'au bois bûche. La polyvalence maximale."}
+                {product.type === "hybride-hydro" &&
+                  "Fonctionne au pellet comme au bois bûche et se raccorde au chauffage central, radiateurs ou plancher chauffant."}
                 {product.type === "insert" &&
                   "S'encastre dans une cheminée existante pour valoriser un foyer ouvert."}
               </p>

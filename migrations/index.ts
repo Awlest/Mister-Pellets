@@ -13,6 +13,8 @@ import * as migration_20260515_200000_products_price_optional from './20260515_2
 import * as migration_20260520_120000_products_variants_metadata from './20260520_120000_products_variants_metadata';
 import * as migration_20260617_140000_products_combustible from './20260617_140000_products_combustible';
 import * as migration_20260903_180000_orders_access_token from './20260903_180000_orders_access_token';
+import * as migration_20260919_100000_products_type_hybride_hydro from './20260919_100000_products_type_hybride_hydro';
+import * as migration_20260919_100100_products_type_hybride_hydro_backfill from './20260919_100100_products_type_hybride_hydro_backfill';
 
 export const migrations = [
   {
@@ -89,5 +91,15 @@ export const migrations = [
     up: migration_20260903_180000_orders_access_token.up,
     down: migration_20260903_180000_orders_access_token.down,
     name: '20260903_180000_orders_access_token',
+  },
+  {
+    up: migration_20260919_100000_products_type_hybride_hydro.up,
+    down: migration_20260919_100000_products_type_hybride_hydro.down,
+    name: '20260919_100000_products_type_hybride_hydro',
+  },
+  {
+    up: migration_20260919_100100_products_type_hybride_hydro_backfill.up,
+    down: migration_20260919_100100_products_type_hybride_hydro_backfill.down,
+    name: '20260919_100100_products_type_hybride_hydro_backfill',
   },
 ];

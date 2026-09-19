@@ -67,7 +67,9 @@ interface PayloadProduct {
   isHydro?: boolean | null;
   isConnected?: boolean | null;
   isBestseller?: boolean | null;
+  isFeatured?: boolean | null;
   isNew?: boolean | null;
+  createdAt?: string | null;
   shortDescription?: string | null;
   features?: Array<{ title?: string | null; description?: string | null }> | null;
   mainImage?: number | PayloadMedia | null;
@@ -319,7 +321,9 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     priceTTC: p.priceTTC ?? undefined,
     stockStatus: p.stockStatus ?? undefined,
     isBestseller: p.isBestseller ?? false,
+    isFeatured: p.isFeatured ?? false,
     isNew: p.isNew ?? false,
+    createdAt: p.createdAt ?? undefined,
     isAirtight: p.isAirtight ?? false,
     isConnected: p.isConnected ?? false,
     imageSrc,

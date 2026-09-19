@@ -84,7 +84,7 @@ function productTypePath(p: ProductDemo): string {
         ? "Poêles hybrides"
         : "Poêles à pellets";
   if (p.type === "canalisable") return `${family} > Canalisable`;
-  if (p.type === "hydro") return `${family} > Hydro`;
+  if (p.type === "hydro" || p.type === "hybride-hydro") return `${family} > Hydro`;
   return family;
 }
 
@@ -228,8 +228,14 @@ function productEntry(p: ProductDemo): FeedEntry | null {
   const imageLink = absUrl(p.imageSrc);
   if (!imageLink) return null; // image obligatoire chez Google Merchant
   const hasIdentifier = Boolean(p.gtin || p.mpn);
+  // « hybride-hydro » : le combustible hybride est déjà dit par le libellé du
+  // produit, il ne reste à préciser que le raccordement à l'eau.
   const typeSuffix =
-    p.type === "canalisable" || p.type === "hydro" ? ` ${p.type}` : "";
+    p.type === "canalisable" || p.type === "hydro"
+      ? ` ${p.type}`
+      : p.type === "hybride-hydro"
+        ? " hydro"
+        : "";
   return {
     rawId: safeMerchantId(p.sku || p.slug),
     dedupSeed: p.slug,

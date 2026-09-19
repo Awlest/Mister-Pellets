@@ -240,9 +240,9 @@ export interface Product {
    */
   model: string;
   /**
-   * Ce qu'EST le poêle (taxonomie V1.3)
+   * Ce qu'EST le poêle. « Hydro » = raccordé au chauffage central. « Hybride » = brûle bois et pellets, sans raccordement à l'eau. « Hybride hydro » = les deux à la fois : cocher aussi la case « Hydro » et choisir le combustible « Hybride ».
    */
-  productType: 'standard' | 'canalisable' | 'hydro' | 'hybride' | 'insert';
+  productType: 'standard' | 'canalisable' | 'hydro' | 'hybride' | 'hybride-hydro' | 'insert';
   /**
    * Combustible — filtre boutique. Pour un modèle proposé en plusieurs combustibles, choisir le combustible principal (le choix pellet/hybride à l'achat se gère en variante). Le caractère hydro/ventilé se règle via la case « Hydro » ci-dessous.
    */

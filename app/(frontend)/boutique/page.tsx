@@ -45,6 +45,8 @@ export default async function BoutiquePage() {
     imageFocalX: p.imageFocalX,
     imageFocalY: p.imageFocalY,
     image: p.image,
+    createdAt: p.createdAt,
+    isFeatured: p.isFeatured,
     isBestseller: p.isBestseller,
     isNew: p.isNew,
     colorVariants: p.colorVariants?.map((c) => ({ colorName: c.colorName, colorHex: c.colorHex })),

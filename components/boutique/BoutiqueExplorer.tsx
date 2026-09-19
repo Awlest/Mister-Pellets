@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import { ProductCard, type ProductCardData } from "@/components/product/ProductCard";
 import {
   COMBUSTIBLE_LABELS,
@@ -29,6 +30,10 @@ export interface BoutiqueProduct extends ProductCardData {
   powerKw: number;
   diffusion: Diffusion;
   color: ColorCategory;
+  /** Date de création de la fiche (ISO) : tri « Derniers ajouts ». */
+  createdAt?: string;
+  /** Case « Mis en avant » de l'admin : pèse dans le tri par défaut. */
+  isFeatured?: boolean;
 }
 
 /**
@@ -52,6 +57,69 @@ interface Filters {
 
 const DEFAULT: Filters = { marque: "all", combustible: "all", chauffage: "all", puissance: "all", diffusion: "all", couleur: "all" };
 const PAGE_SIZE = 24;
+
+/**
+ * Tri de la grille, côté navigateur comme les filtres (paramètre d'URL `tri`).
+ *
+ * « Mis en avant » est l'ordre par défaut. Il ne prétend rien recommander : il
+ * remonte les fiches cochées « Best-seller » puis « Mis en avant » dans l'admin,
+ * fait passer les fiches avec photo avant celles qui n'en ont pas encore, et
+ * départage le reste par date d'ajout. L'équipe pilote donc le haut de la
+ * boutique depuis ces deux cases.
+ */
+const SORTS = [
+  { value: "mis-en-avant", label: "Mis en avant" },
+  { value: "recent", label: "Derniers ajouts" },
+  { value: "prix-asc", label: "Prix croissant" },
+  { value: "prix-desc", label: "Prix décroissant" },
+  { value: "puissance-asc", label: "Puissance croissante" },
+  { value: "puissance-desc", label: "Puissance décroissante" },
+  { value: "nom", label: "Nom, de A à Z" },
+] as const;
+
+type SortKey = (typeof SORTS)[number]["value"];
+const DEFAULT_SORT: SortKey = "mis-en-avant";
+const isSortKey = (v: string | null): v is SortKey => SORTS.some((s) => s.value === v);
+
+const createdTime = (p: BoutiqueProduct): number => (p.createdAt ? Date.parse(p.createdAt) || 0 : 0);
+const hasPrice = (p: BoutiqueProduct): boolean => typeof p.priceTTC === "number" && p.priceTTC > 0;
+// Fiche regroupée multi-puissances : la plus petite sert au tri croissant, la
+// plus grande au tri décroissant (sinon un 9-26 kW se classerait comme un 9 kW).
+const minPower = (p: BoutiqueProduct): number => (p.powers && p.powers.length > 0 ? Math.min(...p.powers) : p.powerKw);
+const maxPower = (p: BoutiqueProduct): number => (p.powers && p.powers.length > 0 ? Math.max(...p.powers) : p.powerKw);
+const featuredScore = (p: BoutiqueProduct): number =>
+  (p.isBestseller ? 4 : 0) + (p.isFeatured ? 2 : 0) + (p.image?.url || p.imageSrc ? 1 : 0);
+
+function sortProducts(list: BoutiqueProduct[], sort: SortKey): BoutiqueProduct[] {
+  const byRecent = (a: BoutiqueProduct, b: BoutiqueProduct) => createdTime(b) - createdTime(a);
+  const sorted = [...list]; // Array.prototype.sort est stable : à égalité, l'ordre reçu est conservé.
+  switch (sort) {
+    case "recent":
+      return sorted.sort(byRecent);
+    case "prix-asc":
+    case "prix-desc": {
+      const dir = sort === "prix-asc" ? 1 : -1;
+      // Le prix trié est celui de la carte (« à partir de »). Les fiches « sur
+      // devis » n'ont pas de prix : elles restent en fin de liste dans les deux sens.
+      return sorted.sort((a, b) => {
+        const pa = hasPrice(a);
+        const pb = hasPrice(b);
+        if (pa !== pb) return pa ? -1 : 1;
+        if (!pa) return 0;
+        return dir * ((a.priceTTC as number) - (b.priceTTC as number));
+      });
+    }
+    case "puissance-asc":
+      return sorted.sort((a, b) => minPower(a) - minPower(b));
+    case "puissance-desc":
+      return sorted.sort((a, b) => maxPower(b) - maxPower(a));
+    case "nom":
+      // numeric : « Rise 7 » se classe avant « Rise 11 ».
+      return sorted.sort((a, b) => a.name.localeCompare(b.name, "fr", { numeric: true, sensitivity: "base" }));
+    default:
+      return sorted.sort((a, b) => featuredScore(b) - featuredScore(a) || byRecent(a, b));
+  }
+}
 
 const COMBUSTIBLE_FILTERS = [{ value: "all", label: "Tous" }, ...(Object.entries(COMBUSTIBLE_LABELS) as [Combustible, string][]).map(([value, label]) => ({ value, label }))];
 const CHAUFFAGE_FILTERS = [{ value: "all", label: "Tous" }, ...Object.entries(CHAUFFAGE_LABELS).map(([value, label]) => ({ value, label }))];
@@ -85,6 +153,7 @@ export function BoutiqueExplorer({
   brandFilters: { value: string; label: string }[];
 }) {
   const [current, setCurrent] = useState<Filters>(DEFAULT);
+  const [sort, setSort] = useState<SortKey>(DEFAULT_SORT);
   const [visible, setVisible] = useState(PAGE_SIZE);
 
   // Au montage : initialise les filtres depuis l'URL (liens partageables).
@@ -105,24 +174,40 @@ export function BoutiqueExplorer({
       diffusion: p.get("diffusion") ?? "all",
       couleur: p.get("couleur") ?? "all",
     });
+    const tri = p.get("tri");
+    if (isSortKey(tri)) setSort(tri);
   }, []);
+
+  /** Filtres + tri dans l'URL (lien partageable), sans aller-retour serveur. */
+  function syncUrl(filters: Filters, sortKey: SortKey) {
+    const params = new URLSearchParams();
+    (Object.keys(filters) as (keyof Filters)[]).forEach((k) => {
+      if (filters[k] !== "all") params.set(k, filters[k]);
+    });
+    if (sortKey !== DEFAULT_SORT) params.set("tri", sortKey);
+    const qs = params.toString();
+    window.history.replaceState(null, "", qs ? `/boutique?${qs}` : "/boutique");
+  }
 
   function setFilter(key: keyof Filters, value: string) {
     const next = { ...current, [key]: value };
     setCurrent(next);
     setVisible(PAGE_SIZE);
-    const params = new URLSearchParams();
-    (Object.keys(next) as (keyof Filters)[]).forEach((k) => {
-      if (next[k] !== "all") params.set(k, next[k]);
-    });
-    const qs = params.toString();
-    window.history.replaceState(null, "", qs ? `/boutique?${qs}` : "/boutique");
+    syncUrl(next, sort);
   }
 
+  function changeSort(value: string) {
+    if (!isSortKey(value)) return;
+    setSort(value);
+    setVisible(PAGE_SIZE);
+    syncUrl(current, value);
+  }
+
+  // « Réinitialiser les filtres » ne touche pas au tri : ce n'est pas un filtre.
   function reset() {
     setCurrent(DEFAULT);
     setVisible(PAGE_SIZE);
-    window.history.replaceState(null, "", "/boutique");
+    syncUrl(DEFAULT, sort);
   }
 
   const filtered = useMemo(
@@ -148,8 +233,10 @@ export function BoutiqueExplorer({
     [products, current],
   );
 
+  const sorted = useMemo(() => sortProducts(filtered, sort), [filtered, sort]);
+
   const activeCount = Object.values(current).filter((v) => v !== "all").length;
-  const shown = filtered.slice(0, visible);
+  const shown = sorted.slice(0, visible);
 
   const GROUPS: { label: string; key: keyof Filters; options: { value: string; label: string }[] }[] = [
     { label: "Marque", key: "marque", options: brandFilters },
@@ -187,10 +274,42 @@ export function BoutiqueExplorer({
         )}
       </div>
 
-      <div className="mb-6 text-sm text-mp-ink-soft">
-        <strong className="text-mp-green-deep">{filtered.length}</strong>{" "}
-        {filtered.length === 1 ? "modèle" : "modèles"}
-        {activeCount > 0 && " correspondant à votre sélection"}
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {/* aria-live : un lecteur d'écran annonce le nouveau total après un filtre. */}
+        <p className="text-sm text-mp-ink-soft" aria-live="polite">
+          <strong className="text-mp-green-deep">{filtered.length}</strong>{" "}
+          {filtered.length === 1 ? "modèle" : "modèles"}
+          {activeCount > 0 && " correspondant à votre sélection"}
+        </p>
+
+        {/* Select natif : clavier, lecteurs d'écran et sélecteur mobile gérés par
+            le système. 44 px de haut (cible tactile), 16 px sur mobile pour
+            éviter le zoom automatique d'iOS au focus. */}
+        {filtered.length > 1 && (
+          <div className="flex items-center gap-3">
+            <label htmlFor="boutique-tri" className="shrink-0 text-sm font-semibold text-mp-green-deep">
+              Trier par
+            </label>
+            <div className="relative flex-1 sm:flex-none">
+              <select
+                id="boutique-tri"
+                value={sort}
+                onChange={(e) => changeSort(e.target.value)}
+                className="h-11 w-full cursor-pointer appearance-none rounded-full border border-mp-sand bg-mp-cream pl-4 pr-10 text-base font-medium text-mp-green-deep transition-colors duration-200 hover:border-mp-green-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-flame focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream motion-reduce:transition-none sm:w-60 sm:text-sm"
+              >
+                {SORTS.map((s) => (
+                  <option key={s.value} value={s.value}>
+                    {s.label}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                aria-hidden="true"
+                className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-mp-ink-soft"
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       {filtered.length === 0 ? (

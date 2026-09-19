@@ -194,10 +194,12 @@ export const Products: CollectionConfig = {
         { label: "Canalisable", value: "canalisable" },
         { label: "Hydro", value: "hydro" },
         { label: "Hybride bois + pellets", value: "hybride" },
+        { label: "Hybride hydro (bois + pellets, chauffage central)", value: "hybride-hydro" },
         { label: "Insert encastrable", value: "insert" },
       ],
       admin: {
-        description: "Ce qu'EST le poêle (taxonomie V1.3)",
+        description:
+          "Ce qu'EST le poêle. « Hydro » = raccordé au chauffage central. « Hybride » = brûle bois et pellets, sans raccordement à l'eau. « Hybride hydro » = les deux à la fois : cocher aussi la case « Hydro » et choisir le combustible « Hybride ».",
       },
     },
     {

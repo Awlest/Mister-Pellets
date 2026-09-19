@@ -108,6 +108,16 @@ export const STOVE_KINDS = {
     extraHT: 0,
     ducts: false,
   },
+  // Bois + pellets ET raccordé à l'eau : même chantier de chauffagiste qu'un
+  // hydro, donc même supplément de raccordement (validé par le client le
+  // 19/09/2026, montant à revoir avec le reste des forfaits).
+  "hybride-hydro": {
+    label: "Hybride hydro",
+    desc: "Brûle des bûches ou des pellets et alimente les radiateurs ou le plancher chauffant",
+    productTypes: ["hybride-hydro"],
+    extraHT: 1600, // raccordement hydraulique complet — À CALIBRER
+    ducts: false,
+  },
   insert: {
     label: "Insert encastrable",
     desc: "S'encastre dans une cheminée existante à la place du foyer ouvert",

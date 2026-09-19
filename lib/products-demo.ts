@@ -27,7 +27,14 @@ export type { ProductImage };
  * - dark : tons foncés (noir, gris anthracite, bordeaux, brun foncé)
  * - natural : tons naturels (acier brossé, fonte, terracotta, bois/pierre)
  */
-export type ProductType = "standard" | "canalisable" | "hydro" | "hybride" | "insert";
+export type ProductType =
+  | "standard"
+  | "canalisable"
+  | "hydro"
+  | "hybride"
+  /** Bois + pellets ET raccordé au chauffage central (gamme Girolami). */
+  | "hybride-hydro"
+  | "insert";
 
 export type Diffusion = "ventilation-forcee" | "convection-naturelle";
 
@@ -61,6 +68,10 @@ export interface ProductDemo extends ProductCardData {
   color: ColorCategory;
   /** Puissance en kW (numérique, dérivable de power mais on stocke pour filtrage rapide) */
   powerKw: number;
+  /** Date de création de la fiche (ISO) : tri « Derniers ajouts » de la boutique. */
+  createdAt?: string;
+  /** Case « Mis en avant » de l'admin : pèse dans le tri par défaut de la boutique. */
+  isFeatured?: boolean;
   /**
    * Description courte saisie dans l'admin Payload (max 200 chars).
    * Affichée en haut de la page produit en remplacement du texte marketing
@@ -331,6 +342,7 @@ export const TYPE_LABELS: Record<ProductType, string> = {
   canalisable: "Canalisable",
   hydro:       "Hydro",
   hybride:     "Hybride bois + pellets",
+  "hybride-hydro": "Hybride hydro",
   insert:      "Insert encastrable",
 };
 
