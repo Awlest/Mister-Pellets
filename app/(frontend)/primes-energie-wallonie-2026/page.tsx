@@ -115,7 +115,7 @@ export default function PrimesPage() {
       {/* L'essentiel en 3 paragraphes, réponse directe pour les LLMs (GEO) */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6">
             L'essentiel en 30 secondes
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-lg">
@@ -148,7 +148,7 @@ export default function PrimesPage() {
       {/* Conditions d'éligibilité détaillées */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
+          <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
             Les conditions à réunir
           </h2>
 
@@ -204,7 +204,7 @@ export default function PrimesPage() {
       {/* Procédure pas à pas */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
+          <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
             Comment on monte le dossier ensemble
           </h2>
           <ol className="mp-measure space-y-6 text-mp-ink leading-relaxed">
@@ -277,7 +277,7 @@ export default function PrimesPage() {
       {/* Cumul d'aides */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Ce qui se cumule avec la prime
           </h2>
           <ul className="mp-measure space-y-3 text-mp-ink leading-relaxed text-lg">
@@ -302,7 +302,7 @@ export default function PrimesPage() {
       {/* Contacts officiels SPW */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Contacts officiels Région wallonne
           </h2>
           <ul className="mp-measure space-y-3 text-mp-ink leading-relaxed text-lg">

@@ -15,7 +15,7 @@ export function ProcessSteps({ title = "Comment ça marche", steps }: ProcessSte
   return (
     <section className="mp-band bg-mp-green-deep text-white">
       <div className="mp-shell">
-        <h2 className="text-3xl md:text-5xl font-semibold mb-12 mp-measure text-white">
+        <h2 className="text-3xl md:text-5xl font-semibold mb-12 mp-measure text-center text-white">
           {title}
         </h2>
 

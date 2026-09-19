@@ -145,7 +145,7 @@ export default async function GuidePage({ params }: Props) {
       {others.length > 0 && (
         <section className="bg-mp-beige mp-band">
           <div className="mp-shell">
-            <h2 className="text-3xl font-semibold text-mp-green-deep mb-8">
+            <h2 className="text-3xl font-semibold text-mp-green-deep mb-8 text-center">
               Continuer sur le sujet
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -172,13 +172,15 @@ export default async function GuidePage({ params }: Props) {
               ))}
             </div>
 
-            <Link
-              href="/guides"
-              className="inline-flex items-center gap-2 mt-8 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Tous les guides
-            </Link>
+            <div className="mt-8 text-center">
+              <Link
+                href="/guides"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Tous les guides
+              </Link>
+            </div>
           </div>
         </section>
       )}

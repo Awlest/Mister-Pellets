@@ -100,7 +100,7 @@ export default async function CityPage({ params }: Props) {
       {/* Stats locales */}
       <section className="bg-mp-cream pb-8 -mt-4">
         <div className="mp-shell">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <Badge variant="secondary">
               <MapPin className="h-3.5 w-3.5" /> {city.distanceFromFernelmont} km de Fernelmont
             </Badge>
@@ -120,7 +120,7 @@ export default async function CityPage({ params }: Props) {
       {/* Contexte local */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-6">
             Ce qu'on installe à {city.name}
           </h2>
           <p className="mp-measure text-lg text-mp-ink leading-relaxed">{city.context}</p>
@@ -152,7 +152,7 @@ export default async function CityPage({ params }: Props) {
       {products.length > 0 && (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
-            <div className="mp-measure mb-10">
+            <div className="mp-measure mb-10 text-center">
               <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
                 Nos modèles recommandés à {city.name}
               </h2>

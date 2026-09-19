@@ -16,6 +16,9 @@ interface HeroSecondaryProps {
 
 /**
  * Hero compact pour les pages internes. Cf. brief §4.1.
+ *
+ * Tout le bloc est centré (fil d'Ariane compris), comme le hero de l'accueil :
+ * aligné à gauche, il laissait la moitié droite de l'écran vide.
  */
 export function HeroSecondary({
   eyebrow,
@@ -29,7 +32,7 @@ export function HeroSecondary({
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav aria-label="Fil d'Ariane" className="mb-6">
-            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-mp-ink-soft">
+            <ol className="flex flex-wrap items-center justify-center gap-1.5 text-sm text-mp-ink-soft">
               {breadcrumbs.map((item, i) => (
                 <li key={i} className="flex items-center gap-1.5">
                   {i > 0 && <ChevronRight className="h-3.5 w-3.5" />}
@@ -49,7 +52,7 @@ export function HeroSecondary({
           </nav>
         )}
 
-        <div className="mp-measure">
+        <div className="mp-measure text-center">
           {eyebrow && (
             <Badge variant="eyebrow" className="mb-4">
               {eyebrow}

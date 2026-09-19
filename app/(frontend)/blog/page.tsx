@@ -69,8 +69,8 @@ export default function BlogHubPage() {
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
             <Link href={`/blog/${featured.slug}`} className="group block">
-              <Card className="p-8 md:p-12 bg-mp-green-deep text-mp-cream border-mp-green-deep hover:-translate-y-0.5 transition-all">
-                <div className="flex items-center gap-3 mb-5">
+              <Card className="p-8 md:p-12 bg-mp-green-deep text-mp-cream text-center border-mp-green-deep hover:-translate-y-0.5 transition-all">
+                <div className="flex flex-wrap items-center justify-center gap-3 mb-5">
                   <Badge variant="secondary" className="bg-mp-orange-flame text-mp-cream border-0">
                     <Sparkles className="h-3.5 w-3.5 mr-1" /> À la une
                   </Badge>
@@ -82,8 +82,12 @@ export default function BlogHubPage() {
                   </span>
                 </div>
 
+                {/* text-mp-cream est OBLIGATOIRE ici : la règle de base
+                  * `h1, h2, h3 { color: vert }` de globals.css l'emporte sur la
+                  * couleur héritée de la carte. Sans couleur explicite, le titre
+                  * sortait vert sur fond vert, donc invisible. */}
                 <h2
-                  className="text-3xl md:text-5xl font-semibold leading-tight mb-4 group-hover:text-mp-orange-light transition-colors"
+                  className="mx-auto max-w-4xl text-3xl md:text-5xl font-semibold leading-tight mb-4 text-mp-cream group-hover:text-mp-orange-light transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {featured.title}
@@ -106,7 +110,7 @@ export default function BlogHubPage() {
       {/* Filtres catégories, contraste WCAG AA (cf. doc §8) */}
       <section className="bg-mp-beige mp-band-sm">
         <div className="mp-shell">
-          <div className="flex flex-wrap gap-2 items-center">
+          <div className="flex flex-wrap gap-2 items-center justify-center">
             <span className="text-sm font-semibold text-mp-ink mr-2">Catégories :</span>
             {ARTICLE_CATEGORIES.map((cat) => {
               const count = ARTICLES.filter((a) => a.category === cat.value).length;
@@ -128,7 +132,7 @@ export default function BlogHubPage() {
       {/* Liste des autres articles */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8 text-center">
             Tous les articles
           </h2>
 

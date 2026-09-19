@@ -91,7 +91,7 @@ export function Testimonials({
   return (
     <section className={cn("mp-band", toneClass(tone))}>
       <div className="mp-shell">
-        <div className="mp-measure mb-12">
+        <div className="mp-measure mb-12 text-center">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
             {title}
           </h2>
@@ -142,7 +142,7 @@ export function Testimonials({
           ))}
         </div>
 
-        <p className="mt-8 text-sm text-mp-ink-soft">
+        <p className="mt-8 text-sm text-mp-ink-soft text-center">
           Avis publiés par nos clients sur notre fiche Google, repris ici sans
           modification.{" "}
           <a

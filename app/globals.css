@@ -112,9 +112,18 @@
  *
  * En rem et non en ch : `ch` dépend de la taille de police de l'élément, si
  * bien qu'un h2 en text-4xl se retrouvait à 1650 px de large — la classe ne
- * servait alors à rien sur les titres. */
+ * servait alors à rien sur les titres.
+ *
+ * CENTRÉE dans la gouttière (retour client 2026-09-19) : collée au bord gauche,
+ * la colonne laissait plus de 500 px de vide à droite sur un écran large et
+ * toute la page paraissait déportée. Règle d'alignement du texte à l'intérieur :
+ *   - titres de section et chapôs courts : `text-center` ;
+ *   - texte long (plusieurs paragraphes, listes, pages légales, articles) :
+ *     aligné à gauche DANS la colonne centrée. Un paragraphe de 5 lignes centré
+ *     n'a plus de bord d'attaque, l'œil perd le début de chaque ligne. */
 @utility mp-measure {
   max-width: 45rem;
+  margin-inline: auto;
 }
 
 /* Rythme vertical — deux valeurs seulement, pour que l'espacement entre
@@ -239,8 +248,13 @@ body {
     color: var(--mp-green-deep);
   }
 
-  h2 { line-height: 1.1; }
-  h3 { line-height: 1.2; font-weight: 600; }
+  /* Césure des titres centrés : un mot seul sur la dernière ligne se voit tout
+   * de suite. h2/h3 : lignes de longueur équilibrée. h1 : `pretty` seulement
+   * (évite l'orphelin sans tout rééquilibrer), parce que `balance` coupait
+   * l'accent orange des héros en deux (« installé chez / vous »). */
+  h1 { text-wrap: pretty; }
+  h2 { line-height: 1.1; text-wrap: balance; }
+  h3 { line-height: 1.2; font-weight: 600; text-wrap: balance; }
 
   h4, h5, h6 {
     font-family: var(--font-sans), sans-serif;

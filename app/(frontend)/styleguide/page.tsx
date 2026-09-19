@@ -81,9 +81,11 @@ export default function StyleguidePage() {
               <div>
                 <dt className="font-mono text-xs font-semibold text-mp-orange-flame">.mp-measure</dt>
                 <dd className="text-mp-ink-soft">
-                  La colonne de lecture : 720 px, soit ~70 caractères par ligne. S&apos;applique aux
-                  titres et aux paragraphes <em>à l&apos;intérieur</em> d&apos;un .mp-shell. Les grilles de
-                  cartes, elles, occupent toute la gouttière.
+                  La colonne de lecture : 720 px, soit ~70 caractères par ligne, centrée dans la
+                  gouttière. S&apos;applique aux titres et aux paragraphes <em>à l&apos;intérieur</em> d&apos;un
+                  .mp-shell. Titres de section et chapôs courts en <code className="font-mono text-xs">text-center</code>,
+                  texte long aligné à gauche dans la colonne centrée. Les grilles de cartes, elles,
+                  occupent toute la gouttière.
                 </dd>
               </div>
               <div>

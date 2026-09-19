@@ -87,7 +87,7 @@ export default function ZonesDInterventionPage() {
           </div>
 
           {/* Liste des villes */}
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-8">
+          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-8 text-center">
             Les 10 villes principales
           </h2>
 

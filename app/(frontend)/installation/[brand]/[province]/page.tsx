@@ -94,7 +94,7 @@ export default async function InstallationLocalePage({ params }: Props) {
       {/* Pourquoi cette marque dans cette province */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-3xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-3xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Un {brand.name} dans {province.longName}
           </h2>
           <div className="mp-measure space-y-4 text-lg text-mp-ink leading-relaxed">
@@ -107,13 +107,13 @@ export default async function InstallationLocalePage({ params }: Props) {
       {/* Zone d'intervention : villes */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-4">
+          <h2 className="mp-measure text-center text-3xl md:text-4xl font-semibold text-mp-green-deep mb-4">
             On vous installe votre {brand.name} partout en {province.name}
           </h2>
-          <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 mp-measure">
+          <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 mp-measure text-center">
             {province.delivery}
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             {province.cities.map((city) => (
               <Badge key={city} variant="default">
                 <MapPin className="h-3.5 w-3.5" /> {city}
@@ -127,7 +127,7 @@ export default async function InstallationLocalePage({ params }: Props) {
       {models.length > 0 && (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
-            <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10">
+            <h2 className="mp-measure text-center text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10">
               Modèles {brand.name} qu&apos;on pose le plus en {province.name}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -167,7 +167,7 @@ export default async function InstallationLocalePage({ params }: Props) {
       {/* Ce qu'on fait sur place */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-3xl md:text-4xl font-semibold text-mp-green-deep mb-8">
+          <h2 className="mp-measure text-center text-3xl md:text-4xl font-semibold text-mp-green-deep mb-8">
             Notre service en {province.name}
           </h2>
           <ul className="mp-measure space-y-3 text-lg text-mp-ink leading-relaxed">

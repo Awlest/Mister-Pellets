@@ -28,16 +28,29 @@ export function BrandsGrid({
   return (
     <section className={cn("mp-band", toneClass(tone))}>
       <div className="mp-shell">
-        <div className="mp-measure mb-12">
-          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
-            {title}
-          </h2>
-          {description && (
-            <p className="text-lg text-mp-ink-soft leading-relaxed">{description}</p>
-          )}
-        </div>
+        {/* /nos-marques passe title="" : son hero porte déjà le titre. Sans ce
+          * garde-fou, la page rendait un <h2> vide suivi de 48 px de blanc. */}
+        {(title || description) && (
+          <div className="mp-measure mb-12 text-center">
+            {title && (
+              <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
+                {title}
+              </h2>
+            )}
+            {description && (
+              <p className="text-lg text-mp-ink-soft leading-relaxed">{description}</p>
+            )}
+          </div>
+        )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* 3 marques : 3 colonnes dès lg. À 2 colonnes, la 3e carte restait seule
+          * à gauche sur sa ligne, avec la moitié droite vide. */}
+        <div
+          className={cn(
+            "grid grid-cols-1 md:grid-cols-2 gap-6",
+            brands.length % 3 === 0 && "lg:grid-cols-3"
+          )}
+        >
           {brands.map((brand) => (
             <Card key={brand.slug} className="p-8 flex flex-col gap-4">
               <div className="flex items-start justify-between gap-4">
@@ -71,7 +84,7 @@ export function BrandsGrid({
 
               <Link
                 href={`/nos-marques/${brand.slug}`}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors mt-2"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors mt-auto pt-2"
               >
                 Voir les modèles {brand.name}
                 <ArrowRight className="h-4 w-4" />

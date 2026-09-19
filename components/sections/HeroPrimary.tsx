@@ -36,7 +36,7 @@ export function HeroPrimary({
       />
 
       <div className="mp-shell py-16 md:py-24 lg:py-32 relative">
-        <div className="mp-measure">
+        <div className="mp-measure text-center">
           <Badge variant="eyebrow" className="mb-6">
             <Flame className="h-3 w-3 text-mp-orange-flame" />
             {eyebrow}
@@ -50,7 +50,7 @@ export function HeroPrimary({
             {description}
           </p>
 
-          <div className="flex flex-wrap gap-3 mb-10">
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
             <Button asChild variant="primary" size="lg">
               <Link href={primaryCta.href}>{primaryCta.label}</Link>
             </Button>
@@ -60,7 +60,7 @@ export function HeroPrimary({
           </div>
 
           {showStats && (
-            <div className="flex flex-wrap gap-x-6 gap-y-3 items-center text-sm font-medium text-mp-ink-soft">
+            <div className="flex flex-wrap gap-x-6 gap-y-3 items-center justify-center text-sm font-medium text-mp-ink-soft">
               <span className="inline-flex items-center gap-2">
                 <span className="font-bold text-mp-green-deep text-base">+800</span>
                 poêles vendus et installés depuis 2016

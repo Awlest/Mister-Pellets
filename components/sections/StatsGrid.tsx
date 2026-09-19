@@ -27,7 +27,7 @@ export function StatsGrid({ title, stats, variant = "light" }: StatsGridProps) {
         {title && (
           <h2
             className={cn(
-              "text-3xl md:text-5xl font-semibold mb-12 mp-measure",
+              "text-3xl md:text-5xl font-semibold mb-12 mp-measure text-center",
               variant === "dark" ? "text-white" : "text-mp-green-deep"
             )}
           >
@@ -37,7 +37,7 @@ export function StatsGrid({ title, stats, variant = "light" }: StatsGridProps) {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col gap-2">
+            <div key={stat.label} className="flex flex-col items-center gap-2 text-center">
               <span
                 className={cn(
                   "text-4xl md:text-6xl font-semibold tabular-nums leading-none",

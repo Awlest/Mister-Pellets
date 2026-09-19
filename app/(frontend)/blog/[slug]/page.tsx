@@ -238,7 +238,7 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Méta-infos auteur + date */}
       <section className="bg-mp-cream mp-band-sm border-b border-mp-sand/30">
-        <div className="mp-shell flex flex-wrap items-center gap-4 text-sm text-mp-ink-soft">
+        <div className="mp-shell flex flex-wrap items-center justify-center gap-4 text-sm text-mp-ink-soft">
           <span className="inline-flex items-center gap-1.5">
             <Calendar className="h-4 w-4" />
             <time dateTime={article.publishedAt}>{formattedDate}</time>
@@ -304,7 +304,7 @@ export default async function ArticlePage({ params }: Props) {
       {relatedGuides.length > 0 && (
         <section className="bg-mp-beige mp-band">
           <div className="mp-shell">
-            <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8">
+            <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8 text-center">
               Approfondir avec un guide
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -335,7 +335,7 @@ export default async function ArticlePage({ params }: Props) {
       {relatedArticles.length > 0 && (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
-            <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8">
+            <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8 text-center">
               Continuer la lecture
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -364,13 +364,13 @@ export default async function ArticlePage({ params }: Props) {
 
             {/* Cross-link villes + marques */}
             {(relatedCities.length > 0 || relatedBrands.length > 0) && (
-              <div className="mt-12 pt-8 border-t border-mp-sand/40 flex flex-wrap gap-x-8 gap-y-4">
+              <div className="mt-12 pt-8 border-t border-mp-sand/40 flex flex-wrap justify-center gap-x-8 gap-y-4 text-center">
                 {relatedCities.length > 0 && (
                   <div>
                     <span className="block text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mb-2">
                       Notre service dans :
                     </span>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap justify-center gap-2">
                       {relatedCities.map((c) => (
                         <Link
                           key={c.slug}
@@ -389,7 +389,7 @@ export default async function ArticlePage({ params }: Props) {
                     <span className="block text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mb-2">
                       Marques mentionnées :
                     </span>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap justify-center gap-2">
                       {relatedBrands.map((b) => (
                         <Link
                           key={b.slug}
@@ -405,13 +405,15 @@ export default async function ArticlePage({ params }: Props) {
               </div>
             )}
 
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 mt-10 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Tous les articles
-            </Link>
+            <div className="mt-10 text-center">
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Tous les articles
+              </Link>
+            </div>
           </div>
         </section>
       )}

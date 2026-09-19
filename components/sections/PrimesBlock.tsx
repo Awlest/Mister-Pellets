@@ -75,7 +75,7 @@ export function PrimesBlock({
   return (
     <section className={cn("mp-band", toneClass(tone))}>
       <div className="mp-shell">
-        <div className="mp-measure mb-12">
+        <div className="mp-measure mb-12 text-center">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
             {title}
           </h2>
@@ -147,13 +147,15 @@ export function PrimesBlock({
           ))}
         </div>
 
-        <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-          <Link href="/primes-energie-wallonie-2026">
-            Conditions complètes et procédure
-          </Link>
-        </Button>
+        <div className="flex justify-center">
+          <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
+            <Link href="/primes-energie-wallonie-2026">
+              Conditions complètes et procédure
+            </Link>
+          </Button>
+        </div>
 
-        <p className="mt-6 text-xs text-mp-ink-soft italic mp-measure">
+        <p className="mt-6 text-xs text-mp-ink-soft italic mp-measure text-center">
           Information à titre indicatif, basée sur le régime temporaire en vigueur du
           14 février 2025 au 30 septembre 2026 (numéro de démarche 3920). Les montants
           et conditions peuvent évoluer. Pour un calcul personnalisé et une vérification

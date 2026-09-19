@@ -68,7 +68,7 @@ export default function PrendreRendezVousPage() {
       {/* Présentation du showroom */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Showroom Mister Pellets à Fernelmont
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
@@ -95,7 +95,7 @@ export default function PrendreRendezVousPage() {
             </p>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3 items-center text-sm text-mp-ink-soft">
+          <div className="mt-8 flex flex-wrap gap-3 items-center justify-center text-sm text-mp-ink-soft">
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-4 w-4 text-mp-orange-flame" />
               Rue des Fagotis 3A, 5380 Fernelmont
@@ -114,7 +114,7 @@ export default function PrendreRendezVousPage() {
       {/* Rendez-vous commerciaux : réservables en ligne */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <div className="mp-measure mb-10">
+          <div className="mp-measure mb-10 text-center">
             <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
               Réserver un rendez-vous en ligne
             </h2>
@@ -141,7 +141,7 @@ export default function PrendreRendezVousPage() {
       {/* Interventions techniques : par téléphone uniquement */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <div className="mp-measure mb-10">
+          <div className="mp-measure mb-10 text-center">
             <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
               Entretien, ramonage, dépannage
             </h2>

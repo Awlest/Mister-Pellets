@@ -428,7 +428,7 @@ export default async function ProductPage({ params }: Props) {
           {/* Points forts saisis dans Payload : grille 2 colonnes desktop */}
           {product.features && product.features.length > 0 && (
             <div className="mt-12 lg:mt-16">
-              <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6">
+              <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 text-center">
                 Les points forts du {product.name}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -452,7 +452,7 @@ export default async function ProductPage({ params }: Props) {
       {/* Pourquoi ce modèle */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-10 mp-measure">
+          <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-10 mp-measure text-center">
             Pourquoi choisir le {product.name}
           </h2>
 
@@ -517,7 +517,7 @@ export default async function ProductPage({ params }: Props) {
       {related.length > 0 && (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
-            <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10">
+            <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10 text-center">
               Autres modèles de la marque {product.brand}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

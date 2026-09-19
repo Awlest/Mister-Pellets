@@ -30,11 +30,12 @@ export function FAQAccordion({
     <section className={cn("mp-band", toneClass(tone))}>
       <div className="mp-shell">
         <div className="mp-measure">
-        <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
+        {/* Titre et chapô centrés ; les questions restent alignées à gauche. */}
+        <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4 text-center">
           {title}
         </h2>
         {description && (
-          <p className="text-lg text-mp-ink-soft mb-10 leading-relaxed">{description}</p>
+          <p className="text-lg text-mp-ink-soft mb-10 leading-relaxed text-center">{description}</p>
         )}
 
         <Accordion type="single" collapsible className="w-full">

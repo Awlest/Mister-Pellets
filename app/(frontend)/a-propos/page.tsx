@@ -30,7 +30,7 @@ export default function AProposPage() {
       {/* Notre histoire */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             On a commencé avec une frustration
           </h2>
           <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">
@@ -67,7 +67,7 @@ export default function AProposPage() {
       {/* Mister Pellets / Awlest, clarification factuelle (autorisée ici, cf. brief §9.4) */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Mister Pellets et Awlest, c'est quoi le lien ?
           </h2>
           <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">
@@ -96,7 +96,7 @@ export default function AProposPage() {
       {/* Comment on bosse */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Comment on bosse
           </h2>
           <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">
@@ -126,7 +126,7 @@ export default function AProposPage() {
       {/* Cadre légal de l'activité */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
             Le cadre dans lequel on bosse
           </h2>
           <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">

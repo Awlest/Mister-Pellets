@@ -32,7 +32,7 @@ export function TripleChoice({
   return (
     <section className={cn("mp-band", toneClass(tone))}>
       <div className="mp-shell">
-        <div className="mp-measure mb-12">
+        <div className="mp-measure mb-12 text-center">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
             {title}
           </h2>

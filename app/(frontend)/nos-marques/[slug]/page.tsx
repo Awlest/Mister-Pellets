@@ -109,7 +109,7 @@ export default async function BrandPage({ params }: Props) {
       {/* Stats badges */}
       <section className="bg-mp-cream pb-8 -mt-4">
         <div className="mp-shell">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <Badge variant="secondary">
               <Award className="h-3.5 w-3.5" /> {brand.positioning}
             </Badge>
@@ -134,7 +134,7 @@ export default async function BrandPage({ params }: Props) {
       {brand.whyWeLove ? (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
-            <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
+            <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
               Pourquoi on aime travailler avec {brand.name}
             </h2>
             <div className="mp-measure space-y-4 text-lg text-mp-ink leading-relaxed">
@@ -147,7 +147,7 @@ export default async function BrandPage({ params }: Props) {
       ) : brand.history ? (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
-            <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
+            <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
               L&apos;histoire de {brand.name}
             </h2>
             <div className="mp-measure space-y-4 text-lg text-mp-ink leading-relaxed">
@@ -163,7 +163,7 @@ export default async function BrandPage({ params }: Props) {
       {brand.milestones && brand.milestones.length > 0 && (
         <section className="bg-mp-beige mp-band">
           <div className="mp-shell">
-            <h2 className="mp-measure text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12">
+            <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12">
               {brand.name} en quelques repères
             </h2>
             <ol className="mp-measure relative border-l-2 border-mp-sand space-y-8 pl-8">
@@ -188,7 +188,7 @@ export default async function BrandPage({ params }: Props) {
       {brand.distinctions && brand.distinctions.length > 0 ? (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
-            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 mp-measure">
+            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 mp-measure text-center">
               Ce qui distingue {brand.name}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -211,7 +211,7 @@ export default async function BrandPage({ params }: Props) {
       ) : brand.specialties && brand.specialties.length > 0 ? (
         <section className="bg-mp-beige mp-band">
           <div className="mp-shell">
-            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 mp-measure">
+            <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 mp-measure text-center">
               Spécialités techniques
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -232,7 +232,7 @@ export default async function BrandPage({ params }: Props) {
       {brand.modelsTable && brand.modelsTable.length > 0 ? (
         <section className="bg-mp-beige mp-band">
           <div className="mp-shell">
-            <div className="mp-measure mb-12">
+            <div className="mp-measure mb-12 text-center">
               <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
                 Modèles {brand.name} disponibles
               </h2>
@@ -273,7 +273,7 @@ export default async function BrandPage({ params }: Props) {
       ) : brand.modelHighlights && brand.modelHighlights.length > 0 ? (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
-            <div className="mp-measure mb-12">
+            <div className="mp-measure mb-12 text-center">
               <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
                 Modèles phares de {brand.name}
               </h2>
@@ -318,8 +318,11 @@ export default async function BrandPage({ params }: Props) {
       {/* Garantie */}
       <section className="bg-mp-green-deep text-white mp-band">
         <div className="mp-shell text-center">
+          {/* text-white OBLIGATOIRE : la règle de base `h2 { color: vert }` de
+            * globals.css bat la couleur héritée de la section. Sans lui, le
+            * titre était vert sur fond vert, invisible. */}
           <h2
-            className="mp-measure mx-auto text-3xl md:text-4xl font-semibold mb-4"
+            className="mp-measure mx-auto text-3xl md:text-4xl font-semibold mb-4 text-white"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Garantie sur les {brand.name}
@@ -332,7 +335,7 @@ export default async function BrandPage({ params }: Props) {
       {otherTopTier.length > 0 && (
         <section className="bg-mp-beige mp-band">
           <div className="mp-shell">
-            <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8">
+            <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-8 text-center">
               Autres marques premium
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

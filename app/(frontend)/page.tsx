@@ -183,7 +183,7 @@ export default function HomePage() {
       {/* SECTION CHOIX, réponse directe en H2 (GEO) */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Comment choisir son poêle à pellets en Wallonie ?
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
@@ -271,10 +271,10 @@ export default function HomePage() {
           cards empilées sur mobile, format tableau classique sur sm+ */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Poêle à pellets vs autres modes de chauffage
           </h2>
-          <p className="mp-measure text-base md:text-lg text-mp-ink-soft leading-relaxed mb-8">
+          <p className="mp-measure text-center text-base md:text-lg text-mp-ink-soft leading-relaxed mb-8">
             Quatre modes de chauffage dominent le résidentiel wallon. Voici comment ils se comparent en
             2026 sur le coût d'usage, l'investissement initial et l'autonomie.
           </p>
@@ -394,7 +394,7 @@ export default function HomePage() {
       {/* SECTION COÛT */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Combien coûte un poêle à pellets installé ?
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
@@ -452,7 +452,7 @@ export default function HomePage() {
       {/* SECTION DÉLAIS */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="mp-measure text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
             Délais et déroulement d'une installation Mister Pellets
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
@@ -486,10 +486,10 @@ export default function HomePage() {
         * concurrent qui rappelle « dans la semaine ». */}
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-3">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-3">
             Une fois le poêle posé, on reste votre interlocuteur
           </h2>
-          <p className="text-mp-ink-soft leading-relaxed mb-8 mp-measure">
+          <p className="text-mp-ink-soft leading-relaxed mb-8 mp-measure text-center">
             Entretien annuel, ramonage avec certificat, dépannage : trois prestations que nous
             assurons nous-mêmes, y compris sur des appareils que nous n&apos;avons pas posés.
           </p>
@@ -510,7 +510,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-8 rounded-2xl border border-mp-sand/60 bg-mp-beige-warm p-6 md:p-8">
+          <div className="mt-8 rounded-2xl border border-mp-sand/60 bg-mp-beige-warm p-6 md:p-8 text-center">
             <h3 className="text-xl md:text-2xl font-semibold text-mp-green-deep">
               Choisissez votre créneau, maintenant
             </h3>
@@ -520,7 +520,7 @@ export default function HomePage() {
               du showroom, et vous recevez la confirmation par e-mail. Pas de rappel à attendre,
               pas de créneau « dans la semaine ».
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-4">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Button asChild variant="primary" size="lg">
                 <Link href="/prendre-rendez-vous">Choisir mon créneau</Link>
               </Button>
@@ -538,15 +538,15 @@ export default function HomePage() {
       {/* MAILLAGE LOCAL : les pages ville n'étaient liées depuis aucune page forte. */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
-          <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-3">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-3">
             Où on intervient
           </h2>
-          <p className="text-mp-ink-soft leading-relaxed mb-8 mp-measure">
+          <p className="text-mp-ink-soft leading-relaxed mb-8 mp-measure text-center">
             Basés à Fernelmont, nous couvrons les cinq provinces wallonnes. Chaque ville a sa page :
             distance, délai, contraintes de conduit les plus courantes et modèles que nous y posons
             le plus souvent.
           </p>
-          <ul className="flex flex-wrap gap-2">
+          <ul className="flex flex-wrap justify-center gap-2">
             {CITIES.map((city) => (
               <li key={city.slug}>
                 <Link
