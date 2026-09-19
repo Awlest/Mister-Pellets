@@ -15,6 +15,14 @@ export interface CityData {
   context: string;
   recommendedModels: string[]; // slugs depuis products-demo
   localPrime?: string;
+  /**
+   * ⚠️ UNIQUEMENT un avis réel, recopié tel quel depuis la fiche Google et
+   * attribuable. Namur, Charleroi et Liège portaient ici les trois témoignages
+   * inventés (« Sophie L. », « Jean-Marc D. », « Claire V. ») déjà retirés de
+   * l'accueil le 01/09/2026 : pratique déloyale (art. VI.100 CDE) et motif de
+   * « déclarations trompeuses » chez Google Merchant. Retirés le 19/09/2026.
+   * Voir components/sections/Testimonials.tsx pour la règle complète.
+   */
   testimonial?: { name: string; quote: string };
   metaTitle: string;
   metaDescription: string;
@@ -33,11 +41,6 @@ export const CITIES: CityData[] = [
     context:
       "Sur les maisons mitoyennes anciennes du centre, le tubage du conduit existant est souvent nécessaire, on a l'habitude. Sur les nouvelles constructions de Bouge ou Belgrade, c'est la pose d'un étanche en façade qui domine. La province de Namur est aussi la plus généreuse côté primes, avec une majoration possible sur certaines communes.",
     recommendedModels: ["edilkamin-blade-9kw", "ek63-tweed-90", "edilkamin-lena-11kw"],
-    testimonial: {
-      name: "Sophie L., Namur centre",
-      quote:
-        "Maison de 1920 dans Bomel, conduit historique. L'équipe a tubé en moins d'une journée et l'installation est nickel.",
-    },
     metaTitle: "Poêle à pellets à Namur, Vente & pose",
     metaDescription:
       "Poêle à pellets à Namur : conseil, vente et pose en 1 jour. 10+ modèles, primes Wallonie incluses, à 17 km de Fernelmont. Devis gratuit en 60 sec.",
@@ -54,11 +57,6 @@ export const CITIES: CityData[] = [
     context:
       "Beaucoup de remplacement de chaudières mazout par des hydros Girolami dans les maisons ouvrières des années 50-70. Sur les maisons modernes de Mont-sur-Marchienne ou Gilly, c'est le canalisable EK63 qui domine pour gérer plusieurs pièces sans gros chantier.",
     recommendedModels: ["edilkamin-mood-plus-11kw", "ek63-tweed-90", "edilkamin-lena-11kw"],
-    testimonial: {
-      name: "Jean-Marc D., Marcinelle",
-      quote:
-        "Remplacement de la vieille chaudière mazout par un Girolami Soft hydro. Économies dès le premier hiver, et plus de cuves à recharger.",
-    },
     metaTitle: "Poêle à pellets à Charleroi, Vente & pose",
     metaDescription:
       "Poêle à pellets à Charleroi : pose en 1 jour, hydro pour remplacer mazout, étanche pour BBC. 10+ modèles. Pose Mister Pellets, primes Wallonie incluses.",
@@ -75,11 +73,6 @@ export const CITIES: CityData[] = [
     context:
       "Liège a une particularité : beaucoup de copropriétés dans les anciennes maisons mosanes divisées en appartements. Les modèles étanches EK63 (ventouse façade) sont parfaits dans ce cas, sous réserve d'avoir l'accord du syndic. Pour les maisons individuelles, mix entre canalisable et hydro selon la surface.",
     recommendedModels: ["ek63-like-80", "edilkamin-blade-9kw", "edilkamin-mood-plus-11kw"],
-    testimonial: {
-      name: "Claire V., Sart-Tilman",
-      quote:
-        "Maison BBC de 2018, étanche EK63 Like 80 en façade. Diagnostic clair, devis transparent, pose impeccable.",
-    },
     metaTitle: "Poêle à pellets à Liège, Vente & pose",
     metaDescription:
       "Poêle à pellets à Liège : étanche pour copros et BBC, hydro pour grandes maisons. Pose en 1 jour, primes Wallonie incluses, conseil expert Mister Pellets.",
