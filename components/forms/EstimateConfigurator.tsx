@@ -1015,10 +1015,10 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
             label={product ? `Poêle ${product.brand}` : "Poêle"}
             value={r.materialHT > 0 ? eur(r.materialHT) : "—"}
           />
+          {r.bonusHT > 0 && <Row label={BONUS.label} value={`-${eur(r.bonusHT)}`} />}
           {r.laborLines.map((l) => (
             <Row key={l.key} label={l.label} value={eur(l.amountHT)} muted />
           ))}
-          {r.bonusHT > 0 && <Row label={BONUS.label} value={`-${eur(r.bonusHT)}`} />}
           <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
         </dl>
 

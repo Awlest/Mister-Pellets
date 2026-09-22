@@ -203,8 +203,8 @@ export async function POST(request: Request) {
     `Emplacement : ${LEVELS[config.level].label} · Logement > 10 ans : ${config.housingOver10Years ? "oui" : "non"}`,
     "",
     `Matériel : ${r.materialHT} € HT`,
-    ...r.laborLines.map((l) => `${l.label} : ${l.amountHT} € HT`),
     r.bonusHT > 0 ? `${BONUS.label} : -${r.bonusHT} € HT (${BONUS.conditions})` : "",
+    ...r.laborLines.map((l) => `${l.label} : ${l.amountHT} € HT`),
     `TVA ${Math.round(r.vatRate * 100)} % : ${r.vatAmount} €`,
     `TOTAL : ${r.totalTTC} € TTC`,
     r.prime > 0
@@ -260,10 +260,10 @@ export async function POST(request: Request) {
       level: LEVELS[config.level].label,
       vatRate: r.vatRate,
       lines: [
-        ...r.laborLines.map((l) => ({ label: l.label, amountHT: l.amountHT })),
         ...(r.bonusHT > 0
           ? [{ label: `${BONUS.label} (${BONUS.conditions})`, amountHT: -r.bonusHT }]
           : []),
+        ...r.laborLines.map((l) => ({ label: l.label, amountHT: l.amountHT })),
       ],
       materialHT: r.materialHT,
       totalTTC: r.totalTTC,
