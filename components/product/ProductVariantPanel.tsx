@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
+import { BONUS } from "@/lib/bonus";
 import type {
   VariantOptionAxis,
   VariantOptionValueData,
@@ -30,6 +31,11 @@ const STOCK_LABELS: Record<VariantStockStatus, string> = {
 /** Prix effectif d'une variante : prix promo s'il existe, sinon prix normal. */
 function effectivePrice(v: ProductVariantData): number {
   return typeof v.salePrice === "number" && v.salePrice > 0 ? v.salePrice : v.price;
+}
+
+/** Prix affiché : prix après bonus de saison pendant la période, sinon prix effectif. */
+function shownPrice(v: ProductVariantData): number {
+  return v.bonusPrice ?? effectivePrice(v);
 }
 
 /**
@@ -97,9 +103,24 @@ export function ProductVariantPanel({
     activeVariant != null && effectivePrice(activeVariant) > 0;
 
   const minPrice = React.useMemo(
+    () => Math.min(...variants.map(shownPrice).filter((n) => n > 0)),
+    [variants],
+  );
+
+  // Bonus de saison (calculé côté serveur dans lib/products.ts) : le prix
+  // catalogue reste affiché barré à côté du prix remisé.
+  const bonusActive = variants.some((v) => v.bonusPrice != null);
+  const minCatalogPrice = React.useMemo(
     () => Math.min(...variants.map(effectivePrice).filter((n) => n > 0)),
     [variants],
   );
+  const struck: number | null = activeVariant
+    ? activePriced && activeVariant.bonusPrice != null
+      ? effectivePrice(activeVariant)
+      : null
+    : bonusActive && Number.isFinite(minCatalogPrice)
+      ? minCatalogPrice
+      : null;
 
   function toggleValue(axisId: number, valueId: number) {
     setSelected((prev) => ({
@@ -159,6 +180,11 @@ export function ProductVariantPanel({
               ? "Configuration choisie, TVA comprise"
               : "Configuration choisie"
             : "Prix du poêle seul, TVA comprise"}
+          {bonusActive ? (
+            <span className="ml-2 rounded-full bg-mp-orange-flame px-2 py-0.5 text-[10px] font-semibold text-white">
+              {BONUS.badge}
+            </span>
+          ) : null}
         </span>
         <span
           className="text-4xl font-semibold text-mp-green-deep"
@@ -166,18 +192,23 @@ export function ProductVariantPanel({
         >
           {activeVariant
             ? activePriced
-              ? formatPrice(effectivePrice(activeVariant))
+              ? formatPrice(shownPrice(activeVariant))
               : "Sur devis"
             : Number.isFinite(minPrice)
               ? `À partir de ${formatPrice(minPrice)}`
               : basePriceTTC
                 ? `À partir de ${formatPrice(basePriceTTC)}`
                 : "Sur devis"}
+          {struck != null ? (
+            <span className="ml-3 text-xl font-normal text-mp-ink-soft line-through">
+              {formatPrice(struck)}
+            </span>
+          ) : null}
         </span>
         {(() => {
           const ttc = activeVariant
             ? activePriced
-              ? effectivePrice(activeVariant)
+              ? shownPrice(activeVariant)
               : null
             : Number.isFinite(minPrice)
               ? minPrice
@@ -195,6 +226,12 @@ export function ProductVariantPanel({
             </>
           ) : null;
         })()}
+
+        {bonusActive ? (
+          <p className="mt-2 text-xs text-mp-ink-soft">
+            {BONUS.label} déduit. {BONUS.conditions}
+          </p>
+        ) : null}
 
         {activeVariant && (
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-mp-ink-soft">

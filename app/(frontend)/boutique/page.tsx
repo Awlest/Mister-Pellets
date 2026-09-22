@@ -5,6 +5,7 @@ import { getAllProducts } from "@/lib/products";
 import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { buildPageMetadata } from "@/lib/seo";
 import { BoutiqueExplorer, type BoutiqueProduct } from "@/components/boutique/BoutiqueExplorer";
+import { BONUS, isBonusPeriod } from "@/lib/bonus";
 
 export const metadata = buildPageMetadata({
   title: "Boutique poêles à pellets en Wallonie",
@@ -28,6 +29,7 @@ const BRAND_FILTERS = [
 
 export default async function BoutiquePage() {
   const products = await getAllProducts();
+  const bonusActive = isBonusPeriod();
 
   // Shape allégé (carte + filtres uniquement) pour réduire le payload envoyé
   // au navigateur — on ne sérialise pas variantes/galerie/features.
@@ -40,6 +42,7 @@ export default async function BoutiquePage() {
     powers: p.powers,
     heatedVolumes: p.heatedVolumes,
     priceTTC: p.priceTTC,
+    bonusPriceTTC: p.bonusPriceTTC,
     imageSrc: p.imageSrc,
     imageAlt: p.imageAlt,
     imageFocalX: p.imageFocalX,
@@ -76,6 +79,13 @@ export default async function BoutiquePage() {
 
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
+          {bonusActive ? (
+            <div className="mb-4 rounded-xl border border-mp-orange-flame/40 bg-mp-orange-light/50 p-4 text-sm text-mp-ink">
+              <strong className="text-mp-green-deep">{BONUS.label}.</strong> {BONUS.conditions}{" "}
+              Les prix ci-dessous sont déjà remisés, le prix catalogue reste indiqué à côté.
+            </div>
+          ) : null}
+
           {/* Note devis : on couvre toute la gamme, même les références non listées. */}
           <div className="mb-8 rounded-xl bg-mp-orange-light/50 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink">
             <strong>Besoin d&apos;un modèle précis ?</strong> On distribue toute la gamme Edilkamin, EK63

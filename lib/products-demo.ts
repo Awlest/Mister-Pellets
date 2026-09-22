@@ -181,6 +181,11 @@ export interface ProductVariantData {
   price: number;
   /** Prix promo TTC, si défini. */
   salePrice?: number;
+  /**
+   * Prix TTC après bonus de saison, calculé côté serveur pendant la période
+   * (lib/products.ts, sur le prix promo admin s'il existe). Absent hors période.
+   */
+  bonusPrice?: number;
   stockStatus?: VariantStockStatus;
   leadTimeDays?: number;
   /** Image propre à la variante, si renseignée. */

@@ -7,7 +7,6 @@ import { ArrowLeft, ArrowRight, Check, Flame, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
-  BONUS,
   DEFAULT_STATE,
   DUCT_ROOMS_MAX,
   CONDUIT_INCLUDED_M,
@@ -21,7 +20,6 @@ import {
   estimate,
   eur,
   filterByKind,
-  isBonusPeriod,
   rankProducts,
   recommendedKw,
   type EstimateProduct,
@@ -33,14 +31,16 @@ import {
   type PrimeCategory,
   type StoveKind,
 } from "@/lib/estimate";
+import { BONUS, isBonusPeriod } from "@/lib/bonus";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
 import { EVENTS, trackEvent } from "@/lib/analytics";
 
 const STORAGE_KEY = "mp_estimate_draft";
 
-// Le bonus de saison dépend de la date : lu après hydratation (faux côté
-// serveur) pour que le HTML mis en cache ne diffère jamais du rendu client.
+// Abonnement vide pour useSyncExternalStore : sert à lire des valeurs que seul
+// le navigateur connaît (hydratation faite, bonus du jour) avec un instantané
+// serveur neutre, pour que le HTML mis en cache ne diffère jamais du rendu client.
 const noopSubscribe = () => () => {};
 
 const STEPS = [
@@ -98,34 +98,71 @@ const inputCls = cn(
   "focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20",
 );
 
+/** Brouillon localStorage brut, null s'il est absent ou inaccessible. */
+function readDraft(): string | null {
+  try {
+    return window.localStorage.getItem(STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+/** Brouillon prêt à l'emploi, null s'il est absent ou corrompu. */
+function parseDraft(json: string | null): EstimateState | null {
+  if (!json) return null;
+  try {
+    const restored = { ...DEFAULT_STATE, ...JSON.parse(json) } as EstimateState;
+    // Un brouillon enregistré quand le plafond était à 4 pièces canalisées
+    // afficherait 3 ou 4 alors que le chiffrage s'arrête à DUCT_ROOMS_MAX.
+    restored.ductRooms = Math.min(DUCT_ROOMS_MAX, Math.max(1, restored.ductRooms));
+    return restored;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Le brouillon n'est lu qu'après l'hydratation : le premier rendu client
+ * reproduit le HTML du serveur (état par défaut), puis le formulaire est
+ * remonté avec le brouillon via `key`. Avant, l'état initial lisait le brouillon
+ * pendant l'hydratation et React signalait un écart (erreur #418) à chaque
+ * visiteur qui revenait. Pas de setState dans un effet (audit V20260503
+ * §2.H.2) : le choix du brouillon est mémorisé une fois pour toutes.
+ */
 export function EstimateConfigurator({ products }: { products: EstimateProduct[] }) {
+  const hydrated = React.useSyncExternalStore(noopSubscribe, () => true, () => false);
+  const draft = React.useMemo(() => (hydrated ? parseDraft(readDraft()) : null), [hydrated]);
+  return (
+    <EstimateForm
+      key={draft ? "brouillon" : "neuf"}
+      products={products}
+      initialState={draft ?? DEFAULT_STATE}
+    />
+  );
+}
+
+function EstimateForm({
+  products,
+  initialState,
+}: {
+  products: EstimateProduct[];
+  initialState: EstimateState;
+}) {
   const [step, setStep] = React.useState(1);
-  const [s, setS] = React.useState<EstimateState>(() => {
-    if (typeof window === "undefined") return DEFAULT_STATE;
-    try {
-      const draft = window.localStorage.getItem(STORAGE_KEY);
-      if (draft) {
-        const restored = { ...DEFAULT_STATE, ...JSON.parse(draft) } as EstimateState;
-        // Un brouillon enregistré quand le plafond était à 4 pièces canalisées
-        // afficherait 3 ou 4 alors que le chiffrage s'arrête à DUCT_ROOMS_MAX.
-        restored.ductRooms = Math.min(DUCT_ROOMS_MAX, Math.max(1, restored.ductRooms));
-        return restored;
-      }
-    } catch {
-      // localStorage indisponible ou brouillon corrompu : on repart à zéro
-    }
-    return DEFAULT_STATE;
-  });
+  const [s, setS] = React.useState<EstimateState>(initialState);
   const [customer, setCustomer] = React.useState<Customer>(EMPTY_CUSTOMER);
   const [website, setWebsite] = React.useState(""); // honeypot
   const [submitState, setSubmitState] = React.useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = React.useState("");
 
+  // Pas de sauvegarde tant que l'état est celui du montage : au premier rendu
+  // (état par défaut, brouillon pas encore lu) on écraserait le brouillon.
   React.useEffect(() => {
+    if (s === initialState) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
     } catch {}
-  }, [s]);
+  }, [s, initialState]);
 
   const set = <K extends keyof EstimateState>(k: K, v: EstimateState[K]) =>
     setS((p) => ({ ...p, [k]: v }));

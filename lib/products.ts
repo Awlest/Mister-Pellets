@@ -1,5 +1,6 @@
 import "server-only";
 import { getPayloadClient } from "./payload-client";
+import { bonusPrice, isBonusPeriod } from "./bonus";
 import type {
   ProductDemo,
   ProductColorVariant,
@@ -261,6 +262,12 @@ function deriveVariantPowers(p: PayloadProduct): {
   return { powers, heatedVolumes };
 }
 
+/** Prix TTC remisé d'une variante : sur son prix promo admin s'il existe, sinon son prix. */
+function variantBonusPrice(price?: number | null, salePrice?: number | null): number | undefined {
+  const effective = salePrice && salePrice > 0 ? salePrice : price;
+  return effective && effective > 0 ? bonusPrice(effective) : undefined;
+}
+
 /**
  * Convertit un document Payload `products` vers le shape ProductDemo
  * attendu par les composants UI existants (ProductCard, filtres boutique).
@@ -304,6 +311,11 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     technicalSheetFilename = p.technicalSheet.filename ?? "fiche-technique.pdf";
   }
 
+  // Bonus de saison (lib/bonus.ts) : calculé ici, côté serveur, à la lecture du
+  // catalogue, pour que cartes, fiche, schéma Product et flux partent du même
+  // prix remisé sans que le navigateur ait à lire la date.
+  const bonusActive = isBonusPeriod();
+
   return {
     slug: p.slug,
     name: p.name,
@@ -319,6 +331,8 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     powers,
     heatedVolumes,
     priceTTC: p.priceTTC ?? undefined,
+    bonusPriceTTC:
+      bonusActive && p.priceTTC && p.priceTTC > 0 ? bonusPrice(p.priceTTC) : undefined,
     stockStatus: p.stockStatus ?? undefined,
     isBestseller: p.isBestseller ?? false,
     isFeatured: p.isFeatured ?? false,
@@ -413,6 +427,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
             mpn: v.mpn ?? undefined,
             price: typeof v.price === "number" ? v.price : 0,
             salePrice: typeof v.salePrice === "number" ? v.salePrice : undefined,
+            bonusPrice: bonusActive ? variantBonusPrice(v.price, v.salePrice) : undefined,
             stockStatus: v.stockStatus ?? undefined,
             leadTimeDays:
               typeof v.leadTimeDays === "number" ? v.leadTimeDays : undefined,

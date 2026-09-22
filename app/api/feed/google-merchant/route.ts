@@ -6,6 +6,7 @@ import {
   SHIPPING_PREFIXES,
 } from "@/lib/shipping";
 import { merchantAvailability as availability } from "@/lib/availability";
+import { BONUS, bonusPhase, bonusPrice, type BonusPhase } from "@/lib/bonus";
 import type {
   ProductDemo,
   ProductColorVariant,
@@ -222,8 +223,34 @@ function buildItem(fields: Array<[string, string | undefined]>): string {
   return `    <item>\n${lines.join("\n")}\n${SHIPPING_XML}\n    </item>`;
 }
 
+/**
+ * Champs promo Google Merchant.
+ *
+ * Le bonus de saison (lib/bonus.ts) est annoncé avec sa plage de dates : Google
+ * l'applique pile pendant la période, même si le flux est relu entre deux
+ * régénérations, et le prix vu sur la fiche reste égal au prix annoncé (c'est
+ * l'écart entre les deux qui fait suspendre un compte). Une promo saisie dans
+ * l'admin (salePrice) reste annoncée seule avant et après la période ; pendant,
+ * le bonus se calcule sur elle, comme sur la fiche.
+ * `regular` : prix catalogue ; `effective` : prix affiché avant bonus.
+ */
+function saleFields(
+  regular: number,
+  effective: number,
+  phase: BonusPhase,
+): Array<[string, string | undefined]> {
+  const adminSale: Array<[string, string | undefined]> =
+    effective < regular ? [["sale_price", `${effective.toFixed(2)} EUR`]] : [];
+  if (phase === "after") return adminSale;
+  if (phase === "before" && adminSale.length > 0) return adminSale;
+  return [
+    ["sale_price", `${bonusPrice(effective).toFixed(2)} EUR`],
+    ["sale_price_effective_date", BONUS.effectiveDate],
+  ];
+}
+
 /** Entrée pour un produit sans variantes. */
-function productEntry(p: ProductDemo): FeedEntry | null {
+function productEntry(p: ProductDemo, phase: BonusPhase): FeedEntry | null {
   if (!p.priceTTC || p.priceTTC <= 0) return null;
   const imageLink = absUrl(p.imageSrc);
   if (!imageLink) return null; // image obligatoire chez Google Merchant
@@ -253,6 +280,7 @@ function productEntry(p: ProductDemo): FeedEntry | null {
       ["availability", availability(p.stockStatus)],
       ["availability_date", availabilityDate(p.stockStatus)],
       ["price", `${p.priceTTC.toFixed(2)} EUR`],
+      ...saleFields(p.priceTTC, p.priceTTC, phase),
       ["brand", p.brand],
       ["gtin", p.gtin],
       ["mpn", p.mpn],
@@ -268,6 +296,7 @@ function productEntry(p: ProductDemo): FeedEntry | null {
 function variantEntry(
   p: ProductDemo,
   variant: ProductVariantData,
+  phase: BonusPhase,
 ): FeedEntry | null {
   const price = variant.price;
   if (!price || price <= 0) return null;
@@ -289,10 +318,6 @@ function variantEntry(
   const color = chosen.find((c) => c.axis.slug === "couleur")?.valueLabel;
   const material = chosen.find((c) => c.axis.slug === "materiau")?.valueLabel;
   const hasIdentifier = Boolean(variant.gtin || variant.mpn);
-  const salePrice =
-    variant.salePrice && variant.salePrice > 0 && variant.salePrice < price
-      ? `${variant.salePrice.toFixed(2)} EUR`
-      : undefined;
   const groupId = p.sku || p.slug;
 
   return {
@@ -311,7 +336,11 @@ function variantEntry(
       ["availability", availability(variant.stockStatus)],
       ["availability_date", availabilityDate(variant.stockStatus)],
       ["price", `${price.toFixed(2)} EUR`],
-      ["sale_price", salePrice],
+      ...saleFields(
+        price,
+        variant.salePrice && variant.salePrice > 0 ? variant.salePrice : price,
+        phase,
+      ),
       ["brand", p.brand],
       ["gtin", variant.gtin],
       ["mpn", variant.mpn],
@@ -329,6 +358,7 @@ function variantEntry(
 function colorVariantEntry(
   p: ProductDemo,
   cv: ProductColorVariant,
+  phase: BonusPhase,
 ): FeedEntry | null {
   if (!p.priceTTC || p.priceTTC <= 0) return null;
   const imageLink = absUrl(cv.mainImage?.url || p.imageSrc);
@@ -357,6 +387,7 @@ function colorVariantEntry(
       ["availability", availability(p.stockStatus)],
       ["availability_date", availabilityDate(p.stockStatus)],
       ["price", `${p.priceTTC.toFixed(2)} EUR`],
+      ...saleFields(p.priceTTC, p.priceTTC, phase),
       ["brand", p.brand],
       ["gtin", cv.gtin],
       ["mpn", p.mpn],
@@ -371,6 +402,7 @@ function colorVariantEntry(
 
 export async function GET(): Promise<Response> {
   const products = await getAllProducts();
+  const phase = bonusPhase();
 
   const entries: FeedEntry[] = [];
   for (const p of products) {
@@ -379,18 +411,18 @@ export async function GET(): Promise<Response> {
     if (p.hasVariants && p.variants && p.variants.length > 0) {
       // Variantes génériques multi-axes : une ligne par combinaison.
       for (const variant of p.variants) {
-        const entry = variantEntry(p, variant);
+        const entry = variantEntry(p, variant, phase);
         if (entry) entries.push(entry);
       }
     } else if (p.colorVariants && p.colorVariants.length > 0) {
       // Déclinaisons de couleur : une ligne par couleur, regroupées.
       for (const cv of p.colorVariants) {
-        const entry = colorVariantEntry(p, cv);
+        const entry = colorVariantEntry(p, cv, phase);
         if (entry) entries.push(entry);
       }
     } else {
       // Produit simple : une seule ligne.
-      const entry = productEntry(p);
+      const entry = productEntry(p, phase);
       if (entry) entries.push(entry);
     }
   }

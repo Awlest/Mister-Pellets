@@ -25,6 +25,12 @@ interface Props {
  */
 export const dynamicParams = false;
 
+/**
+ * Régénération horaire : les cartes produits reprennent les prix du bonus de
+ * saison (lib/bonus.ts) quand il commence et quand il s'arrête.
+ */
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   return CITIES.map((c) => ({ ville: c.slug }));
 }

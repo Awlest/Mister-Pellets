@@ -4,7 +4,6 @@ import { getPayloadClient } from "@/lib/payload-client";
 import { notifyInternalEstimate, confirmCustomerEstimate } from "@/lib/email";
 import { getEstimateProduct } from "@/lib/estimate-catalog";
 import {
-  BONUS,
   DEFAULT_STATE,
   DUCT_ROOMS_MAX,
   CONDUIT_MAX_M,
@@ -23,6 +22,7 @@ import {
   type PrimeCategory,
   type StoveKind,
 } from "@/lib/estimate";
+import { BONUS } from "@/lib/bonus";
 import { durationsFor, monthly0 } from "@/lib/financing";
 
 /**

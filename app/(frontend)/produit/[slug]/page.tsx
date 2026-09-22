@@ -21,6 +21,7 @@ import { BRANDS } from "@/lib/brands";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { schemaAvailability } from "@/lib/availability";
+import { BONUS } from "@/lib/bonus";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Produit introuvable", robots: { index: false, follow: false } };
   return buildPageMetadata({
     title: `${product.name}, Poêle à pellets ${product.power}`,
-    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. ${product.priceTTC ? `${formatPrice(product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets, primes incluses.`,
+    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. ${product.priceTTC ? `${formatPrice(product.bonusPriceTTC ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets, primes incluses.`,
     path: `/produit/${product.slug}`,
   });
 }
@@ -84,7 +85,9 @@ export default async function ProductPage({ params }: Props) {
   // à partir de lib/shipping.ts, la même source que le panier.
   // La disponibilité vient de lib/availability.ts pour rester identique à
   // celle du flux : un écart entre les deux fait refuser le compte Merchant.
-  const priceValidUntil = `${new Date().getFullYear()}-12-31`;
+  // Pendant le bonus de saison, le prix annoncé vaut jusqu'à la fin du bonus.
+  const bonusActive = product.bonusPriceTTC != null;
+  const priceValidUntil = bonusActive ? BONUS.to : `${new Date().getFullYear()}-12-31`;
   const offerExtras = {
     priceValidUntil,
     hasMerchantReturnPolicy: {
@@ -101,7 +104,7 @@ export default async function ProductPage({ params }: Props) {
   if (genericVariants.length > 0) {
     // Mode variantes : un AggregateOffer + un Offer par combinaison réelle.
     const variantPrices = genericVariants
-      .map((v) => (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price))
+      .map((v) => v.bonusPrice ?? (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price))
       .filter((n) => n > 0);
     offers = {
       "@type": "AggregateOffer",
@@ -116,7 +119,7 @@ export default async function ProductPage({ params }: Props) {
         ...(v.mpn ? { mpn: v.mpn } : {}),
         url: productPageUrl,
         priceCurrency: "EUR",
-        price: v.salePrice && v.salePrice > 0 ? v.salePrice : v.price,
+        price: v.bonusPrice ?? (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price),
         availability: schemaAvailability(v.stockStatus ?? product.stockStatus),
         itemCondition: "https://schema.org/NewCondition",
         ...offerExtras,
@@ -127,7 +130,7 @@ export default async function ProductPage({ params }: Props) {
       offers = {
         "@type": "AggregateOffer",
         priceCurrency: "EUR",
-        price: product.priceTTC,
+        price: product.bonusPriceTTC ?? product.priceTTC,
         offerCount: variantsWithGtin.length,
         offers: variantsWithGtin.map((v) => ({
           "@type": "Offer",
@@ -135,7 +138,7 @@ export default async function ProductPage({ params }: Props) {
           gtin13: v.gtin,
           url: `${productPageUrl}#${encodeURIComponent(v.colorName.toLowerCase())}`,
           priceCurrency: "EUR",
-          price: product.priceTTC,
+          price: product.bonusPriceTTC ?? product.priceTTC,
           availability: schemaAvailability(product.stockStatus),
           itemCondition: "https://schema.org/NewCondition",
         ...offerExtras,
@@ -146,7 +149,7 @@ export default async function ProductPage({ params }: Props) {
         "@type": "Offer",
         url: productPageUrl,
         priceCurrency: "EUR",
-        price: product.priceTTC,
+        price: product.bonusPriceTTC ?? product.priceTTC,
         availability: schemaAvailability(product.stockStatus),
         itemCondition: "https://schema.org/NewCondition",
         ...offerExtras,
@@ -332,7 +335,7 @@ export default async function ProductPage({ params }: Props) {
                     productName={product.name}
                     productBrand={product.brand}
                     productImageSrc={product.imageSrc}
-                    basePriceTTC={product.priceTTC}
+                    basePriceTTC={product.bonusPriceTTC ?? product.priceTTC}
                     variantOptions={product.variantOptions ?? []}
                     variants={product.variants}
                   />
@@ -354,26 +357,41 @@ export default async function ProductPage({ params }: Props) {
                     <div>
                       <span className="text-xs text-mp-ink-soft block">
                         Prix du poêle seul, TVA comprise
+                        {product.bonusPriceTTC ? (
+                          <Badge variant="primary" className="ml-2">
+                            {BONUS.badge}
+                          </Badge>
+                        ) : null}
                       </span>
                       <span
                         className="text-4xl font-semibold text-mp-green-deep"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
-                        {formatPrice(product.priceTTC)}
+                        {formatPrice(product.bonusPriceTTC ?? product.priceTTC)}
                         <span className="text-base font-medium text-mp-ink-soft ml-1">
                           TVAC
                         </span>
+                        {product.bonusPriceTTC ? (
+                          <span className="ml-3 text-xl font-normal text-mp-ink-soft line-through">
+                            {formatPrice(product.priceTTC)}
+                          </span>
+                        ) : null}
                       </span>
                       <span className="block text-sm text-mp-ink-soft mt-1">
-                        soit {formatPriceHT(product.priceTTC)} HTVA
+                        soit {formatPriceHT(product.bonusPriceTTC ?? product.priceTTC)} HTVA
                       </span>
                       <p className="mt-3 text-sm text-mp-green-deep">
                         <span className="font-semibold">
-                          {formatPriceReducedVat(product.priceTTC)} TVAC
+                          {formatPriceReducedVat(product.bonusPriceTTC ?? product.priceTTC)} TVAC
                         </span>{" "}
                         si nous le posons sur une habitation de plus de 10 ans
                         <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
                       </p>
+                      {product.bonusPriceTTC ? (
+                        <p className="mt-2 text-xs text-mp-ink-soft">
+                          {BONUS.label} déduit. {BONUS.conditions}
+                        </p>
+                      ) : null}
                     </div>
                     <ul className="text-xs text-mp-ink-soft space-y-1 leading-relaxed">
                       <li>

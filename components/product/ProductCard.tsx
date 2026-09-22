@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-image";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice, formatPriceHT } from "@/lib/utils";
+import { BONUS } from "@/lib/bonus";
 
 export interface ProductColorPreview {
   colorName: string;
@@ -33,6 +34,11 @@ export interface ProductCardData {
    */
   heatedVolumes?: number[];
   priceTTC?: number;
+  /**
+   * Prix TTC après bonus de saison, calculé côté serveur pendant la période
+   * (lib/products.ts). Absent hors période : la carte affiche le prix catalogue.
+   */
+  bonusPriceTTC?: number;
   imageSrc?: string;
   imageAlt?: string;
   /** Point focal de l'image (0-100 %) défini dans l'admin Media Payload. */
@@ -67,6 +73,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
     power,
     heatedVolume,
     priceTTC,
+    bonusPriceTTC,
     imageSrc,
     imageAlt,
     imageFocalX,
@@ -199,16 +206,29 @@ export function ProductCard({ product, className }: ProductCardProps) {
           <div className="mt-auto pt-3 flex items-end justify-between">
             {priceTTC ? (
               <div>
-                <span className="text-xs text-mp-ink-soft block">À partir de</span>
+                <span className="text-xs text-mp-ink-soft block">
+                  À partir de
+                  {bonusPriceTTC ? (
+                    <span className="ml-2 rounded-full bg-mp-orange-flame px-2 py-0.5 text-[10px] font-semibold text-white">
+                      {BONUS.badge}
+                    </span>
+                  ) : null}
+                </span>
                 <span
                   className="text-xl font-semibold text-mp-green-deep"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  {formatPriceHT(priceTTC)}
+                  {formatPriceHT(bonusPriceTTC ?? priceTTC)}
                 </span>
                 <span className="text-xs text-mp-ink-soft ml-1">HTVA</span>
+                {bonusPriceTTC ? (
+                  <span className="ml-2 text-sm text-mp-ink-soft line-through">
+                    {formatPriceHT(priceTTC)}
+                  </span>
+                ) : null}
                 <span className="block text-[11px] text-mp-ink-soft">
-                  soit {formatPrice(priceTTC)} TVAC
+                  soit {formatPrice(bonusPriceTTC ?? priceTTC)} TVAC
+                  {bonusPriceTTC ? ` au lieu de ${formatPrice(priceTTC)}` : ""}
                 </span>
               </div>
             ) : (
