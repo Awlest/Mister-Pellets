@@ -148,7 +148,7 @@
   }
 }
 
-/* === PROTECTION VIEWPORT MOBILE — empêche tout débordement horizontal ===
+/* === PROTECTION VIEWPORT MOBILE : empêche tout débordement horizontal ===
  * Hotfix V1.1 §H2 + V1.3 fix : régression de débordement horizontal observée
  * sur mobile, mais le HOTFIX V1.3.1 a constaté que ces règles HORS LAYER
  * écrasaient les utilities Tailwind (h-[160px], h-16, etc.) à cause de la
@@ -159,9 +159,19 @@
  *
  * html/body restent hors layer car ce sont des règles globales de viewport
  * qui doivent absolument tenir.
- */
+ *
+ * `clip` et non `hidden` (correctif 2026-09-22) : avec overflow-x: hidden sur
+ * html ET body, la valeur de body n'est plus propagée à la fenêtre et body
+ * devient lui-même un conteneur de défilement (overflow-y calculé en auto).
+ * Le header desktop en position: sticky se figeait alors par rapport à body,
+ * qui défile avec la page, et non par rapport à la fenêtre : il partait avec
+ * le contenu et son état réduit au défilement n'était jamais visible.
+ * `clip` coupe le débordement horizontal sans créer de conteneur de
+ * défilement et laisse overflow-y en visible. La ligne `hidden` qui précède
+ * sert de repli aux navigateurs qui ignorent `clip` (Safari < 16). */
 html, body {
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
 }
 
