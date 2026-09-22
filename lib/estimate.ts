@@ -3,61 +3,79 @@
  *
  * Le MATÉRIEL vient du catalogue Payload (prix HT/TTC réels saisis dans
  * l'admin). Tout ce qui est ici, c'est la MAIN D'ŒUVRE et les fournitures de
- * pose : des forfaits indicatifs.
+ * pose.
  *
- * ⚠️⚠️ TOUS LES MONTANTS DE CE FICHIER SONT DES BUDGETS APPROXIMATIFS **HORS
- * TVA**, À CALIBRER avec les tarifs réels de Mister Pellets. Ce ne sont ni des
- * prix fermes ni des engagements : le configurateur produit une ESTIMATION, le
- * prix ferme est établi après la visite technique. Pour ajuster, il suffit de
- * modifier les constantes ci-dessous — l'UI et les totaux suivent.
+ * Les forfaits d'évacuation, les options et la canalisation d'air chaud sont
+ * les tarifs communiqués par Mister Pellets le 22/09/2026 (montants HORS TVA).
+ * Les postes encore marqués « À CALIBRER » (raccordement hydro, insert, étage)
+ * restent des budgets approximatifs. Dans tous les cas le configurateur produit
+ * une ESTIMATION : le prix ferme est établi après la visite technique. Pour
+ * ajuster un montant, il suffit de modifier les constantes ci-dessous, l'UI et
+ * les totaux suivent.
  *
  * La TVA est appliquée en fin de calcul (6 % en rénovation privée d'un logement
  * de plus de 10 ans, 21 % sinon), sur le matériel comme sur la pose.
  */
 
 // =====================================================================
-// 1. ÉVACUATION DES FUMÉES — le poste de main d'œuvre principal
+// 1. ÉVACUATION DES FUMÉES : le poste de main d'œuvre principal
 // =====================================================================
+
+/**
+ * Percement renforcé (mur de plus de 40 cm, béton, pierre de pays) : proposé en
+ * option à l'unité, et compris deux fois dans le conduit neuf par l'intérieur
+ * (traversée de plancher et de toiture). Tarif client 22/09/2026.
+ */
+export const PERCEMENT_RENFORCE_HT = 180;
+
+/**
+ * Conduit neuf double paroi isolé : forfait pour les CONDUIT_INCLUDED_M premiers
+ * mètres, puis au mètre. Même tarif que le conduit parte en façade ou traverse
+ * la maison, le conduit intérieur ajoute seulement ses deux percements.
+ */
+const CONDUIT_NEUF_HT = 2650;
+const CONDUIT_NEUF_PER_M_HT = 200;
 
 /**
  * Type de sortie des fumées. C'est ce qui fait varier le plus la pose : un
  * conduit déjà tubé et conforme se raccorde en une demi-journée, un conduit
  * neuf traversant deux étages et la toiture, c'est deux jours à deux.
+ * Forfaits HT communiqués par le client le 22/09/2026.
  */
 export const INSTALL_TYPES = {
   "conduit-existant": {
     label: "Conduit existant, déjà tubé",
     desc: "Cheminée déjà équipée d'un tubage conforme, il n'y a qu'à raccorder",
-    laborHT: 650, // À CALIBRER
+    laborHT: 950,
     perMeter: 0,
     roofWork: false,
   },
   tubage: {
     label: "Tubage d'une cheminée existante",
     desc: "Conduit maçonné en place, on y descend un tubage inox flexible",
-    laborHT: 1250, // À CALIBRER — inclut le tubage jusqu'à TUBAGE_INCLUDED_M
-    perMeter: 75, // €/m HT au-delà de TUBAGE_INCLUDED_M — À CALIBRER
+    laborHT: 1625, // tubage de CONDUIT_INCLUDED_M mètres compris
+    perMeter: 75, // €/m HT au-delà de CONDUIT_INCLUDED_M
     roofWork: true,
   },
   "ventouse-facade": {
     label: "Ventouse en façade",
     desc: "Pas de cheminée : sortie horizontale concentrique à travers le mur",
-    laborHT: 950, // À CALIBRER
+    laborHT: 1300,
     perMeter: 0,
     roofWork: false,
   },
   "conduit-exterieur": {
     label: "Conduit extérieur en façade",
     desc: "Pas de cheminée : conduit double paroi qui remonte le long de la façade",
-    laborHT: 1850, // À CALIBRER
-    perMeter: 95, // €/m HT au-delà de CONDUIT_INCLUDED_M — À CALIBRER
+    laborHT: CONDUIT_NEUF_HT,
+    perMeter: CONDUIT_NEUF_PER_M_HT,
     roofWork: true,
   },
   "conduit-toiture": {
     label: "Conduit neuf par l'intérieur",
-    desc: "Pas de cheminée : conduit isolé qui traverse les étages et la toiture",
-    laborHT: 2200, // À CALIBRER
-    perMeter: 95, // À CALIBRER
+    desc: "Pas de cheminée : conduit isolé qui traverse les étages et la toiture, deux percements renforcés compris",
+    laborHT: CONDUIT_NEUF_HT + 2 * PERCEMENT_RENFORCE_HT,
+    perMeter: CONDUIT_NEUF_PER_M_HT,
     roofWork: true,
   },
 } as const;
@@ -129,9 +147,12 @@ export const STOVE_KINDS = {
 
 export type StoveKind = keyof typeof STOVE_KINDS;
 
-/** Gaine + grille + finition, par pièce supplémentaire desservie. À CALIBRER. */
-export const DUCT_PER_ROOM_HT = 280;
-export const DUCT_ROOMS_MAX = 4;
+/**
+ * Canalisation d'air chaud : gaine, grille et finition, par pièce desservie.
+ * Une ou deux pièces au maximum. Tarif client 22/09/2026.
+ */
+export const DUCT_PER_ROOM_HT = 300;
+export const DUCT_ROOMS_MAX = 2;
 
 // =====================================================================
 // 3. ACCÈS ET OPTIONS
@@ -146,36 +167,33 @@ export const LEVELS = {
 
 export type LevelKey = keyof typeof LEVELS;
 
-/** Options de pose. `roofOnly` = proposée seulement si le chantier touche au toit. */
+/**
+ * Options de pose, tarifs client 22/09/2026. `roofOnly` = proposée seulement si
+ * le chantier touche au toit.
+ */
 export const OPTIONS = {
   depose: {
     label: "Dépose de l'ancien appareil",
     desc: "Démontage et évacuation en déchetterie agréée",
-    priceHT: 250, // À CALIBRER
+    priceHT: 250,
     roofOnly: false,
   },
   carottage: {
     label: "Percement renforcé",
     desc: "Mur de plus de 40 cm, béton ou pierre de pays",
-    priceHT: 180, // À CALIBRER
-    roofOnly: false,
-  },
-  plaqueSol: {
-    label: "Plaque de sol en verre",
-    desc: "Protection du parquet sous et devant le poêle",
-    priceHT: 190, // À CALIBRER
+    priceHT: PERCEMENT_RENFORCE_HT,
     roofOnly: false,
   },
   thermostat: {
-    label: "Thermostat d'ambiance connecté",
-    desc: "Pilotage par appli, programmation à la semaine",
-    priceHT: 180, // À CALIBRER
+    label: "Thermostat d'ambiance, portatif ou fixe",
+    desc: "Modèle portatif ou fixé au mur, pour régler la température depuis la pièce",
+    priceHT: 280,
     roofOnly: false,
   },
   nacelle: {
-    label: "Nacelle ou échafaudage",
-    desc: "Toiture haute ou d'accès difficile",
-    priceHT: 450, // À CALIBRER
+    label: "Location d'une nacelle (1 jour)",
+    desc: "Toiture haute ou d'accès difficile, jusqu'à 21 m de hauteur",
+    priceHT: 350,
     roofOnly: true,
   },
 } as const;
@@ -381,7 +399,7 @@ export function laborLines(s: EstimateState, product?: EstimateProduct | null): 
     const rooms = Math.min(Math.max(1, s.ductRooms), DUCT_ROOMS_MAX);
     lines.push({
       key: "ducts",
-      label: `Gaines de canalisation (${rooms} pièce${rooms > 1 ? "s" : ""})`,
+      label: `Canalisation d'air chaud (${rooms} pièce${rooms > 1 ? "s" : ""})`,
       amountHT: rooms * DUCT_PER_ROOM_HT,
     });
   }

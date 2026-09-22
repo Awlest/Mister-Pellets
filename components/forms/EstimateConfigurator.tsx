@@ -98,7 +98,13 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
     if (typeof window === "undefined") return DEFAULT_STATE;
     try {
       const draft = window.localStorage.getItem(STORAGE_KEY);
-      if (draft) return { ...DEFAULT_STATE, ...JSON.parse(draft) };
+      if (draft) {
+        const restored = { ...DEFAULT_STATE, ...JSON.parse(draft) } as EstimateState;
+        // Un brouillon enregistré quand le plafond était à 4 pièces canalisées
+        // afficherait 3 ou 4 alors que le chiffrage s'arrête à DUCT_ROOMS_MAX.
+        restored.ductRooms = Math.min(DUCT_ROOMS_MAX, Math.max(1, restored.ductRooms));
+        return restored;
+      }
     } catch {
       // localStorage indisponible ou brouillon corrompu : on repart à zéro
     }
