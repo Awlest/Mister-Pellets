@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, Check, Flame, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
+  BONUS,
   DEFAULT_STATE,
   DUCT_ROOMS_MAX,
   CONDUIT_INCLUDED_M,
@@ -20,6 +21,7 @@ import {
   estimate,
   eur,
   filterByKind,
+  isBonusPeriod,
   rankProducts,
   recommendedKw,
   type EstimateProduct,
@@ -36,6 +38,10 @@ import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthl
 import { EVENTS, trackEvent } from "@/lib/analytics";
 
 const STORAGE_KEY = "mp_estimate_draft";
+
+// Le bonus de saison dépend de la date : lu après hydratation (faux côté
+// serveur) pour que le HTML mis en cache ne diffère jamais du rendu client.
+const noopSubscribe = () => () => {};
 
 const STEPS = [
   { id: 1, label: "Évacuation" },
@@ -144,7 +150,8 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
     () => products.find((p) => p.key === s.productKey) ?? null,
     [products, s.productKey],
   );
-  const r = estimate(s, product);
+  const bonusActive = React.useSyncExternalStore(noopSubscribe, isBonusPeriod, () => false);
+  const r = estimate(s, product, { bonus: bonusActive });
   const durations = durationsFor(r.totalTTC);
   const months =
     s.financeMonths && durations.includes(s.financeMonths)
@@ -318,6 +325,13 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
         </div>
 
         <div className="min-h-[420px] p-6 md:p-10">
+          {bonusActive && (
+            <p className="mb-6 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-4 text-sm text-mp-ink">
+              <strong className="text-mp-green-deep">{BONUS.label}.</strong> {BONUS.conditions}{" "}
+              Il est déjà déduit dans le récapitulatif.
+            </p>
+          )}
+
           {/* ---------- 1. Évacuation des fumées ---------- */}
           {step === 1 && (
             <>
@@ -744,7 +758,8 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
                         {monthly != null ? `${eur(monthly)}/mois` : "—"}
                       </span>
                       <span className="mt-1 block text-sm text-mp-ink-soft">
-                        sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TTC. {FIN_NOTE}
+                        sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TTC
+                        {r.bonusHT > 0 ? ", bonus de saison déduit" : ""}. {FIN_NOTE}
                       </span>
                     </p>
                   </>
@@ -1003,6 +1018,7 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
           {r.laborLines.map((l) => (
             <Row key={l.key} label={l.label} value={eur(l.amountHT)} muted />
           ))}
+          {r.bonusHT > 0 && <Row label={BONUS.label} value={`-${eur(r.bonusHT)}`} />}
           <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
         </dl>
 
@@ -1033,6 +1049,7 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
           Estimation indicative TTC, matériel et pose compris, TVA{" "}
           {Math.round(r.vatRate * 100)} %. Les forfaits de pose sont des budgets moyens : le prix
           ferme est établi après la visite technique gratuite.
+          {r.bonusHT > 0 && ` ${BONUS.label} déduit. ${BONUS.conditions}`}
         </p>
         {monthly != null && (
           <p className="mt-2 text-[11px] leading-relaxed text-mp-ink-soft/80">

@@ -4,6 +4,7 @@ import { getPayloadClient } from "@/lib/payload-client";
 import { notifyInternalEstimate, confirmCustomerEstimate } from "@/lib/email";
 import { getEstimateProduct } from "@/lib/estimate-catalog";
 import {
+  BONUS,
   DEFAULT_STATE,
   DUCT_ROOMS_MAX,
   CONDUIT_MAX_M,
@@ -203,6 +204,7 @@ export async function POST(request: Request) {
     "",
     `Matériel : ${r.materialHT} € HT`,
     ...r.laborLines.map((l) => `${l.label} : ${l.amountHT} € HT`),
+    r.bonusHT > 0 ? `${BONUS.label} : -${r.bonusHT} € HT (${BONUS.conditions})` : "",
     `TVA ${Math.round(r.vatRate * 100)} % : ${r.vatAmount} €`,
     `TOTAL : ${r.totalTTC} € TTC`,
     r.prime > 0
@@ -257,7 +259,12 @@ export async function POST(request: Request) {
       iso: ISO[config.iso].label,
       level: LEVELS[config.level].label,
       vatRate: r.vatRate,
-      lines: r.laborLines.map((l) => ({ label: l.label, amountHT: l.amountHT })),
+      lines: [
+        ...r.laborLines.map((l) => ({ label: l.label, amountHT: l.amountHT })),
+        ...(r.bonusHT > 0
+          ? [{ label: `${BONUS.label} (${BONUS.conditions})`, amountHT: -r.bonusHT }]
+          : []),
+      ],
       materialHT: r.materialHT,
       totalTTC: r.totalTTC,
       prime: r.prime,
@@ -273,6 +280,7 @@ export async function POST(request: Request) {
       totalTTC: r.totalTTC,
       monthly,
       months,
+      bonusNote: r.bonusHT > 0 ? `${BONUS.label} déduit. ${BONUS.conditions}` : undefined,
     }),
   ]);
 

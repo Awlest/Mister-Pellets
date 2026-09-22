@@ -215,6 +215,8 @@ export async function confirmCustomerEstimate(est: {
   totalTTC: number;
   monthly?: number | null;
   months?: number | null;
+  /** Mention du bonus de saison quand il est compris dans le total. */
+  bonusNote?: string;
 }) {
   const fmt = (n: number) => `${Math.round(n).toLocaleString("fr-BE")} €`;
   const html = `
@@ -224,6 +226,7 @@ export async function confirmCustomerEstimate(est: {
       <p style="font-size:18px"><strong>Estimation : ${fmt(est.totalTTC)} TTC</strong>, poêle et pose compris.${
         est.monthly ? ` Soit environ ${fmt(est.monthly)} par mois sur ${est.months} mois à 0 %.` : ""
       }</p>
+      ${est.bonusNote ? `<p style="color:#174724"><strong>${escapeHtml(est.bonusNote)}</strong></p>` : ""}
       <p>C'est une estimation, pas encore un devis : nous vous recontactons sous <strong>48h ouvrées</strong>
       pour convenir de la visite technique gratuite, seule façon de confirmer le prix ferme (état du
       conduit, accès, raccordements).</p>

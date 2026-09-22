@@ -287,7 +287,56 @@ export const primeEstimate = (category: PrimeCategory, totalTTC: number): number
 };
 
 // =====================================================================
-// 7. ÉTAT DU CONFIGURATEUR ET CALCUL
+// 7. BONUS DE SAISON
+// =====================================================================
+
+/**
+ * Bonus de saison : remise sur le total (matériel + pose) pour toute commande
+ * passée entre BONUS.from et BONUS.to inclus, jour civil de Bruxelles. Hors
+ * période, le bonus vaut zéro et rien ne s'affiche.
+ *
+ * Cadre légal vérifié le 22/09/2026 :
+ * - la remise vaut autant pour le client qui paie comptant que pour celui qui
+ *   finance à 0 %. Le SPF Economie considère qu'un avantage réservé au paiement
+ *   comptant est un coût du crédit : un crédit annoncé « TAEG 0 % » ne serait
+ *   alors plus à 0 % (commentaire des art. VII.64, § 1er et VII.65, § 2, 8°
+ *   du Code de droit économique). La mensualité à 0 % se calcule donc sur le
+ *   total remisé, et le bonus ne peut pas être « non cumulable » avec lui ;
+ * - annonce de réduction de prix (art. VI.18 CDE) : le récapitulatif affiche le
+ *   prix catalogue du poêle et le bonus sur une ligne séparée, ce qui donne le
+ *   prix antérieur. Ne pas relever les prix du catalogue entre le 1er septembre
+ *   2026 et la fin du bonus, sinon le prix affiché n'est plus le plus bas des
+ *   30 jours précédents.
+ */
+export const BONUS = {
+  rate: 0.1,
+  from: "2026-10-01",
+  to: "2026-12-24",
+  label: "Bonus de saison -10 %",
+  conditions:
+    "Pour toute commande passée entre le 1er octobre et le 24 décembre 2026, sur le total matériel et pose, cumulable avec la prime Habitation et le financement à 0 %.",
+} as const;
+
+/** Jour civil à Bruxelles au format AAAA-MM-JJ, comparable aux bornes du bonus. */
+export const brusselsDay = (d: Date): string => {
+  const parts = new Intl.DateTimeFormat("fr-BE", {
+    timeZone: "Europe/Brussels",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(d);
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+  return `${get("year")}-${get("month")}-${get("day")}`;
+};
+
+/** Le bonus est-il en cours à l'instant donné (par défaut maintenant) ? */
+export const isBonusPeriod = (now: Date = new Date()): boolean => {
+  const day = brusselsDay(now);
+  return day >= BONUS.from && day <= BONUS.to;
+};
+
+// =====================================================================
+// 8. ÉTAT DU CONFIGURATEUR ET CALCUL
 // =====================================================================
 
 /**
@@ -359,6 +408,8 @@ export interface EstimateResult {
   materialHT: number;
   laborHT: number;
   subtotalHT: number;
+  /** Bonus de saison déduit du sous-total HT avant TVA, 0 hors période. */
+  bonusHT: number;
   vatRate: number;
   vatAmount: number;
   totalTTC: number;
@@ -418,15 +469,26 @@ export function laborLines(s: EstimateState, product?: EstimateProduct | null): 
   return lines;
 }
 
-/** Chiffrage complet à partir de l'état du configurateur et du poêle choisi. */
-export function estimate(s: EstimateState, product?: EstimateProduct | null): EstimateResult {
+/**
+ * Chiffrage complet à partir de l'état du configurateur et du poêle choisi.
+ * `opts.bonus` force l'application (ou non) du bonus de saison ; par défaut il
+ * suit la date du jour. Le navigateur le calcule après hydratation pour que le
+ * HTML rendu côté serveur (mis en cache jusqu'à 60 s) ne diffère pas du rendu client.
+ */
+export function estimate(
+  s: EstimateState,
+  product?: EstimateProduct | null,
+  opts?: { bonus?: boolean },
+): EstimateResult {
   const lines = laborLines(s, product);
   const labor = lines.reduce((a, l) => a + l.amountHT, 0);
   const material = product?.priceHT ?? 0;
   const subtotalHT = material + labor;
+  const bonusHT = (opts?.bonus ?? isBonusPeriod()) ? Math.round(subtotalHT * BONUS.rate) : 0;
+  const netHT = subtotalHT - bonusHT;
   const rate = vatRate(s.housingOver10Years);
-  const vat = Math.round(subtotalHT * rate);
-  const totalTTC = Math.round(subtotalHT + vat);
+  const vat = Math.round(netHT * rate);
+  const totalTTC = Math.round(netHT + vat);
   const prime = primeEstimate(s.primeCategory, totalTTC);
   const needKw = recommendedKw(s.surface, s.iso);
 
@@ -435,6 +497,7 @@ export function estimate(s: EstimateState, product?: EstimateProduct | null): Es
     materialHT: material,
     laborHT: labor,
     subtotalHT,
+    bonusHT,
     vatRate: rate,
     vatAmount: vat,
     totalTTC,
