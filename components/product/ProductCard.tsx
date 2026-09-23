@@ -4,13 +4,19 @@ import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-imag
 import { Badge } from "@/components/ui/badge";
 import { formatPrice, formatPriceHT } from "@/lib/utils";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
+import { ProductFeatureBadges, type ProductFeatureFlags } from "@/components/product/ProductFeatureBadges";
 
 export interface ProductColorPreview {
   colorName: string;
   colorHex?: string;
 }
 
-export interface ProductCardData {
+/**
+ * Les champs hérités de `ProductFeatureFlags` (type, combustible, hydro,
+ * canalisable, étanche) alimentent les pastilles rondes en haut à droite de la
+ * photo (ProductFeatureBadges.tsx).
+ */
+export interface ProductCardData extends ProductFeatureFlags {
   slug: string;
   name: string;
   brand: string;
@@ -91,6 +97,11 @@ export function ProductCard({ product, className }: ProductCardProps) {
     colorVariants,
     powers,
     heatedVolumes,
+    type,
+    combustible,
+    isHydro,
+    isCanalizable,
+    isAirtight,
   } = product;
 
   // Photo servie depuis les tailles pré-générées par Payload (srcset), jamais
@@ -165,11 +176,20 @@ export function ProductCard({ product, className }: ProductCardProps) {
             </div>
           )}
 
-          {/* Badges flottants */}
+          {/* Badges flottants : étiquettes commerciales à gauche, pastilles
+              caractéristiques à droite, les deux calées à 12 px du haut. */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">
             {isBestseller && <Badge variant="primary">Best-seller</Badge>}
             {isNew && <Badge variant="success">Nouveau</Badge>}
           </div>
+          <ProductFeatureBadges
+            className="absolute top-3 right-3"
+            type={type}
+            combustible={combustible}
+            isHydro={isHydro}
+            isCanalizable={isCanalizable}
+            isAirtight={isAirtight}
+          />
         </div>
 
         {/* Contenu */}

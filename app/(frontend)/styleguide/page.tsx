@@ -244,6 +244,9 @@ export default function StyleguidePage() {
                 surface: "70-130 m²",
                 priceTTC: 2890,
                 isBestseller: true,
+                type: "standard",
+                combustible: "pellet",
+                isAirtight: true,
               }}
             />
             <ProductCard
@@ -255,6 +258,9 @@ export default function StyleguidePage() {
                 surface: "80-140 m²",
                 priceTTC: 2390,
                 isNew: true,
+                type: "canalisable",
+                combustible: "pellet",
+                isAirtight: true,
               }}
             />
             <ProductCard
@@ -264,6 +270,9 @@ export default function StyleguidePage() {
                 brand: "Dielle",
                 power: "22 kW",
                 surface: "180-300 m²",
+                type: "hydro",
+                combustible: "pellet",
+                isHydro: true,
               }}
             />
           </div>

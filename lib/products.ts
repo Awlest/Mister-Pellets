@@ -66,6 +66,7 @@ interface PayloadProduct {
   stockStatus?: VariantStockStatus | null;
   heatedVolumeM3?: number | null;
   isAirtight?: boolean | null;
+  isCanalizable?: boolean | null;
   isHydro?: boolean | null;
   isConnected?: boolean | null;
   isBestseller?: boolean | null;
@@ -351,6 +352,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     isNew: p.isNew ?? false,
     createdAt: p.createdAt ?? undefined,
     isAirtight: p.isAirtight ?? false,
+    isCanalizable: p.isCanalizable ?? false,
     isConnected: p.isConnected ?? false,
     imageSrc,
     imageAlt,

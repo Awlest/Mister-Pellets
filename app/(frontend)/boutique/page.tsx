@@ -57,6 +57,8 @@ export default async function BoutiquePage() {
     type: p.type,
     combustible: p.combustible,
     isHydro: p.isHydro,
+    isCanalizable: p.isCanalizable,
+    isAirtight: p.isAirtight,
     powerKw: p.powerKw,
     diffusion: p.diffusion,
     color: p.color,

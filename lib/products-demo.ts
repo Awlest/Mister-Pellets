@@ -61,6 +61,8 @@ export interface ProductDemo extends ProductCardData {
   /** Raccordé à l'eau (thermo). Pilote le filtre « Chauffage » ventilé/hydro. */
   isHydro?: boolean;
   isAirtight: boolean;
+  /** Case « Canalisable » de l'admin : des inserts le sont sans porter le type. */
+  isCanalizable?: boolean;
   isConnected: boolean;
   /** Mode de diffusion de la chaleur (2 valeurs) */
   diffusion: Diffusion;
