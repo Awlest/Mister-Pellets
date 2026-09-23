@@ -1,4 +1,4 @@
-import type { ComponentType, SVGProps } from "react";
+import { useId, type ComponentType, type SVGProps } from "react";
 import { AirVent, Droplet, ShieldCheck } from "lucide-react";
 import type { Combustible, ProductType } from "@/lib/products-demo";
 import { cn } from "@/lib/utils";
@@ -7,7 +7,9 @@ import { cn } from "@/lib/utils";
  * Pastilles rondes de la carte produit : le combustible d'abord (pellets, bois
  * ou hybride, une seule par fiche), puis ce qui change le projet de chauffage
  * (hydro, canalisable, insert, étanche). Tout vient des champs déjà saisis dans
- * l'admin Payload (collections/Products.ts), rien de neuf à encoder.
+ * l'admin Payload (collections/Products.ts), rien de neuf à encoder. La légende
+ * de la boutique (ProductFeatureLegend) lit la même liste FEATURES, donc les
+ * deux ne peuvent pas diverger.
  *
  * Pas de pastille WiFi : 76 fiches sur 84 sont connectées (relevé du
  * 23/09/2026), l'information ne distingue rien et chargerait chaque carte.
@@ -96,11 +98,32 @@ function InsertIcon(props: IconProps) {
 }
 
 export interface ProductFeatureBadge {
-  key: string;
-  /** Libellé lu par les lecteurs d'écran et affiché en info-bulle. */
+  key: ProductFeatureKey;
+  /** Libellé lu par les lecteurs d'écran, affiché en info-bulle et dans la légende. */
   label: string;
   Icon: ComponentType<IconProps>;
 }
+
+/** Les sept pastilles possibles, dans l'ordre d'affichage (carte et légende). */
+const FEATURES = [
+  { key: "pellets", label: "Pellets", Icon: PelletsIcon },
+  { key: "bois", label: "Bois (bûches)", Icon: LogsIcon },
+  { key: "hybride", label: "Hybride bois + pellets", Icon: HybridIcon },
+  { key: "hydro", label: "Hydro (chauffage central)", Icon: Droplet },
+  { key: "canalisable", label: "Canalisable", Icon: AirVent },
+  { key: "insert", label: "Insert encastrable", Icon: InsertIcon },
+  { key: "etanche", label: "Étanche (BBC)", Icon: ShieldCheck },
+] as const satisfies readonly { key: string; label: string; Icon: ComponentType<IconProps> }[];
+
+export type ProductFeatureKey = (typeof FEATURES)[number]["key"];
+
+/** Liste complète pour la légende de la boutique. */
+export const PRODUCT_FEATURE_LEGEND: readonly ProductFeatureBadge[] = FEATURES;
+
+const FEATURE_BY_KEY = Object.fromEntries(FEATURES.map((f) => [f.key, f])) as Record<
+  ProductFeatureKey,
+  ProductFeatureBadge
+>;
 
 const HYDRO_TYPES: ReadonlySet<ProductType> = new Set(["hydro", "hybride-hydro"]);
 const HYBRID_TYPES: ReadonlySet<ProductType> = new Set(["hybride", "hybride-hydro"]);
@@ -111,30 +134,45 @@ const HYBRID_TYPES: ReadonlySet<ProductType> = new Set(["hybride", "hybride-hydr
  * les deux divergent, par exemple un insert Girolami encodé « hybride ».
  */
 export function productFeatureBadges(p: ProductFeatureFlags): ProductFeatureBadge[] {
-  const badges: ProductFeatureBadge[] = [];
+  const keys: ProductFeatureKey[] = [];
   const hasData = p.combustible !== undefined || p.type !== undefined;
   const hybrid = p.combustible === "hybride" || (p.type !== undefined && HYBRID_TYPES.has(p.type));
 
-  if (hybrid) {
-    badges.push({ key: "hybride", label: "Hybride bois + pellets", Icon: HybridIcon });
-  } else if (p.combustible === "bois") {
-    badges.push({ key: "bois", label: "Bois (bûches)", Icon: LogsIcon });
-  } else if (hasData) {
-    badges.push({ key: "pellets", label: "Pellets", Icon: PelletsIcon });
-  }
-  if (p.isHydro || (p.type !== undefined && HYDRO_TYPES.has(p.type))) {
-    badges.push({ key: "hydro", label: "Hydro (chauffage central)", Icon: Droplet });
-  }
-  if (p.isCanalizable || p.type === "canalisable") {
-    badges.push({ key: "canalisable", label: "Canalisable", Icon: AirVent });
-  }
-  if (p.type === "insert") {
-    badges.push({ key: "insert", label: "Insert encastrable", Icon: InsertIcon });
-  }
-  if (p.isAirtight) {
-    badges.push({ key: "etanche", label: "Étanche (BBC)", Icon: ShieldCheck });
-  }
-  return badges;
+  if (hybrid) keys.push("hybride");
+  else if (p.combustible === "bois") keys.push("bois");
+  else if (hasData) keys.push("pellets");
+
+  if (p.isHydro || (p.type !== undefined && HYDRO_TYPES.has(p.type))) keys.push("hydro");
+  if (p.isCanalizable || p.type === "canalisable") keys.push("canalisable");
+  if (p.type === "insert") keys.push("insert");
+  if (p.isAirtight) keys.push("etanche");
+
+  return keys.map((key) => FEATURE_BY_KEY[key]);
+}
+
+interface ProductFeatureIconProps {
+  Icon: ComponentType<IconProps>;
+  /** 32 px sur la photo, 28 px dans la légende. */
+  size?: "md" | "sm";
+}
+
+/**
+ * Le rond orange qui porte l'icône, commun à la carte et à la légende. Icône en
+ * vert profond sur orange flamme : 4,3:1, au-dessus du 3:1 demandé aux
+ * pictogrammes (WCAG 1.4.11) ; le blanc n'atteindrait que 2,5:1.
+ */
+export function ProductFeatureIcon({ Icon, size = "md" }: ProductFeatureIconProps) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        "flex shrink-0 items-center justify-center rounded-full bg-mp-orange-flame text-mp-green-deep shadow-sm ring-1 ring-white/70",
+        size === "sm" ? "h-7 w-7" : "h-8 w-8"
+      )}
+    >
+      <Icon className="h-4 w-4" />
+    </span>
+  );
 }
 
 interface ProductFeatureBadgesProps extends ProductFeatureFlags {
@@ -153,15 +191,36 @@ export function ProductFeatureBadges({ className, ...flags }: ProductFeatureBadg
   return (
     <ul aria-label="Caractéristiques" className={cn("flex flex-col items-end gap-1.5", className)}>
       {badges.map(({ key, label, Icon }) => (
-        <li
-          key={key}
-          title={label}
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-mp-green-deep text-white shadow-sm ring-1 ring-white/70"
-        >
-          <Icon className="h-4 w-4" aria-hidden="true" />
+        <li key={key} title={label}>
+          <ProductFeatureIcon Icon={Icon} />
           <span className="sr-only">{label}</span>
         </li>
       ))}
     </ul>
+  );
+}
+
+/**
+ * Légende des pastilles, affichée juste avant la grille de la boutique. Même
+ * liste et mêmes ronds que sur les photos, pour que le visiteur retrouve
+ * chaque icône d'un regard.
+ */
+export function ProductFeatureLegend({ className }: { className?: string }) {
+  const titleId = useId();
+
+  return (
+    <div className={cn("rounded-2xl border border-mp-sand/40 bg-mp-beige/60 px-4 py-4 text-center", className)}>
+      <p id={titleId} className="mb-3 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
+        Légende des pastilles
+      </p>
+      <ul aria-labelledby={titleId} className="flex flex-wrap justify-center gap-x-5 gap-y-2.5">
+        {PRODUCT_FEATURE_LEGEND.map(({ key, label, Icon }) => (
+          <li key={key} className="flex items-center gap-2 text-sm text-mp-ink">
+            <ProductFeatureIcon Icon={Icon} size="sm" />
+            {label}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
