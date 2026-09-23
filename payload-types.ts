@@ -264,7 +264,7 @@ export interface Product {
    */
   priceTTC?: number | null;
   /**
-   * Prix promo TTC (optionnel)
+   * Prix promo TTC (optionnel). Remplace le prix catalogue en boutique, dans le flux Google et dans le configurateur ; le prix catalogue reste affiché barré et doit être celui pratiqué pendant les 30 jours précédents (art. VI.18 CDE).
    */
   promoPrice?: number | null;
   /**
