@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-image";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice, formatPriceHT } from "@/lib/utils";
-import { BONUS } from "@/lib/bonus";
+import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 
 export interface ProductColorPreview {
   colorName: string;
@@ -39,6 +39,12 @@ export interface ProductCardData {
    * (lib/products.ts). Absent hors période : la carte affiche le prix catalogue.
    */
   bonusPriceTTC?: number;
+  /**
+   * Prix promo TTC saisi dans l'admin, seulement s'il est inférieur au prix
+   * catalogue. Affiché avec le prix catalogue barré, et le bonus de saison se
+   * calcule dessus.
+   */
+  promoPriceTTC?: number;
   imageSrc?: string;
   imageAlt?: string;
   /** Point focal de l'image (0-100 %) défini dans l'admin Media Payload. */
@@ -73,6 +79,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
     power,
     heatedVolume,
     priceTTC,
+    promoPriceTTC,
     bonusPriceTTC,
     imageSrc,
     imageAlt,
@@ -112,6 +119,13 @@ export function ProductCard({ product, className }: ProductCardProps) {
     .filter((v, i, arr) => arr.findIndex((x) => x.colorHex === v.colorHex) === i);
   const visibleSwatches = swatches.slice(0, 6);
   const extraCount = swatches.length - visibleSwatches.length;
+
+  // Prix de la carte : bonus de saison, sinon promo admin, sinon catalogue, avec
+  // le prix précédent barré (lib/product-price.ts).
+  const prices = { priceTTC, promoPriceTTC, bonusPriceTTC };
+  const shown = shownPriceTTC(prices);
+  const struck = struckPriceTTC(prices);
+  const badge = priceBadge(prices);
 
   return (
     <Link
@@ -204,13 +218,13 @@ export function ProductCard({ product, className }: ProductCardProps) {
           )}
 
           <div className="mt-auto pt-3 flex items-end justify-between">
-            {priceTTC ? (
+            {shown ? (
               <div>
                 <span className="text-xs text-mp-ink-soft block">
                   À partir de
-                  {bonusPriceTTC ? (
+                  {badge ? (
                     <span className="ml-2 rounded-full bg-mp-orange-flame px-2 py-0.5 text-[10px] font-semibold text-white">
-                      {BONUS.badge}
+                      {badge}
                     </span>
                   ) : null}
                 </span>
@@ -218,17 +232,17 @@ export function ProductCard({ product, className }: ProductCardProps) {
                   className="text-xl font-semibold text-mp-green-deep"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  {formatPriceHT(bonusPriceTTC ?? priceTTC)}
+                  {formatPriceHT(shown)}
                 </span>
                 <span className="text-xs text-mp-ink-soft ml-1">HTVA</span>
-                {bonusPriceTTC ? (
+                {struck ? (
                   <span className="ml-2 text-sm text-mp-ink-soft line-through">
-                    {formatPriceHT(priceTTC)}
+                    {formatPriceHT(struck)}
                   </span>
                 ) : null}
                 <span className="block text-[11px] text-mp-ink-soft">
-                  soit {formatPrice(bonusPriceTTC ?? priceTTC)} TVAC
-                  {bonusPriceTTC ? ` au lieu de ${formatPrice(priceTTC)}` : ""}
+                  soit {formatPrice(shown)} TVAC
+                  {struck ? ` au lieu de ${formatPrice(struck)}` : ""}
                 </span>
               </div>
             ) : (

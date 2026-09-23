@@ -58,6 +58,7 @@ interface PayloadProduct {
   color: ColorCategory;
   power: number;
   priceTTC?: number | null;
+  promoPrice?: number | null;
   sku?: string | null;
   gtin?: string | null;
   mpn?: string | null;
@@ -316,6 +317,17 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
   // prix remisé sans que le navigateur ait à lire la date.
   const bonusActive = isBonusPeriod();
 
+  // Promo saisie dans l'admin : ne compte que si elle est bien inférieure au
+  // prix catalogue (sinon ce n'est pas une promo). Le bonus de saison se
+  // calcule sur le prix réellement pratiqué avant lui, promo comprise, comme
+  // dans le configurateur (lib/estimate-catalog.ts).
+  const catalogTTC = p.priceTTC && p.priceTTC > 0 ? p.priceTTC : undefined;
+  const promoTTC =
+    p.promoPrice && p.promoPrice > 0 && (catalogTTC == null || p.promoPrice < catalogTTC)
+      ? p.promoPrice
+      : undefined;
+  const effectiveTTC = promoTTC ?? catalogTTC;
+
   return {
     slug: p.slug,
     name: p.name,
@@ -331,8 +343,8 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     powers,
     heatedVolumes,
     priceTTC: p.priceTTC ?? undefined,
-    bonusPriceTTC:
-      bonusActive && p.priceTTC && p.priceTTC > 0 ? bonusPrice(p.priceTTC) : undefined,
+    promoPriceTTC: promoTTC,
+    bonusPriceTTC: bonusActive && effectiveTTC ? bonusPrice(effectiveTTC) : undefined,
     stockStatus: p.stockStatus ?? undefined,
     isBestseller: p.isBestseller ?? false,
     isFeatured: p.isFeatured ?? false,

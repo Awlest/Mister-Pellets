@@ -42,6 +42,7 @@ export default async function BoutiquePage() {
     powers: p.powers,
     heatedVolumes: p.heatedVolumes,
     priceTTC: p.priceTTC,
+    promoPriceTTC: p.promoPriceTTC,
     bonusPriceTTC: p.bonusPriceTTC,
     imageSrc: p.imageSrc,
     imageAlt: p.imageAlt,

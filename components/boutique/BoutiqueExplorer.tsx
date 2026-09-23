@@ -17,6 +17,7 @@ import {
   type ColorCategory,
 } from "@/lib/products-demo";
 import { cn } from "@/lib/utils";
+import { effectivePriceTTC } from "@/lib/product-price";
 
 /**
  * Shape allégé envoyé au navigateur pour la boutique : juste ce qu'il faut pour
@@ -82,7 +83,8 @@ const DEFAULT_SORT: SortKey = "mis-en-avant";
 const isSortKey = (v: string | null): v is SortKey => SORTS.some((s) => s.value === v);
 
 const createdTime = (p: BoutiqueProduct): number => (p.createdAt ? Date.parse(p.createdAt) || 0 : 0);
-const hasPrice = (p: BoutiqueProduct): boolean => typeof p.priceTTC === "number" && p.priceTTC > 0;
+// Prix de tri = prix réellement pratiqué (promo admin comprise), comme sur la carte.
+const hasPrice = (p: BoutiqueProduct): boolean => (effectivePriceTTC(p) ?? 0) > 0;
 // Fiche regroupée multi-puissances : la plus petite sert au tri croissant, la
 // plus grande au tri décroissant (sinon un 9-26 kW se classerait comme un 9 kW).
 const minPower = (p: BoutiqueProduct): number => (p.powers && p.powers.length > 0 ? Math.min(...p.powers) : p.powerKw);
@@ -106,7 +108,7 @@ function sortProducts(list: BoutiqueProduct[], sort: SortKey): BoutiqueProduct[]
         const pb = hasPrice(b);
         if (pa !== pb) return pa ? -1 : 1;
         if (!pa) return 0;
-        return dir * ((a.priceTTC as number) - (b.priceTTC as number));
+        return dir * ((effectivePriceTTC(a) as number) - (effectivePriceTTC(b) as number));
       });
     }
     case "puissance-asc":

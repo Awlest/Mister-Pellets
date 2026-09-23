@@ -22,6 +22,7 @@ import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { schemaAvailability } from "@/lib/availability";
 import { BONUS } from "@/lib/bonus";
+import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -53,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Produit introuvable", robots: { index: false, follow: false } };
   return buildPageMetadata({
     title: `${product.name}, Poêle à pellets ${product.power}`,
-    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. ${product.priceTTC ? `${formatPrice(product.bonusPriceTTC ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets, primes incluses.`,
+    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. ${product.priceTTC ? `${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets, primes incluses.`,
     path: `/produit/${product.slug}`,
   });
 }
@@ -87,6 +88,11 @@ export default async function ProductPage({ params }: Props) {
   // celle du flux : un écart entre les deux fait refuser le compte Merchant.
   // Pendant le bonus de saison, le prix annoncé vaut jusqu'à la fin du bonus.
   const bonusActive = product.bonusPriceTTC != null;
+  // Prix de la fiche : bonus de saison, sinon promo admin, sinon catalogue, avec
+  // le prix précédent barré (lib/product-price.ts).
+  const shownTTC = shownPriceTTC(product);
+  const struckTTC = struckPriceTTC(product);
+  const badge = priceBadge(product);
   const priceValidUntil = bonusActive ? BONUS.to : `${new Date().getFullYear()}-12-31`;
   const offerExtras = {
     priceValidUntil,
@@ -130,7 +136,7 @@ export default async function ProductPage({ params }: Props) {
       offers = {
         "@type": "AggregateOffer",
         priceCurrency: "EUR",
-        price: product.bonusPriceTTC ?? product.priceTTC,
+        price: shownTTC,
         offerCount: variantsWithGtin.length,
         offers: variantsWithGtin.map((v) => ({
           "@type": "Offer",
@@ -138,7 +144,7 @@ export default async function ProductPage({ params }: Props) {
           gtin13: v.gtin,
           url: `${productPageUrl}#${encodeURIComponent(v.colorName.toLowerCase())}`,
           priceCurrency: "EUR",
-          price: product.bonusPriceTTC ?? product.priceTTC,
+          price: shownTTC,
           availability: schemaAvailability(product.stockStatus),
           itemCondition: "https://schema.org/NewCondition",
         ...offerExtras,
@@ -149,7 +155,7 @@ export default async function ProductPage({ params }: Props) {
         "@type": "Offer",
         url: productPageUrl,
         priceCurrency: "EUR",
-        price: product.bonusPriceTTC ?? product.priceTTC,
+        price: shownTTC,
         availability: schemaAvailability(product.stockStatus),
         itemCondition: "https://schema.org/NewCondition",
         ...offerExtras,
@@ -335,7 +341,7 @@ export default async function ProductPage({ params }: Props) {
                     productName={product.name}
                     productBrand={product.brand}
                     productImageSrc={product.imageSrc}
-                    basePriceTTC={product.bonusPriceTTC ?? product.priceTTC}
+                    basePriceTTC={shownTTC}
                     variantOptions={product.variantOptions ?? []}
                     variants={product.variants}
                   />
@@ -357,9 +363,9 @@ export default async function ProductPage({ params }: Props) {
                     <div>
                       <span className="text-xs text-mp-ink-soft block">
                         Prix du poêle seul, TVA comprise
-                        {product.bonusPriceTTC ? (
+                        {badge ? (
                           <Badge variant="primary" className="ml-2">
-                            {BONUS.badge}
+                            {badge}
                           </Badge>
                         ) : null}
                       </span>
@@ -367,22 +373,22 @@ export default async function ProductPage({ params }: Props) {
                         className="text-4xl font-semibold text-mp-green-deep"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
-                        {formatPrice(product.bonusPriceTTC ?? product.priceTTC)}
+                        {formatPrice(shownTTC ?? product.priceTTC)}
                         <span className="text-base font-medium text-mp-ink-soft ml-1">
                           TVAC
                         </span>
-                        {product.bonusPriceTTC ? (
+                        {struckTTC ? (
                           <span className="ml-3 text-xl font-normal text-mp-ink-soft line-through">
-                            {formatPrice(product.priceTTC)}
+                            {formatPrice(struckTTC)}
                           </span>
                         ) : null}
                       </span>
                       <span className="block text-sm text-mp-ink-soft mt-1">
-                        soit {formatPriceHT(product.bonusPriceTTC ?? product.priceTTC)} HTVA
+                        soit {formatPriceHT(shownTTC ?? product.priceTTC)} HTVA
                       </span>
                       <p className="mt-3 text-sm text-mp-green-deep">
                         <span className="font-semibold">
-                          {formatPriceReducedVat(product.bonusPriceTTC ?? product.priceTTC)} TVAC
+                          {formatPriceReducedVat(shownTTC ?? product.priceTTC)} TVAC
                         </span>{" "}
                         si nous le posons sur une habitation de plus de 10 ans
                         <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
