@@ -25,6 +25,18 @@ const COOKIES = [
     ],
   },
   {
+    category: "Mesure publicitaire",
+    description:
+      "Mesurent les demandes de devis et de rendez-vous qui viennent de nos annonces Google. Activés uniquement après votre consentement.",
+    items: [
+      {
+        name: "_gcl_au, _gcl_aw",
+        purpose: "Google Ads, relie une demande de devis ou un rendez-vous au clic sur l'annonce",
+        duration: "90 jours",
+      },
+    ],
+  },
+  {
     category: "Fonctionnels",
     description: "Améliorent l'expérience. Activés uniquement après votre consentement.",
     items: [
@@ -63,7 +75,7 @@ export default function PolitiqueCookiesPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Comment on utilise les cookies sur ce site</h2>
             <p>
-              On distingue 3 catégories de cookies selon leur finalité :
+              On distingue 4 catégories de cookies selon leur finalité :
             </p>
 
             {COOKIES.map((cat) => (

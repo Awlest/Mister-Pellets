@@ -92,9 +92,9 @@ export function Analytics() {
           className="fixed inset-x-3 bottom-28 z-50 rounded-2xl border border-mp-sand bg-mp-cream p-5 shadow-lg lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
         >
           <p className="text-sm leading-relaxed text-mp-ink">
-            On mesure l&apos;audience du site pour savoir quelles pages servent vraiment et d&apos;où
-            viennent nos clients. Rien n&apos;est stocké sur votre appareil tant que vous
-            n&apos;avez pas accepté.{" "}
+            On mesure l&apos;audience du site et l&apos;efficacité de nos annonces Google, pour
+            savoir quelles pages servent vraiment et d&apos;où viennent nos clients. Rien
+            n&apos;est stocké sur votre appareil tant que vous n&apos;avez pas accepté.{" "}
             <Link href="/politique-cookies" className="underline hover:text-mp-orange-flame">
               Notre politique cookies
             </Link>

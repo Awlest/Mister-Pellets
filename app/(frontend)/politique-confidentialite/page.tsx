@@ -59,6 +59,10 @@ export default function PolitiqueConfidentialitePage() {
               <li>Traiter et livrer vos commandes (base légale : exécution du contrat).</li>
               <li>Respecter nos obligations comptables et fiscales (base légale : obligation légale, conservation 7 ans).</li>
               <li>Améliorer notre site (base légale : votre consentement aux cookies analytiques).</li>
+              <li>
+                Savoir quelles annonces Google nous amènent des demandes de devis et de rendez-vous
+                (base légale : votre consentement aux cookies de mesure publicitaire).
+              </li>
             </ul>
           </section>
 
@@ -79,6 +83,7 @@ export default function PolitiqueConfidentialitePage() {
               <li>Données de devis non concrétisé : 12 mois après dernier contact.</li>
               <li>Données client (commande/installation) : 10 ans (obligation légale comptable + garantie).</li>
               <li>Données de navigation analytiques : 26 mois (Google Analytics).</li>
+              <li>Mesure publicitaire : 90 jours (cookies Google Ads).</li>
               <li>Newsletter : tant que vous n'avez pas demandé la désinscription.</li>
             </ul>
           </section>

@@ -40,12 +40,15 @@ const SECURITY_HEADERS = [
       // *.google-analytics.com : sans lui, chaque hit est refusé par la CSP et la
       // mesure est perdue sans aucune erreur visible sur le site (constaté le
       // 22/09/2026). img-src couvre déjà https: pour le pixel de repli.
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com https://va.vercel-scripts.com https://www.googletagmanager.com",
+      // Google Ads (balise AW-, conversions) : domaines de la doc Google
+      // « Content Security Policy » mise à jour le 18/09/2026. Pas de joker
+      // possible sur le TLD, d'où www.google.be écrit en toutes lettres.
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com https://va.vercel-scripts.com https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://googleads.g.doubleclick.net",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' data: https://fonts.gstatic.com",
       "img-src 'self' data: blob: https:",
-      "connect-src 'self' https://*.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
-      "frame-src 'self'",
+      "connect-src 'self' https://*.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://google.com https://www.google.be",
+      "frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
