@@ -204,6 +204,63 @@ export function filterAvailable(candidates: Interval[], busy: Interval[]): Inter
 }
 
 /**
+ * Événement de l'agenda, réduit aux champs utiles au calcul d'occupation.
+ * Même forme que la réponse de l'API Google Agenda (events.list).
+ */
+export interface CalendarEvent {
+  id?: string;
+  status?: string;
+  eventType?: string;
+  start?: { dateTime?: string; date?: string };
+  end?: { dateTime?: string; date?: string };
+  attendees?: Array<{ self?: boolean; responseStatus?: string }>;
+}
+
+/**
+ * Types d'événements qui ne sont pas des engagements : le lieu de travail du
+ * jour et les anniversaires des contacts. Ils couvrent la journée entière et
+ * videraient l'agenda de tout créneau s'ils comptaient.
+ */
+const NON_BLOCKING_EVENT_TYPES = new Set(["workingLocation", "birthday"]);
+
+/** Instant d'une borne d'événement : heure précise, ou minuit belge pour une journée entière. */
+function eventBoundary(b: CalendarEvent["start"]): number | null {
+  if (b?.dateTime) {
+    const t = Date.parse(b.dateTime);
+    return Number.isFinite(t) ? t : null;
+  }
+  if (b?.date) {
+    const [y, m, d] = b.date.split("-").map(Number);
+    if (!y || !m || !d) return null;
+    return belgianWallTimeToInstant(y, m, d, 0, 0);
+  }
+  return null;
+}
+
+/**
+ * Plages occupées à partir des événements de l'agenda.
+ *
+ * Règle de Dorian : on ne réserve que si RIEN n'est prévu. Un événement bloque
+ * donc son créneau quel que soit son état : accepté, en attente de réponse,
+ * « peut-être », affiché « disponible » ou posé sur la journée entière. Seuls
+ * y échappent un événement annulé, une invitation que Dorian a refusée, et les
+ * marqueurs qui ne sont pas des rendez-vous (lieu de travail, anniversaires).
+ */
+export function busyFromEvents(events: CalendarEvent[]): Interval[] {
+  const busy: Interval[] = [];
+  for (const e of events) {
+    if (e.status === "cancelled") continue;
+    if (e.eventType && NON_BLOCKING_EVENT_TYPES.has(e.eventType)) continue;
+    if (e.attendees?.some((a) => a.self && a.responseStatus === "declined")) continue;
+    const start = eventBoundary(e.start);
+    const end = eventBoundary(e.end);
+    if (start === null || end === null || end <= start) continue;
+    busy.push({ start, end });
+  }
+  return busy;
+}
+
+/**
  * Fenêtre de réservation : du délai de prévenance jusqu'à l'horizon.
  * `now` est passé en argument pour rester testable.
  */

@@ -2,6 +2,7 @@ import {
   belgianWallTimeToInstant, belgianParts, generateCandidateSlots,
   filterAvailable, availableSlots, formatSlotTime, belgianDayKey,
   BUSINESS_HOURS, GAP_AFTER_EVENT_MIN, GAP_BEFORE_EVENT_MIN,
+  busyFromEvents, type CalendarEvent,
 } from "@/lib/booking";
 
 let ko = 0;
@@ -60,6 +61,53 @@ const futurs = availableSlots(now, 60, []);
 const tropTot = futurs.filter(s => s.start < now + 24 * 3600000);
 check("aucun creneau sous 24 h de prevenance", tropTot.length, 0);
 check("horizon : dernier creneau sous 30 jours", futurs[futurs.length - 1]!.start <= now + 30 * 86400000, true);
+
+// 8. Regle « rien dans l'agenda » : tout evenement bloque, quel que soit son
+// etat. Le champ « disponible/occupe » n'est meme pas demande a Google : un
+// evenement affiche « disponible » arrive comme les autres et bloque.
+const rdv = (extra: Partial<CalendarEvent> = {}): CalendarEvent => ({
+  start: { dateTime: "2026-09-08T10:00:00+02:00" },
+  end: { dateTime: "2026-09-08T11:00:00+02:00" },
+  ...extra,
+});
+const moi = (responseStatus: string) => ({ attendees: [{ self: true, responseStatus }] });
+check("evenement pose par Dorian -> occupe", busyFromEvents([rdv()]).length, 1);
+check("invitation acceptee -> occupe", busyFromEvents([rdv(moi("accepted"))]).length, 1);
+check("invitation SANS reponse -> occupe", busyFromEvents([rdv(moi("needsAction"))]).length, 1);
+check("reponse « peut-etre » -> occupe", busyFromEvents([rdv(moi("tentative"))]).length, 1);
+check("invitation refusee par Dorian -> libre", busyFromEvents([rdv(moi("declined"))]).length, 0);
+check("refus d'un AUTRE invite -> occupe",
+  busyFromEvents([rdv({ attendees: [{ responseStatus: "declined" }, { self: true, responseStatus: "needsAction" }] })]).length, 1);
+check("evenement annule -> libre", busyFromEvents([rdv({ status: "cancelled" })]).length, 0);
+check("absence (outOfOffice) -> occupe", busyFromEvents([rdv({ eventType: "outOfOffice" })]).length, 1);
+check("lieu de travail -> libre", busyFromEvents([rdv({ eventType: "workingLocation" })]).length, 0);
+check("anniversaire -> libre", busyFromEvents([rdv({ eventType: "birthday" })]).length, 0);
+check("bornes illisibles -> ignore", busyFromEvents([rdv({ start: {}, end: {} })]).length, 0);
+check("heure precise -> intervalle exact",
+  busyFromEvents([rdv()]).map(b => [new Date(b.start).toISOString(), new Date(b.end).toISOString()]),
+  [["2026-09-08T08:00:00.000Z", "2026-09-08T09:00:00.000Z"]]);
+
+// Journee entiere : de minuit a minuit en heure belge, y compris la nuit du
+// passage a l'heure d'hiver (25/10/2026, journee de 25 h).
+const journee = busyFromEvents([{ start: { date: "2026-10-25" }, end: { date: "2026-10-26" } }])[0]!;
+check("journee entiere 25/10 -> minuit belge a minuit belge",
+  [new Date(journee.start).toISOString(), new Date(journee.end).toISOString()],
+  ["2026-10-24T22:00:00.000Z", "2026-10-25T23:00:00.000Z"]);
+
+// Effet sur les creneaux : une journee entiere vide la journee, et une
+// invitation sans reponse de 14:00 a 15:00 ferme tous les departs de 13:00 a
+// 15:00 (60 min de visite, 30 min de route de chaque cote).
+const mardi = belgianWallTimeToInstant(2026, 9, 8, 0, 0);
+const creneauxMardi = generateCandidateSlots(mardi, mardi + 86400000, 60)
+  .filter(s => belgianDayKey(s.start) === "2026-09-08");
+check("journee entiere -> aucun creneau ce jour-la",
+  filterAvailable(creneauxMardi, busyFromEvents([{ start: { date: "2026-09-08" }, end: { date: "2026-09-09" } }])).length, 0);
+const autourInvitation = filterAvailable(creneauxMardi,
+  busyFromEvents([{ start: { dateTime: "2026-09-08T14:00:00+02:00" }, end: { dateTime: "2026-09-08T15:00:00+02:00" }, ...moi("needsAction") }]))
+  .map(s => formatSlotTime(s.start));
+check("invitation sans reponse 14:00-15:00 : 12:30 et 15:30 restent, 13:00-15:00 fermes",
+  ["12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30"].filter(h => autourInvitation.includes(h)),
+  ["12:30", "15:30"]);
 
 console.log(ko === 0 ? "\nTOUS OK" : `\n${ko} ECHEC(S)`);
 process.exit(ko === 0 ? 0 : 1);

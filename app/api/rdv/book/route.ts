@@ -3,12 +3,41 @@ import { Resend } from "resend";
 import { rateLimitResponse, csrfOriginCheck, isHoneypotTriggered } from "@/lib/rate-limit";
 import { getService } from "@/lib/services";
 import { availableSlots, formatSlotTime, belgianDayKey } from "@/lib/booking";
-import { getBusyIntervals, createEvent, isCalendarConfigured } from "@/lib/google-calendar";
+import {
+  getBusyIntervals,
+  createEvent,
+  deleteEvent,
+  isCalendarConfigured,
+} from "@/lib/google-calendar";
 
 export const dynamic = "force-dynamic";
 
 function durationFor(slug: string): number {
   return slug === "visite-showroom" ? 45 : 60;
+}
+
+/**
+ * Le créneau figure-t-il parmi les créneaux réellement libres de l'agenda ?
+ * `excludeEventId` : ne pas compter le rendez-vous qu'on vient de créer.
+ */
+async function isSlotFree(
+  now: number,
+  startInstant: number,
+  durationMin: number,
+  excludeEventId?: string,
+): Promise<boolean> {
+  const busy = await getBusyIntervals(now, startInstant + 7 * 86400000, excludeEventId);
+  return availableSlots(now, durationMin, busy).some((s) => s.start === startInstant);
+}
+
+function slotTaken() {
+  return NextResponse.json(
+    {
+      error: "Ce créneau vient d'être pris ou n'est plus disponible. Choisissez-en un autre.",
+      code: "SLOT_TAKEN",
+    },
+    { status: 409 },
+  );
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -96,20 +125,7 @@ export async function POST(request: Request) {
     // Revalidation : le créneau demandé doit toujours figurer parmi les
     // créneaux réellement disponibles au moment présent.
     const now = Date.now();
-    const busy = await getBusyIntervals(now, startInstant + 7 * 86400000);
-    const stillFree = availableSlots(now, durationMin, busy).some(
-      (s) => s.start === startInstant,
-    );
-    if (!stillFree) {
-      return NextResponse.json(
-        {
-          error:
-            "Ce créneau vient d'être pris ou n'est plus disponible. Choisissez-en un autre.",
-          code: "SLOT_TAKEN",
-        },
-        { status: 409 },
-      );
-    }
+    if (!(await isSlotFree(now, startInstant, durationMin))) return slotTaken();
 
     const locationLabel =
       service.location === "showroom"
@@ -127,6 +143,15 @@ export async function POST(request: Request) {
       notes: notes || undefined,
       locationLabel,
     });
+
+    // Contre-vérification : mister-clim.be écrit dans le même agenda, et
+    // l'équipe peut y poser un rendez-vous à tout moment. Si un autre
+    // événement est arrivé sur le créneau entre la vérification et la
+    // création, on retire le nôtre plutôt que de laisser un doublon.
+    if (!(await isSlotFree(now, startInstant, durationMin, event.id))) {
+      await deleteEvent(event.id);
+      return slotTaken();
+    }
 
     const dayKey = belgianDayKey(startInstant);
     const timeLabel = formatSlotTime(startInstant);

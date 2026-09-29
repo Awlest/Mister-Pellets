@@ -1,17 +1,19 @@
 import { createSign } from "crypto";
-import type { Interval } from "@/lib/booking";
+import { busyFromEvents, type CalendarEvent, type Interval } from "@/lib/booking";
 
 /**
  * Accès à l'agenda Google de Dorian via un compte de service.
  *
  * Pas de librairie `googleapis` : on signe nous-mêmes le JWT et on appelle
- * l'API REST. Deux appels suffisent (freeBusy et events.insert), et ça évite
- * d'embarquer une dépendance de plusieurs mégaoctets dans le bundle serveur.
+ * l'API REST. Trois appels suffisent (events.list, events.insert et
+ * events.delete), et ça évite d'embarquer une dépendance de plusieurs
+ * mégaoctets dans le bundle serveur.
  *
  * Le compte de service n'a aucun accès par défaut. Deux façons de lui en
  * donner, gérées toutes les deux ici :
  *
- *  1. PARTAGE de l'agenda avec son adresse e-mail, depuis Google Agenda.
+ *  1. PARTAGE de l'agenda avec son adresse e-mail, depuis Google Agenda, avec
+ *     au moins le droit de voir le détail des événements.
  *     Fonctionne avec un simple compte Gmail, mais Google refuse alors
  *     d'ajouter des invités à l'événement (« Service accounts cannot invite
  *     attendees without Domain-Wide Delegation »), et un domaine Workspace peut
@@ -113,48 +115,55 @@ async function getAccessToken(): Promise<string> {
 /**
  * Plages occupées de l'agenda sur la période demandée.
  *
- * freeBusy ne renvoie que des intervalles, jamais le contenu des événements :
- * on n'expose donc aucune donnée privée de l'agenda au navigateur.
+ * On lit les événements eux-mêmes et non freeBusy : freeBusy applique les
+ * règles de Google, pour qui un événement affiché « disponible » ou posé sur
+ * la journée entière laisse le créneau libre. Ici la règle est « rien dans
+ * l'agenda » (cf. busyFromEvents). Seuls les champs utiles au calcul sont
+ * demandés, et rien de leur contenu ne sort du serveur : le navigateur ne
+ * reçoit que des créneaux.
+ *
+ * `excludeEventId` écarte un événement du calcul : celui qu'on vient de créer,
+ * quand on vérifie après coup que personne d'autre n'a pris le créneau.
  */
 export async function getBusyIntervals(
   fromInstant: number,
   toInstant: number,
+  excludeEventId?: string,
 ): Promise<Interval[]> {
   const token = await getAccessToken();
-  const res = await fetch(`${API}/freeBusy`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
+  const events: CalendarEvent[] = [];
+  let pageToken: string | undefined;
+
+  do {
+    const params = new URLSearchParams({
       timeMin: new Date(fromInstant).toISOString(),
       timeMax: new Date(toInstant).toISOString(),
-      items: [{ id: calendarId() }],
-    }),
-    cache: "no-store",
-  });
+      // Une occurrence par événement récurrent, pour que chaque semaine compte.
+      singleEvents: "true",
+      maxResults: "2500",
+      fields: "nextPageToken,items(id,status,eventType,start,end,attendees(self,responseStatus))",
+    });
+    if (pageToken) params.set("pageToken", pageToken);
 
-  if (!res.ok) {
-    const detail = await res.text();
-    throw new Error(`Lecture de l'agenda impossible (${res.status}) : ${detail.slice(0, 300)}`);
-  }
-
-  const data = (await res.json()) as {
-    calendars?: Record<string, { busy?: Array<{ start: string; end: string }>; errors?: unknown[] }>;
-  };
-  const entry = data.calendars?.[calendarId()];
-  if (entry?.errors?.length) {
-    throw new Error(
-      `Agenda inaccessible : ${JSON.stringify(entry.errors).slice(0, 200)}. ` +
-        `Vérifier que l'agenda est bien partagé avec ${process.env.GOOGLE_SA_EMAIL}.`,
+    const res = await fetch(
+      `${API}/calendars/${encodeURIComponent(calendarId())}/events?${params}`,
+      { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" },
     );
-  }
 
-  return (entry?.busy ?? []).map((b) => ({
-    start: new Date(b.start).getTime(),
-    end: new Date(b.end).getTime(),
-  }));
+    if (!res.ok) {
+      const detail = await res.text();
+      throw new Error(
+        `Lecture de l'agenda impossible (${res.status}) : ${detail.slice(0, 300)}. ` +
+          `Vérifier l'accès de ${process.env.GOOGLE_SA_EMAIL} à l'agenda.`,
+      );
+    }
+
+    const data = (await res.json()) as { items?: CalendarEvent[]; nextPageToken?: string };
+    events.push(...(data.items ?? []));
+    pageToken = data.nextPageToken;
+  } while (pageToken);
+
+  return busyFromEvents(excludeEventId ? events.filter((e) => e.id !== excludeEventId) : events);
 }
 
 export interface BookingDetails {
@@ -227,4 +236,22 @@ export async function createEvent(details: BookingDetails): Promise<{ id: string
 
   const data = (await res.json()) as { id: string; htmlLink?: string };
   return { id: data.id, htmlLink: data.htmlLink };
+}
+
+/**
+ * Retire un rendez-vous qu'on vient de créer. Le client reçoit l'annulation de
+ * l'invitation qui venait de partir.
+ */
+export async function deleteEvent(eventId: string): Promise<void> {
+  const token = await getAccessToken();
+  const canInvite = impersonatedSubject() !== null;
+  const res = await fetch(
+    `${API}/calendars/${encodeURIComponent(calendarId())}/events/${encodeURIComponent(eventId)}?sendUpdates=${canInvite ? "all" : "none"}`,
+    { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
+  );
+  // 410 : déjà supprimé, le résultat voulu est atteint.
+  if (!res.ok && res.status !== 410) {
+    const detail = await res.text();
+    throw new Error(`Suppression du rendez-vous impossible (${res.status}) : ${detail.slice(0, 300)}`);
+  }
 }
