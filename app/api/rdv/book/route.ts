@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { notifyInternalBooking } from "@/lib/email";
 import { rateLimitResponse, csrfOriginCheck, isHoneypotTriggered } from "@/lib/rate-limit";
 import { getService } from "@/lib/services";
 import { availableSlots, formatSlotTime, belgianDayKey } from "@/lib/booking";
@@ -156,37 +156,24 @@ export async function POST(request: Request) {
     const dayKey = belgianDayKey(startInstant);
     const timeLabel = formatSlotTime(startInstant);
 
-    // Notification interne. L'invitation client part déjà via Google Agenda
-    // (sendUpdates=all) : cet email prévient l'équipe, il n'est pas critique.
-    if (process.env.RESEND_API_KEY) {
-      try {
-        const resend = new Resend(process.env.RESEND_API_KEY);
-        await resend.emails.send({
-          from: process.env.MAIL_FROM ?? "Mister Pellets <info@awlest.com>",
-          to: process.env.MAIL_TO ?? "info@awlest.com",
-          replyTo: email,
-          subject: `Nouveau RDV : ${service.name} — ${dayKey} à ${timeLabel}`,
-          text: [
-            `${service.name}`,
-            `${dayKey} à ${timeLabel} (${durationMin} min)`,
-            ``,
-            `Client : ${name}`,
-            `Email : ${email}`,
-            phone ? `Téléphone : ${phone}` : null,
-            address ? `Adresse : ${address}` : null,
-            notes ? `\nPrécisions :\n${notes}` : null,
-            ``,
-            `Réservé depuis mister-pellets.be, ajouté à l'agenda.`,
-          ]
-            .filter((l) => l !== null)
-            .join("\n"),
-        });
-      } catch (mailError) {
-        // Le rendez-vous est déjà dans l'agenda : un email de notification
-        // qui échoue ne doit pas faire croire au client que ça n'a pas marché.
-        console.error("[rdv/book] notification email", mailError);
-      }
-    }
+    // Notification interne, envoyée par lib/email.ts comme les devis et les
+    // estimations (EMAIL_FROM / EMAIL_TO_QUOTES). L'invitation client part déjà
+    // via Google Agenda (sendUpdates=all) : cet email prévient l'équipe, il
+    // n'est pas critique. sendEmail ne lève pas d'exception (le SDK Resend
+    // renvoie ses refus dans `error`) : un échec est tracé ici, sans faire
+    // croire au client que sa réservation n'a pas marché.
+    const mail = await notifyInternalBooking({
+      serviceName: service.name,
+      dayKey,
+      timeLabel,
+      durationMin,
+      name,
+      email,
+      phone: phone || undefined,
+      address: address || undefined,
+      notes: notes || undefined,
+    });
+    if (!mail.ok) console.error("[rdv/book] notification email", mail.error);
 
     return NextResponse.json({
       ok: true,

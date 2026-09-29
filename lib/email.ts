@@ -143,6 +143,45 @@ export async function confirmCustomerQuote(quote: { name: string; email: string 
 }
 
 /**
+ * Récap interne d'un rendez-vous réservé en ligne (/prendre-rendez-vous).
+ * Le rendez-vous est déjà dans l'agenda de Dorian quand cet email part : il
+ * prévient l'équipe, il ne confirme rien au client.
+ */
+export async function notifyInternalBooking(rdv: {
+  serviceName: string;
+  /** Jour en heure belge, ex. « 2026-10-20 » (belgianDayKey). */
+  dayKey: string;
+  /** Heure de début en heure belge, ex. « 10:00 » (formatSlotTime). */
+  timeLabel: string;
+  durationMin: number;
+  name: string;
+  email: string;
+  phone?: string;
+  address?: string;
+  notes?: string;
+}) {
+  const html = `
+    <h2 style="color:#174724;font-family:Georgia,serif">Nouveau rendez-vous réservé en ligne</h2>
+    <p style="font-size:18px;color:#174724"><strong>${escapeHtml(rdv.serviceName)}</strong> · ${rdv.dayKey} à ${rdv.timeLabel} (${rdv.durationMin} min)</p>
+    <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
+      <tr><td style="background:#FAF7F0;width:40%"><strong>Client</strong></td><td>${escapeHtml(rdv.name)}</td></tr>
+      <tr><td style="background:#FAF7F0"><strong>Email</strong></td><td>${escapeHtml(rdv.email)}</td></tr>
+      ${rdv.phone ? `<tr><td style="background:#FAF7F0"><strong>Téléphone</strong></td><td>${escapeHtml(rdv.phone)}</td></tr>` : ""}
+      ${rdv.address ? `<tr><td style="background:#FAF7F0"><strong>Adresse</strong></td><td>${escapeHtml(rdv.address)}</td></tr>` : ""}
+    </table>
+    ${rdv.notes ? `<h3 style="color:#174724">Précisions :</h3><p>${escapeHtml(rdv.notes).replace(/\n/g, "<br>")}</p>` : ""}
+    <p style="color:#6B7280;font-size:12px;margin-top:24px">Réservé depuis mister-pellets.be, ajouté à l'agenda.</p>
+  `;
+
+  return sendEmail({
+    to: TO_INTERNAL,
+    subject: `Nouveau RDV : ${rdv.serviceName}, ${rdv.dayKey} à ${rdv.timeLabel}`,
+    html,
+    replyTo: rdv.email,
+  });
+}
+
+/**
  * Récap interne d'une estimation configurée en ligne (/estimation).
  * Plus riche que le devis en 6 questions : on a le modèle choisi, le détail de
  * la main d'œuvre et le total chiffré, de quoi rappeler le client en connaissant
