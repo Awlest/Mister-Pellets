@@ -63,6 +63,24 @@ export const bonusPhase = (now: Date = new Date()): BonusPhase => {
 /** Le bonus est-il en cours à l'instant donné (par défaut maintenant) ? */
 export const isBonusPeriod = (now: Date = new Date()): boolean => bonusPhase(now) === "during";
 
+/** Lendemain d'un jour AAAA-MM-JJ (calcul en UTC : pas d'effet d'heure d'été). */
+const nextDay = (day: string): string => {
+  const d = new Date(`${day}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+};
+
+/**
+ * Jour où les prix affichés changent à minuit, heure de Bruxelles : premier
+ * jour du bonus, ou lendemain du dernier. Les pages en cache (ISR) gardent le
+ * rendu de la veille tant qu'on ne les invalide pas, d'où le cron de
+ * app/api/cron/bonus/route.ts.
+ */
+export const isBonusSwitchDay = (now: Date = new Date()): boolean => {
+  const day = brusselsDay(now);
+  return day === BONUS.from || day === nextDay(BONUS.to);
+};
+
 /**
  * Prix après bonus, arrondi à l'euro. Ne regarde pas la date : c'est à
  * l'appelant de ne s'en servir que pendant la période (ou, pour le flux
