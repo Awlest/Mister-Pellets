@@ -350,7 +350,7 @@ export default async function ProductPage({ params }: Props) {
                       <Link href="/estimation">Chiffrer mon installation</Link>
                     </Button>
                     <Button asChild variant="outline" size="lg" className="w-full">
-                      <Link href="/prendre-rendez-vous">Prendre rendez-vous</Link>
+                      <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
                     </Button>
                   </div>
                 </>
@@ -427,7 +427,7 @@ export default async function ProductPage({ params }: Props) {
                   <Link href="/estimation">Chiffrer mon installation</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
-                  <Link href="/prendre-rendez-vous">Prendre rendez-vous</Link>
+                  <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
                 </Button>
               </div>
 

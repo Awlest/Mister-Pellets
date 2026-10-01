@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, MapPin, ArrowRight } from "lucide-react";
+import { Clock, MapPin, ArrowRight, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -144,31 +144,36 @@ export default function HomePage() {
             {/* Le configurateur passe en action principale : depuis le retrait du
               * paiement en ligne, c'est lui qui chiffre, calcule la mensualité et
               * déduit la prime, alors que le formulaire ne fait que transmettre
-              * une demande. Un seul chemin par intention. */}
+              * une demande. Un seul chemin par intention.
+              *
+              * La prise de rendez-vous n'était qu'un lien dans la phrase du
+              * téléphone, et le client la trouvait difficilement (01/10/2026) :
+              * elle a son bouton, vert plein, entre le chiffrage et la boutique.
+              * Sur mobile, les trois boutons s'empilent à la même largeur. */}
             <div className="flex flex-wrap gap-3 justify-center mb-4">
-              <Button asChild variant="primary" size="lg">
+              <Button asChild variant="primary" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
                 <Link href="/estimation">Chiffrer mon installation</Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
+              <Button asChild variant="secondary" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
+                <Link href="/prendre-rendez-vous#reserver">
+                  <CalendarDays aria-hidden />
+                  Prendre rendez-vous
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
                 <Link href="/boutique">Voir la boutique</Link>
               </Button>
             </div>
 
             <p className="mb-7 text-sm text-mp-ink-soft">
-              Vous préférez parler à quelqu&apos;un ?{" "}
+              Vous préférez parler à quelqu&apos;un ? Appelez le{" "}
               <a
                 href="tel:+3281138309"
                 className="font-semibold text-mp-green-deep underline underline-offset-4 hover:text-mp-orange-flame"
               >
                 081 13 83 09
-              </a>{" "}
-              · ou{" "}
-              <Link
-                href="/prendre-rendez-vous"
-                className="font-semibold text-mp-green-deep underline underline-offset-4 hover:text-mp-orange-flame"
-              >
-                choisissez votre créneau en ligne
-              </Link>
+              </a>
+              .
             </p>
 
             <div className="flex flex-wrap gap-x-5 gap-y-2 items-center justify-center text-sm font-medium text-mp-ink-soft">
@@ -533,7 +538,7 @@ export default function HomePage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Button asChild variant="primary" size="lg">
-                <Link href="/prendre-rendez-vous">Choisir mon créneau</Link>
+                <Link href="/prendre-rendez-vous#reserver">Choisir mon créneau</Link>
               </Button>
               <a
                 href="tel:+3281138309"
@@ -592,7 +597,7 @@ export default function HomePage() {
       <CTAFinal
         title="Chiffrez votre installation en 2 minutes"
         description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris, la mensualité à 0 % et la prime déjà déduite. Le prix ferme est confirmé après la visite technique, sans engagement."
-        secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous" }}
+        secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous#reserver" }}
       />
     </>
   );

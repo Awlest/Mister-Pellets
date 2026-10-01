@@ -94,7 +94,7 @@ export default function ContactPage() {
                   <p className="mt-1 text-sm text-mp-ink-soft">
                     Appelez-nous ou{" "}
                     <a
-                      href="/prendre-rendez-vous"
+                      href="/prendre-rendez-vous#reserver"
                       className="text-mp-orange-flame underline hover:no-underline"
                     >
                       réservez votre créneau en ligne

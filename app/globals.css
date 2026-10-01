@@ -335,6 +335,18 @@ body {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Bandeau des jours de /prendre-rendez-vous (BookingWidget) : les jours
+ * suivants entrent par la droite, les précédents par la gauche. Appliqué en
+ * motion-safe seulement. */
+@keyframes mp-days-next {
+  from { opacity: 0.35; transform: translateX(14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes mp-days-prev {
+  from { opacity: 0.35; transform: translateX(-14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
 @keyframes fade-out {
   from { opacity: 1; }
   to { opacity: 0; }

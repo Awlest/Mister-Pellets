@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { notifyInternalBooking } from "@/lib/email";
+import { confirmCustomerBooking, notifyInternalBooking } from "@/lib/email";
 import { rateLimitResponse, csrfOriginCheck, isHoneypotTriggered } from "@/lib/rate-limit";
-import { getService } from "@/lib/services";
+import { getService, bookingDurationMin } from "@/lib/services";
 import { availableSlots, formatSlotTime, belgianDayKey } from "@/lib/booking";
 import {
   getBusyIntervals,
@@ -11,10 +11,6 @@ import {
 } from "@/lib/google-calendar";
 
 export const dynamic = "force-dynamic";
-
-function durationFor(slug: string): number {
-  return slug === "visite-showroom" ? 45 : 60;
-}
 
 /**
  * Le créneau figure-t-il parmi les créneaux réellement libres de l'agenda ?
@@ -118,7 +114,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const durationMin = durationFor(slug);
+  const durationMin = bookingDurationMin(slug);
   const endInstant = startInstant + durationMin * 60000;
 
   try {
@@ -142,26 +138,39 @@ export async function POST(request: Request) {
       address: service.location === "domicile" ? address : undefined,
       notes: notes || undefined,
       locationLabel,
+      // Le client reçoit la confirmation Mister Pellets ci-dessous, pas
+      // l'invitation Google au nom de l'agenda de Dorian.
+      sendGoogleInvite: false,
     });
 
     // Contre-vérification : mister-clim.be écrit dans le même agenda, et
     // l'équipe peut y poser un rendez-vous à tout moment. Si un autre
     // événement est arrivé sur le créneau entre la vérification et la
-    // création, on retire le nôtre plutôt que de laisser un doublon.
+    // création, on retire le nôtre plutôt que de laisser un doublon. Le
+    // client n'a encore rien reçu : suppression sans notification.
     if (!(await isSlotFree(now, startInstant, durationMin, event.id))) {
-      await deleteEvent(event.id);
+      await deleteEvent(event.id, { notifyGuests: false });
       return slotTaken();
     }
 
     const dayKey = belgianDayKey(startInstant);
     const timeLabel = formatSlotTime(startInstant);
 
-    // Notification interne, envoyée par lib/email.ts comme les devis et les
-    // estimations (EMAIL_FROM / EMAIL_TO_QUOTES). L'invitation client part déjà
-    // via Google Agenda (sendUpdates=all) : cet email prévient l'équipe, il
-    // n'est pas critique. sendEmail ne lève pas d'exception et logge lui-même
-    // un refus (« [email] envoi refusé ») : on ne fait pas croire au client
-    // que sa réservation n'a pas marché.
+    // Confirmation client puis notification interne, toutes deux par
+    // lib/email.ts (EMAIL_FROM / EMAIL_TO_QUOTES). sendEmail ne lève pas
+    // d'exception et logge lui-même un refus (« [email] envoi refusé ») : le
+    // rendez-vous est dans l'agenda, on ne fait pas croire au client que sa
+    // réservation a échoué. Si sa confirmation n'est pas partie, la
+    // notification interne le dit, pour que l'équipe l'appelle.
+    const confirmation = await confirmCustomerBooking({
+      service,
+      start: startInstant,
+      durationMin,
+      name,
+      email,
+      address: service.location === "domicile" ? address : undefined,
+    });
+
     await notifyInternalBooking({
       serviceName: service.name,
       dayKey,
@@ -172,6 +181,7 @@ export async function POST(request: Request) {
       phone: phone || undefined,
       address: address || undefined,
       notes: notes || undefined,
+      customerConfirmed: confirmation.ok,
     });
 
     return NextResponse.json({

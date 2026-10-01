@@ -1,4 +1,21 @@
 import { Resend } from "resend";
+import { belgianParts, formatSlotTime } from "@/lib/booking";
+import {
+  bookingCalendarEntry,
+  buildIcs,
+  googleCalendarUrl,
+  icsDownloadPath,
+  SHOWROOM_ADDRESS,
+  SHOWROOM_MAPS_URL,
+} from "@/lib/booking-calendar";
+import {
+  brandedEmailHtml,
+  emailButton,
+  escapeHtml,
+  EMAIL_COLORS,
+  EMAIL_SITE_URL,
+  SERIF,
+} from "@/lib/email-layout";
 
 /**
  * Helper email. Utilise Resend si RESEND_API_KEY est configuré, sinon log
@@ -9,20 +26,6 @@ import { Resend } from "resend";
 
 const FROM = process.env.EMAIL_FROM ?? "Mister Pellets <info@awlest.com>";
 const TO_INTERNAL = process.env.EMAIL_TO_QUOTES ?? "info@awlest.com";
-
-/**
- * Échappe les caractères HTML avant interpolation dans un email.
- * Empêche un visiteur d'injecter du HTML/lien dans les emails internes
- * (phishing interne) ou dans sa propre confirmation (audit 2026-06-12 §P2-2).
- */
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
 
 let _resend: Resend | null = null;
 
@@ -42,6 +45,7 @@ interface SendEmailParams {
   html: string;
   text?: string;
   replyTo?: string;
+  attachments?: { filename: string; content: Buffer; contentType?: string }[];
 }
 
 export async function sendEmail({
@@ -51,6 +55,7 @@ export async function sendEmail({
   html,
   text,
   replyTo,
+  attachments,
 }: SendEmailParams): Promise<{ ok: boolean; id?: string; error?: string }> {
   const resend = getResend();
 
@@ -79,6 +84,7 @@ export async function sendEmail({
       html,
       text,
       replyTo,
+      attachments,
     });
 
     if (!result.error) return { ok: true, id: result.data?.id };
@@ -171,7 +177,13 @@ export async function notifyInternalBooking(rdv: {
   phone?: string;
   address?: string;
   notes?: string;
+  /** La confirmation est-elle partie chez le client ? Sinon, il faut l'appeler. */
+  customerConfirmed: boolean;
 }) {
+  const confirmationRow = rdv.customerConfirmed
+    ? `<tr><td style="background:#FAF7F0"><strong>Confirmation client</strong></td><td>envoyée par e-mail</td></tr>`
+    : `<tr><td style="background:#FFE4D1"><strong>Confirmation client</strong></td><td style="background:#FFE4D1"><strong>NON envoyée</strong> (refus de Resend, voir les logs « [email] envoi refusé ») : prévenir le client par téléphone.</td></tr>`;
+
   const html = `
     <h2 style="color:#174724;font-family:Georgia,serif">Nouveau rendez-vous réservé en ligne</h2>
     <p style="font-size:18px;color:#174724"><strong>${escapeHtml(rdv.serviceName)}</strong> · ${rdv.dayKey} à ${rdv.timeLabel} (${rdv.durationMin} min)</p>
@@ -180,6 +192,7 @@ export async function notifyInternalBooking(rdv: {
       <tr><td style="background:#FAF7F0"><strong>Email</strong></td><td>${escapeHtml(rdv.email)}</td></tr>
       ${rdv.phone ? `<tr><td style="background:#FAF7F0"><strong>Téléphone</strong></td><td>${escapeHtml(rdv.phone)}</td></tr>` : ""}
       ${rdv.address ? `<tr><td style="background:#FAF7F0"><strong>Adresse</strong></td><td>${escapeHtml(rdv.address)}</td></tr>` : ""}
+      ${confirmationRow}
     </table>
     ${rdv.notes ? `<h3 style="color:#174724">Précisions :</h3><p>${escapeHtml(rdv.notes).replace(/\n/g, "<br>")}</p>` : ""}
     <p style="color:#6B7280;font-size:12px;margin-top:24px">Réservé depuis mister-pellets.be, ajouté à l'agenda.</p>
@@ -191,6 +204,205 @@ export async function notifyInternalBooking(rdv: {
     subject: `Nouveau RDV : ${rdv.serviceName}, ${rdv.dayKey} à ${rdv.timeLabel}`,
     html,
     replyTo: rdv.email,
+  });
+}
+
+const WEEKDAYS_FR = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+const MONTHS_FR = [
+  "janvier", "février", "mars", "avril", "mai", "juin",
+  "juillet", "août", "septembre", "octobre", "novembre", "décembre",
+];
+
+/** « jeudi 8 octobre » (« 1er » pour le premier du mois), en heure belge. */
+function frenchDay(instant: number, withYear = false): string {
+  const p = belgianParts(instant);
+  const day = p.day === 1 ? "1er" : String(p.day);
+  return `${WEEKDAYS_FR[p.weekday]} ${day} ${MONTHS_FR[p.month - 1]}${withYear ? ` ${p.year}` : ""}`;
+}
+
+/**
+ * Prénom tel qu'on l'écrit dans une salutation : « jean-marc » ou
+ * « JEAN-MARC », tapés ainsi sur mobile, deviennent « Jean-Marc ». Une casse
+ * déjà mixte (« McKenzie ») est laissée telle quelle.
+ */
+function displayFirstName(fullName: string): string {
+  const first = fullName.trim().split(/\s+/)[0] ?? "";
+  if (first !== first.toLowerCase() && first !== first.toUpperCase()) return first;
+  return first
+    .toLowerCase()
+    .replace(/(^|[-'’])(\p{L})/gu, (_, sep: string, letter: string) => sep + letter.toUpperCase());
+}
+
+export interface BookingConfirmation {
+  service: {
+    slug: string;
+    name: string;
+    location: "domicile" | "showroom";
+    priceLabel: string;
+  };
+  /** Instant de début, epoch en millisecondes. */
+  start: number;
+  durationMin: number;
+  name: string;
+  /** Adresse de la visite, pour un rendez-vous à domicile. */
+  address?: string;
+}
+
+/**
+ * Confirmation client d'un rendez-vous réservé en ligne : sujet, HTML aux
+ * couleurs du site, version texte et fichier .ics. Ne fait qu'assembler,
+ * rien n'est envoyé (aperçus et tests sans risque d'envoi).
+ */
+export function bookingConfirmationEmail(b: BookingConfirmation) {
+  const C = EMAIL_COLORS;
+  const atHome = b.service.location === "domicile";
+  const firstName = displayFirstName(b.name);
+  const day = frenchDay(b.start);
+  const dayWithYear = frenchDay(b.start, true);
+  const dayTitle = dayWithYear.charAt(0).toUpperCase() + dayWithYear.slice(1);
+  const startLabel = formatSlotTime(b.start);
+  const endLabel = formatSlotTime(b.start + b.durationMin * 60000);
+
+  const entry = bookingCalendarEntry(b.service, b.start, b.durationMin);
+  const googleUrl = googleCalendarUrl(entry);
+  const icsUrl = `${EMAIL_SITE_URL}${icsDownloadPath(b.service.slug, b.start)}`;
+  const ics = buildIcs(entry);
+
+  const subject = `Rendez-vous confirmé le ${day} à ${startLabel}`;
+  const heading = firstName ? `C&#39;est noté, ${escapeHtml(firstName)}.` : "C&#39;est noté.";
+  const leadText = atHome
+    ? `On passe chez vous le ${day} à ${startLabel}.`
+    : `On vous attend au showroom le ${day} à ${startLabel}.`;
+  const preheader = atHome
+    ? "On vient voir la pièce et le conduit, le devis suit sous 48 heures."
+    : `${SHOWROOM_ADDRESS}, parking devant le bâtiment.`;
+
+  const where = atHome
+    ? {
+        html: `<strong>À votre domicile</strong>${b.address ? `<br>${escapeHtml(b.address)}` : ""}`,
+        text: `à votre domicile${b.address ? `, ${b.address}` : ""}`,
+      }
+    : {
+        html: `<strong>Showroom Mister Pellets</strong><br>${escapeHtml(SHOWROOM_ADDRESS).replace("5380 ", "5380&nbsp;")}<br><a href="${escapeHtml(SHOWROOM_MAPS_URL)}" target="_blank" style="color:${C.greenDeep};font-weight:bold">Voir l&#39;itinéraire</a>`,
+        text: `Showroom Mister Pellets, ${SHOWROOM_ADDRESS}`,
+      };
+
+  const what = `${escapeHtml(b.service.name)}<br><span style="color:${C.inkSoft}">${escapeHtml(b.service.priceLabel)}, sans engagement · ${b.durationMin}&nbsp;minutes</span>`;
+
+  const guide = atHome
+    ? {
+        title: "Comment se passe la visite",
+        paragraphs: [
+          "On regarde la pièce où ira le poêle, le conduit existant (ou l'endroit où en faire passer un), l'isolation et l'arrivée d'air. La visite dure 30 à 45 minutes ; on bloque une heure pour avoir le temps de répondre à vos questions.",
+          "Vous recevez le devis chiffré sous 48 heures, avec le modèle qu'on vous conseille et la prime Wallonie déjà déduite.",
+          "Si vous avez votre certificat PEB, sortez-le. Avec la surface à chauffer, c'est ce qui nous fait gagner le plus de temps.",
+        ],
+      }
+    : {
+        title: "Votre visite au showroom",
+        paragraphs: [
+          "Garez-vous devant le bâtiment, l'entrée est de plain-pied. Vous voyez les poêles en vrai, flamme comprise, et on parle puissance et budget autour d'un café.",
+          "Les modèles exposés changent avec les saisons. Vous visez un poêle précis ? Répondez à cet e-mail avec son nom, on vous dit la veille s'il est sur place.",
+        ],
+      };
+
+  const row = (label: string, valueHtml: string, last = false) => `
+      <tr>
+        <td style="padding:15px 0;${last ? "" : `border-bottom:1px solid ${C.beigeWarm};`}">
+          <p class="mp-sans" style="margin:0 0 4px;font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:${C.inkSoft}">${label}</p>
+          <p class="mp-sans" style="margin:0;font-size:16px;line-height:1.5;color:${C.ink}">${valueHtml}</p>
+        </td>
+      </tr>`;
+
+  const bodyHtml = `
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 26px">
+      <tr>
+        <td class="mp-recap" style="background:${C.cream};border:1px solid ${C.beigeWarm};border-left:4px solid ${C.orangeFlame};border-radius:14px;padding:4px 22px">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+            ${row("Quand", `<span class="mp-serif" style="font-family:${SERIF};font-size:21px;font-weight:600;color:${C.greenDeep}">${dayTitle}</span><br>de ${startLabel} à ${endLabel}`)}
+            ${row("Où", where.html)}
+            ${row("Rendez-vous", what, true)}
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    ${emailButton(googleUrl, "Ajouter à Google Agenda")}
+    <p style="margin:14px 0 30px;text-align:center;font-size:13px;line-height:1.6;color:${C.inkSoft}">
+      Apple, Outlook ou un autre agenda ? Ouvrez la pièce jointe,
+      ou <a href="${escapeHtml(icsUrl)}" target="_blank" style="color:${C.greenDeep};font-weight:bold">téléchargez le fichier .ics</a>.
+    </p>
+
+    <h2 class="mp-serif" style="margin:0 0 10px;font-family:${SERIF};font-size:21px;font-weight:600;line-height:1.3;color:${C.greenDeep}">${guide.title}</h2>
+    ${guide.paragraphs.map((p) => `<p style="margin:0 0 12px">${escapeHtml(p)}</p>`).join("\n    ")}
+
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:22px 0 26px">
+      <tr>
+        <td style="background:${C.orangeLight};border-radius:12px;padding:16px 20px;font-size:15px;line-height:1.55;color:${C.ink}">
+          <strong>Un empêchement ?</strong> Appelez-nous au
+          <a href="tel:+3281138309" style="color:${C.greenDeep};font-weight:bold;white-space:nowrap">081 13 83 09</a>
+          ou répondez à cet e-mail, on vous trouve une autre date.
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:0">À bientôt,<br><strong style="color:${C.greenDeep}">L&#39;équipe Mister Pellets</strong></p>`;
+
+  const html = brandedEmailHtml({
+    title: subject,
+    preheader,
+    eyebrow: "Rendez-vous confirmé",
+    heading,
+    lead: escapeHtml(leadText),
+    bodyHtml,
+    footerNote: "Vous recevez cet e-mail parce que vous avez réservé un rendez-vous sur mister-pellets.be.",
+  });
+
+  const text = [
+    firstName ? `C'est noté, ${firstName}.` : "C'est noté.",
+    leadText,
+    "",
+    `Quand : ${dayWithYear}, de ${startLabel} à ${endLabel}`,
+    `Où : ${where.text}`,
+    `Rendez-vous : ${b.service.name} (${b.service.priceLabel.toLowerCase()}, sans engagement, ${b.durationMin} minutes)`,
+    ...(atHome ? [] : [`Itinéraire : ${SHOWROOM_MAPS_URL}`]),
+    "",
+    `Ajouter à Google Agenda : ${googleUrl}`,
+    `Apple, Outlook ou un autre agenda : ouvrez la pièce jointe, ou téléchargez le fichier .ics : ${icsUrl}`,
+    "",
+    guide.title,
+    ...guide.paragraphs,
+    "",
+    "Un empêchement ? Appelez-nous au 081 13 83 09 ou répondez à cet e-mail, on vous trouve une autre date.",
+    "",
+    "À bientôt,",
+    "L'équipe Mister Pellets",
+    "Rue des Fagotis 3A, 5380 Fernelmont · mister-pellets.be",
+  ].join("\n");
+
+  return { subject, html, text, ics };
+}
+
+/**
+ * Envoie la confirmation au client. Depuis le 01/10/2026, c'est le seul
+ * message qu'il reçoit : l'invitation Google n'est plus envoyée (cf.
+ * `sendGoogleInvite` dans lib/google-calendar.ts).
+ */
+export async function confirmCustomerBooking(b: BookingConfirmation & { email: string }) {
+  const { subject, html, text, ics } = bookingConfirmationEmail(b);
+  return sendEmail({
+    label: "confirmCustomerBooking",
+    to: b.email,
+    subject,
+    html,
+    text,
+    attachments: [
+      {
+        filename: "rendez-vous-mister-pellets.ics",
+        content: Buffer.from(ics, "utf-8"),
+        contentType: "text/calendar; charset=utf-8; method=PUBLISH",
+      },
+    ],
   });
 }
 

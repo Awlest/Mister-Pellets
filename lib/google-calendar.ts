@@ -19,8 +19,8 @@ import { busyFromEvents, type CalendarEvent, type Interval } from "@/lib/booking
  *     attendees without Domain-Wide Delegation »), et un domaine Workspace peut
  *     interdire le partage externe.
  *  2. DÉLÉGATION AU NIVEAU DU DOMAINE (Workspace) : le compte de service
- *     emprunte l'identité de GOOGLE_SA_SUBJECT. Rien à partager, et les
- *     invitations client partent normalement.
+ *     emprunte l'identité de GOOGLE_SA_SUBJECT. Rien à partager, et le client
+ *     peut figurer en invité de l'événement (cf. `sendGoogleInvite`).
  *
  * Variables d'environnement attendues :
  *   GOOGLE_SA_EMAIL        adresse du compte de service
@@ -178,9 +178,18 @@ export interface BookingDetails {
   notes?: string;
   /** Lieu affiché dans l'événement. */
   locationLabel: string;
+  /**
+   * Faut-il que Google envoie lui-même l'invitation au client ? Non pour les
+   * réservations du site depuis le 01/10/2026 : le client reçoit l'e-mail de
+   * confirmation Mister Pellets (lib/email.ts), et l'invitation Google, au
+   * nom de l'agenda de Dorian, faisait doublon sous une autre marque. Le
+   * client reste invité de l'événement : si Dorian le déplace ou l'annule
+   * depuis Google Agenda, Google lui propose de prévenir le client.
+   */
+  sendGoogleInvite: boolean;
 }
 
-/** Crée le rendez-vous dans l'agenda et invite le client. */
+/** Crée le rendez-vous dans l'agenda, le client en invité. */
 export async function createEvent(details: BookingDetails): Promise<{ id: string; htmlLink?: string }> {
   const token = await getAccessToken();
 
@@ -200,9 +209,10 @@ export async function createEvent(details: BookingDetails): Promise<{ id: string
   // On garde alors l'email du client dans la description : le rendez-vous est
   // enregistré, seule l'invitation automatique manque.
   const canInvite = impersonatedSubject() !== null;
+  const sendUpdates = canInvite && details.sendGoogleInvite ? "all" : "none";
 
   const res = await fetch(
-    `${API}/calendars/${encodeURIComponent(calendarId())}/events?sendUpdates=${canInvite ? "all" : "none"}`,
+    `${API}/calendars/${encodeURIComponent(calendarId())}/events?sendUpdates=${sendUpdates}`,
     {
       method: "POST",
       headers: {
@@ -239,14 +249,19 @@ export async function createEvent(details: BookingDetails): Promise<{ id: string
 }
 
 /**
- * Retire un rendez-vous qu'on vient de créer. Le client reçoit l'annulation de
- * l'invitation qui venait de partir.
+ * Retire un rendez-vous qu'on vient de créer. `notifyGuests` : à passer à
+ * true seulement si le client a reçu l'invitation Google, pour qu'il en
+ * reçoive l'annulation. Sans invitation partie, il n'a rien à apprendre.
  */
-export async function deleteEvent(eventId: string): Promise<void> {
+export async function deleteEvent(
+  eventId: string,
+  { notifyGuests }: { notifyGuests: boolean },
+): Promise<void> {
   const token = await getAccessToken();
   const canInvite = impersonatedSubject() !== null;
+  const sendUpdates = canInvite && notifyGuests ? "all" : "none";
   const res = await fetch(
-    `${API}/calendars/${encodeURIComponent(calendarId())}/events/${encodeURIComponent(eventId)}?sendUpdates=${canInvite ? "all" : "none"}`,
+    `${API}/calendars/${encodeURIComponent(calendarId())}/events/${encodeURIComponent(eventId)}?sendUpdates=${sendUpdates}`,
     { method: "DELETE", headers: { Authorization: `Bearer ${token}` } },
   );
   // 410 : déjà supprimé, le résultat voulu est atteint.

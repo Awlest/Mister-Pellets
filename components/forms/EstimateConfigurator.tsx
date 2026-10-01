@@ -289,7 +289,7 @@ function EstimateForm({
               <span>
                 On vous rappelle sous 48 h ouvrées pour caler la{" "}
                 <strong>visite technique</strong> — vous pouvez aussi{" "}
-                <Link href="/prendre-rendez-vous" className="text-mp-orange-flame underline underline-offset-2 hover:no-underline">
+                <Link href="/prendre-rendez-vous#reserver" className="text-mp-orange-flame underline underline-offset-2 hover:no-underline">
                   choisir votre créneau tout de suite
                 </Link>
                 .
@@ -318,7 +318,7 @@ function EstimateForm({
 
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild variant="primary" size="default">
-            <Link href="/prendre-rendez-vous">Choisir mon créneau</Link>
+            <Link href="/prendre-rendez-vous#reserver">Choisir mon créneau</Link>
           </Button>
           <Button asChild variant="outline" size="default">
             <Link href="/">Retour à l&apos;accueil</Link>

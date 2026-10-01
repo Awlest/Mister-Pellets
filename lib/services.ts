@@ -27,6 +27,12 @@ export interface Service {
   shortDescription: string;
   longDescription: string;
   durationLabel: string;
+  /**
+   * Durée bloquée dans l'agenda, en minutes, pour les rendez-vous réservables
+   * en ligne. Lue par le calcul des créneaux, la réservation, l'e-mail de
+   * confirmation et le fichier agenda : une seule valeur pour les quatre.
+   */
+  durationMin?: number;
   /** Tarif court, pour les cartes et les pastilles. */
   priceLabel: string;
   /** Tarif détaillé, une phrase complète. Affiché sur la page de service. */
@@ -67,6 +73,7 @@ export const SERVICES: Service[] = [
     longDescription:
       "On vient chez vous, on regarde la pièce, le conduit existant, l'isolation, l'arrivée d'air comburant. Sortie : un devis chiffré sous 48 heures avec le modèle adapté, la prime Wallonie déjà calculée, et le délai de pose.",
     durationLabel: "60 minutes",
+    durationMin: 60,
     priceLabel: "Gratuit",
     location: "domicile",
     booking: "online",
@@ -79,6 +86,7 @@ export const SERVICES: Service[] = [
     longDescription:
       "On vous accueille au showroom de Fernelmont, café, vous voyez les flammes, vous comparez les designs, on parle puissance et budget. La sélection en exposition tourne régulièrement, donc on peut vous confirmer quels modèles seront sur place le jour de votre visite.",
     durationLabel: "45 minutes",
+    durationMin: 45,
     priceLabel: "Gratuit",
     location: "showroom",
     booking: "online",
@@ -143,6 +151,11 @@ export const PHONE_SERVICES = SERVICES.filter((s) => s.booking === "phone");
 
 export function getService(slug: string): Service | undefined {
   return SERVICES.find((s) => s.slug === slug);
+}
+
+/** Durée d'un rendez-vous en ligne, en minutes (60 par défaut). */
+export function bookingDurationMin(slug: string): number {
+  return getService(slug)?.durationMin ?? 60;
 }
 
 /** URLs des pages de service, pour le sitemap. */

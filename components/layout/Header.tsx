@@ -7,10 +7,14 @@ import { ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+// « Rendez-vous » a pris la place d'« Estimation » (01/10/2026) : le
+// configurateur garde le bouton « Chiffrer mon poêle » à droite, et la prise
+// de rendez-vous n'avait aucune entrée visible dans la barre. Le lien mène
+// directement à l'agenda (#reserver), pas au haut de la page.
 const NAV_ITEMS = [
   { label: "Accueil", href: "/" },
   { label: "Boutique", href: "/boutique" },
-  { label: "Estimation", href: "/estimation" },
+  { label: "Rendez-vous", href: "/prendre-rendez-vous#reserver" },
   {
     label: "Nos marques",
     href: "/nos-marques",
@@ -27,7 +31,7 @@ const NAV_ITEMS = [
       { label: "Entretien annuel", href: "/entretien-poele-a-pellets", desc: "Révision complète, par téléphone" },
       { label: "Ramonage", href: "/ramonage", desc: "Certificat remis sur place" },
       { label: "Dépannage", href: "/depannage-poele-a-pellets", desc: "Panne, code erreur, extinction" },
-      { label: "Prendre rendez-vous", href: "/prendre-rendez-vous", desc: "Devis et showroom, en ligne" },
+      { label: "Prendre rendez-vous", href: "/prendre-rendez-vous#reserver", desc: "Devis et showroom, en ligne" },
     ],
   },
   {

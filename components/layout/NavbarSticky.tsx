@@ -49,7 +49,8 @@ const TABS: Tab[] = [
   // déduit la prime. Le formulaire /demande-de-devis reste accessible, mais il
   // n'est plus le chemin par défaut depuis le retrait du paiement en ligne.
   { id: "quote", href: "/estimation",          icon: Flame,       label: "Devis",    matches: (p) => p === "/estimation" || p === "/demande-de-devis" },
-  { id: "rdv",   href: "/prendre-rendez-vous", icon: Calendar,    label: "RDV",      matches: (p) => p === "/prendre-rendez-vous" },
+  // #reserver : l'onglet ouvre directement l'agenda, pas la présentation du showroom.
+  { id: "rdv",   href: "/prendre-rendez-vous#reserver", icon: Calendar, label: "RDV", matches: (p) => p === "/prendre-rendez-vous" },
   { id: "menu",                                icon: MenuIcon,    label: "Menu",     matches: () => false },
 ];
 

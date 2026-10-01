@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
 import { rateLimitResponse } from "@/lib/rate-limit";
-import { getService, ONLINE_SERVICES } from "@/lib/services";
+import { getService, bookingDurationMin } from "@/lib/services";
 import { availableSlots, belgianDayKey, formatSlotTime, bookingWindow } from "@/lib/booking";
 import { getBusyIntervals, isCalendarConfigured } from "@/lib/google-calendar";
 
 export const dynamic = "force-dynamic";
-
-/** Durée d'un rendez-vous, en minutes, déduite du libellé du service. */
-function durationFor(slug: string): number {
-  return slug === "visite-showroom" ? 45 : 60;
-}
 
 /**
  * Créneaux disponibles pour un service réservable en ligne.
@@ -47,7 +42,7 @@ export async function GET(request: Request) {
 
   try {
     const busy = await getBusyIntervals(from, to);
-    const slots = availableSlots(now, durationFor(slug), busy);
+    const slots = availableSlots(now, bookingDurationMin(slug), busy);
 
     // Regroupement par jour, pour que l'interface affiche un calendrier.
     const byDay = new Map<string, Array<{ start: number; label: string }>>();
@@ -59,7 +54,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       configured: true,
-      durationMin: durationFor(slug),
+      durationMin: bookingDurationMin(slug),
       days: [...byDay.entries()].map(([date, times]) => ({ date, times })),
     });
   } catch (e) {

@@ -111,17 +111,20 @@ export default function PrendreRendezVousPage() {
         </div>
       </section>
 
-      {/* Rendez-vous commerciaux : réservables en ligne */}
-      <section className="bg-mp-beige mp-band">
+      {/* Rendez-vous commerciaux : réservables en ligne. L'ancre #reserver est
+        * la cible de tous les boutons « Prendre rendez-vous » du site : le
+        * visiteur arrive sur l'agenda, pas sur la présentation du showroom.
+        * scroll-mt-16 : la hauteur du header collant, sur grand écran. */}
+      <section id="reserver" className="bg-mp-beige mp-band scroll-mt-16">
         <div className="mp-shell">
           <div className="mp-measure mb-10 text-center">
             <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
               Réserver un rendez-vous en ligne
             </h2>
             <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed">
-              Pour chiffrer un projet ou venir voir les modèles, choisissez directement votre
-              créneau dans notre agenda. Vous recevez l&apos;invitation par email, et le
-              rendez-vous se pose dans le nôtre.
+              Pour chiffrer un projet ou venir voir les modèles, choisissez votre créneau
+              directement dans notre agenda. La confirmation arrive aussitôt par e-mail, avec de
+              quoi l&apos;ajouter au vôtre.
             </p>
           </div>
 

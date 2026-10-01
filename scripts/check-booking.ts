@@ -4,6 +4,7 @@ import {
   BUSINESS_HOURS, GAP_AFTER_EVENT_MIN, GAP_BEFORE_EVENT_MIN,
   busyFromEvents, type CalendarEvent,
 } from "@/lib/booking";
+import { bookingCalendarEntry, buildIcs, googleCalendarUrl, icsDownloadPath } from "@/lib/booking-calendar";
 
 let ko = 0;
 function check(label: string, got: unknown, want: unknown) {
@@ -108,6 +109,45 @@ const autourInvitation = filterAvailable(creneauxMardi,
 check("invitation sans reponse 14:00-15:00 : 12:30 et 15:30 restent, 13:00-15:00 fermes",
   ["12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30"].filter(h => autourInvitation.includes(h)),
   ["12:30", "15:30"]);
+
+// --- Entree d'agenda du client (e-mail de confirmation, /api/rdv/ics) ---
+const debutRdv = belgianWallTimeToInstant(2026, 10, 8, 10, 30);
+const domicile = bookingCalendarEntry({ slug: "devis-sur-place", name: "Devis sur place", location: "domicile" }, debutRdv, 60);
+check("entree : 10:30 belge (CEST) -> 08:30 UTC, fin 60 min plus tard",
+  [new Date(domicile.start).toISOString(), new Date(domicile.end).toISOString()],
+  ["2026-10-08T08:30:00.000Z", "2026-10-08T09:30:00.000Z"]);
+check("entree a domicile : pas d'adresse, juste « À votre domicile »", domicile.location, "À votre domicile");
+const showroom = bookingCalendarEntry({ slug: "visite-showroom", name: "Visite showroom + conseils", location: "showroom" }, debutRdv, 45);
+check("entree showroom : adresse du showroom", showroom.location, "Showroom Mister Pellets, Rue des Fagotis 3A, 5380 Fernelmont");
+
+const ics = buildIcs(showroom, Date.UTC(2026, 9, 1, 9, 0));
+check("ics : fins de ligne CRLF uniquement", ics.replace(/\r\n/g, "").includes("\n"), false);
+check("ics : aucune ligne de plus de 75 octets",
+  ics.split("\r\n").filter(l => new TextEncoder().encode(l).length > 75).length, 0);
+const unfolded = ics.replace(/\r\n /g, "");
+check("ics : debut et fin en UTC",
+  ["DTSTART:20261008T083000Z", "DTEND:20261008T091500Z"].every(l => unfolded.includes(l)), true);
+check("ics : virgules echappees dans le lieu",
+  unfolded.includes("LOCATION:Showroom Mister Pellets\\, Rue des Fagotis 3A\\, 5380 Fernelmont"), true);
+check("ics : sauts de ligne de la description echappes", /DESCRIPTION:[^\r\n]*\\n/.test(unfolded), true);
+check("ics : PUBLISH, sans organisateur (pas une invitation)",
+  [unfolded.includes("METHOD:PUBLISH"), unfolded.includes("ORGANIZER")], [true, false]);
+check("ics : UID stable", unfolded.includes(`UID:rdv-visite-showroom-${debutRdv}@mister-pellets.be`), true);
+
+// Un caractere accentue a cheval sur la limite des 75 octets ne doit pas etre
+// coupe en deux : une fois les lignes recollees, on retrouve le texte d'origine.
+const longue = bookingCalendarEntry({ slug: "devis-sur-place", name: "é".repeat(60), location: "domicile" }, debutRdv, 60);
+const icsLong = buildIcs(longue, 0);
+check("ics : repli sans casser les caracteres accentues",
+  icsLong.replace(/\r\n /g, "").includes(`SUMMARY:Mister Pellets · ${"é".repeat(60)}`), true);
+check("ics : lignes repliees <= 75 octets avec accents",
+  icsLong.split("\r\n").filter(l => new TextEncoder().encode(l).length > 75).length, 0);
+
+const gcal = new URL(googleCalendarUrl(domicile));
+check("google agenda : dates en UTC", gcal.searchParams.get("dates"), "20261008T083000Z/20261008T093000Z");
+check("google agenda : espaces en %20, jamais en +", googleCalendarUrl(domicile).includes("+"), false);
+check("lien .ics : service et instant seulement",
+  icsDownloadPath("devis-sur-place", debutRdv), `/api/rdv/ics?service=devis-sur-place&start=${debutRdv}`);
 
 console.log(ko === 0 ? "\nTOUS OK" : `\n${ko} ECHEC(S)`);
 process.exit(ko === 0 ? 0 : 1);

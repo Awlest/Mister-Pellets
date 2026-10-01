@@ -236,7 +236,7 @@ export function ServiceLanding({
                   Le devis pour l&apos;achat et la pose, lui, se réserve en ligne.
                 </p>
                 <Button asChild variant="outline" size="default" className="w-full justify-center">
-                  <Link href="/prendre-rendez-vous">
+                  <Link href="/prendre-rendez-vous#reserver">
                     Prendre rendez-vous
                     <ArrowRight className="h-4 w-4" />
                   </Link>
