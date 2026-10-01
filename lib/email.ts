@@ -35,6 +35,8 @@ function getResend(): Resend | null {
 }
 
 interface SendEmailParams {
+  /** Nom de l'e-mail dans les logs, qui ne reprennent ni le sujet ni le destinataire. */
+  label: string;
   to: string | string[];
   subject: string;
   html: string;
@@ -43,6 +45,7 @@ interface SendEmailParams {
 }
 
 export async function sendEmail({
+  label,
   to,
   subject,
   html,
@@ -63,6 +66,11 @@ export async function sendEmail({
     return { ok: true, id: "console-fallback" };
   }
 
+  // Le SDK Resend ne lève pas d'exception quand l'API refuse un envoi (domaine
+  // non vérifié, validation, panne réseau) : il renvoie `{ data: null, error }`.
+  // Les deux chemins d'échec finissent donc dans le même log : sans lui, un
+  // refus ne laisse aucune trace (cas de la notification RDV jusqu'au 29/09/2026).
+  let error: { message: string; statusCode?: number | null; name?: string };
   try {
     const result = await resend.emails.send({
       from: FROM,
@@ -73,13 +81,15 @@ export async function sendEmail({
       replyTo,
     });
 
-    if (result.error) {
-      return { ok: false, error: result.error.message };
-    }
-    return { ok: true, id: result.data?.id };
+    if (!result.error) return { ok: true, id: result.data?.id };
+    error = result.error;
   } catch (err) {
-    return { ok: false, error: err instanceof Error ? err.message : "Erreur inconnue" };
+    error = { message: err instanceof Error ? err.message : "Erreur inconnue" };
   }
+
+  // Ni destinataire ni sujet : ils contiennent des données du client.
+  console.error("[email] envoi refusé", { label, error });
+  return { ok: false, error: error.message };
 }
 
 /**
@@ -115,6 +125,7 @@ export async function notifyInternalQuote(quote: {
   `;
 
   return sendEmail({
+    label: "notifyInternalQuote",
     to: TO_INTERNAL,
     subject: `[Devis] ${quote.name} (${quote.postalCode}), ${quote.budget}`,
     html,
@@ -136,6 +147,7 @@ export async function confirmCustomerQuote(quote: { name: string; email: string 
   `;
 
   return sendEmail({
+    label: "confirmCustomerQuote",
     to: quote.email,
     subject: "Votre demande de devis Mister Pellets a bien été reçue",
     html,
@@ -174,6 +186,7 @@ export async function notifyInternalBooking(rdv: {
   `;
 
   return sendEmail({
+    label: "notifyInternalBooking",
     to: TO_INTERNAL,
     subject: `Nouveau RDV : ${rdv.serviceName}, ${rdv.dayKey} à ${rdv.timeLabel}`,
     html,
@@ -239,6 +252,7 @@ export async function notifyInternalEstimate(est: {
   `;
 
   return sendEmail({
+    label: "notifyInternalEstimate",
     to: TO_INTERNAL,
     subject: `[Estimation] ${est.name} (${est.postalCode}) — ${fmt(est.totalTTC)} · ${est.productName}`,
     html,
@@ -278,6 +292,7 @@ export async function confirmCustomerEstimate(est: {
   `;
 
   return sendEmail({
+    label: "confirmCustomerEstimate",
     to: est.email,
     subject: "Votre estimation Mister Pellets",
     html,
@@ -300,6 +315,7 @@ export async function notifyInternalContact(message: {
   `;
 
   return sendEmail({
+    label: "notifyInternalContact",
     to: TO_INTERNAL,
     subject: `[Contact] ${message.name}, ${message.subject}`,
     html,
@@ -337,6 +353,7 @@ export async function confirmCustomerOrder(order: {
   `;
 
   return sendEmail({
+    label: "confirmCustomerOrder",
     to: order.customerEmail,
     subject: `Confirmation de commande ${order.orderNumber}, Mister Pellets`,
     html,

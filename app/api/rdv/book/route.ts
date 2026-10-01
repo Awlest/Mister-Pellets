@@ -159,10 +159,10 @@ export async function POST(request: Request) {
     // Notification interne, envoyée par lib/email.ts comme les devis et les
     // estimations (EMAIL_FROM / EMAIL_TO_QUOTES). L'invitation client part déjà
     // via Google Agenda (sendUpdates=all) : cet email prévient l'équipe, il
-    // n'est pas critique. sendEmail ne lève pas d'exception (le SDK Resend
-    // renvoie ses refus dans `error`) : un échec est tracé ici, sans faire
-    // croire au client que sa réservation n'a pas marché.
-    const mail = await notifyInternalBooking({
+    // n'est pas critique. sendEmail ne lève pas d'exception et logge lui-même
+    // un refus (« [email] envoi refusé ») : on ne fait pas croire au client
+    // que sa réservation n'a pas marché.
+    await notifyInternalBooking({
       serviceName: service.name,
       dayKey,
       timeLabel,
@@ -173,7 +173,6 @@ export async function POST(request: Request) {
       address: address || undefined,
       notes: notes || undefined,
     });
-    if (!mail.ok) console.error("[rdv/book] notification email", mail.error);
 
     return NextResponse.json({
       ok: true,
