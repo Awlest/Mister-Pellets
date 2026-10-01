@@ -17,6 +17,10 @@
  *   alors plus à 0 % (commentaire des art. VII.64, § 1er et VII.65, § 2, 8°
  *   du Code de droit économique). La mensualité à 0 % se calcule donc sur le
  *   total remisé, et le bonus ne peut pas être « non cumulable » avec lui ;
+ * - les textes de la promo ne parlent pas du financement (décision du client,
+ *   01/10/2026) : citer un taux impose le slogan et l'exemple représentatif
+ *   (art. VII.64, lib/financing.ts), que seul le configurateur affiche, à côté
+ *   de la mensualité. Le bonus reste acquis au client qui finance ;
  * - annonce de réduction de prix (art. VI.18 CDE) : partout, le prix catalogue
  *   reste affiché (barré) à côté du prix remisé, ce qui donne le prix
  *   antérieur. Ne pas relever les prix du catalogue entre le 1er septembre
@@ -32,7 +36,7 @@ export const BONUS = {
   /** Pastille courte pour les cartes et les fiches produit. */
   badge: "-15 %",
   conditions:
-    "Pour toute commande passée entre le 1er octobre et le 24 décembre 2026, sur le prix du poêle, pose non remisée, cumulable avec la prime Habitation et le financement à 0 %.",
+    "Pour toute commande passée entre le 1er octobre et le 24 décembre 2026, sur le prix du poêle, pose non remisée, cumulable avec la prime Habitation.",
   /**
    * Plage `sale_price_effective_date` du flux Google Merchant, ISO 8601 avec
    * fuseau : heure d'été le 1er octobre, heure d'hiver le 24 décembre.
