@@ -9,9 +9,18 @@ import { PrimesBlock } from "@/components/sections/PrimesBlock";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
+import { BonusAnnouncement } from "@/components/sections/BonusAnnouncement";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildFAQSchema } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
+
+/**
+ * Régénération horaire : l'annonce du bonus de saison dépend de la date. Le
+ * cron app/api/cron/bonus invalide le site la nuit de la bascule, mais Vercel
+ * ne garantit pas la livraison d'un cron ; sans ce délai, une page statique
+ * garderait l'annonce après la fin du bonus.
+ */
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Poêle à pellets en Wallonie, vente, pose, entretien",
@@ -119,6 +128,8 @@ export default function HomePage() {
 
         <div className="mp-shell pb-10 md:pb-16 relative">
           <div className="mp-measure mx-auto text-center">
+            <BonusAnnouncement />
+
             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-mp-green-deep mb-5">
               Le bon poêle à pellets, <span className="mp-italic">installé chez vous</span> en Wallonie
             </h1>
