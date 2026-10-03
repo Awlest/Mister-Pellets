@@ -15,6 +15,7 @@ import * as migration_20260617_140000_products_combustible from './20260617_1400
 import * as migration_20260903_180000_orders_access_token from './20260903_180000_orders_access_token';
 import * as migration_20260919_100000_products_type_hybride_hydro from './20260919_100000_products_type_hybride_hydro';
 import * as migration_20260919_100100_products_type_hybride_hydro_backfill from './20260919_100100_products_type_hybride_hydro_backfill';
+import * as migration_20261003_150000_products_appliance from './20261003_150000_products_appliance';
 
 export const migrations = [
   {
@@ -101,5 +102,10 @@ export const migrations = [
     up: migration_20260919_100100_products_type_hybride_hydro_backfill.up,
     down: migration_20260919_100100_products_type_hybride_hydro_backfill.down,
     name: '20260919_100100_products_type_hybride_hydro_backfill',
+  },
+  {
+    up: migration_20261003_150000_products_appliance.up,
+    down: migration_20261003_150000_products_appliance.down,
+    name: '20261003_150000_products_appliance',
   },
 ];

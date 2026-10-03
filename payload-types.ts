@@ -248,6 +248,10 @@ export interface Product {
    */
   combustible: 'pellet' | 'bois' | 'hybride';
   /**
+   * Ce qu'est l'appareil, comme le fabricant le désigne : c'est le début du titre de la fiche (« Insert à bois 9 kW »). Vide, il se déduit du type : « Insert encastrable » donne un insert, le reste un poêle. À choisir quand le type ne suffit pas : insert thermo-cheminée (type hydro), foyer, chaudière.
+   */
+  appliance?: ('poele' | 'insert' | 'foyer' | 'chaudiere') | null;
+  /**
    * COMMENT la chaleur sort
    */
   diffusion: 'ventilation-forcee' | 'convection-naturelle';
@@ -972,6 +976,7 @@ export interface ProductsSelect<T extends boolean = true> {
   model?: T;
   productType?: T;
   combustible?: T;
+  appliance?: T;
   diffusion?: T;
   color?: T;
   priceHT?: T;

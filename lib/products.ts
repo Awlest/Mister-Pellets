@@ -6,6 +6,7 @@ import type {
   ProductColorVariant,
   ProductType,
   Combustible,
+  Appliance,
   Diffusion,
   ColorCategory,
   VariantOptionAxis,
@@ -54,6 +55,7 @@ interface PayloadProduct {
   brand: string;
   productType: ProductType;
   combustible?: Combustible | null;
+  appliance?: Appliance | null;
   diffusion: Diffusion;
   color: ColorCategory;
   power: number;
@@ -337,6 +339,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     brand: p.brand,
     type: p.productType,
     combustible: p.combustible ?? "pellet",
+    appliance: p.appliance ?? undefined,
     isHydro: p.isHydro ?? false,
     diffusion: p.diffusion,
     color: p.color,

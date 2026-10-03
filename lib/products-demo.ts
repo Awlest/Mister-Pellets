@@ -47,6 +47,13 @@ export type ColorCategory = "light" | "dark" | "natural";
 export type Combustible = "pellet" | "bois" | "hybride";
 
 /**
+ * Nature de l'appareil, quand le type ne la dit pas : un insert thermo-cheminée
+ * Girolami porte le type « hybride-hydro », un foyer le type « insert ». Vide,
+ * elle se déduit du type (lib/product-kind.ts).
+ */
+export type Appliance = "poele" | "insert" | "foyer" | "chaudiere";
+
+/**
  * Mode de chauffage (V1.4) — air (ventilé) vs hydro (raccordé à l'eau / thermo).
  * Dérivé du booléen `isHydro` du produit. Remplace, avec `Combustible`,
  * l'ancien filtre « Type » qui mélangeait les deux notions.
@@ -58,6 +65,8 @@ export interface ProductDemo extends ProductCardData {
   type: ProductType;
   /** Combustible (pellet/bois/hybride) — filtre boutique V1.4. */
   combustible?: Combustible;
+  /** Case « Nature de l'appareil » de l'admin : poêle, insert, foyer ou chaudière. */
+  appliance?: Appliance;
   /** Raccordé à l'eau (thermo). Pilote le filtre « Chauffage » ventilé/hydro. */
   isHydro?: boolean;
   isAirtight: boolean;

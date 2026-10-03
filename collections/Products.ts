@@ -219,6 +219,21 @@ export const Products: CollectionConfig = {
       },
     },
     {
+      name: "appliance",
+      type: "select",
+      label: "Nature de l'appareil",
+      options: [
+        { label: "Poêle", value: "poele" },
+        { label: "Insert (s'encastre dans une cheminée existante)", value: "insert" },
+        { label: "Foyer (cœur d'une nouvelle cheminée, à habiller)", value: "foyer" },
+        { label: "Chaudière", value: "chaudiere" },
+      ],
+      admin: {
+        description:
+          "Ce qu'est l'appareil, comme le fabricant le désigne : c'est le début du titre de la fiche (« Insert à bois 9 kW »). Vide, il se déduit du type : « Insert encastrable » donne un insert, le reste un poêle. À choisir quand le type ne suffit pas : insert thermo-cheminée (type hydro), foyer, chaudière.",
+      },
+    },
+    {
       type: "row",
       fields: [
         {
