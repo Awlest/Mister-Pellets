@@ -281,8 +281,9 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
   const heatedVolume =
     p.heatedVolumeM3 && p.heatedVolumeM3 > 0 ? `${p.heatedVolumeM3} m³` : undefined;
 
-  // Reconstruit la string power "9 kW" depuis power numeric
-  const power = `${p.power} kW`;
+  // Reconstruit la string power "9 kW" depuis power numeric, avec la virgule
+  // décimale (« 10,1 kW ») comme dans le configurateur.
+  const power = `${String(p.power).replace(".", ",")} kW`;
 
   // Fiche regroupée multi-puissances : éventail complet des puissances +
   // volumes, pour les pastilles et le filtre boutique.
