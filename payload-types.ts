@@ -219,7 +219,7 @@ export interface Media {
 export interface Product {
   id: number;
   /**
-   * Si coché, le produit n'apparaît plus dans la liste de la boutique ni dans les filtres. L'URL directe /produit/{slug} reste accessible.
+   * Si coché, le produit n'apparaît plus dans la liste de la boutique ni dans les filtres. L'URL directe /produit/{slug} reste accessible, mais Google n'indexe plus la page.
    */
   hiddenFromBoutique?: boolean | null;
   /**

@@ -74,6 +74,8 @@ export interface ProductDemo extends ProductCardData {
   createdAt?: string;
   /** Case « Mis en avant » de l'admin : pèse dans le tri par défaut de la boutique. */
   isFeatured?: boolean;
+  /** Case « Masquer de la boutique » de l'admin : fiche joignable par son URL, hors de Google. */
+  hiddenFromBoutique?: boolean;
   /**
    * Description courte saisie dans l'admin Payload (max 200 chars).
    * Affichée en haut de la page produit en remplacement du texte marketing

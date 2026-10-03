@@ -118,7 +118,8 @@ export const Products: CollectionConfig = {
     // ===== VISIBILITÉ BOUTIQUE =====
     // Champ unique pour permettre à l'équipe de cacher un produit du listing
     // sans le supprimer. La page produit (URL directe /produit/{slug}) reste
-    // accessible pour ne pas casser d'éventuels liens externes ou favoris.
+    // accessible pour ne pas casser d'éventuels liens externes ou favoris,
+    // mais en noindex (app/(frontend)/produit/[slug]/page.tsx).
     // Pour masquer en masse : sélectionner plusieurs produits dans le listing
     // admin → bouton "Edit" en haut → toggle ce champ → "Save changes".
     {
@@ -128,7 +129,7 @@ export const Products: CollectionConfig = {
       label: "Masquer de la boutique",
       admin: {
         description:
-          "Si coché, le produit n'apparaît plus dans la liste de la boutique ni dans les filtres. L'URL directe /produit/{slug} reste accessible.",
+          "Si coché, le produit n'apparaît plus dans la liste de la boutique ni dans les filtres. L'URL directe /produit/{slug} reste accessible, mais Google n'indexe plus la page.",
         position: "sidebar",
       },
     },

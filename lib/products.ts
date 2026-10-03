@@ -72,6 +72,7 @@ interface PayloadProduct {
   isBestseller?: boolean | null;
   isFeatured?: boolean | null;
   isNew?: boolean | null;
+  hiddenFromBoutique?: boolean | null;
   createdAt?: string | null;
   shortDescription?: string | null;
   features?: Array<{ title?: string | null; description?: string | null }> | null;
@@ -350,6 +351,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     isBestseller: p.isBestseller ?? false,
     isFeatured: p.isFeatured ?? false,
     isNew: p.isNew ?? false,
+    hiddenFromBoutique: p.hiddenFromBoutique ?? false,
     createdAt: p.createdAt ?? undefined,
     isAirtight: p.isAirtight ?? false,
     isCanalizable: p.isCanalizable ?? false,

@@ -61,6 +61,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${product.name}, ${kind.charAt(0).toUpperCase()}${kind.slice(1)} ${product.power}`,
     description: `${product.name} : ${product.power}${product.heatedVolume ? ` pour ${product.heatedVolume}` : ""}. ${product.priceTTC ? `${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets${primes}.`,
     path: `/produit/${product.slug}`,
+    // Fiche masquée de la boutique : joignable par son URL (liens, favoris)
+    // mais hors de Google, comme elle l'est déjà du sitemap et du flux.
+    noindex: product.hiddenFromBoutique,
   });
 }
 
