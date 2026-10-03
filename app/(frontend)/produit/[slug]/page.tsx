@@ -73,11 +73,22 @@ export default async function ProductPage({ params }: Props) {
   const brandSlug = product.brand.toLowerCase() as keyof typeof BRANDS;
   const brand = BRANDS[brandSlug];
 
-  // Modèles similaires (même marque, autres modèles)
+  // Modèles similaires (même marque, autres modèles). getAllProducts renvoie
+  // les fiches de la plus récente à la plus ancienne : sans tri, les dernières
+  // fiches encodées, souvent encore sans photo, prenaient les 3 places sur
+  // toutes les fiches de la marque. On montre d'abord les fiches avec photo,
+  // puis celles du même combustible, en gardant l'ordre d'origine à égalité.
   const allProducts = await getAllProducts();
   const related = allProducts
     .filter((p) => p.brand === product.brand && p.slug !== product.slug)
-    .slice(0, 3);
+    .map((p, i) => ({
+      p,
+      i,
+      score: (p.imageSrc ? 2 : 0) + (p.combustible === product.combustible ? 1 : 0),
+    }))
+    .sort((a, b) => b.score - a.score || a.i - b.i)
+    .slice(0, 3)
+    .map(({ p }) => p);
 
   // Schema.org Product : si le produit a des déclinaisons de couleur avec
   // GTIN, on émet un AggregateOffer + un Offer par variante (chacune avec
