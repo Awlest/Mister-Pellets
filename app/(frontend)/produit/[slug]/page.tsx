@@ -23,6 +23,7 @@ import { buildPageMetadata } from "@/lib/seo";
 import { schemaAvailability } from "@/lib/availability";
 import { BONUS } from "@/lib/bonus";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
+import { productFuel, productKindLabel } from "@/lib/product-kind";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -52,9 +53,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // ce soit côté Google.
   if (!product)
     return { title: "Produit introuvable", robots: { index: false, follow: false } };
+  // Libellé tiré du combustible et du type, comme dans le flux Merchant.
+  const kind = productKindLabel(product);
+  // La prime de /primes-energie-wallonie-2026 ne vise que le pellet.
+  const primes = productFuel(product) === "pellet" ? ", primes incluses" : "";
   return buildPageMetadata({
-    title: `${product.name}, Poêle à pellets ${product.power}`,
-    description: `${product.name} : ${product.power} pour ${product.heatedVolume}. ${product.priceTTC ? `${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets, primes incluses.`,
+    title: `${product.name}, ${kind.charAt(0).toUpperCase()}${kind.slice(1)} ${product.power}`,
+    description: `${product.name} : ${product.power}${product.heatedVolume ? ` pour ${product.heatedVolume}` : ""}. ${product.priceTTC ? `${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets${primes}.`,
     path: `/produit/${product.slug}`,
   });
 }
@@ -178,11 +183,11 @@ export default async function ProductPage({ params }: Props) {
     "@type": "Product",
     name: product.name,
     ...(schemaImages.length > 0 ? { image: schemaImages } : {}),
-    description: product.shortDescription
-      ? product.shortDescription
-      : product.heatedVolume
-        ? `${product.name} : poêle à pellets ${product.type} de ${product.power} pour chauffer ${product.heatedVolume}.`
-        : `${product.name} : poêle à pellets ${product.type} de ${product.power}.`,
+    description:
+      product.shortDescription ||
+      `${product.name} : ${productKindLabel(product)}${
+        product.type === "canalisable" ? " canalisable" : ""
+      } de ${product.power}${product.heatedVolume ? ` pour chauffer ${product.heatedVolume}` : ""}.`,
     brand: { "@type": "Brand", name: product.brand },
     offers,
   };

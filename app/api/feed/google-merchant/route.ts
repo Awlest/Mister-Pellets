@@ -7,6 +7,7 @@ import {
 } from "@/lib/shipping";
 import { merchantAvailability as availability } from "@/lib/availability";
 import { BONUS, bonusPhase, bonusPrice, type BonusPhase } from "@/lib/bonus";
+import { productKindLabel } from "@/lib/product-kind";
 import type {
   ProductDemo,
   ProductColorVariant,
@@ -62,17 +63,6 @@ function googleCategory(p: ProductDemo): string {
     return p.googleProductCategory;
   }
   return p.type === "insert" ? CATEGORY_FIREPLACES : CATEGORY_STOVES;
-}
-
-/** Libellé produit selon combustible/type — évite « poêle à pellets » sur un insert à bois. */
-function productKindLabel(p: ProductDemo): string {
-  const fuel =
-    p.combustible === "bois"
-      ? "à bois"
-      : p.combustible === "hybride"
-        ? "hybride bois/pellets"
-        : "à pellets";
-  return p.type === "insert" ? `insert ${fuel}` : `poêle ${fuel}`;
 }
 
 /** `g:product_type` : taxonomie interne libre, utile pour segmenter les campagnes. */
@@ -255,14 +245,9 @@ function productEntry(p: ProductDemo, phase: BonusPhase): FeedEntry | null {
   const imageLink = absUrl(p.imageSrc);
   if (!imageLink) return null; // image obligatoire chez Google Merchant
   const hasIdentifier = Boolean(p.gtin || p.mpn);
-  // « hybride-hydro » : le combustible hybride est déjà dit par le libellé du
-  // produit, il ne reste à préciser que le raccordement à l'eau.
-  const typeSuffix =
-    p.type === "canalisable" || p.type === "hydro"
-      ? ` ${p.type}`
-      : p.type === "hybride-hydro"
-        ? " hydro"
-        : "";
+  // Le libellé (lib/product-kind.ts) dit déjà le combustible et le
+  // raccordement à l'eau : il ne reste à préciser que la diffusion canalisée.
+  const typeSuffix = p.type === "canalisable" ? " canalisable" : "";
   return {
     rawId: safeMerchantId(p.sku || p.slug),
     dedupSeed: p.slug,
