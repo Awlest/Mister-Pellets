@@ -15,7 +15,6 @@ import {
   ISO,
   LEVELS,
   OPTIONS,
-  PRIME_CATEGORIES,
   STOVE_KINDS,
   estimate,
   eur,
@@ -28,7 +27,6 @@ import {
   type IsoKey,
   type LevelKey,
   type OptionKey,
-  type PrimeCategory,
   type StoveKind,
 } from "@/lib/estimate";
 import { BONUS, isBonusPeriod } from "@/lib/bonus";
@@ -48,7 +46,7 @@ const STEPS = [
   { id: 2, label: "Votre logement" },
   { id: 3, label: "Votre poêle" },
   { id: 4, label: "Options" },
-  { id: 5, label: "Prime & financement" },
+  { id: 5, label: "Financement" },
   { id: 6, label: "Coordonnées" },
 ];
 const STEP_COUNT = STEPS.length;
@@ -272,7 +270,6 @@ function EstimateForm({
         </p>
         <p className="mb-8 text-xl font-semibold">
           Estimation : {eur(r.totalTTC)} TTC
-          {r.prime > 0 ? ` · ${eur(r.netAfterPrime)} après prime estimée` : ""}
         </p>
 
         {/*
@@ -526,8 +523,8 @@ function EstimateForm({
                   </button>
                 </div>
                 <p className="mt-3 text-sm text-mp-ink-soft">
-                  La TVA à 6 % s&apos;applique aux logements privés de plus de 10 ans quand la pose
-                  est facturée par l&apos;installateur. Nous le confirmons sur le devis.
+                  La TVA à 6 % s&apos;applique aux logements privés de plus de 10 ans quand
+                  l&apos;installateur fournit et pose le poêle. Nous le confirmons sur le devis.
                 </p>
               </div>
             </>
@@ -720,54 +717,33 @@ function EstimateForm({
             </>
           )}
 
-          {/* ---------- 5. Prime & financement ---------- */}
+          {/* ---------- 5. Financement ----------
+            * La prime Habitation (choix de la catégorie de revenus) a disparu
+            * de cette étape le 03/10/2026 : le régime s'est arrêté le 30/09/2026
+            * et le Rénopack qui le remplace ne se chiffre pas poêle par poêle.
+            */}
           {step === 5 && (
             <>
               <h2 className="mb-2 text-2xl font-semibold text-mp-green-deep md:text-3xl">
-                Prime Wallonie et paiement en plusieurs fois
+                Payer en plusieurs fois
               </h2>
               <p className="mb-8 text-mp-ink-soft">
-                Deux leviers pour alléger la facture : la prime Habitation, et l&apos;étalement du
-                paiement à 0 %.
+                Le total comprend déjà la TVA qui s&apos;applique chez vous (étape 2). Vous pouvez
+                l&apos;étaler à 0 %.
               </p>
 
-              <div className="mb-8">
-                <span className={legendCls}>
-                  Vos revenus de référence (pour estimer la prime Habitation)
-                </span>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {(Object.keys(PRIME_CATEGORIES) as PrimeCategory[]).map((k) => (
-                    <button
-                      key={k}
-                      type="button"
-                      aria-pressed={s.primeCategory === k}
-                      onClick={() => set("primeCategory", k)}
-                      className={cardCls(s.primeCategory === k)}
-                    >
-                      <span className="mb-0.5 block font-semibold text-mp-green-deep">
-                        {PRIME_CATEGORIES[k].label}
-                      </span>
-                      <span className="block text-sm text-mp-ink-soft">
-                        {PRIME_CATEGORIES[k].coef > 0
-                          ? `Prime de base ${160 * PRIME_CATEGORIES[k].coef} €, plafonnée à ${Math.round(
-                              PRIME_CATEGORIES[k].capRatio * 100,
-                            )} % du montant TVAC`
-                          : "Nous verrons ensemble à quelle catégorie vous appartenez"}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-                <p className="mt-3 text-sm text-mp-ink-soft">
-                  Estimation indicative. Un audit logement préalable est obligatoire et le montant
-                  définitif dépend de votre dossier.{" "}
-                  <Link
-                    href="/primes-energie-wallonie-2026"
-                    className="text-mp-orange-flame underline hover:no-underline"
-                  >
-                    Tout savoir sur la prime
-                  </Link>
-                  .
-                </p>
+              <div className="mb-8 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm leading-relaxed text-mp-ink">
+                <strong className="text-mp-green-deep">Et la prime Wallonie ?</strong>{" "}
+                Elle a pris fin le 30 septembre 2026 : il n&apos;y a plus de prime régionale à déduire pour un poêle.
+                Si votre maison est classée PEB E, F ou G et que vous préparez une rénovation plus
+                large, le Rénopack peut financer le poêle avec le reste des travaux.{" "}
+                <Link
+                  href="/primes-energie-wallonie-2026"
+                  className="font-semibold text-mp-green-deep underline hover:no-underline"
+                >
+                  Les aides qui restent
+                </Link>
+                .
               </div>
 
               <div>
@@ -1065,15 +1041,6 @@ function EstimateForm({
           </span>
           <span className="text-2xl font-semibold text-mp-green-deep">{eur(r.totalTTC)}</span>
         </div>
-
-        {r.prime > 0 && (
-          <div className="mt-2 flex items-end justify-between text-sm">
-            <span className="text-mp-ink-soft">
-              Après prime estimée ({eur(r.prime)})
-            </span>
-            <span className="font-semibold text-mp-green-light">{eur(r.netAfterPrime)}</span>
-          </div>
-        )}
 
         {monthly != null && (
           <p className="mt-3 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-3 text-sm text-mp-ink">

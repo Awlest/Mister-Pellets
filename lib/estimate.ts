@@ -250,9 +250,18 @@ export const isWellSized = (powerKw: number, needKw: number): boolean =>
 // =====================================================================
 
 /**
- * TVA 6 % pour la rénovation d'un logement privé de plus de 10 ans (travaux
- * facturés par l'entrepreneur, mention obligatoire sur la facture) ; 21 % pour
- * un logement plus récent ou un usage professionnel.
+ * TVA 6 % pour la rénovation d'un logement privé de plus de 10 ans : poêle
+ * fourni ET posé par l'entrepreneur, facturé au particulier qui l'occupe, avec
+ * la mention légale sur la facture (depuis le 1er juillet 2022). 21 % pour un
+ * logement plus récent ou un usage professionnel. Les appareils 100 % non
+ * fossiles (pellets, bois) gardent le 6 % ; seuls les appareils au gaz, au
+ * mazout ou au charbon sont passés à 21 % le 29 juillet 2025 (SPF Finances,
+ * vérifié le 03/10/2026).
+ *
+ * Pas de prime régionale à déduire : la prime Habitation (poêle à pellets
+ * compris) s'est arrêtée le 30 septembre 2026. Le Rénopack et le Rénoprêt qui
+ * la remplacent financent un projet complet (audit, saut de label PEB) et ne
+ * se chiffrent pas poêle par poêle. Détails sur /primes-energie-wallonie-2026.
  */
 export const VAT = { reduced: 0.06, standard: 0.21 } as const;
 
@@ -260,36 +269,7 @@ export const vatRate = (housingOver10Years: boolean): number =>
   housingOver10Years ? VAT.reduced : VAT.standard;
 
 // =====================================================================
-// 6. PRIME HABITATION WALLONIE
-// =====================================================================
-
-/**
- * Prime « poêle à pellets » : base 160 € multipliée par le coefficient de la
- * catégorie de revenus, plafonnée à un pourcentage du coût total TVAC.
- * Source : page /primes-energie-wallonie-2026 du site (régime en vigueur depuis
- * le 14 février 2025). Un audit logement préalable est obligatoire.
- */
-export const PRIME_BASE = 160;
-
-export const PRIME_CATEGORIES = {
-  R1: { label: "R1 — jusqu'à 24 600 €", coef: 6, capRatio: 0.7 },
-  R2: { label: "R2 — de 24 601 à 39 300 €", coef: 4, capRatio: 0.7 },
-  R3: { label: "R3 — de 39 301 à 58 900 €", coef: 2, capRatio: 0.5 },
-  R4: { label: "R4 — au-delà de 58 900 €", coef: 1, capRatio: 0.5 },
-  inconnu: { label: "Je ne sais pas encore", coef: 0, capRatio: 0 },
-} as const;
-
-export type PrimeCategory = keyof typeof PRIME_CATEGORIES;
-
-/** Prime estimée, plafond compris. 0 si la catégorie n'est pas renseignée. */
-export const primeEstimate = (category: PrimeCategory, totalTTC: number): number => {
-  const c = PRIME_CATEGORIES[category];
-  if (!c || c.coef === 0) return 0;
-  return Math.min(PRIME_BASE * c.coef, Math.round(totalTTC * c.capRatio));
-};
-
-// =====================================================================
-// 7. ÉTAT DU CONFIGURATEUR ET CALCUL
+// 6. ÉTAT DU CONFIGURATEUR ET CALCUL
 // =====================================================================
 
 /**
@@ -330,7 +310,6 @@ export interface EstimateState {
   /** Clé de l'option chiffrable choisie (cf. EstimateProduct.key). */
   productKey: string | null;
   opt: Partial<Record<OptionKey, boolean>>;
-  primeCategory: PrimeCategory;
   financeMonths: number | null;
 }
 
@@ -345,7 +324,6 @@ export const DEFAULT_STATE: EstimateState = {
   housingOver10Years: true,
   productKey: null,
   opt: {},
-  primeCategory: "inconnu",
   financeMonths: null,
 };
 
@@ -366,8 +344,6 @@ export interface EstimateResult {
   vatRate: number;
   vatAmount: number;
   totalTTC: number;
-  prime: number;
-  netAfterPrime: number;
   needKw: number;
   wellSized: boolean | null;
 }
@@ -442,7 +418,6 @@ export function estimate(
   const rate = vatRate(s.housingOver10Years);
   const vat = Math.round(netHT * rate);
   const totalTTC = Math.round(netHT + vat);
-  const prime = primeEstimate(s.primeCategory, totalTTC);
   const needKw = recommendedKw(s.surface, s.iso);
 
   return {
@@ -454,8 +429,6 @@ export function estimate(
     vatRate: rate,
     vatAmount: vat,
     totalTTC,
-    prime,
-    netAfterPrime: Math.max(0, totalTTC - prime),
     needKw,
     wellSized: product ? isWellSized(product.powerKw, needKw) : null,
   };

@@ -136,16 +136,17 @@ export default function AProposPage() {
               de chauffage. Notre siège est au Rue des Fagotis 3A, 5380 Fernelmont (province de Namur).
             </p>
             <p>
-              Côté matériel, on ne distribue que des poêles à pellets conformes au règlement écoconception
-              2022 (lot 20), avec rendement saisonnier d'au moins 87 %. C'est la condition d'éligibilité aux
-              primes Région wallonne, et c'est aussi notre filtre de sélection à l'amont. Pas de stock B,
-              pas de modèles déclassés.
+              Côté matériel, on ne distribue que des poêles conformes au règlement européen
+              d'écoconception (UE) 2015/1185, appliqué depuis le 1er janvier 2022 : au moins 79 % de
+              rendement saisonnier pour un poêle à pellets, et des plafonds d'émissions pour les
+              particules, le monoxyde de carbone et les oxydes d'azote. Pas de stock B, pas de modèles
+              déclassés.
             </p>
             <p>
-              Pour la pose, l'attestation de conformité de l'installation et la facture détaillée vous sont
-              remises à la fin du chantier. Ce sont les deux pièces que la Région demande pour traiter
-              votre dossier de prime. On rédige aussi le récapitulatif technique (puissance, type d'évacuation,
-              modèle exact) pour qu'il soit téléversable directement sur Mon Espace Wallonie.
+              À la fin du chantier, vous recevez la facture détaillée, l'attestation de conformité de
+              l'installation et le récapitulatif technique (puissance, type d'évacuation, modèle exact).
+              Gardez-les : votre assureur, un auditeur logement ou la SWCS, si vous financez le poêle par
+              un Rénopack, vous les demanderont.
             </p>
           </div>
         </div>

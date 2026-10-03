@@ -100,23 +100,22 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     intro:
       "Edilkamin est une référence italienne du chauffage biomasse depuis 1963, basée à Lainate dans la région de Milan. La marque couvre toute la gamme : poêles air, canalisables, étanches, hydro, inserts et poêles à bois. Le pilotage Wi-Fi est intégré sur la plupart des modèles récents.",
     heroSubtitle:
-      "Fondée à Milan en 1963 par Francesco Borsatti, Edilkamin est la référence du chauffage biomasse italien. On la pose depuis le début de l'atelier. C'est notre choix par défaut quand on cherche un poêle qui dure 20 ans sans broncher.",
+      "Fondée en 1963 par Francesco Borsatti, Edilkamin est la référence du chauffage biomasse italien. On la pose depuis le début de l'atelier. C'est notre choix par défaut quand on cherche un poêle qui dure 20 ans sans broncher.",
     whyWeLove: [
-      "Edilkamin, c'est la référence du poêle italien fiable. La marque a 60 ans, six sites de production et tout est encore fabriqué en Italie, principalement dans les ateliers de Lainate près de Milan. La fonderie et le bureau R&D sont internes. Résultat concret : des poêles qui chauffent vraiment, qui se règlent finement et qui supportent les hivers wallons sans broncher.",
+      "Edilkamin, c'est la référence du poêle italien fiable. La marque a plus de 60 ans : siège à Lainate, près de Milan, usine historique à Gabbioneta Binanuova (province de Crémone), pôle technique et laboratoire de recherche à Lavagno, près de Vérone, et une seconde usine à Sárvár, en Hongrie. Résultat concret : des poêles qui chauffent vraiment, qui se règlent finement et qui supportent les hivers wallons sans broncher.",
       "On en pose depuis le début de l'atelier, et on a vu passer toutes les configurations possibles. Insert encastré dans une vieille cheminée, poêle d'angle dans un séjour ouvert, hydro pour chauffage central avec ballon tampon. Les retours après 5 à 10 ans d'utilisation sont systématiquement bons. Le SAV pièces est rapide en Belgique, c'est un point qui compte énormément quand on choisit pour 20 ans.",
       "C'est la marque qu'on recommande quand on veut un poêle qui sera encore là dans deux décennies, sans avoir à y penser tous les hivers.",
     ],
     milestones: [
-      { marker: "1963", label: "Fondation à Milan par Francesco Borsatti, fabrication de cheminées décoratives." },
+      { marker: "1963", label: "Fondation de la marque par Francesco Borsatti." },
       { marker: "1982", label: "Transfert du siège opérationnel à Lainate, dans la banlieue nord de Milan." },
-      { marker: "1985", label: "Premier insert à bois automatique de la marque." },
-      { marker: "2002", label: "Lancement de la gamme pellets, axée sur la combustion étanche." },
-      { marker: "2015", label: "Déploiement de la technologie Leonardo, autorégulation de la combustion par sondes lambda." },
-      { marker: "2024", label: "Présence dans plus de 30 pays, deuxième génération Borsatti aux commandes, plus de 250 collaborateurs." },
+      { marker: "Usines", label: "Usine historique à Gabbioneta Binanuova (Crémone), seconde usine à Sárvár (Hongrie), recherche à Lavagno (Vérone)." },
+      { marker: "Leonardo", label: "Le poêle règle seul sa combustion d'après la pression dans le foyer et la température des fumées." },
+      { marker: "Aujourd'hui", label: "Plus de 250 collaborateurs et des poêles vendus dans plus de 30 pays." },
     ],
     distinctions: [
-      { emoji: "🇮🇹", title: "Fonderie italienne", description: "Production dans 6 sites maison, principalement à Lainate (Milan). Fonderie interne, bureau R&D interne. Pas de sous-traitance opaque, pas de pièces venues d'ailleurs." },
-      { emoji: "🧠", title: "Combustion Leonardo", description: "Sondes lambda et capteurs de pression qui ajustent en permanence l'air et le débit de pellets. La combustion reste stable même si vous changez de marque de sacs, même quand l'humidité ambiante varie." },
+      { emoji: "🇮🇹", title: "Conçu en Italie", description: "Siège à Lainate (Milan), usine historique à Gabbioneta Binanuova (Crémone), laboratoire de recherche à Lavagno (Vérone), seconde usine à Sárvár (Hongrie)." },
+      { emoji: "🧠", title: "Combustion Leonardo", description: "Un capteur de pression dans le foyer et une sonde de température des fumées : le poêle ajuste en permanence l'air et le débit de pellets. La combustion reste stable même si vous changez de marque de sacs, même quand l'humidité ambiante varie." },
       { emoji: "🔇", title: "Silence de fonctionnement", description: "Ventilateurs montés sur amortisseurs, fonte épaisse qui amortit les bruits de combustion. On en met dans un séjour ouvert sur les chambres sans souci." },
       { emoji: "🌬", title: "Technologie airKare", description: "Ionisation et ozonisation actives qui améliorent la qualité de l'air ambiant. Disponible sur certaines gammes. Une fonction qui agit même quand le poêle est éteint." },
       { emoji: "💧", title: "Gamme hydro complète", description: "Les modèles Cherie H et Blade H se raccordent au chauffage central comme une chaudière. Production d'eau chaude sanitaire avec ballon dédié. Adaptée au remplacement d'une vieille chaudière mazout." },
@@ -144,7 +143,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     officialUrl: "https://www.edilkamin.com/",
     metaTitle: "Edilkamin en Wallonie, revendeur officiel poêles italiens | Mister Pellets",
     metaDescription:
-      "Edilkamin, marque italienne fondée en 1963 à Milan. Poêles à pellets premium, technologie Leonardo, fonderie interne. Pose en 1 jour par Mister Pellets, prime Habitation Wallonie 2026 incluse.",
+      "Edilkamin, marque italienne fondée en 1963, siège à Lainate près de Milan. Poêles à pellets premium, technologie Leonardo. Pose en 1 jour par Mister Pellets, TVA à 6 % en rénovation.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -181,7 +180,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { emoji: "📐", title: "Format ultra-fin Entity 90+", description: "31 cm de profondeur seulement. Conçu pour les couloirs ou les petits espaces. Canalisable malgré son format compact." },
       { emoji: "🔥", title: "Focolare en vermiculite", description: "Chambre de combustion en vermiculite haute résistance. Bougie céramique pour allumage rapide. Conçue pour durer dans le temps." },
       { emoji: "🌍", title: "Plateforme Edilkamin", description: "EK63 hérite des méthodes industrielles d'Edilkamin. Même rigueur de fabrication, même filière SAV, mais sous une marque pensée pour un prix d'attaque plus doux." },
-      { emoji: "✅", title: "Certifications complètes", description: "CE, EN 14785, Ecodesign 2022, classe environnementale 5 étoiles D.M. 186. Éligible aux primes belges." },
+      { emoji: "✅", title: "Certifications complètes", description: "CE, EN 14785, Ecodesign 2022, classe environnementale 5 étoiles D.M. 186." },
     ],
     modelsTable: [
       { name: "Tweed 90+", power: "9,2 kW", type: "Canalisable étanche", forWhom: "Best-seller Wallonie, 240 m³, rendement 90,9 %." },
@@ -205,7 +204,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     officialUrl: "https://www.ek-63.com/",
     metaTitle: "EK63 en Wallonie, poêles à pellets Wi-Fi du groupe Edilkamin | Mister Pellets",
     metaDescription:
-      "EK63, marque connectée du groupe Edilkamin. Poêles à pellets étanches, Wi-Fi Smart de série, design moderne, prix accessible. Pose en Wallonie par Mister Pellets, prime 2026 incluse.",
+      "EK63, marque connectée du groupe Edilkamin. Poêles à pellets étanches, Wi-Fi Smart de série, design moderne, prix accessible. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -234,31 +233,30 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { marker: "Années 2000", label: "Développement du brevet Source Feeding, alimentation par le bas auto-nettoyante." },
       { marker: "Années 2010", label: "Lancement du Fuel Convert System pour les hybrides bois-pellet." },
       { marker: "2022", label: "Good Design Award pour le modèle Soft." },
-      { marker: "2024", label: "Environ 65 % de part de marché Italie sur le segment multicombustible domestique, distribution dans plusieurs pays européens." },
     ],
     distinctions: [
       { emoji: "🔄", title: "Source Feeding breveté", description: "Le pellet est poussé par le bas au lieu de tomber sur le brasier. Les cendres sont chassées dans un bac sous le foyer. Le brasier reste propre seul. Plus de nettoyage quotidien à la main." },
-      { emoji: "🪵", title: "Fuel Convert System", description: "Une sonde reconnaît si vous avez chargé du pellet, des bûches ou des broyés (coques, noyaux, marc). Le poêle bascule seul entre les modes. Aucun réglage manuel." },
+      { emoji: "🪵", title: "Fuel Convert System", description: "Une sonde reconnaît si vous avez chargé du pellet, des bûches ou des broyés certifiés (coques, noyaux, plaquettes, parfois avec un accessoire). Le poêle bascule seul entre les modes. Aucun réglage manuel." },
       { emoji: "🌑", title: "Vitre Crystal Magic", description: "La vitre devient totalement opaque quand la flamme est éteinte. Plus de fond noir visible. Le poêle s'efface dans le mobilier quand il ne tourne pas." },
       { emoji: "🔇", title: "Mode SuperSilent", description: "Les ventilateurs s'arrêtent à la demande. La chaleur diffuse par convection naturelle, sans souffle audible. Idéal le soir dans un séjour ouvert sur les chambres." },
       { emoji: "🎛", title: "Canalisable intelligent", description: "Trois ventilateurs indépendants sur les versions canalisables. Chacun ajuste son débit selon la température mesurée dans la pièce qu'il dessert. Thermostats sans fil TriKey en option." },
       { emoji: "🇮🇹", title: "100 % fabriqué en interne", description: "Toutes les phases (idée, conception, fonderie, assemblage, tests) se déroulent dans l'usine de Sant'Oreste, près de Rome. Tradition familiale, deux générations, Good Design Award 2022." },
     ],
     modelsTable: [
-      { name: "Soft", power: "14 à 26 kW", type: "Hybride bois-pellet hydro", forWhom: "Best-seller, Good Design Award 2022, remplacement chaudière." },
-      { name: "Vert", power: "9 à 15 kW", type: "Hybride canalisable", forWhom: "Maison ouverte qui veut canaliser deux pièces." },
+      { name: "Soft", power: "4 versions, jusqu'à 24 kW", type: "Hybride bois-pellet hydro", forWhom: "Best-seller, Good Design Award 2022, remplacement chaudière." },
+      { name: "Vert", power: "Vert 9, 12 ou 14", type: "Pellet canalisable", forWhom: "Maison ouverte qui veut canaliser deux pièces." },
       { name: "Flow", power: "9 à 15 kW", type: "Pellet design moderne", forWhom: "Intérieur contemporain, lignes droites." },
       { name: "Curvy", power: "9 à 14 kW", type: "Pellet maïolique galbée", forWhom: "Intérieur classique ou bohème." },
       { name: "Split", power: "3 puissances", type: "Pellet céramique", forWhom: "Rendement 94,1 %, chambre céramique haut rendement." },
       { name: "Biotec", power: "26 à 34 kW", type: "Chaudière pellet ou hybride", forWhom: "Grandes maisons, ECS, remplacement chaudière fioul." },
     ],
     faq: [
-      { question: "Girolami, c'est qui ?", answer: "Une famille italienne qui fabrique des poêles à Sant'Oreste, près de Rome, depuis 1970. Deux générations. Tout est fait dans la même usine. La marque a environ 65 % de part de marché en Italie sur le segment des poêles multicombustibles." },
+      { question: "Girolami, c'est qui ?", answer: "Une famille italienne qui fabrique des poêles à Sant'Oreste, près de Rome, depuis 1970. Deux générations. Tout est fait dans la même usine." },
       { question: "C'est quoi exactement le Source Feeding ?", answer: "C'est leur brevet d'alimentation par le bas. Au lieu de tomber sur le brasier, le pellet est poussé sous le brasier. Les cendres sont chassées dans un bac de collecte. Concrètement, vous ne nettoyez plus le brasier tous les jours, vous videz le cendrier une fois par semaine." },
       { question: "Un Girolami peut-il fonctionner au pellet et au bois ?", answer: "Oui, sur la gamme hybride (Soft notamment). Le Fuel Convert System détecte automatiquement le combustible chargé. Vous mettez du pellet, ça fonctionne au pellet. Vous mettez des bûches, ça bascule en mode bois. Sans toucher au menu." },
       { question: "C'est silencieux ?", answer: "La fonction SuperSilent coupe les ventilateurs et fait diffuser la chaleur par convection naturelle, sans aucun souffle audible. Utile le soir, dans un séjour ouvert sur les chambres." },
       { question: "On peut piloter un Girolami depuis le smartphone ?", answer: "Oui. Wi-Fi de série sur les modèles modernes (Vert, Flow, Curvy). Application smartphone, programmation horaire, commande vocale via Alexa." },
-      { question: "Quel modèle pour une maison de 150 m² ?", answer: "Pour un chauffage à air, un Vert 12 ou Vert 15 canalisable couvre confortablement, avec deux pièces canalisées. Pour un raccordement aux radiateurs, le Soft hydro 14 ou 18 kW est mieux adapté. On dimensionne ça gratuitement lors du diagnostic à domicile." },
+      { question: "Quel modèle pour une maison de 150 m² ?", answer: "Pour un chauffage à air, un Vert 12 ou Vert 14 canalisable couvre confortablement, avec deux pièces canalisées. Pour un raccordement aux radiateurs, le Soft hydro 14 ou 18 kW est mieux adapté. On dimensionne ça gratuitement lors du diagnostic à domicile." },
     ],
     warranty:
       "Garantie constructeur Girolami. Mister Pellets assure le SAV pièces localement : intervention sous 48 à 72 h et stock des consommables courants en atelier.",
@@ -266,7 +264,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     officialUrl: "https://www.girolami.eu/",
     metaTitle: "Girolami en Wallonie, poêle hybride bois-pellet auto-nettoyant | Mister Pellets",
     metaDescription:
-      "Girolami, fabricant italien familial depuis 1970, brevet Source Feeding auto-nettoyant. Hybrides bois-pellet, canalisables, hydro. Pose en Wallonie par Mister Pellets, prime 2026 incluse.",
+      "Girolami, fabricant italien familial depuis 1970, brevet Source Feeding auto-nettoyant. Hybrides bois-pellet, canalisables, hydro. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
   },
 
   // ───────────────────────────────────────────────────────────────────

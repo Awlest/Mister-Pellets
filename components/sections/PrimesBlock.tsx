@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
+import { AIDES_VERIFIED_AT, LOAN_MAX, MEBAR_MAX } from "@/lib/aides";
 
-interface PrimeRow {
+interface AideRow {
   amount: string;
   audience: string;
   detail?: string;
@@ -13,45 +14,40 @@ interface PrimeRow {
 }
 
 /**
- * Régime Prime Habitation Wallonie 2026 (en vigueur du 14/02/2025 au 30/09/2026).
- * Source : SPW Logement / SPW Énergie. Numéro de démarche 3920.
- *
- * Méthode : prime de base 160 € × coefficient selon revenus de référence.
- *   R1 (≤ 24 600 €) × 6 = 960 €
- *   R2 (24 601 à 39 300 €) × 4 = 640 €
- *   R3 (39 301 à 58 900 €) × 2 = 320 €
- *   R4 (> 58 900 €) × 1 = 160 € (montant de base)
- *   R5 (> 122 800 €) : non éligible depuis le 14/02/2025
+ * Les aides qui restent pour un poêle à pellets en Wallonie depuis la fin de
+ * la prime Habitation (30/09/2026). Réécrit le 03/10/2026 : l'ancien bloc
+ * affichait la prime 160 à 960 € par catégorie R1 à R4, qui n'existe plus.
+ * Chiffres et date de vérification : lib/aides.ts.
  */
-const DEFAULT_PRIMES: PrimeRow[] = [
+const DEFAULT_AIDES: AideRow[] = [
   {
-    amount: "960 €",
-    audience: "Revenus modestes",
-    detail: "Catégorie R1 · coefficient × 6",
+    amount: "6 %",
+    audience: "TVA réduite",
+    detail: "Au lieu de 21 %, logement de plus de 10 ans, poêle posé par nous",
     highlight: true,
   },
   {
-    amount: "640 €",
-    audience: "Revenus moyens",
-    detail: "Catégorie R2 · coefficient × 4",
+    amount: "50 %",
+    audience: "Rénopack",
+    detail: "Part du prêt effacée en C1 (40 % en C2, 15 % en C3)",
   },
   {
-    amount: "320 €",
-    audience: "Revenus supérieurs",
-    detail: "Catégorie R3 · coefficient × 2",
+    amount: LOAN_MAX.house,
+    audience: "Prêt maximum",
+    detail: "Rénopack ou Rénoprêt, maison unifamiliale",
   },
   {
-    amount: "160 €",
-    audience: "Au-delà",
-    detail: "Catégorie R4 · prime de base",
+    amount: MEBAR_MAX,
+    audience: "MEBAR",
+    detail: "Revenus modestes, demande via le CPAS",
   },
 ];
 
 const CONDITIONS = [
-  "Logement de plus de 15 ans en Région wallonne",
-  "Audit logement préalable obligatoire",
-  "Poêle dans la liste officielle SPW Logement",
-  "Pose par entrepreneur inscrit à la BCE",
+  "Maison classée PEB E, F ou G",
+  "Audit logement de moins d'un an",
+  "Label D (ou C) atteint après travaux",
+  "Demande à la SWCS ou au Fonds du Logement",
 ];
 
 interface PrimesBlockProps {
@@ -59,18 +55,17 @@ interface PrimesBlockProps {
   tone?: SectionTone;
   title?: string;
   description?: string;
-  primes?: PrimeRow[];
+  aides?: AideRow[];
+  /** Bouton vers /primes-energie-wallonie-2026 (inutile sur cette page même). */
+  showLink?: boolean;
 }
 
-/**
- * Bloc primes Wallonie 2026, rectification factuelle complète (régime
- * temporaire 14/02/2025 → 30/09/2026).
- */
 export function PrimesBlock({
   tone = "cream",
-  title = "Prime Habitation Wallonie 2026",
-  description = "Régime temporaire en vigueur jusqu'au 30 septembre 2026. Prime de base 160 € multipliée par un coefficient selon votre catégorie de revenus. On monte le dossier complet pour vous.",
-  primes = DEFAULT_PRIMES,
+  title = "Les aides en 2026, après la fin de la prime",
+  description = "Depuis le 1er octobre 2026, la Wallonie ne verse plus de prime pour un poêle à pellets. Voici ce qui reste pour alléger la facture, et à quelles conditions.",
+  aides = DEFAULT_AIDES,
+  showLink = true,
 }: PrimesBlockProps) {
   return (
     <section className={cn("mp-band", toneClass(tone))}>
@@ -84,13 +79,13 @@ export function PrimesBlock({
           )}
         </div>
 
-        {/* 4 cards, R1 (highlight) puis R2, R3, R4 */}
+        {/* 4 cartes, la TVA (l'aide de presque tous les chantiers) en tête */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {primes.map((prime) => (
+          {aides.map((aide) => (
             <Card
-              key={prime.audience}
+              key={aide.audience}
               className={`p-6 flex flex-col items-start ${
-                prime.highlight
+                aide.highlight
                   ? "ring-2 ring-mp-orange-flame ring-offset-2 ring-offset-mp-cream"
                   : ""
               }`}
@@ -99,43 +94,43 @@ export function PrimesBlock({
                 className="text-4xl md:text-5xl font-semibold text-mp-orange-flame mb-2 tabular-nums"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                {prime.amount}
+                {aide.amount}
               </span>
               <span className="text-base font-semibold text-mp-green-deep">
-                {prime.audience}
+                {aide.audience}
               </span>
-              {prime.detail && (
-                <span className="text-xs text-mp-ink-soft mt-1">{prime.detail}</span>
+              {aide.detail && (
+                <span className="text-xs text-mp-ink-soft mt-1">{aide.detail}</span>
               )}
             </Card>
           ))}
         </div>
 
-        {/* Plafonds + R5 */}
+        {/* Ce qui a changé au 1er octobre */}
         <Card className="p-6 mb-8 bg-mp-beige border-mp-sand/40">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-mp-ink leading-relaxed">
             <div>
               <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
-                Plafond R1 et R2
+                Prime poêle à pellets
               </span>
-              Maximum 70 % du coût total TVAC
+              Terminée : demandes closes le 30 septembre 2026 à 23 h 59
             </div>
             <div>
               <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
-                Plafond R3 et R4
+                Rénopack et Rénoprêt
               </span>
-              Maximum 50 % du coût total TVAC
+              Prêts pour les maisons PEB E, F ou G, avec audit préalable
             </div>
             <div>
               <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
-                Catégorie R5 (&gt; 122 800 €)
+                Saut de label exigé
               </span>
-              Non éligible depuis le 14/02/2025
+              De F ou G vers D au minimum, de E vers C au minimum
             </div>
           </div>
         </Card>
 
-        {/* Conditions */}
+        {/* Conditions des prêts */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mb-10 mp-measure">
           {CONDITIONS.map((c) => (
             <div key={c} className="flex items-start gap-2 text-sm text-mp-ink">
@@ -147,19 +142,20 @@ export function PrimesBlock({
           ))}
         </div>
 
-        <div className="flex justify-center">
-          <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-            <Link href="/primes-energie-wallonie-2026">
-              Conditions complètes et procédure
-            </Link>
-          </Button>
-        </div>
+        {showLink && (
+          <div className="flex justify-center">
+            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
+              <Link href="/primes-energie-wallonie-2026">
+                Toutes les aides et leurs conditions
+              </Link>
+            </Button>
+          </div>
+        )}
 
         <p className="mt-6 text-xs text-mp-ink-soft italic mp-measure text-center">
-          Information à titre indicatif, basée sur le régime temporaire en vigueur du
-          14 février 2025 au 30 septembre 2026 (numéro de démarche 3920). Les montants
-          et conditions peuvent évoluer. Pour un calcul personnalisé et une vérification
-          officielle, contactez le SPW Énergie au 1718 ou sur energie.wallonie.be.
+          Situation vérifiée le {AIDES_VERIFIED_AT} sur wallonie.be, swcs.be et fin.belgium.be.
+          Les taux et durées des prêts sont fixés par la SWCS et le Fonds du Logement de
+          Wallonie. Renseignements gratuits au 1718.
         </p>
       </div>
     </section>

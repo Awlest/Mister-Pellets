@@ -87,11 +87,9 @@ export default function PrendreRendezVousPage() {
               stock atelier pour votre visite.
             </p>
             <p>
-              <strong className="text-mp-green-deep">Pour être certain d'être reçu</strong> et
-              bénéficier de conseils personnalisés (avec un café, accessoirement),
-              <strong> prendre rendez-vous est fortement recommandé</strong>. Les visites sans RDV
-              sont possibles aux heures d'ouverture mais on ne peut pas garantir la disponibilité
-              d'un conseiller selon la charge du jour.
+              <strong className="text-mp-green-deep">Le showroom se visite uniquement sur rendez-vous.</strong>{" "}
+              C&apos;est ce qui garantit qu&apos;un conseiller est là pour vous, avec le temps de répondre
+              à vos questions (et un café, accessoirement).
             </p>
           </div>
 

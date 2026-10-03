@@ -9,7 +9,7 @@ type State = "idle" | "loading" | "success" | "error";
 const SUBJECTS = [
   { value: "info-produit", label: "Question sur un produit" },
   { value: "info-pose", label: "Question sur la pose ou l'installation" },
-  { value: "info-primes", label: "Question sur les primes Wallonie" },
+  { value: "info-primes", label: "Question sur les aides et la TVA" },
   { value: "info-entretien", label: "Question sur l'entretien" },
   { value: "info-other", label: "Autre" },
 ];

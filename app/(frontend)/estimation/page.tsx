@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Estimation en ligne, poêle à pellets posé",
   description:
-    "Composez votre installation en 2 minutes : le poêle de notre catalogue, la pose, la TVA 6 %, la prime Wallonie et la mensualité à 0 %. Estimation immédiate, prix ferme après visite technique.",
+    "Composez votre installation en 2 minutes : le poêle de notre catalogue, la pose, la TVA 6 % et la mensualité à 0 %. Estimation immédiate, prix ferme après visite technique.",
   path: "/estimation",
 });
 
@@ -30,7 +30,7 @@ export default async function EstimationPage() {
             Votre poêle à pellets posé, <span className="mp-italic">chiffré en direct</span>
           </>
         }
-        description="Vous choisissez le poêle dans notre catalogue, nous ajoutons la pose, la TVA applicable, la prime Wallonie estimée et la mensualité à 0 %. Le tout sans attendre un rappel."
+        description="Vous choisissez le poêle dans notre catalogue, nous ajoutons la pose, la TVA applicable et la mensualité à 0 %. Le tout sans attendre un rappel."
         breadcrumbs={[{ label: "Accueil", href: "/" }, { label: "Estimation en ligne" }]}
       />
 
@@ -47,7 +47,7 @@ export default async function EstimationPage() {
             </span>
             <span className="inline-flex items-center gap-2">
               <PiggyBank className="h-4 w-4 text-mp-orange-flame" />
-              Prime et 0 % simulés
+              TVA et 0 % simulés
             </span>
           </div>
 

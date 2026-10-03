@@ -294,7 +294,7 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
         title: "Comment se passe la visite",
         paragraphs: [
           "On regarde la pièce où ira le poêle, le conduit existant (ou l'endroit où en faire passer un), l'isolation et l'arrivée d'air. La visite dure 30 à 45 minutes ; on bloque une heure pour avoir le temps de répondre à vos questions.",
-          "Vous recevez le devis chiffré sous 48 heures, avec le modèle qu'on vous conseille et la prime Wallonie déjà déduite.",
+          "Vous recevez le devis chiffré sous 48 heures, avec le modèle qu'on vous conseille, la pose et la TVA qui s'applique chez vous.",
           "Si vous avez votre certificat PEB, sortez-le. Avec la surface à chauffer, c'est ce qui nous fait gagner le plus de temps.",
         ],
       }
@@ -431,8 +431,6 @@ export async function notifyInternalEstimate(est: {
   lines: { label: string; amountHT: number }[];
   materialHT: number;
   totalTTC: number;
-  prime: number;
-  netAfterPrime: number;
   months?: number | null;
   monthly?: number | null;
   message?: string;
@@ -448,7 +446,7 @@ export async function notifyInternalEstimate(est: {
   const html = `
     <h2 style="color:#174724;font-family:Georgia,serif">Nouvelle estimation configurée en ligne</h2>
     <p><strong>${escapeHtml(est.name)}</strong> · ${escapeHtml(est.email)}${est.phone ? ` · ${escapeHtml(est.phone)}` : ""} · ${escapeHtml(est.postalCode)}</p>
-    <p style="font-size:18px;color:#174724"><strong>${fmt(est.totalTTC)} TTC</strong> (TVA ${Math.round(est.vatRate * 100)} %)${est.prime > 0 ? ` · ${fmt(est.netAfterPrime)} après prime estimée de ${fmt(est.prime)}` : ""}${est.monthly ? ` · ${fmt(est.monthly)}/mois sur ${est.months} mois` : ""}</p>
+    <p style="font-size:18px;color:#174724"><strong>${fmt(est.totalTTC)} TTC</strong> (TVA ${Math.round(est.vatRate * 100)} %)${est.monthly ? ` · ${fmt(est.monthly)}/mois sur ${est.months} mois` : ""}</p>
     <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
       <tr><td style="background:#FAF7F0;width:45%"><strong>Poêle choisi</strong></td><td>${escapeHtml(est.productName)} (${est.powerKw} kW) — /produit/${escapeHtml(est.productSlug)}</td></tr>
       <tr><td style="background:#FAF7F0"><strong>Matériel</strong></td><td>${fmt(est.materialHT)} HT</td></tr>

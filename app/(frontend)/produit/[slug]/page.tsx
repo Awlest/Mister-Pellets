@@ -23,7 +23,7 @@ import { buildPageMetadata } from "@/lib/seo";
 import { schemaAvailability } from "@/lib/availability";
 import { BONUS } from "@/lib/bonus";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
-import { productFuel, productKindLabel } from "@/lib/product-kind";
+import { productKindLabel } from "@/lib/product-kind";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -55,11 +55,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Produit introuvable", robots: { index: false, follow: false } };
   // Libellé tiré du combustible et du type, comme dans le flux Merchant.
   const kind = productKindLabel(product);
-  // La prime de /primes-energie-wallonie-2026 ne vise que le pellet.
-  const primes = productFuel(product) === "pellet" ? ", primes incluses" : "";
   return buildPageMetadata({
     title: `${product.name}, ${kind.charAt(0).toUpperCase()}${kind.slice(1)} ${product.power}`,
-    description: `${product.name} : ${product.power}${product.heatedVolume ? ` pour ${product.heatedVolume}` : ""}. ${product.priceTTC ? `${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets${primes}.`,
+    description: `${product.name} : ${product.power}${product.heatedVolume ? ` pour ${product.heatedVolume}` : ""}. ${product.priceTTC ? `${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets.`,
     path: `/produit/${product.slug}`,
     // Fiche masquée de la boutique : joignable par son URL (liens, favoris)
     // mais hors de Google, comme elle l'est déjà du sitemap et du flux.
@@ -287,13 +285,12 @@ export default async function ProductPage({ params }: Props) {
               ) : product.heatedVolume ? (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
                   {brand?.tagline}. {product.power} pour chauffer {product.heatedVolume}. Pose par
-                  Mister Pellets en une journée, primes Wallonie 2026 déduites du devis et
-                  garantie 5 ans.
+                  Mister Pellets en une journée, TVA à 6 % en rénovation et garantie 5 ans.
                 </p>
               ) : (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
-                  {brand?.tagline}. Pose par Mister Pellets en une journée, primes Wallonie 2026
-                  déduites du devis et garantie 5 ans.
+                  {brand?.tagline}. Pose par Mister Pellets en une journée, TVA à 6 % en rénovation
+                  et garantie 5 ans.
                 </p>
               )}
 
@@ -449,7 +446,7 @@ export default async function ProductPage({ params }: Props) {
               <p className="text-xs text-mp-ink-soft mt-4 text-center">
                 Prix du matériel seul. La pose se chiffre après une visite sur
                 place : c'est là qu'on valide le conduit, l'évacuation et
-                l'accès. Les primes et la TVA à 6 % sont calculées dans le devis.
+                l'accès. La TVA à 6 % (logement de plus de 10 ans) est calculée dans le devis.
               </p>
                 </>
               )}
@@ -563,7 +560,7 @@ export default async function ProductPage({ params }: Props) {
 
       <CTAFinal
         title={`Devis avec pose pour le ${product.name}`}
-        description="On chiffre le poêle, la pose et les primes en 48 heures. Sans engagement avant signature."
+        description="On chiffre le poêle et la pose en 48 heures. Sans engagement avant signature."
       />
     </>
   );

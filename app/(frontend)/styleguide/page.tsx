@@ -136,7 +136,7 @@ export default function StyleguidePage() {
             </div>
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft">Body Large · Inter Tight 400</span>
-              <p className="text-lg">Edilkamin, EK63, Dielle, Ferlux. Conseils d'experts, pose soignée, primes incluses.</p>
+              <p className="text-lg">Edilkamin, EK63, Dielle, Ferlux. Conseils d'experts, pose soignée, TVA à 6 % en rénovation.</p>
             </div>
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft">Body · Inter Tight 400</span>
@@ -289,7 +289,7 @@ export default function StyleguidePage() {
       <TripleChoice
         choices={[
           { icon: ShoppingBag, title: "Acheter en boutique", description: "61 modèles, livraison gratuite 20km.", cta: { label: "Voir la boutique", href: "/boutique" } },
-          { icon: FileText, title: "Devis avec pose", description: "Chiffrage en 48h, primes incluses.", cta: { label: "Demander un devis", href: "/demande-de-devis" }, highlight: true },
+          { icon: FileText, title: "Devis avec pose", description: "Chiffrage en 48h, TVA comprise.", cta: { label: "Demander un devis", href: "/demande-de-devis" }, highlight: true },
           { icon: Calendar, title: "RDV showroom", description: "Voir les modèles à Fernelmont.", cta: { label: "Prendre RDV", href: "/prendre-rendez-vous" } },
         ]}
       />
@@ -299,7 +299,7 @@ export default function StyleguidePage() {
         stats={[
           { value: "−40 %", label: "sur la facture", detail: "vs mazout" },
           { value: "90 %", label: "de rendement", detail: "écodesign 2022" },
-          { value: "960 €", label: "prime max", detail: "Wallonie 2026 R1" },
+          { value: "6 %", label: "de TVA", detail: "logement de plus de 10 ans" },
           { value: "−95 %", label: "d'émissions CO2", detail: "vs mazout" },
         ]}
       />
@@ -309,7 +309,7 @@ export default function StyleguidePage() {
         title="ProcessSteps (fond vert deep)"
         steps={[
           { title: "Diagnostic gratuit", description: "Visite à domicile ou visio." },
-          { title: "Devis avec primes", description: "Chiffrage transparent en 48h." },
+          { title: "Devis tout compris", description: "Chiffrage transparent en 48h." },
           { title: "Pose en 1 journée", description: "Équipe Mister Pellets, pose soignée." },
           { title: "Mise en route", description: "Garantie 5 ans pièces et main d'œuvre." },
         ]}

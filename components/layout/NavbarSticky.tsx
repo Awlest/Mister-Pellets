@@ -57,7 +57,7 @@ const TABS: Tab[] = [
 const MENU_LINKS = [
   { href: "/nos-marques",                  label: "Nos marques",          desc: "Edilkamin · EK63 · Girolami" },
   { href: "/guides",                       label: "Guides",               desc: "Conseils, comparatifs, dimensionnement" },
-  { href: "/primes-energie-wallonie-2026", label: "Prime 2026",           desc: "Jusqu'à 960 € selon revenus" },
+  { href: "/primes-energie-wallonie-2026", label: "Aides 2026",           desc: "Fin de la prime, ce qui reste" },
   { href: "/zones-d-intervention",         label: "Zones d'intervention", desc: "10 villes en Wallonie" },
   { href: "/blog",                         label: "Blog",                 desc: "Articles et actualités" },
   { href: "/faq",                          label: "FAQ",                  desc: "Réponses aux questions courantes" },

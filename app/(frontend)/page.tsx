@@ -25,14 +25,14 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Poêle à pellets en Wallonie, vente, pose, entretien",
   description:
-    "Edilkamin, EK63 et Girolami : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, prime Wallonie 2026 jusqu'à 960 €, livraison gratuite dans 20 km autour de Fernelmont. Devis en 60 secondes.",
+    "Edilkamin, EK63 et Girolami : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
 };
 
 const FAQ_HOMEPAGE = [
   {
     question: "Combien coûte un poêle à pellets installé en Wallonie ?",
     answer:
-      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. La Prime Habitation Wallonie 2026 ramène 160 à 960 € de cette facture selon votre catégorie de revenus.",
+      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. Dans un logement de plus de 10 ans, la TVA passe à 6 % au lieu de 21 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026.",
   },
   {
     question: "Quelle puissance de poêle pour quelle surface ?",
@@ -45,14 +45,14 @@ const FAQ_HOMEPAGE = [
       "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours.",
   },
   {
-    question: "Faut-il un audit logement pour la prime Wallonie 2026 ?",
+    question: "Existe-t-il encore une prime pour un poêle à pellets en Wallonie ?",
     answer:
-      "Oui, depuis le 14 février 2025, un audit logement préalable est obligatoire pour la quasi-totalité des primes Habitation, y compris pour un poêle à pellets isolé. Coût 800 à 1 200 € TVAC, validité 5 ans. C'est un changement majeur par rapport à l'ancien régime.",
+      "Plus depuis le 1er octobre 2026. La prime Habitation s'est arrêtée le 30 septembre 2026, et la Région passe à des prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui font un saut de label après un audit. Pour un poêle seul, il reste la TVA à 6 % sur un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes, via le CPAS.",
   },
   {
     question: "Le SAV est-il assuré après la pose ?",
     answer:
-      "Oui. Garantie 5 ans pièces et main d'œuvre incluse, intervention SAV sous 48 à 72 heures dans la zone Fernelmont et 50 km autour. On reste l'interlocuteur unique pour l'entretien annuel obligatoire et les éventuelles révisions techniques. Pas de SAV sous-traité à un tiers.",
+      "Oui. Garantie 5 ans pièces et main d'œuvre incluse, intervention SAV sous 48 à 72 heures dans la zone Fernelmont et 50 km autour. On reste l'interlocuteur unique pour l'entretien annuel, condition de la garantie, et les éventuelles révisions techniques. Pas de SAV sous-traité à un tiers.",
   },
   {
     question: "Vous livrez et posez partout en Wallonie ?",
@@ -62,7 +62,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Quelles marques de poêles distribuez-vous ?",
     answer:
-      "On distribue trois marques italiennes, choisies parce qu'on les connaît à fond. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi de série. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Nous, on vous dirige vers celle qui colle à votre projet, pas vers celle qui rapporte le plus.",
+      "On distribue trois marques italiennes, choisies parce qu'on les connaît à fond. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi sur la plupart des modèles récents. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Sant'Oreste, près de Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Nous, on vous dirige vers celle qui colle à votre projet, pas vers celle qui rapporte le plus.",
   },
 ];
 
@@ -78,7 +78,7 @@ const SERVICES = [
     href: "/ramonage",
     title: "Ramonage",
     description:
-      "Obligatoire une fois par an en Wallonie sur un appareil à combustible solide. Certificat remis sur place, celui que votre assureur vous demandera après un sinistre.",
+      "Une fois par an : c'est ce que demandent la plupart des contrats d'assurance incendie et les notices des fabricants. Certificat remis sur place, à garder pour votre assureur.",
     cta: "Voir le ramonage",
   },
   {
@@ -137,13 +137,13 @@ export default function HomePage() {
             <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 mp-measure mx-auto">
               Edilkamin, EK63 et Girolami : trois marques italiennes, et on ne pose que celles-là.
               Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
-              prime Habitation Wallonie 2026 déjà déduite. Basés à Fernelmont, on couvre les 5
+              TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
               provinces wallonnes depuis 2016.
             </p>
 
             {/* Le configurateur passe en action principale : depuis le retrait du
-              * paiement en ligne, c'est lui qui chiffre, calcule la mensualité et
-              * déduit la prime, alors que le formulaire ne fait que transmettre
+              * paiement en ligne, c'est lui qui chiffre et calcule la mensualité,
+              * alors que le formulaire ne fait que transmettre
               * une demande. Un seul chemin par intention.
               *
               * La prise de rendez-vous n'était qu'un lien dans la phrase du
@@ -228,8 +228,8 @@ export default function HomePage() {
               Le diagnostic à domicile, qu'on fait gratuitement dans la zone Fernelmont et 50 km
               autour, dure 30 à 45 minutes. On regarde la pièce d'installation, le conduit existant,
               l'arrivée d'air comburant possible, l'isolation, l'évacuation des fumées la plus
-              naturelle. C'est de cette visite que sort le devis chiffré sous 48 heures, avec la
-              prime déjà déduite.
+              naturelle. C'est de cette visite que sort le devis chiffré sous 48 heures, au taux de
+              TVA qui s'applique chez vous.
             </p>
           </div>
 
@@ -422,7 +422,7 @@ export default function HomePage() {
             <p>
               Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
               compte 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
-              étage. Les modèles EK63 et Edilkamin Mood ou Cherie Up dominent ce segment.
+              étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
             </p>
             <p>
               Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez 8 000 à
@@ -435,8 +435,10 @@ export default function HomePage() {
               Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
               l'écrasante majorité des logements wallons concernés ont plus de 10 ans. Cette TVA
               réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
-              S'ajoutent ensuite la Prime Habitation Wallonie 2026 (160 à 960 € selon catégorie de
-              revenus) et d'éventuelles primes communales (cuve mazout, rénovation chauffage).
+              La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
+              désormais par des prêts (Rénopack, Rénoprêt) réservés aux maisons classées E, F ou G
+              qui font un saut de label. Certaines communes gardent une prime énergie, à vérifier
+              auprès d'elles.
             </p>
           </div>
         </div>
@@ -450,7 +452,7 @@ export default function HomePage() {
           },
           {
             title: "Devis chiffré sous 48h",
-            description: "Modèle adapté, prix TVAC, prime Wallonie déjà calculée, délai annoncé.",
+            description: "Modèle adapté, prix TVAC au bon taux de TVA, délai annoncé.",
           },
           {
             title: "Pose en 1 journée",
@@ -596,7 +598,7 @@ export default function HomePage() {
 
       <CTAFinal
         title="Chiffrez votre installation en 2 minutes"
-        description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris, la mensualité à 0 % et la prime déjà déduite. Le prix ferme est confirmé après la visite technique, sans engagement."
+        description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris et la mensualité à 0 %. Le prix ferme est confirmé après la visite technique, sans engagement."
         secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous#reserver" }}
       />
     </>

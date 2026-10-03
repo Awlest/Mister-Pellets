@@ -39,11 +39,11 @@ export const CITIES: CityData[] = [
     intro:
       "Capitale wallonne, Namur regroupe un mix de logements anciens en pierre dans le centre historique et de quartiers résidentiels modernes en périphérie (Jambes, Belgrade, Bouge, Saint-Servais). On y intervient quasi quotidiennement depuis Fernelmont, 17 km, 20 minutes de route.",
     context:
-      "Sur les maisons mitoyennes anciennes du centre, le tubage du conduit existant est souvent nécessaire, on a l'habitude. Sur les nouvelles constructions de Bouge ou Belgrade, c'est la pose d'un étanche en façade qui domine. La province de Namur est aussi la plus généreuse côté primes, avec une majoration possible sur certaines communes.",
+      "Sur les maisons mitoyennes anciennes du centre, le tubage du conduit existant est souvent nécessaire, on a l'habitude. Sur les nouvelles constructions de Bouge ou Belgrade, c'est la pose d'un étanche en façade qui domine.",
     recommendedModels: ["edilkamin-blade-9kw", "ek63-tweed-90", "edilkamin-lena-11kw"],
     metaTitle: "Poêle à pellets à Namur, Vente & pose",
     metaDescription:
-      "Poêle à pellets à Namur : conseil, vente et pose en 1 jour. 10+ modèles, primes Wallonie incluses, à 17 km de Fernelmont. Devis gratuit en 60 sec.",
+      "Poêle à pellets à Namur : conseil, vente et pose en 1 jour. 10+ modèles, TVA à 6 % en rénovation, à 17 km de Fernelmont. Devis gratuit en 60 sec.",
   },
   {
     slug: "charleroi",
@@ -59,7 +59,7 @@ export const CITIES: CityData[] = [
     recommendedModels: ["edilkamin-mood-plus-11kw", "ek63-tweed-90", "edilkamin-lena-11kw"],
     metaTitle: "Poêle à pellets à Charleroi, Vente & pose",
     metaDescription:
-      "Poêle à pellets à Charleroi : pose en 1 jour, hydro pour remplacer mazout, étanche pour BBC. 10+ modèles. Pose Mister Pellets, primes Wallonie incluses.",
+      "Poêle à pellets à Charleroi : pose en 1 jour, hydro pour remplacer mazout, étanche pour BBC. 10+ modèles. Pose Mister Pellets, TVA à 6 % en rénovation.",
   },
   {
     slug: "liege",
@@ -75,7 +75,7 @@ export const CITIES: CityData[] = [
     recommendedModels: ["ek63-like-80", "edilkamin-blade-9kw", "edilkamin-mood-plus-11kw"],
     metaTitle: "Poêle à pellets à Liège, Vente & pose",
     metaDescription:
-      "Poêle à pellets à Liège : étanche pour copros et BBC, hydro pour grandes maisons. Pose en 1 jour, primes Wallonie incluses, conseil expert Mister Pellets.",
+      "Poêle à pellets à Liège : étanche pour copros et BBC, hydro pour grandes maisons. Pose en 1 jour, TVA à 6 % en rénovation, conseil expert Mister Pellets.",
   },
   {
     slug: "wavre",
@@ -107,7 +107,7 @@ export const CITIES: CityData[] = [
     recommendedModels: ["edilkamin-lena-11kw", "ek63-spy-110", "edilkamin-blade-9kw"],
     metaTitle: "Poêle à pellets à Mons, Vente & pose",
     metaDescription:
-      "Poêle à pellets à Mons : tubage, étanche, hydro selon votre maison. 10+ modèles, pose Mister Pellets, primes Wallonie incluses. À 90 km de Fernelmont.",
+      "Poêle à pellets à Mons : tubage, étanche, hydro selon votre maison. 10+ modèles, pose Mister Pellets, TVA à 6 % en rénovation. À 90 km de Fernelmont.",
   },
   {
     slug: "arlon",
@@ -123,7 +123,7 @@ export const CITIES: CityData[] = [
     recommendedModels: ["edilkamin-mood-plus-11kw", "ek63-spy-110", "edilkamin-lena-11kw"],
     metaTitle: "Poêle à pellets à Arlon, Vente & pose",
     metaDescription:
-      "Poêle à pellets à Arlon : hydro Girolami pour grandes maisons, hivers luxembourgeois. Pose Mister Pellets sur RDV. Primes Wallonie + Luxembourg incluses.",
+      "Poêle à pellets à Arlon : hydro Girolami pour grandes maisons, hivers luxembourgeois. Pose Mister Pellets sur RDV, TVA à 6 % en rénovation.",
   },
   {
     slug: "tournai",
@@ -187,7 +187,7 @@ export const CITIES: CityData[] = [
     recommendedModels: ["edilkamin-mood-plus-11kw", "edilkamin-lena-11kw", "ek63-like-80"],
     metaTitle: "Poêle à pellets à Dinant, Vente & pose",
     metaDescription:
-      "Poêle à pellets à Dinant : hydro pour maisons mosanes, étanche pour modernes. 10+ modèles, pose Mister Pellets, primes Wallonie incluses. Devis sous 48h.",
+      "Poêle à pellets à Dinant : hydro pour maisons mosanes, étanche pour modernes. 10+ modèles, pose Mister Pellets, TVA à 6 % en rénovation. Devis sous 48h.",
   },
 ];
 

@@ -35,8 +35,10 @@ export const BONUS = {
   label: "Bonus de saison -15 % sur le poêle",
   /** Pastille courte pour les cartes et les fiches produit. */
   badge: "-15 %",
+  // « cumulable avec la prime Habitation » retiré le 03/10/2026 : la prime
+  // s'est arrêtée le 30/09/2026, aucune commande du bonus ne peut y prétendre.
   conditions:
-    "Pour toute commande passée entre le 1er octobre et le 24 décembre 2026, sur le prix du poêle, pose non remisée, cumulable avec la prime Habitation.",
+    "Pour toute commande passée entre le 1er octobre et le 24 décembre 2026, sur le prix du poêle, pose non remisée.",
   /**
    * Plage `sale_price_effective_date` du flux Google Merchant, ISO 8601 avec
    * fuseau : heure d'été le 1er octobre, heure d'hiver le 24 décembre.

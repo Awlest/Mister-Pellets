@@ -115,7 +115,7 @@ export default async function OpengraphImage() {
         >
           Edilkamin · EK63 · Girolami
           <br />
-          Pose en 1 jour · Prime Wallonie 2026 jusqu&apos;à 960 €
+          Pose en 1 jour · TVA à 6 % en rénovation
         </div>
 
         {/* Bandeau footer (identité Awlest + URL) */}

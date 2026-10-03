@@ -24,7 +24,7 @@ export default function GuidesHubPage() {
             Poêle à pellets : tout savoir avant <span className="mp-italic">d'acheter</span>
           </>
         }
-        description="Des guides complets sur le poêle à pellets en Wallonie : choix de marques, technologies, dimensionnement, entretien, primes. Sans bullshit, avec les vrais chiffres."
+        description="Des guides complets sur le poêle à pellets en Wallonie : choix de marques, technologies, dimensionnement, entretien, aides. Sans bullshit, avec les vrais chiffres."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Guides" },

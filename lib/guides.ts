@@ -27,10 +27,102 @@ export interface GuideData {
 }
 
 export const GUIDES: GuideData[] = [
+  // Guide de saison (03/10/2026), placé en tête pendant la saison de chauffe :
+  // la page /guides et le bloc « Continuer sur le sujet » suivent l'ordre du tableau.
+  {
+    slug: "remettre-en-route-poele-pellets-automne",
+    title: "Remettre son poêle à pellets en route à l'automne : le guide de début de saison",
+    description:
+      "Ce qu'on vérifie avant le premier feu, comment rallumer sans panne, régler le poêle pour l'hiver et faire son stock de pellets. Le guide de saison des techniciens Mister Pellets.",
+    category: "Entretien",
+    readingTime: "7 min",
+    excerpt:
+      "Après six mois d'arrêt, un poêle à pellets se rallume rarement du premier coup sans un peu de préparation. Voici l'ordre dans lequel on fait les choses, et les signes qui doivent vous faire appeler.",
+    sections: [
+      {
+        heading: "1. Avant le premier feu : trois vérifications à froid",
+        paragraphs: [
+          "Poêle éteint et froid, prise débranchée dès que vous touchez à l'intérieur. Dix minutes suffisent.",
+        ],
+        list: [
+          "Le réservoir. Les pellets restés dedans tout l'été ont pu reprendre de l'humidité : s'ils sont ternes, friables ou poussiéreux, videz-les. Un pellet qui gonfle peut bloquer la vis sans fin dès le premier allumage.",
+          "Le creuset et le cendrier. Videz les cendres de la fin d'hiver, dégagez les trous du creuset à la brosse et vérifiez que rien n'est tombé dans le foyer pendant l'été.",
+          "Le dehors. Sur un poêle étanche, la prise d'air et le terminal de la ventouse doivent être dégagés : feuilles, toiles d'araignée, nid de guêpes. Sur un conduit en toiture, un nid d'oiseau dans le chapeau suffit à provoquer des refoulements.",
+        ],
+      },
+      {
+        heading: "2. L'entretien et le ramonage, avant ou juste après",
+        paragraphs: [
+          "Si l'entretien de l'an dernier n'a pas été fait, faites-le avant les grands froids. Un échangeur resté encrassé depuis le printemps fait consommer plus dès le premier mois, et les créneaux se remplissent vite à partir d'octobre. Chez nous, l'entretien complet coûte 175 € TVAC, ramonage du conduit compris.",
+          "Aucune loi wallonne n'impose le ramonage d'un poêle, mais la plupart des contrats d'assurance incendie l'exigent chaque année. Gardez le certificat avec les papiers de la maison : c'est le premier document qu'un assureur demande après un feu de cheminée.",
+        ],
+      },
+      {
+        heading: "3. Le premier allumage de la saison",
+        paragraphs: [
+          "La vis sans fin s'est vidée pendant l'été. Au premier allumage, elle met plusieurs minutes à amener les pellets jusqu'au creuset, et il arrive que le poêle affiche un échec d'allumage. Beaucoup de modèles proposent une fonction de chargement de la vis dans leur menu (voyez la notice) : lancez-la avant d'allumer, ou relancez simplement un second allumage.",
+          "Avant tout nouvel essai, videz le creuset s'il est plein de pellets non brûlés. Les rallumer en tas, c'est risquer un départ de flamme brutal dans le foyer. Et jamais d'allume-feu, de papier ou d'alcool dans un poêle à pellets : la bougie s'en charge.",
+          "Une odeur de chaud pendant la première heure est normale, c'est la poussière de l'été qui brûle sur l'échangeur. Aérez. Si l'odeur ressemble à de la fumée et ne passe pas, éteignez et appelez.",
+        ],
+      },
+      {
+        heading: "4. Régler le poêle pour l'hiver",
+        paragraphs: [
+          "Vérifiez l'heure du poêle : s'il a été débranché, il a pu la perdre, et le passage à l'heure d'hiver, le 25 octobre cette année, la décale d'une heure sur les modèles qui ne s'ajustent pas seuls. Vos plages horaires en dépendent.",
+          "Visez 19 à 20 °C dans la pièce de vie. Un poêle bien dimensionné passe l'hiver à mi-régime. S'il s'allume et s'éteint à longueur de journée, il use sa bougie et consomme plus : mieux vaut une puissance basse en continu, ou des plages horaires plus longues.",
+          "Sur un poêle hydro, contrôlez la pression du circuit à froid (souvent autour de 1 à 1,5 bar, la notice donne la bonne valeur) et purgez les radiateurs qui gargouillent. Un circulateur resté à l'arrêt tout l'été peut avoir du mal à redémarrer : si le circuit reste froid alors que le poêle chauffe, appelez-nous.",
+        ],
+      },
+      {
+        heading: "5. Faire son stock de pellets",
+        paragraphs: [
+          "Un poêle qui chauffe la maison tout l'hiver avale 1,5 à 2 tonnes de pellets, soit 100 à 135 sacs de 15 kg. En août 2026, ValBiom relevait 6,19 € en moyenne le sac en Wallonie, acheté par palette, et ne prévoit pas de baisse cet hiver. Notre article sur le budget d'un hiver au pellet détaille le calcul.",
+          "Stockez au sec et sur palette, à distance du poêle. C'est l'humidité qui abîme les pellets, pas le froid. Prenez des sacs certifiés ENplus A1 ou DINplus : les deux imposent les mêmes seuils, et un sac sans logo ne garantit rien.",
+        ],
+      },
+      {
+        heading: "6. Les signes qui doivent vous faire appeler",
+        paragraphs: [
+          "Ceux-là ne se règlent pas avec une brosse. Notez la marque du poêle et le code affiché avant d'appeler le 081 13 83 09 : on gagne souvent un déplacement.",
+        ],
+        list: [
+          "Une odeur de fumée dans la pièce, ou l'alarme du détecteur de monoxyde de carbone : éteignez, aérez, sortez et appelez. Le détecteur de CO n'est pas obligatoire en Wallonie, mais on le conseille dans la pièce du poêle ; les détecteurs de fumée, eux, sont obligatoires dans tous les logements.",
+          "Une flamme longue, orange et molle, avec une vitre qui noircit en quelques heures : la combustion manque d'air, le conduit ou l'échangeur est probablement encrassé.",
+          "Le même code d'erreur qui revient, ou un allumage qui échoue deux fois de suite alors que le réservoir est plein.",
+          "Un bruit nouveau : vis sans fin qui grince, ventilateur qui frotte ou qui siffle.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: "Faut-il faire l'entretien avant de rallumer le poêle ?",
+        answer:
+          "Idéalement oui, surtout s'il n'a pas été fait l'hiver dernier. Sinon, dans le premier mois de chauffe. Un poêle encrassé consomme plus et s'arrête plus souvent, et la garantie du fabricant demande un entretien annuel.",
+      },
+      {
+        question: "Peut-on utiliser les pellets de l'an dernier ?",
+        answer:
+          "Oui, s'ils sont restés au sec : durs, brillants, sans poussière. S'ils sont ternes, friables ou s'ils sentent l'humidité, ne les mettez pas dans le poêle : ils encrassent et peuvent bloquer la vis.",
+      },
+      {
+        question: "Mon poêle sent le brûlé au premier allumage, est-ce normal ?",
+        answer:
+          "Pendant la première heure, oui : c'est la poussière de l'été qui brûle. Aérez. Une odeur de fumée qui persiste, en revanche, se traite tout de suite : éteignez et appelez.",
+      },
+      {
+        question: "À quelle température régler mon poêle ?",
+        answer:
+          "19 à 20 °C dans la pièce de vie. Au-delà, chaque degré se paie tout l'hiver. La nuit, une baisse programmée vaut souvent mieux qu'un arrêt complet, sauf si la maison garde bien la chaleur.",
+      },
+    ],
+    metaTitle: "Remettre son poêle à pellets en route à l'automne, le guide de saison",
+    metaDescription:
+      "Vérifications avant le premier feu, premier allumage sans échec, réglages d'hiver, stock de pellets et signes d'alerte. Le guide de début de saison Mister Pellets.",
+  },
   {
     slug: "guide-achat-poele-pellets-wallonie",
     title: "Le guide d'achat 2026 du poêle à pellets en Wallonie",
-    description: "Tout savoir avant d'acheter : technologies, marques, primes, pose, entretien. Le guide complet par les techniciens Mister Pellets.",
+    description: "Tout savoir avant d'acheter : technologies, marques, aides, pose, entretien. Le guide complet par les techniciens Mister Pellets.",
     category: "Choix",
     readingTime: "12 min",
     excerpt:
@@ -60,15 +152,15 @@ export const GUIDES: GuideData[] = [
       {
         heading: "4. Conduit existant ou pas ?",
         paragraphs: [
-          "Si vous avez un conduit existant et conforme : la pose est plus simple et moins chère (4 000 à 5 500 € tout compris). Si le conduit est trop ancien (avant 1980, ou non chemisé), il faudra le tuber : prévoyez 800 à 1 500 € de plus selon la hauteur.",
-          "Si vous n'avez pas de conduit, deux options : ventouse en façade (modèles étanches uniquement, le plus simple) ou conduit en toiture (plus cher, ~1 200 à 2 500 € selon la complexité). Dans tous les cas, le diagnostic à domicile précise le devis.",
+          "Si vous avez un conduit existant et conforme : la pose est plus simple et moins chère (4 000 à 5 500 € tout compris). Si le conduit est trop ancien (avant 1980, ou non chemisé), il faudra le tuber : prévoyez environ 700 à 1 400 € TVAC de plus selon la hauteur (TVA à 6 %).",
+          "Si vous n'avez pas de conduit, deux options : ventouse en façade (modèles étanches uniquement, le plus simple) ou conduit neuf en façade ou par le toit (environ 1 800 à 2 200 € TVAC de plus pour 6 m de conduit). Dans tous les cas, le diagnostic à domicile précise le devis.",
         ],
       },
       {
-        heading: "5. Calculer les primes",
+        heading: "5. Compter les aides",
         paragraphs: [
-          "Wallonie 2026 (régime temporaire 14/02/2025 au 30/09/2026) : prime de base 160 € multipliée par un coefficient selon revenus de référence. R1 (≤ 24 600 €) : 960 €. R2 (24 601-39 300 €) : 640 €. R3 (39 301-58 900 €) : 320 €. R4 (> 58 900 €) : 160 €. R5 (> 122 800 €) non éligible. Audit logement préalable obligatoire. Détails et procédure sur la page primes.",
-          "Vérifiez aussi les primes communales (certaines communes namuroises et hennuyères en ont) et la déductibilité fiscale éventuelle. Mister Pellets monte le dossier complet pour vous.",
+          "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Depuis le 1er octobre, la Wallonie aide la rénovation par deux prêts : le Rénopack, à 0 % avec 15 à 50 % effacés selon les revenus, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent le label exigé après un audit. Un poêle seul y donne rarement accès. Tout le détail est sur notre page consacrée aux aides.",
+          "L'aide qui joue presque à chaque fois, c'est la TVA : 6 % au lieu de 21 % quand l'installateur fournit et pose le poêle dans un logement de plus de 10 ans. Pour les petits revenus, la subvention MEBAR (jusqu'à 2 000 €) passe par le CPAS, avant les travaux. Et demandez à votre commune : certaines gardent une prime énergie.",
         ],
       },
     ],
@@ -76,7 +168,7 @@ export const GUIDES: GuideData[] = [
       {
         question: "Combien coûte un poêle à pellets installé en 2026 ?",
         answer:
-          "Comptez 4 000 à 8 000 € tout compris pour une maison standard avec conduit existant. Hydro complet : 7 000 à 12 000 €. La Prime Habitation Wallonie 2026 ramène 160 à 960 € selon votre catégorie de revenus.",
+          "Comptez 4 000 à 8 000 € tout compris pour une maison standard avec conduit existant. Hydro complet : 8 000 à 14 000 €. Dans un logement de plus de 10 ans, ces montants comprennent la TVA à 6 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026.",
       },
       {
         question: "Quelle marque est la plus fiable ?",
@@ -86,12 +178,12 @@ export const GUIDES: GuideData[] = [
       {
         question: "Faut-il un audit énergétique ?",
         answer:
-          "Oui. Depuis le 14 février 2025, un audit logement préalable est obligatoire pour la quasi-totalité des primes Habitation, même pour un poêle à pellets seul. Comptez 800 à 1 200 € (partiellement couverts par une prime audit), à réaliser et enregistrer avant le début des travaux. Sa validité est de 5 ans. Sans audit, le dossier prime est rejeté.",
+          "Pour un poêle seul, non : la prime qui l'exigeait s'est arrêtée le 30 septembre 2026. L'audit logement redevient indispensable si vous visez un Rénopack ou un Rénoprêt : il doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui dit quels travaux font gagner le label exigé.",
       },
     ],
     metaTitle: "Guide d'achat poêle à pellets en Wallonie 2026, Mister Pellets",
     metaDescription:
-      "Le guide complet pour choisir votre poêle à pellets en Wallonie : technologies, marques, primes, pose, entretien. Conseils des techniciens Mister Pellets.",
+      "Le guide complet pour choisir votre poêle à pellets en Wallonie : technologies, marques, aides, pose, entretien. Conseils des techniciens Mister Pellets.",
   },
   {
     slug: "poele-pellets-canalisable",
@@ -112,7 +204,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "Pour quelle surface et quelle config",
         paragraphs: [
-          "Le canalisable est la solution naturelle pour les maisons à étage de 100-180 m². Modèles typiques : Edilkamin Mood Plus 11 kW, EK63 Tweed 90+ 9 kW, EK63 Spy 110+ 11 kW, Girolami Vert canalisable.",
+          "Le canalisable est la solution naturelle pour les maisons à étage de 100-180 m². Modèles typiques : EK63 Tweed 90+ (9,2 kW) et Spy 110+ (10,5 kW), Edilkamin Cherie 11++ Evo (11 kW), Girolami Vert canalisable.",
           "Pour les très grandes maisons (180+ m²) ou pour vraiment chauffer toutes les pièces, on passe plutôt sur un hydro avec radiateurs ou plancher chauffant. Le canalisable a ses limites : 2-3 pièces secondaires max, à 5-8m de distance.",
         ],
       },
@@ -138,7 +230,7 @@ export const GUIDES: GuideData[] = [
     ],
     metaTitle: "Poêle à pellets canalisable, Le guide complet",
     metaDescription:
-      "Tout sur les poêles à pellets canalisables : fonctionnement, puissances, exemples wallons. Edilkamin Mood Plus, EK63 Tweed et Spy. Conseil Mister Pellets.",
+      "Tout sur les poêles à pellets canalisables : fonctionnement, puissances, exemples wallons. EK63 Tweed et Spy, Edilkamin Cherie. Conseil Mister Pellets.",
   },
   {
     slug: "poele-pellets-hydro",
@@ -147,7 +239,7 @@ export const GUIDES: GuideData[] = [
     category: "Technique",
     readingTime: "10 min",
     excerpt:
-      "Si vous avez une chaudière mazout vieillissante et un système radiateur ou plancher chauffant, l'hydro pellets est la solution la plus rentable pour passer aux énergies renouvelables, souvent rentabilisé en 4-7 ans.",
+      "Si vous avez une chaudière mazout vieillissante et un système radiateur ou plancher chauffant, l'hydro pellets est la solution la plus rentable pour passer aux énergies renouvelables, souvent rentabilisé en 5 à 9 ans.",
     sections: [
       {
         heading: "Le principe",
@@ -159,15 +251,15 @@ export const GUIDES: GuideData[] = [
       {
         heading: "Marques et modèles",
         paragraphs: [
-          "Girolami (Italie, depuis 1970) a fait du raccordement hydro une vraie spécialité : la gamme Soft, des thermopoêles de 14 à 26 kW, en hybride bois-pellet ou en pellet seul, chauffe le circuit d'eau de la maison (radiateurs ou plancher) et remplace une chaudière mazout. Son alimentation Source Feeding autonettoyante évite le nettoyage quotidien, et la version hybride accepte aussi les bûches. Edilkamin (Italie, depuis 1963) propose également des modèles hydro (suffixe H), compatibles radiateurs, plancher chauffant et solaire thermique, avec la finition et la fiabilité premium de la marque.",
-          "EK63 ne fait pas d'hydro à l'heure actuelle : pour un chauffage central aux pellets, on oriente donc vers Girolami ou Edilkamin. On choisit selon le budget et la configuration : un Girolami Soft pour l'autonomie, l'option bois et le brasier propre, un Edilkamin hydro pour le haut de gamme.",
+          "Girolami (Italie, depuis 1970) a fait du raccordement hydro une vraie spécialité : la gamme Soft, des thermopoêles en quatre versions jusqu'à 24 kW, en hybride bois-pellet ou en pellet seul, chauffe le circuit d'eau de la maison (radiateurs ou plancher) et remplace une chaudière mazout. Son alimentation Source Feeding autonettoyante évite le nettoyage quotidien, et la version hybride accepte aussi les bûches. Edilkamin (Italie, depuis 1963) propose également des modèles hydro (suffixe H), compatibles radiateurs, plancher chauffant et solaire thermique, avec la finition et la fiabilité premium de la marque.",
+          "EK63 a aussi ses hydros, du Spot 100 H (10 kW) aux Monday H 190 et 230 (19 et 23 kW). On choisit selon le budget et la maison : un Girolami Soft pour l'option bois et le brasier propre, un EK63 pour un prix plus doux, un Edilkamin hydro pour le haut de gamme.",
         ],
       },
       {
-        heading: "Coûts et primes",
+        heading: "Coûts et aides",
         paragraphs: [
-          "Un hydro complet (poêle + kit hydraulique + raccordement + main d'œuvre) coûte 7 000 à 12 000 € selon la puissance et la complexité. La Prime Habitation Wallonie 2026 s'applique normalement (160 à 960 € selon catégorie de revenus, audit logement préalable obligatoire).",
-          "Le retour sur investissement vs mazout : entre 4 et 7 ans selon la consommation actuelle et l'évolution des prix. Au-delà, c'est de l'économie nette tous les hivers.",
+          "Un hydro complet (poêle, kit hydraulique, ballon, raccordement et main d'œuvre) coûte 8 000 à 14 000 € TVAC selon la puissance et la complexité. Il n'y a plus de prime régionale depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer l'hydro avec le reste des travaux ; sinon, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
+          "Face au mazout, le retour sur investissement tourne autour de 5 à 9 ans pour une maison qui en brûlait 2 000 litres par an, aux prix d'octobre 2026. Au-delà, c'est de l'économie nette tous les hivers.",
         ],
       },
     ],
@@ -180,12 +272,12 @@ export const GUIDES: GuideData[] = [
       {
         question: "Combien d'autonomie en pellets ?",
         answer:
-          "Réservoir typique : 30-60 kg sur les hydros, soit 1.5 à 4 jours d'autonomie selon la puissance. Pour ne pas être contraint, beaucoup ajoutent un silo externe à pellets relié par aspiration : 500-2000 kg de stock, plusieurs semaines d'autonomie.",
+          "Le réservoir des hydros que nous posons contient 14 à 30 kg : de quelques heures à pleine puissance à une grosse journée en régime doux. Pour ne pas remplir tous les jours en plein hiver, beaucoup ajoutent un silo externe relié par aspiration : 500 à 2 000 kg de stock, plusieurs semaines d'autonomie.",
       },
     ],
     metaTitle: "Poêle hydro pour remplacer chaudière mazout, Guide",
     metaDescription:
-      "Le guide complet du poêle hydro pour remplacer une chaudière mazout : marques (Girolami, Edilkamin), dimensionnement, coûts, primes. Conseil Mister Pellets.",
+      "Le guide complet du poêle hydro pour remplacer une chaudière mazout : marques (Girolami, Edilkamin, EK63), dimensionnement, coûts, aides. Conseil Mister Pellets.",
   },
   {
     slug: "comment-entretenir-poele-pellets",
@@ -225,8 +317,8 @@ export const GUIDES: GuideData[] = [
       {
         heading: "Une fois par an, par un pro",
         paragraphs: [
-          "L'entretien annuel par un installateur certifié est obligatoire en Belgique pour les poêles à pellets. C'est aussi requis pour valider la garantie constructeur.",
-          "On démonte tout : foyer, échangeur, brûleur, ventilateur d'extraction, conduit. On nettoie en profondeur, on remplace les joints fatigués, on vérifie les capteurs et la combustion. Une visite annuelle coûte typiquement 150 à 250 € chez Mister Pellets selon le modèle.",
+          "Pour un poêle à air, aucune loi ne l'impose. Les fabricants l'exigent pour maintenir leur garantie, notre garantie de 5 ans en dépend, et votre assurance incendie vous demandera la preuve du ramonage. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 sur le chauffage central prévoit un contrôle chaque année pour les générateurs au combustible solide.",
+          "On démonte tout : foyer, échangeur, brûleur, ventilateur d'extraction, conduit. On nettoie en profondeur, on remplace les joints fatigués, on vérifie les capteurs et la combustion. Chez Mister Pellets, l'entretien complet coûte 175 € TVAC, ramonage du conduit compris.",
         ],
       },
     ],
@@ -266,11 +358,11 @@ export const GUIDES: GuideData[] = [
         heading: "Tableau de correspondance",
         paragraphs: [
           "Studio 40 m² PEB B : 4-5 kW (rare, plutôt un poêle d'appoint).",
-          "Maison 80 m² PEB C : 8-9 kW (Like 80, Blade 9, Girolami Split 9).",
-          "Maison 100 m² PEB B : 9-10 kW (Blade 9, Tweed 90+, Girolami Vert 9).",
-          "Maison 130 m² PEB D : 13-15 kW (Lena 11, Spy 110+, Girolami Vert 14).",
-          "Maison 160 m² PEB C : 14-16 kW (Mood Plus 11 canalisable, Girolami Soft 14 hydro).",
-          "Maison 200 m² PEB D : 18-22 kW (passer sur hydro, Girolami Soft 22).",
+          "Maison 80 m² PEB C : 8-9 kW (EK63 Like 90+, Edilkamin Cherie 9+ Evo, Girolami Split).",
+          "Maison 100 m² PEB B : 9-10 kW (EK63 Tweed 90+, Edilkamin Rise 9+, Girolami Vert 9).",
+          "Maison 130 m² PEB D : 13-15 kW (EK63 Monday 130++, Edilkamin Vyda 13++ Evo, Girolami Vert 14).",
+          "Maison 160 m² PEB C : 14-16 kW (en hydro : Girolami Soft 14 ou EK63 Monday H 190).",
+          "Maison 200 m² PEB D : 18-22 kW (passer sur hydro : Girolami Soft 22 ou EK63 Monday H 230).",
           "Maison 280 m² PEB D-E : 25-30 kW (hydro Girolami Soft 26, ou poêle + chaudière en complément).",
         ],
       },

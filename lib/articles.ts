@@ -76,6 +76,219 @@ export interface ArticleData {
 
 export const ARTICLES: ArticleData[] = [
   // ───────────────────────────────────────────────────────────────────
+  // SAISON 2026-2027 : budget d'un hiver au pellet (ajouté le 03/10/2026)
+  // Prix : ValBiom (pellets, août 2026) et SPF Économie (mazout, tarif
+  // n° 2026/191 du 03/10/2026). À actualiser à chaque saison.
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "budget-hiver-poele-pellets-consommation-2026",
+    title: "Combien coûte un hiver au pellet ? Le calcul pour 2026-2027",
+    metaTitle: "Consommation d'un poêle à pellets : combien de sacs pour l'hiver 2026-2027 ?",
+    metaDescription:
+      "Combien de pellets pour un hiver, ce que ça coûte en 2026 et comment le calculer chez vous à partir de votre ancienne facture. Prix ValBiom et SPF Économie.",
+    excerpt:
+      "Un sac de 15 kg coûte autour de 6 € en Wallonie. La vraie question, c'est combien de sacs votre maison va avaler entre octobre et avril. Voici comment le calculer sans vous tromper.",
+    tldr:
+      "Pour un poêle de 10 kW qui chauffe la maison tout l'hiver, comptez 1,5 à 2 tonnes de pellets, soit 100 à 135 sacs de 15 kg. Au prix moyen relevé par ValBiom en août 2026, 6,19 € le sac acheté par palette, la saison revient à 620 à 830 €. En appoint, plutôt 600 à 900 kg. Le calcul tient en un chiffre : un kilo de pellet certifié livre au moins 4,6 kWh, et votre poêle en restitue environ 90 %.",
+    category: "pellets",
+    tags: ["consommation", "prix des pellets", "budget chauffage", "mazout", "hiver 2026-2027"],
+    readingTimeMinutes: 7,
+    publishedAt: "2026-10-03",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Conseillers combustible",
+    coverImageAlt: "Palette de sacs de pellets de 15 kg stockée au sec pour l'hiver",
+    sections: [
+      {
+        heading: "Ce qu'un kilo de pellet vous donne vraiment",
+        paragraphs: [
+          "Un pellet certifié ENplus A1 ou DINplus contient au moins 4,6 kWh par kilo. Votre poêle n'en restitue pas tout : les modèles que nous posons annoncent entre 85 et 96 % de rendement. Pour un calcul simple sur une saison entière, avec les allumages et les régimes bas, on retient 90 %. Un kilo de pellet, c'est donc un peu plus de 4 kWh de chaleur dans la maison.",
+          "À pleine puissance, un poêle de 8 kW brûle un peu moins de 2 kilos par heure : Edilkamin annonce de 0,7 à 1,9 kg/h pour son insert Pellkamin 8 Evo, du minimum au maximum. Mais un poêle bien dimensionné passe l'essentiel de l'hiver à mi-régime, et c'est là que se joue votre consommation.",
+        ],
+      },
+      {
+        heading: "Trois profils, trois budgets",
+        paragraphs: [
+          "Voici les fourchettes qu'on donne en rendez-vous, chiffrées au prix moyen relevé par ValBiom en août 2026.",
+        ],
+        table: {
+          headers: ["Votre usage", "Pellets par saison", "Sacs de 15 kg", "Budget"],
+          rows: [
+            ["Appoint le soir et le week-end, poêle de 7 à 9 kW", "600 à 900 kg", "40 à 60", "250 à 370 €"],
+            ["Chauffage principal, maison de 120 m² en PEB B ou C, poêle de 10 kW", "1,5 à 2 tonnes", "100 à 135", "620 à 830 €"],
+            ["Poêle hydro qui remplace une chaudière, maison de 150 à 180 m²", "3 à 4 tonnes", "200 à 270", "1 240 à 1 650 €"],
+          ],
+          caption: "Prix moyen ValBiom d'août 2026 en Wallonie : 6,19 € le sac de 15 kg, pellets certifiés achetés par palette, livraison non comprise. Fourchettes indicatives : l'isolation et le thermostat font la différence.",
+        },
+      },
+      {
+        heading: "Faire le calcul chez vous, à partir de l'ancienne facture",
+        paragraphs: [
+          "Le plus fiable, c'est de partir de ce que la maison consommait déjà. Un litre de mazout contient environ 10 kWh. Si votre vieille chaudière en rendait 80 % sur la saison, chaque litre devenait 8 kWh de chaleur. Un kilo de pellet en donne un peu plus de 4 dans le poêle : un litre de mazout remplacé, c'est donc à peu près 1,9 kg de pellets.",
+          "Une maison qui brûlait 1 500 litres par an demandera autour de 2,8 tonnes de pellets, à condition que le poêle chauffe toute la maison, ce qui suppose un hydro raccordé aux radiateurs. Un poêle à air dans le séjour n'en remplace qu'une partie : la chaudière continue de chauffer les chambres, et le calcul porte sur la part de chaleur que le poêle reprend.",
+          "Au gaz ou à l'électricité, le principe ne change pas : partez des kWh de chauffage de votre facture annuelle, puis divisez par ce que livre un kilo de pellet.",
+        ],
+      },
+      {
+        heading: "Le kWh de pellet face au mazout, début octobre 2026",
+        paragraphs: [
+          "Au prix ValBiom d'août, 6,19 € le sac, un kilo de pellets coûte 41 centimes. À 4,6 kWh par kilo, le kWh revient à 9 centimes. Le mazout était à 1,53 € le litre au tarif maximum du SPF Économie du 3 octobre 2026, à partir de 2 000 litres commandés. À 10 kWh par litre, le kWh revient à 15 centimes.",
+          "À chaleur égale, le pellet coûte donc un peu moins de 60 % du mazout. Pour le gaz et l'électricité, regardez le prix du kWh sur votre propre facture : les contrats varient trop d'un ménage à l'autre pour qu'un chiffre unique veuille dire quelque chose.",
+        ],
+        callout: {
+          variant: "info",
+          text: "Le SPF Économie publie chaque jour ouvrable le prix maximum du mazout, et ValBiom publie chaque mois le prix moyen des pellets en Wallonie. Deux sources gratuites pour refaire le calcul quand les prix bougent.",
+        },
+      },
+      {
+        heading: "Quand acheter, et comment ne pas gaspiller",
+        paragraphs: [
+          "Les prix suivent la saison. En 2025, ValBiom relevait 5,43 € le sac en juin et en juillet, puis 5,99 € en janvier 2026. Pour l'hiver qui vient, ValBiom n'attend pas de baisse. Si vous avez la place, une palette achetée maintenant reste un meilleur calcul que des sacs à l'unité en plein mois de janvier.",
+          "Côté consommation, ce qui pèse le plus, c'est la consigne de température, puis la propreté du poêle. Un échangeur encrassé ou des pellets humides, et le poêle brûle plus pour chauffer moins. L'entretien annuel n'est pas qu'une affaire de garantie.",
+        ],
+        list: {
+          items: [
+            "Réglez la pièce de vie à 19 ou 20 °C : chaque degré au-dessus se paie tout l'hiver.",
+            "Préférez un régime bas et continu à une série d'allumages : chaque démarrage sollicite la bougie et brûle des pellets avant de vraiment chauffer.",
+            "Fermez les portes des pièces que le poêle n'est pas censé chauffer, sauf si c'est un canalisable.",
+            "Stockez les sacs au sec : un pellet qui a pris l'humidité chauffe moins et encrasse plus.",
+          ],
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Combien de sacs de pellets faut-il pour un hiver ?",
+        answer:
+          "Pour un poêle qui chauffe la maison tout l'hiver, 100 à 135 sacs de 15 kg, soit 1,5 à 2 tonnes. En appoint le soir et le week-end, 40 à 60 sacs suffisent souvent. L'isolation et la consigne de température font varier ces chiffres du simple au double.",
+      },
+      {
+        question: "Combien consomme un poêle à pellets par heure ?",
+        answer:
+          "Un poêle de 8 kW brûle un peu moins de 2 kg par heure à pleine puissance, et moins d'un kilo au ralenti. Edilkamin annonce par exemple de 0,7 à 1,9 kg/h pour son insert Pellkamin 8 Evo.",
+      },
+      {
+        question: "Le pellet est-il moins cher que le mazout en 2026 ?",
+        answer:
+          "Oui. Début octobre 2026, le kWh de pellet revenait à environ 9 centimes (6,19 € le sac de 15 kg, prix moyen ValBiom d'août), contre 15 centimes pour le mazout (1,53 € le litre au tarif maximum du SPF Économie, à partir de 2 000 litres).",
+      },
+      {
+        question: "Faut-il acheter ses pellets maintenant ?",
+        answer:
+          "Si vous avez un endroit sec pour les stocker, oui. Les prix montent d'habitude entre l'été et janvier : en 2025, le sac est passé de 5,43 € en juin à 5,99 € en janvier, et ValBiom ne prévoit pas de baisse pour l'hiver 2026-2027.",
+      },
+    ],
+    related: {
+      articles: [
+        "pellets-enplus-a1-vs-dinplus",
+        "remplacer-chaudiere-mazout-poele-hydro",
+        "dimensionner-poele-pellets-surface-wallonie",
+      ],
+      guides: ["remettre-en-route-poele-pellets-automne", "quelle-puissance-poele-pellets"],
+      cities: ["namur", "charleroi", "liege"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // INSTALLATION : insert à pellets dans une cheminée ouverte (03/10/2026)
+  // Fiches : EK63 Pellek 80 et 110+, Edilkamin Pellkamin 8, 10+ et 12++,
+  // Girolami Grid (catalogue). Autonomie et chargement : edilkamin.com, ek-63.com.
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "insert-pellets-cheminee-existante",
+    title: "Transformer une cheminée ouverte en insert à pellets : ce qu'on vérifie avant de poser",
+    metaTitle: "Insert à pellets dans une cheminée existante : faisabilité, tubage, réservoir",
+    metaDescription:
+      "Votre feu ouvert chauffe surtout le conduit. Un insert à pellets récupère la cheminée : dimensions, tubage, électricité, réservoir, canalisation. Le point avant devis.",
+    excerpt:
+      "Un feu ouvert, c'est beau, et ça chauffe surtout le conduit. Un insert à pellets garde la cheminée et la rend utile tout l'hiver, à condition de vérifier quatre choses avant de commander.",
+    tldr:
+      "Un insert à pellets se glisse dans le foyer d'une cheminée ouverte et la transforme en chauffage programmable, avec 89 à 92 % de rendement sur les modèles que nous posons. Avant de commander, on vérifie quatre points : les dimensions du foyer, le conduit (un tubage de 80 ou 100 mm est presque toujours nécessaire), une prise électrique et la ventilation de la hotte. La contrepartie, c'est un petit réservoir, 11 kg sur les modèles compacts, qu'on remplit chaque jour en plein hiver.",
+    category: "installation",
+    tags: ["insert", "cheminée", "tubage", "Pellkamin", "Pellek"],
+    readingTimeMinutes: 7,
+    publishedAt: "2026-10-03",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens pose et conduits",
+    coverImageAlt: "Insert à pellets encastré dans une ancienne cheminée ouverte",
+    sections: [
+      {
+        heading: "Pourquoi un feu ouvert chauffe si peu",
+        paragraphs: [
+          "Une cheminée ouverte aspire l'air chaud de la pièce pour nourrir sa flamme et en renvoie la plus grande part dans le conduit. Vous avez chaud au visage, froid dans le dos, et la maison se refroidit pendant que le feu brûle. C'est le charme du feu de bois, pas un chauffage.",
+          "Un insert à pellets ferme le foyer et règle sa combustion. Les modèles que nous posons annoncent entre 89 et 92 % de rendement, et ils se programment comme un poêle : allumage à 6 h, extinction à 23 h, consigne de température, souvent depuis le smartphone.",
+        ],
+      },
+      {
+        heading: "Les quatre vérifications avant de commander",
+        paragraphs: [
+          "C'est ce qu'on regarde à la visite technique, dans cet ordre.",
+        ],
+        list: {
+          ordered: true,
+          items: [
+            "Les dimensions du foyer. Un insert compact comme l'EK63 Pellek 80 ou l'Edilkamin Pellkamin 8 Evo mesure 73,5 cm de large pour 49 cm de haut et 49 cm de profondeur : le foyer doit offrir un peu plus, pour le glisser et le raccorder. Le Pellkamin 12++ Evo, plus puissant, monte à 93 cm de large. On mesure le foyer et la hotte, pas seulement l'ouverture.",
+            "Le conduit. Un insert à pellets pousse ses fumées avec un ventilateur : le conduit travaille en légère pression et doit être étanche. Le vieux conduit maçonné d'une cheminée ouverte ne l'est presque jamais, d'où un tubage inox de 80 mm, ou de 100 mm selon la hauteur et le modèle, jusqu'en haut de la souche.",
+            "L'électricité. Comme tout appareil à pellets, l'insert a besoin d'une prise 230 V pour sa bougie d'allumage, sa vis sans fin et ses ventilateurs. Pendant une coupure de courant, il s'arrête en sécurité.",
+            "La hotte et l'air. L'espace autour de l'insert doit être ventilé comme le prévoit la notice, avec des grilles d'entrée et de sortie, sinon la chaleur reste piégée dans la maçonnerie au lieu de chauffer la pièce. Et le foyer doit recevoir son air de combustion.",
+          ],
+        },
+      },
+      {
+        heading: "Le vrai défaut : un petit réservoir",
+        paragraphs: [
+          "C'est le point qu'on explique toujours avant de vendre un insert. Pour tenir dans un foyer, le réservoir est petit : 11 kg sur le Pellek 80 et sur le Pellkamin 8 Evo. Edilkamin annonce de 6 à 16 heures d'autonomie pour ce dernier, selon la puissance. En plein hiver, vous remplissez donc chaque jour.",
+          "Le remplissage dépend de l'option choisie. Le Pellkamin 8 Evo se sort sur ses glissières pour être rempli, ou reçoit en option un tiroir de chargement frontal ou une trappe. EK63 propose aussi un tiroir frontal pour ses Pellek, qui permet de recharger l'insert allumé. Ça se décide à la commande, et ça change le quotidien.",
+        ],
+      },
+      {
+        heading: "Chauffer une deuxième pièce, ou brûler du bois",
+        paragraphs: [
+          "Certains inserts envoient une partie de l'air chaud vers une pièce voisine par une gaine : c'est le cas des Edilkamin Pellkamin 10+ et 12++ et de l'EK63 Pellek 110+. Pratique quand la cheminée est dans le séjour et qu'une chambre ou un bureau reste froid derrière le mur.",
+          "Si vous tenez au feu de bois de temps en temps, Girolami fait des foyers hybrides qui acceptent les bûches et les pellets, comme la gamme Grid. Ils sont plus encombrants qu'un insert compact : on regarde ensemble si votre cheminée peut les accueillir.",
+        ],
+      },
+      {
+        heading: "Ce que coûte la transformation",
+        paragraphs: [
+          "Le prix se joue sur l'insert et sur le conduit. Six mètres de tubage sont compris dans notre forfait de pose avec tubage, chaque mètre au-delà se paie. Dans un logement de plus de 10 ans, toute la facture est à 6 % de TVA quand nous fournissons et posons l'insert.",
+          "Pour un chiffre précis, le configurateur en ligne compose l'ensemble en deux minutes : l'insert du catalogue, la pose, le tubage et la TVA. Le prix ferme vient après la visite technique, parce qu'on ne connaît vraiment un conduit qu'après l'avoir vu de près.",
+        ],
+        callout: {
+          variant: "warning",
+          text: "Un insert à bois et un insert à pellets ne se raccordent pas de la même façon. Si votre cheminée a déjà reçu un insert à bois, son conduit n'est pas forcément adapté au pellet : on le vérifie à la visite.",
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Peut-on poser un insert à pellets dans n'importe quelle cheminée ?",
+        answer:
+          "Dans la plupart des cheminées ouvertes, oui, si le foyer est assez grand, si le conduit peut être tubé jusqu'en haut et si une prise électrique est accessible. Les cheminées très étroites ou au conduit dévoyé demandent plus de travail : la visite technique tranche.",
+      },
+      {
+        question: "Faut-il obligatoirement tuber le conduit ?",
+        answer:
+          "Presque toujours. Un insert à pellets rejette ses fumées sous une légère pression, grâce à son ventilateur : le conduit doit être étanche. Un vieux conduit maçonné ne l'est pas, d'où le tubage inox de 80 ou 100 mm.",
+      },
+      {
+        question: "Combien de temps tient le réservoir d'un insert ?",
+        answer:
+          "Sur les modèles compacts, 11 kg de pellets : de 6 heures à pleine puissance à 16 heures au ralenti, selon Edilkamin pour le Pellkamin 8 Evo. En plein hiver, on le remplit chaque jour.",
+      },
+      {
+        question: "Un insert à pellets fonctionne-t-il sans électricité ?",
+        answer:
+          "Non. Bougie d'allumage, vis sans fin et ventilateurs ont besoin de courant. Pendant une coupure, l'insert s'éteint en sécurité et redémarre au retour du courant s'il était en mode automatique.",
+      },
+    ],
+    related: {
+      articles: ["dimensionner-poele-pellets-surface-wallonie", "budget-hiver-poele-pellets-consommation-2026"],
+      guides: ["guide-achat-poele-pellets-wallonie", "poele-pellets-canalisable"],
+      brands: ["edilkamin", "ek63", "girolami"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
   // MARQUES 2026 : comparatif des 3 marques top-tier (pilier maillage)
   // ───────────────────────────────────────────────────────────────────
   {
@@ -100,15 +313,15 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Trois marques italiennes, trois philosophies",
         paragraphs: [
-          "On distribue cinq marques, mais on en met trois en avant : Edilkamin, EK63 et Girolami. Le point commun, c'est l'Italie. Toutes les trois conçoivent et fabriquent leurs poêles dans des ateliers italiens, avec le savoir-faire biomasse qui va avec.",
-          "Le reste change. Edilkamin, c'est la référence historique, fondée à Milan en 1963. EK63 est sa marque sœur, lancée pour proposer du connecté moderne à un prix plus doux. Girolami est une marque familiale fondée près de Rome en 1970, avec un brevet maison d'alimentation par le bas qui change le quotidien d'entretien.",
+          "On distribue cinq marques, mais on en met trois en avant : Edilkamin, EK63 et Girolami. Le point commun, c'est l'Italie. Toutes les trois conçoivent leurs poêles en Italie, avec le savoir-faire biomasse qui va avec.",
+          "Le reste change. Edilkamin, c'est la référence historique, fondée en 1963 et installée à Lainate, près de Milan. EK63 est sa marque sœur, lancée pour proposer du connecté moderne à un prix plus doux. Girolami est une marque familiale fondée près de Rome en 1970, avec un brevet maison d'alimentation par le bas qui change le quotidien d'entretien.",
           "Aucune n'est meilleure dans l'absolu. La bonne, c'est celle qui colle à votre maison et à votre budget.",
         ],
       },
       {
         heading: "Edilkamin : la valeur sûre qui dure 20 ans",
         paragraphs: [
-          "Edilkamin a 60 ans, six sites de production et une fonderie interne. Tout est fabriqué en Italie, principalement à Lainate près de Milan. C'est la marque qu'on recommande quand le critère numéro un, c'est la longévité.",
+          "Edilkamin a plus de 60 ans. Son usine historique est à Gabbioneta Binanuova, près de Crémone, sa recherche à Lavagno, près de Vérone, et le groupe produit aussi en Hongrie, à Sárvár. C'est la marque qu'on recommande quand le critère numéro un, c'est la longévité.",
           "Sa technologie Leonardo ajuste en permanence l'air et le débit de pellets grâce à des sondes. La combustion reste stable même quand vous changez de marque de sacs ou quand l'humidité varie. Sur le terrain, les Edilkamin qu'on a posés tiennent couramment 15 à 20 ans.",
           "Le revers, c'est le prix catalogue : Edilkamin est dans le haut de la fourchette. Mais ramené à la durée de vie réelle, le coût annuel reste bas, et le SAV pièces reste disponible longtemps après l'arrêt d'un modèle.",
         ],
@@ -170,7 +383,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Ces trois marques sont-elles vraiment toutes italiennes ?",
         answer:
-          "Oui. Edilkamin est fabriquée près de Milan depuis 1963, Girolami près de Rome depuis 1970, et EK63 est la marque sœur d'Edilkamin, produite sur la plateforme industrielle du groupe.",
+          "Oui. Edilkamin a son siège près de Milan depuis 1963, Girolami est installée à Sant'Oreste, près de Rome, depuis 1970, et EK63 est la marque sœur d'Edilkamin. Précision utile : Edilkamin produit aussi dans son usine de Sárvár, en Hongrie.",
       },
       {
         question: "EK63 est-il moins bien qu'Edilkamin ?",
@@ -190,7 +403,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Quelle marque pour remplacer une chaudière mazout ?",
         answer:
-          "Visez un modèle hydro, qui se raccorde au circuit de chauffage central. Les trois marques en proposent : Edilkamin (Cherie H, Blade H), EK63 et Girolami (gamme Soft hydro, chaudière Biotec).",
+          "Visez un modèle hydro, qui se raccorde au circuit de chauffage central. Les trois marques en proposent : Edilkamin (Cherie H, Blade H), EK63 (Spot 100 H, Monday H 190 et 230) et Girolami (gamme Soft hydro, chaudière Biotec).",
       },
     ],
     related: {
@@ -207,11 +420,11 @@ export const ARTICLES: ArticleData[] = [
     title: "Technologie Leonardo : comment Edilkamin auto-règle la combustion",
     metaTitle: "Technologie Leonardo Edilkamin : la combustion auto-réglée",
     metaDescription:
-      "Leonardo, le système d'autorégulation d'Edilkamin : sondes lambda, correction continue de l'air et des pellets. Ce que ça change vraiment au quotidien.",
+      "Leonardo, le système d'autorégulation d'Edilkamin : pression du foyer et température des fumées, correction continue de l'air et des pellets. Ce que ça change au quotidien.",
     excerpt:
       "Leonardo, c'est le système qui règle la combustion à votre place. On explique comment il marche et ce qu'il change concrètement chez vous.",
     tldr:
-      "Leonardo est le système d'autorégulation de combustion d'Edilkamin. Des sondes lambda et des capteurs de pression mesurent en continu la combustion, et le poêle corrige seul le débit de pellets et d'air. Résultat : la flamme reste optimale même si vous changez de marque de pellets, même quand l'humidité ou la température varient. Vous n'avez rien à régler dans le menu. Leonardo est intégré aux modèles Edilkamin qui en sont équipés, ce n'est pas une option payante.",
+      "Leonardo est le système d'autorégulation de combustion d'Edilkamin. Un capteur mesure en continu la pression dans le foyer, une sonde la température des fumées, et le poêle corrige seul le débit de pellets et d'air. Résultat : la flamme reste optimale même si vous changez de marque de pellets, même quand l'humidité ou la température varient. Vous n'avez rien à régler dans le menu. Leonardo est intégré aux modèles Edilkamin qui en sont équipés, ce n'est pas une option payante.",
     category: "marques",
     tags: ["Edilkamin", "Leonardo", "combustion", "autorégulation"],
     readingTimeMinutes: 6,
@@ -231,7 +444,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Des sondes qui mesurent, un poêle qui corrige",
         paragraphs: [
-          "Leonardo s'appuie sur des sondes lambda, qui mesurent l'oxygène présent dans les fumées, et sur des capteurs de pression. Le poêle lit en permanence comment la combustion se déroule.",
+          "Leonardo s'appuie sur deux capteurs : l'un mesure la pression dans la chambre de combustion, l'autre la température des fumées. Le poêle lit en permanence comment la combustion se déroule, et Edilkamin précise qu'il reconnaît aussi le type de pellet pour ajuster le débit.",
           "À partir de ces mesures, il corrige deux choses : le débit de pellets envoyé par la vis sans fin, et le débit d'air du ventilateur. La flamme reste dans sa zone idéale, sans intervention de votre part.",
         ],
       },
@@ -276,7 +489,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Avec Leonardo, je n'ai plus besoin d'entretenir mon poêle ?",
         answer:
-          "Si. Le ramonage et l'entretien annuel restent obligatoires et indispensables. Leonardo optimise la combustion, il ne remplace pas l'entretien mécanique.",
+          "Si. Le ramonage et l'entretien annuel restent indispensables. Leonardo optimise la combustion, il ne remplace pas l'entretien mécanique.",
       },
       {
         question: "Leonardo fonctionne avec n'importe quels pellets ?",
@@ -448,7 +661,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Quels modèles Girolami profitent du Source Feeding",
         paragraphs: [
-          "Le Source Feeding est la signature de Girolami, présente sur la gamme. La Soft, hybride bois-pellet hydro, est le best-seller, primée Good Design Award 2022. Les modèles Vert, Flow et Curvy l'embarquent aussi, chacun avec son style.",
+          "Le Source Feeding est la signature de Girolami, présente sur la gamme. La Soft, hybride bois-pellet hydro, primée au Good Design Award 2022, en est la vitrine. Les modèles Vert, Flow et Curvy l'embarquent aussi, chacun avec son style.",
           "Sur la gamme hybride, Source Feeding se combine au Fuel Convert System, qui bascule automatiquement entre pellet et bois selon le combustible chargé.",
         ],
       },
@@ -493,7 +706,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "Choisir entre le pellet et la bûche, c'est un faux dilemme avec un Girolami hybride. Le poêle reconnaît le combustible et s'adapte tout seul.",
     tldr:
-      "Les Girolami hybrides (gamme Soft et Vert) fonctionnent au pellet comme à la bûche. Le Fuel Convert System utilise une sonde qui reconnaît le combustible chargé et bascule automatiquement entre les modes, sans aucun réglage manuel. Vous allumez au pellet le matin pour la programmation, vous finissez la soirée à la bûche pour l'ambiance. Le système accepte aussi des combustibles broyés naturels comme les coques ou les noyaux.",
+      "Les Girolami hybrides, la Soft en tête, fonctionnent au pellet comme à la bûche. Le Fuel Convert System utilise une sonde qui reconnaît le combustible chargé et bascule automatiquement entre les modes, sans aucun réglage manuel. Vous allumez au pellet le matin pour la programmation, vous finissez la soirée à la bûche pour l'ambiance. Le système accepte aussi certains broyés certifiés, comme les coques ou les noyaux, parfois avec un accessoire.",
     category: "marques",
     tags: ["Girolami", "hybride", "bois", "pellet", "Fuel Convert System"],
     readingTimeMinutes: 6,
@@ -531,15 +744,15 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Au-delà du bois : les combustibles broyés",
         paragraphs: [
-          "Le Fuel Convert System ne se limite pas au pellet et à la bûche. Il accepte aussi des combustibles broyés naturels, comme des coques de fruits, des noyaux ou du marc.",
+          "Le Fuel Convert System ne se limite pas au pellet et à la bûche. Il accepte aussi des combustibles broyés certifiés, comme des coques, des noyaux ou des plaquettes, avec parfois un accessoire à ajouter.",
           "C'est un atout si vous avez accès à ce type de ressource. Le poêle adapte sa combustion à ce que vous lui donnez, dans la limite des combustibles prévus par le constructeur.",
         ],
       },
       {
         heading: "Quels modèles Girolami sont hybrides",
         paragraphs: [
-          "L'hybride se trouve principalement sur la gamme Soft, le best-seller de Girolami, primé Good Design Award 2022. La Soft existe en version hydro, pour alimenter un chauffage central.",
-          "La gamme Vert propose aussi de l'hybride en version canalisable, pour diffuser la chaleur vers plusieurs pièces. On dimensionne le bon modèle ensemble lors du diagnostic à domicile.",
+          "L'hybride se trouve surtout sur la gamme Soft, primée au Good Design Award 2022, un thermopoêle qui alimente le chauffage central.",
+          "Girolami décline aussi l'hybride en thermocheminées, en chaudières et en foyers. La Vert, elle, fonctionne au pellet seul : c'est le canalisable de la marque. On dimensionne le bon modèle ensemble lors du diagnostic à domicile.",
         ],
       },
     ],
@@ -597,7 +810,7 @@ export const ARTICLES: ArticleData[] = [
       "Poêle à pellets EK63 étanche installé dans une maison basse consommation",
     sections: [
       {
-        heading: "Pourquoi un poêle étanche est obligatoire en maison BBC",
+        heading: "Pourquoi un poêle étanche s'impose en maison BBC",
         paragraphs: [
           "Une maison passive ou BBC est conçue pour être très étanche à l'air, avec une ventilation mécanique contrôlée, souvent en double flux. L'air entre et sort par un circuit maîtrisé.",
           "Un poêle classique, lui, aspire l'air de la pièce pour sa combustion. Dans une maison étanche, ça déséquilibre la ventilation et ça peut créer une dépression. C'est pour ça qu'un poêle étanche est nécessaire : il ne touche pas à l'air intérieur.",
@@ -662,7 +875,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "L'étanchéité change-t-elle l'entretien du poêle ?",
         answer:
-          "Non. L'entretien annuel et le ramonage restent identiques et obligatoires, qu'un poêle soit étanche ou non.",
+          "Non. L'entretien annuel et le ramonage restent les mêmes, qu'un poêle soit étanche ou non.",
       },
     ],
     related: {
@@ -682,11 +895,11 @@ export const ARTICLES: ArticleData[] = [
     title: "Remplacer une chaudière mazout par un poêle Edilkamin hydro",
     metaTitle: "Remplacer une chaudière mazout par un Edilkamin hydro",
     metaDescription:
-      "Un poêle Edilkamin hydro se raccorde à vos radiateurs comme une chaudière. Principe, modèles, ballon tampon, eau chaude sanitaire et primes Wallonie 2026.",
+      "Un poêle Edilkamin hydro se raccorde à vos radiateurs comme une chaudière. Principe, modèles, ballon tampon, eau chaude sanitaire et aides en 2026.",
     excerpt:
       "Un poêle hydro chauffe toute la maison via vos radiateurs existants. Voici comment il remplace une vieille chaudière mazout.",
     tldr:
-      "Un poêle Edilkamin hydro se raccorde au circuit de chauffage central et alimente vos radiateurs ou votre plancher chauffant, exactement comme une chaudière. Couplé à un ballon tampon, il peut aussi produire l'eau chaude sanitaire. Les modèles comme la gamme Cherie H ou Blade H sont conçus pour ça. C'est une solution adaptée pour remplacer une chaudière mazout vieillissante, et la prime Habitation Wallonie 2026 réduit la facture.",
+      "Un poêle Edilkamin hydro se raccorde au circuit de chauffage central et alimente vos radiateurs ou votre plancher chauffant, exactement comme une chaudière. Couplé à un ballon tampon, il peut aussi produire l'eau chaude sanitaire. Les modèles comme la gamme Cherie H ou Blade H sont conçus pour ça. C'est une solution adaptée pour remplacer une chaudière mazout vieillissante. La prime Habitation a pris fin le 30 septembre 2026 ; restent la TVA à 6 % et, pour une maison classée E, F ou G rénovée plus largement, le Rénopack.",
     category: "marques",
     tags: ["Edilkamin", "hydro", "chaudière mazout", "chauffage central"],
     readingTimeMinutes: 7,
@@ -700,7 +913,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Pourquoi remplacer le mazout maintenant",
         paragraphs: [
           "Le mazout coûte cher et son prix reste volatil. Les vieilles chaudières au fioul perdent en rendement avec les années, et leur entretien devient un poste régulier.",
-          "Beaucoup de maisons wallonnes en sont encore équipées. Passer au pellet, c'est un combustible local, un coût plus stable, et l'accès à la prime Habitation Wallonie 2026 pour le remplacement d'un système de chauffage.",
+          "Beaucoup de maisons wallonnes en sont encore équipées, et le calendrier se resserre : à partir du 1er janvier 2031, on ne pourra plus installer ni remplacer une chaudière au mazout dans une maison existante en Wallonie. Passer au pellet, c'est un combustible produit en Belgique, dont le prix ne suit pas celui du pétrole.",
         ],
       },
       {
@@ -725,14 +938,14 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "success",
-          text: "Le remplacement d'un système de chauffage par un appareil biomasse est visé par la prime Habitation Wallonie 2026. On déduit la prime estimée directement du devis.",
+          text: "La prime Habitation qui couvrait ce remplacement s'est arrêtée le 30 septembre 2026. Si votre maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer l'hydro avec le reste des travaux. Sinon, comptez sur la TVA à 6 %.",
         },
       },
       {
         heading: "Ce que comprend le remplacement",
         paragraphs: [
           "Un remplacement de chaudière mazout par un hydro, ce n'est pas juste poser un poêle. Il faut déposer l'ancienne chaudière, se raccorder au circuit existant, puis prévoir le ballon tampon et le conduit d'évacuation.",
-          "On chiffre tout ça lors du diagnostic à domicile. Le devis détaille chaque poste pour que vous sachiez exactement ce que vous payez, primes déduites.",
+          "On chiffre tout ça lors du diagnostic à domicile. Le devis détaille chaque poste pour que vous sachiez exactement ce que vous payez, TVA comprise.",
         ],
       },
     ],
@@ -755,7 +968,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Le remplacement donne-t-il droit à une prime ?",
         answer:
-          "Le remplacement d'un système de chauffage par un appareil biomasse est visé par la prime Habitation Wallonie 2026. On estime le montant et on le déduit du devis.",
+          "Plus de prime régionale depuis le 1er octobre 2026. Le Rénopack peut financer le remplacement si la maison est classée E, F ou G et que l'ensemble des travaux la fait monter de label, avec un audit préalable. Dans tous les cas, la TVA est à 6 % dans un logement de plus de 10 ans.",
       },
     ],
     related: {
@@ -818,7 +1031,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Quelle maison pour un Girolami canalisable",
         paragraphs: [
           "Le canalisable intelligent prend tout son sens dans une maison ouverte où le poêle est dans le séjour, avec une ou deux pièces à chauffer en plus, par exemple une chambre à l'étage ou un bureau.",
-          "La gamme Vert de Girolami couvre ce besoin, en hybride canalisable. On valide le tracé des gaines et la puissance utile lors du diagnostic.",
+          "La gamme Vert de Girolami couvre ce besoin, au pellet, en 9, 12 ou 14 kW. On valide le tracé des gaines et la puissance utile lors du diagnostic.",
         ],
       },
       {
@@ -848,7 +1061,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Le canalisable Girolami est-il aussi hybride ?",
         answer:
-          "La gamme Vert combine le canalisable et l'hybride bois-pellet. Vous profitez des trois ventilateurs indépendants et du Fuel Convert System sur le même appareil.",
+          "Non. La Vert fonctionne au pellet seul. Pour brûler du bois et des pellets dans la même machine, il faut passer sur un hybride de la marque, comme la Soft, qui alimente le chauffage central.",
       },
     ],
     related: {
@@ -872,7 +1085,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "Un Edilkamin coûte cher à l'achat, mais combien d'années tient-il vraiment ? Ce qu'on observe sur le terrain, sans enjoliver.",
     tldr:
-      "Un poêle Edilkamin entretenu correctement dure couramment 15 à 20 ans, ce qu'on observe sur le parc qu'on suit en Wallonie. La longévité tient à la fabrication italienne (fonderie interne, fonte épaisse) et surtout à l'entretien annuel : aucun poêle ne dure sans ramonage et révision. Les pièces d'usure restent disponibles longtemps grâce au réseau Edilkamin. Ramené à l'année, le tarif premium devient raisonnable.",
+      "Un poêle Edilkamin entretenu correctement dure couramment 15 à 20 ans, ce qu'on observe sur le parc qu'on suit en Wallonie. La longévité tient à la qualité de fabrication et surtout à l'entretien annuel : aucun poêle ne dure sans ramonage et révision. Les pièces d'usure restent disponibles longtemps grâce au réseau Edilkamin. Ramené à l'année, le tarif premium devient raisonnable.",
     category: "marques",
     tags: ["Edilkamin", "durée de vie", "entretien", "fiabilité"],
     readingTimeMinutes: 7,
@@ -892,8 +1105,8 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Pourquoi un Edilkamin dure : la fabrication",
         paragraphs: [
-          "Edilkamin fabrique en Italie, dans six sites de production, avec une fonderie interne. Les pièces de structure sont en fonte épaisse, conçues pour encaisser les cycles de chauffe pendant des années.",
-          "Une fabrication maîtrisée, sans sous-traitance opaque, ça se voit dans le temps : moins de jeu mécanique, des assemblages qui tiennent, une structure qui ne fatigue pas prématurément.",
+          "Edilkamin produit dans son usine historique de Gabbioneta Binanuova, près de Crémone, et dans son usine de Sárvár, en Hongrie, avec un laboratoire de recherche à Lavagno, près de Vérone. Les foyers sont conçus pour encaisser les cycles de chauffe pendant des années.",
+          "Une fabrication maîtrisée, ça se voit dans le temps : moins de jeu mécanique, des assemblages qui tiennent, une structure qui ne fatigue pas prématurément.",
         ],
       },
       {
@@ -1135,8 +1348,8 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Exemple chiffré : maison à Namur, PEB D, 130 m²",
         paragraphs: [
-          "Cas réel d'un client à Bouge (Namur) en 2026 : maison 4 façades 1985, PEB D, surface chauffée 130 m², plafond 2,55 m, conduit existant tubé.",
-          "Calcul : 130 × 0,12 = 15,6 kW. Avec correction plafond négligeable, on cible 14-16 kW. Verdict atelier : un canalisable 14 kW (Edilkamin Cherie Up ou EK63 Tweed 140) avec gaines vers 2 chambres. Coût installé tout compris : 6 800 € avant primes, 5 050 € après prime R2.",
+          "Prenons une maison 4 façades de 1985 à Bouge (Namur), classée D, avec 130 m² chauffés, 2,55 m sous plafond et un conduit déjà tubé.",
+          "Calcul : 130 × 0,12 = 15,6 kW. La correction de plafond est négligeable, on cible 13 à 16 kW. Si le séjour s'ouvre sur l'escalier, un canalisable de 12 à 13 kW (EK63 Monday 130++ ou Edilkamin Vyda 13++ Evo) avec des gaines vers deux chambres fait le travail ; sinon, on regarde du côté d'un hydro raccordé aux radiateurs. Budget d'un canalisable posé sur conduit existant : 5 500 à 7 500 € TVAC, TVA à 6 % comprise.",
         ],
         callout: {
           variant: "info",
@@ -1167,7 +1380,7 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["pellets-enplus-a1-vs-dinplus", "remplacer-chaudiere-mazout-poele-hydro"],
+      articles: ["pellets-enplus-a1-vs-dinplus", "remplacer-chaudiere-mazout-poele-hydro", "budget-hiver-poele-pellets-consommation-2026"],
       guides: ["quelle-puissance-poele-pellets", "guide-achat-poele-pellets-wallonie"],
       cities: ["namur", "charleroi", "liege"],
       brands: ["edilkamin", "ek63"],
@@ -1182,16 +1395,16 @@ export const ARTICLES: ArticleData[] = [
     title: "Pellets ENplus A1 vs DINplus : que choisir en Belgique en 2026 ?",
     metaTitle: "Pellets ENplus A1 ou DINplus ? Comparatif 2026 (Belgique)",
     metaDescription:
-      "ENplus A1 = 4,8 kWh/kg, ≤ 0,7 % cendres, traçabilité totale. DINplus reste équivalent. Voici comment choisir et où acheter en Wallonie.",
+      "ENplus A1 et DINplus imposent les mêmes seuils : au moins 4,6 kWh/kg, 0,7 % de cendres au maximum. Comment lire un sac, le prix en Wallonie et le stockage.",
     excerpt:
-      "ENplus A1 et DINplus sont les deux certifications sérieuses. Voici la différence concrète, le bon prix au sac, et les marques qu'on recommande pour la Belgique.",
+      "ENplus A1 et DINplus sont les deux certifications sérieuses, et elles disent la même chose. Voici comment lire un sac, ce qu'il coûte en Wallonie et comment le stocker.",
     tldr:
-      "ENplus A1 et DINplus garantissent toutes deux ≥ 4,6 kWh/kg, ≤ 0,7 % de cendres et un taux d'humidité < 10 %. ENplus est aujourd'hui le standard dominant en Belgique avec une traçabilité du sac jusqu'à la scierie. Refuse tout sac sans certification visible : un pellet douteux peut faire 3,5 kWh/kg avec 2 % de cendres et casse l'échangeur en 2 saisons.",
+      "ENplus A1 et DINplus imposent les mêmes seuils de qualité : au moins 4,6 kWh/kg, 0,7 % de cendres et 10 % d'humidité au maximum, 6 mm de diamètre à 1 mm près. ENplus est la plus répandue en Belgique. Refusez tout sac sans certification visible : un pellet douteux chauffe moins, encrasse plus vite, et personne ne vous dira ce qu'il contient. En août 2026, ValBiom relevait 6,19 € en moyenne le sac de 15 kg en Wallonie.",
     category: "pellets",
     tags: ["pellets", "ENplus", "DINplus", "qualité", "combustible"],
-    readingTimeMinutes: 8,
+    readingTimeMinutes: 7,
     publishedAt: "2026-03-22",
-    modifiedAt: "2026-04-29",
+    modifiedAt: "2026-10-03",
     authorName: "Équipe technique Mister Pellets",
     authorRole: "Conseillers combustible",
     coverImageAlt: "Sac de pellets certifiés ENplus A1 à côté d'un sac DINplus",
@@ -1199,58 +1412,59 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Les deux certifications qui comptent vraiment",
         paragraphs: [
-          "Sur le marché belge, deux normes garantissent la qualité d'un sac de pellets : ENplus (norme européenne EN ISO 17225-2, gérée par le bioenergyEurope) et DINplus (norme allemande historique, gérée par DIN CERTCO). Toutes deux contrôlent diamètre, longueur, densité, taux de cendres, humidité et pouvoir calorifique.",
-          "Concrètement, un pellet ENplus A1 ou DINplus livre ≥ 4,6 kWh/kg (souvent 4,8), avec ≤ 0,7 % de cendres et < 10 % d'humidité. La classe ENplus A2 existe (≤ 1,2 % cendres) mais elle est plutôt destinée aux chaudières industrielles, pas aux poêles domestiques.",
+          "Sur le marché belge, deux labels garantissent la qualité d'un sac de pellets : ENplus, géré depuis Bruxelles par Bioenergy Europe, et DINplus, le label allemand de DIN CERTCO. Tous deux reprennent la classe A1 de la norme ISO 17225-2 et contrôlent le diamètre, la longueur, la solidité, les cendres, l'humidité et le pouvoir calorifique.",
+          "Leurs cahiers des charges fixent aujourd'hui les mêmes seuils : au moins 4,6 kWh par kilo, 0,7 % de cendres et 10 % d'humidité au maximum. ENplus a aussi une classe A2, jusqu'à 1,2 % de cendres, plutôt vendue pour les chaudières : pour un poêle, restez en A1.",
         ],
         table: {
-          headers: ["Critère", "ENplus A1", "DINplus", "Pellet non certifié"],
+          headers: ["Critère", "ENplus A1", "DINplus", "Sac non certifié"],
           rows: [
-            ["PCI minimum", "≥ 4,6 kWh/kg", "≥ 4,9 kWh/kg", "3,5-4,2 kWh/kg"],
-            ["Cendres", "≤ 0,7 %", "≤ 0,5 %", "1,5-3 %"],
-            ["Humidité", "≤ 10 %", "≤ 10 %", "12-18 %"],
-            ["Diamètre", "6 mm ± 0,5", "6 mm ± 0,5", "Variable"],
-            ["Traçabilité", "Oui (n° lot)", "Oui (n° lot)", "Aucune"],
+            ["Pouvoir calorifique", "≥ 4,6 kWh/kg", "≥ 4,6 kWh/kg", "Non garanti"],
+            ["Cendres", "≤ 0,7 %", "≤ 0,7 %", "Non garanti"],
+            ["Humidité", "≤ 10 %", "≤ 10 %", "Non garanti"],
+            ["Diamètre", "6 ou 8 mm, ± 1 mm", "6 ou 8 mm, ± 1 mm", "Variable"],
+            ["Longueur", "3,15 à 40 mm", "3,15 à 40 mm", "Variable"],
+            ["Durabilité mécanique", "≥ 98 %", "≥ 98 %", "Non garantie"],
           ],
-          caption: "Comparatif des seuils de certification pour pellets domestiques.",
+          caption: "Seuils des cahiers des charges ENplus A1 et DINplus (DIN CERTCO, édition 02-2025). Un sac non certifié n'offre aucune garantie.",
         },
       },
       {
-        heading: "Pourquoi un pellet bas de gamme vous coûte plus cher",
+        heading: "Pourquoi un pellet bon marché finit par coûter cher",
         paragraphs: [
-          "Un sac à 4,50 € contre un ENplus A1 à 6,50 €, ça paraît avantageux. En réalité, le bas de gamme tape souvent à 3,8 kWh/kg réels au lieu de 4,8 : vous brûlez 26 % de pellets en plus pour la même chaleur. À 800 kg/an de consommation moyenne, l'économie disparaît.",
-          "Pire, le taux de cendres élevé (2 %) sature le creuset 3 fois plus vite, encrasse l'échangeur de chaleur et finit par bloquer la sonde de fumée. Sur le terrain, on a vu des poêles 3 ans tomber en panne pour cause de pellets bon marché, la garantie ne couvre pas ce type de sinistre.",
+          "Un sac à 4,50 € à côté d'un ENplus A1 à 6,20 €, la différence se voit sur le ticket. Elle fond dans le poêle : un pellet non certifié peut livrer nettement moins que les 4,6 kWh garantis par kilo, et vous en brûlez davantage pour la même chaleur.",
+          "Le vrai coût est ailleurs. Plus de cendres, c'est un creuset qui se bouche plus vite, un échangeur qui s'encrasse et des extinctions en pleine chauffe. Et les fabricants demandent des pellets conformes : les dégâts causés par un combustible hors norme ne sont en général pas couverts par leur garantie.",
         ],
         callout: {
           variant: "warning",
-          text: "Si le sac n'affiche ni logo ENplus A1 (avec ID type BE001), ni logo DINplus (avec n° de lot), ne l'achetez pas. Tous les distributeurs sérieux en Belgique sont certifiés.",
+          text: "Si le sac n'affiche ni le logo ENplus A1 avec son numéro d'identification, ni le logo DINplus avec son numéro de certificat, ne l'achetez pas. Le site enplus-pellets.eu liste les producteurs et distributeurs certifiés, pays par pays.",
         },
       },
       {
-        heading: "Combien coûte un sac en 2026 et comment stocker",
+        heading: "Combien coûte un sac en 2026 et comment le stocker",
         paragraphs: [
-          "Prix indicatifs Wallonie au 29 avril 2026 : 6,20 à 7,00 € le sac de 15 kg en grande surface bricolage, 5,50 à 6,30 € en achat groupé palette (66 sacs = 990 kg). En vrac livré (pour ceux qui ont un silo), compte 360 à 410 € la tonne TTC.",
-          "Stockage : sec, ventilé, à l'abri du gel intense (< -10 °C les fragilise). Pour 800 kg/an, prévoir 4 m² de palette dans un garage ou un abri. Évitez les sous-sols humides : le pellet absorbe vite l'humidité et perd en pouvoir calorifique dès 12 %.",
+          "En août 2026, ValBiom relevait en moyenne 6,19 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette (66 sacs, 990 kg), livraison non comprise. C'est environ 413 € la tonne, et 13 % de plus qu'un an plus tôt. Le sac acheté à l'unité coûte plus cher.",
+          "Pour le stockage, une seule règle : au sec. C'est l'humidité qui abîme les pellets, pas le froid. Une palette tient sur moins d'un mètre carré ; posez-la dans un garage ou un abri sain, jamais dans une cave humide, où le pellet reprend l'eau et perd son pouvoir calorifique.",
         ],
         list: {
           ordered: true,
           items: [
-            "Achetez en hiver pour de la combustion immédiate, en été pour profiter de stocks bas saison (-10 à -15 %).",
-            "Vérifiez la date d'ensachage : un pellet de plus de 18 mois a souvent perdu en cohésion.",
-            "Préférez les marques avec scieries traçables en Belgique, France ou Autriche, pas les pellets d'origine inconnue.",
+            "Achetez au printemps ou en été : en 2025, le sac valait 5,43 € en juin, contre 5,99 € en janvier suivant (relevés ValBiom).",
+            "Fermez les sacs entamés, ou videz-les en entier dans le réservoir.",
+            "Fiez-vous à la certification plutôt qu'au pays affiché : le numéro du sac remonte jusqu'au producteur.",
           ],
         },
       },
       {
-        heading: "Les marques qu'on recommande à nos clients en Wallonie",
+        heading: "Quelle marque de pellets choisir ?",
         paragraphs: [
-          "Sans contrat exclusif ni rétro-commission : Badger Pellets, Crown, Stelia, Brites et Energiebois sortent leurs lots avec une régularité de pouvoir calorifique qu'on a mesurée saison après saison. Mister Pellets ne vend pas de pellets, ce conseil est purement technique.",
-          "Concrètement : on a fait tourner sur banc les principaux pellets disponibles à Fernelmont, Namur, Charleroi et Liège. Sur 12 marques testées en 2025-2026, 9 tenaient la promesse de la fiche, 3 décrochaient sur les cendres ou l'humidité au sortir de palette stockée.",
+          "Mister Pellets ne vend pas de pellets et ne touche rien sur leur vente, alors on vous le dit simplement : prenez un sac certifié A1, chez un revendeur qui stocke à l'abri.",
+          "Ensuite, si votre poêle tourne bien avec une marque, gardez-la. À chaque changement de lot, la combustion se recale. Les poêles autorégulés, comme les Edilkamin équipés de Leonardo, encaissent mieux ces écarts, mais un poêle qui brûle toujours le même pellet reste plus régulier.",
         ],
       },
       {
         heading: "La règle simple à retenir",
         paragraphs: [
-          "Logo ENplus A1 ou DINplus visible, n° de lot lisible, prix entre 5,50 et 7 € le sac de 15 kg, achat chez un revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Tout le reste, c'est de la roulette russe avec votre matériel.",
+          "Logo ENplus A1 ou DINplus visible avec son numéro, prix cohérent avec le marché (autour de 6 € le sac de 15 kg à la palette en 2026), revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Le reste, c'est jouer avec votre matériel.",
         ],
       },
     ],
@@ -1258,194 +1472,167 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Faut-il choisir ENplus A1 plutôt que DINplus ?",
         answer:
-          "Les deux certifications sont équivalentes pour un usage domestique en Belgique. ENplus est plus répandue (et plus facile à trouver dans les enseignes wallonnes), DINplus impose un seuil de cendres légèrement plus strict. Choisissez selon disponibilité et prix.",
+          "Non, les deux se valent pour un poêle domestique : mêmes seuils de pouvoir calorifique, de cendres et d'humidité. ENplus est plus répandue dans les enseignes wallonnes. Choisissez selon la disponibilité et le prix.",
       },
       {
         question: "Combien de pellets faut-il par an pour chauffer une maison wallonne ?",
         answer:
-          "Pour une maison PEB B-C de 120 m² avec un poêle 10 kW en chauffage principal, compte 1,5 à 2 tonnes par saison de chauffe (octobre à avril). En appoint sur 3 mois d'hiver, plutôt 600 à 900 kg.",
+          "Pour une maison PEB B-C de 120 m² avec un poêle de 10 kW en chauffage principal, comptez 1,5 à 2 tonnes par saison de chauffe (octobre à avril). En appoint sur les 3 mois d'hiver, plutôt 600 à 900 kg.",
       },
       {
         question: "Peut-on stocker des pellets dans un garage non chauffé ?",
         answer:
-          "Oui, à condition que le garage soit sec et ventilé. Évitez le contact direct avec un sol béton humide en posant les sacs sur palette bois. Le pellet supporte le froid jusqu'à -10 °C sans dégradation.",
+          "Oui, s'il est sec et ventilé. Posez les sacs sur une palette en bois plutôt que sur le béton. Le froid ne les abîme pas, l'humidité si.",
       },
       {
         question: "Que faire d'un sac de pellets éventré qui a pris l'humidité ?",
         answer:
-          "S'il est légèrement gondolé sans odeur de moisi, étalez-le 48 h dans un endroit sec, il peut récupérer. S'il sent l'humide ou se transforme en bouillie au toucher, jetez-le : il bloquerait la vis sans fin.",
+          "Si les pellets restent durs et brillants, utilisez-les rapidement. S'ils sont gonflés, friables ou s'ils sentent le moisi, ne les mettez pas dans le poêle : ils bloqueraient la vis sans fin et encrasseraient le creuset.",
       },
     ],
     related: {
-      articles: ["entretien-poele-pellets-saison", "poele-pellets-eteint-tout-seul-causes"],
-      guides: ["comment-entretenir-poele-pellets"],
+      articles: ["budget-hiver-poele-pellets-consommation-2026", "poele-pellets-eteint-tout-seul-causes"],
+      guides: ["remettre-en-route-poele-pellets-automne", "comment-entretenir-poele-pellets"],
       cities: ["namur", "charleroi", "liege", "tournai"],
     },
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // 3. PRIMES WALLONIE 2026, RECTIFICATION FACTUELLE COMPLÈTE
-  //    Régime temporaire 14/02/2025 → 30/09/2026 (numéro démarche 3920)
+  // 3. AIDES WALLONIE, réécrit le 03/10/2026 : la prime Habitation (régime
+  //    temporaire 14/02/2025 → 30/09/2026) est terminée. Chiffres et liens :
+  //    lib/aides.ts. Slug conservé pour les liens entrants et Google.
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "primes-wallonie-2026-poele-pellets-combien-recuperer",
-    title: "Prime poêle à pellets en Wallonie 2026 : combien pouvez-vous vraiment récupérer ?",
-    metaTitle: "Prime poêle à pellets Wallonie 2026 (160 à 960 €), montants et conditions",
+    title: "Prime poêle à pellets en Wallonie : ce qui reste après le 1er octobre 2026",
+    metaTitle: "Prime poêle à pellets Wallonie : fin au 30/09/2026, ce qui reste",
     metaDescription:
-      "Régime Prime Habitation 14/02/2025 au 30/09/2026 : 160 € de base × coefficient selon revenus. R1 = 960 €, R2 = 640 €, R3 = 320 €, R4 = 160 €. Conditions, audit, procédure SPW.",
+      "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Rénopack, Rénoprêt, TVA à 6 %, MEBAR : ce qui reste, et pour qui.",
     excerpt:
-      "Quatre catégories de revenus, quatre montants. Audit logement obligatoire et liste officielle de poêles éligibles. Voici exactement combien vous touchez et comment ne pas se planter sur le dossier.",
+      "La prime a disparu le 30 septembre. Ce qui la remplace ne vise pas le même public : voici, sans détour, ce que vous pouvez encore obtenir pour un poêle.",
     tldr:
-      "Depuis le 14 février 2025, la Région wallonne applique un régime temporaire jusqu'au 30 septembre 2026. La prime poêle à pellets vaut 160 € de base, multipliée par 6 pour la catégorie R1 (revenus de référence ≤ 24 600 €) soit 960 €, par 4 pour R2 (640 €), par 2 pour R3 (320 €), par 1 pour R4 (160 €). Les ménages R5 (au-delà de 122 800 €) ne sont plus éligibles. Plafond complémentaire : 70 % de la facture pour R1-R2, 50 % pour R3-R4. Conditions cumulatives : audit logement préalable obligatoire, logement de plus de 15 ans, poêle dans la liste officielle SPW, pose par un entrepreneur inscrit à la BCE.",
+      "Il n'y a plus de prime régionale pour un poêle à pellets depuis le 1er octobre 2026. Le régime temporaire des primes Habitation s'est arrêté le 30 septembre, et la Wallonie aide désormais la rénovation par deux prêts : le Rénopack, à 0 % avec 15 à 50 % effacés selon les revenus, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent au moins deux classes PEB après un audit. Pour un poêle posé seul, il reste la TVA à 6 % dans un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes.",
     category: "primes",
-    tags: ["primes", "Wallonie", "2026", "Prime Habitation", "SPW Logement"],
-    readingTimeMinutes: 11,
+    tags: ["aides", "Wallonie", "Rénopack", "Rénoprêt", "TVA 6 %", "MEBAR"],
+    readingTimeMinutes: 8,
     publishedAt: "2026-02-10",
-    modifiedAt: "2026-05-02",
+    modifiedAt: "2026-10-03",
     authorName: "Équipe Mister Pellets",
-    authorRole: "Conseillers primes énergie",
-    coverImageAlt: "Tableau récapitulatif de la Prime Habitation Wallonie 2026 pour poêle à pellets",
+    authorRole: "Conseillers chauffage biomasse",
+    coverImageAlt: "Récapitulatif des aides pour un poêle à pellets en Wallonie après la fin de la prime Habitation",
     sections: [
       {
-        heading: "Les 4 montants exacts 2026 selon vos revenus de référence",
+        heading: "Ce qui s'est arrêté le 30 septembre 2026",
         paragraphs: [
-          "Depuis le 14 février 2025, la Région wallonne a remplacé les anciennes \"primes Chauffage et Eau Chaude\" par la Prime Habitation, dans un régime temporaire valable jusqu'au 30 septembre 2026. La méthode est la même pour la plupart des travaux subventionnés : un montant de base, multiplié par un coefficient lié à votre catégorie de revenus.",
-          "Pour un poêle à pellets, la base est de 160 €. Le coefficient va de 1 (R4) à 6 (R1). Au-delà de 122 800 € de revenus de référence (catégorie R5), vous n'êtes tout simplement plus éligible aux primes Habitation depuis le 14 février 2025.",
-        ],
-        table: {
-          headers: ["Catégorie", "Revenus de référence", "Coefficient", "Prime poêle à pellets"],
-          rows: [
-            ["R1", "≤ 24 600 €", "× 6", "960 €"],
-            ["R2", "24 601 à 39 300 €", "× 4", "640 €"],
-            ["R3", "39 301 à 58 900 €", "× 2", "320 €"],
-            ["R4", "> 58 900 €", "× 1", "160 €"],
-            ["R5", "> 122 800 €", "non éligible", "0 €"],
-          ],
-          caption: "Montants Prime Habitation Wallonie 2026, régime temporaire 14/02/2025 au 30/09/2026 (numéro démarche 3920).",
-        },
-      },
-      {
-        heading: "Le plafond en pourcentage qu'il faut bien comprendre",
-        paragraphs: [
-          "La prime calculée ne peut jamais dépasser un certain pourcentage du coût total TVAC de l'opération. Pour les catégories R1 et R2, ce plafond est de 70 %. Pour R3 et R4, c'est 50 %. Le montant réellement versé est le plus bas entre la prime théorique et ce plafond.",
-          "Concrètement, si vous êtes en R1 (théorie 960 €) et que votre facture totale TVAC est de 1 200 €, le plafond 70 % vaut 840 € : vous recevez 840 € au lieu de 960 €. Sur une facture de 4 200 € TVAC, le plafond 70 % vaut 2 940 € : vous recevez bien vos 960 €.",
-        ],
-        callout: {
-          variant: "success",
-          text: "Sur la quasi-totalité des poses pellets en maison (4 000 € à 8 000 € TVAC), le plafond 70 % ou 50 % ne mord pas et vous recevez le montant nominal de votre catégorie.",
-        },
-      },
-      {
-        heading: "L'audit logement préalable obligatoire (le truc qui surprend tout le monde)",
-        paragraphs: [
-          "Depuis le 14 février 2025, un audit logement préalable est obligatoire pour la quasi-totalité des primes Habitation, y compris pour un poêle à pellets isolé. Vous ne pouvez plus décider lundi de poser un poêle et déposer la prime vendredi : il faut un audit enregistré avant le démarrage des travaux.",
-          "Le coût de l'audit est de 800 à 1 200 € TVAC selon la taille du logement et la complexité. Une prime audit séparée couvre une partie de ce coût (montant variable selon catégorie de revenus). L'audit est réalisé par un auditeur agréé en Région wallonne et reste valide 5 ans, donc un audit fait pour d'autres travaux récents reste utilisable.",
-        ],
-        callout: {
-          variant: "warning",
-          text: "Pas d'audit avant travaux = pas de prime. C'est le piège n°1 sur lequel les ménages tombent depuis le 14 février 2025. Mister Pellets ne signe pas un devis pellets seul sans avoir vérifié que vous avez votre audit en cours ou planifié.",
-        },
-      },
-      {
-        heading: "Les conditions techniques à respecter strictement",
-        paragraphs: [
-          "En plus de l'audit, le projet pellets lui-même doit remplir des conditions cumulatives. Si l'une manque, la prime est refusée à l'instruction du dossier.",
-        ],
-        list: {
-          ordered: true,
-          items: [
-            "Logement situé en Région wallonne (hors Communauté germanophone), construit depuis plus de 15 ans, à usage principal d'habitation.",
-            "Poêle figurant dans la liste officielle des appareils éligibles publiée par le SPW Logement (mise à jour régulièrement). Tous les modèles que distribue Mister Pellets y figurent, mais on vérifie le numéro de modèle exact avant chaque devis.",
-            "Pose réalisée par un entrepreneur inscrit à la Banque-Carrefour des Entreprises (BCE) avec accès à la profession requis. Awlest SRL (la société qui porte Mister Pellets) est inscrite à la BCE sous le numéro BE 0656.514.212.",
-          ],
-        },
-      },
-      {
-        heading: "Le dossier : pièces à réunir et délais à tenir",
-        paragraphs: [
-          "Le dossier se dépose sur Mon Espace Wallonie (mon.wallonie.be) avec connexion eID ou itsme. Alternative : envoi postal à la Direction des Aides aux Particuliers, Rue des Brigades d'Irlande 1, 5100 Jambes. Vous avez 8 mois après la dernière facture pour déposer un dossier complet, ensuite c'est forclos.",
-        ],
-        list: {
-          ordered: true,
-          items: [
-            "Rapport d'audit logement enregistré avant travaux (PDF officiel)",
-            "Devis détaillé daté et signé avant le démarrage des travaux",
-            "Facture finale acquittée TVAC, avec mention du modèle exact",
-            "Annexe 6 \"Chauffage et Eau Chaude Sanitaire\" complétée par l'installateur",
-            "Attestation de conformité de l'installation",
-            "Justificatifs des revenus de référence (avertissement-extrait de rôle)",
-            "Récépissé de l'inscription BCE de l'entrepreneur (le cas échéant)",
-          ],
-        },
-      },
-      {
-        heading: "Le délai de traitement : sois patient",
-        paragraphs: [
-          "Honnêtement, c'est le point le plus difficile à expliquer aux clients. Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt du dossier complet. Le gouvernement wallon s'est engagé à raccourcir ce délai, mais on reste prudent dans nos annonces.",
-          "Pendant ces 12 à 24 mois, vous avez déjà avancé la facture totale chez Mister Pellets. La prime arrive ensuite directement sur votre compte. Si vous avez besoin d'étaler la dépense, le prêt à taux 0 % Renopack ou Rénoprêt (via la Société wallonne du Crédit social ou le Fonds du Logement) peut financer jusqu'à 60 000 € de travaux.",
-        ],
-      },
-      {
-        heading: "Les cumuls qu'il faut connaître",
-        paragraphs: [
-          "Plusieurs avantages se cumulent avec la prime poêle à pellets sans la réduire. La TVA à 6 % au lieu de 21 % s'applique d'office si votre logement a plus de 10 ans : c'est appliqué directement sur votre facture par l'installateur, pas une prime à demander. Les primes isolation et châssis se cumulent sous un plafond global de 50 000 € par logement individuel, toutes primes confondues sur la durée. Le prêt 0 % Renopack se cumule librement. Et certaines communes wallonnes ajoutent leur propre prime communale (montants variables, à vérifier au cas par cas).",
+          "Depuis le 14 février 2025, la Région wallonne appliquait un régime temporaire de primes Habitation, et le poêle à pellets en faisait partie. Ce régime s'est arrêté le 30 septembre 2026 à 23 h 59. Pour toucher la prime, les travaux devaient être terminés et la demande introduite avant cette heure-là.",
+          "Une facture de septembre sans dossier déposé à temps ne donne donc plus rien. Si vous êtes dans ce cas, le 1718 vous dira si une exception vous concerne, mais il n'existe pas de rattrapage général.",
         ],
         callout: {
           variant: "info",
-          text: "Mister Pellets prépare le pack dossier complet pour ses clients : récapitulatif technique, attestation de conformité, annexe 6, facture détaillée. Vous uploadez sur Mon Espace, pas besoin de gérer l'administratif côté SPW. Service inclus dans le devis, pas de frais additionnels.",
+          text: "L'exception : les projets lancés avant le 14 février 2025, avec un devis daté et signé avant cette date. Le Gouvernement wallon a décidé le 24 septembre 2026 qu'ils pourraient encore demander la prime aux anciennes conditions jusqu'au 30 septembre 2027, sans l'acompte de 20 % exigé jusque-là. La mesure s'applique après sa publication au Moniteur belge.",
         },
       },
       {
-        heading: "Exemples chiffrés à jour (mai 2026)",
+        heading: "Ce qui la remplace : le Rénopack et le Rénoprêt",
         paragraphs: [
-          "Cas A. Ménage R2 (revenus de référence 36 000 €), maison à Andenne construite en 1985, audit récent valide. Pose d'un Edilkamin 8 kW à 4 600 € TVAC. Prime calculée : 640 €. Plafond 70 % = 3 220 €, donc vous recevez bien 640 €. Coût net après prime : 3 960 €.",
-          "Cas B. Ménage R1 (revenus de référence 22 000 €), maison à Charleroi de 1962, audit en cours. Pose d'un canalisable EK63 12 kW à 7 100 € TVAC. Prime calculée : 960 €. Plafond 70 % = 4 970 €, donc vous recevez bien 960 €. Coût net : 6 140 €.",
-          "Cas C. Ménage R3 (revenus 50 000 €), maison à Wavre construite en 2002. Audit obligatoire à organiser avant pose. Hydro Girolami Soft 22 kW à 11 800 € TVAC. Prime calculée : 320 €. Plafond 50 % = 5 900 €, donc vous recevez bien 320 €. Coût net : 11 480 €. Ici, c'est le remplacement de la chaudière mazout existante qui rentabilise sur la durée, pas la prime.",
-          "Cas D. Ménage R5 (revenus 140 000 €). Non éligible aux primes Habitation depuis le 14 février 2025, quel que soit le projet. Pas de prime Wallonie sur le poêle à pellets, mais TVA 6 % et prêt 0 % restent accessibles.",
+          "Depuis le 1er octobre 2026, la Wallonie ne verse plus de prime par poste de travaux. Elle finance des projets de rénovation par deux prêts, gérés par la Société wallonne du Crédit social (SWCS) et le Fonds du Logement de Wallonie.",
+          "Le Rénopack est un prêt à 0 % dont une partie ne se rembourse pas. Il vise les catégories de revenus C1 à C3, propriétaires ou titulaires d'un autre droit réel, qui habiteront le logement au plus tard 24 mois après l'octroi. Le Rénoprêt, à taux zéro ou préférentiel, s'adresse à la catégorie C4, aux propriétaires bailleurs et aux copropriétés.",
+        ],
+        table: {
+          headers: ["Catégorie", "Revenus du ménage", "Prêt", "Part non remboursée"],
+          rows: [
+            ["C1", "Jusqu'à 28 900 €", "Rénopack à 0 %", "50 %"],
+            ["C2", "De 28 900 à 41 100 €", "Rénopack à 0 %", "40 %"],
+            ["C3", "De 41 100 à 67 100 €", "Rénopack à 0 %", "15 %"],
+            ["C4", "De 67 100 à 122 800 €", "Rénoprêt, taux zéro ou préférentiel", "Aucune"],
+          ],
+          caption: "Montants indexés au 1er janvier 2026, diminués de 5 000 € par personne à charge. Source : wallonie.be, mis à jour le 25 septembre 2026.",
+        },
+      },
+      {
+        heading: "Les conditions qui changent tout",
+        paragraphs: [
+          "Le prêt finance un projet complet. Voici ce qu'il exige.",
+        ],
+        list: {
+          ordered: true,
+          items: [
+            "Une maison classée G ou F qui atteint au moins le label D après travaux, ou classée E qui atteint au moins le label C.",
+            "Un audit logement réalisé ou actualisé moins d'un an avant la demande de prêt. C'est lui qui fixe le label de départ et la liste des travaux.",
+            "Un emprunt sous 75 000 € pour une maison unifamiliale, 60 000 € par appartement.",
+          ],
+        },
+        callout: {
+          variant: "warning",
+          text: "Une maison classée C ou D n'est pas visée, même si elle a besoin d'un nouveau chauffage. Des dérogations existent quand le label visé est impossible à atteindre pour des raisons techniques, fonctionnelles ou économiques.",
+        },
+      },
+      {
+        heading: "Le poêle à pellets peut-il entrer dans un Rénopack ?",
+        paragraphs: [
+          "Oui : la SWCS cite l'installation d'un poêle biomasse parmi les travaux qu'elle finance. Mais un poêle seul fait rarement gagner deux classes PEB à une maison. Le saut demande en général d'isoler le toit, les murs ou les châssis, et le chauffage vient compléter le projet.",
+          "Si c'est votre cas, commencez par l'audit, puis la préinscription sur le site de la SWCS, qui ne vaut pas demande d'aide mais permet à leurs équipes de vous recontacter. Et parlez-nous de l'audit avant de choisir le poêle : une maison isolée perd moins de chaleur, la puissance doit correspondre à la maison après travaux. Un poêle calibré sur la maison d'avant tournerait au ralenti tout l'hiver.",
         ],
       },
       {
-        heading: "Et après le 30 septembre 2026 ?",
+        heading: "La TVA à 6 %, l'aide de presque tous les chantiers",
         paragraphs: [
-          "Le régime actuel est temporaire. À partir du 1er octobre 2026, un nouveau régime global devrait entrer en vigueur, avec des montants et conditions à confirmer (rien n'est publié au moment de la rédaction, mai 2026). Si votre projet n'est pas urgent, il peut être pertinent d'attendre les annonces officielles. Si l'hiver 2026-2027 vous concerne, mieux vaut sécuriser maintenant sous le régime connu.",
-          "Mister Pellets met cette page à jour dès la publication officielle du nouveau régime. Vous pouvez aussi appeler le numéro gratuit 1718 (SPW) pour obtenir l'info la plus à jour, ou consulter un Guichet Énergie Wallonie de votre zone.",
+          "Elle est fédérale, et la réforme wallonne n'y change rien. Quand nous fournissons et posons le poêle dans un logement privé occupé depuis plus de 10 ans, toute la facture est à 6 % au lieu de 21 %, poêle compris. Sur 6 000 € hors TVA, l'écart fait 900 €.",
+          "Il n'y a plus d'attestation à signer depuis le 1er juillet 2022 : la facture porte une mention légale, et vous avez un mois pour la contester par écrit si elle est fausse. Depuis le 29 juillet 2025, les appareils au gaz, au mazout ou au charbon sont repassés à 21 %. Les poêles qui brûlent uniquement du bois ou des pellets gardent le 6 %.",
+        ],
+      },
+      {
+        heading: "MEBAR et primes communales",
+        paragraphs: [
+          "Pour les revenus modestes, la subvention MEBAR reste ouverte. Elle vise les ménages dont les revenus ne dépassent pas le revenu d'intégration sociale majoré de 30 %, et finance jusqu'à 2 000 € de travaux qui font baisser la facture d'énergie, dont l'installation d'un poêle. La demande passe par le CPAS de la commune, avant tout achat.",
+          "Certaines communes ont leur propre prime énergie. Beaucoup étaient calquées sur la prime régionale qui vient de disparaître : appelez votre commune avant d'en tenir compte dans votre budget.",
+        ],
+      },
+      {
+        heading: "Trois cas pour s'y retrouver",
+        paragraphs: [
+          "Prenons une maison de 1985 à Andenne, classée C, et un ménage en catégorie C2. Un canalisable EK63 posé sur conduit existant à 5 800 € hors TVA revient à 6 148 € TVAC avec la TVA à 6 %, au lieu de 7 018 € à 21 %. Pas de Rénopack : la maison n'est pas visée.",
+          "Prenons une fermette de 1962 près de Ciney, classée F, et un ménage en catégorie C1. L'audit prévoit d'isoler la toiture et les murs, de changer les châssis et de remplacer la chaudière au mazout par un poêle hydro. Si l'ensemble fait passer la maison en D, le Rénopack peut financer tout le projet, poêle compris, et la moitié du prêt ne se rembourse pas.",
+          "Prenons enfin une maison de 2002 à Wavre, classée D, avec des revenus au-delà de 122 800 €. Ni prime, ni Rénopack, ni Rénoprêt. Reste la TVA à 6 %, puisque la maison a plus de 10 ans.",
+        ],
+      },
+      {
+        heading: "Ce que Mister Pellets fait pour votre dossier",
+        paragraphs: [
+          "On vous remet un devis détaillé poste par poste, utile à l'auditeur comme à la SWCS, puis la facture et l'attestation de conformité de l'installation après la pose. La demande de prêt, elle, se fait chez la SWCS ou au Fonds du Logement.",
+          "Pour une question sur votre situation, le 1718 répond gratuitement les jours ouvrables de 8 h 30 à 17 h, et les Guichets Énergie Wallonie conseillent sans frais près de chez vous. Notre page consacrée aux aides reprend tout le détail, avec les liens officiels.",
         ],
       },
     ],
     faqs: [
       {
-        question: "Quel est le montant maximal de la prime poêle à pellets en Wallonie en 2026 ?",
+        question: "Peut-on encore obtenir une prime pour un poêle à pellets en Wallonie ?",
         answer:
-          "960 €, pour un ménage en catégorie R1 (revenus de référence inférieurs ou égaux à 24 600 €). C'est la prime de base de 160 € multipliée par le coefficient 6. Au-delà, le plafond en pourcentage de la facture peut s'appliquer (70 % pour R1 et R2).",
+          "Non, plus depuis le 1er octobre 2026, sauf la subvention MEBAR pour les ménages à très petits revenus, via le CPAS. La prime Habitation s'est arrêtée le 30 septembre 2026. Les prêts qui la remplacent, Rénopack et Rénoprêt, visent les maisons classées E, F ou G qui gagnent le label exigé après travaux.",
       },
       {
-        question: "L'audit logement préalable est-il vraiment obligatoire pour un simple poêle à pellets ?",
+        question: "Mon poêle a été posé en septembre : est-il trop tard ?",
         answer:
-          "Oui, depuis le 14 février 2025. C'est un changement majeur par rapport à l'ancien régime. L'audit doit être enregistré avant le démarrage des travaux, dure 5 ans, et coûte 800 à 1 200 € TVAC, partiellement couvert par une prime audit séparée. Sans audit, le dossier prime est rejeté.",
+          "Oui, si la demande n'a pas été introduite au plus tard le 30 septembre 2026 à 23 h 59. Seuls les projets avec un devis daté et signé avant le 14 février 2025 peuvent encore passer par les anciennes conditions, jusqu'au 30 septembre 2027.",
       },
       {
-        question: "Faut-il déposer le dossier avant ou après les travaux ?",
+        question: "Le Rénopack rembourse-t-il une partie du poêle ?",
         answer:
-          "L'audit logement et le devis doivent être réalisés avant les travaux. Le dépôt du dossier prime se fait après la pose, dans un délai maximum de 8 mois après la facture finale acquittée.",
+          "Le Rénopack ne rembourse pas un appareil : c'est un prêt à 0 % pour un projet complet, dont 15 à 50 % ne se remboursent pas selon vos revenus. Le poêle peut en faire partie si la maison, classée E, F ou G, gagne le label exigé après les travaux.",
       },
       {
-        question: "Combien de temps pour recevoir la prime sur mon compte ?",
+        question: "Faut-il encore un audit logement ?",
         answer:
-          "Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai. En attendant, vous payez normalement Mister Pellets et vous recevez la prime ensuite, directement sur votre compte.",
+          "Pour un poêle seul, non. Pour un Rénopack ou un Rénoprêt, oui : l'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt.",
       },
       {
-        question: "Peut-on cumuler avec la prime de la commune ?",
+        question: "La TVA à 6 % s'applique-t-elle toujours ?",
         answer:
-          "Oui dans la plupart des cas. Plusieurs communes wallonnes ajoutent leur propre prime communale (Namur, Charleroi, Liège, certaines communes du Brabant wallon notamment), de 100 à 500 € selon les règlements locaux. Le cumul est possible avec la Prime Habitation régionale, sous le plafond global de 50 000 € par logement.",
-      },
-      {
-        question: "Et si mes revenus dépassent 122 800 € ?",
-        answer:
-          "Vous êtes en catégorie R5 et vous n'êtes plus éligible aux primes Habitation depuis le 14 février 2025. Vous pouvez toutefois bénéficier de la TVA réduite à 6 % (logement de plus de 10 ans) et du prêt à taux 0 % Renopack ou Rénoprêt.",
+          "Oui, dans un logement privé de plus de 10 ans, quand l'installateur fournit et pose le poêle. Les appareils au gaz, au mazout ou au charbon sont à 21 % depuis le 29 juillet 2025, pas les poêles à pellets.",
       },
     ],
     related: {
-      articles: ["remplacer-chaudiere-mazout-poele-hydro", "dimensionner-poele-pellets-surface-wallonie"],
+      articles: ["remplacer-chaudiere-mazout-poele-hydro", "budget-hiver-poele-pellets-consommation-2026"],
       guides: ["guide-achat-poele-pellets-wallonie"],
       cities: ["namur", "charleroi", "liege", "wavre", "andenne"],
     },
@@ -1459,16 +1646,16 @@ export const ARTICLES: ArticleData[] = [
     title: "Remplacer sa chaudière mazout par un poêle hydro à pellets : ce qu'il faut savoir",
     metaTitle: "Remplacer mazout par poêle pellets hydro, guide 2026",
     metaDescription:
-      "Coût total, primes cumulées, délai de retour, raccordement aux radiateurs : la transition mazout → pellets hydro expliquée par Mister Pellets.",
+      "Coût total, aides, retour sur investissement, raccordement aux radiateurs, cuve à mettre hors service : passer du mazout au pellet hydro, expliqué par Mister Pellets.",
     excerpt:
-      "Avec le mazout à 1,15 €/litre et la fin programmée des chaudières mazout d'ici 2035, le pellet hydro devient l'alternative la plus simple en Wallonie.",
+      "Le mazout dépasse 1,50 € le litre, et la Wallonie interdira de remplacer une chaudière mazout à partir de 2031. Le pellet hydro est l'alternative la plus simple pour garder ses radiateurs.",
     tldr:
-      "Remplacer une chaudière mazout par un poêle hydro à pellets coûte 8 000 à 14 000 € posé selon la puissance (16 à 24 kW) et la complexité du raccordement aux radiateurs existants. Avec la Prime Habitation Wallonie 2026 (160 à 960 € selon catégorie de revenus), le démantèlement cuve mazout (250 à 1 000 € selon la commune) et les économies de combustible, le retour sur investissement se situe entre 5 et 9 ans pour une maison consommant 2 000 litres de mazout par an.",
+      "Remplacer une chaudière mazout par un poêle hydro à pellets coûte 8 000 à 14 000 € TVAC posé, selon la puissance (16 à 24 kW) et le raccordement aux radiateurs existants. Il n'y a plus de prime régionale depuis le 1er octobre 2026, mais la TVA est à 6 % dans un logement de plus de 10 ans. Pour une maison qui brûlait 2 000 litres de mazout par an, l'économie tourne autour de 1 500 € par an aux prix d'octobre 2026 : l'installation se rembourse en 5 à 9 ans.",
     category: "installation",
     tags: ["hydro", "mazout", "remplacement", "chaudière", "transition"],
-    readingTimeMinutes: 11,
+    readingTimeMinutes: 10,
     publishedAt: "2026-01-28",
-    modifiedAt: "2026-04-29",
+    modifiedAt: "2026-10-03",
     authorName: "Équipe technique Mister Pellets",
     authorRole: "Spécialistes hydro et chauffage central",
     coverImageAlt: "Comparaison entre chaudière mazout ancienne et poêle hydro à pellets moderne",
@@ -1477,13 +1664,14 @@ export const ARTICLES: ArticleData[] = [
         heading: "Pourquoi le pellet hydro remplace bien le mazout",
         paragraphs: [
           "Une chaudière mazout chauffe un circuit d'eau qui alimente les radiateurs et l'eau chaude sanitaire. Un poêle hydro à pellets fait exactement la même chose : il chauffe le même circuit, branché de la même manière. La transition technique est plus simple qu'on ne l'imagine.",
-          "L'apport pellet par rapport au mazout : combustible local (Wallonie, Ardennes, Allemagne), prix plus stable (350-410 €/T contre 1 050-1 200 €/m³ équivalent), émissions CO2 considérées neutres. Et surtout : la fin annoncée des chaudières mazout en Wallonie d'ici 2035 (interdiction des nouvelles installations dès 2026 dans les nouvelles constructions).",
+          "Côté combustible, le pellet se produit en Belgique, qui en fabrique plus qu'elle n'en consomme selon ValBiom. En août 2026, le sac de 15 kg valait 6,19 € en moyenne en Wallonie. Le mazout, lui, dépassait 1,50 € le litre au tarif maximum du SPF Économie début octobre 2026.",
+          "Et la réglementation tourne. Depuis le 1er janvier 2026, une maison neuve ne peut plus recevoir de chaudière au mazout. À partir du 1er janvier 2031, on ne pourra plus en installer ni en remplacer dans une maison existante ; seul le remplacement du brûleur restera permis jusqu'à fin 2034.",
         ],
       },
       {
         heading: "Quelle puissance hydro pour quelle maison",
         paragraphs: [
-          "Le calcul est différent du poêle d'air : ici, la puissance doit suivre le besoin total de chauffage de la maison + l'eau chaude sanitaire si vous choisissez cette option. Comptez généralement 0,15 à 0,18 kW par m² pour une maison wallonne 4 façades non passive.",
+          "Le calcul est différent du poêle d'air : ici, la puissance doit suivre le besoin total de chauffage de la maison, plus l'eau chaude sanitaire si vous choisissez cette option. Comptez généralement 0,15 à 0,18 kW par m² pour une maison wallonne 4 façades non passive.",
         ],
         table: {
           headers: ["Surface chauffée", "PEB", "Puissance hydro", "Ballon tampon recommandé"],
@@ -1492,45 +1680,44 @@ export const ARTICLES: ArticleData[] = [
             ["130-180 m²", "C-E", "20-22 kW", "300-500 L"],
             ["180-250 m²", "D-G", "24-28 kW", "500-800 L"],
           ],
-          caption: "Dimensionnement hydro indicatif Wallonie. Ajouter +10 % si production ECS intégrée.",
+          caption: "Dimensionnement hydro indicatif Wallonie. Ajouter 10 % si la production d'eau chaude sanitaire est intégrée.",
         },
         callout: {
           variant: "info",
-          text: "Pour les maisons > 200 m² ou très mal isolées, on ajoute parfois un appoint électrique sur le ballon ECS pour les pics extrêmes (-15 °C, week-ends prolongés). Coût marginal : 200 € matériel.",
+          text: "Pour les maisons de plus de 200 m² ou très mal isolées, on ajoute parfois un appoint électrique sur le ballon d'eau chaude pour les grands froids ou les week-ends prolongés.",
         },
       },
       {
         heading: "Le raccordement aux radiateurs existants",
         paragraphs: [
-          "Bonne nouvelle : vos radiateurs existants restent en place. Le poêle hydro se raccorde au circuit primaire via un ballon tampon (200 à 800 litres selon la puissance) qui sert de volume d'inertie. Ce ballon est obligatoire : il évite les cycles courts qui usent prématurément le poêle.",
-          "Le circuit doit être désembouée (rinçage du tartre et boues accumulés en 20-30 ans de mazout) avant raccordement. Coût du désemboueage : 350 à 600 € selon la longueur du circuit et le nombre de radiateurs. C'est non négociable : un circuit emboué pollue le nouveau matériel en quelques mois.",
+          "Bonne nouvelle : vos radiateurs restent en place. Le poêle hydro se raccorde au circuit via un ballon tampon (200 à 800 litres selon la puissance) qui sert de volume d'inertie. Ce ballon évite les cycles courts qui usent le poêle avant l'heure.",
+          "Avant le raccordement, le circuit doit être désemboué : 20 ou 30 ans de chauffage au mazout laissent des boues dans les tuyaux et les radiateurs. Comptez 350 à 600 € selon la longueur du circuit et le nombre de radiateurs. On ne transige pas là-dessus : un circuit emboué encrasse le nouvel échangeur en quelques mois.",
         ],
       },
       {
-        heading: "Coût total, primes incluses",
+        heading: "Combien ça coûte, et combien ça rapporte",
         paragraphs: [
-          "Voici un cas réel de mars 2026 à Sombreffe : maison 4 façades 1978, 175 m², PEB E, chaudière mazout Junkers de 28 kW en fin de vie, cuve mazout 3 000 L à démanteler.",
-          "Devis Mister Pellets : Girolami Soft hydro 22 kW (5 200 € matériel) + ballon tampon 500 L (1 100 €) + désembouage circuit (480 €) + raccordement et mise en service (1 600 €) + démantèlement et nettoyage cuve mazout (850 €) = 9 230 € TVAC tout compris (TVA 6 %).",
-          "Primes obtenues : Prime Habitation Wallonie 2026 catégorie R2 (640 €, soit base 160 € × coefficient 4) + prime communale Sombreffe pour démantèlement cuve (300 €) + prime communale rénovation chauffage (200 €) = 1 140 € total. Coût net pour le client : 8 090 €.",
+          "Prenons une maison 4 façades de 1978 près de Sombreffe : 175 m², classée E, une chaudière mazout de 28 kW en fin de vie et une cuve de 3 000 litres. Le projet type comprend un Girolami Soft hydro, un ballon tampon de 500 litres, le désembouage du circuit, le raccordement, la mise en service et la mise hors service de la cuve. Avec la TVA à 6 %, il se situe dans le haut de notre fourchette hydro, entre 8 000 et 14 000 € TVAC selon l'état du circuit.",
+          "Le calcul de l'économie. 2 000 litres de mazout contiennent environ 20 000 kWh ; une chaudière qui rend 80 % sur la saison en fait 16 000 kWh de chaleur. Pour produire la même chaleur, un hydro qui rend 90 % brûle environ 3,8 tonnes de pellets à 4,7 kWh par kilo.",
         ],
         callout: {
           variant: "success",
-          text: "Économie annuelle estimée : 2 100 litres mazout/an × 1,15 € = 2 415 € contre 2,2 tonnes pellet × 380 € = 836 €. Soit ~1 580 € d'économie/an. Retour sur investissement : ~5 ans.",
+          text: "Aux prix d'octobre 2026 : 2 000 litres × 1,53 € = 3 070 € de mazout, contre 3,8 tonnes × 413 € = 1 560 € de pellets. Environ 1 500 € d'économie par an, soit un retour sur investissement de 5 à 9 ans.",
         },
       },
       {
-        heading: "Le démantèlement de la cuve mazout : étape souvent oubliée",
+        heading: "La cuve à mazout : une étape à ne pas oublier",
         paragraphs: [
-          "Vous ne pouvez pas laisser une cuve mazout vide sur place : la réglementation wallonne impose le dégazage et soit le retrait soit la neutralisation par remplissage à la mousse polyuréthane. Coût : 600 à 1 200 € selon volume (1 500, 3 000, 5 000 litres) et accessibilité (extérieure ou enterrée).",
-          "Plusieurs communes wallonnes (Namur, Charleroi, Wavre, Andenne, Sombreffe) accordent une prime communale spécifique de 100 à 500 € pour ce démantèlement. À cumuler avec la prime régionale poêle pellets. Mister Pellets coordonne avec un opérateur agréé pour l'évacuation conforme.",
+          "À partir de 3 000 litres, la réglementation wallonne (arrêté du 17 juillet 2003) impose une mise hors service en règle : la citerne est vidée, nettoyée et dégazée, puis enlevée si elle est aérienne, enlevée ou remplie d'un matériau inerte si elle est enterrée. Les boues partent chez un collecteur agréé. Sous 3 000 litres, ces règles ne sont pas obligatoires, mais le SPW recommande de les suivre.",
+          "Certaines communes accordent une aide pour la mise hors service d'une citerne : renseignez-vous avant les travaux. Mister Pellets coordonne l'opération avec une entreprise spécialisée.",
         ],
       },
       {
         heading: "Les 3 erreurs à éviter dans une transition mazout → pellets hydro",
         paragraphs: [
-          "Erreur 1 : ne pas désembouer le circuit. Vous importez 25 ans de boues dans un échangeur neuf, résultat, l'échangeur s'encrasse en 18 mois.",
-          "Erreur 2 : sous-dimensionner pour économiser. Un hydro 18 kW sur 200 m² PEB E, ça tourne à plein 24/7 en janvier et vous finissez par allumer un appoint électrique. La marge utile est de 15-20 % au-dessus du calcul théorique.",
-          "Erreur 3 : oublier le ballon tampon. Sans ballon, le poêle fait des cycles courts (allumage-extinction toutes les 30 min), use sa résistance d'allumage en une saison, et bruite la maison. Le ballon n'est pas une option, c'est un élément central.",
+          "Erreur 1 : ne pas désembouer le circuit. Vous importez des années de boues dans un échangeur neuf, qui s'encrasse aussitôt.",
+          "Erreur 2 : sous-dimensionner pour économiser. Un hydro de 18 kW sur 200 m² en PEB E tourne à plein en janvier, et vous finissez par allumer un appoint électrique. La marge utile est de 15 à 20 % au-dessus du calcul théorique.",
+          "Erreur 3 : oublier le ballon tampon. Sans lui, le poêle enchaîne les cycles courts, allumage puis extinction toutes les demi-heures, use sa résistance d'allumage bien plus vite et fait du bruit dans la maison. Le ballon n'est pas une option.",
         ],
       },
     ],
@@ -1538,26 +1725,30 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien coûte le passage du mazout au poêle hydro à pellets ?",
         answer:
-          "Comptez 8 000 à 14 000 € TVAC tout compris en Wallonie : matériel (poêle + ballon tampon), désembouage du circuit, raccordement, démantèlement de la cuve mazout. Avec la Prime Habitation 2026 (160 à 960 € selon catégorie de revenus) et d'éventuelles primes communales (cuve mazout, rénovation chauffage), on tombe souvent à 6 500-12 500 € net.",
+          "Comptez 8 000 à 14 000 € TVAC tout compris en Wallonie, avec la TVA à 6 % dans un logement de plus de 10 ans : poêle, ballon tampon, désembouage du circuit, raccordement et mise hors service de la cuve. Il n'y a plus de prime régionale depuis le 1er octobre 2026 ; si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer le projet.",
       },
       {
         question: "Faut-il garder une chaudière d'appoint en plus du poêle hydro ?",
         answer:
-          "Non, dans 90 % des cas le poêle hydro couvre 100 % du besoin de chauffage et d'eau chaude. Seules les très grandes maisons (>250 m²) très mal isolées peuvent nécessiter un appoint électrique sur ballon ECS pour les pics de froid extrêmes.",
+          "Non, dans la grande majorité des cas le poêle hydro couvre tout le chauffage et l'eau chaude. Seules les très grandes maisons mal isolées peuvent avoir besoin d'un appoint électrique sur le ballon d'eau chaude pour les grands froids.",
       },
       {
         question: "Combien de temps pour rentabiliser l'investissement ?",
         answer:
-          "Pour une maison consommant 2 000 litres de mazout par an, le retour sur investissement (ROI) se situe entre 5 et 9 ans selon le coût total des travaux et les primes obtenues. Au-delà de 9 ans, c'est de la pure économie.",
+          "Pour une maison qui brûlait 2 000 litres de mazout par an, comptez 5 à 9 ans aux prix d'octobre 2026 : environ 3 070 € de mazout contre 1 560 € de pellets, soit 1 500 € d'économie par an pour un investissement de 8 000 à 14 000 €. Si le mazout continue de grimper, ça va plus vite.",
       },
       {
         question: "Que faire de l'ancienne cuve mazout vide ?",
         answer:
-          "Réglementairement, elle doit être dégazée puis soit retirée (cuves extérieures, ~600 €) soit neutralisée par remplissage mousse PU si enterrée et inaccessible (~900-1 200 €). Une prime communale couvre souvent une partie. Mister Pellets coordonne l'opération avec un opérateur agréé.",
+          "À partir de 3 000 litres, elle doit être vidée, nettoyée et dégazée, puis enlevée si elle est aérienne, enlevée ou remplie d'un matériau inerte si elle est enterrée. Sous 3 000 litres, ce n'est pas obligatoire mais recommandé. Mister Pellets coordonne l'opération avec une entreprise spécialisée.",
       },
     ],
     related: {
-      articles: ["dimensionner-poele-pellets-surface-wallonie", "primes-wallonie-2026-poele-pellets-combien-recuperer"],
+      articles: [
+        "budget-hiver-poele-pellets-consommation-2026",
+        "primes-wallonie-2026-poele-pellets-combien-recuperer",
+        "dimensionner-poele-pellets-surface-wallonie",
+      ],
       guides: ["poele-pellets-hydro", "guide-achat-poele-pellets-wallonie"],
       cities: ["namur", "charleroi", "wavre", "andenne"],
       brands: ["edilkamin", "girolami"],
@@ -1576,7 +1767,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "Un poêle qui s'éteint sans qu'on lui demande, c'est rarement un défaut de fabrication. 7 causes couvrent 95 % des cas, la plupart se règlent en 30 minutes sans technicien.",
     tldr:
-      "Un poêle à pellets qui s'éteint tout seul a presque toujours une de ces 7 causes : creuset encrassé, pellets de mauvaise qualité ou humides, sonde de fumée encrassée, échangeur bouché, vis sans fin bloquée, prise d'air comburant obstruée, ou conduit non ramoné. Avant d'appeler un technicien, vérifie ces 7 points dans l'ordre, la cause est dans 80 % des cas un défaut d'entretien plutôt qu'une panne matérielle.",
+      "Un poêle à pellets qui s'éteint tout seul a presque toujours une de ces 7 causes : creuset encrassé, pellets de mauvaise qualité ou humides, sonde de fumée encrassée, échangeur bouché, vis sans fin bloquée, prise d'air comburant obstruée, ou conduit non ramoné. Avant d'appeler un technicien, vérifiez ces 7 points dans l'ordre : la cause est le plus souvent un défaut d'entretien plutôt qu'une panne matérielle.",
     category: "entretien",
     tags: ["panne", "diagnostic", "entretien", "extinction", "creuset"],
     readingTimeMinutes: 9,
@@ -1615,7 +1806,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Cause n°4 : échangeur bouché (10 %)",
         paragraphs: [
           "L'échangeur (les conduits internes par où passent les fumées avant la sortie) accumule de la suie. Quand le passage rétrécit trop, le tirage chute, la combustion devient mauvaise, le poêle s'éteint.",
-          "Diagnostic : ouvrez la porte du foyer. Si les parois sont noires de suie épaisse, l'échangeur l'est aussi probablement. Solution : ramonage interne avec la canne fournie (action sur le levier en façade pour les Edilkamin/EK63) toutes les 2-3 semaines en saison. Ramonage technique annuel par un professionnel obligatoire.",
+          "Diagnostic : ouvrez la porte du foyer. Si les parois sont noires de suie épaisse, l'échangeur l'est aussi probablement. Solution : ramonage interne avec la canne fournie (action sur le levier en façade pour les Edilkamin/EK63) toutes les 2-3 semaines en saison. Faites aussi ramoner le conduit une fois par an.",
         ],
       },
       {
@@ -1635,12 +1826,12 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Cause n°7 : conduit non ramoné ou refoulement (2 %)",
         paragraphs: [
-          "En Wallonie, le ramonage du conduit de fumée est obligatoire 1 fois par an pour un poêle à pellets. Sans ramonage, la suie accumulée réduit le tirage. Par grand vent, un refoulement temporaire peut aussi déclencher l'extinction.",
-          "Diagnostic : si le poêle s'éteint surtout par temps venteux ou si vous sentez une odeur de fumée intermittente, c'est probablement le conduit. Solution : appel d'un ramoneur certifié (50 à 90 € en Wallonie). Vérifiez aussi le chapeau du conduit : nid d'oiseau, mousse, c'est fréquent.",
+          "Aucune loi wallonne n'impose de ramoner un poêle, mais la plupart des contrats d'assurance incendie l'exigent chaque année, et pour une bonne raison : la suie accumulée réduit le tirage. Par grand vent, un refoulement temporaire peut aussi déclencher l'extinction.",
+          "Diagnostic : si le poêle s'éteint surtout par temps venteux ou si vous sentez une odeur de fumée intermittente, c'est probablement le conduit. Solution : un ramonage (90 € TVAC chez nous, certificat compris). Vérifiez aussi le chapeau du conduit : nid d'oiseau, mousse, c'est fréquent.",
         ],
         callout: {
           variant: "warning",
-          text: "Sans certificat de ramonage annuel, votre assurance habitation peut refuser de couvrir un sinistre lié au poêle. Gardez toujours la facture du ramoneur.",
+          text: "Si votre contrat d'assurance impose un ramonage annuel, l'assureur peut réduire ou refuser son intervention après un feu de cheminée quand le défaut de ramonage a joué dans le sinistre. Gardez toujours le certificat.",
         },
       },
       {
@@ -1660,7 +1851,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien coûte une intervention SAV en Wallonie ?",
         answer:
-          "Comptez 90 à 140 € de déplacement + main d'œuvre (1 à 2 h en moyenne) pour un diagnostic. Pièces en sus : sonde fumée 35-60 €, résistance d'allumage 45-90 €, motoréducteur 180-280 €. Mister Pellets facture le déplacement à partir du retour atelier.",
+          "Chez Mister Pellets, le dépannage coûte 110 € TVAC la première heure, puis 60 € TVAC par heure, déplacement inclus dans notre zone. Les pièces sont facturées en plus.",
       },
       {
         question: "Est-ce normal que mon poêle s'éteigne quand le réservoir est vide ?",
@@ -1674,8 +1865,8 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["pellets-enplus-a1-vs-dinplus", "entretien-poele-pellets-saison"],
-      guides: ["comment-entretenir-poele-pellets"],
+      articles: ["pellets-enplus-a1-vs-dinplus", "budget-hiver-poele-pellets-consommation-2026"],
+      guides: ["remettre-en-route-poele-pellets-automne", "comment-entretenir-poele-pellets"],
       cities: ["namur", "charleroi", "liege", "fernelmont"],
       brands: ["edilkamin", "ek63", "girolami"],
     },

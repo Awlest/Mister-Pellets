@@ -71,7 +71,7 @@ export const SERVICES: Service[] = [
     name: "Devis sur place",
     shortDescription: "Diagnostic à domicile pour chiffrer votre projet pellets.",
     longDescription:
-      "On vient chez vous, on regarde la pièce, le conduit existant, l'isolation, l'arrivée d'air comburant. Sortie : un devis chiffré sous 48 heures avec le modèle adapté, la prime Wallonie déjà calculée, et le délai de pose.",
+      "On vient chez vous, on regarde la pièce, le conduit existant, l'isolation, l'arrivée d'air comburant. Sortie : un devis chiffré sous 48 heures avec le modèle adapté, la pose au bon taux de TVA, et le délai.",
     durationLabel: "60 minutes",
     durationMin: 60,
     priceLabel: "Gratuit",
@@ -96,7 +96,7 @@ export const SERVICES: Service[] = [
     slug: "entretien-annuel",
     name: "Entretien annuel",
     href: "/entretien-poele-a-pellets",
-    shortDescription: "Révision complète, obligatoire chaque année.",
+    shortDescription: "Révision complète, une fois par an.",
     longDescription:
       "Démontage, nettoyage du creuset, de l'échangeur de chaleur, de la chambre de combustion, du conduit interne, de la sonde de fumée, du ventilateur d'extraction. Vérification des joints, du tirage, des paramètres de combustion.",
     durationLabel: "Environ 90 minutes",

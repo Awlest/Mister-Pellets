@@ -214,12 +214,19 @@ export default async function ArticlePage({ params }: Props) {
     .slice(0, 4);
 
   // ---------- Date affichée ----------
-  const publishedDate = new Date(article.publishedAt);
-  const formattedDate = publishedDate.toLocaleDateString("fr-BE", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  // La date de mise à jour s'affiche aussi : sur un sujet réglementaire (aides,
+  // TVA), le lecteur doit savoir de quand date l'information.
+  const formatDate = (iso: string) =>
+    new Date(iso).toLocaleDateString("fr-BE", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  const formattedDate = formatDate(article.publishedAt);
+  const updatedDate =
+    article.modifiedAt && article.modifiedAt > article.publishedAt
+      ? formatDate(article.modifiedAt)
+      : null;
 
   return (
     <>
@@ -243,6 +250,11 @@ export default async function ArticlePage({ params }: Props) {
             <Calendar className="h-4 w-4" />
             <time dateTime={article.publishedAt}>{formattedDate}</time>
           </span>
+          {updatedDate && (
+            <span>
+              Mis à jour le <time dateTime={article.modifiedAt}>{updatedDate}</time>
+            </span>
+          )}
           <span className="inline-flex items-center gap-1.5">
             <Clock className="h-4 w-4" />
             {article.readingTimeMinutes} min
@@ -420,7 +432,7 @@ export default async function ArticlePage({ params }: Props) {
 
       <CTAFinal
         title="Prêt à passer à l'action ?"
-        description="Devis chiffré sous 48h, primes incluses, pose en 1 jour. Sans engagement."
+        description="Devis chiffré sous 48h, TVA comprise, pose en 1 jour. Sans engagement."
       />
     </>
   );

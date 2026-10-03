@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Devis gratuit, Poêle à pellets en Wallonie",
   description:
-    "Demandez votre devis personnalisé en 60 secondes. 6 questions sur votre projet, on revient sous 48h avec un chiffrage clair, primes incluses.",
+    "Demandez votre devis personnalisé en 60 secondes. 6 questions sur votre projet, on revient sous 48h avec un chiffrage clair, TVA comprise.",
   alternates: { canonical: "https://mister-pellets.be/demande-de-devis" },
 };
 
@@ -22,7 +22,7 @@ export default function DevisPage() {
             Devis poêle à pellets en <span className="mp-italic">6 questions</span>
           </>
         }
-        description="Plus précis que le devis générique : on adapte au PEB de votre maison, à votre budget, et au délai. Réponse sous 48h ouvrées avec un chiffrage net incluant les primes Wallonie."
+        description="Plus précis que le devis générique : on adapte au PEB de votre maison, à votre budget, et au délai. Réponse sous 48h ouvrées avec un chiffrage net, au bon taux de TVA."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Demande de devis" },
@@ -43,7 +43,7 @@ export default function DevisPage() {
             </span>
             <span className="inline-flex items-center gap-2">
               <FileCheck className="h-4 w-4 text-mp-orange-flame" />
-              Primes calculées
+              TVA à 6 % si éligible
             </span>
           </div>
 
@@ -55,7 +55,7 @@ export default function DevisPage() {
             </h2>
             <p className="mb-4 text-sm text-mp-ink-soft">
               Notre estimation en ligne compose votre installation à partir des poêles du catalogue :
-              prix du modèle, pose, TVA, prime Wallonie et mensualité à 0 %, affichés en direct.
+              prix du modèle, pose, TVA et mensualité à 0 %, affichés en direct.
             </p>
             <Button asChild variant="primary" size="default">
               <Link href="/estimation">Estimer mon installation →</Link>

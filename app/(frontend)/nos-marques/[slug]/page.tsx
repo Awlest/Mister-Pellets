@@ -368,7 +368,7 @@ export default async function BrandPage({ params }: Props) {
 
       <CTAFinal
         title={`Devis sur un modèle ${brand.name} ?`}
-        description="Donnez-nous quelques infos sur votre maison, on chiffre la pose en 48h avec primes incluses."
+        description="Donnez-nous quelques infos sur votre maison, on chiffre la pose en 48h, TVA comprise."
       />
     </>
   );

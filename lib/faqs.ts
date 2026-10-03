@@ -80,14 +80,14 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Quelles garanties offrez-vous ?",
     answer:
-      "Garantie légale belge de 2 ans sur tous les produits. En complément, garantie commerciale Mister Pellets de 5 ans pièces et main d'œuvre sur les poêles installés par notre équipe, sous réserve de l'entretien annuel obligatoire. Le SAV est assuré directement par nous (pas de sous-traitance), avec un délai d'intervention typique de 48 à 72 heures dans la zone Fernelmont et 50 km autour.",
+      "Garantie légale belge de 2 ans sur tous les produits. En complément, garantie commerciale Mister Pellets de 5 ans pièces et main d'œuvre sur les poêles installés par notre équipe, sous réserve d'un entretien annuel. Le SAV est assuré directement par nous (pas de sous-traitance), avec un délai d'intervention typique de 48 à 72 heures dans la zone Fernelmont et 50 km autour.",
   },
   {
     id: "general-contact",
     category: "general",
     question: "Comment vous contacter ?",
     answer:
-      "Trois canaux : téléphone au 081 13 83 09 (le plus rapide, du lundi au vendredi 9h-18h et samedi 9h-13h), email à info@awlest.com, ou formulaire de devis en ligne avec réponse sous 48 heures ouvrées. Pour une visite en personne, le showroom de Fernelmont accueille sur rendez-vous (recommandé pour garantir la disponibilité d'un conseiller).",
+      "Trois canaux : téléphone au 081 13 83 09 (le plus rapide, du lundi au vendredi 9h-18h et samedi 9h-13h), email à info@awlest.com, ou formulaire de devis en ligne avec réponse sous 48 heures ouvrées. Pour une visite en personne, le showroom de Fernelmont vous reçoit uniquement sur rendez-vous.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -126,14 +126,14 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Peut-on installer un poêle à pellets sans cheminée existante ?",
     answer:
-      "Oui, deux options. Première : ventouse en façade, possible uniquement avec les modèles étanches certifiés. C'est la solution la plus simple et la moins chère (pas de tubage en toiture, pas de complexité d'étanchéité). Deuxième : conduit en toiture, plus cher (1 200 à 2 500 € selon la complexité du toit) mais utilisable avec tous les modèles. Le diagnostic à domicile valide quelle option est techniquement faisable chez vous.",
+      "Oui, deux options. Première : ventouse en façade, possible uniquement avec les modèles étanches certifiés. C'est la solution la plus simple et la moins chère (pas de tubage en toiture, pas de complexité d'étanchéité). Deuxième : un conduit neuf, le long de la façade ou à travers la maison jusqu'au toit, utilisable avec tous les modèles. Comptez environ 1 800 à 2 200 € TVAC de plus qu'une pose sur conduit existant pour 6 m de conduit (TVA à 6 %), puis un peu plus de 200 € par mètre supplémentaire. Le diagnostic à domicile valide quelle option est techniquement faisable chez vous.",
   },
   {
     id: "choisir-etanche",
     category: "choisir",
     question: "Quelle différence entre un poêle étanche et un poêle non étanche ?",
     answer:
-      "Un poêle étanche prend l'air comburant directement à l'extérieur via un tuyau dédié (concentrique avec la sortie de fumée le plus souvent), donc il ne consomme pas l'air de la pièce. Un poêle non étanche puise l'air dans la pièce d'installation. Les modèles étanches sont obligatoires en maison passive, BBC ou avec VMC double-flux, et fortement recommandés en logement bien isolé. Ils permettent aussi le passage en ventouse façade. Surcoût typique : 200 à 400 € sur le matériel.",
+      "Un poêle étanche prend l'air comburant directement à l'extérieur via un tuyau dédié (concentrique avec la sortie de fumée le plus souvent), donc il ne consomme pas l'air de la pièce. Un poêle non étanche puise l'air dans la pièce d'installation. Les modèles étanches sont indispensables en maison passive, BBC ou avec VMC double flux, et fortement recommandés en logement bien isolé. Ils permettent aussi le passage en ventouse façade. Surcoût typique : 200 à 400 € sur le matériel.",
   },
   {
     id: "choisir-canalisable-vs-hydro",
@@ -165,7 +165,7 @@ export const FAQS: FaqItem[] = [
     category: "marques",
     question: "Qu'est-ce qui rend Girolami différent des autres ?",
     answer:
-      "Girolami a un brevet maison, le Source Feeding : le pellet est poussé sous le brasier au lieu de tomber dessus, et les cendres sont chassées dans un bac sous le foyer. Concrètement, le brasier reste propre tout seul, vous ne grattez plus tous les jours, vous videz le cendrier une fois par semaine. C'est un fabricant familial italien de Sant'Oreste, près de Rome, depuis 1970, avec environ 65 % de part de marché en Italie sur le multicombustible domestique. Autre signature : la gamme hybride bois-pellet (le Soft, Good Design Award 2022), où une sonde reconnaît seule le combustible chargé et bascule entre bûche et pellet sans toucher au menu.",
+      "Girolami a un brevet maison, le Source Feeding : le pellet est poussé sous le brasier au lieu de tomber dessus, et les cendres sont chassées dans un bac sous le foyer. Concrètement, le brasier reste propre tout seul, vous ne grattez plus tous les jours, vous videz le cendrier une fois par semaine. C'est un fabricant familial italien de Sant'Oreste, près de Rome, depuis 1970. Autre signature : la gamme hybride bois-pellet (le Soft, Good Design Award 2022), où une sonde reconnaît seule le combustible chargé et bascule entre bûche et pellet sans toucher au menu.",
   },
   {
     id: "marques-girolami-bois-pellet",
@@ -179,7 +179,7 @@ export const FAQS: FaqItem[] = [
     category: "marques",
     question: "Quels sont vos modèles best-sellers ?",
     answer:
-      "Côté Edilkamin : la Blade Plus 9 kW (étanche moderne pour BBC) et la Cherie Up 11 kW (polyvalente). Côté EK63 : la Tweed 90+ canalisable 9 kW (très populaire en Wallonie) et la Like 80 pour les appartements. Côté Girolami : le Soft hydro (best-seller de la marque, Good Design Award 2022) pour remplacer une chaudière, et le Vert canalisable pour chauffer deux pièces. Le diagnostic à domicile précise quel modèle correspond le mieux à votre configuration.",
+      "Nos deux meilleures ventes sont des EK63 : la Tweed 90+ (9,2 kW) et la Spy 110+ (10,5 kW), canalisables et étanches. Chez Edilkamin, la Cherie 11++ Evo (11 kW, canalisable) couvre la plupart des maisons à étage, et la Celia Air Tight C (7,2 kW, étanche) les maisons très bien isolées. Chez Girolami, le Soft, primé au Good Design Award 2022, remplace une chaudière au mazout en hydro, et le Vert canalisable chauffe deux pièces de plus. Le diagnostic à domicile tranche selon votre maison.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -197,21 +197,21 @@ export const FAQS: FaqItem[] = [
     category: "pellets",
     question: "ENplus A1 ou DINplus : quelle différence ?",
     answer:
-      "Les deux certifications garantissent la même qualité pour un usage domestique en Belgique. ENplus A1 et DINplus livrent ≥ 4,6 kWh/kg, ≤ 0,7 % de cendres, ≤ 10 % d'humidité, traçabilité du sac jusqu'à la scierie. ENplus est plus répandue dans les enseignes wallonnes. DINplus impose un seuil de cendres légèrement plus strict (≤ 0,5 %). Choisissez selon disponibilité et prix. Refusez tout sac sans certification visible : un pellet douteux peut faire 3,5 kWh/kg avec 2 % de cendres et casse l'échangeur en 2 saisons.",
+      "Pour un poêle domestique, aucune : les deux certifications reprennent la classe A1 de la norme ISO 17225-2, avec les mêmes seuils. Au moins 4,6 kWh/kg, 0,7 % de cendres au maximum, 10 % d'humidité au maximum, 6 mm de diamètre à 1 mm près. ENplus est la plus répandue dans les magasins wallons, DINplus vient d'Allemagne. Prenez celle qui est disponible au meilleur prix, et refusez un sac sans certification : vous ne savez pas ce que vous brûlez.",
   },
   {
     id: "pellets-prix-tonne",
     category: "pellets",
     question: "Combien coûte une tonne de pellets en Wallonie en 2026 ?",
     answer:
-      "Au sac de 15 kg en grande surface bricolage : 6,20 à 7,00 € le sac (soit 410 à 470 € la tonne équivalente). En achat groupé sur palette de 66 sacs (990 kg) : 5,50 à 6,30 € le sac (370 à 420 € la tonne). En vrac livré pour ceux qui ont un silo : 360 à 410 € la tonne TVAC. Achat conseillé en été pour profiter des stocks bas saison (10 à 15 % de réduction par rapport aux prix d'hiver).",
+      "Autour de 410 € la tonne en sacs. En août 2026, ValBiom relevait en moyenne 6,19 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est 13 % de plus qu'en août 2025 (5,48 €). Le sac acheté à l'unité coûte plus cher. ValBiom ne s'attend pas à une baisse pour l'hiver 2026-2027 : si vous avez la place, faire son stock à l'automne reste le bon réflexe.",
   },
   {
     id: "pellets-stockage",
     category: "pellets",
     question: "Comment stocker les pellets correctement ?",
     answer:
-      "Stockage sec, ventilé, à l'abri du gel intense (sous -10 °C, les pellets se fragilisent). Pour 800 kg/an de consommation, prévoyez 4 m² de palette dans un garage ou un abri. Évitez les sous-sols humides : le pellet absorbe vite l'humidité et perd en pouvoir calorifique dès 12 % d'eau. Posez les sacs sur palette bois pour éviter le contact direct avec un sol béton humide. Vérifiez la date d'ensachage : un pellet de plus de 18 mois a souvent perdu en cohésion.",
+      "Au sec, sur une palette, jamais à même un sol en béton. C'est l'humidité qui abîme les pellets, pas le froid : un garage non chauffé convient s'il est sain. Une palette de 66 sacs (990 kg) tient sur moins d'un mètre carré. Évitez les caves humides : un pellet qui prend l'eau gonfle, se délite et peut bourrer la vis sans fin. Fermez les sacs entamés et videz-les en entier dans le réservoir plutôt que de les laisser ouverts.",
   },
   {
     id: "pellets-mauvaise-qualite",
@@ -243,7 +243,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Faut-il une arrivée d'air dédiée ?",
     answer:
-      "Oui pour les modèles étanches (raccordement direct vers l'extérieur via tuyau dédié, c'est leur principe). Pour les modèles non étanches en maison non hermétique, une grille d'aération dans la pièce ou la pièce attenante suffit. En maison passive, BBC ou avec VMC double-flux, seul le poêle étanche est admissible. Le diagnostic vérifie la conformité de la prise d'air par rapport à la puissance du poêle (section minimale réglementaire de 50 cm² par kW au-delà de 5 kW).",
+      "Oui pour les modèles étanches (raccordement direct vers l'extérieur via tuyau dédié, c'est leur principe). Pour les modèles non étanches en maison non hermétique, une grille d'aération dans la pièce ou la pièce attenante suffit. En maison passive, BBC ou avec VMC double-flux, seul le poêle étanche est admissible. Le diagnostic vérifie que la prise d'air a la section demandée par la notice du fabricant pour votre modèle.",
   },
   {
     id: "installation-distance-mur-bois",
@@ -264,7 +264,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Mon ancien conduit de cheminée est-il utilisable ?",
     answer:
-      "Si le conduit est en bon état et conforme (chemisé inox ou émail vitrifié récent), il est utilisable directement. Pour les conduits anciens (avant 1980, ou en briques non chemisées), le tubage est obligatoire pour la sécurité et la conformité. Coût : 800 à 1 500 € selon la hauteur et la complexité. Le diagnostic à domicile inclut une inspection visuelle du conduit. Pour les cas douteux, un test de vacuité par fumigène est réalisé avant de signer le devis.",
+      "Si le conduit est en bon état et conforme (chemisé inox ou émail vitrifié récent), il est utilisable directement. Pour les conduits anciens (avant 1980, ou en briques non chemisées), le tubage est obligatoire pour la sécurité et la conformité. Comptez environ 700 à 1 400 € TVAC de plus qu'un simple raccordement, selon la hauteur (TVA à 6 %). Le diagnostic à domicile inclut une inspection visuelle du conduit. Pour les cas douteux, un test de vacuité par fumigène est réalisé avant de signer le devis.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -273,51 +273,51 @@ export const FAQS: FaqItem[] = [
   {
     id: "primes-montant-max",
     category: "primes",
-    question: "Quel est le montant maximal de la prime poêle pellets en 2026 ?",
+    question: "Existe-t-il encore une prime pour un poêle à pellets en 2026 ?",
     answer:
-      "960 €, pour un ménage en catégorie R1 (revenus de référence inférieurs ou égaux à 24 600 €). C'est la prime de base de 160 € multipliée par le coefficient 6. Au-delà, le plafond en pourcentage de la facture peut s'appliquer (70 % pour R1 et R2). R2 reçoit 640 €, R3 reçoit 320 €, R4 reçoit 160 €. Au-delà de 122 800 € de revenus (catégorie R5), le ménage n'est plus éligible aux primes Habitation depuis le 14 février 2025.",
+      "Non, plus depuis le 1er octobre 2026, sauf pour les ménages à très petits revenus (subvention MEBAR, via le CPAS). La prime Habitation, qui couvrait le poêle à pellets, s'est arrêtée le 30 septembre 2026 : travaux terminés et demande introduite ce jour-là au plus tard. La Wallonie soutient désormais la rénovation par deux prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui gagnent le label exigé après travaux. Pour un poêle posé seul, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
   },
   {
     id: "primes-categorie",
     category: "primes",
-    question: "Comment savoir dans quelle catégorie de revenus je tombe ?",
+    question: "Comment savoir dans quelle catégorie de revenus je tombe pour le Rénopack ?",
     answer:
-      "La catégorie est définie par le revenu de référence du ménage figurant sur l'avertissement-extrait de rôle de l'avant-dernière année (pour une demande en 2026, on regarde les revenus 2024). C'est un revenu net imposable globalisé du ménage. R1 : ≤ 24 600 €. R2 : 24 601 à 39 300 €. R3 : 39 301 à 58 900 €. R4 : > 58 900 €. R5 (non éligible) : > 122 800 €. Le numéro gratuit 1718 du SPW vous donne votre catégorie en quelques minutes.",
+      "Quatre catégories, selon les revenus du ménage : C1 jusqu'à 28 900 €, C2 jusqu'à 41 100 €, C3 jusqu'à 67 100 € et C4 jusqu'à 122 800 €. Les seuils sont indexés au 1er janvier 2026 et baissent de 5 000 € par personne à charge. En C1, la moitié du Rénopack ne se rembourse pas, 40 % en C2 et 15 % en C3 ; la C4 a droit au Rénoprêt, sans part effacée. La SWCS, le Fonds du Logement ou le 1718 (gratuit) vous situent précisément.",
   },
   {
     id: "primes-audit-obligatoire",
     category: "primes",
-    question: "L'audit logement préalable est-il vraiment obligatoire ?",
+    question: "Faut-il un audit logement ?",
     answer:
-      "Oui, depuis le 14 février 2025, un audit logement préalable est obligatoire pour la quasi-totalité des primes Habitation, y compris pour un poêle à pellets isolé. Coût 800 à 1 200 € TVAC, partiellement couvert par une prime audit séparée. L'audit doit être réalisé et enregistré avant le démarrage des travaux. Sa validité est de 5 ans, donc un audit fait pour d'autres travaux récents reste utilisable. Sans audit, le dossier prime est rejeté.",
+      "Pour un poêle seul, non : il n'y a plus de prime à demander. Pour un Rénopack ou un Rénoprêt, oui. L'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui fixe le label PEB de départ et la liste des travaux. Si un tel projet est en vue, parlez-nous de l'audit avant de choisir le poêle : sa puissance doit correspondre à la maison une fois isolée.",
   },
   {
     id: "primes-eligible",
     category: "primes",
-    question: "Comment savoir si mon poêle est sur la liste officielle SPW ?",
+    question: "Mon poêle doit-il figurer sur une liste officielle ?",
     answer:
-      "La liste officielle des appareils éligibles est publiée par le SPW Logement (logement.wallonie.be) et mise à jour régulièrement. Tous les modèles que distribue Mister Pellets (Edilkamin, EK63, Girolami) répondent aux critères techniques de base : rendement saisonnier ≥ 87 %, conformité écodesign 2022. On vérifie systématiquement le numéro de modèle exact dans la liste avant de signer le devis. Si un modèle n'y figure pas, on vous dirige vers une référence équivalente éligible.",
+      "Plus pour une prime, puisqu'elle a pris fin. Tous les poêles vendus en Europe depuis le 1er janvier 2022 doivent respecter le règlement d'écoconception (UE) 2015/1185 : au moins 79 % de rendement saisonnier pour un poêle à pellets, et des plafonds d'émissions de particules, de monoxyde de carbone et d'oxydes d'azote. Les modèles que nous posons y répondent. Si vous financez le poêle par un Rénopack, la SWCS vous dira si elle impose d'autres critères.",
   },
   {
     id: "primes-delai-versement",
     category: "primes",
-    question: "Combien de temps pour recevoir la prime sur mon compte ?",
+    question: "Mon poêle a été posé en septembre 2026 : puis-je encore demander la prime ?",
     answer:
-      "Le délai actuel d'instruction par le SPW Logement est de 1 à 2 ans à compter du dépôt complet. Le gouvernement wallon s'est engagé à raccourcir ce délai. En attendant, vous payez normalement Mister Pellets et vous recevez la prime ensuite, directement sur votre compte. Vous avez 8 mois après la dernière facture pour déposer un dossier complet, ensuite c'est forclos.",
+      "Seulement si la demande a été introduite au plus tard le 30 septembre 2026 à 23 h 59, la date limite du régime temporaire. Une exception concerne les projets lancés avant le 14 février 2025, avec un devis daté et signé avant cette date : ils peuvent demander la prime aux anciennes conditions jusqu'au 30 septembre 2027, une fois la mesure publiée au Moniteur belge. Le 1718 (gratuit) vous renseignera sur votre cas.",
   },
   {
     id: "primes-cumul-tva",
     category: "primes",
-    question: "Puis-je cumuler la prime poêle pellets avec la TVA réduite à 6 % ?",
+    question: "Puis-je cumuler la TVA à 6 % et le Rénopack ?",
     answer:
-      "Oui, automatiquement. La TVA à 6 % au lieu de 21 % s'applique d'office sur la pose si votre logement a plus de 10 ans (cas le plus fréquent en Wallonie). C'est appliqué directement par l'installateur sur la facture, ce n'est pas une prime à demander. Vous pouvez aussi cumuler avec un prêt à taux 0 % (Renopack ou Rénoprêt) jusqu'à 60 000 €, et avec d'éventuelles primes communales (cuve mazout, rénovation chauffage). Le cumul global est plafonné à 50 000 € par logement.",
+      "Oui, l'un n'empêche pas l'autre. La TVA réduite est fédérale : elle s'applique sur la facture quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans. Le Rénopack est un prêt régional qui finance des travaux, poêle compris, si le projet remplit ses conditions (maison classée E, F ou G, audit de moins d'un an, saut de label).",
   },
   {
     id: "primes-r5",
     category: "primes",
-    question: "Et si mes revenus dépassent 122 800 € ?",
+    question: "Et si les revenus du ménage dépassent 122 800 € ?",
     answer:
-      "Vous êtes en catégorie R5 et vous n'êtes plus éligible aux primes Habitation depuis le 14 février 2025. Vous pouvez toutefois bénéficier de la TVA réduite à 6 % (logement de plus de 10 ans) et du prêt à taux 0 % Renopack ou Rénoprêt. La prime régionale poêle pellets est exclue, mais l'opération reste rentable sur le long terme grâce à la TVA réduite et aux économies de combustible (pellets vs mazout vs gaz).",
+      "Pour un ménage qui occupe son logement, les prêts régionaux s'arrêtent là : ni Rénopack ni Rénoprêt. Il reste la TVA à 6 % sur un logement de plus de 10 ans, poêle et pose compris, et les économies de combustible si vous quittez le mazout. Si vous louez le logement, le Rénoprêt est ouvert aux propriétaires bailleurs : la SWCS vous dira à quelles conditions.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -328,7 +328,7 @@ export const FAQS: FaqItem[] = [
     category: "entretien",
     question: "À quelle fréquence faire ramoner mon poêle ?",
     answer:
-      "Une fois par an minimum en Wallonie, c'est obligatoire pour tous les poêles à pellets et requis par les compagnies d'assurance habitation. Le ramonage du conduit de fumée se fait par un ramoneur certifié (50 à 90 € en Wallonie). Gardez toujours la facture : sans certificat de ramonage annuel, votre assurance peut refuser de couvrir un sinistre lié au poêle. Mister Pellets coordonne le ramonage avec l'entretien annuel sur demande.",
+      "Une fois par an. Aucune loi wallonne ni fédérale ne l'impose pour un poêle, mais la plupart des contrats d'assurance incendie l'exigent, comme les notices des fabricants et certains règlements de police communaux. Gardez le certificat : si un feu de cheminée survient alors que le ramonage manque, l'assureur peut réduire son intervention quand ce manquement a joué dans le sinistre. Chez nous, le ramonage coûte 90 € TVAC, et il est compris dans l'entretien complet à 175 € TVAC.",
   },
   {
     id: "entretien-poele-eteint",
@@ -342,7 +342,7 @@ export const FAQS: FaqItem[] = [
     category: "entretien",
     question: "Quel est le coût moyen d'un entretien annuel ?",
     answer:
-      "À titre indicatif, un entretien annuel complet à domicile coûte sur devis selon la zone et la complexité. L'opération dure environ 90 minutes : démontage, nettoyage du creuset, de l'échangeur, de la chambre de combustion, du conduit interne, de la sonde de fumée, du ventilateur d'extraction, vérification des joints et des paramètres de combustion. Comptez aussi 50 à 90 € pour le ramonage du conduit par un ramoneur certifié, à programmer en parallèle.",
+      "175 € TVAC chez nous, ramonage du conduit compris, déplacement inclus dans notre zone d'intervention. L'opération dure environ 90 minutes : démontage, nettoyage du creuset, de l'échangeur, de la chambre de combustion, du conduit interne, de la sonde de fumée et du ventilateur d'extraction, puis contrôle des joints et des paramètres de combustion. Le ramonage seul coûte 90 € TVAC.",
   },
   {
     id: "entretien-quotidien",
@@ -356,7 +356,7 @@ export const FAQS: FaqItem[] = [
     category: "entretien",
     question: "Quel est le délai d'intervention SAV ?",
     answer:
-      "48 à 72 heures dans la zone Fernelmont et 50 km autour, hors période de pic hivernal où le délai peut s'étendre à 5 à 7 jours. Le SAV est assuré directement par notre équipe (pas de sous-traitance), avec stock de pièces détachées Edilkamin, EK63 et Girolami disponibles sous 48 heures. Coût intervention SAV : déplacement + main d'œuvre 1 à 2 h en moyenne, plus pièces si remplacement nécessaire.",
+      "48 à 72 heures dans la zone Fernelmont et 50 km autour, hors période de pic hivernal où le délai peut s'étendre à 5 à 7 jours. Le SAV est assuré directement par notre équipe (pas de sous-traitance), avec stock de pièces détachées Edilkamin, EK63 et Girolami disponibles sous 48 heures. Côté prix : 110 € TVAC la première heure, puis 60 € TVAC par heure supplémentaire, déplacement inclus dans notre zone, pièces en plus.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -374,14 +374,14 @@ export const FAQS: FaqItem[] = [
     category: "boutique",
     question: "Puis-je acheter le poêle en ligne et le faire poser par Mister Pellets ?",
     answer:
-      "Oui, c'est même la configuration la plus fréquente. Vous chiffrez votre installation sur le configurateur, on cale une visite technique, et c'est elle qui transforme l'estimation en prix ferme : on valide le conduit, les distances et l'accès avant tout engagement. La pose est facturée séparément du matériel (TVA 6 % si le logement a plus de 10 ans, contre 21 % sur le matériel). Une fois le devis accepté, vous recevez la facture d'acompte et on planifie la pose.",
+      "Oui, c'est même la configuration la plus fréquente. Vous chiffrez votre installation sur le configurateur, on cale une visite technique, et c'est elle qui transforme l'estimation en prix ferme : on valide le conduit, les distances et l'accès avant tout engagement. Quand nous fournissons et posons le poêle dans un logement de plus de 10 ans, toute la facture est à 6 % de TVA, poêle compris. Un poêle livré sans pose reste à 21 %. Une fois le devis accepté, vous recevez la facture d'acompte et on planifie la pose.",
   },
   {
     id: "boutique-paiement",
     category: "boutique",
     question: "Quels moyens de paiement acceptez-vous ?",
     answer:
-      "Rien ne se paie en ligne. Après la visite technique et l'acceptation du devis, vous recevez une facture d'acompte de 30 %, puis le solde à la fin de la pose. Virement, carte ou Bancontact. On accepte aussi les paiements en plusieurs fois via le prêt à taux 0 % Renopack ou Rénoprêt (Société wallonne du Crédit social ou Fonds du Logement) pour les projets éligibles.",
+      "Rien ne se paie en ligne. Après la visite technique et l'acceptation du devis, vous recevez une facture d'acompte de 30 %, puis le solde à la fin de la pose. Virement, carte ou Bancontact. Si votre projet entre dans les conditions du Rénopack ou du Rénoprêt (logement classé E, F ou G, audit, saut de label), le prêt de la SWCS ou du Fonds du Logement peut financer la facture.",
   },
   {
     id: "boutique-retour",
@@ -399,21 +399,21 @@ export const FAQS: FaqItem[] = [
     category: "showroom",
     question: "Où se trouve votre showroom ?",
     answer:
-      "Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). Horaires : du lundi au vendredi 9h à 18h, samedi 9h à 13h. La prise de rendez-vous est fortement recommandée pour garantir la disponibilité d'un conseiller.",
+      "Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). Horaires : du lundi au vendredi de 9 h à 18 h, le samedi de 9 h à 13 h, uniquement sur rendez-vous.",
   },
   {
     id: "showroom-modeles",
     category: "showroom",
     question: "Tous les modèles de poêles sont-ils visibles au showroom ?",
     answer:
-      "Non, la sélection en exposition tourne régulièrement selon les nouveautés de saison et les modèles que nous testons en condition réelle. Si vous visez un modèle particulier, prenez rendez-vous : on vous confirme la veille les références effectivement en exposition, et au besoin on en sort un du stock atelier pour votre visite. Les visites sans RDV restent possibles aux heures d'ouverture mais on ne peut pas garantir la disponibilité d'un conseiller selon la charge du jour.",
+      "Non. La sélection en exposition tourne au fil des saisons et des modèles que nous testons. Comme le showroom se visite sur rendez-vous, dites-nous en réservant quel modèle vous intéresse : on vous confirme la veille ce qui est exposé, et au besoin on en sort un du stock de l'atelier pour votre visite.",
   },
   {
     id: "showroom-services",
     category: "showroom",
     question: "Quels services sont disponibles via la prise de rendez-vous ?",
     answer:
-      "Cinq services au total. Devis sur place à domicile (gratuit, 60 minutes). Visite showroom + conseils à Fernelmont (gratuit, 45 minutes). Entretien annuel à domicile (sur devis, 90 minutes, réservé poêles à pellets). Dépannage à domicile (sur devis, durée variable selon la cause, réservé poêles à pellets). Ramonage à domicile (sur devis, 60 minutes, certificat fourni, réservé poêles à pellets). Réservation en ligne via notre système Easy!Appointments.",
+      "Cinq services. Le devis sur place à domicile (gratuit, 60 minutes) et la visite du showroom à Fernelmont (gratuite, 45 minutes) se réservent en ligne, sur la page Prendre rendez-vous. L'entretien annuel (175 € TVAC, ramonage compris, environ 90 minutes), le dépannage (110 € TVAC la première heure) et le ramonage (90 € TVAC, certificat fourni) se calent par téléphone au 081 13 83 09 : on a besoin de savoir quel poêle on vient voir avant de bloquer un créneau.",
   },
   {
     id: "showroom-visio",

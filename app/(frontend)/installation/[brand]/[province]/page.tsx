@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildPageMetadata({
     // pas de suffixe " | Mister Pellets" ici : le template du layout racine l'ajoute déjà
     title: `Installation poêle ${brand.name} en ${province.name}`,
-    description: `Pose de poêle à pellets ${brand.name} dans ${province.longName} par Mister Pellets : devis sous 48 h, prime Habitation Wallonie 2026 incluse, équipes basées à Fernelmont. ${province.cities.slice(0, 4).join(", ")} et environs.`,
+    description: `Pose de poêle à pellets ${brand.name} dans ${province.longName} par Mister Pellets : devis sous 48 h, TVA à 6 % en rénovation, équipes basées à Fernelmont. ${province.cities.slice(0, 4).join(", ")} et environs.`,
     path: `/installation/${brandSlug}/${provinceSlug}`,
   });
 }
@@ -82,7 +82,7 @@ export default async function InstallationLocalePage({ params }: Props) {
             </span>
           </>
         }
-        description={`${brand.tagline}. On le livre, on le pose et on le règle dans ${province.longName}, avec la prime Habitation Wallonie 2026 déduite du devis.`}
+        description={`${brand.tagline}. On le livre, on le pose et on le règle dans ${province.longName}, au taux de TVA réduit quand votre logement a plus de 10 ans.`}
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Nos marques", href: "/nos-marques" },
@@ -173,7 +173,7 @@ export default async function InstallationLocalePage({ params }: Props) {
           <ul className="mp-measure space-y-3 text-lg text-mp-ink leading-relaxed">
             {[
               "Visite technique pour valider le conduit, le tubage et l'emplacement.",
-              "Devis chiffré sous 48 h, prime Habitation Wallonie 2026 déduite.",
+              "Devis chiffré sous 48 h, TVA à 6 % si le logement a plus de 10 ans.",
               "Pose réalisée en une journée par nos équipes basées à Fernelmont.",
               "Service après-vente assuré localement, pièces courantes en stock.",
             ].map((item) => (
@@ -188,7 +188,7 @@ export default async function InstallationLocalePage({ params }: Props) {
 
       <CTAFinal
         title={`Devis pour un ${brand.name} en ${province.name}`}
-        description="Donnez-nous quelques infos sur votre maison, on chiffre la pose en 48h avec primes incluses."
+        description="Donnez-nous quelques infos sur votre maison, on chiffre la pose en 48h, TVA comprise."
       />
     </>
   );

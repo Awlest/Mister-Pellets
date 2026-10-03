@@ -9,12 +9,12 @@ import { FaqExplorer } from "@/components/sections/FaqExplorer";
 export const metadata: Metadata = buildPageMetadata({
   title: "FAQ Mister Pellets, toutes vos questions sur les poêles à pellets en Wallonie",
   description:
-    "Plus de 40 questions et réponses sur les poêles à pellets en Wallonie. Choix du modèle, marques, primes 2026, installation, entretien, boutique. Recherche et filtres par catégorie.",
+    "Plus de 40 questions et réponses sur les poêles à pellets en Wallonie. Choix du modèle, marques, aides 2026, installation, entretien, boutique. Recherche et filtres par catégorie.",
   path: "/faq",
   keywords: [
     "FAQ poêle à pellets",
     "questions poêle pellets Wallonie",
-    "prime poêle pellets 2026",
+    "aides poêle pellets 2026",
     "entretien poêle pellets",
     "Mister Pellets",
   ],

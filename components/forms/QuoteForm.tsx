@@ -355,8 +355,8 @@ function Step2({ value, onChange }: { value: QuoteState["peb"]; onChange: (v: Qu
           { value: "C", label: "C", sub: "Moyen" },
           { value: "D", label: "D", sub: "Moyen-faible" },
           { value: "E", label: "E", sub: "Faible" },
-          { value: "F", label: "F", sub: "Mauvais (bonus prime)" },
-          { value: "G", label: "G", sub: "Très mauvais (bonus prime)" },
+          { value: "F", label: "F", sub: "Mauvais" },
+          { value: "G", label: "G", sub: "Très mauvais" },
           { value: "ne-sais-pas", label: "Je ne sais pas", sub: "On regardera ensemble" },
         ]}
       />
@@ -421,7 +421,7 @@ function Step5({ value, onChange }: { value: QuoteState["budget"]; onChange: (v:
         Quel budget total (poêle + pose) ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
-        Hors prime, on calcule la prime ensuite et on vous montre le net après déduction.
+        Poêle et pose compris, TVA incluse. Le devis précise le montant exact après la visite.
       </p>
       <ChoiceGrid<QuoteState["budget"] & string>
         value={value}

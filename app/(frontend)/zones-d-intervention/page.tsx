@@ -81,7 +81,7 @@ export default function ZonesDInterventionPage() {
                 Atelier à Fernelmont
               </h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
-                Rue des Fagotis 3A, 5380. À 17 km de Namur, 22 km de Gembloux. Showroom ouvert lun-ven 9h-18h, sam 9h-13h.
+                Rue des Fagotis 3A, 5380. À 17 km de Namur, 22 km de Gembloux. Showroom sur rendez-vous, lun-ven 9h-18h, sam 9h-13h.
               </p>
             </Card>
           </div>

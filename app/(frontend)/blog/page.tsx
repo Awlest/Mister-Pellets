@@ -12,12 +12,12 @@ import { buildPageMetadata, buildBreadcrumbSchema, SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "Blog poêle à pellets, articles techniques & guides Wallonie",
   description:
-    "Guides d'achat, comparatifs marques, primes Wallonie 2026, dépannage et entretien. Le blog technique de Mister Pellets : du concret et des chiffres à jour pour la Wallonie.",
+    "Guides d'achat, comparatifs marques, aides Wallonie 2026, dépannage et entretien. Le blog technique de Mister Pellets : du concret et des chiffres à jour pour la Wallonie.",
   path: "/blog",
   keywords: [
     "blog poêle à pellets",
     "guide poêle pellets Wallonie",
-    "primes Wallonie 2026",
+    "aides poêle à pellets Wallonie 2026",
     "entretien poêle pellets",
     "Mister Pellets",
   ],
@@ -57,7 +57,7 @@ export default function BlogHubPage() {
             Le savoir-faire pellets, <span className="mp-italic">sans bullshit</span>
           </>
         }
-        description="Articles techniques sur le poêle à pellets : données chiffrées, retours terrain, primes Wallonie 2026. Du concret, pas des généralités."
+        description="Articles techniques sur le poêle à pellets : données chiffrées, retours terrain, aides Wallonie 2026. Du concret, pas des généralités."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Blog" },

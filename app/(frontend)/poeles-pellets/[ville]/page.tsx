@@ -185,8 +185,8 @@ export default async function CityPage({ params }: Props) {
             description: `Visite à domicile à ${city.name} ou visio si vous préférez. On regarde la pièce, le conduit, l'isolation. Aucune obligation.`,
           },
           {
-            title: "Devis avec primes",
-            description: "Chiffrage transparent sous 48h, primes Wallonie déjà déduites. Vous voyez exactement combien vous payez net.",
+            title: "Devis tout compris",
+            description: "Chiffrage transparent sous 48h, pose et TVA comprises. Vous voyez exactement combien vous payez.",
           },
           {
             title: "Pose en 1 journée",

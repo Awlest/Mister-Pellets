@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s | Mister Pellets",
   },
   description:
-    "Edilkamin, EK63 et Girolami : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, prime 2026 jusqu'à 960 €, livraison gratuite dans 20 km autour de Fernelmont. Devis en 60 secondes.",
+    "Edilkamin, EK63 et Girolami : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   generator: "Next.js",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     "Edilkamin",
     "EK63",
     "Girolami",
-    "primes énergie Wallonie 2026",
+    "aides poêle à pellets Wallonie 2026",
     "installation poêle pellets",
     "Fernelmont",
     "Namur",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "Poêle à pellets en Wallonie, Vente & pose | Mister Pellets",
     description:
-      "Edilkamin, EK63 et Girolami. Pose en 1 jour, primes incluses, livraison gratuite dans 20 km autour de Fernelmont.",
+      "Edilkamin, EK63 et Girolami. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
     images: [
       {
         url: DEFAULT_OG_IMAGE,

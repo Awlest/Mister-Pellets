@@ -75,22 +75,31 @@ Base : Fernelmont (5380), province de Namur.
   Flandre.
 - Pas de pose ni de SAV en Flandre ni à Bruxelles.
 
-## Prix et aides (situation au 4 septembre 2026)
+## Prix et aides (situation au 3 octobre 2026)
 
 - Poêle à air pulsé étanche posé, conduit existant : à partir d'environ
   4 000 € TVAC tout compris.
 - Canalisable 10 à 14 kW : 5 500 à 7 500 € TVAC.
 - Hydraulique 18 à 24 kW raccordé aux radiateurs : 8 000 à 14 000 € TVAC selon
   la puissance, le ballon tampon et le démantèlement éventuel d'une cuve mazout.
-- TVA à 6 % au lieu de 21 % sur les logements de plus de dix ans, appliquée
-  d'office par l'installateur. Ce n'est pas une prime à demander.
-- Prime Habitation Wallonie 2026 : 160 à 960 € selon la catégorie de revenus.
-  Depuis le 14 février 2025, un audit logement préalable est obligatoire pour la
-  quasi-totalité des primes Habitation, poêle à pellets compris (800 à 1 200 €
-  TVAC, valable 5 ans).
+- TVA à 6 % au lieu de 21 % sur les logements privés de plus de dix ans, quand
+  l'installateur fournit et pose le poêle. Ce n'est pas une prime à demander.
+  Les appareils au gaz, au mazout ou au charbon sont à 21 % depuis le 29 juillet
+  2025 ; les poêles à pellets et à bois gardent le 6 %.
+- Plus de prime régionale pour un poêle à pellets : la prime Habitation s'est
+  arrêtée le 30 septembre 2026 (travaux finis et demande introduite à cette
+  date au plus tard). Depuis le 1er octobre 2026, la Wallonie soutient la
+  rénovation par deux prêts, le Rénopack (0 %, 50, 40 ou 15 % effacés selon les
+  revenus, catégories C1 à C3) et le Rénoprêt (catégorie C4, taux zéro ou
+  préférentiel), réservés aux logements classés PEB E, F ou G qui atteignent au
+  moins le label D (ou C depuis E) après travaux, avec un audit logement de
+  moins d'un an. Demandes auprès de la SWCS ou du Fonds du Logement de Wallonie.
+- Subvention MEBAR (revenus jusqu'au revenu d'intégration sociale majoré de
+  30 %) : jusqu'à 2 000 €, installation d'un poêle comprise, demande via le CPAS
+  avant les travaux.
 - Financement Cofidis à 0 %, sous réserve d'acceptation du prêteur.
-- Le configurateur en ligne donne une estimation tout compris avec la prime déjà
-  déduite ; le prix ferme est confirmé après la visite technique.
+- Le configurateur en ligne donne une estimation tout compris, TVA comprise ;
+  le prix ferme est confirmé après la visite technique.
 
 ## Dimensionnement, règle de base en Wallonie
 
@@ -104,13 +113,17 @@ Base : Fernelmont (5380), province de Namur.
 
 - Garantie 5 ans pièces et main-d'œuvre sur l'installation, intervention SAV
   sous 48 à 72 heures dans la zone.
-- Ramonage obligatoire une fois par an en Wallonie sur un appareil à combustible
-  solide, avec certificat remis sur place.
+- Ramonage une fois par an, avec certificat remis sur place. Aucune loi
+  wallonne ni fédérale ne l'impose pour un poêle (réponse du ministre wallon de
+  l'Énergie au Parlement, 11 janvier 2022) ; l'obligation vient en pratique du
+  contrat d'assurance incendie, du bail, de la notice du fabricant ou du
+  règlement de police de la commune.
 - Awlest SRL est inscrite à la Banque-Carrefour des Entreprises sous le numéro
   BE 0656.514.212, avec accès à la profession requis pour la pose et l'entretien
   d'appareils de chauffage.
-- Appareils conformes au règlement écoconception 2022 (lot 20), rendement
-  saisonnier d'au moins 87 %, condition d'éligibilité aux primes.
+- Appareils conformes au règlement européen d'écoconception (UE) 2015/1185,
+  applicable depuis le 1er janvier 2022 : au moins 79 % de rendement saisonnier
+  pour un poêle à pellets.
 
 ## Pages de référence
 
@@ -122,7 +135,7 @@ Base : Fernelmont (5380), province de Namur.
 - Entretien annuel : ${SITE_URL}/entretien-poele-a-pellets
 - Ramonage : ${SITE_URL}/ramonage
 - Dépannage : ${SITE_URL}/depannage-poele-a-pellets
-- Primes Wallonie 2026 : ${SITE_URL}/primes-energie-wallonie-2026
+- Aides Wallonie 2026 (fin de la prime, Rénopack, TVA) : ${SITE_URL}/primes-energie-wallonie-2026
 - Zones d'intervention : ${SITE_URL}/zones-d-intervention
 - Guides : ${SITE_URL}/guides
 - FAQ (${FAQS.length} questions) : ${SITE_URL}/faq

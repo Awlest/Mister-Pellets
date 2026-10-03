@@ -11,7 +11,6 @@ import {
   ISO,
   LEVELS,
   OPTIONS,
-  PRIME_CATEGORIES,
   STOVE_KINDS,
   estimate,
   type EstimateState,
@@ -19,7 +18,6 @@ import {
   type IsoKey,
   type LevelKey,
   type OptionKey,
-  type PrimeCategory,
   type StoveKind,
 } from "@/lib/estimate";
 import { BONUS } from "@/lib/bonus";
@@ -90,11 +88,6 @@ function sanitizeConfig(raw: Record<string, unknown>): EstimateState {
     housingOver10Years: raw.housingOver10Years !== false,
     productKey: typeof raw.productKey === "string" ? raw.productKey.slice(0, 140) : null,
     opt,
-    primeCategory: pick(
-      raw.primeCategory,
-      Object.keys(PRIME_CATEGORIES) as PrimeCategory[],
-      DEFAULT_STATE.primeCategory,
-    ),
     financeMonths: null,
   };
 }
@@ -207,9 +200,6 @@ export async function POST(request: Request) {
     ...r.laborLines.map((l) => `${l.label} : ${l.amountHT} € HT`),
     `TVA ${Math.round(r.vatRate * 100)} % : ${r.vatAmount} €`,
     `TOTAL : ${r.totalTTC} € TTC`,
-    r.prime > 0
-      ? `Prime estimée (${PRIME_CATEGORIES[config.primeCategory].label}) : −${r.prime} € → ${r.netAfterPrime} €`
-      : `Prime : catégorie de revenus non communiquée`,
     monthly ? `Financement 0 % : ${monthly} €/mois sur ${months} mois` : "",
   ]
     .filter(Boolean)
@@ -267,8 +257,6 @@ export async function POST(request: Request) {
       ],
       materialHT: r.materialHT,
       totalTTC: r.totalTTC,
-      prime: r.prime,
-      netAfterPrime: r.netAfterPrime,
       months,
       monthly,
       message,
@@ -287,8 +275,6 @@ export async function POST(request: Request) {
   return NextResponse.json({
     ok: true,
     totalTTC: r.totalTTC,
-    prime: r.prime,
-    netAfterPrime: r.netAfterPrime,
     monthly,
     months,
   });

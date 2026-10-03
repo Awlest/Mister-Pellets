@@ -44,13 +44,13 @@ export default function DepannagePage() {
               </p>
               <p>
                 <strong>Il ne prend plus de pellets.</strong> Le motoréducteur de la vis sans
-                fin, ou un corps étranger coincé dans la vis — il arrive qu&apos;un caillou ou
+                fin, ou un corps étranger coincé dans la vis : il arrive qu&apos;un caillou ou
                 une agrafe passe avec un sac de mauvaise qualité.
               </p>
               <p>
                 <strong>Un code erreur s&apos;affiche.</strong> Notez-le et donnez-le nous au
                 téléphone. Chaque fabricant a sa nomenclature, et le code oriente déjà le
-                diagnostic — parfois même vers quelque chose que vous pouvez régler seul en
+                diagnostic, parfois même vers quelque chose que vous pouvez régler seul en
                 cinq minutes, auquel cas on vous le dira sans nous déplacer.
               </p>
             </>

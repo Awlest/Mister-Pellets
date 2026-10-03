@@ -17,7 +17,7 @@ export default function RamonagePage() {
     <ServiceLanding
       service={service}
       title="Ramonage de poêle à pellets en Wallonie"
-      intro="Le ramonage annuel du conduit est obligatoire, et c'est la première chose que votre assurance demandera en cas de sinistre. 90 € TVAC, certificat remis sur place."
+      intro="Un ramonage par an : c'est ce que demandent la plupart des contrats d'assurance incendie et la notice de votre poêle. 90 € TVAC, certificat remis sur place."
       included={[
         "Ramonage mécanique complet du conduit de fumée",
         "Contrôle du chapeau et de la sortie en toiture",
@@ -28,21 +28,31 @@ export default function RamonagePage() {
       ]}
       sections={[
         {
-          heading: "Pourquoi c'est obligatoire",
+          heading: "Obligatoire ? Pas par la loi, mais par votre contrat",
           body: (
             <>
               <p>
-                En Wallonie, le ramonage du conduit est imposé une fois par an pour un
-                appareil à combustible solide, et le pellet en fait partie. Ce n&apos;est pas
-                une formalité administrative : un conduit encrassé tire mal, la combustion
-                se dégrade, et le risque de feu de cheminée augmente.
+                Beaucoup de sites disent le contraire, alors précisons : aucune loi
+                wallonne ni fédérale n&apos;impose de ramoner un poêle chaque année. Le
+                ministre wallon de l&apos;Énergie l&apos;a confirmé au Parlement en janvier
+                2022. L&apos;obligation existe pourtant, ailleurs : dans la plupart des
+                contrats d&apos;assurance incendie, dans le bail si vous êtes locataire, dans
+                la notice du fabricant, et dans le règlement de police de certaines
+                communes.
               </p>
               <p>
-                Le point qui coûte cher, c&apos;est l&apos;assurance. En cas de sinistre lié
-                à l&apos;appareil, l&apos;assureur réclame le certificat de ramonage de
-                l&apos;année. Sans lui, la prise en charge peut être refusée. C&apos;est la
-                raison pour laquelle on vous le remet sur place, le jour même, et pas par
+                Le point qui coûte cher, c&apos;est l&apos;assurance. Si votre contrat impose
+                un ramonage annuel et qu&apos;un feu de cheminée survient, l&apos;assureur peut
+                réduire ou refuser son intervention quand le conduit non ramoné a joué dans
+                le sinistre (article 65 de la loi du 4 avril 2014 sur les assurances).
+                Personne n&apos;a envie d&apos;en débattre après un incendie. C&apos;est pour ça
+                qu&apos;on vous remet le certificat sur place, le jour même, et pas par
                 courrier trois semaines plus tard.
+              </p>
+              <p>
+                Et même sans contrat, une fois par an reste le bon rythme : un conduit
+                encrassé tire mal, la combustion se dégrade et le risque de feu de cheminée
+                augmente.
               </p>
             </>
           ),
@@ -77,7 +87,7 @@ export default function RamonagePage() {
               <p>
                 Le calcul est vite fait&nbsp;: le ramonage seul est à 90 € TVAC, et notre
                 entretien complet à <strong>175 € TVAC comprend déjà le ramonage</strong>. Pour
-                85 € de plus, vous ajoutez la révision de l&apos;appareil sur le même passage —
+                85 € de plus, vous ajoutez la révision de l&apos;appareil sur le même passage :
                 nettoyage de l&apos;échangeur, contrôle de la sonde de fumée, réglage de la
                 combustion, remplacement des joints usés. C&apos;est ce que prennent la plupart
                 de nos clients.
@@ -89,7 +99,7 @@ export default function RamonagePage() {
       faq={[
         {
           q: "Le ramonage est-il vraiment obligatoire pour un poêle à pellets ?",
-          a: "Oui. Le pellet est un combustible solide, le ramonage annuel du conduit s'applique comme pour un poêle à bois. Le certificat vous sera demandé par votre assurance en cas de sinistre.",
+          a: "Pas par une loi : ni la Région wallonne ni le fédéral n'imposent de ramonage annuel pour un poêle. Mais la plupart des contrats d'assurance incendie l'exigent, comme la notice du fabricant et parfois le règlement de police de votre commune. En pratique : une fois par an, certificat à l'appui.",
         },
         {
           q: "Combien coûte un ramonage ?",

@@ -56,7 +56,7 @@ export default function EntretienPage() {
               <p>
                 Sur les poêles que nous installons, nous offrons une garantie commerciale de
                 5 ans pièces et main d&apos;œuvre, en plus de la garantie légale de 2 ans.
-                Cette garantie commerciale est conditionnée à l&apos;entretien annuel — c&apos;est
+                Cette garantie commerciale est conditionnée à l&apos;entretien annuel. C&apos;est
                 écrit dans nos conditions générales, et c&apos;est la même logique chez tous les
                 fabricants.
               </p>
@@ -77,7 +77,7 @@ export default function EntretienPage() {
               les délais sont courts et vous démarrez l&apos;hiver sur un appareil propre. À
               partir d&apos;octobre, la demande grimpe et les créneaux se remplissent. Si votre
               poêle tourne toute l&apos;année ou chauffe une grande surface, un second passage
-              en milieu de saison peut se justifier — on vous le dira franchement si c&apos;est
+              en milieu de saison peut se justifier : on vous le dira franchement si c&apos;est
               votre cas, et pas autrement.
             </p>
           ),

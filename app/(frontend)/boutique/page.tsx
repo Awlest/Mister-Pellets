@@ -10,7 +10,7 @@ import { BONUS, isBonusPeriod } from "@/lib/bonus";
 export const metadata = buildPageMetadata({
   title: "Boutique poêles à pellets en Wallonie",
   description:
-    "Catalogue Mister Pellets : Edilkamin, EK63, Girolami. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, prime 2026 incluse.",
+    "Catalogue Mister Pellets : Edilkamin, EK63, Girolami. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, TVA à 6 % en rénovation.",
   path: "/boutique",
 });
 
@@ -73,7 +73,7 @@ export default async function BoutiquePage() {
             Tous les <span className="mp-italic">poêles à pellets</span>
           </>
         }
-        description="Le catalogue complet, filtrable par marque, puissance, type de diffusion et couleur. Tous nos modèles sont conformes écodesign 2022 et figurent dans la liste officielle SPW Logement éligible à la Prime Habitation Wallonie 2026."
+        description="Le catalogue complet, filtrable par marque, puissance, type de diffusion et couleur. Tous nos poêles respectent le règlement européen d'écoconception en vigueur depuis 2022."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Boutique" },
@@ -93,7 +93,7 @@ export default async function BoutiquePage() {
           <div className="mb-8 rounded-xl bg-mp-orange-light/50 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink">
             <strong>Besoin d&apos;un modèle précis ?</strong> On distribue toute la gamme Edilkamin, EK63
             et Girolami, même les références qui ne sont pas encore listées ici. Pour un chiffrage
-            complet (poêle + pose + prime Wallonie), passez par le{" "}
+            complet (poêle, pose et TVA), passez par le{" "}
             <Link href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline font-semibold">
               formulaire de devis
             </Link>
@@ -106,7 +106,7 @@ export default async function BoutiquePage() {
 
       <CTAFinal
         title="Pas trouvé le modèle qu'il vous faut ?"
-        description="Décrivez votre projet, on vous propose 2 ou 3 options pertinentes, prime Wallonie déjà calculée."
+        description="Décrivez votre projet, on vous propose 2 ou 3 options pertinentes, pose et TVA comprises."
       />
     </>
   );
