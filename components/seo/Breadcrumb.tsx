@@ -43,7 +43,7 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
                 // seul retour vers la boutique ou la marque.
                 <Link
                   href={item.href}
-                  className="-my-3 inline-flex min-h-11 items-center px-0.5 hover:text-mp-orange-ink transition-colors"
+                  className="-my-3 inline-flex min-h-11 min-w-11 items-center justify-center px-0.5 hover:text-mp-orange-ink transition-colors"
                 >
                   {item.label}
                 </Link>

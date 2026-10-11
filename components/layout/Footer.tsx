@@ -154,7 +154,7 @@ export function Footer() {
             <span key={link.href} className="inline-flex items-center gap-2">
               <Link
                 href={link.href}
-                className="inline-flex min-h-11 items-center text-mp-cream hover:text-mp-orange-flame transition-colors"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-mp-cream hover:text-mp-orange-flame transition-colors"
               >
                 {link.label}
               </Link>

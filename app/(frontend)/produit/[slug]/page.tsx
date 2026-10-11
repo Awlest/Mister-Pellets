@@ -235,7 +235,7 @@ export default async function ProductPage({ params }: Props) {
               <div className="flex flex-wrap items-center gap-2 mb-2 lg:mb-3">
                 <Link
                   href={`/nos-marques/${brandSlug}`}
-                  className="-my-3 inline-flex min-h-11 items-center text-xs font-semibold uppercase tracking-wider text-mp-orange-ink hover:underline"
+                  className="-my-3 inline-flex min-h-11 min-w-11 items-center text-xs font-semibold uppercase tracking-wider text-mp-orange-ink hover:underline"
                 >
                   {product.brand}
                 </Link>

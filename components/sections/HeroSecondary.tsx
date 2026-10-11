@@ -55,7 +55,7 @@ export function HeroSecondary({
                   {item.href ? (
                     <Link
                       href={item.href}
-                      className="-my-3 inline-flex min-h-11 items-center px-1 hover:text-mp-orange-ink transition-colors"
+                      className="-my-3 inline-flex min-h-11 min-w-11 items-center justify-center px-1 hover:text-mp-orange-ink transition-colors"
                     >
                       {item.label}
                     </Link>
