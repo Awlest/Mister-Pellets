@@ -287,7 +287,7 @@ export function ProductGallery({
           <button
             type="button"
             onClick={closeLightbox}
-            className="absolute top-4 right-4 inline-flex items-center justify-center h-10 w-10 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+            className="absolute top-4 right-4 inline-flex items-center justify-center h-11 w-11 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
             aria-label="Fermer la photo agrandie"
           >
             <svg
@@ -419,7 +419,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
               type="button"
               onClick={() => onChange(isActive ? -1 : i)}
               className={cn(
-                "inline-flex items-center gap-2 rounded-full pl-1.5 pr-3 py-1.5 text-xs font-semibold border transition-all focus:outline-none focus:ring-2 focus:ring-mp-orange-flame focus:ring-offset-1",
+                "inline-flex min-h-11 items-center gap-2 rounded-full pl-1.5 pr-3 text-xs font-semibold border transition-colors pointer-fine:min-h-9 focus:outline-none focus:ring-2 focus:ring-mp-orange-flame focus:ring-offset-1",
                 isActive
                   ? "border-mp-orange-flame bg-mp-orange-light text-mp-ink"
                   : "border-mp-sand bg-mp-cream text-mp-green-deep hover:border-mp-orange-flame/60"

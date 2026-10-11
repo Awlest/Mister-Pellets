@@ -33,14 +33,17 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
     <>
       <JsonLd data={schema} />
       <nav aria-label="Fil d'Ariane" className={className}>
-        <ol className="flex flex-wrap items-center gap-1.5 text-sm text-mp-ink-soft">
+        <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm text-mp-ink-soft">
           {items.map((item, i) => (
             <li key={i} className="flex items-center gap-1.5">
-              {i > 0 && <ChevronRight className="h-3.5 w-3.5" />}
+              {i > 0 && <ChevronRight className="h-3.5 w-3.5" aria-hidden />}
               {item.href ? (
+                // Zone de clic de 44 px de haut sans changer la mise en page
+                // (marges négatives) : sur mobile, sans en-tête, c'est le
+                // seul retour vers la boutique ou la marque.
                 <Link
                   href={item.href}
-                  className="hover:text-mp-orange-flame transition-colors"
+                  className="-my-3 inline-flex min-h-11 items-center px-0.5 hover:text-mp-orange-ink transition-colors"
                 >
                   {item.label}
                 </Link>

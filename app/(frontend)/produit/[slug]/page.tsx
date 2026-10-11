@@ -224,10 +224,33 @@ export default async function ProductPage({ params }: Props) {
           {/* Provider couleur : partage la variante sélectionnée entre la
               galerie (gauche) et le bloc d'achat (droite). */}
           <ProductColorProvider>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+          {/* Trois blocs : en-tête (marque + nom), galerie, informations. Sur
+              mobile ils s'empilent dans cet ordre, pour que le nom du poêle
+              apparaisse dans le premier écran : sous la galerie et les
+              pastilles de finition, il tombait vers 950 px. À partir de
+              1 024 px, la galerie occupe la colonne de gauche sur toute la
+              hauteur et l'en-tête reprend le haut de la colonne de droite. */}
+          <div className="grid grid-cols-1 gap-y-6 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-0">
+            <div className="lg:col-start-2 lg:row-start-1">
+              <div className="flex flex-wrap items-center gap-2 mb-2 lg:mb-3">
+                <Link
+                  href={`/nos-marques/${brandSlug}`}
+                  className="-my-3 inline-flex min-h-11 items-center text-xs font-semibold uppercase tracking-wider text-mp-orange-ink hover:underline"
+                >
+                  {product.brand}
+                </Link>
+                {product.isBestseller && <Badge variant="primary">Best-seller</Badge>}
+                {product.isNew && <Badge variant="success">Nouveau</Badge>}
+              </div>
+
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-mp-green-deep lg:mb-4 leading-tight">
+                {product.name}
+              </h1>
+            </div>
+
             {/* Galerie interactive : clic vignette = image principale change,
                 clic image principale = lightbox plein écran. Composant client. */}
-            <div>
+            <div className="lg:col-start-1 lg:row-span-2 lg:row-start-1">
               <ProductGallery
                 productName={product.name}
                 mainImage={
@@ -246,7 +269,7 @@ export default async function ProductPage({ params }: Props) {
                   href={product.technicalSheetUrl}
                   target="_blank"
                   rel="noopener"
-                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink hover:text-mp-green-deep transition-colors underline-offset-4 hover:underline"
+                  className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-mp-orange-ink hover:text-mp-green-deep transition-colors underline-offset-4 hover:underline"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -270,22 +293,7 @@ export default async function ProductPage({ params }: Props) {
             </div>
 
             {/* Info produit */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Link
-                  href={`/nos-marques/${brandSlug}`}
-                  className="text-xs font-semibold uppercase tracking-wider text-mp-orange-ink hover:underline"
-                >
-                  {product.brand}
-                </Link>
-                {product.isBestseller && <Badge variant="primary">Best-seller</Badge>}
-                {product.isNew && <Badge variant="success">Nouveau</Badge>}
-              </div>
-
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-mp-green-deep mb-4 leading-tight">
-                {product.name}
-              </h1>
-
+            <div className="mt-4 lg:col-start-2 lg:row-start-2 lg:mt-0">
               {/* Description : priorité au shortDescription saisi dans l'admin.
                   Fallback sur le template marketing seulement si vide ET que les
                   données minimales (surface) sont présentes pour éviter "pour ." */}

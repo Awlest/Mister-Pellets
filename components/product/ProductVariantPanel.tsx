@@ -297,7 +297,8 @@ function VariantValueButton({
   const disabled = !available && !selected;
   const title = disabled ? "Combinaison non disponible" : value.label;
 
-  // Mode pastille couleur
+  // Mode pastille couleur : pastille de 32 px dans une zone de clic de 44 px
+  // (la pastille seule faisait 32 px, sous la cible tactile minimale).
   if (axis.displayMode === "color" && value.colorHex) {
     return (
       <button
@@ -308,14 +309,22 @@ function VariantValueButton({
         aria-label={value.label}
         aria-pressed={selected}
         className={[
-          "h-8 w-8 rounded-full border transition-all",
-          selected
-            ? "ring-2 ring-mp-green-deep ring-offset-2 border-mp-green-deep"
-            : "border-mp-sand",
-          disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:scale-105",
+          "group/swatch -m-1 grid h-11 w-11 place-items-center rounded-full",
+          disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer",
         ].join(" ")}
-        style={{ backgroundColor: value.colorHex }}
-      />
+      >
+        <span
+          aria-hidden="true"
+          className={[
+            "h-8 w-8 rounded-full border transition-transform motion-reduce:transition-none",
+            selected
+              ? "ring-2 ring-mp-green-deep ring-offset-2 border-mp-green-deep"
+              : "border-mp-sand",
+            disabled ? "" : "group-hover/swatch:scale-105",
+          ].join(" ")}
+          style={{ backgroundColor: value.colorHex }}
+        />
+      </button>
     );
   }
 
@@ -346,7 +355,7 @@ function VariantValueButton({
             e.currentTarget.style.display = "none";
           }}
         />
-        <span className="text-[10px] leading-tight text-mp-ink-soft text-center">
+        <span className="text-xs leading-tight text-mp-ink-soft text-center">
           {value.label}
         </span>
       </button>
@@ -362,7 +371,7 @@ function VariantValueButton({
       title={title}
       aria-pressed={selected}
       className={[
-        "rounded-full border px-4 py-1.5 text-sm font-medium transition-all",
+        "inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-medium transition-colors pointer-fine:min-h-9",
         selected
           ? "bg-mp-green-deep text-mp-cream border-mp-green-deep"
           : "bg-mp-cream text-mp-green-deep border-mp-sand",
