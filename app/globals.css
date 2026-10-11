@@ -435,6 +435,26 @@ html[data-consent] .mp-consent-banner {
   }
 }
 
+/* === FAQ (FAQAccordion, <details> natifs) ===
+ * Ouverture et fermeture glissées là où le navigateur sait animer vers une
+ * hauteur `auto` (calc-size : Chrome, Edge). Ailleurs, aucune règle : un
+ * <details> ordinaire, qui s'ouvre d'un coup. content-visibility en
+ * allow-discrete garde la réponse affichée pendant la fermeture. */
+@supports (block-size: calc-size(auto, size)) {
+  .mp-faq-item::details-content {
+    block-size: 0;
+    overflow-y: clip;
+  }
+  .mp-faq-item[open]::details-content {
+    block-size: calc-size(auto, size);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .mp-faq-item::details-content {
+      transition: block-size 0.2s ease-out, content-visibility 0.2s ease-out allow-discrete;
+    }
+  }
+}
+
 /* === Keyframes pour Accordion + Sheet (Radix) === */
 @keyframes accordion-down {
   from { height: 0; }

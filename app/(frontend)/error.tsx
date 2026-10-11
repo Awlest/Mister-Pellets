@@ -3,10 +3,14 @@
 import * as React from "react";
 import Link from "next/link";
 import { RefreshCw, Home, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 
 /**
  * Error boundary global frontend (cf. audit V20260503 §2.M.2).
+ *
+ * Next charge ce composant sur chaque page, avant toute erreur : les boutons
+ * prennent donc les classes de buttonVariants plutôt que le composant
+ * Button, qui embarque tailwind-merge (8 Ko compressés) et Slot.
  */
 export default function FrontendError({
   error,
@@ -39,22 +43,22 @@ export default function FrontendError({
           </p>
         )}
         <div className="flex flex-wrap gap-3 justify-center">
-          <Button variant="primary" size="lg" onClick={() => reset()}>
+          <button
+            type="button"
+            onClick={() => reset()}
+            className={buttonVariants({ variant: "primary", size: "lg" })}
+          >
             <RefreshCw className="h-5 w-5" />
             Réessayer
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <Link href="/">
-              <Home className="h-5 w-5" />
-              Retour à l&apos;accueil
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <Link href="/contact">
-              <Phone className="h-5 w-5" />
-              Nous contacter
-            </Link>
-          </Button>
+          </button>
+          <Link href="/" className={buttonVariants({ variant: "outline", size: "lg" })}>
+            <Home className="h-5 w-5" />
+            Retour à l&apos;accueil
+          </Link>
+          <Link href="/contact" className={buttonVariants({ variant: "outline", size: "lg" })}>
+            <Phone className="h-5 w-5" />
+            Nous contacter
+          </Link>
         </div>
       </div>
     </section>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Clock, MapPin, ArrowRight, CalendarDays, Droplet, Flame, Fuel, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -116,12 +115,16 @@ export default function HomePage() {
           className="flex justify-center relative"
           style={{ paddingTop: "17.5px", paddingBottom: "17.5px" }}
         >
-          <Image
+          {/* fetchPriority high : React en fait aussi un préchargement dans le
+              <head>, comme le faisait `priority` de next/image. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/logo-mister-pellets-full.svg"
             alt="Mister Pellets"
             width={400}
             height={400}
-            priority
+            fetchPriority="high"
+            decoding="async"
             className="h-[160px] w-[160px] md:h-[200px] md:w-[200px] object-contain"
           />
         </div>

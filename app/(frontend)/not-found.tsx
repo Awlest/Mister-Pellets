@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Home, ShoppingBag, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CTAFinal } from "@/components/sections/CTAFinal";
@@ -17,11 +16,14 @@ export default function NotFound() {
     <>
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell text-center">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/logo-mister-pellets-mascotte.svg"
             alt=""
             width={120}
             height={120}
+            loading="lazy"
+            decoding="async"
             className="mx-auto mb-6 h-24 w-24 opacity-60"
           />
           <p className="mp-measure mx-auto text-sm uppercase tracking-wider font-semibold text-mp-orange-ink mb-3">

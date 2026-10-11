@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 /**
  * Footer mobile MINIMAL (Hotfix V1.3 §P1).
@@ -84,11 +83,14 @@ export function Footer() {
         <div className="flex items-center w-full">
           <div className="flex-1 flex justify-center">
             <Link href="/" aria-label="Mister Pellets, accueil">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/logo-mister-pellets-ref.svg"
                 alt="Mister Pellets"
                 width={320}
                 height={320}
+                loading="lazy"
+                decoding="async"
                 className="h-32 w-32 sm:h-36 sm:w-36 object-contain"
                 style={{
                   filter:

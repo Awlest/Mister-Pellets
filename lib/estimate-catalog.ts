@@ -109,9 +109,11 @@ function powerOptions(row: PayloadEstimateRow): Array<{ kw: number; ttc: number 
 }
 
 /**
- * Hôtes distants acceptés par `next/image` (cf. images.remotePatterns dans
- * next.config.ts). Une URL servie depuis un autre hôte ferait LEVER next/image
- * au rendu — donc planter tout le configurateur pour une simple vignette.
+ * Hôtes distants acceptés pour les vignettes (les mêmes que
+ * images.remotePatterns dans next.config.ts). La liste protégeait next/image,
+ * qui levait une erreur au rendu pour tout autre hôte et plantait le
+ * configurateur ; la vignette est un simple <img> depuis le 11/10/2026, la
+ * liste reste en garde-fou : photo d'un hôte inconnu = pictogramme.
  */
 const ALLOWED_IMAGE_HOSTS = [
   ".public.blob.vercel-storage.com",
@@ -121,7 +123,7 @@ const ALLOWED_IMAGE_HOSTS = [
 ];
 
 /**
- * Normalise l'URL d'une photo pour `next/image` :
+ * Normalise l'URL d'une photo de vignette :
  * - notre propre hôte (prod) ou l'hôte local (dev) → chemin relatif ;
  * - hôte distant explicitement autorisé → URL telle quelle ;
  * - tout le reste → undefined, la vignette bascule sur le pictogramme.

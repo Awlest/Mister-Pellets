@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -13,10 +12,8 @@ import {
   Loader2,
   Minus,
   Plus,
-  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetClose, SheetContent } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import {
   DEFAULT_STATE,
@@ -48,6 +45,13 @@ import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthl
 import { EVENTS, trackEvent } from "@/lib/analytics";
 
 const STORAGE_KEY = "mp_estimate_draft";
+
+// Volet du détail (mobile et tablette) : sa fenêtre Radix n'est téléchargée
+// qu'au premier geste vers le total, beaucoup de visiteurs ne l'ouvrent pas.
+const loadRecapSheet = () => import("./EstimateRecapSheet");
+const preloadRecapSheet = () => {
+  loadRecapSheet().catch(() => {});
+};
 
 // Abonnement vide pour useSyncExternalStore : sert à lire des valeurs que seul
 // le navigateur connaît (hydratation faite, bonus du jour) avec un instantané
@@ -246,6 +250,20 @@ function EstimateForm({
   const [productMissing, setProductMissing] = React.useState(false);
   const [showAllFor, setShowAllFor] = React.useState<StoveKind | null>(null);
   const [recapOpen, setRecapOpen] = React.useState(false);
+  const [RecapSheet, setRecapSheet] = React.useState<
+    typeof import("./EstimateRecapSheet").default | null
+  >(null);
+
+  const openRecap = () => {
+    setRecapOpen(true);
+    if (RecapSheet) return;
+    loadRecapSheet().then(
+      (mod) => setRecapSheet(() => mod.default),
+      // Réseau coupé, ou version remplacée entre-temps (Turbopack ne retente
+      // pas un morceau en échec) : le total reste lisible sur la barre.
+      () => setRecapOpen(false),
+    );
+  };
 
   const cardRef = React.useRef<HTMLDivElement>(null);
   const headingRef = React.useRef<HTMLHeadingElement>(null);
@@ -722,7 +740,14 @@ function EstimateForm({
                             />
                             <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-mp-beige-warm sm:h-16 sm:w-16">
                               {p.imageSrc ? (
-                                <Image src={p.imageSrc} alt="" fill sizes="64px" className="object-cover" />
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img
+                                  src={p.imageSrc}
+                                  alt=""
+                                  loading="lazy"
+                                  decoding="async"
+                                  className="absolute inset-0 size-full object-cover"
+                                />
                               ) : (
                                 <span className="flex h-full w-full items-center justify-center text-mp-sand">
                                   <Flame className="h-6 w-6" aria-hidden />
@@ -1079,7 +1104,9 @@ function EstimateForm({
             {step < STEP_COUNT && (
               <button
                 type="button"
-                onClick={() => setRecapOpen(true)}
+                onPointerDown={preloadRecapSheet}
+                onFocus={preloadRecapSheet}
+                onClick={openRecap}
                 aria-haspopup="dialog"
                 className="-my-1 min-h-11 min-w-0 flex-1 rounded-xl py-1 pr-2 text-left lg:hidden"
               >
@@ -1140,29 +1167,12 @@ function EstimateForm({
         <Recap product={product} s={s} r={r} needKw={needKw} monthly={monthly} months={months} />
       </aside>
 
-      {/* ============ Détail en volet (mobile et tablette) ============ */}
-      <Sheet open={recapOpen} onOpenChange={setRecapOpen}>
-        <SheetContent
-          side="bottom"
-          hideClose
-          title="Détail de votre estimation"
-          className="max-h-[85dvh] overflow-y-auto overscroll-contain rounded-t-3xl border-t-0 px-5 lg:hidden"
-          style={{ paddingTop: "1.25rem", paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))" }}
-        >
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
-              Votre estimation
-            </p>
-            <SheetClose
-              className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-mp-ink transition-colors hover:bg-mp-beige"
-              aria-label="Fermer le détail"
-            >
-              <X className="h-5 w-5" aria-hidden />
-            </SheetClose>
-          </div>
+      {/* ============ Détail en volet (mobile et tablette), monté au premier appui ============ */}
+      {RecapSheet && (
+        <RecapSheet open={recapOpen} onOpenChange={setRecapOpen}>
           <Recap product={product} s={s} r={r} needKw={needKw} monthly={monthly} months={months} />
-        </SheetContent>
-      </Sheet>
+        </RecapSheet>
+      )}
     </div>
   );
 }

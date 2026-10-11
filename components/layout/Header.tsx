@@ -1,11 +1,8 @@
-"use client";
-
-import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { HeaderShell } from "./HeaderShell";
 
 // « Rendez-vous » a pris la place d'« Estimation » (01/10/2026) : le
 // configurateur garde le bouton « Chiffrer mon poêle » à droite, et la prise
@@ -49,19 +46,24 @@ const NAV_ITEMS = [
   { label: "Contact", href: "/contact" },
 ];
 
+/**
+ * En-tête desktop, rendu côté serveur. Seule HeaderShell (suivi du
+ * défilement) envoie du JavaScript : avant, tout l'en-tête partait vers les
+ * téléphones, qui ne l'affichent jamais, avec le préchargement prioritaire de
+ * son logo (68 Ko) au détriment des images de la page.
+ *
+ * Sous-menus en CSS : ouverts au survol comme avant, et désormais au clavier
+ * (focus visible dans l'entrée), ce que la version React ne faisait pas.
+ * `:focus-visible` plutôt que `:focus-within` : après un clic souris, le lien
+ * garde le focus et un focus-within laisserait le sous-menu ouvert sur la page
+ * suivante. Masqués par `visibility`, avec 100 ms de délai à la fermeture
+ * seulement, pas par `display: none` : au Tab, Chrome retire le focus du lien
+ * parent avant de le donner au sous-menu, qui disparaissait entre les deux
+ * (focus perdu). L'ouverture reste immédiate (delay-0).
+ */
 export function Header() {
-  const [scrolled, setScrolled] = React.useState(false);
-  const [openDropdown, setOpenDropdown] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 100);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <header
+    <HeaderShell
       className={cn(
         // ZÉRO header sur mobile et tablette (cf. doc corrections-mobile-v1 §3.1).
         // Le header n'apparaît qu'à partir de xl (1280 px) : c'est la première
@@ -69,29 +71,28 @@ export function Header() {
         // À 1024 px (iPad paysage) la barre débordait et les libellés se
         // cassaient lettre par lettre — audit 2026-09-05. En dessous de xl,
         // c'est la NavbarSticky du bas qui porte la navigation.
-        "hidden xl:block",
+        "group/header hidden xl:block",
         "sticky top-0 z-40 w-full transition-all duration-300",
-        scrolled
-          ? "h-16 bg-mp-cream/92 backdrop-blur-md shadow-sm"
-          : "h-20 md:h-24 bg-mp-cream"
+        "h-20 md:h-24 bg-mp-cream",
+        "data-scrolled:h-16 data-scrolled:bg-mp-cream/92 data-scrolled:backdrop-blur-md data-scrolled:shadow-sm"
       )}
     >
       <div className="mp-shell h-full flex items-center justify-between gap-4">
-        {/* Logo */}
+        {/* Logo. Chargement différé : l'en-tête est masqué sous 1280 px, les
+            téléphones n'ont pas à télécharger ce fichier. */}
         <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="Mister Pellets, accueil">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/logo-mister-pellets-mascotte.svg"
             alt=""
-            width={scrolled ? 36 : 44}
-            height={scrolled ? 36 : 44}
-            priority
-            className="transition-all duration-300"
+            width={44}
+            height={44}
+            loading="lazy"
+            decoding="async"
+            className="size-11 transition-all duration-300 group-data-scrolled/header:size-9"
           />
           <span
-            className={cn(
-              "font-semibold text-mp-green-deep transition-all duration-300 hidden sm:inline",
-              scrolled ? "text-lg" : "text-xl"
-            )}
+            className="font-semibold text-mp-green-deep transition-all duration-300 hidden sm:inline text-xl group-data-scrolled/header:text-lg"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Mister Pellets
@@ -101,12 +102,7 @@ export function Header() {
         {/* Nav desktop */}
         <nav className="hidden xl:flex items-center gap-1 mx-auto">
           {NAV_ITEMS.map((item) => (
-            <div
-              key={item.href}
-              className="relative"
-              onMouseEnter={() => item.children && setOpenDropdown(item.href)}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
+            <div key={item.href} className="group/item relative">
               <Link
                 href={item.href}
                 className={cn(
@@ -117,15 +113,12 @@ export function Header() {
                 )}
               >
                 {item.label}
-                {item.children && <ChevronDown className="h-3.5 w-3.5" />}
+                {item.children && <ChevronDown className="h-3.5 w-3.5" aria-hidden />}
               </Link>
 
               {/* Mega menu */}
-              {item.children && openDropdown === item.href && (
-                <div
-                  className="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-72"
-                  role="menu"
-                >
+              {item.children && (
+                <div className="invisible absolute left-1/2 -translate-x-1/2 top-full pt-2 w-72 transition-[visibility] duration-0 delay-100 group-hover/item:visible group-hover/item:delay-0 group-has-[:focus-visible]/item:visible group-has-[:focus-visible]/item:delay-0">
                   <div className="rounded-2xl bg-mp-cream border border-mp-sand/50 shadow-lg p-2">
                     {item.children.map((child) => (
                       <Link
@@ -166,6 +159,6 @@ export function Header() {
           </Button>
         </div>
       </div>
-    </header>
+    </HeaderShell>
   );
 }
