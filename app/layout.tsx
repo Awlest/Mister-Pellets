@@ -1,23 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter_Tight } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { JsonLd, ORGANIZATION_SCHEMA } from "@/components/seo/JsonLd";
 import { GA_BOOTSTRAP } from "@/lib/analytics";
 import { SITE_URL, SITE_NAME, SITE_LOCALE, DEFAULT_OG_IMAGE } from "@/lib/seo";
 
-const fraunces = Fraunces({
+// Polices hébergées dans le dépôt (./fonts) : les fichiers latins que
+// next/font/google servait, repris à l'identique. Le 11/10/2026, Google a servi
+// par intermittence des adresses de police que Turbopack ne sait pas lire
+// (« next/font/google queries have exactly one entry ») : le build Vercel du
+// commit a5da23e a échoué sur Fraunces, et mister-clim a eu la même panne le
+// même jour. Plus aucune requête vers Google au build. Fichiers variables : un
+// seul fichier par style couvre les graisses déclarées. Polices de repli :
+// celles que générait next/font/google, déclarées dans globals.css.
+const fraunces = localFont({
   variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
   display: "swap",
+  adjustFontFallback: false,
+  fallback: ["Fraunces Fallback"],
+  src: [
+    { path: "./fonts/fraunces-latin.woff2", weight: "400 600", style: "normal" },
+    { path: "./fonts/fraunces-italic-latin.woff2", weight: "400 600", style: "italic" },
+  ],
 });
 
-const interTight = Inter_Tight({
+const interTight = localFont({
   variable: "--font-inter-tight",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
+  adjustFontFallback: false,
+  fallback: ["Inter Tight Fallback"],
+  src: [{ path: "./fonts/inter-tight-latin.woff2", weight: "400 700", style: "normal" }],
 });
 
 export const viewport: Viewport = {
