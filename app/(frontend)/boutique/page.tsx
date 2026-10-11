@@ -78,10 +78,14 @@ export default async function BoutiquePage() {
           { label: "Accueil", href: "/" },
           { label: "Boutique" },
         ]}
+        compact
       />
 
-      <section className="bg-mp-cream mp-band">
-        <div className="mp-shell">
+      {/* Mêmes valeurs que mp-band, haut resserré sur mobile après le héros compact. */}
+      <section className="bg-mp-cream pt-6 pb-14 md:py-20">
+        {/* flex-col + order : sur mobile, la note « modèle précis » passe sous
+            la grille pour que les poêles arrivent plus haut. */}
+        <div className="mp-shell flex flex-col">
           {bonusActive ? (
             <div className="mb-4 rounded-xl border border-mp-orange-flame/40 bg-mp-orange-light/50 p-4 text-sm text-mp-ink">
               <strong className="text-mp-green-deep">{BONUS.label}.</strong> {BONUS.conditions}{" "}
@@ -90,7 +94,7 @@ export default async function BoutiquePage() {
           ) : null}
 
           {/* Note devis : on couvre toute la gamme, même les références non listées. */}
-          <div className="mb-8 rounded-xl bg-mp-orange-light/50 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink">
+          <div className="order-last mt-10 rounded-xl bg-mp-orange-light/50 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink md:order-none md:mt-0 md:mb-8">
             <strong>Besoin d&apos;un modèle précis ?</strong> On distribue toute la gamme Edilkamin, EK63
             et Girolami, même les références qui ne sont pas encore listées ici. Pour un chiffrage
             complet (poêle, pose et TVA), passez par le{" "}

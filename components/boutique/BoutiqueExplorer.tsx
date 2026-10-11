@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ArrowDownUp, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { ProductCard, type ProductCardData } from "@/components/product/ProductCard";
 import { ProductFeatureLegend } from "@/components/product/ProductFeatureBadges";
 import {
@@ -130,6 +130,10 @@ const DIFFUSION_FILTERS = [{ value: "all", label: "Toutes" }, ...(Object.entries
 const COLOR_FILTERS = [{ value: "all", label: "Toutes" }, ...(Object.entries(COLOR_LABELS) as [ColorCategory, string][]).map(([value, label]) => ({ value, label }))];
 const POWER_FILTERS = [{ value: "all", label: "Toutes" }, ...POWER_TRANCHES.map((t) => ({ value: t.value, label: t.label }))];
 
+/**
+ * 44 px de haut sur écran tactile (30 px avant, sous la cible minimale), format
+ * compact d'origine à la souris (`pointer-fine`).
+ */
 function FilterPill({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button
@@ -137,7 +141,8 @@ function FilterPill({ active, onClick, children }: { active: boolean; onClick: (
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "inline-flex items-center gap-1 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors",
+        "inline-flex min-h-11 items-center gap-1 rounded-full px-4 text-sm font-semibold transition-colors",
+        "pointer-fine:min-h-8 pointer-fine:px-3.5 pointer-fine:text-xs",
         active
           ? "bg-mp-orange-flame text-mp-green-darkest shadow-sm"
           : "bg-mp-cream border border-mp-sand text-mp-green-deep hover:bg-mp-orange-light hover:text-mp-ink",
@@ -158,6 +163,10 @@ export function BoutiqueExplorer({
   const [current, setCurrent] = useState<Filters>(DEFAULT);
   const [sort, setSort] = useState<SortKey>(DEFAULT_SORT);
   const [visible, setVisible] = useState(PAGE_SIZE);
+  // Sur mobile, les six groupes de filtres occupaient deux écrans avant le
+  // premier poêle (1er modèle à 1 750 px du haut à 375 px) : ils se replient
+  // derrière un bouton « Filtres ». Toujours dépliés à partir de 768 px.
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Au montage : initialise les filtres depuis l'URL (liens partageables).
   // Évite le hook useSearchParams (qui forcerait la page en dynamique).
@@ -252,34 +261,82 @@ export function BoutiqueExplorer({
 
   return (
     <>
-      <div className="mb-8 space-y-5">
-        {GROUPS.map((g) => (
-          <div key={g.key}>
-            <span className="text-xs uppercase tracking-wider text-mp-ink-soft font-semibold mb-2 block">{g.label}</span>
-            <div className="flex flex-wrap gap-2">
-              {g.options.map((f) => (
-                <FilterPill key={f.value} active={current[g.key] === f.value} onClick={() => setFilter(g.key, f.value)}>
-                  {f.label}
-                </FilterPill>
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {activeCount > 0 && (
-          <button
-            type="button"
-            onClick={reset}
-            className="inline-flex items-center text-xs font-semibold text-mp-orange-ink underline hover:no-underline"
-          >
-            Réinitialiser les filtres ({activeCount} actif{activeCount > 1 ? "s" : ""})
-          </button>
+      {/* Mobile : [Filtres] [Tri] sur une ligne, filtres repliés, total dessous.
+          À partir de 768 px : filtres dépliés, puis total et tri sur une ligne.
+          Une seule liste de contrôles, rangée par zones de grille. */}
+      <div
+        className={cn(
+          "mb-6 grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-4",
+          "[grid-template-areas:'toggle_sort'_'panel_panel'_'count_count']",
+          "md:grid-cols-[minmax(0,1fr)_auto] md:gap-y-6 md:[grid-template-areas:'panel_panel'_'count_sort']",
         )}
-      </div>
+      >
+        <button
+          type="button"
+          onClick={() => setFiltersOpen((o) => !o)}
+          aria-expanded={filtersOpen}
+          aria-controls="boutique-filtres"
+          className={cn(
+            "[grid-area:toggle] inline-flex min-h-11 items-center gap-2 rounded-full border-2 px-4 text-sm font-semibold transition-colors md:hidden",
+            filtersOpen || activeCount > 0
+              ? "border-mp-green-deep bg-mp-green-deep text-white"
+              : "border-mp-green-deep text-mp-green-deep",
+          )}
+        >
+          <SlidersHorizontal className="h-4 w-4" aria-hidden />
+          Filtres
+          {activeCount > 0 && (
+            <span className="grid h-5 min-w-5 place-items-center rounded-full bg-mp-orange-flame px-1 text-xs text-mp-green-darkest">
+              {activeCount}
+              <span className="sr-only"> actif{activeCount > 1 ? "s" : ""}</span>
+            </span>
+          )}
+          <ChevronDown
+            className={cn("h-4 w-4 transition-transform motion-reduce:transition-none", filtersOpen && "rotate-180")}
+            aria-hidden
+          />
+        </button>
 
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div
+          id="boutique-filtres"
+          className={cn("[grid-area:panel] space-y-5", !filtersOpen && "hidden md:block")}
+        >
+          {GROUPS.map((g) => (
+            <div key={g.key}>
+              <span className="text-xs uppercase tracking-wider text-mp-ink-soft font-semibold mb-2 block">{g.label}</span>
+              <div className="flex flex-wrap gap-2">
+                {g.options.map((f) => (
+                  <FilterPill key={f.value} active={current[g.key] === f.value} onClick={() => setFilter(g.key, f.value)}>
+                    {f.label}
+                  </FilterPill>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Mobile : refermer le volet et voir les résultats sans remonter. */}
+            <button
+              type="button"
+              onClick={() => setFiltersOpen(false)}
+              className="inline-flex min-h-11 items-center justify-center rounded-full bg-mp-green-deep px-6 text-sm font-semibold text-white transition-colors hover:bg-mp-green-mid md:hidden"
+            >
+              Voir {filtered.length === 1 ? "le modèle" : `les ${filtered.length} modèles`}
+            </button>
+            {activeCount > 0 && (
+              <button
+                type="button"
+                onClick={reset}
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-mp-orange-ink underline hover:no-underline pointer-fine:min-h-0 pointer-fine:text-xs"
+              >
+                Réinitialiser les filtres ({activeCount} actif{activeCount > 1 ? "s" : ""})
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* aria-live : un lecteur d'écran annonce le nouveau total après un filtre. */}
-        <p className="text-sm text-mp-ink-soft" aria-live="polite">
+        <p className="[grid-area:count] text-sm text-mp-ink-soft" aria-live="polite">
           <strong className="text-mp-green-deep">{filtered.length}</strong>{" "}
           {filtered.length === 1 ? "modèle" : "modèles"}
           {activeCount > 0 && " correspondant à votre sélection"}
@@ -289,16 +346,16 @@ export function BoutiqueExplorer({
             le système. 44 px de haut (cible tactile), 16 px sur mobile pour
             éviter le zoom automatique d'iOS au focus. */}
         {filtered.length > 1 && (
-          <div className="flex items-center gap-3">
-            <label htmlFor="boutique-tri" className="shrink-0 text-sm font-semibold text-mp-green-deep">
+          <div className="[grid-area:sort] flex min-w-0 items-center gap-3">
+            <label htmlFor="boutique-tri" className="sr-only shrink-0 text-sm font-semibold text-mp-green-deep md:not-sr-only">
               Trier par
             </label>
-            <div className="relative flex-1 sm:flex-none">
+            <div className="relative min-w-0 flex-1 sm:flex-none">
               <select
                 id="boutique-tri"
                 value={sort}
                 onChange={(e) => changeSort(e.target.value)}
-                className="h-11 w-full cursor-pointer appearance-none rounded-full border border-mp-sand bg-mp-cream pl-4 pr-10 text-base font-medium text-mp-green-deep transition-colors duration-200 hover:border-mp-green-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-flame focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream motion-reduce:transition-none sm:w-60 sm:text-sm"
+                className="h-11 w-full cursor-pointer appearance-none rounded-full border border-mp-sand bg-mp-cream pl-10 pr-10 text-base md:pl-4 font-medium text-mp-green-deep transition-colors duration-200 hover:border-mp-green-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-ink focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream motion-reduce:transition-none sm:w-60 sm:text-sm"
               >
                 {SORTS.map((s) => (
                   <option key={s.value} value={s.value}>
@@ -306,6 +363,12 @@ export function BoutiqueExplorer({
                   </option>
                 ))}
               </select>
+              {/* Sur mobile le libellé « Trier par » est réservé aux lecteurs
+                  d'écran : la flèche signale le tri sans prendre de place. */}
+              <ArrowDownUp
+                aria-hidden="true"
+                className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-mp-ink-soft md:hidden"
+              />
               <ChevronDown
                 aria-hidden="true"
                 className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-mp-ink-soft"
@@ -332,6 +395,9 @@ export function BoutiqueExplorer({
         <>
           {/* Légende des pastilles des photos, juste avant les premiers poêles. */}
           <ProductFeatureLegend className="mb-6" />
+          {/* Titre de la grille pour les lecteurs d'écran : sans lui, les noms
+              de poêles (h3) suivaient directement le h1. */}
+          <h2 className="sr-only">Modèles</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {shown.map((product) => (
               <ProductCard key={product.slug} product={product} />

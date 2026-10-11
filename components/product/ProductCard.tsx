@@ -141,8 +141,10 @@ export function ProductCard({ product, className }: ProductCardProps) {
   return (
     <Link
       href={`/produit/${slug}`}
-      className={`group block rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-flame focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream ${className ?? ""}`}
-      aria-label={`Voir ${name}`}
+      // Pas d'aria-label : « Voir {nom} » remplaçait tout le contenu de la carte
+      // (prix compris) pour les lecteurs d'écran, et l'audit le signalait
+      // (nom accessible différent du texte visible).
+      className={`group block rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-ink focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream ${className ?? ""}`}
     >
       <Card className="overflow-hidden h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         {/* Image */}
@@ -230,7 +232,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
                 />
               ))}
               {extraCount > 0 && (
-                <span className="text-[10px] font-semibold text-mp-ink-soft ml-0.5">
+                <span className="text-xs font-semibold text-mp-ink-soft ml-0.5">
                   +{extraCount}
                 </span>
               )}
@@ -248,21 +250,25 @@ export function ProductCard({ product, className }: ProductCardProps) {
                     </span>
                   ) : null}
                 </span>
+                {/* Prix TVAC en avant, comme sur la fiche produit depuis le
+                    01/09/2026 (art. VI.3 CDE : prix total au consommateur).
+                    La carte affichait encore le HTVA en grand et le TVAC en
+                    11 px : 2 269 € sur la carte, 2 746 € sur la fiche. */}
                 <span
-                  className="text-xl font-semibold text-mp-green-deep"
+                  className="text-xl font-semibold tabular-nums text-mp-green-deep"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  {formatPriceHT(shown)}
+                  {formatPrice(shown)}
                 </span>
-                <span className="text-xs text-mp-ink-soft ml-1">HTVA</span>
+                <span className="text-xs text-mp-ink-soft ml-1">TVAC</span>
                 {struck ? (
-                  <span className="ml-2 text-sm text-mp-ink-soft line-through">
-                    {formatPriceHT(struck)}
+                  <span className="ml-2 text-sm tabular-nums text-mp-ink-soft line-through">
+                    {formatPrice(struck)}
                   </span>
                 ) : null}
-                <span className="block text-[11px] text-mp-ink-soft">
-                  soit {formatPrice(shown)} TVAC
-                  {struck ? ` au lieu de ${formatPrice(struck)}` : ""}
+                <span className="block text-xs text-mp-ink-soft">
+                  soit {formatPriceHT(shown)} HTVA
+                  {struck ? ` au lieu de ${formatPriceHT(struck)}` : ""}
                 </span>
               </div>
             ) : (
