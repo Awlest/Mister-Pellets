@@ -187,4 +187,33 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPayload(nextConfig);
+/**
+ * Payload pose sur TOUTES les routes Accept-CH, Vary et Critical-CH
+ * (Sec-CH-Prefers-Color-Scheme), qui ne servent qu'au thème de l'admin.
+ * Critical-CH oblige Chrome à rejouer la requête de la page à la première
+ * visite : un aller-retour réseau de plus avant le premier affichage, soit
+ * 0,8 s en 4G simulée (Lighthouse mobile du 11/10/2026, 82 % du trafic Ads
+ * arrive sur mobile). Ces en-têtes restent sur /admin et quittent le site public.
+ */
+const ADMIN_ONLY_HEADERS = new Set(["accept-ch", "critical-ch", "vary"]);
+
+const payloadConfig = withPayload(nextConfig);
+const payloadHeaders = payloadConfig.headers;
+
+const config: NextConfig = {
+  ...payloadConfig,
+  async headers() {
+    const rules = (await payloadHeaders?.()) ?? [];
+    return rules.flatMap((rule) => {
+      const adminOnly = rule.headers.filter((h) => ADMIN_ONLY_HEADERS.has(h.key.toLowerCase()));
+      if (adminOnly.length === 0) return [rule];
+      const others = rule.headers.filter((h) => !ADMIN_ONLY_HEADERS.has(h.key.toLowerCase()));
+      return [
+        ...(others.length > 0 ? [{ ...rule, headers: others }] : []),
+        { ...rule, source: "/admin/:path*", headers: adminOnly },
+      ];
+    });
+  },
+};
+
+export default config;
