@@ -1,6 +1,7 @@
 import "server-only";
 import { getPayloadClient } from "./payload-client";
 import type { EstimateProduct } from "./estimate";
+import { webpUrl } from "./product-image";
 
 /**
  * Catalogue vu par le configurateur d'estimation (/estimation).
@@ -181,8 +182,10 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
       img && typeof img === "object"
         ? (img.sizes?.card?.url && img.sizes.card.url.length > 0 ? img.sizes.card.url : img.url)
         : undefined;
-    const imageSrc =
+    const relSrc =
       typeof rawUrl === "string" && rawUrl.length > 0 ? toImageSrc(rawUrl) : undefined;
+    // Ancienne déclinaison JPEG ou PNG : servie en WebP (lib/product-image.ts).
+    const imageSrc = relSrc ? webpUrl(relSrc) : undefined;
 
     const options = powerOptions(doc);
     const multi = options.length > 1;

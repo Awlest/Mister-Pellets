@@ -44,6 +44,22 @@ interface Candidate {
 }
 
 /**
+ * Déclinaison JPEG ou PNG de la route Payload (/api/media/file/…), relative ou
+ * absolue. Les tailles générées avant le 11/10/2026 sont dans ce cas.
+ */
+const RASTER_MEDIA_URL = /^(?:https?:\/\/[^/]+)?\/api\/media\/file\/([^?#/]+\.(?:jpe?g|png))(?:[?#].*)?$/i;
+
+/**
+ * URL WebP d'une déclinaison : /photos/<fichier>.webp, convertie à la volée
+ * puis mise en cache par le CDN (app/photos/[file]/route.ts). Une URL déjà en
+ * WebP, ou qui ne vient pas de la médiathèque, est rendue telle quelle.
+ */
+export function webpUrl(url: string): string {
+  const m = url.match(RASTER_MEDIA_URL);
+  return m ? `/photos/${m[1]}.webp` : url;
+}
+
+/**
  * Toutes les versions disponibles d'une image, triées par largeur croissante.
  * La vignette 200×200 de Payload est volontairement exclue : elle est recadrée
  * au centre et n'a pas le même cadrage que les autres tailles.
@@ -52,13 +68,13 @@ export function imageCandidates(img: ProductImage): Candidate[] {
   const list: Candidate[] = [];
   for (const size of Object.keys(PRODUCT_IMAGE_WIDTHS) as ProductImageSize[]) {
     const url = img.sizes?.[size];
-    if (url) list.push({ url, width: PRODUCT_IMAGE_WIDTHS[size] });
+    if (url) list.push({ url: webpUrl(url), width: PRODUCT_IMAGE_WIDTHS[size] });
   }
   // L'original n'entre dans le srcset que si sa largeur est connue et qu'il
   // apporte plus de pixels que la plus grande déclinaison.
   const largest = list.length > 0 ? list[list.length - 1]!.width : 0;
   if (typeof img.width === "number" && img.width > largest) {
-    list.push({ url: img.url, width: img.width });
+    list.push({ url: webpUrl(img.url), width: img.width });
   }
   return list.sort((a, b) => a.width - b.width);
 }
@@ -81,5 +97,5 @@ export function buildSrcSet(img: ProductImage): string | undefined {
 export function pickImageSrc(img: ProductImage, targetWidth: number): string {
   const candidates = imageCandidates(img);
   const fit = candidates.find((c) => c.width >= targetWidth);
-  return (fit ?? candidates[candidates.length - 1])?.url ?? img.url;
+  return (fit ?? candidates[candidates.length - 1])?.url ?? webpUrl(img.url);
 }
