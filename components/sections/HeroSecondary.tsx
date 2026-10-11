@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface BreadcrumbItem {
   label: string;
@@ -12,6 +13,13 @@ interface HeroSecondaryProps {
   title: React.ReactNode;
   description?: string;
   breadcrumbs?: BreadcrumbItem[];
+  /**
+   * Héros resserré sur mobile, pour les pages où l'outil doit apparaître dans
+   * le premier écran (configurateur) : marges réduites, titre plus petit,
+   * chapô masqué sous 640 px. Sur /estimation, la première question tombait
+   * à 832 px du haut, sous le premier écran d'un téléphone.
+   */
+  compact?: boolean;
 }
 
 /**
@@ -25,26 +33,36 @@ export function HeroSecondary({
   title,
   description,
   breadcrumbs,
+  compact = false,
 }: HeroSecondaryProps) {
   return (
-    <section className="bg-mp-cream pt-12 pb-16 md:pt-20 md:pb-24 border-b border-mp-sand/30">
+    <section
+      className={cn(
+        "bg-mp-cream border-b border-mp-sand/30",
+        compact ? "pt-5 pb-6 sm:pt-12 sm:pb-12 md:pt-16 md:pb-16" : "pt-12 pb-16 md:pt-20 md:pb-24",
+      )}
+    >
       <div className="mp-shell">
-        {/* Breadcrumbs */}
+        {/* Breadcrumbs : liens agrandis à 44 px de haut sans changer la mise en
+            page (marges négatives), c'est le seul retour arrière visible sur
+            mobile, où il n'y a pas d'en-tête. */}
         {breadcrumbs && breadcrumbs.length > 0 && (
-          <nav aria-label="Fil d'Ariane" className="mb-6">
-            <ol className="flex flex-wrap items-center justify-center gap-1.5 text-sm text-mp-ink-soft">
+          <nav aria-label="Fil d'Ariane" className={compact ? "mb-3 sm:mb-6" : "mb-6"}>
+            <ol className="flex flex-wrap items-center justify-center gap-x-1.5 text-sm text-mp-ink-soft">
               {breadcrumbs.map((item, i) => (
                 <li key={i} className="flex items-center gap-1.5">
-                  {i > 0 && <ChevronRight className="h-3.5 w-3.5" />}
+                  {i > 0 && <ChevronRight className="h-3.5 w-3.5" aria-hidden />}
                   {item.href ? (
                     <Link
                       href={item.href}
-                      className="hover:text-mp-orange-flame transition-colors"
+                      className="-my-3 inline-flex min-h-11 items-center px-1 hover:text-mp-orange-ink transition-colors"
                     >
                       {item.label}
                     </Link>
                   ) : (
-                    <span className="text-mp-ink font-medium">{item.label}</span>
+                    <span className="text-mp-ink font-medium" aria-current="page">
+                      {item.label}
+                    </span>
                   )}
                 </li>
               ))}
@@ -54,15 +72,29 @@ export function HeroSecondary({
 
         <div className="mp-measure text-center">
           {eyebrow && (
-            <Badge variant="eyebrow" className="mb-4">
+            <Badge variant="eyebrow" className={compact ? "mb-2 sm:mb-4" : "mb-4"}>
               {eyebrow}
             </Badge>
           )}
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-mp-green-deep mb-4">
+          <h1
+            className={cn(
+              "font-semibold tracking-tight text-mp-green-deep",
+              compact
+                ? "text-[1.75rem] leading-tight mb-0 sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl sm:leading-[1.1]"
+                : "text-3xl md:text-5xl lg:text-6xl leading-[1.1] mb-4",
+            )}
+          >
             {title}
           </h1>
           {description && (
-            <p className="text-lg text-mp-ink-soft leading-relaxed">{description}</p>
+            <p
+              className={cn(
+                "text-lg text-mp-ink-soft leading-relaxed",
+                compact && "hidden sm:block",
+              )}
+            >
+              {description}
+            </p>
           )}
         </div>
       </div>

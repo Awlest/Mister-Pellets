@@ -3,8 +3,20 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Flame, Loader2 } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  ChevronDown,
+  ChevronUp,
+  Flame,
+  Loader2,
+  Minus,
+  Plus,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetClose, SheetContent } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import {
   DEFAULT_STATE,
@@ -22,6 +34,7 @@ import {
   rankProducts,
   recommendedKw,
   type EstimateProduct,
+  type EstimateResult,
   type EstimateState,
   type InstallType,
   type IsoKey,
@@ -50,6 +63,14 @@ const STEPS = [
   { id: 6, label: "Coordonnées" },
 ];
 const STEP_COUNT = STEPS.length;
+
+/**
+ * Modèles montrés d'emblée à l'étape 3, les mieux dimensionnés en tête. Avant,
+ * toute la liste vivait dans un cadre de 420 px qui défilait à l'intérieur de
+ * la page : sur mobile, deux défilements imbriqués et une liste de 30 à 60
+ * lignes. Le reste s'ouvre d'un geste.
+ */
+const MODELS_PREVIEW = 6;
 
 /** Même validation que le formulaire de devis : numéros belges uniquement. */
 function isValidBelgianPhone(input: string): boolean {
@@ -82,18 +103,56 @@ const EMPTY_CUSTOMER: Customer = {
   consent: false,
 };
 
-const cardCls = (active: boolean) =>
+type CustomerField = "postalCode" | "delay" | "name" | "email" | "phone" | "consent";
+
+/** Ordre d'affichage : le premier champ en erreur reçoit le focus à l'envoi. */
+const FIELD_ORDER: CustomerField[] = ["postalCode", "delay", "name", "email", "phone", "consent"];
+const FIELD_IDS: Record<CustomerField, string> = {
+  postalCode: "est-cp",
+  delay: "est-delay",
+  name: "est-name",
+  email: "est-email",
+  phone: "est-phone",
+  consent: "est-consent",
+};
+
+/**
+ * Erreurs de l'étape 6, champ par champ. Le bouton d'envoi n'est plus grisé
+ * sans explication : un clic sur un formulaire incomplet affiche la raison
+ * sous chaque champ et place le curseur sur le premier à corriger.
+ */
+function customerErrors(c: Customer): Partial<Record<CustomerField, string>> {
+  const e: Partial<Record<CustomerField, string>> = {};
+  if (!/^[1-9]\d{3}$/.test(c.postalCode)) e.postalCode = "Indiquez un code postal belge à 4 chiffres.";
+  if (c.delay === "") e.delay = "Choisissez un délai.";
+  if (c.name.trim().length < 2) e.name = "Indiquez votre nom.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)) e.email = "Vérifiez l'adresse e-mail, par exemple nom@domaine.be.";
+  if (!isValidBelgianPhone(c.phone)) e.phone = "Indiquez un numéro belge, par exemple 0470 12 34 56.";
+  if (!c.consent) e.consent = "Cochez la case pour que nous puissions vous recontacter.";
+  return e;
+}
+
+/**
+ * Carte de choix (bouton radio ou case à cocher natifs, masqués). Le clavier,
+ * les flèches dans un groupe radio et les lecteurs d'écran (« 2 sur 5,
+ * sélectionné ») sont gérés par le navigateur ; l'anneau de focus se pose sur
+ * la carte entière.
+ */
+const cardCls = (active: boolean, disabled = false) =>
   cn(
-    "rounded-xl border-2 p-4 text-left transition-all min-h-[44px]",
+    "flex min-h-11 w-full items-start gap-3 rounded-xl border-2 p-4 text-left transition-colors",
+    "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-mp-orange-ink",
+    disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
     active
       ? "border-mp-orange-flame bg-mp-orange-light/40 ring-2 ring-mp-orange-flame/20"
       : "border-mp-sand/40 bg-white hover:border-mp-orange-flame/50 hover:bg-mp-cream",
   );
-const legendCls = "block text-sm font-medium text-mp-ink mb-3";
+const legendCls = "mb-3 block text-sm font-medium text-mp-ink";
 const inputCls = cn(
-  "w-full rounded-xl border border-mp-sand bg-white px-4 py-3 text-mp-ink",
-  "placeholder:text-mp-ink-soft/60 outline-none transition-colors",
+  "w-full rounded-xl border border-mp-sand bg-white px-4 py-3 text-base text-mp-ink",
+  "placeholder:text-mp-ink-soft/70 outline-none transition-colors",
   "focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20",
+  "aria-[invalid=true]:border-red-700 aria-[invalid=true]:focus:ring-red-700/20",
 );
 
 /** Brouillon localStorage brut, null s'il est absent ou inaccessible. */
@@ -139,6 +198,20 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
   );
 }
 
+/**
+ * Parcours pensé d'abord pour le téléphone (82 % des clics Ads, audit du
+ * 11/10/2026) :
+ * - la barre d'action (total, Précédent, Suivant) reste collée en bas de
+ *   l'écran, au-dessus de la barre de navigation, tant que le formulaire est
+ *   à l'écran : « Suivant » était à 1 811 px du haut de la page, et le total
+ *   sous le formulaire ;
+ * - chaque changement d'étape ramène en haut du formulaire et place le focus
+ *   sur la question ;
+ * - le détail du chiffrage s'ouvre en volet depuis le total (la colonne de
+ *   droite n'existe qu'à partir de 1 024 px).
+ * La mensualité n'apparaît pas dans la barre : une publicité chiffrée pour un
+ * crédit doit porter l'exemple représentatif (VII.64), ce que fait le volet.
+ */
 function EstimateForm({
   products,
   initialState,
@@ -152,6 +225,15 @@ function EstimateForm({
   const [website, setWebsite] = React.useState(""); // honeypot
   const [submitState, setSubmitState] = React.useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = React.useState("");
+  const [touched, setTouched] = React.useState<Partial<Record<CustomerField, boolean>>>({});
+  const [triedSubmit, setTriedSubmit] = React.useState(false);
+  const [productMissing, setProductMissing] = React.useState(false);
+  const [showAllFor, setShowAllFor] = React.useState<StoveKind | null>(null);
+  const [recapOpen, setRecapOpen] = React.useState(false);
+
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const headingRef = React.useRef<HTMLHeadingElement>(null);
+  const lastStep = React.useRef(step);
 
   // Pas de sauvegarde tant que l'état est celui du montage : au premier rendu
   // (état par défaut, brouillon pas encore lu) on écraserait le brouillon.
@@ -161,6 +243,23 @@ function EstimateForm({
       localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
     } catch {}
   }, [s, initialState]);
+
+  // Changement d'étape : retour en haut du formulaire s'il est sorti de
+  // l'écran (le bouton Suivant est en bas, la nouvelle question en haut), puis
+  // focus sur la question pour les lecteurs d'écran.
+  React.useEffect(() => {
+    if (lastStep.current === step) return;
+    lastStep.current = step;
+    const card = cardRef.current;
+    if (card) {
+      const top = card.getBoundingClientRect().top;
+      if (top < 0 || top > window.innerHeight / 2) {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        card.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      }
+    }
+    headingRef.current?.focus({ preventScroll: true });
+  }, [step]);
 
   const set = <K extends keyof EstimateState>(k: K, v: EstimateState[K]) =>
     setS((p) => ({ ...p, [k]: v }));
@@ -194,33 +293,33 @@ function EstimateForm({
       : (durations[durations.length - 1] ?? null);
   const monthly = months ? monthly0(r.totalTTC, months) : null;
 
-  const canGoNext = (): boolean => {
-    switch (step) {
-      case 1:
-      case 2:
-      case 4:
-      case 5:
-        return true;
-      case 3:
-        return s.productKey !== null;
-      case 6:
-        return (
-          /^[1-9]\d{3}$/.test(customer.postalCode) &&
-          customer.delay !== "" &&
-          customer.name.trim().length >= 2 &&
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email) &&
-          isValidBelgianPhone(customer.phone) &&
-          customer.consent
-        );
-      default:
-        return false;
-    }
-  };
+  const errors = customerErrors(customer);
+  const fieldError = (f: CustomerField) => (touched[f] || triedSubmit ? errors[f] : undefined);
+  const touch = (f: CustomerField) => setTouched((t) => (t[f] ? t : { ...t, [f]: true }));
+
+  const selectedIdx = eligible.findIndex((p) => p.key === s.productKey);
+  // Le modèle repris d'un brouillon reste visible même s'il est loin dans la liste.
+  const showAllModels = showAllFor === s.stoveKind || selectedIdx >= MODELS_PREVIEW;
+  const shownModels = showAllModels ? eligible : eligible.slice(0, MODELS_PREVIEW);
 
   const next = () => {
-    if (!canGoNext()) return;
-    if (step < STEP_COUNT) setStep(step + 1);
-    else void handleSubmit();
+    if (submitState === "loading") return;
+    if (step === 3 && !s.productKey) {
+      setProductMissing(true);
+      document.getElementById("est-models")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    if (step === STEP_COUNT) {
+      const first = FIELD_ORDER.find((f) => errors[f]);
+      if (first) {
+        setTriedSubmit(true);
+        document.getElementById(FIELD_IDS[first])?.focus();
+        return;
+      }
+      void handleSubmit();
+      return;
+    }
+    setStep(step + 1);
   };
   const prev = () => step > 1 && setStep(step - 1);
 
@@ -249,6 +348,9 @@ function EstimateForm({
       try {
         localStorage.removeItem(STORAGE_KEY);
       } catch {}
+      requestAnimationFrame(() =>
+        cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
+      );
     } catch (e) {
       setSubmitState("error");
       setErrorMsg(e instanceof Error ? e.message : "Erreur inconnue");
@@ -257,10 +359,13 @@ function EstimateForm({
 
   if (submitState === "success") {
     return (
-      <div className="rounded-3xl border border-mp-green-light/40 bg-mp-green-light/15 p-8 text-center text-mp-green-deep md:p-12">
+      <div
+        ref={cardRef}
+        className="scroll-mt-3 rounded-3xl border border-mp-green-light/40 bg-mp-green-light/15 p-6 text-center text-mp-green-deep sm:p-8 md:p-12 xl:scroll-mt-24"
+      >
         <div className="mb-6 flex justify-center">
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-mp-green-light text-white">
-            <Check className="h-8 w-8" />
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-mp-green-mid text-white">
+            <Check className="h-8 w-8" aria-hidden />
           </span>
         </div>
         <h2 className="mb-4 text-3xl font-semibold md:text-4xl">Estimation envoyée</h2>
@@ -278,14 +383,14 @@ function EstimateForm({
           poêle ne se commande pas sans avoir vu le conduit, et cette étape
           évite les mauvaises surprises des deux côtés.
         */}
-        <div className="mx-auto mb-8 mp-measure rounded-2xl border border-mp-sand/60 bg-white/70 p-6 text-left">
+        <div className="mx-auto mb-8 mp-measure rounded-2xl border border-mp-sand/60 bg-white/70 p-5 text-left sm:p-6">
           <p className="mb-4 font-semibold">La suite, en trois temps</p>
           <ol className="space-y-3 text-mp-ink">
             <li className="flex gap-3">
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-mp-green-deep text-xs font-bold text-mp-cream">1</span>
               <span>
                 On vous rappelle sous 48 h ouvrées pour caler la{" "}
-                <strong>visite technique</strong> — vous pouvez aussi{" "}
+                <strong>visite technique</strong>. Vous pouvez aussi{" "}
                 <Link href="/prendre-rendez-vous#reserver" className="text-mp-orange-ink underline underline-offset-2 hover:no-underline">
                   choisir votre créneau tout de suite
                 </Link>
@@ -309,15 +414,19 @@ function EstimateForm({
             </li>
           </ol>
           <p className="mt-4 text-sm text-mp-ink-soft">
-            Une question dans l&apos;intervalle ? 081 13 83 09.
+            Une question dans l&apos;intervalle ?{" "}
+            <a href="tel:+3281138309" className="whitespace-nowrap font-semibold text-mp-green-deep underline underline-offset-2">
+              081 13 83 09
+            </a>
+            .
           </p>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button asChild variant="primary" size="default">
+          <Button asChild variant="primary" size="default" className="w-full max-w-xs sm:w-auto">
             <Link href="/prendre-rendez-vous#reserver">Choisir mon créneau</Link>
           </Button>
-          <Button asChild variant="outline" size="default">
+          <Button asChild variant="outline" size="default" className="w-full max-w-xs sm:w-auto">
             <Link href="/">Retour à l&apos;accueil</Link>
           </Button>
         </div>
@@ -325,10 +434,18 @@ function EstimateForm({
     );
   }
 
+  const loading = submitState === "loading";
+
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[1.5fr_1fr]">
-      {/* ============ Colonne formulaire ============ */}
-      <div className="overflow-hidden rounded-3xl border border-mp-sand/40 bg-white shadow-md">
+      {/* ============ Colonne formulaire ============
+          overflow: clip et non overflow-hidden : hidden ferait de la carte un
+          conteneur de défilement, et la barre d'action ne collerait plus au
+          bas de l'écran (même piège que html/body, globals.css). */}
+      <div
+        ref={cardRef}
+        className="scroll-mt-3 rounded-3xl border border-mp-sand/40 bg-white shadow-md [overflow:clip] xl:scroll-mt-24"
+      >
         {/* Honeypot anti-spam : caché aux humains, tentant pour les bots. */}
         <div aria-hidden="true" className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
           <label htmlFor="hp-website-est">Ne pas remplir ce champ</label>
@@ -343,80 +460,77 @@ function EstimateForm({
           />
         </div>
 
-        <div className="border-b border-mp-sand/40 bg-mp-cream px-6 py-5 md:px-8">
-          <div className="mb-3 flex items-center justify-between">
+        <div className="border-b border-mp-sand/40 bg-mp-cream px-4 py-4 sm:px-6 sm:py-5 md:px-8">
+          <div className="mb-3 flex items-center justify-between gap-3">
             <span className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
               Étape {step} sur {STEP_COUNT}
             </span>
             <span className="text-sm font-medium text-mp-green-deep">{STEPS[step - 1]?.label}</span>
           </div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-mp-sand/40">
+          <div className="h-1.5 overflow-hidden rounded-full bg-mp-sand/40" aria-hidden>
             <div
-              className="h-full rounded-full bg-mp-orange-flame transition-all duration-500"
-              style={{ width: `${(step / STEP_COUNT) * 100}%` }}
+              className="h-full w-full origin-left rounded-full bg-mp-orange-flame transition-transform duration-300 ease-out motion-reduce:transition-none"
+              style={{ transform: `scaleX(${step / STEP_COUNT})` }}
             />
           </div>
         </div>
 
-        <div className="min-h-[420px] p-6 md:p-10">
+        <div className="p-4 sm:p-6 md:min-h-[420px] md:p-10">
+          {/* Bonus de saison : replié sur une ligne, conditions à un geste. Il
+              occupait 5 lignes au-dessus de chaque question sur mobile. */}
           {bonusActive && (
-            <p className="mb-6 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-4 text-sm text-mp-ink">
-              <strong className="text-mp-green-deep">{BONUS.label}.</strong> {BONUS.conditions}{" "}
-              Il est déjà déduit dans le récapitulatif.
-            </p>
+            <details className="group mb-5 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 text-sm text-mp-ink">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 [&::-webkit-details-marker]:hidden">
+                <span>
+                  <strong className="text-mp-green-deep">{BONUS.label}</strong>, déjà déduit du total
+                </span>
+                <ChevronDown className="h-4 w-4 shrink-0 text-mp-ink-soft transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
+              </summary>
+              <p className="px-4 pb-3 leading-relaxed">{BONUS.conditions}</p>
+            </details>
           )}
 
           {/* ---------- 1. Évacuation des fumées ---------- */}
           {step === 1 && (
             <>
-              <h2 className="mb-2 text-2xl font-semibold text-mp-green-deep md:text-3xl">
-                Comment sortent les fumées chez vous ?
-              </h2>
-              <p className="mb-8 text-mp-ink-soft">
+              <StepHeading ref={headingRef}>Comment sortent les fumées chez vous ?</StepHeading>
+              <p className="mb-6 text-mp-ink-soft md:mb-8">
                 C&apos;est ce qui pèse le plus dans le coût de la pose. Si vous hésitez entre deux
                 réponses, prenez la plus probable, nous vérifions tout lors de la visite.
               </p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {(Object.keys(INSTALL_TYPES) as InstallType[]).map((k) => (
-                  <button
-                    key={k}
-                    type="button"
-                    aria-pressed={s.installType === k}
-                    onClick={() => set("installType", k)}
-                    className={cardCls(s.installType === k)}
-                  >
-                    <span className="mb-0.5 block font-semibold text-mp-green-deep">
-                      {INSTALL_TYPES[k].label}
-                    </span>
-                    <span className="block text-sm text-mp-ink-soft">{INSTALL_TYPES[k].desc}</span>
-                  </button>
-                ))}
-              </div>
+              <ChoiceGroup
+                name="installType"
+                legend="Évacuation des fumées"
+                legendHidden
+                value={s.installType}
+                onChange={(v) => set("installType", v)}
+                className="sm:grid-cols-2"
+                choices={(Object.keys(INSTALL_TYPES) as InstallType[]).map((k) => ({
+                  value: k,
+                  label: INSTALL_TYPES[k].label,
+                  desc: INSTALL_TYPES[k].desc,
+                }))}
+              />
 
               {cfg.perMeter > 0 && (
                 <div className="mt-8">
-                  <label htmlFor="conduit" className={legendCls}>
-                    Hauteur de conduit à poser
-                  </label>
-                  <div className="flex items-center gap-4">
-                    <input
-                      id="conduit"
-                      type="range"
-                      min={4}
-                      max={CONDUIT_MAX_M}
-                      step={1}
-                      value={s.conduitM}
-                      onChange={(e) => set("conduitM", +e.target.value)}
-                      className="h-2 flex-1 cursor-pointer accent-mp-orange-flame"
-                    />
-                    <span className="min-w-[64px] text-right text-xl font-semibold text-mp-green-deep">
-                      {s.conduitM} <span className="text-sm font-normal text-mp-ink-soft">m</span>
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm text-mp-ink-soft">
-                    {CONDUIT_INCLUDED_M} m compris dans le forfait, au-delà nous comptons au mètre.
-                    En général : un rez seul, 5 à 6 m ; un rez + un étage, 8 à 10 m.
-                  </p>
+                  <RangeField
+                    id="conduit"
+                    label="Hauteur de conduit à poser"
+                    unit="m"
+                    min={4}
+                    max={CONDUIT_MAX_M}
+                    step={1}
+                    value={s.conduitM}
+                    onChange={(v) => set("conduitM", v)}
+                    decLabel="Réduire la hauteur de conduit"
+                    incLabel="Augmenter la hauteur de conduit"
+                  >
+                    <p className="mt-2 text-sm text-mp-ink-soft">
+                      {CONDUIT_INCLUDED_M} m compris dans le forfait, au-delà nous comptons au mètre.
+                      En général : un rez seul, 5 à 6 m ; un rez + un étage, 8 à 10 m.
+                    </p>
+                  </RangeField>
                 </div>
               )}
             </>
@@ -425,117 +539,84 @@ function EstimateForm({
           {/* ---------- 2. Le logement ---------- */}
           {step === 2 && (
             <>
-              <h2 className="mb-2 text-2xl font-semibold text-mp-green-deep md:text-3xl">
-                Parlez-nous de votre logement
-              </h2>
-              <p className="mb-8 text-mp-ink-soft">
+              <StepHeading ref={headingRef}>Parlez-nous de votre logement</StepHeading>
+              <p className="mb-6 text-mp-ink-soft md:mb-8">
                 De quoi calculer la puissance qu&apos;il vous faut, et le taux de TVA applicable.
               </p>
 
               <div className="mb-8">
-                <label htmlFor="surface" className={legendCls}>
-                  Surface à chauffer
-                </label>
-                <div className="flex items-center gap-4">
-                  <input
-                    id="surface"
-                    type="range"
-                    min={20}
-                    max={300}
-                    step={5}
-                    value={s.surface}
-                    onChange={(e) => set("surface", +e.target.value)}
-                    className="h-2 flex-1 cursor-pointer accent-mp-orange-flame"
-                  />
-                  <span className="min-w-[86px] text-right text-xl font-semibold text-mp-green-deep">
-                    {s.surface} <span className="text-sm font-normal text-mp-ink-soft">m²</span>
-                  </span>
-                </div>
-                <p className="mt-2 text-sm text-mp-ink-soft">
-                  La surface du rez si vous voulez chauffer le bas, la surface habitable totale pour
-                  un canalisable ou un hydro.
-                </p>
+                <RangeField
+                  id="surface"
+                  label="Surface à chauffer"
+                  unit="m²"
+                  min={20}
+                  max={300}
+                  step={5}
+                  value={s.surface}
+                  onChange={(v) => set("surface", v)}
+                  decLabel="Réduire la surface"
+                  incLabel="Augmenter la surface"
+                >
+                  <p className="mt-2 text-sm text-mp-ink-soft">
+                    La surface du rez si vous voulez chauffer le bas, la surface habitable totale pour
+                    un canalisable ou un hydro.
+                  </p>
+                </RangeField>
               </div>
 
               <div className="mb-8">
-                <span className={legendCls}>Isolation du bâtiment</span>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {(Object.keys(ISO) as IsoKey[]).map((k) => (
-                    <button
-                      key={k}
-                      type="button"
-                      aria-pressed={s.iso === k}
-                      onClick={() => set("iso", k)}
-                      className={cardCls(s.iso === k)}
-                    >
-                      <span className="mb-0.5 block font-semibold text-mp-green-deep">
-                        {ISO[k].label}
-                      </span>
-                      <span className="block text-sm text-mp-ink-soft">
-                        {ISO[k].desc} · {ISO[k].wattsPerM2} W/m²
-                      </span>
-                    </button>
-                  ))}
-                </div>
+                <ChoiceGroup
+                  name="iso"
+                  legend="Isolation du bâtiment"
+                  value={s.iso}
+                  onChange={(v) => set("iso", v)}
+                  className="sm:grid-cols-2"
+                  choices={(Object.keys(ISO) as IsoKey[]).map((k) => ({
+                    value: k,
+                    label: ISO[k].label,
+                    desc: `${ISO[k].desc} · ${ISO[k].wattsPerM2} W/m²`,
+                  }))}
+                />
               </div>
 
               <div className="mb-8">
-                <span className={legendCls}>Où le poêle sera-t-il installé ?</span>
-                <div className="grid gap-3 sm:grid-cols-3">
-                  {(Object.keys(LEVELS) as LevelKey[]).map((k) => (
-                    <button
-                      key={k}
-                      type="button"
-                      aria-pressed={s.level === k}
-                      onClick={() => set("level", k)}
-                      className={cardCls(s.level === k)}
-                    >
-                      <span className="block font-semibold text-mp-green-deep">{LEVELS[k].label}</span>
-                    </button>
-                  ))}
-                </div>
+                <ChoiceGroup
+                  name="level"
+                  legend="Où le poêle sera-t-il installé ?"
+                  value={s.level}
+                  onChange={(v) => set("level", v)}
+                  className="sm:grid-cols-3"
+                  choices={(Object.keys(LEVELS) as LevelKey[]).map((k) => ({
+                    value: k,
+                    label: LEVELS[k].label,
+                  }))}
+                />
               </div>
 
-              <div>
-                <span className={legendCls}>Votre logement a-t-il plus de 10 ans ?</span>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <button
-                    type="button"
-                    aria-pressed={s.housingOver10Years}
-                    onClick={() => set("housingOver10Years", true)}
-                    className={cardCls(s.housingOver10Years)}
-                  >
-                    <span className="mb-0.5 block font-semibold text-mp-green-deep">
-                      Oui, plus de 10 ans
-                    </span>
-                    <span className="block text-sm text-mp-ink-soft">TVA à 6 % sur tout le devis</span>
-                  </button>
-                  <button
-                    type="button"
-                    aria-pressed={!s.housingOver10Years}
-                    onClick={() => set("housingOver10Years", false)}
-                    className={cardCls(!s.housingOver10Years)}
-                  >
-                    <span className="mb-0.5 block font-semibold text-mp-green-deep">
-                      Non, ou je ne sais pas
-                    </span>
-                    <span className="block text-sm text-mp-ink-soft">TVA à 21 %</span>
-                  </button>
-                </div>
-                <p className="mt-3 text-sm text-mp-ink-soft">
-                  La TVA à 6 % s&apos;applique aux logements privés de plus de 10 ans quand
-                  l&apos;installateur fournit et pose le poêle. Nous le confirmons sur le devis.
-                </p>
-              </div>
+              <ChoiceGroup
+                name="housing"
+                legend="Votre logement a-t-il plus de 10 ans ?"
+                value={s.housingOver10Years ? "oui" : "non"}
+                onChange={(v) => set("housingOver10Years", v === "oui")}
+                className="sm:grid-cols-2"
+                choices={[
+                  { value: "oui", label: "Oui, plus de 10 ans", desc: "TVA à 6 % sur tout le devis" },
+                  { value: "non", label: "Non, ou je ne sais pas", desc: "TVA à 21 %" },
+                ]}
+                hint={
+                  <p className="mt-3 text-sm text-mp-ink-soft">
+                    La TVA à 6 % s&apos;applique aux logements privés de plus de 10 ans quand
+                    l&apos;installateur fournit et pose le poêle. Nous le confirmons sur le devis.
+                  </p>
+                }
+              />
             </>
           )}
 
           {/* ---------- 3. Le poêle ---------- */}
           {step === 3 && (
             <>
-              <h2 className="mb-2 text-2xl font-semibold text-mp-green-deep md:text-3xl">
-                Quel type de poêle, et lequel ?
-              </h2>
+              <StepHeading ref={headingRef}>Quel type de poêle, et lequel ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft">
                 Pour {s.surface} m² avec cette isolation, comptez environ{" "}
                 <strong className="text-mp-green-deep">
@@ -544,172 +625,178 @@ function EstimateForm({
                 . Nous mettons en tête les modèles qui collent à ce besoin.
               </p>
 
-              <div className="mb-6 grid gap-3 sm:grid-cols-2">
-                {(Object.keys(STOVE_KINDS) as StoveKind[]).map((k) => {
-                  const count = filterByKind(products, k).length;
-                  return (
-                    <button
-                      key={k}
-                      type="button"
-                      aria-pressed={s.stoveKind === k}
-                      disabled={count === 0}
-                      onClick={() => setStoveKind(k)}
-                      className={cn(cardCls(s.stoveKind === k), count === 0 && "opacity-40")}
-                    >
-                      <span className="mb-0.5 block font-semibold text-mp-green-deep">
-                        {STOVE_KINDS[k].label}
-                      </span>
-                      <span className="block text-sm text-mp-ink-soft">{STOVE_KINDS[k].desc}</span>
-                    </button>
-                  );
-                })}
+              <div className="mb-6">
+                <ChoiceGroup
+                  name="stoveKind"
+                  legend="Type de poêle"
+                  value={s.stoveKind}
+                  onChange={setStoveKind}
+                  className="sm:grid-cols-2"
+                  choices={(Object.keys(STOVE_KINDS) as StoveKind[]).map((k) => ({
+                    value: k,
+                    label: STOVE_KINDS[k].label,
+                    desc: STOVE_KINDS[k].desc,
+                    disabled: filterByKind(products, k).length === 0,
+                  }))}
+                />
               </div>
 
               {STOVE_KINDS[s.stoveKind].ducts && (
                 <div className="mb-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4">
-                  <span className={legendCls}>Combien de pièces à desservir par les gaines ?</span>
-                  <div className="inline-flex items-center overflow-hidden rounded-xl border border-mp-sand">
-                    <button
-                      type="button"
-                      aria-label="Moins de pièces"
-                      className="h-11 w-11 text-xl text-mp-green-deep hover:bg-mp-beige-warm"
+                  <p id="est-ducts-label" className={legendCls}>
+                    Combien de pièces à desservir par les gaines ?
+                  </p>
+                  <div className="inline-flex items-center gap-2" role="group" aria-labelledby="est-ducts-label">
+                    <StepButton
+                      label="Moins de pièces"
                       onClick={() => set("ductRooms", Math.max(1, s.ductRooms - 1))}
+                      disabled={s.ductRooms <= 1}
                     >
-                      −
-                    </button>
-                    <span className="w-14 text-center text-xl font-semibold text-mp-green-deep">
+                      <Minus className="h-4 w-4" aria-hidden />
+                    </StepButton>
+                    <output aria-live="polite" className="w-12 text-center text-xl font-semibold tabular-nums text-mp-green-deep">
                       {s.ductRooms}
-                    </span>
-                    <button
-                      type="button"
-                      aria-label="Plus de pièces"
-                      className="h-11 w-11 text-xl text-mp-green-deep hover:bg-mp-beige-warm"
+                    </output>
+                    <StepButton
+                      label="Plus de pièces"
                       onClick={() => set("ductRooms", Math.min(DUCT_ROOMS_MAX, s.ductRooms + 1))}
+                      disabled={s.ductRooms >= DUCT_ROOMS_MAX}
                     >
-                      +
-                    </button>
+                      <Plus className="h-4 w-4" aria-hidden />
+                    </StepButton>
                   </div>
                 </div>
               )}
 
-              <span className={legendCls}>
-                Choisissez votre modèle{" "}
-                <span className="font-normal text-mp-ink-soft">({eligible.length} disponibles)</span>
-              </span>
-              {eligible.length === 0 ? (
-                <p className="rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
-                  Aucun modèle de ce type n&apos;est chiffrable en ligne pour le moment. Appelez-nous
-                  au 081 13 83 09, nous avons d&apos;autres références en stock.
-                </p>
-              ) : (
-                <ul className="max-h-[420px] space-y-2 overflow-y-auto pr-1">
-                  {eligible.map((p) => {
-                    const active = s.productKey === p.key;
-                    const fit = p.powerKw >= needKw * 0.75 && p.powerKw <= needKw * 1.45;
-                    const ttc = Math.round(p.priceHT * (s.housingOver10Years ? 1.06 : 1.21));
-                    return (
-                      <li key={p.key}>
-                        <button
-                          type="button"
-                          aria-pressed={active}
-                          onClick={() => set("productKey", p.key)}
-                          className={cn(cardCls(active), "flex w-full items-center gap-4")}
-                        >
-                          <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-mp-beige-warm">
-                            {p.imageSrc ? (
-                              <Image
-                                src={p.imageSrc}
-                                alt=""
-                                fill
-                                sizes="64px"
-                                className="object-cover"
-                              />
-                            ) : (
-                              <span className="flex h-full w-full items-center justify-center text-mp-sand">
-                                <Flame className="h-6 w-6" />
-                              </span>
-                            )}
-                          </span>
-                          <span className="min-w-0 flex-1">
-                            <span className="block text-xs uppercase tracking-wider text-mp-ink-soft">
-                              {p.brand}
-                            </span>
-                            <span className="block truncate font-semibold text-mp-green-deep">
-                              {p.name}
-                            </span>
-                            <span className="block text-sm text-mp-ink-soft">
-                              {p.powerKw.toString().replace(".", ",")} kW
-                              {fit && (
-                                <span className="ml-2 text-mp-green-light">· bien dimensionné</span>
+              <fieldset id="est-models" className="min-w-0 scroll-mt-6">
+                <legend className={legendCls}>
+                  Choisissez votre modèle{" "}
+                  <span className="font-normal text-mp-ink-soft">({eligible.length} disponibles)</span>
+                </legend>
+                {productMissing && !s.productKey && (
+                  <p role="alert" className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
+                    Choisissez un modèle pour continuer.
+                  </p>
+                )}
+                {eligible.length === 0 ? (
+                  <p className="rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
+                    Aucun modèle de ce type n&apos;est chiffrable en ligne pour le moment. Appelez-nous
+                    au{" "}
+                    <a href="tel:+3281138309" className="whitespace-nowrap font-semibold text-mp-green-deep underline">
+                      081 13 83 09
+                    </a>
+                    , nous avons d&apos;autres références en stock.
+                  </p>
+                ) : (
+                  <>
+                    <div className="space-y-2">
+                      {shownModels.map((p) => {
+                        const active = s.productKey === p.key;
+                        const fit = p.powerKw >= needKw * 0.75 && p.powerKw <= needKw * 1.45;
+                        const ttc = Math.round(p.priceHT * (s.housingOver10Years ? 1.06 : 1.21));
+                        return (
+                          <label key={p.key} className={cn(cardCls(active), "items-center p-3 sm:gap-4 sm:p-4")}>
+                            <input
+                              type="radio"
+                              name="productKey"
+                              value={p.key}
+                              checked={active}
+                              onChange={() => set("productKey", p.key)}
+                              className="sr-only"
+                            />
+                            <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-mp-beige-warm sm:h-16 sm:w-16">
+                              {p.imageSrc ? (
+                                <Image src={p.imageSrc} alt="" fill sizes="64px" className="object-cover" />
+                              ) : (
+                                <span className="flex h-full w-full items-center justify-center text-mp-sand">
+                                  <Flame className="h-6 w-6" aria-hidden />
+                                </span>
+                              )}
+                              {active && (
+                                <span className="absolute right-1 top-1 grid h-5 w-5 place-items-center rounded-full bg-mp-orange-flame text-mp-green-darkest shadow-sm">
+                                  <Check className="h-3.5 w-3.5" aria-hidden />
+                                </span>
                               )}
                             </span>
-                          </span>
-                          <span className="shrink-0 text-right">
-                            <span className="block font-semibold text-mp-green-deep">{eur(ttc)}</span>
-                            <span className="block text-xs text-mp-ink-soft">
-                              {p.fromVariant ? "poêle seul, dès" : "poêle seul"}
+                            <span className="min-w-0 flex-1">
+                              <span className="block text-xs uppercase tracking-wider text-mp-ink-soft">
+                                {p.brand}
+                              </span>
+                              <span className="line-clamp-2 font-semibold leading-snug text-mp-green-deep">
+                                {p.name}
+                              </span>
+                              <span className="block text-sm text-mp-ink-soft">
+                                {p.powerKw.toString().replace(".", ",")} kW
+                                {fit && <span className="text-mp-green-mid"> · bien dimensionné</span>}
+                              </span>
                             </span>
-                          </span>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+                            <span className="shrink-0 text-right">
+                              <span className="block font-semibold tabular-nums text-mp-green-deep">{eur(ttc)}</span>
+                              <span className="block text-xs text-mp-ink-soft">
+                                {p.fromVariant ? "poêle seul, dès" : "poêle seul"}
+                              </span>
+                            </span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                    {!showAllModels && eligible.length > MODELS_PREVIEW && (
+                      <button
+                        type="button"
+                        onClick={() => setShowAllFor(s.stoveKind)}
+                        className="mt-3 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-mp-sand px-4 text-sm font-semibold text-mp-green-deep transition-colors hover:border-mp-green-deep"
+                      >
+                        Voir les {eligible.length - MODELS_PREVIEW} autres modèles
+                        <ChevronDown className="h-4 w-4" aria-hidden />
+                      </button>
+                    )}
+                  </>
+                )}
+              </fieldset>
             </>
           )}
 
           {/* ---------- 4. Options ---------- */}
           {step === 4 && (
             <>
-              <h2 className="mb-2 text-2xl font-semibold text-mp-green-deep md:text-3xl">
-                Quelque chose à ajouter ?
-              </h2>
-              <p className="mb-8 text-mp-ink-soft">
+              <StepHeading ref={headingRef}>Quelque chose à ajouter ?</StepHeading>
+              <p className="mb-6 text-mp-ink-soft md:mb-8">
                 Cochez ce qui s&apos;applique. Rien n&apos;est définitif, nous ajustons après la
                 visite technique.
               </p>
-              <div className="space-y-3">
-                {(Object.keys(OPTIONS) as OptionKey[])
-                  .filter((k) => !OPTIONS[k].roofOnly || cfg.roofWork)
-                  .map((k) => {
-                    const on = !!s.opt[k];
-                    const ttc = Math.round(
-                      OPTIONS[k].priceHT * (s.housingOver10Years ? 1.06 : 1.21),
-                    );
-                    return (
-                      <button
-                        key={k}
-                        type="button"
-                        aria-pressed={on}
-                        onClick={() => toggleOpt(k)}
-                        className={cn(cardCls(on), "flex w-full items-center justify-between gap-4")}
-                      >
-                        <span className="min-w-0">
-                          <span className="block font-semibold text-mp-green-deep">
-                            {OPTIONS[k].label}
+              <fieldset className="min-w-0">
+                <legend className="sr-only">Options de pose</legend>
+                <div className="space-y-3">
+                  {(Object.keys(OPTIONS) as OptionKey[])
+                    .filter((k) => !OPTIONS[k].roofOnly || cfg.roofWork)
+                    .map((k) => {
+                      const on = !!s.opt[k];
+                      const ttc = Math.round(
+                        OPTIONS[k].priceHT * (s.housingOver10Years ? 1.06 : 1.21),
+                      );
+                      return (
+                        <label key={k} className={cardCls(on)}>
+                          <input
+                            type="checkbox"
+                            checked={on}
+                            onChange={() => toggleOpt(k)}
+                            className="sr-only"
+                          />
+                          <CheckMark on={on} />
+                          <span className="min-w-0 flex-1">
+                            <span className="block font-semibold text-mp-green-deep">
+                              {OPTIONS[k].label}
+                            </span>
+                            <span className="block text-sm text-mp-ink-soft">{OPTIONS[k].desc}</span>
+                            <span className="mt-1 block text-sm font-semibold tabular-nums text-mp-orange-ink">
+                              + {eur(ttc)}
+                            </span>
                           </span>
-                          <span className="block text-sm text-mp-ink-soft">{OPTIONS[k].desc}</span>
-                        </span>
-                        <span className="flex shrink-0 items-center gap-3">
-                          <span className="text-sm font-medium text-mp-orange-ink">
-                            + {eur(ttc)}
-                          </span>
-                          <span
-                            className={cn(
-                              "grid h-6 w-6 place-items-center rounded border-2",
-                              on
-                                ? "border-mp-orange-flame bg-mp-orange-flame text-white"
-                                : "border-mp-sand",
-                            )}
-                          >
-                            {on && <Check className="h-4 w-4" />}
-                          </span>
-                        </span>
-                      </button>
-                    );
-                  })}
-              </div>
+                        </label>
+                      );
+                    })}
+                </div>
+              </fieldset>
               <p className="mt-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
                 Compris d&apos;office dans nos poses : la mise en service, le réglage de la
                 combustion, le nettoyage du chantier et la remise du certificat de conformité.
@@ -724,10 +811,8 @@ function EstimateForm({
             */}
           {step === 5 && (
             <>
-              <h2 className="mb-2 text-2xl font-semibold text-mp-green-deep md:text-3xl">
-                Payer en plusieurs fois
-              </h2>
-              <p className="mb-8 text-mp-ink-soft">
+              <StepHeading ref={headingRef}>Payer en plusieurs fois</StepHeading>
+              <p className="mb-6 text-mp-ink-soft md:mb-8">
                 Le total comprend déjà la TVA qui s&apos;applique chez vous (étape 2). Vous pouvez
                 l&apos;étaler à 0 %.
               </p>
@@ -746,91 +831,94 @@ function EstimateForm({
                 .
               </div>
 
-              <div>
-                <span className={legendCls}>Étaler le paiement à 0 %</span>
-                {isFinanceable(r.totalTTC) && durations.length > 0 ? (
-                  <>
-                    <div className="flex flex-wrap gap-2">
-                      {durations.map((m) => (
-                        <button
-                          key={m}
-                          type="button"
-                          aria-pressed={months === m}
-                          onClick={() => set("financeMonths", m)}
-                          className={cn(cardCls(months === m), "px-4 py-2 text-center")}
-                        >
+              {isFinanceable(r.totalTTC) && durations.length > 0 ? (
+                <fieldset className="min-w-0">
+                  <legend className={legendCls}>Étaler le paiement à 0 %</legend>
+                  <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">
+                    {durations.map((m) => {
+                      const active = months === m;
+                      return (
+                        <label key={m} className={cn(cardCls(active), "flex-col items-center gap-0 px-2 py-2.5 text-center sm:px-4")}>
+                          <input
+                            type="radio"
+                            name="financeMonths"
+                            value={m}
+                            checked={active}
+                            onChange={() => set("financeMonths", m)}
+                            className="sr-only"
+                          />
                           <span className="block font-semibold text-mp-green-deep">{m} mois</span>
-                          <span className="block text-sm text-mp-ink-soft">
+                          <span className="block text-sm tabular-nums text-mp-ink-soft">
                             {eur(monthly0(r.totalTTC, m) ?? 0)}/mois
                           </span>
-                        </button>
-                      ))}
-                    </div>
-                    <p className="mt-4 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-4">
-                      <span className="block text-2xl font-semibold text-mp-green-deep">
-                        {monthly != null ? `${eur(monthly)}/mois` : "—"}
-                      </span>
-                      <span className="mt-1 block text-sm text-mp-ink-soft">
-                        sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TTC
-                        {r.bonusHT > 0 ? ", bonus de saison déduit" : ""}. {FIN_NOTE}
-                      </span>
-                    </p>
-                  </>
-                ) : (
-                  <p className="rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
-                    Le financement s&apos;applique de 200 à 50 000 €. Choisissez d&apos;abord votre
-                    poêle à l&apos;étape précédente pour voir la mensualité.
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-4 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-4">
+                    <span className="block text-2xl font-semibold tabular-nums text-mp-green-deep">
+                      {eur(monthly ?? 0)}/mois
+                    </span>
+                    <span className="mt-1 block text-sm text-mp-ink-soft">
+                      sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TTC
+                      {r.bonusHT > 0 ? ", bonus de saison déduit" : ""}. {FIN_NOTE}
+                    </span>
                   </p>
-                )}
-                <p className="mt-4 text-xs leading-relaxed text-mp-ink-soft">
-                  <strong className="text-mp-ink">{SLOGAN_CREDIT}</strong> {FIN_LEGAL}
+                </fieldset>
+              ) : (
+                <p className="rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
+                  Le financement s&apos;applique de 200 à 50 000 €. Choisissez d&apos;abord votre
+                  poêle à l&apos;étape précédente pour voir la mensualité.
                 </p>
-              </div>
+              )}
+              <p className="mt-4 text-xs leading-relaxed text-mp-ink-soft">
+                <strong className="text-mp-ink">{SLOGAN_CREDIT}</strong> {FIN_LEGAL}
+              </p>
             </>
           )}
 
           {/* ---------- 6. Coordonnées ---------- */}
           {step === 6 && (
             <>
-              <h2 className="mb-2 text-2xl font-semibold text-mp-green-deep md:text-3xl">
-                Où vous envoyons-nous cette estimation ?
-              </h2>
+              <StepHeading ref={headingRef}>Où vous envoyons-nous cette estimation ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft">
                 Nous vous rappelons sous 48h ouvrées pour caler la visite technique. Pas de spam, pas
                 de vente forcée.
               </p>
               <div className="space-y-4">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="est-cp" className="mb-2 block text-sm font-medium text-mp-ink">
-                      Code postal <span className="text-mp-orange-ink">*</span>
-                    </label>
+                  <Field id="est-cp" label="Code postal" required error={fieldError("postalCode")}>
                     <input
                       id="est-cp"
                       type="text"
                       inputMode="numeric"
+                      enterKeyHint="next"
                       maxLength={4}
                       required
+                      aria-invalid={!!fieldError("postalCode")}
+                      aria-describedby={fieldError("postalCode") ? "est-cp-err" : undefined}
                       value={customer.postalCode}
                       onChange={(e) =>
                         setCustomer({ ...customer, postalCode: e.target.value.replace(/[^0-9]/g, "") })
                       }
+                      onBlur={() => touch("postalCode")}
                       className={inputCls}
                       placeholder="5380"
                       autoComplete="postal-code"
                     />
-                  </div>
-                  <div>
-                    <label htmlFor="est-delay" className="mb-2 block text-sm font-medium text-mp-ink">
-                      Délai souhaité <span className="text-mp-orange-ink">*</span>
-                    </label>
+                  </Field>
+                  <Field id="est-delay" label="Délai souhaité" required error={fieldError("delay")}>
                     <select
                       id="est-delay"
                       required
+                      aria-invalid={!!fieldError("delay")}
+                      aria-describedby={fieldError("delay") ? "est-delay-err" : undefined}
                       value={customer.delay}
-                      onChange={(e) =>
-                        setCustomer({ ...customer, delay: e.target.value as Customer["delay"] })
-                      }
+                      onChange={(e) => {
+                        setCustomer({ ...customer, delay: e.target.value as Customer["delay"] });
+                        touch("delay");
+                      }}
+                      onBlur={() => touch("delay")}
                       className={inputCls}
                     >
                       <option value="" disabled>
@@ -841,61 +929,68 @@ function EstimateForm({
                       <option value="3-6-mois">Dans 3 à 6 mois</option>
                       <option value="+6-mois">Plus de 6 mois (je me renseigne)</option>
                     </select>
-                  </div>
+                  </Field>
                 </div>
-                <div>
-                  <label htmlFor="est-name" className="mb-2 block text-sm font-medium text-mp-ink">
-                    Nom complet <span className="text-mp-orange-ink">*</span>
-                  </label>
+                <Field id="est-name" label="Nom complet" required error={fieldError("name")}>
                   <input
                     id="est-name"
                     type="text"
+                    enterKeyHint="next"
                     required
                     minLength={2}
+                    aria-invalid={!!fieldError("name")}
+                    aria-describedby={fieldError("name") ? "est-name-err" : undefined}
                     value={customer.name}
                     onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
+                    onBlur={() => touch("name")}
                     className={inputCls}
                     placeholder="Sophie Dupont"
                     autoComplete="name"
                   />
-                </div>
+                </Field>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="est-email" className="mb-2 block text-sm font-medium text-mp-ink">
-                      Email <span className="text-mp-orange-ink">*</span>
-                    </label>
+                  <Field id="est-email" label="Email" required error={fieldError("email")}>
                     <input
                       id="est-email"
                       type="email"
+                      inputMode="email"
+                      enterKeyHint="next"
                       required
+                      aria-invalid={!!fieldError("email")}
+                      aria-describedby={fieldError("email") ? "est-email-err" : undefined}
                       value={customer.email}
                       onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
+                      onBlur={() => touch("email")}
                       className={inputCls}
                       placeholder="sophie@exemple.be"
                       autoComplete="email"
                     />
-                  </div>
-                  <div>
-                    <label htmlFor="est-phone" className="mb-2 block text-sm font-medium text-mp-ink">
-                      Téléphone <span className="text-mp-orange-ink">*</span>
-                      <span className="ml-1 text-xs font-normal text-mp-ink-soft">(BE uniquement)</span>
-                    </label>
+                  </Field>
+                  <Field
+                    id="est-phone"
+                    label="Téléphone"
+                    required
+                    note="(BE uniquement)"
+                    error={fieldError("phone")}
+                  >
                     <input
                       id="est-phone"
                       type="tel"
+                      inputMode="tel"
+                      enterKeyHint="next"
                       required
+                      aria-invalid={!!fieldError("phone")}
+                      aria-describedby={fieldError("phone") ? "est-phone-err" : undefined}
                       value={customer.phone}
                       onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
+                      onBlur={() => touch("phone")}
                       className={inputCls}
                       placeholder="0470 12 34 56"
                       autoComplete="tel"
                     />
-                  </div>
+                  </Field>
                 </div>
-                <div>
-                  <label htmlFor="est-message" className="mb-2 block text-sm font-medium text-mp-ink">
-                    Précisions (optionnel)
-                  </label>
+                <Field id="est-message" label="Précisions (optionnel)">
                   <textarea
                     id="est-message"
                     rows={3}
@@ -904,164 +999,479 @@ function EstimateForm({
                     className={cn(inputCls, "resize-y")}
                     placeholder="Accès particulier, projet en cours, contraintes de planning…"
                   />
+                </Field>
+                <div>
+                  <label
+                    htmlFor="est-consent"
+                    className="flex cursor-pointer items-start gap-3 py-1 text-sm text-mp-ink-soft"
+                  >
+                    <input
+                      id="est-consent"
+                      type="checkbox"
+                      required
+                      aria-invalid={!!fieldError("consent")}
+                      aria-describedby={fieldError("consent") ? "est-consent-err" : undefined}
+                      checked={customer.consent}
+                      onChange={(e) => {
+                        setCustomer({ ...customer, consent: e.target.checked });
+                        touch("consent");
+                      }}
+                      className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-mp-orange-ink"
+                    />
+                    <span>
+                      J&apos;accepte que mes données soient utilisées pour me recontacter,
+                      conformément à la{" "}
+                      <a
+                        href="/politique-confidentialite"
+                        className="text-mp-orange-ink underline hover:no-underline"
+                      >
+                        politique de confidentialité
+                      </a>
+                      .
+                    </span>
+                  </label>
+                  {fieldError("consent") && (
+                    <p id="est-consent-err" className="mt-1.5 text-sm text-red-700">
+                      {fieldError("consent")}
+                    </p>
+                  )}
                 </div>
-                <label
-                  htmlFor="est-consent"
-                  className="flex cursor-pointer items-start gap-3 text-sm text-mp-ink-soft"
-                >
-                  <input
-                    id="est-consent"
-                    type="checkbox"
-                    required
-                    checked={customer.consent}
-                    onChange={(e) => setCustomer({ ...customer, consent: e.target.checked })}
-                    className="mt-1 h-4 w-4 rounded border-mp-sand text-mp-orange-flame focus:ring-mp-orange-flame"
-                  />
-                  <span>
-                    J&apos;accepte que mes données soient utilisées pour me recontacter,
-                    conformément à la{" "}
-                    <a
-                      href="/politique-confidentialite"
-                      className="text-mp-orange-ink underline hover:no-underline"
-                    >
-                      politique de confidentialité
-                    </a>
-                    .
-                  </span>
-                </label>
               </div>
             </>
           )}
 
           {submitState === "error" && (
-            <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+            <div role="alert" className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
               {errorMsg}
             </div>
           )}
         </div>
 
-        <div className="border-t border-mp-sand/40 bg-mp-cream px-4 py-5 sm:px-6 md:px-8">
-          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-            <Button
-              variant="ghost"
-              size="default"
-              onClick={prev}
-              disabled={step === 1 || submitState === "loading"}
-              className={cn("w-full justify-center sm:w-auto", step === 1 && "invisible h-0 sm:h-auto")}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Précédent
-            </Button>
+        {/* Barre d'action. Sous 1 024 px elle colle au bas de l'écran, posée sur
+            la barre de navigation, puis au ras de l'écran quand celle-ci se
+            replie (--mp-bottomnav-offset, globals.css), le tout dans les limites
+            du formulaire : arrivée en bas de la carte, elle reprend sa place. */}
+        <div
+          className={cn(
+            "sticky bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-20",
+            "border-t border-mp-sand/40 bg-mp-cream/95 px-4 py-3 backdrop-blur-md",
+            "shadow-[0_-10px_24px_rgba(20,36,27,0.08)] transition-[bottom] duration-300 ease-out motion-reduce:transition-none",
+            "sm:px-6 lg:static lg:bg-mp-cream lg:px-8 lg:py-5 lg:shadow-none lg:backdrop-blur-none",
+          )}
+        >
+          <div className="flex items-center gap-3">
+            {step < STEP_COUNT && (
+              <button
+                type="button"
+                onClick={() => setRecapOpen(true)}
+                aria-haspopup="dialog"
+                className="-my-1 min-h-11 min-w-0 flex-1 rounded-xl py-1 pr-2 text-left lg:hidden"
+              >
+                <span className="block text-xs font-medium text-mp-ink-soft">
+                  {product ? "Total posé, TTC" : "Pose estimée, TTC"}
+                </span>
+                <span className="flex items-center gap-1 text-lg font-semibold leading-tight tabular-nums text-mp-green-deep">
+                  {eur(r.totalTTC)}
+                  <ChevronUp className="h-4 w-4 text-mp-ink-soft" aria-hidden />
+                  <span className="sr-only">, voir le détail</span>
+                </span>
+              </button>
+            )}
+            {step > 1 && (
+              <Button
+                variant="ghost"
+                size="default"
+                onClick={prev}
+                disabled={loading}
+                className="w-11 shrink-0 px-0 lg:w-auto lg:px-6"
+              >
+                <ArrowLeft className="h-4 w-4" aria-hidden />
+                <span className="sr-only lg:not-sr-only">Précédent</span>
+              </Button>
+            )}
+            <span className="hidden flex-1 lg:block" aria-hidden />
             <Button
               variant="primary"
               size="default"
               onClick={next}
-              disabled={!canGoNext() || submitState === "loading"}
-              className="w-full justify-center sm:w-auto"
+              disabled={loading}
+              className={cn("shrink-0 px-5 lg:px-6", step === STEP_COUNT && "flex-1 sm:flex-none")}
             >
-              {submitState === "loading" ? (
+              {loading ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
                   Envoi…
                 </>
               ) : step === STEP_COUNT ? (
                 <>
-                  Recevoir mon estimation <ArrowRight className="h-4 w-4" />
+                  Recevoir mon estimation <ArrowRight className="h-4 w-4" aria-hidden />
                 </>
               ) : (
                 <>
-                  Suivant <ArrowRight className="h-4 w-4" />
+                  Suivant <ArrowRight className="h-4 w-4" aria-hidden />
                 </>
               )}
             </Button>
           </div>
-          {step === 3 && !s.productKey && (
-            <p className="mt-3 text-center text-sm text-mp-ink-soft sm:text-right">
-              Sélectionnez un modèle pour continuer.
-            </p>
-          )}
         </div>
       </div>
 
-      {/* ============ Colonne récapitulatif ============ */}
-      <aside className="rounded-3xl border border-mp-sand/40 bg-white p-6 shadow-md lg:sticky lg:top-24">
+      {/* ============ Colonne récapitulatif (desktop) ============ */}
+      <aside className="hidden rounded-3xl border border-mp-sand/40 bg-white p-6 shadow-md lg:sticky lg:top-24 lg:block">
         <p className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
           Votre estimation
         </p>
-        {product ? (
-          <>
-            <h3 className="mt-2 text-xl font-semibold text-mp-green-deep">{product.name}</h3>
-            <p className="text-sm text-mp-ink-soft">
-              {product.brand} · {product.powerKw.toString().replace(".", ",")} kW ·{" "}
-              {STOVE_KINDS[s.stoveKind].label}
-            </p>
-          </>
-        ) : (
-          <>
-            <h3 className="mt-2 text-xl font-semibold text-mp-green-deep">Modèle à choisir</h3>
-            <p className="text-sm text-mp-ink-soft">
-              Étape 3 : choisissez le poêle, le total se met à jour.
-            </p>
-          </>
-        )}
-
-        <div
-          className={cn(
-            "mt-4 rounded-xl border p-3 text-sm",
-            r.wellSized === false
-              ? "border-mp-orange-flame/40 bg-mp-orange-light/30 text-mp-ink"
-              : "border-mp-green-light/40 bg-mp-green-light/10 text-mp-green-deep",
-          )}
-        >
-          Besoin estimé : {needKw.toString().replace(".", ",")} kW pour {s.surface} m²
-          {r.wellSized === false && product && (
-            <>
-              {" "}
-              — le {product.powerKw.toString().replace(".", ",")} kW s&apos;en éloigne, nous
-              validerons ce point à la visite.
-            </>
-          )}
-        </div>
-
-        <dl className="mt-5 space-y-1 border-t border-mp-sand/40 pt-4 text-sm">
-          <Row
-            label={product ? `Poêle ${product.brand}` : "Poêle"}
-            value={r.materialHT > 0 ? eur(r.materialHT) : "—"}
-          />
-          {r.bonusHT > 0 && <Row label={BONUS.label} value={`-${eur(r.bonusHT)}`} />}
-          {r.laborLines.map((l) => (
-            <Row key={l.key} label={l.label} value={eur(l.amountHT)} muted />
-          ))}
-          <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
-        </dl>
-
-        <div className="mt-4 flex items-end justify-between border-t border-mp-sand/40 pt-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
-            Total TTC posé
-          </span>
-          <span className="text-2xl font-semibold text-mp-green-deep">{eur(r.totalTTC)}</span>
-        </div>
-
-        {monthly != null && (
-          <p className="mt-3 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-3 text-sm text-mp-ink">
-            ou <strong className="text-mp-green-deep">{eur(monthly)}/mois</strong> sur {months} mois
-            à 0 %
-          </p>
-        )}
-
-        <p className="mt-4 text-xs leading-relaxed text-mp-ink-soft">
-          Estimation indicative TTC, matériel et pose compris, TVA{" "}
-          {Math.round(r.vatRate * 100)} %. Les forfaits de pose sont des budgets moyens : le prix
-          ferme est établi après la visite technique gratuite.
-          {r.bonusHT > 0 && ` ${BONUS.label} déduit. ${BONUS.conditions}`}
-        </p>
-        {monthly != null && (
-          <p className="mt-2 text-[11px] leading-relaxed text-mp-ink-soft/80">
-            <strong className="text-mp-ink-soft">{SLOGAN_CREDIT}</strong> {FIN_LEGAL}
-          </p>
-        )}
+        <Recap product={product} s={s} r={r} needKw={needKw} monthly={monthly} months={months} />
       </aside>
+
+      {/* ============ Détail en volet (mobile et tablette) ============ */}
+      <Sheet open={recapOpen} onOpenChange={setRecapOpen}>
+        <SheetContent
+          side="bottom"
+          hideClose
+          title="Détail de votre estimation"
+          className="max-h-[85dvh] overflow-y-auto overscroll-contain rounded-t-3xl border-t-0 px-5 lg:hidden"
+          style={{ paddingTop: "1.25rem", paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))" }}
+        >
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
+              Votre estimation
+            </p>
+            <SheetClose
+              className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-mp-ink transition-colors hover:bg-mp-beige"
+              aria-label="Fermer le détail"
+            >
+              <X className="h-5 w-5" aria-hidden />
+            </SheetClose>
+          </div>
+          <Recap product={product} s={s} r={r} needKw={needKw} monthly={monthly} months={months} />
+        </SheetContent>
+      </Sheet>
     </div>
+  );
+}
+
+/** Question de l'étape : reçoit le focus à chaque changement d'étape. */
+const StepHeading = React.forwardRef<HTMLHeadingElement, { children: React.ReactNode }>(
+  function StepHeading({ children }, ref) {
+    return (
+      <h2
+        ref={ref}
+        tabIndex={-1}
+        className="mb-2 text-2xl font-semibold text-mp-green-deep outline-none md:text-3xl"
+      >
+        {children}
+      </h2>
+    );
+  },
+);
+
+interface Choice<K extends string> {
+  value: K;
+  label: string;
+  desc?: string;
+  disabled?: boolean;
+}
+
+/** Groupe de cartes à choix unique, sur de vrais boutons radio. */
+function ChoiceGroup<K extends string>({
+  name,
+  legend,
+  legendHidden = false,
+  value,
+  choices,
+  onChange,
+  className,
+  hint,
+}: {
+  name: string;
+  legend: string;
+  legendHidden?: boolean;
+  value: K;
+  choices: Choice<K>[];
+  onChange: (v: K) => void;
+  className?: string;
+  hint?: React.ReactNode;
+}) {
+  return (
+    <fieldset className="min-w-0">
+      <legend className={legendHidden ? "sr-only" : legendCls}>{legend}</legend>
+      <div className={cn("grid gap-3", className)}>
+        {choices.map((c) => {
+          const active = value === c.value;
+          return (
+            <label key={c.value} className={cardCls(active, c.disabled)}>
+              <input
+                type="radio"
+                name={name}
+                value={c.value}
+                checked={active}
+                disabled={c.disabled}
+                onChange={() => onChange(c.value)}
+                className="sr-only"
+              />
+              <RadioDot active={active} />
+              <span className="min-w-0">
+                <span className="block font-semibold text-mp-green-deep">{c.label}</span>
+                {c.desc && <span className="mt-0.5 block text-sm text-mp-ink-soft">{c.desc}</span>}
+              </span>
+            </label>
+          );
+        })}
+      </div>
+      {hint}
+    </fieldset>
+  );
+}
+
+/** Pastille radio dessinée : la sélection ne repose pas que sur la couleur. */
+function RadioDot({ active }: { active: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        "mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full border-2 bg-white transition-colors",
+        active ? "border-mp-orange-ink" : "border-mp-sand",
+      )}
+    >
+      <span
+        className={cn(
+          "h-2.5 w-2.5 rounded-full bg-mp-orange-ink transition-transform motion-reduce:transition-none",
+          active ? "scale-100" : "scale-0",
+        )}
+      />
+    </span>
+  );
+}
+
+function CheckMark({ on }: { on: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        "mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md border-2 transition-colors",
+        on ? "border-mp-orange-flame bg-mp-orange-flame text-mp-green-darkest" : "border-mp-sand bg-white",
+      )}
+    >
+      {on && <Check className="h-4 w-4" />}
+    </span>
+  );
+}
+
+function StepButton({
+  label,
+  onClick,
+  disabled,
+  children,
+}: {
+  label: string;
+  onClick: () => void;
+  disabled?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      onClick={onClick}
+      disabled={disabled}
+      className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-mp-sand bg-white text-mp-green-deep transition-colors hover:border-mp-green-deep disabled:cursor-not-allowed disabled:opacity-40"
+    >
+      {children}
+    </button>
+  );
+}
+
+/**
+ * Curseur avec boutons − et + de 44 px : le pouce natif d'un curseur fait une
+ * quinzaine de pixels sur mobile, et viser 135 m² au doigt sur 56 positions
+ * relève de la chance. La valeur s'affiche au-dessus, à droite du libellé.
+ */
+function RangeField({
+  id,
+  label,
+  unit,
+  min,
+  max,
+  step,
+  value,
+  onChange,
+  decLabel,
+  incLabel,
+  children,
+}: {
+  id: string;
+  label: string;
+  unit: string;
+  min: number;
+  max: number;
+  step: number;
+  value: number;
+  onChange: (v: number) => void;
+  decLabel: string;
+  incLabel: string;
+  children?: React.ReactNode;
+}) {
+  const fill = ((value - min) / (max - min)) * 100;
+  return (
+    <div>
+      <div className="mb-1 flex items-baseline justify-between gap-3">
+        <label htmlFor={id} className="text-sm font-medium text-mp-ink">
+          {label}
+        </label>
+        <output htmlFor={id} className="text-xl font-semibold tabular-nums text-mp-green-deep">
+          {value} <span className="text-sm font-normal text-mp-ink-soft">{unit}</span>
+        </output>
+      </div>
+      <div className="flex items-center gap-2">
+        <StepButton label={decLabel} onClick={() => onChange(Math.max(min, value - step))} disabled={value <= min}>
+          <Minus className="h-4 w-4" aria-hidden />
+        </StepButton>
+        <input
+          id={id}
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(e) => onChange(+e.target.value)}
+          aria-valuetext={`${value} ${unit}`}
+          className="mp-range min-w-0 flex-1"
+          style={{ "--mp-range-fill": `${fill}%` } as React.CSSProperties}
+        />
+        <StepButton label={incLabel} onClick={() => onChange(Math.min(max, value + step))} disabled={value >= max}>
+          <Plus className="h-4 w-4" aria-hidden />
+        </StepButton>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+/** Libellé, champ et message d'erreur sous le champ (lié par aria-describedby). */
+function Field({
+  id,
+  label,
+  required,
+  note,
+  error,
+  children,
+}: {
+  id: string;
+  label: string;
+  required?: boolean;
+  note?: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-2 block text-sm font-medium text-mp-ink">
+        {label}
+        {required && <span className="text-mp-orange-ink"> *</span>}
+        {note && <span className="ml-1 text-xs font-normal text-mp-ink-soft">{note}</span>}
+      </label>
+      {children}
+      {error && (
+        <p id={`${id}-err`} className="mt-1.5 text-sm text-red-700">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** Récapitulatif chiffré : colonne de droite sur desktop, volet sur mobile. */
+function Recap({
+  product,
+  s,
+  r,
+  needKw,
+  monthly,
+  months,
+}: {
+  product: EstimateProduct | null;
+  s: EstimateState;
+  r: EstimateResult;
+  needKw: number;
+  monthly: number | null;
+  months: number | null;
+}) {
+  return (
+    <>
+      {product ? (
+        <>
+          <h3 className="mt-2 text-xl font-semibold text-mp-green-deep">{product.name}</h3>
+          <p className="text-sm text-mp-ink-soft">
+            {product.brand} · {product.powerKw.toString().replace(".", ",")} kW ·{" "}
+            {STOVE_KINDS[s.stoveKind].label}
+          </p>
+        </>
+      ) : (
+        <>
+          <h3 className="mt-2 text-xl font-semibold text-mp-green-deep">Modèle à choisir</h3>
+          <p className="text-sm text-mp-ink-soft">
+            Étape 3 : choisissez le poêle, le total se met à jour.
+          </p>
+        </>
+      )}
+
+      <div
+        className={cn(
+          "mt-4 rounded-xl border p-3 text-sm",
+          r.wellSized === false
+            ? "border-mp-orange-flame/40 bg-mp-orange-light/30 text-mp-ink"
+            : "border-mp-green-light/40 bg-mp-green-light/10 text-mp-green-deep",
+        )}
+      >
+        Besoin estimé : {needKw.toString().replace(".", ",")} kW pour {s.surface} m².
+        {r.wellSized === false && product && (
+          <>
+            {" "}
+            Le {product.powerKw.toString().replace(".", ",")} kW s&apos;en éloigne, nous
+            validerons ce point à la visite.
+          </>
+        )}
+      </div>
+
+      <dl className="mt-5 space-y-1 border-t border-mp-sand/40 pt-4 text-sm">
+        <Row
+          label={product ? `Poêle ${product.brand}` : "Poêle"}
+          value={r.materialHT > 0 ? eur(r.materialHT) : "à choisir"}
+        />
+        {r.bonusHT > 0 && <Row label={BONUS.label} value={`-${eur(r.bonusHT)}`} />}
+        {r.laborLines.map((l) => (
+          <Row key={l.key} label={l.label} value={eur(l.amountHT)} muted />
+        ))}
+        <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
+      </dl>
+
+      <div className="mt-4 flex items-end justify-between border-t border-mp-sand/40 pt-4">
+        <span className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
+          Total TTC posé
+        </span>
+        <span className="text-2xl font-semibold tabular-nums text-mp-green-deep">{eur(r.totalTTC)}</span>
+      </div>
+
+      {monthly != null && (
+        <p className="mt-3 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-3 text-sm text-mp-ink">
+          ou <strong className="text-mp-green-deep">{eur(monthly)}/mois</strong> sur {months} mois
+          à 0 %
+        </p>
+      )}
+
+      <p className="mt-4 text-xs leading-relaxed text-mp-ink-soft">
+        Estimation indicative TTC, matériel et pose compris, TVA{" "}
+        {Math.round(r.vatRate * 100)} %. Les forfaits de pose sont des budgets moyens : le prix
+        ferme est établi après la visite technique gratuite.
+        {r.bonusHT > 0 && ` ${BONUS.label} déduit. ${BONUS.conditions}`}
+      </p>
+      {monthly != null && (
+        <p className="mt-2 text-xs leading-relaxed text-mp-ink-soft">
+          <strong className="text-mp-ink">{SLOGAN_CREDIT}</strong> {FIN_LEGAL}
+        </p>
+      )}
+    </>
   );
 }
 

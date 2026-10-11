@@ -259,20 +259,22 @@ body {
  * Hauteur occupée par la barre flottante : 64 px + sa marge basse, elle-même
  * au moins la zone de sécurité iOS. NavbarSticky pose data-bottomnav="hidden"
  * sur <html> quand elle se replie au défilement. Une barre d'action collante
- * (configurateur /estimation) se cale à --mp-bottomnav-h du bas, puis glisse
- * de --mp-bottomnav-shift vers le bas quand la barre se replie : elle ne la
- * recouvre jamais et ne laisse pas de trou. */
+ * (configurateur /estimation) se cale à --mp-bottomnav-offset du bas : posée
+ * sur la barre quand elle est là, au ras de l'écran quand elle se replie.
+ * Le décalage passe par `bottom` et non par un translate : décalée par
+ * transform, la barre d'action sortait de son formulaire en fin de carte et
+ * disparaissait, rognée par l'overflow de la carte. */
 :root {
   --mp-bottomnav-h: calc(4rem + max(0.75rem, env(safe-area-inset-bottom)));
-  --mp-bottomnav-shift: 0px;
+  --mp-bottomnav-offset: var(--mp-bottomnav-h);
 }
 :root[data-bottomnav="hidden"] {
-  --mp-bottomnav-shift: calc(var(--mp-bottomnav-h) - env(safe-area-inset-bottom));
+  --mp-bottomnav-offset: env(safe-area-inset-bottom);
 }
 @media (min-width: 1280px) {
   :root {
     --mp-bottomnav-h: 0px;
-    --mp-bottomnav-shift: 0px;
+    --mp-bottomnav-offset: env(safe-area-inset-bottom);
   }
 }
 
@@ -345,6 +347,68 @@ body {
   font-style: italic;
   color: var(--mp-orange-display);
   font-weight: 500;
+}
+
+/* === CURSEUR (configurateur /estimation) ===
+ * Zone tactile de 44 px de haut, piste de 6 px, pouce de 28 px. La partie
+ * remplie suit --mp-range-fill (pourcentage posé par le composant).
+ * Pouce blanc cerclé d'orange foncé : 5,5:1 sur blanc, seuil 3:1 des
+ * composants d'interface. */
+.mp-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2.75rem;
+  background: transparent;
+  cursor: pointer;
+}
+.mp-range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--mp-orange-flame) var(--mp-range-fill, 50%),
+    var(--mp-beige-warm) var(--mp-range-fill, 50%)
+  );
+}
+.mp-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: -11px;
+  border-radius: 9999px;
+  background: var(--mp-white);
+  border: 3px solid var(--mp-orange-ink);
+  box-shadow: 0 2px 8px rgba(20, 36, 27, 0.18);
+}
+.mp-range::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--mp-beige-warm);
+}
+.mp-range::-moz-range-progress {
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--mp-orange-flame);
+}
+.mp-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--mp-white);
+  border: 3px solid var(--mp-orange-ink);
+  box-shadow: 0 2px 8px rgba(20, 36, 27, 0.18);
+}
+.mp-range:focus-visible {
+  outline: none;
+}
+.mp-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--mp-orange-ink);
+  outline-offset: 2px;
+}
+.mp-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--mp-orange-ink);
+  outline-offset: 2px;
 }
 
 /* Selection */

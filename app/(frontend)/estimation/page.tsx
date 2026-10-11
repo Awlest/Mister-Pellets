@@ -4,6 +4,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { EstimateConfigurator } from "@/components/forms/EstimateConfigurator";
 import { getEstimateCatalog } from "@/lib/estimate-catalog";
 import { buildPageMetadata } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 
 export const metadata = buildPageMetadata({
   title: "Estimation en ligne, poêle à pellets posé",
@@ -32,24 +33,15 @@ export default async function EstimationPage() {
         }
         description="Vous choisissez le poêle dans notre catalogue, nous ajoutons la pose, la TVA applicable et la mensualité à 0 %. Le tout sans attendre un rappel."
         breadcrumbs={[{ label: "Accueil", href: "/" }, { label: "Estimation en ligne" }]}
+        compact
       />
 
-      <section className="bg-mp-cream mp-band">
+      {/* Mobile d'abord : héros resserré, arguments déplacés sous le
+        * configurateur, pour que la première question tienne dans le premier
+        * écran (elle tombait à 832 px du haut sur un téléphone). */}
+      <section className="bg-mp-cream pt-4 pb-14 sm:pt-10 md:pt-14 md:pb-20">
         <div className="mp-shell">
-          <div className="mb-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-mp-ink-soft">
-            <span className="inline-flex items-center gap-2">
-              <Calculator className="h-4 w-4 text-mp-orange-flame" />
-              Prix du catalogue, pas une fourchette
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <Wrench className="h-4 w-4 text-mp-orange-flame" />
-              Pose et mise en service comprises
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <PiggyBank className="h-4 w-4 text-mp-orange-flame" />
-              TVA et 0 % simulés
-            </span>
-          </div>
+          <TrustPoints className="mb-8 hidden lg:flex" />
 
           {products.length === 0 ? (
             <div className="rounded-3xl border border-mp-sand/40 bg-white p-8 text-center shadow-md">
@@ -70,6 +62,8 @@ export default async function EstimationPage() {
           ) : (
             <EstimateConfigurator products={products} />
           )}
+
+          <TrustPoints className="mt-8 lg:hidden" />
 
           <div className="mx-auto mt-10 mp-measure space-y-4 text-sm text-mp-ink-soft">
             <p>
@@ -94,5 +88,30 @@ export default async function EstimationPage() {
         </div>
       </section>
     </>
+  );
+}
+
+/** Les trois arguments du configurateur : au-dessus sur grand écran, dessous sur mobile. */
+function TrustPoints({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col items-center gap-3 text-sm text-mp-ink-soft sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-8",
+        className,
+      )}
+    >
+      <span className="inline-flex items-center gap-2">
+        <Calculator className="h-4 w-4 text-mp-orange-flame" aria-hidden />
+        Prix du catalogue, pas une fourchette
+      </span>
+      <span className="inline-flex items-center gap-2">
+        <Wrench className="h-4 w-4 text-mp-orange-flame" aria-hidden />
+        Pose et mise en service comprises
+      </span>
+      <span className="inline-flex items-center gap-2">
+        <PiggyBank className="h-4 w-4 text-mp-orange-flame" aria-hidden />
+        TVA et 0 % simulés
+      </span>
+    </div>
   );
 }

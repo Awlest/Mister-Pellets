@@ -50,20 +50,23 @@ interface SheetContentProps
    * en haut à droite, 44 × 44 px).
    */
   hideClose?: boolean;
+  /** Titre annoncé par les lecteurs d'écran à l'ouverture (masqué à l'écran). */
+  title?: string;
 }
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ side = "right", className, children, hideClose = false, ...props }, ref) => (
+>(({ side = "right", className, children, hideClose = false, title = "Menu", ...props }, ref) => (
   <SheetPortal>
     <SheetOverlay />
     <SheetPrimitive.Content
       ref={ref}
+      aria-describedby={undefined}
       className={cn(sheetVariants({ side }), className)}
       {...props}
     >
-      <SheetPrimitive.Title className="sr-only">Menu</SheetPrimitive.Title>
+      <SheetPrimitive.Title className="sr-only">{title}</SheetPrimitive.Title>
       {children}
       {!hideClose && (
         <SheetPrimitive.Close className="absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full text-mp-ink transition-colors hover:bg-mp-beige focus:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-ink disabled:pointer-events-none">
