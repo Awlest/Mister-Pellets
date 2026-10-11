@@ -18,6 +18,17 @@
   --mp-orange-warm:   #FDB842;
   --mp-orange-light:  #FFE4D1;
 
+  /* Orange pour du TEXTE sur fond clair (audit mobile du 11/10/2026).
+   * L'orange flamme ne fait que 2,3:1 sur crème et 2,5:1 sur blanc : il reste
+   * pour les aplats (boutons, pastilles), les icônes et les bordures, et le
+   * texte posé dessus passe en vert le plus sombre (6,2:1).
+   *   ink     : petit texte (liens, astérisques, étiquettes) ; 5,2:1 sur
+   *             crème, 4,9:1 sur beige, 5,5:1 sur blanc.
+   *   display : mots d'accent des grands titres (24 px et plus) ; 3,7:1 sur
+   *             crème, le seuil AA du grand texte étant 3:1. */
+  --mp-orange-ink:     #A05508;
+  --mp-orange-display: #C2680A;
+
   /* === BEIGES (FOND DOMINANT) === */
   --mp-cream:         #FAF7F0;
   --mp-beige:         #F4F1E8;
@@ -45,6 +56,8 @@
   --color-mp-orange-flame:  var(--mp-orange-flame);
   --color-mp-orange-warm:   var(--mp-orange-warm);
   --color-mp-orange-light:  var(--mp-orange-light);
+  --color-mp-orange-ink:     var(--mp-orange-ink);
+  --color-mp-orange-display: var(--mp-orange-display);
 
   --color-mp-cream:         var(--mp-cream);
   --color-mp-beige:         var(--mp-beige);
@@ -242,6 +255,27 @@ body {
   }
 }
 
+/* === BARRE DU BAS (NavbarSticky, mobile et tablette) ===
+ * Hauteur occupée par la barre flottante : 64 px + sa marge basse, elle-même
+ * au moins la zone de sécurité iOS. NavbarSticky pose data-bottomnav="hidden"
+ * sur <html> quand elle se replie au défilement. Une barre d'action collante
+ * (configurateur /estimation) se cale à --mp-bottomnav-h du bas, puis glisse
+ * de --mp-bottomnav-shift vers le bas quand la barre se replie : elle ne la
+ * recouvre jamais et ne laisse pas de trou. */
+:root {
+  --mp-bottomnav-h: calc(4rem + max(0.75rem, env(safe-area-inset-bottom)));
+  --mp-bottomnav-shift: 0px;
+}
+:root[data-bottomnav="hidden"] {
+  --mp-bottomnav-shift: calc(var(--mp-bottomnav-h) - env(safe-area-inset-bottom));
+}
+@media (min-width: 1280px) {
+  :root {
+    --mp-bottomnav-h: 0px;
+    --mp-bottomnav-shift: 0px;
+  }
+}
+
 @layer base {
   /* Typographie de marque, dans @layer base pour que toute classe utility
    * Tailwind (text-mp-cream, text-white, text-mp-orange-flame, etc.) puisse
@@ -289,19 +323,27 @@ body {
    * cette règle couvre les éléments custom (cartes, liens) jusqu'ici sans
    * indicateur de focus. */
   :focus-visible {
-    outline: 2px solid var(--mp-orange-flame);
+    outline: 2px solid var(--mp-orange-ink);
     outline-offset: 2px;
   }
   :focus:not(:focus-visible) {
     outline: none;
   }
+  /* Sur les fonds verts, l'orange foncé ne se voit plus (1,9:1) : anneau en
+   * orange chaud, 6,2:1 sur le vert profond. */
+  :where(.bg-mp-green-deep, .bg-mp-green-darkest) :focus-visible {
+    outline-color: var(--mp-orange-warm);
+  }
 }
 
 /* Classe publique réutilisable, pas de @layer (doit pouvoir gagner contre
- * les couleurs de texte par défaut quand elle est appliquée explicitement). */
+ * les couleurs de texte par défaut quand elle est appliquée explicitement).
+ * Orange « display » : ces mots d'accent sont toujours dans un grand titre
+ * (30 px et plus), où le seuil AA est 3:1 ; l'orange flamme ne fait que
+ * 2,3:1 sur le crème des héros. */
 .mp-italic {
   font-style: italic;
-  color: var(--mp-orange-flame);
+  color: var(--mp-orange-display);
   font-weight: 500;
 }
 

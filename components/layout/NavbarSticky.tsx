@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useReducedMotion } from "framer-motion";
 import {
   Home,
   ShoppingBag,
@@ -13,6 +12,9 @@ import {
   X,
   ChevronRight,
   Phone,
+  Wrench,
+  BrushCleaning,
+  TriangleAlert,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetClose } from "@/components/ui/sheet";
 import { cn, formatPhone } from "@/lib/utils";
@@ -21,13 +23,16 @@ import { cn, formatPhone } from "@/lib/utils";
  * Navbar FLOTTANTE sticky bottom, mobile ET tablette (jusqu'à xl / 1280 px).
  * 5 onglets : Accueil / Boutique / Devis / RDV / Menu (drawer)
  * La pastille orange est un FOND ACTIF derrière l'onglet courant qui glisse
- * latéralement avec un overshoot doux dans le sens du déplacement.
+ * latéralement avec un léger dépassement dans le sens du déplacement.
  *
  * Design :
  * - Navbar pill rounded, marges externes (lévite au-dessus du contenu)
  * - Backdrop blur + shadow douce
- * - Pastille orange = motion.span derrière l'item actif (pas surélevée)
- * - Animation : spring purement horizontal, doux, léger overshoot
+ * - Pastille orange = un seul élément derrière les onglets, déplacé en CSS
+ *   (transform). framer-motion servait à cette seule animation et chargeait
+ *   plus de 40 Ko de JavaScript sur chaque page (audit mobile du 11/10/2026).
+ * - Libellé et icône de l'onglet actif en vert le plus sombre : le blanc sur
+ *   l'orange flamme ne fait que 2,5:1, le vert 6,2:1.
  */
 
 const PHONE = "081 13 83 09";
@@ -43,7 +48,11 @@ interface Tab {
 }
 
 const TABS: Tab[] = [
-  { id: "home",  href: "/",                    icon: Home,        label: "Accueil",  matches: (p) => p === "/" },
+  // « /index » : c'est le chemin que voit le rendu serveur de l'accueil en
+  // production (régénération ISR). Sans lui, le HTML marquait l'onglet Menu
+  // et le navigateur l'onglet Accueil : React levait l'erreur d'hydratation
+  // #418 et recalculait toute la page côté navigateur (constaté le 11/10/2026).
+  { id: "home",  href: "/",                    icon: Home,        label: "Accueil",  matches: (p) => p === "/" || p === "/index" || p === "" },
   { id: "shop",  href: "/boutique",            icon: ShoppingBag, label: "Boutique", matches: (p) => p.startsWith("/boutique") || p.startsWith("/produit/") },
   // L'onglet Devis mène au configurateur : il chiffre, calcule la mensualité et
   // déduit la prime. Le formulaire /demande-de-devis reste accessible, mais il
@@ -52,6 +61,14 @@ const TABS: Tab[] = [
   // #reserver : l'onglet ouvre directement l'agenda, pas la présentation du showroom.
   { id: "rdv",   href: "/prendre-rendez-vous#reserver", icon: Calendar, label: "RDV", matches: (p) => p === "/prendre-rendez-vous" },
   { id: "menu",                                icon: MenuIcon,    label: "Menu",     matches: () => false },
+];
+
+// Les trois prestations n'avaient aucune entrée sur mobile : le menu du haut,
+// qui les liste, n'existe qu'à partir de 1280 px. Mêmes libellés que ce menu.
+const SERVICE_LINKS = [
+  { href: "/entretien-poele-a-pellets", label: "Entretien", icon: Wrench },
+  { href: "/ramonage",                  label: "Ramonage",  icon: BrushCleaning },
+  { href: "/depannage-poele-a-pellets", label: "Dépannage", icon: TriangleAlert },
 ];
 
 const MENU_LINKS = [
@@ -70,7 +87,6 @@ export function NavbarSticky() {
   // Visible par défaut. Comportement iOS-like : hide on scroll down, show on scroll up.
   const [visible, setVisible] = React.useState(true);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const reduceMotion = useReducedMotion();
 
   React.useEffect(() => {
     const SCROLL_THRESHOLD = 8; // ignore micro-scrolls (rebond iOS, trackpad)
@@ -95,8 +111,6 @@ export function NavbarSticky() {
           setVisible(true);
         }
 
-        // Toujours visible si le drawer est ouvert (sécurité au cas où on ferme le drawer
-        // sans scroll : la nav doit rester accessible derrière)
         lastY = current;
         ticking = false;
       });
@@ -107,14 +121,25 @@ export function NavbarSticky() {
   }, []);
 
   // Audit V20260503 §2.H.2 : forcer visible quand le drawer Menu s'ouvre,
-  // sans setState dans useEffect. On dérive l'état effectif via useMemo.
+  // sans setState dans useEffect. On dérive l'état effectif.
   const effectiveVisible = visible || menuOpen;
+
+  // La barre publie son état sur <html> : une barre d'action collante (celle
+  // du configurateur) se pose au-dessus d'elle grâce à --mp-bottomnav-h, puis
+  // redescend quand elle se replie (globals.css, « Barre du bas »).
+  React.useEffect(() => {
+    const root = document.documentElement;
+    if (effectiveVisible) root.removeAttribute("data-bottomnav");
+    else root.setAttribute("data-bottomnav", "hidden");
+  }, [effectiveVisible]);
+  React.useEffect(() => () => document.documentElement.removeAttribute("data-bottomnav"), []);
 
   const activeTabId: TabId = React.useMemo(() => {
     if (menuOpen) return "menu";
     const match = TABS.find((t) => t.matches(pathname ?? "/"));
     return match ? match.id : "menu";
   }, [pathname, menuOpen]);
+  const activeIndex = TABS.findIndex((t) => t.id === activeTabId);
 
   return (
     <>
@@ -123,7 +148,7 @@ export function NavbarSticky() {
         className={cn(
           "fixed inset-x-0 bottom-0 z-30 xl:hidden",
           "px-3 pb-3",
-          "transition-all duration-300",
+          "transition-[transform,opacity] duration-300",
           effectiveVisible ? "translate-y-0 opacity-100" : "translate-y-[120%] opacity-0 pointer-events-none"
         )}
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
@@ -138,6 +163,21 @@ export function NavbarSticky() {
           )}
           aria-label="Navigation rapide"
         >
+          {/* Pastille active : glisse d'un onglet à l'autre, avec un léger
+              dépassement (courbe à rebond), coupée si l'utilisateur réduit
+              les animations. */}
+          <span
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute inset-y-1.5 left-1.5 rounded-full bg-mp-orange-flame",
+              "shadow-[0_4px_14px_rgba(242,138,32,0.45)]",
+              "transition-transform duration-300 ease-[cubic-bezier(0.34,1.36,0.64,1)] motion-reduce:transition-none"
+            )}
+            style={{
+              width: `calc((100% - 0.75rem) / ${TABS.length})`,
+              transform: `translateX(${Math.max(0, activeIndex) * 100}%)`,
+            }}
+          />
           <ul className="relative flex items-stretch h-16 p-1.5">
             {TABS.map((tab) => {
               const Icon = tab.icon;
@@ -148,41 +188,16 @@ export function NavbarSticky() {
                   className={cn(
                     "relative z-10 flex flex-col items-center justify-center gap-0.5 h-full w-full px-1",
                     "text-[10px] font-semibold tracking-tight transition-colors duration-200",
-                    isActive ? "text-white" : "text-mp-ink-soft"
+                    isActive ? "text-mp-green-darkest" : "text-mp-ink-soft"
                   )}
                 >
-                  <Icon className={cn("h-[18px] w-[18px]", isActive ? "text-white" : "text-mp-ink-soft")} />
+                  <Icon className="h-[18px] w-[18px]" aria-hidden />
                   <span>{tab.label}</span>
                 </span>
               );
 
               return (
                 <li key={tab.id} className="flex-1 relative">
-                  {/* Pastille active (fond), animation horizontale douce */}
-                  {isActive && (
-                    <motion.span
-                      layoutId="navbar-active-pill"
-                      className={cn(
-                        "absolute inset-0 rounded-full bg-mp-orange-flame",
-                        "shadow-[0_4px_14px_rgba(242,138,32,0.45)]",
-                        "pointer-events-none"
-                      )}
-                      transition={
-                        reduceMotion
-                          ? { duration: 0 }
-                          : {
-                              // Spring doux horizontal avec léger overshoot dans le sens du déplacement
-                              type: "spring",
-                              stiffness: 260,   // pas trop raide
-                              damping: 26,      // sous-amorti pour overshoot léger
-                              mass: 0.8,        // léger pour répondre rapidement
-                              restDelta: 0.5,   // arrêt net, pas de micro-tremblement
-                            }
-                      }
-                      aria-hidden
-                    />
-                  )}
-
                   {tab.id === "menu" ? (
                     <button
                       type="button"
@@ -213,68 +228,92 @@ export function NavbarSticky() {
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
         <SheetContent
           side="bottom"
+          hideClose
           className={cn(
             "rounded-t-3xl border-t-0",
             // Hauteur max + scroll interne
-            "max-h-[88vh] overflow-y-auto overscroll-contain",
+            "max-h-[88dvh] overflow-y-auto overscroll-contain",
             // Padding horizontal
-            "px-6",
+            "px-5",
             "xl:hidden"
           )}
           // Padding vertical via style pour combiner valeur fixe + safe-area iOS
           style={{
-            paddingTop: "max(2.5rem, env(safe-area-inset-top))",
+            paddingTop: "max(2rem, env(safe-area-inset-top))",
             paddingBottom: "calc(env(safe-area-inset-bottom) + 6.5rem)",
             // ↑ 6.5rem = espace pour la NavbarSticky flottante (~88px) + air en bas
           }}
         >
           {/* Drag handle visuel */}
-          <div className="flex justify-center -mt-4 mb-4" aria-hidden>
+          <div className="flex justify-center -mt-3 mb-3" aria-hidden>
             <div className="h-1.5 w-12 rounded-full bg-mp-sand/60" />
           </div>
 
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <h2
               className="text-2xl font-semibold text-mp-green-deep"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Plus d'options
+              Plus d&apos;options
             </h2>
-            <SheetClose className="rounded-full p-2 hover:bg-mp-beige transition-colors" aria-label="Fermer">
-              <X className="h-5 w-5" />
+            {/* Une seule croix, 44 × 44 px (spec mobile V1). */}
+            <SheetClose
+              className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-mp-ink transition-colors hover:bg-mp-beige"
+              aria-label="Fermer le menu"
+            >
+              <X className="h-5 w-5" aria-hidden />
             </SheetClose>
           </div>
 
-          <div className="grid grid-cols-1 gap-2 mb-6">
-            {MENU_LINKS.map((link) => (
-              <SheetClose asChild key={link.href}>
-                <Link
-                  href={link.href}
-                  className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-mp-cream border border-mp-sand/40 hover:border-mp-orange-flame hover:bg-mp-orange-light/30 transition-all group"
-                >
-                  <div>
-                    <span className="block text-base font-semibold text-mp-green-deep">
-                      {link.label}
-                    </span>
-                    <span className="block text-xs text-mp-ink-soft mt-0.5">
-                      {link.desc}
-                    </span>
-                  </div>
-                  <ChevronRight className="h-5 w-5 text-mp-ink-soft group-hover:text-mp-orange-flame group-hover:translate-x-1 transition-all" />
-                </Link>
-              </SheetClose>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
+            Services
+          </p>
+          <ul className="mb-5 grid grid-cols-3 gap-2">
+            {SERVICE_LINKS.map(({ href, label, icon: Icon }) => (
+              <li key={href}>
+                <SheetClose asChild>
+                  <Link
+                    href={href}
+                    className="flex min-h-[4.5rem] flex-col items-center justify-center gap-1.5 rounded-2xl border border-mp-sand/40 bg-mp-cream px-2 py-3 text-center text-sm font-semibold text-mp-green-deep transition-colors hover:border-mp-orange-flame hover:bg-mp-orange-light/30"
+                  >
+                    <Icon className="h-5 w-5 text-mp-orange-flame" aria-hidden />
+                    {label}
+                  </Link>
+                </SheetClose>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <div className="pt-4 border-t border-mp-sand/40 flex items-center justify-center">
-            <a
-              href={`tel:${formatPhone(PHONE)}`}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
-            >
-              <Phone className="h-4 w-4" />
-              {PHONE}
-            </a>
-          </div>
+          <ul className="grid grid-cols-1 gap-2 mb-5">
+            {MENU_LINKS.map((link) => (
+              <li key={link.href}>
+                <SheetClose asChild>
+                  <Link
+                    href={link.href}
+                    className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-mp-cream border border-mp-sand/40 hover:border-mp-orange-flame hover:bg-mp-orange-light/30 transition-colors group"
+                  >
+                    <span>
+                      <span className="block text-base font-semibold text-mp-green-deep">
+                        {link.label}
+                      </span>
+                      <span className="block text-sm text-mp-ink-soft mt-0.5">
+                        {link.desc}
+                      </span>
+                    </span>
+                    <ChevronRight className="h-5 w-5 shrink-0 text-mp-ink-soft transition-transform group-hover:translate-x-1" aria-hidden />
+                  </Link>
+                </SheetClose>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={`tel:${formatPhone(PHONE)}`}
+            className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-mp-green-deep px-6 text-base font-semibold text-mp-green-deep transition-colors hover:bg-mp-green-deep hover:text-white"
+          >
+            <Phone className="h-5 w-5" aria-hidden />
+            Appeler le {PHONE}
+          </a>
         </SheetContent>
       </Sheet>
     </>
