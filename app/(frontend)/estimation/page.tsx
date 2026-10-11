@@ -3,6 +3,7 @@ import { Calculator, PiggyBank, Wrench } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { EstimateConfigurator } from "@/components/forms/EstimateConfigurator";
 import { getEstimateCatalog } from "@/lib/estimate-catalog";
+import { isBonusPeriod } from "@/lib/bonus";
 import { buildPageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
@@ -60,7 +61,7 @@ export default async function EstimationPage() {
               </p>
             </div>
           ) : (
-            <EstimateConfigurator products={products} />
+            <EstimateConfigurator products={products} bonusAtRender={isBonusPeriod()} />
           )}
 
           <TrustPoints className="mt-8 lg:hidden" />

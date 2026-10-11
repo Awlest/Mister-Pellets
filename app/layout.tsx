@@ -124,9 +124,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
+    // suppressHydrationWarning : l'amorce du consentement (GA_BOOTSTRAP) pose
+    // data-consent sur <html> avant l'hydratation, attribut absent du rendu
+    // serveur. Ne vaut que pour les attributs de <html>, pas pour ses enfants.
     <html
       lang="fr-BE"
       className={`${fraunces.variable} ${interTight.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
         {/* Schemas globaux SSR, chaque page peut ajouter ses propres schemas en plus */}

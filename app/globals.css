@@ -349,6 +349,14 @@ body {
   font-weight: 500;
 }
 
+/* Bandeau cookies : rendu dans le HTML pour s'afficher sans attendre le
+ * JavaScript. L'amorce du <head> (GA_BOOTSTRAP, lib/analytics.ts) pose
+ * data-consent sur <html> quand le visiteur a déjà répondu : le bandeau est
+ * masqué avant le premier affichage, sans clignotement. */
+html[data-consent] .mp-consent-banner {
+  display: none;
+}
+
 /* === CURSEUR (configurateur /estimation) ===
  * Zone tactile de 44 px de haut, piste de 6 px, pouce de 28 px. La partie
  * remplie suit --mp-range-fill (pourcentage posé par le composant).

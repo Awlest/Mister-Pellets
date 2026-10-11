@@ -399,8 +399,8 @@ export function BoutiqueExplorer({
               de poêles (h3) suivaient directement le h1. */}
           <h2 className="sr-only">Modèles</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {shown.map((product) => (
-              <ProductCard key={product.slug} product={product} />
+            {shown.map((product, i) => (
+              <ProductCard key={product.slug} product={product} priority={i === 0} />
             ))}
           </div>
           {visible < filtered.length && (

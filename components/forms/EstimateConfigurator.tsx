@@ -186,7 +186,20 @@ function parseDraft(json: string | null): EstimateState | null {
  * visiteur qui revenait. Pas de setState dans un effet (audit V20260503
  * §2.H.2) : le choix du brouillon est mémorisé une fois pour toutes.
  */
-export function EstimateConfigurator({ products }: { products: EstimateProduct[] }) {
+export function EstimateConfigurator({
+  products,
+  bonusAtRender = false,
+}: {
+  products: EstimateProduct[];
+  /**
+   * Bonus de saison actif au moment du rendu serveur (ISR). Sert d'instantané
+   * serveur : le HTML et l'hydratation lisent la même valeur, donc aucun
+   * écart d'hydratation, et la ligne du bonus est dans le HTML au lieu de
+   * s'insérer au-dessus de la question après coup (décalage de mise en page
+   * mesuré à 0,053 sur la prod le 11/10/2026).
+   */
+  bonusAtRender?: boolean;
+}) {
   const hydrated = React.useSyncExternalStore(noopSubscribe, () => true, () => false);
   const draft = React.useMemo(() => (hydrated ? parseDraft(readDraft()) : null), [hydrated]);
   return (
@@ -194,6 +207,7 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
       key={draft ? "brouillon" : "neuf"}
       products={products}
       initialState={draft ?? DEFAULT_STATE}
+      bonusAtRender={bonusAtRender}
     />
   );
 }
@@ -215,9 +229,11 @@ export function EstimateConfigurator({ products }: { products: EstimateProduct[]
 function EstimateForm({
   products,
   initialState,
+  bonusAtRender,
 }: {
   products: EstimateProduct[];
   initialState: EstimateState;
+  bonusAtRender: boolean;
 }) {
   const [step, setStep] = React.useState(1);
   const [s, setS] = React.useState<EstimateState>(initialState);
@@ -284,7 +300,7 @@ function EstimateForm({
     () => products.find((p) => p.key === s.productKey) ?? null,
     [products, s.productKey],
   );
-  const bonusActive = React.useSyncExternalStore(noopSubscribe, isBonusPeriod, () => false);
+  const bonusActive = React.useSyncExternalStore(noopSubscribe, isBonusPeriod, () => bonusAtRender);
   const r = estimate(s, product, { bonus: bonusActive });
   const durations = durationsFor(r.totalTTC);
   const months =

@@ -83,14 +83,20 @@ export function Analytics() {
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
       />
 
-      {choice === "unknown" && (
+      {/* Rendu dès le HTML (« loading » = rendu serveur et hydratation) :
+        * avant, le bandeau n'apparaissait qu'après l'exécution du JavaScript,
+        * tard sur mobile, et Lighthouse en faisait l'élément le plus lent de
+        * /estimation (11/10/2026). Pour qui a déjà répondu, l'amorce du <head>
+        * pose data-consent sur <html> et la classe mp-consent-banner le masque
+        * avant le premier affichage (globals.css) ; React le retire ensuite. */}
+      {(choice === "unknown" || choice === "loading") && (
         <div
           role="dialog"
           aria-label="Cookies de mesure d'audience"
           // Sur mobile, posé juste au-dessus de la barre de navigation
           // flottante (--mp-bottomnav-offset, globals.css) et resserré : il
           // couvrait le milieu du premier écran, boutons du héros compris.
-          className="fixed inset-x-3 bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-50 rounded-2xl border border-mp-sand bg-mp-cream p-4 shadow-lg sm:p-5 lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
+          className="mp-consent-banner fixed inset-x-3 bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-50 rounded-2xl border border-mp-sand bg-mp-cream p-4 shadow-lg sm:p-5 lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
         >
           <p className="text-sm leading-relaxed text-mp-ink">
             On mesure l&apos;audience du site et l&apos;efficacité de nos annonces Google, pour

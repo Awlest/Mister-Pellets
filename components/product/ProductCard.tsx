@@ -71,13 +71,21 @@ export interface ProductCardData extends ProductFeatureFlags {
 interface ProductCardProps {
   product: ProductCardData;
   className?: string;
+  /**
+   * Photo chargée tout de suite et en priorité : à réserver à la première
+   * carte d'une grille qui s'affiche dans le premier écran. Sur la boutique
+   * en mobile, cette photo est l'élément le plus grand de l'écran, et en
+   * chargement différé elle repoussait l'affichage complet à 7,3 s
+   * (Lighthouse mobile du 11/10/2026).
+   */
+  priority?: boolean;
 }
 
 /**
  * Carte produit pour la boutique, l'accueil et les listings.
  * Cf. brief §4.3.
  */
-export function ProductCard({ product, className }: ProductCardProps) {
+export function ProductCard({ product, className, priority = false }: ProductCardProps) {
   const {
     slug,
     name,
@@ -156,7 +164,8 @@ export function ProductCard({ product, className }: ProductCardProps) {
               srcSet={buildSrcSet(cardImage)}
               sizes="(max-width: 768px) 100vw, 33vw"
               alt={imageAlt ?? name}
-              loading="lazy"
+              loading={priority ? "eager" : "lazy"}
+              fetchPriority={priority ? "high" : "auto"}
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               style={{ objectPosition }}

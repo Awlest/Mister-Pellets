@@ -124,6 +124,10 @@ export function writeConsent(choice: ConsentChoice): void {
  * chargement de gtag.js n'était pas garanti : constaté en production le
  * 5 septembre 2026. Un `<script>` inline dans le `<head>` est le seul moyen
  * d'avoir la garantie d'ordre.
+ *
+ * Il pose aussi `data-consent` sur `<html>` quand un choix est déjà
+ * enregistré : le bandeau cookies, rendu dans le HTML, est alors masqué par
+ * CSS avant le premier affichage (components/layout/Analytics.tsx).
  */
 export const GA_BOOTSTRAP = `
 window.dataLayer = window.dataLayer || [];
@@ -137,7 +141,11 @@ gtag('consent', 'default', {
   wait_for_update: 500
 });
 try {
-  if (localStorage.getItem('${CONSENT_KEY}') === 'granted') {
+  var mpConsent = localStorage.getItem('${CONSENT_KEY}');
+  if (mpConsent === 'granted' || mpConsent === 'denied') {
+    document.documentElement.setAttribute('data-consent', mpConsent);
+  }
+  if (mpConsent === 'granted') {
     gtag('consent', 'update', {
       ad_storage: 'granted',
       ad_user_data: 'granted',
