@@ -119,7 +119,7 @@ export function Testimonials({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {items.map((t, i) => (
             <Card key={i} className="p-6 flex flex-col gap-4">
-              <div className="flex gap-0.5" aria-label={`${t.rating} étoiles sur 5`}>
+              <div className="flex gap-0.5" role="img" aria-label={`${t.rating} étoiles sur 5`}>
                 {Array.from({ length: t.rating }).map((_, k) => (
                   <Star
                     key={k}

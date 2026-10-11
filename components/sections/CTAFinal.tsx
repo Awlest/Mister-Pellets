@@ -60,7 +60,7 @@ export function CTAFinal({
           {showPhone && (
             <a
               href={`tel:${formatPhone(PHONE)}`}
-              className="inline-flex items-center gap-2 text-base font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
+              className="inline-flex min-h-11 items-center gap-2 text-base font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
             >
               <Phone className="h-5 w-5" />
               {PHONE}

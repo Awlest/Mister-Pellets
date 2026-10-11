@@ -387,7 +387,7 @@ export default async function ArticlePage({ params }: Props) {
                         <Link
                           key={c.slug}
                           href={`/poeles-pellets-${c.slug}`}
-                          className="text-sm text-mp-green-deep hover:text-mp-orange-flame underline underline-offset-4 decoration-mp-sand"
+                          className="inline-flex min-h-11 items-center px-1.5 text-sm text-mp-green-deep hover:text-mp-orange-flame underline underline-offset-4 decoration-mp-sand"
                         >
                           {c.name}
                         </Link>
@@ -406,7 +406,7 @@ export default async function ArticlePage({ params }: Props) {
                         <Link
                           key={b.slug}
                           href={`/nos-marques/${b.slug}`}
-                          className="text-sm text-mp-green-deep hover:text-mp-orange-flame underline underline-offset-4 decoration-mp-sand"
+                          className="inline-flex min-h-11 items-center px-1.5 text-sm text-mp-green-deep hover:text-mp-orange-flame underline underline-offset-4 decoration-mp-sand"
                         >
                           {b.name}
                         </Link>
@@ -420,9 +420,9 @@ export default async function ArticlePage({ params }: Props) {
             <div className="mt-10 text-center">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="h-4 w-4" aria-hidden />
                 Tous les articles
               </Link>
             </div>

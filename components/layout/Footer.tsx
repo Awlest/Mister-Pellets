@@ -148,13 +148,13 @@ export function Footer() {
         {/* Liens légaux compacts : pleine opacité pour la lisibilité */}
         <nav
           aria-label="Liens légaux"
-          className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm text-mp-cream pt-4 border-t border-mp-cream/25 w-full"
+          className="flex flex-wrap items-center justify-center gap-x-2 text-sm text-mp-cream pt-2 border-t border-mp-cream/25 w-full"
         >
           {LEGAL_LINKS.map((link, i) => (
             <span key={link.href} className="inline-flex items-center gap-2">
               <Link
                 href={link.href}
-                className="text-mp-cream hover:text-mp-orange-flame transition-colors"
+                className="inline-flex min-h-11 items-center text-mp-cream hover:text-mp-orange-flame transition-colors"
               >
                 {link.label}
               </Link>

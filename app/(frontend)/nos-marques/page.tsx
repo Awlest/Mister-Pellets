@@ -173,7 +173,7 @@ export default function NosMarquesHubPage() {
                 </p>
                 <Link
                   href={`/nos-marques/${a.brand.toLowerCase()}`}
-                  className="text-2xl font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
+                  className="inline-flex min-h-11 items-center text-2xl font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {a.brand}

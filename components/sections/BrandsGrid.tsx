@@ -84,7 +84,7 @@ export function BrandsGrid({
 
               <Link
                 href={`/nos-marques/${brand.slug}`}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors mt-auto pt-2"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors mt-auto"
               >
                 Voir les modèles {brand.name}
                 <ArrowRight className="h-4 w-4" />

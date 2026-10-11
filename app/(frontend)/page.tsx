@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, MapPin, ArrowRight, CalendarDays } from "lucide-react";
+import { Clock, MapPin, ArrowRight, CalendarDays, Droplet, Flame, Fuel, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -169,24 +169,24 @@ export default function HomePage() {
               Vous préférez parler à quelqu&apos;un ? Appelez le{" "}
               <a
                 href="tel:+3281138309"
-                className="font-semibold text-mp-green-deep underline underline-offset-4 hover:text-mp-orange-flame"
+                className="whitespace-nowrap font-semibold text-mp-green-deep underline underline-offset-4 hover:text-mp-orange-flame"
               >
                 081 13 83 09
               </a>
               .
             </p>
 
-            <div className="flex flex-wrap gap-x-5 gap-y-2 items-center justify-center text-sm font-medium text-mp-ink-soft">
+            <div className="flex flex-col gap-y-2 items-center justify-center text-sm font-medium text-mp-ink-soft sm:flex-row sm:flex-wrap sm:gap-x-5">
               <span className="inline-flex items-center gap-2">
                 <span className="font-bold text-mp-green-deep text-base">+800</span>
                 poêles vendus et installés depuis 2016
               </span>
-              <span className="text-mp-sand">·</span>
+              <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
               <span className="inline-flex items-center gap-2">
                 <Clock className="h-4 w-4 text-mp-green-mid" />
                 Pose en 1 jour
               </span>
-              <span className="text-mp-sand">·</span>
+              <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-mp-green-mid" />
                 50 km autour de Fernelmont
@@ -284,7 +284,9 @@ export default function HomePage() {
       </section>
 
       {/* TABLEAU COMPARATIF, option B (cf. doc V1.2 §H5) :
-          cards empilées sur mobile, format tableau classique sur sm+ */}
+          cards empilées sur mobile, format tableau classique sur sm+.
+          Icônes SVG (lucide) à la place des emoji, dont le rendu changeait
+          d'un téléphone à l'autre. */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
@@ -299,7 +301,7 @@ export default function HomePage() {
             const rows = [
               {
                 solution: "Poêle à pellets",
-                emoji: "🔥",
+                icon: Flame,
                 highlight: true,
                 investissement: "4 000 à 14 000 €",
                 coutAnnuel: "700 à 1 100 €",
@@ -307,21 +309,21 @@ export default function HomePage() {
               },
               {
                 solution: "Chaudière mazout",
-                emoji: "🛢️",
+                icon: Droplet,
                 investissement: "8 000 à 15 000 €",
                 coutAnnuel: "2 200 à 2 800 €",
                 autonomie: "Cuve 2 à 3 ans",
               },
               {
                 solution: "Chaudière gaz",
-                emoji: "⛽",
+                icon: Fuel,
                 investissement: "5 000 à 12 000 €",
                 coutAnnuel: "1 600 à 2 200 €",
                 autonomie: "Réseau continu",
               },
               {
                 solution: "Pompe à chaleur air-eau",
-                emoji: "💨",
+                icon: Wind,
                 investissement: "12 000 à 22 000 €",
                 coutAnnuel: "800 à 1 400 €",
                 autonomie: "Réseau continu",
@@ -342,7 +344,7 @@ export default function HomePage() {
                       }`}
                     >
                       <h3 className="flex items-center gap-2 text-lg font-semibold text-mp-green-deep mb-3">
-                        <span aria-hidden>{r.emoji}</span>
+                        <r.icon className="h-5 w-5 shrink-0 text-mp-orange-flame" aria-hidden />
                         {r.solution}
                       </h3>
                       <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
@@ -381,7 +383,7 @@ export default function HomePage() {
                           }
                         >
                           <td className="p-4 border-t border-mp-sand/30 text-mp-ink font-semibold">
-                            <span className="mr-1.5" aria-hidden>{r.emoji}</span>
+                            <r.icon className="mr-1.5 inline h-4 w-4 align-[-3px] text-mp-orange-flame" aria-hidden />
                             {r.solution}
                           </td>
                           <td className="p-4 border-t border-mp-sand/30 text-mp-ink">{r.investissement}</td>
@@ -544,7 +546,7 @@ export default function HomePage() {
               </Button>
               <a
                 href="tel:+3281138309"
-                className="inline-flex items-center gap-2 text-base font-semibold text-mp-green-deep transition-colors hover:text-mp-orange-flame"
+                className="inline-flex min-h-11 items-center gap-2 text-base font-semibold text-mp-green-deep transition-colors hover:text-mp-orange-flame"
               >
                 081 13 83 09
               </a>
@@ -564,22 +566,28 @@ export default function HomePage() {
             distance, délai, contraintes de conduit les plus courantes et modèles que nous y posons
             le plus souvent.
           </p>
-          <ul className="flex flex-wrap justify-center gap-2">
+          {/* Mobile : deux colonnes de villes (une ville par ligne sur 460 px
+              avant). Le libellé complet « Poêle à pellets {ville} » reste dans
+              le lien, masqué à l'écran sous 640 px. */}
+          <ul className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center">
             {CITIES.map((city) => (
               <li key={city.slug}>
                 <Link
                   href={`/poeles-pellets/${city.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-mp-sand/60 bg-mp-cream px-4 py-2 text-sm font-medium text-mp-ink transition-colors hover:border-mp-orange-flame hover:text-mp-orange-flame"
+                  className="flex min-h-11 items-center justify-between gap-2 rounded-full border border-mp-sand/60 bg-mp-cream px-4 text-sm font-medium text-mp-ink transition-colors hover:border-mp-orange-flame hover:text-mp-orange-ink sm:inline-flex sm:justify-start"
                 >
-                  Poêle à pellets {city.name}
+                  <span>
+                    <span className="sr-only sm:not-sr-only">Poêle à pellets </span>
+                    {city.name}
+                  </span>
                   <span className="text-xs text-mp-ink-soft">{city.distanceFromFernelmont} km</span>
                 </Link>
               </li>
             ))}
-            <li>
+            <li className="col-span-2 text-center">
               <Link
                 href="/zones-d-intervention"
-                className="inline-flex items-center gap-1 px-4 py-2 text-sm font-semibold text-mp-orange-ink"
+                className="inline-flex min-h-11 items-center gap-1 px-4 text-sm font-semibold text-mp-orange-ink"
               >
                 Toute la zone <ArrowRight className="h-3.5 w-3.5" />
               </Link>

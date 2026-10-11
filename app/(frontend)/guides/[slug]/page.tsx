@@ -175,9 +175,9 @@ export default async function GuidePage({ params }: Props) {
             <div className="mt-8 text-center">
               <Link
                 href="/guides"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="h-4 w-4" aria-hidden />
                 Tous les guides
               </Link>
             </div>

@@ -100,7 +100,7 @@ export function FaqExplorer() {
               <button
                 type="button"
                 onClick={() => setQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center h-8 w-8 rounded-full text-mp-ink-soft hover:bg-mp-beige transition-colors"
+                className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center justify-center h-11 w-11 rounded-full text-mp-ink-soft hover:bg-mp-beige transition-colors"
                 aria-label="Effacer la recherche"
               >
                 <X className="h-4 w-4" />
@@ -221,7 +221,7 @@ function CategoryPill({
       type="button"
       onClick={onClick}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap transition-colors shrink-0",
+        "inline-flex min-h-11 items-center gap-1.5 rounded-full px-4 text-sm font-semibold whitespace-nowrap transition-colors shrink-0 pointer-fine:min-h-9",
         active
           ? "bg-mp-orange-flame text-mp-green-darkest shadow-sm"
           : "bg-white border border-mp-sand text-mp-green-deep hover:bg-mp-orange-light",

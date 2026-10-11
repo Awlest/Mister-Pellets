@@ -93,17 +93,17 @@ export default function PrendreRendezVousPage() {
             </p>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-3 items-center justify-center text-sm text-mp-ink-soft">
+          <div className="mt-8 flex flex-col gap-2 items-center justify-center text-sm text-mp-ink-soft sm:flex-row sm:flex-wrap sm:gap-3">
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-4 w-4 text-mp-orange-flame" />
               Rue des Fagotis 3A, 5380 Fernelmont
             </span>
-            <span className="text-mp-sand">·</span>
+            <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
             <span className="inline-flex items-center gap-2">
               <Clock className="h-4 w-4 text-mp-orange-flame" />
               Lun-Ven 9h-18h, Sam 9h-13h
             </span>
-            <span className="text-mp-sand">·</span>
+            <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
             <span className="font-medium text-mp-orange-ink">Sur rendez-vous uniquement</span>
           </div>
         </div>

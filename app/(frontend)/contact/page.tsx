@@ -72,7 +72,7 @@ export default function ContactPage() {
                     href={MAPS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block mt-2 text-sm text-mp-orange-ink underline hover:no-underline"
+                    className="mt-1 inline-flex min-h-11 items-center text-sm text-mp-orange-ink underline hover:no-underline"
                   >
                     Itinéraire sur Google Maps
                   </a>

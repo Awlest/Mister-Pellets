@@ -472,7 +472,6 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
                       type="button"
                       onClick={() => { setActiveDay(d.date); setChosenStart(null); }}
                       aria-pressed={active}
-                      aria-label={`${humanDay(d.date)}, ${plural(d.times.length, "créneau libre", "créneaux libres")}`}
                       className={cn(
                         "flex min-h-[4.75rem] flex-col items-center justify-center rounded-xl border px-1 py-2 transition-colors",
                         // Anneau de focus à l'intérieur : le bandeau masque ce
@@ -483,10 +482,16 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
                           : "border-mp-sand bg-white text-mp-ink hover:border-mp-orange-warm",
                       )}
                     >
+                      {/* Nom accessible complet en texte masqué plutôt qu'en
+                          aria-label : l'audit signalait un nom différent du
+                          texte visible (« mar. 13 oct. »). */}
+                      <span className="sr-only">
+                        {`${humanDay(d.date)}, ${plural(d.times.length, "créneau libre", "créneaux libres")}`}
+                      </span>
                       <span
                         aria-hidden
                         className={cn(
-                          "text-[11px] font-semibold uppercase tracking-wide",
+                          "text-xs font-semibold uppercase tracking-wide",
                           active ? "text-mp-cream/85" : "text-mp-ink-soft",
                         )}
                       >

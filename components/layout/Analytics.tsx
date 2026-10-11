@@ -87,9 +87,10 @@ export function Analytics() {
         <div
           role="dialog"
           aria-label="Cookies de mesure d'audience"
-          // bottom-28 sur mobile : la barre de navigation flottante occupe le
-          // bas de l'écran, un bandeau posé à 0 la recouvrirait.
-          className="fixed inset-x-3 bottom-28 z-50 rounded-2xl border border-mp-sand bg-mp-cream p-5 shadow-lg lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
+          // Sur mobile, posé juste au-dessus de la barre de navigation
+          // flottante (--mp-bottomnav-offset, globals.css) et resserré : il
+          // couvrait le milieu du premier écran, boutons du héros compris.
+          className="fixed inset-x-3 bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-50 rounded-2xl border border-mp-sand bg-mp-cream p-4 shadow-lg sm:p-5 lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
         >
           <p className="text-sm leading-relaxed text-mp-ink">
             On mesure l&apos;audience du site et l&apos;efficacité de nos annonces Google, pour
@@ -100,18 +101,18 @@ export function Analytics() {
             </Link>
             .
           </p>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-4 sm:flex sm:flex-wrap">
             <button
               type="button"
               onClick={() => decide("granted")}
-              className="rounded-full bg-mp-green-deep px-5 py-2.5 text-sm font-semibold text-mp-cream transition-colors hover:bg-mp-orange-flame focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mp-orange-flame"
+              className="inline-flex min-h-11 items-center justify-center rounded-full bg-mp-green-deep px-5 text-sm font-semibold text-mp-cream transition-colors hover:bg-mp-green-mid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mp-orange-ink"
             >
               Accepter
             </button>
             <button
               type="button"
               onClick={() => decide("denied")}
-              className="rounded-full border border-mp-sand px-5 py-2.5 text-sm font-semibold text-mp-ink transition-colors hover:border-mp-green-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mp-orange-flame"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-mp-sand px-5 text-sm font-semibold text-mp-ink transition-colors hover:border-mp-green-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mp-orange-ink"
             >
               Refuser
             </button>
