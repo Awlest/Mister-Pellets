@@ -23,7 +23,7 @@ export function ProcessSteps({ title = "Comment ça marche", steps }: ProcessSte
           {steps.map((step, i) => (
             <li key={i} className="flex flex-col gap-4 relative">
               {/* Cercle numéroté */}
-              <div className="flex items-center justify-center h-14 w-14 rounded-full bg-mp-orange-flame text-white text-xl font-bold shadow-[0_8px_32px_rgba(242,138,32,0.32)]">
+              <div className="flex items-center justify-center h-14 w-14 rounded-full bg-mp-orange-flame text-mp-green-darkest text-xl font-bold shadow-[0_8px_32px_rgba(242,138,32,0.32)]">
                 {i + 1}
               </div>
 

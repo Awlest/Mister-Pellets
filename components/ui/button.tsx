@@ -8,13 +8,13 @@ const buttonVariants = cva(
   // sur mobile avec libellés longs) + ajout max-w-full + text-center pour
   // que les boutons multi-mots se replient proprement sans dépasser la
   // viewport sur 375 px.
-  "inline-flex items-center justify-center gap-2 max-w-full text-sm font-semibold text-center transition-all duration-200 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-flame focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 max-w-full text-sm font-semibold text-center transition-all duration-200 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-ink focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         // CTA principal, orange flame, le bouton "conversion"
         primary:
-          "bg-mp-orange-flame text-white shadow-md hover:bg-mp-orange-warm hover:shadow-lg hover:-translate-y-0.5",
+          "bg-mp-orange-flame text-mp-green-darkest shadow-md hover:bg-mp-orange-warm hover:shadow-lg hover:-translate-y-0.5",
         // CTA secondaire, outline vert deep
         outline:
           "bg-transparent text-mp-green-deep border-2 border-mp-green-deep hover:bg-mp-green-deep hover:text-white",

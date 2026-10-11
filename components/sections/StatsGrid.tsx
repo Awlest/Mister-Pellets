@@ -41,7 +41,7 @@ export function StatsGrid({ title, stats, variant = "light" }: StatsGridProps) {
               <span
                 className={cn(
                   "text-4xl md:text-6xl font-semibold tabular-nums leading-none",
-                  variant === "dark" ? "text-mp-orange-warm" : "text-mp-orange-flame"
+                  variant === "dark" ? "text-mp-orange-warm" : "text-mp-orange-display"
                 )}
                 style={{ fontFamily: "var(--font-display)" }}
               >

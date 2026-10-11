@@ -77,7 +77,7 @@ export default async function InstallationLocalePage({ params }: Props) {
         title={
           <>
             <span className="block">Poêle {brand.name}</span>
-            <span className="block text-mp-orange-flame mt-1">
+            <span className="block text-mp-orange-display mt-1">
               posé dans {province.longName}
             </span>
           </>

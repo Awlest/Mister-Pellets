@@ -71,7 +71,7 @@ export default function BlogHubPage() {
             <Link href={`/blog/${featured.slug}`} className="group block">
               <Card className="p-8 md:p-12 bg-mp-green-deep text-mp-cream text-center border-mp-green-deep hover:-translate-y-0.5 transition-all">
                 <div className="flex flex-wrap items-center justify-center gap-3 mb-5">
-                  <Badge variant="secondary" className="bg-mp-orange-flame text-mp-cream border-0">
+                  <Badge variant="secondary" className="bg-mp-orange-flame text-mp-green-darkest border-0">
                     <Sparkles className="h-3.5 w-3.5 mr-1" /> À la une
                   </Badge>
                   <Badge variant="secondary" className="bg-mp-cream/10 text-mp-cream border-mp-cream/20">
@@ -158,7 +158,7 @@ export default function BlogHubPage() {
                     {a.excerpt}
                   </p>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-flame group-hover:gap-3 transition-all">
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink group-hover:gap-3 transition-all">
                     Lire
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>

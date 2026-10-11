@@ -72,7 +72,7 @@ export default function ContactPage() {
                     href={MAPS_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block mt-2 text-sm text-mp-orange-flame underline hover:no-underline"
+                    className="inline-block mt-2 text-sm text-mp-orange-ink underline hover:no-underline"
                   >
                     Itinéraire sur Google Maps
                   </a>
@@ -88,14 +88,14 @@ export default function ContactPage() {
                     <li>Samedi : 9h - 13h</li>
                     <li className="text-mp-ink-soft">Dimanche : fermé</li>
                   </ul>
-                  <p className="mt-3 text-sm font-medium text-mp-orange-flame">
+                  <p className="mt-3 text-sm font-medium text-mp-orange-ink">
                     Showroom accessible uniquement sur rendez-vous.
                   </p>
                   <p className="mt-1 text-sm text-mp-ink-soft">
                     Appelez-nous ou{" "}
                     <a
                       href="/prendre-rendez-vous#reserver"
-                      className="text-mp-orange-flame underline hover:no-underline"
+                      className="text-mp-orange-ink underline hover:no-underline"
                     >
                       réservez votre créneau en ligne
                     </a>{" "}
@@ -112,7 +112,7 @@ export default function ContactPage() {
               </h2>
               <p className="text-mp-ink-soft mb-8">
                 Pour un devis personnalisé, prenez 60 secondes pour remplir le{" "}
-                <a href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline">
+                <a href="/demande-de-devis" className="text-mp-orange-ink underline hover:no-underline">
                   formulaire de devis
                 </a>{" "}
                , c'est plus précis. Ce formulaire de contact est pour les questions générales.

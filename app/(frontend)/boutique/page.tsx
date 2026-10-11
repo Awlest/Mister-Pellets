@@ -94,7 +94,7 @@ export default async function BoutiquePage() {
             <strong>Besoin d&apos;un modèle précis ?</strong> On distribue toute la gamme Edilkamin, EK63
             et Girolami, même les références qui ne sont pas encore listées ici. Pour un chiffrage
             complet (poêle, pose et TVA), passez par le{" "}
-            <Link href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline font-semibold">
+            <Link href="/demande-de-devis" className="text-mp-orange-ink underline hover:no-underline font-semibold">
               formulaire de devis
             </Link>
             .

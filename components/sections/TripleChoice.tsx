@@ -69,7 +69,7 @@ export function TripleChoice({
 
                 <Link
                   href={choice.cta.href}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-flame group-hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink group-hover:gap-3 transition-all"
                 >
                   {choice.cta.label}
                   <ArrowRight className="h-4 w-4" />

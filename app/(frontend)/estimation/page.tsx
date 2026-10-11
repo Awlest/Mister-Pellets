@@ -60,7 +60,7 @@ export default async function EstimationPage() {
                 Notre catalogue est en cours de mise à jour. Appelez-nous au 081 13 83 09 ou{" "}
                 <Link
                   href="/demande-de-devis"
-                  className="text-mp-orange-flame underline hover:no-underline"
+                  className="text-mp-orange-ink underline hover:no-underline"
                 >
                   décrivez-nous votre projet
                 </Link>
@@ -84,7 +84,7 @@ export default async function EstimationPage() {
               <strong className="text-mp-green-deep">Pas envie de choisir un modèle ?</strong>{" "}
               <Link
                 href="/demande-de-devis"
-                className="text-mp-orange-flame underline hover:no-underline"
+                className="text-mp-orange-ink underline hover:no-underline"
               >
                 Décrivez-nous votre projet en 6 questions
               </Link>{" "}

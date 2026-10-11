@@ -120,7 +120,7 @@ export default async function GuidePage({ params }: Props) {
                   <ul className="space-y-3">
                     {section.list.map((item, k) => (
                       <li key={k} className="flex items-start gap-3 text-mp-ink leading-relaxed">
-                        <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-flame font-bold text-xs shrink-0 mt-0.5">
+                        <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-ink font-bold text-xs shrink-0 mt-0.5">
                           {k + 1}
                         </span>
                         <span>{item}</span>

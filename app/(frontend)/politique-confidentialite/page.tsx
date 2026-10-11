@@ -46,7 +46,7 @@ export default function PolitiqueConfidentialitePage() {
               <li>
                 <strong>Données de navigation</strong> : pages visitées, durée de visite, type
                 d'appareil. Collectées uniquement après acceptation des cookies analytiques (cf.
-                <a href="/politique-cookies" className="text-mp-orange-flame underline hover:no-underline ml-1">politique cookies</a>).
+                <a href="/politique-cookies" className="text-mp-orange-ink underline hover:no-underline ml-1">politique cookies</a>).
               </li>
             </ul>
           </section>
@@ -107,7 +107,7 @@ export default function PolitiqueConfidentialitePage() {
             <p className="mt-3">
               En cas de désaccord, vous pouvez saisir l'Autorité de protection des données (APD)
               belge :{" "}
-              <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener noreferrer" className="text-mp-orange-flame underline hover:no-underline">
+              <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener noreferrer" className="text-mp-orange-ink underline hover:no-underline">
                 autoriteprotectiondonnees.be
               </a>
               .

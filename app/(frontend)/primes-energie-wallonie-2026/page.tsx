@@ -219,10 +219,10 @@ export default function PrimesPage() {
             <div>
               <h3 className="text-xl font-semibold text-mp-green-deep mb-3">Les conditions à remplir</h3>
               <ul className="space-y-2">
-                <li className="flex gap-3"><span className="text-mp-orange-flame">•</span> Une maison classée G ou F qui atteint au moins le label D après travaux, ou une maison classée E qui atteint au moins le label C.</li>
-                <li className="flex gap-3"><span className="text-mp-orange-flame">•</span> Un audit logement réalisé ou actualisé moins d&apos;un an avant la demande de prêt. C&apos;est lui qui fixe le label de départ et la liste des travaux.</li>
-                <li className="flex gap-3"><span className="text-mp-orange-flame">•</span> Pour le Rénopack, un droit réel sur le logement (propriétaire, usufruitier) et l&apos;engagement d&apos;y habiter au plus tard 24 mois après l&apos;octroi du prêt.</li>
-                <li className="flex gap-3"><span className="text-mp-orange-flame">•</span> Un emprunt plafonné à {LOAN_MAX.house} pour une maison unifamiliale et à {LOAN_MAX.apartment} par appartement.</li>
+                <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Une maison classée G ou F qui atteint au moins le label D après travaux, ou une maison classée E qui atteint au moins le label C.</li>
+                <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Un audit logement réalisé ou actualisé moins d&apos;un an avant la demande de prêt. C&apos;est lui qui fixe le label de départ et la liste des travaux.</li>
+                <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Pour le Rénopack, un droit réel sur le logement (propriétaire, usufruitier) et l&apos;engagement d&apos;y habiter au plus tard 24 mois après l&apos;octroi du prêt.</li>
+                <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Un emprunt plafonné à {LOAN_MAX.house} pour une maison unifamiliale et à {LOAN_MAX.apartment} par appartement.</li>
               </ul>
             </div>
 

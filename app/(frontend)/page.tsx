@@ -244,7 +244,7 @@ export default function HomePage() {
               <span className="block text-xs text-mp-ink-soft mb-3">
                 Méthode complète selon PEB et surface
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-flame group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink group-hover:gap-2.5 transition-all">
                 Voir le guide
                 <ArrowRight className="h-3 w-3" />
               </span>
@@ -259,7 +259,7 @@ export default function HomePage() {
               <span className="block text-xs text-mp-ink-soft mb-3">
                 Diffuser la chaleur sur 2-3 pièces
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-flame group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink group-hover:gap-2.5 transition-all">
                 Voir le guide
                 <ArrowRight className="h-3 w-3" />
               </span>
@@ -274,7 +274,7 @@ export default function HomePage() {
               <span className="block text-xs text-mp-ink-soft mb-3">
                 Passage mazout vers hydro pellets
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-flame group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink group-hover:gap-2.5 transition-all">
                 Voir le guide
                 <ArrowRight className="h-3 w-3" />
               </span>
@@ -520,9 +520,9 @@ export default function HomePage() {
               >
                 <h3 className="text-lg font-semibold text-mp-green-deep">{service.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-mp-ink-soft">{service.description}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-mp-orange-flame">
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-mp-green-deep">
                   {service.cta}
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-3.5 w-3.5 text-mp-orange-ink transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
             ))}
@@ -579,7 +579,7 @@ export default function HomePage() {
             <li>
               <Link
                 href="/zones-d-intervention"
-                className="inline-flex items-center gap-1 px-4 py-2 text-sm font-semibold text-mp-orange-flame"
+                className="inline-flex items-center gap-1 px-4 py-2 text-sm font-semibold text-mp-orange-ink"
               >
                 Toute la zone <ArrowRight className="h-3.5 w-3.5" />
               </Link>

@@ -141,7 +141,7 @@ export function FaqExplorer() {
             <button
               type="button"
               onClick={reset}
-              className="text-xs font-semibold text-mp-orange-flame underline hover:no-underline"
+              className="text-xs font-semibold text-mp-orange-ink underline hover:no-underline"
             >
               Réinitialiser
             </button>
@@ -158,7 +158,7 @@ export function FaqExplorer() {
               Essayez avec un autre mot, ou contactez-nous directement au{" "}
               <a
                 href="tel:+3281138309"
-                className="text-mp-orange-flame underline hover:no-underline font-semibold"
+                className="text-mp-orange-ink underline hover:no-underline font-semibold"
               >
                 081 13 83 09
               </a>
@@ -170,7 +170,7 @@ export function FaqExplorer() {
           <div className="space-y-8">
             {Array.from(groupedByCategory.entries()).map(([cat, items]) => (
               <div key={cat}>
-                <h2 className="text-xs font-bold uppercase tracking-wider text-mp-orange-flame mb-3">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-mp-orange-ink mb-3">
                   {FAQ_CATEGORIES.find((c) => c.value === cat)?.label} ({items.length})
                 </h2>
                 <ul className="space-y-2">
@@ -223,12 +223,12 @@ function CategoryPill({
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap transition-colors shrink-0",
         active
-          ? "bg-mp-orange-flame text-white shadow-sm"
+          ? "bg-mp-orange-flame text-mp-green-darkest shadow-sm"
           : "bg-white border border-mp-sand text-mp-green-deep hover:bg-mp-orange-light",
       )}
     >
       {label}
-      <span className={cn("text-xs", active ? "text-white/85" : "text-mp-ink-soft")}>
+      <span className={cn("text-xs", active ? "text-mp-green-darkest" : "text-mp-ink-soft")}>
         {count}
       </span>
     </button>

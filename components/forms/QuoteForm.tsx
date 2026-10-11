@@ -493,7 +493,7 @@ function Step6({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="postalCode" className="block text-sm font-medium text-mp-ink mb-2">
-              Code postal <span className="text-mp-orange-flame">*</span>
+              Code postal <span className="text-mp-orange-ink">*</span>
             </label>
             <input
               id="postalCode"
@@ -515,7 +515,7 @@ function Step6({
           </div>
           <div>
             <label htmlFor="delay" className="block text-sm font-medium text-mp-ink mb-2">
-              Délai souhaité <span className="text-mp-orange-flame">*</span>
+              Délai souhaité <span className="text-mp-orange-ink">*</span>
             </label>
             <select
               id="delay"
@@ -535,7 +535,7 @@ function Step6({
 
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-mp-ink mb-2">
-            Nom complet <span className="text-mp-orange-flame">*</span>
+            Nom complet <span className="text-mp-orange-ink">*</span>
           </label>
           <input
             id="name"
@@ -557,7 +557,7 @@ function Step6({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-mp-ink mb-2">
-              Email <span className="text-mp-orange-flame">*</span>
+              Email <span className="text-mp-orange-ink">*</span>
             </label>
             <input
               id="email"
@@ -576,7 +576,7 @@ function Step6({
           </div>
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-mp-ink mb-2">
-              Téléphone <span className="text-mp-orange-flame">*</span>
+              Téléphone <span className="text-mp-orange-ink">*</span>
               <span className="text-xs text-mp-ink-soft font-normal ml-1">(BE uniquement)</span>
             </label>
             <input
@@ -621,7 +621,7 @@ function Step6({
           />
           <span>
             J'accepte que mes données soient utilisées pour me recontacter, conformément à la{" "}
-            <a href="/politique-confidentialite" className="text-mp-orange-flame underline hover:no-underline">
+            <a href="/politique-confidentialite" className="text-mp-orange-ink underline hover:no-underline">
               politique de confidentialité
             </a>
             .

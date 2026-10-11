@@ -104,7 +104,7 @@ export default function PrendreRendezVousPage() {
               Lun-Ven 9h-18h, Sam 9h-13h
             </span>
             <span className="text-mp-sand">·</span>
-            <span className="font-medium text-mp-orange-flame">Sur rendez-vous uniquement</span>
+            <span className="font-medium text-mp-orange-ink">Sur rendez-vous uniquement</span>
           </div>
         </div>
       </section>
@@ -163,7 +163,7 @@ export default function PrendreRendezVousPage() {
                     <div className="flex items-center justify-center h-11 w-11 rounded-xl bg-mp-orange-light text-mp-orange-flame">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <span className="text-xs font-semibold text-mp-orange-flame uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-mp-orange-ink uppercase tracking-wider">
                       {service.priceLabel}
                     </span>
                   </div>

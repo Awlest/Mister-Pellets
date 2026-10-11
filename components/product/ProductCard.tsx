@@ -194,7 +194,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
 
         {/* Contenu */}
         <div className="flex flex-col gap-2 p-5 flex-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-mp-orange-flame">
+          <span className="text-xs font-semibold uppercase tracking-wider text-mp-orange-ink">
             {brand}
           </span>
 
@@ -243,7 +243,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
                 <span className="text-xs text-mp-ink-soft block">
                   À partir de
                   {badge ? (
-                    <span className="ml-2 rounded-full bg-mp-orange-flame px-2 py-0.5 text-[10px] font-semibold text-white">
+                    <span className="ml-2 rounded-full bg-mp-orange-flame px-2 py-0.5 text-xs font-semibold text-mp-green-darkest">
                       {badge}
                     </span>
                   ) : null}
@@ -268,7 +268,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
             ) : (
               <span className="text-sm text-mp-ink-soft italic">Sur devis</span>
             )}
-            <span className="text-xs font-semibold text-mp-orange-flame opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className="text-xs font-semibold text-mp-orange-ink opacity-0 group-hover:opacity-100 transition-opacity">
               Voir →
             </span>
           </div>

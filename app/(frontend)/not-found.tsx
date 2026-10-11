@@ -24,7 +24,7 @@ export default function NotFound() {
             height={120}
             className="mx-auto mb-6 h-24 w-24 opacity-60"
           />
-          <p className="mp-measure mx-auto text-sm uppercase tracking-wider font-semibold text-mp-orange-flame mb-3">
+          <p className="mp-measure mx-auto text-sm uppercase tracking-wider font-semibold text-mp-orange-ink mb-3">
             Erreur 404
           </p>
           <h1 className="mp-measure mx-auto text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4 leading-tight">

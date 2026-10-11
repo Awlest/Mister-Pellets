@@ -181,7 +181,7 @@ export function ProductVariantPanel({
               : "Configuration choisie"
             : "Prix du poêle seul, TVA comprise"}
           {bonusActive ? (
-            <span className="ml-2 rounded-full bg-mp-orange-flame px-2 py-0.5 text-[10px] font-semibold text-white">
+            <span className="ml-2 rounded-full bg-mp-orange-flame px-2 py-0.5 text-xs font-semibold text-mp-green-darkest">
               {BONUS.badge}
             </span>
           ) : null}

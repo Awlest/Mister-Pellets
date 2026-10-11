@@ -139,7 +139,7 @@ function FilterPill({ active, onClick, children }: { active: boolean; onClick: (
       className={cn(
         "inline-flex items-center gap-1 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors",
         active
-          ? "bg-mp-orange-flame text-white shadow-sm"
+          ? "bg-mp-orange-flame text-mp-green-darkest shadow-sm"
           : "bg-mp-cream border border-mp-sand text-mp-green-deep hover:bg-mp-orange-light hover:text-mp-ink",
       )}
     >
@@ -270,7 +270,7 @@ export function BoutiqueExplorer({
           <button
             type="button"
             onClick={reset}
-            className="inline-flex items-center text-xs font-semibold text-mp-orange-flame underline hover:no-underline"
+            className="inline-flex items-center text-xs font-semibold text-mp-orange-ink underline hover:no-underline"
           >
             Réinitialiser les filtres ({activeCount} actif{activeCount > 1 ? "s" : ""})
           </button>
@@ -322,7 +322,7 @@ export function BoutiqueExplorer({
           </p>
           <p className="text-sm text-mp-ink-soft">
             On couvre toute la gamme Edilkamin, EK63 et Girolami.{" "}
-            <Link href="/demande-de-devis" className="text-mp-orange-flame underline hover:no-underline">
+            <Link href="/demande-de-devis" className="text-mp-orange-ink underline hover:no-underline">
               Demandez un devis personnalisé
             </Link>
             , on vous propose 2 ou 3 options adaptées.

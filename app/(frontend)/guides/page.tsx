@@ -59,7 +59,7 @@ export default function GuidesHubPage() {
                     {guide.excerpt}
                   </p>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-flame group-hover:gap-3 transition-all">
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink group-hover:gap-3 transition-all">
                     Lire le guide
                     <ArrowRight className="h-4 w-4" />
                   </span>
@@ -73,7 +73,7 @@ export default function GuidesHubPage() {
               <BookOpen className="h-8 w-8 text-mp-orange-flame mx-auto mb-3" />
               <p className="text-sm text-mp-ink-soft">
                 Plus d'articles à venir dans le{" "}
-                <Link href="/blog" className="text-mp-orange-flame underline hover:no-underline font-semibold">
+                <Link href="/blog" className="text-mp-orange-ink underline hover:no-underline font-semibold">
                   blog
                 </Link>{" "}
                 : actualités, comparatifs, retours d'installation.

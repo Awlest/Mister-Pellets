@@ -246,7 +246,7 @@ export default async function ProductPage({ params }: Props) {
                   href={product.technicalSheetUrl}
                   target="_blank"
                   rel="noopener"
-                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-flame hover:text-mp-green-deep transition-colors underline-offset-4 hover:underline"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink hover:text-mp-green-deep transition-colors underline-offset-4 hover:underline"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +274,7 @@ export default async function ProductPage({ params }: Props) {
               <div className="flex items-center gap-2 mb-3">
                 <Link
                   href={`/nos-marques/${brandSlug}`}
-                  className="text-xs font-semibold uppercase tracking-wider text-mp-orange-flame hover:underline"
+                  className="text-xs font-semibold uppercase tracking-wider text-mp-orange-ink hover:underline"
                 >
                   {product.brand}
                 </Link>

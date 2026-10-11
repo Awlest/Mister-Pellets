@@ -283,7 +283,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
 
         <p className="text-sm text-mp-ink-soft mt-6">
           Un imprévu ? Appelez le{" "}
-          <a href={phoneHref} className="text-mp-orange-flame underline hover:no-underline font-semibold">
+          <a href={phoneHref} className="text-mp-orange-ink underline hover:no-underline font-semibold">
             {phoneDisplay}
           </a>
           .
@@ -421,7 +421,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
         {!loadingSlots && days && days.length === 0 && (
           <p className="text-sm text-mp-ink-soft">
             Aucun créneau libre dans les 30 prochains jours. Appelez le{" "}
-            <a href={phoneHref} className="text-mp-orange-flame underline hover:no-underline font-semibold">
+            <a href={phoneHref} className="text-mp-orange-ink underline hover:no-underline font-semibold">
               {phoneDisplay}
             </a>
             , on trouvera une solution.
@@ -526,7 +526,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
                         "min-h-11 rounded-lg border px-2 py-2 text-sm tabular-nums transition-colors",
                         "focus:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-flame",
                         chosenStart === t.start
-                          ? "border-mp-orange-flame bg-mp-orange-flame text-white font-semibold"
+                          ? "border-mp-orange-flame bg-mp-orange-flame text-mp-green-darkest font-semibold"
                           : "border-mp-sand bg-white text-mp-ink hover:border-mp-orange-warm",
                       )}
                     >
@@ -550,7 +550,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
               <label htmlFor="bk-name" className="block text-sm font-medium mb-1.5">
-                Nom complet <span className="text-mp-orange-flame">*</span>
+                Nom complet <span className="text-mp-orange-ink">*</span>
               </label>
               <input
                 id="bk-name" required value={form.name} autoComplete="name"
@@ -560,7 +560,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
             </div>
             <div>
               <label htmlFor="bk-email" className="block text-sm font-medium mb-1.5">
-                Email <span className="text-mp-orange-flame">*</span>
+                Email <span className="text-mp-orange-ink">*</span>
               </label>
               <input
                 id="bk-email" type="email" required value={form.email} autoComplete="email"
@@ -581,7 +581,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
             {needsAddress && (
               <div className="sm:col-span-2">
                 <label htmlFor="bk-address" className="block text-sm font-medium mb-1.5">
-                  Adresse de la visite <span className="text-mp-orange-flame">*</span>
+                  Adresse de la visite <span className="text-mp-orange-ink">*</span>
                 </label>
                 <input
                   id="bk-address" required value={form.address} autoComplete="street-address"

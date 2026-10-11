@@ -286,7 +286,7 @@ function EstimateForm({
               <span>
                 On vous rappelle sous 48 h ouvrées pour caler la{" "}
                 <strong>visite technique</strong> — vous pouvez aussi{" "}
-                <Link href="/prendre-rendez-vous#reserver" className="text-mp-orange-flame underline underline-offset-2 hover:no-underline">
+                <Link href="/prendre-rendez-vous#reserver" className="text-mp-orange-ink underline underline-offset-2 hover:no-underline">
                   choisir votre créneau tout de suite
                 </Link>
                 .
@@ -692,7 +692,7 @@ function EstimateForm({
                           <span className="block text-sm text-mp-ink-soft">{OPTIONS[k].desc}</span>
                         </span>
                         <span className="flex shrink-0 items-center gap-3">
-                          <span className="text-sm font-medium text-mp-orange-flame">
+                          <span className="text-sm font-medium text-mp-orange-ink">
                             + {eur(ttc)}
                           </span>
                           <span
@@ -803,7 +803,7 @@ function EstimateForm({
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label htmlFor="est-cp" className="mb-2 block text-sm font-medium text-mp-ink">
-                      Code postal <span className="text-mp-orange-flame">*</span>
+                      Code postal <span className="text-mp-orange-ink">*</span>
                     </label>
                     <input
                       id="est-cp"
@@ -822,7 +822,7 @@ function EstimateForm({
                   </div>
                   <div>
                     <label htmlFor="est-delay" className="mb-2 block text-sm font-medium text-mp-ink">
-                      Délai souhaité <span className="text-mp-orange-flame">*</span>
+                      Délai souhaité <span className="text-mp-orange-ink">*</span>
                     </label>
                     <select
                       id="est-delay"
@@ -845,7 +845,7 @@ function EstimateForm({
                 </div>
                 <div>
                   <label htmlFor="est-name" className="mb-2 block text-sm font-medium text-mp-ink">
-                    Nom complet <span className="text-mp-orange-flame">*</span>
+                    Nom complet <span className="text-mp-orange-ink">*</span>
                   </label>
                   <input
                     id="est-name"
@@ -862,7 +862,7 @@ function EstimateForm({
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label htmlFor="est-email" className="mb-2 block text-sm font-medium text-mp-ink">
-                      Email <span className="text-mp-orange-flame">*</span>
+                      Email <span className="text-mp-orange-ink">*</span>
                     </label>
                     <input
                       id="est-email"
@@ -877,7 +877,7 @@ function EstimateForm({
                   </div>
                   <div>
                     <label htmlFor="est-phone" className="mb-2 block text-sm font-medium text-mp-ink">
-                      Téléphone <span className="text-mp-orange-flame">*</span>
+                      Téléphone <span className="text-mp-orange-ink">*</span>
                       <span className="ml-1 text-xs font-normal text-mp-ink-soft">(BE uniquement)</span>
                     </label>
                     <input
@@ -922,7 +922,7 @@ function EstimateForm({
                     conformément à la{" "}
                     <a
                       href="/politique-confidentialite"
-                      className="text-mp-orange-flame underline hover:no-underline"
+                      className="text-mp-orange-ink underline hover:no-underline"
                     >
                       politique de confidentialité
                     </a>

@@ -12,7 +12,7 @@ export default function FrontendLayout({
         * clavier, permet aux utilisateurs screen reader de sauter la navigation. */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-mp-orange-flame focus:text-white focus:px-4 focus:py-2 focus:rounded-full focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-mp-cream"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-mp-orange-flame focus:text-mp-green-darkest focus:px-4 focus:py-2 focus:rounded-full focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-mp-cream"
       >
         Aller au contenu principal
       </a>

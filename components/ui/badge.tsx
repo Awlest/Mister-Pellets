@@ -8,12 +8,12 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: "bg-mp-beige-warm text-mp-ink",
-        primary: "bg-mp-orange-flame text-white",
+        primary: "bg-mp-orange-flame text-mp-green-darkest",
         secondary: "bg-mp-green-deep text-white",
         outline: "bg-transparent border border-mp-green-deep text-mp-green-deep",
-        success: "bg-mp-green-light text-white",
+        success: "bg-mp-green-mid text-white",
         warning: "bg-mp-orange-warm text-mp-ink",
-        eyebrow: "bg-mp-cream border border-mp-sand text-mp-ink-soft uppercase tracking-wider text-[10px]",
+        eyebrow: "bg-mp-cream border border-mp-sand text-mp-ink-soft uppercase tracking-wider text-xs text-balance text-center leading-snug",
       },
     },
     defaultVariants: {

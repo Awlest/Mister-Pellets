@@ -88,7 +88,7 @@ export function ContactForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-mp-ink mb-2">
-            Nom complet <span className="text-mp-orange-flame">*</span>
+            Nom complet <span className="text-mp-orange-ink">*</span>
           </label>
           <input
             id="name"
@@ -103,7 +103,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-mp-ink mb-2">
-            Email <span className="text-mp-orange-flame">*</span>
+            Email <span className="text-mp-orange-ink">*</span>
           </label>
           <input
             id="email"
@@ -135,7 +135,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="subject" className="block text-sm font-medium text-mp-ink mb-2">
-            Sujet <span className="text-mp-orange-flame">*</span>
+            Sujet <span className="text-mp-orange-ink">*</span>
           </label>
           <select
             id="subject"
@@ -159,7 +159,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-mp-ink mb-2">
-          Message <span className="text-mp-orange-flame">*</span>
+          Message <span className="text-mp-orange-ink">*</span>
         </label>
         <textarea
           id="message"
@@ -183,7 +183,7 @@ export function ContactForm() {
         />
         <span>
           J'accepte que mes données soient utilisées pour répondre à ma demande, conformément à la{" "}
-          <a href="/politique-confidentialite" className="text-mp-orange-flame underline hover:no-underline">
+          <a href="/politique-confidentialite" className="text-mp-orange-ink underline hover:no-underline">
             politique de confidentialité
           </a>
           .

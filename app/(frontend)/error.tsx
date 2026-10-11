@@ -23,7 +23,7 @@ export default function FrontendError({
   return (
     <section className="bg-mp-cream mp-band">
       <div className="mp-shell text-center">
-        <p className="mp-measure mx-auto text-sm uppercase tracking-wider font-semibold text-mp-orange-flame mb-3">
+        <p className="mp-measure mx-auto text-sm uppercase tracking-wider font-semibold text-mp-orange-ink mb-3">
           Quelque chose s&apos;est mal passé
         </p>
         <h1 className="mp-measure mx-auto text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4 leading-tight">

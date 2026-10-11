@@ -61,7 +61,7 @@ export function BrandsGrid({
                   >
                     {brand.name}
                   </h3>
-                  <p className="text-sm font-medium text-mp-orange-flame">
+                  <p className="text-sm font-medium text-mp-orange-ink">
                     {brand.tagline}
                   </p>
                 </div>

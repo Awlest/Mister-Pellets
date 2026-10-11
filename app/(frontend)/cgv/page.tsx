@@ -121,7 +121,7 @@ export default function CGVPage() {
               Pour exercer ce droit, écrivez-nous à{" "}
               <a
                 href="mailto:info@awlest.com"
-                className="text-mp-orange-flame underline hover:no-underline"
+                className="text-mp-orange-ink underline hover:no-underline"
               >
                 info@awlest.com
               </a>{" "}
@@ -162,7 +162,7 @@ export default function CGVPage() {
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">12. Données personnelles et litiges</h2>
             <p>
               Le traitement des données est détaillé dans notre{" "}
-              <a href="/politique-confidentialite" className="text-mp-orange-flame underline hover:no-underline">
+              <a href="/politique-confidentialite" className="text-mp-orange-ink underline hover:no-underline">
                 politique de confidentialité
               </a>
               . En cas de litige, une solution amiable sera recherchée en priorité. À défaut, les

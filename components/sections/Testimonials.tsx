@@ -107,7 +107,7 @@ export function Testimonials({
                 href={GOOGLE_REVIEWS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-mp-orange-flame underline hover:no-underline"
+                className="text-mp-orange-ink underline hover:no-underline"
               >
                 Lire les avis
               </a>
@@ -149,7 +149,7 @@ export function Testimonials({
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-mp-orange-flame underline hover:no-underline"
+            className="text-mp-orange-ink underline hover:no-underline"
           >
             Voir les {GOOGLE_REVIEW_COUNT} avis sur Google
           </a>

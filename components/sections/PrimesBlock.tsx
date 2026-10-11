@@ -91,7 +91,7 @@ export function PrimesBlock({
               }`}
             >
               <span
-                className="text-4xl md:text-5xl font-semibold text-mp-orange-flame mb-2 tabular-nums"
+                className="text-4xl md:text-5xl font-semibold text-mp-orange-display mb-2 tabular-nums"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {aide.amount}

@@ -95,7 +95,7 @@ export default async function BrandPage({ params }: Props) {
         title={
           <>
             <span className="block">{brand.name}</span>
-            <span className="block text-mp-orange-flame mt-1">{brand.tagline}</span>
+            <span className="block text-mp-orange-display mt-1">{brand.tagline}</span>
           </>
         }
         description={brand.heroSubtitle ?? brand.intro}
@@ -217,7 +217,7 @@ export default async function BrandPage({ params }: Props) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {brand.specialties.map((spec, i) => (
                 <Card key={i} className="p-5 flex items-start gap-3">
-                  <span className="flex items-center justify-center h-8 w-8 rounded-full bg-mp-orange-light text-mp-orange-flame font-bold text-sm shrink-0">
+                  <span className="flex items-center justify-center h-8 w-8 rounded-full bg-mp-orange-light text-mp-orange-ink font-bold text-sm shrink-0">
                     {i + 1}
                   </span>
                   <p className="text-mp-ink leading-relaxed pt-1">{spec}</p>
@@ -348,7 +348,7 @@ export default async function BrandPage({ params }: Props) {
                     >
                       {b.name}
                     </h3>
-                    <p className="text-sm font-medium text-mp-orange-flame">
+                    <p className="text-sm font-medium text-mp-orange-ink">
                       {b.tagline}
                     </p>
                     <p className="text-mp-ink-soft leading-relaxed flex-1">

@@ -90,11 +90,11 @@ export default function MentionsLegalesPage() {
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Données personnelles</h2>
             <p>
               Le traitement des données personnelles est détaillé dans notre{" "}
-              <a href="/politique-confidentialite" className="text-mp-orange-flame underline hover:no-underline">
+              <a href="/politique-confidentialite" className="text-mp-orange-ink underline hover:no-underline">
                 politique de confidentialité
               </a>{" "}
               et notre{" "}
-              <a href="/politique-cookies" className="text-mp-orange-flame underline hover:no-underline">
+              <a href="/politique-cookies" className="text-mp-orange-ink underline hover:no-underline">
                 politique cookies
               </a>
               .

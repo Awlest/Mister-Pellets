@@ -109,7 +109,7 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
           <ol className="space-y-3 my-6">
             {section.list.items.map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-mp-ink leading-relaxed">
-                <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-flame font-bold text-xs shrink-0 mt-0.5">
+                <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-ink font-bold text-xs shrink-0 mt-0.5">
                   {i + 1}
                 </span>
                 <span>{item}</span>
@@ -268,7 +268,7 @@ export default async function ArticlePage({ params }: Props) {
         <div className="mp-shell">
           <Card className="mp-measure p-6 md:p-8 bg-mp-cream border-mp-orange-flame/30">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-mp-orange-flame">
+              <span className="text-xs font-bold uppercase tracking-wider text-mp-orange-ink">
                 Réponse directe
               </span>
             </div>
@@ -366,7 +366,7 @@ export default async function ArticlePage({ params }: Props) {
                     <p className="text-sm text-mp-ink-soft leading-relaxed flex-1 mb-4 line-clamp-3">
                       {a.excerpt}
                     </p>
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-mp-orange-flame group-hover:gap-2 transition-all">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-mp-orange-ink group-hover:gap-2 transition-all">
                       Lire <ArrowRight className="h-3.5 w-3.5" />
                     </span>
                   </Card>

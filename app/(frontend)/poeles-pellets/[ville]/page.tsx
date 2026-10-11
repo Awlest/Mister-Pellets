@@ -164,7 +164,7 @@ export default async function CityPage({ params }: Props) {
               </h2>
               <p className="text-lg text-mp-ink-soft leading-relaxed">
                 Sélection éditoriale en fonction de l'habitat typique de la zone. Catalogue complet
-                sur la <Link href="/boutique" className="text-mp-orange-flame underline hover:no-underline">boutique</Link>.
+                sur la <Link href="/boutique" className="text-mp-orange-ink underline hover:no-underline">boutique</Link>.
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
