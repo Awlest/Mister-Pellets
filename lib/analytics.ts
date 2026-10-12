@@ -67,6 +67,8 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: GtagArgs) => void;
+    /** gtag.js déjà lancé par l'amorce du <head> (visite issue d'une annonce). */
+    __gtagEarly?: boolean;
   }
 }
 
@@ -128,6 +130,13 @@ export function writeConsent(choice: ConsentChoice): void {
  * Il pose aussi `data-consent` sur `<html>` quand un choix est déjà
  * enregistré : le bandeau cookies, rendu dans le HTML, est alors masqué par
  * CSS avant le premier affichage (components/layout/Analytics.tsx).
+ *
+ * Pour une visite issue d'une annonce ou d'une campagne (gclid, utm_…), il
+ * lance aussi gtag.js tout de suite et le signale par `window.__gtagEarly`.
+ * Sinon la bibliothèque n'arrive qu'après le chargement de la page
+ * (Analytics.tsx) : un clic sur un lien interne avant son arrivée effacerait
+ * ces paramètres de l'adresse, et la conversion ne serait plus attribuée à
+ * l'annonce.
  */
 export const GA_BOOTSTRAP = `
 window.dataLayer = window.dataLayer || [];
@@ -157,4 +166,11 @@ try {
 gtag('js', new Date());
 gtag('config', '${GA_MEASUREMENT_ID}');
 gtag('config', '${ADS_ID}');
+if (/[?&](gclid|gbraid|wbraid|dclid|gad_source|srsltid|utm_[a-z]+)=/i.test(location.search)) {
+  window.__gtagEarly = true;
+  var gs = document.createElement('script');
+  gs.async = true;
+  gs.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}';
+  document.head.appendChild(gs);
+}
 `;

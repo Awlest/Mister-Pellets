@@ -73,15 +73,32 @@ export function Analytics() {
     listeners.forEach((l) => l());
   };
 
+  // Visite issue d'une annonce : l'amorce du <head> a déjà lancé gtag.js
+  // (lib/analytics.ts), il ne faut pas le charger une seconde fois. Lu au
+  // rendu : faux côté serveur, et <Script lazyOnload> ne produit aucun HTML,
+  // donc rien ne diffère à l'hydratation.
+  const gtagEarly = typeof window !== "undefined" && window.__gtagEarly === true;
+
   return (
     <>
       {/* L'amorce du consentement est rendue en <head> par app/layout.tsx :
-        * elle doit s'exécuter avant cette bibliothèque, pas après. */}
-      <Script
-        id="ga-lib"
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-      />
+        * elle doit s'exécuter avant cette bibliothèque, pas après.
+        * lazyOnload et non afterInteractive : avec afterInteractive, Next
+        * précharge gtag.js dans le <head>, en priorité haute, et ses 176 Ko
+        * partaient en même temps que la feuille de style et les polices,
+        * suivis du script Google Ads (195 Ko) qu'il charge à son tour.
+        * Lighthouse les comptait avant le premier affichage (LCP mobile de
+        * 4,1 à 6,7 s, mesuré le 12/10/2026). Chargé quand le navigateur est
+        * inactif, après la page : les appels faits avant son arrivée
+        * (consentement, configuration, conversions) attendent dans
+        * dataLayer, puisque l'amorce définit gtag() d'emblée. */}
+      {!gtagEarly && (
+        <Script
+          id="ga-lib"
+          strategy="lazyOnload"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        />
+      )}
 
       {/* Rendu dès le HTML (« loading » = rendu serveur et hydratation) :
         * avant, le bandeau n'apparaissait qu'après l'exécution du JavaScript,
