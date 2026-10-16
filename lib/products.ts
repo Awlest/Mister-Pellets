@@ -510,23 +510,20 @@ export async function getProductBySlug(slug: string): Promise<ProductDemo | unde
 }
 
 /**
- * Retourne tous les slugs des produits VISIBLES dans la boutique. Utilisé par
- * sitemap.ts (on ne référence pas les produits masqués dans Google) et
- * generateStaticParams() de la page produit (pas besoin de pré-générer les
- * pages masquées au build, elles seront rendues à la demande si quelqu'un
- * arrive par URL directe).
+ * Retourne les slugs de TOUS les produits, masqués compris. Sert à
+ * generateStaticParams() de la page produit : la route refuse tout slug hors
+ * de cette liste (dynamicParams = false), une fiche oubliée répondrait 404.
+ *
+ * Pas de `limit` : avec `pagination: false`, Payload renvoie tout, alors
+ * qu'une limite explicite s'appliquerait quand même (Payload 3.84).
  */
 export async function getAllProductSlugs(): Promise<string[]> {
   const payload = await getPayloadClient();
   const result = await payload.find({
     collection: "products",
-    limit: 200,
     pagination: false,
     overrideAccess: false,
     select: { slug: true },
-    where: {
-      hiddenFromBoutique: { not_equals: true },
-    },
   });
 
   return result.docs.map((d) => (d as unknown as PayloadProduct).slug);

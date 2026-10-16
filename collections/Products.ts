@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { revalidatePath } from "next/cache";
+import { triggerDeployHook } from "../lib/deploy-hook";
 
 /**
  * Slugifie une chaîne pour générer des URLs propres :
@@ -48,7 +49,7 @@ export const Products: CollectionConfig = {
       },
     ],
     afterChange: [
-      ({ doc, previousDoc }) => {
+      async ({ doc, previousDoc, operation }) => {
         // Revalidation instantanée des pages Next.js cachées dès qu'un produit
         // est créé/modifié dans l'admin. Sans ce hook, les pages SSG du CDN
         // Vercel restent figées jusqu'au prochain build, et l'éditeur croit
@@ -75,11 +76,20 @@ export const Products: CollectionConfig = {
           // En dev local le revalidatePath peut échouer ; ne bloque pas le save
           console.warn("[products afterChange] revalidate failed:", err);
         }
+        // Les pages produit sont toutes construites au build et la route
+        // refuse les autres slugs : une fiche créée ou un slug changé n'est en
+        // ligne qu'après un nouveau build (lib/deploy-hook.ts). Une simple
+        // modification, elle, passe par les revalidatePath ci-dessus.
+        if (operation === "create") {
+          await triggerDeployHook(`produit créé : ${doc?.slug}`);
+        } else if (previousDoc?.slug !== doc?.slug) {
+          await triggerDeployHook(`slug changé : ${previousDoc?.slug} devient ${doc?.slug}`);
+        }
         return doc;
       },
     ],
     afterDelete: [
-      ({ doc }) => {
+      async ({ doc }) => {
         // Idem au delete : revalide pour que la page produit disparaisse
         // de la boutique et que l'URL retourne 404 immédiatement.
         try {
@@ -90,6 +100,9 @@ export const Products: CollectionConfig = {
         } catch (err) {
           console.warn("[products afterDelete] revalidate failed:", err);
         }
+        // Le slug doit aussi quitter la liste des pages construites : le
+        // build suivant lui donne la page 404 statique du site.
+        await triggerDeployHook(`produit supprimé : ${doc?.slug}`);
         return doc;
       },
     ],
@@ -150,7 +163,11 @@ export const Products: CollectionConfig = {
           type: "text",
           required: true,
           unique: true,
-          admin: { width: "67%", description: "URL : /produit/{slug}/" },
+          admin: {
+            width: "67%",
+            description:
+              "URL : /produit/{slug}/. Une fiche créée, ou un slug modifié, n'est en ligne qu'après le build relancé à l'enregistrement (quelques minutes).",
+          },
         },
       ],
     },

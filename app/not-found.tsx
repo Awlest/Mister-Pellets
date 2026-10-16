@@ -6,8 +6,9 @@ export { metadata } from "./(frontend)/not-found";
 /**
  * 404 des adresses qu'aucune route ne sert (/page-inexistante, /a/b/c) et des
  * slugs inconnus des routes fermées par `dynamicParams = false` (/guides,
- * /blog, /nos-marques, /poeles-pellets-*). Next y servait sa page anglaise
- * générique, sans en-tête ni barre du bas (constaté le 11/10/2026).
+ * /blog, /nos-marques, /poeles-pellets-*, /installation, /produit). Next y
+ * servait sa page anglaise générique, sans en-tête ni barre du bas (constaté
+ * le 11/10/2026).
  *
  * La mise en page racine ne porte pas l'habillage du site, qui vit dans
  * app/(frontend) parce que l'admin Payload partage la racine : cette page

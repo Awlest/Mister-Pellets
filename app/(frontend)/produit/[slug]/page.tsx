@@ -38,8 +38,21 @@ interface Props {
  */
 export const revalidate = 60;
 
+/**
+ * Catalogue fermé au build : toutes les fiches, masquées comprises, sont
+ * construites par generateStaticParams, et un slug hors liste reçoit la page
+ * 404 du site (app/not-found.tsx), rendue par le serveur avec l'habillage et
+ * l'amorce du consentement dans le <head>. Le notFound() de la page ne donne
+ * qu'un HTML vide, la coquille d'erreur de Next (voir la page installation).
+ *
+ * Contrepartie : un produit créé, supprimé ou dont le slug change dans l'admin
+ * ne change la liste des pages qu'au build suivant, que collections/Products.ts
+ * relance par le Deploy Hook Vercel (lib/deploy-hook.ts).
+ */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  // Phase 5 : query Payload au build pour générer les routes statiques.
+  // Query Payload au build : tous les produits, masqués compris.
   const slugs = await getAllProductSlugs();
   return slugs.map((slug) => ({ slug }));
 }
@@ -47,11 +60,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  // Contrairement aux guides/marques/villes, on NE PEUT PAS mettre
-  // `dynamicParams = false` ici : le catalogue vit dans Payload et un produit
-  // créé en admin doit sortir sans redéploiement. Un slug inconnu renvoie donc
-  // une page en HTTP 200 ; le noindex/nofollow évite qu'elle serve à quoi que
-  // ce soit côté Google.
+  // Seul cas restant : un produit supprimé ou renommé dans l'admin, dont la
+  // page construite est revalidée avant la fin du build relancé par le hook.
+  // La page répond alors 404 (notFound() plus bas), en noindex.
   if (!product)
     return { title: "Produit introuvable", robots: { index: false, follow: false } };
   // Libellé tiré du combustible et du type, comme dans le flux Merchant.

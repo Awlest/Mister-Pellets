@@ -227,7 +227,7 @@ export interface Product {
    */
   sku: string;
   /**
-   * URL : /produit/{slug}/
+   * URL : /produit/{slug}/. Une fiche créée, ou un slug modifié, n'est en ligne qu'après le build relancé à l'enregistrement (quelques minutes).
    */
   slug: string;
   /**
