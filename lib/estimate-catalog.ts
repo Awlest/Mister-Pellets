@@ -145,7 +145,8 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
   const payload = await getPayloadClient();
   const result = await payload.find({
     collection: "products",
-    limit: 200,
+    // Pas de `limit` : avec `pagination: false`, Payload renvoie tout, alors
+    // qu'une limite explicite s'appliquerait quand même (Payload 3.84).
     pagination: false,
     depth: 1, // hydrate mainImage
     overrideAccess: false, // respecte la règle read publique

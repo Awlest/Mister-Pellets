@@ -469,13 +469,16 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
  * boutique" par l'équipe Awlest). Ces produits restent accessibles via leur
  * URL directe /produit/{slug} mais n'apparaissent plus dans le listing.
  *
- * Phase 5 : pas de pagination car catalogue ≤ 100 produits attendus.
+ * Pas de `limit` : avec `pagination: false`, Payload renvoie tous les produits
+ * visibles (boutique, pages villes, modèles similaires, flux Google Merchant).
+ * Une limite explicite s'appliquerait quand même (Payload 3.84) et, sans
+ * `pagination: false`, la limite par défaut serait de 10.
  */
 export async function getAllProducts(): Promise<ProductDemo[]> {
   const payload = await getPayloadClient();
   const result = await payload.find({
     collection: "products",
-    limit: 200,
+    pagination: false,
     depth: 1, // hydrate mainImage
     overrideAccess: false, // respecte la règle read public
     where: {
@@ -540,7 +543,8 @@ export async function getProductSitemapEntries(): Promise<ProductSitemapEntry[]>
   const payload = await getPayloadClient();
   const result = await payload.find({
     collection: "products",
-    limit: 200,
+    // Pas de `limit`, comme getAllProductSlugs : il s'appliquerait malgré
+    // `pagination: false` et couperait le sitemap.
     pagination: false,
     overrideAccess: false,
     select: { slug: true, updatedAt: true },
