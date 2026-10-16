@@ -16,6 +16,16 @@ interface Props {
   params: Promise<{ brand: string; province: string }>;
 }
 
+/**
+ * Les 15 pages sont connues au build : une marque ou une province hors liste
+ * reçoit la page 404 du site (app/not-found.tsx), rendue par le serveur avec
+ * l'en-tête, le pied de page et l'amorce du consentement dans le <head>.
+ * Le notFound() de la page ne suffit pas : le statut est bien 404, mais Next
+ * sert alors un HTML vide (sa coquille d'erreur) que seul le navigateur
+ * complète, sans exécuter les scripts du <head> (constaté le 11/10/2026).
+ */
+export const dynamicParams = false;
+
 /** 3 marques top-tier × 5 provinces = 15 pages locales (brief §E.2). */
 export function generateStaticParams() {
   return TOP_TIER_BRANDS.flatMap((b) =>
