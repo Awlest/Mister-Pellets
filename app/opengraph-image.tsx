@@ -1,16 +1,27 @@
 import { ImageResponse } from "next/og";
 
 /**
- * OG image dynamique générée à la volée via @vercel/og (cf. audit V20260503
- * §1.H.1 et §4.H.2). Remplace le fichier `/public/og-image.jpg` qui
- * n'existait pas. Sert pour Facebook, LinkedIn, WhatsApp, Twitter, Slack, etc.
+ * Image Open Graph par défaut (DEFAULT_OG_IMAGE dans lib/seo.ts), cf. audit
+ * V20260503 §1.H.1 et §4.H.2. Sert pour Facebook, LinkedIn, WhatsApp, Twitter,
+ * Slack, etc.
  *
- * Convention Next.js : ce fichier exporte automatiquement une URL OG
- * /opengraph-image qui est référencée dans la metadata du layout.
+ * Route statique : l'image est générée une seule fois au build puis servie
+ * comme un fichier. L'ancien runtime edge empêchait cette génération et
+ * rendait l'image à chaque requête.
+ *
+ * Règles de Satori, le moteur de next/og :
+ * - toute <div> qui a plus d'un enfant doit déclarer display: flex, sinon le
+ *   rendu échoue et la route renvoie un PNG vide (constaté en prod le
+ *   11/10/2026) ;
+ * - <br /> ne passe pas à la ligne et le texte ne coule pas en ligne : chaque
+ *   ligne est une <div>, chaque couleur un élément à part ;
+ * - sans police fournie, seule Geist Regular est disponible : Georgia, le gras
+ *   et l'italique ne s'appliquent pas ;
+ * - l'emoji 🔥 est une image Twemoji téléchargée sur cdn.jsdelivr.net pendant
+ *   le build.
  */
 
-export const runtime = "edge"; // ImageResponse requiert l'edge runtime
-export const alt = "Mister Pellets — Poêle à pellets en Wallonie depuis 2016";
+export const alt = "Mister Pellets, poêle à pellets en Wallonie depuis 2016";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -84,6 +95,9 @@ export default async function OpengraphImage() {
         {/* Titre principal */}
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             fontSize: 64,
             fontWeight: 600,
             color: "#102916",
@@ -94,17 +108,30 @@ export default async function OpengraphImage() {
             maxWidth: 1000,
           }}
         >
-          Le bon poêle à pellets,
-          <br />
-          <span style={{ color: "#F28A20", fontStyle: "italic" }}>
-            installé chez vous
-          </span>{" "}
-          en Wallonie
+          <div>Le bon poêle à pellets,</div>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              // Satori supprime l'espace en tête d'un texte : le gap la remplace
+              // (0,25 em, largeur d'une espace dans Geist).
+              columnGap: "0.25em",
+            }}
+          >
+            <span style={{ color: "#F28A20", fontStyle: "italic" }}>
+              installé chez vous
+            </span>
+            en Wallonie
+          </div>
         </div>
 
         {/* Sous-titre / preuves */}
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             fontSize: 28,
             color: "#4A5A50",
             textAlign: "center",
@@ -113,9 +140,8 @@ export default async function OpengraphImage() {
             lineHeight: 1.4,
           }}
         >
-          Edilkamin · EK63 · Girolami
-          <br />
-          Pose en 1 jour · TVA à 6 % en rénovation
+          <div>Edilkamin · EK63 · Girolami</div>
+          <div>Pose en 1 jour · TVA à 6 % en rénovation</div>
         </div>
 
         {/* Bandeau footer (identité Awlest + URL) */}
