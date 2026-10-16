@@ -2,6 +2,7 @@ import "server-only";
 import { getPayloadClient } from "./payload-client";
 import type { EstimateProduct } from "./estimate";
 import { webpUrl } from "./product-image";
+import { parseKw } from "./power";
 
 /**
  * Catalogue vu par le configurateur d'estimation (/estimation).
@@ -48,14 +49,6 @@ interface PayloadEstimateRow {
     price?: number | null;
     salePrice?: number | null;
   }> | null;
-}
-
-/** Puissance (kW) lue sur le libellé d'une valeur de variante : « 22 kW » → 22. */
-function parseKw(label: string | null | undefined): number | null {
-  if (!label) return null;
-  const m = label.replace(",", ".").match(/([\d.]+)\s*kW/i);
-  const kw = m ? Number(m[1]) : NaN;
-  return Number.isFinite(kw) && kw > 0 ? kw : null;
 }
 
 /**

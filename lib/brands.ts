@@ -243,10 +243,10 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { emoji: "🇮🇹", title: "100 % fabriqué en interne", description: "Toutes les phases (idée, conception, fonderie, assemblage, tests) se déroulent dans l'usine de Sant'Oreste, près de Rome. Tradition familiale, deux générations, Good Design Award 2022." },
     ],
     modelsTable: [
-      { name: "Soft", power: "4 versions, jusqu'à 24 kW", type: "Hybride bois-pellet hydro", forWhom: "Best-seller, Good Design Award 2022, remplacement chaudière." },
-      { name: "Vert", power: "Vert 9, 12 ou 14", type: "Pellet canalisable", forWhom: "Maison ouverte qui veut canaliser deux pièces." },
-      { name: "Flow", power: "9 à 15 kW", type: "Pellet design moderne", forWhom: "Intérieur contemporain, lignes droites." },
-      { name: "Curvy", power: "9 à 14 kW", type: "Pellet maïolique galbée", forWhom: "Intérieur classique ou bohème." },
+      { name: "Soft", power: "4 versions, jusqu'à 24,1 kW", type: "Hybride bois-pellet hydro", forWhom: "Best-seller, Good Design Award 2022, remplacement chaudière." },
+      { name: "Vert", power: "8,3 à 13 kW", type: "Pellet canalisable", forWhom: "Maison ouverte qui veut canaliser deux pièces." },
+      { name: "Flow", power: "8,3 à 13 kW", type: "Pellet design moderne", forWhom: "Intérieur contemporain, lignes droites." },
+      { name: "Curvy", power: "8,3 à 13 kW", type: "Pellet maïolique galbée", forWhom: "Intérieur classique ou bohème." },
       { name: "Split", power: "3 puissances", type: "Pellet céramique", forWhom: "Rendement 94,1 %, chambre céramique haut rendement." },
       { name: "Biotec", power: "26 à 34 kW", type: "Chaudière pellet ou hybride", forWhom: "Grandes maisons, ECS, remplacement chaudière fioul." },
     ],
@@ -256,7 +256,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { question: "Un Girolami peut-il fonctionner au pellet et au bois ?", answer: "Oui, sur la gamme hybride (Soft notamment). Le Fuel Convert System détecte automatiquement le combustible chargé. Vous mettez du pellet, ça fonctionne au pellet. Vous mettez des bûches, ça bascule en mode bois. Sans toucher au menu." },
       { question: "C'est silencieux ?", answer: "La fonction SuperSilent coupe les ventilateurs et fait diffuser la chaleur par convection naturelle, sans aucun souffle audible. Utile le soir, dans un séjour ouvert sur les chambres." },
       { question: "On peut piloter un Girolami depuis le smartphone ?", answer: "Oui. Wi-Fi de série sur les modèles modernes (Vert, Flow, Curvy). Application smartphone, programmation horaire, commande vocale via Alexa." },
-      { question: "Quel modèle pour une maison de 150 m² ?", answer: "Pour un chauffage à air, un Vert 12 ou Vert 14 canalisable couvre confortablement, avec deux pièces canalisées. Pour un raccordement aux radiateurs, le Soft hydro 14 ou 18 kW est mieux adapté. On dimensionne ça gratuitement lors du diagnostic à domicile." },
+      { question: "Quel modèle pour une maison de 150 m² ?", answer: "Pour un chauffage à air, un Vert canalisable de 10,8 ou 13 kW couvre confortablement, avec deux pièces canalisées. Pour un raccordement aux radiateurs, un Soft hydro de 15 ou 18,1 kW est mieux adapté. On dimensionne ça gratuitement lors du diagnostic à domicile." },
     ],
     warranty:
       "Garantie constructeur Girolami. Mister Pellets assure le SAV pièces localement : intervention sous 48 à 72 h et stock des consommables courants en atelier.",

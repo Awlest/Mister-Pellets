@@ -24,6 +24,7 @@ import { schemaAvailability } from "@/lib/availability";
 import { BONUS } from "@/lib/bonus";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { productKindLabel } from "@/lib/product-kind";
+import { formatKw } from "@/lib/power";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -315,11 +316,11 @@ export default async function ProductPage({ params }: Props) {
 
               {/* Tags techniques : chaque badge n'apparaît que si la donnée existe.
                   Pour une fiche regroupée multi-puissances, on liste toutes les
-                  puissances (ex: "9 · 12 · 14 kW") et la fourchette de surface. */}
+                  puissances (ex: "8,3 · 10,8 · 13 kW") et la fourchette de surface. */}
               <div className="flex flex-wrap gap-2 mb-8">
                 {product.powers && product.powers.length > 1 ? (
                   <Badge variant="default">
-                    <Flame className="h-3.5 w-3.5" /> {product.powers.join(" · ")} kW
+                    <Flame className="h-3.5 w-3.5" /> {product.powers.map(formatKw).join(" · ")} kW
                   </Badge>
                 ) : (
                   product.power && (
@@ -520,7 +521,7 @@ export default async function ProductPage({ params }: Props) {
               <h3 className="text-lg font-semibold text-mp-green-deep">Adapté à votre surface</h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
                 {product.powers && product.powers.length > 1
-                  ? `Disponible de ${product.powers[0]} à ${product.powers[product.powers.length - 1]} kW${
+                  ? `Disponible de ${formatKw(product.powers[0]!)} à ${formatKw(product.powers[product.powers.length - 1]!)} kW${
                       product.heatedVolumes && product.heatedVolumes.length > 1
                         ? `, pour chauffer de ${product.heatedVolumes[0]} à ${product.heatedVolumes[product.heatedVolumes.length - 1]} m³`
                         : ""

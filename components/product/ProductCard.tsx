@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-image";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice, formatPriceHT } from "@/lib/utils";
+import { formatKw } from "@/lib/power";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { ProductFeatureBadges, type ProductFeatureFlags } from "@/components/product/ProductFeatureBadges";
 
@@ -119,10 +120,10 @@ export function ProductCard({ product, className, priority = false }: ProductCar
     image ?? (imageSrc ? { url: imageSrc, focalX: imageFocalX, focalY: imageFocalY } : undefined);
 
   // Fiche regroupée multi-puissances : on affiche l'éventail complet
-  // (ex: "9 · 12 · 14 kW" + "276–373 m³") au lieu de la seule valeur du parent.
+  // (ex: "8,3 · 10,8 · 13 kW" + "276–373 m³") au lieu de la seule valeur du parent.
   const multiPower = powers && powers.length > 1;
   const multiVolume = heatedVolumes && heatedVolumes.length > 1;
-  const powerLabel = multiPower ? `${powers!.join(" · ")} kW` : power;
+  const powerLabel = multiPower ? `${powers!.map(formatKw).join(" · ")} kW` : power;
   const volumeLabel = multiVolume
     ? `${heatedVolumes![0]}–${heatedVolumes![heatedVolumes!.length - 1]} m³`
     : heatedVolume;

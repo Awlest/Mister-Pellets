@@ -389,7 +389,9 @@ export const COLOR_LABELS: Record<ColorCategory, string> = {
 };
 
 export const POWER_TRANCHES = [
-  { value: "6-9",   label: "6 à 9 kW",   min: 6,  max: 9,  desc: "Compacts, petites pièces" },
+  // Ouverte vers le bas : les plus petits poêles rendent moins de 6 kW
+  // (Girolami Mini 5,8 kW, plusieurs Edilkamin entre 5,1 et 5,9 kW).
+  { value: "6-9",   label: "Moins de 9 kW", min: 0, max: 9,  desc: "Compacts, petites pièces" },
   { value: "9-12",  label: "9 à 12 kW",  min: 9,  max: 12, desc: "Standards, surfaces moyennes" },
   { value: "12-18", label: "12 à 18 kW", min: 12, max: 18, desc: "Puissants, grandes surfaces" },
   { value: "18+",   label: "18 kW et +", min: 18, max: 999, desc: "Hydros et installations spécifiques" },

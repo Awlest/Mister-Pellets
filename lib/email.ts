@@ -16,6 +16,7 @@ import {
   EMAIL_SITE_URL,
   SERIF,
 } from "@/lib/email-layout";
+import { formatKw } from "@/lib/power";
 
 /**
  * Helper email. Utilise Resend si RESEND_API_KEY est configuré, sinon log
@@ -448,7 +449,7 @@ export async function notifyInternalEstimate(est: {
     <p><strong>${escapeHtml(est.name)}</strong> · ${escapeHtml(est.email)}${est.phone ? ` · ${escapeHtml(est.phone)}` : ""} · ${escapeHtml(est.postalCode)}</p>
     <p style="font-size:18px;color:#174724"><strong>${fmt(est.totalTTC)} TTC</strong> (TVA ${Math.round(est.vatRate * 100)} %)${est.monthly ? ` · ${fmt(est.monthly)}/mois sur ${est.months} mois` : ""}</p>
     <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-      <tr><td style="background:#FAF7F0;width:45%"><strong>Poêle choisi</strong></td><td>${escapeHtml(est.productName)} (${est.powerKw} kW) — /produit/${escapeHtml(est.productSlug)}</td></tr>
+      <tr><td style="background:#FAF7F0;width:45%"><strong>Poêle choisi</strong></td><td>${escapeHtml(est.productName)} (${formatKw(est.powerKw)} kW) — /produit/${escapeHtml(est.productSlug)}</td></tr>
       <tr><td style="background:#FAF7F0"><strong>Matériel</strong></td><td>${fmt(est.materialHT)} HT</td></tr>
       ${linesHtml}
       <tr><td style="background:#FAF7F0"><strong>Type de poêle</strong></td><td>${escapeHtml(est.stoveKind)}</td></tr>

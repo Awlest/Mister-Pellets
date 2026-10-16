@@ -1,6 +1,7 @@
 import "server-only";
 import { getPayloadClient } from "./payload-client";
 import { bonusPrice, isBonusPeriod } from "./bonus";
+import { formatKw, parseKw } from "./power";
 import type {
   ProductDemo,
   ProductColorVariant,
@@ -215,15 +216,20 @@ function mapMedia(
  * (relevé sur les fiches produit avant regroupement). Sert UNIQUEMENT à
  * enrichir les fiches regroupées (plusieurs puissances sur une seule fiche) :
  * pastilles d'infos + filtre boutique. Aucune valeur inventée.
+ *
+ * Clé = puissance nominale réelle arrondie à 0,1 kW, telle que dans les
+ * libellés de l'axe, et non le numéro du modèle : le « 14 » à air rend 13 kW
+ * (373 m³), le « 14 » hydro 15 kW au total, eau comprise (375 m³).
  */
 const GIROLAMI_VOLUME_BY_POWER_KW: Record<number, number> = {
-  6: 165,
-  9: 276,
-  12: 310,
-  14: 375,
-  18: 452,
-  22: 551,
-  26: 584,
+  5.8: 165,
+  8.3: 276,
+  10.8: 310,
+  13: 373,
+  15: 375,
+  18.1: 452,
+  22.1: 551,
+  24.1: 584,
 };
 
 /**
@@ -231,7 +237,7 @@ const GIROLAMI_VOLUME_BY_POWER_KW: Record<number, number> = {
  * et les volumes de chauffe (m³) correspondants, lus sur l'axe de variante
  * « Puissance ». Retourne {} si la fiche n'a pas plusieurs puissances.
  *
- * - `powers` : lu directement sur les libellés de l'axe (ex: "12 kW" → 12),
+ * - `powers` : lu directement sur les libellés de l'axe (ex: "10,8 kW" → 10,8),
  *   valable pour toutes les marques.
  * - `heatedVolumes` : déduit du barème Girolami ci-dessus (scopé à la marque
  *   pour ne pas attribuer un volume Girolami à une autre marque).
@@ -251,9 +257,8 @@ function deriveVariantPowers(p: PayloadProduct): {
   });
   if (!powerAxis || !Array.isArray(powerAxis.values)) return {};
   const kws = powerAxis.values
-    .map((v) => (v && typeof v === "object" ? v.label : null))
-    .map((label) => (typeof label === "string" ? parseInt(label, 10) : NaN))
-    .filter((n): n is number => Number.isFinite(n));
+    .map((v) => (v && typeof v === "object" ? parseKw(v.label) : null))
+    .filter((n): n is number => n != null);
   const powers = [...new Set(kws)].sort((a, b) => a - b);
   if (powers.length < 2) return {};
 
@@ -285,7 +290,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
 
   // Reconstruit la string power "9 kW" depuis power numeric, avec la virgule
   // décimale (« 10,1 kW ») comme dans le configurateur.
-  const power = `${String(p.power).replace(".", ",")} kW`;
+  const power = `${formatKw(p.power)} kW`;
 
   // Fiche regroupée multi-puissances : éventail complet des puissances +
   // volumes, pour les pastilles et le filtre boutique.

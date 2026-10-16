@@ -3,6 +3,7 @@ import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/r
 import { getPayloadClient } from "@/lib/payload-client";
 import { notifyInternalEstimate, confirmCustomerEstimate } from "@/lib/email";
 import { getEstimateProduct } from "@/lib/estimate-catalog";
+import { formatKw } from "@/lib/power";
 import {
   DEFAULT_STATE,
   DUCT_ROOMS_MAX,
@@ -188,7 +189,7 @@ export async function POST(request: Request) {
   const recap = [
     message ? `${message}\n` : "",
     "--- Estimation configurée en ligne ---",
-    `Poêle : ${product.name} (${product.brand}, ${product.powerKw} kW) — /produit/${product.slug}`,
+    `Poêle : ${product.name} (${product.brand}, ${formatKw(product.powerKw)} kW) — /produit/${product.slug}`,
     `Type : ${STOVE_KINDS[config.stoveKind].label} · Évacuation : ${INSTALL_TYPES[config.installType].label}`,
     INSTALL_TYPES[config.installType].perMeter > 0 ? `Conduit : ${config.conduitM} m` : "",
     STOVE_KINDS[config.stoveKind].ducts ? `Pièces canalisées : ${config.ductRooms}` : "",

@@ -1031,7 +1031,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Quelle maison pour un Girolami canalisable",
         paragraphs: [
           "Le canalisable intelligent prend tout son sens dans une maison ouverte où le poêle est dans le séjour, avec une ou deux pièces à chauffer en plus, par exemple une chambre à l'étage ou un bureau.",
-          "La gamme Vert de Girolami couvre ce besoin, au pellet, en 9, 12 ou 14 kW. On valide le tracé des gaines et la puissance utile lors du diagnostic.",
+          "La gamme Vert de Girolami couvre ce besoin, au pellet, de 8,3 à 13 kW. On valide le tracé des gaines et la puissance utile lors du diagnostic.",
         ],
       },
       {
