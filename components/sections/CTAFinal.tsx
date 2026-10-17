@@ -18,7 +18,8 @@ interface CTAFinalProps {
 const PHONE = "081 13 83 09";
 
 /**
- * Bloc CTA final sur fond beige avec halo orange. Cf. brief §3.2 sec 12.
+ * Bloc CTA final sur fond uni (crème ou beige selon l'alternance de la page),
+ * sans halo ni dégradé (DESIGN.md). Cf. brief §3.2 sec 12.
  */
 export function CTAFinal({
   tone = "beige",
@@ -29,17 +30,8 @@ export function CTAFinal({
   showPhone = true,
 }: CTAFinalProps) {
   return (
-    <section className={cn("mp-band relative overflow-hidden", toneClass(tone))}>
-      {/* Halo orange */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-24 top-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(242,138,32,0.20) 0%, rgba(242,138,32,0) 70%)",
-        }}
-      />
-
-      <div className="mp-shell relative text-center">
+    <section className={cn("mp-band", toneClass(tone))}>
+      <div className="mp-shell text-center">
         <div className="mx-auto mp-measure">
         <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
           {title}

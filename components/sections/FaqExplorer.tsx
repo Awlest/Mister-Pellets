@@ -223,7 +223,7 @@ function CategoryPill({
       className={cn(
         "inline-flex min-h-11 items-center gap-1.5 rounded-full px-4 text-sm font-semibold whitespace-nowrap transition-colors shrink-0 pointer-fine:min-h-9",
         active
-          ? "bg-mp-orange-flame text-mp-green-darkest shadow-sm"
+          ? "bg-mp-orange-flame text-mp-green-darkest"
           : "bg-white border border-mp-sand text-mp-green-deep hover:bg-mp-orange-light",
       )}
     >
@@ -248,7 +248,7 @@ function FaqItemRow({
     <li
       className={cn(
         "rounded-2xl border bg-white transition-colors",
-        isOpen ? "border-mp-orange-flame/40 shadow-sm" : "border-mp-sand/40 hover:border-mp-sand",
+        isOpen ? "border-mp-orange-flame/40" : "border-mp-sand/40 hover:border-mp-sand",
       )}
     >
       <button
@@ -262,14 +262,14 @@ function FaqItemRow({
         </h3>
         <ChevronDown
           className={cn(
-            "h-5 w-5 shrink-0 mt-0.5 text-mp-orange-flame transition-transform duration-200",
+            "h-5 w-5 shrink-0 mt-0.5 text-mp-orange-flame transition-transform",
             isOpen && "rotate-180",
           )}
           aria-hidden
         />
       </button>
       {isOpen && (
-        <div className="px-4 md:px-5 pb-5 -mt-1">
+        <div className="px-4 md:px-5 pb-5">
           <p className="text-mp-ink leading-relaxed text-sm md:text-base">
             {item.answer}
           </p>

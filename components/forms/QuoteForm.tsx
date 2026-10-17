@@ -203,9 +203,10 @@ export function QuoteForm() {
           </span>
         </div>
         <div className="h-1.5 bg-mp-sand/40 rounded-full overflow-hidden">
+          {/* Progression par transform (scaleX) : la largeur ne s'anime pas. */}
           <div
-            className="h-full bg-mp-orange-flame rounded-full transition-all duration-500"
-            style={{ width: `${(step / 6) * 100}%` }}
+            className="h-full w-full origin-left bg-mp-orange-flame rounded-full transition-transform duration-(--mp-duration-enter) ease-out motion-reduce:transition-none"
+            style={{ transform: `scaleX(${step / 6})` }}
           />
         </div>
       </div>
@@ -298,7 +299,7 @@ function ChoiceGrid<T extends string>({
           type="button"
           onClick={() => onChange(opt.value)}
           className={cn(
-            "rounded-xl border-2 p-4 text-left transition-all",
+            "rounded-xl border-2 p-4 text-left transition-colors",
             value === opt.value
               ? "border-mp-orange-flame bg-mp-orange-light/40 ring-2 ring-mp-orange-flame/20"
               : "border-mp-sand/40 hover:border-mp-orange-flame/50 hover:bg-mp-cream"

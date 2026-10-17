@@ -33,6 +33,7 @@ const interTight = localFont({
 });
 
 export const viewport: Viewport = {
+  // check-design: allow (balise meta : valeur littérale du jeton --mp-cream)
   themeColor: "#FAF7F0",
   width: "device-width",
   initialScale: 1,

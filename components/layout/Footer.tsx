@@ -72,9 +72,11 @@ export function Footer() {
   return (
     <footer className="footer-mp bg-mp-green-deep text-mp-cream w-full px-4 pt-8 lg:px-6 lg:pt-12">
       <div className="max-w-md mx-auto lg:max-w-3xl flex flex-col items-center text-center gap-6">
-        {/* Bloc identité : logo (×2 = 160 px) côte à côte avec les sociaux.
-          * Drop-shadow cream empilé pour un fin contour lumineux qui suit
-          * exactement les contours du SVG (vs un rectangle de bordure).
+        {/* Bloc identité : logo côte à côte avec les sociaux.
+          * Le contour du logo est en vert sombre, le même que ce fond : posé
+          * à nu, il disparaît. Il repose donc sur un médaillon crème plein
+          * (avant le 17/10/2026 : un contour lumineux en drop-shadow, retiré
+          * avec les lueurs, DESIGN.md).
           *
           * Symétrie visuelle équilibrée : deux moitiés égales (flex-1)
           * avec contenu centré dans chacune. Le logo apparaît centré dans
@@ -82,7 +84,7 @@ export function Footer() {
           * L'ensemble paraît centré globalement avec un équilibre parfait. */}
         <div className="flex items-center w-full">
           <div className="flex-1 flex justify-center">
-            <Link href="/" aria-label="Mister Pellets, accueil">
+            <Link href="/" aria-label="Mister Pellets, accueil" className="block rounded-[28px] bg-mp-cream p-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo-mister-pellets-ref.svg"
@@ -91,11 +93,7 @@ export function Footer() {
                 height={320}
                 loading="lazy"
                 decoding="async"
-                className="h-32 w-32 sm:h-36 sm:w-36 object-contain"
-                style={{
-                  filter:
-                    "drop-shadow(0 0 1px #FAF7F0) drop-shadow(0 0 1px #FAF7F0) drop-shadow(0 0 0.5px #FAF7F0)",
-                }}
+                className="h-28 w-28 sm:h-32 sm:w-32 object-contain"
               />
             </Link>
           </div>

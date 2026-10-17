@@ -68,7 +68,7 @@ export default async function EstimationPage() {
 
           <div className="mx-auto mt-10 mp-measure space-y-4 text-sm text-mp-ink-soft">
             <p>
-              <strong className="text-mp-green-deep">Ce que couvre l&apos;estimation.</strong> Le
+              <strong className="text-mp-green-deep">Ce que couvre l&apos;estimation.</strong>{" "}Le
               poêle au prix de notre catalogue, la pose et le raccordement selon votre type
               d&apos;évacuation, les fournitures courantes, la mise en service et le réglage de la
               combustion. Les forfaits de pose sont des budgets moyens : une configuration

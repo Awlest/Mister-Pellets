@@ -97,14 +97,7 @@ export default function HomePage() {
       <JsonLd data={faqSchema} />
 
       {/* HERO, logo central doublé + spacing 35 px max (cf. doc V1.3 §P7) */}
-      <section className="relative overflow-hidden bg-mp-cream">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-24 -top-24 h-[500px] w-[500px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(242,138,32,0.18) 0%, rgba(242,138,32,0) 70%)",
-          }}
-        />
+      <section className="bg-mp-cream">
 
         {/* Bloc logo dédié. Taille divisée par deux (320/400 → 160/200 px) :
           * au format précédent, le premier écran ne contenait que le logo, et
@@ -112,7 +105,7 @@ export default function HomePage() {
           * qu'après un défilement. Sur du trafic payant, c'est un visiteur
           * acheté puis perdu avant d'avoir lu la proposition. */}
         <div
-          className="flex justify-center relative"
+          className="flex justify-center"
           style={{ paddingTop: "17.5px", paddingBottom: "17.5px" }}
         >
           {/* fetchPriority high : React en fait aussi un préchargement dans le
@@ -129,7 +122,7 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="mp-shell pb-10 md:pb-16 relative">
+        <div className="mp-shell pb-10 md:pb-16">
           <div className="mp-measure mx-auto text-center">
             <BonusAnnouncement />
 
@@ -247,9 +240,9 @@ export default function HomePage() {
               <span className="block text-xs text-mp-ink-soft mb-3">
                 Méthode complète selon PEB et surface
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink">
                 Voir le guide
-                <ArrowRight className="h-3 w-3" />
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
             <Link
@@ -262,9 +255,9 @@ export default function HomePage() {
               <span className="block text-xs text-mp-ink-soft mb-3">
                 Diffuser la chaleur sur 2-3 pièces
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink">
                 Voir le guide
-                <ArrowRight className="h-3 w-3" />
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
             <Link
@@ -277,9 +270,9 @@ export default function HomePage() {
               <span className="block text-xs text-mp-ink-soft mb-3">
                 Passage mazout vers hydro pellets
               </span>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink group-hover:gap-2.5 transition-all">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-mp-orange-ink">
                 Voir le guide
-                <ArrowRight className="h-3 w-3" />
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
           </div>

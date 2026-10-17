@@ -40,7 +40,7 @@ export default function GuidesHubPage() {
                 href={`/guides/${guide.slug}`}
                 className="group"
               >
-                <Card className="p-8 h-full flex flex-col hover:-translate-y-1 transition-all">
+                <Card className="p-8 h-full flex flex-col transition-colors group-hover:border-mp-orange-flame">
                   <div className="flex items-start justify-between mb-4">
                     <Badge variant="secondary">{guide.category}</Badge>
                     <span className="inline-flex items-center gap-1 text-xs text-mp-ink-soft">
@@ -59,9 +59,9 @@ export default function GuidesHubPage() {
                     {guide.excerpt}
                   </p>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink group-hover:gap-3 transition-all">
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink">
                     Lire le guide
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Card>
               </Link>

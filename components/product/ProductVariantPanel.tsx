@@ -338,7 +338,7 @@ function VariantValueButton({
         title={title}
         aria-pressed={selected}
         className={[
-          "flex flex-col items-center justify-center gap-1 h-14 min-w-14 px-2 rounded-xl border bg-mp-cream transition-all",
+          "flex flex-col items-center justify-center gap-1 h-14 min-w-14 px-2 rounded-xl border bg-mp-cream transition-colors",
           selected ? "border-mp-green-deep border-2" : "border-mp-sand",
           disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:border-mp-green-deep",
         ].join(" ")}

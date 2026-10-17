@@ -33,17 +33,17 @@ export default function DepannagePage() {
           body: (
             <>
               <p>
-                <strong>Le poêle ne s&apos;allume plus.</strong> Neuf fois sur dix, c&apos;est
+                <strong>Le poêle ne s&apos;allume plus.</strong>{" "}Neuf fois sur dix, c&apos;est
                 la résistance d&apos;allumage, une pièce d&apos;usure qui fatigue au bout de
                 quelques milliers de démarrages. Elle se remplace en une intervention.
               </p>
               <p>
-                <strong>Il s&apos;éteint tout seul en pleine chauffe.</strong> Généralement une
+                <strong>Il s&apos;éteint tout seul en pleine chauffe.</strong>{" "}Généralement une
                 sonde de fumée encrassée ou un conduit qui tire mal. C&apos;est le symptôme
                 typique d&apos;un appareil qui n&apos;a pas été entretenu depuis deux saisons.
               </p>
               <p>
-                <strong>Il ne prend plus de pellets.</strong> Le motoréducteur de la vis sans
+                <strong>Il ne prend plus de pellets.</strong>{" "}Le motoréducteur de la vis sans
                 fin, ou un corps étranger coincé dans la vis : il arrive qu&apos;un caillou ou
                 une agrafe passe avec un sac de mauvaise qualité.
               </p>

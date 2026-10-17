@@ -48,7 +48,7 @@ export function TripleChoice({
               <Card
                 key={choice.title}
                 className={cn(
-                  "group flex flex-col p-8 transition-all hover:-translate-y-1",
+                  "group flex flex-col p-8 transition-colors hover:border-mp-orange-flame",
                   choice.highlight && "ring-2 ring-mp-orange-flame ring-offset-2 ring-offset-mp-cream"
                 )}
               >
@@ -69,10 +69,10 @@ export function TripleChoice({
 
                 <Link
                   href={choice.cta.href}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink group-hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink"
                 >
                   {choice.cta.label}
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Card>
             );

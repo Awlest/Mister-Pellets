@@ -201,10 +201,10 @@ export function ProductGallery({
             alt={active.alt || productName}
             fetchPriority="high"
             decoding="async"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-[1.02]"
             style={{ objectPosition: `${active.focalX ?? 50}% ${active.focalY ?? 50}%` }}
           />
-          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-mp-ink/80 px-2.5 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-mp-ink px-2.5 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -235,7 +235,7 @@ export function ProductGallery({
                 type="button"
                 onClick={() => setActiveImageIdx(i)}
                 className={cn(
-                  "relative aspect-square rounded-xl bg-mp-beige border overflow-hidden transition-all focus:outline-none focus:ring-2 focus:ring-mp-orange-flame focus:ring-offset-1",
+                  "relative aspect-square rounded-xl bg-mp-beige border overflow-hidden transition-colors focus:outline-none focus:ring-2 focus:ring-mp-orange-flame focus:ring-offset-1",
                   isActive
                     ? "border-mp-orange-flame ring-2 ring-mp-orange-flame"
                     : "border-mp-sand/40 hover:border-mp-orange-flame/60"
@@ -278,7 +278,7 @@ export function ProductGallery({
       {/* Lightbox plein écran */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-10"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-10"
           onClick={closeLightbox}
           role="dialog"
           aria-modal="true"
@@ -373,7 +373,7 @@ export function ProductGallery({
           </div>
 
           {allImages.length > 1 && (
-            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/10 backdrop-blur-sm px-3 py-1 text-sm text-white">
+            <span className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-3 py-1 text-sm text-white">
               {activeImageIdx + 1} / {allImages.length}
             </span>
           )}
@@ -412,7 +412,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
       <div className="flex flex-wrap gap-2">
         {variants.map((v, i) => {
           const isActive = i === activeIdx;
-          const swatch = v.colorHex ?? "#A0A0A0";
+          const swatch = v.colorHex ?? "var(--mp-sand)";
           return (
             <button
               key={i}
@@ -429,7 +429,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
               data-gtin={v.gtin}
             >
               <span
-                className="inline-block h-5 w-5 rounded-full border border-mp-sand/60 shadow-sm"
+                className="inline-block h-5 w-5 rounded-full border border-mp-sand/60"
                 style={{ backgroundColor: swatch }}
                 aria-hidden="true"
               />

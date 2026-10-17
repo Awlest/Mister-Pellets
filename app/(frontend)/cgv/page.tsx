@@ -130,7 +130,7 @@ export default function CGVPage() {
               d&apos;origine et en état de revente.
             </p>
             <p className="mt-3">
-              <strong>Remboursement.</strong> Nous vous remboursons la totalité des sommes versées,
+              <strong>Remboursement.</strong>{" "}Nous vous remboursons la totalité des sommes versées,
               frais de livraison standard compris, au plus tard 14 jours après la réception de votre
               demande de rétractation. Nous pouvons différer le remboursement jusqu&apos;à la
               récupération du produit ou jusqu&apos;à ce que vous ayez fourni une preuve de son

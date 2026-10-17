@@ -144,7 +144,7 @@ function FilterPill({ active, onClick, children }: { active: boolean; onClick: (
         "inline-flex min-h-11 items-center gap-1 rounded-full px-4 text-sm font-semibold transition-colors",
         "pointer-fine:min-h-8 pointer-fine:px-3.5 pointer-fine:text-xs",
         active
-          ? "bg-mp-orange-flame text-mp-green-darkest shadow-sm"
+          ? "bg-mp-orange-flame text-mp-green-darkest"
           : "bg-mp-cream border border-mp-sand text-mp-green-deep hover:bg-mp-orange-light hover:text-mp-ink",
       )}
     >
@@ -408,7 +408,7 @@ export function BoutiqueExplorer({
               <button
                 type="button"
                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                className="inline-flex items-center justify-center rounded-full bg-mp-green-deep px-7 h-12 text-sm font-semibold text-white transition-all hover:bg-mp-green-mid active:scale-[0.98]"
+                className="inline-flex items-center justify-center rounded-full bg-mp-green-deep px-7 h-12 text-sm font-semibold text-white transition-[background-color,scale] hover:bg-mp-green-mid active:scale-[0.98]"
               >
                 Voir plus de modèles ({filtered.length - visible} restant{filtered.length - visible > 1 ? "s" : ""})
               </button>

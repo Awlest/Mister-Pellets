@@ -44,6 +44,25 @@
   /* === SEMANTIC ALIAS === */
   --background: var(--mp-cream);
   --foreground: var(--mp-ink);
+
+  /* === MOUVEMENT (passe sobriété du 17/10/2026, DESIGN.md) ===
+   * Une seule courbe, en sortie douce, et trois durées. Seules l'opacité et
+   * la transformation s'animent (plus les couleurs et bordures au survol).
+   *   micro : survol, pression, changement d'état (150 à 200 ms) ;
+   *   enter : ouverture d'un volet, d'un menu, retour de la barre du bas ;
+   *   exit  : fermeture, toujours plus courte que l'ouverture. */
+  --mp-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --mp-duration-micro: 180ms;
+  --mp-duration-enter: 240ms;
+  --mp-duration-exit: 160ms;
+}
+
+/* Les utilitaires Tailwind suivent ces jetons : `ease-out` prend la courbe du
+ * site, et `transition-colors` & co. sans durée explicite durent 180 ms. */
+@theme {
+  --ease-out: var(--mp-ease-out);
+  --default-transition-duration: var(--mp-duration-micro);
+  --default-transition-timing-function: var(--mp-ease-out);
 }
 
 @theme inline {
@@ -83,11 +102,15 @@
   --radius-xl:   28px;
   --radius-full: 9999px;
 
-  /* === SHADOWS === */
+  /* === SHADOWS ===
+   * Échelle unique, teintée encre, toujours décalée vers le bas. Les cartes
+   * et blocs posés dans la page n'ont pas d'ombre : un filet sable suffit.
+   *   md : surfaces de travail (formulaires, configurateur), barre du bas ;
+   *   lg : couches flottantes (menus déroulants, volets, bandeau cookies).
+   * Plus de lueur orange (--shadow-glow retiré le 17/10/2026). */
   --shadow-sm:   0 2px 8px  rgba(20, 36, 27, 0.06);
   --shadow-md:   0 8px 24px rgba(20, 36, 27, 0.10);
   --shadow-lg:   0 16px 48px rgba(20, 36, 27, 0.16);
-  --shadow-glow: 0 8px 32px rgba(242, 138, 32, 0.32);
 
   /* === BREAKPOINTS (info — Tailwind v4 défauts conviennent) === */
   /* sm 640 / md 768 / lg 1024 / xl 1280 / 2xl 1536 */
@@ -262,15 +285,16 @@ body {
 
 /* === FOOTER (Hotfix V1.3.5) ===
  * Padding-bottom mobile : 30 px de respiration entre le copyright et le bord
- * bas du footer (demande client), + safe-area iOS pour ne pas masquer le
- * texte sous la barre Home iPhone. La NavbarSticky flottante (72 px) chevauche
- * désormais légèrement le bas du footer mais le copyright et les liens
- * légaux restent visibles dans le flux normal.
+ * bas visible (demande client), PLUS la hauteur de la barre du bas
+ * (--mp-bottomnav-h, safe-area iOS comprise). Sans cette réserve, la barre
+ * flottante recouvrait les liens légaux et le copyright en fin de page dès
+ * qu'elle réapparaissait (constaté le 17/10/2026). La réserve vit ici, au bas
+ * du footer, et non plus en bas de <main> où elle ne protégeait rien.
  *
  * Sur xl+ la navbar mobile/tablette disparaît, on revient à un padding standard.
  */
 .footer-mp {
-  padding-bottom: calc(30px + env(safe-area-inset-bottom));
+  padding-bottom: calc(30px + var(--mp-bottomnav-h));
 }
 @media (min-width: 1280px) {
   .footer-mp {
@@ -395,6 +419,8 @@ html[data-consent] .mp-consent-banner {
 .mp-range::-webkit-slider-runnable-track {
   height: 6px;
   border-radius: 9999px;
+  /* Deux aplats à arrêt net (même position), pas un dégradé visible : WebKit
+   * n'a pas d'équivalent à ::-moz-range-progress. check-design: allow range-fill */
   background: linear-gradient(
     to right,
     var(--mp-orange-flame) var(--mp-range-fill, 50%),
@@ -406,6 +432,7 @@ html[data-consent] .mp-consent-banner {
   appearance: none;
   width: 28px;
   height: 28px;
+  /* check-design: allow (centre le pouce de 28 px sur la piste de 6 px) */
   margin-top: -11px;
   border-radius: 9999px;
   background: var(--mp-white);
@@ -459,54 +486,49 @@ html[data-consent] .mp-consent-banner {
 }
 
 /* === FAQ (FAQAccordion, <details> natifs) ===
- * Ouverture et fermeture glissées là où le navigateur sait animer vers une
- * hauteur `auto` (calc-size : Chrome, Edge). Ailleurs, aucune règle : un
- * <details> ordinaire, qui s'ouvre d'un coup. content-visibility en
- * allow-discrete garde la réponse affichée pendant la fermeture. */
-@supports (block-size: calc-size(auto, size)) {
+ * La réponse prend sa place d'un coup (la hauteur ne s'anime plus : seules
+ * l'opacité et la transformation bougent sur le site) et apparaît en fondu
+ * court. content-visibility en allow-discrete garde la réponse affichée
+ * pendant le fondu de fermeture. Un navigateur sans ::details-content ignore
+ * ces règles : <details> ordinaire, réponse visible dès l'ouverture. */
+@media (prefers-reduced-motion: no-preference) {
   .mp-faq-item::details-content {
-    block-size: 0;
-    overflow-y: clip;
+    opacity: 0;
+    transition:
+      opacity var(--mp-duration-exit) var(--mp-ease-out),
+      content-visibility var(--mp-duration-exit) allow-discrete;
   }
   .mp-faq-item[open]::details-content {
-    block-size: calc-size(auto, size);
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .mp-faq-item::details-content {
-      transition: block-size 0.2s ease-out, content-visibility 0.2s ease-out allow-discrete;
-    }
+    opacity: 1;
+    transition-duration: var(--mp-duration-micro);
   }
 }
 
-/* === Keyframes pour Accordion + Sheet (Radix) === */
-@keyframes accordion-down {
-  from { height: 0; }
-  to { height: var(--radix-accordion-content-height); }
-}
-@keyframes accordion-up {
-  from { height: var(--radix-accordion-content-height); }
-  to { height: 0; }
-}
-
+/* === Keyframes des volets (components/ui/sheet.tsx, Radix) ===
+ * Appliquées par les variantes data-[state=open|closed] du composant, avec les
+ * jetons de mouvement : entrée --mp-duration-enter, sortie --mp-duration-exit.
+ * (Avant le 17/10/2026, les classes .animate-in / .slide-in-from-* étaient de
+ * simples classes CSS : Tailwind 4 ne génère pas de variante pour elles, les
+ * volets s'ouvraient donc sans aucune animation.) */
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
-/* Bandeau des jours de /prendre-rendez-vous (BookingWidget) : les jours
- * suivants entrent par la droite, les précédents par la gauche. Appliqué en
- * motion-safe seulement. */
-@keyframes mp-days-next {
-  from { opacity: 0.35; transform: translateX(14px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-@keyframes mp-days-prev {
-  from { opacity: 0.35; transform: translateX(-14px); }
-  to { opacity: 1; transform: translateX(0); }
-}
 @keyframes fade-out {
   from { opacity: 1; }
   to { opacity: 0; }
+}
+
+/* Bandeau des jours de /prendre-rendez-vous (BookingWidget) : les jours
+ * suivants entrent par la droite, les précédents par la gauche, sur 8 px au
+ * plus. Appliqué en motion-safe seulement. */
+@keyframes mp-days-next {
+  from { opacity: 0.35; transform: translateX(8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes mp-days-prev {
+  from { opacity: 0.35; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slide-in-from-right {
@@ -540,26 +562,4 @@ html[data-consent] .mp-consent-banner {
 @keyframes slide-out-to-bottom {
   from { transform: translateY(0); }
   to { transform: translateY(100%); }
-}
-
-/* Helpers Tailwind utilities (utilisés par les data-[state] de Radix) */
-.fade-in-0 { animation-name: fade-in; }
-.fade-out-0 { animation-name: fade-out; }
-.slide-in-from-right { animation-name: slide-in-from-right; }
-.slide-out-to-right { animation-name: slide-out-to-right; }
-.slide-in-from-left { animation-name: slide-in-from-left; }
-.slide-out-to-left { animation-name: slide-out-to-left; }
-.slide-in-from-top { animation-name: slide-in-from-top; }
-.slide-out-to-top { animation-name: slide-out-to-top; }
-.slide-in-from-bottom { animation-name: slide-in-from-bottom; }
-.slide-out-to-bottom { animation-name: slide-out-to-bottom; }
-.animate-in {
-  animation-duration: 200ms;
-  animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-.animate-out {
-  animation-duration: 200ms;
-  animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.7, 0, 0.84, 0);
 }

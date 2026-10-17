@@ -503,7 +503,7 @@ function EstimateForm({
           </div>
           <div className="h-1.5 overflow-hidden rounded-full bg-mp-sand/40" aria-hidden>
             <div
-              className="h-full w-full origin-left rounded-full bg-mp-orange-flame transition-transform duration-300 ease-out motion-reduce:transition-none"
+              className="h-full w-full origin-left rounded-full bg-mp-orange-flame transition-transform duration-(--mp-duration-enter) ease-out motion-reduce:transition-none"
               style={{ transform: `scaleX(${step / STEP_COUNT})` }}
             />
           </div>
@@ -738,6 +738,9 @@ function EstimateForm({
                               onChange={() => set("productKey", p.key)}
                               className="sr-only"
                             />
+                            {/* Sélection marquée par la pastille radio, à côté de
+                                la vignette et non posée dessus (DESIGN.md). */}
+                            <RadioDot active={active} />
                             <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-mp-beige-warm sm:h-16 sm:w-16">
                               {p.imageSrc ? (
                                 // eslint-disable-next-line @next/next/no-img-element
@@ -751,11 +754,6 @@ function EstimateForm({
                               ) : (
                                 <span className="flex h-full w-full items-center justify-center text-mp-sand">
                                   <Flame className="h-6 w-6" aria-hidden />
-                                </span>
-                              )}
-                              {active && (
-                                <span className="absolute right-1 top-1 grid h-5 w-5 place-items-center rounded-full bg-mp-orange-flame text-mp-green-darkest shadow-sm">
-                                  <Check className="h-3.5 w-3.5" aria-hidden />
                                 </span>
                               )}
                             </span>
@@ -1095,9 +1093,11 @@ function EstimateForm({
         <div
           className={cn(
             "sticky bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-20",
-            "border-t border-mp-sand/40 bg-mp-cream/95 px-4 py-3 backdrop-blur-md",
-            "shadow-[0_-10px_24px_rgba(20,36,27,0.08)] transition-[bottom] duration-300 ease-out motion-reduce:transition-none",
-            "sm:px-6 lg:static lg:bg-mp-cream lg:px-8 lg:py-5 lg:shadow-none lg:backdrop-blur-none",
+            // Fond opaque et filet, sans flou ni ombre (DESIGN.md). Le saut de
+            // `bottom` quand la barre du bas se replie n'est pas animé : seuls
+            // opacité et transform s'animent sur le site.
+            "border-t border-mp-sand/40 bg-mp-cream px-4 py-3",
+            "sm:px-6 lg:static lg:px-8 lg:py-5",
           )}
         >
           <div className="flex items-center gap-3">

@@ -152,7 +152,7 @@ export function productFeatureBadges(p: ProductFeatureFlags): ProductFeatureBadg
 
 interface ProductFeatureIconProps {
   Icon: ComponentType<IconProps>;
-  /** 32 px sur la photo, 28 px dans la légende. */
+  /** 32 px par défaut, 28 px sur la carte produit et dans la légende. */
   size?: "md" | "sm";
 }
 
@@ -166,7 +166,7 @@ export function ProductFeatureIcon({ Icon, size = "md" }: ProductFeatureIconProp
     <span
       aria-hidden="true"
       className={cn(
-        "flex shrink-0 items-center justify-center rounded-full bg-mp-orange-flame text-mp-green-deep shadow-sm ring-1 ring-white/70",
+        "flex shrink-0 items-center justify-center rounded-full bg-mp-orange-flame text-mp-green-deep",
         size === "sm" ? "h-7 w-7" : "h-8 w-8"
       )}
     >
@@ -180,8 +180,8 @@ interface ProductFeatureBadgesProps extends ProductFeatureFlags {
 }
 
 /**
- * Colonne de pastilles rondes posée en haut à droite de la photo, en face des
- * étiquettes « Best-seller » / « Nouveau ». Icône seule à l'écran, libellé en
+ * Rangée de pastilles rondes, dans le corps de la carte produit (sur la ligne
+ * de la marque), jamais posée sur la photo. Icône seule à l'écran, libellé en
  * info-bulle au survol et dans le texte masqué pour les lecteurs d'écran.
  */
 export function ProductFeatureBadges({ className, ...flags }: ProductFeatureBadgesProps) {
@@ -189,10 +189,10 @@ export function ProductFeatureBadges({ className, ...flags }: ProductFeatureBadg
   if (badges.length === 0) return null;
 
   return (
-    <ul aria-label="Caractéristiques" className={cn("flex flex-col items-end gap-1.5", className)}>
+    <ul aria-label="Caractéristiques" className={cn("flex min-w-0 flex-wrap justify-end gap-1", className)}>
       {badges.map(({ key, label, Icon }) => (
         <li key={key} title={label}>
-          <ProductFeatureIcon Icon={Icon} />
+          <ProductFeatureIcon Icon={Icon} size="sm" />
           <span className="sr-only">{label}</span>
         </li>
       ))}
@@ -202,7 +202,7 @@ export function ProductFeatureBadges({ className, ...flags }: ProductFeatureBadg
 
 /**
  * Légende des pastilles, affichée juste avant la grille de la boutique. Même
- * liste et mêmes ronds que sur les photos, pour que le visiteur retrouve
+ * liste et mêmes ronds que sur les cartes, pour que le visiteur retrouve
  * chaque icône d'un regard.
  */
 export function ProductFeatureLegend({ className }: { className?: string }) {

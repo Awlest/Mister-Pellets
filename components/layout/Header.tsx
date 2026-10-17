@@ -72,9 +72,12 @@ export function Header() {
         // cassaient lettre par lettre — audit 2026-09-05. En dessous de xl,
         // c'est la NavbarSticky du bas qui porte la navigation.
         "group/header hidden xl:block",
-        "sticky top-0 z-40 w-full transition-all duration-300",
+        // Au défilement : barre plus basse et filet sable, fond toujours
+        // opaque (ni flou ni transparence, DESIGN.md). Hauteur et logo
+        // changent sans animation : seuls opacité et transform s'animent.
+        "sticky top-0 z-40 w-full border-b border-transparent transition-colors",
         "h-20 md:h-24 bg-mp-cream",
-        "data-scrolled:h-16 data-scrolled:bg-mp-cream/92 data-scrolled:backdrop-blur-md data-scrolled:shadow-sm"
+        "data-scrolled:h-16 data-scrolled:border-mp-sand/50"
       )}
     >
       <div className="mp-shell h-full flex items-center justify-between gap-4">
@@ -89,10 +92,10 @@ export function Header() {
             height={44}
             loading="lazy"
             decoding="async"
-            className="size-11 transition-all duration-300 group-data-scrolled/header:size-9"
+            className="size-11 group-data-scrolled/header:size-9"
           />
           <span
-            className="font-semibold text-mp-green-deep transition-all duration-300 hidden sm:inline text-xl group-data-scrolled/header:text-lg"
+            className="font-semibold text-mp-green-deep hidden sm:inline text-xl group-data-scrolled/header:text-lg"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Mister Pellets

@@ -26,7 +26,7 @@ export function BonusAnnouncement() {
   return (
     <Link
       href="/boutique"
-      className="group mx-auto mb-6 flex w-fit max-w-full items-center gap-3 rounded-xl bg-mp-green-deep py-2 pl-2 pr-4 text-left text-mp-cream shadow-md transition-[background-color,transform] duration-200 ease-out hover:bg-mp-green-darkest focus-visible:outline-mp-green-darkest focus-visible:outline-offset-[3px] motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 sm:gap-4 sm:pr-5"
+      className="group mx-auto mb-6 flex w-fit max-w-full items-center gap-3 rounded-xl bg-mp-green-deep py-2 pl-2 pr-4 text-left text-mp-cream transition-colors hover:bg-mp-green-darkest focus-visible:outline-mp-green-darkest focus-visible:outline-offset-[3px] sm:gap-4 sm:pr-5"
     >
       <span className="shrink-0 whitespace-nowrap rounded-lg bg-mp-orange-flame px-3 py-2 font-display text-xl font-semibold leading-none tabular-nums text-mp-green-darkest sm:text-2xl">
         {BONUS.badge}
@@ -43,7 +43,7 @@ export function BonusAnnouncement() {
         Voir les prix
         <ArrowRight
           aria-hidden
-          className="h-4 w-4 transition-transform duration-200 ease-out motion-safe:group-hover:translate-x-0.5"
+          className="h-4 w-4 transition-transform motion-safe:group-hover:translate-x-0.5"
         />
       </span>
       <ArrowRight aria-hidden className="h-5 w-5 shrink-0 text-mp-orange-warm sm:hidden" />

@@ -21,9 +21,9 @@ export function ProcessSteps({ title = "Comment ça marche", steps }: ProcessSte
 
         <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {steps.map((step, i) => (
-            <li key={i} className="flex flex-col gap-4 relative">
+            <li key={i} className="flex flex-col gap-4">
               {/* Cercle numéroté */}
-              <div className="flex items-center justify-center h-14 w-14 rounded-full bg-mp-orange-flame text-mp-green-darkest text-xl font-bold shadow-[0_8px_32px_rgba(242,138,32,0.32)]">
+              <div className="flex items-center justify-center h-14 w-14 rounded-full bg-mp-orange-flame text-mp-green-darkest text-xl font-bold">
                 {i + 1}
               </div>
 
@@ -37,14 +37,6 @@ export function ProcessSteps({ title = "Comment ça marche", steps }: ProcessSte
               <p className="text-mp-cream/80 leading-relaxed text-sm">
                 {step.description}
               </p>
-
-              {/* Ligne connector, desktop only */}
-              {i < steps.length - 1 && (
-                <span
-                  aria-hidden
-                  className="hidden lg:block absolute top-7 left-[60px] right-[-40px] h-px bg-mp-cream/20"
-                />
-              )}
             </li>
           ))}
         </ol>
