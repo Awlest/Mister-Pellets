@@ -2,8 +2,8 @@
 name: Mister Pellets
 description: Installateur et boutique de poêles à pellets en Wallonie. Crème, vert forêt et orange braise, à plat, sans effet.
 colors:
-  cream: "#FAF7F0"
-  beige: "#F4F1E8"
+  cream: "#F4EDE1"
+  beige: "#F0E8DA"
   beige-warm: "#EAE0CB"
   sand: "#C8B68F"
   white: "#FFFFFF"
@@ -168,7 +168,7 @@ exposées en classes Tailwind (`bg-mp-cream`, `text-mp-green-deep`, etc.).
 - **Vert nuit** (green-darkest) : texte posé sur l'orange (boutons, pastilles), survol foncé des blocs verts.
 
 ### Secondary
-- **Orange braise** (orange-flame) : APLATS uniquement. Bouton principal, pastilles caractéristiques, chips actives, barre de progression, pouce du curseur, icônes, bordure de survol des cartes. Jamais en texte sur fond clair (2,3:1).
+- **Orange braise** (orange-flame) : APLATS uniquement. Bouton principal, pastilles caractéristiques, chips actives, barre de progression, pouce du curseur, icônes, bordure de survol des cartes. Jamais en texte sur fond clair (2,1:1).
 - **Orange chaud** (orange-warm) : survol du bouton principal ; texte et icônes d'accent sur fond vert (6,2:1) ; anneau de focus sur fond vert.
 - **Orange encre** (orange-ink) : tout PETIT texte orange sur fond clair (marque au-dessus d'un nom, liens « Lire », étiquettes, astérisques) et anneau de focus du site.
 - **Orange titre** (orange-display) : mots d'accent des grands titres (`.mp-italic`, 24 px et plus), seuil AA du grand texte.
@@ -179,7 +179,7 @@ exposées en classes Tailwind (`bg-mp-cream`, `text-mp-green-deep`, etc.).
 - **Vert tendre** (green-light) : fonds de confirmation (`/15`) et leur filet (`/40`).
 
 ### Neutral
-- **Crème** (cream) : fond de page et des cartes (`--background`).
+- **Crème** (cream) : fond de page et des cartes (`--background`). #F4EDE1 depuis le 17/10/2026, le même lin que Mister Bois : l'ancien #FAF7F0 paraissait blanc.
 - **Beige** (beige) : section sur deux, encadrés de texte.
 - **Beige chaud** (beige-warm) : pastilles neutres (puissance, volume), fond des photos en attente, survol des menus.
 - **Sable** (sand) : filets et bordures (`/40` sur les cartes, `/50` à `/60` sur les barres et menus), pastilles inactives.
@@ -192,21 +192,21 @@ exposées en classes Tailwind (`bg-mp-cream`, `text-mp-green-deep`, etc.).
 ### Paires de contraste validées (WCAG 2.2)
 | Texte / fond | Ratio | Usage permis |
 |---|---|---|
-| ink / cream | 15,1:1 | texte courant |
-| ink-soft / cream | 6,8:1 | texte secondaire |
+| ink / cream | 13,9:1 | texte courant |
+| ink-soft / cream | 6,3:1 | texte secondaire |
 | ink-soft / beige-warm | 5,6:1 | texte dans une pastille neutre |
-| green-deep / cream | 10,0:1 | titres, liens |
+| green-deep / cream | 9,2:1 | titres, liens |
 | green-deep / beige-warm | 8,2:1 | titres sur fond beige chaud |
-| orange-ink / cream | 5,2:1 | petit texte orange |
-| orange-ink / beige | 4,9:1 | petit texte orange |
+| orange-ink / cream | 4,8:1 | petit texte orange |
+| orange-ink / beige | 4,5:1 | petit texte orange |
 | orange-ink / white | 5,5:1 | petit texte orange |
-| orange-display / cream | 3,7:1 | grand texte seulement (24 px et plus) |
+| orange-display / cream | 3,4:1 | grand texte seulement (24 px et plus) |
 | green-darkest / orange-flame | 6,2:1 | texte sur bouton ou pastille orange |
 | green-deep / orange-flame | 4,3:1 | pictogramme sur pastille orange (seuil 3:1) |
-| cream / green-deep | 10,0:1 | texte sur fond vert |
+| cream / green-deep | 9,2:1 | texte sur fond vert |
 | orange-warm / green-deep | 6,2:1 | accent sur fond vert |
 | white / green-mid | 5,9:1 | badge « Nouveau » |
-| orange-flame / cream | 2,3:1 | INTERDIT pour du texte |
+| orange-flame / cream | 2,1:1 | INTERDIT pour du texte |
 
 ### Named Rules
 **La règle de la braise.** L'orange flamme est un aplat, jamais un texte sur fond clair. Pour du texte orange : orange-ink (petit) ou orange-display (grand titre).
@@ -396,7 +396,7 @@ Permis : opacité et transform (`translate`, `scale`, `rotate` d'un chevron), co
 ### Don't:
 - **Don't** écrire une couleur en dur (`#xxxxxx`, `rgb()`) dans un composant ; seules les images Open Graph générées et la balise `theme-color` en ont.
 - **Don't** utiliser `rounded-xl` en pensant à 12 px : il vaut 28 px ici.
-- **Don't** mettre l'orange braise en couleur de texte sur fond clair (2,3:1).
+- **Don't** mettre l'orange braise en couleur de texte sur fond clair (2,1:1).
 - **Don't** ajouter un fondu ou un `opacity: 0` sur le titre ou la photo du héros.
 
 ### Interdits (règles du 17/10/2026, mot pour mot)

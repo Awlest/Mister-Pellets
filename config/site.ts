@@ -28,7 +28,7 @@ export const LEGAL_ENTITY = {
  * et le volet Menu. Ordre commun aux trois sites Mister.
  */
 export const FAMILY_SITES = [
-  { name: "Mr. Bois", description: "Poêles, inserts et foyers à bois", href: "https://mister-bois.be" },
+  { name: "Mister Bois", description: "Poêles, inserts et foyers à bois", href: "https://mister-bois.be" },
   { name: "Mister Clim", description: "Climatisation", href: "https://mister-clim.be" },
   { name: "Awlest", description: "Pompe à chaleur, photovoltaïque, rénovation", href: "https://www.awlest.com" },
 ] as const;

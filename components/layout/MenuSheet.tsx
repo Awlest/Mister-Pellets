@@ -1,17 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, BrushCleaning, ChevronRight, Phone, TriangleAlert, Wrench, X } from "lucide-react";
+import { ArrowUpRight, Calculator, CalendarDays, ChevronRight, Phone, X } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { Sheet, SheetClose, SheetContent } from "@/components/ui/sheet";
-import {
-  CATALOGUE_LINKS,
-  INFO_LINKS,
-  ROUTES,
-  SERVICE_LINKS as ALL_SERVICE_LINKS,
-  isFilterLink,
-  published,
-  type NavLink,
-} from "@/config/navigation";
+import { INFO_LINKS, ROUTES, isFilterLink, visibleNav, type NavLink } from "@/config/navigation";
 import { FAMILY_SITES, PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -21,28 +14,61 @@ import { cn } from "@/lib/utils";
  * piège à focus), il pesait sur le JavaScript de chaque page alors qu'il ne
  * sert qu'à l'ouverture du menu.
  *
- * Ordre commun aux sites Mister (standard du 17/10/2026) : catalogue,
- * services, rendez-vous, puis les pages dans l'ordre du menu, appel, et la
- * famille Awlest.
+ * Même structure que le menu du haut, sur les trois sites Mister : les
+ * entrées de visibleNav() dans leur ordre (Catalogue, Marques, Services,
+ * Aides, Réalisations, Conseils, Contact), puis les actions de l'en-tête dans
+ * leur ordre (téléphone, rendez-vous, estimation) et la famille Awlest.
  */
 
-// Les trois prestations n'avaient aucune entrée sur mobile : le menu du haut,
-// qui les liste, n'existe qu'à partir de 1280 px. Mêmes libellés que ce menu.
-const SERVICE_ICONS = {
-  [ROUTES.maintenance]: Wrench,
-  [ROUTES.sweeping]: BrushCleaning,
-  [ROUTES.repair]: TriangleAlert,
-} as const;
-const SERVICE_LINKS = ALL_SERVICE_LINKS.filter((l) => l.href in SERVICE_ICONS);
+const NAV_ITEMS = visibleNav();
 
-// Le rendez-vous n'a pas d'onglet dans la barre : il ouvre la liste.
-const BOOKING = ALL_SERVICE_LINKS.find((l) => l.href === ROUTES.booking)!;
-const MENU_LINKS: NavLink[] = published([
-  { ...BOOKING, href: ROUTES.bookingWidget },
-  { href: ROUTES.brands, label: "Nos marques", desc: "Edilkamin · EK63 · Girolami" },
-  ...ALL_SERVICE_LINKS.filter((l) => !(l.href in SERVICE_ICONS) && l !== BOOKING),
-  ...INFO_LINKS,
-]);
+// Catalogue et marques en tuiles sur deux colonnes, le reste en lignes.
+const TILES = new Set(["catalogue", "marques"]);
+
+const TILE =
+  "flex min-h-14 items-center justify-center rounded-2xl border border-mp-sand/40 bg-mp-cream px-3 py-3 text-center text-sm font-semibold text-mp-green-deep transition-colors hover:border-mp-orange-flame hover:bg-mp-orange-light/30";
+const ROW =
+  "group flex items-center justify-between gap-3 rounded-2xl border border-mp-sand/40 bg-mp-cream px-4 py-3 transition-colors hover:border-mp-orange-flame hover:bg-mp-orange-light/30";
+const LABEL = "text-xs font-semibold uppercase tracking-wider text-mp-ink-soft";
+
+/** Description d'une entrée sans sous-menu (Aides, Contact) : celle du pied de page. */
+const descOf = (href: string) => INFO_LINKS.find((l) => l.href === href)?.desc;
+
+/**
+ * Un lien filtré de la boutique se suit par un chargement complet
+ * (isFilterLink) : pas de navigation client, le volet se ferme avec la page.
+ */
+function SheetLink({ link, className, children }: { link: NavLink; className: string; children: React.ReactNode }) {
+  if (isFilterLink(link.href)) {
+    return (
+      <a href={link.href} className={className}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <SheetClose asChild>
+      <Link href={link.href} className={className}>
+        {children}
+      </Link>
+    </SheetClose>
+  );
+}
+
+function Row({ link }: { link: NavLink }) {
+  return (
+    <SheetLink link={link} className={ROW}>
+      <span>
+        <span className="block text-base font-semibold text-mp-green-deep">{link.label}</span>
+        {link.desc && <span className="mt-0.5 block text-sm text-mp-ink-soft">{link.desc}</span>}
+      </span>
+      <ChevronRight
+        className="h-5 w-5 shrink-0 text-mp-ink-soft transition-transform group-hover:translate-x-1"
+        aria-hidden
+      />
+    </SheetLink>
+  );
+}
 
 export default function MenuSheet({
   open,
@@ -92,83 +118,69 @@ export default function MenuSheet({
           </SheetClose>
         </div>
 
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
-          Catalogue
-        </p>
-        <ul className="mb-5 grid grid-cols-2 gap-2">
-          {CATALOGUE_LINKS.map((link) => {
-            const cls =
-              "flex min-h-14 items-center justify-center rounded-2xl border border-mp-sand/40 bg-mp-cream px-3 py-3 text-center text-sm font-semibold text-mp-green-deep transition-colors hover:border-mp-orange-flame hover:bg-mp-orange-light/30";
+        <nav aria-label="Menu" className="flex flex-col gap-5">
+          {NAV_ITEMS.map((item) => {
+            if (!item.children) {
+              return <Row key={item.key} link={{ href: item.href, label: item.label, desc: descOf(item.href) }} />;
+            }
+            const overview = !item.children.some((c) => c.href === item.href);
             return (
-              <li key={link.href}>
-                {isFilterLink(link.href) ? (
-                  <a href={link.href} className={cls}>
-                    {link.short ?? link.label}
-                  </a>
+              <section key={item.key} aria-label={item.label}>
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <p className={LABEL}>{item.label}</p>
+                  {overview && (
+                    <SheetClose asChild>
+                      <Link
+                        href={item.href}
+                        className="inline-flex min-h-11 items-center text-sm font-semibold text-mp-orange-ink hover:underline"
+                      >
+                        Tout voir
+                      </Link>
+                    </SheetClose>
+                  )}
+                </div>
+                {TILES.has(item.key) ? (
+                  <ul className="grid grid-cols-2 gap-2">
+                    {item.children.map((link) => (
+                      <li key={link.href}>
+                        <SheetLink link={link} className={TILE}>
+                          {link.short ?? link.label}
+                        </SheetLink>
+                      </li>
+                    ))}
+                  </ul>
                 ) : (
-                  <SheetClose asChild>
-                    <Link href={link.href} className={cls}>
-                      {link.short ?? link.label}
-                    </Link>
-                  </SheetClose>
+                  <ul className="grid grid-cols-1 gap-2">
+                    {item.children.map((link) => (
+                      <li key={link.href}>
+                        <Row link={link} />
+                      </li>
+                    ))}
+                  </ul>
                 )}
-              </li>
+              </section>
             );
           })}
-        </ul>
+        </nav>
 
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
-          Services
-        </p>
-        <ul className="mb-5 grid grid-cols-3 gap-2">
-          {SERVICE_LINKS.map(({ href, short, label }) => {
-            const Icon = SERVICE_ICONS[href as keyof typeof SERVICE_ICONS];
-            return (
-            <li key={href}>
-              <SheetClose asChild>
-                <Link
-                  href={href}
-                  className="flex min-h-[4.5rem] flex-col items-center justify-center gap-1.5 rounded-2xl border border-mp-sand/40 bg-mp-cream px-2 py-3 text-center text-sm font-semibold text-mp-green-deep transition-colors hover:border-mp-orange-flame hover:bg-mp-orange-light/30"
-                >
-                  <Icon className="h-5 w-5 text-mp-orange-flame" aria-hidden />
-                  {short ?? label}
-                </Link>
-              </SheetClose>
-            </li>
-            );
-          })}
-        </ul>
-
-        <ul className="grid grid-cols-1 gap-2 mb-5">
-          {MENU_LINKS.map((link) => (
-            <li key={link.href}>
-              <SheetClose asChild>
-                <Link
-                  href={link.href}
-                  className="flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-mp-cream border border-mp-sand/40 hover:border-mp-orange-flame hover:bg-mp-orange-light/30 transition-colors group"
-                >
-                  <span>
-                    <span className="block text-base font-semibold text-mp-green-deep">
-                      {link.label}
-                    </span>
-                    <span className="block text-sm text-mp-ink-soft mt-0.5">
-                      {link.desc}
-                    </span>
-                  </span>
-                  <ChevronRight className="h-5 w-5 shrink-0 text-mp-ink-soft transition-transform group-hover:translate-x-1" aria-hidden />
-                </Link>
-              </SheetClose>
-            </li>
-          ))}
-        </ul>
-
-        <a
-          href={PHONE_HREF}
-          className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-mp-green-deep px-6 text-base font-semibold text-mp-green-deep transition-colors hover:bg-mp-green-deep hover:text-white"
-        >
-          <Phone className="h-5 w-5" aria-hidden />
-          Appeler le {PHONE_DISPLAY}
-        </a>
+        <div className="mt-6 grid grid-cols-1 gap-2">
+          <a href={PHONE_HREF} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full")}>
+            <Phone aria-hidden />
+            Appeler le {PHONE_DISPLAY}
+          </a>
+          <SheetClose asChild>
+            <Link href={ROUTES.bookingWidget} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full")}>
+              <CalendarDays aria-hidden />
+              Prendre rendez-vous
+            </Link>
+          </SheetClose>
+          <SheetClose asChild>
+            <Link href={ROUTES.configurator} className={cn(buttonVariants({ variant: "primary", size: "lg" }), "w-full")}>
+              <Calculator aria-hidden />
+              Estimer mon projet
+            </Link>
+          </SheetClose>
+        </div>
 
         <p className="mb-2 mt-6 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
           La famille Awlest

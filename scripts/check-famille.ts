@@ -1,7 +1,7 @@
 /**
  * Conformité au standard commun des sites Mister (awlest-next,
  * ecosysteme/standard-sites-mister.md, 17/10/2026). Le même contrôle vit dans
- * Mr. Bois (lib/famille.test.ts) et Mister Clim : si l'un des trois sites
+ * Mister Bois (lib/famille.test.ts) et Mister Clim : si l'un des trois sites
  * change son menu, ses onglets ou ses liens famille sans changer le standard,
  * le contrôle échoue.
  *
@@ -48,6 +48,16 @@ const checks: [string, () => void][] = [
         const dir = route === "/" ? front : join(front, ...route.split("/").filter(Boolean));
         assert.ok(existsSync(join(dir, "page.tsx")), route);
       }
+    },
+  ],
+  [
+    "le volet Menu reprend le menu du haut, puis les actions de l'en-tête dans leur ordre",
+    () => {
+      const sheet = readFileSync(join(process.cwd(), "components", "layout", "MenuSheet.tsx"), "utf8");
+      assert.ok(sheet.includes("visibleNav()"));
+      const order = ["Appeler le {PHONE_DISPLAY}", "Prendre rendez-vous", "Estimer mon projet"].map((t) => sheet.lastIndexOf(t));
+      assert.ok(order.every((i) => i > 0));
+      assert.deepEqual([...order].sort((a, b) => a - b), order);
     },
   ],
   [

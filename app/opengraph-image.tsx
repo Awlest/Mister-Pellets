@@ -40,7 +40,7 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#FAF7F0",
+          background: "#F4EDE1",
           padding: "60px 80px",
           fontFamily: "Georgia, serif",
         }}

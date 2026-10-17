@@ -19,8 +19,8 @@ import {
  * « Un service Awlest » et « La famille Awlest », et la ligne légale.
  * Remplace la version minimale du Hotfix V1.3 (logo, réseaux, liens légaux).
  *
- * Couleurs sur vert deep #174724 : texte beige #FAF7F0 (11,8:1), liens et
- * textes secondaires beige à 85 %, titres de colonne beige à 75 % (8,8:1),
+ * Couleurs sur vert deep #174724 : texte crème #F4EDE1 (9,2:1), liens et
+ * textes secondaires beige à 85 %, titres de colonne beige à 75 % (5,9:1),
  * survol orange flame #F28A20 (4,6:1).
  *
  * Padding-bottom : place pour la NavbarSticky sous 1280 px (.footer-mp).
