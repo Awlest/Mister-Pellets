@@ -42,7 +42,7 @@ import {
 import { BONUS, isBonusPeriod } from "@/lib/bonus";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
-import { EVENTS, trackEvent } from "@/lib/analytics";
+import { BRAND_PARAMS, EVENTS, trackEvent } from "@/lib/analytics";
 
 const STORAGE_KEY = "mp_estimate_draft";
 
@@ -378,6 +378,7 @@ function EstimateForm({
         currency: "EUR",
         value: Math.round(r.totalTTC),
         source: "configurateur",
+        ...BRAND_PARAMS,
       });
       try {
         localStorage.removeItem(STORAGE_KEY);

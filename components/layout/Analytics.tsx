@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Script from "next/script";
 import {
+  BRAND_PARAMS,
   EVENTS,
   GA_MEASUREMENT_ID,
   readConsent,
@@ -12,6 +13,7 @@ import {
   writeConsent,
   type ConsentChoice,
 } from "@/lib/analytics";
+import { FAMILY_HOSTS } from "@/config/site";
 
 /**
  * Mesure d'audience GA4 avec mode consentement Google (v2).
@@ -50,18 +52,28 @@ const getServerSnapshot = (): "loading" => "loading";
 export function Analytics() {
   const choice = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  // Clics téléphoniques : un seul écouteur délégué couvre tous les liens du
-  // site, présents comme à venir. Sans ça il faudrait instrumenter chaque
-  // bouton, et le premier oublié fausse le rapport.
+  // Clics téléphoniques et liens vers les sites de la famille : un seul
+  // écouteur délégué couvre tous les liens du site, présents comme à venir.
+  // Sans ça il faudrait instrumenter chaque bouton, et le premier oublié
+  // fausse le rapport.
   React.useEffect(() => {
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      const link = target?.closest?.("a[href^='tel:']") as HTMLAnchorElement | null;
-      if (!link) return;
-      trackEvent(EVENTS.appelTelephone, {
-        numero: link.getAttribute("href")?.replace("tel:", "") ?? "",
-        emplacement: window.location.pathname,
-      });
+      const link = target?.closest?.("a[href]");
+      if (!(link instanceof HTMLAnchorElement)) return;
+      const emplacement = window.location.pathname;
+      if (link.protocol === "tel:") {
+        trackEvent(EVENTS.appelTelephone, {
+          numero: link.getAttribute("href")?.replace("tel:", "") ?? "",
+          emplacement,
+        });
+        trackEvent(EVENTS.clickToCall, { ...BRAND_PARAMS, emplacement });
+        return;
+      }
+      const host = link.hostname.replace(/^www\./, "");
+      if ((FAMILY_HOSTS as readonly string[]).includes(host)) {
+        trackEvent(EVENTS.crossBrandClick, { ...BRAND_PARAMS, emplacement, destination: host });
+      }
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
