@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { NavbarSticky } from "@/components/layout/NavbarSticky";
 import { Analytics } from "@/components/layout/Analytics";
+import { SmoothMotion } from "@/components/layout/SmoothMotion";
 
 export default function FrontendLayout({
   children,
@@ -21,6 +22,7 @@ export default function FrontendLayout({
       <Footer />
       <NavbarSticky />
       <Analytics />
+      <SmoothMotion />
     </>
   );
 }

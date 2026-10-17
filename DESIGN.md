@@ -382,6 +382,13 @@ Jetons dans `app/globals.css` (`:root`), repris par Tailwind (`ease-out`, durée
 
 Permis : opacité et transform (`translate`, `scale`, `rotate` d'un chevron), couleurs et bordures au survol, glissement d'un volet depuis son bord, déplacement de 8 px au plus pour un contenu. `prefers-reduced-motion: reduce` coupe tout (règle globale dans `globals.css`). Le héros n'a aucun fondu : titre, photo et accroche sont visibles dès le premier affichage (LCP).
 
+**Défilement et apparitions** (`components/layout/SmoothMotion.tsx`, GSAP ScrollTrigger et Lenis, chargés après la page) :
+- défilement doux à la souris (Lenis, `lerp` 0,12) ; au doigt, défilement natif ; les ancres suivent les `scroll-mt-*` ; un volet ouvert bloque le défilement comme avant ;
+- apparition des blocs de section encore sous l’écran : 14 px et fondu en 550 ms, cartes d’une grille courte à 60 ms d’écart, une seule fois. Seule exception à la règle des 300 ms et des 8 px : elle accompagne le défilement, elle ne fait pas attendre un geste. Le héros et ce qui est déjà affiché ne bougent pas ;
+- changement de page : fondu du contenu en 280 ms ;
+- un bloc qui ne doit pas bouger porte `data-reveal="off"`.
+
+
 ## Do's and Don'ts
 
 ### Do:
