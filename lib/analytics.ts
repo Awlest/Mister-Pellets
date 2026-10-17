@@ -40,7 +40,19 @@ export const EVENTS = {
   rdvReserve: "rdv_reserve",
   /** Clic sur un lien téléphonique. Ne dit pas si l'appel a abouti. */
   appelTelephone: "appel_telephone",
+  /**
+   * Noms du plan de marquage commun aux 4 sites (standard du 17/10/2026),
+   * envoyés en plus des noms historiques ci-dessus. Absents de
+   * ADS_CONVERSIONS : ils ne déclenchent aucune conversion Google Ads.
+   */
+  bookAppointment: "book_appointment",
+  clickToCall: "click_to_call",
+  /** Clic vers un autre site de la famille Awlest. */
+  crossBrandClick: "cross_brand_click",
 } as const;
+
+/** Paramètres portés par chaque événement du plan commun. */
+export const BRAND_PARAMS = { brand: "pellets", project_type: "poele_pellets" } as const;
 
 /**
  * Conversion Google Ads envoyée en plus de l'événement GA4 du même nom. Les

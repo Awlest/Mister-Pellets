@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { EVENTS, trackEvent } from "@/lib/analytics";
+import { BRAND_PARAMS, EVENTS, trackEvent } from "@/lib/analytics";
 import {
   Calendar,
   CalendarPlus,
@@ -234,6 +234,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
         durationMin: typeof data.durationMin === "number" ? data.durationMin : 60,
       });
       trackEvent(EVENTS.rdvReserve, { service: serviceSlug, date: data.date });
+      trackEvent(EVENTS.bookAppointment, { ...BRAND_PARAMS, service: serviceSlug });
     } catch (e) {
       setSubmitError(e instanceof Error ? e.message : "Erreur inattendue.");
     } finally {

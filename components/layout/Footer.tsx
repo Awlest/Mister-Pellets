@@ -1,30 +1,29 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { CATALOGUE_LINKS, INFO_LINKS, LEGAL_LINKS, SERVICE_LINKS, isFilterLink, published, type NavLink } from "@/config/navigation";
+import {
+  ADDRESS,
+  EMAIL,
+  FAMILY_SITES,
+  LEGAL_ENTITY,
+  OPENING_HOURS,
+  PARENT_BRAND,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  SITE_NAME,
+} from "@/config/site";
 
 /**
- * Footer mobile MINIMAL (Hotfix V1.3 §P1).
+ * Pied de page, grille commune aux sites Mister (standard du 17/10/2026) :
+ * marque et coordonnées, Catalogue, Services, S'informer, puis les bandes
+ * « Un service Awlest » et « La famille Awlest », et la ligne légale.
+ * Remplace la version minimale du Hotfix V1.3 (logo, réseaux, liens légaux).
  *
- * Annule et remplace les versions V1.1 et V1.2.
+ * Couleurs sur vert deep #174724 : texte beige #FAF7F0 (11,8:1), liens et
+ * textes secondaires beige à 85 %, titres de colonne beige à 75 % (8,8:1),
+ * survol orange flame #F28A20 (4,6:1).
  *
- * Contenu strict, UNIQUEMENT :
- *   1. Logo couleur (60-70 px de hauteur)
- *   2. Bloc "Suivez-nous" + 3 icônes sociales (TikTok, Instagram, YouTube)
- *      en pleine opacité pour bonne visibilité
- *   3. 4 liens légaux compacts horizontaux séparés par "·"
- *   4. Copyright Awlest SRL + TVA + © year
- *
- * Retiré du V1.2 :
- *   - Téléphone, email, adresse (déjà accessibles via la page Contact en 1 clic
- *     depuis la navbar, pas de doublon dans le footer)
- *
- * Couleurs (WCAG AAA) :
- *   - Fond vert deep #174724
- *   - Texte / icônes / liens légaux : beige #FAF7F0 PLEINE OPACITÉ (11.8:1)
- *   - Séparateurs "·" : beige opacité 60 % (7.1:1)
- *   - Hover : orange flame #F28A20 (4.6:1)
- *   - Texte légal en bas : beige opacité 75 % (8.8:1)
- *
- * Padding-bottom : 96 px sur mobile (libère NavbarSticky 72 + 24) + safe-area iOS
- *                  via classe .footer-mp dans globals.css. 32 px sur lg+.
+ * Padding-bottom : place pour la NavbarSticky sous 1280 px (.footer-mp).
  */
 
 // Réseaux sociaux. Tant qu'une URL reste vide, l'icône correspondante n'est
@@ -39,13 +38,6 @@ const SOCIAL = {
 };
 
 const hasSocial = Object.values(SOCIAL).some(Boolean);
-
-const LEGAL_LINKS = [
-  { label: "Mentions légales", href: "/mentions-legales" },
-  { label: "CGV", href: "/cgv" },
-  { label: "Confidentialité", href: "/politique-confidentialite" },
-  { label: "Cookies", href: "/politique-cookies" },
-];
 
 // SVG officiels des marques (lucide-react n'expose plus les logos de marque).
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -66,25 +58,47 @@ const YoutubeIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const LINK =
+  "inline-flex min-h-11 items-center text-[0.9375rem] text-mp-cream/85 transition-colors hover:text-mp-orange-flame pointer-fine:min-h-9";
+const TITLE = "mb-2 text-xs font-semibold uppercase tracking-wider text-mp-cream/75";
+
+function Column({ title, links }: { title: string; links: readonly NavLink[] }) {
+  const shown = published(links);
+  if (shown.length === 0) return null;
+  return (
+    <div>
+      <p className={TITLE}>{title}</p>
+      <ul>
+        {shown.map((link) => (
+          <li key={link.href}>
+            {isFilterLink(link.href) ? (
+              <a href={link.href} className={LINK}>
+                {link.label}
+              </a>
+            ) : (
+              <Link href={link.href} className={LINK}>
+                {link.label}
+              </Link>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="footer-mp bg-mp-green-deep text-mp-cream w-full px-4 pt-8 lg:px-6 lg:pt-12">
-      <div className="max-w-md mx-auto lg:max-w-3xl flex flex-col items-center text-center gap-6">
-        {/* Bloc identité : logo côte à côte avec les sociaux.
-          * Le contour du logo est en vert sombre, le même que ce fond : posé
-          * à nu, il disparaît. Il repose donc sur un médaillon crème plein
-          * (avant le 17/10/2026 : un contour lumineux en drop-shadow, retiré
-          * avec les lueurs, DESIGN.md).
-          *
-          * Symétrie visuelle équilibrée : deux moitiés égales (flex-1)
-          * avec contenu centré dans chacune. Le logo apparaît centré dans
-          * la moitié gauche, les sociaux centrés dans la moitié droite.
-          * L'ensemble paraît centré globalement avec un équilibre parfait. */}
-        <div className="flex items-center w-full">
-          <div className="flex-1 flex justify-center">
-            <Link href="/" aria-label="Mister Pellets, accueil" className="block rounded-[28px] bg-mp-cream p-3">
+    <footer className="footer-mp w-full bg-mp-green-deep pt-10 text-mp-cream lg:pt-12">
+      <div className="mp-shell">
+        <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
+          <div className="max-w-xs">
+            {/* Le contour du logo est en vert sombre, le même que ce fond : posé
+              * à nu, il disparaît. Il repose donc sur un médaillon crème plein
+              * (pas de contour lumineux en drop-shadow, DESIGN.md). */}
+            <Link href="/" aria-label="Mister Pellets, accueil" className="inline-block rounded-[28px] bg-mp-cream p-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo-mister-pellets-ref.svg"
@@ -93,82 +107,114 @@ export function Footer() {
                 height={320}
                 loading="lazy"
                 decoding="async"
-                className="h-28 w-28 sm:h-32 sm:w-32 object-contain"
+                className="h-24 w-24 object-contain"
               />
             </Link>
+            <p className="mt-3 text-base text-mp-cream/85">Poêles à pellets vendus, posés et entretenus en Wallonie.</p>
+            <div className="mt-4 flex flex-col items-start">
+              <a
+                href={PHONE_HREF}
+                className="inline-flex min-h-11 items-center text-base font-semibold text-mp-cream transition-colors hover:text-mp-orange-flame"
+              >
+                {PHONE_DISPLAY}
+              </a>
+              <a href={`mailto:${EMAIL}`} className={LINK}>
+                {EMAIL}
+              </a>
+              <p className="mt-1 text-[0.9375rem] text-mp-cream/85">{OPENING_HOURS}</p>
+              <p className="mt-1 text-[0.9375rem] text-mp-cream/85">
+                Showroom sur rendez-vous, {ADDRESS.street}, {ADDRESS.postalCode} {ADDRESS.city}
+              </p>
+            </div>
+
+            {/* Réseaux sociaux : masqués tant qu'aucun profil n'est renseigné. */}
+            {hasSocial && (
+              <div className="mt-5">
+                <p className={TITLE}>Suivez-nous</p>
+                <div className="flex items-center gap-4">
+                  {SOCIAL.tiktok && (
+                    <a
+                      href={SOCIAL.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Mister Pellets sur TikTok"
+                      className="text-mp-cream transition-colors hover:text-mp-orange-flame"
+                    >
+                      <TikTokIcon className="h-7 w-7" />
+                    </a>
+                  )}
+                  {SOCIAL.instagram && (
+                    <a
+                      href={SOCIAL.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Mister Pellets sur Instagram"
+                      className="text-mp-cream transition-colors hover:text-mp-orange-flame"
+                    >
+                      <InstagramIcon className="h-7 w-7" />
+                    </a>
+                  )}
+                  {SOCIAL.youtube && (
+                    <a
+                      href={SOCIAL.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Mister Pellets sur YouTube"
+                      className="text-mp-cream transition-colors hover:text-mp-orange-flame"
+                    >
+                      <YoutubeIcon className="h-7 w-7" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Réseaux sociaux : masqués tant qu'aucun profil n'est renseigné. */}
-          {hasSocial && (
-          <div className="flex-1 flex justify-center">
-            <div className="flex flex-col items-center gap-3">
-              <p className="text-xs uppercase tracking-wider text-mp-cream/85">
-                Suivez-nous
-              </p>
-              <div className="flex items-center gap-4">
-                {SOCIAL.tiktok && (
-                  <a
-                    href={SOCIAL.tiktok}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Mister Pellets sur TikTok"
-                    className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-                  >
-                    <TikTokIcon className="h-7 w-7" />
-                  </a>
-                )}
-                {SOCIAL.instagram && (
-                  <a
-                    href={SOCIAL.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Mister Pellets sur Instagram"
-                    className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-                  >
-                    <InstagramIcon className="h-7 w-7" />
-                  </a>
-                )}
-                {SOCIAL.youtube && (
-                  <a
-                    href={SOCIAL.youtube}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Mister Pellets sur YouTube"
-                    className="text-mp-cream hover:text-mp-orange-flame transition-colors"
-                  >
-                    <YoutubeIcon className="h-7 w-7" />
-                  </a>
-                )}
-              </div>
-            </div>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:gap-x-12">
+            <Column title="Catalogue" links={CATALOGUE_LINKS} />
+            <Column title="Services" links={SERVICE_LINKS} />
+            <Column title="S'informer" links={INFO_LINKS} />
           </div>
-          )}
         </div>
 
-        {/* Liens légaux compacts : pleine opacité pour la lisibilité */}
-        <nav
-          aria-label="Liens légaux"
-          className="flex flex-wrap items-center justify-center gap-x-2 text-sm text-mp-cream pt-2 border-t border-mp-cream/25 w-full"
-        >
-          {LEGAL_LINKS.map((link, i) => (
-            <span key={link.href} className="inline-flex items-center gap-2">
-              <Link
-                href={link.href}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-mp-cream hover:text-mp-orange-flame transition-colors"
-              >
+        <div className="mt-10 grid gap-8 border-t border-mp-cream/25 pt-6 lg:grid-cols-2">
+          <div>
+            <p className={TITLE}>Un service {PARENT_BRAND.name}</p>
+            <p className="max-w-md text-[0.9375rem] text-mp-cream/85">
+              {SITE_NAME} est une marque d&apos;{PARENT_BRAND.name}, installateur de chauffage en Wallonie depuis{" "}
+              {PARENT_BRAND.since}. Ce sont ses techniciens qui posent et entretiennent votre poêle.
+            </p>
+            <a href={PARENT_BRAND.href} className={`${LINK} gap-1 font-semibold text-mp-cream`}>
+              Découvrir {PARENT_BRAND.name}
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </a>
+          </div>
+          <div>
+            <p className={TITLE}>La famille {PARENT_BRAND.name}</p>
+            <ul className="flex flex-col">
+              {FAMILY_SITES.filter((site) => site.href !== PARENT_BRAND.href).map((site) => (
+                <li key={site.href}>
+                  <a href={site.href} className={`${LINK} gap-1`}>
+                    {site.name} · {site.description}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-col gap-2 border-t border-mp-cream/25 pt-4 pb-2 sm:flex-row sm:items-center sm:justify-between">
+          <nav aria-label="Liens légaux" className="flex flex-wrap gap-x-4">
+            {published(LEGAL_LINKS).map((link) => (
+              <Link key={link.href} href={link.href} className={LINK}>
                 {link.label}
               </Link>
-              {i < LEGAL_LINKS.length - 1 && (
-                <span className="text-mp-cream/60" aria-hidden>·</span>
-              )}
-            </span>
-          ))}
-        </nav>
-
-        {/* Copyright */}
-        <div className="text-xs text-mp-cream/75 leading-relaxed">
-          <p>Awlest SRL · TVA BE 0656.514.212</p>
-          <p>© {year} Mister Pellets</p>
+            ))}
+          </nav>
+          <p className="text-xs text-mp-cream/75">
+            © {year} {SITE_NAME}, une marque d&apos;{LEGAL_ENTITY.name} · BCE {LEGAL_ENTITY.enterpriseNumber}
+          </p>
         </div>
       </div>
     </footer>

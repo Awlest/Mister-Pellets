@@ -4,11 +4,15 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { Home, ShoppingBag, Flame, Calendar, Menu as MenuIcon } from "lucide-react";
+import { Home, ShoppingBag, Flame, Phone, Menu as MenuIcon } from "lucide-react";
+import { MOBILE_TABS, ROUTES, isCataloguePath, type MobileTabId } from "@/config/navigation";
 
 /**
  * Navbar FLOTTANTE sticky bottom, mobile ET tablette (jusqu'à xl / 1280 px).
- * 5 onglets : Accueil / Boutique / Devis / RDV / Menu (drawer)
+ * 5 onglets communs aux sites Mister (config/navigation.ts, MOBILE_TABS,
+ * standard du 17/10/2026) : Accueil / Catalogue / Estimer / Appeler / Menu.
+ * L'appel reste à un geste sur toutes les pages ; le rendez-vous ouvre le
+ * volet Menu, en tête de liste.
  * La pastille orange est un FOND ACTIF derrière l'onglet courant qui glisse
  * latéralement d'un onglet à l'autre (courbe en sortie douce, sans rebond).
  *
@@ -34,31 +38,24 @@ const preloadMenuSheet = () => {
   loadMenuSheet().catch(() => {});
 };
 
-type TabId = "home" | "shop" | "quote" | "rdv" | "menu";
+type TabId = MobileTabId;
 
-interface Tab {
-  id: TabId;
-  href?: string;
-  icon: typeof Home;
-  label: string;
-  matches: (path: string) => boolean;
-}
-
-const TABS: Tab[] = [
+const TAB_UI: Record<TabId, { icon: typeof Home; matches: (path: string) => boolean }> = {
   // « /index » : c'est le chemin que voit le rendu serveur de l'accueil en
   // production (régénération ISR). Sans lui, le HTML marquait l'onglet Menu
   // et le navigateur l'onglet Accueil : React levait l'erreur d'hydratation
   // #418 et recalculait toute la page côté navigateur (constaté le 11/10/2026).
-  { id: "home",  href: "/",                    icon: Home,        label: "Accueil",  matches: (p) => p === "/" || p === "/index" || p === "" },
-  { id: "shop",  href: "/boutique",            icon: ShoppingBag, label: "Boutique", matches: (p) => p.startsWith("/boutique") || p.startsWith("/produit/") },
-  // L'onglet Devis mène au configurateur : il chiffre, calcule la mensualité et
-  // déduit la prime. Le formulaire /demande-de-devis reste accessible, mais il
-  // n'est plus le chemin par défaut depuis le retrait du paiement en ligne.
-  { id: "quote", href: "/estimation",          icon: Flame,       label: "Devis",    matches: (p) => p === "/estimation" || p === "/demande-de-devis" },
-  // #reserver : l'onglet ouvre directement l'agenda, pas la présentation du showroom.
-  { id: "rdv",   href: "/prendre-rendez-vous#reserver", icon: Calendar, label: "RDV", matches: (p) => p === "/prendre-rendez-vous" },
-  { id: "menu",                                icon: MenuIcon,    label: "Menu",     matches: () => false },
-];
+  home: { icon: Home, matches: (p) => p === "/" || p === "/index" || p === "" },
+  catalogue: { icon: ShoppingBag, matches: isCataloguePath },
+  // Le configurateur chiffre, calcule la mensualité et déduit la prime. Le
+  // formulaire /demande-de-devis reste accessible depuis le volet.
+  estimate: { icon: Flame, matches: (p) => p === ROUTES.configurator || p === ROUTES.quoteForm },
+  // Lien tel: : jamais actif.
+  call: { icon: Phone, matches: () => false },
+  menu: { icon: MenuIcon, matches: () => false },
+};
+
+const TABS = MOBILE_TABS.map((tab) => ({ ...tab, ...TAB_UI[tab.id] }));
 
 export function NavbarSticky() {
   const pathname = usePathname();
@@ -209,6 +206,13 @@ export function NavbarSticky() {
                     >
                       {itemContent}
                     </button>
+                  ) : tab.id === "call" ? (
+                    <a
+                      href={tab.href!}
+                      className="relative z-10 flex flex-col items-center justify-center h-full w-full"
+                    >
+                      {itemContent}
+                    </a>
                   ) : (
                     <Link
                       href={tab.href!}
