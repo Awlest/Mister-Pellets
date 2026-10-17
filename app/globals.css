@@ -19,19 +19,21 @@
   --mp-orange-light:  #FFE4D1;
 
   /* Orange pour du TEXTE sur fond clair (audit mobile du 11/10/2026).
-   * L'orange flamme ne fait que 2,3:1 sur crème et 2,5:1 sur blanc : il reste
+   * L'orange flamme ne fait que 2,1:1 sur crème et 2,5:1 sur blanc : il reste
    * pour les aplats (boutons, pastilles), les icônes et les bordures, et le
    * texte posé dessus passe en vert le plus sombre (6,2:1).
-   *   ink     : petit texte (liens, astérisques, étiquettes) ; 5,2:1 sur
-   *             crème, 4,9:1 sur beige, 5,5:1 sur blanc.
-   *   display : mots d'accent des grands titres (24 px et plus) ; 3,7:1 sur
+   *   ink     : petit texte (liens, astérisques, étiquettes) ; 4,8:1 sur
+   *             crème, 4,5:1 sur beige, 5,5:1 sur blanc.
+   *   display : mots d'accent des grands titres (24 px et plus) ; 3,4:1 sur
    *             crème, le seuil AA du grand texte étant 3:1. */
   --mp-orange-ink:     #A05508;
   --mp-orange-display: #C2680A;
 
-  /* === BEIGES (FOND DOMINANT) === */
-  --mp-cream:         #FAF7F0;
-  --mp-beige:         #F4F1E8;
+  /* === BEIGES (FOND DOMINANT) ===
+   * Crème passé de #FAF7F0 à #F4EDE1 le 17/10/2026 (le fond paraissait
+   * blanc), le lin de Mister Bois ; beige d'alternance de #F4F1E8 à #F0E8DA. */
+  --mp-cream:         #F4EDE1;
+  --mp-beige:         #F0E8DA;
   --mp-beige-warm:    #EAE0CB;
   --mp-sand:          #C8B68F;
 
@@ -389,7 +391,7 @@ body {
  * les couleurs de texte par défaut quand elle est appliquée explicitement).
  * Orange « display » : ces mots d'accent sont toujours dans un grand titre
  * (30 px et plus), où le seuil AA est 3:1 ; l'orange flamme ne fait que
- * 2,3:1 sur le crème des héros. */
+ * 2,1:1 sur le crème des héros. */
 .mp-italic {
   font-style: italic;
   color: var(--mp-orange-display);

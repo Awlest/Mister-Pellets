@@ -4,7 +4,7 @@
  *
  * Menu, onglets mobiles et colonnes du pied de page suivent le standard commun
  * des sites Mister (awlest-next, ecosysteme/standard-sites-mister.md, 17/10/2026) :
- * même ordre et mêmes libellés sur Mister Pellets, Mister Clim et Mr. Bois.
+ * même ordre et mêmes libellés sur Mister Pellets, Mister Clim et Mister Bois.
  * scripts/check-famille.ts le vérifie (pnpm check:famille).
  */
 

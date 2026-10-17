@@ -119,13 +119,13 @@ export async function notifyInternalQuote(quote: {
     <h2 style="color:#174724;font-family:Georgia,serif">Nouvelle demande de devis</h2>
     <p><strong>${escapeHtml(quote.name)}</strong> · ${escapeHtml(quote.email)}${quote.phone ? ` · ${escapeHtml(quote.phone)}` : ""}</p>
     <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-      <tr><td style="background:#FAF7F0;width:40%"><strong>Code postal</strong></td><td>${quote.postalCode}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Surface</strong></td><td>${quote.surface}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>PEB</strong></td><td>${quote.peb}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Cheminée</strong></td><td>${quote.chimney}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Style</strong></td><td>${quote.style}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Budget</strong></td><td>${quote.budget}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Délai souhaité</strong></td><td>${quote.delay}</td></tr>
+      <tr><td style="background:#F4EDE1;width:40%"><strong>Code postal</strong></td><td>${quote.postalCode}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Surface</strong></td><td>${quote.surface}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>PEB</strong></td><td>${quote.peb}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Cheminée</strong></td><td>${quote.chimney}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Style</strong></td><td>${quote.style}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Budget</strong></td><td>${quote.budget}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Délai souhaité</strong></td><td>${quote.delay}</td></tr>
     </table>
     ${quote.message ? `<h3 style="color:#174724">Message :</h3><p>${escapeHtml(quote.message).replace(/\n/g, "<br>")}</p>` : ""}
     <p style="color:#6B7280;font-size:12px;margin-top:24px">Reçu le ${new Date().toLocaleString("fr-BE", { dateStyle: "long", timeStyle: "short" })}</p>
@@ -182,17 +182,17 @@ export async function notifyInternalBooking(rdv: {
   customerConfirmed: boolean;
 }) {
   const confirmationRow = rdv.customerConfirmed
-    ? `<tr><td style="background:#FAF7F0"><strong>Confirmation client</strong></td><td>envoyée par e-mail</td></tr>`
+    ? `<tr><td style="background:#F4EDE1"><strong>Confirmation client</strong></td><td>envoyée par e-mail</td></tr>`
     : `<tr><td style="background:#FFE4D1"><strong>Confirmation client</strong></td><td style="background:#FFE4D1"><strong>NON envoyée</strong> (refus de Resend, voir les logs « [email] envoi refusé ») : prévenir le client par téléphone.</td></tr>`;
 
   const html = `
     <h2 style="color:#174724;font-family:Georgia,serif">Nouveau rendez-vous réservé en ligne</h2>
     <p style="font-size:18px;color:#174724"><strong>${escapeHtml(rdv.serviceName)}</strong> · ${rdv.dayKey} à ${rdv.timeLabel} (${rdv.durationMin} min)</p>
     <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-      <tr><td style="background:#FAF7F0;width:40%"><strong>Client</strong></td><td>${escapeHtml(rdv.name)}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Email</strong></td><td>${escapeHtml(rdv.email)}</td></tr>
-      ${rdv.phone ? `<tr><td style="background:#FAF7F0"><strong>Téléphone</strong></td><td>${escapeHtml(rdv.phone)}</td></tr>` : ""}
-      ${rdv.address ? `<tr><td style="background:#FAF7F0"><strong>Adresse</strong></td><td>${escapeHtml(rdv.address)}</td></tr>` : ""}
+      <tr><td style="background:#F4EDE1;width:40%"><strong>Client</strong></td><td>${escapeHtml(rdv.name)}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Email</strong></td><td>${escapeHtml(rdv.email)}</td></tr>
+      ${rdv.phone ? `<tr><td style="background:#F4EDE1"><strong>Téléphone</strong></td><td>${escapeHtml(rdv.phone)}</td></tr>` : ""}
+      ${rdv.address ? `<tr><td style="background:#F4EDE1"><strong>Adresse</strong></td><td>${escapeHtml(rdv.address)}</td></tr>` : ""}
       ${confirmationRow}
     </table>
     ${rdv.notes ? `<h3 style="color:#174724">Précisions :</h3><p>${escapeHtml(rdv.notes).replace(/\n/g, "<br>")}</p>` : ""}
@@ -440,7 +440,7 @@ export async function notifyInternalEstimate(est: {
   const linesHtml = est.lines
     .map(
       (l) =>
-        `<tr><td style="background:#FAF7F0">${escapeHtml(l.label)}</td><td>${fmt(l.amountHT)} HT</td></tr>`,
+        `<tr><td style="background:#F4EDE1">${escapeHtml(l.label)}</td><td>${fmt(l.amountHT)} HT</td></tr>`,
     )
     .join("");
 
@@ -449,14 +449,14 @@ export async function notifyInternalEstimate(est: {
     <p><strong>${escapeHtml(est.name)}</strong> · ${escapeHtml(est.email)}${est.phone ? ` · ${escapeHtml(est.phone)}` : ""} · ${escapeHtml(est.postalCode)}</p>
     <p style="font-size:18px;color:#174724"><strong>${fmt(est.totalTTC)} TTC</strong> (TVA ${Math.round(est.vatRate * 100)} %)${est.monthly ? ` · ${fmt(est.monthly)}/mois sur ${est.months} mois` : ""}</p>
     <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-      <tr><td style="background:#FAF7F0;width:45%"><strong>Poêle choisi</strong></td><td>${escapeHtml(est.productName)} (${formatKw(est.powerKw)} kW) — /produit/${escapeHtml(est.productSlug)}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Matériel</strong></td><td>${fmt(est.materialHT)} HT</td></tr>
+      <tr><td style="background:#F4EDE1;width:45%"><strong>Poêle choisi</strong></td><td>${escapeHtml(est.productName)} (${formatKw(est.powerKw)} kW) — /produit/${escapeHtml(est.productSlug)}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Matériel</strong></td><td>${fmt(est.materialHT)} HT</td></tr>
       ${linesHtml}
-      <tr><td style="background:#FAF7F0"><strong>Type de poêle</strong></td><td>${escapeHtml(est.stoveKind)}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Évacuation</strong></td><td>${escapeHtml(est.installType)}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Surface / isolation</strong></td><td>${est.surface} m² · ${escapeHtml(est.iso)} · besoin ~${est.needKw} kW</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Niveau</strong></td><td>${escapeHtml(est.level)}</td></tr>
-      <tr><td style="background:#FAF7F0"><strong>Délai souhaité</strong></td><td>${escapeHtml(est.delay)}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Type de poêle</strong></td><td>${escapeHtml(est.stoveKind)}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Évacuation</strong></td><td>${escapeHtml(est.installType)}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Surface / isolation</strong></td><td>${est.surface} m² · ${escapeHtml(est.iso)} · besoin ~${est.needKw} kW</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Niveau</strong></td><td>${escapeHtml(est.level)}</td></tr>
+      <tr><td style="background:#F4EDE1"><strong>Délai souhaité</strong></td><td>${escapeHtml(est.delay)}</td></tr>
     </table>
     ${est.message ? `<h3 style="color:#174724">Précisions :</h3><p>${escapeHtml(est.message).replace(/\n/g, "<br>")}</p>` : ""}
     <p style="color:#6B7280;font-size:12px;margin-top:24px">Reçu le ${new Date().toLocaleString("fr-BE", { dateStyle: "long", timeStyle: "short" })} · montants de pose issus des forfaits indicatifs de lib/estimate.ts</p>
