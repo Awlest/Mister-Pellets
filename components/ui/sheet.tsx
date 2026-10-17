@@ -17,7 +17,8 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      "fixed inset-0 z-50 bg-mp-ink/40 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      // Voile en aplat sombre, sans flou (DESIGN.md, « Interdits »).
+      "fixed inset-0 z-50 bg-mp-ink/40 data-[state=open]:animate-[fade-in_var(--mp-duration-enter)_var(--mp-ease-out)] data-[state=closed]:animate-[fade-out_var(--mp-duration-exit)_var(--mp-ease-out)_forwards]",
       className
     )}
     {...props}
@@ -27,14 +28,15 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = "SheetOverlay";
 
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-mp-cream shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  // Ouverture en --mp-duration-enter, fermeture plus courte (--mp-duration-exit).
+  "fixed z-50 gap-4 bg-mp-cream shadow-lg",
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
-        bottom: "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
-        right: "inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+        top: "inset-x-0 top-0 border-b data-[state=open]:animate-[slide-in-from-top_var(--mp-duration-enter)_var(--mp-ease-out)] data-[state=closed]:animate-[slide-out-to-top_var(--mp-duration-exit)_var(--mp-ease-out)_forwards]",
+        bottom: "inset-x-0 bottom-0 border-t data-[state=open]:animate-[slide-in-from-bottom_var(--mp-duration-enter)_var(--mp-ease-out)] data-[state=closed]:animate-[slide-out-to-bottom_var(--mp-duration-exit)_var(--mp-ease-out)_forwards]",
+        left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=open]:animate-[slide-in-from-left_var(--mp-duration-enter)_var(--mp-ease-out)] data-[state=closed]:animate-[slide-out-to-left_var(--mp-duration-exit)_var(--mp-ease-out)_forwards] sm:max-w-sm",
+        right: "inset-y-0 right-0 h-full w-3/4 border-l data-[state=open]:animate-[slide-in-from-right_var(--mp-duration-enter)_var(--mp-ease-out)] data-[state=closed]:animate-[slide-out-to-right_var(--mp-duration-exit)_var(--mp-ease-out)_forwards] sm:max-w-sm",
       },
     },
     defaultVariants: { side: "right" },

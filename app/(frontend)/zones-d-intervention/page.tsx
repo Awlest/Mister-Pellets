@@ -100,7 +100,7 @@ export default function ZonesDInterventionPage() {
                   href={`/poeles-pellets-${city.slug}`}
                   className="group"
                 >
-                  <Card className="p-5 h-full hover:-translate-y-0.5 transition-all">
+                  <Card className="p-5 h-full transition-colors group-hover:border-mp-orange-flame">
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div>
                         <h3
@@ -113,7 +113,7 @@ export default function ZonesDInterventionPage() {
                           Province de {city.province}
                         </span>
                       </div>
-                      <ArrowRight className="h-5 w-5 text-mp-ink-soft group-hover:text-mp-orange-flame group-hover:translate-x-1 transition-all shrink-0 mt-1" />
+                      <ArrowRight className="h-5 w-5 text-mp-ink-soft group-hover:text-mp-orange-flame group-hover:translate-x-1 transition-[color,translate] shrink-0 mt-1" />
                     </div>
 
                     <div className="flex flex-wrap gap-1.5 mb-3">

@@ -69,7 +69,7 @@ export default function BlogHubPage() {
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
             <Link href={`/blog/${featured.slug}`} className="group block">
-              <Card className="p-8 md:p-12 bg-mp-green-deep text-mp-cream text-center border-mp-green-deep hover:-translate-y-0.5 transition-all">
+              <Card className="p-8 md:p-12 bg-mp-green-deep text-mp-cream text-center border-mp-green-deep">
                 <div className="flex flex-wrap items-center justify-center gap-3 mb-5">
                   <Badge variant="secondary" className="bg-mp-orange-flame text-mp-green-darkest border-0">
                     <Sparkles className="h-3.5 w-3.5 mr-1" /> À la une
@@ -97,9 +97,9 @@ export default function BlogHubPage() {
                   {featured.excerpt}
                 </p>
 
-                <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-light group-hover:gap-3 transition-all">
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-light">
                   Lire l'article
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </Card>
             </Link>
@@ -139,7 +139,7 @@ export default function BlogHubPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {others.map((a) => (
               <Link key={a.slug} href={`/blog/${a.slug}`} className="group">
-                <Card className="p-6 h-full flex flex-col hover:-translate-y-1 transition-all">
+                <Card className="p-6 h-full flex flex-col transition-colors group-hover:border-mp-orange-flame">
                   <div className="flex items-center gap-2 mb-3">
                     <Badge variant="secondary">{CATEGORY_LABELS[a.category]}</Badge>
                     <span className="inline-flex items-center gap-1 text-xs text-mp-ink-soft">
@@ -158,9 +158,9 @@ export default function BlogHubPage() {
                     {a.excerpt}
                   </p>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink group-hover:gap-3 transition-all">
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-mp-orange-ink">
                     Lire
-                    <ArrowRight className="h-3.5 w-3.5" />
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Card>
               </Link>

@@ -51,12 +51,12 @@ export function FAQAccordion({
               name={group}
               className="mp-faq-item group border-b border-mp-sand/40 last:border-b-0"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-mp-green-deep transition-all hover:text-mp-orange-flame [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-mp-green-deep transition-colors hover:text-mp-orange-flame [&::-webkit-details-marker]:hidden">
                 {/* text-current : la question suit la couleur du survol, comme
                     le texte du bouton Radix qu'elle remplace. */}
                 <h3 className="text-base font-medium text-current">{item.question}</h3>
                 <ChevronDown
-                  className="h-5 w-5 shrink-0 transition-transform duration-200 group-open:rotate-180"
+                  className="h-5 w-5 shrink-0 transition-transform group-open:rotate-180"
                   aria-hidden
                 />
               </summary>

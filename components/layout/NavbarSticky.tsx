@@ -10,11 +10,11 @@ import { Home, ShoppingBag, Flame, Calendar, Menu as MenuIcon } from "lucide-rea
  * Navbar FLOTTANTE sticky bottom, mobile ET tablette (jusqu'à xl / 1280 px).
  * 5 onglets : Accueil / Boutique / Devis / RDV / Menu (drawer)
  * La pastille orange est un FOND ACTIF derrière l'onglet courant qui glisse
- * latéralement avec un léger dépassement dans le sens du déplacement.
+ * latéralement d'un onglet à l'autre (courbe en sortie douce, sans rebond).
  *
  * Design :
  * - Navbar pill rounded, marges externes (lévite au-dessus du contenu)
- * - Backdrop blur + shadow douce
+ * - Fond crème opaque, filet sable et ombre douce (aucun flou : DESIGN.md)
  * - Pastille orange = un seul élément derrière les onglets, déplacé en CSS
  *   (transform). framer-motion servait à cette seule animation et chargeait
  *   plus de 40 Ko de JavaScript sur chaque page (audit mobile du 11/10/2026).
@@ -143,30 +143,34 @@ export function NavbarSticky() {
         className={clsx(
           "fixed inset-x-0 bottom-0 z-30 xl:hidden",
           "px-3 pb-3",
-          "transition-[transform,opacity] duration-300",
-          effectiveVisible ? "translate-y-0 opacity-100" : "translate-y-[120%] opacity-0 pointer-events-none"
+          // translate-y-* écrit la propriété translate (Tailwind 4), d'où
+          // transition-[translate,opacity]. Retour en --mp-duration-enter,
+          // repli plus court.
+          "transition-[translate,opacity] ease-out",
+          effectiveVisible
+            ? "translate-y-0 opacity-100 duration-(--mp-duration-enter)"
+            : "translate-y-[120%] opacity-0 pointer-events-none duration-(--mp-duration-exit)"
         )}
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       >
         <nav
           className={clsx(
             "relative mx-auto max-w-md",
-            "rounded-full bg-mp-cream/92 backdrop-blur-xl",
+            "rounded-full bg-mp-cream",
             "border border-mp-sand/50",
-            "shadow-[0_8px_32px_rgba(20,36,27,0.18)]",
+            "shadow-md",
             "overflow-hidden"
           )}
           aria-label="Navigation rapide"
         >
-          {/* Pastille active : glisse d'un onglet à l'autre, avec un léger
-              dépassement (courbe à rebond), coupée si l'utilisateur réduit
-              les animations. */}
+          {/* Pastille active : glisse d'un onglet à l'autre (180 ms, sortie
+              douce, sans rebond), coupée si l'utilisateur réduit les
+              animations. */}
           <span
             aria-hidden
             className={clsx(
               "pointer-events-none absolute inset-y-1.5 left-1.5 rounded-full bg-mp-orange-flame",
-              "shadow-[0_4px_14px_rgba(242,138,32,0.45)]",
-              "transition-transform duration-300 ease-[cubic-bezier(0.34,1.36,0.64,1)] motion-reduce:transition-none"
+              "transition-transform ease-out motion-reduce:transition-none"
             )}
             style={{
               width: `calc((100% - 0.75rem) / ${TABS.length})`,
@@ -182,7 +186,7 @@ export function NavbarSticky() {
                 <span
                   className={clsx(
                     "relative z-10 flex flex-col items-center justify-center gap-0.5 h-full w-full px-1",
-                    "text-[10px] font-semibold tracking-tight transition-colors duration-200",
+                    "text-[10px] font-semibold tracking-tight transition-colors",
                     isActive ? "text-mp-green-darkest" : "text-mp-ink-soft"
                   )}
                 >

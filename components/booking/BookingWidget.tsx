@@ -458,8 +458,8 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
                 key={pageStart}
                 className={cn(
                   "grid gap-2",
-                  slideDir === 1 && "motion-safe:animate-[mp-days-next_220ms_ease-out]",
-                  slideDir === -1 && "motion-safe:animate-[mp-days-prev_220ms_ease-out]",
+                  slideDir === 1 && "motion-safe:animate-[mp-days-next_var(--mp-duration-micro)_var(--mp-ease-out)]",
+                  slideDir === -1 && "motion-safe:animate-[mp-days-prev_var(--mp-duration-micro)_var(--mp-ease-out)]",
                 )}
                 style={{ gridTemplateColumns: `repeat(${perPage}, minmax(0, 1fr))` }}
               >

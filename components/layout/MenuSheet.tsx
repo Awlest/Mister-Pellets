@@ -55,13 +55,13 @@ export default function MenuSheet({
         )}
         // Padding vertical via style pour combiner valeur fixe + safe-area iOS
         style={{
-          paddingTop: "max(2rem, env(safe-area-inset-top))",
+          paddingTop: "max(1.25rem, env(safe-area-inset-top))",
           paddingBottom: "calc(env(safe-area-inset-bottom) + 6.5rem)",
           // ↑ 6.5rem = espace pour la NavbarSticky flottante (~88px) + air en bas
         }}
       >
         {/* Drag handle visuel */}
-        <div className="flex justify-center -mt-3 mb-3" aria-hidden>
+        <div className="flex justify-center mb-3" aria-hidden>
           <div className="h-1.5 w-12 rounded-full bg-mp-sand/60" />
         </div>
 

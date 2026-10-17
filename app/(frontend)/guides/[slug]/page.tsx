@@ -153,7 +153,7 @@ export default async function GuidePage({ params }: Props) {
                 <Link
                   key={g.slug}
                   href={`/guides/${g.slug}`}
-                  className="group p-6 rounded-2xl bg-mp-cream border border-mp-sand/40 hover:-translate-y-0.5 hover:shadow-md transition-all"
+                  className="group p-6 rounded-2xl bg-mp-cream border border-mp-sand/40 hover:border-mp-orange-flame transition-colors"
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <Badge variant="secondary">{g.category}</Badge>

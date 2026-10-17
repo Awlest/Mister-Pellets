@@ -324,7 +324,7 @@ export default async function ArticlePage({ params }: Props) {
                 <Link
                   key={g.slug}
                   href={`/guides/${g.slug}`}
-                  className="group p-6 rounded-2xl bg-mp-cream border border-mp-sand/40 hover:-translate-y-0.5 hover:shadow-md transition-all"
+                  className="group p-6 rounded-2xl bg-mp-cream border border-mp-sand/40 hover:border-mp-orange-flame transition-colors"
                 >
                   <Badge variant="secondary" className="mb-3">
                     Guide · {g.readingTime}
@@ -353,7 +353,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedArticles.map((a) => (
                 <Link key={a.slug} href={`/blog/${a.slug}`} className="group">
-                  <Card className="p-6 h-full flex flex-col hover:-translate-y-1 transition-all">
+                  <Card className="p-6 h-full flex flex-col transition-colors group-hover:border-mp-orange-flame">
                     <Badge variant="secondary" className="mb-3 self-start">
                       {CATEGORY_LABELS[a.category]}
                     </Badge>
@@ -366,8 +366,8 @@ export default async function ArticlePage({ params }: Props) {
                     <p className="text-sm text-mp-ink-soft leading-relaxed flex-1 mb-4 line-clamp-3">
                       {a.excerpt}
                     </p>
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-mp-orange-ink group-hover:gap-2 transition-all">
-                      Lire <ArrowRight className="h-3.5 w-3.5" />
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-mp-orange-ink">
+                      Lire <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </span>
                   </Card>
                 </Link>

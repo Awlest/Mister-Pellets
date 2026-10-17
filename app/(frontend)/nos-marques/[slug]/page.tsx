@@ -107,7 +107,7 @@ export default async function BrandPage({ params }: Props) {
       />
 
       {/* Stats badges */}
-      <section className="bg-mp-cream pb-8 -mt-4">
+      <section className="bg-mp-cream pt-6 pb-8">
         <div className="mp-shell">
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Badge variant="secondary">

@@ -8,7 +8,9 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-[20px] border border-mp-sand/40 bg-mp-cream shadow-[0_2px_8px_rgba(20,36,27,0.06)] transition-shadow hover:shadow-[0_8px_24px_rgba(20,36,27,0.10)]",
+      // À plat : un filet sable, pas d'ombre ni de lévitation au survol. Une
+      // carte cliquable signale le survol par sa bordure (hover:border-mp-orange-flame).
+      "rounded-[20px] border border-mp-sand/40 bg-mp-cream",
       className
     )}
     {...props}

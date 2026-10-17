@@ -13,7 +13,7 @@ interface HeroPrimaryProps {
 }
 
 /**
- * Hero d'accueil, sur fond beige cream avec halo orange flottant.
+ * Hero d'accueil, sur fond crème uni (sans halo, DESIGN.md).
  * Cf. brief §3.2 sec 1.
  */
 export function HeroPrimary({
@@ -25,17 +25,8 @@ export function HeroPrimary({
   showStats = true,
 }: HeroPrimaryProps) {
   return (
-    <section className="relative overflow-hidden">
-      {/* Halo orange flottant */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-24 -top-24 h-[500px] w-[500px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, rgba(242,138,32,0.18) 0%, rgba(242,138,32,0) 70%)",
-        }}
-      />
-
-      <div className="mp-shell py-16 md:py-24 lg:py-32 relative">
+    <section>
+      <div className="mp-shell py-16 md:py-24 lg:py-32">
         <div className="mp-measure text-center">
           <Badge variant="eyebrow" className="mb-6">
             <Flame className="h-3 w-3 text-mp-orange-flame" />

@@ -19,6 +19,10 @@ import { ImageResponse } from "next/og";
  *   et l'italique ne s'appliquent pas ;
  * - l'emoji 🔥 est une image Twemoji téléchargée sur cdn.jsdelivr.net pendant
  *   le build.
+ *
+ * Fond crème uni, sans dégradé ni halo (DESIGN.md, 17/10/2026). Couleurs en
+ * dur : Satori ne lit pas les variables CSS, ce sont les valeurs des jetons
+ * --mp-* de globals.css (crème, vert le plus sombre, orange, encre douce).
  */
 
 export const alt = "Mister Pellets, poêle à pellets en Wallonie depuis 2016";
@@ -36,26 +40,11 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background:
-            "linear-gradient(135deg, #FAF7F0 0%, #F4F1E8 50%, #EAE0CB 100%)",
+          background: "#FAF7F0",
           padding: "60px 80px",
           fontFamily: "Georgia, serif",
         }}
       >
-        {/* Halo orange flottant en haut à droite */}
-        <div
-          style={{
-            position: "absolute",
-            top: -120,
-            right: -120,
-            width: 480,
-            height: 480,
-            borderRadius: 9999,
-            background:
-              "radial-gradient(circle, rgba(242,138,32,0.28) 0%, rgba(242,138,32,0) 70%)",
-          }}
-        />
-
         {/* Bandeau identité (logo + wordmark) */}
         <div
           style={{
@@ -119,7 +108,7 @@ export default async function OpengraphImage() {
               columnGap: "0.25em",
             }}
           >
-            <span style={{ color: "#F28A20", fontStyle: "italic" }}>
+            <span style={{ color: "#C2680A", fontStyle: "italic" }}>
               installé chez vous
             </span>
             en Wallonie

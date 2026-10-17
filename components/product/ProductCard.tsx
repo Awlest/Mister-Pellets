@@ -14,8 +14,8 @@ export interface ProductColorPreview {
 
 /**
  * Les champs hérités de `ProductFeatureFlags` (type, combustible, hydro,
- * canalisable, étanche) alimentent les pastilles rondes en haut à droite de la
- * photo (ProductFeatureBadges.tsx).
+ * canalisable, étanche) alimentent les pastilles rondes de la carte, sur la
+ * ligne de la marque, sous la photo (ProductFeatureBadges.tsx).
  */
 export interface ProductCardData extends ProductFeatureFlags {
   slug: string;
@@ -155,7 +155,7 @@ export function ProductCard({ product, className, priority = false }: ProductCar
       // (nom accessible différent du texte visible).
       className={`group block rounded-[20px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-ink focus-visible:ring-offset-2 focus-visible:ring-offset-mp-cream ${className ?? ""}`}
     >
-      <Card className="overflow-hidden h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <Card className="overflow-hidden h-full flex flex-col transition-colors group-hover:border-mp-orange-flame">
         {/* Image */}
         <div className="relative aspect-square bg-mp-beige-warm overflow-hidden">
           {cardImage ? (
@@ -168,7 +168,7 @@ export function ProductCard({ product, className, priority = false }: ProductCar
               loading={priority ? "eager" : "lazy"}
               fetchPriority={priority ? "high" : "auto"}
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-[1.02]"
               style={{ objectPosition }}
             />
           ) : (
@@ -187,28 +187,24 @@ export function ProductCard({ product, className, priority = false }: ProductCar
               </svg>
             </div>
           )}
-
-          {/* Badges flottants : étiquettes commerciales à gauche, pastilles
-              caractéristiques à droite, les deux calées à 12 px du haut. */}
-          <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-            {isBestseller && <Badge variant="primary">Best-seller</Badge>}
-            {isNew && <Badge variant="success">Nouveau</Badge>}
-          </div>
-          <ProductFeatureBadges
-            className="absolute top-3 right-3"
-            type={type}
-            combustible={combustible}
-            isHydro={isHydro}
-            isCanalizable={isCanalizable}
-            isAirtight={isAirtight}
-          />
         </div>
 
-        {/* Contenu */}
+        {/* Contenu. Rien n'est posé sur la photo (DESIGN.md) : les pastilles
+            caractéristiques partagent la ligne de la marque, les étiquettes
+            commerciales ouvrent la ligne des puissances. */}
         <div className="flex flex-col gap-2 p-5 flex-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-mp-orange-ink">
-            {brand}
-          </span>
+          <div className="flex min-h-7 items-center justify-between gap-3">
+            <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-mp-orange-ink">
+              {brand}
+            </span>
+            <ProductFeatureBadges
+              type={type}
+              combustible={combustible}
+              isHydro={isHydro}
+              isCanalizable={isCanalizable}
+              isAirtight={isAirtight}
+            />
+          </div>
 
           <h3
             className="text-lg font-semibold text-mp-green-deep leading-tight line-clamp-2"
@@ -217,8 +213,10 @@ export function ProductCard({ product, className, priority = false }: ProductCar
             {name}
           </h3>
 
-          {(powerLabel || volumeLabel) && (
+          {(powerLabel || volumeLabel || isBestseller || isNew) && (
             <div className="flex flex-wrap gap-2 mt-1">
+              {isBestseller && <Badge variant="primary">Best-seller</Badge>}
+              {isNew && <Badge variant="success">Nouveau</Badge>}
               {powerLabel && <Badge variant="default">{powerLabel}</Badge>}
               {volumeLabel && <Badge variant="default">{volumeLabel}</Badge>}
             </div>
@@ -236,7 +234,7 @@ export function ProductCard({ product, className, priority = false }: ProductCar
                 <span
                   key={i}
                   title={v.colorName}
-                  className="inline-block h-3.5 w-3.5 rounded-full border border-mp-sand/60 shadow-sm"
+                  className="inline-block h-3.5 w-3.5 rounded-full border border-mp-sand/60"
                   style={{ backgroundColor: v.colorHex }}
                   aria-hidden="true"
                 />
