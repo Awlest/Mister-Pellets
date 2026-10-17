@@ -213,6 +213,13 @@ html, body {
   max-width: 100vw;
 }
 
+/* Lenis (components/layout/SmoothMotion.tsx) passe html en height: auto : le
+ * min-h-full de body ne vaut plus rien et le pied de page remonterait sur une
+ * page courte. */
+html.lenis body {
+  min-height: 100dvh;
+}
+
 /* Polices de repli, affichées le temps que les polices du site arrivent :
  * Times New Roman et Arial recalés sur les métriques de Fraunces et d'Inter
  * Tight, avec les valeurs exactes que générait next/font/google (layout.tsx,
