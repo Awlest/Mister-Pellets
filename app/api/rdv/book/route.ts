@@ -3,6 +3,7 @@ import { confirmCustomerBooking, notifyInternalBooking } from "@/lib/email";
 import { rateLimitResponse, csrfOriginCheck, isHoneypotTriggered } from "@/lib/rate-limit";
 import { getService, bookingDurationMin } from "@/lib/services";
 import { availableSlots, formatSlotTime, belgianDayKey } from "@/lib/booking";
+import { readVisitAddress, visitAddressError, formatVisitAddress } from "@/lib/visit-address";
 import {
   getBusyIntervals,
   createEvent,
@@ -88,7 +89,9 @@ export async function POST(request: Request) {
   const name = str(payload.name, 120);
   const email = str(payload.email, 160);
   const phone = str(payload.phone, 40);
-  const address = str(payload.address, 200);
+  const visit = readVisitAddress(payload);
+  // Au showroom, le client vient chez nous : pas d'adresse à demander.
+  const address = service.location === "domicile" ? formatVisitAddress(visit) : "";
   const notes = str(payload.notes, 1000);
 
   if (name.length < 2) {
@@ -97,11 +100,10 @@ export async function POST(request: Request) {
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Adresse email invalide." }, { status: 400 });
   }
-  if (service.location === "domicile" && address.length < 5) {
-    return NextResponse.json(
-      { error: "Merci d'indiquer l'adresse de la visite." },
-      { status: 400 },
-    );
+  // Adresse complète obligatoire, code postal compris.
+  const addressError = service.location === "domicile" ? visitAddressError(visit) : null;
+  if (addressError) {
+    return NextResponse.json({ error: addressError }, { status: 400 });
   }
 
   if (!isCalendarConfigured()) {

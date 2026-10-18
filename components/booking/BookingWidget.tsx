@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { POSTAL_RE, readVisitAddress, visitAddressError } from "@/lib/visit-address";
 import { bookingCalendarEntry, googleCalendarUrl, icsDownloadPath } from "@/lib/booking-calendar";
 
 interface OnlineService {
@@ -122,7 +123,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
   const [chosenStart, setChosenStart] = React.useState<number | null>(null);
 
   const [form, setForm] = React.useState({
-    name: "", email: "", phone: "", address: "", notes: "", website: "",
+    name: "", email: "", phone: "", street: "", postalCode: "", city: "", notes: "", website: "",
   });
   const [submitting, setSubmitting] = React.useState(false);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
@@ -203,7 +204,10 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
   const formValid =
     form.name.trim().length >= 2 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) &&
-    (!needsAddress || form.address.trim().length >= 5);
+    (!needsAddress || visitAddressError(readVisitAddress(form)) == null);
+  // Le bouton reste grisé tant que le code postal est faux : dire pourquoi.
+  const [postalTouched, setPostalTouched] = React.useState(false);
+  const postalCodeWrong = postalTouched && form.postalCode.length > 0 && !POSTAL_RE.test(form.postalCode);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -585,17 +589,51 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
               />
             </div>
             {needsAddress && (
-              <div className="sm:col-span-2">
-                <label htmlFor="bk-address" className="block text-sm font-medium mb-1.5">
-                  Adresse de la visite <span className="text-mp-orange-ink">*</span>
-                </label>
-                <input
-                  id="bk-address" required value={form.address} autoComplete="street-address"
-                  placeholder="Rue, numéro, code postal, commune"
-                  onChange={(e) => update("address", e.target.value)}
-                  className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
-                />
-              </div>
+              <>
+                <div className="sm:col-span-2">
+                  <label htmlFor="bk-street" className="block text-sm font-medium mb-1.5">
+                    Adresse de la visite : rue et numéro <span className="text-mp-orange-ink">*</span>
+                  </label>
+                  <input
+                    id="bk-street" required minLength={4} value={form.street} autoComplete="address-line1"
+                    placeholder="Rue de la Station 12"
+                    onChange={(e) => update("street", e.target.value)}
+                    className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
+                  />
+                </div>
+                <div className="grid min-w-0 grid-cols-[7.5rem_minmax(0,1fr)] gap-x-4 gap-y-1.5 sm:col-span-2">
+                  <div className="min-w-0">
+                    <label htmlFor="bk-postal" className="block text-sm font-medium mb-1.5">
+                      Code postal <span className="text-mp-orange-ink">*</span>
+                    </label>
+                    <input
+                      id="bk-postal" required inputMode="numeric" maxLength={4} pattern="[1-9][0-9]{3}"
+                      value={form.postalCode} autoComplete="postal-code" placeholder="5000"
+                      aria-invalid={postalCodeWrong || undefined}
+                      aria-describedby={postalCodeWrong ? "bk-postal-error" : undefined}
+                      onBlur={() => setPostalTouched(true)}
+                      onChange={(e) => update("postalCode", e.target.value.replace(/\D/g, ""))}
+                      className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <label htmlFor="bk-city" className="block text-sm font-medium mb-1.5">
+                      Commune <span className="text-mp-orange-ink">*</span>
+                    </label>
+                    <input
+                      id="bk-city" required minLength={2} value={form.city} autoComplete="address-level2"
+                      placeholder="Namur"
+                      onChange={(e) => update("city", e.target.value)}
+                      className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
+                    />
+                  </div>
+                  {postalCodeWrong && (
+                    <p id="bk-postal-error" className="col-span-2 text-sm text-mp-orange-ink">
+                      Le code postal belge compte 4 chiffres.
+                    </p>
+                  )}
+                </div>
+              </>
             )}
             <div className="sm:col-span-2">
               <label htmlFor="bk-notes" className="block text-sm font-medium mb-1.5">
