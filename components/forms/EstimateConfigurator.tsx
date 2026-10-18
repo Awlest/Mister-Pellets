@@ -517,11 +517,11 @@ function EstimateForm({
             <details className="group mb-5 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 text-sm text-mp-ink">
               <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 [&::-webkit-details-marker]:hidden">
                 <span>
-                  <strong className="text-mp-green-deep">Bonus de saison</strong>, déjà déduit du total
+                  <strong className="text-mp-green-deep">Jusqu&apos;à {BONUS.badge}</strong>, déjà déduit du total
                 </span>
                 <ChevronDown className="h-4 w-4 shrink-0 text-mp-ink-soft transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
               </summary>
-              <p className="px-4 pb-3 leading-relaxed">{BONUS.conditions} {BONUS.exception}.</p>
+              <p className="px-4 pb-3 leading-relaxed">{BONUS.label}. {BONUS.conditions}</p>
             </details>
           )}
 
