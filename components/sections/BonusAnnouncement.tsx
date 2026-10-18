@@ -33,10 +33,10 @@ export function BonusAnnouncement() {
       </span>
       <span className="min-w-0">
         <span className="block text-[15px] font-semibold leading-snug sm:text-base">
-          sur tous nos poêles jusqu&apos;au {lastDay}
+          sur nos poêles jusqu&apos;au {lastDay}
         </span>
         <span className="block text-[13px] leading-snug text-mp-cream/85 sm:text-sm">
-          Bonus de saison sur le prix du poêle, pose au tarif normal.
+          Bonus de saison sur le prix du poêle ({BONUS.exception}), pose au tarif normal.
         </span>
       </span>
       <span className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-mp-orange-warm sm:inline-flex">

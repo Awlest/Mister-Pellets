@@ -21,7 +21,7 @@ import {
   type OptionKey,
   type StoveKind,
 } from "@/lib/estimate";
-import { BONUS } from "@/lib/bonus";
+import { BONUS, bonusLabelFor } from "@/lib/bonus";
 import { durationsFor, monthly0 } from "@/lib/financing";
 
 /**
@@ -197,7 +197,7 @@ export async function POST(request: Request) {
     `Emplacement : ${LEVELS[config.level].label} · Logement > 10 ans : ${config.housingOver10Years ? "oui" : "non"}`,
     "",
     `Matériel : ${r.materialHT} € HT`,
-    r.bonusHT > 0 ? `${BONUS.label} : -${r.bonusHT} € HT (${BONUS.conditions})` : "",
+    r.bonusHT > 0 ? `${bonusLabelFor(product.brand)} : -${r.bonusHT} € HT (${BONUS.conditions})` : "",
     ...r.laborLines.map((l) => `${l.label} : ${l.amountHT} € HT`),
     `TVA ${Math.round(r.vatRate * 100)} % : ${r.vatAmount} €`,
     `TOTAL : ${r.totalTTC} € TTC`,
@@ -252,7 +252,7 @@ export async function POST(request: Request) {
       vatRate: r.vatRate,
       lines: [
         ...(r.bonusHT > 0
-          ? [{ label: `${BONUS.label} (${BONUS.conditions})`, amountHT: -r.bonusHT }]
+          ? [{ label: `${bonusLabelFor(product.brand)} (${BONUS.conditions})`, amountHT: -r.bonusHT }]
           : []),
         ...r.laborLines.map((l) => ({ label: l.label, amountHT: l.amountHT })),
       ],
@@ -269,7 +269,7 @@ export async function POST(request: Request) {
       totalTTC: r.totalTTC,
       monthly,
       months,
-      bonusNote: r.bonusHT > 0 ? `${BONUS.label} déduit. ${BONUS.conditions}` : undefined,
+      bonusNote: r.bonusHT > 0 ? `${bonusLabelFor(product.brand)} déduit. ${BONUS.conditions}` : undefined,
     }),
   ]);
 

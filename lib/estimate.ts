@@ -17,7 +17,7 @@
  * de plus de 10 ans, 21 % sinon), sur le matériel comme sur la pose.
  */
 
-import { BONUS, isBonusPeriod } from "./bonus";
+import { bonusRateFor, isBonusPeriod } from "./bonus";
 
 // =====================================================================
 // 1. ÉVACUATION DES FUMÉES : le poste de main d'œuvre principal
@@ -417,7 +417,7 @@ export function estimate(
   const labor = lines.reduce((a, l) => a + l.amountHT, 0);
   const material = product?.priceHT ?? 0;
   const subtotalHT = material + labor;
-  const bonusHT = (opts?.bonus ?? isBonusPeriod()) ? Math.round(material * BONUS.rate) : 0;
+  const bonusHT = (opts?.bonus ?? isBonusPeriod()) ? Math.round(material * bonusRateFor(product?.brand)) : 0;
   const netHT = subtotalHT - bonusHT;
   const rate = vatRate(s.housingOver10Years);
   const vat = Math.round(netHT * rate);

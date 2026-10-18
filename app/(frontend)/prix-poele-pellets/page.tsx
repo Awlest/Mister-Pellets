@@ -6,7 +6,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { CallbackForm } from "@/components/forms/CallbackForm";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { BONUS } from "@/lib/bonus";
+import { BONUS, bonusBadgeFor } from "@/lib/bonus";
 import { CONDUIT_INCLUDED_M, eur } from "@/lib/estimate";
 import {
   EXAMPLE_INSTALL_LABEL,
@@ -91,7 +91,7 @@ export default async function PrixPoelePelletsPage() {
           </p>
           {bonus ? (
             <p className="mp-measure mt-6 rounded-2xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-4 text-center text-sm text-mp-ink">
-              <strong className="text-mp-green-deep">{BONUS.label}</strong>. {BONUS.conditions}
+              <strong className="text-mp-green-deep">{BONUS.label}</strong>. {BONUS.conditions} {BONUS.exception}.
             </p>
           ) : null}
         </div>
@@ -238,7 +238,7 @@ function ExampleCard({ ex, bonus }: { ex: PriceExample; bonus: boolean }) {
         <Row label="Poêle" value={eur(ex.stoveTTC)} />
         <Row label="Pose et raccordement" value={eur(ex.laborTTC)} />
         {bonus && ex.bonusTTC > 0 ? (
-          <Row label={`Bonus de saison ${BONUS.badge}`} value={`- ${eur(ex.bonusTTC)}`} />
+          <Row label={`Bonus de saison ${bonusBadgeFor(ex.brand)}`} value={`- ${eur(ex.bonusTTC)}`} />
         ) : null}
       </dl>
       <div className="mt-auto border-t border-mp-sand/40 pt-4">

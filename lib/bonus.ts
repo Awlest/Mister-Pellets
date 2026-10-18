@@ -44,7 +44,33 @@ export const BONUS = {
    * fuseau : heure d'été le 1er octobre, heure d'hiver le 24 décembre.
    */
   effectiveDate: "2026-10-01T00:00+02:00/2026-12-24T23:59+01:00",
+  /**
+   * Exception au taux : Austroflamm et Cadel à -10 % au lieu de -15 %
+   * (décision du client, 18/10/2026). Les autres marques restent à -15 %.
+   */
+  reduced: {
+    rate: 0.1,
+    badge: "-10 %",
+    brands: ["Austroflamm", "Cadel"] as readonly string[],
+  },
+  /** Mention de l'exception, pour les textes qui parlent du bonus en général. */
+  exception: "-10 % sur les poêles Austroflamm et Cadel",
 } as const;
+
+const isReduced = (brand?: string | null): boolean =>
+  brand != null && BONUS.reduced.brands.includes(brand);
+
+/** Taux du bonus pour une marque : -10 % pour Austroflamm et Cadel, -15 % sinon. */
+export const bonusRateFor = (brand?: string | null): number =>
+  isReduced(brand) ? BONUS.reduced.rate : BONUS.rate;
+
+/** Pastille du bonus pour une marque (« -15 % » ou « -10 % »). */
+export const bonusBadgeFor = (brand?: string | null): string =>
+  isReduced(brand) ? BONUS.reduced.badge : BONUS.badge;
+
+/** « Bonus de saison -10 % sur le poêle » pour une fiche donnée. */
+export const bonusLabelFor = (brand?: string | null): string =>
+  `Bonus de saison ${bonusBadgeFor(brand)} sur le poêle`;
 
 /** Jour civil à Bruxelles au format AAAA-MM-JJ, comparable aux bornes du bonus. */
 export const brusselsDay = (d: Date): string => {
@@ -88,8 +114,9 @@ export const isBonusSwitchDay = (now: Date = new Date()): boolean => {
 };
 
 /**
- * Prix après bonus, arrondi à l'euro. Ne regarde pas la date : c'est à
- * l'appelant de ne s'en servir que pendant la période (ou, pour le flux
- * Google Merchant, avec la plage de dates).
+ * Prix après bonus, arrondi à l'euro, au taux de la marque (bonusRateFor).
+ * Ne regarde pas la date : c'est à l'appelant de ne s'en servir que pendant la
+ * période (ou, pour le flux Google Merchant, avec la plage de dates).
  */
-export const bonusPrice = (price: number): number => Math.round(price * (1 - BONUS.rate));
+export const bonusPrice = (price: number, brand?: string | null): number =>
+  Math.round(price * (1 - bonusRateFor(brand)));

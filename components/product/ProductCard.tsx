@@ -142,7 +142,7 @@ export function ProductCard({ product, className, priority = false }: ProductCar
 
   // Prix de la carte : bonus de saison, sinon promo admin, sinon catalogue, avec
   // le prix précédent barré (lib/product-price.ts).
-  const prices = { priceTTC, promoPriceTTC, bonusPriceTTC };
+  const prices = { brand, priceTTC, promoPriceTTC, bonusPriceTTC };
   const shown = shownPriceTTC(prices);
   const struck = struckPriceTTC(prices);
   const badge = priceBadge(prices);

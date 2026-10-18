@@ -1,4 +1,4 @@
-import { BONUS } from "./bonus";
+import { bonusBadgeFor } from "./bonus";
 
 /**
  * Prix TTC d'une fiche produit, dans l'ordre où la boutique les applique :
@@ -8,6 +8,8 @@ import { BONUS } from "./bonus";
  * configurateur (lib/estimate-catalog.ts : la promo prime sur le catalogue).
  */
 export interface PricedProduct {
+  /** Marque : fixe le taux du bonus (-10 % Austroflamm et Cadel, -15 % sinon). */
+  brand?: string;
   priceTTC?: number;
   promoPriceTTC?: number;
   bonusPriceTTC?: number;
@@ -30,4 +32,4 @@ export const struckPriceTTC = (p: PricedProduct): number | undefined => {
 
 /** Pastille à côté du prix : bonus de saison, sinon promo admin, sinon rien. */
 export const priceBadge = (p: PricedProduct): string | undefined =>
-  p.bonusPriceTTC != null ? BONUS.badge : p.promoPriceTTC != null ? "Promo" : undefined;
+  p.bonusPriceTTC != null ? bonusBadgeFor(p.brand) : p.promoPriceTTC != null ? "Promo" : undefined;
