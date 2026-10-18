@@ -366,7 +366,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     tier: 1,
     founded: 1983,
     positioning: "Haut de gamme autrichien, poêles à pellets silencieux et mixtes bois-pellets",
-    tagline: "Le poêle à pellets haut de gamme qu'on n'entend pas",
+    tagline: "Le poêle à pellets qu'on n'entend pas",
     badge: "Marque autrichienne haut de gamme",
     intro:
       "Austroflamm est une entreprise familiale autrichienne fondée en 1983 par Ferdinand Huemer, qui la dirige toujours, à Krenglbach en Haute-Autriche. Ses poêles à pellets chauffent sans ventilateur dans la pièce, et ses poêles mixtes Duo brûlent des bûches ou des pellets, puis repassent seuls aux pellets quand le bois a fini de brûler. Arrivée chez Mister Pellets en octobre 2026.",
