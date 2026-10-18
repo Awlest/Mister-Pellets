@@ -384,7 +384,7 @@ export function BoutiqueExplorer({
             Aucun modèle ne correspond à cette combinaison de filtres.
           </p>
           <p className="text-sm text-mp-ink-soft">
-            On couvre toute la gamme Edilkamin, EK63 et Girolami.{" "}
+            On couvre toute la gamme Edilkamin, EK63, Girolami, Austroflamm et Cadel.{" "}
             <Link href="/demande-de-devis" className="text-mp-orange-ink underline hover:no-underline">
               Demandez un devis personnalisé
             </Link>

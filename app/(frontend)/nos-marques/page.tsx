@@ -7,67 +7,92 @@ import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
   title:
-    "Nos marques de poêles à pellets : Edilkamin, EK63, Girolami",
+    "Nos marques de poêles à pellets : Edilkamin, EK63, Girolami, Austroflamm, Cadel",
   description:
-    "Les 3 marques italiennes distribuées par Mister Pellets en Wallonie : Edilkamin (référence depuis 1963), EK63 (groupe Edilkamin, Wi-Fi de série) et Girolami (polycombustible breveté, brasier auto-nettoyant).",
+    "Les 5 marques posées par Mister Pellets en Wallonie : Edilkamin (référence depuis 1963), EK63 (groupe Edilkamin, Wi-Fi de série), Girolami (brasier auto-nettoyant), Austroflamm (haut de gamme autrichien) et Cadel (groupe MCZ, Wi-Fi intégré).",
   path: "/nos-marques",
 });
 
-/** Comparatif des 3 marques premium, brief marques §E.1. */
-const COMPARISON: { criterion: string; edilkamin: string; ek63: string; girolami: string }[] = [
+/** Comparatif des 5 marques mises en avant, brief marques §E.1 (Austroflamm et Cadel le 18/10/2026). */
+const COMPARISON: {
+  criterion: string;
+  edilkamin: string;
+  ek63: string;
+  girolami: string;
+  austroflamm: string;
+  cadel: string;
+}[] = [
   {
     criterion: "Positionnement",
     edilkamin: "Référence premium",
     ek63: "Connecté accessible",
     girolami: "Polycombustible breveté",
+    austroflamm: "Haut de gamme autrichien",
+    cadel: "Connecté accessible (groupe MCZ)",
   },
   {
     criterion: "Origine",
     edilkamin: "Milan (Lainate), 1963",
     ek63: "Plateforme Edilkamin",
     girolami: "Sant'Oreste (Rome), 1970",
+    austroflamm: "Krenglbach (Haute-Autriche), 1983",
+    cadel: "Santa Lucia di Piave (Trévise), 1949",
   },
   {
     criterion: "Techno phare",
     edilkamin: "Leonardo (autorégulation)",
     ek63: "Wi-Fi Smart de série",
     girolami: "Source Feeding (auto-nettoyage)",
+    austroflamm: "Pellets sans ventilateur, Keramott",
+    cadel: "Easy Connect Plus, Autoclean",
   },
   {
     criterion: "Combustible",
     edilkamin: "Pellet",
     ek63: "Pellet",
     girolami: "Pellet, bois, hybride",
+    austroflamm: "Pellet, mixte bois-pellet",
+    cadel: "Pellet",
   },
   {
     criterion: "Canalisable",
     edilkamin: "Oui",
     ek63: "Oui",
     girolami: "Oui",
+    austroflamm: "Avec kit (Ruby, Duo)",
+    cadel: "Oui (gamme Plus)",
   },
   {
     criterion: "Hydro",
     edilkamin: "Oui",
     ek63: "Oui",
     girolami: "Oui",
+    austroflamm: "Non",
+    cadel: "Oui",
   },
   {
     criterion: "Hybride bois-pellet",
     edilkamin: "Non",
     ek63: "Non",
     girolami: "Oui",
+    austroflamm: "Oui (gamme Duo)",
+    cadel: "Non",
   },
   {
     criterion: "Wi-Fi de série",
     edilkamin: "Selon modèle",
     ek63: "Oui sur la majorité",
     girolami: "Oui sur gamme moderne",
+    austroflamm: "En option (box WiRCU)",
+    cadel: "Wi-Fi et Bluetooth intégrés",
   },
   {
     criterion: "Étanchéité",
     edilkamin: "Sur gamme étanche",
     ek63: "Quasi toute la gamme",
     girolami: "Selon modèle",
+    austroflamm: "Air extérieur de série",
+    cadel: "Presque toute la gamme",
   },
 ];
 
@@ -87,19 +112,29 @@ const ADVICE: { need: string; brand: string; why: string }[] = [
     brand: "Girolami",
     why: "Brevet auto-nettoyant Source Feeding et Fuel Convert System.",
   },
+  {
+    need: "Je veux un beau poêle, silencieux, qui fait aussi feu de bois",
+    brand: "Austroflamm",
+    why: "Pellets sans ventilateur dans la pièce, design Cesare Monti, mixtes Duo qui repassent seuls aux pellets.",
+  },
+  {
+    need: "Je veux du connecté à bon prix, même pour un couloir",
+    brand: "Cadel",
+    why: "Wi-Fi et Bluetooth intégrés, poêles plats dès 27 cm, brasero Autoclean, groupe MCZ.",
+  },
 ];
 
 export default function NosMarquesHubPage() {
   return (
     <>
       <HeroSecondary
-        eyebrow="3 marques sélectionnées"
+        eyebrow="5 marques sélectionnées"
         title={
           <>
             Les marques de poêles à pellets que <span className="mp-italic">nous distribuons</span>
           </>
         }
-        description="Plutôt que de tout vendre, on s'est limités à trois marques italiennes qui couvrent les besoins qu'on voit sur le terrain en Wallonie. Edilkamin pour la profondeur de gamme, EK63 (sa marque sœur) pour le connecté à prix accessible, Girolami pour son brevet polycombustible qui nettoie le brasier tout seul. Chaque marque a son créneau, on vous dit franchement laquelle est faite pour vous."
+        description="Plutôt que de tout vendre, on s'est limités à cinq marques qui couvrent les besoins qu'on voit sur le terrain en Wallonie. Edilkamin pour la profondeur de gamme, EK63 (sa marque sœur) pour le connecté à prix accessible, Girolami pour son brevet qui nettoie le brasier tout seul. Depuis octobre 2026, Austroflamm pour le haut de gamme silencieux et les mixtes bois-pellets, et Cadel, du groupe MCZ, pour une gamme connectée très large à prix doux. Chaque marque a son créneau, on vous dit franchement laquelle est faite pour vous."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Nos marques" },
@@ -108,21 +143,21 @@ export default function NosMarquesHubPage() {
 
       <BrandsGrid title="" description="" />
 
-      {/* Comparatif des 3 marques premium */}
+      {/* Comparatif des 5 marques mises en avant */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <div className="mp-measure mb-10 text-center">
             <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
-              Edilkamin, EK63, Girolami : le comparatif
+              Nos cinq marques : le comparatif
             </h2>
             <p className="text-lg text-mp-ink-soft leading-relaxed">
-              Nos trois marques premium, côte à côte. Aucune n&apos;écrase les autres,
+              Edilkamin, EK63, Girolami, Austroflamm et Cadel, côte à côte. Aucune n&apos;écrase les autres,
               chacune a son terrain de jeu.
             </p>
           </div>
 
           <div className="overflow-x-auto rounded-2xl border border-mp-sand/40">
-            <table className="w-full text-sm border-collapse min-w-[640px]">
+            <table className="w-full text-sm border-collapse min-w-[960px]">
               <thead>
                 <tr className="bg-mp-beige">
                   <th className="text-left font-semibold text-mp-ink-soft p-4">
@@ -136,6 +171,12 @@ export default function NosMarquesHubPage() {
                   </th>
                   <th className="text-left font-semibold text-mp-green-deep p-4">
                     Girolami
+                  </th>
+                  <th className="text-left font-semibold text-mp-green-deep p-4">
+                    Austroflamm
+                  </th>
+                  <th className="text-left font-semibold text-mp-green-deep p-4">
+                    Cadel
                   </th>
                 </tr>
               </thead>
@@ -151,6 +192,8 @@ export default function NosMarquesHubPage() {
                     <td className="p-4 text-mp-ink">{row.edilkamin}</td>
                     <td className="p-4 text-mp-ink">{row.ek63}</td>
                     <td className="p-4 text-mp-ink">{row.girolami}</td>
+                    <td className="p-4 text-mp-ink">{row.austroflamm}</td>
+                    <td className="p-4 text-mp-ink">{row.cadel}</td>
                   </tr>
                 ))}
               </tbody>

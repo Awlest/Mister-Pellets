@@ -103,6 +103,8 @@ export const BRAND_LINKS: readonly NavLink[] = [
   { href: `${ROUTES.brands}/edilkamin`, label: "Edilkamin", desc: "Premium · Italie" },
   { href: `${ROUTES.brands}/ek63`, label: "EK63", desc: "Connecté · Italie" },
   { href: `${ROUTES.brands}/girolami`, label: "Girolami", desc: "Polycombustible · Italie" },
+  { href: `${ROUTES.brands}/austroflamm`, label: "Austroflamm", desc: "Haut de gamme · Autriche" },
+  { href: `${ROUTES.brands}/cadel`, label: "Cadel", desc: "Connecté · Italie" },
 ];
 
 /** Services : pose et suivi, puis les deux portes d'entrée d'un projet. */

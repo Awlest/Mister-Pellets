@@ -21,7 +21,7 @@ interface BrandsGridProps {
  */
 export function BrandsGrid({
   tone = "beige",
-  title = "Les 3 marques que nous distribuons",
+  title = "Les 5 marques que nous distribuons",
   description = "Chaque marque a son créneau. Notre rôle est de vous diriger vers celle qui colle vraiment à votre maison et à votre budget.",
   brands = TOP_TIER_BRANDS,
 }: BrandsGridProps) {
@@ -43,12 +43,12 @@ export function BrandsGrid({
           </div>
         )}
 
-        {/* 3 marques : 3 colonnes dès lg. À 2 colonnes, la 3e carte restait seule
-          * à gauche sur sa ligne, avec la moitié droite vide. */}
+        {/* 3 colonnes dès lg sauf si la dernière carte resterait seule sur sa
+          * ligne (4, 7 cartes) : 3 ou 5 cartes passent en 3 colonnes. */}
         <div
           className={cn(
             "grid grid-cols-1 md:grid-cols-2 gap-6",
-            brands.length % 3 === 0 && "lg:grid-cols-3"
+            brands.length % 3 !== 1 && "lg:grid-cols-3"
           )}
         >
           {brands.map((brand) => (

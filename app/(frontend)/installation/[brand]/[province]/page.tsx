@@ -26,7 +26,7 @@ interface Props {
  */
 export const dynamicParams = false;
 
-/** 3 marques top-tier × 5 provinces = 15 pages locales (brief §E.2). */
+/** 5 marques top-tier × 5 provinces = 25 pages locales (brief §E.2). */
 export function generateStaticParams() {
   return TOP_TIER_BRANDS.flatMap((b) =>
     PROVINCES.map((p) => ({ brand: b.slug, province: p.slug })),

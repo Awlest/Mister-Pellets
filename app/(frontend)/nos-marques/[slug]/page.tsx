@@ -252,7 +252,18 @@ export default async function BrandPage({ params }: Props) {
                     className="text-xl font-semibold text-mp-green-deep mt-1"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
-                    {brand.name} {model.name}
+                    {model.slug ? (
+                      <Link
+                        href={`/produit/${model.slug}`}
+                        className="hover:text-mp-orange-ink underline-offset-4 hover:underline"
+                      >
+                        {brand.name} {model.name}
+                      </Link>
+                    ) : (
+                      <>
+                        {brand.name} {model.name}
+                      </>
+                    )}
                   </h3>
                   <p className="text-mp-ink-soft leading-relaxed flex-1">
                     {model.forWhom}
