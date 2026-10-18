@@ -534,6 +534,37 @@ export async function notifyInternalContact(message: {
   });
 }
 
+/**
+ * Demande de rappel de la page /prix-poele-pellets (arrivée des annonces
+ * « prix » et « devis »). Le sujet ne reprend aucune donnée du client.
+ */
+export async function notifyInternalCallback(req: {
+  name: string;
+  email: string;
+  phone: string;
+  postalCode: string;
+  situation: string;
+  origin?: string;
+}) {
+  const html = `
+    <h2 style="color:#174724;font-family:Georgia,serif">Demande de rappel pour un prix posé</h2>
+    <p><strong>${escapeHtml(req.name)}</strong> · ${escapeHtml(req.phone)} · ${escapeHtml(req.email)}</p>
+    <p><strong>Code postal :</strong> ${escapeHtml(req.postalCode)}<br>
+    <strong>Évacuation des fumées :</strong> ${escapeHtml(req.situation)}${
+      req.origin ? `<br><strong>Origine :</strong> ${escapeHtml(req.origin)}` : ""
+    }</p>
+    <p style="font-family:sans-serif;font-size:14px">À rappeler dans la journée ouvrée, depuis la page Prix d'un poêle à pellets posé.</p>
+  `;
+
+  return sendEmail({
+    label: "notifyInternalCallback",
+    to: TO_INTERNAL,
+    subject: "[Rappel prix] Nouvelle demande de rappel",
+    html,
+    replyTo: req.email,
+  });
+}
+
 export async function confirmCustomerOrder(order: {
   customerName: string;
   customerEmail: string;

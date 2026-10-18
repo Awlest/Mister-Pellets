@@ -285,6 +285,10 @@ export interface EstimateProduct {
   name: string;
   brand: string;
   productType: string;
+  /** Combustible de la fiche (pellet, bois, hybride), pour les filtres hors configurateur. */
+  combustible?: string;
+  /** Nature de l'appareil saisie dans l'admin (poele, insert, foyer, chaudiere), vide = déduite du type. */
+  appliance?: string;
   powerKw: number;
   /** true si la puissance vient d'une variante et non du champ principal. */
   fromVariant?: boolean;

@@ -28,6 +28,8 @@ interface PayloadEstimateRow {
   name: string;
   brand: string;
   productType: string;
+  combustible?: string | null;
+  appliance?: string | null;
   power?: number | null;
   priceHT?: number | null;
   priceTTC?: number | null;
@@ -199,6 +201,8 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
         name: doc.name,
         brand: doc.brand,
         productType: doc.productType,
+        combustible: doc.combustible ?? undefined,
+        appliance: doc.appliance ?? undefined,
         powerKw: opt.kw,
         fromVariant: opt.fromVariant && multi,
         priceHT: ht,
