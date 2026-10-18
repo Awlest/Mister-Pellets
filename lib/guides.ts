@@ -4,7 +4,7 @@
  * permettre l'édition et l'ajout de nouveaux guides par le client.
  *
  * Voix : vouvoiement (charte juin 2026), installateur wallon, zéro tiret long.
- * 3 marques mises en avant : Edilkamin, EK63, Girolami.
+ * 5 marques mises en avant : Edilkamin, EK63, Girolami, Austroflamm, Cadel.
  */
 
 export interface GuideSection {
@@ -146,7 +146,8 @@ export const GUIDES: GuideData[] = [
         heading: "3. Choisir la marque",
         paragraphs: [
           "Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse, avec une gamme très large (air, canalisable, étanche, hydro, inserts) et le Wi-Fi de série sur la plupart des modèles récents. EK63 (Italie) est la marque sœur du groupe Edilkamin, lancée pour proposer du connecté à un prix plus accessible, gamme complète air/canalisable/étanche/hydro. Girolami (Italie, depuis 1970) est un fabricant familial au brevet Source Feeding : le pellet est poussé sous le brasier, qui reste propre tout seul, et la gamme va du poêle à air étanche au thermopoêle hydro, avec une particularité, l'hybride bois-pellet (la gamme Soft) qui accepte les deux combustibles.",
-          "À Mister Pellets, on a retenu ces trois marques après avoir testé une vingtaine de fabricants. Chacune a son créneau, on oriente selon le projet, pas selon la marge.",
+          "Depuis octobre 2026, deux marques complètent la sélection. Austroflamm (Autriche) est notre marque haut de gamme : poêles à pellets qui chauffent par convection naturelle, sans ventilateur qui souffle dans la pièce, et mixtes bois et pellets Duo qui repassent seuls aux pellets quand les bûches ont brûlé. Cadel (Italie, province de Trévise) joue le même rôle qu'EK63 : du connecté, Wi-Fi et Bluetooth intégrés, une gamme très large (poêles plats de 27 cm, canalisables à deux sorties, inserts, hydros) à prix accessible.",
+          "À Mister Pellets, on a retenu ces cinq marques après avoir testé une vingtaine de fabricants. Chacune a son créneau, on oriente selon le projet, pas selon la marge.",
         ],
       },
       {

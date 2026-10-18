@@ -6,7 +6,7 @@
  * pour combler les angles morts (cf. doc §P2.5).
  *
  * Voix : vouvoiement (charte juin 2026), installateur wallon, zéro tiret long.
- * 3 marques mises en avant : Edilkamin, EK63, Girolami. Aucun paiement en ligne : devis, visite, acompte.
+ * 5 marques mises en avant : Edilkamin, EK63, Girolami, Austroflamm, Cadel. Aucun paiement en ligne : devis, visite, acompte.
  * Stratégie GEO : première phrase de chaque réponse = la réponse complète,
  * le reste détaille. Réponses 50 à 200 mots. Mention naturelle de la marque
  * et de la zone géographique (Mister Pellets, Wallonie). Schema FAQPage
@@ -151,7 +151,7 @@ export const FAQS: FaqItem[] = [
     category: "marques",
     question: "Quelles marques distribuez-vous ?",
     answer:
-      "Trois marques, choisies pour couvrir l'ensemble des besoins wallons. Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse, gamme très large et Wi-Fi de série sur les modèles récents. EK63, la marque sœur du groupe Edilkamin, vise le moderne et le connecté à un prix plus accessible. Girolami (Italie, depuis 1970) est un fabricant familial au brevet Source Feeding autonettoyant, avec une gamme hybride bois-pellet et des thermopoêles hydro pour remplacer une chaudière. Les trois sont posées et suivies par notre équipe, avec le même SAV de proximité.",
+      "Cinq marques, choisies pour couvrir l'ensemble des besoins wallons. Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse, gamme très large et Wi-Fi de série sur les modèles récents. EK63, la marque sœur du groupe Edilkamin, vise le moderne et le connecté à un prix plus accessible. Girolami (Italie, depuis 1970) est un fabricant familial au brevet Source Feeding autonettoyant, avec une gamme hybride bois-pellet et des thermopoêles hydro pour remplacer une chaudière. Depuis octobre 2026, Austroflamm (Autriche) apporte le haut de gamme silencieux, poêles à pellets sans ventilateur et mixtes bois et pellets, et Cadel (Italie) une gamme connectée très large à prix accessible, dans l'esprit d'EK63. Les cinq sont posées et suivies par notre équipe, avec le même SAV de proximité.",
   },
   {
     id: "marques-edilkamin-vs-ek63",
@@ -166,6 +166,20 @@ export const FAQS: FaqItem[] = [
     question: "Qu'est-ce qui rend Girolami différent des autres ?",
     answer:
       "Girolami a un brevet maison, le Source Feeding : le pellet est poussé sous le brasier au lieu de tomber dessus, et les cendres sont chassées dans un bac sous le foyer. Concrètement, le brasier reste propre tout seul, vous ne grattez plus tous les jours, vous videz le cendrier une fois par semaine. C'est un fabricant familial italien de Sant'Oreste, près de Rome, depuis 1970. Autre signature : la gamme hybride bois-pellet (le Soft, Good Design Award 2022), où une sonde reconnaît seule le combustible chargé et bascule entre bûche et pellet sans toucher au menu.",
+  },
+  {
+    id: "marques-austroflamm",
+    category: "marques",
+    question: "Pourquoi avoir ajouté Austroflamm ?",
+    answer:
+      "Pour le haut de gamme et le silence. Austroflamm est une entreprise familiale autrichienne fondée en 1983 par Ferdinand Huemer, à Krenglbach. Ses poêles à pellets chauffent par convection naturelle, sans ventilateur qui souffle dans la pièce, et ses poêles mixtes Duo brûlent des bûches ou des pellets, puis repassent seuls aux pellets quand le bois a fini de brûler. Portes en fonte massive, design de Cesare Monti, habillages en céramique ou en pierre : c'est la marque qu'on propose à ceux qui veulent un bel objet qui dure, depuis octobre 2026.",
+  },
+  {
+    id: "marques-cadel",
+    category: "marques",
+    question: "Cadel, c'est comparable à EK63 ?",
+    answer:
+      "Oui, c'est le même créneau : du connecté et de l'étanche à prix plus doux, avec le savoir-faire d'un grand groupe. Cadel, fondée en 1949 près de Trévise, fait partie du groupe MCZ depuis 2013, comme EK63 fait partie du groupe Edilkamin. Ses poêles à pellets ont le Wi-Fi et le Bluetooth intégrés (appli Easy Connect Plus), le brasero autonettoyant Autoclean sur les modèles récents, et la gamme va du poêle plat de 27 cm de profondeur au thermopoêle hydro de 24 kW. On la pose depuis octobre 2026.",
   },
   {
     id: "marques-girolami-bois-pellet",

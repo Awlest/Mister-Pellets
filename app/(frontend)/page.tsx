@@ -24,7 +24,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Poêle à pellets en Wallonie, vente, pose, entretien",
   description:
-    "Edilkamin, EK63 et Girolami : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
+    "Edilkamin, EK63, Girolami, Austroflamm et Cadel : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
 };
 
 const FAQ_HOMEPAGE = [
@@ -61,7 +61,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Quelles marques de poêles distribuez-vous ?",
     answer:
-      "On distribue trois marques italiennes, choisies parce qu'on les connaît à fond. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi sur la plupart des modèles récents. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Sant'Oreste, près de Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Nous, on vous dirige vers celle qui colle à votre projet, pas vers celle qui rapporte le plus.",
+      "Cinq marques, choisies parce qu'on les connaît à fond. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi sur la plupart des modèles récents. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Sant'Oreste, près de Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Depuis octobre 2026, deux nouvelles venues : Austroflamm, fabricant autrichien haut de gamme, pour ses poêles à pellets sans ventilateur et ses mixtes bois et pellets Duo, et Cadel, fabricant italien de Trévise, pour une gamme connectée très large à prix accessible (poêles plats, canalisables, hydros). Nous, on vous dirige vers celle qui colle à votre projet, pas vers celle qui rapporte le plus.",
   },
 ];
 
@@ -131,7 +131,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 mp-measure mx-auto">
-              Edilkamin, EK63 et Girolami : trois marques italiennes, et on ne pose que celles-là.
+              Edilkamin, EK63, Girolami et, nouveaux cet automne, Austroflamm et Cadel : cinq marques qu&apos;on connaît à fond, et on ne pose que celles-là.
               Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
               TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
               provinces wallonnes depuis 2016.

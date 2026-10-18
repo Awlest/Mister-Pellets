@@ -76,6 +76,124 @@ export interface ArticleData {
 
 export const ARTICLES: ArticleData[] = [
   // ───────────────────────────────────────────────────────────────────
+  // ACTUALITÉ : arrivée d'Austroflamm et de Cadel (18/10/2026)
+  // Sources : austroflamm.com et cadelsrl.com (pages entreprise, catalogues
+  // 2026, notices, FAQ), registre autrichien, communiqués Cadel 2023 et iF
+  // 2026, fiches techniques reprises sur les 77 fiches produit du site.
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "austroflamm-cadel-nouvelles-marques-mister-pellets",
+    title: "Austroflamm et Cadel arrivent chez Mister Pellets",
+    metaTitle: "Austroflamm et Cadel : deux nouvelles marques de poêles à pellets en Wallonie",
+    metaDescription:
+      "Depuis octobre 2026, Mister Pellets pose Austroflamm (Autriche, haut de gamme, pellets sans ventilateur et mixtes Duo) et Cadel (Italie, groupe MCZ, Wi-Fi intégré). Ce qui change pour vous.",
+    excerpt:
+      "Deux marques rejoignent Edilkamin, EK63 et Girolami : Austroflamm pour le haut de gamme silencieux, Cadel pour le connecté à prix doux. 77 modèles en plus dans la boutique, posés par la même équipe.",
+    tldr:
+      "Depuis octobre 2026, Mister Pellets distribue et pose deux nouvelles marques en Wallonie. Austroflamm, entreprise familiale autrichienne fondée en 1983, apporte des poêles à pellets qui chauffent sans ventilateur dans la pièce et des poêles mixtes bois-pellets Duo : 11 modèles de 6 à 10 kW. Cadel, fabricant italien fondé en 1949 et membre du groupe MCZ depuis 2013, apporte 66 modèles à pellets, Wi-Fi et Bluetooth intégrés, du poêle plat de 27 cm au thermopoêle hydro de 24,7 kW. Austroflamm se place à côté d'Edilkamin dans le haut de gamme, Cadel à côté d'EK63 dans le connecté accessible.",
+    category: "actualite",
+    tags: ["Austroflamm", "Cadel", "nouveautés", "marques", "poêle mixte", "poêle connecté"],
+    readingTimeMinutes: 6,
+    publishedAt: "2026-10-18",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Conseillers poêles à pellets",
+    coverImageAlt: "Poêle à pellets installé dans un séjour",
+    sections: [
+      {
+        heading: "Pourquoi deux marques de plus ?",
+        paragraphs: [
+          "Avec Edilkamin, EK63 et Girolami, on couvrait l'essentiel des projets wallons. Il restait deux demandes auxquelles on répondait mal. D'un côté, des clients qui voulaient un poêle à pellets vraiment silencieux, beau, et parfois capable de brûler aussi des bûches. De l'autre, des maisons où la place manque : un couloir, un hall, une petite pièce, avec un budget serré mais l'envie de piloter le poêle depuis le téléphone.",
+          "Austroflamm répond à la première, Cadel à la seconde. Les deux marques ont un point commun avec celles qu'on posait déjà : elles se vendent par des revendeurs spécialisés qui installent et mettent en service, et leur garantie suppose une pose par un professionnel. C'est notre métier.",
+        ],
+      },
+      {
+        heading: "Austroflamm : le haut de gamme autrichien",
+        paragraphs: [
+          "Austroflamm est une entreprise familiale fondée en 1983 par Ferdinand Huemer, qui la dirige toujours, à Krenglbach en Haute-Autriche. Son premier poêle à pellets date de 1995. Les poêles sont dessinés par Cesare Monti, un designer italien qui travaille exclusivement pour la marque, et le foyer est garni de Keramott, un matériau breveté développé et produit par Austroflamm.",
+          "Ce qui la distingue sur les pellets, c'est l'absence de ventilateur d'air ambiant. Les Clou Pellet, Clou Compact Pellet, Ella, Perry et Ruby 2.0 chauffent par convection naturelle : pas de souffle, pas de bruit de soufflerie dans le séjour. Ils prennent tous l'air de combustion dehors grâce à un raccord d'air extérieur de série, et annoncent de 87 à 90 % de rendement en classe A+.",
+          "L'autre famille, ce sont les poêles mixtes Duo : Clou Duo, Mo Duo, Mo Duo Cook, Quadra Duo et Scotty Duo. Vous chargez des bûches, le poêle le détecte et règle l'air ; quand le bois a fini de brûler, il redémarre de lui-même aux pellets. Au bois, il chauffe aussi pendant une coupure de courant. Le Mo Duo Cook a en plus une plaque de cuisson sur le dessus.",
+        ],
+        table: {
+          headers: ["Modèle", "Type", "Puissance pellets", "À retenir"],
+          rows: [
+            ["Clou Compact Pellet", "Pellets", "6 kW", "52 cm de large, 49,9 cm de profondeur"],
+            ["Clou Pellet 8 / 10", "Pellets", "8 ou 10 kW", "Réservoir de 36 kg, jusqu'à 60 h d'autonomie"],
+            ["Ruby 2.0", "Pellets", "8 kW", "Porte arrondie en fonte, canalisable avec kit"],
+            ["Clou Duo", "Mixte bois-pellets", "7 kW", "43 cm de profondeur"],
+            ["Mo Duo Cook", "Mixte bois-pellets", "9,4 kW", "Plaque de cuisson de série"],
+            ["Quadra Duo", "Mixte bois-pellets", "8,3 kW", "Acier ou pierre naturelle, 41 cm de profondeur"],
+          ],
+          caption: "Valeurs des fiches techniques et déclarations de performances Austroflamm. Les 11 modèles sont dans la boutique.",
+        },
+      },
+      {
+        heading: "Cadel : le connecté accessible du groupe MCZ",
+        paragraphs: [
+          "Cadel est née en 1949 à Santa Lucia di Piave, près de Trévise, fondée par Umberto Cadel. Depuis 2013, la marque fait partie du groupe MCZ. Le parallèle avec EK63, marque du groupe Edilkamin, est le bon : des poêles modernes, connectés, à un prix plus doux que la marque phare du groupe. Les poêles sortent d'une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006, où la tôle est découpée, soudée, peinte et assemblée.",
+          "Les poêles à pellets Cadel se pilotent depuis le téléphone avec l'appli gratuite Easy Connect Plus, en Wi-Fi ou en Bluetooth. Sur les modèles récents, le brasero Autoclean se vide à chaque allumage : le nettoyage passe de tous les jours à une fois par semaine, voire moins, selon Cadel. Presque toute la gamme a une chambre de combustion étanche, et elle est en classe A+ (A++ pour une partie des hydros).",
+          "La gamme est très large : poêles plats de 27 à 33 cm de profondeur (Grace, Spirit, Baggy, Luce, Elle, Vesta), canalisables à une ou deux sorties (gamme Plus), inserts pour cheminée ouverte (Ponente, Zefiro), thermopoêles et inserts hydro pour les radiateurs (Maya Idro, River Idro, Saturno). En 2026, le Spin Plus 9 a reçu un iF Design Award.",
+        ],
+        table: {
+          headers: ["Besoin", "Modèle Cadel", "Pourquoi"],
+          rows: [
+            ["Couloir ou petite pièce", "Grace 7", "27 cm de profondeur, fixation murale possible"],
+            ["Chauffer deux pièces de plus", "Vesta Plus 11 Autoclean", "Deux sorties d'air chaud, 33 cm de profondeur"],
+            ["Séjour, budget maîtrisé", "Cristal Plus 9", "Porte en fonte, une sortie canalisée, 90 % de rendement"],
+            ["Cheminée ouverte existante", "Zefiro 9", "Insert à pellets, canalisable avec kit"],
+            ["Radiateurs ou plancher chauffant", "River Idro 18 Autoclean", "13,2 kW cédés à l'eau, classe A++"],
+          ],
+          caption: "Exemples tirés des 66 modèles Cadel de la boutique, valeurs des fiches techniques Cadel 2026.",
+        },
+      },
+      {
+        heading: "Ce qui change pour vous",
+        list: {
+          items: [
+            "77 modèles en plus dans la boutique, avec leurs caractéristiques et photos officielles, filtrables par marque.",
+            "Même parcours qu'avec nos autres marques : visite technique, devis sous 48 heures, pose en une journée dans la plupart des cas, TVA à 6 % sur les logements de plus de 10 ans.",
+            "Bonus de saison jusqu'au 24 décembre 2026 : -10 % sur le prix des poêles Austroflamm et Cadel (-15 % sur les autres marques), pose au tarif normal.",
+            "Garantie : 2 ans chez Cadel ; chez Austroflamm, les conditions de l'importateur belge, remises par écrit avec le devis. Dans les deux cas, l'entretien annuel est à faire : on s'en charge.",
+          ],
+        },
+        callout: {
+          variant: "info",
+          text: "Les prix de certains modèles arrivent sur les fiches au fil des jours. En attendant, on vous chiffre le poêle et la pose sur devis, sous 48 heures.",
+        },
+      },
+      {
+        heading: "Austroflamm ou Cadel : comment choisir ?",
+        paragraphs: [
+          "Prenez Austroflamm si le silence et la finition comptent plus que tout, ou si vous voulez profiter d'un vrai feu de bois sans renoncer à l'automatisme des pellets. Prenez Cadel si vous cherchez le bon rapport entre prix, connectivité et format, en particulier pour une pièce étroite, plusieurs pièces à chauffer ou des radiateurs à alimenter.",
+          "Et si vous hésitez avec Edilkamin, EK63 ou Girolami, c'est normal : on compare toujours deux ou trois modèles de marques différentes lors de la visite, sur votre maison, votre conduit et votre budget.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Les poêles Austroflamm sans ventilateur chauffent-ils assez ?",
+        answer: "Oui, la chaleur se diffuse par convection naturelle et par rayonnement, comme avec un poêle à bois. La pièce monte un peu moins vite en température qu'avec un poêle ventilé, mais sans bruit de soufflerie. Pour plusieurs pièces, on regarde un modèle canalisable avec kit, comme le Ruby 2.0 ou un Duo.",
+      },
+      {
+        question: "Un Cadel a-t-il le Wi-Fi de série ?",
+        answer: "Cadel annonce le Wi-Fi et le Bluetooth intégrés sur ses poêles à pellets, avec l'appli gratuite Easy Connect Plus. Sur quelques modèles d'entrée de gamme, la fiche du fabricant parle de Wi-Fi à prévoir : on vous le confirme au devis.",
+      },
+      {
+        question: "Le bonus de saison s'applique-t-il aux nouvelles marques ?",
+        answer: "Oui, à -10 % sur le prix du poêle pour Austroflamm et Cadel, jusqu'au 24 décembre 2026. La pose n'est pas remisée. Les autres marques restent à -15 %.",
+      },
+      {
+        question: "Vous posez Austroflamm et Cadel dans toute la Wallonie ?",
+        answer: "Oui, dans les cinq provinces wallonnes, avec la même équipe et le même SAV que pour nos autres marques. Livraison gratuite dans un rayon de 20 km autour de Fernelmont.",
+      },
+    ],
+    related: {
+      articles: ["edilkamin-ek63-girolami-quelle-marque-choisir", "dimensionner-poele-pellets-surface-wallonie", "ek63-entity-90-poele-31-cm-couloir"],
+      brands: ["austroflamm", "cadel"],
+      cities: ["namur", "charleroi", "liege"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
   // SAISON 2026-2027 : budget d'un hiver au pellet (ajouté le 03/10/2026)
   // Prix : ValBiom (pellets, août 2026) et SPF Économie (mazout, tarif
   // n° 2026/191 du 03/10/2026). À actualiser à chaque saison.
@@ -305,6 +423,7 @@ export const ARTICLES: ArticleData[] = [
     tags: ["Edilkamin", "EK63", "Girolami", "comparatif", "marques italiennes"],
     readingTimeMinutes: 8,
     publishedAt: "2026-05-15",
+    modifiedAt: "2026-10-18",
     authorName: "Équipe Mister Pellets",
     authorRole: "Conseillers chauffage biomasse",
     coverImageAlt:
@@ -313,7 +432,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Trois marques italiennes, trois philosophies",
         paragraphs: [
-          "On distribue cinq marques, mais on en met trois en avant : Edilkamin, EK63 et Girolami. Le point commun, c'est l'Italie. Toutes les trois conçoivent leurs poêles en Italie, avec le savoir-faire biomasse qui va avec.",
+          "Ce comparatif porte sur nos trois marques italiennes historiques : Edilkamin, EK63 et Girolami. Depuis octobre 2026, Austroflamm et Cadel les ont rejointes, on les présente dans notre article sur leur arrivée. Le point commun, c'est l'Italie. Toutes les trois conçoivent leurs poêles en Italie, avec le savoir-faire biomasse qui va avec.",
           "Le reste change. Edilkamin, c'est la référence historique, fondée en 1963 et installée à Lainate, près de Milan. EK63 est sa marque sœur, lancée pour proposer du connecté moderne à un prix plus doux. Girolami est une marque familiale fondée près de Rome en 1970, avec un brevet maison d'alimentation par le bas qui change le quotidien d'entretien.",
           "Aucune n'est meilleure dans l'absolu. La bonne, c'est celle qui colle à votre maison et à votre budget.",
         ],
@@ -407,7 +526,8 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["dimensionner-poele-pellets-surface-wallonie"],
+      articles: [
+        "austroflamm-cadel-nouvelles-marques-mister-pellets","dimensionner-poele-pellets-surface-wallonie"],
       brands: ["edilkamin", "ek63", "girolami"],
     },
   },

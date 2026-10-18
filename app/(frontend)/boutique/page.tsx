@@ -10,7 +10,7 @@ import { BONUS, isBonusPeriod } from "@/lib/bonus";
 export const metadata = buildPageMetadata({
   title: "Boutique poêles à pellets en Wallonie",
   description:
-    "Catalogue Mister Pellets : Edilkamin, EK63, Girolami. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, TVA à 6 % en rénovation.",
+    "Catalogue Mister Pellets : Edilkamin, EK63, Girolami, Austroflamm, Cadel. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, TVA à 6 % en rénovation.",
   path: "/boutique",
 });
 

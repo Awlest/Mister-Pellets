@@ -56,8 +56,9 @@ sociétés. Le devis et la facture portent le nom Awlest SRL.
   appareils posés par d'autres.
 - Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une
   journée dans la majorité des cas.
-- Marques distribuées, exclusivement italiennes : Edilkamin, EK63, Girolami.
-  Nous ne posons que ces trois marques.
+- Marques distribuées : Edilkamin, EK63 et Girolami (Italie), et depuis
+  octobre 2026 Austroflamm (Autriche, poêles à pellets et mixtes bois/pellets)
+  et Cadel (Italie, gamme pellets complète). Nous ne posons que ces cinq marques.
 
 Ce que nous ne faisons pas : la climatisation (voir Mister Clim), les chaudières
 gaz ou mazout, le photovoltaïque. Nous ne vendons plus en ligne avec paiement :
