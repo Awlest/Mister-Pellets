@@ -2,7 +2,7 @@ import Link from "next/link";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { getAllProducts } from "@/lib/products";
-import { TOP_TIER_BRANDS } from "@/lib/brands";
+import { BRAND_LIST } from "@/lib/brands";
 import { buildPageMetadata } from "@/lib/seo";
 import { BoutiqueExplorer, type BoutiqueProduct } from "@/components/boutique/BoutiqueExplorer";
 import { BONUS, isBonusPeriod } from "@/lib/bonus";
@@ -22,13 +22,15 @@ export const metadata = buildPageMetadata({
  */
 export const revalidate = 60;
 
-const BRAND_FILTERS = [
-  { value: "all", label: "Toutes" },
-  ...TOP_TIER_BRANDS.map((b) => ({ value: b.name, label: b.name })),
-];
-
 export default async function BoutiquePage() {
   const products = await getAllProducts();
+  // Filtre par marque : seulement les marques qui ont au moins une fiche en
+  // boutique, dans l'ordre de BRAND_LIST (top tier d'abord).
+  const brandsInShop = BRAND_LIST.filter((b) => products.some((p) => p.brand === b.name));
+  const brandFilters = [
+    { value: "all", label: "Toutes" },
+    ...brandsInShop.map((b) => ({ value: b.name, label: b.name })),
+  ];
   const bonusActive = isBonusPeriod();
 
   // Shape allégé (carte + filtres uniquement) pour réduire le payload envoyé
@@ -67,7 +69,7 @@ export default async function BoutiquePage() {
   return (
     <>
       <HeroSecondary
-        eyebrow={`${products.length} modèles · ${TOP_TIER_BRANDS.length} marques · pellets uniquement`}
+        eyebrow={`${products.length} modèles · ${brandsInShop.length} marques · pellets uniquement`}
         title={
           <>
             Tous les <span className="mp-italic">poêles à pellets</span>
@@ -104,7 +106,7 @@ export default async function BoutiquePage() {
             .
           </div>
 
-          <BoutiqueExplorer products={lean} brandFilters={BRAND_FILTERS} />
+          <BoutiqueExplorer products={lean} brandFilters={brandFilters} />
         </div>
       </section>
 

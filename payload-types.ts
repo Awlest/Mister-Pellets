@@ -234,7 +234,7 @@ export interface Product {
    * Nom commercial complet (ex: Edilkamin Blade Plus 9 kW)
    */
   name: string;
-  brand: 'Edilkamin' | 'EK63' | 'Girolami' | 'Dielle' | 'Ferlux';
+  brand: 'Edilkamin' | 'EK63' | 'Girolami' | 'Dielle' | 'Ferlux' | 'Austroflamm' | 'Cadel';
   /**
    * ex: Blade Plus, Tweed 90+, Iride 22
    */

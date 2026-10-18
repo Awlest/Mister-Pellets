@@ -192,6 +192,8 @@ export const Products: CollectionConfig = {
             { label: "Girolami", value: "Girolami" },
             { label: "Dielle", value: "Dielle" },
             { label: "Ferlux", value: "Ferlux" },
+            { label: "Austroflamm", value: "Austroflamm" },
+            { label: "Cadel", value: "Cadel" },
           ],
           admin: { width: "50%" },
         },

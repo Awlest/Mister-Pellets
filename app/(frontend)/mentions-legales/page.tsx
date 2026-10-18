@@ -71,7 +71,7 @@ export default function MentionsLegalesPage() {
             <p>
               L'ensemble du site (textes, photos, logos, charte graphique, code source) est la
               propriété exclusive de Awlest SRL ou de ses partenaires (marques distribuées :
-              Edilkamin, EK63, Girolami, Dielle, Ferlux pour les éléments propres à ces marques). Toute
+              Edilkamin, EK63, Girolami, Dielle, Ferlux, Austroflamm, Cadel pour les éléments propres à ces marques). Toute
               reproduction, totale ou partielle, sans autorisation écrite préalable est interdite.
             </p>
           </section>
