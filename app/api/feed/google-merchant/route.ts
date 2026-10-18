@@ -222,19 +222,21 @@ function buildItem(fields: Array<[string, string | undefined]>): string {
  * l'écart entre les deux qui fait suspendre un compte). Une promo saisie dans
  * l'admin (salePrice) reste annoncée seule avant et après la période ; pendant,
  * le bonus se calcule sur elle, comme sur la fiche.
- * `regular` : prix catalogue ; `effective` : prix affiché avant bonus.
+ * `regular` : prix catalogue ; `effective` : prix affiché avant bonus ;
+ * `brand` : fixe le taux du bonus (-10 % Austroflamm et Cadel, -15 % sinon).
  */
 function saleFields(
   regular: number,
   effective: number,
   phase: BonusPhase,
+  brand: string,
 ): Array<[string, string | undefined]> {
   const adminSale: Array<[string, string | undefined]> =
     effective < regular ? [["sale_price", `${effective.toFixed(2)} EUR`]] : [];
   if (phase === "after") return adminSale;
   if (phase === "before" && adminSale.length > 0) return adminSale;
   return [
-    ["sale_price", `${bonusPrice(effective).toFixed(2)} EUR`],
+    ["sale_price", `${bonusPrice(effective, brand).toFixed(2)} EUR`],
     ["sale_price_effective_date", BONUS.effectiveDate],
   ];
 }
@@ -265,7 +267,7 @@ function productEntry(p: ProductDemo, phase: BonusPhase): FeedEntry | null {
       ["availability", availability(p.stockStatus)],
       ["availability_date", availabilityDate(p.stockStatus)],
       ["price", `${p.priceTTC.toFixed(2)} EUR`],
-      ...saleFields(p.priceTTC, p.promoPriceTTC ?? p.priceTTC, phase),
+      ...saleFields(p.priceTTC, p.promoPriceTTC ?? p.priceTTC, phase, p.brand),
       ["brand", p.brand],
       ["gtin", p.gtin],
       ["mpn", p.mpn],
@@ -325,6 +327,7 @@ function variantEntry(
         price,
         variant.salePrice && variant.salePrice > 0 ? variant.salePrice : price,
         phase,
+        p.brand,
       ),
       ["brand", p.brand],
       ["gtin", variant.gtin],
@@ -372,7 +375,7 @@ function colorVariantEntry(
       ["availability", availability(p.stockStatus)],
       ["availability_date", availabilityDate(p.stockStatus)],
       ["price", `${p.priceTTC.toFixed(2)} EUR`],
-      ...saleFields(p.priceTTC, p.promoPriceTTC ?? p.priceTTC, phase),
+      ...saleFields(p.priceTTC, p.promoPriceTTC ?? p.priceTTC, phase, p.brand),
       ["brand", p.brand],
       ["gtin", cv.gtin],
       ["mpn", p.mpn],

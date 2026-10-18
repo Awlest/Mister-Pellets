@@ -21,7 +21,7 @@ import { BRANDS } from "@/lib/brands";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { schemaAvailability } from "@/lib/availability";
-import { BONUS } from "@/lib/bonus";
+import { BONUS, bonusLabelFor } from "@/lib/bonus";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { productKindLabel } from "@/lib/product-kind";
 import { formatKw } from "@/lib/power";
@@ -431,7 +431,7 @@ export default async function ProductPage({ params }: Props) {
                       </p>
                       {product.bonusPriceTTC ? (
                         <p className="mt-2 text-xs text-mp-ink-soft">
-                          {BONUS.label} déduit. {BONUS.conditions}
+                          {bonusLabelFor(product.brand)} déduit. {BONUS.conditions}
                         </p>
                       ) : null}
                     </div>

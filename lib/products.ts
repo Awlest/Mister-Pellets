@@ -273,9 +273,9 @@ function deriveVariantPowers(p: PayloadProduct): {
 }
 
 /** Prix TTC remisé d'une variante : sur son prix promo admin s'il existe, sinon son prix. */
-function variantBonusPrice(price?: number | null, salePrice?: number | null): number | undefined {
+function variantBonusPrice(price: number | null | undefined, salePrice: number | null | undefined, brand: string): number | undefined {
   const effective = salePrice && salePrice > 0 ? salePrice : price;
-  return effective && effective > 0 ? bonusPrice(effective) : undefined;
+  return effective && effective > 0 ? bonusPrice(effective, brand) : undefined;
 }
 
 /**
@@ -355,7 +355,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     heatedVolumes,
     priceTTC: p.priceTTC ?? undefined,
     promoPriceTTC: promoTTC,
-    bonusPriceTTC: bonusActive && effectiveTTC ? bonusPrice(effectiveTTC) : undefined,
+    bonusPriceTTC: bonusActive && effectiveTTC ? bonusPrice(effectiveTTC, p.brand) : undefined,
     stockStatus: p.stockStatus ?? undefined,
     isBestseller: p.isBestseller ?? false,
     isFeatured: p.isFeatured ?? false,
@@ -452,7 +452,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
             mpn: v.mpn ?? undefined,
             price: typeof v.price === "number" ? v.price : 0,
             salePrice: typeof v.salePrice === "number" ? v.salePrice : undefined,
-            bonusPrice: bonusActive ? variantBonusPrice(v.price, v.salePrice) : undefined,
+            bonusPrice: bonusActive ? variantBonusPrice(v.price, v.salePrice, p.brand) : undefined,
             stockStatus: v.stockStatus ?? undefined,
             leadTimeDays:
               typeof v.leadTimeDays === "number" ? v.leadTimeDays : undefined,

@@ -39,7 +39,7 @@ import {
   type OptionKey,
   type StoveKind,
 } from "@/lib/estimate";
-import { BONUS, isBonusPeriod } from "@/lib/bonus";
+import { BONUS, bonusLabelFor, isBonusPeriod } from "@/lib/bonus";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
 import { BRAND_PARAMS, EVENTS, trackEvent } from "@/lib/analytics";
@@ -517,11 +517,11 @@ function EstimateForm({
             <details className="group mb-5 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 text-sm text-mp-ink">
               <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 [&::-webkit-details-marker]:hidden">
                 <span>
-                  <strong className="text-mp-green-deep">{BONUS.label}</strong>, déjà déduit du total
+                  <strong className="text-mp-green-deep">Bonus de saison</strong>, déjà déduit du total
                 </span>
                 <ChevronDown className="h-4 w-4 shrink-0 text-mp-ink-soft transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
               </summary>
-              <p className="px-4 pb-3 leading-relaxed">{BONUS.conditions}</p>
+              <p className="px-4 pb-3 leading-relaxed">{BONUS.conditions} {BONUS.exception}.</p>
             </details>
           )}
 
@@ -1466,7 +1466,7 @@ function Recap({
           label={product ? `Poêle ${product.brand}` : "Poêle"}
           value={r.materialHT > 0 ? eur(r.materialHT) : "à choisir"}
         />
-        {r.bonusHT > 0 && <Row label={BONUS.label} value={`-${eur(r.bonusHT)}`} />}
+        {r.bonusHT > 0 && <Row label={bonusLabelFor(product?.brand)} value={`-${eur(r.bonusHT)}`} />}
         {r.laborLines.map((l) => (
           <Row key={l.key} label={l.label} value={eur(l.amountHT)} muted />
         ))}
@@ -1491,7 +1491,7 @@ function Recap({
         Estimation indicative TTC, matériel et pose compris, TVA{" "}
         {Math.round(r.vatRate * 100)} %. Les forfaits de pose sont des budgets moyens : le prix
         ferme est établi après la visite technique gratuite.
-        {r.bonusHT > 0 && ` ${BONUS.label} déduit. ${BONUS.conditions}`}
+        {r.bonusHT > 0 && ` ${bonusLabelFor(product?.brand)} déduit. ${BONUS.conditions}`}
       </p>
       {monthly != null && (
         <p className="mt-2 text-xs leading-relaxed text-mp-ink-soft">
