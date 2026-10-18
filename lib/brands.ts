@@ -40,7 +40,7 @@ export interface BrandFaqItem {
 }
 
 export interface BrandData {
-  slug: "edilkamin" | "ek63" | "girolami" | "dielle" | "ferlux";
+  slug: "edilkamin" | "ek63" | "girolami" | "dielle" | "ferlux" | "austroflamm" | "cadel";
   name: string;
   country: string;
   /** 1 = marque top tier (page complète), 2 = marque secondaire. */
@@ -71,7 +71,7 @@ export interface BrandData {
   /** FAQ "Ce qu'on nous demande souvent". */
   faq?: BrandFaqItem[];
 
-  // ----- Contenu hérité (tier 2 : Dielle, Ferlux) -----
+  // ----- Contenu hérité (tier 2 : Dielle, Ferlux, Austroflamm, Cadel) -----
   history?: string[];
   specialties?: string[];
   modelHighlights?: { name: string; power: string; usp: string }[];
@@ -345,6 +345,82 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     metaDescription:
       "Ferlux, fabricant espagnol depuis plus de 28 ans, distribué dans 30+ pays. Air, canalisable, hydro. Rendement jusqu'à 94 %. Pose en Wallonie par Mister Pellets.",
   },
+
+  // ───────────────────────────────────────────────────────────────────
+  // AUSTROFLAMM , tier2, poêles à pellets silencieux et mixtes bois/pellets
+  // ───────────────────────────────────────────────────────────────────
+  austroflamm: {
+    slug: "austroflamm",
+    name: "Austroflamm",
+    country: "Autriche",
+    tier: 2,
+    foundedLabel: "Depuis le début des années 1980",
+    positioning: "Poêles à pellets sans ventilateur d'ambiance et poêles mixtes bois/pellets",
+    tagline: "Un poêle à pellets qu'on n'entend pas",
+    intro:
+      "Austroflamm est un fabricant autrichien installé à Krenglbach, en Haute-Autriche. Ses poêles à pellets chauffent par convection naturelle : pas de ventilateur qui souffle dans la pièce, donc pas de bruit de soufflerie. La marque fait aussi des poêles mixtes, les Duo, qui brûlent des bûches ou des pellets et repassent seuls aux pellets quand le bois a fini de brûler.",
+    history: [
+      "Fabricant autrichien établi à Krenglbach, en Haute-Autriche. Son histoire, telle qu'il la raconte, commence au début des années 1980.",
+      "Connu d'abord pour ses poêles et foyers à bois, il propose aujourd'hui une gamme de poêles à pellets et de poêles mixtes bois/pellets.",
+    ],
+    specialties: [
+      "Poêles à pellets à convection naturelle, sans ventilateur d'air ambiant",
+      "Poêles mixtes Duo : bûches ou pellets, retour automatique aux pellets après le bois",
+      "Raccord d'air extérieur et fonctionnement indépendant de l'air de la pièce sur la plupart des modèles",
+      "Rendements de 87 à 90 % en pellets et classe A+ sur toute la gamme",
+      "Pilotage par smartphone en option (box WiRCU et appli PelletControl)",
+    ],
+    modelHighlights: [
+      { name: "Clou Pellet", power: "8 et 10 kW", usp: "Vitre ronde, réservoir de 36 kg, jusqu'à 60 h d'autonomie" },
+      { name: "Ruby 2.0", power: "8 kW", usp: "Porte arrondie en fonte, canalisable avec kit" },
+      { name: "Clou Duo", power: "7 kW", usp: "Mixte bois/pellets de 43 cm de profondeur" },
+      { name: "Mo Duo Cook", power: "9,4 kW", usp: "Mixte bois/pellets avec plaque de cuisson" },
+    ],
+    warranty: "Garantie légale de 2 ans en Belgique ; garantie constructeur selon le modèle.",
+    tags: ["Autriche", "Convection naturelle", "Mixte bois et pellets", "Silencieux"],
+    officialUrl: "https://www.austroflamm.com/",
+    metaTitle: "Austroflamm en Belgique, poêles à pellets et mixtes bois/pellets",
+    metaDescription:
+      "Austroflamm, fabricant autrichien : poêles à pellets sans ventilateur d'ambiance et poêles mixtes Duo bois/pellets. Pose en Wallonie par Mister Pellets.",
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // CADEL , tier2, gamme pellets italienne très large
+  // ───────────────────────────────────────────────────────────────────
+  cadel: {
+    slug: "cadel",
+    name: "Cadel",
+    country: "Italie",
+    tier: 2,
+    foundedLabel: "Plus de 60 ans dans le chauffage",
+    positioning: "Gamme pellets italienne très large : plats, canalisables, étanches, hydro, inserts",
+    tagline: "Un poêle à pellets pour chaque recoin",
+    intro:
+      "Cadel est un fabricant italien dont le siège est à Santa Lucia di Piave, dans la province de Trévise. Sa gamme pellets est l'une des plus larges qu'on distribue : poêles plats de 27 à 33 cm de profondeur, poêles canalisables à une ou deux sorties, inserts pour cheminée ouverte et thermopoêles raccordés au chauffage central. Presque tous sont étanches et ont le Wi-Fi intégré.",
+    history: [
+      "Fabricant italien dont le siège est à Santa Lucia di Piave, dans la province de Trévise. L'entreprise dit travailler dans le chauffage depuis plus de soixante ans.",
+      "Catalogue 2026 : une soixantaine de poêles, inserts et thermopoêles à pellets.",
+    ],
+    specialties: [
+      "Poêles plats de 27 à 33 cm de profondeur (Grace, Spirit, Baggy, Luce, Vesta)",
+      "Canalisation à une ou deux sorties d'air chaud, avec un moteur par sortie",
+      "Chambre de combustion étanche et Wi-Fi + Bluetooth intégrés (appli Easy Connect Plus)",
+      "Brasero autonettoyant Autoclean sur les modèles récents",
+      "Thermopoêles et inserts hydro jusqu'à 24,7 kW, kit hydraulique compris",
+    ],
+    modelHighlights: [
+      { name: "Cristal", power: "5,5 à 10,5 kW", usp: "La gamme de base, du compact 41 cm au 25 kg de réserve" },
+      { name: "Vesta Plus 11", power: "10,5 kW", usp: "33 cm de profondeur, deux pièces voisines chauffées en plus" },
+      { name: "River Idro", power: "18 et 24 kW", usp: "Thermopoêle pour radiateurs ou plancher chauffant" },
+      { name: "Zefiro 9", power: "9 kW", usp: "Insert pour transformer une cheminée ouverte" },
+    ],
+    warranty: "Garantie légale de 2 ans en Belgique ; garantie constructeur selon le modèle.",
+    tags: ["Italie", "Poêles plats", "Canalisable", "Hydro", "Wi-Fi intégré"],
+    officialUrl: "https://cadelsrl.com/",
+    metaTitle: "Cadel en Belgique, poêles à pellets plats, canalisables et hydro",
+    metaDescription:
+      "Cadel, fabricant italien : poêles à pellets plats, canalisables, étanches, inserts et thermopoêles hydro, Wi-Fi intégré. Pose en Wallonie par Mister Pellets.",
+  },
 };
 
 /** Ordre d'affichage : top tier d'abord, puis secondaires. */
@@ -354,6 +430,8 @@ export const BRAND_LIST: BrandData[] = [
   BRANDS.girolami,
   BRANDS.dielle,
   BRANDS.ferlux,
+  BRANDS.austroflamm,
+  BRANDS.cadel,
 ];
 
 /** Les 3 marques mises en avant (traitement éditorial complet). */
