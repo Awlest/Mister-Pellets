@@ -91,7 +91,7 @@ export default async function PrixPoelePelletsPage() {
           </p>
           {bonus ? (
             <p className="mp-measure mt-6 rounded-2xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-4 text-center text-sm text-mp-ink">
-              <strong className="text-mp-green-deep">{BONUS.label}</strong>. {BONUS.conditions} {BONUS.exception}.
+              <strong className="text-mp-green-deep">{BONUS.label}</strong>. {BONUS.conditions}
             </p>
           ) : null}
         </div>

@@ -32,8 +32,19 @@ export const BONUS = {
   rate: 0.15,
   from: "2026-10-01",
   to: "2026-12-24",
-  label: "Bonus de saison -15 % sur le poêle",
-  /** Pastille courte pour les cartes et les fiches produit. */
+  /**
+   * Libellé des textes qui parlent du bonus en général (accueil, boutique,
+   * page prix, configurateur) : « jusqu'à », parce que le taux dépend de la
+   * marque (voir `reduced`). Chaque fiche, carte ou ligne d'estimation donne
+   * son taux exact (bonusLabelFor, bonusBadgeFor) à côté du prix barré.
+   * Le SPF Économie admet « jusqu'à X % » quand les taux varient, mais le
+   * juge trompeur si le taux maximal ne vaut que pour quelques biens (lignes
+   * directrices « Annonces de réductions de prix » du 09/02/2026, point 10).
+   * Ici -15 % vaut pour toutes les marques sauf Austroflamm et Cadel : si
+   * l'exception venait à couvrir la plupart des poêles, revoir l'annonce.
+   */
+  label: "Bonus de saison jusqu'à -15 % sur le poêle",
+  /** Pastille courte pour les cartes et les fiches produit (taux plein). */
   badge: "-15 %",
   // « cumulable avec la prime Habitation » retiré le 03/10/2026 : la prime
   // s'est arrêtée le 30/09/2026, aucune commande du bonus ne peut y prétendre.
@@ -53,8 +64,6 @@ export const BONUS = {
     badge: "-10 %",
     brands: ["Austroflamm", "Cadel"] as readonly string[],
   },
-  /** Mention de l'exception, pour les textes qui parlent du bonus en général. */
-  exception: "-10 % sur les poêles Austroflamm et Cadel",
 } as const;
 
 const isReduced = (brand?: string | null): boolean =>

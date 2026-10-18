@@ -90,7 +90,7 @@ export default async function BoutiquePage() {
         <div className="mp-shell flex flex-col">
           {bonusActive ? (
             <div className="mb-4 rounded-xl border border-mp-orange-flame/40 bg-mp-orange-light/50 p-4 text-sm text-mp-ink">
-              <strong className="text-mp-green-deep">{BONUS.label}.</strong> {BONUS.conditions} {BONUS.exception}.{" "}
+              <strong className="text-mp-green-deep">{BONUS.label}.</strong> {BONUS.conditions}{" "}
               Les prix ci-dessous sont déjà remisés, le prix catalogue reste indiqué à côté.
             </div>
           ) : null}
