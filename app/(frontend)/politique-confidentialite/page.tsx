@@ -14,7 +14,7 @@ export const metadata: Metadata = {
  *   Supabase eu-west-1, fonctions Vercel dub1 (vercel.json), e-mails Resend
  *   (domaine en eu-west-1) vers info@awlest.com, rendez-vous dans Google Agenda ;
  * - mesure : mode consentement avancé et url_passthrough (lib/analytics.ts),
- *   détaillés dans la politique cookies ;
+ *   détaillés dans la politique cookies ; ad_personalization toujours refusé ;
  * - Google Analytics : conservation réglée à 2 mois (événements) et 14 mois
  *   (utilisateur, remis à zéro à chaque visite) sur G-XZH50KSFW4 et sur
  *   G-S7R1T5NQ58, la propriété liée à la balise Google Ads.
@@ -67,7 +67,8 @@ export default function PolitiqueConfidentialitePage() {
                 <strong>Votre visite sur le site</strong>{" "}: pages vues, provenance, type
                 d&apos;appareil et de navigateur. Si vous acceptez les cookies, Google Analytics et
                 Google Ads relient ces informations à un identifiant rangé dans votre navigateur. Si
-                vous refusez, ou tant que vous n&apos;avez pas répondu, Google ne dépose aucun cookie.
+                vous refusez, ou tant que vous n&apos;avez pas répondu, Google ne dépose rien sur votre
+                appareil.
                 Les pages lui envoient quand même des signaux sans cookie : page vue, demande
                 envoyée, heure, navigateur et adresse IP. Et si vous arrivez par une annonce, le
                 numéro de ce clic peut rester dans l&apos;adresse des pages suivantes. Le détail est
@@ -98,11 +99,11 @@ export default function PolitiqueConfidentialitePage() {
                 cookies de mesure d&apos;audience).
               </li>
               <li>
-                Savoir quelles annonces Google nous amènent des demandes et, si vous acceptez,
-                laisser Google vous montrer nos annonces sur d&apos;autres sites (base légale : votre
+                Savoir quelles annonces Google nous amènent des demandes (base légale : votre
                 consentement aux cookies de mesure publicitaire ; pour les signaux sans cookie
                 envoyés sans votre accord, notre intérêt légitime à savoir si nos annonces valent ce
-                qu&apos;elles coûtent).
+                qu&apos;elles coûtent). Même si vous acceptez, Google ne peut pas se servir de votre
+                visite pour vous montrer nos annonces sur d&apos;autres sites.
               </li>
             </ul>
           </section>
