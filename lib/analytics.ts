@@ -149,6 +149,18 @@ export function writeConsent(choice: ConsentChoice): void {
  * (Analytics.tsx) : un clic sur un lien interne avant son arrivée effacerait
  * ces paramètres de l'adresse, et la conversion ne serait plus attribuée à
  * l'annonce.
+ *
+ * Sans consentement, aucun cookie ne garde le clic d'annonce. gtag lit le
+ * gclid dans l'adresse d'arrivée et le garde en mémoire tant que la page vit,
+ * navigations internes de Next comprises, même quand le visiteur change de
+ * page avant l'arrivée de gtag.js (contrôlé le 19/10/2026 : chaque conversion
+ * repart avec le gclid). `url_passthrough` couvre le reste : il recopie gclid
+ * et wbraid dans les liens internes au moment du clic, si bien qu'un
+ * rechargement complet (lien <a> ordinaire, nouvel onglet, page rechargée)
+ * ne perd plus le clic. Il doit précéder les `config`.
+ * Pas d'`ads_data_redaction` : quand le visiteur refuse, cette option retire
+ * l'identifiant de clic des appels Google Ads, la conversion ne serait plus
+ * reliée à l'annonce.
  */
 export const GA_BOOTSTRAP = `
 window.dataLayer = window.dataLayer || [];
@@ -161,6 +173,7 @@ gtag('consent', 'default', {
   analytics_storage: 'denied',
   wait_for_update: 500
 });
+gtag('set', 'url_passthrough', true);
 try {
   var mpConsent = localStorage.getItem('${CONSENT_KEY}');
   if (mpConsent === 'granted' || mpConsent === 'denied') {
