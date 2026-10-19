@@ -12,7 +12,11 @@ export const metadata: Metadata = {
  * - hébergement : fonctions Vercel en dub1 (vercel.json), store Blob
  *   mister-pellets-next-blob en fra1, base Supabase eu-west-1 ; adresse de
  *   Vercel Inc. reprise de vercel.com/legal/privacy-notice (version du 01/06/2026) ;
- * - responsable : la BCE (0656.514.212) inscrit un administrateur, pas un gérant.
+ * - responsable : la BCE (0656.514.212) inscrit un administrateur, pas un gérant ;
+ * - siège : Braives depuis le 17/03/2026 selon la BCE (situation au 18/10/2026),
+ *   Fernelmont n'est que l'unité d'établissement ; tribunal du siège (CSA art. 2:20)
+ *   lu sur competence-territoriale.just.fgov.be : 4260 Braives relève du tribunal de
+ *   l'entreprise de Liège, division Huy.
  */
 export default function MentionsLegalesPage() {
   return (
@@ -37,16 +41,22 @@ export default function MentionsLegalesPage() {
             <address className="not-italic mt-3">
               <strong>Awlest SRL</strong>
               <br />
-              Rue des Fagotis 3A
+              Siège social : Rue Saint-Pierre 29
               <br />
-              5380 Fernelmont, Belgique
+              4260 Braives, Belgique
               <br />
-              TVA : BE 0656.514.212
+              Numéro d&apos;entreprise et TVA : BE 0656.514.212
+              <br />
+              RPM Liège, division Huy
               <br />
               Téléphone : 0472 04 32 22
               <br />
               Email : info@awlest.com
             </address>
+            <p className="mt-3">
+              Le showroom et l&apos;atelier sont à Fernelmont, Rue des Fagotis 3A. On vous y reçoit
+              sur rendez-vous.
+            </p>
           </section>
 
           <section>

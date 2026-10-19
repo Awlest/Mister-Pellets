@@ -39,8 +39,9 @@ export default function PolitiqueConfidentialitePage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Responsable du traitement</h2>
             <p>
-              <strong>Awlest SRL</strong> · Rue des Fagotis 3A, 5380 Fernelmont, Belgique · TVA BE
-              0656.514.212 · Email contact : info@awlest.com.
+              <strong>Awlest SRL</strong>{" "}· Siège social : Rue Saint-Pierre 29, 4260 Braives,
+              Belgique · Numéro d&apos;entreprise et TVA : BE 0656.514.212 · RPM Liège, division Huy ·
+              Email contact : info@awlest.com.
             </p>
           </section>
 
