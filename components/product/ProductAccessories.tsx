@@ -129,9 +129,9 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
                   {a.note ? (
                     <span className="block text-xs text-mp-ink-soft">{a.note}</span>
                   ) : null}
-                </span>
-                <span className="shrink-0 text-right text-sm font-semibold tabular-nums text-mp-orange-ink">
-                  {a.priceTTC != null ? `+ ${formatPrice(a.priceTTC)}` : "Prix sur demande"}
+                  <span className="mt-1 block text-sm font-semibold tabular-nums text-mp-orange-ink">
+                    {a.priceTTC != null ? `+ ${formatPrice(a.priceTTC)}` : "Prix sur demande"}
+                  </span>
                 </span>
               </label>
             </li>
