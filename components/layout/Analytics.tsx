@@ -7,6 +7,8 @@ import {
   BRAND_PARAMS,
   EVENTS,
   GA_MEASUREMENT_ID,
+  clearConsent,
+  clearGoogleCookies,
   readConsent,
   trackEvent,
   updateConsent,
@@ -14,6 +16,7 @@ import {
   type ConsentChoice,
 } from "@/lib/analytics";
 import { FAMILY_HOSTS } from "@/config/site";
+import { buttonVariants } from "@/components/ui/button-variants";
 
 /**
  * Mesure d'audience GA4 avec mode consentement Google (v2).
@@ -49,6 +52,45 @@ function subscribe(cb: () => void) {
 const getSnapshot = (): ConsentChoice | "unknown" => readConsent() ?? "unknown";
 const getServerSnapshot = (): "loading" => "loading";
 
+const notify = () => listeners.forEach((l) => l());
+
+const BANNER_ID = "mp-consent";
+
+/** Élément qui a rouvert le bandeau, où rendre le focus après la réponse. */
+let reopenedFrom: HTMLElement | null = null;
+
+/**
+ * « Gérer les cookies » : retirer son accord doit être aussi simple que le
+ * donner. Le choix est oublié, Google repasse au refus par défaut (l'état
+ * d'une première visite) et le bandeau revient avec le focus, pour qui
+ * navigue au clavier. Les cookies déjà posés ne sont effacés qu'au refus.
+ */
+function reopenConsent(from: HTMLElement) {
+  reopenedFrom = from;
+  clearConsent();
+  updateConsent("denied");
+  notify();
+  // Après le rendu qui remonte le bandeau (setTimeout et non
+  // requestAnimationFrame : figé dans un onglet en arrière-plan).
+  setTimeout(() => document.getElementById(BANNER_ID)?.focus({ preventScroll: true }), 0);
+}
+
+/** Bouton du pied de page et de la politique cookies. */
+export function ConsentSettingsButton({ className }: { className?: string }) {
+  return (
+    <button type="button" onClick={(e) => reopenConsent(e.currentTarget)} className={className}>
+      Gérer les cookies
+    </button>
+  );
+}
+
+/**
+ * Accepter et Refuser : même taille, même couleur, même ligne. Un Accepter
+ * plein face à un Refuser en contour pousse à accepter ; refuser doit rester
+ * aussi visible et aussi facile.
+ */
+const CHOICE_BUTTON = `${buttonVariants({ variant: "secondary" })} sm:w-32`;
+
 export function Analytics() {
   const choice = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
@@ -82,7 +124,10 @@ export function Analytics() {
   const decide = (value: ConsentChoice) => {
     writeConsent(value);
     updateConsent(value);
-    listeners.forEach((l) => l());
+    if (value === "denied") clearGoogleCookies();
+    notify();
+    if (reopenedFrom?.isConnected) reopenedFrom.focus({ preventScroll: true });
+    reopenedFrom = null;
   };
 
   // Visite issue d'une annonce : l'amorce du <head> a déjà lancé gtag.js
@@ -120,35 +165,28 @@ export function Analytics() {
         * avant le premier affichage (globals.css) ; React le retire ensuite. */}
       {(choice === "unknown" || choice === "loading") && (
         <div
+          id={BANNER_ID}
           role="dialog"
-          aria-label="Cookies de mesure d'audience"
+          aria-label="Cookies de mesure"
+          tabIndex={-1}
           // Sur mobile, posé juste au-dessus de la barre de navigation
-          // flottante (--mp-bottomnav-offset, globals.css) et resserré : il
-          // couvrait le milieu du premier écran, boutons du héros compris.
-          className="mp-consent-banner fixed inset-x-3 bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-50 rounded-2xl border border-mp-sand bg-mp-cream p-4 shadow-lg sm:p-5 lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
+          // flottante (--mp-bottomnav-offset) et, sur /estimation, de la
+          // barre d'action du configurateur (--mp-actionbar-space, globals.css) :
+          // il recouvrait le bouton Suivant (relevé à 375 px le 19/10/2026).
+          className="mp-consent-banner fixed inset-x-3 bottom-[calc(var(--mp-bottomnav-offset)_+_var(--mp-actionbar-space)_+_0.5rem)] z-50 rounded-2xl border border-mp-sand bg-mp-cream p-4 shadow-lg sm:p-5 lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
         >
           <p className="text-sm leading-relaxed text-mp-ink">
-            On mesure l&apos;audience du site et l&apos;efficacité de nos annonces Google, pour
-            savoir quelles pages servent vraiment et d&apos;où viennent nos clients. Rien
-            n&apos;est stocké sur votre appareil tant que vous n&apos;avez pas accepté.{" "}
-            <Link href="/politique-cookies" className="underline hover:text-mp-orange-flame">
-              Notre politique cookies
+            Les cookies Google nous montrent comment vous nous avez trouvés, et donc quelle pub
+            vaut la peine. Sans votre accord, on n&apos;en dépose aucun.{" "}
+            <Link href="/politique-cookies" className="whitespace-nowrap underline hover:text-mp-orange-flame">
+              Politique cookies
             </Link>
-            .
           </p>
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-4 sm:flex sm:flex-wrap">
-            <button
-              type="button"
-              onClick={() => decide("granted")}
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-mp-green-deep px-5 text-sm font-semibold text-mp-cream transition-colors hover:bg-mp-green-mid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mp-orange-ink"
-            >
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-4 sm:flex">
+            <button type="button" onClick={() => decide("granted")} className={CHOICE_BUTTON}>
               Accepter
             </button>
-            <button
-              type="button"
-              onClick={() => decide("denied")}
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-mp-sand px-5 text-sm font-semibold text-mp-ink transition-colors hover:border-mp-green-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mp-orange-ink"
-            >
+            <button type="button" onClick={() => decide("denied")} className={CHOICE_BUTTON}>
               Refuser
             </button>
           </div>

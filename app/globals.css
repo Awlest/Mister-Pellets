@@ -334,6 +334,24 @@ body {
   }
 }
 
+/* === BARRE D'ACTION ET BANDEAU COOKIES ===
+ * Sous 1 024 px, la barre d'action du configurateur (.mp-actionbar, total et
+ * bouton Suivant) colle au-dessus de la barre du bas. Le bandeau cookies, fixe
+ * au même endroit, la recouvrait (relevé à 375 px le 19/10/2026) : quand la
+ * page contient une barre d'action, il monte de sa hauteur plus 0,5 rem
+ * (--mp-actionbar-space). La barre reçoit cette hauteur en min-height, pour
+ * que les deux s'accordent dès le HTML, sans attendre le JavaScript. Sans
+ * :has() (navigateurs anciens), le bandeau reste à sa place d'avant. */
+:root {
+  --mp-actionbar-h: 4.375rem;
+  --mp-actionbar-space: 0px;
+}
+@media (max-width: 1023.98px) {
+  :root:has(.mp-actionbar) {
+    --mp-actionbar-space: calc(var(--mp-actionbar-h) + 0.5rem);
+  }
+}
+
 @layer base {
   /* Typographie de marque, dans @layer base pour que toute classe utility
    * Tailwind (text-mp-cream, text-white, text-mp-orange-flame, etc.) puisse

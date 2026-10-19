@@ -1,46 +1,61 @@
 import type { Metadata } from "next";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
+import { ConsentSettingsButton } from "@/components/layout/Analytics";
+import { buttonVariants } from "@/components/ui/button-variants";
 
 export const metadata: Metadata = {
   title: "Politique cookies",
-  description: "Liste détaillée des cookies utilisés par Mister Pellets et comment les paramétrer.",
+  description:
+    "Les cookies Google du site Mister Pellets, ce qu'ils mesurent, ce qui part chez Google sans votre accord et comment changer d'avis.",
   alternates: { canonical: "https://mister-pellets.be/politique-cookies" },
 };
 
+/**
+ * Inventaire relevé dans le code le 19/10/2026 : le site ne pose lui-même
+ * aucun cookie aux visiteurs (le cookie payload-token ne sert qu'à l'équipe
+ * sur /admin). Trois clés du stockage du navigateur, puis les cookies de
+ * gtag.js (lib/analytics.ts), posés seulement après Accepter. À tenir à jour
+ * à chaque outil ajouté ou retiré.
+ */
 const COOKIES = [
   {
-    category: "Essentiels",
-    description: "Indispensables au fonctionnement du site. Pas de consentement requis.",
-    items: [
-      { name: "mp_session", purpose: "Session utilisateur (panier, login admin)", duration: "Session" },
-      { name: "mp_cookie_consent", purpose: "Mémorise votre choix sur le bandeau cookies", duration: "12 mois" },
-    ],
-  },
-  {
-    category: "Analytiques",
-    description: "Mesure d'audience anonyme. Activés uniquement après votre consentement.",
-    items: [
-      { name: "_ga, _ga_*", purpose: "Google Analytics 4, pages vues, durée, parcours", duration: "26 mois" },
-      { name: "_clck, _clsk", purpose: "Microsoft Clarity, heatmaps anonymes", duration: "12 mois" },
-    ],
-  },
-  {
-    category: "Mesure publicitaire",
+    category: "Indispensables",
     description:
-      "Mesurent les demandes de devis et de rendez-vous qui viennent de nos annonces Google. Activés uniquement après votre consentement.",
+      "Rangés dans le stockage de votre navigateur, pas dans un cookie. Ils ne servent qu'au site et ne partent nulle part.",
     items: [
       {
-        name: "_gcl_au, _gcl_aw",
-        purpose: "Google Ads, relie une demande de devis ou un rendez-vous au clic sur l'annonce",
-        duration: "90 jours",
+        name: "mp-consent",
+        purpose: "Votre réponse au bandeau cookies",
+        duration: "Jusqu'à ce que vous cliquiez sur « Gérer les cookies » ou effaciez les données du site",
+      },
+      {
+        name: "mp_estimate_draft",
+        purpose: "Vos réponses à l'estimation en ligne, si vous quittez la page avant la fin",
+        duration: "Effacé à l'envoi de l'estimation",
+      },
+      {
+        name: "mp_quote_draft",
+        purpose: "Votre demande de devis en cours",
+        duration: "Effacé à l'envoi de la demande",
       },
     ],
   },
   {
-    category: "Fonctionnels",
-    description: "Améliorent l'expérience. Activés uniquement après votre consentement.",
+    category: "Mesure d'audience",
+    description: "Déposés par Google Analytics, uniquement si vous acceptez.",
     items: [
-      { name: "youtube_*", purpose: "Lecture des vidéos YouTube intégrées (si applicable)", duration: "Variable" },
+      { name: "_ga, _ga_*", purpose: "Pages vues, provenance de la visite, parcours sur le site", duration: "2 ans" },
+    ],
+  },
+  {
+    category: "Mesure des annonces",
+    description: "Déposés par Google Ads, uniquement si vous acceptez.",
+    items: [
+      {
+        name: "_gcl_au, _gcl_aw, _gcl_gb",
+        purpose: "Relier une demande (estimation, rappel, rendez-vous, appel depuis le site) au clic sur notre annonce",
+        duration: "90 jours",
+      },
     ],
   },
 ];
@@ -50,7 +65,7 @@ export default function PolitiqueCookiesPage() {
     <>
       <HeroSecondary
         title="Politique cookies"
-        description="Quels cookies on dépose, pourquoi, et comment les contrôler."
+        description="Quels cookies on dépose, pourquoi, et comment changer d'avis."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Politique cookies" },
@@ -62,20 +77,19 @@ export default function PolitiqueCookiesPage() {
           <div className="mp-measure space-y-8 text-mp-ink leading-relaxed">
 
           <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Qu'est-ce qu'un cookie ?</h2>
+            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Qu&apos;est-ce qu&apos;un cookie ?</h2>
             <p>
-              Un cookie est un petit fichier texte déposé sur votre appareil (ordinateur, mobile,
-              tablette) lors de la visite d'un site. Il permet de mémoriser des informations sur votre
-              navigation : préférences, panier, session. Certains sont indispensables au
-              fonctionnement, d'autres servent à mesurer l'audience ou à proposer des fonctionnalités
-              optionnelles.
+              Un cookie est un petit fichier texte qu&apos;un site dépose sur votre appareil (ordinateur,
+              téléphone, tablette) pour s&apos;en souvenir d&apos;une visite à l&apos;autre. Certains servent au
+              fonctionnement du site, d&apos;autres à mesurer l&apos;audience ou l&apos;effet des annonces.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Comment on utilise les cookies sur ce site</h2>
+            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Ce qu&apos;on utilise sur ce site</h2>
             <p>
-              On distingue 4 catégories de cookies selon leur finalité :
+              Le site lui-même ne vous dépose aucun cookie. Il garde trois informations dans le
+              stockage de votre navigateur, et Google ne dépose ses cookies que si vous acceptez.
             </p>
 
             {COOKIES.map((cat) => (
@@ -106,17 +120,47 @@ export default function PolitiqueCookiesPage() {
                 </div>
               </div>
             ))}
+
+            <p className="mt-6">
+              Si vous acceptez, Google peut aussi lire ou déposer ses propres cookies sur ses domaines
+              (google.com, doubleclick.net), selon ses règles. Accepter l&apos;autorise également à se
+              servir de ces données pour la publicité personnalisée, par exemple vous montrer nos
+              annonces sur d&apos;autres sites.
+            </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Comment paramétrer ou refuser les cookies</h2>
+            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Ce qui part chez Google sans votre accord</h2>
             <p>
-              Sur votre première visite, un bandeau vous demande votre choix : accepter, refuser, ou
-              personnaliser par catégorie. Vous pouvez modifier vos préférences à tout moment en cliquant
-              sur le lien « Cookies » en bas de chaque page.
+              Le site utilise le mode consentement « avancé » de Google. Tant que vous n&apos;avez pas
+              répondu, ou si vous refusez, aucun cookie Google n&apos;est déposé. Les pages envoient quand
+              même à Google des signaux sans cookie : page vue, demande envoyée, heure, type de
+              navigateur et, comme pour toute connexion, votre adresse IP. Google s&apos;en sert pour
+              estimer, quand il a assez de données, les visites et les demandes qu&apos;il ne peut pas
+              compter une à une.
             </p>
             <p className="mt-3">
-              Vous pouvez aussi gérer les cookies directement depuis votre navigateur :
+              Si vous arrivez par une de nos annonces, le numéro de ce clic (gclid) et un code de
+              Google (_gl) peuvent aussi rester dans l&apos;adresse des pages suivantes. Une demande
+              envoyée plus loin dans la visite est ainsi reliée à l&apos;annonce, sans rien enregistrer sur
+              votre appareil.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Changer d&apos;avis</h2>
+            <p>
+              À votre première visite, un bandeau vous pose la question : Accepter ou Refuser, deux
+              boutons de même taille. Refuser ne bloque rien sur le site.
+            </p>
+            <p className="mt-3">
+              Pour changer d&apos;avis, cliquez sur « Gérer les cookies » en bas de chaque page, ou sur le
+              bouton ci-dessous. Votre réponse est oubliée et le bandeau revient. Si vous refusez à
+              ce moment-là, on efface aussi les cookies Google que ce site avait déposés.
+            </p>
+            <ConsentSettingsButton className={`${buttonVariants({ variant: "outline" })} mt-4 cursor-pointer`} />
+            <p className="mt-6">
+              Vous pouvez aussi effacer ou bloquer les cookies depuis votre navigateur :
             </p>
             <ul className="list-disc list-outside ml-5 space-y-1 mt-3">
               <li>Chrome : Paramètres → Confidentialité et sécurité → Cookies</li>
@@ -125,21 +169,21 @@ export default function PolitiqueCookiesPage() {
               <li>Edge : Paramètres → Cookies et autorisations de site</li>
             </ul>
             <p className="mt-3">
-              ⚠️ Bloquer tous les cookies, y compris les essentiels, peut empêcher certaines
-              fonctionnalités du site (panier, session, formulaires).
+              Si vous bloquez aussi le stockage du navigateur, le bandeau reviendra à chaque visite et
+              l&apos;estimation en ligne ne gardera pas vos réponses si vous quittez la page.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Modification de la politique</h2>
             <p>
-              Cette politique peut évoluer pour s'adapter aux nouveaux outils ou à la réglementation.
-              Toute modification significative vous sera signalée via le bandeau cookies.
+              On met cette page à jour quand on ajoute ou retire un outil. La date ci-dessous indique
+              la dernière version.
             </p>
           </section>
 
           <p className="mp-measure text-sm text-mp-ink-soft pt-6 border-t border-mp-sand/40">
-            Dernière mise à jour : {new Date().toLocaleDateString("fr-BE", { year: "numeric", month: "long" })}
+            Dernière mise à jour : octobre 2026
           </p>
           </div>
         </div>
