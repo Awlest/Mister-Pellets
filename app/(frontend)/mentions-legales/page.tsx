@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://mister-pellets.be/mentions-legales" },
 };
 
+/**
+ * Relevé le 19/10/2026 :
+ * - hébergement : fonctions Vercel en dub1 (vercel.json), store Blob
+ *   mister-pellets-next-blob en fra1, base Supabase eu-west-1 ; adresse de
+ *   Vercel Inc. reprise de vercel.com/legal/privacy-notice (version du 01/06/2026) ;
+ * - responsable : la BCE (0656.514.212) inscrit un administrateur, pas un gérant.
+ */
 export default function MentionsLegalesPage() {
   return (
     <>
@@ -45,32 +52,42 @@ export default function MentionsLegalesPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Marque commerciale</h2>
             <p>
-              <em>Mister Pellets</em> est la marque commerciale exploitée par Awlest SRL pour ses
-              activités de vente, installation et entretien de poêles à pellets en Wallonie.
+              <em>Mister Pellets</em>{" "}
+              est une marque d&apos;Awlest SRL. Sous ce nom, on vend, on pose et on entretient des
+              poêles à pellets en Wallonie.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Hébergement</h2>
-            <p>
-              Le site est hébergé par <strong>Combell</strong> (datacenter Bruxelles). Pendant la
-              phase de construction, des déploiements de prévisualisation sont également hébergés
-              par Vercel Inc. (États-Unis), accessibles uniquement via authentification.
+            <p>Le site est hébergé par :</p>
+            <address className="not-italic mt-3">
+              <strong>Vercel Inc.</strong>
+              <br />
+              {/* check-design: allow (n° de boîte de l'adresse de Vercel, pas une couleur) */}
+              440 N Barranca Avenue #4133
+              <br />
+              Covina, CA 91723, États-Unis
+            </address>
+            <p className="mt-3">
+              Vos formulaires passent par ses serveurs de Dublin, en Irlande. Les photos du site
+              sont stockées chez Vercel, à Francfort. On garde vos demandes dans notre base de
+              données chez Supabase, en Irlande elle aussi.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Directeur de publication</h2>
+            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Responsable de la publication</h2>
             <p>
-              Le directeur de la publication est le gérant de Awlest SRL.
+              Le responsable de la publication est l&apos;administrateur d&apos;Awlest SRL.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Propriété intellectuelle</h2>
             <p>
-              L'ensemble du site (textes, photos, logos, charte graphique, code source) est la
-              propriété exclusive de Awlest SRL ou de ses partenaires (marques distribuées :
+              L&apos;ensemble du site (textes, photos, logos, charte graphique, code source) est la
+              propriété exclusive d&apos;Awlest SRL ou de ses partenaires (marques distribuées :
               Edilkamin, EK63, Girolami, Dielle, Ferlux, Austroflamm, Cadel pour les éléments propres à ces marques). Toute
               reproduction, totale ou partielle, sans autorisation écrite préalable est interdite.
             </p>
@@ -81,7 +98,7 @@ export default function MentionsLegalesPage() {
             <p>
               Les informations fournies sur le site sont données à titre indicatif. Awlest SRL met
               tout en œuvre pour offrir des informations à jour et exactes, mais ne peut garantir
-              l'absence d'erreurs ou d'omissions. Les caractéristiques techniques et les prix des
+              l&apos;absence d&apos;erreurs ou d&apos;omissions. Les caractéristiques techniques et les prix des
               produits peuvent évoluer. En cas de doute, contactez-nous pour confirmation.
             </p>
           </section>
@@ -105,12 +122,12 @@ export default function MentionsLegalesPage() {
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Droit applicable</h2>
             <p>
               Les présentes mentions légales sont soumises au droit belge. Tout litige relatif à
-              l'utilisation du site relève de la compétence des tribunaux de Namur.
+              l&apos;utilisation du site relève de la compétence des tribunaux de Namur.
             </p>
           </section>
 
           <p className="mp-measure text-sm text-mp-ink-soft pt-6 border-t border-mp-sand/40">
-            Dernière mise à jour : {new Date().toLocaleDateString("fr-BE", { year: "numeric", month: "long" })}
+            Dernière mise à jour : octobre 2026
           </p>
           </div>
         </div>
