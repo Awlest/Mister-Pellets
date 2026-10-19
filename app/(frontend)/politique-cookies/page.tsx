@@ -44,7 +44,7 @@ const COOKIES = [
     category: "Mesure d'audience",
     description: "Déposés par Google Analytics, uniquement si vous acceptez.",
     items: [
-      { name: "_ga, _ga_*", purpose: "Pages vues, provenance de la visite, parcours sur le site", duration: "2 ans" },
+      { name: "_ga, _ga_*", purpose: "Pages vues, provenance de la visite, parcours sur le site", duration: "Jusqu'à 2 ans" },
     ],
   },
   {
@@ -54,6 +54,11 @@ const COOKIES = [
       {
         name: "_gcl_au, _gcl_aw, _gcl_gb",
         purpose: "Relier une demande (estimation, rappel, rendez-vous, appel depuis le site) au clic sur notre annonce",
+        duration: "90 jours",
+      },
+      {
+        name: "_gcl_ls",
+        purpose: "Le même clic, rangé par Google dans le stockage de votre navigateur plutôt que dans un cookie",
         duration: "90 jours",
       },
     ],
@@ -89,7 +94,8 @@ export default function PolitiqueCookiesPage() {
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">Ce qu&apos;on utilise sur ce site</h2>
             <p>
               Le site lui-même ne vous dépose aucun cookie. Il garde trois informations dans le
-              stockage de votre navigateur, et Google ne dépose ses cookies que si vous acceptez.
+              stockage de votre navigateur. Google, lui, ne dépose rien sur votre appareil tant que
+              vous n&apos;avez pas accepté.
             </p>
 
             {COOKIES.map((cat) => (
@@ -123,9 +129,9 @@ export default function PolitiqueCookiesPage() {
 
             <p className="mt-6">
               Si vous acceptez, Google peut aussi lire ou déposer ses propres cookies sur ses domaines
-              (google.com, doubleclick.net), selon ses règles. Accepter l&apos;autorise également à se
-              servir de ces données pour la publicité personnalisée, par exemple vous montrer nos
-              annonces sur d&apos;autres sites.
+              (google.com, doubleclick.net), selon ses règles. Accepter sert à la mesure, pas à la
+              publicité personnalisée : le site indique à Google qu&apos;il ne peut pas se servir de
+              votre visite pour vous montrer nos annonces ailleurs, même si vous acceptez.
             </p>
           </section>
 
@@ -156,7 +162,8 @@ export default function PolitiqueCookiesPage() {
             <p className="mt-3">
               Pour changer d&apos;avis, cliquez sur « Gérer les cookies » en bas de chaque page, ou sur le
               bouton ci-dessous. Votre réponse est oubliée et le bandeau revient. Si vous refusez à
-              ce moment-là, on efface aussi les cookies Google que ce site avait déposés.
+              ce moment-là, on efface aussi ce que Google avait déposé par ce site, cookies et
+              stockage du navigateur.
             </p>
             <ConsentSettingsButton className={`${buttonVariants({ variant: "outline" })} mt-4 cursor-pointer`} />
             <p className="mt-6">
