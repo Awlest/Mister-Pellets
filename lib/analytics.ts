@@ -101,13 +101,21 @@ export function trackEvent(name: string, params?: Record<string, unknown>): void
   }
 }
 
-/** Met à jour le consentement Google après le choix de l'utilisateur. */
+/**
+ * Met à jour le consentement Google après le choix de l'utilisateur.
+ *
+ * `ad_personalization` reste refusé dans tous les cas : le bandeau ne demande
+ * l'accord que pour la mesure (audience et annonces), et le compte Ads ne fait
+ * pas de remarketing. Les conversions n'en dépendent pas. Le jour où l'on veut
+ * des listes de remarketing, il faudra le dire dans le bandeau et la politique
+ * avant de l'accorder ici et dans GA_BOOTSTRAP.
+ */
 export function updateConsent(choice: ConsentChoice): void {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   window.gtag("consent", "update", {
     ad_storage: choice,
     ad_user_data: choice,
-    ad_personalization: choice,
+    ad_personalization: "denied",
     analytics_storage: choice,
   });
 }
@@ -153,8 +161,17 @@ const GOOGLE_COOKIE = /^(_ga|_gid|_gat|_gcl_)/;
  * chez quelqu'un qui vient de retirer son accord. gtag les pose sur le domaine
  * le plus large (.mister-pellets.be) : chaque niveau est essayé, plus le cas
  * sans domaine (localhost).
+ * gtag range aussi le clic d'annonce dans le stockage du navigateur
+ * (`_gcl_ls`, relevé en prod le 19/10/2026 après Accepter) : effacé aussi.
  */
 export function clearGoogleCookies(): void {
+  try {
+    for (const key of Object.keys(localStorage)) {
+      if (key.startsWith("_gcl_")) localStorage.removeItem(key);
+    }
+  } catch {
+    // Stockage bloqué : gtag n'a rien pu y ranger.
+  }
   const names = document.cookie
     .split(";")
     .map((c) => (c.split("=", 1)[0] ?? "").trim())
@@ -200,6 +217,8 @@ export function clearGoogleCookies(): void {
  * Pas d'`ads_data_redaction` : quand le visiteur refuse, cette option retire
  * l'identifiant de clic des appels Google Ads, la conversion ne serait plus
  * reliée à l'annonce.
+ * L'accord restauré laisse `ad_personalization` au refus par défaut (voir
+ * updateConsent).
  */
 export const GA_BOOTSTRAP = `
 window.dataLayer = window.dataLayer || [];
@@ -222,7 +241,6 @@ try {
     gtag('consent', 'update', {
       ad_storage: 'granted',
       ad_user_data: 'granted',
-      ad_personalization: 'granted',
       analytics_storage: 'granted'
     });
   }

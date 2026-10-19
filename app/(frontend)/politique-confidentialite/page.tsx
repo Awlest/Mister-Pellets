@@ -45,7 +45,9 @@ export default function PolitiqueConfidentialitePage() {
               </li>
               <li>
                 <strong>Données de navigation</strong> : pages visitées, durée de visite, type
-                d'appareil. Collectées uniquement après acceptation des cookies analytiques (cf.
+                d'appareil, annonce Google d'où vous venez. Avec des cookies Google seulement si
+                vous acceptez. Sans votre accord, Google reçoit quand même des signaux sans cookie
+                (cf.
                 <a href="/politique-cookies" className="text-mp-orange-ink underline hover:no-underline ml-1">politique cookies</a>).
               </li>
             </ul>
@@ -73,7 +75,8 @@ export default function PolitiqueConfidentialitePage() {
               uniquement avec nos sous-traitants techniques (hébergement, fournisseur d&apos;email
               Resend, agenda Google pour les rendez-vous), tous engagés contractuellement à
               respecter la confidentialité. Pour les commandes, vos données peuvent être transmises
-              au fabricant pour les besoins de garantie et SAV.
+              au fabricant pour les besoins de garantie et SAV. Les données de navigation vont à
+              Google (Analytics et Ads), dans les limites décrites dans la politique cookies.
             </p>
           </section>
 
@@ -82,7 +85,7 @@ export default function PolitiqueConfidentialitePage() {
             <ul className="list-disc list-outside ml-5 space-y-2">
               <li>Données de devis non concrétisé : 12 mois après dernier contact.</li>
               <li>Données client (commande/installation) : 10 ans (obligation légale comptable + garantie).</li>
-              <li>Données de navigation analytiques : 26 mois (Google Analytics).</li>
+              <li>Données de navigation analytiques : 14 mois au plus dans Google Analytics.</li>
               <li>Mesure publicitaire : 90 jours (cookies Google Ads).</li>
               <li>Newsletter : tant que vous n'avez pas demandé la désinscription.</li>
             </ul>
@@ -98,7 +101,7 @@ export default function PolitiqueConfidentialitePage() {
               <li><strong>Limiter</strong> le traitement</li>
               <li><strong>Récupérer</strong> vos données dans un format portable</li>
               <li><strong>Vous opposer</strong> au traitement pour motif légitime</li>
-              <li><strong>Retirer</strong> votre consentement à tout moment</li>
+              <li><strong>Retirer</strong> votre consentement à tout moment (pour les cookies : « Gérer les cookies » en bas de chaque page)</li>
             </ul>
             <p className="mt-4">
               Pour exercer ces droits : email à <strong>info@awlest.com</strong> avec votre demande et
@@ -124,7 +127,7 @@ export default function PolitiqueConfidentialitePage() {
           </section>
 
           <p className="mp-measure text-sm text-mp-ink-soft pt-6 border-t border-mp-sand/40">
-            Dernière mise à jour : {new Date().toLocaleDateString("fr-BE", { year: "numeric", month: "long" })}
+            Dernière mise à jour : octobre 2026
           </p>
           </div>
         </div>
