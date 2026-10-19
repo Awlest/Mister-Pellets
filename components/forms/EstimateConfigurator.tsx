@@ -1090,10 +1090,12 @@ function EstimateForm({
         {/* Barre d'action. Sous 1 024 px elle colle au bas de l'écran, posée sur
             la barre de navigation, puis au ras de l'écran quand celle-ci se
             replie (--mp-bottomnav-offset, globals.css), le tout dans les limites
-            du formulaire : arrivée en bas de la carte, elle reprend sa place. */}
+            du formulaire : arrivée en bas de la carte, elle reprend sa place.
+            mp-actionbar et sa hauteur minimale : le bandeau cookies se pose
+            au-dessus (globals.css). */}
         <div
           className={cn(
-            "sticky bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-20",
+            "mp-actionbar sticky bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-20 min-h-[var(--mp-actionbar-h)]",
             // Fond opaque et filet, sans flou ni ombre (DESIGN.md). Le saut de
             // `bottom` quand la barre du bas se replie n'est pas animé : seuls
             // opacité et transform s'animent sur le site.

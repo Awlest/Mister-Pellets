@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CATALOGUE_LINKS, INFO_LINKS, LEGAL_LINKS, SERVICE_LINKS, isFilterLink, published, type NavLink } from "@/config/navigation";
+import { ConsentSettingsButton } from "@/components/layout/Analytics";
 import {
   ADDRESS,
   EMAIL,
@@ -211,6 +212,9 @@ export function Footer() {
                 {link.label}
               </Link>
             ))}
+            {/* Rouvre le bandeau : la politique cookies promet ce lien, et
+              * retirer son accord doit être aussi simple que le donner. */}
+            <ConsentSettingsButton className={`${LINK} cursor-pointer`} />
           </nav>
           <p className="text-xs text-mp-cream/75">
             © {year} {SITE_NAME}, une marque d&apos;{LEGAL_ENTITY.name} · BCE {LEGAL_ENTITY.enterpriseNumber}

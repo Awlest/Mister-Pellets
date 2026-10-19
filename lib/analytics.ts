@@ -130,6 +130,45 @@ export function writeConsent(choice: ConsentChoice): void {
 }
 
 /**
+ * Oublie le choix enregistré (lien « Gérer les cookies ») : stockage et
+ * attribut `data-consent` posé par l'amorce, sans quoi le CSS garderait le
+ * bandeau masqué.
+ */
+export function clearConsent(): void {
+  try {
+    localStorage.removeItem(CONSENT_KEY);
+  } catch {
+    // Stockage bloqué : rien n'était enregistré.
+  }
+  document.documentElement.removeAttribute("data-consent");
+}
+
+/** Cookies posés par gtag.js sur ce site (GA4 et Google Ads). */
+const GOOGLE_COOKIE = /^(_ga|_gid|_gat|_gcl_)/;
+
+/**
+ * Efface les cookies Google déjà posés, après un refus. Repasser le
+ * consentement à « denied » empêche gtag d'en écrire de nouveaux mais laisse
+ * les anciens : sans ce ménage, _ga (2 ans) et _gcl_aw (90 jours) resteraient
+ * chez quelqu'un qui vient de retirer son accord. gtag les pose sur le domaine
+ * le plus large (.mister-pellets.be) : chaque niveau est essayé, plus le cas
+ * sans domaine (localhost).
+ */
+export function clearGoogleCookies(): void {
+  const names = document.cookie
+    .split(";")
+    .map((c) => (c.split("=", 1)[0] ?? "").trim())
+    .filter((name) => GOOGLE_COOKIE.test(name));
+  if (names.length === 0) return;
+  const labels = location.hostname.split(".");
+  const domains = [""];
+  for (let i = 0; i < labels.length - 1; i++) domains.push(`; domain=.${labels.slice(i).join(".")}`);
+  for (const name of names) {
+    for (const domain of domains) document.cookie = `${name}=; Max-Age=0; path=/${domain}`;
+  }
+}
+
+/**
  * Script d'amorce du mode consentement, à rendre en clair dans le `<head>`.
  *
  * Il DOIT s'exécuter avant que la bibliothèque Google ne s'initialise, sinon
