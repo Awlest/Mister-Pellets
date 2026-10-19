@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductVariantPanel } from "@/components/product/ProductVariantPanel";
+import { ProductAccessories } from "@/components/product/ProductAccessories";
 import { ProductColorProvider } from "@/components/product/ProductColorContext";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
@@ -69,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const kind = productKindLabel(product);
   return buildPageMetadata({
     title: `${product.name}, ${kind.charAt(0).toUpperCase()}${kind.slice(1)} ${product.power}`,
-    description: `${product.name} : ${product.power}${product.heatedVolume ? ` pour ${product.heatedVolume}` : ""}. ${product.priceTTC ? `${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets.`,
+    description: `${product.name} : ${product.power}${product.heatedVolume ? ` pour ${product.heatedVolume}` : ""}. ${product.priceTTC ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets.`,
     path: `/produit/${product.slug}`,
     // Fiche masquée de la boutique : joignable par son URL (liens, favoris)
     // mais hors de Google, comme elle l'est déjà du sitemap et du flux.
@@ -380,6 +381,7 @@ export default async function ProductPage({ params }: Props) {
                     basePriceTTC={shownTTC}
                     variantOptions={product.variantOptions ?? []}
                     variants={product.variants}
+                    accessories={product.accessories}
                   />
                   <div className="mt-3 flex flex-col gap-3">
                     <Button asChild variant="primary" size="lg" className="w-full">
@@ -457,6 +459,16 @@ export default async function ProductPage({ params }: Props) {
                   </p>
                 </div>
               )}
+
+              {product.accessories && product.accessories.length > 0 ? (
+                <div className="mb-6">
+                  <ProductAccessories
+                    accessories={product.accessories}
+                    basePriceTTC={product.priceTTC ? (shownTTC ?? product.priceTTC) : null}
+                    missingBaseHint="Le poêle se chiffre sur devis."
+                  />
+                </div>
+              ) : null}
 
               <div className="flex flex-col gap-3">
                 <Button asChild variant="primary" size="lg" className="w-full">

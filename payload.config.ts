@@ -9,6 +9,7 @@ import sharp from "sharp";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Products } from "./collections/Products";
+import { Accessories } from "./collections/Accessories";
 import { VariantOptionTypes } from "./collections/VariantOptionTypes";
 import { VariantOptionValues } from "./collections/VariantOptionValues";
 import { Orders } from "./collections/Orders";
@@ -55,6 +56,7 @@ export default buildConfig({
     Users,
     Media,
     Products,
+    Accessories,
     VariantOptionTypes,
     VariantOptionValues,
     Orders,

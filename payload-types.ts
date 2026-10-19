@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     products: Product;
+    accessories: Accessory;
     'variant-option-types': VariantOptionType;
     'variant-option-values': VariantOptionValue;
     orders: Order;
@@ -86,6 +87,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    accessories: AccessoriesSelect<false> | AccessoriesSelect<true>;
     'variant-option-types': VariantOptionTypesSelect<false> | VariantOptionTypesSelect<true>;
     'variant-option-values': VariantOptionValuesSelect<false> | VariantOptionValuesSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
@@ -335,7 +337,7 @@ export interface Product {
       }[]
     | null;
   /**
-   * Couleurs disponibles pour ce produit. Le prix et les options techniques restent identiques, seuls le code EAN et les photos peuvent varier.
+   * Photos par finition (pastilles sous la galerie). Le prix n'y est pas : si les finitions n'ont pas toutes le même prix, cocher « Ce produit a des variantes » plus bas et créer une combinaison par finition, avec son prix.
    */
   colorVariants?:
     | {
@@ -453,9 +455,9 @@ export interface Product {
          */
         mpn?: string | null;
         /**
-         * Prix TTC (€)
+         * Prix TTC (€). Vide = « Sur devis » pour cette combinaison.
          */
-        price: number;
+        price?: number | null;
         /**
          * Prix promo TTC (€)
          */
@@ -500,6 +502,10 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Options vendues en plus de ce poêle (thermostat, Wi-Fi, canalisation…). Le prix se règle dans Boutique > Compléments.
+   */
+  accessories?: (number | Accessory)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -554,6 +560,47 @@ export interface VariantOptionValue {
    * Icône SVG. Utilisée si l'axe parent est en mode « Icônes ».
    */
   icon?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Options vendues en plus d'un poêle (thermostat, Wi-Fi, canalisation…). Une fiche par code fabricant, rattachée aux produits depuis leur fiche.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accessories".
+ */
+export interface Accessory {
+  id: number;
+  /**
+   * Court et clair pour un particulier (ex. « Thermostat radio TriKey »).
+   */
+  name: string;
+  brand: 'Edilkamin' | 'EK63' | 'Girolami' | 'Dielle' | 'Ferlux' | 'Austroflamm' | 'Cadel';
+  /**
+   * Regroupe les compléments sur la fiche produit.
+   */
+  category: 'thermostat' | 'connectivite' | 'canalisation' | 'raccordement' | 'habillage' | 'fonctionnement' | 'autre';
+  mpn?: string | null;
+  /**
+   * Prix du tarif fabricant.
+   */
+  priceHT?: number | null;
+  /**
+   * Affiché sur les fiches. Vide = calculé depuis le HTVA (×1,21). Les deux vides = « prix sur demande ».
+   */
+  priceTTC?: number | null;
+  /**
+   * Unique (ex. girolami-5629).
+   */
+  sku: string;
+  /**
+   * Optionnel, une ligne sous le nom (ex. « Indispensable avec le kit Air Diffuser », « Version canalisable seulement »).
+   */
+  description?: string | null;
+  /**
+   * Tarif et page d'origine (ex. Girolami Catalistino 2026 p. 50).
+   */
+  tariffSource?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -809,6 +856,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'accessories';
+        value: number | Accessory;
       } | null)
     | ({
         relationTo: 'variant-option-types';
@@ -1073,6 +1124,24 @@ export interface ProductsSelect<T extends boolean = true> {
         importBatchId?: T;
         id?: T;
       };
+  accessories?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "accessories_select".
+ */
+export interface AccessoriesSelect<T extends boolean = true> {
+  name?: T;
+  brand?: T;
+  category?: T;
+  mpn?: T;
+  priceHT?: T;
+  priceTTC?: T;
+  sku?: T;
+  description?: T;
+  tariffSource?: T;
   updatedAt?: T;
   createdAt?: T;
 }

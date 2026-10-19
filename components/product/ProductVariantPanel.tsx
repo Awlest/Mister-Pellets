@@ -4,11 +4,13 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { BONUS, bonusBadgeFor, bonusLabelFor } from "@/lib/bonus";
+import { ProductAccessories } from "@/components/product/ProductAccessories";
 import type {
   VariantOptionAxis,
   VariantOptionValueData,
   ProductVariantData,
   VariantStockStatus,
+  ProductAccessory,
 } from "@/lib/products-demo";
 
 interface Props {
@@ -19,6 +21,8 @@ interface Props {
   basePriceTTC?: number;
   variantOptions: VariantOptionAxis[];
   variants: ProductVariantData[];
+  /** Compléments en option : leur total s'ajoute à la configuration choisie. */
+  accessories?: ProductAccessory[];
 }
 
 const STOCK_LABELS: Record<VariantStockStatus, string> = {
@@ -56,6 +60,7 @@ export function ProductVariantPanel({
   basePriceTTC,
   variantOptions,
   variants,
+  accessories,
 }: Props) {
   // Axes triés par sortOrder (ordre d'affichage défini dans l'admin).
   const axes = React.useMemo(
@@ -63,9 +68,32 @@ export function ProductVariantPanel({
     [variantOptions],
   );
 
+  // Un axe à une seule valeur (ex. une seule sortie des fumées) est choisi
+  // d'office : rien à décider, et le prix s'affiche sans ce clic.
   const [selected, setSelected] = React.useState<Record<number, number | null>>(
-    () => Object.fromEntries(axes.map((a) => [a.optionTypeId, null])),
+    () =>
+      Object.fromEntries(
+        axes.map((a) => [a.optionTypeId, a.values.length === 1 ? (a.values[0]?.id ?? null) : null]),
+      ),
   );
+
+  // Au montage : présélection depuis l'URL (?materiau=acier&couleur=noir),
+  // la forme des liens du flux Google Merchant (une ligne par combinaison) :
+  // la page doit alors afficher le prix de la combinaison annoncée. Le
+  // setState est synchrone dans l'effet pour la même raison que la boutique
+  // (BoutiqueExplorer) : l'URL n'existe pas au rendu serveur.
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl: Record<number, number> = {};
+    for (const axis of axes) {
+      const slug = params.get(axis.slug);
+      const value = slug ? axis.values.find((v) => v.slug === slug) : undefined;
+      if (value) fromUrl[axis.optionTypeId] = value.id;
+    }
+    if (Object.keys(fromUrl).length === 0) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSelected((prev) => ({ ...prev, ...fromUrl }));
+  }, [axes]);
 
   /** Une variante est compatible avec une sélection partielle donnée. */
   const matchesSelection = React.useCallback(
@@ -260,6 +288,18 @@ export function ProductVariantPanel({
           />
         )}
       </div>
+
+      {accessories && accessories.length > 0 ? (
+        <ProductAccessories
+          accessories={accessories}
+          basePriceTTC={activeVariant && activePriced ? shownPrice(activeVariant) : null}
+          missingBaseHint={
+            activeVariant
+              ? "Cette configuration du poêle se chiffre sur devis."
+              : "Choisissez la configuration du poêle pour voir le total."
+          }
+        />
+      ) : null}
 
       {/* La configuration choisie sert au chiffrage, pas à un panier :
           la pose se confirme lors de la visite technique. */}
