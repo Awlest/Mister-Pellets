@@ -470,7 +470,7 @@ export const Products: CollectionConfig = {
       maxRows: 8,
       admin: {
         description:
-          "Couleurs disponibles pour ce produit. Le prix et les options techniques restent identiques, seuls le code EAN et les photos peuvent varier.",
+          "Photos par finition (pastilles sous la galerie). Le prix n'y est pas : si les finitions n'ont pas toutes le même prix, cocher « Ce produit a des variantes » plus bas et créer une combinaison par finition, avec son prix.",
         initCollapsed: true,
       },
       fields: [
@@ -751,8 +751,11 @@ export const Products: CollectionConfig = {
             {
               name: "price",
               type: "number",
-              required: true,
-              admin: { width: "33%", step: 0.01, description: "Prix TTC (€)" },
+              admin: {
+                width: "33%",
+                step: 0.01,
+                description: "Prix TTC (€). Vide = « Sur devis » pour cette combinaison.",
+              },
             },
             {
               name: "salePrice",
@@ -846,6 +849,24 @@ export const Products: CollectionConfig = {
           ],
         },
       ],
+    },
+
+    // ===== COMPLÉMENTS EN OPTION =====
+    // Thermostat, Wi-Fi, kits… : fiches de la collection « Compléments »,
+    // partagées entre les produits d'une marque. Affichés sous le prix de la
+    // fiche, avec un total qui s'ajoute à la configuration choisie.
+    {
+      name: "accessories",
+      type: "relationship",
+      relationTo: "accessories",
+      hasMany: true,
+      label: "Compléments en option",
+      filterOptions: ({ data }) =>
+        data?.brand ? { brand: { equals: data.brand } } : true,
+      admin: {
+        description:
+          "Options vendues en plus de ce poêle (thermostat, Wi-Fi, canalisation…). Le prix se règle dans Boutique > Compléments.",
+      },
     },
   ],
 };

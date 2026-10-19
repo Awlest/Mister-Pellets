@@ -16,6 +16,8 @@ import type {
   VariantDisplayMode,
   VariantStockStatus,
   ProductImage,
+  ProductAccessory,
+  AccessoryCategory,
 } from "./products-demo";
 
 /**
@@ -129,6 +131,46 @@ interface PayloadProduct {
         }
       | null;
   }> | null;
+  accessories?: Array<number | PayloadAccessory> | null;
+}
+
+/** Document `accessories` hydraté (depth ≥ 1). */
+interface PayloadAccessory {
+  id: number;
+  name?: string | null;
+  category?: AccessoryCategory | null;
+  mpn?: string | null;
+  priceHT?: number | null;
+  priceTTC?: number | null;
+  description?: string | null;
+}
+
+/**
+ * Compléments hydratés d'une fiche, dans l'ordre de l'admin. Un complément
+ * sans prix TVAC mais avec un prix HTVA (saisi avant le calcul automatique)
+ * prend HTVA × 1,21 arrondi à l'euro, comme l'admin.
+ */
+function mapAccessories(list: PayloadProduct["accessories"]): ProductAccessory[] | undefined {
+  if (!Array.isArray(list)) return undefined;
+  const out = list
+    .filter((a): a is PayloadAccessory => Boolean(a) && typeof a === "object" && Boolean(a.name))
+    .map((a): ProductAccessory => {
+      const ttc =
+        a.priceTTC && a.priceTTC > 0
+          ? a.priceTTC
+          : a.priceHT && a.priceHT > 0
+            ? Math.round(a.priceHT * 1.21)
+            : undefined;
+      return {
+        id: a.id,
+        name: a.name as string,
+        category: a.category ?? "autre",
+        ...(ttc ? { priceTTC: ttc } : {}),
+        ...(a.mpn ? { mpn: a.mpn } : {}),
+        ...(a.description ? { note: a.description } : {}),
+      };
+    });
+  return out.length > 0 ? out : undefined;
 }
 
 /** Document `variant-option-values` hydraté (depth ≥ 1). */
@@ -331,9 +373,26 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
   // prix catalogue (sinon ce n'est pas une promo). Le bonus de saison se
   // calcule sur le prix réellement pratiqué avant lui, promo comprise, comme
   // dans le configurateur (lib/estimate-catalog.ts).
-  const catalogTTC = p.priceTTC && p.priceTTC > 0 ? p.priceTTC : undefined;
+  //
+  // Fiche à variantes chiffrées : le prix « à partir de » (carte boutique,
+  // méta de la fiche) est celui de la variante la moins chère, promo de la
+  // variante comprise. Le prix saisi sur la fiche parente ne sert alors plus :
+  // il pouvait être celui d'une autre version (Girolami Sharp hybride à
+  // 6 776 € pour une version pellet à 5 324 €) ou plus bas que toutes les
+  // variantes (EK63 Like 80), et un prix posé sur une finition n'apparaissait
+  // pas sur la carte tant que le parent restait vide.
+  const variantPrices = p.hasVariants
+    ? (p.variants ?? [])
+        .map((v) => (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price))
+        .filter((n): n is number => typeof n === "number" && n > 0)
+    : [];
+  const variantMinTTC = variantPrices.length > 0 ? Math.min(...variantPrices) : undefined;
+  const catalogTTC = variantMinTTC ?? (p.priceTTC && p.priceTTC > 0 ? p.priceTTC : undefined);
   const promoTTC =
-    p.promoPrice && p.promoPrice > 0 && (catalogTTC == null || p.promoPrice < catalogTTC)
+    variantMinTTC == null &&
+    p.promoPrice &&
+    p.promoPrice > 0 &&
+    (catalogTTC == null || p.promoPrice < catalogTTC)
       ? p.promoPrice
       : undefined;
   const effectiveTTC = promoTTC ?? catalogTTC;
@@ -353,7 +412,7 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
     heatedVolume,
     powers,
     heatedVolumes,
-    priceTTC: p.priceTTC ?? undefined,
+    priceTTC: catalogTTC,
     promoPriceTTC: promoTTC,
     bonusPriceTTC: bonusActive && effectiveTTC ? bonusPrice(effectiveTTC, p.brand) : undefined,
     stockStatus: p.stockStatus ?? undefined,
@@ -460,6 +519,9 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
           };
         })
       : undefined,
+
+    // ===== COMPLÉMENTS EN OPTION =====
+    accessories: mapAccessories(p.accessories),
   };
 }
 
@@ -481,6 +543,9 @@ export async function getAllProducts(): Promise<ProductDemo[]> {
     pagination: false,
     depth: 1, // hydrate mainImage
     overrideAccess: false, // respecte la règle read public
+    // Les compléments ne servent qu'à la fiche produit (getProductBySlug) :
+    // inutile de les charger pour la boutique, les villes et le flux.
+    select: { accessories: false },
     where: {
       // Les produits sans hiddenFromBoutique=true sont visibles (gère NULL,
       // false, et undefined — utile pour les produits créés avant la migration)

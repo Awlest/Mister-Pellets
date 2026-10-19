@@ -116,8 +116,9 @@ export interface ProductDemo extends ProductCardData {
   technicalSheetFilename?: string;
   /**
    * Déclinaisons de couleur disponibles. Chaque variante a son propre code
-   * EAN (gtin) et peut surcharger la photo principale + galerie.
-   * Le prix et les options techniques restent identiques entre variantes.
+   * EAN (gtin) et peut surcharger la photo principale + galerie. Elles ne
+   * portent pas de prix : quand les finitions n'ont pas le même prix, la
+   * fiche a des variantes (`variants`) avec un prix par finition.
    */
   colorVariants?: ProductColorVariant[];
   /** Référence interne du produit (utilisée par le feed Google Merchant). */
@@ -140,6 +141,31 @@ export interface ProductDemo extends ProductCardData {
   variantOptions?: VariantOptionAxis[];
   /** Combinaisons réelles disponibles (un prix/SKU/stock par variante). */
   variants?: ProductVariantData[];
+  /** Compléments en option (thermostat, Wi-Fi, kits…), collection « Compléments ». */
+  accessories?: ProductAccessory[];
+}
+
+/** Catégorie d'un complément (regroupement sur la fiche produit). */
+export type AccessoryCategory =
+  | "thermostat"
+  | "connectivite"
+  | "canalisation"
+  | "raccordement"
+  | "habillage"
+  | "fonctionnement"
+  | "autre";
+
+/** Complément vendu en plus du poêle. Sans prix : « prix sur demande ». */
+export interface ProductAccessory {
+  id: number;
+  name: string;
+  category: AccessoryCategory;
+  /** Prix TVAC (21 %), hors bonus de saison. */
+  priceTTC?: number;
+  /** Code fabricant. */
+  mpn?: string;
+  /** Précision d'une ligne (« indispensable avec… »). */
+  note?: string;
 }
 
 /** Variante de couleur d'un produit (cf. colorVariants ci-dessus). */
@@ -190,7 +216,7 @@ export interface ProductVariantData {
   sku?: string;
   gtin?: string;
   mpn?: string;
-  /** Prix TTC de la variante. */
+  /** Prix TTC de la variante ; 0 quand il n'est pas encore saisi (« Sur devis »). */
   price: number;
   /** Prix promo TTC, si défini. */
   salePrice?: number;
