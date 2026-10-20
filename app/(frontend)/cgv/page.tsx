@@ -42,8 +42,10 @@ export default function CGVPage() {
           <section>
             <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">2. Identité du vendeur</h2>
             <p>
-              <strong>Awlest SRL</strong> · Siège social : Rue des Fagotis 3A, 5380 Fernelmont,
-              Belgique · TVA : BE 0656.514.212 · Téléphone : 0472 04 32 22 · Email : info@awlest.com.
+              <strong>Awlest SRL</strong>{" "}· Siège social : Rue Saint-Pierre 29, 4260 Braives,
+              Belgique · Numéro d&apos;entreprise et TVA : BE 0656.514.212 · RPM Liège, division Huy ·
+              Showroom et atelier : Rue des Fagotis 3A, 5380 Fernelmont · Téléphone : 0472 04 32 22 ·
+              Email : info@awlest.com.
             </p>
           </section>
 
@@ -125,7 +127,7 @@ export default function CGVPage() {
               >
                 info@awlest.com
               </a>{" "}
-              ou par courrier à Awlest SRL, Rue des Fagotis 3A, 5380 Fernelmont, avant la fin du
+              ou par courrier à Awlest SRL, Rue Saint-Pierre 29, 4260 Braives, avant la fin du
               délai de 14 jours. Le produit doit nous être renvoyé complet, dans son emballage
               d&apos;origine et en état de revente.
             </p>
@@ -172,7 +174,7 @@ export default function CGVPage() {
           </section>
 
           <p className="mp-measure text-sm text-mp-ink-soft pt-6 border-t border-mp-sand/40">
-            Dernière mise à jour : {new Date().toLocaleDateString("fr-BE", { year: "numeric", month: "long" })}
+            Dernière mise à jour : octobre 2026
           </p>
           </div>
         </div>

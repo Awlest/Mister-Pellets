@@ -109,8 +109,10 @@ casse la confiance et le SEO.
 - **Paiement = Mollie** (migration V1.6), plus Stripe. Corriger toute mention
   « Stripe » dans le contenu rendu, y compris CGV et politique de
   confidentialité. Moyens acceptés : Bancontact, Visa/Mastercard via Mollie.
-- **Coordonnées figées** : Awlest SRL, TVA BE 0656.514.212, Rue des Fagotis
-  3A, 5380 Fernelmont, 0472 04 32 22, info@awlest.com. Showroom lun-ven
+- **Coordonnées figées** : Awlest SRL, TVA BE 0656.514.212, siège social Rue
+  Saint-Pierre 29, 4260 Braives (RPM Liège, division Huy), showroom et atelier
+  Rue des Fagotis 3A, 5380 Fernelmont (pas le siège), 0472 04 32 22,
+  info@awlest.com. Showroom lun-ven
   9h-18h, sam 9h-13h.
 - **SEO/GEO, ne pas casser** : mots-clés cibles, metaTitle / metaDescription
   (sauf correction d'un fait : Stripe, marque), chiffres (prix, primes,

@@ -133,7 +133,8 @@ export default function AProposPage() {
             <p>
               Awlest SRL est inscrite à la Banque-Carrefour des Entreprises sous le numéro
               BE 0656.514.212, avec accès à la profession requis pour la pose et l'entretien d'appareils
-              de chauffage. Notre siège est au Rue des Fagotis 3A, 5380 Fernelmont (province de Namur).
+              de chauffage. Le siège social est à Braives, Rue Saint-Pierre 29 (RPM Liège, division Huy).
+              Le showroom et l&apos;atelier sont à Fernelmont, Rue des Fagotis 3A, et c&apos;est là qu&apos;on vous reçoit.
             </p>
             <p>
               Côté matériel, on ne distribue que des poêles conformes au règlement européen
