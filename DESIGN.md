@@ -180,7 +180,7 @@ exposées en classes Tailwind (`bg-mp-cream`, `text-mp-green-deep`, etc.).
 
 ### Neutral
 - **Crème** (cream) : fond de page et des cartes (`--background`). #F4EDE1 depuis le 17/10/2026, le même lin que Mister Bois : l'ancien #FAF7F0 paraissait blanc.
-- **Beige** (beige) : section sur deux, encadrés de texte.
+- **Beige** (beige) : section sur deux, encadrés de texte, encadrés de la colonne d'achat d'une fiche produit (prix et compléments en option, lignes des compléments en crème).
 - **Beige chaud** (beige-warm) : pastilles neutres (puissance, volume), fond des photos en attente, survol des menus.
 - **Sable** (sand) : filets et bordures (`/40` sur les cartes, `/50` à `/60` sur les barres et menus), pastilles inactives.
 - **Blanc** (white) : surfaces de formulaire (configurateur, devis, champs).
