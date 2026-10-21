@@ -74,7 +74,9 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
   }
 
   return (
-    <section aria-labelledby={headingId} className="rounded-2xl border border-mp-sand/40 bg-white p-5">
+    // Même encadré que le bloc prix juste au-dessus (beige, filet sable) :
+    // en blanc, la zone tranchait sur le reste de la colonne.
+    <section aria-labelledby={headingId} className="rounded-2xl border border-mp-sand/40 bg-mp-beige p-6">
       <h2 id={headingId} className="text-base font-semibold text-mp-green-deep">
         Compléments en option
       </h2>
@@ -104,7 +106,7 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
                   "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-mp-orange-ink",
                   on
                     ? "border-mp-orange-flame bg-mp-orange-light/40"
-                    : "border-mp-sand/40 bg-white hover:border-mp-orange-flame/50 hover:bg-mp-cream",
+                    : "border-mp-sand/40 bg-mp-cream hover:border-mp-orange-flame/50",
                 )}
               >
                 <input
@@ -153,7 +155,7 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
       ) : null}
 
       {chosen.length > 0 ? (
-        <div className="mt-4 rounded-2xl bg-mp-beige p-4" aria-live="polite">
+        <div className="mt-4 rounded-2xl border border-mp-sand/40 bg-mp-cream p-4" aria-live="polite">
           {totalTTC != null ? (
             <>
               <span className="block text-xs text-mp-ink-soft">
