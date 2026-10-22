@@ -18,6 +18,7 @@ import * as migration_20260919_100100_products_type_hybride_hydro_backfill from 
 import * as migration_20261003_150000_products_appliance from './20261003_150000_products_appliance';
 import * as migration_20261018_120000_products_brand_austroflamm_cadel from './20261018_120000_products_brand_austroflamm_cadel';
 import * as migration_20261019_120000_accessories from './20261019_120000_accessories';
+import * as migration_20261022_100000_payload_3_91 from './20261022_100000_payload_3_91';
 
 export const migrations = [
   {
@@ -119,5 +120,10 @@ export const migrations = [
     up: migration_20261019_120000_accessories.up,
     down: migration_20261019_120000_accessories.down,
     name: '20261019_120000_accessories',
+  },
+  {
+    up: migration_20261022_100000_payload_3_91.up,
+    down: migration_20261022_100000_payload_3_91.down,
+    name: '20261022_100000_payload_3_91',
   },
 ];
