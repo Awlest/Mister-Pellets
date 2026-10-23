@@ -28,6 +28,17 @@ import { formatKw } from "@/lib/power";
 const FROM = process.env.EMAIL_FROM ?? "Mister Pellets <info@awlest.com>";
 const TO_INTERNAL = process.env.EMAIL_TO_QUOTES ?? "info@awlest.com";
 
+/**
+ * Expéditeur des notifications internes (RDV, devis, estimation, contact,
+ * rappel). Il doit différer de EMAIL_FROM : info@mister-pellets.be est une
+ * adresse « Envoyer en tant que » du Gmail qui reçoit les demandes, et Gmail
+ * range alors la notification dans « Messages envoyés », jamais dans la boîte
+ * de réception (constaté le 23/10/2026). Même domaine, déjà vérifié chez
+ * Resend ; la réponse part vers le client grâce au replyTo.
+ */
+const FROM_INTERNAL =
+  process.env.EMAIL_FROM_INTERNAL ?? "Site Mister Pellets <notifications@mister-pellets.be>";
+
 let _resend: Resend | null = null;
 
 function getResend(): Resend | null {
@@ -41,6 +52,8 @@ function getResend(): Resend | null {
 interface SendEmailParams {
   /** Nom de l'e-mail dans les logs, qui ne reprennent ni le sujet ni le destinataire. */
   label: string;
+  /** Expéditeur, EMAIL_FROM par défaut (FROM_INTERNAL pour les notifications internes). */
+  from?: string;
   to: string | string[];
   subject: string;
   html: string;
@@ -51,6 +64,7 @@ interface SendEmailParams {
 
 export async function sendEmail({
   label,
+  from = FROM,
   to,
   subject,
   html,
@@ -63,7 +77,7 @@ export async function sendEmail({
   if (!resend) {
     // Mode console fallback (RESEND_API_KEY non configuré)
     console.log("[email:console-fallback]", {
-      from: FROM,
+      from,
       to,
       subject,
       replyTo,
@@ -79,7 +93,7 @@ export async function sendEmail({
   let error: { message: string; statusCode?: number | null; name?: string };
   try {
     const result = await resend.emails.send({
-      from: FROM,
+      from,
       to: Array.isArray(to) ? to : [to],
       subject,
       html,
@@ -133,6 +147,7 @@ export async function notifyInternalQuote(quote: {
 
   return sendEmail({
     label: "notifyInternalQuote",
+    from: FROM_INTERNAL,
     to: TO_INTERNAL,
     subject: `[Devis] ${quote.name} (${quote.postalCode}), ${quote.budget}`,
     html,
@@ -201,6 +216,7 @@ export async function notifyInternalBooking(rdv: {
 
   return sendEmail({
     label: "notifyInternalBooking",
+    from: FROM_INTERNAL,
     to: TO_INTERNAL,
     subject: `Nouveau RDV : ${rdv.serviceName}, ${rdv.dayKey} à ${rdv.timeLabel}`,
     html,
@@ -464,6 +480,7 @@ export async function notifyInternalEstimate(est: {
 
   return sendEmail({
     label: "notifyInternalEstimate",
+    from: FROM_INTERNAL,
     to: TO_INTERNAL,
     subject: `[Estimation] ${est.name} (${est.postalCode}) — ${fmt(est.totalTTC)} · ${est.productName}`,
     html,
@@ -527,6 +544,7 @@ export async function notifyInternalContact(message: {
 
   return sendEmail({
     label: "notifyInternalContact",
+    from: FROM_INTERNAL,
     to: TO_INTERNAL,
     subject: `[Contact] ${message.name}, ${message.subject}`,
     html,
@@ -564,6 +582,7 @@ export async function notifyInternalCallback(req: {
 
   return sendEmail({
     label: "notifyInternalCallback",
+    from: FROM_INTERNAL,
     to: TO_INTERNAL,
     subject: "[Rappel prix] Nouvelle demande de rappel",
     html,
