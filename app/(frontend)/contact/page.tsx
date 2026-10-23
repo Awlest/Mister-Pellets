@@ -21,7 +21,7 @@ export default function ContactPage() {
     <>
       <HeroSecondary
         title="Une question ? On répond."
-        description="Téléphone, email ou formulaire. On revient vers vous dans la journée pendant les heures ouvrées (lun-ven 9h-18h, sam 9h-13h)."
+        description="Téléphone, email ou formulaire. On revient vers vous dans la journée pendant les heures ouvrées (lun-ven 9h-18h)."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Contact" },
@@ -101,8 +101,7 @@ export default function ContactPage() {
                   <span className="text-xs text-mp-ink-soft uppercase tracking-wider block mb-1">Horaires du téléphone</span>
                   <ul className="text-mp-ink space-y-1 leading-relaxed">
                     <li>Lundi - Vendredi : 9h - 18h</li>
-                    <li>Samedi : 9h - 13h</li>
-                    <li className="text-mp-ink-soft">Dimanche : fermé</li>
+                    <li className="text-mp-ink-soft">Samedi et dimanche : fermé</li>
                   </ul>
                   <p className="mt-3 text-sm text-mp-ink-soft">
                     Les visites du showroom se calent dans ces mêmes plages, sur rendez-vous.

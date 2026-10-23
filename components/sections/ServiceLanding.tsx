@@ -128,7 +128,7 @@ export function ServiceLanding({
               </p>
               <p className="text-mp-cream/75 text-sm mt-1">
                 On vérifie d&apos;abord le modèle et l&apos;accès au conduit, puis on cale un
-                créneau. Téléphone : lun-ven 9h-18h, sam 9h-13h.
+                créneau. Téléphone : lun-ven 9h-18h.
               </p>
             </div>
             <Button asChild variant="primary" size="lg" className="shrink-0">

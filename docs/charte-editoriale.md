@@ -112,8 +112,8 @@ casse la confiance et le SEO.
 - **Coordonnées figées** : Awlest SRL, TVA BE 0656.514.212, siège social Rue
   Saint-Pierre 29, 4260 Braives (RPM Liège, division Huy), showroom et atelier
   Rue des Fagotis 3A, 5380 Fernelmont (pas le siège), 0472 04 32 22,
-  info@awlest.com. Showroom lun-ven
-  9h-18h, sam 9h-13h.
+  info@awlest.com. Téléphone lun-ven 9h-18h, samedi et dimanche fermés ;
+  showroom uniquement sur rendez-vous (octobre 2026).
 - **SEO/GEO, ne pas casser** : mots-clés cibles, metaTitle / metaDescription
   (sauf correction d'un fait : Stripe, marque), chiffres (prix, primes,
   puissances, %, années), slugs et canonical restent intacts. On humanise le

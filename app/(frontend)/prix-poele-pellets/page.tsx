@@ -83,7 +83,7 @@ export default async function PrixPoelePelletsPage() {
             </Button>
           </div>
           <p className="mp-measure mt-4 text-center text-sm text-mp-ink-soft">
-            Lun-ven 9 h-18 h, sam 9 h-13 h. Vous préférez chiffrer vous-même ?{" "}
+            Lun-ven 9 h-18 h. Vous préférez chiffrer vous-même ?{" "}
             <Link href="/estimation" className="text-mp-orange-ink underline hover:no-underline">
               Estimation en ligne en 2 minutes
             </Link>

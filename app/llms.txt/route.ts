@@ -38,7 +38,7 @@ export function GET() {
 - Siège social : Rue Saint-Pierre 29, 4260 Braives, Belgique
 - Showroom et atelier : Rue des Fagotis 3A, 5380 Fernelmont, Belgique
   (showroom accessible uniquement sur rendez-vous)
-- Téléphone : 081 13 83 09 (lundi au vendredi 9 h à 18 h, samedi 9 h à 13 h)
+- Téléphone : 081 13 83 09 (lundi au vendredi 9 h à 18 h)
 - E-mail : info@awlest.com
 - Site : ${SITE_URL}
 - Marque sœur : Mister Clim (climatisation réversible), même société Awlest SRL,

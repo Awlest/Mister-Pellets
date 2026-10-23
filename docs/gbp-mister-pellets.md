@@ -65,9 +65,10 @@ ramoneur certifié tiers, donc pas de catégorie « Ramoneur » sur la fiche.
 
 ## 5. Horaires
 
-Lundi à vendredi 9h-18h, samedi 9h-13h. Ce sont les horaires déjà publiés sur
-le site (JSON-LD de la page d'accueil et FAQ) ; la fiche Google n'indique
-aujourd'hui que « ouvre à 09:00 lun ». Les deux doivent dire la même chose.
+Lundi à vendredi 9h-18h, samedi et dimanche fermés (octobre 2026). Ce sont les
+heures du téléphone, et le showroom ne reçoit que sur rendez-vous : le site
+les déclare sur contactPoint.hoursAvailable, plus en heures d'ouverture.
+La fiche Google doit dire la même chose.
 Penser aux horaires exceptionnels pour la fermeture en cours (jusqu'au 01/09).
 
 ## 6. Posts à publier

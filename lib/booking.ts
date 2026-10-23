@@ -48,7 +48,7 @@ export const BUSINESS_HOURS: Record<number, { open: string; close: string } | nu
   3: { open: "09:00", close: "18:00" },
   4: { open: "09:00", close: "18:00" },
   5: { open: "09:00", close: "18:00" },
-  6: { open: "09:00", close: "13:00" }, // samedi
+  6: null, // samedi : fermé depuis octobre 2026, plus aucun créneau en ligne
 };
 
 export interface Interval {

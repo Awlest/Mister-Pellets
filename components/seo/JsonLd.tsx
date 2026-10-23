@@ -122,12 +122,7 @@ export const ORGANIZATION_SCHEMA = {
         opens: "09:00",
         closes: "18:00",
       },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "13:00",
-      },
+      // Samedi et dimanche : fermé (octobre 2026).
     ],
   },
   areaServed: [
