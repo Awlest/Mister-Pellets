@@ -532,8 +532,8 @@ export default function HomePage() {
             </h3>
             <p className="mt-3 mp-measure leading-relaxed text-mp-ink-soft">
               Notre agenda est en ligne. Vous voyez nos disponibilités réelles, vous réservez
-              l&apos;heure qui vous arrange pour un diagnostic à domicile, un entretien ou une visite
-              du showroom, et vous recevez la confirmation par e-mail. Pas de rappel à attendre,
+              l&apos;heure qui vous arrange pour un diagnostic à domicile ou une visite du showroom
+              (uniquement sur rendez-vous), et vous recevez la confirmation par e-mail. Pas de rappel à attendre,
               pas de créneau « dans la semaine ».
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">

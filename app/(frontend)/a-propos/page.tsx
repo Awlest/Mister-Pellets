@@ -134,7 +134,7 @@ export default function AProposPage() {
               Awlest SRL est inscrite à la Banque-Carrefour des Entreprises sous le numéro
               BE 0656.514.212, avec accès à la profession requis pour la pose et l'entretien d'appareils
               de chauffage. Le siège social est à Braives, Rue Saint-Pierre 29 (RPM Liège, division Huy).
-              Le showroom et l&apos;atelier sont à Fernelmont, Rue des Fagotis 3A, et c&apos;est là qu&apos;on vous reçoit.
+              Le showroom et l&apos;atelier sont à Fernelmont, Rue des Fagotis 3A, et c&apos;est là qu&apos;on vous reçoit, uniquement sur rendez-vous.
             </p>
             <p>
               Côté matériel, on ne distribue que des poêles conformes au règlement européen
@@ -155,7 +155,7 @@ export default function AProposPage() {
 
       <CTAFinal
         title="On se rencontre ?"
-        description="Visite du showroom, visio, ou on vient chez vous pour le diagnostic. Aucune obligation derrière, juste une discussion concrète sur votre projet."
+        description="Visite du showroom sur rendez-vous, visio, ou on vient chez vous pour le diagnostic. Aucune obligation derrière, juste une discussion concrète sur votre projet."
       />
     </>
   );

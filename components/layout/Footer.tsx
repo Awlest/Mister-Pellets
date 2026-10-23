@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { CATALOGUE_LINKS, INFO_LINKS, LEGAL_LINKS, SERVICE_LINKS, isFilterLink, published, type NavLink } from "@/config/navigation";
+import { CATALOGUE_LINKS, INFO_LINKS, LEGAL_LINKS, ROUTES, SERVICE_LINKS, isFilterLink, published, type NavLink } from "@/config/navigation";
 import { ConsentSettingsButton } from "@/components/layout/Analytics";
 import {
   ADDRESS,
@@ -11,6 +11,7 @@ import {
   PARENT_BRAND,
   PHONE_DISPLAY,
   PHONE_HREF,
+  SHOWROOM_ACCESS,
   SITE_NAME,
 } from "@/config/site";
 
@@ -122,10 +123,16 @@ export function Footer() {
               <a href={`mailto:${EMAIL}`} className={LINK}>
                 {EMAIL}
               </a>
-              <p className="mt-1 text-[0.9375rem] text-mp-cream/85">{OPENING_HOURS}</p>
+              <p className="mt-1 text-[0.9375rem] text-mp-cream/85">Téléphone : {OPENING_HOURS}</p>
               <p className="mt-1 text-[0.9375rem] text-mp-cream/85">
-                Showroom sur rendez-vous, {ADDRESS.street}, {ADDRESS.postalCode} {ADDRESS.city}
+                {ADDRESS.street}, {ADDRESS.postalCode} {ADDRESS.city}
               </p>
+              <Link
+                href={`${ROUTES.booking}#reserver`}
+                className="inline-flex min-h-11 items-center text-[0.9375rem] font-semibold text-mp-cream transition-colors hover:text-mp-orange-flame pointer-fine:min-h-9"
+              >
+                {SHOWROOM_ACCESS}
+              </Link>
             </div>
 
             {/* Réseaux sociaux : masqués tant qu'aucun profil n'est renseigné. */}

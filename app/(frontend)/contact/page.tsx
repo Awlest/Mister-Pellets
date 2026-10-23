@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Contact, Mister Pellets Wallonie",
   description:
-    "Contactez Mister Pellets à Fernelmont : téléphone, email, adresse et horaires. Showroom accessible sur rendez-vous. On répond dans la journée pendant les heures ouvrées.",
+    "Contactez Mister Pellets à Fernelmont : téléphone, email, adresse et horaires. Showroom uniquement sur rendez-vous. On répond dans la journée pendant les heures ouvrées.",
   path: "/contact",
 });
 
@@ -57,10 +57,14 @@ export default function ContactPage() {
                 </div>
               </a>
 
+              {/* Le rendez-vous est annoncé dans le bloc adresse lui-même, avant
+                * le lien d'itinéraire : c'est là que regarde quelqu'un qui
+                * s'apprête à prendre la route. */}
               <div className="flex items-start gap-4 p-5 rounded-2xl bg-mp-beige border border-mp-sand/40">
                 <MapPin className="h-5 w-5 text-mp-orange-flame mt-0.5 shrink-0" />
                 <div>
                   <span className="text-xs text-mp-ink-soft uppercase tracking-wider block mb-1">Showroom & atelier</span>
+                  <p className="mb-2 font-semibold text-mp-orange-ink">Uniquement sur rendez-vous</p>
                   <address className="not-italic text-mp-ink leading-relaxed">
                     Rue des Fagotis 3A
                     <br />
@@ -68,38 +72,40 @@ export default function ContactPage() {
                     <br />
                     Belgique
                   </address>
-                  <a
-                    href={MAPS_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-1 inline-flex min-h-11 items-center text-sm text-mp-orange-ink underline hover:no-underline"
-                  >
-                    Itinéraire sur Google Maps
-                  </a>
+                  <p className="mt-3 text-sm text-mp-ink-soft leading-relaxed">
+                    La visite est gratuite et dure 45 minutes. Un conseiller vous attend à
+                    l&apos;heure prévue.
+                  </p>
+                  <div className="mt-1 flex flex-col items-start">
+                    <a
+                      href="/prendre-rendez-vous#reserver"
+                      className="inline-flex min-h-11 items-center text-sm font-semibold text-mp-orange-ink underline hover:no-underline"
+                    >
+                      Réserver une visite en ligne
+                    </a>
+                    <a
+                      href={MAPS_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center text-sm text-mp-orange-ink underline hover:no-underline"
+                    >
+                      Itinéraire sur Google Maps
+                    </a>
+                  </div>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 p-5 rounded-2xl bg-mp-beige border border-mp-sand/40">
                 <Clock className="h-5 w-5 text-mp-orange-flame mt-0.5 shrink-0" />
                 <div>
-                  <span className="text-xs text-mp-ink-soft uppercase tracking-wider block mb-1">Horaires</span>
+                  <span className="text-xs text-mp-ink-soft uppercase tracking-wider block mb-1">Horaires du téléphone</span>
                   <ul className="text-mp-ink space-y-1 leading-relaxed">
                     <li>Lundi - Vendredi : 9h - 18h</li>
                     <li>Samedi : 9h - 13h</li>
                     <li className="text-mp-ink-soft">Dimanche : fermé</li>
                   </ul>
-                  <p className="mt-3 text-sm font-medium text-mp-orange-ink">
-                    Showroom accessible uniquement sur rendez-vous.
-                  </p>
-                  <p className="mt-1 text-sm text-mp-ink-soft">
-                    Appelez-nous ou{" "}
-                    <a
-                      href="/prendre-rendez-vous#reserver"
-                      className="text-mp-orange-ink underline hover:no-underline"
-                    >
-                      réservez votre créneau en ligne
-                    </a>{" "}
-                    avant de passer.
+                  <p className="mt-3 text-sm text-mp-ink-soft">
+                    Les visites du showroom se calent dans ces mêmes plages, sur rendez-vous.
                   </p>
                 </div>
               </div>
@@ -114,8 +120,8 @@ export default function ContactPage() {
                 Pour un devis personnalisé, prenez 60 secondes pour remplir le{" "}
                 <a href="/demande-de-devis" className="text-mp-orange-ink underline hover:no-underline">
                   formulaire de devis
-                </a>{" "}
-               , c'est plus précis. Ce formulaire de contact est pour les questions générales.
+                </a>
+                , c'est plus précis. Ce formulaire de contact est pour les questions générales.
               </p>
               <ContactForm />
             </div>

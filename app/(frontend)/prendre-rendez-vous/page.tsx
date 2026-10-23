@@ -19,7 +19,7 @@ import {
 export const metadata: Metadata = {
   title: "Prendre rendez-vous, Showroom Fernelmont & services Mister Pellets",
   description:
-    "Showroom Fernelmont (5380), modèles d'exposition tournants. Devis sur place, visite, entretien annuel, dépannage, ramonage : 5 services Mister Pellets pour poêles à pellets en Wallonie.",
+    "Showroom Fernelmont (5380), uniquement sur rendez-vous, modèles d'exposition tournants. Devis sur place, visite, entretien annuel, dépannage, ramonage : 5 services Mister Pellets pour poêles à pellets en Wallonie.",
   alternates: { canonical: "https://mister-pellets.be/prendre-rendez-vous" },
 };
 
@@ -52,13 +52,13 @@ export default function PrendreRendezVousPage() {
       <JsonLd data={serviceSchema} />
 
       <HeroSecondary
-        eyebrow="Showroom Fernelmont · 5 services"
+        eyebrow="Showroom sur rendez-vous · 5 services"
         title={
           <>
             Voir nos poêles, <span className="mp-italic">faire chiffrer</span>, ou nous appeler en SAV
           </>
         }
-        description="Notre showroom à Fernelmont accueille plusieurs modèles d'exposition (sélection tournante, on confirme avant votre visite). Devis à domicile, visite showroom, entretien annuel, dépannage, ramonage : 5 services pour poêles à pellets en Wallonie."
+        description="Notre showroom à Fernelmont se visite uniquement sur rendez-vous. Il accueille plusieurs modèles d'exposition (sélection tournante, on confirme avant votre visite). Devis à domicile, visite showroom, entretien annuel, dépannage, ramonage : 5 services pour poêles à pellets en Wallonie."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Prendre rendez-vous" },
@@ -101,7 +101,7 @@ export default function PrendreRendezVousPage() {
             <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
             <span className="inline-flex items-center gap-2">
               <Clock className="h-4 w-4 text-mp-orange-flame" />
-              Lun-Ven 9h-18h, Sam 9h-13h
+              Visites lun-ven 9h-18h, sam 9h-13h
             </span>
             <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
             <span className="font-medium text-mp-orange-ink">Sur rendez-vous uniquement</span>
@@ -230,7 +230,7 @@ export default function PrendreRendezVousPage() {
           </div>
 
           <p className="mp-measure mx-auto text-sm text-mp-ink-soft mt-8">
-            Lun-Ven 9h-18h, Sam 9h-13h
+            Téléphone : lun-ven 9h-18h, sam 9h-13h
           </p>
         </div>
       </section>
