@@ -4,17 +4,12 @@ import * as React from "react";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EVENTS, trackEvent } from "@/lib/analytics";
-import {
-  CALLBACK_SITUATIONS,
-  isValidBelgianPhone,
-  isValidEmail,
-  isValidPostalCode,
-} from "@/lib/callback";
+import { isValidBelgianPhone } from "@/lib/callback";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/services";
 import { cn } from "@/lib/utils";
 
 type Status = "idle" | "loading" | "success" | "error";
-type Field = "name" | "phone" | "email" | "postalCode" | "situation" | "consent";
+type Field = "name" | "phone" | "consent";
 
 /**
  * Origine de la visite, lue dans l'adresse de la page d'arrivée : campagne
@@ -33,15 +28,15 @@ function readOrigin(): string {
 }
 
 /**
- * Demande de rappel courte (/prix-poele-pellets) : quatre champs et une
- * question, pour le visiteur venu d'une annonce « prix » sur son téléphone.
- * Le chiffrage complet reste dans /estimation.
+ * Demande de rappel courte (/prix-poele-pellets) : le nom et le téléphone,
+ * pour le visiteur venu d'une annonce « prix » sur son téléphone. Le
+ * technicien pose ses questions en rappelant ; le chiffrage complet reste
+ * dans /estimation.
  */
 export function CallbackForm() {
   const [status, setStatus] = React.useState<Status>("idle");
   const [serverError, setServerError] = React.useState("");
   const [errors, setErrors] = React.useState<Partial<Record<Field, string>>>({});
-  const [situation, setSituation] = React.useState("");
   const originRef = React.useRef("");
 
   React.useEffect(() => {
@@ -57,9 +52,6 @@ export function CallbackForm() {
     const next: Partial<Record<Field, string>> = {};
     if (value("name").length < 2) next.name = "Indiquez votre nom.";
     if (!isValidBelgianPhone(value("phone"))) next.phone = "Numéro belge, par exemple 0470 12 34 56.";
-    if (!isValidEmail(value("email"))) next.email = "Adresse e-mail incomplète.";
-    if (!isValidPostalCode(value("postalCode"))) next.postalCode = "4 chiffres, par exemple 5380.";
-    if (!situation) next.situation = "Choisissez une réponse.";
     if (data.get("consent") !== "on") next.consent = "Cochez la case pour qu'on puisse vous rappeler.";
     setErrors(next);
     if (Object.keys(next).length > 0) {
@@ -77,9 +69,6 @@ export function CallbackForm() {
         body: JSON.stringify({
           name: value("name"),
           phone: value("phone"),
-          email: value("email"),
-          postalCode: value("postalCode"),
-          situation,
           origin: originRef.current,
           consent: true,
           website: data.get("website"),
@@ -174,74 +163,7 @@ export function CallbackForm() {
           />
           {errorText("phone")}
         </div>
-        <div>
-          <label htmlFor="rappel-email" className="mb-2 block text-sm font-medium text-mp-ink">
-            E-mail
-          </label>
-          <input
-            id="rappel-email"
-            name="email"
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            disabled={disabled}
-            aria-invalid={!!errors.email}
-            aria-describedby={describedBy("email")}
-            className={inputClass("email")}
-          />
-          {errorText("email")}
-        </div>
-        <div>
-          <label htmlFor="rappel-postalCode" className="mb-2 block text-sm font-medium text-mp-ink">
-            Code postal du chantier
-          </label>
-          <input
-            id="rappel-postalCode"
-            name="postalCode"
-            type="text"
-            inputMode="numeric"
-            autoComplete="postal-code"
-            maxLength={4}
-            placeholder="5380"
-            disabled={disabled}
-            aria-invalid={!!errors.postalCode}
-            aria-describedby={describedBy("postalCode")}
-            className={inputClass("postalCode")}
-          />
-          {errorText("postalCode")}
-        </div>
       </div>
-
-      <fieldset className="min-w-0" aria-describedby={describedBy("situation")}>
-        <legend className="mb-2 block text-sm font-medium text-mp-ink">
-          Pour les fumées, chez vous il y a…
-        </legend>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-          {CALLBACK_SITUATIONS.map((s) => (
-            <label
-              key={s.value}
-              className={cn(
-                "flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border bg-white px-4 py-2.5 text-base text-mp-ink transition-colors",
-                situation === s.value
-                  ? "border-mp-orange-flame ring-2 ring-mp-orange-flame/20"
-                  : "border-mp-sand hover:border-mp-orange-flame",
-              )}
-            >
-              <input
-                type="radio"
-                name="situation"
-                value={s.value}
-                checked={situation === s.value}
-                onChange={() => setSituation(s.value)}
-                disabled={disabled}
-                className="h-4 w-4 accent-mp-orange-flame"
-              />
-              {s.label}
-            </label>
-          ))}
-        </div>
-        {errorText("situation")}
-      </fieldset>
 
       <div>
         <label htmlFor="rappel-consent" className="flex cursor-pointer items-start gap-3 text-sm text-mp-ink-soft">

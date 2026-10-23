@@ -540,19 +540,25 @@ export async function notifyInternalContact(message: {
  */
 export async function notifyInternalCallback(req: {
   name: string;
-  email: string;
+  email?: string;
   phone: string;
-  postalCode: string;
-  situation: string;
+  postalCode?: string;
+  situation?: string;
   origin?: string;
 }) {
+  // Le formulaire ne demande que le nom et le téléphone ; les autres lignes
+  // n'apparaissent que si une ancienne version de la page les a envoyées.
+  const details = [
+    req.postalCode ? `<strong>Code postal :</strong> ${escapeHtml(req.postalCode)}` : null,
+    req.situation ? `<strong>Évacuation des fumées :</strong> ${escapeHtml(req.situation)}` : null,
+    req.origin ? `<strong>Origine :</strong> ${escapeHtml(req.origin)}` : null,
+  ].filter(Boolean);
   const html = `
     <h2 style="color:#174724;font-family:Georgia,serif">Demande de rappel pour un prix posé</h2>
-    <p><strong>${escapeHtml(req.name)}</strong> · ${escapeHtml(req.phone)} · ${escapeHtml(req.email)}</p>
-    <p><strong>Code postal :</strong> ${escapeHtml(req.postalCode)}<br>
-    <strong>Évacuation des fumées :</strong> ${escapeHtml(req.situation)}${
-      req.origin ? `<br><strong>Origine :</strong> ${escapeHtml(req.origin)}` : ""
+    <p><strong>${escapeHtml(req.name)}</strong> · ${escapeHtml(req.phone)}${
+      req.email ? ` · ${escapeHtml(req.email)}` : ""
     }</p>
+    ${details.length > 0 ? `<p>${details.join("<br>")}</p>` : ""}
     <p style="font-family:sans-serif;font-size:14px">À rappeler dans la journée ouvrée, depuis la page Prix d'un poêle à pellets posé.</p>
   `;
 
