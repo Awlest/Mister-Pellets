@@ -413,7 +413,14 @@ export const FAQS: FaqItem[] = [
     category: "showroom",
     question: "Où se trouve votre showroom ?",
     answer:
-      "Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). Horaires : du lundi au vendredi de 9 h à 18 h, le samedi de 9 h à 13 h, uniquement sur rendez-vous.",
+      "Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). On vous y reçoit uniquement sur rendez-vous, du lundi au vendredi de 9 h à 18 h et le samedi de 9 h à 13 h.",
+  },
+  {
+    id: "showroom-sans-rendez-vous",
+    category: "showroom",
+    question: "Peut-on passer au showroom sans rendez-vous ?",
+    answer:
+      "Non, on ne reçoit que sur rendez-vous. Réservez votre visite en ligne sur la page Prendre rendez-vous (gratuite, 45 minutes) ou appelez le 081 13 83 09 : un conseiller vous attend à l'heure prévue, avec le temps de répondre à vos questions.",
   },
   {
     id: "showroom-modeles",

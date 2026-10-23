@@ -111,6 +111,24 @@ export const ORGANIZATION_SCHEMA = {
     contactType: "customer service",
     areaServed: "BE",
     availableLanguage: "French",
+    // Heures du téléphone. Le showroom n'a pas d'heures d'ouverture au
+    // public (visite uniquement sur rendez-vous) : ces heures sont portées
+    // par le point de contact et pas par l'entreprise, pour qu'aucun moteur
+    // ne les affiche comme des heures où l'on peut passer sans prévenir.
+    hoursAvailable: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "09:00",
+        closes: "13:00",
+      },
+    ],
   },
   areaServed: [
     { "@type": "AdministrativeArea", name: "Province de Namur" },
@@ -124,18 +142,7 @@ export const ORGANIZATION_SCHEMA = {
   // Mister Pellets directement. À réintroduire quand la marque commerciale
   // Mister Pellets aura ses propres avis vérifiés (collection Payload
   // Testimonials avec source datée).
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "18:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "09:00",
-      closes: "13:00",
-    },
-  ],
+  //
+  // Pas d'openingHoursSpecification : le showroom se visite uniquement sur
+  // rendez-vous (octobre 2026). Les heures du téléphone sont sur contactPoint.
 };

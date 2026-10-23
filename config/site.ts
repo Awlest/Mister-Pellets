@@ -9,7 +9,14 @@ export const SITE_NAME = "Mister Pellets";
 export const PHONE_DISPLAY = "081 13 83 09";
 export const PHONE_HREF = "tel:+3281138309";
 export const EMAIL = "info@awlest.com";
-export const OPENING_HOURS = "Lun-ven 9h-18h, samedi 9h-13h";
+/**
+ * Heures où l'on répond au téléphone et où l'on fixe les visites. Ce ne sont
+ * pas des heures d'ouverture au public : le showroom se visite uniquement sur
+ * rendez-vous (SHOWROOM_ACCESS), et le balisage n'annonce donc aucun horaire
+ * d'ouverture (components/seo/JsonLd.tsx).
+ */
+export const OPENING_HOURS = "lun-ven 9h-18h, samedi 9h-13h";
+export const SHOWROOM_ACCESS = "Showroom uniquement sur rendez-vous";
 
 export const ADDRESS = {
   street: "Rue des Fagotis 3A",
