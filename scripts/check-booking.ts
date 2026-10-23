@@ -25,11 +25,11 @@ check("15/01 09:00 belge -> 08:00 UTC", new Date(hiver).toISOString(), "2026-01-
 const bascule = belgianWallTimeToInstant(2026, 10, 26, 9, 0);
 check("26/10 09:00 belge relu en local", formatSlotTime(bascule), "09:00");
 
-// 4. Samedi : ferme a 13h, donc dernier creneau de 60 min a 12:00
+// 4. Samedi : ferme (octobre 2026), aucun creneau
 const sam = belgianWallTimeToInstant(2026, 9, 5, 0, 0);
 const samSlots = generateCandidateSlots(sam, sam + 86400000, 60)
-  .filter(s => belgianDayKey(s.start) === "2026-09-05").map(s => formatSlotTime(s.start));
-check("samedi 05/09, creneaux 60 min", samSlots, ["09:00","09:30","10:00","10:30","11:00","11:30","12:00"]);
+  .filter(s => belgianDayKey(s.start) === "2026-09-05");
+check("samedi 05/09, aucun creneau", samSlots.length, 0);
 
 // 5. Dimanche : aucun creneau
 const dim = belgianWallTimeToInstant(2026, 9, 6, 0, 0);

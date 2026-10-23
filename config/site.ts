@@ -15,7 +15,7 @@ export const EMAIL = "info@awlest.com";
  * rendez-vous (SHOWROOM_ACCESS), et le balisage n'annonce donc aucun horaire
  * d'ouverture (components/seo/JsonLd.tsx).
  */
-export const OPENING_HOURS = "lun-ven 9h-18h, samedi 9h-13h";
+export const OPENING_HOURS = "lun-ven 9h-18h";
 export const SHOWROOM_ACCESS = "Showroom uniquement sur rendez-vous";
 
 export const ADDRESS = {

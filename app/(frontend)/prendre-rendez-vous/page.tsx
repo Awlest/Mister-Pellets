@@ -101,7 +101,7 @@ export default function PrendreRendezVousPage() {
             <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
             <span className="inline-flex items-center gap-2">
               <Clock className="h-4 w-4 text-mp-orange-flame" />
-              Visites lun-ven 9h-18h, sam 9h-13h
+              Visites lun-ven 9h-18h
             </span>
             <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
             <span className="font-medium text-mp-orange-ink">Sur rendez-vous uniquement</span>
@@ -230,7 +230,7 @@ export default function PrendreRendezVousPage() {
           </div>
 
           <p className="mp-measure mx-auto text-sm text-mp-ink-soft mt-8">
-            Téléphone : lun-ven 9h-18h, sam 9h-13h
+            Téléphone : lun-ven 9h-18h
           </p>
         </div>
       </section>
