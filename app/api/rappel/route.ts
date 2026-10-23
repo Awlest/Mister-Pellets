@@ -3,6 +3,7 @@ import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/r
 import { getPayloadClient } from "@/lib/payload-client";
 import { notifyInternalCallback } from "@/lib/email";
 import {
+  CALLBACK_NO_EMAIL,
   isValidBelgianPhone,
   isValidEmail,
   isValidPostalCode,
@@ -12,24 +13,30 @@ import {
 interface CallbackPayload {
   name: string;
   phone: string;
-  email: string;
-  postalCode: string;
-  situation: string;
+  email?: string;
+  postalCode?: string;
+  situation?: string;
   origin?: string;
   consent: boolean;
 }
+
+/** Champ facultatif : absent ou vide, il est ignoré ; rempli, il doit être valide. */
+const filled = (value: unknown): value is string => typeof value === "string" && value.trim() !== "";
 
 function validate(body: Partial<CallbackPayload>): string | null {
   if (typeof body.name !== "string" || body.name.trim().length < 2) return "Indiquez votre nom.";
   if (typeof body.phone !== "string" || !isValidBelgianPhone(body.phone)) {
     return "Téléphone belge requis (formats : 0470 12 34 56 ou +32 470 12 34 56).";
   }
-  if (typeof body.email !== "string" || !isValidEmail(body.email)) return "E-mail invalide.";
-  if (typeof body.postalCode !== "string" || !isValidPostalCode(body.postalCode)) {
+  // Le formulaire ne demande plus que le nom et le téléphone. Une page restée
+  // en cache peut encore envoyer l'e-mail, le code postal et la cheminée : ils
+  // restent acceptés, et vérifiés quand ils sont remplis.
+  if (filled(body.email) && !isValidEmail(body.email)) return "E-mail invalide.";
+  if (filled(body.postalCode) && !isValidPostalCode(body.postalCode)) {
     return "Code postal belge invalide (4 chiffres).";
   }
-  if (typeof body.situation !== "string" || !situationLabel(body.situation)) {
-    return "Dites-nous si vous avez une cheminée.";
+  if (filled(body.situation) && !situationLabel(body.situation)) {
+    return "Réponse inconnue pour la cheminée.";
   }
   if (body.consent !== true) return "Le consentement est obligatoire.";
   return null;
@@ -38,7 +45,8 @@ function validate(body: Partial<CallbackPayload>): string | null {
 /**
  * Demande de rappel de /prix-poele-pellets. Rangée avec les messages de
  * contact (sujet « Pose / installation ») pour ne pas toucher au schéma de la
- * base, et notifiée à info@awlest.com. Les logs ne gardent qu'un libellé
+ * base (sans e-mail : voir CALLBACK_NO_EMAIL), et notifiée à l'adresse interne
+ * des demandes. Les logs ne gardent qu'un libellé
  * technique, jamais de donnée du client.
  */
 export async function POST(request: Request) {
@@ -65,9 +73,9 @@ export async function POST(request: Request) {
 
   const name = body.name!.trim();
   const phone = body.phone!.trim();
-  const email = body.email!.trim();
-  const postalCode = body.postalCode!.trim();
-  const situation = situationLabel(body.situation!)!;
+  const email = filled(body.email) ? body.email.trim() : undefined;
+  const postalCode = filled(body.postalCode) ? body.postalCode.trim() : undefined;
+  const situation = filled(body.situation) ? situationLabel(body.situation) : undefined;
   // Origine de la visite (utm_campaign, présence d'un gclid), lue par le
   // formulaire dans l'adresse de la page d'arrivée. Bornée et sans balise.
   const origin =
@@ -85,13 +93,14 @@ export async function POST(request: Request) {
       overrideAccess: true,
       data: {
         name,
-        email,
+        email: email ?? CALLBACK_NO_EMAIL,
         phone,
         subject: "info-pose",
         message: [
           "Demande de rappel pour un prix posé (page Prix d'un poêle à pellets posé).",
-          `Code postal : ${postalCode}`,
-          `Évacuation des fumées : ${situation}`,
+          email ? null : "Pas d'e-mail demandé : rappeler au téléphone.",
+          postalCode ? `Code postal : ${postalCode}` : null,
+          situation ? `Évacuation des fumées : ${situation}` : null,
           origin ? `Origine : ${origin}` : null,
         ]
           .filter(Boolean)

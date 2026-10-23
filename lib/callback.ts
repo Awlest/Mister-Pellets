@@ -27,3 +27,11 @@ export function isValidBelgianPhone(input: string): boolean {
 export const isValidPostalCode = (input: string): boolean => /^[1-9]\d{3}$/.test(input.trim());
 
 export const isValidEmail = (input: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.trim());
+
+/**
+ * Le formulaire ne demande que le nom et le téléphone, mais la colonne email
+ * de contact-messages est obligatoire en base. Plutôt qu'une migration, les
+ * demandes sans e-mail y sont rangées avec cette adresse technique, qui ne
+ * sert qu'à les reconnaître dans l'admin.
+ */
+export const CALLBACK_NO_EMAIL = "rappel-sans-email@mister-pellets.be";
