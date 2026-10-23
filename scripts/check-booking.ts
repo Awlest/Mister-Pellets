@@ -3,6 +3,7 @@ import {
   filterAvailable, availableSlots, formatSlotTime, belgianDayKey,
   BUSINESS_HOURS, GAP_AFTER_EVENT_MIN, GAP_BEFORE_EVENT_MIN,
   busyFromEvents, type CalendarEvent,
+  easterSunday, belgianPublicHolidays, isBelgianPublicHoliday,
 } from "@/lib/booking";
 import { bookingCalendarEntry, buildIcs, googleCalendarUrl, icsDownloadPath } from "@/lib/booking-calendar";
 
@@ -36,6 +37,49 @@ const dim = belgianWallTimeToInstant(2026, 9, 6, 0, 0);
 const dimSlots = generateCandidateSlots(dim, dim + 86400000, 60)
   .filter(s => belgianDayKey(s.start) === "2026-09-06");
 check("dimanche 06/09, aucun creneau", dimSlots.length, 0);
+
+// 5 bis. Jours feries legaux : fermes comme un dimanche.
+// Paques : dates connues, dont les extremes du calendrier gregorien
+// (22 mars en 2285, 25 avril en 2038).
+const paques = (y: number) => {
+  const e = easterSunday(y);
+  return `${y}-${String(e.month).padStart(2, "0")}-${String(e.day).padStart(2, "0")}`;
+};
+check("Paques 2024 a 2028, 2038 et 2285",
+  [2024, 2025, 2026, 2027, 2028, 2038, 2285].map(paques),
+  ["2024-03-31", "2025-04-20", "2026-04-05", "2027-03-28", "2028-04-16", "2038-04-25", "2285-03-22"]);
+check("feries 2026",
+  belgianPublicHolidays(2026).map(h => h.date),
+  ["2026-01-01", "2026-04-06", "2026-05-01", "2026-05-14", "2026-05-25",
+   "2026-07-21", "2026-08-15", "2026-11-01", "2026-11-11", "2026-12-25"]);
+check("feries mobiles 2027 (Paques le 28/03)",
+  belgianPublicHolidays(2027).filter(h => ["Lundi de Pâques", "Ascension", "Lundi de Pentecôte"].includes(h.name)).map(h => h.date),
+  ["2027-03-29", "2027-05-06", "2027-05-17"]);
+check("27/09 (fete de communaute) et 26/12 ne sont pas feries",
+  [isBelgianPublicHoliday(2026, 9, 27), isBelgianPublicHoliday(2026, 12, 26)], [false, false]);
+
+const creneauxDuJour = (y: number, m: number, d: number) => {
+  const minuit = belgianWallTimeToInstant(y, m, d, 0, 0);
+  const cle = `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+  return generateCandidateSlots(minuit, minuit + 86400000, 60).filter(s => belgianDayKey(s.start) === cle);
+};
+check("mercredi 11/11/2026 (Armistice), aucun creneau", creneauxDuJour(2026, 11, 11).length, 0);
+check("lundi de Paques 29/03/2027, aucun creneau", creneauxDuJour(2027, 3, 29).length, 0);
+check("Ascension 06/05/2027 et lundi de Pentecote 17/05/2027, aucun creneau",
+  [creneauxDuJour(2027, 5, 6).length, creneauxDuJour(2027, 5, 17).length], [0, 0]);
+check("vendredi 25/12/2026 (Noel), aucun creneau", creneauxDuJour(2026, 12, 25).length, 0);
+const jeudi = creneauxDuJour(2026, 11, 12).map(s => formatSlotTime(s.start));
+check("jour normal inchange : jeudi 12/11/2026, 17 departs de 09:00 a 17:00",
+  [jeudi.length, jeudi[0], jeudi[jeudi.length - 1]], [17, "09:00", "17:00"]);
+check("jour normal inchange : mardi 30/03/2027, lendemain du lundi de Paques",
+  creneauxDuJour(2027, 3, 30).length, 17);
+
+// Le cas signale le 23/10/2026 : l'agenda en ligne proposait 17 creneaux le
+// 11/11. Meme pipeline que /api/rdv/slots, agenda vide.
+const auSignalement = availableSlots(belgianWallTimeToInstant(2026, 10, 23, 12, 0), 60, []);
+check("au 23/10/2026 : rien le 11/11, les 10 et 12/11 restent ouverts",
+  ["2026-11-10", "2026-11-11", "2026-11-12"].map(j => auSignalement.filter(s => belgianDayKey(s.start) === j).length),
+  [17, 0, 17]);
 
 // 6. Regle des 30 min, SYMETRIQUE : RDV existant 12:00-13:00 le mardi 08/09.
 // On doit avoir 30 min de route avant comme apres.

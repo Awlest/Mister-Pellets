@@ -39,7 +39,8 @@ export const HORIZON_DAYS = 30;
 /**
  * Horaires d'ouverture, en heure locale belge, indexés sur getDay()
  * (0 = dimanche). Doivent rester alignés sur les horaires publiés sur le site
- * et sur la fiche Google.
+ * et sur la fiche Google. Les jours fériés légaux sont fermés en plus, quel
+ * que soit le jour de la semaine (cf. belgianPublicHolidays).
  */
 export const BUSINESS_HOURS: Record<number, { open: string; close: string } | null> = {
   0: null, // dimanche
@@ -50,6 +51,65 @@ export const BUSINESS_HOURS: Record<number, { open: string; close: string } | nu
   5: { open: "09:00", close: "18:00" },
   6: null, // samedi : fermé depuis octobre 2026, plus aucun créneau en ligne
 };
+
+/**
+ * Dimanche de Pâques du calendrier grégorien, par l'algorithme de Meeus (repris
+ * de Gauss). Renvoie le mois (1 à 12) et le jour.
+ */
+export function easterSunday(year: number): { month: number; day: number } {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const n = h + l - 7 * m + 114;
+  return { month: Math.floor(n / 31), day: (n % 31) + 1 };
+}
+
+/**
+ * Clé « AAAA-MM-JJ » d'une date civile. Calcul de calendrier sans fuseau :
+ * `Date.UTC` absorbe les débordements (5 avril + 39 jours = 14 mai).
+ */
+function civilDayKey(year: number, month: number, day: number): string {
+  const d = new Date(Date.UTC(year, month - 1, day));
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-${String(d.getUTCDate()).padStart(2, "0")}`;
+}
+
+/**
+ * Les dix jours fériés légaux belges d'une année. Aucun créneau n'est proposé
+ * ces jours-là. Les fêtes de communauté (27 septembre) et les congés du
+ * secteur public (2 et 15 novembre, 26 décembre) ne sont pas des jours fériés
+ * légaux : ils restent des jours ouvrés.
+ */
+export function belgianPublicHolidays(year: number): Array<{ date: string; name: string }> {
+  const easter = easterSunday(year);
+  const afterEaster = (days: number) => civilDayKey(year, easter.month, easter.day + days);
+  return [
+    { date: civilDayKey(year, 1, 1), name: "Nouvel An" },
+    { date: afterEaster(1), name: "Lundi de Pâques" },
+    { date: civilDayKey(year, 5, 1), name: "Fête du Travail" },
+    { date: afterEaster(39), name: "Ascension" },
+    { date: afterEaster(50), name: "Lundi de Pentecôte" },
+    { date: civilDayKey(year, 7, 21), name: "Fête nationale" },
+    { date: civilDayKey(year, 8, 15), name: "Assomption" },
+    { date: civilDayKey(year, 11, 1), name: "Toussaint" },
+    { date: civilDayKey(year, 11, 11), name: "Armistice" },
+    { date: civilDayKey(year, 12, 25), name: "Noël" },
+  ];
+}
+
+/** Le jour civil belge donné est-il un jour férié légal ? */
+export function isBelgianPublicHoliday(year: number, month: number, day: number): boolean {
+  const key = civilDayKey(year, month, day);
+  return belgianPublicHolidays(year).some((h) => h.date === key);
+}
 
 export interface Interval {
   /** Instant de début, en millisecondes epoch. */
@@ -164,7 +224,8 @@ export function generateCandidateSlots(
     const key = `${p.year}-${p.month}-${p.day}`;
     if (!seen.has(key)) {
       seen.add(key);
-      const hours = BUSINESS_HOURS[p.weekday];
+      // Un jour férié est fermé comme un dimanche.
+      const hours = isBelgianPublicHoliday(p.year, p.month, p.day) ? null : BUSINESS_HOURS[p.weekday];
       if (hours) {
         const o = parseHm(hours.open);
         const c = parseHm(hours.close);
