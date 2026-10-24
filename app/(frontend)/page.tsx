@@ -22,7 +22,10 @@ import { CITIES } from "@/lib/cities";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Poêle à pellets en Wallonie, vente, pose, entretien",
+  // Suffixe écrit en toutes lettres : le template de titre de
+  // app/(frontend)/layout.tsx ne s'applique qu'aux segments enfants, pas à
+  // cette page, qui est dans le même segment que lui.
+  title: { absolute: "Poêle à pellets en Wallonie, vente, pose, entretien | Mister Pellets" },
   description:
     "Edilkamin, EK63, Girolami, Austroflamm et Cadel : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
 };

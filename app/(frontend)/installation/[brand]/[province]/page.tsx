@@ -18,7 +18,7 @@ interface Props {
 
 /**
  * Les 15 pages sont connues au build : une marque ou une province hors liste
- * reçoit la page 404 du site (app/not-found.tsx), rendue par le serveur avec
+ * reçoit la page 404 du site (app/global-not-found.tsx), rendue par le serveur avec
  * l'en-tête, le pied de page et l'amorce du consentement dans le <head>.
  * Le notFound() de la page ne suffit pas : le statut est bien 404, mais Next
  * sert alors un HTML vide (sa coquille d'erreur) que seul le navigateur
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const province = getProvince(provinceSlug);
   if (!brand || !province) return { title: "Page introuvable", robots: { index: false } };
   return buildPageMetadata({
-    // pas de suffixe " | Mister Pellets" ici : le template du layout racine l'ajoute déjà
+    // pas de suffixe " | Mister Pellets" ici : le template de app/(frontend)/layout.tsx l'ajoute déjà
     title: `Installation poêle ${brand.name} en ${province.name}`,
     description: `Pose de poêle à pellets ${brand.name} dans ${province.longName} par Mister Pellets : devis sous 48 h, TVA à 6 % en rénovation, équipes basées à Fernelmont. ${province.cities.slice(0, 4).join(", ")} et environs.`,
     path: `/installation/${brandSlug}/${provinceSlug}`,

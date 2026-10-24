@@ -29,7 +29,7 @@ import { buttonVariants } from "@/components/ui/button-variants";
  * `granted` ne se fait qu'après un clic explicite sur Accepter.
  *
  * L'amorce (dataLayer, consentement par défaut, restauration du choix stocké)
- * vit dans app/layout.tsx, rendue en clair dans le `<head>` : c'est la seule
+ * vit dans app/(frontend)/layout.tsx, rendue en clair dans le `<head>` : c'est la seule
  * façon de garantir qu'elle s'exécute avant la bibliothèque Google.
  */
 
@@ -138,7 +138,7 @@ export function Analytics() {
 
   return (
     <>
-      {/* L'amorce du consentement est rendue en <head> par app/layout.tsx :
+      {/* L'amorce du consentement est rendue en <head> par app/(frontend)/layout.tsx :
         * elle doit s'exécuter avant cette bibliothèque, pas après.
         * lazyOnload et non afterInteractive : avec afterInteractive, Next
         * précharge gtag.js dans le <head>, en priorité haute, et ses 176 Ko

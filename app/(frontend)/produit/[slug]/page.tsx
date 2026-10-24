@@ -42,7 +42,7 @@ export const revalidate = 60;
 /**
  * Catalogue fermé au build : toutes les fiches, masquées comprises, sont
  * construites par generateStaticParams, et un slug hors liste reçoit la page
- * 404 du site (app/not-found.tsx), rendue par le serveur avec l'habillage et
+ * 404 du site (app/global-not-found.tsx), rendue par le serveur avec l'habillage et
  * l'amorce du consentement dans le <head>. Le notFound() de la page ne donne
  * qu'un HTML vide, la coquille d'erreur de Next (voir la page installation).
  *
