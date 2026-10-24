@@ -179,7 +179,7 @@ export const FAQS: FaqItem[] = [
     category: "marques",
     question: "Cadel, c'est comparable à EK63 ?",
     answer:
-      "Oui, c'est le même créneau : du connecté et de l'étanche à prix plus doux, avec le savoir-faire d'un grand groupe. Cadel, fondée en 1949 près de Trévise, fait partie du groupe MCZ depuis 2013, comme EK63 fait partie du groupe Edilkamin. Ses poêles à pellets ont le Wi-Fi et le Bluetooth intégrés (appli Easy Connect Plus), le brasero autonettoyant Autoclean sur les modèles récents, et la gamme va du poêle plat de 27 cm de profondeur au thermopoêle hydro de 24 kW. On la pose depuis octobre 2026.",
+      "Oui, c'est le même créneau : du connecté et de l'étanche à prix plus doux, avec le savoir-faire d'un grand groupe. Cadel, qui fait des poêles près de Trévise depuis plus de soixante ans, fait partie du groupe MCZ depuis 2013, comme EK63 fait partie du groupe Edilkamin. Ses poêles à pellets ont le Wi-Fi et le Bluetooth intégrés (appli Easy Connect Plus), le brasero autonettoyant Autoclean sur les modèles récents, et la gamme va du poêle plat de 27 cm de profondeur au thermopoêle hydro de 24 kW. On la pose depuis octobre 2026.",
   },
   {
     id: "marques-girolami-bois-pellet",

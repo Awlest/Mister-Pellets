@@ -36,14 +36,14 @@ const COMPARISON: {
     ek63: "Plateforme Edilkamin",
     girolami: "Sant'Oreste (Rome), 1970",
     austroflamm: "Krenglbach (Haute-Autriche), 1983",
-    cadel: "Santa Lucia di Piave (Trévise), 1949",
+    cadel: "Santa Lucia di Piave (Trévise), groupe MCZ",
   },
   {
     criterion: "Techno phare",
     edilkamin: "Leonardo (autorégulation)",
     ek63: "Wi-Fi Smart de série",
     girolami: "Source Feeding (auto-nettoyage)",
-    austroflamm: "Pellets sans ventilateur, Keramott",
+    austroflamm: "Pellets sans convection forcée, Keramott",
     cadel: "Easy Connect Plus, Autoclean",
   },
   {
