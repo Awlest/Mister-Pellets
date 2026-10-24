@@ -184,6 +184,9 @@ const nextConfig: NextConfig = {
   experimental: {
     // Payload nécessite la résolution des paquets ESM modernes
     serverActions: { bodySizeLimit: "10mb" },
+    // 404 des adresses inconnues dans app/global-not-found.tsx : le site n'a
+    // pas de mise en page racine (l'admin Payload rend son propre <html>).
+    globalNotFound: true,
   },
 };
 
