@@ -86,11 +86,11 @@ export const ARTICLES: ArticleData[] = [
     title: "Austroflamm et Cadel arrivent chez Mister Pellets",
     metaTitle: "Austroflamm et Cadel : deux nouvelles marques de poêles à pellets en Wallonie",
     metaDescription:
-      "Depuis octobre 2026, Mister Pellets pose Austroflamm (Autriche, haut de gamme, pellets sans ventilateur et mixtes Duo) et Cadel (Italie, groupe MCZ, Wi-Fi intégré). Ce qui change pour vous.",
+      "Depuis octobre 2026, Mister Pellets pose Austroflamm (Autriche, haut de gamme, pellets sans ventilateur dans la pièce et mixtes Duo) et Cadel (Italie, groupe MCZ, Wi-Fi intégré). Ce qui change pour vous.",
     excerpt:
       "Deux marques rejoignent Edilkamin, EK63 et Girolami : Austroflamm pour le haut de gamme silencieux, Cadel pour le connecté à prix doux. 77 modèles en plus dans la boutique, posés par la même équipe.",
     tldr:
-      "Depuis octobre 2026, Mister Pellets distribue et pose deux nouvelles marques en Wallonie. Austroflamm, entreprise familiale autrichienne fondée en 1983, apporte des poêles à pellets qui chauffent sans ventilateur dans la pièce et des poêles mixtes bois-pellets Duo : 11 modèles de 6 à 10 kW. Cadel, fabricant italien fondé en 1949 et membre du groupe MCZ depuis 2013, apporte 66 modèles à pellets, Wi-Fi et Bluetooth intégrés, du poêle plat de 27 cm au thermopoêle hydro de 24,7 kW. Austroflamm se place à côté d'Edilkamin dans le haut de gamme, Cadel à côté d'EK63 dans le connecté accessible.",
+      "Depuis octobre 2026, Mister Pellets distribue et pose deux nouvelles marques en Wallonie. Austroflamm, entreprise familiale autrichienne fondée en 1983, apporte des poêles à pellets qui chauffent sans ventilateur dans la pièce et des poêles mixtes bois-pellets Duo : 11 modèles de 6 à 10 kW. Cadel, fabricant italien de poêles depuis plus de soixante ans et membre du groupe MCZ depuis 2013, apporte 66 modèles à pellets, Wi-Fi et Bluetooth intégrés, du poêle plat de 27 cm au thermopoêle hydro de 24,7 kW. Austroflamm se place à côté d'Edilkamin dans le haut de gamme, Cadel à côté d'EK63 dans le connecté accessible.",
     category: "actualite",
     tags: ["Austroflamm", "Cadel", "nouveautés", "marques", "poêle mixte", "poêle connecté"],
     readingTimeMinutes: 6,
@@ -129,7 +129,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Cadel : le connecté accessible du groupe MCZ",
         paragraphs: [
-          "Cadel est née en 1949 à Santa Lucia di Piave, près de Trévise, fondée par Umberto Cadel. Depuis 2013, la marque fait partie du groupe MCZ. Le parallèle avec EK63, marque du groupe Edilkamin, est le bon : des poêles modernes, connectés, à un prix plus doux que la marque phare du groupe. Les poêles sortent d'une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006, où la tôle est découpée, soudée, peinte et assemblée.",
+          "Cadel fabrique des poêles depuis plus de soixante ans à Santa Lucia di Piave, près de Trévise. Depuis 2013, la marque fait partie du groupe MCZ. Le parallèle avec EK63, marque du groupe Edilkamin, est le bon : des poêles modernes, connectés, à un prix plus doux que la marque phare du groupe. Les poêles sortent d'une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006, où la tôle est découpée, soudée, peinte et assemblée.",
           "Les poêles à pellets Cadel se pilotent depuis le téléphone avec l'appli gratuite Easy Connect Plus, en Wi-Fi ou en Bluetooth. Sur les modèles récents, le brasero Autoclean se vide à chaque allumage : le nettoyage passe de tous les jours à une fois par semaine, voire moins, selon Cadel. Presque toute la gamme a une chambre de combustion étanche, et elle est en classe A+ (A++ pour une partie des hydros).",
           "La gamme est très large : poêles plats de 27 à 33 cm de profondeur (Grace, Spirit, Baggy, Luce, Elle, Vesta), canalisables à une ou deux sorties (gamme Plus), inserts pour cheminée ouverte (Ponente, Zefiro), thermopoêles et inserts hydro pour les radiateurs (Maya Idro, River Idro, Saturno). En 2026, le Spin Plus 9 a reçu un iF Design Award.",
         ],
@@ -170,7 +170,7 @@ export const ARTICLES: ArticleData[] = [
     ],
     faqs: [
       {
-        question: "Les poêles Austroflamm sans ventilateur chauffent-ils assez ?",
+        question: "Les poêles Austroflamm sans ventilateur dans la pièce chauffent-ils assez ?",
         answer: "Oui, la chaleur se diffuse par convection naturelle et par rayonnement, comme avec un poêle à bois. La pièce monte un peu moins vite en température qu'avec un poêle ventilé, mais sans bruit de soufflerie. Pour plusieurs pièces, on regarde un modèle canalisable avec kit, comme le Ruby 2.0 ou un Duo.",
       },
       {
@@ -441,7 +441,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Edilkamin : la valeur sûre qui dure 20 ans",
         paragraphs: [
           "Edilkamin a plus de 60 ans. Son usine historique est à Gabbioneta Binanuova, près de Crémone, sa recherche à Lavagno, près de Vérone, et le groupe produit aussi en Hongrie, à Sárvár. C'est la marque qu'on recommande quand le critère numéro un, c'est la longévité.",
-          "Sa technologie Leonardo ajuste en permanence l'air et le débit de pellets grâce à des sondes. La combustion reste stable même quand vous changez de marque de sacs ou quand l'humidité varie. Sur le terrain, les Edilkamin qu'on a posés tiennent couramment 15 à 20 ans.",
+          "Sa technologie Leonardo surveille en continu la combustion et l'adapte au conduit, à la météo et aux pellets. La combustion reste stable même quand vous changez de marque de sacs ou quand l'humidité varie. Sur le terrain, les Edilkamin qu'on a posés tiennent couramment 15 à 20 ans.",
           "Le revers, c'est le prix catalogue : Edilkamin est dans le haut de la fourchette. Mais ramené à la durée de vie réelle, le coût annuel reste bas, et le SAV pièces reste disponible longtemps après l'arrêt d'un modèle.",
         ],
       },
@@ -540,11 +540,11 @@ export const ARTICLES: ArticleData[] = [
     title: "Technologie Leonardo : comment Edilkamin auto-règle la combustion",
     metaTitle: "Technologie Leonardo Edilkamin : la combustion auto-réglée",
     metaDescription:
-      "Leonardo, le système d'autorégulation d'Edilkamin : pression du foyer et température des fumées, correction continue de l'air et des pellets. Ce que ça change au quotidien.",
+      "Leonardo, le système d'autorégulation d'Edilkamin : combustion surveillée en continu et adaptée au conduit, à la météo et aux pellets. Ce que ça change au quotidien.",
     excerpt:
       "Leonardo, c'est le système qui règle la combustion à votre place. On explique comment il marche et ce qu'il change concrètement chez vous.",
     tldr:
-      "Leonardo est le système d'autorégulation de combustion d'Edilkamin. Un capteur mesure en continu la pression dans le foyer, une sonde la température des fumées, et le poêle corrige seul le débit de pellets et d'air. Résultat : la flamme reste optimale même si vous changez de marque de pellets, même quand l'humidité ou la température varient. Vous n'avez rien à régler dans le menu. Leonardo est intégré aux modèles Edilkamin qui en sont équipés, ce n'est pas une option payante.",
+      "Leonardo est le système d'autorégulation de combustion d'Edilkamin. Il relève en continu les paramètres de la combustion, qui varient avec le conduit, la météo et les pellets, et le poêle corrige seul sa combustion. Résultat : la flamme reste optimale même si vous changez de marque de pellets, même quand l'humidité ou la température varient. Vous n'avez rien à régler dans le menu. Leonardo est intégré aux modèles Edilkamin qui en sont équipés, ce n'est pas une option payante.",
     category: "marques",
     tags: ["Edilkamin", "Leonardo", "combustion", "autorégulation"],
     readingTimeMinutes: 6,
@@ -564,7 +564,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Des sondes qui mesurent, un poêle qui corrige",
         paragraphs: [
-          "Leonardo s'appuie sur deux capteurs : l'un mesure la pression dans la chambre de combustion, l'autre la température des fumées. Le poêle lit en permanence comment la combustion se déroule, et Edilkamin précise qu'il reconnaît aussi le type de pellet pour ajuster le débit.",
+          "Edilkamin explique que Leonardo relève en continu les principaux paramètres de la combustion, influencés par le conduit (courbes, longueur, diamètre), les conditions ambiantes (vent, pression atmosphérique, altitude) et le pellet (essence du bois, compacité, humidité). D'après les notices des modèles équipés, il s'appuie pour cela sur un capteur de pression dans la chambre de combustion et une sonde de température des fumées.",
           "À partir de ces mesures, il corrige deux choses : le débit de pellets envoyé par la vis sans fin, et le débit d'air du ventilateur. La flamme reste dans sa zone idéale, sans intervention de votre part.",
         ],
       },

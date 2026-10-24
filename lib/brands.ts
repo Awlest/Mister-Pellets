@@ -113,12 +113,12 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { marker: "1963", label: "Fondation de la marque par Francesco Borsatti." },
       { marker: "1982", label: "Transfert du siège opérationnel à Lainate, dans la banlieue nord de Milan." },
       { marker: "Usines", label: "Usine historique à Gabbioneta Binanuova (Crémone), seconde usine à Sárvár (Hongrie), recherche à Lavagno (Vérone)." },
-      { marker: "Leonardo", label: "Le poêle règle seul sa combustion d'après la pression dans le foyer et la température des fumées." },
+      { marker: "Leonardo", label: "Le poêle surveille en continu sa combustion et l'adapte au conduit, à la météo et aux pellets." },
       { marker: "Aujourd'hui", label: "Plus de 250 collaborateurs et des poêles vendus dans plus de 30 pays." },
     ],
     distinctions: [
       { emoji: "🇮🇹", title: "Conçu en Italie", description: "Siège à Lainate (Milan), usine historique à Gabbioneta Binanuova (Crémone), laboratoire de recherche à Lavagno (Vérone), seconde usine à Sárvár (Hongrie)." },
-      { emoji: "🧠", title: "Combustion Leonardo", description: "Un capteur de pression dans le foyer et une sonde de température des fumées : le poêle ajuste en permanence l'air et le débit de pellets. La combustion reste stable même si vous changez de marque de sacs, même quand l'humidité ambiante varie." },
+      { emoji: "🧠", title: "Combustion Leonardo", description: "Le poêle relève en continu les paramètres de sa combustion, qui varient avec le conduit, la météo et le pellet (essence, compacité, humidité), et la corrige seul. D'après les notices des modèles équipés, il s'appuie sur un capteur de pression dans le foyer et une sonde de température des fumées. La combustion reste stable même si vous changez de marque de sacs." },
       { emoji: "🔇", title: "Silence de fonctionnement", description: "Ventilateurs montés sur amortisseurs, fonte épaisse qui amortit les bruits de combustion. On en met dans un séjour ouvert sur les chambres sans souci." },
       { emoji: "🌬", title: "Technologie airKare", description: "Ionisation et ozonisation actives qui améliorent la qualité de l'air ambiant. Disponible sur certaines gammes. Une fonction qui agit même quand le poêle est éteint." },
       { emoji: "💧", title: "Gamme hydro complète", description: "Les modèles Cherie H et Blade H se raccordent au chauffage central comme une chaudière. Production d'eau chaude sanitaire avec ballon dédié. Adaptée au remplacement d'une vieille chaudière mazout." },
@@ -394,8 +394,8 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { emoji: "🎛", title: "Une molette, ou le smartphone", description: "Sur les Clou Pellet et l'Ella, on règle la chaleur avec une simple molette. Avec la box Wi-Fi WiRCU en option, l'appli PelletControl programme, allume et suit le poêle à distance." },
     ],
     modelsTable: [
-      { name: "Clou Pellet 8", power: "8 kW", type: "Pellets, sans ventilateur", forWhom: "Vitre ronde, réservoir de 36 kg et jusqu'à 60 h d'autonomie. Rendement de 90 %, pour 98 à 255 m³.", slug: "austroflamm-clou-pellet-8" },
-      { name: "Clou Pellet 10", power: "10 kW", type: "Pellets, sans ventilateur", forWhom: "La même carrosserie que le 8 kW, pour les maisons plus grandes : jusqu'à 350 m³.", slug: "austroflamm-clou-pellet-10" },
+      { name: "Clou Pellet 8", power: "8 kW", type: "Pellets, sans convection forcée", forWhom: "Vitre ronde, réservoir de 36 kg et jusqu'à 60 h d'autonomie. Rendement de 90 %, pour 98 à 255 m³.", slug: "austroflamm-clou-pellet-8" },
+      { name: "Clou Pellet 10", power: "10 kW", type: "Pellets, sans convection forcée", forWhom: "La même carrosserie que le 8 kW, pour les maisons plus grandes : jusqu'à 350 m³.", slug: "austroflamm-clou-pellet-10" },
       { name: "Clou Compact Pellet", power: "6 kW", type: "Pellets, compact", forWhom: "52 cm de large pour 49,9 cm de profondeur : la place d'un petit meuble.", slug: "austroflamm-clou-compact-pellet" },
       { name: "Ruby 2.0", power: "8 kW", type: "Pellets, canalisable avec kit", forWhom: "Porte arrondie en fonte, poignée en bois, acier ou céramique. Rendement de 90 %.", slug: "austroflamm-ruby" },
       { name: "Ella", power: "7,7 kW", type: "Pellets, rond", forWhom: "Vitre bombée, habillage acier ou céramique blanche, grille basculante pour vider le brûleur.", slug: "austroflamm-ella" },
@@ -406,7 +406,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     faq: [
       { question: "Austroflamm, c'est qui ?", answer: "Une entreprise familiale autrichienne, fondée en 1983 par Ferdinand Huemer, qui la dirige toujours. Le siège est à Krenglbach, en Haute-Autriche. Elle fabrique des poêles à bois, à pellets et mixtes bois-pellets, vendus uniquement par des revendeurs agréés. Le premier poêle à pellets de la marque date de 1995." },
-      { question: "Un poêle à pellets sans ventilateur, ça chauffe vraiment ?", answer: "Oui. La chaleur se diffuse par convection naturelle et par rayonnement, comme avec un poêle à bois. La pièce monte un peu moins vite en température qu'avec un poêle ventilé, mais la chaleur est plus douce et vous n'entendez plus de soufflerie. Pour une maison très ouverte ou plusieurs pièces à chauffer, on regarde ensemble s'il vaut mieux un modèle canalisable." },
+      { question: "Un poêle à pellets sans ventilateur dans la pièce, ça chauffe vraiment ?", answer: "Oui. La chaleur se diffuse par convection naturelle et par rayonnement, comme avec un poêle à bois. La pièce monte un peu moins vite en température qu'avec un poêle ventilé, mais la chaleur est plus douce et vous n'entendez plus de soufflerie. Pour une maison très ouverte ou plusieurs pièces à chauffer, on regarde ensemble s'il vaut mieux un modèle canalisable." },
       { question: "Comment fonctionne un poêle mixte Duo ?", answer: "Il brûle des pellets ou des bûches dans le même foyer. Vous chargez du bois, le poêle le détecte et règle l'air de combustion tout seul. Quand les bûches ont brûlé, il redémarre aux pellets si vous ne l'avez pas éteint, donc la maison reste chauffée même si vous êtes sortis. En cas de coupure de courant, le mode bois continue de fonctionner." },
       { question: "Un Austroflamm convient-il à une maison basse énergie ou passive ?", answer: "Les poêles à pellets Austroflamm ont tous un raccord d'air extérieur de série : l'air de combustion vient du dehors, pas de la pièce. Les Clou Duo, Mo Duo et Scotty Duo ont l'agrément allemand DIBt pour le fonctionnement indépendant de l'air ambiant, valable jusqu'en 2028. On vérifie toujours la compatibilité avec votre ventilation lors de la visite technique." },
       { question: "Peut-on piloter un Austroflamm depuis son téléphone ?", answer: "Oui, avec la box Wi-Fi WiRCU, en option, et l'appli gratuite PelletControl : programmation journalière ou hebdomadaire, mode Eco, statistiques, rappels d'entretien. Sans la box, les Clou Pellet et l'Ella se règlent avec une molette, les autres modèles avec leur écran." },
@@ -415,11 +415,11 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     warranty:
       "Austroflamm garantit le corps de chauffe 6 ans et les autres pièces en acier et en fonte 2 ans en Autriche et en Allemagne ; en Belgique, les conditions de l'importateur s'appliquent et on vous les remet par écrit avec le devis. Elles supposent une pose par un professionnel et un entretien annuel : on s'occupe des deux, avec intervention sous 48 à 72 h.",
-    tags: ["Autriche", "Depuis 1983", "Sans ventilateur", "Mixte bois-pellets"],
+    tags: ["Autriche", "Depuis 1983", "Sans convection forcée", "Mixte bois-pellets"],
     officialUrl: "https://www.austroflamm.com/",
     metaTitle: "Austroflamm en Wallonie, poêles à pellets haut de gamme et mixtes Duo | Mister Pellets",
     metaDescription:
-      "Austroflamm, marque autrichienne haut de gamme depuis 1983 : poêles à pellets sans ventilateur, mixtes bois-pellets Duo, design Cesare Monti. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "Austroflamm, marque autrichienne haut de gamme depuis 1983 : poêles à pellets sans convection forcée, mixtes bois-pellets Duo, design Cesare Monti. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -436,21 +436,21 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     name: "Cadel",
     country: "Italie",
     tier: 1,
-    founded: 1949,
+    foundedLabel: "Plus de 60 ans de poêles",
     positioning: "Connecté accessible, gamme pellets très large",
     tagline: "Le poêle connecté italien, pour chaque coin de la maison",
     badge: "Marque italienne du groupe MCZ",
     intro:
-      "Cadel est un fabricant italien né en 1949 à Santa Lucia di Piave, près de Trévise, et membre du groupe MCZ depuis 2013. Tous ses poêles à pellets ont le Wi-Fi et le Bluetooth intégrés, et la gamme est l'une des plus larges qu'on pose : poêles plats de 27 cm, canalisables à une ou deux sorties, inserts et thermopoêles hydro. Arrivée chez Mister Pellets en octobre 2026.",
+      "Cadel est un fabricant italien établi à Santa Lucia di Piave, près de Trévise, qui fait des poêles depuis plus de soixante ans et appartient au groupe MCZ depuis 2013. Tous ses poêles à pellets ont le Wi-Fi et le Bluetooth intégrés, et la gamme est l'une des plus larges qu'on pose : poêles plats de 27 cm, canalisables à une ou deux sorties, inserts et thermopoêles hydro. Arrivée chez Mister Pellets en octobre 2026.",
     heroSubtitle:
-      "Fondée en 1949 par Umberto Cadel, entrée dans le groupe MCZ en 2013, usine neuve en 2023 près de Trévise. Wi-Fi et Bluetooth intégrés, brasero autonettoyant sur les modèles récents, des poêles plats qui tiennent dans un couloir, à un prix qui reste raisonnable. Cadel joue chez nous le même rôle qu'EK63.",
+      "Plus de soixante ans de poêles, entrée dans le groupe MCZ en 2013, usine neuve en 2023 près de Trévise. Wi-Fi et Bluetooth intégrés, brasero autonettoyant sur les modèles récents, des poêles plats qui tiennent dans un couloir, à un prix qui reste raisonnable. Cadel joue chez nous le même rôle qu'EK63.",
     whyWeLove: [
-      "Cadel, c'est d'abord une histoire de famille, commencée en 1949 à Santa Lucia di Piave, près de Trévise, par Umberto Cadel, spécialiste des cuisinières et des poêles à bois, qui est ensuite passé au pellet. Depuis 2013, la marque fait partie du groupe MCZ, un des grands noms italiens du chauffage au bois et aux pellets. Le parallèle avec EK63 et Edilkamin est assez juste : Cadel profite du savoir-faire d'un grand groupe, avec des poêles plus simples et un prix plus doux.",
+      "Cadel, c'est d'abord une histoire de famille, commencée il y a plus de soixante ans à Santa Lucia di Piave, près de Trévise, avec des cuisinières et des poêles à bois, avant le passage au pellet. Depuis 2013, la marque fait partie du groupe MCZ, un des grands noms italiens du chauffage au bois et aux pellets. Le parallèle avec EK63 et Edilkamin est assez juste : Cadel profite du savoir-faire d'un grand groupe, avec des poêles plus simples et un prix plus doux.",
       "La fabrication se fait dans une usine inaugurée en mars 2023 : 15 000 m² de production, dix lignes d'assemblage, découpe et pliage de la tôle, soudure, peinture et montage sur place, 400 kW de panneaux photovoltaïques sur les toits. L'entreprise est certifiée ISO 9001 depuis 2006. En 2022, Cadel a vendu 45 000 poêles, et selon la presse économique italienne, la Belgique fait partie de ses premiers marchés à l'export.",
       "Sur le terrain, ce qu'on apprécie, c'est d'avoir une réponse pour presque chaque maison. Un couloir de 1 m de large : un Grace de 27 cm de profondeur. Deux chambres à chauffer en plus : un Vesta Plus ou un Mithos Plus à deux sorties d'air chaud. Une vieille cheminée ouverte : un insert Zefiro. Des radiateurs à alimenter : un River Idro. Et sur tous, le pilotage depuis le téléphone avec l'appli gratuite Easy Connect Plus, même sans Wi-Fi grâce au Bluetooth.",
     ],
     milestones: [
-      { marker: "1949", label: "Umberto Cadel fonde l'entreprise à Santa Lucia di Piave, près de Trévise." },
+      { marker: "60 ans", label: "Plus de soixante ans de poêles fabriqués à Santa Lucia di Piave, près de Trévise." },
       { marker: "2006", label: "Première certification ISO 9001, renouvelée depuis (Kiwa Cermet, valable jusqu'en 2027)." },
       { marker: "2013", label: "Cadel rejoint le groupe MCZ, de la famille Zanette." },
       { marker: "2023", label: "Nouvelle usine de 15 000 m², 10 lignes d'assemblage, 400 kW de photovoltaïque." },
@@ -477,7 +477,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { name: "Saturno 24", power: "24,7 kW", type: "Insert hydro", forWhom: "Dans une cheminée existante, 19 kW cédés à l'eau, réservoir de 40 kg.", slug: "cadel-saturno-24" },
     ],
     faq: [
-      { question: "Cadel, c'est qui ?", answer: "Un fabricant italien fondé en 1949 par Umberto Cadel à Santa Lucia di Piave, près de Trévise. Depuis 2013, Cadel fait partie du groupe MCZ, de la famille Zanette. Les poêles sont fabriqués dans une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006." },
+      { question: "Cadel, c'est qui ?", answer: "Un fabricant italien de Santa Lucia di Piave, près de Trévise, qui fait des poêles depuis plus de soixante ans. Depuis 2013, Cadel fait partie du groupe MCZ, de la famille Zanette. Les poêles sont fabriqués dans une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006." },
       { question: "Cadel ou EK63 : quelle différence ?", answer: "Les deux jouent le même rôle : du connecté et de l'étanche à un prix plus doux que la marque phare de leur groupe (MCZ pour Cadel, Edilkamin pour EK63). Cadel a une gamme plus large en formats (poêles plats de 27 à 33 cm, inserts, hydros jusqu'à 24,7 kW) et le brasero autonettoyant Autoclean sur ses modèles récents. EK63 a l'Entity 90+ de 31 cm et le service du groupe Edilkamin. On compare les deux sur votre projet, modèle par modèle." },
       { question: "Le Wi-Fi est-il vraiment intégré ?", answer: "Oui : Cadel annonce le Wi-Fi et le Bluetooth intégrés sur ses poêles à pellets, avec l'appli gratuite Easy Connect Plus (iOS et Android). Vous réglez la puissance, la température, les canalisations, la programmation, et pour un hydro la température de l'eau. Sur quelques modèles d'entrée de gamme, la fiche parle de Wi-Fi à prévoir : on vous le confirme au devis." },
       { question: "Autoclean, ça veut dire plus aucun nettoyage ?", answer: "Non, mais beaucoup moins. Le brasero se vide de lui-même à chaque allumage, et le nettoyage passe de tous les jours à une fois par semaine, voire moins, selon Cadel. Il faut toujours vider le tiroir à cendres et faire l'entretien annuel par un technicien." },
@@ -487,11 +487,11 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     ],
     warranty:
       "Garantie constructeur Cadel : 2 ans à partir de la date d'achat, facture faisant foi, sur les pièces défectueuses d'origine (joints, vitre et pièces amovibles du foyer exclus). Elle suppose une installation par un professionnel : on pose, on met en service et on assure le SAV, avec intervention sous 48 à 72 h.",
-    tags: ["Italie", "Depuis 1949", "Groupe MCZ", "Wi-Fi intégré", "Autoclean"],
+    tags: ["Italie", "Plus de 60 ans", "Groupe MCZ", "Wi-Fi intégré", "Autoclean"],
     officialUrl: "https://cadelsrl.com/",
     metaTitle: "Cadel en Wallonie, poêles à pellets Wi-Fi du groupe MCZ | Mister Pellets",
     metaDescription:
-      "Cadel, fabricant italien depuis 1949, groupe MCZ : poêles à pellets Wi-Fi et Bluetooth intégrés, brasero Autoclean, poêles plats, canalisables et hydro. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "Cadel, fabricant italien près de Trévise, groupe MCZ : poêles à pellets Wi-Fi et Bluetooth intégrés, brasero Autoclean, poêles plats, canalisables et hydro. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
   },
 };
 
