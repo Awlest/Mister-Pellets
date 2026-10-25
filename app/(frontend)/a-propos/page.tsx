@@ -1,7 +1,10 @@
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { StatsGrid } from "@/components/sections/StatsGrid";
+import { FAMILY_SITES, PARENT_BRAND } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo";
+
+const LINK = "text-mp-orange-ink underline hover:no-underline";
 
 export const metadata = buildPageMetadata({
   title: "À propos, Mister Pellets, installateur poêles à pellets en Wallonie",
@@ -81,6 +84,24 @@ export default function AProposPage() {
               Mister Pellets, c'est le visage métier. Awlest, c'est la structure légale derrière. Même équipe,
               même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale, pas de
               sous-traitance cachée.
+            </p>
+            <p>
+              La même société porte aussi{" "}
+              {FAMILY_SITES.filter((site) => site.href !== PARENT_BRAND.href).map((site, i) => (
+                <span key={site.href}>
+                  {i > 0 && " et "}
+                  <a href={site.href} className={LINK}>
+                    {site.name}
+                  </a>{" "}
+                  ({site.description.toLowerCase()})
+                </span>
+              ))}
+              . La pompe à chaleur, le photovoltaïque et la rénovation sont présentés sur le site
+              d&apos;
+              <a href={PARENT_BRAND.href} className={LINK}>
+                {PARENT_BRAND.name}
+              </a>
+              .
             </p>
             <p>
               L'activité d'Awlest, qui couvre les poêles à pellets sous la marque Mister Pellets et d'autres
