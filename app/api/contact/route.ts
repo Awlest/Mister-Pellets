@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/rate-limit";
 import { getPayloadClient } from "@/lib/payload-client";
-import { notifyInternalContact } from "@/lib/email";
+import { confirmCustomerContact, notifyInternalContact } from "@/lib/email";
 
 interface ContactPayload {
   name: string;
@@ -23,23 +23,23 @@ function redactName(name: string): string {
 
 function validate(payload: Partial<ContactPayload>): string | null {
   if (!payload.name || typeof payload.name !== "string" || payload.name.length < 2) {
-    return "Nom invalide.";
+    return "Merci d'indiquer votre nom.";
   }
   if (
     !payload.email ||
     typeof payload.email !== "string" ||
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)
   ) {
-    return "Email invalide.";
+    return "Cette adresse e-mail ne semble pas valide. Pouvez-vous la vérifier ?";
   }
   if (!payload.subject || typeof payload.subject !== "string") {
-    return "Sujet manquant.";
+    return "Merci de choisir le sujet de votre message.";
   }
   if (!payload.message || typeof payload.message !== "string" || payload.message.length < 10) {
-    return "Le message doit faire au moins 10 caractères.";
+    return "Votre message est un peu court : décrivez votre demande en quelques mots (10 caractères au moins).";
   }
   if (payload.consent !== true) {
-    return "Le consentement est obligatoire.";
+    return "Merci de cocher la case d'accord : sans elle, nous ne pouvons pas enregistrer votre message.";
   }
   return null;
 }
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "JSON invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Votre message n'a pas pu être lu. Rechargez la page et réessayez." }, { status: 400 });
   }
 
   // 2. Honeypot
@@ -107,14 +107,18 @@ export async function POST(request: Request) {
     console.error("[contact] payload save failed", err);
   }
 
-  // 5. Notification email staff (info@awlest.com).
-  await notifyInternalContact({
-    name: body.name!,
-    email: body.email!,
-    phone: body.phone ?? undefined,
-    subject: body.subject!,
-    message: body.message!,
-  });
+  // 5. Notification email staff (info@awlest.com) et accusé de réception au
+  // visiteur, en parallèle : l'un ne bloque pas l'autre.
+  await Promise.allSettled([
+    notifyInternalContact({
+      name: body.name!,
+      email: body.email!,
+      phone: body.phone ?? undefined,
+      subject: body.subject!,
+      message: body.message!,
+    }),
+    confirmCustomerContact({ name: body.name!, email: body.email! }),
+  ]);
 
   return NextResponse.json({ ok: true });
 }

@@ -389,6 +389,17 @@ Permis : opacité et transform (`translate`, `scale`, `rotate` d'un chevron), co
 - un bloc qui ne doit pas bouger porte `data-reveal="off"`.
 
 
+## E-mails
+
+Gabarit unique : `lib/email-layout.ts` (tableaux, styles en ligne, 600 px), textes dans `lib/email.ts`, e-mail d'administration dans `lib/admin-email.ts`.
+
+- **Structure :** logo PNG `public/email/logo-mister-pellets.png` sur beige, bandeau vert profond à filet orange (surtitre orange chaud, titre Fraunces crème), corps blanc, récapitulatif crème à filet orange (`emailRecap`), encadré d'aide orange clair (`emailNote`), bouton pilule vert (`emailButton`).
+- **Polices :** Fraunces et Arial ; Gmail et Outlook affichent Georgia et Arial.
+- **Ton :** vouvoiement, « nous » pour l'équipe, salutation au prénom (`greeting`), ce qui se passe ensuite avec un délai concret, un moyen simple de nous joindre, puis « Bien à vous » (« À bientôt » quand un rendez-vous est fixé). Jamais de tiret long ni de point d'exclamation.
+- **Toujours une version texte**, et le pied légal (`EMAIL_LEGAL_LINES`, CSA art. 2:20 : dénomination, siège, numéro d'entreprise, RPM et tribunal).
+- **Jamais le message libre du visiteur** dans un accusé de réception : l'adresse n'est pas vérifiée, l'accusé servirait à envoyer n'importe quoi depuis notre domaine.
+- **Notifications internes :** même gabarit en `audience: "equipe"` (bandeau court, pied réduit), sujets inchangés (des filtres de boîte s'y fient).
+
 ## Do's and Don'ts
 
 ### Do:

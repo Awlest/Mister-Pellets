@@ -189,7 +189,11 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
         setSlideDir(0);
       } catch (e) {
         if (controller.signal.aborted) return;
-        setSlotsError(e instanceof Error ? e.message : "Erreur inattendue.");
+        setSlotsError(
+          e instanceof Error && e.name === "Error"
+            ? e.message
+            : "Les disponibilités ne s'affichent pas. Vérifiez votre connexion, ou appelez-nous au 081 13 83 09.",
+        );
       } finally {
         if (!controller.signal.aborted) setLoadingSlots(false);
       }
@@ -240,7 +244,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
       trackEvent(EVENTS.rdvReserve, { service: serviceSlug, date: data.date });
       trackEvent(EVENTS.bookAppointment, { ...BRAND_PARAMS, service: serviceSlug });
     } catch (e) {
-      setSubmitError(e instanceof Error ? e.message : "Erreur inattendue.");
+      setSubmitError(e instanceof Error && e.name === "Error" ? e.message : "Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou appelez-nous au 081 13 83 09.");
     } finally {
       setSubmitting(false);
     }

@@ -24,21 +24,21 @@ interface CallbackPayload {
 const filled = (value: unknown): value is string => typeof value === "string" && value.trim() !== "";
 
 function validate(body: Partial<CallbackPayload>): string | null {
-  if (typeof body.name !== "string" || body.name.trim().length < 2) return "Indiquez votre nom.";
+  if (typeof body.name !== "string" || body.name.trim().length < 2) return "Merci d'indiquer votre nom.";
   if (typeof body.phone !== "string" || !isValidBelgianPhone(body.phone)) {
-    return "Téléphone belge requis (formats : 0470 12 34 56 ou +32 470 12 34 56).";
+    return "Merci d'indiquer un numéro de téléphone belge, par exemple 0470 12 34 56 ou +32 470 12 34 56.";
   }
   // Le formulaire ne demande plus que le nom et le téléphone. Une page restée
   // en cache peut encore envoyer l'e-mail, le code postal et la cheminée : ils
   // restent acceptés, et vérifiés quand ils sont remplis.
-  if (filled(body.email) && !isValidEmail(body.email)) return "E-mail invalide.";
+  if (filled(body.email) && !isValidEmail(body.email)) return "Cette adresse e-mail ne semble pas valide. Pouvez-vous la vérifier ?";
   if (filled(body.postalCode) && !isValidPostalCode(body.postalCode)) {
-    return "Code postal belge invalide (4 chiffres).";
+    return "Ce code postal ne semble pas belge : il compte 4 chiffres.";
   }
   if (filled(body.situation) && !situationLabel(body.situation)) {
-    return "Réponse inconnue pour la cheminée.";
+    return "Merci de choisir une réponse pour la cheminée.";
   }
-  if (body.consent !== true) return "Le consentement est obligatoire.";
+  if (body.consent !== true) return "Merci de cocher la case d'accord : sans elle, nous ne pouvons pas enregistrer votre demande.";
   return null;
 }
 
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "JSON invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Votre demande n'a pas pu être lue. Rechargez la page et réessayez." }, { status: 400 });
   }
 
   if (isHoneypotTriggered(body as Record<string, unknown>)) {
@@ -120,7 +120,7 @@ export async function POST(request: Request) {
   // Ni rangée ni envoyée : la demande serait perdue, le visiteur doit le savoir.
   if (!saved && !sent.ok) {
     return NextResponse.json(
-      { error: "Envoi impossible pour le moment. Appelez-nous au 081 13 83 09." },
+      { error: "Votre demande n'a pas pu être envoyée. Réessayez dans un instant, ou appelez-nous au 081 13 83 09." },
       { status: 500 },
     );
   }

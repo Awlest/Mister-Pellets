@@ -44,24 +44,24 @@ export function ContactForm() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error ?? "Une erreur est survenue. Réessayez ou téléphonez-nous.");
+        throw new Error(data.error ?? "Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou appelez-nous au 081 13 83 09.");
       }
 
       setState("success");
       (event.target as HTMLFormElement).reset();
     } catch (error) {
       setState("error");
-      setErrorMessage(error instanceof Error ? error.message : "Erreur inconnue.");
+      setErrorMessage(error instanceof Error && error.name === "Error" ? error.message : "Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou appelez-nous au 081 13 83 09.");
     }
   }
 
   if (state === "success") {
     return (
       <div className="rounded-2xl bg-mp-green-light/15 border border-mp-green-light/40 p-8 text-mp-green-deep">
-        <h3 className="text-2xl font-semibold mb-2">Message reçu, merci !</h3>
+        <h3 className="text-2xl font-semibold mb-2">Message bien reçu, merci.</h3>
         <p className="leading-relaxed">
-          On revient vers vous dans la journée pendant les heures ouvrées. Si c'est urgent, vous pouvez
-          aussi appeler le 081 13 83 09.
+          Nous vous répondons dans la journée, pendant les heures ouvrées, et une confirmation vous
+          parvient par e-mail. Si c'est urgent, vous pouvez aussi appeler le 081 13 83 09.
         </p>
         <Button variant="outline" size="default" className="mt-6" onClick={() => setState("idle")}>
           Envoyer un autre message

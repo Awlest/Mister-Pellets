@@ -113,7 +113,7 @@ export async function POST(request: Request) {
   try {
     body = (await request.json()) as Record<string, unknown>;
   } catch {
-    return NextResponse.json({ error: "JSON invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Votre demande n'a pas pu être lue. Rechargez la page et réessayez." }, { status: 400 });
   }
 
   // Honeypot : on répond 200 sans rien traiter pour ne pas informer le bot.
@@ -129,21 +129,21 @@ export async function POST(request: Request) {
   const postalCode = typeof customer.postalCode === "string" ? customer.postalCode.trim() : "";
   const message = typeof customer.message === "string" ? customer.message.slice(0, 2000) : "";
 
-  if (name.length < 2) return NextResponse.json({ error: "Nom manquant." }, { status: 400 });
+  if (name.length < 2) return NextResponse.json({ error: "Merci d'indiquer votre nom." }, { status: 400 });
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-    return NextResponse.json({ error: "Email invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Cette adresse e-mail ne semble pas valide. Pouvez-vous la vérifier ?" }, { status: 400 });
   if (!/^[1-9]\d{3}$/.test(postalCode))
     return NextResponse.json(
-      { error: "Code postal belge invalide (4 chiffres entre 1000 et 9999)." },
+      { error: "Ce code postal ne semble pas belge : il compte 4 chiffres, entre 1000 et 9999." },
       { status: 400 },
     );
   if (!isValidBelgianPhone(phone))
     return NextResponse.json(
-      { error: "Téléphone belge requis (formats : 0470 12 34 56 ou +32 470 12 34 56)." },
+      { error: "Merci d'indiquer un numéro de téléphone belge, par exemple 0470 12 34 56 ou +32 470 12 34 56." },
       { status: 400 },
     );
   if (customer.consent !== true)
-    return NextResponse.json({ error: "Le consentement est obligatoire." }, { status: 400 });
+    return NextResponse.json({ error: "Merci de cocher la case d'accord : sans elle, nous ne pouvons pas enregistrer votre demande." }, { status: 400 });
 
   const delay = pick(customer.delay, DELAYS, "asap");
   const config = sanitizeConfig((body.config ?? {}) as Record<string, unknown>);
@@ -160,7 +160,7 @@ export async function POST(request: Request) {
   const allowedTypes = STOVE_KINDS[config.stoveKind].productTypes as readonly string[];
   if (!allowedTypes.includes(product.productType)) {
     return NextResponse.json(
-      { error: "Le modèle choisi ne correspond plus au type d'installation." },
+      { error: "Le modèle choisi ne convient pas au type d'installation retenu. Revenez à l'étape 3 pour en choisir un autre." },
       { status: 400 },
     );
   }

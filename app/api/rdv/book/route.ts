@@ -63,7 +63,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Requête invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Votre demande n'a pas pu être lue. Rechargez la page et réessayez." }, { status: 400 });
   }
 
   const payload = body as Record<string, unknown>;
@@ -76,14 +76,14 @@ export async function POST(request: Request) {
   const service = getService(slug);
   if (!service || service.booking !== "online") {
     return NextResponse.json(
-      { error: "Ce service ne se réserve pas en ligne. Appelez le 081 13 83 09." },
+      { error: "Ce rendez-vous ne se réserve pas en ligne. Appelez-nous au 081 13 83 09 : nous fixerons le moment avec vous." },
       { status: 400 },
     );
   }
 
   const startInstant = Number(payload.start);
   if (!Number.isFinite(startInstant)) {
-    return NextResponse.json({ error: "Créneau invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Ce créneau n'est pas valable. Choisissez-en un dans la liste." }, { status: 400 });
   }
 
   const name = str(payload.name, 120);
@@ -98,7 +98,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Merci d'indiquer votre nom." }, { status: 400 });
   }
   if (!EMAIL_RE.test(email)) {
-    return NextResponse.json({ error: "Adresse email invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Cette adresse e-mail ne semble pas valide. Pouvez-vous la vérifier ?" }, { status: 400 });
   }
   // Adresse complète obligatoire, code postal compris.
   const addressError = service.location === "domicile" ? visitAddressError(visit) : null;
@@ -110,7 +110,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "La réservation en ligne n'est pas encore active. Appelez le 081 13 83 09, on cale un créneau tout de suite.",
+          "La réservation en ligne n'est pas encore active. Appelez-nous au 081 13 83 09 : nous fixerons le créneau avec vous.",
       },
       { status: 503 },
     );
@@ -198,7 +198,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "La réservation n'a pas pu aboutir. Appelez le 081 13 83 09, on cale votre créneau directement.",
+          "La réservation n'a pas pu aboutir, veuillez nous en excuser. Appelez-nous au 081 13 83 09 : nous fixerons le créneau avec vous.",
       },
       { status: 502 },
     );

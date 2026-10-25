@@ -25,10 +25,10 @@ export async function GET(request: Request) {
   const start = Number(searchParams.get("start"));
 
   if (!service || service.booking !== "online") {
-    return NextResponse.json({ error: "Service inconnu." }, { status: 400 });
+    return NextResponse.json({ error: "Ce rendez-vous est introuvable." }, { status: 400 });
   }
   if (!Number.isSafeInteger(start) || start < MIN_INSTANT || start > MAX_INSTANT) {
-    return NextResponse.json({ error: "Créneau invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Ce créneau n'est pas valable." }, { status: 400 });
   }
 
   const ics = buildIcs(
