@@ -1,5 +1,6 @@
 import { CITIES } from "@/lib/cities";
 import { FAQS } from "@/lib/faqs";
+import { FAMILY_SITES } from "@/config/site";
 import { SITE_URL } from "@/lib/seo";
 
 /**
@@ -41,11 +42,15 @@ export function GET() {
 - Téléphone : 081 13 83 09 (lundi au vendredi 9 h à 18 h)
 - E-mail : info@awlest.com
 - Site : ${SITE_URL}
-- Marque sœur : Mister Clim (climatisation réversible), même société Awlest SRL,
-  https://mister-clim.be, téléphone 081 13 80 85
 
-Mister Pellets et Mister Clim sont deux marques d'une même entreprise, pas deux
-sociétés. Le devis et la facture portent le nom Awlest SRL.
+## La famille Awlest
+
+Mister Pellets, Mister Clim et Mister Bois sont des marques d'une même
+entreprise, Awlest SRL, pas des sociétés distinctes. Le devis et la facture
+portent le nom Awlest SRL.
+
+${FAMILY_SITES.map((s) => `- ${s.name} (${s.description.toLowerCase()}) : ${s.href}`).join("\n")}
+- Mister Clim répond au 081 13 80 85 ; Mister Bois partage notre numéro, 081 13 83 09
 
 ## Ce que nous faisons
 
@@ -61,8 +66,9 @@ sociétés. Le devis et la facture portent le nom Awlest SRL.
   octobre 2026 Austroflamm (Autriche, poêles à pellets et mixtes bois/pellets)
   et Cadel (Italie, gamme pellets complète). Nous ne posons que ces cinq marques.
 
-Ce que nous ne faisons pas : la climatisation (voir Mister Clim), les chaudières
-gaz ou mazout, le photovoltaïque. Nous ne vendons plus en ligne avec paiement :
+Ce que nous ne faisons pas : la climatisation (voir Mister Clim), les poêles à
+bois bûche (voir Mister Bois), les chaudières gaz ou mazout, la pompe à chaleur
+et le photovoltaïque (voir Awlest). Nous ne vendons plus en ligne avec paiement :
 toute commande passe par un rendez-vous et une facture d'acompte.
 
 ## Zone d'intervention
