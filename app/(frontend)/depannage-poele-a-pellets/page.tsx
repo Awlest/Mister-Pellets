@@ -112,7 +112,7 @@ export default function DepannagePage() {
         },
         {
           q: "Mon poêle est encore sous garantie, que faire ?",
-          a: "Dites-le nous à l'appel. Si nous l'avons installé, la panne est couverte par notre garantie commerciale de 5 ans pièces et main d'œuvre, sous réserve que l'entretien annuel ait bien été fait.",
+          a: "Dites-le nous à l'appel. Si nous l'avons installé il y a moins de 2 ans, un défaut du poêle ou de la pose est couvert par la garantie légale, pièces et main-d'œuvre. Au-delà, la garantie du fabricant peut encore jouer : on la fait valoir avec vous.",
         },
         {
           q: "Puis-je prendre rendez-vous en ligne pour un dépannage ?",

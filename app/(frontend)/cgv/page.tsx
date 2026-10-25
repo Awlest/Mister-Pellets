@@ -1,184 +1,37 @@
 import type { Metadata } from "next";
+import { LegalDocument } from "@/components/legal/LegalDocument";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
+import { LEGAL_UPDATED_ON } from "@/lib/legal/company";
+import { conditionsGenerales } from "@/lib/legal/conditions-generales";
+import { SITE } from "@/lib/legal/site";
 
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
-  description: "Conditions générales de vente, Awlest SRL / Mister Pellets.",
+  description:
+    "Conditions générales de vente et d'installation d'Awlest SRL, communes à ses quatre marques, avec celles de Mister Pellets : acompte, livraison, service après-vente.",
   alternates: { canonical: "https://mister-pellets.be/cgv" },
 };
 
+/*
+  NE PAS remettre d'avertissement "brouillon / à finaliser" sur cette page.
+  Elle est publique et sert de référence à Google Merchant Center pour
+  vérifier la politique de retour et de remboursement (articles 3.2 et 3.4 de
+  la Partie I) : un texte disant que les conditions ne sont pas en vigueur
+  déclenche un refus. La relecture par un juriste belge reste à faire, suivie
+  hors site.
+*/
 export default function CGVPage() {
   return (
     <>
       <HeroSecondary
-        title="Conditions générales de vente"
-        description="Version applicable à toutes les commandes passées sur mister-pellets.be."
+        title="Conditions générales de vente et d'installation"
+        description="Les mêmes conditions pour les quatre marques d'Awlest SRL. Celles propres à Mister Pellets (acompte, livraison, service après-vente) sont en Partie III."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "CGV" },
         ]}
       />
-
-      <article className="bg-mp-cream mp-band">
-        <div className="mp-shell">
-          <div className="mp-measure space-y-8 text-mp-ink leading-relaxed">
-          {/*
-            NE PAS remettre d'avertissement "brouillon / à finaliser" sur cette page.
-            Elle est publique et sert de référence à Google Merchant Center pour
-            vérifier la politique de retour et de remboursement : un texte disant
-            que les conditions ne sont pas en vigueur declenche un refus.
-            La relecture par un juriste belge reste à faire — c'est suivi hors site.
-          */}
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">1. Objet</h2>
-            <p>
-              Les présentes conditions générales régissent les ventes de produits et de services
-              effectuées par Awlest SRL (ci-après « Mister Pellets ») via le site mister-pellets.be
-              ainsi que par devis. Toute commande implique l'acceptation pleine et entière des
-              présentes conditions.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">2. Identité du vendeur</h2>
-            <p>
-              <strong>Awlest SRL</strong>{" "}· Siège social : Rue Saint-Pierre 29, 4260 Braives,
-              Belgique · Numéro d&apos;entreprise et TVA : BE 0656.514.212 · RPM Liège, division Huy ·
-              Showroom et atelier : Rue des Fagotis 3A, 5380 Fernelmont · Téléphone : 0472 04 32 22 ·
-              Email : info@awlest.com.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">3. Produits et services</h2>
-            <p>
-              Mister Pellets distribue des poêles à pellets des marques Edilkamin, EK63 et
-              Girolami. Mister Pellets propose également des prestations de pose, mise en service,
-              entretien annuel et tubage de cheminée. Les caractéristiques techniques sont fournies
-              à titre indicatif d'après les données fabricant.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">4. Prix</h2>
-            <p>
-              Les prix affichés sur le site sont en euros, toutes taxes comprises (TVA 21 % sur les
-              produits). La pose et la mise en service bénéficient du taux de TVA réduit à 6 % pour
-              les habitations privées de plus de 10 ans, conformément à la législation belge. Les
-              prix sont garantis pour la durée du devis (30 jours) sauf modification du tarif
-              fabricant.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">5. Commande</h2>
-            <p>
-              La commande se confirme soit par signature du devis, soit par paiement en ligne via le
-              site. Mister Pellets se réserve le droit de refuser une commande pour des raisons
-              légitimes (rupture de stock, anomalie de prix, motif technique).
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">6. Paiement</h2>
-            <p>
-              Aucun paiement ne se fait en ligne. Toute commande passe par un devis :
-              acompte de 30 % à la signature, facturé après la visite technique qui confirme
-              la faisabilité de la pose, puis solde à la fin du chantier. Acompte et solde se
-              règlent par virement, carte ou Bancontact.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">7. Livraison</h2>
-            <p>
-              Livraison gratuite des poêles dans un rayon de 20 km autour de Fernelmont. Au-delà : 50 €
-              en Wallonie, 100 € à Bruxelles, 100 € en Flandre. Les délais de livraison sont indicatifs :
-              48h à 4-6 semaines selon la disponibilité du modèle. Mister Pellets informe le client
-              de tout retard significatif.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">8. Pose et installation</h2>
-            <p>
-              La pose est réalisée par notre équipe (Awlest SRL, inscrite à la Banque-Carrefour
-              des Entreprises sous le numéro BE 0656.514.212, accès à la profession requis).
-              Une visite technique préalable est obligatoire pour valider la faisabilité (conduit,
-              distances de sécurité, accès). La pose comprend le raccordement au conduit, la mise
-              en service, et la formation initiale du client.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">9. Droit de rétractation</h2>
-            <p>
-              Conformément au Code de droit économique belge, le consommateur dispose d'un délai de
-              <strong> 14 jours</strong> à compter de la réception du produit pour exercer son droit
-              de rétractation, sans avoir à motiver sa décision. Les frais de retour sont à la charge
-              du consommateur. Ce droit ne s'applique pas aux produits installés ou aux prestations
-              de pose déjà exécutées.
-            </p>
-            <p className="mt-3">
-              Pour exercer ce droit, écrivez-nous à{" "}
-              <a
-                href="mailto:info@awlest.com"
-                className="text-mp-orange-ink underline hover:no-underline"
-              >
-                info@awlest.com
-              </a>{" "}
-              ou par courrier à Awlest SRL, Rue Saint-Pierre 29, 4260 Braives, avant la fin du
-              délai de 14 jours. Le produit doit nous être renvoyé complet, dans son emballage
-              d&apos;origine et en état de revente.
-            </p>
-            <p className="mt-3">
-              <strong>Remboursement.</strong>{" "}Nous vous remboursons la totalité des sommes versées,
-              frais de livraison standard compris, au plus tard 14 jours après la réception de votre
-              demande de rétractation. Nous pouvons différer le remboursement jusqu&apos;à la
-              récupération du produit ou jusqu&apos;à ce que vous ayez fourni une preuve de son
-              expédition. Le remboursement est effectué par le même moyen de paiement que celui
-              utilisé lors de la commande, sans frais pour vous.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">10. Garantie légale</h2>
-            <p>
-              Tous les produits bénéficient de la garantie légale de conformité de 2 ans applicable
-              en Belgique. Mister Pellets offre en complément une garantie commerciale de 5 ans
-              pièces et main d'œuvre sur les poêles installés par notre équipe, sous réserve de
-              l'entretien annuel.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">11. Service après-vente</h2>
-            <p>
-              Le SAV est assuré directement par Mister Pellets pour les poêles installés par notre
-              équipe. Délai d'intervention typique : 48h à 5 jours selon la nature de la panne. Pour
-              les poêles non installés par nous, nous renvoyons vers le réseau SAV de la marque.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-mp-green-deep mb-3">12. Données personnelles et litiges</h2>
-            <p>
-              Le traitement des données est détaillé dans notre{" "}
-              <a href="/politique-confidentialite" className="text-mp-orange-ink underline hover:no-underline">
-                politique de confidentialité
-              </a>
-              . En cas de litige, une solution amiable sera recherchée en priorité. À défaut, les
-              tribunaux de Namur sont compétents. Le consommateur peut également saisir le Service
-              de médiation pour le consommateur (Belgique).
-            </p>
-          </section>
-
-          <p className="mp-measure text-sm text-mp-ink-soft pt-6 border-t border-mp-sand/40">
-            Dernière mise à jour : octobre 2026
-          </p>
-          </div>
-        </div>
-      </article>
+      <LegalDocument blocks={conditionsGenerales(SITE)} updatedOn={LEGAL_UPDATED_ON} />
     </>
   );
 }

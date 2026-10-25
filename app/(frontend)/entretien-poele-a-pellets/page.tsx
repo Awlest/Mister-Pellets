@@ -50,20 +50,20 @@ export default function EntretienPage() {
           ),
         },
         {
-          heading: "L'entretien conditionne votre garantie",
+          heading: "L'entretien conditionne la garantie du fabricant",
           body: (
             <>
               <p>
-                Sur les poêles que nous installons, nous offrons une garantie commerciale de
-                5 ans pièces et main d&apos;œuvre, en plus de la garantie légale de 2 ans.
-                Cette garantie commerciale est conditionnée à l&apos;entretien annuel. C&apos;est
-                écrit dans nos conditions générales, et c&apos;est la même logique chez tous les
-                fabricants.
+                Sur les poêles que nous installons, la garantie légale de 2 ans couvre le poêle
+                et la pose, sans condition d&apos;entretien. La garantie du fabricant, elle, est
+                presque toujours subordonnée à un entretien annuel par un professionnel : c&apos;est
+                écrit dans leurs notices, et nos conditions générales appliquent la même règle à
+                notre garantie d&apos;installation.
               </p>
               <p>
-                Autrement dit, sauter une année d&apos;entretien pour économiser le passage
-                revient à renoncer à une couverture qui vaut bien plus cher que l&apos;entretien
-                lui-même.
+                Autrement dit, sauter une année d&apos;entretien pour économiser le passage peut
+                vous faire perdre la garantie du fabricant, qui vaut bien plus cher que
+                l&apos;entretien lui-même.
               </p>
             </>
           ),
@@ -86,7 +86,7 @@ export default function EntretienPage() {
       faq={[
         {
           q: "À quelle fréquence faut-il entretenir un poêle à pellets ?",
-          a: "Une fois par an au minimum. C'est ce que demandent les fabricants pour maintenir leur garantie, et ce qui conditionne notre garantie commerciale de 5 ans.",
+          a: "Une fois par an au minimum. C'est ce que demandent les fabricants pour maintenir leur garantie.",
         },
         {
           q: "Est-ce que je peux le faire moi-même ?",

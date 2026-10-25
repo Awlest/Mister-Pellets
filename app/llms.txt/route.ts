@@ -119,8 +119,9 @@ Base : Fernelmont (5380), province de Namur.
 
 ## Garanties et cadre
 
-- Garantie 5 ans pièces et main-d'œuvre sur l'installation, intervention SAV
-  sous 48 à 72 heures dans la zone.
+- Garantie légale de 2 ans sur le poêle et la pose, responsabilité décennale
+  pour les travaux qui la requièrent, intervention SAV sous 48 à 72 heures dans
+  la zone.
 - Ramonage une fois par an, avec certificat remis sur place. Aucune loi
   wallonne ni fédérale ne l'impose pour un poêle (réponse du ministre wallon de
   l'Énergie au Parlement, 11 janvier 2022) ; l'obligation vient en pratique du

@@ -62,7 +62,7 @@ export default function AProposPage() {
         stats={[
           { value: "+800", label: "poêles vendus et installés", detail: "depuis 2016" },
           { value: "9 ans", label: "d'expérience", detail: "spécialisés pellets" },
-          { value: "5 ans", label: "de garantie", detail: "incluse sur la pose" },
+          { value: "2 ans", label: "de garantie légale", detail: "poêle et pose compris" },
           { value: "20 km", label: "autour de Fernelmont", detail: "livraison gratuite" },
         ]}
       />
@@ -82,8 +82,8 @@ export default function AProposPage() {
             </p>
             <p>
               Mister Pellets, c'est le visage métier. Awlest, c'est la structure légale derrière. Même équipe,
-              même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale, pas de
-              sous-traitance cachée.
+              même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale : une seule
+              société répond de votre chantier.
             </p>
             <p>
               La même société porte aussi{" "}

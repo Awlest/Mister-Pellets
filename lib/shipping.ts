@@ -1,5 +1,5 @@
 /**
- * Frais de port des commandes en ligne, selon les CGV §7.
+ * Frais de port des commandes en ligne, selon les CGV (Partie III, A.2).
  *
  * Trois zones :
  *  - zone locale (rayon d'environ 20 km autour de Fernelmont) : offerte

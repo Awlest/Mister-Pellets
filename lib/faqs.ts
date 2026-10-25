@@ -80,7 +80,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Quelles garanties offrez-vous ?",
     answer:
-      "Garantie légale belge de 2 ans sur tous les produits. En complément, garantie commerciale Mister Pellets de 5 ans pièces et main d'œuvre sur les poêles installés par notre équipe, sous réserve d'un entretien annuel. Le SAV est assuré directement par nous (pas de sous-traitance), avec un délai d'intervention typique de 48 à 72 heures dans la zone Fernelmont et 50 km autour.",
+      "Garantie légale belge de 2 ans sur le poêle et sur la pose, sans condition d'entretien. S'y ajoute la garantie du fabricant, dont la durée et les conditions dépendent de la marque (l'entretien annuel en fait presque toujours partie). Pour les travaux qui touchent à la solidité ou à l'étanchéité du bâtiment, la responsabilité décennale s'applique. Le SAV passe directement par nous, avec un délai d'intervention typique de 48 à 72 heures dans la zone Fernelmont et 50 km autour.",
   },
   {
     id: "general-contact",
@@ -370,7 +370,7 @@ export const FAQS: FaqItem[] = [
     category: "entretien",
     question: "Quel est le délai d'intervention SAV ?",
     answer:
-      "48 à 72 heures dans la zone Fernelmont et 50 km autour, hors période de pic hivernal où le délai peut s'étendre à 5 à 7 jours. Le SAV est assuré directement par notre équipe (pas de sous-traitance), avec stock de pièces détachées Edilkamin, EK63 et Girolami disponibles sous 48 heures. Côté prix : 110 € TVAC la première heure, puis 60 € TVAC par heure supplémentaire, déplacement inclus dans notre zone, pièces en plus.",
+      "48 à 72 heures dans la zone Fernelmont et 50 km autour, hors période de pic hivernal où le délai peut s'étendre à 5 à 7 jours. Le SAV passe directement par nous, avec stock de pièces détachées Edilkamin, EK63 et Girolami disponibles sous 48 heures. Côté prix : 110 € TVAC la première heure, puis 60 € TVAC par heure supplémentaire, déplacement inclus dans notre zone, pièces en plus.",
   },
 
   // ───────────────────────────────────────────────────────────────────
