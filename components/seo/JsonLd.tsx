@@ -56,13 +56,13 @@ const ADDRESS = {
  * réseaux : sans lui, rien ne dit à Google ni à un assistant que le site, la
  * fiche et les pages sociales parlent de la même entreprise.
  *
- * À compléter dès que la fiche Google Business « Mister Pellets » est validée :
- * coller son URL courte (Google Business Profile → Partager votre fiche,
- * format https://g.page/... ou https://maps.app.goo.gl/...), puis les pages
- * sociales réellement actives. Ne rien mettre d'inventé : une URL morte dans
+ * Fiche Google « Mister Pellets » (Rue des Fagotis 3A, Fernelmont, site
+ * mister-pellets.be), par son identifiant Maps (cid), relevé le 25/10/2026 :
+ * même forme que le sameAs d'awlest.be. Ajouter les pages sociales le jour où
+ * elles sont réellement actives. Ne rien mettre d'inventé : une URL morte dans
  * `sameAs` est pire que l'absence d'entrée.
  */
-export const SAME_AS: string[] = [];
+export const SAME_AS: string[] = ["https://maps.google.com/?cid=16187368063678582693"];
 
 /**
  * Société mère, même nœud sur les trois sites Mister et même @id que celui
