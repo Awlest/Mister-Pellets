@@ -178,6 +178,18 @@ export function emailNote(html: string): string {
     </table>`;
 }
 
+/**
+ * Gmail transforme un nom de domaine écrit en clair en lien bleu, qui jure
+ * avec le gabarit. Le domaine du site devient donc un lien à nous, de la
+ * couleur du texte qui l'entoure (HTML déjà échappé en entrée).
+ */
+export function linkSiteDomain(html: string, color: string = C.inkSoft): string {
+  return html.replace(
+    /mister-pellets\.be/g,
+    `<a href="${EMAIL_SITE_URL}" target="_blank" style="color:${color};text-decoration:underline">mister-pellets.be</a>`,
+  );
+}
+
 /** Lien téléphone du showroom, en vert gras et sans coupure. */
 export const EMAIL_PHONE_LINK = `<a href="${EMAIL_PHONE_HREF}" style="color:${C.greenDeep};font-weight:bold;white-space:nowrap">${EMAIL_PHONE_DISPLAY}</a>`;
 
@@ -244,11 +256,12 @@ export function brandedEmailHtml(o: BrandedEmailOptions): string {
   // Gmail complète l'aperçu avec le début du corps (le bandeau, le logo…).
   const previewFiller = "&#847;&zwnj;&nbsp;".repeat(60);
 
+  const footerNote = linkSiteDomain(escapeHtml(o.footerNote));
   const footer = internal
-    ? escapeHtml(o.footerNote)
+    ? footerNote
     : `<strong style="color:${C.greenDeep}">Mister Pellets</strong> · <a href="${EMAIL_SITE_URL}" target="_blank" style="color:${C.greenDeep};font-weight:bold">mister-pellets.be</a> · <a href="${EMAIL_PHONE_HREF}" style="color:${C.inkSoft};white-space:nowrap">${EMAIL_PHONE_DISPLAY}</a><br>
               ${EMAIL_LEGAL_HTML}<br>
-              ${escapeHtml(o.footerNote)}`;
+              ${footerNote}`;
 
   return `<!DOCTYPE html>
 <html lang="fr" xmlns="http://www.w3.org/1999/xhtml">

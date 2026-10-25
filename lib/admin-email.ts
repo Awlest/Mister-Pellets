@@ -1,4 +1,4 @@
-import { brandedEmailHtml, emailButton, emailParagraph, escapeHtml, EMAIL_COLORS } from "./email-layout";
+import { brandedEmailHtml, emailButton, emailParagraph, escapeHtml, linkSiteDomain, EMAIL_COLORS } from "./email-layout";
 
 /**
  * E-mail « mot de passe oublié » de l'administration (/admin/forgot), en
@@ -22,7 +22,7 @@ export function resetPasswordHtml({ url, email }: { url: string; email?: string 
     heading: "Nouveau mot de passe",
     lead: "Le lien ci-dessous vaut une heure.",
     bodyHtml: `${emailParagraph("Bonjour,")}
-    ${emailParagraph(`Une réinitialisation du mot de passe de l&#39;administration de mister-pellets.be a été demandée${account}.`, 24)}
+    ${emailParagraph(linkSiteDomain(`Une réinitialisation du mot de passe de l&#39;administration de mister-pellets.be a été demandée${account}.`, C.ink), 24)}
     ${emailButton(url, "Choisir un nouveau mot de passe")}
     <p style="margin:16px 0 24px;text-align:center;font-size:12px;line-height:1.6;color:${C.inkSoft}">
       Le bouton ne s&#39;ouvre pas&nbsp;? Copiez ce lien dans votre navigateur&nbsp;:<br>

@@ -229,18 +229,20 @@ export async function confirmCustomerQuote(quote: { name: string; email: string 
   const hello = greeting(quote.name);
   const received =
     "Nous avons bien reçu votre demande de devis pour un poêle à pellets, et nous vous en remercions.";
-  const next =
-    "Notre équipe relit vos réponses (surface, PEB, conduit, budget) et vous envoie un chiffrage personnalisé par e-mail sous 48 heures ouvrées.";
+  // Le délai figure dans le bandeau : le corps ne le répète pas, la version
+  // texte (sans bandeau) le garde.
+  const delay = "Votre chiffrage personnalisé vous parvient par e-mail sous 48 heures ouvrées.";
+  const review = "Notre équipe relit d'abord vos réponses (surface, PEB, conduit, budget) pour chiffrer au plus juste.";
 
   const html = brandedEmailHtml({
     title: "Votre demande de devis est bien arrivée",
-    preheader: "Votre chiffrage personnalisé vous parvient par e-mail sous 48 heures ouvrées.",
+    preheader: delay,
     eyebrow: "Demande de devis reçue",
     heading: "Merci pour votre demande",
     lead: "Votre chiffrage personnalisé vous parvient sous 48 heures ouvrées.",
     bodyHtml: `${emailParagraph(escapeHtml(hello))}
     ${emailParagraph(escapeHtml(received))}
-    ${emailParagraph(escapeHtml(next))}
+    ${emailParagraph(escapeHtml(review))}
     ${QUESTION_NOTE_HTML}
     ${emailSignoffHtml()}`,
     footerNote: "Vous recevez cet e-mail parce que vous avez demandé un devis sur mister-pellets.be.",
@@ -251,7 +253,7 @@ export async function confirmCustomerQuote(quote: { name: string; email: string 
     to: quote.email,
     subject: "Votre demande de devis est bien arrivée",
     html,
-    text: customerText([hello, "", received, "", next, "", QUESTION_NOTE_TEXT]),
+    text: customerText([hello, "", received, "", delay, review, "", QUESTION_NOTE_TEXT]),
   });
 }
 
@@ -684,19 +686,21 @@ export async function notifyInternalContact(message: {
 export async function confirmCustomerContact(message: { name: string; email: string }) {
   const hello = greeting(message.name);
   const received = "Merci pour votre message, il est bien arrivé chez nous.";
-  const next =
-    "Nous vous répondons dans la journée, pendant les heures ouvrées : par e-mail, ou par téléphone si vous nous avez laissé un numéro.";
+  // Le délai figure dans le bandeau : le corps ne le répète pas, la version
+  // texte (sans bandeau) le garde.
+  const delay = "Nous vous répondons dans la journée, pendant les heures ouvrées.";
+  const how = "Nous vous répondrons par e-mail, ou par téléphone si vous nous avez laissé un numéro.";
   const urgent = `Si c'est urgent, vous pouvez aussi nous appeler au ${EMAIL_PHONE_DISPLAY}.`;
 
   const html = brandedEmailHtml({
     title: "Nous avons bien reçu votre message",
-    preheader: "Nous vous répondons dans la journée, pendant les heures ouvrées.",
+    preheader: delay,
     eyebrow: "Message reçu",
     heading: "Merci pour votre message",
-    lead: "Nous vous répondons dans la journée, pendant les heures ouvrées.",
+    lead: delay,
     bodyHtml: `${emailParagraph(escapeHtml(hello))}
     ${emailParagraph(escapeHtml(received))}
-    ${emailParagraph(escapeHtml(next))}
+    ${emailParagraph(escapeHtml(how))}
     ${emailNote(`<strong>C&#39;est urgent&nbsp;?</strong> Vous pouvez aussi nous appeler au ${EMAIL_PHONE_LINK}.`)}
     ${emailSignoffHtml()}`,
     footerNote: "Vous recevez cet e-mail parce que vous nous avez écrit depuis mister-pellets.be.",
@@ -707,7 +711,15 @@ export async function confirmCustomerContact(message: { name: string; email: str
     to: message.email,
     subject: "Nous avons bien reçu votre message",
     html,
-    text: customerText([hello, "", received, "", next, "", urgent]),
+    text: customerText([
+      hello,
+      "",
+      received,
+      "",
+      "Nous vous répondons dans la journée, pendant les heures ouvrées, par e-mail ou par téléphone si vous nous avez laissé un numéro.",
+      "",
+      urgent,
+    ]),
   });
 }
 
