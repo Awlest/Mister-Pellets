@@ -144,14 +144,14 @@ export function QuoteForm() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error ?? "Erreur lors de l'envoi.");
+        throw new Error(data.error ?? "Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou appelez-nous au 081 13 83 09.");
       }
       setSubmitState("success");
       trackEvent(EVENTS.formulaireDevis, { source: "formulaire" });
       try { localStorage.removeItem(STORAGE_KEY); } catch {}
     } catch (e) {
       setSubmitState("error");
-      setErrorMsg(e instanceof Error ? e.message : "Erreur inconnue");
+      setErrorMsg(e instanceof Error && e.name === "Error" ? e.message : "Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou appelez-nous au 081 13 83 09.");
     }
   }
 
@@ -464,7 +464,7 @@ function Step6({
 
   const errPostal =
     touched.postalCode && state.postalCode !== "" && !/^[1-9]\d{3}$/.test(state.postalCode)
-      ? "Code postal belge invalide (4 chiffres entre 1000 et 9999)."
+      ? "Ce code postal ne semble pas belge : il compte 4 chiffres, entre 1000 et 9999."
       : "";
   const errName =
     touched.name && state.name !== "" && state.name.trim().length < 2
@@ -472,7 +472,7 @@ function Step6({
       : "";
   const errEmail =
     touched.email && state.email !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)
-      ? "Format email invalide (exemple : prenom@domaine.be)."
+      ? "Cette adresse e-mail ne semble pas valide (exemple : prenom@domaine.be)."
       : "";
   const errPhone =
     touched.phone && state.phone !== "" && !isValidBelgianPhone(state.phone)

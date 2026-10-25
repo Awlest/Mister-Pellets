@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { RESET_PASSWORD_SUBJECT, resetPasswordHtml } from "../lib/admin-email";
 
 /**
  * Users — collection système Payload
@@ -15,6 +16,22 @@ export const Users: CollectionConfig = {
     cookies: {
       sameSite: "Strict",
       secure: process.env.NODE_ENV === "production",
+    },
+    // E-mail « mot de passe oublié » en français, aux couleurs du site
+    // (lib/admin-email.ts). Le lien reprend la construction de Payload :
+    // serverURL + route admin + route reset + jeton.
+    forgotPassword: {
+      generateEmailSubject: () => RESET_PASSWORD_SUBJECT,
+      generateEmailHTML: (args) => {
+        const config = args?.req?.payload.config;
+        const base = config?.serverURL || process.env.NEXT_PUBLIC_SITE_URL || "";
+        const adminRoute = config?.routes?.admin ?? "/admin";
+        const resetRoute = config?.admin?.routes?.reset ?? "/reset";
+        return resetPasswordHtml({
+          url: `${base}${adminRoute}${resetRoute}/${args?.token ?? ""}`,
+          email: typeof args?.user?.email === "string" ? args.user.email : undefined,
+        });
+      },
     },
   },
   // RLS Payload (cf. audit V14.1) : seuls les users authentifiés peuvent
