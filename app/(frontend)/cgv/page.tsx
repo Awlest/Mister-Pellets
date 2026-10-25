@@ -8,7 +8,7 @@ import { SITE } from "@/lib/legal/site";
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
   description:
-    "Conditions générales de vente et d'installation d'Awlest SRL, communes à ses quatre marques, avec celles de Mister Pellets : acompte, livraison, garantie de cinq ans.",
+    "Conditions générales de vente et d'installation d'Awlest SRL, communes à ses quatre marques, avec celles de Mister Pellets : acompte, livraison, service après-vente.",
   alternates: { canonical: "https://mister-pellets.be/cgv" },
 };
 
@@ -25,7 +25,7 @@ export default function CGVPage() {
     <>
       <HeroSecondary
         title="Conditions générales de vente et d'installation"
-        description="Les mêmes conditions pour les quatre marques d'Awlest SRL. Celles propres à Mister Pellets (acompte, livraison, garantie de cinq ans) sont en Partie III."
+        description="Les mêmes conditions pour les quatre marques d'Awlest SRL. Celles propres à Mister Pellets (acompte, livraison, service après-vente) sont en Partie III."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "CGV" },

@@ -318,7 +318,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "Une fois par an, par un pro",
         paragraphs: [
-          "Pour un poêle à air, aucune loi ne l'impose. Les fabricants l'exigent pour maintenir leur garantie, notre garantie de 5 ans en dépend, et votre assurance incendie vous demandera la preuve du ramonage. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 sur le chauffage central prévoit un contrôle chaque année pour les générateurs au combustible solide.",
+          "Pour un poêle à air, aucune loi ne l'impose. Les fabricants l'exigent pour maintenir leur garantie, et votre assurance incendie vous demandera la preuve du ramonage. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 sur le chauffage central prévoit un contrôle chaque année pour les générateurs au combustible solide.",
           "On démonte tout : foyer, échangeur, brûleur, ventilateur d'extraction, conduit. On nettoie en profondeur, on remplace les joints fatigués, on vérifie les capteurs et la combustion. Chez Mister Pellets, l'entretien complet coûte 175 € TVAC, ramonage du conduit compris.",
         ],
       },

@@ -317,12 +317,12 @@ export default async function ProductPage({ params }: Props) {
               ) : product.heatedVolume ? (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
                   {brand?.tagline}. {product.power} pour chauffer {product.heatedVolume}. Pose par
-                  Mister Pellets en une journée, TVA à 6 % en rénovation et garantie 5 ans.
+                  Mister Pellets en une journée, TVA à 6 % en rénovation et garantie légale de 2 ans, pose comprise.
                 </p>
               ) : (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
                   {brand?.tagline}. Pose par Mister Pellets en une journée, TVA à 6 % en rénovation
-                  et garantie 5 ans.
+                  et garantie légale de 2 ans, pose comprise.
                 </p>
               )}
 

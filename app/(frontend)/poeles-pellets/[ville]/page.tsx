@@ -194,7 +194,7 @@ export default async function CityPage({ params }: Props) {
           },
           {
             title: "Mise en route + SAV",
-            description: "Premier feu avec vous, formation à l'usage, garantie 5 ans pièces et main d'œuvre, intervention SAV sous 48-72h.",
+            description: "Premier feu avec vous, formation à l'usage, garantie légale de 2 ans sur le poêle et la pose, intervention SAV sous 48-72h.",
           },
         ]}
       />

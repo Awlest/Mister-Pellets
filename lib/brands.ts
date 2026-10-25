@@ -341,7 +341,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { name: "Lyra", power: "12 kW", usp: "Canalisable jusqu'à 12 kW, plusieurs pièces" },
       { name: "Agua", power: "Hydro", usp: "Gamme hydro pour chauffage central et eau chaude sanitaire" },
     ],
-    warranty: "Garantie légale 2 ans (Belgique) + garantie commerciale Mister Pellets 5 ans sur la pose.",
+    warranty: "Garantie légale de 2 ans (Belgique), poêle et pose compris.",
     tags: ["Espagne", "Andalousie", "Gamme complète", "Rendement jusqu'à 94 %"],
     officialUrl: "https://ferlux.es/",
     metaTitle: "Ferlux en Belgique, gamme complète poêles à pellets",

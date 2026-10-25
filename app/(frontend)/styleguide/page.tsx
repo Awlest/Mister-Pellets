@@ -144,7 +144,7 @@ export default function StyleguidePage() {
             </div>
             <div>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft">Caption · Inter Tight 500 uppercase</span>
-              <p className="text-xs uppercase tracking-wider font-medium text-mp-ink-soft">Garantie 5 ans incluse</p>
+              <p className="text-xs uppercase tracking-wider font-medium text-mp-ink-soft">Garantie légale 2 ans</p>
             </div>
           </div>
         </Section>
@@ -311,7 +311,7 @@ export default function StyleguidePage() {
           { title: "Diagnostic gratuit", description: "Visite à domicile ou visio." },
           { title: "Devis tout compris", description: "Chiffrage transparent en 48h." },
           { title: "Pose en 1 journée", description: "Équipe Mister Pellets, pose soignée." },
-          { title: "Mise en route", description: "Garantie 5 ans pièces et main d'œuvre." },
+          { title: "Mise en route", description: "Garantie légale de 2 ans, poêle et pose." },
         ]}
       />
       <PrimesBlock />
