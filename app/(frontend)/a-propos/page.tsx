@@ -79,8 +79,8 @@ export default function AProposPage() {
             </p>
             <p>
               Mister Pellets, c'est le visage métier. Awlest, c'est la structure légale derrière. Même équipe,
-              même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale, pas de
-              sous-traitance cachée.
+              même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale : une seule
+              société répond de votre chantier.
             </p>
             <p>
               L'activité d'Awlest, qui couvre les poêles à pellets sous la marque Mister Pellets et d'autres

@@ -54,7 +54,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Le SAV est-il assuré après la pose ?",
     answer:
-      "Oui. La garantie légale de 2 ans couvre le poêle et la pose, et on intervient en SAV sous 48 à 72 heures dans la zone Fernelmont et 50 km autour. On reste l'interlocuteur unique pour l'entretien annuel, qui conditionne la garantie du fabricant, et pour les éventuelles révisions techniques. Pas de SAV sous-traité à un tiers.",
+      "Oui. La garantie légale de 2 ans couvre le poêle et la pose, et on intervient en SAV sous 48 à 72 heures dans la zone Fernelmont et 50 km autour. On reste l'interlocuteur unique pour l'entretien annuel, qui conditionne la garantie du fabricant, et pour les éventuelles révisions techniques.",
   },
   {
     question: "Vous livrez et posez partout en Wallonie ?",
