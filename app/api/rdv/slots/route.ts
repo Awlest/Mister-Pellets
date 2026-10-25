@@ -64,7 +64,7 @@ export async function GET(request: Request) {
     return NextResponse.json(
       {
         error:
-          "Impossible de lire les disponibilités pour le moment. Appelez le 081 13 83 09, on cale un créneau tout de suite.",
+          "Les disponibilités ne s'affichent pas pour le moment, veuillez nous en excuser. Appelez-nous au 081 13 83 09 : nous fixerons le créneau avec vous.",
       },
       { status: 502 },
     );

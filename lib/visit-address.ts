@@ -30,9 +30,9 @@ export function readVisitAddress(raw: Record<string, unknown>): VisitAddress {
 
 /** Premier problème trouvé, ou null si l'adresse est complète. */
 export function visitAddressError(a: VisitAddress): string | null {
-  if (a.street.length < 4) return "Indiquez la rue et le numéro de la visite.";
+  if (a.street.length < 4) return "Merci d'indiquer la rue et le numéro de la visite.";
   if (!POSTAL_RE.test(a.postalCode)) return "Le code postal belge compte 4 chiffres.";
-  if (a.city.length < 2) return "Indiquez la commune de la visite.";
+  if (a.city.length < 2) return "Merci d'indiquer la commune de la visite.";
   return null;
 }
 

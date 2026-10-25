@@ -61,17 +61,17 @@ function validate(payload: Partial<QuotePayload>): string | null {
     }
   }
   if (typeof payload.email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
-    return "Email invalide.";
+    return "Cette adresse e-mail ne semble pas valide. Pouvez-vous la vérifier ?";
   }
   if (typeof payload.postalCode !== "string" || !/^[1-9]\d{3}$/.test(payload.postalCode)) {
-    return "Code postal belge invalide (4 chiffres entre 1000 et 9999).";
+    return "Ce code postal ne semble pas belge : il compte 4 chiffres, entre 1000 et 9999.";
   }
   // Téléphone belge requis (V1.3 audit §3.H.3)
   if (!payload.phone || !isValidBelgianPhone(payload.phone)) {
-    return "Téléphone belge requis (formats : 0470 12 34 56 ou +32 470 12 34 56).";
+    return "Merci d'indiquer un numéro de téléphone belge, par exemple 0470 12 34 56 ou +32 470 12 34 56.";
   }
   if (payload.consent !== true) {
-    return "Le consentement est obligatoire.";
+    return "Merci de cocher la case d'accord : sans elle, nous ne pouvons pas enregistrer votre demande.";
   }
   return null;
 }
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "JSON invalide." }, { status: 400 });
+    return NextResponse.json({ error: "Votre demande n'a pas pu être lue. Rechargez la page et réessayez." }, { status: 400 });
   }
 
   // 2. Honeypot : si un champ caché est rempli, c'est un bot. Renvoyer 200

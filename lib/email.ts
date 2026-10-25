@@ -11,10 +11,23 @@ import {
 import {
   brandedEmailHtml,
   emailButton,
+  emailFields,
+  emailNote,
+  emailParagraph,
+  emailRecap,
+  emailSignoffHtml,
+  emailSignoffText,
+  emailSubheading,
   escapeHtml,
+  greeting,
+  multilineHtml,
   EMAIL_COLORS,
+  EMAIL_FOOTER_TEXT,
+  EMAIL_PHONE_DISPLAY,
+  EMAIL_PHONE_LINK,
   EMAIL_SITE_URL,
   SERIF,
+  type EmailRow,
 } from "@/lib/email-layout";
 import { formatKw } from "@/lib/power";
 
@@ -22,7 +35,9 @@ import { formatKw } from "@/lib/power";
  * Helper email. Utilise Resend si RESEND_API_KEY est configuré, sinon log
  * dans la console (mode dev / phase migration).
  *
- * Le user fournira la vraie clé Resend en Phase 8 (analytics) ou plus tôt.
+ * Chaque e-mail client a sa version HTML (gabarit lib/email-layout.ts) et sa
+ * version texte. Les notifications internes reprennent le même gabarit, en
+ * version « equipe », et gardent leurs sujets : des filtres Gmail s'y fient.
  */
 
 const FROM = process.env.EMAIL_FROM ?? "Mister Pellets <info@awlest.com>";
@@ -113,6 +128,51 @@ export async function sendEmail({
   return { ok: false, error: error.message };
 }
 
+/* === Outils communs === */
+
+const C = EMAIL_COLORS;
+
+const fmtEuros = (n: number) => `${Math.round(n).toLocaleString("fr-BE")} €`;
+
+/** « 25 octobre 2026 à 14:05 », en heure belge (les fonctions tournent en UTC). */
+function receivedAt(): string {
+  return new Date().toLocaleString("fr-BE", {
+    dateStyle: "long",
+    timeStyle: "short",
+    timeZone: "Europe/Brussels",
+  });
+}
+
+const mailtoLink = (email: string) =>
+  `<a href="mailto:${escapeHtml(email)}" style="color:${C.greenDeep};font-weight:bold">${escapeHtml(email)}</a>`;
+
+const telLink = (phone: string) =>
+  `<a href="tel:${escapeHtml(phone.replace(/[^\d+]/g, ""))}" style="color:${C.greenDeep};font-weight:bold;white-space:nowrap">${escapeHtml(phone)}</a>`;
+
+/** Encadré « Une question ? » commun aux accusés de réception. */
+const QUESTION_NOTE_HTML = emailNote(
+  `<strong>Une question d&#39;ici là&nbsp;?</strong> Répondez simplement à cet e-mail, ou appelez-nous au ${EMAIL_PHONE_LINK}.`,
+);
+const QUESTION_NOTE_TEXT = `Une question d'ici là ? Répondez simplement à cet e-mail, ou appelez-nous au ${EMAIL_PHONE_DISPLAY}.`;
+
+/** Version texte d'un e-mail client : paragraphes, formule de fin et pied légal. */
+function customerText(paragraphs: string[], closing?: string): string {
+  return [...paragraphs, "", ...emailSignoffText(closing), "", ...EMAIL_FOOTER_TEXT].join("\n");
+}
+
+/** Message saisi par le visiteur, dans une notification interne. */
+function internalMessageBlock(title: string, message?: string): string {
+  if (!message) return "";
+  return `${emailSubheading(title)}
+    <div style="padding:14px 16px;border-left:3px solid ${C.orangeFlame};background:${C.cream};border-radius:8px;font-size:14px;line-height:1.6">${multilineHtml(message)}</div>`;
+}
+
+/** Pied des notifications internes. */
+const INTERNAL_FOOTER =
+  "Notification interne de mister-pellets.be. « Répondre » écrit directement au client.";
+
+/* === Devis en 6 questions (/devis) === */
+
 /**
  * Récap interne pour info@awlest.com.
  */
@@ -129,21 +189,30 @@ export async function notifyInternalQuote(quote: {
   delay: string;
   message?: string;
 }) {
-  const html = `
-    <h2 style="color:#174724;font-family:Georgia,serif">Nouvelle demande de devis</h2>
-    <p><strong>${escapeHtml(quote.name)}</strong> · ${escapeHtml(quote.email)}${quote.phone ? ` · ${escapeHtml(quote.phone)}` : ""}</p>
-    <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-      <tr><td style="background:#F4EDE1;width:40%"><strong>Code postal</strong></td><td>${quote.postalCode}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Surface</strong></td><td>${quote.surface}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>PEB</strong></td><td>${quote.peb}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Cheminée</strong></td><td>${quote.chimney}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Style</strong></td><td>${quote.style}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Budget</strong></td><td>${quote.budget}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Délai souhaité</strong></td><td>${quote.delay}</td></tr>
-    </table>
-    ${quote.message ? `<h3 style="color:#174724">Message :</h3><p>${escapeHtml(quote.message).replace(/\n/g, "<br>")}</p>` : ""}
-    <p style="color:#6B7280;font-size:12px;margin-top:24px">Reçu le ${new Date().toLocaleString("fr-BE", { dateStyle: "long", timeStyle: "short" })}</p>
-  `;
+  const rows: EmailRow[] = [
+    { label: "E-mail", valueHtml: mailtoLink(quote.email) },
+    { label: "Téléphone", valueHtml: quote.phone ? telLink(quote.phone) : "" },
+    { label: "Code postal", valueHtml: escapeHtml(quote.postalCode) },
+    { label: "Surface", valueHtml: escapeHtml(quote.surface) },
+    { label: "PEB", valueHtml: escapeHtml(quote.peb) },
+    { label: "Cheminée", valueHtml: escapeHtml(quote.chimney) },
+    { label: "Style", valueHtml: escapeHtml(quote.style) },
+    { label: "Budget", valueHtml: escapeHtml(quote.budget) },
+    { label: "Délai souhaité", valueHtml: escapeHtml(quote.delay) },
+  ];
+
+  const html = brandedEmailHtml({
+    audience: "equipe",
+    title: "Nouvelle demande de devis",
+    preheader: `${quote.postalCode}, budget ${quote.budget}, délai ${quote.delay}`,
+    eyebrow: "Nouvelle demande de devis",
+    heading: escapeHtml(quote.name),
+    lead: escapeHtml(`${quote.postalCode} · budget ${quote.budget}`),
+    bodyHtml: `${emailFields(rows)}
+    ${internalMessageBlock("Message", quote.message)}
+    <p style="margin:20px 0 0;font-size:12px;color:${C.inkSoft}">Reçu le ${receivedAt()}.</p>`,
+    footerNote: INTERNAL_FOOTER,
+  });
 
   return sendEmail({
     label: "notifyInternalQuote",
@@ -155,26 +224,38 @@ export async function notifyInternalQuote(quote: {
   });
 }
 
+/** Accusé de réception d'une demande de devis. */
 export async function confirmCustomerQuote(quote: { name: string; email: string }) {
-  const html = `
-    <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
-      <h1 style="color:#174724;font-family:Georgia,serif">Bonjour ${escapeHtml(quote.name.split(" ")[0] ?? quote.name)},</h1>
-      <p>On a bien reçu votre demande de devis. Notre équipe l'examine et vous recontacte par email
-      sous <strong>48h ouvrées</strong> avec un chiffrage personnalisé.</p>
-      <p>Si c'est urgent, vous pouvez nous appeler directement au <a href="tel:+3281138309" style="color:#F28A20">081 13 83 09</a>.</p>
-      <p style="margin-top:32px;padding-top:16px;border-top:1px solid #EAE0CB;color:#4A5A50;font-size:13px">
-        Mister Pellets · Awlest SRL · Rue des Fagotis 3A, 5380 Fernelmont · TVA BE 0656.514.212
-      </p>
-    </div>
-  `;
+  const hello = greeting(quote.name);
+  const received =
+    "Nous avons bien reçu votre demande de devis pour un poêle à pellets, et nous vous en remercions.";
+  const next =
+    "Notre équipe relit vos réponses (surface, PEB, conduit, budget) et vous envoie un chiffrage personnalisé par e-mail sous 48 heures ouvrées.";
+
+  const html = brandedEmailHtml({
+    title: "Votre demande de devis est bien arrivée",
+    preheader: "Votre chiffrage personnalisé vous parvient par e-mail sous 48 heures ouvrées.",
+    eyebrow: "Demande de devis reçue",
+    heading: "Merci pour votre demande",
+    lead: "Votre chiffrage personnalisé vous parvient sous 48 heures ouvrées.",
+    bodyHtml: `${emailParagraph(escapeHtml(hello))}
+    ${emailParagraph(escapeHtml(received))}
+    ${emailParagraph(escapeHtml(next))}
+    ${QUESTION_NOTE_HTML}
+    ${emailSignoffHtml()}`,
+    footerNote: "Vous recevez cet e-mail parce que vous avez demandé un devis sur mister-pellets.be.",
+  });
 
   return sendEmail({
     label: "confirmCustomerQuote",
     to: quote.email,
-    subject: "Votre demande de devis Mister Pellets a bien été reçue",
+    subject: "Votre demande de devis est bien arrivée",
     html,
+    text: customerText([hello, "", received, "", next, "", QUESTION_NOTE_TEXT]),
   });
 }
+
+/* === Rendez-vous réservé en ligne (/prendre-rendez-vous) === */
 
 /**
  * Récap interne d'un rendez-vous réservé en ligne (/prendre-rendez-vous).
@@ -196,23 +277,30 @@ export async function notifyInternalBooking(rdv: {
   /** La confirmation est-elle partie chez le client ? Sinon, il faut l'appeler. */
   customerConfirmed: boolean;
 }) {
-  const confirmationRow = rdv.customerConfirmed
-    ? `<tr><td style="background:#F4EDE1"><strong>Confirmation client</strong></td><td>envoyée par e-mail</td></tr>`
-    : `<tr><td style="background:#FFE4D1"><strong>Confirmation client</strong></td><td style="background:#FFE4D1"><strong>NON envoyée</strong> (refus de Resend, voir les logs « [email] envoi refusé ») : prévenir le client par téléphone.</td></tr>`;
+  const confirmation = rdv.customerConfirmed
+    ? "envoyée par e-mail"
+    : `<span style="display:inline-block;padding:2px 8px;border-radius:6px;background:${C.orangeLight}"><strong>NON envoyée</strong> (refus de Resend, voir les logs « [email] envoi refusé ») : prévenir le client par téléphone.</span>`;
 
-  const html = `
-    <h2 style="color:#174724;font-family:Georgia,serif">Nouveau rendez-vous réservé en ligne</h2>
-    <p style="font-size:18px;color:#174724"><strong>${escapeHtml(rdv.serviceName)}</strong> · ${rdv.dayKey} à ${rdv.timeLabel} (${rdv.durationMin} min)</p>
-    <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-      <tr><td style="background:#F4EDE1;width:40%"><strong>Client</strong></td><td>${escapeHtml(rdv.name)}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Email</strong></td><td>${escapeHtml(rdv.email)}</td></tr>
-      ${rdv.phone ? `<tr><td style="background:#F4EDE1"><strong>Téléphone</strong></td><td>${escapeHtml(rdv.phone)}</td></tr>` : ""}
-      ${rdv.address ? `<tr><td style="background:#F4EDE1"><strong>Adresse</strong></td><td>${escapeHtml(rdv.address)}</td></tr>` : ""}
-      ${confirmationRow}
-    </table>
-    ${rdv.notes ? `<h3 style="color:#174724">Précisions :</h3><p>${escapeHtml(rdv.notes).replace(/\n/g, "<br>")}</p>` : ""}
-    <p style="color:#6B7280;font-size:12px;margin-top:24px">Réservé depuis mister-pellets.be, ajouté à l'agenda.</p>
-  `;
+  const rows: EmailRow[] = [
+    { label: "Client", valueHtml: escapeHtml(rdv.name) },
+    { label: "E-mail", valueHtml: mailtoLink(rdv.email) },
+    { label: "Téléphone", valueHtml: rdv.phone ? telLink(rdv.phone) : "" },
+    { label: "Adresse", valueHtml: rdv.address ? escapeHtml(rdv.address) : "" },
+    { label: "Confirmation client", valueHtml: confirmation },
+  ];
+
+  const html = brandedEmailHtml({
+    audience: "equipe",
+    title: "Nouveau rendez-vous réservé en ligne",
+    preheader: `${rdv.dayKey} à ${rdv.timeLabel}, ${rdv.durationMin} min, déjà dans l'agenda`,
+    eyebrow: "Rendez-vous réservé en ligne",
+    heading: escapeHtml(rdv.serviceName),
+    lead: escapeHtml(`${rdv.dayKey} à ${rdv.timeLabel} (${rdv.durationMin} min)`),
+    bodyHtml: `${emailFields(rows)}
+    ${internalMessageBlock("Précisions", rdv.notes)}
+    <p style="margin:20px 0 0;font-size:12px;color:${C.inkSoft}">Réservé depuis mister-pellets.be, déjà ajouté à l&#39;agenda.</p>`,
+    footerNote: INTERNAL_FOOTER,
+  });
 
   return sendEmail({
     label: "notifyInternalBooking",
@@ -237,19 +325,6 @@ function frenchDay(instant: number, withYear = false): string {
   return `${WEEKDAYS_FR[p.weekday]} ${day} ${MONTHS_FR[p.month - 1]}${withYear ? ` ${p.year}` : ""}`;
 }
 
-/**
- * Prénom tel qu'on l'écrit dans une salutation : « jean-marc » ou
- * « JEAN-MARC », tapés ainsi sur mobile, deviennent « Jean-Marc ». Une casse
- * déjà mixte (« McKenzie ») est laissée telle quelle.
- */
-function displayFirstName(fullName: string): string {
-  const first = fullName.trim().split(/\s+/)[0] ?? "";
-  if (first !== first.toLowerCase() && first !== first.toUpperCase()) return first;
-  return first
-    .toLowerCase()
-    .replace(/(^|[-'’])(\p{L})/gu, (_, sep: string, letter: string) => sep + letter.toUpperCase());
-}
-
 export interface BookingConfirmation {
   service: {
     slug: string;
@@ -271,9 +346,8 @@ export interface BookingConfirmation {
  * rien n'est envoyé (aperçus et tests sans risque d'envoi).
  */
 export function bookingConfirmationEmail(b: BookingConfirmation) {
-  const C = EMAIL_COLORS;
   const atHome = b.service.location === "domicile";
-  const firstName = displayFirstName(b.name);
+  const hello = greeting(b.name);
   const day = frenchDay(b.start);
   const dayWithYear = frenchDay(b.start, true);
   const dayTitle = dayWithYear.charAt(0).toUpperCase() + dayWithYear.slice(1);
@@ -286,12 +360,12 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
   const ics = buildIcs(entry);
 
   const subject = `Rendez-vous confirmé le ${day} à ${startLabel}`;
-  const heading = firstName ? `C&#39;est noté, ${escapeHtml(firstName)}.` : "C&#39;est noté.";
   const leadText = atHome
-    ? `On passe chez vous le ${day} à ${startLabel}.`
-    : `On vous attend au showroom le ${day} à ${startLabel}.`;
+    ? `Nous passons chez vous le ${day} à ${startLabel}.`
+    : `Nous vous attendons au showroom le ${day} à ${startLabel}.`;
+  const thanks = "Merci pour votre réservation. Le rendez-vous est inscrit dans notre agenda.";
   const preheader = atHome
-    ? "On vient voir la pièce et le conduit, le devis suit sous 48 heures."
+    ? "Nous venons voir la pièce et le conduit, le devis suit sous 48 heures."
     : `${SHOWROOM_ADDRESS}, parking devant le bâtiment.`;
 
   const where = atHome
@@ -310,39 +384,33 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
     ? {
         title: "Comment se passe la visite",
         paragraphs: [
-          "On regarde la pièce où ira le poêle, le conduit existant (ou l'endroit où en faire passer un), l'isolation et l'arrivée d'air. La visite dure 30 à 45 minutes ; on bloque une heure pour avoir le temps de répondre à vos questions.",
-          "Vous recevez le devis chiffré sous 48 heures, avec le modèle qu'on vous conseille, la pose et la TVA qui s'applique chez vous.",
-          "Si vous avez votre certificat PEB, sortez-le. Avec la surface à chauffer, c'est ce qui nous fait gagner le plus de temps.",
+          "Nous regardons la pièce où ira le poêle, le conduit existant (ou l'endroit où en faire passer un), l'isolation et l'arrivée d'air. La visite dure 30 à 45 minutes ; nous prévoyons une heure pour prendre le temps de répondre à vos questions.",
+          "Vous recevez ensuite le devis chiffré sous 48 heures, avec le modèle que nous vous conseillons, la pose et le taux de TVA qui s'applique chez vous.",
+          "Si vous avez votre certificat PEB, gardez-le sous la main. Avec la surface à chauffer, c'est ce qui nous fait gagner le plus de temps.",
         ],
       }
     : {
         title: "Votre visite au showroom",
         paragraphs: [
-          "Garez-vous devant le bâtiment, l'entrée est de plain-pied. Vous voyez les poêles en vrai, flamme comprise, et on parle puissance et budget autour d'un café.",
-          "Les modèles exposés changent avec les saisons. Vous visez un poêle précis ? Répondez à cet e-mail avec son nom, on vous dit la veille s'il est sur place.",
+          "Vous pouvez vous garer devant le bâtiment, l'entrée est de plain-pied. Vous voyez les poêles en vrai, flamme comprise, et nous parlons puissance et budget autour d'un café.",
+          "Les modèles exposés changent avec les saisons. Vous visez un poêle précis ? Répondez à cet e-mail avec son nom : nous vous dirons la veille s'il est sur place.",
         ],
       };
 
-  const row = (label: string, valueHtml: string, last = false) => `
-      <tr>
-        <td style="padding:15px 0;${last ? "" : `border-bottom:1px solid ${C.beigeWarm};`}">
-          <p class="mp-sans" style="margin:0 0 4px;font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:${C.inkSoft}">${label}</p>
-          <p class="mp-sans" style="margin:0;font-size:16px;line-height:1.5;color:${C.ink}">${valueHtml}</p>
-        </td>
-      </tr>`;
+  const change =
+    "Un empêchement ? Appelez-nous au 081 13 83 09 ou répondez à cet e-mail : nous vous proposerons une autre date.";
 
   const bodyHtml = `
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 26px">
-      <tr>
-        <td class="mp-recap" style="background:${C.cream};border:1px solid ${C.beigeWarm};border-left:4px solid ${C.orangeFlame};border-radius:14px;padding:4px 22px">
-          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-            ${row("Quand", `<span class="mp-serif" style="font-family:${SERIF};font-size:21px;font-weight:600;color:${C.greenDeep}">${dayTitle}</span><br>de ${startLabel} à ${endLabel}`)}
-            ${row("Où", where.html)}
-            ${row("Rendez-vous", what, true)}
-          </table>
-        </td>
-      </tr>
-    </table>
+    ${emailParagraph(escapeHtml(hello))}
+    ${emailParagraph(escapeHtml(thanks), 22)}
+    ${emailRecap([
+      {
+        label: "Quand",
+        valueHtml: `<span class="mp-serif" style="font-family:${SERIF};font-size:21px;font-weight:600;color:${C.greenDeep}">${dayTitle}</span><br>de ${startLabel} à ${endLabel}`,
+      },
+      { label: "Où", valueHtml: where.html },
+      { label: "Rendez-vous", valueHtml: what },
+    ])}
 
     ${emailButton(googleUrl, "Ajouter à Google Agenda")}
     <p style="margin:14px 0 30px;text-align:center;font-size:13px;line-height:1.6;color:${C.inkSoft}">
@@ -350,52 +418,47 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
       ou <a href="${escapeHtml(icsUrl)}" target="_blank" style="color:${C.greenDeep};font-weight:bold">téléchargez le fichier .ics</a>.
     </p>
 
-    <h2 class="mp-serif" style="margin:0 0 10px;font-family:${SERIF};font-size:21px;font-weight:600;line-height:1.3;color:${C.greenDeep}">${guide.title}</h2>
-    ${guide.paragraphs.map((p) => `<p style="margin:0 0 12px">${escapeHtml(p)}</p>`).join("\n    ")}
+    ${emailSubheading(guide.title)}
+    ${guide.paragraphs.map((p) => emailParagraph(escapeHtml(p), 12)).join("\n    ")}
 
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:22px 0 26px">
-      <tr>
-        <td style="background:${C.orangeLight};border-radius:12px;padding:16px 20px;font-size:15px;line-height:1.55;color:${C.ink}">
-          <strong>Un empêchement ?</strong> Appelez-nous au
-          <a href="tel:+3281138309" style="color:${C.greenDeep};font-weight:bold;white-space:nowrap">081 13 83 09</a>
-          ou répondez à cet e-mail, on vous trouve une autre date.
-        </td>
-      </tr>
-    </table>
+    ${emailNote(
+      `<strong>Un empêchement&nbsp;?</strong> Appelez-nous au ${EMAIL_PHONE_LINK} ou répondez à cet e-mail : nous vous proposerons une autre date.`,
+    )}
 
-    <p style="margin:0">À bientôt,<br><strong style="color:${C.greenDeep}">L&#39;équipe Mister Pellets</strong></p>`;
+    ${emailSignoffHtml("À bientôt,")}`;
 
   const html = brandedEmailHtml({
     title: subject,
     preheader,
     eyebrow: "Rendez-vous confirmé",
-    heading,
+    heading: "Votre rendez-vous est confirmé",
     lead: escapeHtml(leadText),
     bodyHtml,
     footerNote: "Vous recevez cet e-mail parce que vous avez réservé un rendez-vous sur mister-pellets.be.",
   });
 
-  const text = [
-    firstName ? `C'est noté, ${firstName}.` : "C'est noté.",
-    leadText,
-    "",
-    `Quand : ${dayWithYear}, de ${startLabel} à ${endLabel}`,
-    `Où : ${where.text}`,
-    `Rendez-vous : ${b.service.name} (${b.service.priceLabel.toLowerCase()}, sans engagement, ${b.durationMin} minutes)`,
-    ...(atHome ? [] : [`Itinéraire : ${SHOWROOM_MAPS_URL}`]),
-    "",
-    `Ajouter à Google Agenda : ${googleUrl}`,
-    `Apple, Outlook ou un autre agenda : ouvrez la pièce jointe, ou téléchargez le fichier .ics : ${icsUrl}`,
-    "",
-    guide.title,
-    ...guide.paragraphs,
-    "",
-    "Un empêchement ? Appelez-nous au 081 13 83 09 ou répondez à cet e-mail, on vous trouve une autre date.",
-    "",
+  const text = customerText(
+    [
+      hello,
+      "",
+      thanks,
+      leadText,
+      "",
+      `Quand : ${dayWithYear}, de ${startLabel} à ${endLabel}`,
+      `Où : ${where.text}`,
+      `Rendez-vous : ${b.service.name} (${b.service.priceLabel.toLowerCase()}, sans engagement, ${b.durationMin} minutes)`,
+      ...(atHome ? [] : [`Itinéraire : ${SHOWROOM_MAPS_URL}`]),
+      "",
+      `Ajouter à Google Agenda : ${googleUrl}`,
+      `Apple, Outlook ou un autre agenda : ouvrez la pièce jointe, ou téléchargez le fichier .ics : ${icsUrl}`,
+      "",
+      guide.title,
+      ...guide.paragraphs,
+      "",
+      change,
+    ],
     "À bientôt,",
-    "L'équipe Mister Pellets",
-    "Rue des Fagotis 3A, 5380 Fernelmont · mister-pellets.be",
-  ].join("\n");
+  );
 
   return { subject, html, text, ics };
 }
@@ -422,6 +485,8 @@ export async function confirmCustomerBooking(b: BookingConfirmation & { email: s
     ],
   });
 }
+
+/* === Estimation configurée en ligne (/estimation) === */
 
 /**
  * Récap interne d'une estimation configurée en ligne (/estimation).
@@ -452,37 +517,49 @@ export async function notifyInternalEstimate(est: {
   monthly?: number | null;
   message?: string;
 }) {
-  const fmt = (n: number) => `${Math.round(n).toLocaleString("fr-BE")} €`;
-  const linesHtml = est.lines
-    .map(
-      (l) =>
-        `<tr><td style="background:#F4EDE1">${escapeHtml(l.label)}</td><td>${fmt(l.amountHT)} HT</td></tr>`,
-    )
-    .join("");
+  const productUrl = `${EMAIL_SITE_URL}/produit/${encodeURIComponent(est.productSlug)}`;
+  const rows: EmailRow[] = [
+    { label: "E-mail", valueHtml: mailtoLink(est.email) },
+    { label: "Téléphone", valueHtml: est.phone ? telLink(est.phone) : "" },
+    { label: "Code postal", valueHtml: escapeHtml(est.postalCode) },
+    {
+      label: "Poêle choisi",
+      valueHtml: `<a href="${escapeHtml(productUrl)}" target="_blank" style="color:${C.greenDeep};font-weight:bold">${escapeHtml(est.productName)}</a> (${formatKw(est.powerKw)} kW)`,
+    },
+    { label: "Matériel", valueHtml: `${fmtEuros(est.materialHT)} HT` },
+    ...est.lines.map((l) => ({ label: l.label, valueHtml: `${fmtEuros(l.amountHT)} HT` })),
+    { label: "Type de poêle", valueHtml: escapeHtml(est.stoveKind) },
+    { label: "Évacuation", valueHtml: escapeHtml(est.installType) },
+    {
+      label: "Surface / isolation",
+      valueHtml: `${est.surface} m² · ${escapeHtml(est.iso)} · besoin ~${est.needKw} kW`,
+    },
+    { label: "Niveau", valueHtml: escapeHtml(est.level) },
+    { label: "Délai souhaité", valueHtml: escapeHtml(est.delay) },
+  ];
 
-  const html = `
-    <h2 style="color:#174724;font-family:Georgia,serif">Nouvelle estimation configurée en ligne</h2>
-    <p><strong>${escapeHtml(est.name)}</strong> · ${escapeHtml(est.email)}${est.phone ? ` · ${escapeHtml(est.phone)}` : ""} · ${escapeHtml(est.postalCode)}</p>
-    <p style="font-size:18px;color:#174724"><strong>${fmt(est.totalTTC)} TTC</strong> (TVA ${Math.round(est.vatRate * 100)} %)${est.monthly ? ` · ${fmt(est.monthly)}/mois sur ${est.months} mois` : ""}</p>
-    <table cellspacing="0" cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-      <tr><td style="background:#F4EDE1;width:45%"><strong>Poêle choisi</strong></td><td>${escapeHtml(est.productName)} (${formatKw(est.powerKw)} kW) — /produit/${escapeHtml(est.productSlug)}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Matériel</strong></td><td>${fmt(est.materialHT)} HT</td></tr>
-      ${linesHtml}
-      <tr><td style="background:#F4EDE1"><strong>Type de poêle</strong></td><td>${escapeHtml(est.stoveKind)}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Évacuation</strong></td><td>${escapeHtml(est.installType)}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Surface / isolation</strong></td><td>${est.surface} m² · ${escapeHtml(est.iso)} · besoin ~${est.needKw} kW</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Niveau</strong></td><td>${escapeHtml(est.level)}</td></tr>
-      <tr><td style="background:#F4EDE1"><strong>Délai souhaité</strong></td><td>${escapeHtml(est.delay)}</td></tr>
-    </table>
-    ${est.message ? `<h3 style="color:#174724">Précisions :</h3><p>${escapeHtml(est.message).replace(/\n/g, "<br>")}</p>` : ""}
-    <p style="color:#6B7280;font-size:12px;margin-top:24px">Reçu le ${new Date().toLocaleString("fr-BE", { dateStyle: "long", timeStyle: "short" })} · montants de pose issus des forfaits indicatifs de lib/estimate.ts</p>
-  `;
+  const total = `${fmtEuros(est.totalTTC)} TTC (TVA ${Math.round(est.vatRate * 100)} %)${
+    est.monthly ? ` · ${fmtEuros(est.monthly)}/mois sur ${est.months} mois` : ""
+  }`;
+
+  const html = brandedEmailHtml({
+    audience: "equipe",
+    title: "Nouvelle estimation configurée en ligne",
+    preheader: `${est.productName}, ${fmtEuros(est.totalTTC)} TTC, ${est.postalCode}`,
+    eyebrow: "Nouvelle estimation en ligne",
+    heading: escapeHtml(est.name),
+    lead: escapeHtml(total),
+    bodyHtml: `${emailFields(rows)}
+    ${internalMessageBlock("Précisions", est.message)}
+    <p style="margin:20px 0 0;font-size:12px;color:${C.inkSoft}">Reçu le ${receivedAt()} · montants de pose issus des forfaits indicatifs de lib/estimate.ts.</p>`,
+    footerNote: INTERNAL_FOOTER,
+  });
 
   return sendEmail({
     label: "notifyInternalEstimate",
     from: FROM_INTERNAL,
     to: TO_INTERNAL,
-    subject: `[Estimation] ${est.name} (${est.postalCode}) — ${fmt(est.totalTTC)} · ${est.productName}`,
+    subject: `[Estimation] ${est.name} (${est.postalCode}), ${fmtEuros(est.totalTTC)} · ${est.productName}`,
     html,
     replyTo: est.email,
   });
@@ -499,33 +576,68 @@ export async function confirmCustomerEstimate(est: {
   /** Mention du bonus de saison quand il est compris dans le total. */
   bonusNote?: string;
 }) {
-  const fmt = (n: number) => `${Math.round(n).toLocaleString("fr-BE")} €`;
-  const html = `
-    <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
-      <h1 style="color:#174724;font-family:Georgia,serif">Bonjour ${escapeHtml(est.name.split(" ")[0] ?? est.name)},</h1>
-      <p>Nous avons bien reçu votre configuration autour du <strong>${escapeHtml(est.productName)}</strong>.</p>
-      <p style="font-size:18px"><strong>Estimation : ${fmt(est.totalTTC)} TTC</strong>, poêle et pose compris.${
-        est.monthly ? ` Soit environ ${fmt(est.monthly)} par mois sur ${est.months} mois à 0 %.` : ""
-      }</p>
-      ${est.bonusNote ? `<p style="color:#174724"><strong>${escapeHtml(est.bonusNote)}</strong></p>` : ""}
-      <p>C'est une estimation, pas encore un devis : nous vous recontactons sous <strong>48h ouvrées</strong>
-      pour convenir de la visite technique gratuite, seule façon de confirmer le prix ferme (état du
-      conduit, accès, raccordements).</p>
-      <p>Une question d'ici là ? <a href="tel:+3281138309" style="color:#F28A20">081 13 83 09</a>.</p>
-      <p style="color:#4A5A50;font-size:12px">Attention, emprunter de l'argent coûte aussi de l'argent.</p>
-      <p style="margin-top:32px;padding-top:16px;border-top:1px solid #EAE0CB;color:#4A5A50;font-size:13px">
-        Mister Pellets · Awlest SRL · Rue des Fagotis 3A, 5380 Fernelmont · TVA BE 0656.514.212
-      </p>
-    </div>
-  `;
+  const hello = greeting(est.name);
+  const thanks = "Merci d'avoir configuré votre projet sur notre site. Voici l'estimation que vous avez obtenue.";
+  const credit = est.monthly
+    ? `Soit environ ${fmtEuros(est.monthly)} par mois sur ${est.months} mois à 0 %.`
+    : null;
+  const creditWarning = "Attention, emprunter de l'argent coûte aussi de l'argent.";
+  const next =
+    "Cette estimation n'a pas encore valeur de devis. Nous vous contactons sous 48 heures ouvrées pour convenir de la visite technique gratuite : c'est elle qui confirme le prix ferme, une fois vus l'état du conduit, l'accès et les raccordements.";
+
+  const recapRows: EmailRow[] = [
+    { label: "Poêle choisi", valueHtml: `<strong>${escapeHtml(est.productName)}</strong>` },
+    {
+      label: "Estimation",
+      valueHtml: `<span class="mp-serif" style="font-family:${SERIF};font-size:21px;font-weight:600;color:${C.greenDeep}">${fmtEuros(est.totalTTC)} TTC</span><br>poêle et pose compris${
+        credit ? `<br><span style="color:${C.inkSoft}">${escapeHtml(credit)}</span>` : ""
+      }`,
+    },
+    ...(est.bonusNote ? [{ label: "Bonus", valueHtml: escapeHtml(est.bonusNote) }] : []),
+  ];
+
+  const html = brandedEmailHtml({
+    title: "Votre estimation Mister Pellets",
+    preheader: `${est.productName} : ${fmtEuros(est.totalTTC)} TTC, poêle et pose compris.`,
+    eyebrow: "Estimation enregistrée",
+    heading: "Merci pour votre configuration",
+    lead: escapeHtml(`${est.productName} : ${fmtEuros(est.totalTTC)} TTC, poêle et pose compris.`),
+    bodyHtml: `${emailParagraph(escapeHtml(hello))}
+    ${emailParagraph(escapeHtml(thanks), 22)}
+    ${emailRecap(recapRows)}
+    ${credit ? `<p style="margin:-14px 0 22px;font-size:12px;color:${C.inkSoft}">${escapeHtml(creditWarning)}</p>` : ""}
+    ${emailSubheading("La suite")}
+    ${emailParagraph(escapeHtml(next))}
+    ${QUESTION_NOTE_HTML}
+    ${emailSignoffHtml()}`,
+    footerNote: "Vous recevez cet e-mail parce que vous avez demandé une estimation sur mister-pellets.be.",
+  });
+
+  const text = customerText([
+    hello,
+    "",
+    thanks,
+    "",
+    `Poêle choisi : ${est.productName}`,
+    `Estimation : ${fmtEuros(est.totalTTC)} TTC, poêle et pose compris.`,
+    ...(credit ? [credit, creditWarning] : []),
+    ...(est.bonusNote ? [`Bonus : ${est.bonusNote}`] : []),
+    "",
+    next,
+    "",
+    QUESTION_NOTE_TEXT,
+  ]);
 
   return sendEmail({
     label: "confirmCustomerEstimate",
     to: est.email,
     subject: "Votre estimation Mister Pellets",
     html,
+    text,
   });
 }
+
+/* === Formulaire de contact (/contact) === */
 
 export async function notifyInternalContact(message: {
   name: string;
@@ -534,13 +646,24 @@ export async function notifyInternalContact(message: {
   subject: string;
   message: string;
 }) {
-  const html = `
-    <h2 style="color:#174724;font-family:Georgia,serif">Nouveau message de contact</h2>
-    <p><strong>${escapeHtml(message.name)}</strong> · ${escapeHtml(message.email)}${message.phone ? ` · ${escapeHtml(message.phone)}` : ""}</p>
-    <p><strong>Sujet :</strong> ${escapeHtml(message.subject)}</p>
-    <hr style="border:none;border-top:1px solid #EAE0CB;margin:16px 0">
-    <div style="font-family:sans-serif;font-size:14px;line-height:1.6">${escapeHtml(message.message).replace(/\n/g, "<br>")}</div>
-  `;
+  const rows: EmailRow[] = [
+    { label: "E-mail", valueHtml: mailtoLink(message.email) },
+    { label: "Téléphone", valueHtml: message.phone ? telLink(message.phone) : "" },
+    { label: "Sujet", valueHtml: escapeHtml(message.subject) },
+  ];
+
+  const html = brandedEmailHtml({
+    audience: "equipe",
+    title: "Nouveau message de contact",
+    preheader: message.message.slice(0, 120),
+    eyebrow: "Nouveau message de contact",
+    heading: escapeHtml(message.name),
+    lead: escapeHtml(message.subject),
+    bodyHtml: `${emailFields(rows)}
+    ${internalMessageBlock("Message", message.message)}
+    <p style="margin:20px 0 0;font-size:12px;color:${C.inkSoft}">Reçu le ${receivedAt()}.</p>`,
+    footerNote: INTERNAL_FOOTER,
+  });
 
   return sendEmail({
     label: "notifyInternalContact",
@@ -551,6 +674,44 @@ export async function notifyInternalContact(message: {
     replyTo: message.email,
   });
 }
+
+/**
+ * Accusé de réception du formulaire de contact. Le message du visiteur n'y est
+ * pas recopié : l'adresse n'est pas vérifiée, et un accusé qui reprendrait un
+ * texte libre servirait à envoyer n'importe quoi à n'importe qui depuis notre
+ * domaine.
+ */
+export async function confirmCustomerContact(message: { name: string; email: string }) {
+  const hello = greeting(message.name);
+  const received = "Merci pour votre message, il est bien arrivé chez nous.";
+  const next =
+    "Nous vous répondons dans la journée, pendant les heures ouvrées : par e-mail, ou par téléphone si vous nous avez laissé un numéro.";
+  const urgent = `Si c'est urgent, vous pouvez aussi nous appeler au ${EMAIL_PHONE_DISPLAY}.`;
+
+  const html = brandedEmailHtml({
+    title: "Nous avons bien reçu votre message",
+    preheader: "Nous vous répondons dans la journée, pendant les heures ouvrées.",
+    eyebrow: "Message reçu",
+    heading: "Merci pour votre message",
+    lead: "Nous vous répondons dans la journée, pendant les heures ouvrées.",
+    bodyHtml: `${emailParagraph(escapeHtml(hello))}
+    ${emailParagraph(escapeHtml(received))}
+    ${emailParagraph(escapeHtml(next))}
+    ${emailNote(`<strong>C&#39;est urgent&nbsp;?</strong> Vous pouvez aussi nous appeler au ${EMAIL_PHONE_LINK}.`)}
+    ${emailSignoffHtml()}`,
+    footerNote: "Vous recevez cet e-mail parce que vous nous avez écrit depuis mister-pellets.be.",
+  });
+
+  return sendEmail({
+    label: "confirmCustomerContact",
+    to: message.email,
+    subject: "Nous avons bien reçu votre message",
+    html,
+    text: customerText([hello, "", received, "", next, "", urgent]),
+  });
+}
+
+/* === Demande de rappel (/prix-poele-pellets) === */
 
 /**
  * Demande de rappel de la page /prix-poele-pellets (arrivée des annonces
@@ -566,19 +727,25 @@ export async function notifyInternalCallback(req: {
 }) {
   // Le formulaire ne demande que le nom et le téléphone ; les autres lignes
   // n'apparaissent que si une ancienne version de la page les a envoyées.
-  const details = [
-    req.postalCode ? `<strong>Code postal :</strong> ${escapeHtml(req.postalCode)}` : null,
-    req.situation ? `<strong>Évacuation des fumées :</strong> ${escapeHtml(req.situation)}` : null,
-    req.origin ? `<strong>Origine :</strong> ${escapeHtml(req.origin)}` : null,
-  ].filter(Boolean);
-  const html = `
-    <h2 style="color:#174724;font-family:Georgia,serif">Demande de rappel pour un prix posé</h2>
-    <p><strong>${escapeHtml(req.name)}</strong> · ${escapeHtml(req.phone)}${
-      req.email ? ` · ${escapeHtml(req.email)}` : ""
-    }</p>
-    ${details.length > 0 ? `<p>${details.join("<br>")}</p>` : ""}
-    <p style="font-family:sans-serif;font-size:14px">À rappeler dans la journée ouvrée, depuis la page Prix d'un poêle à pellets posé.</p>
-  `;
+  const rows: EmailRow[] = [
+    { label: "Téléphone", valueHtml: telLink(req.phone) },
+    { label: "E-mail", valueHtml: req.email ? mailtoLink(req.email) : "" },
+    { label: "Code postal", valueHtml: req.postalCode ? escapeHtml(req.postalCode) : "" },
+    { label: "Évacuation des fumées", valueHtml: req.situation ? escapeHtml(req.situation) : "" },
+    { label: "Origine", valueHtml: req.origin ? escapeHtml(req.origin) : "" },
+  ];
+
+  const html = brandedEmailHtml({
+    audience: "equipe",
+    title: "Demande de rappel pour un prix posé",
+    preheader: "À rappeler dans la journée ouvrée.",
+    eyebrow: "Demande de rappel pour un prix posé",
+    heading: escapeHtml(req.name),
+    lead: "À rappeler dans la journée ouvrée, depuis la page Prix d&#39;un poêle à pellets posé.",
+    bodyHtml: `${emailFields(rows)}
+    <p style="margin:20px 0 0;font-size:12px;color:${C.inkSoft}">Reçu le ${receivedAt()}.</p>`,
+    footerNote: INTERNAL_FOOTER,
+  });
 
   return sendEmail({
     label: "notifyInternalCallback",
@@ -590,6 +757,8 @@ export async function notifyInternalCallback(req: {
   });
 }
 
+/* === Commande (boutique, non branchée à ce jour) === */
+
 export async function confirmCustomerOrder(order: {
   customerName: string;
   customerEmail: string;
@@ -599,30 +768,54 @@ export async function confirmCustomerOrder(order: {
   /** Lien tokenisé vers la page de confirmation (anti-IDOR). */
   orderUrl?: string;
 }) {
+  const hello = greeting(order.customerName);
+  const totalLabel = new Intl.NumberFormat("fr-BE", { style: "currency", currency: "EUR" }).format(order.total);
+  const thanks = `Merci pour votre commande ${order.orderNumber}, elle est confirmée.`;
+  const next =
+    "Nous vous écrivons dès que la livraison est en route. Pour toute question, répondez à cet e-mail ou appelez-nous au 081 13 83 09.";
+
   const itemsHtml = order.items
-    .map((it) => `<li>${it.quantity}× ${escapeHtml(it.name)}</li>`)
-    .join("");
+    .map((it) => `${it.quantity}&nbsp;×&nbsp;${escapeHtml(it.name)}`)
+    .join("<br>");
 
-  const ctaHtml = order.orderUrl
-    ? `<p style="margin-top:20px"><a href="${escapeHtml(order.orderUrl)}" style="display:inline-block;background:#174724;color:#fff;text-decoration:none;padding:12px 22px;border-radius:9999px;font-weight:600">Voir ma commande</a></p>`
-    : "";
+  const html = brandedEmailHtml({
+    title: `Commande ${order.orderNumber} confirmée`,
+    preheader: `Total ${totalLabel}. Nous vous écrivons dès que la livraison est en route.`,
+    eyebrow: "Commande confirmée",
+    heading: "Merci pour votre commande",
+    lead: escapeHtml(`Commande ${order.orderNumber} · ${totalLabel} TTC`),
+    bodyHtml: `${emailParagraph(escapeHtml(hello))}
+    ${emailParagraph(escapeHtml(thanks), 22)}
+    ${emailRecap([
+      { label: "Articles", valueHtml: itemsHtml },
+      {
+        label: "Total TTC",
+        valueHtml: `<span class="mp-serif" style="font-family:${SERIF};font-size:21px;font-weight:600;color:${C.greenDeep}">${escapeHtml(totalLabel)}</span>`,
+      },
+    ])}
+    ${order.orderUrl ? `${emailButton(order.orderUrl, "Voir ma commande")}<div style="height:26px;line-height:26px">&nbsp;</div>` : ""}
+    ${emailParagraph(escapeHtml(next).replace(EMAIL_PHONE_DISPLAY, EMAIL_PHONE_LINK))}
+    ${emailSignoffHtml()}`,
+    footerNote: "Vous recevez cet e-mail parce que vous avez passé commande sur mister-pellets.be.",
+  });
 
-  const html = `
-    <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
-      <h1 style="color:#174724;font-family:Georgia,serif">Merci ${escapeHtml(order.customerName.split(" ")[0] ?? order.customerName)} !</h1>
-      <p>Votre commande <strong>${escapeHtml(order.orderNumber)}</strong> est confirmée.</p>
-      <h3 style="color:#174724">Récap</h3>
-      <ul style="padding-left:20px">${itemsHtml}</ul>
-      <p style="font-size:18px;margin-top:16px"><strong>Total TTC : ${new Intl.NumberFormat("fr-BE", { style: "currency", currency: "EUR" }).format(order.total)}</strong></p>
-      ${ctaHtml}
-      <p>On vous envoie un mail dès que la livraison est en route. Pour toute question : <a href="tel:+3281138309" style="color:#F28A20">081 13 83 09</a> ou <a href="mailto:info@awlest.com" style="color:#F28A20">info@awlest.com</a>.</p>
-    </div>
-  `;
+  const text = customerText([
+    hello,
+    "",
+    thanks,
+    "",
+    ...order.items.map((it) => `${it.quantity} × ${it.name}`),
+    `Total TTC : ${totalLabel}`,
+    ...(order.orderUrl ? ["", `Voir ma commande : ${order.orderUrl}`] : []),
+    "",
+    next,
+  ]);
 
   return sendEmail({
     label: "confirmCustomerOrder",
     to: order.customerEmail,
     subject: `Confirmation de commande ${order.orderNumber}, Mister Pellets`,
     html,
+    text,
   });
 }

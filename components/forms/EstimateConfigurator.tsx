@@ -368,7 +368,7 @@ function EstimateForm({
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error ?? "Erreur lors de l'envoi.");
+        throw new Error(data.error ?? "Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou appelez-nous au 081 13 83 09.");
       }
       setSubmitState("success");
       // Conversion principale du site : le visiteur a un prix chiffré et nous a
@@ -388,7 +388,7 @@ function EstimateForm({
       );
     } catch (e) {
       setSubmitState("error");
-      setErrorMsg(e instanceof Error ? e.message : "Erreur inconnue");
+      setErrorMsg(e instanceof Error && e.name === "Error" ? e.message : "Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou appelez-nous au 081 13 83 09.");
     }
   }
 
