@@ -35,8 +35,9 @@ export function JsonLd({ data }: JsonLdProps) {
  * `HomeAndConstructionBusiness` est un sous-type d'`Organization` : un seul
  * nœud suffit à décrire les deux facettes.
  *
- * Le pendant côté clim vit dans mister-clim/lib/entity.ts, et pointe vers le
- * même @id de société mère (#awlest).
+ * Les pendants vivent dans mister-clim/lib/entity.ts et
+ * mister-bois/components/seo/JsonLd.tsx, et pointent vers la même société mère
+ * (https://awlest.be/#organization).
  */
 
 const ADDRESS = {
@@ -63,16 +64,23 @@ const ADDRESS = {
  */
 export const SAME_AS: string[] = [];
 
-/** Société mère. Même @id que celui déclaré sur mister-clim.be. */
+/**
+ * Société mère, même nœud sur les trois sites Mister et même @id que celui
+ * qu'awlest.be déclare pour lui-même : les moteurs et les assistants relient
+ * ainsi les quatre sites à une seule entreprise. Jusqu'au 25/10/2026, l'@id
+ * était https://mister-pellets.be/#awlest, partagé avec Mister Clim seulement.
+ */
 export const AWLEST_ORGANIZATION = {
   "@type": "Organization",
-  "@id": "https://mister-pellets.be/#awlest",
-  name: "Awlest SRL",
+  "@id": "https://awlest.be/#organization",
+  name: "Awlest",
   legalName: "Awlest SRL",
+  url: "https://awlest.be",
   foundingDate: "2016",
-  description:
-    "Société belge active en Wallonie depuis 2016. Elle exploite la marque Mister Pellets pour la vente, la pose et l'entretien de poêles à pellets, et la marque Mister Clim pour la climatisation réversible.",
   vatID: "BE0656514212",
+  identifier: { "@type": "PropertyValue", propertyID: "BCE", value: "0656.514.212" },
+  description:
+    "Installateur belge actif en Wallonie depuis 2016. Mister Pellets (poêles à pellets), Mister Clim (climatisation réversible) et Mister Bois (poêles et inserts à bois) sont ses trois marques : une seule société.",
   address: ADDRESS,
 };
 
