@@ -167,8 +167,8 @@ export default function AProposPage() {
             <p>
               À la fin du chantier, vous recevez la facture détaillée, l'attestation de conformité de
               l'installation et le récapitulatif technique (puissance, type d'évacuation, modèle exact).
-              Gardez-les : votre assureur, un auditeur logement ou la SWCS, si vous financez le poêle par
-              un Rénopack, vous les demanderont.
+              Gardez-les : votre assureur, un auditeur logement ou un organisme prêteur, si le poêle entre
+              dans un projet financé par un Rénopack, vous les demanderont.
             </p>
           </div>
         </div>

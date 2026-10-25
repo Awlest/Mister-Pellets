@@ -160,7 +160,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "5. Compter les aides",
         paragraphs: [
-          "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Depuis le 1er octobre, la Wallonie aide la rénovation par deux prêts : le Rénopack, à 0 % avec 15 à 50 % effacés selon les revenus, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent le label exigé après un audit. Un poêle seul y donne rarement accès. Tout le détail est sur notre page consacrée aux aides.",
+          "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Depuis le 1er octobre, la Wallonie aide la rénovation par deux prêts : le Rénopack, à 0 % avec 10 à 50 % effacés selon les revenus et les matériaux d'isolation, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent le label exigé après un audit, et la demande de prêt passe avant tout devis signé ou acompte. Leur liste officielle de travaux ne nomme pas le poêle : il n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte. Tout le détail est sur notre page consacrée aux aides.",
           "L'aide qui joue presque à chaque fois, c'est la TVA : 6 % au lieu de 21 % quand l'installateur fournit et pose le poêle dans un logement de plus de 10 ans. Pour les petits revenus, la subvention MEBAR (jusqu'à 2 000 €) passe par le CPAS, avant les travaux. Et demandez à votre commune : certaines gardent une prime énergie.",
         ],
       },
@@ -179,7 +179,7 @@ export const GUIDES: GuideData[] = [
       {
         question: "Faut-il un audit énergétique ?",
         answer:
-          "Pour un poêle seul, non : la prime qui l'exigeait s'est arrêtée le 30 septembre 2026. L'audit logement redevient indispensable si vous visez un Rénopack ou un Rénoprêt : il doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui dit quels travaux font gagner le label exigé.",
+          "Pour un poêle seul, non : la prime qui l'exigeait s'est arrêtée le 30 septembre 2026. L'audit logement redevient indispensable si vous visez un Rénopack ou un Rénoprêt : il doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui dit quels travaux font gagner le label exigé. La demande de prêt passe ensuite avant tout devis signé ou acompte.",
       },
     ],
     metaTitle: "Guide d'achat poêle à pellets en Wallonie 2026, Mister Pellets",
@@ -259,7 +259,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "Coûts et aides",
         paragraphs: [
-          "Un hydro complet (poêle, kit hydraulique, ballon, raccordement et main d'œuvre) coûte 8 000 à 14 000 € TVAC selon la puissance et la complexité. Il n'y a plus de prime régionale depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer l'hydro avec le reste des travaux ; sinon, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
+          "Un hydro complet (poêle, kit hydraulique, ballon, raccordement et main d'œuvre) coûte 8 000 à 14 000 € TVAC selon la puissance et la complexité. Il n'y a plus de prime régionale depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, voyez le Rénopack avant de signer un devis : l'hydro n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte, car la liste officielle des travaux ne nomme pas les poêles. Sinon, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
           "Face au mazout, le retour sur investissement tourne autour de 5 à 9 ans pour une maison qui en brûlait 2 000 litres par an, aux prix d'octobre 2026. Au-delà, c'est de l'économie nette tous les hivers.",
         ],
       },

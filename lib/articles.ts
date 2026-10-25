@@ -1058,7 +1058,7 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "success",
-          text: "La prime Habitation qui couvrait ce remplacement s'est arrêtée le 30 septembre 2026. Si votre maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer l'hydro avec le reste des travaux. Sinon, comptez sur la TVA à 6 %.",
+          text: "La prime Habitation qui couvrait ce remplacement s'est arrêtée le 30 septembre 2026. Si votre maison est classée E, F ou G et que vous la rénovez plus largement, voyez le Rénopack avant de signer un devis : la liste officielle des travaux ne nomme pas les poêles, et l'hydro n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte. Sinon, comptez sur la TVA à 6 %.",
         },
       },
       {
@@ -1088,7 +1088,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Le remplacement donne-t-il droit à une prime ?",
         answer:
-          "Plus de prime régionale depuis le 1er octobre 2026. Le Rénopack peut financer le remplacement si la maison est classée E, F ou G et que l'ensemble des travaux la fait monter de label, avec un audit préalable. Dans tous les cas, la TVA est à 6 % dans un logement de plus de 10 ans.",
+          "Plus de prime régionale pour un nouveau projet depuis le 1er octobre 2026. Le Rénopack peut financer une rénovation si la maison est classée E, F ou G et que l'ensemble des travaux la fait monter de label, avec un audit préalable et une demande de prêt avant tout devis signé. Le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte. Dans tous les cas, la TVA est à 6 % dans un logement de plus de 10 ans.",
       },
     ],
     related: {
@@ -1619,8 +1619,10 @@ export const ARTICLES: ArticleData[] = [
 
   // ───────────────────────────────────────────────────────────────────
   // 3. AIDES WALLONIE, réécrit le 03/10/2026 : la prime Habitation (régime
-  //    temporaire 14/02/2025 → 30/09/2026) est terminée. Chiffres et liens :
-  //    lib/aides.ts. Slug conservé pour les liens entrants et Google.
+  //    temporaire 14/02/2025 → 30/09/2026) est terminée. Revu le 25/10/2026 :
+  //    parts non remboursées de l'arrêté du 24/09/2026, poêle absent de la
+  //    liste des travaux, demande de prêt avant tout devis signé. Chiffres et
+  //    liens : lib/aides.ts. Slug conservé pour les liens entrants et Google.
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "primes-wallonie-2026-poele-pellets-combien-recuperer",
@@ -1631,12 +1633,12 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "La prime a disparu le 30 septembre. Ce qui la remplace ne vise pas le même public : voici, sans détour, ce que vous pouvez encore obtenir pour un poêle.",
     tldr:
-      "Il n'y a plus de prime régionale pour un poêle à pellets depuis le 1er octobre 2026. Le régime temporaire des primes Habitation s'est arrêté le 30 septembre, et la Wallonie aide désormais la rénovation par deux prêts : le Rénopack, à 0 % avec 15 à 50 % effacés selon les revenus, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent au moins deux classes PEB après un audit. Pour un poêle posé seul, il reste la TVA à 6 % dans un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes.",
+      "Il n'y a plus de prime régionale pour un poêle à pellets depuis le 1er octobre 2026. Le régime temporaire des primes Habitation s'est arrêté le 30 septembre, et la Wallonie aide désormais la rénovation par deux prêts : le Rénopack, à 0 % avec 10 à 50 % effacés selon les revenus et les matériaux d'isolation, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent au moins deux classes PEB après un audit, et la demande de prêt passe avant tout devis signé. Pour un poêle posé seul, il reste la TVA à 6 % dans un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes.",
     category: "primes",
     tags: ["aides", "Wallonie", "Rénopack", "Rénoprêt", "TVA 6 %", "MEBAR"],
     readingTimeMinutes: 8,
     publishedAt: "2026-02-10",
-    modifiedAt: "2026-10-03",
+    modifiedAt: "2026-10-25",
     authorName: "Équipe Mister Pellets",
     authorRole: "Conseillers chauffage biomasse",
     coverImageAlt: "Récapitulatif des aides pour un poêle à pellets en Wallonie après la fin de la prime Habitation",
@@ -1649,24 +1651,24 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "info",
-          text: "L'exception : les projets lancés avant le 14 février 2025, avec un devis daté et signé avant cette date. Le Gouvernement wallon a décidé le 24 septembre 2026 qu'ils pourraient encore demander la prime aux anciennes conditions jusqu'au 30 septembre 2027, sans l'acompte de 20 % exigé jusque-là. La mesure s'applique après sa publication au Moniteur belge.",
+          text: "L'exception : les projets avec un devis signé ou un bon de commande définitif datant au plus tard du 13 février 2025. L'arrêté du Gouvernement wallon du 24 septembre 2026, adopté définitivement, leur permet de demander encore la prime aux anciennes conditions jusqu'au 30 septembre 2027, sans l'acompte de 20 % exigé jusque-là.",
         },
       },
       {
         heading: "Ce qui la remplace : le Rénopack et le Rénoprêt",
         paragraphs: [
-          "Depuis le 1er octobre 2026, la Wallonie ne verse plus de prime par poste de travaux. Elle finance des projets de rénovation par deux prêts, gérés par la Société wallonne du Crédit social (SWCS) et le Fonds du Logement de Wallonie.",
-          "Le Rénopack est un prêt à 0 % dont une partie ne se rembourse pas. Il vise les catégories de revenus C1 à C3, propriétaires ou titulaires d'un autre droit réel, qui habiteront le logement au plus tard 24 mois après l'octroi. Le Rénoprêt, à taux zéro ou préférentiel, s'adresse à la catégorie C4, aux propriétaires bailleurs et aux copropriétés.",
+          "Depuis le 1er octobre 2026, la Wallonie n'accorde plus de prime par poste de travaux pour un nouveau projet. Elle finance des projets de rénovation par deux prêts, gérés par la Société wallonne du Crédit social (SWCS) et le Fonds du Logement de Wallonie. Selon la SWCS, le dispositif devrait être pleinement opérationnel au début de 2027 : la préinscription est ouverte, les modalités de demande sont en cours de finalisation.",
+          "Le Rénopack est un prêt à 0 % dont une partie ne se rembourse pas : 45, 35 ou 10 % selon la catégorie, portés à 50, 40 ou 15 % si toute l'isolation de l'enveloppe est réalisée en écomatériaux, et seulement sur les travaux éligibles. Il vise les catégories de revenus C1 à C3, propriétaires ou titulaires d'un autre droit réel, qui habiteront le logement au plus tard 24 mois après l'octroi. La part non remboursée demande en plus un bâtiment de plus de 15 ans et un demandeur qui n'est propriétaire d'aucun autre logement, et elle ne se cumule avec aucune autre aide wallonne pour le même investissement. Le Rénoprêt, à taux préférentiel, s'adresse à la catégorie C4, aux propriétaires bailleurs et aux copropriétés.",
         ],
         table: {
           headers: ["Catégorie", "Revenus du ménage", "Prêt", "Part non remboursée"],
           rows: [
-            ["C1", "Jusqu'à 28 900 €", "Rénopack à 0 %", "50 %"],
-            ["C2", "De 28 900 à 41 100 €", "Rénopack à 0 %", "40 %"],
-            ["C3", "De 41 100 à 67 100 €", "Rénopack à 0 %", "15 %"],
-            ["C4", "De 67 100 à 122 800 €", "Rénoprêt, taux zéro ou préférentiel", "Aucune"],
+            ["C1", "Jusqu'à 28 900 €", "Rénopack à 0 %", "45 % (50 % avec écomatériaux)"],
+            ["C2", "De 28 900 à 41 100 €", "Rénopack à 0 %", "35 % (40 % avec écomatériaux)"],
+            ["C3", "De 41 100 à 67 100 €", "Rénopack à 0 %", "10 % (15 % avec écomatériaux)"],
+            ["C4", "De 67 100 à 122 800 €", "Rénoprêt à taux préférentiel", "Aucune"],
           ],
-          caption: "Montants indexés au 1er janvier 2026, diminués de 5 000 € par personne à charge. Source : wallonie.be, mis à jour le 25 septembre 2026.",
+          caption: "Montants indexés au 1er janvier 2026, diminués de 5 000 € par personne à charge. Sources : wallonie.be, mis à jour le 25 septembre 2026, et arrêté du Gouvernement wallon du 24 septembre 2026.",
         },
       },
       {
@@ -1679,6 +1681,7 @@ export const ARTICLES: ArticleData[] = [
           items: [
             "Une maison classée G ou F qui atteint au moins le label D après travaux, ou classée E qui atteint au moins le label C.",
             "Un audit logement réalisé ou actualisé moins d'un an avant la demande de prêt. C'est lui qui fixe le label de départ et la liste des travaux.",
+            "Une demande de prêt introduite avant tout engagement avec l'entrepreneur : aucun devis signé, aucun acompte et aucun début de travaux avant la signature du contrat de crédit. Le Fonds du Logement l'a rappelé le 12 octobre 2026 dans un « appel à la vigilance ».",
             "Un emprunt sous 75 000 € pour une maison unifamiliale, 60 000 € par appartement.",
           ],
         },
@@ -1690,8 +1693,8 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le poêle à pellets peut-il entrer dans un Rénopack ?",
         paragraphs: [
-          "Oui : la SWCS cite l'installation d'un poêle biomasse parmi les travaux qu'elle finance. Mais un poêle seul fait rarement gagner deux classes PEB à une maison. Le saut demande en général d'isoler le toit, les murs ou les châssis, et le chauffage vient compléter le projet.",
-          "Si c'est votre cas, commencez par l'audit, puis la préinscription sur le site de la SWCS, qui ne vaut pas demande d'aide mais permet à leurs équipes de vous recontacter. Et parlez-nous de l'audit avant de choisir le poêle : une maison isolée perd moins de chaleur, la puissance doit correspondre à la maison après travaux. Un poêle calibré sur la maison d'avant tournerait au ralenti tout l'hiver.",
+          "Rien ne le garantit. La liste officielle des travaux finançables (article 6 de l'arrêté du Gouvernement wallon du 24 septembre 2026) parle de « systèmes de chauffage et/ou eau chaude performants, décarbonés » et ne nomme pas les poêles. Un poêle n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte. Et un poêle seul fait rarement gagner deux classes PEB à une maison : le saut demande en général d'isoler le toit, les murs ou les châssis.",
+          "Si c'est votre cas, commencez par l'audit, puis la préinscription sur le site de la SWCS, qui ne vaut pas demande d'aide mais permet à leurs équipes de vous recontacter. Vient ensuite la demande de prêt, avant tout engagement : ne signez aucun devis, le nôtre compris, et ne versez aucun acompte avant la signature du contrat de crédit. Et parlez-nous de l'audit avant de choisir le poêle : une maison isolée perd moins de chaleur, la puissance doit correspondre à la maison après travaux. Un poêle calibré sur la maison d'avant tournerait au ralenti tout l'hiver.",
         ],
       },
       {
@@ -1712,14 +1715,14 @@ export const ARTICLES: ArticleData[] = [
         heading: "Trois cas pour s'y retrouver",
         paragraphs: [
           "Prenons une maison de 1985 à Andenne, classée C, et un ménage en catégorie C2. Un canalisable EK63 posé sur conduit existant à 5 800 € hors TVA revient à 6 148 € TVAC avec la TVA à 6 %, au lieu de 7 018 € à 21 %. Pas de Rénopack : la maison n'est pas visée.",
-          "Prenons une fermette de 1962 près de Ciney, classée F, et un ménage en catégorie C1. L'audit prévoit d'isoler la toiture et les murs, de changer les châssis et de remplacer la chaudière au mazout par un poêle hydro. Si l'ensemble fait passer la maison en D, le Rénopack peut financer tout le projet, poêle compris, et la moitié du prêt ne se rembourse pas.",
+          "Prenons une fermette de 1962 près de Ciney, classée F, et un ménage en catégorie C1. L'audit prévoit d'isoler la toiture et les murs, de changer les châssis et de remplacer la chaudière au mazout par un poêle hydro. Si l'ensemble fait passer la maison en D, le Rénopack peut financer les travaux éligibles, et 45 % du prêt ne se rembourse pas (50 % si toute l'isolation est en écomatériaux). Le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et rien ne se signe avant le contrat de crédit.",
           "Prenons enfin une maison de 2002 à Wavre, classée D, avec des revenus au-delà de 122 800 €. Ni prime, ni Rénopack, ni Rénoprêt. Reste la TVA à 6 %, puisque la maison a plus de 10 ans.",
         ],
       },
       {
         heading: "Ce que Mister Pellets fait pour votre dossier",
         paragraphs: [
-          "On vous remet un devis détaillé poste par poste, utile à l'auditeur comme à la SWCS, puis la facture et l'attestation de conformité de l'installation après la pose. La demande de prêt, elle, se fait chez la SWCS ou au Fonds du Logement.",
+          "Nous vous remettons un devis détaillé poste par poste, utile à l'auditeur comme à l'organisme prêteur, puis la facture et l'attestation de conformité de l'installation après la pose. La demande de prêt, elle, se fait chez la SWCS ou au Fonds du Logement, et elle passe avant tout engagement : si un Rénopack est en vue, ne signez pas notre devis et ne versez aucun acompte avant la signature de votre contrat de crédit.",
           "Pour une question sur votre situation, le 1718 répond gratuitement les jours ouvrables de 8 h 30 à 17 h, et les Guichets Énergie Wallonie conseillent sans frais près de chez vous. Notre page consacrée aux aides reprend tout le détail, avec les liens officiels.",
         ],
       },
@@ -1728,22 +1731,22 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Peut-on encore obtenir une prime pour un poêle à pellets en Wallonie ?",
         answer:
-          "Non, plus depuis le 1er octobre 2026, sauf la subvention MEBAR pour les ménages à très petits revenus, via le CPAS. La prime Habitation s'est arrêtée le 30 septembre 2026. Les prêts qui la remplacent, Rénopack et Rénoprêt, visent les maisons classées E, F ou G qui gagnent le label exigé après travaux.",
+          "Non, plus depuis le 1er octobre 2026, sauf la subvention MEBAR pour les ménages à très petits revenus, via le CPAS. La prime Habitation s'est arrêtée le 30 septembre 2026. Les prêts qui la remplacent, Rénopack et Rénoprêt, visent les maisons classées E, F ou G qui gagnent le label exigé après travaux, et se demandent avant tout devis signé ou acompte.",
       },
       {
         question: "Mon poêle a été posé en septembre : est-il trop tard ?",
         answer:
-          "Oui, si la demande n'a pas été introduite au plus tard le 30 septembre 2026 à 23 h 59. Seuls les projets avec un devis daté et signé avant le 14 février 2025 peuvent encore passer par les anciennes conditions, jusqu'au 30 septembre 2027.",
+          "Oui, si la demande n'a pas été introduite au plus tard le 30 septembre 2026 à 23 h 59. Seuls les projets avec un devis signé ou un bon de commande définitif datant au plus tard du 13 février 2025 peuvent encore passer par les anciennes conditions, jusqu'au 30 septembre 2027.",
       },
       {
         question: "Le Rénopack rembourse-t-il une partie du poêle ?",
         answer:
-          "Le Rénopack ne rembourse pas un appareil : c'est un prêt à 0 % pour un projet complet, dont 15 à 50 % ne se remboursent pas selon vos revenus. Le poêle peut en faire partie si la maison, classée E, F ou G, gagne le label exigé après les travaux.",
+          "Le Rénopack ne rembourse pas un appareil : c'est un prêt à 0 % pour un projet complet, dont 10 à 50 % ne se remboursent pas selon vos revenus et les matériaux d'isolation. La liste officielle des travaux ne nomme pas les poêles : le vôtre n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, dans une maison classée E, F ou G qui gagne le label exigé.",
       },
       {
         question: "Faut-il encore un audit logement ?",
         answer:
-          "Pour un poêle seul, non. Pour un Rénopack ou un Rénoprêt, oui : l'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt.",
+          "Pour un poêle seul, non. Pour un Rénopack ou un Rénoprêt, oui : l'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, qui passe elle-même avant tout devis signé.",
       },
       {
         question: "La TVA à 6 % s'applique-t-elle toujours ?",
@@ -1845,7 +1848,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien coûte le passage du mazout au poêle hydro à pellets ?",
         answer:
-          "Comptez 8 000 à 14 000 € TVAC tout compris en Wallonie, avec la TVA à 6 % dans un logement de plus de 10 ans : poêle, ballon tampon, désembouage du circuit, raccordement et mise hors service de la cuve. Il n'y a plus de prime régionale depuis le 1er octobre 2026 ; si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer le projet.",
+          "Comptez 8 000 à 14 000 € TVAC tout compris en Wallonie, avec la TVA à 6 % dans un logement de plus de 10 ans : poêle, ballon tampon, désembouage du circuit, raccordement et mise hors service de la cuve. Il n'y a plus de prime régionale pour un nouveau projet depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer les travaux éligibles ; le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et la demande de prêt passe avant tout devis signé.",
       },
       {
         question: "Faut-il garder une chaudière d'appoint en plus du poêle hydro ?",

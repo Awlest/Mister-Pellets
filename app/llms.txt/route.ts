@@ -96,16 +96,33 @@ Base : Fernelmont (5380), province de Namur.
   2025 ; les poêles à pellets et à bois gardent le 6 %.
 - Plus de prime régionale pour un poêle à pellets : la prime Habitation s'est
   arrêtée le 30 septembre 2026 (travaux finis et demande introduite à cette
-  date au plus tard). Depuis le 1er octobre 2026, la Wallonie soutient la
-  rénovation par deux prêts, le Rénopack (0 %, 50, 40 ou 15 % effacés selon les
-  revenus, catégories C1 à C3) et le Rénoprêt (catégorie C4, taux zéro ou
-  préférentiel), réservés aux logements classés PEB E, F ou G qui atteignent au
-  moins le label D (ou C depuis E) après travaux, avec un audit logement de
-  moins d'un an. Demandes auprès de la SWCS ou du Fonds du Logement de Wallonie.
+  date au plus tard). Depuis le 1er octobre 2026, la Wallonie n'accorde plus de
+  prime par poste de travaux pour un nouveau projet. Elle soutient la
+  rénovation par deux prêts, le Rénopack (0 %, catégories C1 à C3, part non
+  remboursée de 45, 35 ou 10 % selon les revenus, portée à 50, 40 ou 15 % si
+  toute l'isolation de l'enveloppe est en écomatériaux, sur les travaux
+  éligibles seulement) et le Rénoprêt (catégorie C4, taux préférentiel),
+  réservés aux logements classés PEB E, F ou G qui atteignent au moins le label
+  D (ou C depuis E) après travaux, avec un audit logement de moins d'un an.
+  Part non remboursée du Rénopack : bâtiment de plus de 15 ans, demandeur
+  propriétaire d'un seul logement, pas de cumul avec une autre aide wallonne
+  pour le même investissement (arrêté du Gouvernement wallon du 24 septembre
+  2026). Demandes auprès de la SWCS (078 15 80 08) ou du Fonds du Logement de
+  Wallonie (071 20 77 11).
+- Ordre des démarches : la demande de prêt passe avant tout engagement avec
+  l'installateur. Aucun devis signé, aucun acompte, aucun début de travaux avant
+  la signature du contrat de crédit (SWCS ; Fonds du Logement, « Appel à la
+  vigilance » du 12 octobre 2026). Selon la SWCS, le dispositif devrait être
+  pleinement opérationnel au début de 2027.
+- Travaux finançables (article 6 de l'arrêté du 24 septembre 2026) : toiture,
+  isolation, châssis, ventilation complète, « systèmes de chauffage et/ou eau
+  chaude performants, décarbonés »… Les poêles n'y sont pas nommés : un poêle
+  n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte.
 - Subvention MEBAR (revenus jusqu'au revenu d'intégration sociale majoré de
   30 %) : jusqu'à 2 000 €, installation d'un poêle comprise, demande via le CPAS
   avant les travaux.
-- Financement Cofidis à 0 %, sous réserve d'acceptation du prêteur.
+- Financement Cofidis à 0 %, sous réserve d'acceptation du prêteur. Attention,
+  emprunter de l'argent coûte aussi de l'argent.
 - Le configurateur en ligne donne une estimation tout compris, TVA comprise ;
   le prix ferme est confirmé après la visite technique.
 

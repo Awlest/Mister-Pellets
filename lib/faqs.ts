@@ -289,49 +289,49 @@ export const FAQS: FaqItem[] = [
     category: "primes",
     question: "Existe-t-il encore une prime pour un poêle à pellets en 2026 ?",
     answer:
-      "Non, plus depuis le 1er octobre 2026, sauf pour les ménages à très petits revenus (subvention MEBAR, via le CPAS). La prime Habitation, qui couvrait le poêle à pellets, s'est arrêtée le 30 septembre 2026 : travaux terminés et demande introduite ce jour-là au plus tard. La Wallonie soutient désormais la rénovation par deux prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui gagnent le label exigé après travaux. Pour un poêle posé seul, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
+      "Non, plus depuis le 1er octobre 2026, sauf pour les ménages à très petits revenus (subvention MEBAR, via le CPAS). La prime Habitation, qui couvrait le poêle à pellets, s'est arrêtée le 30 septembre 2026 : travaux terminés et demande introduite ce jour-là au plus tard. La Wallonie n'accorde plus de prime pour un nouveau projet et soutient désormais la rénovation par deux prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui gagnent le label exigé après travaux, et à demander avant tout devis signé ou acompte. Pour un poêle posé seul, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
   },
   {
     id: "primes-categorie",
     category: "primes",
     question: "Comment savoir dans quelle catégorie de revenus je tombe pour le Rénopack ?",
     answer:
-      "Quatre catégories, selon les revenus du ménage : C1 jusqu'à 28 900 €, C2 jusqu'à 41 100 €, C3 jusqu'à 67 100 € et C4 jusqu'à 122 800 €. Les seuils sont indexés au 1er janvier 2026 et baissent de 5 000 € par personne à charge. En C1, la moitié du Rénopack ne se rembourse pas, 40 % en C2 et 15 % en C3 ; la C4 a droit au Rénoprêt, sans part effacée. La SWCS, le Fonds du Logement ou le 1718 (gratuit) vous situent précisément.",
+      "Quatre catégories, selon les revenus du ménage : C1 jusqu'à 28 900 €, C2 jusqu'à 41 100 €, C3 jusqu'à 67 100 € et C4 jusqu'à 122 800 €. Les seuils sont indexés au 1er janvier 2026 et baissent de 5 000 € par personne à charge. En C1, 45 % du Rénopack ne se rembourse pas, 35 % en C2 et 10 % en C3, avec 5 points de plus si toute l'isolation de l'enveloppe est réalisée en écomatériaux ; la C4 a droit au Rénoprêt, à taux préférentiel, sans part effacée. La SWCS, le Fonds du Logement ou le 1718 (gratuit) vous situent précisément.",
   },
   {
     id: "primes-audit-obligatoire",
     category: "primes",
     question: "Faut-il un audit logement ?",
     answer:
-      "Pour un poêle seul, non : il n'y a plus de prime à demander. Pour un Rénopack ou un Rénoprêt, oui. L'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui fixe le label PEB de départ et la liste des travaux. Si un tel projet est en vue, parlez-nous de l'audit avant de choisir le poêle : sa puissance doit correspondre à la maison une fois isolée.",
+      "Pour un poêle seul, non : il n'y a plus de prime à demander. Pour un Rénopack ou un Rénoprêt, oui. L'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui fixe le label PEB de départ et la liste des travaux. La demande de prêt, elle, passe avant tout devis signé ou acompte. Si un tel projet est en vue, parlez-nous de l'audit avant de choisir le poêle : sa puissance doit correspondre à la maison une fois isolée.",
   },
   {
     id: "primes-eligible",
     category: "primes",
     question: "Mon poêle doit-il figurer sur une liste officielle ?",
     answer:
-      "Plus pour une prime, puisqu'elle a pris fin. Tous les poêles vendus en Europe depuis le 1er janvier 2022 doivent respecter le règlement d'écoconception (UE) 2015/1185 : au moins 79 % de rendement saisonnier pour un poêle à pellets, et des plafonds d'émissions de particules, de monoxyde de carbone et d'oxydes d'azote. Les modèles que nous posons y répondent. Si vous financez le poêle par un Rénopack, la SWCS vous dira si elle impose d'autres critères.",
+      "Plus pour une prime, puisqu'elle a pris fin. Tous les poêles vendus en Europe depuis le 1er janvier 2022 doivent respecter le règlement d'écoconception (UE) 2015/1185 : au moins 79 % de rendement saisonnier pour un poêle à pellets, et des plafonds d'émissions de particules, de monoxyde de carbone et d'oxydes d'azote. Les modèles que nous posons y répondent. Pour un projet Rénopack, la liste officielle des travaux ne nomme pas les poêles : c'est l'audit et l'organisme prêteur qui décident si le vôtre est retenu.",
   },
   {
     id: "primes-delai-versement",
     category: "primes",
     question: "Mon poêle a été posé en septembre 2026 : puis-je encore demander la prime ?",
     answer:
-      "Seulement si la demande a été introduite au plus tard le 30 septembre 2026 à 23 h 59, la date limite du régime temporaire. Une exception concerne les projets lancés avant le 14 février 2025, avec un devis daté et signé avant cette date : ils peuvent demander la prime aux anciennes conditions jusqu'au 30 septembre 2027, une fois la mesure publiée au Moniteur belge. Le 1718 (gratuit) vous renseignera sur votre cas.",
+      "Seulement si la demande a été introduite au plus tard le 30 septembre 2026 à 23 h 59, la date limite du régime temporaire. Une exception concerne les projets avec un devis signé ou un bon de commande définitif datant au plus tard du 13 février 2025 : ils peuvent demander la prime aux anciennes conditions jusqu'au 30 septembre 2027. Le 1718 (gratuit) vous renseignera sur votre cas.",
   },
   {
     id: "primes-cumul-tva",
     category: "primes",
     question: "Puis-je cumuler la TVA à 6 % et le Rénopack ?",
     answer:
-      "Oui, l'un n'empêche pas l'autre. La TVA réduite est fédérale : elle s'applique sur la facture quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans. Le Rénopack est un prêt régional qui finance des travaux, poêle compris, si le projet remplit ses conditions (maison classée E, F ou G, audit de moins d'un an, saut de label).",
+      "Oui, l'un n'empêche pas l'autre. La TVA réduite est fédérale : elle s'applique sur la facture quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans. Le Rénopack est un prêt régional qui finance les travaux éligibles d'un projet qui remplit ses conditions (maison classée E, F ou G, audit de moins d'un an, saut de label). Le poêle n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et la demande de prêt passe avant tout devis signé ou acompte.",
   },
   {
     id: "primes-r5",
     category: "primes",
     question: "Et si les revenus du ménage dépassent 122 800 € ?",
     answer:
-      "Pour un ménage qui occupe son logement, les prêts régionaux s'arrêtent là : ni Rénopack ni Rénoprêt. Il reste la TVA à 6 % sur un logement de plus de 10 ans, poêle et pose compris, et les économies de combustible si vous quittez le mazout. Si vous louez le logement, le Rénoprêt est ouvert aux propriétaires bailleurs : la SWCS vous dira à quelles conditions.",
+      "Pour un ménage qui occupe son logement, les prêts régionaux s'arrêtent là : ni Rénopack ni Rénoprêt. Il reste la TVA à 6 % sur un logement de plus de 10 ans, poêle et pose compris, et les économies de combustible si vous quittez le mazout. Si vous louez le logement, le Rénoprêt est ouvert aux propriétaires bailleurs : la SWCS vous dira à quelles conditions, et la demande passe avant tout devis signé.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -395,7 +395,7 @@ export const FAQS: FaqItem[] = [
     category: "boutique",
     question: "Quels moyens de paiement acceptez-vous ?",
     answer:
-      "Rien ne se paie en ligne. Après la visite technique et l'acceptation du devis, vous recevez une facture d'acompte de 30 %, puis le solde à la fin de la pose. Virement, carte ou Bancontact. Si votre projet entre dans les conditions du Rénopack ou du Rénoprêt (logement classé E, F ou G, audit, saut de label), le prêt de la SWCS ou du Fonds du Logement peut financer la facture.",
+      "Rien ne se paie en ligne. Après la visite technique et l'acceptation du devis, vous recevez une facture d'acompte de 30 %, puis le solde à la fin de la pose. Virement, carte ou Bancontact. Si vous visez un Rénopack ou un Rénoprêt (logement classé E, F ou G, audit, saut de label), dites-le-nous avant d'accepter le devis : la demande de prêt passe avant tout engagement, donc ni devis signé ni acompte avant la signature de votre contrat de crédit auprès de la SWCS ou du Fonds du Logement.",
   },
   {
     id: "boutique-retour",

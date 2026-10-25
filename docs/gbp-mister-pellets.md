@@ -25,7 +25,7 @@ ce qui existe dans sa taxonomie) :
 - Secondaires : « Entreprise de chauffage », « Magasin de cheminées », « Ramoneur »
   (uniquement si le ramonage est réellement proposé)
 
-## 3. Description (à coller telle quelle, 730 caractères)
+## 3. Description (à coller telle quelle, 724 caractères)
 
 Mister Pellets installe des poêles à pellets en Wallonie. Nous vendons et posons
 les gammes Edilkamin, EK63 et Girolami : poêles classiques, canalisables pour
@@ -36,9 +36,8 @@ Nous prenons en charge toute la partie technique : tubage de cheminée, sortie
 ventouse, conduit neuf, raccordement, mise en service et réglage de la
 combustion.
 
-La TVA à 6 % s'applique aux logements de plus de 10 ans, et nous vous aidons à
-monter votre dossier de prime Habitation. Paiement en plusieurs fois à 0 %
-possible.
+La TVA à 6 % s'applique aux logements de plus de 10 ans. Paiement en plusieurs
+fois à 0 % possible. Attention, emprunter de l'argent coûte aussi de l'argent.
 
 Estimation chiffrée en ligne sur mister-pellets.be et visite technique gratuite
 avant le devis ferme. Showroom à Fernelmont.
