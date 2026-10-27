@@ -4,6 +4,7 @@ import "../globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { NavbarSticky } from "@/components/layout/NavbarSticky";
+import { PelletPromoBanner } from "@/components/layout/PelletPromoBanner";
 import { Analytics } from "@/components/layout/Analytics";
 import { SmoothMotion } from "@/components/layout/SmoothMotion";
 import { JsonLd, ORGANIZATION_SCHEMA } from "@/components/seo/JsonLd";
@@ -176,6 +177,8 @@ export default function FrontendLayout({
         >
           Aller au contenu principal
         </a>
+        {/* Prix de lancement des pellets Comfo : rien hors période (lib/pellets.ts). */}
+        <PelletPromoBanner />
         <Header />
         <main id="main-content" className="flex-1">{children}</main>
         <Footer />

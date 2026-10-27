@@ -31,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL,                                       lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
     { url: `${SITE_URL}/boutique`,                          lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${SITE_URL}/palette-pellets-comfo`,             lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
     { url: `${SITE_URL}/demande-de-devis`,                  lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/estimation`,                        lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
     { url: `${SITE_URL}/prix-poele-pellets`,                lastModified: now, changeFrequency: "weekly",  priority: 0.9 },

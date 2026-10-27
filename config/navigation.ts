@@ -13,6 +13,7 @@ import { PHONE_HREF } from "./site";
 export const ROUTES = {
   home: "/",
   shop: "/boutique",
+  pellets: "/palette-pellets-comfo",
   product: "/produit",
   brands: "/nos-marques",
   maintenance: "/entretien-poele-a-pellets",
@@ -45,6 +46,7 @@ export const ROUTES = {
 export const PUBLISHED: ReadonlySet<string> = new Set<string>([
   ROUTES.home,
   ROUTES.shop,
+  ROUTES.pellets,
   ROUTES.brands,
   ROUTES.maintenance,
   ROUTES.sweeping,
@@ -97,6 +99,7 @@ export const CATALOGUE_LINKS: readonly NavLink[] = [
   { href: `${ROUTES.shop}?chauffage=ventile`, label: "Poêles à air", short: "À air", desc: "Chauffer la pièce de vie" },
   { href: `${ROUTES.shop}?chauffage=hydro`, label: "Poêles hydro", short: "Hydro", desc: "Raccordés aux radiateurs" },
   { href: `${ROUTES.shop}?combustible=hybride`, label: "Poêles hybrides bois et pellets", short: "Hybrides", desc: "Bûches ou pellets, au choix" },
+  { href: ROUTES.pellets, label: "Pellets Comfo en palette", short: "Pellets", desc: "975 kg, retrait à Fernelmont" },
 ];
 
 export const BRAND_LINKS: readonly NavLink[] = [

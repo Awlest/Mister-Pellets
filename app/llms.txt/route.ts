@@ -65,6 +65,11 @@ ${FAMILY_SITES.map((s) => `- ${s.name} (${s.description.toLowerCase()}) : ${s.hr
 - Marques distribuées : Edilkamin, EK63 et Girolami (Italie), et depuis
   octobre 2026 Austroflamm (Autriche, poêles à pellets et mixtes bois/pellets)
   et Cadel (Italie, gamme pellets complète). Nous ne posons que ces cinq marques.
+- Pellets en palette : Comfo (fabriqués à Bertrix par ERDA, DINplus A1,
+  100 % résineux, 6 mm), 65 sacs de 15 kg, soit 975 kg. 470 € TVAC la palette,
+  prix de lancement de 435 € pour les réservations faites jusqu'au 2 novembre
+  2026. Retrait sur rendez-vous au showroom de Fernelmont, paiement sur place,
+  pas de livraison : ${SITE_URL}/palette-pellets-comfo
 
 Ce que nous ne faisons pas : la climatisation (voir Mister Clim), les poêles à
 bois bûche (voir Mister Bois), les chaudières gaz ou mazout, la pompe à chaleur

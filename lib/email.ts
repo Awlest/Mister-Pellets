@@ -30,6 +30,7 @@ import {
   type EmailRow,
 } from "@/lib/email-layout";
 import { formatKw } from "@/lib/power";
+import { PALLET_NET_KG, PELLET_OFFER, formatEuro } from "@/lib/pellets";
 
 /**
  * Helper email. Utilise Resend si RESEND_API_KEY est configuré, sinon log
@@ -333,6 +334,7 @@ export interface BookingConfirmation {
     name: string;
     location: "domicile" | "showroom";
     priceLabel: string;
+    calendarDescription?: string;
   };
   /** Instant de début, epoch en millisecondes. */
   start: number;
@@ -340,6 +342,8 @@ export interface BookingConfirmation {
   name: string;
   /** Adresse de la visite, pour un rendez-vous à domicile. */
   address?: string;
+  /** Retrait de pellets : palettes réservées et prix du jour (lib/pellets.ts). */
+  pickup?: { quantity: number; unitPriceTTC: number };
 }
 
 /**
@@ -361,10 +365,23 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
   const icsUrl = `${EMAIL_SITE_URL}${icsDownloadPath(b.service.slug, b.start)}`;
   const ics = buildIcs(entry);
 
-  const subject = `Rendez-vous confirmé le ${day} à ${startLabel}`;
-  const leadText = atHome
-    ? `Nous passons chez vous le ${day} à ${startLabel}.`
-    : `Nous vous attendons au showroom le ${day} à ${startLabel}.`;
+  // Retrait de pellets : mêmes rubriques, autre objet (palettes, prix, paiement).
+  const pickup = b.pickup;
+  const pallets = pickup
+    ? `${pickup.quantity} ${pickup.quantity > 1 ? "palettes" : "palette"}`
+    : "";
+  const pickupTotal = pickup ? formatEuro(pickup.quantity * pickup.unitPriceTTC) : "";
+
+  const subject = pickup
+    ? `Retrait de pellets confirmé le ${day} à ${startLabel}`
+    : `Rendez-vous confirmé le ${day} à ${startLabel}`;
+  const leadText = pickup
+    ? pickup.quantity > 1
+      ? `Vos ${pallets} de pellets Comfo vous attendent au showroom le ${day} à ${startLabel}.`
+      : `Votre palette de pellets Comfo vous attend au showroom le ${day} à ${startLabel}.`
+    : atHome
+      ? `Nous passons chez vous le ${day} à ${startLabel}.`
+      : `Nous vous attendons au showroom le ${day} à ${startLabel}.`;
   const thanks = "Merci pour votre réservation. Le rendez-vous est inscrit dans notre agenda.";
   const preheader = atHome
     ? "Nous venons voir la pièce et le conduit, le devis suit sous 48 heures."
@@ -380,9 +397,20 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
         text: `Showroom Mister Pellets, ${SHOWROOM_ADDRESS}`,
       };
 
-  const what = `${escapeHtml(b.service.name)}<br><span style="color:${C.inkSoft}">${escapeHtml(b.service.priceLabel)}, sans engagement · ${b.durationMin}&nbsp;minutes</span>`;
+  const what = pickup
+    ? `${escapeHtml(pallets)} de pellets Comfo<br><span style="color:${C.inkSoft}">${escapeHtml(formatEuro(pickup.unitPriceTTC))} TVAC la palette, soit ${escapeHtml(pickupTotal)} TVAC à payer sur place</span>`
+    : `${escapeHtml(b.service.name)}<br><span style="color:${C.inkSoft}">${escapeHtml(b.service.priceLabel)}, sans engagement · ${b.durationMin}&nbsp;minutes</span>`;
 
-  const guide = atHome
+  const guide = pickup
+    ? {
+        title: "Le jour du retrait",
+        paragraphs: [
+          `Une palette, ce sont ${PELLET_OFFER.bags} sacs de ${PELLET_OFFER.bagKg} kg : ${PALLET_NET_KG} kg de pellets, sans compter la palette. Venez avec un véhicule ou une remorque qui supporte ce poids.`,
+          `Le paiement se fait sur place, à l'enlèvement : ${pickupTotal} TVAC pour ${pallets}, au prix du jour de votre réservation.`,
+          "Vous voulez changer le nombre de palettes ? Répondez à cet e-mail avant de venir.",
+        ],
+      }
+    : atHome
     ? {
         title: "Comment se passe la visite",
         paragraphs: [
@@ -411,7 +439,7 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
         valueHtml: `<span class="mp-serif" style="font-family:${SERIF};font-size:21px;font-weight:600;color:${C.greenDeep}">${dayTitle}</span><br>de ${startLabel} à ${endLabel}`,
       },
       { label: "Où", valueHtml: where.html },
-      { label: "Rendez-vous", valueHtml: what },
+      { label: pickup ? "Commande" : "Rendez-vous", valueHtml: what },
     ])}
 
     ${emailButton(googleUrl, "Ajouter à Google Agenda")}
@@ -432,8 +460,8 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
   const html = brandedEmailHtml({
     title: subject,
     preheader,
-    eyebrow: "Rendez-vous confirmé",
-    heading: "Votre rendez-vous est confirmé",
+    eyebrow: pickup ? "Retrait confirmé" : "Rendez-vous confirmé",
+    heading: pickup ? "Votre retrait est confirmé" : "Votre rendez-vous est confirmé",
     lead: escapeHtml(leadText),
     bodyHtml,
     footerNote: "Vous recevez cet e-mail parce que vous avez réservé un rendez-vous sur mister-pellets.be.",
@@ -448,7 +476,9 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
       "",
       `Quand : ${dayWithYear}, de ${startLabel} à ${endLabel}`,
       `Où : ${where.text}`,
-      `Rendez-vous : ${b.service.name} (${b.service.priceLabel.toLowerCase()}, sans engagement, ${b.durationMin} minutes)`,
+      pickup
+        ? `Commande : ${pallets} de pellets Comfo, ${formatEuro(pickup.unitPriceTTC)} TVAC la palette, soit ${pickupTotal} TVAC à payer sur place`
+        : `Rendez-vous : ${b.service.name} (${b.service.priceLabel.toLowerCase()}, sans engagement, ${b.durationMin} minutes)`,
       ...(atHome ? [] : [`Itinéraire : ${SHOWROOM_MAPS_URL}`]),
       "",
       `Ajouter à Google Agenda : ${googleUrl}`,

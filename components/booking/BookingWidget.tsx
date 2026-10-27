@@ -24,6 +24,11 @@ interface OnlineService {
   name: string;
   durationLabel: string;
   location: "domicile" | "showroom";
+  /** Champs propres à un rendez-vous (retrait de pellets), lib/services.ts. */
+  notesField?: { label: string; placeholder: string };
+  quantity?: { label: string; max: number; unit: string; unitPlural: string };
+  calendarDescription?: string;
+  isLead?: false;
 }
 
 interface DaySlots {
@@ -125,6 +130,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
   const [form, setForm] = React.useState({
     name: "", email: "", phone: "", street: "", postalCode: "", city: "", notes: "", website: "",
   });
+  const [quantity, setQuantity] = React.useState(1);
   const [submitting, setSubmitting] = React.useState(false);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [confirmed, setConfirmed] = React.useState<{
@@ -222,7 +228,12 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
       const res = await fetch("/api/rdv/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ service: serviceSlug, start: chosenStart, ...form }),
+        body: JSON.stringify({
+          service: serviceSlug,
+          start: chosenStart,
+          ...form,
+          ...(service?.quantity ? { quantity } : {}),
+        }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -241,7 +252,10 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
         start: chosenStart,
         durationMin: typeof data.durationMin === "number" ? data.durationMin : 60,
       });
-      trackEvent(EVENTS.rdvReserve, { service: serviceSlug, date: data.date });
+      // Retrait de pellets : pas la conversion Ads des projets de poêle.
+      if (service?.isLead !== false) {
+        trackEvent(EVENTS.rdvReserve, { service: serviceSlug, date: data.date });
+      }
       trackEvent(EVENTS.bookAppointment, { ...BRAND_PARAMS, service: serviceSlug });
     } catch (e) {
       setSubmitError(e instanceof Error && e.name === "Error" ? e.message : "Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou appelez-nous au 081 13 83 09.");
@@ -382,42 +396,49 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
     );
   };
 
+  // Un seul rendez-vous possible (page de la palette de pellets) : pas de
+  // choix à faire, la numérotation commence au créneau.
+  const singleService = services.length === 1;
+  const step = (n: number) => (singleService ? n - 1 : n);
+
   return (
     <Card className="mx-auto max-w-3xl p-6 md:p-8">
       {/* Étape 1 — service */}
-      <fieldset className="mb-7 min-w-0">
-        <legend className="text-sm font-semibold text-mp-green-deep mb-3">
-          1. Quel type de rendez-vous&nbsp;?
-        </legend>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {services.map((s) => (
-            <button
-              key={s.slug}
-              type="button"
-              onClick={() => setServiceSlug(s.slug)}
-              aria-pressed={serviceSlug === s.slug}
-              className={cn(
-                "text-left rounded-xl border px-4 py-3 transition-colors",
-                "focus:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-flame",
-                serviceSlug === s.slug
-                  ? "border-mp-orange-flame bg-mp-orange-light/40"
-                  : "border-mp-sand hover:border-mp-orange-warm",
-              )}
-            >
-              <span className="block font-semibold text-mp-green-deep">{s.name}</span>
-              <span className="block text-xs text-mp-ink-soft mt-0.5">
-                {s.durationLabel} · {s.location === "domicile" ? "À domicile" : "Au showroom"}
-              </span>
-            </button>
-          ))}
-        </div>
-      </fieldset>
+      {!singleService && (
+        <fieldset className="mb-7 min-w-0">
+          <legend className="text-sm font-semibold text-mp-green-deep mb-3">
+            1. Quel type de rendez-vous&nbsp;?
+          </legend>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {services.map((s) => (
+              <button
+                key={s.slug}
+                type="button"
+                onClick={() => setServiceSlug(s.slug)}
+                aria-pressed={serviceSlug === s.slug}
+                className={cn(
+                  "text-left rounded-xl border px-4 py-3 transition-colors",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-mp-orange-flame",
+                  serviceSlug === s.slug
+                    ? "border-mp-orange-flame bg-mp-orange-light/40"
+                    : "border-mp-sand hover:border-mp-orange-warm",
+                )}
+              >
+                <span className="block font-semibold text-mp-green-deep">{s.name}</span>
+                <span className="block text-xs text-mp-ink-soft mt-0.5">
+                  {s.durationLabel} · {s.location === "domicile" ? "À domicile" : "Au showroom"}
+                </span>
+              </button>
+            ))}
+          </div>
+        </fieldset>
+      )}
 
       {/* Étape 2 — créneau. min-w-0 : sans lui, le fieldset prend la largeur
         * de son contenu au lieu de celle de la carte (cf. plus haut). */}
       <fieldset className="mb-7 min-w-0">
         <legend className="text-sm font-semibold text-mp-green-deep mb-3">
-          2. Choisissez un créneau
+          {step(2)}. Choisissez un créneau
         </legend>
 
         {loadingSlots && (
@@ -558,10 +579,28 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
       <form onSubmit={submit}>
         <fieldset disabled={chosenStart == null} className={cn("min-w-0", chosenStart == null && "opacity-45")}>
           <legend className="text-sm font-semibold text-mp-green-deep mb-3">
-            3. Vos coordonnées
+            {step(3)}. Vos coordonnées
           </legend>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {service?.quantity && (
+              <div className="sm:col-span-2">
+                <label htmlFor="bk-quantity" className="block text-sm font-medium mb-1.5">
+                  {service.quantity.label} <span className="text-mp-orange-ink">*</span>
+                </label>
+                <select
+                  id="bk-quantity" value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20 sm:w-auto sm:min-w-56"
+                >
+                  {Array.from({ length: service.quantity.max }, (_, i) => i + 1).map((n) => (
+                    <option key={n} value={n}>
+                      {n} {n > 1 ? service.quantity!.unitPlural : service.quantity!.unit}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             <div className="sm:col-span-2">
               <label htmlFor="bk-name" className="block text-sm font-medium mb-1.5">
                 Nom complet <span className="text-mp-orange-ink">*</span>
@@ -641,11 +680,14 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
             )}
             <div className="sm:col-span-2">
               <label htmlFor="bk-notes" className="block text-sm font-medium mb-1.5">
-                Votre projet en deux mots
+                {service?.notesField?.label ?? "Votre projet en deux mots"}
               </label>
               <textarea
                 id="bk-notes" rows={3} value={form.notes}
-                placeholder="Surface à chauffer, conduit existant ou non, modèle qui vous intéresse…"
+                placeholder={
+                  service?.notesField?.placeholder ??
+                  "Surface à chauffer, conduit existant ou non, modèle qui vous intéresse…"
+                }
                 onChange={(e) => update("notes", e.target.value)}
                 className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
               />
