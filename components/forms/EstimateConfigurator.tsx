@@ -64,9 +64,20 @@ const STEPS = [
   { id: 3, label: "Votre poêle" },
   { id: 4, label: "Options" },
   { id: 5, label: "Financement" },
-  { id: 6, label: "Coordonnées" },
+  { id: 6, label: "La suite" },
 ];
 const STEP_COUNT = STEPS.length;
+
+/**
+ * Dernière étape : le visiteur choisit d'être recontacté ou non. Les
+ * coordonnées ne sont demandées que sur « oui » ; sur « non », rien ne part,
+ * l'estimation reste affichée et le brouillon reste dans le navigateur.
+ */
+type ContactChoice = "" | "oui" | "non";
+const CONTACT_CHOICES: Choice<ContactChoice>[] = [
+  { value: "oui", label: "Oui, recontactez-moi", desc: "Nous fixons ensemble la visite technique" },
+  { value: "non", label: "Non merci, pas maintenant", desc: "Je garde mon estimation pour l'instant" },
+];
 
 /**
  * Modèles montrés d'emblée à l'étape 3, les mieux dimensionnés en tête. Avant,
@@ -242,6 +253,7 @@ function EstimateForm({
   const [step, setStep] = React.useState(1);
   const [s, setS] = React.useState<EstimateState>(initialState);
   const [customer, setCustomer] = React.useState<Customer>(EMPTY_CUSTOMER);
+  const [contactChoice, setContactChoice] = React.useState<ContactChoice>("");
   const [website, setWebsite] = React.useState(""); // honeypot
   const [submitState, setSubmitState] = React.useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = React.useState("");
@@ -344,6 +356,8 @@ function EstimateForm({
       return;
     }
     if (step === STEP_COUNT) {
+      // Sans « oui », rien à envoyer (le bouton n'est d'ailleurs pas affiché).
+      if (contactChoice !== "oui") return;
       const first = FIELD_ORDER.find((f) => errors[f]);
       if (first) {
         setTriedSubmit(true);
@@ -917,166 +931,208 @@ function EstimateForm({
             </>
           )}
 
-          {/* ---------- 6. Coordonnées ---------- */}
+          {/* ---------- 6. La suite : recontact ou non ---------- */}
           {step === 6 && (
             <>
-              <StepHeading ref={headingRef}>Où vous envoyons-nous cette estimation ?</StepHeading>
+              <StepHeading ref={headingRef}>Voulez-vous qu&apos;on vous recontacte ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft">
-                Nous vous rappelons sous 48h ouvrées pour caler la visite technique. Pas de spam, pas
-                de vente forcée.
+                Votre estimation est prête :{" "}
+                <strong className="whitespace-nowrap text-mp-green-deep">{eur(r.totalTTC)} TTC</strong>,
+                pose comprise. Elle est calculée sans avoir vu votre maison. Pendant la visite
+                technique, gratuite, il nous arrive de trouver moins cher : un conduit existant qui
+                suffit, un poêle un cran moins puissant, un trajet plus court pour les fumées.
               </p>
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <Field id="est-cp" label="Code postal" required error={fieldError("postalCode")}>
-                    <input
-                      id="est-cp"
-                      type="text"
-                      inputMode="numeric"
-                      enterKeyHint="next"
-                      maxLength={4}
-                      required
-                      aria-invalid={!!fieldError("postalCode")}
-                      aria-describedby={fieldError("postalCode") ? "est-cp-err" : undefined}
-                      value={customer.postalCode}
-                      onChange={(e) =>
-                        setCustomer({ ...customer, postalCode: e.target.value.replace(/[^0-9]/g, "") })
-                      }
-                      onBlur={() => touch("postalCode")}
-                      className={inputCls}
-                      placeholder="5380"
-                      autoComplete="postal-code"
-                    />
-                  </Field>
-                  <Field id="est-delay" label="Délai souhaité" required error={fieldError("delay")}>
-                    <select
-                      id="est-delay"
-                      required
-                      aria-invalid={!!fieldError("delay")}
-                      aria-describedby={fieldError("delay") ? "est-delay-err" : undefined}
-                      value={customer.delay}
-                      onChange={(e) => {
-                        setCustomer({ ...customer, delay: e.target.value as Customer["delay"] });
-                        touch("delay");
-                      }}
-                      onBlur={() => touch("delay")}
-                      className={inputCls}
-                    >
-                      <option value="" disabled>
-                        Choisissez…
-                      </option>
-                      <option value="asap">Le plus vite possible</option>
-                      <option value="1-3-mois">Dans 1 à 3 mois</option>
-                      <option value="3-6-mois">Dans 3 à 6 mois</option>
-                      <option value="+6-mois">Plus de 6 mois (je me renseigne)</option>
-                    </select>
-                  </Field>
+              <ChoiceGroup
+                name="contactChoice"
+                legend="Voulez-vous qu'on vous recontacte ?"
+                legendHidden
+                value={contactChoice}
+                choices={CONTACT_CHOICES}
+                onChange={setContactChoice}
+                className="sm:grid-cols-2"
+              />
+
+              {contactChoice === "non" && (
+                <div
+                  role="status"
+                  className="mt-6 rounded-xl border border-mp-sand/60 bg-mp-cream p-4 text-mp-ink sm:p-5"
+                >
+                  <p>
+                    C&apos;est noté, nous ne vous recontacterons pas. Votre configuration reste
+                    enregistrée dans ce navigateur : vous la retrouverez en revenant sur cette page.
+                  </p>
+                  <p className="mt-3">
+                    Si vous changez d&apos;avis, choisissez « Oui » ci-dessus, appelez le{" "}
+                    <a href="tel:+3281138309" className="whitespace-nowrap font-semibold text-mp-green-deep underline underline-offset-2">
+                      081 13 83 09
+                    </a>{" "}
+                    ou{" "}
+                    <Link href="/prendre-rendez-vous#reserver" className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline">
+                      réservez la visite en ligne
+                    </Link>
+                    .
+                  </p>
                 </div>
-                <Field id="est-name" label="Nom complet" required error={fieldError("name")}>
-                  <input
-                    id="est-name"
-                    type="text"
-                    enterKeyHint="next"
-                    required
-                    minLength={2}
-                    aria-invalid={!!fieldError("name")}
-                    aria-describedby={fieldError("name") ? "est-name-err" : undefined}
-                    value={customer.name}
-                    onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
-                    onBlur={() => touch("name")}
-                    className={inputCls}
-                    placeholder="Sophie Dupont"
-                    autoComplete="name"
-                  />
-                </Field>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <Field id="est-email" label="Email" required error={fieldError("email")}>
-                    <input
-                      id="est-email"
-                      type="email"
-                      inputMode="email"
-                      enterKeyHint="next"
-                      required
-                      aria-invalid={!!fieldError("email")}
-                      aria-describedby={fieldError("email") ? "est-email-err" : undefined}
-                      value={customer.email}
-                      onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
-                      onBlur={() => touch("email")}
-                      className={inputCls}
-                      placeholder="sophie@exemple.be"
-                      autoComplete="email"
-                    />
-                  </Field>
-                  <Field
-                    id="est-phone"
-                    label="Téléphone"
-                    required
-                    note="(BE uniquement)"
-                    error={fieldError("phone")}
-                  >
-                    <input
-                      id="est-phone"
-                      type="tel"
-                      inputMode="tel"
-                      enterKeyHint="next"
-                      required
-                      aria-invalid={!!fieldError("phone")}
-                      aria-describedby={fieldError("phone") ? "est-phone-err" : undefined}
-                      value={customer.phone}
-                      onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
-                      onBlur={() => touch("phone")}
-                      className={inputCls}
-                      placeholder="0470 12 34 56"
-                      autoComplete="tel"
-                    />
-                  </Field>
-                </div>
-                <Field id="est-message" label="Précisions (optionnel)">
-                  <textarea
-                    id="est-message"
-                    rows={3}
-                    value={customer.message}
-                    onChange={(e) => setCustomer({ ...customer, message: e.target.value })}
-                    className={cn(inputCls, "resize-y")}
-                    placeholder="Accès particulier, projet en cours, contraintes de planning…"
-                  />
-                </Field>
-                <div>
-                  <label
-                    htmlFor="est-consent"
-                    className="flex cursor-pointer items-start gap-3 py-1 text-sm text-mp-ink-soft"
-                  >
-                    <input
-                      id="est-consent"
-                      type="checkbox"
-                      required
-                      aria-invalid={!!fieldError("consent")}
-                      aria-describedby={fieldError("consent") ? "est-consent-err" : undefined}
-                      checked={customer.consent}
-                      onChange={(e) => {
-                        setCustomer({ ...customer, consent: e.target.checked });
-                        touch("consent");
-                      }}
-                      className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-mp-orange-ink"
-                    />
-                    <span>
-                      J&apos;accepte que mes données soient utilisées pour me recontacter,
-                      conformément à la{" "}
-                      <a
-                        href="/politique-confidentialite"
-                        className="text-mp-orange-ink underline hover:no-underline"
+              )}
+
+              {contactChoice === "oui" && (
+                <div className="mt-8 space-y-4">
+                  <p className="text-mp-ink-soft">
+                    Nous vous rappelons sous 48 h ouvrées pour caler la visite. Pas de spam, pas de
+                    vente forcée.
+                  </p>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <Field id="est-cp" label="Code postal" required error={fieldError("postalCode")}>
+                      <input
+                        id="est-cp"
+                        type="text"
+                        inputMode="numeric"
+                        enterKeyHint="next"
+                        maxLength={4}
+                        required
+                        aria-invalid={!!fieldError("postalCode")}
+                        aria-describedby={fieldError("postalCode") ? "est-cp-err" : undefined}
+                        value={customer.postalCode}
+                        onChange={(e) =>
+                          setCustomer({ ...customer, postalCode: e.target.value.replace(/[^0-9]/g, "") })
+                        }
+                        onBlur={() => touch("postalCode")}
+                        className={inputCls}
+                        placeholder="5380"
+                        autoComplete="postal-code"
+                      />
+                    </Field>
+                    <Field id="est-delay" label="Délai souhaité" required error={fieldError("delay")}>
+                      <select
+                        id="est-delay"
+                        required
+                        aria-invalid={!!fieldError("delay")}
+                        aria-describedby={fieldError("delay") ? "est-delay-err" : undefined}
+                        value={customer.delay}
+                        onChange={(e) => {
+                          setCustomer({ ...customer, delay: e.target.value as Customer["delay"] });
+                          touch("delay");
+                        }}
+                        onBlur={() => touch("delay")}
+                        className={inputCls}
                       >
-                        politique de confidentialité
-                      </a>
-                      .
-                    </span>
-                  </label>
-                  {fieldError("consent") && (
-                    <p id="est-consent-err" className="mt-1.5 text-sm text-red-700">
-                      {fieldError("consent")}
-                    </p>
-                  )}
+                        <option value="" disabled>
+                          Choisissez…
+                        </option>
+                        <option value="asap">Le plus vite possible</option>
+                        <option value="1-3-mois">Dans 1 à 3 mois</option>
+                        <option value="3-6-mois">Dans 3 à 6 mois</option>
+                        <option value="+6-mois">Plus de 6 mois (je me renseigne)</option>
+                      </select>
+                    </Field>
+                  </div>
+                  <Field id="est-name" label="Nom complet" required error={fieldError("name")}>
+                    <input
+                      id="est-name"
+                      type="text"
+                      enterKeyHint="next"
+                      required
+                      minLength={2}
+                      aria-invalid={!!fieldError("name")}
+                      aria-describedby={fieldError("name") ? "est-name-err" : undefined}
+                      value={customer.name}
+                      onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
+                      onBlur={() => touch("name")}
+                      className={inputCls}
+                      placeholder="Sophie Dupont"
+                      autoComplete="name"
+                    />
+                  </Field>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <Field id="est-email" label="Email" required error={fieldError("email")}>
+                      <input
+                        id="est-email"
+                        type="email"
+                        inputMode="email"
+                        enterKeyHint="next"
+                        required
+                        aria-invalid={!!fieldError("email")}
+                        aria-describedby={fieldError("email") ? "est-email-err" : undefined}
+                        value={customer.email}
+                        onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
+                        onBlur={() => touch("email")}
+                        className={inputCls}
+                        placeholder="sophie@exemple.be"
+                        autoComplete="email"
+                      />
+                    </Field>
+                    <Field
+                      id="est-phone"
+                      label="Téléphone"
+                      required
+                      note="(BE uniquement)"
+                      error={fieldError("phone")}
+                    >
+                      <input
+                        id="est-phone"
+                        type="tel"
+                        inputMode="tel"
+                        enterKeyHint="next"
+                        required
+                        aria-invalid={!!fieldError("phone")}
+                        aria-describedby={fieldError("phone") ? "est-phone-err" : undefined}
+                        value={customer.phone}
+                        onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
+                        onBlur={() => touch("phone")}
+                        className={inputCls}
+                        placeholder="0470 12 34 56"
+                        autoComplete="tel"
+                      />
+                    </Field>
+                  </div>
+                  <Field id="est-message" label="Précisions (optionnel)">
+                    <textarea
+                      id="est-message"
+                      rows={3}
+                      value={customer.message}
+                      onChange={(e) => setCustomer({ ...customer, message: e.target.value })}
+                      className={cn(inputCls, "resize-y")}
+                      placeholder="Accès particulier, projet en cours, contraintes de planning…"
+                    />
+                  </Field>
+                  <div>
+                    <label
+                      htmlFor="est-consent"
+                      className="flex cursor-pointer items-start gap-3 py-1 text-sm text-mp-ink-soft"
+                    >
+                      <input
+                        id="est-consent"
+                        type="checkbox"
+                        required
+                        aria-invalid={!!fieldError("consent")}
+                        aria-describedby={fieldError("consent") ? "est-consent-err" : undefined}
+                        checked={customer.consent}
+                        onChange={(e) => {
+                          setCustomer({ ...customer, consent: e.target.checked });
+                          touch("consent");
+                        }}
+                        className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-mp-orange-ink"
+                      />
+                      <span>
+                        J&apos;accepte que mes données soient utilisées pour me recontacter,
+                        conformément à la{" "}
+                        <a
+                          href="/politique-confidentialite"
+                          className="text-mp-orange-ink underline hover:no-underline"
+                        >
+                          politique de confidentialité
+                        </a>
+                        .
+                      </span>
+                    </label>
+                    {fieldError("consent") && (
+                      <p id="est-consent-err" className="mt-1.5 text-sm text-red-700">
+                        {fieldError("consent")}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </>
           )}
 
@@ -1104,7 +1160,8 @@ function EstimateForm({
           )}
         >
           <div className="flex items-center gap-3">
-            {step < STEP_COUNT && (
+            {/* Le total reste dans la barre tant que le formulaire n'est pas ouvert. */}
+            {(step < STEP_COUNT || contactChoice !== "oui") && (
               <button
                 type="button"
                 onPointerDown={preloadRecapSheet}
@@ -1136,28 +1193,30 @@ function EstimateForm({
               </Button>
             )}
             <span className="hidden flex-1 lg:block" aria-hidden />
-            <Button
-              variant="primary"
-              size="default"
-              onClick={next}
-              disabled={loading}
-              className={cn("shrink-0 px-5 lg:px-6", step === STEP_COUNT && "flex-1 sm:flex-none")}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-                  Envoi…
-                </>
-              ) : step === STEP_COUNT ? (
-                <>
-                  Recevoir mon estimation <ArrowRight className="h-4 w-4" aria-hidden />
-                </>
-              ) : (
-                <>
-                  Suivant <ArrowRight className="h-4 w-4" aria-hidden />
-                </>
-              )}
-            </Button>
+            {(step < STEP_COUNT || contactChoice === "oui") && (
+              <Button
+                variant="primary"
+                size="default"
+                onClick={next}
+                disabled={loading}
+                className={cn("shrink-0 px-5 lg:px-6", step === STEP_COUNT && "flex-1 sm:flex-none")}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+                    Envoi…
+                  </>
+                ) : step === STEP_COUNT ? (
+                  <>
+                    Envoyer ma demande <ArrowRight className="h-4 w-4" aria-hidden />
+                  </>
+                ) : (
+                  <>
+                    Suivant <ArrowRight className="h-4 w-4" aria-hidden />
+                  </>
+                )}
+              </Button>
+            )}
           </div>
         </div>
       </div>
