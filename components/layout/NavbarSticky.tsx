@@ -4,15 +4,16 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { Home, ShoppingBag, Flame, Phone, Menu as MenuIcon } from "lucide-react";
+import { CalendarCheck, ShoppingBag, Flame, Phone, Menu as MenuIcon } from "lucide-react";
 import { MOBILE_TABS, ROUTES, isCataloguePath, type MobileTabId } from "@/config/navigation";
 
 /**
  * Navbar FLOTTANTE sticky bottom, mobile ET tablette (jusqu'à xl / 1280 px).
- * 5 onglets communs aux sites Mister (config/navigation.ts, MOBILE_TABS,
- * standard du 17/10/2026) : Accueil / Catalogue / Estimer / Appeler / Menu.
- * L'appel reste à un geste sur toutes les pages ; le rendez-vous ouvre le
- * volet Menu, en tête de liste.
+ * 5 onglets (config/navigation.ts, MOBILE_TABS) : Catalogue / Estimer /
+ * Rendez-vous / Appeler / Menu. Le standard des sites Mister du 17/10/2026
+ * met Accueil en premier ; ici le rendez-vous le remplace, au centre (écart
+ * décidé le 28/10/2026, raison dans config/navigation.ts). L'appel reste à
+ * un geste sur toutes les pages, l'accueil ouvre le volet Menu.
  * La pastille orange est un FOND ACTIF derrière l'onglet courant qui glisse
  * latéralement d'un onglet à l'autre (courbe en sortie douce, sans rebond).
  *
@@ -40,16 +41,16 @@ const preloadMenuSheet = () => {
 
 type TabId = MobileTabId;
 
-const TAB_UI: Record<TabId, { icon: typeof Home; matches: (path: string) => boolean }> = {
-  // « /index » : c'est le chemin que voit le rendu serveur de l'accueil en
-  // production (régénération ISR). Sans lui, le HTML marquait l'onglet Menu
-  // et le navigateur l'onglet Accueil : React levait l'erreur d'hydratation
-  // #418 et recalculait toute la page côté navigateur (constaté le 11/10/2026).
-  home: { icon: Home, matches: (p) => p === "/" || p === "/index" || p === "" },
+// Sans onglet Accueil, l'accueil ne correspond à aucun onglet et marque Menu,
+// au rendu serveur (« /index » en régénération ISR) comme dans le navigateur
+// (« / ») : pas de décalage d'hydratation (erreur #418 du 11/10/2026).
+const TAB_UI: Record<TabId, { icon: typeof ShoppingBag; matches: (path: string) => boolean }> = {
   catalogue: { icon: ShoppingBag, matches: isCataloguePath },
   // Le configurateur chiffre, calcule la mensualité et déduit la prime. Le
   // formulaire /demande-de-devis reste accessible depuis le volet.
   estimate: { icon: Flame, matches: (p) => p === ROUTES.configurator || p === ROUTES.quoteForm },
+  // Vise l'agenda (#reserver) : depuis la page elle-même, le geste y descend.
+  booking: { icon: CalendarCheck, matches: (p) => p === ROUTES.booking },
   // Lien tel: : jamais actif.
   call: { icon: Phone, matches: () => false },
   menu: { icon: MenuIcon, matches: () => false },
@@ -188,7 +189,14 @@ export function NavbarSticky() {
                   )}
                 >
                   <Icon className="h-[18px] w-[18px]" aria-hidden />
-                  <span>{tab.label}</span>
+                  {tab.short ? (
+                    <>
+                      <span className="hidden min-[370px]:inline">{tab.label}</span>
+                      <span className="min-[370px]:hidden">{tab.short}</span>
+                    </>
+                  ) : (
+                    <span>{tab.label}</span>
+                  )}
                 </span>
               );
 
@@ -218,6 +226,8 @@ export function NavbarSticky() {
                       href={tab.href!}
                       className="relative z-10 flex flex-col items-center justify-center h-full w-full"
                       aria-current={isActive ? "page" : undefined}
+                      // Sous 370 px, « RDV » à l'écran, le nom complet pour les lecteurs d'écran.
+                      aria-label={tab.short ? tab.label : undefined}
                     >
                       {itemContent}
                     </Link>

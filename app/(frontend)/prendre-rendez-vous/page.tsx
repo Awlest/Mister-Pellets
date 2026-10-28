@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Phone, MapPin, Clock, ArrowRight, CalendarCheck } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -63,6 +63,14 @@ export default function PrendreRendezVousPage() {
           { label: "Accueil", href: "/" },
           { label: "Prendre rendez-vous" },
         ]}
+        actions={
+          <Button asChild variant="primary" size="lg" className="w-full sm:w-auto">
+            <a href="#reserver">
+              <CalendarCheck aria-hidden />
+              Choisir un créneau
+            </a>
+          </Button>
+        }
       />
 
       {/* Présentation du showroom */}

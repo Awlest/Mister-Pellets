@@ -178,16 +178,22 @@ export function visibleNav(entries: readonly NavEntry[] = MAIN_NAV): NavEntry[] 
 }
 
 /**
- * Barre flottante du bas, commune aux trois sites : l'appel reste à un geste
- * sur toutes les pages, le rendez-vous passe en tête du volet Menu.
+ * Barre flottante du bas : l'appel reste à un geste sur toutes les pages.
+ *
+ * Écart au standard commun des trois sites (Accueil, Catalogue, Estimer,
+ * Appeler, Menu), décidé le 28/10/2026 : sur Mister Pellets, le rendez-vous
+ * prend la place d'Accueil, au centre. 80 % des visites viennent d'un
+ * téléphone et la réservation n'était qu'au fond du volet Menu. L'accueil
+ * reste en tête du volet et dans le fil d'Ariane de chaque page.
  */
-export const MOBILE_TAB_IDS = ["home", "catalogue", "estimate", "call", "menu"] as const;
+export const MOBILE_TAB_IDS = ["catalogue", "estimate", "booking", "call", "menu"] as const;
 export type MobileTabId = (typeof MOBILE_TAB_IDS)[number];
 
-export const MOBILE_TABS: readonly { id: MobileTabId; label: string; href?: string }[] = [
-  { id: "home", label: "Accueil", href: ROUTES.home },
+/** `short` : libellé affiché sous 370 px (téléphones de 320 à 360 px), où « Rendez-vous » passait sur deux lignes. */
+export const MOBILE_TABS: readonly { id: MobileTabId; label: string; short?: string; href?: string }[] = [
   { id: "catalogue", label: "Catalogue", href: ROUTES.shop },
   { id: "estimate", label: "Estimer", href: ROUTES.configurator },
+  { id: "booking", label: "Rendez-vous", short: "RDV", href: ROUTES.bookingWidget },
   { id: "call", label: "Appeler", href: PHONE_HREF },
   { id: "menu", label: "Menu" },
 ];

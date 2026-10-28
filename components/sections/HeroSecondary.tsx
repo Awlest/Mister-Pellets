@@ -20,6 +20,12 @@ interface HeroSecondaryProps {
    * à 832 px du haut, sous le premier écran d'un téléphone.
    */
   compact?: boolean;
+  /**
+   * Boutons sous le chapô, pour les pages où le visiteur vient faire un
+   * geste précis : sur /prendre-rendez-vous, l'agenda tombait à 1 500 px du
+   * haut d'un téléphone, sans rien pour y aller (constaté le 28/10/2026).
+   */
+  actions?: React.ReactNode;
 }
 
 /**
@@ -34,6 +40,7 @@ export function HeroSecondary({
   description,
   breadcrumbs,
   compact = false,
+  actions,
 }: HeroSecondaryProps) {
   return (
     <section
@@ -95,6 +102,9 @@ export function HeroSecondary({
             >
               {description}
             </p>
+          )}
+          {actions && (
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">{actions}</div>
           )}
         </div>
       </div>
