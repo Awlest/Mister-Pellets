@@ -297,6 +297,7 @@ Réutiliser ces composants pour toute nouvelle page. En créer un nouveau seulem
 | Formulaires | `ContactForm`, `QuoteForm`, `EstimateConfigurator`, `BookingWidget` | `components/forms/`, `components/booking/` |
 | Métadonnées, données structurées | `buildPageMetadata`, `JsonLd`, `build*Schema` | `lib/seo.ts`, `components/seo/JsonLd.tsx` |
 | Fond de section | `toneClass(tone)` | `lib/section-tone.ts` |
+| Bandeau d'offre datée en haut de chaque page (lien pleine largeur, vert profond, texte 14 px crème, 44 px de haut au moins, rendu serveur seulement pendant l'offre) | `PelletPromoBanner` | `components/layout/PelletPromoBanner.tsx` |
 
 `components/sections/HeroPrimary.tsx` n'est utilisé nulle part : le héros de l'accueil est écrit dans `app/(frontend)/page.tsx`. Pour une page interne, `HeroSecondary`.
 

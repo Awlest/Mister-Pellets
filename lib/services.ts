@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
-import { Home, Coffee, Wrench, Flame, Brush } from "lucide-react";
+import { Home, Coffee, Wrench, Flame, Brush, Package } from "lucide-react";
+import { PELLET_OFFER } from "@/lib/pellets";
 
 /**
  * Catalogue des prestations Mister Pellets.
@@ -46,6 +47,24 @@ export interface Service {
   location: ServiceLocation;
   booking: BookingMode;
   icon: LucideIcon;
+  /**
+   * Champ libre du formulaire de réservation, quand la question par défaut
+   * (« Votre projet en deux mots ») ne convient pas.
+   */
+  notesField?: { label: string; placeholder: string };
+  /** Quantité demandée à la réservation (palettes de pellets). */
+  quantity?: { label: string; max: number; unit: string; unitPlural: string };
+  /**
+   * Phrase de l'entrée d'agenda envoyée au client (.ics, Google Agenda), à la
+   * place de celle du lieu (diagnostic à domicile, visite du showroom).
+   */
+  calendarDescription?: string;
+  /**
+   * false : rendez-vous qui n'est pas un projet de poêle (retrait de
+   * pellets). La réservation ne déclenche pas la conversion Google Ads
+   * « prise de rendez-vous », pour ne pas fausser les campagnes poêles.
+   */
+  isLead?: false;
 }
 
 export const PHONE_DISPLAY = "081 13 83 09";
@@ -143,6 +162,41 @@ export const SERVICES: Service[] = [
   },
 ];
 
+/**
+ * Retrait d'une palette de pellets Comfo au showroom (lib/pellets.ts).
+ * Réservable en ligne dans l'agenda, mais hors de SERVICES : ce n'est pas une
+ * prestation, il n'a rien à faire dans la liste de /prendre-rendez-vous, la
+ * navigation ni le balisage des services. getService le connaît, pour les
+ * créneaux, la réservation et le fichier agenda. Prix et quantité réservés :
+ * app/api/rdv/book.
+ */
+export const PELLET_PICKUP: Service = {
+  slug: "retrait-palette-pellets",
+  name: "Retrait de pellets Comfo",
+  shortDescription: "Venir chercher sa palette de pellets au showroom de Fernelmont.",
+  longDescription:
+    "Vous choisissez le moment, vous venez chercher la palette au showroom et vous payez sur place, à l'enlèvement.",
+  durationLabel: "30 minutes",
+  durationMin: 30,
+  priceLabel: "Paiement sur place",
+  location: "showroom",
+  booking: "online",
+  icon: Package,
+  notesField: {
+    label: "Une précision ?",
+    placeholder: "Véhicule ou remorque, question sur le chargement…",
+  },
+  quantity: {
+    label: "Nombre de palettes",
+    max: PELLET_OFFER.maxPerBooking,
+    unit: "palette",
+    unitPlural: "palettes",
+  },
+  calendarDescription:
+    "Retrait de votre palette de pellets Comfo au showroom Mister Pellets. Paiement sur place à l'enlèvement. Parking devant le bâtiment.",
+  isLead: false,
+};
+
 /** Prestations réservables en ligne (rendez-vous commerciaux). */
 export const ONLINE_SERVICES = SERVICES.filter((s) => s.booking === "online");
 
@@ -150,7 +204,7 @@ export const ONLINE_SERVICES = SERVICES.filter((s) => s.booking === "online");
 export const PHONE_SERVICES = SERVICES.filter((s) => s.booking === "phone");
 
 export function getService(slug: string): Service | undefined {
-  return SERVICES.find((s) => s.slug === slug);
+  return [...SERVICES, PELLET_PICKUP].find((s) => s.slug === slug);
 }
 
 /** Durée d'un rendez-vous en ligne, en minutes (60 par défaut). */

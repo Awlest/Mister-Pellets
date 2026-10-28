@@ -2,11 +2,13 @@ import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { rateLimitResponse } from "@/lib/rate-limit";
 import { bonusPhase, brusselsDay, isBonusSwitchDay } from "@/lib/bonus";
+import { isPelletSwitchDay } from "@/lib/pellets";
 
 export const dynamic = "force-dynamic";
 
 /**
- * Invalide tout le site la nuit où le bonus de saison commence ou s'arrête.
+ * Invalide tout le site la nuit où le bonus de saison commence ou s'arrête,
+ * et celle où le prix de lancement des pellets Comfo prend fin.
  *
  * Boutique, fiches produit et pages ville sont en ISR : passé minuit, Vercel
  * sert encore la version de la veille au premier visiteur de chaque page et ne
@@ -32,12 +34,15 @@ export async function GET(request: Request) {
 
   const now = new Date();
   const day = brusselsDay(now);
-  if (!isBonusSwitchDay(now)) {
+  // Même nuit pour la fin du prix de lancement des pellets (lib/pellets.ts) :
+  // bandeau du site, page de la palette et prix réservé changent à minuit.
+  const pellets = isPelletSwitchDay(now);
+  if (!isBonusSwitchDay(now) && !pellets) {
     return NextResponse.json({ day, revalidated: false });
   }
 
   const phase = bonusPhase(now);
   revalidatePath("/", "layout");
-  console.log("[cron/bonus] site invalidé", { day, phase });
-  return NextResponse.json({ day, phase, revalidated: true });
+  console.log("[cron/bonus] site invalidé", { day, phase, pellets });
+  return NextResponse.json({ day, phase, pellets, revalidated: true });
 }

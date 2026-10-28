@@ -6,6 +6,8 @@ import {
   easterSunday, belgianPublicHolidays, isBelgianPublicHoliday,
 } from "@/lib/booking";
 import { bookingCalendarEntry, buildIcs, googleCalendarUrl, icsDownloadPath } from "@/lib/booking-calendar";
+import { isPelletSwitchDay, pelletPriceHT, pelletPricePerBag, pelletPricePerKg, pelletPriceTTC } from "@/lib/pellets";
+import { getService, ONLINE_SERVICES, PELLET_PICKUP } from "@/lib/services";
 
 let ko = 0;
 function check(label: string, got: unknown, want: unknown) {
@@ -192,6 +194,25 @@ check("google agenda : dates en UTC", gcal.searchParams.get("dates"), "20261008T
 check("google agenda : espaces en %20, jamais en +", googleCalendarUrl(domicile).includes("+"), false);
 check("lien .ics : service et instant seulement",
   icsDownloadPath("devis-sur-place", debutRdv), `/api/rdv/ics?service=devis-sur-place&start=${debutRdv}`);
+
+// Palette de pellets Comfo (lib/pellets.ts) : prix de lancement jusqu'au
+// 02/11/2026 inclus, heure de Bruxelles (heure d'hiver, UTC+1), puis 470 €.
+const dernierJour = new Date("2026-11-02T22:59:00Z"); // 23:59 à Bruxelles
+const lendemain = new Date("2026-11-02T23:00:00Z"); // minuit le 03/11
+check("pellets : 435 € le 02/11 à 23:59", pelletPriceTTC(dernierJour), 435);
+check("pellets : 470 € le 03/11 à 00:00", pelletPriceTTC(lendemain), 470);
+check("pellets : bascule la nuit du 02 au 03/11 seulement",
+  [isPelletSwitchDay(dernierJour), isPelletSwitchDay(lendemain), isPelletSwitchDay(new Date("2026-11-04T10:00:00Z"))],
+  [false, true, false]);
+check("pellets : cron de 23 h UTC le 02/11 = minuit à Bruxelles, bascule",
+  isPelletSwitchDay(new Date("2026-11-02T23:40:00Z")), true);
+check("pellets : prix unitaires de 435 €", [pelletPriceHT(435), pelletPricePerBag(435), pelletPricePerKg(435)],
+  [410.38, 6.69, 0.45]);
+check("pellets : retrait réservable, hors des prestations listées",
+  [getService("retrait-palette-pellets")?.booking, ONLINE_SERVICES.some((s) => s.slug === PELLET_PICKUP.slug)],
+  ["online", false]);
+check("pellets : entrée d'agenda propre au retrait",
+  bookingCalendarEntry(PELLET_PICKUP, debutRdv, 30).description.startsWith("Retrait de votre palette"), true);
 
 console.log(ko === 0 ? "\nTOUS OK" : `\n${ko} ECHEC(S)`);
 process.exit(ko === 0 ? 0 : 1);

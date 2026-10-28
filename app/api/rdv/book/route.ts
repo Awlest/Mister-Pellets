@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { confirmCustomerBooking, notifyInternalBooking } from "@/lib/email";
 import { rateLimitResponse, csrfOriginCheck, isHoneypotTriggered } from "@/lib/rate-limit";
-import { getService, bookingDurationMin } from "@/lib/services";
+import { getService, bookingDurationMin, PELLET_PICKUP } from "@/lib/services";
+import { formatEuro, pelletPriceTTC } from "@/lib/pellets";
 import { availableSlots, formatSlotTime, belgianDayKey } from "@/lib/booking";
 import { readVisitAddress, visitAddressError, formatVisitAddress } from "@/lib/visit-address";
 import {
@@ -94,6 +95,29 @@ export async function POST(request: Request) {
   const address = service.location === "domicile" ? formatVisitAddress(visit) : "";
   const notes = str(payload.notes, 1000);
 
+  // Retrait de pellets : nombre de palettes, et prix du jour de la
+  // réservation (lib/pellets.ts), que le client paie sur place.
+  let pickup: { quantity: number; unitPriceTTC: number } | undefined;
+  if (service.quantity) {
+    const quantity = Number(payload.quantity);
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > service.quantity.max) {
+      return NextResponse.json(
+        {
+          error: `Indiquez un nombre de ${service.quantity.unitPlural} entre 1 et ${service.quantity.max}. Pour davantage, appelez-nous au 081 13 83 09.`,
+        },
+        { status: 400 },
+      );
+    }
+    if (service.slug === PELLET_PICKUP.slug) {
+      pickup = { quantity, unitPriceTTC: pelletPriceTTC() };
+    }
+  }
+  // Ligne lue en tête de l'agenda et de la notification interne.
+  const pickupLine = pickup
+    ? `${pickup.quantity} ${pickup.quantity > 1 ? "palettes" : "palette"} à ${formatEuro(pickup.unitPriceTTC)} TVAC, soit ${formatEuro(pickup.quantity * pickup.unitPriceTTC)} TVAC à payer sur place (prix du jour de la réservation).`
+    : "";
+  const agendaNotes = [pickupLine, notes].filter(Boolean).join("\n");
+
   if (name.length < 2) {
     return NextResponse.json({ error: "Merci d'indiquer votre nom." }, { status: 400 });
   }
@@ -138,7 +162,7 @@ export async function POST(request: Request) {
       customerEmail: email,
       customerPhone: phone || undefined,
       address: service.location === "domicile" ? address : undefined,
-      notes: notes || undefined,
+      notes: agendaNotes || undefined,
       locationLabel,
       // Le client reçoit la confirmation Mister Pellets ci-dessous, pas
       // l'invitation Google au nom de l'agenda de Dorian.
@@ -171,6 +195,7 @@ export async function POST(request: Request) {
       name,
       email,
       address: service.location === "domicile" ? address : undefined,
+      pickup,
     });
 
     await notifyInternalBooking({
@@ -182,7 +207,7 @@ export async function POST(request: Request) {
       email,
       phone: phone || undefined,
       address: address || undefined,
-      notes: notes || undefined,
+      notes: agendaNotes || undefined,
       customerConfirmed: confirmation.ok,
     });
 

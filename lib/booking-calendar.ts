@@ -35,6 +35,8 @@ export interface BookedService {
   slug: string;
   name: string;
   location: "domicile" | "showroom";
+  /** Remplace la phrase du lieu (retrait de pellets, lib/services.ts). */
+  calendarDescription?: string;
 }
 
 /** Entrée d'agenda d'un rendez-vous, à partir du service et du créneau. */
@@ -51,9 +53,10 @@ export function bookingCalendarEntry(
     end: start + durationMin * 60000,
     location: atHome ? "À votre domicile" : SHOWROOM_LABEL,
     description: [
-      atHome
-        ? "Diagnostic gratuit chez vous pour chiffrer votre poêle. Le devis suit sous 48 heures."
-        : "Visite du showroom Mister Pellets. Parking devant le bâtiment.",
+      service.calendarDescription ??
+        (atHome
+          ? "Diagnostic gratuit chez vous pour chiffrer votre poêle. Le devis suit sous 48 heures."
+          : "Visite du showroom Mister Pellets. Parking devant le bâtiment."),
       `Un empêchement ? Appelez le ${PHONE_DISPLAY}.`,
       "https://mister-pellets.be",
     ].join("\n"),
