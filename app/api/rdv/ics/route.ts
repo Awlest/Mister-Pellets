@@ -12,8 +12,9 @@ const MAX_INSTANT = Date.UTC(2100, 0, 1);
  * Fichier .ics d'un rendez-vous, pour l'ajouter à Apple Calendar, Outlook ou
  * tout autre agenda. Lien de l'écran de confirmation et de l'e-mail.
  *
- * La requête ne porte que le service et l'instant de début, jamais de donnée
- * du client : le fichier est reconstruit ici, identique pour tout le monde.
+ * La requête ne porte que le service, l'instant de début et, pour un retrait
+ * de pellets, le nombre de palettes, jamais de donnée du client : le fichier
+ * est reconstruit ici, identique pour tout le monde.
  * Il ne prouve pas qu'un rendez-vous existe, il ne fait que le décrire.
  */
 export async function GET(request: Request) {
@@ -30,9 +31,19 @@ export async function GET(request: Request) {
   if (!Number.isSafeInteger(start) || start < MIN_INSTANT || start > MAX_INSTANT) {
     return NextResponse.json({ error: "Ce créneau n'est pas valable." }, { status: 400 });
   }
+  // Retrait de pellets : nombre de palettes, pour accorder la description.
+  // Absent des liens envoyés avant le 28/10/2026.
+  const quantityParam = searchParams.get("quantity");
+  const quantity = quantityParam === null ? undefined : Number(quantityParam);
+  if (
+    quantity !== undefined &&
+    (!service.quantity || !Number.isInteger(quantity) || quantity < 1 || quantity > service.quantity.max)
+  ) {
+    return NextResponse.json({ error: "Ce rendez-vous est introuvable." }, { status: 400 });
+  }
 
   const ics = buildIcs(
-    bookingCalendarEntry(service, start, bookingDurationMin(service.slug)),
+    bookingCalendarEntry(service, start, bookingDurationMin(service.slug), quantity),
   );
 
   return new NextResponse(ics, {

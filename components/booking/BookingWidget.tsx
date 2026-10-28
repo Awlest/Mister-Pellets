@@ -138,6 +138,8 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
     time: string;
     start: number;
     durationMin: number;
+    /** Palettes réservées (retrait de pellets), pour l'entrée d'agenda. */
+    quantity?: number;
   } | null>(null);
 
   // Largeur disponible pour le bandeau des jours, et sens du dernier
@@ -251,6 +253,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
         time: data.time,
         start: chosenStart,
         durationMin: typeof data.durationMin === "number" ? data.durationMin : 60,
+        quantity: service?.quantity ? quantity : undefined,
       });
       // Retrait de pellets : pas la conversion Ads des projets de poêle.
       if (service?.isLead !== false) {
@@ -266,7 +269,9 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
 
   // ---------- Confirmation ----------
   if (confirmed) {
-    const entry = service ? bookingCalendarEntry(service, confirmed.start, confirmed.durationMin) : null;
+    const entry = service
+      ? bookingCalendarEntry(service, confirmed.start, confirmed.durationMin, confirmed.quantity)
+      : null;
     return (
       <Card className="mx-auto max-w-3xl p-8 text-center">
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-mp-orange-light text-mp-orange-flame">
@@ -295,7 +300,7 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
                 </a>
               </Button>
               <Button asChild variant="outline" size="default">
-                <a href={icsDownloadPath(service.slug, confirmed.start)} download>
+                <a href={icsDownloadPath(service.slug, confirmed.start, confirmed.quantity)} download>
                   <Download aria-hidden />
                   Apple, Outlook (.ics)
                 </a>
