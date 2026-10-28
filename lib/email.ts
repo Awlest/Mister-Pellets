@@ -371,6 +371,12 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
     ? `${pickup.quantity} ${pickup.quantity > 1 ? "palettes" : "palette"}`
     : "";
   const pickupTotal = pickup ? formatEuro(pickup.quantity * pickup.unitPriceTTC) : "";
+  // Une palette : le total suffit, le prix unitaire le répéterait.
+  const pickupPay = pickup
+    ? pickup.quantity > 1
+      ? `${formatEuro(pickup.unitPriceTTC)} TVAC la palette, soit ${pickupTotal} TVAC à payer sur place`
+      : `${pickupTotal} TVAC à payer sur place`
+    : "";
 
   const subject = pickup
     ? `Retrait de pellets confirmé le ${day} à ${startLabel}`
@@ -398,7 +404,7 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
       };
 
   const what = pickup
-    ? `${escapeHtml(pallets)} de pellets Comfo<br><span style="color:${C.inkSoft}">${escapeHtml(formatEuro(pickup.unitPriceTTC))} TVAC la palette, soit ${escapeHtml(pickupTotal)} TVAC à payer sur place</span>`
+    ? `${escapeHtml(pallets)} de pellets Comfo<br><span style="color:${C.inkSoft}">${escapeHtml(pickupPay)}</span>`
     : `${escapeHtml(b.service.name)}<br><span style="color:${C.inkSoft}">${escapeHtml(b.service.priceLabel)}, sans engagement · ${b.durationMin}&nbsp;minutes</span>`;
 
   const guide = pickup
@@ -477,7 +483,7 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
       `Quand : ${dayWithYear}, de ${startLabel} à ${endLabel}`,
       `Où : ${where.text}`,
       pickup
-        ? `Commande : ${pallets} de pellets Comfo, ${formatEuro(pickup.unitPriceTTC)} TVAC la palette, soit ${pickupTotal} TVAC à payer sur place`
+        ? `Commande : ${pallets} de pellets Comfo, ${pickupPay}`
         : `Rendez-vous : ${b.service.name} (${b.service.priceLabel.toLowerCase()}, sans engagement, ${b.durationMin} minutes)`,
       ...(atHome ? [] : [`Itinéraire : ${SHOWROOM_MAPS_URL}`]),
       "",
