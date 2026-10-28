@@ -4,6 +4,8 @@ import { ArrowRight, CalendarCheck, Flame, Phone, Ruler } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CallbackForm } from "@/components/forms/CallbackForm";
+import { NextSlot } from "@/components/booking/NextSlot";
+import { ROUTES } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BONUS, bonusBadgeFor } from "@/lib/bonus";
@@ -28,9 +30,12 @@ export const metadata = buildPageMetadata({
 /**
  * Arrivée des annonces « prix » et « devis » (Google Ads, groupe P2). Le
  * visiteur veut un chiffre : il l'a dès le premier écran, puis des exemples
- * réels du catalogue et les forfaits de pose. Deux sorties seulement : se
- * faire rappeler ou appeler. Les chiffres se régénèrent avec le catalogue
- * (ISR 60 s, comme /estimation) et suivent le bonus de saison.
+ * réels du catalogue et les forfaits de pose. Trois sorties : réserver la
+ * visite technique (en tête depuis le 28/10/2026 : 44 % du budget Ads arrivait
+ * ici et la réservation n'apparaissait qu'en bas de page), se faire rappeler
+ * ou appeler. Les chiffres se régénèrent avec le catalogue (ISR 60 s, comme
+ * /estimation) et suivent le bonus de saison ; le prochain créneau libre se
+ * lit dans le navigateur (NextSlot), pas au rendu.
  */
 export const revalidate = 60;
 
@@ -65,12 +70,35 @@ export default async function PrixPoelePelletsPage() {
         compact
       />
 
-      {/* Les deux gestes du visiteur venu d'une annonce, dans le premier écran. */}
+      {/* Les gestes du visiteur venu d'une annonce, dans le premier écran. La
+          visite technique d'abord : c'est elle qui rend le prix ferme. */}
       <section className="bg-mp-cream pb-10 md:pb-14">
         <div className="mp-shell">
           <p className="mp-measure mb-6 text-center text-base leading-relaxed text-mp-ink-soft md:text-lg">
             {fromConditions}
           </p>
+          <Card className="mp-measure mb-6 bg-white p-5 md:p-6">
+            <div className="flex items-start gap-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-mp-orange-light text-mp-orange-flame">
+                <CalendarCheck className="h-5 w-5" aria-hidden />
+              </div>
+              <div className="min-w-0">
+                <h2 className="text-xl font-semibold text-mp-green-deep">
+                  Visite technique gratuite chez vous
+                </h2>
+                <p className="mt-1 text-sm leading-relaxed text-mp-ink-soft md:text-base">
+                  Une heure sur place : on regarde la pièce et le conduit. Devis ferme sous 48 heures.
+                </p>
+                <NextSlot service="devis-sur-place" className="mt-2 min-h-10 sm:min-h-5" />
+              </div>
+            </div>
+            <Button asChild variant="secondary" size="lg" className="mt-4 w-full">
+              <Link href={ROUTES.bookingWidget}>
+                <CalendarCheck aria-hidden />
+                Choisir mon créneau
+              </Link>
+            </Button>
+          </Card>
           <div className="mp-measure flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button asChild variant="primary" size="lg" className="w-full sm:w-auto">
               <a href="#rappel">Être rappelé avec un prix</a>

@@ -61,14 +61,19 @@ const checks: [string, () => void][] = [
     },
   ],
   [
-    "barre mobile, Accueil, Catalogue, Estimer, Appeler, Menu",
+    // Écart voulu au standard (Accueil, Catalogue, Estimer, Appeler, Menu) depuis
+    // le 28/10/2026 : Rendez-vous remplace Accueil, qui passe en tête du volet.
+    "barre mobile, Catalogue, Estimer, Rendez-vous, Appeler, Menu",
     () => {
       assert.deepEqual(
         MOBILE_TABS.map((t) => t.label),
-        ["Accueil", "Catalogue", "Estimer", "Appeler", "Menu"],
+        ["Catalogue", "Estimer", "Rendez-vous", "Appeler", "Menu"],
       );
       assert.equal(MOBILE_TABS.find((t) => t.id === "call")?.href, PHONE_HREF);
       assert.equal(MOBILE_TABS.find((t) => t.id === "estimate")?.href, ROUTES.configurator);
+      assert.equal(MOBILE_TABS.find((t) => t.id === "booking")?.href, ROUTES.bookingWidget);
+      const sheet = readFileSync(join(process.cwd(), "components", "layout", "MenuSheet.tsx"), "utf8");
+      assert.ok(sheet.includes("href: ROUTES.home"), "Accueil absent du volet Menu");
     },
   ],
   [

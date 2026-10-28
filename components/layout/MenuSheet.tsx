@@ -18,6 +18,8 @@ import { cn } from "@/lib/utils";
  * entrées de visibleNav() dans leur ordre (Catalogue, Marques, Services,
  * Aides, Réalisations, Conseils, Contact), puis les actions de l'en-tête dans
  * leur ordre (téléphone, rendez-vous, estimation) et la famille Awlest.
+ * Accueil en tête : la barre du bas n'a plus cet onglet sur Mister Pellets,
+ * et aucun en-tête ne s'affiche sous 1 280 px.
  */
 
 const NAV_ITEMS = visibleNav();
@@ -119,6 +121,7 @@ export default function MenuSheet({
         </div>
 
         <nav aria-label="Menu" className="flex flex-col gap-5">
+          <Row link={{ href: ROUTES.home, label: "Accueil" }} />
           {NAV_ITEMS.map((item) => {
             if (!item.children) {
               return <Row key={item.key} link={{ href: item.href, label: item.label, desc: descOf(item.href) }} />;
