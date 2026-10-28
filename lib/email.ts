@@ -335,6 +335,7 @@ export interface BookingConfirmation {
     location: "domicile" | "showroom";
     priceLabel: string;
     calendarDescription?: string;
+    quantity?: { unit: string; unitPlural: string };
   };
   /** Instant de début, epoch en millisecondes. */
   start: number;
@@ -360,9 +361,9 @@ export function bookingConfirmationEmail(b: BookingConfirmation) {
   const startLabel = formatSlotTime(b.start);
   const endLabel = formatSlotTime(b.start + b.durationMin * 60000);
 
-  const entry = bookingCalendarEntry(b.service, b.start, b.durationMin);
+  const entry = bookingCalendarEntry(b.service, b.start, b.durationMin, b.pickup?.quantity);
   const googleUrl = googleCalendarUrl(entry);
-  const icsUrl = `${EMAIL_SITE_URL}${icsDownloadPath(b.service.slug, b.start)}`;
+  const icsUrl = `${EMAIL_SITE_URL}${icsDownloadPath(b.service.slug, b.start, b.pickup?.quantity)}`;
   const ics = buildIcs(entry);
 
   // Retrait de pellets : mêmes rubriques, autre objet (palettes, prix, paiement).

@@ -35,17 +35,35 @@ export interface BookedService {
   slug: string;
   name: string;
   location: "domicile" | "showroom";
-  /** Remplace la phrase du lieu (retrait de pellets, lib/services.ts). */
+  /**
+   * Remplace la phrase du lieu (retrait de pellets, lib/services.ts).
+   * « {quantity} » y devient « votre palette » ou « vos 3 palettes ».
+   */
   calendarDescription?: string;
+  quantity?: { unit: string; unitPlural: string };
 }
 
-/** Entrée d'agenda d'un rendez-vous, à partir du service et du créneau. */
+/**
+ * « votre palette », « vos 3 palettes ». Sans nombre (liens .ics envoyés
+ * avant le 28/10/2026), le singulier d'avant.
+ */
+function quantityLabel(unit: { unit: string; unitPlural: string }, quantity = 1): string {
+  return quantity > 1 ? `vos ${quantity} ${unit.unitPlural}` : `votre ${unit.unit}`;
+}
+
+/**
+ * Entrée d'agenda d'un rendez-vous, à partir du service et du créneau.
+ * `quantity` : palettes réservées, pour un service qui en demande.
+ */
 export function bookingCalendarEntry(
   service: BookedService,
   start: number,
   durationMin: number,
+  quantity?: number,
 ): CalendarEntry {
   const atHome = service.location === "domicile";
+  const unit = service.quantity;
+  const custom = service.calendarDescription;
   return {
     uid: `rdv-${service.slug}-${start}@mister-pellets.be`,
     title: `Mister Pellets · ${service.name}`,
@@ -53,7 +71,7 @@ export function bookingCalendarEntry(
     end: start + durationMin * 60000,
     location: atHome ? "À votre domicile" : SHOWROOM_LABEL,
     description: [
-      service.calendarDescription ??
+      (custom && unit ? custom.replace("{quantity}", quantityLabel(unit, quantity)) : custom) ??
         (atHome
           ? "Diagnostic gratuit chez vous pour chiffrer votre poêle. Le devis suit sous 48 heures."
           : "Visite du showroom Mister Pellets. Parking devant le bâtiment."),
@@ -163,8 +181,10 @@ export function googleCalendarUrl(entry: CalendarEntry): string {
 
 /**
  * Chemin du fichier .ics servi par le site (/api/rdv/ics). Ne transporte que
- * le service et l'instant : la route reconstruit l'entrée elle-même.
+ * le service, l'instant et le nombre de palettes : la route reconstruit
+ * l'entrée elle-même.
  */
-export function icsDownloadPath(serviceSlug: string, start: number): string {
-  return `/api/rdv/ics?service=${encodeURIComponent(serviceSlug)}&start=${start}`;
+export function icsDownloadPath(serviceSlug: string, start: number, quantity?: number): string {
+  const path = `/api/rdv/ics?service=${encodeURIComponent(serviceSlug)}&start=${start}`;
+  return quantity === undefined ? path : `${path}&quantity=${quantity}`;
 }

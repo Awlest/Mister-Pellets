@@ -57,6 +57,7 @@ export interface Service {
   /**
    * Phrase de l'entrée d'agenda envoyée au client (.ics, Google Agenda), à la
    * place de celle du lieu (diagnostic à domicile, visite du showroom).
+   * « {quantity} » : quantité réservée, accordée (lib/booking-calendar.ts).
    */
   calendarDescription?: string;
   /**
@@ -193,7 +194,7 @@ export const PELLET_PICKUP: Service = {
     unitPlural: "palettes",
   },
   calendarDescription:
-    "Retrait de votre palette de pellets Comfo au showroom Mister Pellets. Paiement sur place à l'enlèvement. Parking devant le bâtiment.",
+    "Retrait de {quantity} de pellets Comfo au showroom Mister Pellets. Paiement sur place à l'enlèvement. Parking devant le bâtiment.",
   isLead: false,
 };
 

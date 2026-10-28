@@ -211,8 +211,13 @@ check("pellets : prix unitaires de 435 €", [pelletPriceHT(435), pelletPricePer
 check("pellets : retrait réservable, hors des prestations listées",
   [getService("retrait-palette-pellets")?.booking, ONLINE_SERVICES.some((s) => s.slug === PELLET_PICKUP.slug)],
   ["online", false]);
-check("pellets : entrée d'agenda propre au retrait",
-  bookingCalendarEntry(PELLET_PICKUP, debutRdv, 30).description.startsWith("Retrait de votre palette"), true);
+check("pellets : entrée d'agenda propre au retrait, accordée au nombre de palettes",
+  [undefined, 1, 2, 10].map((n) => bookingCalendarEntry(PELLET_PICKUP, debutRdv, 30, n).description.split(" de pellets")[0]),
+  ["Retrait de votre palette", "Retrait de votre palette", "Retrait de vos 2 palettes", "Retrait de vos 10 palettes"]);
+check("pellets : nombre de palettes dans le lien .ics",
+  [icsDownloadPath(PELLET_PICKUP.slug, debutRdv), icsDownloadPath(PELLET_PICKUP.slug, debutRdv, 3)],
+  [`/api/rdv/ics?service=retrait-palette-pellets&start=${debutRdv}`,
+    `/api/rdv/ics?service=retrait-palette-pellets&start=${debutRdv}&quantity=3`]);
 
 console.log(ko === 0 ? "\nTOUS OK" : `\n${ko} ECHEC(S)`);
 process.exit(ko === 0 ? 0 : 1);
