@@ -112,9 +112,12 @@ export async function POST(request: Request) {
       pickup = { quantity, unitPriceTTC: pelletPriceTTC() };
     }
   }
-  // Ligne lue en tête de l'agenda et de la notification interne.
+  // Ligne lue en tête de l'agenda et de la notification interne. Pour une
+  // palette, le total suffit.
   const pickupLine = pickup
-    ? `${pickup.quantity} ${pickup.quantity > 1 ? "palettes" : "palette"} à ${formatEuro(pickup.unitPriceTTC)} TVAC, soit ${formatEuro(pickup.quantity * pickup.unitPriceTTC)} TVAC à payer sur place (prix du jour de la réservation).`
+    ? pickup.quantity > 1
+      ? `${pickup.quantity} palettes à ${formatEuro(pickup.unitPriceTTC)} TVAC, soit ${formatEuro(pickup.quantity * pickup.unitPriceTTC)} TVAC à payer sur place (prix du jour de la réservation).`
+      : `1 palette, ${formatEuro(pickup.unitPriceTTC)} TVAC à payer sur place (prix du jour de la réservation).`
     : "";
   const agendaNotes = [pickupLine, notes].filter(Boolean).join("\n");
 
