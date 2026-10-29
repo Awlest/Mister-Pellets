@@ -549,9 +549,12 @@ export async function notifyInternalEstimate(est: {
   iso: string;
   level: string;
   vatRate: number;
-  lines: { label: string; amountHT: number }[];
+  /** `valueText` remplace le montant (remise, sur devis). */
+  lines: { label: string; amountHT: number; valueText?: string }[];
   materialHT: number;
   totalTTC: number;
+  /** Partie du chantier chiffrée sur devis (échafaudage), absente du total. */
+  quoteNote?: string;
   months?: number | null;
   monthly?: number | null;
   message?: string;
@@ -566,7 +569,7 @@ export async function notifyInternalEstimate(est: {
       valueHtml: `<a href="${escapeHtml(productUrl)}" target="_blank" style="color:${C.greenDeep};font-weight:bold">${escapeHtml(est.productName)}</a> (${formatKw(est.powerKw)} kW)`,
     },
     { label: "Matériel", valueHtml: `${fmtEuros(est.materialHT)} HT` },
-    ...est.lines.map((l) => ({ label: l.label, valueHtml: `${fmtEuros(l.amountHT)} HT` })),
+    ...est.lines.map((l) => ({ label: l.label, valueHtml: escapeHtml(l.valueText ?? `${fmtEuros(l.amountHT)} HT`) })),
     { label: "Type de poêle", valueHtml: escapeHtml(est.stoveKind) },
     { label: "Évacuation", valueHtml: escapeHtml(est.installType) },
     {
@@ -578,8 +581,8 @@ export async function notifyInternalEstimate(est: {
   ];
 
   const total = `${fmtEuros(est.totalTTC)} TTC (TVA ${Math.round(est.vatRate * 100)} %)${
-    est.monthly ? ` · ${fmtEuros(est.monthly)}/mois sur ${est.months} mois` : ""
-  }`;
+    est.quoteNote ? `, ${est.quoteNote}` : ""
+  }${est.monthly ? ` · ${fmtEuros(est.monthly)}/mois sur ${est.months} mois` : ""}`;
 
   const html = brandedEmailHtml({
     audience: "equipe",
@@ -590,7 +593,7 @@ export async function notifyInternalEstimate(est: {
     lead: escapeHtml(total),
     bodyHtml: `${emailFields(rows)}
     ${internalMessageBlock("Précisions", est.message)}
-    <p style="margin:20px 0 0;font-size:12px;color:${C.inkSoft}">Reçu le ${receivedAt()} · montants de pose issus des forfaits indicatifs de lib/estimate.ts.</p>`,
+    <p style="margin:20px 0 0;font-size:12px;color:${C.inkSoft}">Reçu le ${receivedAt()} · montants de pose issus des forfaits de lib/pose/tarifs.ts.</p>`,
     footerNote: INTERNAL_FOOTER,
   });
 
@@ -614,6 +617,8 @@ export async function confirmCustomerEstimate(est: {
   months?: number | null;
   /** Mention du bonus de saison quand il est compris dans le total. */
   bonusNote?: string;
+  /** Partie du chantier chiffrée sur devis (échafaudage), absente du total. */
+  quoteNote?: string;
 }) {
   const hello = greeting(est.name);
   const thanks = "Merci d'avoir configuré votre projet sur notre site. Voici l'estimation que vous avez obtenue.";
@@ -633,6 +638,7 @@ export async function confirmCustomerEstimate(est: {
       }`,
     },
     ...(est.bonusNote ? [{ label: "Bonus", valueHtml: escapeHtml(est.bonusNote) }] : []),
+    ...(est.quoteNote ? [{ label: "Sur devis", valueHtml: escapeHtml(est.quoteNote) }] : []),
   ];
 
   const html = brandedEmailHtml({
@@ -661,6 +667,7 @@ export async function confirmCustomerEstimate(est: {
     `Estimation : ${fmtEuros(est.totalTTC)} TTC, poêle et pose compris.`,
     ...(credit ? [credit, creditWarning] : []),
     ...(est.bonusNote ? [`Bonus : ${est.bonusNote}`] : []),
+    ...(est.quoteNote ? [`Sur devis : ${est.quoteNote}`] : []),
     "",
     next,
     "",

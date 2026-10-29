@@ -49,7 +49,7 @@ export const BONUS = {
   // « cumulable avec la prime Habitation » retiré le 03/10/2026 : la prime
   // s'est arrêtée le 30/09/2026, aucune commande du bonus ne peut y prétendre.
   conditions:
-    "Pour toute commande passée entre le 1er octobre et le 24 décembre 2026, sur le prix du poêle, pose non remisée.",
+    "Pour toute commande passée entre le 1er octobre et le 24 décembre 2026, sur le prix du poêle seul (la pose suit ses propres tarifs).",
   /**
    * Plage `sale_price_effective_date` du flux Google Merchant, ISO 8601 avec
    * fuseau : heure d'été le 1er octobre, heure d'hiver le 24 décembre.

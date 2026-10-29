@@ -1,8 +1,8 @@
 import "server-only";
 import { getEstimateCatalog } from "./estimate-catalog";
 import {
-  CONDUIT_INCLUDED_M,
   DEFAULT_STATE,
+  HAUTEUR,
   INSTALL_TYPES,
   VAT,
   estimate,
@@ -11,6 +11,8 @@ import {
   type InstallType,
 } from "./estimate";
 import { isBonusPeriod } from "./bonus";
+import { activeDiscount, applyDiscount, evacuationPrice, heightRule, roundCents } from "./pose/moteur";
+import { REMISES, TARIFS } from "./pose/tarifs";
 
 /**
  * Chiffres de la page /prix-poele-pellets, l'arrivée des annonces « prix » et
@@ -42,8 +44,12 @@ export interface PriceExample {
   imageSrc?: string;
   /** Poêle, TVA 6 % comprise, avant bonus. */
   stoveTTC: number;
-  /** Pose et raccordement, TVA 6 % comprise. */
+  /** Pose et raccordement, TVA 6 % comprise, remise de pose déduite. */
   laborTTC: number;
+  /** Pose au plein tarif, TVA 6 % comprise, quand une remise s'applique. */
+  laborFullTTC?: number;
+  laborDiscountPct: number;
+  laborShowStrike: boolean;
   /** Bonus de saison déduit, TVA 6 % comprise (0 hors période). */
   bonusTTC: number;
   /** Total TVA 6 % comprise, identique au configurateur. */
@@ -54,10 +60,20 @@ export interface InstallPrice {
   key: InstallType;
   label: string;
   desc: string;
-  /** Forfait de pose, TVA 6 % comprise. */
+  /** Forfait de pose, TVA 6 % et remise comprises. */
   laborTTC: number;
-  /** Prix du mètre de conduit au-delà du forfait, TVA 6 % comprise (0 = sans objet). */
-  perMeterTTC: number;
+  /** Forfait au plein tarif, TVA 6 % comprise, quand une remise s'applique. */
+  fullTTC?: number;
+  discountPct: number;
+  showStrike: boolean;
+  /** Hauteur comprise dans le forfait (0 = sans objet). */
+  heightM: number;
+  /** Retiré par mètre sous la hauteur du forfait, TVA 6 % et remise comprises. */
+  lessPerMeterTTC: number;
+  /** Ajouté par mètre au-dessus, TVA 6 % et remise comprises. */
+  morePerMeterTTC: number;
+  /** Percements renforcés compris dans le forfait (conduit par l'intérieur), non remisés. */
+  percements: number;
 }
 
 export interface PricePageData {
@@ -69,6 +85,8 @@ export interface PricePageData {
 }
 
 const withVat = (ht: number) => Math.round(ht * (1 + VAT.reduced));
+/** Au cent près : sert aux ajustements au mètre, qui tombent rarement juste. */
+const withVatCents = (ht: number) => roundCents(ht * (1 + VAT.reduced));
 
 function priceExample(
   product: EstimateProduct,
@@ -78,13 +96,15 @@ function priceExample(
   const state: EstimateState = {
     ...DEFAULT_STATE,
     installType,
-    conduitM: CONDUIT_INCLUDED_M,
+    conduitM: HAUTEUR.defaut,
     stoveKind: "standard",
     housingOver10Years: true,
     productKey: product.key,
   };
   const r = estimate(state, product, { bonus });
   const laborTTC = withVat(r.laborHT);
+  const discounted = r.laborLines.filter((l) => l.fullHT !== undefined);
+  const laborFullHT = r.laborHT + discounted.reduce((a, l) => a + (l.fullHT! - l.amountHT), 0);
   const bonusTTC = withVat(r.bonusHT);
   return {
     slug: product.slug,
@@ -99,6 +119,9 @@ function priceExample(
     // exactement sur le total du moteur.
     stoveTTC: r.totalTTC - laborTTC + bonusTTC,
     laborTTC,
+    laborFullTTC: discounted.length > 0 ? withVat(laborFullHT) : undefined,
+    laborDiscountPct: discounted[0]?.discountPct ?? 0,
+    laborShowStrike: discounted.some((l) => l.showStrike),
     bonusTTC,
     totalTTC: r.totalTTC,
   };
@@ -145,14 +168,27 @@ export async function getPricePageData(now: Date = new Date()): Promise<PricePag
   const inRange = standard.filter((p) => p.powerKw >= POWER_MIN_KW && p.powerKw <= POWER_MAX_KW);
   const pool = cheapestPerSlug(inRange.length > 0 ? inRange : standard);
 
-  const installs: InstallPrice[] = (Object.keys(INSTALL_TYPES) as InstallType[]).map((key) => {
+  // Forfaits de pose : mêmes prix et mêmes remises que le configurateur, à la
+  // hauteur de référence du forfait.
+  const installs: InstallPrice[] = TARIFS.evacuationsProposees.map((key) => {
     const t = INSTALL_TYPES[key];
+    const rule = heightRule(key, TARIFS);
+    const price = evacuationPrice(key, rule?.hauteurRefM ?? HAUTEUR.defaut, TARIFS, REMISES);
+    const percementsHT = t.percements * TARIFS.percementRenforceHT;
+    const remise = activeDiscount(t.prestation, REMISES);
+    const perMeter = (ht: number) => withVatCents(applyDiscount(ht, remise).amountHT);
     return {
       key,
       label: t.label,
       desc: t.desc,
-      laborTTC: withVat(t.laborHT),
-      perMeterTTC: t.perMeter > 0 ? withVat(t.perMeter) : 0,
+      laborTTC: withVat(price.amountHT + percementsHT),
+      fullTTC: price.discountPct > 0 ? withVat(price.fullHT + percementsHT) : undefined,
+      discountPct: price.discountPct,
+      showStrike: price.showStrike,
+      heightM: rule?.hauteurRefM ?? 0,
+      lessPerMeterTTC: rule ? perMeter(rule.moinsParMetreHT) : 0,
+      morePerMeterTTC: rule ? perMeter(rule.plusParMetreHT) : 0,
+      percements: t.percements,
     };
   });
 

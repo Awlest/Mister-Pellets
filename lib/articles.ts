@@ -179,7 +179,7 @@ export const ARTICLES: ArticleData[] = [
       },
       {
         question: "Le bonus de saison s'applique-t-il aux nouvelles marques ?",
-        answer: "Oui, à -10 % sur le prix du poêle pour Austroflamm et Cadel, jusqu'au 24 décembre 2026. La pose n'est pas remisée. Les autres marques restent à -15 %.",
+        answer: "Oui, à -10 % sur le prix du poêle pour Austroflamm et Cadel, jusqu'au 24 décembre 2026. Le bonus ne porte pas sur la pose, qui suit ses propres tarifs. Les autres marques restent à -15 %.",
       },
       {
         question: "Vous posez Austroflamm et Cadel dans toute la Wallonie ?",
@@ -368,7 +368,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Ce que coûte la transformation",
         paragraphs: [
-          "Le prix se joue sur l'insert et sur le conduit. Six mètres de tubage sont compris dans notre forfait de pose avec tubage, chaque mètre au-delà se paie. Dans un logement de plus de 10 ans, toute la facture est à 6 % de TVA quand nous fournissons et posons l'insert.",
+          "Le prix se joue sur l'insert et sur le conduit. Notre forfait de pose avec tubage est calculé pour dix mètres de conduit, puis ajusté au mètre, en plus ou en moins. Dans un logement de plus de 10 ans, toute la facture est à 6 % de TVA quand nous fournissons et posons l'insert.",
           "Pour un chiffre précis, le configurateur en ligne compose l'ensemble en deux minutes : l'insert du catalogue, la pose, le tubage et la TVA. Le prix ferme vient après la visite technique, parce qu'on ne connaît vraiment un conduit qu'après l'avoir vu de près.",
         ],
         callout: {

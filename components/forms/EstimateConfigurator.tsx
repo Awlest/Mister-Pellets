@@ -16,29 +16,36 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
+  ACCESS_MODES,
   DEFAULT_STATE,
   DUCT_ROOMS_MAX,
-  CONDUIT_INCLUDED_M,
-  CONDUIT_MAX_M,
+  HAUTEUR,
   INSTALL_TYPES,
   ISO,
   LEVELS,
   OPTIONS,
+  REMISES,
   STOVE_KINDS,
+  SURFACE,
+  TARIFS,
   estimate,
   eur,
   filterByKind,
+  isCanalisable,
   rankProducts,
   recommendedKw,
+  type AccessMode,
+  type DuctsChoice,
   type EstimateProduct,
   type EstimateResult,
   type EstimateState,
-  type InstallType,
   type IsoKey,
   type LevelKey,
   type OptionKey,
   type StoveKind,
 } from "@/lib/estimate";
+import { evacuationPrice, heightRule, missingAnswers, needsAccess, optionShown } from "@/lib/pose/moteur";
+import { DiscountedPrice } from "./DiscountedPrice";
 import { BONUS, bonusLabelFor, isBonusPeriod } from "@/lib/bonus";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
@@ -187,6 +194,12 @@ function parseDraft(json: string | null): EstimateState | null {
     // Un brouillon enregistré quand le plafond était à 4 pièces canalisées
     // afficherait 3 ou 4 alors que le chiffrage s'arrête à DUCT_ROOMS_MAX.
     restored.ductRooms = Math.min(DUCT_ROOMS_MAX, Math.max(1, restored.ductRooms));
+    // Brouillon antérieur aux évacuations au mètre (29/10/2026) ou retouché :
+    // hauteur dans les bornes, accès et canalisation à redemander.
+    restored.conduitM = Math.min(HAUTEUR.max, Math.max(HAUTEUR.min, Math.round(restored.conduitM) || HAUTEUR.defaut));
+    if (!TARIFS.evacuationsProposees.includes(restored.installType)) restored.installType = DEFAULT_STATE.installType;
+    if (!(restored.access in ACCESS_MODES)) restored.access = "";
+    if (restored.ducts !== "oui" && restored.ducts !== "non") restored.ducts = "";
     return restored;
   } catch {
     return null;
@@ -260,6 +273,8 @@ function EstimateForm({
   const [touched, setTouched] = React.useState<Partial<Record<CustomerField, boolean>>>({});
   const [triedSubmit, setTriedSubmit] = React.useState(false);
   const [productMissing, setProductMissing] = React.useState(false);
+  const [accessMissing, setAccessMissing] = React.useState(false);
+  const [ductsMissing, setDuctsMissing] = React.useState(false);
   const [showAllFor, setShowAllFor] = React.useState<StoveKind | null>(null);
   const [recapOpen, setRecapOpen] = React.useState(false);
   const [RecapSheet, setRecapSheet] = React.useState<
@@ -321,6 +336,10 @@ function EstimateForm({
     });
 
   const cfg = INSTALL_TYPES[s.installType];
+  const rule = heightRule(s.installType, TARIFS);
+  const accessNeeded = needsAccess(s);
+  const vatFactor = s.housingOver10Years ? 1.06 : 1.21;
+  const ttc = (ht: number) => Math.round(ht * vatFactor);
   const needKw = recommendedKw(s.surface, s.iso);
   const eligible = React.useMemo(
     () => rankProducts(filterByKind(products, s.stoveKind), needKw),
@@ -330,6 +349,8 @@ function EstimateForm({
     () => products.find((p) => p.key === s.productKey) ?? null,
     [products, s.productKey],
   );
+  const canalisable = isCanalisable(product);
+  const missing = missingAnswers(s, canalisable);
   const bonusActive = React.useSyncExternalStore(noopSubscribe, isBonusPeriod, () => bonusAtRender);
   const r = estimate(s, product, { bonus: bonusActive });
   const durations = durationsFor(r.totalTTC);
@@ -350,9 +371,21 @@ function EstimateForm({
 
   const next = () => {
     if (submitState === "loading") return;
+    // Au-delà de 12 m, pas d'estimation sans mode d'accès (nacelle ou échafaudage).
+    if (step === 1 && missing.includes("access")) {
+      setAccessMissing(true);
+      document.getElementById("est-access")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
     if (step === 3 && !s.productKey) {
       setProductMissing(true);
       document.getElementById("est-models")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    // Poêle canalisable : rien n'est coché d'office, le client répond.
+    if (step === 3 && missing.includes("ducts")) {
+      setDuctsMissing(true);
+      document.getElementById("est-ducts")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
     if (step === STEP_COUNT) {
@@ -554,32 +587,81 @@ function EstimateForm({
                 value={s.installType}
                 onChange={(v) => set("installType", v)}
                 className="sm:grid-cols-2"
-                choices={(Object.keys(INSTALL_TYPES) as InstallType[]).map((k) => ({
-                  value: k,
-                  label: INSTALL_TYPES[k].label,
-                  desc: INSTALL_TYPES[k].desc,
-                }))}
+                choices={TARIFS.evacuationsProposees.map((k) => {
+                  const t = INSTALL_TYPES[k];
+                  const p = evacuationPrice(k, s.conduitM, TARIFS, REMISES);
+                  const extra = t.percements * TARIFS.percementRenforceHT;
+                  return {
+                    value: k,
+                    label: t.label,
+                    desc: t.desc,
+                    aside: (
+                      <span className="mt-2 flex flex-wrap items-baseline gap-x-1.5 text-sm font-semibold text-mp-orange-ink">
+                        <DiscountedPrice
+                          amount={ttc(p.amountHT + extra)}
+                          full={ttc(p.fullHT + extra)}
+                          pct={p.discountPct}
+                          showStrike={p.showStrike}
+                          format={eur}
+                          className="justify-start"
+                        />
+                        <span className="font-normal text-mp-ink-soft">
+                          TVAC{t.hauteur ? `, pour ${s.conduitM} m` : ""}
+                        </span>
+                      </span>
+                    ),
+                  };
+                })}
               />
 
-              {cfg.perMeter > 0 && (
+              {cfg.hauteur && rule && (
                 <div className="mt-8">
                   <RangeField
                     id="conduit"
                     label="Hauteur de conduit à poser"
                     unit="m"
-                    min={4}
-                    max={CONDUIT_MAX_M}
-                    step={1}
+                    min={HAUTEUR.min}
+                    max={HAUTEUR.max}
+                    step={HAUTEUR.pas}
                     value={s.conduitM}
                     onChange={(v) => set("conduitM", v)}
                     decLabel="Réduire la hauteur de conduit"
                     incLabel="Augmenter la hauteur de conduit"
                   >
                     <p className="mt-2 text-sm text-mp-ink-soft">
-                      {CONDUIT_INCLUDED_M} m compris dans le forfait, au-delà nous comptons au mètre.
-                      En général : un rez seul, 5 à 6 m ; un rez + un étage, 8 à 10 m.
+                      Forfait calculé pour {rule.hauteurRefM} m, puis ajusté au mètre. En général : un
+                      rez seul, 5 à 6 m ; un rez + un étage, 8 à 10 m.
                     </p>
                   </RangeField>
+                </div>
+              )}
+
+              {accessNeeded && (
+                <div id="est-access" className="mt-8 scroll-mt-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4">
+                  {accessMissing && !s.access && (
+                    <p role="alert" className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
+                      Choisissez la nacelle ou l&apos;échafaudage pour continuer.
+                    </p>
+                  )}
+                  <ChoiceGroup<AccessMode | "">
+                    name="access"
+                    legend={`Plus de ${HAUTEUR.seuilAcces} m : comment accède-t-on au toit ?`}
+                    value={s.access}
+                    onChange={(v) => set("access", v)}
+                    className="sm:grid-cols-2"
+                    choices={[
+                      {
+                        value: "nacelle",
+                        label: ACCESS_MODES.nacelle.label,
+                        desc: `Location à la journée, + ${eur(ttc(TARIFS.options.nacelle))} TVAC au total`,
+                      },
+                      {
+                        value: "echafaudage",
+                        label: ACCESS_MODES.echafaudage.label,
+                        desc: "Prix sur devis : nous le chiffrons après la visite",
+                      },
+                    ]}
+                  />
                 </div>
               )}
             </>
@@ -598,9 +680,9 @@ function EstimateForm({
                   id="surface"
                   label="Surface à chauffer"
                   unit="m²"
-                  min={20}
-                  max={300}
-                  step={5}
+                  min={SURFACE.min}
+                  max={SURFACE.max}
+                  step={SURFACE.pas}
                   value={s.surface}
                   onChange={(v) => set("surface", v)}
                   decLabel="Réduire la surface"
@@ -689,33 +771,6 @@ function EstimateForm({
                   }))}
                 />
               </div>
-
-              {STOVE_KINDS[s.stoveKind].ducts && (
-                <div className="mb-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4">
-                  <p id="est-ducts-label" className={legendCls}>
-                    Combien de pièces à desservir par les gaines ?
-                  </p>
-                  <div className="inline-flex items-center gap-2" role="group" aria-labelledby="est-ducts-label">
-                    <StepButton
-                      label="Moins de pièces"
-                      onClick={() => set("ductRooms", Math.max(1, s.ductRooms - 1))}
-                      disabled={s.ductRooms <= 1}
-                    >
-                      <Minus className="h-4 w-4" aria-hidden />
-                    </StepButton>
-                    <output aria-live="polite" className="w-12 text-center text-xl font-semibold tabular-nums text-mp-green-deep">
-                      {s.ductRooms}
-                    </output>
-                    <StepButton
-                      label="Plus de pièces"
-                      onClick={() => set("ductRooms", Math.min(DUCT_ROOMS_MAX, s.ductRooms + 1))}
-                      disabled={s.ductRooms >= DUCT_ROOMS_MAX}
-                    >
-                      <Plus className="h-4 w-4" aria-hidden />
-                    </StepButton>
-                  </div>
-                </div>
-              )}
 
               <fieldset id="est-models" className="min-w-0 scroll-mt-6">
                 <legend className={legendCls}>
@@ -807,6 +862,59 @@ function EstimateForm({
                   </>
                 )}
               </fieldset>
+
+              {/* Canalisation : posée seulement si le poêle choisi s'y prête,
+                  rien de coché d'office, le forfait n'entre au total que sur « oui ». */}
+              {canalisable && (
+                <div id="est-ducts" className="mt-6 scroll-mt-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4">
+                  {ductsMissing && !s.ducts && (
+                    <p role="alert" className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
+                      Dites-nous si vous voulez la canalisation pour continuer.
+                    </p>
+                  )}
+                  <ChoiceGroup<DuctsChoice>
+                    name="ducts"
+                    legend="Voulez-vous la canalisation d'air chaud ?"
+                    value={s.ducts}
+                    onChange={(v) => set("ducts", v)}
+                    className="sm:grid-cols-2"
+                    choices={[
+                      {
+                        value: "oui",
+                        label: "Oui",
+                        desc: `Gaines vers 1 ou ${DUCT_ROOMS_MAX} autres pièces, + ${eur(ttc(TARIFS.canalisationParPieceHT))} TVAC par pièce`,
+                      },
+                      { value: "non", label: "Non", desc: "Le poêle chauffe la pièce où il est posé" },
+                    ]}
+                  />
+                  {s.ducts === "oui" && (
+                    <div className="mt-4">
+                      <p id="est-ducts-label" className={legendCls}>
+                        Combien de pièces à desservir par les gaines ?
+                      </p>
+                      <div className="inline-flex items-center gap-2" role="group" aria-labelledby="est-ducts-label">
+                        <StepButton
+                          label="Moins de pièces"
+                          onClick={() => set("ductRooms", Math.max(1, s.ductRooms - 1))}
+                          disabled={s.ductRooms <= 1}
+                        >
+                          <Minus className="h-4 w-4" aria-hidden />
+                        </StepButton>
+                        <output aria-live="polite" className="w-12 text-center text-xl font-semibold tabular-nums text-mp-green-deep">
+                          {s.ductRooms}
+                        </output>
+                        <StepButton
+                          label="Plus de pièces"
+                          onClick={() => set("ductRooms", Math.min(DUCT_ROOMS_MAX, s.ductRooms + 1))}
+                          disabled={s.ductRooms >= DUCT_ROOMS_MAX}
+                        >
+                          <Plus className="h-4 w-4" aria-hidden />
+                        </StepButton>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </>
           )}
 
@@ -821,13 +929,10 @@ function EstimateForm({
               <fieldset className="min-w-0">
                 <legend className="sr-only">Options de pose</legend>
                 <div className="space-y-3">
-                  {(Object.keys(OPTIONS) as OptionKey[])
-                    .filter((k) => !OPTIONS[k].roofOnly || cfg.roofWork)
+                  {TARIFS.optionsProposees
+                    .filter((k) => optionShown(k, s, TARIFS))
                     .map((k) => {
                       const on = !!s.opt[k];
-                      const ttc = Math.round(
-                        OPTIONS[k].priceHT * (s.housingOver10Years ? 1.06 : 1.21),
-                      );
                       return (
                         <label key={k} className={cardCls(on)}>
                           <input
@@ -843,7 +948,7 @@ function EstimateForm({
                             </span>
                             <span className="block text-sm text-mp-ink-soft">{OPTIONS[k].desc}</span>
                             <span className="mt-1 block text-sm font-semibold tabular-nums text-mp-orange-ink">
-                              + {eur(ttc)}
+                              + {eur(ttc(TARIFS.options[k]))}
                             </span>
                           </span>
                         </label>
@@ -938,7 +1043,8 @@ function EstimateForm({
               <p className="mb-6 text-mp-ink-soft">
                 Votre estimation est prête :{" "}
                 <strong className="whitespace-nowrap text-mp-green-deep">{eur(r.totalTTC)} TTC</strong>,
-                pose comprise. Elle est calculée sans avoir vu votre maison. Pendant la visite
+                pose comprise{r.onQuote ? ", échafaudage en plus sur devis" : ""}. Elle est calculée
+                sans avoir vu votre maison. Pendant la visite
                 technique, gratuite, il nous arrive de trouver moins cher : un conduit existant qui
                 suffit, un poêle un cran moins puissant, un trajet plus court pour les fumées.
               </p>
@@ -1172,6 +1278,7 @@ function EstimateForm({
               >
                 <span className="block text-xs font-medium text-mp-ink-soft">
                   {product ? "Total posé, TTC" : "Pose estimée, TTC"}
+                  {r.onQuote ? ", hors échafaudage" : ""}
                 </span>
                 <span className="flex items-center gap-1 text-lg font-semibold leading-tight tabular-nums text-mp-green-deep">
                   {eur(r.totalTTC)}
@@ -1258,6 +1365,8 @@ interface Choice<K extends string> {
   value: K;
   label: string;
   desc?: string;
+  /** Sous la description : le prix d'une évacuation, par exemple. */
+  aside?: React.ReactNode;
   disabled?: boolean;
 }
 
@@ -1302,6 +1411,7 @@ function ChoiceGroup<K extends string>({
               <span className="min-w-0">
                 <span className="block font-semibold text-mp-green-deep">{c.label}</span>
                 {c.desc && <span className="mt-0.5 block text-sm text-mp-ink-soft">{c.desc}</span>}
+                {c.aside}
               </span>
             </label>
           );
@@ -1529,7 +1639,18 @@ function Recap({
         />
         {r.bonusHT > 0 && <Row label={bonusLabelFor(product?.brand)} value={`-${eur(r.bonusHT)}`} />}
         {r.laborLines.map((l) => (
-          <Row key={l.key} label={l.label} value={eur(l.amountHT)} muted />
+          <Row
+            key={l.key}
+            label={l.label}
+            value={
+              l.onQuote ? (
+                "sur devis"
+              ) : (
+                <DiscountedPrice amount={l.amountHT} full={l.fullHT} pct={l.discountPct} showStrike={l.showStrike} />
+              )
+            }
+            muted
+          />
         ))}
         <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
       </dl>
@@ -1540,6 +1661,9 @@ function Recap({
         </span>
         <span className="text-2xl font-semibold tabular-nums text-mp-green-deep">{eur(r.totalTTC)}</span>
       </div>
+      {r.onQuote && (
+        <p className="mt-1 text-right text-sm text-mp-ink-soft">+ échafaudage, sur devis</p>
+      )}
 
       {monthly != null && (
         <p className="mt-3 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-3 text-sm text-mp-ink">
@@ -1550,8 +1674,8 @@ function Recap({
 
       <p className="mt-4 text-xs leading-relaxed text-mp-ink-soft">
         Estimation indicative TTC, matériel et pose compris, TVA{" "}
-        {Math.round(r.vatRate * 100)} %. Les forfaits de pose sont des budgets moyens : le prix
-        ferme est établi après la visite technique gratuite.
+        {Math.round(r.vatRate * 100)} %. Détail de la pose hors TVA. Les forfaits de pose sont des
+        budgets moyens : le prix ferme est établi après la visite technique gratuite.
         {r.bonusHT > 0 && ` ${bonusLabelFor(product?.brand)} déduit. ${BONUS.conditions}`}
       </p>
       {monthly != null && (
@@ -1563,11 +1687,11 @@ function Recap({
   );
 }
 
-function Row({ label, value, muted }: { label: string; value: string; muted?: boolean }) {
+function Row({ label, value, muted }: { label: string; value: React.ReactNode; muted?: boolean }) {
   return (
     <div className="flex justify-between gap-3 py-1">
       <dt className={cn("min-w-0", muted ? "text-mp-ink-soft" : "text-mp-ink")}>{label}</dt>
-      <dd className={cn("shrink-0 tabular-nums", muted ? "text-mp-ink-soft" : "text-mp-ink")}>
+      <dd className={cn("max-w-[45%] shrink-0 text-right tabular-nums", muted ? "text-mp-ink-soft" : "text-mp-ink")}>
         {value}
       </dd>
     </div>
