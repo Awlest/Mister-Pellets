@@ -6,21 +6,21 @@ import { getEstimateProduct } from "@/lib/estimate-catalog";
 import { formatKw } from "@/lib/power";
 import {
   DEFAULT_STATE,
-  DUCT_ROOMS_MAX,
-  CONDUIT_MAX_M,
-  INSTALL_TYPES,
   ISO,
   LEVELS,
-  OPTIONS,
   STOVE_KINDS,
+  SURFACE,
   estimate,
+  formatEur,
+  isCanalisable,
+  type EstimateLine,
   type EstimateState,
   type InstallType,
   type IsoKey,
-  type LevelKey,
-  type OptionKey,
   type StoveKind,
 } from "@/lib/estimate";
+import { describeEvacuation, describePose, missingAnswers, sanitizePose } from "@/lib/pose/moteur";
+import { TARIFS } from "@/lib/pose/tarifs";
 import { BONUS, bonusLabelFor } from "@/lib/bonus";
 import { durationsFor, monthly0 } from "@/lib/financing";
 
@@ -71,26 +71,29 @@ const pick = <T extends string>(value: unknown, allowed: readonly T[], fallback:
     ? (value as T)
     : fallback;
 
-/** Reconstruit un état de configurateur sûr à partir du corps de la requête. */
-function sanitizeConfig(raw: Record<string, unknown>): EstimateState {
-  const opt: Partial<Record<OptionKey, boolean>> = {};
-  const rawOpt = (raw.opt ?? {}) as Record<string, unknown>;
-  for (const k of Object.keys(OPTIONS) as OptionKey[]) {
-    if (rawOpt[k] === true) opt[k] = true;
-  }
+/**
+ * Reconstruit un état de configurateur sûr à partir du corps de la requête.
+ * La pose (évacuation, hauteur, accès, canalisation, étage, options) passe par
+ * les listes blanches du moteur commun ; null si l'évacuation est inconnue.
+ */
+function sanitizeConfig(raw: Record<string, unknown>): EstimateState | null {
+  const pose = sanitizePose(raw, TARIFS);
+  if (!pose) return null;
   return {
-    installType: pick(raw.installType, Object.keys(INSTALL_TYPES) as InstallType[], DEFAULT_STATE.installType),
-    conduitM: clamp(raw.conduitM, 4, CONDUIT_MAX_M, DEFAULT_STATE.conduitM),
+    ...pose,
     stoveKind: pick(raw.stoveKind, Object.keys(STOVE_KINDS) as StoveKind[], DEFAULT_STATE.stoveKind),
-    ductRooms: clamp(raw.ductRooms, 1, DUCT_ROOMS_MAX, DEFAULT_STATE.ductRooms),
-    surface: clamp(raw.surface, 20, 300, DEFAULT_STATE.surface),
+    surface: clamp(raw.surface, SURFACE.min, SURFACE.max, DEFAULT_STATE.surface),
     iso: pick(raw.iso, Object.keys(ISO) as IsoKey[], DEFAULT_STATE.iso),
-    level: pick(raw.level, Object.keys(LEVELS) as LevelKey[], DEFAULT_STATE.level),
-    housingOver10Years: raw.housingOver10Years !== false,
     productKey: typeof raw.productKey === "string" ? raw.productKey.slice(0, 140) : null,
-    opt,
     financeMonths: null,
   };
+}
+
+/** Montant d'une ligne de pose pour le récap : remise et « sur devis » en clair. */
+function lineValue(l: EstimateLine): string {
+  if (l.onQuote) return "sur devis";
+  if (l.fullHT !== undefined) return `${formatEur(l.amountHT)} HT (au lieu de ${formatEur(l.fullHT)}, -${l.discountPct} %)`;
+  return `${formatEur(l.amountHT)} HT`;
 }
 
 /** Tranches de la collection Quotes (le configurateur travaille en valeurs exactes). */
@@ -147,6 +150,12 @@ export async function POST(request: Request) {
 
   const delay = pick(customer.delay, DELAYS, "asap");
   const config = sanitizeConfig((body.config ?? {}) as Record<string, unknown>);
+  if (!config) {
+    return NextResponse.json(
+      { error: "Le type d'évacuation n'est pas reconnu. Revenez à l'étape 1 pour le choisir à nouveau." },
+      { status: 400 },
+    );
+  }
 
   // Le prix du poêle est relu en base : le client ne peut pas l'imposer.
   const product = config.productKey ? await getEstimateProduct(config.productKey) : undefined;
@@ -165,7 +174,24 @@ export async function POST(request: Request) {
     );
   }
 
+  // Mêmes réponses obligatoires que dans le navigateur : sans elles, pas d'estimation.
+  const canalisable = isCanalisable(product);
+  const missing = missingAnswers(config, canalisable);
+  if (missing.includes("access")) {
+    return NextResponse.json(
+      { error: "Au-delà de 12 m de conduit, choisissez la nacelle ou l'échafaudage à l'étape 1." },
+      { status: 400 },
+    );
+  }
+  if (missing.includes("ducts")) {
+    return NextResponse.json(
+      { error: "Dites-nous si vous voulez la canalisation d'air chaud, à l'étape 3." },
+      { status: 400 },
+    );
+  }
+
   const r = estimate(config, product);
+  const quoteNote = r.onQuote ? "Échafaudage en plus, chiffré sur devis après la visite." : undefined;
   const durations = durationsFor(r.totalTTC);
   const requestedMonths = typeof body.months === "number" ? body.months : null;
   const months =
@@ -189,18 +215,16 @@ export async function POST(request: Request) {
   const recap = [
     message ? `${message}\n` : "",
     "--- Estimation configurée en ligne ---",
-    `Poêle : ${product.name} (${product.brand}, ${formatKw(product.powerKw)} kW) — /produit/${product.slug}`,
-    `Type : ${STOVE_KINDS[config.stoveKind].label} · Évacuation : ${INSTALL_TYPES[config.installType].label}`,
-    INSTALL_TYPES[config.installType].perMeter > 0 ? `Conduit : ${config.conduitM} m` : "",
-    STOVE_KINDS[config.stoveKind].ducts ? `Pièces canalisées : ${config.ductRooms}` : "",
+    `Poêle : ${product.name} (${product.brand}, ${formatKw(product.powerKw)} kW), /produit/${product.slug}`,
+    `Type : ${STOVE_KINDS[config.stoveKind].label}`,
+    ...describePose(config, canalisable),
     `Surface : ${config.surface} m² · Isolation : ${ISO[config.iso].label} · Besoin estimé : ${r.needKw} kW`,
-    `Emplacement : ${LEVELS[config.level].label} · Logement > 10 ans : ${config.housingOver10Years ? "oui" : "non"}`,
     "",
     `Matériel : ${r.materialHT} € HT`,
     r.bonusHT > 0 ? `${bonusLabelFor(product.brand)} : -${r.bonusHT} € HT (${BONUS.conditions})` : "",
-    ...r.laborLines.map((l) => `${l.label} : ${l.amountHT} € HT`),
+    ...r.laborLines.map((l) => `${l.label} : ${lineValue(l)}`),
     `TVA ${Math.round(r.vatRate * 100)} % : ${r.vatAmount} €`,
-    `TOTAL : ${r.totalTTC} € TTC`,
+    `TOTAL : ${r.totalTTC} € TTC${r.onQuote ? " (échafaudage en plus, sur devis)" : ""}`,
     monthly ? `Financement 0 % : ${monthly} €/mois sur ${months} mois` : "",
   ]
     .filter(Boolean)
@@ -244,7 +268,7 @@ export async function POST(request: Request) {
       productSlug: product.slug,
       powerKw: product.powerKw,
       needKw: r.needKw,
-      installType: INSTALL_TYPES[config.installType].label,
+      installType: describeEvacuation(config),
       stoveKind: STOVE_KINDS[config.stoveKind].label,
       surface: config.surface,
       iso: ISO[config.iso].label,
@@ -254,10 +278,11 @@ export async function POST(request: Request) {
         ...(r.bonusHT > 0
           ? [{ label: `${bonusLabelFor(product.brand)} (${BONUS.conditions})`, amountHT: -r.bonusHT }]
           : []),
-        ...r.laborLines.map((l) => ({ label: l.label, amountHT: l.amountHT })),
+        ...r.laborLines.map((l) => ({ label: l.label, amountHT: l.amountHT, valueText: lineValue(l) })),
       ],
       materialHT: r.materialHT,
       totalTTC: r.totalTTC,
+      quoteNote,
       months,
       monthly,
       message,
@@ -270,6 +295,7 @@ export async function POST(request: Request) {
       monthly,
       months,
       bonusNote: r.bonusHT > 0 ? `${bonusLabelFor(product.brand)} déduit. ${BONUS.conditions}` : undefined,
+      quoteNote,
     }),
   ]);
 

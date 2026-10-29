@@ -126,7 +126,7 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Peut-on installer un poêle à pellets sans cheminée existante ?",
     answer:
-      "Oui, deux options. Première : ventouse en façade, possible uniquement avec les modèles étanches certifiés. C'est la solution la plus simple et la moins chère (pas de tubage en toiture, pas de complexité d'étanchéité). Deuxième : un conduit neuf, le long de la façade ou à travers la maison jusqu'au toit, utilisable avec tous les modèles. Comptez environ 1 800 à 2 200 € TVAC de plus qu'une pose sur conduit existant pour 6 m de conduit (TVA à 6 %), puis un peu plus de 200 € par mètre supplémentaire. Le diagnostic à domicile valide quelle option est techniquement faisable chez vous.",
+      "Oui, deux options. Première : ventouse en façade, possible uniquement avec les modèles étanches certifiés. C'est la solution la plus simple et la moins chère (pas de tubage en toiture, pas de complexité d'étanchéité). Deuxième : un conduit neuf, le long de la façade ou à travers la maison jusqu'au toit, utilisable avec tous les modèles. Le conduit neuf se chiffre au forfait pour 10 m, puis au mètre en plus ou en moins : les montants à jour sont sur notre page prix et dans l'estimation en ligne. Le diagnostic à domicile valide quelle option est techniquement faisable chez vous.",
   },
   {
     id: "choisir-etanche",

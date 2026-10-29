@@ -10,6 +10,7 @@
     "lint": "eslint",
     "check:design": "node scripts/check-design.mjs",
     "check:famille": "node --import tsx scripts/check-famille.ts",
+    "check:pose": "node --import tsx scripts/check-pose.ts",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",

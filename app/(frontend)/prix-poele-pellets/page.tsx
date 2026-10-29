@@ -9,11 +9,13 @@ import { ROUTES } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BONUS, bonusBadgeFor } from "@/lib/bonus";
-import { CONDUIT_INCLUDED_M, eur } from "@/lib/estimate";
+import { HAUTEUR, TARIFS, eur, formatEur } from "@/lib/estimate";
+import { DiscountedPrice } from "@/components/forms/DiscountedPrice";
 import {
   EXAMPLE_INSTALL_LABEL,
   FROM_INSTALL_LABEL,
   getPricePageData,
+  type InstallPrice,
   type PriceExample,
 } from "@/lib/price-examples";
 import { formatKw } from "@/lib/power";
@@ -134,7 +136,7 @@ export default async function PrixPoelePelletsPage() {
               </h2>
               <p className="text-lg leading-relaxed text-mp-ink-soft">
                 Des poêles de notre catalogue, chiffrés avec un {EXAMPLE_INSTALL_LABEL.toLowerCase()}{" "}
-                ({CONDUIT_INCLUDED_M} m), {vatNote}. Ce sont les prix que vous retrouvez dans
+                ({HAUTEUR.defaut} m), {vatNote}. Ce sont les prix que vous retrouvez dans
                 l&apos;estimation en ligne.
               </p>
             </div>
@@ -167,19 +169,29 @@ export default async function PrixPoelePelletsPage() {
                     <p className="font-semibold text-mp-green-deep">{it.label}</p>
                     <p className="text-sm text-mp-ink-soft">
                       {it.desc}
-                      {it.perMeterTTC > 0
-                        ? `. ${CONDUIT_INCLUDED_M} m compris, puis ${eur(it.perMeterTTC)} le mètre.`
-                        : "."}
+                      {it.percements > 0 ? `, ${it.percements} percements renforcés compris` : ""}.
+                      {it.heightM > 0 ? ` ${heightNote(it)}` : ""}
                     </p>
                   </div>
-                  <p className="shrink-0 text-right font-semibold text-mp-ink">{eur(it.laborTTC)}</p>
+                  <p className="shrink-0 text-right font-semibold text-mp-ink">
+                    <DiscountedPrice
+                      amount={it.laborTTC}
+                      full={it.fullTTC}
+                      pct={it.discountPct}
+                      showStrike={it.showStrike}
+                      format={eur}
+                      className="max-w-36"
+                    />
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
           <p className="mp-measure mt-4 text-center text-sm text-mp-ink-soft">
-            Logement de moins de 10 ans ou construction neuve : TVA à 21 %. Un mur très épais, un
-            étage ou un poêle canalisable ajoutent un supplément, chiffré à la visite.
+            Au-delà de {HAUTEUR.seuilAcces} m de conduit, il faut une nacelle ({eur(TARIFS.options.nacelle * 1.06)}{" "}
+            la journée) ou un échafaudage, chiffré sur devis. Logement de moins de 10 ans ou
+            construction neuve : TVA à 21 %. Un mur très épais, un étage ou la canalisation
+            d&apos;air chaud ajoutent un supplément.
           </p>
         </div>
       </section>
@@ -264,7 +276,18 @@ function ExampleCard({ ex, bonus }: { ex: PriceExample; bonus: boolean }) {
       </div>
       <dl className="mb-4 space-y-1.5 text-sm">
         <Row label="Poêle" value={eur(ex.stoveTTC)} />
-        <Row label="Pose et raccordement" value={eur(ex.laborTTC)} />
+        <div className="flex justify-between gap-3">
+          <dt className="text-mp-ink-soft">Pose et raccordement</dt>
+          <dd className="font-medium text-mp-ink">
+            <DiscountedPrice
+              amount={ex.laborTTC}
+              full={ex.laborFullTTC}
+              pct={ex.laborDiscountPct}
+              showStrike={ex.laborShowStrike}
+              format={eur}
+            />
+          </dd>
+        </div>
         {bonus && ex.bonusTTC > 0 ? (
           <Row label={`Bonus de saison ${bonusBadgeFor(ex.brand)}`} value={`- ${eur(ex.bonusTTC)}`} />
         ) : null}
@@ -284,6 +307,15 @@ function ExampleCard({ ex, bonus }: { ex: PriceExample; bonus: boolean }) {
       </div>
     </Card>
   );
+}
+
+/** « Forfait pour 10 m, 127,20 € par mètre en plus ou en moins. » */
+function heightNote(it: InstallPrice): string {
+  const base = `Forfait pour ${it.heightM} m`;
+  if (it.lessPerMeterTTC === it.morePerMeterTTC) {
+    return `${base}, ${formatEur(it.morePerMeterTTC)} par mètre en plus ou en moins.`;
+  }
+  return `${base}, ${formatEur(it.lessPerMeterTTC)} de moins par mètre en dessous, ${formatEur(it.morePerMeterTTC)} de plus par mètre au-dessus.`;
 }
 
 function Row({ label, value }: { label: string; value: string }) {
