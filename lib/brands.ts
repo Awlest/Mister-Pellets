@@ -7,8 +7,9 @@
  * "ce qui distingue", FAQ, maillage). Sources : edilkamin.com, ek-63.com,
  * girolami.eu, diellespa.it, ferlux.es.
  *
- * Hiérarchie : 5 marques "top tier" (tier 1, traitement éditorial complet ;
- * Austroflamm et Cadel ajoutées le 18/10/2026)
+ * Hiérarchie : 6 marques "top tier" (tier 1, traitement éditorial complet ;
+ * Austroflamm et Cadel ajoutées le 18/10/2026, MCZ le 30/10/2026, en tête :
+ * c'est la marque appelée à prendre la place d'Edilkamin)
  * et 2 marques secondaires (tier 2, contenu hérité). Les champs enrichis
  * (whyWeLove, milestones, distinctions, modelsTable, faq) sont OPTIONNELS :
  * le composant BrandPage n'affiche un bloc que si la donnée existe, donc les
@@ -43,7 +44,7 @@ export interface BrandFaqItem {
 }
 
 export interface BrandData {
-  slug: "edilkamin" | "ek63" | "girolami" | "dielle" | "ferlux" | "austroflamm" | "cadel";
+  slug: "mcz" | "edilkamin" | "ek63" | "girolami" | "dielle" | "ferlux" | "austroflamm" | "cadel";
   name: string;
   country: string;
   /** 1 = marque top tier (page complète), 2 = marque secondaire. */
@@ -88,6 +89,81 @@ export interface BrandData {
 }
 
 export const BRANDS: Record<BrandData["slug"], BrandData> = {
+  // ───────────────────────────────────────────────────────────────────
+  // MCZ , tier1, marque phare (arrivée octobre 2026, appelée à remplacer Edilkamin)
+  // Sources : mcz.it/fr-be (fiches produits, technologies Core, Maestro+ et
+  // 365, collection Easy, informations légales), mcz.it/fr (designers,
+  // communiqués iF Design Award et Red Dot Award 2026 d'Eiko 365),
+  // mcz.it/it/career (historique pellet), mczgroup.it/fr/le-groupe-mcz
+  // (histoire, sièges, chiffres 2021), catalogue MCZ pellet 2026.
+  // Relevé du 30/10/2026.
+  // Écarté faute de source officielle : importateur belge, durée de garantie.
+  // ───────────────────────────────────────────────────────────────────
+  mcz: {
+    slug: "mcz",
+    name: "MCZ",
+    country: "Italie",
+    tier: 1,
+    founded: 1975,
+    positioning: "Référence italienne du pellet, la gamme la plus complète qu'on pose",
+    tagline: "Le pellet italien, du petit 6 kW au foyer hydro",
+    badge: "Marque italienne du groupe MCZ",
+    intro:
+      "MCZ est la marque phare du groupe MCZ, fondé en 1975 à Vigonovo di Fontanafredda, près de Pordenone, dans le nord-est de l'Italie. Son premier poêle à pellets, l'Antares, date de 2002. Sa gamme pellets couvre tout : poêles à air, canalisables Comfort Air, hydros pour les radiateurs, foyers et inserts, avec la combustion Core et le pilotage Maestro+. Arrivée chez Mister Pellets en octobre 2026.",
+    heroSubtitle:
+      "Fondée en 1975 par la famille Zanette, premier poêle à pellets en 2002, canalisation Comfort Air brevetée en 2007, premier poêle à pellets piloté par smartphone en 2014. Aujourd'hui, la combustion Core, le Wi-Fi de série et des hydros jusqu'à 24 kW. C'est la marque qu'on met désormais en premier quand on cherche le bon poêle pour une maison wallonne.",
+    whyWeLove: [
+      "MCZ, c'est la profondeur de gamme. Une centaine de versions en pellets, du petit poêle de 6 kW pour une pièce bien isolée au foyer hydro de 24 kW qui alimente les radiateurs. Entre les deux : des poêles plats de 27,5 cm pour un couloir, des ronds qui se placent en angle, des canalisables qui chauffent une ou deux pièces de plus, des inserts pour une vieille cheminée. Quand on arrive chez vous, on a presque toujours un MCZ qui colle à la maison, sans forcer.",
+      "Ensuite, la technique. La combustion Core fonctionne par gazéification : MCZ annonce 55 % d'émissions en moins que les limites européennes Ecodesign, une flamme plus calme, une vitre qui reste propre plus longtemps et un brasero qui se nettoie seul, avec un nettoyage du foyer une fois par semaine. Le pilotage Maestro+ met le Wi-Fi et le Bluetooth de série : on règle et on programme le poêle depuis le téléphone, à la maison ou à distance, et le logiciel se met à jour tout seul.",
+      "Enfin, le confort de toute la maison. Le système Comfort Air, breveté par MCZ, envoie l'air chaud par des gaines jusqu'à 8 m, à une température de sortie qui peut monter à 80 °C, avec des diffuseurs qu'on peut placer bas sur le mur. Et pour ceux qui veulent un budget plus serré, la ligne Easy garde la fonte (dessus, porte, brasero) et une utilisation très simple.",
+    ],
+    milestones: [
+      { marker: "1975", label: "Lidia Pizzinato fonde MCZ, Manufatti in Cemento Zanette, dans la famille Zanette." },
+      { marker: "2002", label: "Antares, le premier poêle à pellets de la marque." },
+      { marker: "2007", label: "Brevet Comfort Air pour envoyer l'air chaud dans les autres pièces." },
+      { marker: "2011", label: "Premier fabricant du secteur primé à l'iF Design Award, avec le poêle à pellets Toba." },
+      { marker: "2013", label: "Cadel, Sergio Leoni et J.Corradi rejoignent le groupe MCZ." },
+      { marker: "2014", label: "Premier poêle à pellets MCZ piloté par smartphone ; Maestro suit en 2018." },
+      { marker: "2022", label: "La combustion Core, protégée par trois brevets, entre en production." },
+      { marker: "2026", label: "Eiko 365, poêle à pellets qui rafraîchit aussi l'été, primé à l'iF Design Award puis au Red Dot Award. Arrivée chez Mister Pellets." },
+    ],
+    distinctions: [
+      { emoji: "🔥", title: "Combustion Core", description: "Combustion par gazéification : 55 % d'émissions en moins que les limites Ecodesign, jusqu'à 15 % de pellets économisés, une flamme qui ressemble à celle du bois et une vitre propre plus longtemps. La flamme apparaît en moins de 3 minutes." },
+      { emoji: "📱", title: "Maestro+ de série", description: "Wi-Fi et Bluetooth inclus, appli pour allumer, programmer et suivre la consommation, panneau numérique sur le poêle, mise à jour du logiciel à distance. Télécommande Freestanding avec thermostat en option." },
+      { emoji: "🌬️", title: "Comfort Air breveté", description: "La canalisation MCZ envoie l'air chaud jusqu'à 8 m dans d'autres pièces, avec une sortie jusqu'à 80 °C. Les diffuseurs se posent où vous voulez, même près du sol." },
+      { emoji: "🧹", title: "Moins de nettoyage", description: "Brasero autonettoyant sur les versions Core et Matic, tiroir à cendres à vider une fois par semaine. Sur les Teia SmartClean, 7 à 10 jours sans aspirer les cendres, sans pièce mécanique en mouvement." },
+      { emoji: "💧", title: "Des hydros jusqu'à 24 kW", description: "Thermopoêles Musa, Suite, Club, Pad, Feel Hydro, Clio, Thea et foyers Vivo 90 Hydro : ils chauffent l'eau des radiateurs ou du plancher chauffant, en classe A++ pour la plupart." },
+      { emoji: "❄️", title: "Eiko 365, chaud et froid", description: "Un poêle à pellets avec module de rafraîchissement de 9 000 BTU/h intégré, sans unité extérieure : un seul trou dans le mur. iF Design Award et Red Dot Award 2026." },
+    ],
+    modelsTable: [
+      { name: "Ego Air 8 R", power: "8,1 kW", type: "Poêle à air, best-seller", forWhom: "Le best-seller acier de MCZ, couvercle et brasero en fonte, étanche, Wi-Fi de série.", slug: "mcz-ego-air-8-r" },
+      { name: "Club Comfort Air Matic 12 Core R", power: "12 kW", type: "Canalisable, combustion Core", forWhom: "Céramique, une pièce de plus chauffée par gaine, brasero autonettoyant.", slug: "mcz-club-comfort-air-matic-12-core-r" },
+      { name: "Musa Hydro Matic 18 R", power: "18 kW", type: "Hydro, classe A++", forWhom: "Pour alimenter les radiateurs ou le plancher chauffant, jusqu'à 13,2 kW cédés à l'eau.", slug: "mcz-musa-hydro-matic-18-r" },
+      { name: "Eiko Natural Matic 6 Core R", power: "6 kW", type: "Convection naturelle", forWhom: "Sans ventilateur dans la pièce, 40,5 cm de profondeur : pour une maison bien isolée.", slug: "mcz-eiko-natural-matic-6-core-r" },
+      { name: "Eiko 365 R", power: "6 kW", type: "Chauffe et rafraîchit", forWhom: "Pellets l'hiver, rafraîchissement l'été, sans unité extérieure. Primé en 2026.", slug: "mcz-eiko-365-r" },
+      { name: "Feel Comfort Air Matic 12 Core R", power: "12 kW", type: "Plat, canalisable", forWhom: "43,3 cm de profondeur, deux pièces de plus chauffées par gaines, finitions grès.", slug: "mcz-feel-comfort-air-matic-12-core-r" },
+      { name: "Rock Comfort Air 8 R", power: "7,9 kW", type: "Plat, ligne Easy", forWhom: "27,6 cm de profondeur pour un couloir, avec une pièce de plus chauffée.", slug: "mcz-rock-comfort-air-8-r" },
+      { name: "Teia Comfort Air SmartClean 10 R", power: "10 kW", type: "Canalisable, ligne Easy", forWhom: "Dessus et façade en fonte, 7 à 10 jours sans aspirer les cendres, classe A++.", slug: "mcz-teia-comfort-air-smartclean-10-r" },
+      { name: "Qbox 70 Air 8", power: "7,8 kW", type: "Insert pour cheminée", forWhom: "Transforme une cheminée existante en chauffage aux pellets, sans gros travaux.", slug: "mcz-qbox-70-air-8" },
+    ],
+    faq: [
+      { question: "MCZ, c'est qui ?", answer: "Un fabricant italien fondé en 1975 par la famille Zanette à Vigonovo di Fontanafredda, près de Pordenone, où se trouvent toujours le siège et l'usine. Foyers en 1982, poêles à bois en 1998, premier poêle à pellets en 2002. Le groupe MCZ possède aussi Cadel, une autre marque qu'on pose, et compte 673 personnes selon ses chiffres de 2021." },
+      { question: "La combustion Core, ça change quoi au quotidien ?", answer: "Trois choses. Moins de nettoyage : le brasero se nettoie seul et le foyer se nettoie une fois par semaine. Une vitre qui reste propre plus longtemps. Et moins de pellets brûlés pour la même chaleur, jusqu'à 15 % selon MCZ, avec 55 % d'émissions en moins que les limites Ecodesign. Elle équipe les Ego, Eiko, Club, Suite, Musa, Feel, Curve, Mood et Mako marqués Core." },
+      { question: "Peut-on piloter un MCZ depuis son téléphone ?", answer: "Oui. Sur les modèles Maestro+, le Wi-Fi et le Bluetooth sont de série : allumage, programmation, réglage de la ventilation et suivi de la consommation depuis l'appli, à la maison ou à distance. Les poêles de la ligne Easy se pilotent avec leur panneau, et depuis le téléphone avec le kit Wi-Fi en option." },
+      { question: "MCZ ou Cadel : quelle différence ?", answer: "Les deux marques appartiennent au groupe MCZ. MCZ, c'est la gamme la plus large et la plus technique : combustion Core, canalisation Comfort Air, hydros jusqu'à 24 kW, foyers et inserts. Cadel joue le connecté à prix doux, avec beaucoup de poêles plats. On compare les deux sur votre projet." },
+      { question: "Quel MCZ pour chauffer plusieurs pièces ?", answer: "Un modèle Comfort Air : l'air chaud part par une gaine vers une autre pièce, jusqu'à 8 m. Les Feel Comfort Air ont deux sorties à l'arrière, donc deux pièces de plus. Pour toute la maison avec des radiateurs, on part plutôt sur un hydro (Musa, Suite, Club, Pad, Feel Hydro) de 18 ou 24 kW." },
+      { question: "C'est quoi les versions R, UP et XUP ?", answer: "Elles changent la sortie des fumées. R : à l'arrière. UP : par le haut, ce qui permet de coller le poêle au mur et de gagner de la profondeur. XUP : par le haut aussi, avec une buse de 80 ou 130 mm selon le modèle. On choisit à la visite technique, selon votre conduit." },
+      { question: "Et les pièces et la garantie ?", answer: "La garantie constructeur MCZ s'applique selon les conditions remises avec le devis, et elle suppose une pose par un professionnel et un entretien chaque année. On pose, on met en service et on assure le SAV, avec intervention sous 48 à 72 h dans notre zone." },
+    ],
+    warranty:
+      "Garantie constructeur MCZ, aux conditions remises par écrit avec le devis. Elle suppose une pose par un professionnel et un entretien annuel : on s'occupe des deux, avec intervention sous 48 à 72 h.",
+    tags: ["Italie", "Depuis 1975", "Combustion Core", "Maestro+ Wi-Fi", "Comfort Air"],
+    officialUrl: "https://www.mcz.it/fr-be",
+    metaTitle: "MCZ en Wallonie, poêles à pellets Core, canalisables et hydro | Mister Pellets",
+    metaDescription:
+      "MCZ, pionnier italien du pellet : combustion Core, Wi-Fi Maestro+ de série, canalisation Comfort Air, hydros jusqu'à 24 kW, foyers et inserts. Toute la gamme posée en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+  },
+
   // ───────────────────────────────────────────────────────────────────
   // EDILKAMIN , tier1, référence italienne historique
   // ───────────────────────────────────────────────────────────────────
@@ -497,6 +573,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
 
 /** Ordre d'affichage : top tier d'abord, puis secondaires. */
 export const BRAND_LIST: BrandData[] = [
+  BRANDS.mcz,
   BRANDS.edilkamin,
   BRANDS.ek63,
   BRANDS.girolami,
@@ -506,7 +583,7 @@ export const BRAND_LIST: BrandData[] = [
   BRANDS.ferlux,
 ];
 
-/** Les 5 marques mises en avant (traitement éditorial complet). */
+/** Les 6 marques mises en avant (traitement éditorial complet). */
 export const TOP_TIER_BRANDS: BrandData[] = BRAND_LIST.filter((b) => b.tier === 1);
 
 /**

@@ -76,6 +76,125 @@ export interface ArticleData {
 
 export const ARTICLES: ArticleData[] = [
   // ───────────────────────────────────────────────────────────────────
+  // ACTUALITÉ : arrivée de MCZ (30/10/2026)
+  // Sources : mcz.it/fr-be (fiches produits et données techniques,
+  // technologies Core, Maestro+ et 365, collection Easy), mcz.it/fr
+  // (communiqués iF Design Award et Red Dot Award 2026), mcz.it/it/career,
+  // mczgroup.it/fr/le-groupe-mcz, catalogue MCZ pellet 2026 ; valeurs reprises
+  // sur les fiches produit.
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "mcz-arrive-chez-mister-pellets",
+    title: "MCZ arrive chez Mister Pellets : toute la gamme pellets posée en Wallonie",
+    metaTitle: "MCZ chez Mister Pellets : poêles à pellets Core, canalisables et hydro",
+    metaDescription:
+      "Depuis octobre 2026, Mister Pellets pose toute la gamme pellets MCZ en Wallonie : combustion Core, Wi-Fi Maestro+, canalisables Comfort Air, hydros, foyers et inserts. Ce qui change pour vous.",
+    excerpt:
+      "MCZ devient notre première marque : une centaine de versions de 6 à 24 kW, la combustion Core, le Wi-Fi de série et la canalisation Comfort Air. Posées par la même équipe, partout en Wallonie.",
+    tldr:
+      "Depuis octobre 2026, Mister Pellets distribue et pose toute la gamme pellets MCZ en Wallonie. MCZ, fabricant italien fondé en 1975 près de Pordenone, a lancé son premier poêle à pellets en 2002 et breveté sa canalisation Comfort Air en 2007. Sa gamme va du poêle de 6 kW pour une pièce bien isolée au foyer hydro de 24 kW, avec la combustion Core (55 % d'émissions en moins que les limites Ecodesign selon MCZ), le Wi-Fi et le Bluetooth de série sur la plupart des modèles et la canalisation Comfort Air jusqu'à 8 m. C'est désormais la marque qu'on propose en premier.",
+    category: "actualite",
+    tags: ["MCZ", "nouveautés", "marques", "combustion Core", "poêle canalisable", "poêle hydro"],
+    readingTimeMinutes: 6,
+    publishedAt: "2026-10-30",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Conseillers poêles à pellets",
+    coverImageAlt: "Poêle à pellets MCZ installé dans un séjour",
+    sections: [
+      {
+        heading: "Pourquoi MCZ, et pourquoi en premier ?",
+        paragraphs: [
+          "Sur le terrain, la question n'est jamais « quelle marque ? », c'est « quel poêle pour cette maison-là ? ». Une pièce de vie ouverte, un couloir d'un mètre, deux chambres à chauffer à l'étage, une vieille cheminée, des radiateurs à alimenter : il faut un modèle qui colle, pas un modèle qu'on force. MCZ est la marque qui a le plus de réponses, avec une centaine de versions en pellets.",
+          "MCZ a été fondée en 1975 par la famille Zanette à Vigonovo di Fontanafredda, près de Pordenone, dans le nord-est de l'Italie, où se trouvent toujours le siège et l'usine. Foyers en 1982, poêles à bois en 1998, premier poêle à pellets, l'Antares, en 2002, premier poêle à pellets piloté par smartphone en 2014. Le groupe possède aussi Cadel, une marque qu'on pose depuis le début du mois. Edilkamin, EK63, Girolami, Austroflamm et Cadel restent au catalogue : MCZ passe simplement devant.",
+        ],
+      },
+      {
+        heading: "Ce que MCZ fait mieux",
+        list: {
+          items: [
+            "La combustion Core : une combustion par gazéification qui, selon MCZ, rejette 55 % d'émissions en moins que les limites européennes Ecodesign et économise jusqu'à 15 % de pellets. Le brasero se nettoie seul et le foyer se nettoie une fois par semaine.",
+            "Le pilotage Maestro+ : Wi-Fi et Bluetooth de série, appli pour allumer, programmer et suivre la consommation, panneau numérique sur le poêle et mise à jour du logiciel à distance. La télécommande Freestanding avec thermostat est en option.",
+            "La canalisation Comfort Air, brevetée par MCZ : l'air chaud part par des gaines jusqu'à 8 m, avec une sortie jusqu'à 80 °C, et les diffuseurs peuvent se poser bas sur le mur.",
+            "Moins d'entretien sur toute la gamme : brasero autonettoyant sur les versions Core et Matic, technologie SmartClean sur les nouveaux Teia (7 à 10 jours sans aspirer les cendres) et sur le foyer Vivo 90 Hydro SmartClean (un nettoyage par semaine).",
+            "La ligne Easy pour les budgets serrés : dessus, porte ou brasero en fonte selon les modèles, commandes simples, Wi-Fi par kit en option.",
+          ],
+        },
+      },
+      {
+        heading: "La gamme MCZ en un coup d'œil",
+        paragraphs: [
+          "Toutes les versions sont dans la boutique, filtrables par marque, type et puissance. Les versions R ont la sortie des fumées à l'arrière, les UP et XUP par le haut, ce qui permet de coller le poêle au mur. Quelques exemples selon le besoin :",
+        ],
+        table: {
+          headers: ["Besoin", "Modèle MCZ", "Pourquoi"],
+          rows: [
+            ["Séjour, poêle à air polyvalent", "Ego Air 8 R", "8,1 kW, étanche, Wi-Fi de série, couvercle et brasero en fonte"],
+            ["Couloir ou petite pièce", "Alea Air 7 R", "27,5 cm de profondeur pour 6,2 kW, ligne Easy"],
+            ["Maison bien isolée, silence", "Eiko Natural Matic 6 Core R", "Convection naturelle, pas de ventilateur dans la pièce, 40,5 cm de profondeur"],
+            ["Chauffer deux pièces de plus", "Feel Comfort Air Matic 12 Core R", "12 kW, deux gaines à l'arrière, finitions grès"],
+            ["Radiateurs ou plancher chauffant", "Musa Hydro Matic 18 R", "13,2 kW cédés à l'eau, classe A++"],
+            ["Cheminée existante", "Qbox 70 Air 8", "Insert de 7,8 kW, chambre de combustion en fonte"],
+            ["Chaud l'hiver, frais l'été", "Eiko 365 R", "6 kW aux pellets et 2,6 kW de rafraîchissement, sans unité extérieure"],
+          ],
+          caption: "Valeurs des fiches techniques du site belge MCZ et du catalogue MCZ pellet 2026, reprises sur nos fiches produit.",
+        },
+      },
+      {
+        heading: "Eiko 365 : le poêle qui rafraîchit aussi",
+        paragraphs: [
+          "C'est la nouveauté dont on nous parle le plus. L'Eiko 365 chauffe aux pellets l'hiver, avec la combustion Core, et rafraîchit l'été grâce à un module air-air de 9 000 BTU/h intégré. Pas d'unité extérieure, pas d'évacuation des condensats : un seul trou dans le mur en plus du conduit de fumée. Il a reçu l'iF Design Award puis le Red Dot Award en 2026.",
+          "MCZ le destine aux espaces jusqu'à 50 m² environ. On regarde avec vous si votre pièce et votre conduit s'y prêtent lors de la visite technique.",
+        ],
+      },
+      {
+        heading: "Ce qui change pour vous",
+        list: {
+          items: [
+            "Une centaine de modèles MCZ en plus dans la boutique, avec leurs caractéristiques, leurs finitions et les photos du fabricant.",
+            "Même parcours qu'avec nos autres marques : visite technique, devis sous 48 heures, pose en une journée dans la plupart des cas, TVA à 6 % sur les logements de plus de 10 ans.",
+            "Même équipe et même SAV : on pose, on met en service, on fait l'entretien annuel et on intervient sous 48 à 72 h dans notre zone.",
+            "Bonus de saison jusqu'au 24 décembre 2026 : -10 % sur le prix des poêles MCZ dès qu'il est affiché, pose au tarif normal.",
+          ],
+        },
+        callout: {
+          variant: "info",
+          text: "Les prix des modèles MCZ arrivent sur les fiches au fil des jours. En attendant, on vous chiffre le poêle et la pose sur devis, sous 48 heures.",
+        },
+      },
+      {
+        heading: "MCZ, Cadel ou Edilkamin : comment choisir ?",
+        paragraphs: [
+          "Prenez MCZ si vous voulez le modèle exact qui colle à votre maison, avec la combustion la plus propre et le pilotage depuis le téléphone. Cadel, du même groupe, reste intéressant pour un poêle connecté à prix doux, surtout en format plat. Edilkamin garde ses fidèles et sa longue histoire.",
+          "Dans tous les cas, on compare deux ou trois modèles de marques différentes lors de la visite, sur votre maison, votre conduit et votre budget.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "MCZ, c'est une marque italienne ?",
+        answer: "Oui. MCZ est la marque phare du groupe MCZ, installé à Vigonovo di Fontanafredda, près de Pordenone, dans le nord-est de l'Italie. Le groupe possède aussi Cadel.",
+      },
+      {
+        question: "Tous les poêles MCZ ont-ils le Wi-Fi ?",
+        answer: "Les modèles Maestro+, c'est-à-dire la plupart de la gamme, ont le Wi-Fi et le Bluetooth de série. Les poêles de la ligne Easy (Alea, Ghea, Hera, May, Mida, Raam, Rock, Teia, Clio, Thea) se pilotent avec leur panneau, et depuis le téléphone avec le kit Wi-Fi en option.",
+      },
+      {
+        question: "Un poêle MCZ demande-t-il beaucoup d'entretien ?",
+        answer: "Moins qu'un poêle classique sur les versions Core et Matic : le brasero se nettoie seul et le foyer se nettoie une fois par semaine. Sur les Teia SmartClean, MCZ annonce 7 à 10 jours sans aspirer les cendres. L'entretien annuel par un technicien reste obligatoire : on s'en charge.",
+      },
+      {
+        question: "Vous posez MCZ dans toute la Wallonie ?",
+        answer: "Oui, dans les cinq provinces wallonnes, avec la même équipe et le même SAV que pour nos autres marques. Livraison gratuite dans un rayon de 20 km autour de Fernelmont.",
+      },
+    ],
+    related: {
+      articles: ["austroflamm-cadel-nouvelles-marques-mister-pellets", "dimensionner-poele-pellets-surface-wallonie", "edilkamin-ek63-girolami-quelle-marque-choisir"],
+      brands: ["mcz", "cadel", "edilkamin"],
+      cities: ["namur", "charleroi", "liege"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
   // ACTUALITÉ : arrivée d'Austroflamm et de Cadel (18/10/2026)
   // Sources : austroflamm.com et cadelsrl.com (pages entreprise, catalogues
   // 2026, notices, FAQ), registre autrichien, communiqués Cadel 2023 et iF
@@ -151,7 +270,7 @@ export const ARTICLES: ArticleData[] = [
           items: [
             "77 modèles en plus dans la boutique, avec leurs caractéristiques et photos officielles, filtrables par marque.",
             "Même parcours qu'avec nos autres marques : visite technique, devis sous 48 heures, pose en une journée dans la plupart des cas, TVA à 6 % sur les logements de plus de 10 ans.",
-            "Bonus de saison jusqu'au 24 décembre 2026 : -10 % sur le prix des poêles Austroflamm et Cadel (-15 % sur les autres marques), pose au tarif normal.",
+            "Bonus de saison jusqu'au 24 décembre 2026 : -10 % sur le prix des poêles Austroflamm et Cadel, comme sur MCZ (-15 % sur Edilkamin, EK63 et Girolami), pose au tarif normal.",
             "Garantie : 2 ans chez Cadel ; chez Austroflamm, les conditions de l'importateur belge, remises par écrit avec le devis. Dans les deux cas, l'entretien annuel est à faire : on s'en charge.",
           ],
         },
@@ -179,7 +298,7 @@ export const ARTICLES: ArticleData[] = [
       },
       {
         question: "Le bonus de saison s'applique-t-il aux nouvelles marques ?",
-        answer: "Oui, à -10 % sur le prix du poêle pour Austroflamm et Cadel, jusqu'au 24 décembre 2026. Le bonus ne porte pas sur la pose, qui suit ses propres tarifs. Les autres marques restent à -15 %.",
+        answer: "Oui, à -10 % sur le prix du poêle pour Austroflamm et Cadel, comme pour MCZ, jusqu'au 24 décembre 2026. Le bonus ne porte pas sur la pose, qui suit ses propres tarifs. Edilkamin, EK63 et Girolami restent à -15 %.",
       },
       {
         question: "Vous posez Austroflamm et Cadel dans toute la Wallonie ?",

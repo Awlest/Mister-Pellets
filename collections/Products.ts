@@ -187,6 +187,7 @@ export const Products: CollectionConfig = {
           type: "select",
           required: true,
           options: [
+            { label: "MCZ", value: "MCZ" },
             { label: "Edilkamin", value: "Edilkamin" },
             { label: "EK63", value: "EK63" },
             { label: "Girolami", value: "Girolami" },

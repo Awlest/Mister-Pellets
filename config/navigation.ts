@@ -103,6 +103,7 @@ export const CATALOGUE_LINKS: readonly NavLink[] = [
 ];
 
 export const BRAND_LINKS: readonly NavLink[] = [
+  { href: `${ROUTES.brands}/mcz`, label: "MCZ", desc: "Gamme complète · Italie" },
   { href: `${ROUTES.brands}/edilkamin`, label: "Edilkamin", desc: "Premium · Italie" },
   { href: `${ROUTES.brands}/ek63`, label: "EK63", desc: "Connecté · Italie" },
   { href: `${ROUTES.brands}/girolami`, label: "Girolami", desc: "Polycombustible · Italie" },

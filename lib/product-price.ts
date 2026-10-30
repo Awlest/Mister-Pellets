@@ -8,7 +8,7 @@ import { bonusBadgeFor } from "./bonus";
  * configurateur (lib/estimate-catalog.ts : la promo prime sur le catalogue).
  */
 export interface PricedProduct {
-  /** Marque : fixe le taux du bonus (-10 % Austroflamm et Cadel, -15 % sinon). */
+  /** Marque : fixe le taux du bonus (-10 % Austroflamm, Cadel et MCZ, -15 % sinon). */
   brand?: string;
   priceTTC?: number;
   promoPriceTTC?: number;

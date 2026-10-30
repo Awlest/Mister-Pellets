@@ -93,7 +93,7 @@ export const ORGANIZATION_SCHEMA = {
   alternateName: ["Mister Pellets", "Awlest", "Awlest SRL"],
   foundingDate: "2016",
   description:
-    "Vente et installation de poêles à pellets en Wallonie (Edilkamin, EK63, Girolami, Austroflamm, Cadel) : tubage de cheminée, sortie ventouse, conduit neuf, entretien annuel, ramonage et dépannage. Showroom à Fernelmont accessible uniquement sur rendez-vous.",
+    "Vente et installation de poêles à pellets en Wallonie (MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel) : tubage de cheminée, sortie ventouse, conduit neuf, entretien annuel, ramonage et dépannage. Showroom à Fernelmont accessible uniquement sur rendez-vous.",
   url: "https://mister-pellets.be",
   logo: "https://mister-pellets.be/logo-mister-pellets-full.svg",
   image: "https://mister-pellets.be/logo-mister-pellets-full.svg",

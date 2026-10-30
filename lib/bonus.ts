@@ -40,8 +40,9 @@ export const BONUS = {
    * Le SPF Économie admet « jusqu'à X % » quand les taux varient, mais le
    * juge trompeur si le taux maximal ne vaut que pour quelques biens (lignes
    * directrices « Annonces de réductions de prix » du 09/02/2026, point 10).
-   * Ici -15 % vaut pour toutes les marques sauf Austroflamm et Cadel : si
-   * l'exception venait à couvrir la plupart des poêles, revoir l'annonce.
+   * Ici -15 % vaut pour toutes les marques sauf Austroflamm, Cadel et MCZ :
+   * si l'exception venait à couvrir la plupart des poêles chiffrés, revoir
+   * l'annonce (à surveiller quand les prix MCZ seront posés).
    */
   label: "Bonus de saison jusqu'à -15 % sur le poêle",
   /** Pastille courte pour les cartes et les fiches produit (taux plein). */
@@ -57,19 +58,20 @@ export const BONUS = {
   effectiveDate: "2026-10-01T00:00+02:00/2026-12-24T23:59+01:00",
   /**
    * Exception au taux : Austroflamm et Cadel à -10 % au lieu de -15 %
-   * (décision du client, 18/10/2026). Les autres marques restent à -15 %.
+   * (décision du client, 18/10/2026), MCZ aussi (30/10/2026). Les autres
+   * marques restent à -15 %.
    */
   reduced: {
     rate: 0.1,
     badge: "-10 %",
-    brands: ["Austroflamm", "Cadel"] as readonly string[],
+    brands: ["Austroflamm", "Cadel", "MCZ"] as readonly string[],
   },
 } as const;
 
 const isReduced = (brand?: string | null): boolean =>
   brand != null && BONUS.reduced.brands.includes(brand);
 
-/** Taux du bonus pour une marque : -10 % pour Austroflamm et Cadel, -15 % sinon. */
+/** Taux du bonus pour une marque : -10 % pour Austroflamm, Cadel et MCZ, -15 % sinon. */
 export const bonusRateFor = (brand?: string | null): number =>
   isReduced(brand) ? BONUS.reduced.rate : BONUS.rate;
 

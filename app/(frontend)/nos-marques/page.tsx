@@ -7,15 +7,16 @@ import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
   title:
-    "Nos marques de poêles à pellets : Edilkamin, EK63, Girolami, Austroflamm, Cadel",
+    "Nos marques de poêles à pellets : MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel",
   description:
-    "Les 5 marques posées par Mister Pellets en Wallonie : Edilkamin (référence depuis 1963), EK63 (groupe Edilkamin, Wi-Fi de série), Girolami (brasier auto-nettoyant), Austroflamm (haut de gamme autrichien) et Cadel (groupe MCZ, Wi-Fi intégré).",
+    "Les 6 marques posées par Mister Pellets en Wallonie : MCZ (gamme complète, combustion Core), Edilkamin (référence depuis 1963), EK63 (groupe Edilkamin, Wi-Fi de série), Girolami (brasier auto-nettoyant), Austroflamm (haut de gamme autrichien) et Cadel (groupe MCZ, Wi-Fi intégré).",
   path: "/nos-marques",
 });
 
-/** Comparatif des 5 marques mises en avant, brief marques §E.1 (Austroflamm et Cadel le 18/10/2026). */
+/** Comparatif des 6 marques mises en avant, brief marques §E.1 (Austroflamm et Cadel le 18/10/2026, MCZ le 30/10/2026). */
 const COMPARISON: {
   criterion: string;
+  mcz: string;
   edilkamin: string;
   ek63: string;
   girolami: string;
@@ -24,6 +25,7 @@ const COMPARISON: {
 }[] = [
   {
     criterion: "Positionnement",
+    mcz: "Gamme la plus complète",
     edilkamin: "Référence premium",
     ek63: "Connecté accessible",
     girolami: "Polycombustible breveté",
@@ -32,6 +34,7 @@ const COMPARISON: {
   },
   {
     criterion: "Origine",
+    mcz: "Pordenone (Frioul), groupe MCZ",
     edilkamin: "Milan (Lainate), 1963",
     ek63: "Plateforme Edilkamin",
     girolami: "Sant'Oreste (Rome), 1970",
@@ -40,6 +43,7 @@ const COMPARISON: {
   },
   {
     criterion: "Techno phare",
+    mcz: "Combustion Core, Comfort Air",
     edilkamin: "Leonardo (autorégulation)",
     ek63: "Wi-Fi Smart de série",
     girolami: "Source Feeding (auto-nettoyage)",
@@ -48,6 +52,7 @@ const COMPARISON: {
   },
   {
     criterion: "Combustible",
+    mcz: "Pellet",
     edilkamin: "Pellet",
     ek63: "Pellet",
     girolami: "Pellet, bois, hybride",
@@ -56,6 +61,7 @@ const COMPARISON: {
   },
   {
     criterion: "Canalisable",
+    mcz: "Oui (Comfort Air, jusqu'à 8 m)",
     edilkamin: "Oui",
     ek63: "Oui",
     girolami: "Oui",
@@ -64,6 +70,7 @@ const COMPARISON: {
   },
   {
     criterion: "Hydro",
+    mcz: "Oui, 8 à 24 kW",
     edilkamin: "Oui",
     ek63: "Oui",
     girolami: "Oui",
@@ -72,6 +79,7 @@ const COMPARISON: {
   },
   {
     criterion: "Hybride bois-pellet",
+    mcz: "Non",
     edilkamin: "Non",
     ek63: "Non",
     girolami: "Oui",
@@ -80,6 +88,7 @@ const COMPARISON: {
   },
   {
     criterion: "Wi-Fi de série",
+    mcz: "Oui (Maestro+), kit sur la ligne Easy",
     edilkamin: "Selon modèle",
     ek63: "Oui sur la majorité",
     girolami: "Oui sur gamme moderne",
@@ -88,6 +97,7 @@ const COMPARISON: {
   },
   {
     criterion: "Étanchéité",
+    mcz: "Presque toute la gamme",
     edilkamin: "Sur gamme étanche",
     ek63: "Quasi toute la gamme",
     girolami: "Selon modèle",
@@ -97,6 +107,11 @@ const COMPARISON: {
 ];
 
 const ADVICE: { need: string; brand: string; why: string }[] = [
+  {
+    need: "Je veux le bon poêle pour ma maison, quelle qu'elle soit",
+    brand: "MCZ",
+    why: "Une centaine de versions, de 6 à 24 kW : air, canalisable, hydro, plat, foyer, insert. Combustion Core et Wi-Fi de série.",
+  },
   {
     need: "Je veux une marque qui a fait ses preuves",
     brand: "Edilkamin",
@@ -128,13 +143,13 @@ export default function NosMarquesHubPage() {
   return (
     <>
       <HeroSecondary
-        eyebrow="5 marques sélectionnées"
+        eyebrow="6 marques sélectionnées"
         title={
           <>
             Les marques de poêles à pellets que <span className="mp-italic">nous distribuons</span>
           </>
         }
-        description="Plutôt que de tout vendre, on s'est limités à cinq marques qui couvrent les besoins qu'on voit sur le terrain en Wallonie. Edilkamin pour la profondeur de gamme, EK63 (sa marque sœur) pour le connecté à prix accessible, Girolami pour son brevet qui nettoie le brasier tout seul. Depuis octobre 2026, Austroflamm pour le haut de gamme silencieux et les mixtes bois-pellets, et Cadel, du groupe MCZ, pour une gamme connectée très large à prix doux. Chaque marque a son créneau, on vous dit franchement laquelle est faite pour vous."
+        description="Plutôt que de tout vendre, on s'est limités à six marques qui couvrent les besoins qu'on voit sur le terrain en Wallonie. MCZ en premier, depuis octobre 2026, pour la gamme la plus complète et la combustion Core. Edilkamin pour sa longue histoire, EK63 (sa marque sœur) pour le connecté à prix accessible, Girolami pour son brevet qui nettoie le brasier tout seul. Austroflamm pour le haut de gamme silencieux et les mixtes bois-pellets, et Cadel, du groupe MCZ, pour une gamme connectée très large à prix doux. Chaque marque a son créneau, on vous dit franchement laquelle est faite pour vous."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Nos marques" },
@@ -143,25 +158,28 @@ export default function NosMarquesHubPage() {
 
       <BrandsGrid title="" description="" />
 
-      {/* Comparatif des 5 marques mises en avant */}
+      {/* Comparatif des 6 marques mises en avant */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <div className="mp-measure mb-10 text-center">
             <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
-              Nos cinq marques : le comparatif
+              Nos six marques : le comparatif
             </h2>
             <p className="text-lg text-mp-ink-soft leading-relaxed">
-              Edilkamin, EK63, Girolami, Austroflamm et Cadel, côte à côte. Aucune n&apos;écrase les autres,
+              MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel, côte à côte. Aucune n&apos;écrase les autres,
               chacune a son terrain de jeu.
             </p>
           </div>
 
           <div className="overflow-x-auto rounded-2xl border border-mp-sand/40">
-            <table className="w-full text-sm border-collapse min-w-[960px]">
+            <table className="w-full text-sm border-collapse min-w-[1120px]">
               <thead>
                 <tr className="bg-mp-beige">
                   <th className="text-left font-semibold text-mp-ink-soft p-4">
                     Critère
+                  </th>
+                  <th className="text-left font-semibold text-mp-green-deep p-4">
+                    MCZ
                   </th>
                   <th className="text-left font-semibold text-mp-green-deep p-4">
                     Edilkamin
@@ -189,6 +207,7 @@ export default function NosMarquesHubPage() {
                     <td className="p-4 font-medium text-mp-ink-soft">
                       {row.criterion}
                     </td>
+                    <td className="p-4 text-mp-ink">{row.mcz}</td>
                     <td className="p-4 text-mp-ink">{row.edilkamin}</td>
                     <td className="p-4 text-mp-ink">{row.ek63}</td>
                     <td className="p-4 text-mp-ink">{row.girolami}</td>

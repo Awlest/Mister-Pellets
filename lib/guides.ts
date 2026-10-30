@@ -4,7 +4,7 @@
  * permettre l'édition et l'ajout de nouveaux guides par le client.
  *
  * Voix : vouvoiement (charte juin 2026), installateur wallon, zéro tiret long.
- * 5 marques mises en avant : Edilkamin, EK63, Girolami, Austroflamm, Cadel.
+ * 6 marques mises en avant : MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel.
  */
 
 export interface GuideSection {
@@ -145,9 +145,10 @@ export const GUIDES: GuideData[] = [
       {
         heading: "3. Choisir la marque",
         paragraphs: [
+          "MCZ (Italie) est notre première marque depuis octobre 2026. Pionnier du poêle à pellets au début des années 2000, il a la gamme la plus complète qu'on pose : poêles à air de 6 à 14 kW, plats dès 27,5 cm de profondeur, canalisables Comfort Air jusqu'à 8 m de gaine, hydros de 18 et 24 kW, foyers et inserts. La combustion Core annonce 55 % d'émissions en moins que les limites Ecodesign, avec un brasero qui se nettoie seul, et le Wi-Fi Maestro+ est de série sur la plupart des modèles.",
           "Edilkamin (Italie, depuis 1963) est la référence italienne du chauffage biomasse, avec une gamme très large (air, canalisable, étanche, hydro, inserts) et le Wi-Fi de série sur la plupart des modèles récents. EK63 (Italie) est la marque sœur du groupe Edilkamin, lancée pour proposer du connecté à un prix plus accessible, gamme complète air/canalisable/étanche/hydro. Girolami (Italie, depuis 1970) est un fabricant familial au brevet Source Feeding : le pellet est poussé sous le brasier, qui reste propre tout seul, et la gamme va du poêle à air étanche au thermopoêle hydro, avec une particularité, l'hybride bois-pellet (la gamme Soft) qui accepte les deux combustibles.",
-          "Depuis octobre 2026, deux marques complètent la sélection. Austroflamm (Autriche) est notre marque haut de gamme : poêles à pellets qui chauffent par convection naturelle, sans ventilateur qui souffle dans la pièce, et mixtes bois et pellets Duo qui repassent seuls aux pellets quand les bûches ont brûlé. Cadel (Italie, province de Trévise) joue le même rôle qu'EK63 : du connecté, Wi-Fi et Bluetooth intégrés, une gamme très large (poêles plats de 27 cm, canalisables à deux sorties, inserts, hydros) à prix accessible.",
-          "À Mister Pellets, on a retenu ces cinq marques après avoir testé une vingtaine de fabricants. Chacune a son créneau, on oriente selon le projet, pas selon la marge.",
+          "Deux autres marques complètent la sélection. Austroflamm (Autriche) est notre marque haut de gamme : poêles à pellets qui chauffent par convection naturelle, sans ventilateur qui souffle dans la pièce, et mixtes bois et pellets Duo qui repassent seuls aux pellets quand les bûches ont brûlé. Cadel (Italie, province de Trévise, groupe MCZ) joue le même rôle qu'EK63 : du connecté, Wi-Fi et Bluetooth intégrés, une gamme très large (poêles plats de 27 cm, canalisables à deux sorties, inserts, hydros) à prix accessible.",
+          "À Mister Pellets, on a retenu ces six marques après avoir testé une vingtaine de fabricants. Chacune a son créneau, on oriente selon le projet, pas selon la marge.",
         ],
       },
       {
