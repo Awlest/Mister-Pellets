@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   // cette page, qui est dans le même segment que lui.
   title: { absolute: "Poêle à pellets en Wallonie, vente, pose, entretien | Mister Pellets" },
   description:
-    "Edilkamin, EK63, Girolami, Austroflamm et Cadel : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
+    "MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
 };
 
 const FAQ_HOMEPAGE = [
@@ -64,7 +64,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Quelles marques de poêles distribuez-vous ?",
     answer:
-      "Cinq marques, choisies parce qu'on les connaît à fond. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi sur la plupart des modèles récents. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Sant'Oreste, près de Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Depuis octobre 2026, deux nouvelles venues : Austroflamm, fabricant autrichien haut de gamme, pour ses poêles à pellets sans ventilateur et ses mixtes bois et pellets Duo, et Cadel, fabricant italien de Trévise, pour une gamme connectée très large à prix accessible (poêles plats, canalisables, hydros). Nous, on vous dirige vers celle qui colle à votre projet, pas vers celle qui rapporte le plus.",
+      "Six marques, choisies parce qu'on les connaît à fond. MCZ passe en premier depuis octobre 2026 : ce fabricant italien, parmi les premiers à avoir lancé le poêle à pellets au début des années 2000, a la gamme la plus complète qu'on pose (air, canalisable Comfort Air, hydro jusqu'à 24 kW, foyers et inserts), avec la combustion Core et le Wi-Fi de série sur la plupart des modèles. Edilkamin (depuis 1963), c'est la référence du chauffage biomasse : gamme très large (air, canalisable, étanche, hydro, inserts) et Wi-Fi sur la plupart des modèles récents. EK63, c'est la marque sœur du groupe Edilkamin, plus moderne et connectée, à un prix plus accessible. Girolami (Sant'Oreste, près de Rome, depuis 1970), c'est le polycombustible et le brevet Source Feeding (le brasier se nettoie tout seul), avec des modèles hybrides bois et pellets et des hydros pour remplacer une chaudière. Austroflamm, fabricant autrichien haut de gamme, pour ses poêles à pellets sans ventilateur et ses mixtes bois et pellets Duo, et Cadel, fabricant italien de Trévise du groupe MCZ, pour une gamme connectée très large à prix accessible (poêles plats, canalisables, hydros). Nous, on vous dirige vers celle qui colle à votre projet, pas vers celle qui rapporte le plus.",
   },
 ];
 
@@ -134,7 +134,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 mp-measure mx-auto">
-              Edilkamin, EK63, Girolami et, nouveaux cet automne, Austroflamm et Cadel : cinq marques qu&apos;on connaît à fond, et on ne pose que celles-là.
+              MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
               Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
               TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
               provinces wallonnes depuis 2016.

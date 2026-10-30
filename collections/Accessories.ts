@@ -81,6 +81,7 @@ export const Accessories: CollectionConfig = {
           required: true,
           label: "Marque",
           options: [
+            { label: "MCZ", value: "MCZ" },
             { label: "Edilkamin", value: "Edilkamin" },
             { label: "EK63", value: "EK63" },
             { label: "Girolami", value: "Girolami" },

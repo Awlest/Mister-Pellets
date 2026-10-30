@@ -223,7 +223,7 @@ function buildItem(fields: Array<[string, string | undefined]>): string {
  * l'admin (salePrice) reste annoncée seule avant et après la période ; pendant,
  * le bonus se calcule sur elle, comme sur la fiche.
  * `regular` : prix catalogue ; `effective` : prix affiché avant bonus ;
- * `brand` : fixe le taux du bonus (-10 % Austroflamm et Cadel, -15 % sinon).
+ * `brand` : fixe le taux du bonus (-10 % Austroflamm, Cadel et MCZ, -15 % sinon).
  */
 function saleFields(
   regular: number,

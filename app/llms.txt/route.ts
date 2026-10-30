@@ -62,9 +62,11 @@ ${FAMILY_SITES.map((s) => `- ${s.name} (${s.description.toLowerCase()}) : ${s.hr
   appareils posés par d'autres.
 - Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une
   journée dans la majorité des cas.
-- Marques distribuées : Edilkamin, EK63 et Girolami (Italie), et depuis
-  octobre 2026 Austroflamm (Autriche, poêles à pellets et mixtes bois/pellets)
-  et Cadel (Italie, gamme pellets complète). Nous ne posons que ces cinq marques.
+- Marques distribuées : MCZ (Italie, notre marque principale depuis octobre
+  2026 : toute la gamme pellets, combustion Core, Wi-Fi Maestro+, canalisables
+  Comfort Air, hydros, foyers et inserts), Edilkamin, EK63 et Girolami (Italie),
+  Austroflamm (Autriche, poêles à pellets et mixtes bois/pellets) et Cadel
+  (Italie, groupe MCZ). Nous ne posons que ces six marques.
 - Pellets en palette : Comfo (fabriqués à Bertrix par ERDA, DINplus A1,
   100 % résineux, 6 mm), 65 sacs de 15 kg, soit 975 kg. 470 € TVAC la palette,
   prix de lancement de 435 € pour les réservations faites jusqu'au 2 novembre

@@ -39,7 +39,7 @@ export const SITE: LegalSite = {
     "Les prix des poêles affichés sur le site et le résultat de l'estimation en ligne sont indicatifs : ils ne constituent pas une offre. Le prix ferme figure au devis, établi après la visite technique.",
     "Les caractéristiques techniques des poêles sont celles publiées par les fabricants. Elles sont données à titre indicatif et peuvent évoluer.",
   ],
-  manufacturers: "Edilkamin, EK63, Girolami, Dielle, Ferlux, Austroflamm, Cadel",
+  manufacturers: "MCZ, Edilkamin, EK63, Girolami, Dielle, Ferlux, Austroflamm, Cadel",
   collected: [
     "**Estimation, demande de devis, demande de rappel, contact et rendez-vous** : nom, e-mail, téléphone, code postal, et l'adresse de la visite quand nous venons chez vous.",
     "**Votre projet** : surface, isolation ou PEB, type de conduit, âge du logement, poêle choisi. Ce sont vos réponses à l'estimation ou à la demande de devis ; sans elles, pas de prix qui tienne la route.",

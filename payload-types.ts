@@ -238,7 +238,7 @@ export interface Product {
    * Nom commercial complet (ex: Edilkamin Blade Plus 9 kW)
    */
   name: string;
-  brand: 'Edilkamin' | 'EK63' | 'Girolami' | 'Dielle' | 'Ferlux' | 'Austroflamm' | 'Cadel';
+  brand: 'MCZ' | 'Edilkamin' | 'EK63' | 'Girolami' | 'Dielle' | 'Ferlux' | 'Austroflamm' | 'Cadel';
   /**
    * ex: Blade Plus, Tweed 90+, Iride 22
    */
@@ -577,7 +577,7 @@ export interface Accessory {
    * Court et clair pour un particulier (ex. « Thermostat radio TriKey »).
    */
   name: string;
-  brand: 'Edilkamin' | 'EK63' | 'Girolami' | 'Dielle' | 'Ferlux' | 'Austroflamm' | 'Cadel';
+  brand: 'MCZ' | 'Edilkamin' | 'EK63' | 'Girolami' | 'Dielle' | 'Ferlux' | 'Austroflamm' | 'Cadel';
   /**
    * Regroupe les compléments sur la fiche produit.
    */
