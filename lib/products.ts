@@ -501,7 +501,12 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
             : [];
           const variantImage =
             v.image && typeof v.image === "object" && v.image.url
-              ? { url: toRelativeUrl(v.image.url), alt: v.image.alt ?? p.name }
+              ? {
+                  url: toRelativeUrl(v.image.url),
+                  alt: v.image.alt ?? p.name,
+                  ...(typeof v.image.focalX === "number" ? { focalX: v.image.focalX } : {}),
+                  ...(typeof v.image.focalY === "number" ? { focalY: v.image.focalY } : {}),
+                }
               : undefined;
           return {
             id: String(v.id ?? ""),
