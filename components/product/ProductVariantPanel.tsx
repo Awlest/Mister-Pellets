@@ -285,6 +285,10 @@ export function ProductVariantPanel({
             src={activeVariant.image.url}
             alt={activeVariant.image.alt ?? productName}
             className="mt-4 h-24 w-24 rounded-xl object-cover border border-mp-sand/40"
+            // Même cadrage que la galerie : une ambiance 16:9 garde le poêle dans le carré.
+            style={{
+              objectPosition: `${activeVariant.image.focalX ?? 50}% ${activeVariant.image.focalY ?? 50}%`,
+            }}
           />
         )}
       </div>

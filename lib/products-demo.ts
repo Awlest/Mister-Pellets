@@ -227,8 +227,11 @@ export interface ProductVariantData {
   bonusPrice?: number;
   stockStatus?: VariantStockStatus;
   leadTimeDays?: number;
-  /** Image propre à la variante, si renseignée. */
-  image?: { url: string; alt?: string };
+  /**
+   * Image propre à la variante, si renseignée. Point focal (0-100 %) du média
+   * Payload, pour cadrer la vignette comme la galerie (CSS object-position).
+   */
+  image?: { url: string; alt?: string; focalX?: number; focalY?: number };
 }
 
 export const PRODUCTS_DEMO: ProductDemo[] = [
