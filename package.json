@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "check:design": "node scripts/check-design.mjs",
+    "check:detoure": "node --import tsx scripts/check-detoure.ts",
     "check:famille": "node --import tsx scripts/check-famille.ts",
     "check:pose": "node --import tsx scripts/check-pose.ts",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",

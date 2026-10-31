@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { squareCutout } from "../lib/detoure-carre";
 
 /** Déclinaisons en WebP, même qualité que la conversion à la volée (app/photos). */
 const WEBP_SIZE = { format: "webp", options: { quality: 80 } } as const;
@@ -19,6 +20,35 @@ export const Media: CollectionConfig = {
   },
   admin: {
     defaultColumns: ["filename", "alt", "mimeType", "filesize"],
+  },
+  hooks: {
+    // Détouré non carré remis au carré avant que Payload ne calcule les
+    // tailles (cf. lib/detoure-carre.ts) : le poêle reste entier dans les
+    // vignettes et cartes carrées. beforeOperation passe avant la lecture du
+    // fichier ; une erreur laisse la photo telle quelle.
+    beforeOperation: [
+      async ({ args, operation, req }) => {
+        const file = req.file;
+        const sharp = req.payload.config.sharp;
+        if ((operation !== "create" && operation !== "update") || !file || !sharp) return args;
+        if (!/^image\/(jpeg|png|webp)$/.test(file.mimetype)) return args;
+        try {
+          const input = file.tempFilePath
+            ? await (await import("node:fs/promises")).readFile(file.tempFilePath)
+            : file.data;
+          const squared = await squareCutout(sharp as Parameters<typeof squareCutout>[0], input);
+          if (squared) {
+            req.file = { ...file, data: squared.buffer, size: squared.buffer.length, tempFilePath: undefined };
+            req.payload.logger.info(
+              `media : détouré ${squared.from.width}x${squared.from.height} mis au carré (${squared.side} px)`,
+            );
+          }
+        } catch (err) {
+          req.payload.logger.warn(`media : mise au carré ignorée (${err instanceof Error ? err.message : "erreur"})`);
+        }
+        return args;
+      },
+    ],
   },
   fields: [
     {
