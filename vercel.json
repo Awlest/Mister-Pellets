@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "regions": ["dub1"],
+  "git": {
+    "deploymentEnabled": { "**": false, "main": true }
+  },
   "crons": [
     { "path": "/api/cron/bonus", "schedule": "0 22 * * *" },
     { "path": "/api/cron/bonus", "schedule": "0 23 * * *" }
