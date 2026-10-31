@@ -980,7 +980,9 @@ function EstimateForm({
                 <strong className="text-mp-green-deep">Et la prime Wallonie ?</strong>{" "}
                 Elle a pris fin le 30 septembre 2026 : il n&apos;y a plus de prime régionale à déduire pour un poêle.
                 Si votre maison est classée PEB E, F ou G et que vous préparez une rénovation plus
-                large, le Rénopack peut financer le poêle avec le reste des travaux.{" "}
+                large, renseignez-vous sur le Rénopack avant de vous engager : la demande de prêt passe
+                avant tout devis signé ou acompte, et le poêle n&apos;est financé que si l&apos;audit le
+                retient et que l&apos;organisme prêteur l&apos;accepte.{" "}
                 <Link
                   href="/primes-energie-wallonie-2026"
                   className="font-semibold text-mp-green-deep underline hover:no-underline"
