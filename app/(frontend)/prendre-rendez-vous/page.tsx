@@ -5,6 +5,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CTAFinal } from "@/components/sections/CTAFinal";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { formatPhone } from "@/lib/utils";
 import { BookingWidget } from "@/components/booking/BookingWidget";
@@ -213,6 +214,9 @@ export default function PrendreRendezVousPage() {
           </div>
         </div>
       </section>
+
+      {/* Beige : sépare les deux sections crème qui l'entourent. */}
+      <GoogleReviews tone="beige" />
 
       {/* Alternative téléphone (toujours utile pour qui n'aime pas le formulaire) */}
       <section className="bg-mp-cream mp-band">

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { CalendarCheck, Clock, FileText, Flame, Home, Phone, Ruler, ShieldCheck } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { BookingWidget } from "@/components/booking/BookingWidget";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -120,7 +120,7 @@ export default function VisiteTechniquePage() {
         </div>
       </section>
 
-      <Testimonials tone="cream" />
+      <GoogleReviews tone="cream" />
 
       <section className="bg-mp-beige mp-band-sm">
         <div className="mp-shell text-center">

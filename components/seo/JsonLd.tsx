@@ -140,11 +140,12 @@ export const ORGANIZATION_SCHEMA = {
     { "@type": "AdministrativeArea", name: "Province du Brabant wallon" },
     { "@type": "AdministrativeArea", name: "Province du Luxembourg" },
   ],
-  // Hotfix V1.3 §P6 : aggregateRating retiré pour le lancement. Les avis
-  // Google 4,9/200 existent mais sur la fiche Awlest (maison mère), pas sur
-  // Mister Pellets directement. À réintroduire quand la marque commerciale
-  // Mister Pellets aura ses propres avis vérifiés (collection Payload
-  // Testimonials avec source datée).
+  // Pas d'aggregateRating ni de review, et ne pas en remettre : les avis
+  // affichés sur le site sont ceux de la fiche Google d'Awlest, repris dans
+  // l'admin (« Avis Google »). Google refuse les avis qu'une entreprise
+  // publie sur elle-même (LocalBusiness, Organization) ou reprend d'une autre
+  // plateforme, et les étoiles d'avis de tiers vues comme les nôtres seraient
+  // trompeuses. La note s'affiche en contenu, avec le lien vers la fiche.
   //
   // Pas d'openingHoursSpecification : le showroom se visite uniquement sur
   // rendez-vous (octobre 2026). Les heures du téléphone sont sur contactPoint.

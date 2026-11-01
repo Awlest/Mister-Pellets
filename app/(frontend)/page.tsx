@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PrimesBlock } from "@/components/sections/PrimesBlock";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { BonusAnnouncement } from "@/components/sections/BonusAnnouncement";
@@ -595,7 +595,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Testimonials />
+      <GoogleReviews />
 
       <FAQAccordion
         title="Questions fréquentes des Wallons"

@@ -293,7 +293,8 @@ Réutiliser ces composants pour toute nouvelle page. En créer un nouveau seulem
 | FAQ (avec `buildFAQSchema`) | `FAQAccordion` ; page FAQ complète : `FaqExplorer` | `components/sections/` |
 | Bloc d'appel final | `CTAFinal` (`tone`, `secondaryCta`) | `components/sections/CTAFinal.tsx` |
 | Page de service (entretien, ramonage, dépannage) | `ServiceLanding` | `components/sections/ServiceLanding.tsx` |
-| Marques, aides, chiffres, avis | `BrandsGrid`, `PrimesBlock`, `StatsGrid`, `Testimonials` | `components/sections/` |
+| Marques, aides, chiffres | `BrandsGrid`, `PrimesBlock`, `StatsGrid` | `components/sections/` |
+| Avis Google (bloc de section ; encart de note sous les boutons d'une fiche produit) | `GoogleReviews` (`tone`, `limit`), `GoogleRatingNote` | `components/sections/GoogleReviews.tsx` |
 | Formulaires | `ContactForm`, `QuoteForm`, `EstimateConfigurator`, `BookingWidget` | `components/forms/`, `components/booking/` |
 | Métadonnées, données structurées | `buildPageMetadata`, `JsonLd`, `build*Schema` | `lib/seo.ts`, `components/seo/JsonLd.tsx` |
 | Fond de section | `toneClass(tone)` | `lib/section-tone.ts` |
@@ -411,12 +412,14 @@ Gabarit unique : `lib/email-layout.ts` (tableaux, styles en ligne, 600 px), text
 - **Do** garder photo et texte côte à côte (desktop) ou empilés (mobile).
 - **Do** vérifier 44 px de cible, contraste AA, focus visible, aucun défilement horizontal à 320 et 375 px, `min-w-0` sur les colonnes.
 - **Do** lancer `pnpm run check:design` avant de livrer.
+- **Do** prendre les avis clients dans l'admin (« Avis Google », « Note Google ») par `GoogleReviews` : avis réels de la fiche Google d'Awlest, recopiés tels quels, note et nombre datés, lien vers la fiche et vers /avis-clients (politique d'avis).
 
 ### Don't:
 - **Don't** écrire une couleur en dur (`#xxxxxx`, `rgb()`) dans un composant ; seules les images Open Graph générées et la balise `theme-color` en ont.
 - **Don't** utiliser `rounded-xl` en pensant à 12 px : il vaut 28 px ici.
 - **Don't** mettre l'orange braise en couleur de texte sur fond clair (2,1:1).
 - **Don't** ajouter un fondu ou un `opacity: 0` sur le titre ou la photo du héros.
+- **Don't** écrire un avis en dur dans une page, ni mettre une note en étoiles (`aggregateRating`, `review`) dans les données structurées.
 
 ### Interdits (règles du 17/10/2026, mot pour mot)
 1. **Aucun dégradé** : ni `linear-/radial-/conic-gradient`, ni `bg-gradient-*`, `bg-linear-*`, `bg-radial-*`, `from-/via-/to-`,

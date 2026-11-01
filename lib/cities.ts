@@ -21,7 +21,8 @@ export interface CityData {
    * inventés (« Sophie L. », « Jean-Marc D. », « Claire V. ») déjà retirés de
    * l'accueil le 01/09/2026 : pratique déloyale (art. VI.100 CDE) et motif de
    * « déclarations trompeuses » chez Google Merchant. Retirés le 19/09/2026.
-   * Voir components/sections/Testimonials.tsx pour la règle complète.
+   * Les avis Google repris sur le site vivent dans l'admin (« Avis Google »,
+   * collections/GoogleReviews.ts), avec leur règle publiée sur /avis-clients.
    */
   testimonial?: { name: string; quote: string };
   metaTitle: string;

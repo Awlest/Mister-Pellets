@@ -8,7 +8,7 @@ import { StatsGrid } from "@/components/sections/StatsGrid";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { PrimesBlock } from "@/components/sections/PrimesBlock";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { ProductCard } from "@/components/product/ProductCard";
@@ -315,7 +315,7 @@ export default function StyleguidePage() {
         ]}
       />
       <PrimesBlock />
-      <Testimonials />
+      <GoogleReviews />
       <FAQAccordion
         items={[
           { question: "Combien coûte un poêle pellets installé ?", answer: "Entre 4 500 et 7 500 € pose comprise selon le modèle." },

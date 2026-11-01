@@ -77,6 +77,7 @@ export interface Config {
     quotes: Quote;
     'contact-messages': ContactMessage;
     articles: Article;
+    'google-reviews': GoogleReview;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +95,7 @@ export interface Config {
     quotes: QuotesSelect<false> | QuotesSelect<true>;
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    'google-reviews': GoogleReviewsSelect<false> | GoogleReviewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -103,8 +105,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'google-reviews-summary': GoogleReviewsSummary;
+  };
+  globalsSelect: {
+    'google-reviews-summary': GoogleReviewsSummarySelect<false> | GoogleReviewsSummarySelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -824,6 +830,30 @@ export interface Article {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Avis de la fiche Google d'Awlest qui parlent de poêles à pellets, recopiés tels quels. Règle publiée sur /avis-clients : tout avis de la fiche sur un poêle à pellets va ici, y compris un avis négatif. La note moyenne et le nombre d'avis se changent dans « Note Google ».
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "google-reviews".
+ */
+export interface GoogleReview {
+  id: number;
+  /**
+   * Prénom et initiale du nom, comme « Olivier P. ». Le nom complet reste sur Google.
+   */
+  authorName: string;
+  rating: number;
+  /**
+   * Recopié tel quel depuis la fiche Google, sans retouche ni coupe.
+   */
+  quote: string;
+  /**
+   * Les plus petits d'abord. Les trois premiers s'affichent sur l'accueil, la page prix, la prise de rendez-vous et la visite technique ; /avis-clients les montre tous.
+   */
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -886,6 +916,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'articles';
         value: number | Article;
+      } | null)
+    | ({
+        relationTo: 'google-reviews';
+        value: number | GoogleReview;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1289,6 +1323,18 @@ export interface ArticlesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "google-reviews_select".
+ */
+export interface GoogleReviewsSelect<T extends boolean = true> {
+  authorName?: T;
+  rating?: T;
+  quote?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -1326,6 +1372,37 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Note et nombre d'avis affichés sur la fiche Google d'Awlest, tels que Google les montre le jour du relevé. Les reporter avec la date à chaque nouvel avis.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "google-reviews-summary".
+ */
+export interface GoogleReviewsSummary {
+  id: number;
+  /**
+   * Par exemple 5 ou 4,9.
+   */
+  rating: number;
+  reviewCount: number;
+  checkedAt: string;
+  placeUrl: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "google-reviews-summary_select".
+ */
+export interface GoogleReviewsSummarySelect<T extends boolean = true> {
+  rating?: T;
+  reviewCount?: T;
+  checkedAt?: T;
+  placeUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
