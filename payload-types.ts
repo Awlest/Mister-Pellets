@@ -282,7 +282,7 @@ export interface Product {
    */
   promoPrice?: number | null;
   /**
-   * Prix pose typique (€) — TVA 6%
+   * Pose propre à ce modèle, en € HT. À laisser vide dans le cas courant : si le champ est rempli, l'estimation en ligne compte ce montant à la place du forfait d'évacuation (tubage, ventouse, conduit, hauteur). Jamais le prix du poêle.
    */
   installationPrice?: number | null;
   /**

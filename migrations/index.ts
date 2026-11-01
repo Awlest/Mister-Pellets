@@ -21,6 +21,7 @@ import * as migration_20261019_120000_accessories from './20261019_120000_access
 import * as migration_20261022_100000_payload_3_91 from './20261022_100000_payload_3_91';
 import * as migration_20261030_120000_products_brand_mcz from './20261030_120000_products_brand_mcz';
 import * as migration_20261101_120000_google_reviews from './20261101_120000_google_reviews';
+import * as migration_20261101_180000_products_installation_price_cadel_austroflamm from './20261101_180000_products_installation_price_cadel_austroflamm';
 
 export const migrations = [
   {
@@ -137,5 +138,10 @@ export const migrations = [
     up: migration_20261101_120000_google_reviews.up,
     down: migration_20261101_120000_google_reviews.down,
     name: '20261101_120000_google_reviews',
+  },
+  {
+    up: migration_20261101_180000_products_installation_price_cadel_austroflamm.up,
+    down: migration_20261101_180000_products_installation_price_cadel_austroflamm.down,
+    name: '20261101_180000_products_installation_price_cadel_austroflamm',
   },
 ];
