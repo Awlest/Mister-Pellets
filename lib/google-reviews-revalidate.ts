@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 
 /** Pages qui affichent des avis Google (bloc complet). */
-const PAGES_WITH_REVIEWS = ["/", "/prix-poele-pellets", "/prendre-rendez-vous", "/avis-clients"];
+const PAGES_WITH_REVIEWS = ["/", "/prix-poele-pellets", "/prendre-rendez-vous", "/visite-technique", "/avis-clients"];
 
 /**
  * Pages en ISR à rafraîchir quand un avis ou la note Google change dans

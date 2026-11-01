@@ -73,7 +73,7 @@ export const GoogleReviews: CollectionConfig = {
       label: "Ordre d'affichage",
       admin: {
         description:
-          "Les plus petits d'abord. Les trois premiers s'affichent sur l'accueil, la page prix et la prise de rendez-vous ; /avis-clients les montre tous.",
+          "Les plus petits d'abord. Les trois premiers s'affichent sur l'accueil, la page prix, la prise de rendez-vous et la visite technique ; /avis-clients les montre tous.",
       },
     },
   ],
