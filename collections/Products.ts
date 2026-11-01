@@ -310,7 +310,10 @@ export const Products: CollectionConfig = {
     {
       name: "installationPrice",
       type: "number",
-      admin: { description: "Prix pose typique (€) — TVA 6%" },
+      admin: {
+        description:
+          "Pose propre à ce modèle, en € HT. À laisser vide dans le cas courant : si le champ est rempli, l'estimation en ligne compte ce montant à la place du forfait d'évacuation (tubage, ventouse, conduit, hauteur). Jamais le prix du poêle.",
+      },
     },
 
     // ===== CARACTÉRISTIQUES TECHNIQUES =====
