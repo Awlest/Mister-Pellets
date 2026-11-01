@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { POSTAL_RE, readVisitAddress, visitAddressError } from "@/lib/visit-address";
+import { isValidBelgianPhone } from "@/lib/callback";
 import { bookingCalendarEntry, googleCalendarUrl, icsDownloadPath } from "@/lib/booking-calendar";
 
 interface OnlineService {
@@ -40,7 +41,18 @@ interface Props {
   services: OnlineService[];
   phoneDisplay: string;
   phoneHref: string;
+  /**
+   * Coordonnée obligatoire. « email » par défaut. « phone » sur la page des
+   * annonces (/visite-technique) : sur un téléphone, le numéro se tape plus
+   * vite qu'une adresse e-mail, et c'est lui qui sert avant une visite ;
+   * l'e-mail devient facultatif (il apporte la confirmation écrite).
+   */
+  contact?: "email" | "phone";
+  /** Chemin de la page, repris dans la notification interne. */
+  origin?: string;
 }
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const WEEKDAYS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
 const WEEKDAYS_SHORT = ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."];
@@ -117,7 +129,7 @@ function daysPerPage(width: number): number {
  * serveur revalide la disponibilité au moment de l'envoi, et cette interface
  * doit savoir afficher proprement le cas « créneau pris entre-temps ».
  */
-export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
+export function BookingWidget({ services, phoneDisplay, phoneHref, contact = "email", origin }: Props) {
   const [serviceSlug, setServiceSlug] = React.useState<string>(services[0]?.slug ?? "");
   const [days, setDays] = React.useState<DaySlots[] | null>(null);
   const [configured, setConfigured] = React.useState(true);
@@ -213,13 +225,20 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
     setForm((s) => ({ ...s, [k]: v }));
 
   const needsAddress = service?.location === "domicile";
+  const phoneFirst = contact === "phone";
+  const emailValid = EMAIL_RE.test(form.email);
+  const phoneValid = isValidBelgianPhone(form.phone);
   const formValid =
     form.name.trim().length >= 2 &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) &&
+    (phoneFirst ? phoneValid && (form.email === "" || emailValid) : emailValid) &&
     (!needsAddress || visitAddressError(readVisitAddress(form)) == null);
-  // Le bouton reste grisé tant que le code postal est faux : dire pourquoi.
+  // Le bouton reste grisé tant qu'un champ est faux : dire pourquoi.
   const [postalTouched, setPostalTouched] = React.useState(false);
   const postalCodeWrong = postalTouched && form.postalCode.length > 0 && !POSTAL_RE.test(form.postalCode);
+  const [phoneTouched, setPhoneTouched] = React.useState(false);
+  const phoneWrong = phoneFirst && phoneTouched && form.phone.trim() !== "" && !phoneValid;
+  const [emailTouched, setEmailTouched] = React.useState(false);
+  const emailWrong = phoneFirst && emailTouched && form.email !== "" && !emailValid;
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -234,7 +253,9 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
           service: serviceSlug,
           start: chosenStart,
           ...form,
+          email: form.email.trim(),
           ...(service?.quantity ? { quantity } : {}),
+          ...(origin ? { origin } : {}),
         }),
       });
       const data = await res.json();
@@ -280,14 +301,28 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
         <h3 className="text-2xl font-semibold text-mp-green-deep mb-2">
           Rendez-vous confirmé
         </h3>
-        <p className="text-mp-ink-soft leading-relaxed max-w-md mx-auto">
-          {service?.name} le <strong className="text-mp-green-deep">{humanDay(confirmed.date)}</strong>{" "}
-          à <strong className="text-mp-green-deep">{confirmed.time}</strong>. La confirmation
-          vient de partir à <strong className="text-mp-green-deep wrap-break-word">{form.email}</strong>.
-        </p>
-        <p className="text-sm text-mp-ink-soft mt-2 max-w-md mx-auto">
-          Rien reçu d&apos;ici quelques minutes ? Regardez dans les courriers indésirables.
-        </p>
+        {form.email.trim() ? (
+          <>
+            <p className="text-mp-ink-soft leading-relaxed max-w-md mx-auto">
+              {service?.name} le <strong className="text-mp-green-deep">{humanDay(confirmed.date)}</strong>{" "}
+              à <strong className="text-mp-green-deep">{confirmed.time}</strong>. La confirmation
+              vient de partir à <strong className="text-mp-green-deep wrap-break-word">{form.email.trim()}</strong>.
+            </p>
+            <p className="text-sm text-mp-ink-soft mt-2 max-w-md mx-auto">
+              Rien reçu d&apos;ici quelques minutes ? Regardez dans les courriers indésirables.
+            </p>
+          </>
+        ) : (
+          // Sans e-mail, pas de confirmation écrite : l'équipe est prévenue
+          // et rappelle au numéro laissé (notification interne).
+          <p className="text-mp-ink-soft leading-relaxed max-w-md mx-auto">
+            {service?.name} le <strong className="text-mp-green-deep">{humanDay(confirmed.date)}</strong>{" "}
+            à <strong className="text-mp-green-deep">{confirmed.time}</strong>, c&apos;est noté dans
+            notre agenda. On vous appelle au{" "}
+            <strong className="text-mp-green-deep whitespace-nowrap">{form.phone.trim()}</strong> pour
+            le confirmer.
+          </p>
+        )}
 
         {entry && service && (
           <div className="mt-6">
@@ -616,26 +651,50 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
                 className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
               />
             </div>
-            <div>
-              <label htmlFor="bk-email" className="block text-sm font-medium mb-1.5">
-                Email <span className="text-mp-orange-ink">*</span>
-              </label>
-              <input
-                id="bk-email" type="email" required value={form.email} autoComplete="email"
-                onChange={(e) => update("email", e.target.value)}
-                className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
-              />
-            </div>
-            <div>
-              <label htmlFor="bk-phone" className="block text-sm font-medium mb-1.5">
-                Téléphone
-              </label>
-              <input
-                id="bk-phone" type="tel" value={form.phone} autoComplete="tel"
-                onChange={(e) => update("phone", e.target.value)}
-                className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
-              />
-            </div>
+            {phoneFirst ? (
+              <div className="sm:col-span-2">
+                <label htmlFor="bk-phone" className="block text-sm font-medium mb-1.5">
+                  Téléphone <span className="text-mp-orange-ink">*</span>
+                </label>
+                <input
+                  id="bk-phone" type="tel" required inputMode="tel" value={form.phone} autoComplete="tel"
+                  placeholder="0470 12 34 56"
+                  aria-invalid={phoneWrong || undefined}
+                  aria-describedby={phoneWrong ? "bk-phone-error" : undefined}
+                  onBlur={() => setPhoneTouched(true)}
+                  onChange={(e) => update("phone", e.target.value)}
+                  className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20 sm:max-w-xs"
+                />
+                {phoneWrong && (
+                  <p id="bk-phone-error" className="mt-1.5 text-sm text-mp-orange-ink">
+                    Un numéro belge, par exemple 0470 12 34 56 ou 081 13 83 09.
+                  </p>
+                )}
+              </div>
+            ) : (
+              <>
+                <div>
+                  <label htmlFor="bk-email" className="block text-sm font-medium mb-1.5">
+                    Email <span className="text-mp-orange-ink">*</span>
+                  </label>
+                  <input
+                    id="bk-email" type="email" required value={form.email} autoComplete="email"
+                    onChange={(e) => update("email", e.target.value)}
+                    className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="bk-phone" className="block text-sm font-medium mb-1.5">
+                    Téléphone
+                  </label>
+                  <input
+                    id="bk-phone" type="tel" value={form.phone} autoComplete="tel"
+                    onChange={(e) => update("phone", e.target.value)}
+                    className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
+                  />
+                </div>
+              </>
+            )}
             {needsAddress && (
               <>
                 <div className="sm:col-span-2">
@@ -682,6 +741,27 @@ export function BookingWidget({ services, phoneDisplay, phoneHref }: Props) {
                   )}
                 </div>
               </>
+            )}
+            {/* Page des annonces : l'e-mail vient après l'adresse, facultatif. */}
+            {phoneFirst && (
+              <div className="sm:col-span-2">
+                <label htmlFor="bk-email" className="block text-sm font-medium mb-1.5">
+                  Email <span className="font-normal text-mp-ink-soft">(facultatif, pour recevoir la confirmation)</span>
+                </label>
+                <input
+                  id="bk-email" type="email" value={form.email} autoComplete="email"
+                  aria-invalid={emailWrong || undefined}
+                  aria-describedby={emailWrong ? "bk-email-error" : undefined}
+                  onBlur={() => setEmailTouched(true)}
+                  onChange={(e) => update("email", e.target.value)}
+                  className="w-full rounded-xl border border-mp-sand bg-white px-4 py-2.5 outline-none focus:border-mp-orange-flame focus:ring-2 focus:ring-mp-orange-flame/20"
+                />
+                {emailWrong && (
+                  <p id="bk-email-error" className="mt-1.5 text-sm text-mp-orange-ink">
+                    Cette adresse semble incomplète. Corrigez-la ou laissez le champ vide.
+                  </p>
+                )}
+              </div>
             )}
             <div className="sm:col-span-2">
               <label htmlFor="bk-notes" className="block text-sm font-medium mb-1.5">

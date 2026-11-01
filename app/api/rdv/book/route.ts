@@ -5,6 +5,7 @@ import { getService, bookingDurationMin, PELLET_PICKUP } from "@/lib/services";
 import { formatEuro, pelletPriceTTC } from "@/lib/pellets";
 import { availableSlots, formatSlotTime, belgianDayKey } from "@/lib/booking";
 import { readVisitAddress, visitAddressError, formatVisitAddress } from "@/lib/visit-address";
+import { isValidBelgianPhone } from "@/lib/callback";
 import {
   getBusyIntervals,
   createEvent,
@@ -124,9 +125,22 @@ export async function POST(request: Request) {
   if (name.length < 2) {
     return NextResponse.json({ error: "Merci d'indiquer votre nom." }, { status: 400 });
   }
-  if (!EMAIL_RE.test(email)) {
+  // Un moyen de joindre le client, au choix : l'e-mail (/prendre-rendez-vous)
+  // ou le téléphone seul (/visite-technique, page des annonces). Un e-mail
+  // saisi doit être valable : une faute de frappe ne doit pas faire perdre
+  // la confirmation en silence.
+  if (email !== "" && !EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Cette adresse e-mail ne semble pas valide. Pouvez-vous la vérifier ?" }, { status: 400 });
   }
+  if (email === "" && !isValidBelgianPhone(phone)) {
+    return NextResponse.json(
+      { error: "Merci d'indiquer un numéro de téléphone belge, par exemple 0470 12 34 56, pour que nous puissions vous joindre." },
+      { status: 400 },
+    );
+  }
+  // Page d'où vient la réservation, pour la notification interne : un chemin
+  // du site, rien d'autre.
+  const origin = /^\/[a-z0-9-]{1,60}$/.test(str(payload.origin, 61)) ? str(payload.origin, 61) : undefined;
   // Adresse complète obligatoire, code postal compris.
   const addressError = service.location === "domicile" ? visitAddressError(visit) : null;
   if (addressError) {
@@ -162,7 +176,7 @@ export async function POST(request: Request) {
       startInstant,
       endInstant,
       customerName: name,
-      customerEmail: email,
+      customerEmail: email || undefined,
       customerPhone: phone || undefined,
       address: service.location === "domicile" ? address : undefined,
       notes: agendaNotes || undefined,
@@ -190,16 +204,19 @@ export async function POST(request: Request) {
     // d'exception et logge lui-même un refus (« [email] envoi refusé ») : le
     // rendez-vous est dans l'agenda, on ne fait pas croire au client que sa
     // réservation a échoué. Si sa confirmation n'est pas partie, la
-    // notification interne le dit, pour que l'équipe l'appelle.
-    const confirmation = await confirmCustomerBooking({
-      service,
-      start: startInstant,
-      durationMin,
-      name,
-      email,
-      address: service.location === "domicile" ? address : undefined,
-      pickup,
-    });
+    // notification interne le dit, pour que l'équipe l'appelle. Sans e-mail,
+    // rien à envoyer au client : la notification demande de l'appeler.
+    const confirmation = email
+      ? await confirmCustomerBooking({
+          service,
+          start: startInstant,
+          durationMin,
+          name,
+          email,
+          address: service.location === "domicile" ? address : undefined,
+          pickup,
+        })
+      : null;
 
     await notifyInternalBooking({
       serviceName: service.name,
@@ -207,11 +224,12 @@ export async function POST(request: Request) {
       timeLabel,
       durationMin,
       name,
-      email,
+      email: email || undefined,
       phone: phone || undefined,
       address: address || undefined,
       notes: agendaNotes || undefined,
-      customerConfirmed: confirmation.ok,
+      customerConfirmation: confirmation == null ? "no-email" : confirmation.ok ? "sent" : "failed",
+      origin,
     });
 
     return NextResponse.json({

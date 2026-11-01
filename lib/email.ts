@@ -273,23 +273,35 @@ export async function notifyInternalBooking(rdv: {
   timeLabel: string;
   durationMin: number;
   name: string;
-  email: string;
+  /** Absent quand le client n'a laissé que son téléphone (/visite-technique). */
+  email?: string;
   phone?: string;
   address?: string;
   notes?: string;
-  /** La confirmation est-elle partie chez le client ? Sinon, il faut l'appeler. */
-  customerConfirmed: boolean;
+  /**
+   * Sort de la confirmation au client : partie, refusée par Resend, ou
+   * impossible faute d'e-mail. Dans les deux derniers cas, il faut l'appeler.
+   */
+  customerConfirmation: "sent" | "failed" | "no-email";
+  /** Page où le rendez-vous a été pris, ex. « /visite-technique ». */
+  origin?: string;
 }) {
-  const confirmation = rdv.customerConfirmed
-    ? "envoyée par e-mail"
-    : `<span style="display:inline-block;padding:2px 8px;border-radius:6px;background:${C.orangeLight}"><strong>NON envoyée</strong> (refus de Resend, voir les logs « [email] envoi refusé ») : prévenir le client par téléphone.</span>`;
+  const highlight = (html: string) =>
+    `<span style="display:inline-block;padding:2px 8px;border-radius:6px;background:${C.orangeLight}">${html}</span>`;
+  const confirmation =
+    rdv.customerConfirmation === "sent"
+      ? "envoyée par e-mail"
+      : rdv.customerConfirmation === "no-email"
+        ? highlight("<strong>Pas d&#39;e-mail donné</strong> : appeler le client pour confirmer le rendez-vous.")
+        : highlight("<strong>NON envoyée</strong> (refus de Resend, voir les logs « [email] envoi refusé ») : prévenir le client par téléphone.");
 
   const rows: EmailRow[] = [
     { label: "Client", valueHtml: escapeHtml(rdv.name) },
-    { label: "E-mail", valueHtml: mailtoLink(rdv.email) },
+    { label: "E-mail", valueHtml: rdv.email ? mailtoLink(rdv.email) : "" },
     { label: "Téléphone", valueHtml: rdv.phone ? telLink(rdv.phone) : "" },
     { label: "Adresse", valueHtml: rdv.address ? escapeHtml(rdv.address) : "" },
     { label: "Confirmation client", valueHtml: confirmation },
+    { label: "Page", valueHtml: rdv.origin ? escapeHtml(rdv.origin) : "" },
   ];
 
   const html = brandedEmailHtml({
