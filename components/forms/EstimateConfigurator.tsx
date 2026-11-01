@@ -473,7 +473,7 @@ function EstimateForm({
               <span>
                 On vous rappelle sous 48 h ouvrées pour caler la{" "}
                 <strong>visite technique</strong>. Vous pouvez aussi{" "}
-                <Link href="/prendre-rendez-vous#reserver" className="text-mp-orange-ink underline underline-offset-2 hover:no-underline">
+                <Link href="/visite-technique" className="text-mp-orange-ink underline underline-offset-2 hover:no-underline">
                   choisir votre créneau tout de suite
                 </Link>
                 .
@@ -506,7 +506,7 @@ function EstimateForm({
 
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild variant="primary" size="default" className="w-full max-w-xs sm:w-auto">
-            <Link href="/prendre-rendez-vous#reserver">Choisir mon créneau</Link>
+            <Link href="/visite-technique">Choisir mon créneau</Link>
           </Button>
           <Button asChild variant="outline" size="default" className="w-full max-w-xs sm:w-auto">
             <Link href="/">Retour à l&apos;accueil</Link>
@@ -1073,7 +1073,7 @@ function EstimateForm({
                       081 13 83 09
                     </a>{" "}
                     ou{" "}
-                    <Link href="/prendre-rendez-vous#reserver" className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline">
+                    <Link href="/visite-technique" className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline">
                       réservez la visite en ligne
                     </Link>
                     .

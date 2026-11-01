@@ -171,7 +171,8 @@ export interface BookingDetails {
   startInstant: number;
   endInstant: number;
   customerName: string;
-  customerEmail: string;
+  /** Absent quand le client n'a laissé que son téléphone (/visite-technique). */
+  customerEmail?: string;
   customerPhone?: string;
   /** Adresse d'intervention, pour un rendez-vous à domicile. */
   address?: string;
@@ -197,7 +198,7 @@ export async function createEvent(details: BookingDetails): Promise<{ id: string
     `Prise de rendez-vous depuis mister-pellets.be`,
     ``,
     `Client : ${details.customerName}`,
-    `Email : ${details.customerEmail}`,
+    details.customerEmail ? `Email : ${details.customerEmail}` : `Email : aucun, confirmer par téléphone`,
     details.customerPhone ? `Téléphone : ${details.customerPhone}` : null,
     details.address ? `Adresse : ${details.address}` : null,
     details.notes ? `` : null,
@@ -225,7 +226,7 @@ export async function createEvent(details: BookingDetails): Promise<{ id: string
         location: details.address || details.locationLabel,
         start: { dateTime: new Date(details.startInstant).toISOString() },
         end: { dateTime: new Date(details.endInstant).toISOString() },
-        ...(canInvite
+        ...(canInvite && details.customerEmail
           ? { attendees: [{ email: details.customerEmail, displayName: details.customerName }] }
           : {}),
         reminders: {

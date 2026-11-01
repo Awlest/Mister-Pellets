@@ -95,7 +95,7 @@ export default async function PrixPoelePelletsPage() {
               </div>
             </div>
             <Button asChild variant="secondary" size="lg" className="mt-4 w-full">
-              <Link href={ROUTES.bookingWidget}>
+              <Link href={ROUTES.visit}>
                 <CalendarCheck aria-hidden />
                 Choisir mon créneau
               </Link>
@@ -240,7 +240,7 @@ export default async function PrixPoelePelletsPage() {
           </ol>
           <div className="mt-10 flex justify-center">
             <Button asChild variant="secondary" size="default">
-              <Link href="/prendre-rendez-vous">
+              <Link href={ROUTES.visit}>
                 <CalendarCheck aria-hidden />
                 Réserver la visite en ligne
               </Link>

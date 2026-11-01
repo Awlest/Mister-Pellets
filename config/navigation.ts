@@ -24,6 +24,8 @@ export const ROUTES = {
   quoteForm: "/demande-de-devis",
   booking: "/prendre-rendez-vous",
   bookingWidget: "/prendre-rendez-vous#reserver",
+  /** Visite technique à domicile : page d'arrivée des annonces, agenda en tête. */
+  visit: "/visite-technique",
   grants: "/primes-energie-wallonie-2026",
   realisations: "/realisations",
   guides: "/guides",
