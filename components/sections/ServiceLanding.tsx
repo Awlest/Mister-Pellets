@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SITE_URL } from "@/lib/seo";
 import { PHONE_DISPLAY, PHONE_HREF, type Service } from "@/lib/services";
+import { PHONE_HOURS } from "@/config/site";
 
 export interface ServiceLandingProps {
   service: Service;
@@ -128,7 +129,7 @@ export function ServiceLanding({
               </p>
               <p className="text-mp-cream/75 text-sm mt-1">
                 On vérifie d&apos;abord le modèle et l&apos;accès au conduit, puis on cale un
-                créneau. Téléphone : lun-ven 9h-18h.
+                créneau. Téléphone : {PHONE_HOURS}.
               </p>
             </div>
             <Button asChild variant="primary" size="lg" className="shrink-0">

@@ -13,6 +13,8 @@
  * généré automatiquement sur la page /faq.
  */
 
+import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
+
 export type FaqCategory =
   | "general"
   | "choisir"
@@ -87,7 +89,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Comment vous contacter ?",
     answer:
-      "Trois canaux : téléphone au 081 13 83 09 (le plus rapide, du lundi au vendredi de 9h à 18h), email à info@awlest.com, ou formulaire de devis en ligne avec réponse sous 48 heures ouvrées. Pour une visite en personne, le showroom de Fernelmont vous reçoit uniquement sur rendez-vous.",
+      `Trois canaux : téléphone au 081 13 83 09 (le plus rapide, ${PHONE_HOURS_LONG}), email à info@awlest.com, ou formulaire de devis en ligne avec réponse sous 48 heures ouvrées. Pour une visite en personne, le showroom de Fernelmont vous reçoit uniquement sur rendez-vous.`,
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -420,7 +422,7 @@ export const FAQS: FaqItem[] = [
     category: "showroom",
     question: "Où se trouve votre showroom ?",
     answer:
-      "Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). On vous y reçoit uniquement sur rendez-vous, du lundi au vendredi de 9 h à 18 h.",
+      `Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). On vous y reçoit uniquement sur rendez-vous, ${VISIT_HOURS_LONG}.`,
   },
   {
     id: "showroom-sans-rendez-vous",

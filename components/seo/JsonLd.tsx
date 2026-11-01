@@ -128,9 +128,10 @@ export const ORGANIZATION_SCHEMA = {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         opens: "09:00",
-        closes: "18:00",
+        closes: "19:00",
       },
-      // Samedi et dimanche : fermé (octobre 2026).
+      // Samedi et dimanche : fermé, répondeur (novembre 2026). Même plage que
+      // PHONE_HOURS dans config/site.ts.
     ],
   },
   areaServed: [

@@ -21,6 +21,7 @@ import {
 import { formatKw } from "@/lib/power";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/services";
 import { buildPageMetadata } from "@/lib/seo";
+import { PHONE_HOURS } from "@/config/site";
 
 export const metadata = buildPageMetadata({
   title: "Prix d'un poêle à pellets posé en Wallonie",
@@ -113,7 +114,7 @@ export default async function PrixPoelePelletsPage() {
             </Button>
           </div>
           <p className="mp-measure mt-4 text-center text-sm text-mp-ink-soft">
-            Lun-ven 9 h-18 h. Vous préférez chiffrer vous-même ?{" "}
+            Téléphone : {PHONE_HOURS}. Vous préférez chiffrer vous-même ?{" "}
             <Link href="/estimation" className="text-mp-orange-ink underline hover:no-underline">
               Estimation en ligne en 2 minutes
             </Link>

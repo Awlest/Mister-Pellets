@@ -1,6 +1,6 @@
 import { CITIES } from "@/lib/cities";
 import { FAQS } from "@/lib/faqs";
-import { FAMILY_SITES } from "@/config/site";
+import { FAMILY_SITES, PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
 import { SITE_URL } from "@/lib/seo";
 
 /**
@@ -38,8 +38,8 @@ export function GET() {
 - Société : Awlest SRL, TVA BE 0656.514.212, RPM Liège, division Huy
 - Siège social : Rue Saint-Pierre 29, 4260 Braives, Belgique
 - Showroom et atelier : Rue des Fagotis 3A, 5380 Fernelmont, Belgique
-  (showroom accessible uniquement sur rendez-vous)
-- Téléphone : 081 13 83 09 (lundi au vendredi 9 h à 18 h)
+  (showroom accessible uniquement sur rendez-vous, ${line(VISIT_HOURS_LONG)})
+- Téléphone : 081 13 83 09 (${line(PHONE_HOURS_LONG)} ; répondeur le soir et le week-end)
 - E-mail : info@awlest.com
 - Site : ${SITE_URL}
 
