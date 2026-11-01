@@ -49,7 +49,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Existe-t-il encore une prime pour un poêle à pellets en Wallonie ?",
     answer:
-      "Plus depuis le 1er octobre 2026. La prime Habitation s'est arrêtée le 30 septembre 2026, et la Région passe à des prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui font un saut de label après un audit. Pour un poêle seul, il reste la TVA à 6 % sur un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes, via le CPAS.",
+      "Plus pour un nouveau projet depuis le 1er octobre 2026. La prime Habitation s'est arrêtée le 30 septembre 2026, et la Région passe à des prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui font un saut de label après un audit, et à demander avant tout devis signé ou acompte. Pour un poêle seul, il reste la TVA à 6 % sur un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes, via le CPAS.",
   },
   {
     question: "Le SAV est-il assuré après la pose ?",
@@ -438,8 +438,8 @@ export default function HomePage() {
               réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
               La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
               désormais par des prêts (Rénopack, Rénoprêt) réservés aux maisons classées E, F ou G
-              qui font un saut de label. Certaines communes gardent une prime énergie, à vérifier
-              auprès d'elles.
+              qui font un saut de label, à demander avant de signer le moindre devis. Certaines
+              communes gardent une prime énergie, à vérifier auprès d'elles.
             </p>
           </div>
         </div>
