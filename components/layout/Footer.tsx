@@ -7,8 +7,8 @@ import {
   EMAIL,
   FAMILY_SITES,
   LEGAL_ENTITY,
-  OPENING_HOURS,
   PARENT_BRAND,
+  PHONE_HOURS,
   PHONE_DISPLAY,
   PHONE_HREF,
   SHOWROOM_ACCESS,
@@ -123,7 +123,7 @@ export function Footer() {
               <a href={`mailto:${EMAIL}`} className={LINK}>
                 {EMAIL}
               </a>
-              <p className="mt-1 text-[0.9375rem] text-mp-cream/85">Téléphone : {OPENING_HOURS}</p>
+              <p className="mt-1 text-[0.9375rem] text-mp-cream/85">Téléphone : {PHONE_HOURS}</p>
               <p className="mt-1 text-[0.9375rem] text-mp-cream/85">
                 {ADDRESS.street}, {ADDRESS.postalCode} {ADDRESS.city}
               </p>

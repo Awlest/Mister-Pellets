@@ -63,7 +63,7 @@ export function escapeHtml(value: string): string {
  * 17/03/2026), Fernelmont n'est que le showroom et l'atelier.
  */
 export const EMAIL_LEGAL_LINES = [
-  "Showroom et atelier : Rue des Fagotis 3A, 5380 Fernelmont",
+  "Showroom (uniquement sur rendez-vous) et atelier : Rue des Fagotis 3A, 5380 Fernelmont",
   "Awlest SRL · Siège social : Rue Saint-Pierre 29, 4260 Braives",
   "Numéro d'entreprise et TVA : BE 0656.514.212 · RPM Liège, division Huy",
 ] as const;

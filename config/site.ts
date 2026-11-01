@@ -10,12 +10,18 @@ export const PHONE_DISPLAY = "081 13 83 09";
 export const PHONE_HREF = "tel:+3281138309";
 export const EMAIL = "info@awlest.com";
 /**
- * Heures où l'on répond au téléphone et où l'on fixe les visites. Ce ne sont
- * pas des heures d'ouverture au public : le showroom se visite uniquement sur
- * rendez-vous (SHOWROOM_ACCESS), et le balisage n'annonce donc aucun horaire
- * d'ouverture (components/seo/JsonLd.tsx).
+ * Heures où l'on décroche le 081 13 83 09 : la ligne OVH sonne au bureau de
+ * 9 h à 16 h puis sur le mobile jusqu'à 19 h, répondeur le soir et le
+ * week-end (novembre 2026). Même plage que le composant Appel de Google Ads.
+ * Ce ne sont pas des heures d'ouverture au public : le showroom se visite
+ * uniquement sur rendez-vous (SHOWROOM_ACCESS), et le balisage n'annonce donc
+ * aucun horaire d'ouverture (components/seo/JsonLd.tsx).
  */
-export const OPENING_HOURS = "lun-ven 9h-18h";
+export const PHONE_HOURS = "lun-ven 9 h-19 h";
+export const PHONE_HOURS_LONG = "du lundi au vendredi, de 9 h à 19 h";
+/** Créneaux de visite proposés à la réservation, alignés sur lib/booking.ts. */
+export const VISIT_HOURS = "lun-ven 9 h-18 h";
+export const VISIT_HOURS_LONG = "du lundi au vendredi, de 9 h à 18 h";
 export const SHOWROOM_ACCESS = "Showroom uniquement sur rendez-vous";
 
 export const ADDRESS = {

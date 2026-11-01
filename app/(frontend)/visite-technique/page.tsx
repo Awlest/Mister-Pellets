@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getService, PHONE_DISPLAY, PHONE_HREF } from "@/lib/services";
 import { buildPageMetadata } from "@/lib/seo";
+import { PHONE_HOURS_LONG } from "@/config/site";
 
 /*
  * Page d'arrivée des annonces Google « visite technique » (01/11/2026).
@@ -78,7 +79,7 @@ export default function VisiteTechniquePage() {
             <a href={PHONE_HREF} className="whitespace-nowrap font-semibold text-mp-green-deep underline underline-offset-2 hover:no-underline">
               {PHONE_DISPLAY}
             </a>
-            , du lundi au vendredi de 9 h à 18 h.
+            , {PHONE_HOURS_LONG}.
           </p>
         </div>
       </section>

@@ -3,6 +3,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { formatPhone } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
+import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
 
 export const metadata = buildPageMetadata({
   title: "Contact, Mister Pellets Wallonie",
@@ -21,7 +22,7 @@ export default function ContactPage() {
     <>
       <HeroSecondary
         title="Une question ? On répond."
-        description="Téléphone, email ou formulaire. On revient vers vous dans la journée pendant les heures ouvrées (lun-ven 9h-18h)."
+        description={`Téléphone, email ou formulaire. On décroche ${PHONE_HOURS_LONG}, et on répond aux messages dans la journée ouvrée.`}
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Contact" },
@@ -100,11 +101,11 @@ export default function ContactPage() {
                 <div>
                   <span className="text-xs text-mp-ink-soft uppercase tracking-wider block mb-1">Horaires du téléphone</span>
                   <ul className="text-mp-ink space-y-1 leading-relaxed">
-                    <li>Lundi - Vendredi : 9h - 18h</li>
-                    <li className="text-mp-ink-soft">Samedi et dimanche : fermé</li>
+                    <li>Lundi au vendredi : 9&nbsp;h à 19&nbsp;h</li>
+                    <li className="text-mp-ink-soft">Samedi et dimanche : fermé, répondeur</li>
                   </ul>
                   <p className="mt-3 text-sm text-mp-ink-soft">
-                    Les visites du showroom se calent dans ces mêmes plages, sur rendez-vous.
+                    Visites du showroom uniquement sur rendez-vous, {VISIT_HOURS_LONG}.
                   </p>
                 </div>
               </div>
