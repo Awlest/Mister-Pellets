@@ -35,6 +35,7 @@ export const ROUTES = {
   terms: "/cgv",
   privacy: "/politique-confidentialite",
   cookies: "/politique-cookies",
+  reviews: "/avis-clients",
 } as const;
 
 /**
@@ -65,6 +66,7 @@ export const PUBLISHED: ReadonlySet<string> = new Set<string>([
   ROUTES.terms,
   ROUTES.privacy,
   ROUTES.cookies,
+  ROUTES.reviews,
 ]);
 
 /** Les fiches marque et les guides sont des routes dynamiques : publiées avec leur page mère. */
@@ -142,6 +144,7 @@ export const LEGAL_LINKS: readonly NavLink[] = [
   { href: ROUTES.terms, label: "CGV" },
   { href: ROUTES.privacy, label: "Confidentialité" },
   { href: ROUTES.cookies, label: "Cookies" },
+  { href: ROUTES.reviews, label: "Avis clients" },
 ];
 
 /**

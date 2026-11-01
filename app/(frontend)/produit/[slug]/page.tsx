@@ -12,6 +12,7 @@ import { ProductAccessories } from "@/components/product/ProductAccessories";
 import { ProductColorProvider } from "@/components/product/ProductColorContext";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
+import { GoogleRatingNote } from "@/components/sections/GoogleReviews";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   getAllProducts,
@@ -391,6 +392,7 @@ export default async function ProductPage({ params }: Props) {
                       <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
                     </Button>
                   </div>
+                  <GoogleRatingNote className="mt-4" />
                 </>
               ) : (
                 <>
@@ -478,6 +480,8 @@ export default async function ProductPage({ params }: Props) {
                   <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
                 </Button>
               </div>
+
+              <GoogleRatingNote className="mt-4" />
 
               {/*
                 Le paiement en ligne a été retiré (04/09/2026). Un poêle ne se

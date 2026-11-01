@@ -20,6 +20,7 @@ import * as migration_20261018_120000_products_brand_austroflamm_cadel from './2
 import * as migration_20261019_120000_accessories from './20261019_120000_accessories';
 import * as migration_20261022_100000_payload_3_91 from './20261022_100000_payload_3_91';
 import * as migration_20261030_120000_products_brand_mcz from './20261030_120000_products_brand_mcz';
+import * as migration_20261101_120000_google_reviews from './20261101_120000_google_reviews';
 
 export const migrations = [
   {
@@ -131,5 +132,10 @@ export const migrations = [
     up: migration_20261030_120000_products_brand_mcz.up,
     down: migration_20261030_120000_products_brand_mcz.down,
     name: '20261030_120000_products_brand_mcz',
+  },
+  {
+    up: migration_20261101_120000_google_reviews.up,
+    down: migration_20261101_120000_google_reviews.down,
+    name: '20261101_120000_google_reviews',
   },
 ];

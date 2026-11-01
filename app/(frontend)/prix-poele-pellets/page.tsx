@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRight, CalendarCheck, Flame, Phone, Ruler } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { CallbackForm } from "@/components/forms/CallbackForm";
 import { NextSlot } from "@/components/booking/NextSlot";
 import { ROUTES } from "@/config/navigation";
@@ -249,7 +249,7 @@ export default async function PrixPoelePelletsPage() {
         </div>
       </section>
 
-      <Testimonials tone="beige" />
+      <GoogleReviews tone="beige" />
     </>
   );
 }

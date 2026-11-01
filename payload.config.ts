@@ -17,6 +17,8 @@ import { Orders } from "./collections/Orders";
 import { Quotes } from "./collections/Quotes";
 import { ContactMessages } from "./collections/ContactMessages";
 import { Articles } from "./collections/Articles";
+import { GoogleReviews } from "./collections/GoogleReviews";
+import { GoogleReviewsSummary } from "./globals/GoogleReviewsSummary";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -74,7 +76,10 @@ export default buildConfig({
     Quotes,
     ContactMessages,
     Articles,
+    GoogleReviews,
   ],
+
+  globals: [GoogleReviewsSummary],
 
   editor: lexicalEditor(),
 
