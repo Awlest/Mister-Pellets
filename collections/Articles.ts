@@ -1,4 +1,9 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, Where } from "payload";
+
+/** Ce qu'un visiteur anonyme peut lire : un article publié et coché « isPublished ». */
+const PUBLISHED_ONLY: Where = {
+  and: [{ _status: { equals: "published" } }, { isPublished: { equals: true } }],
+};
 
 /**
  * Articles — collection pour le blog éditorial Mister Pellets.
@@ -18,7 +23,10 @@ export const Articles: CollectionConfig = {
   slug: "articles",
   // RLS Payload (cf. audit V14.1) : explicite chaque opération.
   access: {
-    read: () => true, // public, le blog est en SSG
+    // Public : les articles publiés seulement (statut « published » ET case
+    // « isPublished » cochée). Sans ce filtre, /api/articles?draft=true
+    // rendait les brouillons à n'importe qui. Un compte de l'admin voit tout.
+    read: ({ req }) => (req.user ? true : PUBLISHED_ONLY),
     create: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
