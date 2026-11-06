@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { revalidatePath } from "next/cache";
 import { triggerDeployHook } from "../lib/deploy-hook";
+import { errorInfo } from "../lib/log-error";
 
 /**
  * Slugifie une chaîne pour générer des URLs propres :
@@ -74,7 +75,7 @@ export const Products: CollectionConfig = {
           revalidatePath("/poeles-pellets/[ville]", "page");
         } catch (err) {
           // En dev local le revalidatePath peut échouer ; ne bloque pas le save
-          console.warn("[products afterChange] revalidate failed:", err);
+          console.warn("[products afterChange] revalidate failed:", errorInfo(err));
         }
         // Les pages produit sont toutes construites au build et la route
         // refuse les autres slugs : une fiche créée ou un slug changé n'est en
@@ -98,7 +99,7 @@ export const Products: CollectionConfig = {
           }
           revalidatePath("/boutique");
         } catch (err) {
-          console.warn("[products afterDelete] revalidate failed:", err);
+          console.warn("[products afterDelete] revalidate failed:", errorInfo(err));
         }
         // Le slug doit aussi quitter la liste des pages construites : le
         // build suivant lui donne la page 404 statique du site.

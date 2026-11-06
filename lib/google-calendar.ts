@@ -101,7 +101,9 @@ async function getAccessToken(): Promise<string> {
 
   if (!res.ok) {
     const detail = await res.text();
-    throw new Error(`Authentification Google refusée (${res.status}) : ${detail.slice(0, 300)}`);
+    throw new Error(`Authentification Google refusée (${res.status}) : ${detail.slice(0, 300)}`, {
+      cause: { code: `google_token_${res.status}` },
+    });
   }
 
   const data = (await res.json()) as { access_token: string; expires_in: number };
@@ -155,6 +157,7 @@ export async function getBusyIntervals(
       throw new Error(
         `Lecture de l'agenda impossible (${res.status}) : ${detail.slice(0, 300)}. ` +
           `Vérifier l'accès de ${process.env.GOOGLE_SA_EMAIL} à l'agenda.`,
+        { cause: { code: `google_list_${res.status}` } },
       );
     }
 
@@ -242,7 +245,9 @@ export async function createEvent(details: BookingDetails): Promise<{ id: string
 
   if (!res.ok) {
     const detail = await res.text();
-    throw new Error(`Création du rendez-vous impossible (${res.status}) : ${detail.slice(0, 300)}`);
+    throw new Error(`Création du rendez-vous impossible (${res.status}) : ${detail.slice(0, 300)}`, {
+      cause: { code: `google_insert_${res.status}` },
+    });
   }
 
   const data = (await res.json()) as { id: string; htmlLink?: string };
@@ -268,6 +273,8 @@ export async function deleteEvent(
   // 410 : déjà supprimé, le résultat voulu est atteint.
   if (!res.ok && res.status !== 410) {
     const detail = await res.text();
-    throw new Error(`Suppression du rendez-vous impossible (${res.status}) : ${detail.slice(0, 300)}`);
+    throw new Error(`Suppression du rendez-vous impossible (${res.status}) : ${detail.slice(0, 300)}`, {
+      cause: { code: `google_delete_${res.status}` },
+    });
   }
 }

@@ -91,14 +91,10 @@ export async function sendEmail({
   const resend = getResend();
 
   if (!resend) {
-    // Mode console fallback (RESEND_API_KEY non configuré)
-    console.log("[email:console-fallback]", {
-      from,
-      to,
-      subject,
-      replyTo,
-      preview: text ?? html.replace(/<[^>]+>/g, "").substring(0, 200),
-    });
+    // Sans RESEND_API_KEY (poste local, préversion) : rien n'est envoyé. Le
+    // log ne garde que le nom de l'e-mail : destinataire, sujet, réponse et
+    // texte contiennent des données du client.
+    console.log("[email:console-fallback]", { label });
     return { ok: true, id: "console-fallback" };
   }
 
@@ -121,11 +117,15 @@ export async function sendEmail({
     if (!result.error) return { ok: true, id: result.data?.id };
     error = result.error;
   } catch (err) {
-    error = { message: err instanceof Error ? err.message : "Erreur inconnue" };
+    error = {
+      message: err instanceof Error ? err.message : "Erreur inconnue",
+      name: err instanceof Error ? err.name : "Erreur inconnue",
+    };
   }
 
-  // Ni destinataire ni sujet : ils contiennent des données du client.
-  console.error("[email] envoi refusé", { label, error });
+  // Ni destinataire, ni sujet, ni message d'erreur (il peut citer une
+  // adresse) : le nom de l'e-mail, le type d'erreur et le statut HTTP.
+  console.error("[email] envoi refusé", { label, name: error.name, statusCode: error.statusCode });
   return { ok: false, error: error.message };
 }
 

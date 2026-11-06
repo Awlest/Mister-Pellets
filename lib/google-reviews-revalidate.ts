@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { errorInfo } from "./log-error";
 
 /** Pages qui affichent des avis Google (bloc complet). */
 const PAGES_WITH_REVIEWS = ["/", "/prix-poele-pellets", "/prendre-rendez-vous", "/visite-technique", "/avis-clients"];
@@ -15,6 +16,6 @@ export function revalidateGoogleReviewPages({ withProductPages = false } = {}): 
     if (withProductPages) revalidatePath("/produit/[slug]", "page");
   } catch (err) {
     // En dev local ou en script, revalidatePath peut échouer ; ne bloque pas la sauvegarde.
-    console.warn("[google-reviews] revalidate failed:", err);
+    console.warn("[google-reviews] revalidate failed:", errorInfo(err));
   }
 }

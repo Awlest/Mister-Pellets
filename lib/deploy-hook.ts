@@ -1,3 +1,5 @@
+import { errorInfo } from "./log-error";
+
 /**
  * Relance un build de production par le Deploy Hook Vercel.
  *
@@ -32,6 +34,6 @@ export async function triggerDeployHook(reason: string): Promise<void> {
       console.error(`[deploy-hook] build refusé par Vercel : HTTP ${res.status} (${reason})`);
     }
   } catch (err) {
-    console.error(`[deploy-hook] Vercel injoignable, aucun build lancé (${reason}) :`, err);
+    console.error(`[deploy-hook] Vercel injoignable, aucun build lancé (${reason}) :`, errorInfo(err));
   }
 }
