@@ -18,9 +18,26 @@ export function JsonLd({ data }: JsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
+}
+
+/**
+ * JSON sans danger dans un <script>. JSON.stringify laisse passer « < » : un
+ * « </script> » saisi dans une fiche produit (nom, description courte,
+ * couleur, référence) fermerait la balise, et la suite s'exécuterait chez
+ * chaque visiteur. Les cinq caractères sont écrits en échappements \uXXXX,
+ * que tout lecteur JSON relit à l'identique ; U+2028 et U+2029 cassent un
+ * script lu comme du JavaScript.
+ */
+export function serializeJsonLd(data: JsonLdProps["data"]): string {
+  return JSON.stringify(data)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 }
 
 /**
