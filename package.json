@@ -12,6 +12,7 @@
     "check:detoure": "node --import tsx scripts/check-detoure.ts",
     "check:famille": "node --import tsx scripts/check-famille.ts",
     "check:pose": "node --import tsx scripts/check-pose.ts",
+    "check:securite": "node --import tsx scripts/check-securite.ts",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
