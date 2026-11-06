@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { isAdmin, isAdminField, isAdminOrSelf, isLoggedIn } from "../lib/access";
 import { RESET_PASSWORD_SUBJECT, resetPasswordHtml } from "../lib/admin-email";
 
 /**
@@ -36,12 +37,14 @@ export const Users: CollectionConfig = {
   },
   // RLS Payload (cf. audit V14.1) : seuls les users authentifiés peuvent
   // lister/lire la collection Users. Pas de read public, pas de signup auto.
-  // La création de comptes se fait uniquement par un admin via /admin.
+  // Créer ou supprimer un compte, changer un rôle : un admin seulement
+  // (lib/access.ts). Chacun peut modifier son propre compte (mot de passe),
+  // pas celui d'un autre.
   access: {
-    read: ({ req }) => Boolean(req.user),
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: isLoggedIn,
+    create: isAdmin,
+    update: isAdminOrSelf,
+    delete: isAdmin,
     admin: ({ req }) => Boolean(req.user),
   },
   admin: {
@@ -59,6 +62,8 @@ export const Users: CollectionConfig = {
       type: "select",
       required: true,
       defaultValue: "admin",
+      // Sans cette règle, un compte « viewer » pouvait se donner le rôle admin.
+      access: { update: isAdminField },
       options: [
         { label: "Admin (tout)", value: "admin" },
         { label: "Editor (contenu uniquement)", value: "editor" },
