@@ -1,4 +1,17 @@
 import type { CollectionConfig } from "payload";
+import { canEditLeads, isLoggedIn } from "../lib/access";
+
+/**
+ * Sujets du formulaire de contact. La route /api/contact refuse toute autre
+ * valeur : le sujet part tel quel dans la notification interne.
+ */
+export const CONTACT_SUBJECTS = [
+  { label: "Question produit", value: "info-produit" },
+  { label: "Pose / installation", value: "info-pose" },
+  { label: "Primes Wallonie", value: "info-primes" },
+  { label: "Entretien", value: "info-entretien" },
+  { label: "Autre", value: "info-other" },
+];
 
 /**
  * ContactMessages — messages reçus via /contact.
@@ -6,11 +19,12 @@ import type { CollectionConfig } from "payload";
  */
 export const ContactMessages: CollectionConfig = {
   slug: "contact-messages",
+  // Lecture pour tout compte, écriture refusée au rôle « viewer » (lib/access.ts).
   access: {
-    read: ({ req }) => Boolean(req.user),
-    create: ({ req }) => Boolean(req.user), // REST public verrouillé ; création via /api/contact (Local API)
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: isLoggedIn,
+    create: canEditLeads, // REST public verrouillé ; création via /api/contact (Local API)
+    update: canEditLeads,
+    delete: canEditLeads,
   },
   admin: {
     useAsTitle: "name",
@@ -33,13 +47,7 @@ export const ContactMessages: CollectionConfig = {
           name: "subject",
           type: "select",
           required: true,
-          options: [
-            { label: "Question produit", value: "info-produit" },
-            { label: "Pose / installation", value: "info-pose" },
-            { label: "Primes Wallonie", value: "info-primes" },
-            { label: "Entretien", value: "info-entretien" },
-            { label: "Autre", value: "info-other" },
-          ],
+          options: CONTACT_SUBJECTS,
           admin: { width: "67%" },
         },
         {

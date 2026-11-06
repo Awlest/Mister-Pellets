@@ -2,52 +2,62 @@ import { NextResponse } from "next/server";
 import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/rate-limit";
 import { getPayloadClient } from "@/lib/payload-client";
 import { confirmCustomerContact, notifyInternalContact } from "@/lib/email";
+import { clip, hasLink, oneLine } from "@/lib/form-text";
+import { errorInfo } from "@/lib/log-error";
+import { CONTACT_SUBJECTS } from "@/collections/ContactMessages";
 
 interface ContactPayload {
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
   subject: string;
   message: string;
-  consent: boolean;
 }
 
-function redactEmail(email: string): string {
-  const at = email.indexOf("@");
-  if (at < 1) return "[invalid]";
-  return `${email.slice(0, 2)}***${email.slice(at)}`;
-}
-function redactName(name: string): string {
-  return name.length > 0 ? `${name.charAt(0)}***` : "[empty]";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SUBJECTS: readonly string[] = CONTACT_SUBJECTS.map((s) => s.value);
+
+/**
+ * Champs du formulaire, bornés comme dans /api/rdv/book. Nom, e-mail,
+ * téléphone et sujet tiennent sur une ligne : le nom et le sujet partent dans
+ * le sujet de la notification interne.
+ */
+function read(body: Record<string, unknown>): ContactPayload {
+  return {
+    name: oneLine(body.name, 120),
+    email: oneLine(body.email, 160),
+    phone: oneLine(body.phone, 40),
+    subject: oneLine(body.subject, 40),
+    message: clip(body.message, 2000),
+  };
 }
 
-function validate(payload: Partial<ContactPayload>): string | null {
-  if (!payload.name || typeof payload.name !== "string" || payload.name.length < 2) {
+function validate(payload: ContactPayload, consent: unknown): string | null {
+  if (payload.name.length < 2) {
     return "Merci d'indiquer votre nom.";
   }
-  if (
-    !payload.email ||
-    typeof payload.email !== "string" ||
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)
-  ) {
+  if (hasLink(payload.name)) {
+    return "Indiquez votre nom sans adresse web ni e-mail.";
+  }
+  if (!EMAIL_RE.test(payload.email)) {
     return "Cette adresse e-mail ne semble pas valide. Pouvez-vous la vérifier ?";
   }
-  if (!payload.subject || typeof payload.subject !== "string") {
+  if (!SUBJECTS.includes(payload.subject)) {
     return "Merci de choisir le sujet de votre message.";
   }
-  if (!payload.message || typeof payload.message !== "string" || payload.message.length < 10) {
+  if (payload.message.length < 10) {
     return "Votre message est un peu court : décrivez votre demande en quelques mots (10 caractères au moins).";
   }
-  if (payload.consent !== true) {
+  if (consent !== true) {
     return "Merci de cocher la case d'accord : sans elle, nous ne pouvons pas enregistrer votre message.";
   }
   return null;
 }
 
 /**
- * Reçoit les messages du formulaire de contact.
- * Phase 5 : envoie un email via Resend + sauvegarde dans Payload (collection ContactMessages).
- * Pour l'instant : log + accepte. On branche l'email plus tard quand RESEND_API_KEY sera configuré.
+ * Reçoit les messages du formulaire de contact : enregistrement dans Payload
+ * (collection ContactMessages), notification interne par Resend et accusé de
+ * réception au visiteur.
  */
 export async function POST(request: Request) {
   // 1. CSRF check : Origin ou Referer doit correspondre à notre site
@@ -58,66 +68,68 @@ export async function POST(request: Request) {
   const limited = rateLimitResponse(request, { routeKey: "contact", max: 5 });
   if (limited) return limited;
 
-  let body: Partial<ContactPayload>;
+  let body: Record<string, unknown>;
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: "Votre message n'a pas pu être lu. Rechargez la page et réessayez." }, { status: 400 });
   }
+  if (!body || typeof body !== "object") {
+    return NextResponse.json({ error: "Votre message n'a pas pu être lu. Rechargez la page et réessayez." }, { status: 400 });
+  }
 
   // 2. Honeypot
-  if (isHoneypotTriggered(body as Record<string, unknown>)) {
+  if (isHoneypotTriggered(body)) {
     console.warn("[contact] honeypot triggered, dropping silently");
     return NextResponse.json({ ok: true });
   }
 
   // 3. Validation métier
-  const error = validate(body);
+  const message = read(body);
+  const error = validate(message, body.consent);
   if (error) {
     return NextResponse.json({ error }, { status: 400 });
   }
 
-  // PII redactés dans les logs (cf. audit §3.H.1)
+  // Aucune donnée du client dans les logs : le sujet est une valeur de la liste.
   console.log("[contact] new message", {
-    name: redactName(body.name!),
-    email: redactEmail(body.email!),
-    subject: body.subject,
+    subject: message.subject,
     timestamp: new Date().toISOString(),
   });
 
   // 4. Sauvegarde Payload (collection ContactMessages). Ne bloque pas
   // l'envoi de l'email si la base est injoignable. Cast subject vers
-  // l'union type stricte (déjà validé par le formulaire + validate()).
+  // l'union type stricte (validé par la liste CONTACT_SUBJECTS).
   try {
     const payload = await getPayloadClient();
     await payload.create({
       collection: "contact-messages",
       overrideAccess: true, // création serveur de confiance (REST public verrouillé côté collection)
       data: {
-        name: body.name!,
-        email: body.email!,
-        phone: body.phone ?? "",
-        subject: body.subject as never,
-        message: body.message!,
+        name: message.name,
+        email: message.email,
+        phone: message.phone,
+        subject: message.subject as never,
+        message: message.message,
         consent: true,
         status: "new",
       } as never,
     });
   } catch (err) {
-    console.error("[contact] payload save failed", err);
+    console.error("[contact] payload save failed", errorInfo(err));
   }
 
   // 5. Notification email staff (info@awlest.com) et accusé de réception au
   // visiteur, en parallèle : l'un ne bloque pas l'autre.
   await Promise.allSettled([
     notifyInternalContact({
-      name: body.name!,
-      email: body.email!,
-      phone: body.phone ?? undefined,
-      subject: body.subject!,
-      message: body.message!,
+      name: message.name,
+      email: message.email,
+      phone: message.phone || undefined,
+      subject: message.subject,
+      message: message.message,
     }),
-    confirmCustomerContact({ name: body.name!, email: body.email! }),
+    confirmCustomerContact({ name: message.name, email: message.email }),
   ]);
 
   return NextResponse.json({ ok: true });

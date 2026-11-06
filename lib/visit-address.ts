@@ -1,3 +1,5 @@
+import { oneLine } from "@/lib/form-text";
+
 /**
  * Adresse de la visite à domicile, vérifiée pareil dans le navigateur et dans
  * la route /api/rdv/book. Trois champs séparés plutôt qu'une zone libre : un
@@ -12,13 +14,6 @@ export interface VisitAddress {
 
 /** Code postal belge : 4 chiffres, de 1000 à 9999. */
 export const POSTAL_RE = /^[1-9]\d{3}$/;
-
-/** Une ligne : contrôles et sauts de ligne remplacés par une espace, blancs resserrés. */
-function oneLine(v: unknown, max: number): string {
-  return typeof v === "string"
-    ? v.replace(/\p{Cc}+/gu, " ").replace(/\s+/g, " ").trim().slice(0, max)
-    : "";
-}
 
 export function readVisitAddress(raw: Record<string, unknown>): VisitAddress {
   return {

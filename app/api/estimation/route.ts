@@ -23,6 +23,8 @@ import { describeEvacuation, describePose, missingAnswers, sanitizePose } from "
 import { TARIFS } from "@/lib/pose/tarifs";
 import { BONUS, bonusLabelFor } from "@/lib/bonus";
 import { durationsFor, monthly0 } from "@/lib/financing";
+import { hasLink, oneLine } from "@/lib/form-text";
+import { errorInfo } from "@/lib/log-error";
 
 /**
  * Reçoit les estimations configurées sur /estimation.
@@ -53,12 +55,6 @@ function isValidBelgianPhone(input: string): boolean {
   return [/^\+32[1-9]\d{7,8}$/, /^0032[1-9]\d{7,8}$/, /^0[1-9]\d{7,8}$/].some((re) =>
     re.test(cleaned),
   );
-}
-
-function redactEmail(email: string): string {
-  const at = email.indexOf("@");
-  if (at < 1) return "[invalid]";
-  return `${email.slice(0, 2)}***${email.slice(at)}`;
 }
 
 const clamp = (n: unknown, min: number, max: number, fallback: number): number => {
@@ -126,13 +122,16 @@ export async function POST(request: Request) {
   }
 
   const customer = (body.customer ?? {}) as Customer;
-  const name = typeof customer.name === "string" ? customer.name.trim().slice(0, 120) : "";
+  // Le nom part dans le sujet de la notification interne : une seule ligne.
+  const name = oneLine(customer.name, 120);
   const email = typeof customer.email === "string" ? customer.email.trim().slice(0, 160) : "";
   const phone = typeof customer.phone === "string" ? customer.phone.trim().slice(0, 40) : "";
   const postalCode = typeof customer.postalCode === "string" ? customer.postalCode.trim() : "";
   const message = typeof customer.message === "string" ? customer.message.slice(0, 2000) : "";
 
   if (name.length < 2) return NextResponse.json({ error: "Merci d'indiquer votre nom." }, { status: 400 });
+  if (hasLink(name))
+    return NextResponse.json({ error: "Indiquez votre nom sans adresse web ni e-mail." }, { status: 400 });
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     return NextResponse.json({ error: "Cette adresse e-mail ne semble pas valide. Pouvez-vous la vérifier ?" }, { status: 400 });
   if (!/^[1-9]\d{3}$/.test(postalCode))
@@ -200,9 +199,8 @@ export async function POST(request: Request) {
       : (durations[durations.length - 1] ?? null);
   const monthly = months ? monthly0(r.totalTTC, months) : null;
 
+  // Aucune donnée du client dans les logs : le modèle et le montant seulement.
   console.log("[estimation] new request", {
-    email: redactEmail(email),
-    postalCode,
     product: product.slug,
     totalTTC: r.totalTTC,
     timestamp: new Date().toISOString(),
@@ -254,7 +252,7 @@ export async function POST(request: Request) {
       } as never,
     });
   } catch (err) {
-    console.error("[estimation] payload save failed", err);
+    console.error("[estimation] payload save failed", errorInfo(err));
   }
 
   await Promise.allSettled([
