@@ -12,6 +12,10 @@ import {
   deleteEvent,
   isCalendarConfigured,
 } from "@/lib/google-calendar";
+import { getPayloadClient } from "@/lib/payload-client";
+import { reserveBookingQuota, UNCHECKED_QUOTA, type BookingQuota } from "@/lib/booking-limits";
+import { hasLink } from "@/lib/form-text";
+import { errorInfo } from "@/lib/log-error";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +40,20 @@ function slotTaken() {
       code: "SLOT_TAKEN",
     },
     { status: 409 },
+  );
+}
+
+/** Plafond de lib/booking-limits.ts atteint : on oriente vers le téléphone. */
+function tooManyBookings(reason: "contact" | "site") {
+  return NextResponse.json(
+    {
+      error:
+        reason === "contact"
+          ? "Vous avez déjà réservé deux rendez-vous en ligne ces dernières 24 heures. Pour un autre, appelez-nous au 081 13 83 09 : nous trouverons le moment avec vous."
+          : "La réservation en ligne est complète pour aujourd'hui. Appelez-nous au 081 13 83 09 : nous fixerons le créneau avec vous.",
+      code: "BOOKING_LIMIT",
+    },
+    { status: 429 },
   );
 }
 
@@ -125,6 +143,11 @@ export async function POST(request: Request) {
   if (name.length < 2) {
     return NextResponse.json({ error: "Merci d'indiquer votre nom." }, { status: 400 });
   }
+  // Le nom revient dans la confirmation envoyée à l'adresse saisie et dans
+  // l'agenda : pas de lien (lib/form-text.ts).
+  if (hasLink(name)) {
+    return NextResponse.json({ error: "Indiquez votre nom sans adresse web ni e-mail." }, { status: 400 });
+  }
   // Un moyen de joindre le client, au choix : l'e-mail (/prendre-rendez-vous)
   // ou le téléphone seul (/visite-technique, page des annonces). Un e-mail
   // saisi doit être valable : une faute de frappe ne doit pas faire perdre
@@ -146,6 +169,12 @@ export async function POST(request: Request) {
   if (addressError) {
     return NextResponse.json({ error: addressError }, { status: 400 });
   }
+  if (service.location === "domicile" && (hasLink(visit.street) || hasLink(visit.city))) {
+    return NextResponse.json(
+      { error: "Indiquez la rue et la commune de la visite sans adresse web ni e-mail." },
+      { status: 400 },
+    );
+  }
 
   if (!isCalendarConfigured()) {
     return NextResponse.json(
@@ -157,14 +186,36 @@ export async function POST(request: Request) {
     );
   }
 
+  // Plafonds en base (lib/booking-limits.ts) : deux rendez-vous par e-mail ou
+  // par téléphone et huit pour le site, sur 24 heures glissantes. Base
+  // injoignable : on laisse réserver plutôt que de perdre le client.
+  let quota: BookingQuota = UNCHECKED_QUOTA;
+  try {
+    quota = await reserveBookingQuota(await getPayloadClient(), {
+      email: email || undefined,
+      phone: phone || undefined,
+      service: slug,
+      now: Date.now(),
+      secret: process.env.PAYLOAD_SECRET ?? "",
+    });
+  } catch (err) {
+    console.error("[rdv/book] plafond non vérifié", errorInfo(err));
+  }
+  if (!quota.ok) return tooManyBookings(quota.reason);
+
   const durationMin = bookingDurationMin(slug);
   const endInstant = startInstant + durationMin * 60000;
+  // Tant qu'aucun événement n'est créé, un échec rend la place du plafond.
+  let eventCreated = false;
 
   try {
     // Revalidation : le créneau demandé doit toujours figurer parmi les
     // créneaux réellement disponibles au moment présent.
     const now = Date.now();
-    if (!(await isSlotFree(now, startInstant, durationMin))) return slotTaken();
+    if (!(await isSlotFree(now, startInstant, durationMin))) {
+      await quota.release();
+      return slotTaken();
+    }
 
     const locationLabel =
       service.location === "showroom"
@@ -185,6 +236,7 @@ export async function POST(request: Request) {
       // l'invitation Google au nom de l'agenda de Dorian.
       sendGoogleInvite: false,
     });
+    eventCreated = true;
 
     // Contre-vérification : mister-clim.be écrit dans le même agenda, et
     // l'équipe peut y poser un rendez-vous à tout moment. Si un autre
@@ -193,6 +245,7 @@ export async function POST(request: Request) {
     // client n'a encore rien reçu : suppression sans notification.
     if (!(await isSlotFree(now, startInstant, durationMin, event.id))) {
       await deleteEvent(event.id, { notifyGuests: false });
+      await quota.release();
       return slotTaken();
     }
 
@@ -240,7 +293,8 @@ export async function POST(request: Request) {
       durationMin,
     });
   } catch (e) {
-    console.error("[rdv/book]", e);
+    console.error("[rdv/book]", errorInfo(e));
+    if (!eventCreated) await quota.release();
     return NextResponse.json(
       {
         error:

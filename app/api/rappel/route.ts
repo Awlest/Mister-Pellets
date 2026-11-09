@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { rateLimitResponse, isHoneypotTriggered, csrfOriginCheck } from "@/lib/rate-limit";
 import { getPayloadClient } from "@/lib/payload-client";
 import { notifyInternalCallback } from "@/lib/email";
+import { hasLink, oneLine } from "@/lib/form-text";
+import { errorInfo } from "@/lib/log-error";
 import {
   CALLBACK_NO_EMAIL,
   isValidBelgianPhone,
@@ -24,7 +26,9 @@ interface CallbackPayload {
 const filled = (value: unknown): value is string => typeof value === "string" && value.trim() !== "";
 
 function validate(body: Partial<CallbackPayload>): string | null {
-  if (typeof body.name !== "string" || body.name.trim().length < 2) return "Merci d'indiquer votre nom.";
+  const name = oneLine(body.name, 120);
+  if (name.length < 2) return "Merci d'indiquer votre nom.";
+  if (hasLink(name)) return "Indiquez votre nom sans adresse web ni e-mail.";
   if (typeof body.phone !== "string" || !isValidBelgianPhone(body.phone)) {
     return "Merci d'indiquer un numéro de téléphone belge, par exemple 0470 12 34 56 ou +32 470 12 34 56.";
   }
@@ -71,7 +75,7 @@ export async function POST(request: Request) {
   const error = validate(body);
   if (error) return NextResponse.json({ error }, { status: 400 });
 
-  const name = body.name!.trim();
+  const name = oneLine(body.name, 120);
   const phone = body.phone!.trim();
   const email = filled(body.email) ? body.email.trim() : undefined;
   const postalCode = filled(body.postalCode) ? body.postalCode.trim() : undefined;
@@ -111,7 +115,7 @@ export async function POST(request: Request) {
     });
     saved = true;
   } catch (err) {
-    console.error("[rappel] payload save failed", err);
+    console.error("[rappel] payload save failed", errorInfo(err));
   }
 
   const sent = await notifyInternalCallback({ name, email, phone, postalCode, situation, origin });

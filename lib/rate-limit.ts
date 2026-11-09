@@ -128,10 +128,10 @@ export function rateLimitResponse(
  * Retourne null si OK, NextResponse 403 sinon.
  */
 export function csrfOriginCheck(request: Request): NextResponse | null {
+  // localhost hors production seulement, comme cors et csrf de payload.config.ts.
   const allowedOrigins = [
     process.env.NEXT_PUBLIC_SITE_URL,
-    "http://localhost:3000",
-    "http://localhost:3001",
+    ...(process.env.NODE_ENV === "production" ? [] : ["http://localhost:3000", "http://localhost:3001"]),
   ].filter((x): x is string => Boolean(x));
 
   const origin = request.headers.get("origin");

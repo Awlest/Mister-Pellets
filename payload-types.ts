@@ -78,6 +78,7 @@ export interface Config {
     'contact-messages': ContactMessage;
     articles: Article;
     'google-reviews': GoogleReview;
+    'online-bookings': OnlineBooking;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -96,6 +97,7 @@ export interface Config {
     'contact-messages': ContactMessagesSelect<false> | ContactMessagesSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     'google-reviews': GoogleReviewsSelect<false> | GoogleReviewsSelect<true>;
+    'online-bookings': OnlineBookingsSelect<false> | OnlineBookingsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -175,7 +177,6 @@ export interface Media {
   id: number;
   alt: string;
   caption?: string | null;
-  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -855,6 +856,18 @@ export interface GoogleReview {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "online-bookings".
+ */
+export interface OnlineBooking {
+  id: number;
+  emailKey?: string | null;
+  phoneKey?: string | null;
+  service?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -995,7 +1008,6 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
-  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1330,6 +1342,17 @@ export interface GoogleReviewsSelect<T extends boolean = true> {
   rating?: T;
   quote?: T;
   sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "online-bookings_select".
+ */
+export interface OnlineBookingsSelect<T extends boolean = true> {
+  emailKey?: T;
+  phoneKey?: T;
+  service?: T;
   updatedAt?: T;
   createdAt?: T;
 }

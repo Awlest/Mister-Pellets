@@ -59,6 +59,11 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  // Sans en-tête X-Powered-By : Next l'envoie par défaut et withPayload le
+  // remplace par « Next.js, Payload », qui donnait la pile du site à tout
+  // scanner. withPayload ne l'ajoute pas quand ce réglage vaut false.
+  poweredByHeader: false,
+
   // Bloque l'indexation tant que NEXT_PUBLIC_ALLOW_INDEXING != "true"
   // + headers de sécurité applicables sur toutes les routes.
   async headers() {

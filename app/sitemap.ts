@@ -7,6 +7,7 @@ import { PROVINCES } from "@/lib/local-seo";
 import { ARTICLES } from "@/lib/articles";
 import { getPayloadClient } from "@/lib/payload-client";
 import { getProductSitemapEntries } from "@/lib/products";
+import { errorInfo } from "@/lib/log-error";
 
 /**
  * Sitemap dynamique généré au build + revalidé toutes les heures.
@@ -118,7 +119,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }));
   } catch (err) {
-    console.warn("[sitemap] produits non joignables :", err);
+    console.warn("[sitemap] produits non joignables :", errorInfo(err));
   }
 
   // Articles (Phase 7) si la collection existe
@@ -128,6 +129,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       collection: "articles",
       limit: 100,
       depth: 0,
+      // Règle de lecture publique : les articles publiés seulement, pas les
+      // brouillons (collections/Articles.ts).
+      overrideAccess: false,
     });
     const articleDocs = articles.docs as Array<{ slug?: string; updatedAt?: string }>;
     payloadArticlePages = articleDocs

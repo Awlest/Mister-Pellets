@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { randomUUID } from "crypto";
+import { canEditLeads, isLoggedIn } from "../lib/access";
 
 /**
  * Orders — historique des commandes boutique.
@@ -12,13 +13,14 @@ import { randomUUID } from "crypto";
 export const Orders: CollectionConfig = {
   slug: "orders",
   access: {
-    read: ({ req }) => Boolean(req.user), // admin uniquement
+    read: isLoggedIn, // comptes de l'admin uniquement
     // REST public verrouillé : empêche un POST /api/orders direct d'injecter
     // une fausse commande "payée". La création légitime passe par /api/checkout
     // (Local API, overrideAccess) — voir app/api/checkout/route.ts.
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    // Écriture refusée au rôle « viewer » (lib/access.ts).
+    create: canEditLeads,
+    update: canEditLeads,
+    delete: canEditLeads,
   },
   hooks: {
     beforeChange: [

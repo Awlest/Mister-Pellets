@@ -3,6 +3,7 @@ import { rateLimitResponse } from "@/lib/rate-limit";
 import { getService, bookingDurationMin } from "@/lib/services";
 import { availableSlots, belgianDayKey, formatSlotTime, bookingWindow } from "@/lib/booking";
 import { getBusyIntervals, isCalendarConfigured } from "@/lib/google-calendar";
+import { errorInfo } from "@/lib/log-error";
 
 export const dynamic = "force-dynamic";
 
@@ -60,7 +61,7 @@ export async function GET(request: Request) {
   } catch (e) {
     // On ne renvoie jamais le détail Google au navigateur : il peut contenir
     // l'adresse du compte de service ou l'identifiant de l'agenda.
-    console.error("[rdv/slots]", e);
+    console.error("[rdv/slots]", errorInfo(e));
     return NextResponse.json(
       {
         error:

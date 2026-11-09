@@ -1,6 +1,7 @@
 import "server-only";
 import { cache } from "react";
 import { getPayloadClient } from "@/lib/payload-client";
+import { errorInfo } from "@/lib/log-error";
 
 export interface GoogleReviewItem {
   id: number;
@@ -50,7 +51,7 @@ export const getGoogleReviews = cache(async (): Promise<GoogleReviewsData | null
       })),
     };
   } catch (err) {
-    console.warn("[google-reviews] lecture impossible:", err instanceof Error ? err.message.slice(0, 200) : err);
+    console.warn("[google-reviews] lecture impossible:", errorInfo(err));
     return null;
   }
 });

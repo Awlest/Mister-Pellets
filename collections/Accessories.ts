@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { revalidatePath } from "next/cache";
+import { errorInfo } from "../lib/log-error";
 
 /** TVA appliquée aux prix du site (21 %), comme `priceTTC` des produits. */
 const VAT = 1.21;
@@ -59,7 +60,7 @@ export const Accessories: CollectionConfig = {
         try {
           revalidatePath("/produit/[slug]", "page");
         } catch (err) {
-          console.warn("[accessories afterChange] revalidate failed:", err);
+          console.warn("[accessories afterChange] revalidate failed:", errorInfo(err));
         }
       },
     ],

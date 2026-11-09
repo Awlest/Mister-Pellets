@@ -95,10 +95,18 @@ export function displayFirstName(fullName: string): string {
     .replace(/(^|[-'’])(\p{L})/gu, (_, sep: string, letter: string) => sep + letter.toUpperCase());
 }
 
-/** « Bonjour Jean, » ou « Bonjour, » quand le nom est vide. */
+/**
+ * Prénom repris dans la salutation : des lettres, l'apostrophe, le tiret ou
+ * l'espace, 30 caractères au plus. Le nom vient d'un formulaire public et
+ * l'e-mail part à l'adresse saisie, quelle qu'elle soit : un robot qui y
+ * mettrait un lien le ferait porter par un e-mail Mister Pellets.
+ */
+const SAFE_FIRST_NAME = /^[\p{L}][\p{L}'’ -]{0,29}$/u;
+
+/** « Bonjour Jean, » ou « Bonjour, » quand le nom est vide ou ne ressemble pas à un prénom. */
 export function greeting(fullName: string): string {
   const first = displayFirstName(fullName);
-  return first ? `Bonjour ${first},` : "Bonjour,";
+  return SAFE_FIRST_NAME.test(first) ? `Bonjour ${first},` : "Bonjour,";
 }
 
 /** Texte saisi par le visiteur, échappé, retours à la ligne conservés. */
