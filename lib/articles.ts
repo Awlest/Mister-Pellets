@@ -14,6 +14,18 @@
  * En attendant, on les expose en SSG pour garantir un build prévisible.
  */
 
+import {
+  activeDiscount,
+  evacuationPrice,
+  formatEur,
+  HAUTEUR,
+  INSTALL_TYPES,
+  VAT,
+  withVat,
+  type InstallType,
+} from "@/lib/pose/moteur";
+import { REMISES, TARIFS } from "@/lib/pose/tarifs";
+
 export type ArticleCategory =
   | "guide-achat"
   | "installation"
@@ -70,11 +82,173 @@ export interface ArticleData {
   };
 }
 
+/**
+ * Pose et raccordement d'une évacuation pour l'article sur l'évacuation, au
+ * même calcul que /estimation (lib/pose) : un changement de tarif ou de remise
+ * se répercute ici au déploiement suivant.
+ */
+function poseEvacuation(type: InstallType, hauteurM = HAUTEUR.defaut): string[] {
+  const ht =
+    evacuationPrice(type, hauteurM, TARIFS, REMISES).amountHT +
+    INSTALL_TYPES[type].percements * TARIFS.percementRenforceHT;
+  return [formatEur(ht), formatEur(withVat(ht, VAT.reduced).total)];
+}
+
+const REMISE_POSE_EN_COURS = (["tubage", "double-paroi"] as const).some((p) => activeDiscount(p, REMISES));
+
 // =====================================================================
 // 5 ARTICLES PILIERS GEO, chacun ~1500-2000 mots, format réponse directe
 // =====================================================================
 
 export const ARTICLES: ArticleData[] = [
+  // ───────────────────────────────────────────────────────────────────
+  // INSTALLATION : évacuation des fumées (09/11/2026)
+  // Sources lues le 09/11/2026 : notices MCZ (PAD Hydromatic M2, réf.
+  // 8902137901), Edilkamin (cod. 942415-FR 11.23/C) et Cadel (89022051B,
+  // rév. 00-2025) ; FAQ belge de MCZ (mcz.it/fr-be, sortie murale) ; DoP et
+  // notices Poujoulat (Therminox TI, PGI, Tubaginox ; lettres P1, N1, W, G, O) ;
+  // guide Poujoulat « Tubage et raccordement » (11/2019) ; CoDT, art. R.IV.1-1,
+  // rubrique A.11 (Wallex, version du 01/05/2025) ; AGW du 29/01/2009 (NBN
+  // B 61-002 citée pour les seules chaudières de chauffage central). Prix :
+  // poseEvacuation() ci-dessus. Ventouse en façade : règles des fabricants,
+  // choix de Dorian du 09/11/2026 (le configurateur reste à revoir à part).
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "evacuation-fumees-poele-pellets",
+    title: "Évacuation d'un poêle à pellets : tubage, conduit en façade ou par l'intérieur ?",
+    metaTitle: "Évacuation d'un poêle à pellets : tubage, conduit, ventouse",
+    metaDescription:
+      "Tubage, conduit double paroi en façade ou par l'intérieur, sortie murale : ce qu'imposent les fabricants, les règles en Wallonie et le prix posé.",
+    excerpt:
+      "Sans une évacuation conforme, ni bon tirage ni garantie. Les solutions que nous posons, ce que demandent les notices MCZ, Edilkamin et Cadel, et ce que coûte chacune.",
+    tldr:
+      "Un poêle à pellets évacue ses fumées par un conduit qui débouche au-dessus du toit. Avec une cheminée existante, on la tube en inox ; sans cheminée, on pose un conduit isolé double paroi, le long de la façade ou à travers les étages. La sortie murale directe, souvent appelée ventouse, est interdite par les notices MCZ, Edilkamin et Cadel, et MCZ prévient qu'elle fait perdre la garantie. Le raccord doit être étanche : le poêle pousse ses fumées avec un ventilateur.",
+    category: "installation",
+    tags: ["évacuation", "tubage", "conduit double paroi", "ventouse", "installation"],
+    readingTimeMinutes: 9,
+    publishedAt: "2026-11-09",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens poseurs",
+    coverImageAlt: "Conduit de fumée isolé double paroi fixé le long d'une façade, au-dessus du toit",
+    sections: [
+      {
+        heading: "Pourquoi l'évacuation compte autant que le poêle",
+        paragraphs: [
+          "Un poêle à pellets n'attend pas que la cheminée tire. Un ventilateur extrait les fumées du foyer et les pousse dans le raccord : Cadel parle d'appareil à tirage forcé. Le raccord travaille donc en pression, et il doit être étanche aux fumées comme aux condensats. MCZ et Cadel conseillent des tubes à joint, du type T200 P1.",
+          "La notice du fabricant fixe le reste : diamètre, longueurs, coudes, débouché. Une évacuation qui s'en écarte tire mal, encrasse le poêle et met la garantie en jeu. C'est pour ça que nous la choisissons en même temps que l'appareil.",
+        ],
+      },
+      {
+        heading: "Les règles des notices, en clair",
+        list: {
+          items: [
+            "Un diamètre constant, au moins égal à celui de la buse du poêle (MCZ).",
+            "Peu d'horizontal : 3 m au plus chez Edilkamin, 4 m avec une pente d'au moins 3 % chez MCZ et Cadel.",
+            "Trois changements de direction à 90° au maximum, chez les trois fabricants.",
+            "Un tronçon vertical d'au moins 1,5 m (Edilkamin ; Cadel en Ø 80), 2 m chez Cadel en Ø 100.",
+            "Au pied du conduit, un té avec une chambre visitable qui recueille la suie et les condensats.",
+            "Pas de flexible aluminium ni de fibrociment pour le raccord (MCZ).",
+            "Un débouché au-dessus du toit, hors de la zone de reflux, que chaque notice impose.",
+          ],
+        },
+        callout: {
+          variant: "info",
+          text: "Lire le marquage d'un conduit : dans « T200 P1 W V2 L50040 O20 », P1 veut dire étanche en pression jusqu'à 200 Pa (N1 : seulement en dépression), W accepte les condensats, O20 indique un conduit non résistant au feu de cheminée à garder à 20 mm des matériaux combustibles. Un G à la place du O signale un conduit qui résiste au feu de cheminée.",
+        },
+      },
+      {
+        heading: "La ventouse en façade : ce que disent les fabricants",
+        paragraphs: [
+          "Une ventouse, c'est une sortie horizontale à travers le mur : les fumées débouchent en façade sans monter jusqu'au toit. La solution paraît simple, mais MCZ, Edilkamin et Cadel la refusent.",
+          "Edilkamin interdit l'évacuation murale directe dans ses notices, modèles étanches compris. MCZ et Cadel interdisent toute évacuation dirigée vers un mur. Dans sa foire aux questions belge, MCZ va plus loin : une sortie de fumée murale est « absolument déconseillée », et les fabricants font tomber la garantie des poêles installés ainsi.",
+          "En France, la sortie en façade existe sous avis technique, avec des distances précises aux fenêtres, au sol et aux voisins. Aucun texte belge public ne l'organise. La règle que nous suivons est donc celle des notices : un conduit qui monte au-dessus du toit, même quand il traverse d'abord le mur.",
+          "Un poêle étanche garde tout son intérêt dans une maison très isolée : il prend son air dehors, par une arrivée d'air dédiée ou par un conduit concentrique, et ne dépend pas de la ventilation de la maison. C'est la sortie des fumées qui doit monter, pas l'arrivée d'air.",
+        ],
+      },
+      {
+        heading: "Vous avez une cheminée : on la tube",
+        paragraphs: [
+          "Un ancien conduit maçonné ne reçoit pas un poêle à pellets tel quel. On y descend un tubage inox au diamètre du poêle, sur toute la hauteur. Poujoulat conseille un tubage rigide dans un conduit droit et un flexible double peau dans un conduit dévoyé. Pour un poêle étanche, le raccord se fait en concentrique jusqu'au plafond, puis le flexible prend le relais : l'air de combustion descend par l'espace resté libre autour.",
+          "Avant de tuber, le conduit se ramone et se contrôle. Cadel demande de le faire vérifier par un ramoneur, et Edilkamin exige qu'un conduit qui n'est pas neuf soit nettoyé. Si votre cheminée est déjà tubée en inox et en bon état, il n'y a qu'à raccorder le poêle.",
+          "Le cas de la cheminée ouverte transformée en insert est détaillé dans notre article sur l'insert à pellets.",
+        ],
+      },
+      {
+        heading: "Pas de cheminée : un conduit isolé le long de la façade",
+        paragraphs: [
+          "Le conduit traverse le mur derrière le poêle, puis monte contre la façade jusqu'au-dessus du toit. C'est un conduit double paroi isolé : un tube inox pour les fumées, une couche d'isolant, une paroi extérieure. L'isolant garde les fumées chaudes, ce qui aide le tirage et limite la condensation.",
+          "En Wallonie, le placement d'un conduit de cheminée est dispensé de permis d'urbanisme par le CoDT (article R.IV.1-1, rubrique A.11). Deux réserves : si votre bien est soumis au guide régional d'urbanisme pour les zones protégées ou les bâtisses en site rural, le conduit doit le respecter ; et un bien en zone de protection ou repris à l'inventaire du patrimoine sort de la dispense. Le Code civil continue de s'appliquer, mitoyenneté et vues comprises : un conduit sur un mur mitoyen se discute avec le voisin.",
+        ],
+      },
+      {
+        heading: "Pas de cheminée : un conduit par l'intérieur",
+        paragraphs: [
+          "Le conduit double paroi monte dans la maison, traverse le plancher de l'étage et la toiture. Il reste à l'abri du froid et ne se voit pas de la rue, mais il demande deux percements renforcés et un passage libre à chaque étage, souvent dans un placard ou un coin de chambre.",
+          "À chaque traversée, la distance aux matériaux combustibles est celle du marquage du conduit (le chiffre qui suit G ou O), et les pièces de traversée sont prévues pour. Le passage se vérifie à la visite, solive par solive.",
+        ],
+      },
+      {
+        heading: "Ce que coûte chaque solution chez nous",
+        paragraphs: [
+          `Ces montants sortent du même calcul que notre estimation en ligne, pour 10 m de conduit${REMISE_POSE_EN_COURS ? ", remises en cours comprises" : ""}. Le tubage et le conduit double paroi sont ensuite ajustés au mètre réel. Au-delà de ${HAUTEUR.seuilAcces} m, il faut une nacelle (${formatEur(TARIFS.options.nacelle)} HTVA la journée) ou un échafaudage, chiffré sur devis.`,
+        ],
+        table: {
+          headers: ["Évacuation", "Pose et raccordement HTVA", "TVAC à 6 %"],
+          rows: [
+            ["Cheminée déjà tubée, à raccorder", ...poseEvacuation("conduit-existant")],
+            ["Tubage d'une cheminée existante, 10 m", ...poseEvacuation("tubage")],
+            ["Conduit double paroi en façade, 10 m", ...poseEvacuation("conduit-exterieur")],
+            ["Conduit double paroi par l'intérieur, 10 m, deux percements compris", ...poseEvacuation("conduit-toiture")],
+          ],
+          caption:
+            "Hors poêle. TVA à 6 % pour un logement de plus de 10 ans, sinon 21 %. Le prix ferme suit la visite technique.",
+        },
+      },
+      {
+        heading: "Ce que nous vérifions à la visite technique",
+        list: {
+          items: [
+            "La cheminée existante : état, section, aucun autre appareil raccordé, accès pour le ramonage.",
+            "La hauteur jusqu'au faîte et le débouché, selon la pente et la couverture du toit.",
+            "Le passage du mur ou des planchers, et les distances aux matériaux combustibles.",
+            "La ventilation de la maison : VMC, hotte, autre appareil à combustion, qui décident d'un poêle étanche.",
+            "La place du poêle par rapport au conduit, qui fixe la sortie arrière ou dessus et le nombre de coudes.",
+          ],
+        },
+        paragraphs: [
+          "Vous pouvez chiffrer votre cas en deux minutes avec l'estimation en ligne, puis réserver la visite technique gratuite : le prix ferme vient après.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Peut-on installer un poêle à pellets sans conduit de fumée ?",
+        answer:
+          "Non. Une sortie murale directe est interdite par les notices MCZ, Edilkamin et Cadel, et MCZ écrit que les fabricants font alors tomber la garantie. Sans cheminée, on pose un conduit double paroi isolé qui monte au-dessus du toit, en façade ou par l'intérieur.",
+      },
+      {
+        question: "Tubage ou conduit double paroi, quelle différence ?",
+        answer:
+          "Le tubage est un tube inox descendu dans une cheminée existante, qui lui sert d'enveloppe. Le conduit double paroi remplace la cheminée qui n'existe pas : il a sa propre isolation et sa paroi extérieure. Le tubage revient moins cher quand la cheminée est saine.",
+      },
+      {
+        question: "Faut-il un permis pour un conduit en façade en Wallonie ?",
+        answer:
+          "En général non : le CoDT dispense de permis le placement d'un conduit de cheminée (article R.IV.1-1, rubrique A.11). Exceptions : un bien en zone de protection ou repris à l'inventaire du patrimoine, ou un conduit contraire au guide régional d'urbanisme dans les zones où il s'applique. Renseignez-vous auprès de votre commune en cas de doute.",
+      },
+      {
+        question: "Ma cheminée est déjà tubée, faut-il refaire le tubage ?",
+        answer:
+          "Pas forcément. Si le tubage est en inox, au bon diamètre, en bon état et adapté aux pellets, on raccorde simplement le poêle après un ramonage. Nous le vérifions à la visite technique.",
+      },
+    ],
+    related: {
+      articles: ["insert-pellets-cheminee-existante", "dimensionner-poele-pellets-surface-wallonie", "ek63-etanche-maison-passive-bbc"],
+      guides: ["guide-achat-poele-pellets-wallonie", "comment-entretenir-poele-pellets"],
+      cities: ["namur", "liege", "charleroi", "fernelmont"],
+      brands: ["mcz", "edilkamin", "cadel"],
+    },
+  },
   // ───────────────────────────────────────────────────────────────────
   // ACTUALITÉ : arrivée de MCZ (30/10/2026)
   // Sources : mcz.it/fr-be (fiches produits et données techniques,
