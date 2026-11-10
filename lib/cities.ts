@@ -40,7 +40,7 @@ export const CITIES: CityData[] = [
     intro:
       "Capitale wallonne, Namur regroupe un mix de logements anciens en pierre dans le centre historique et de quartiers résidentiels modernes en périphérie (Jambes, Belgrade, Bouge, Saint-Servais). On y intervient quasi quotidiennement depuis Fernelmont, 17 km, 20 minutes de route.",
     context:
-      "Sur les maisons mitoyennes anciennes du centre, le tubage du conduit existant est souvent nécessaire, on a l'habitude. Sur les nouvelles constructions de Bouge ou Belgrade, c'est la pose d'un étanche en façade qui domine.",
+      "Sur les maisons mitoyennes anciennes du centre, le tubage du conduit existant est souvent nécessaire, on a l'habitude. Sur les nouvelles constructions de Bouge ou Belgrade, ce sont les poêles étanches qui dominent, avec une ventouse concentrique ou un conduit neuf qui monte au-dessus du toit.",
     recommendedModels: ["edilkamin-blade-9kw", "ek63-tweed-90", "edilkamin-lena-11kw"],
     metaTitle: "Poêle à pellets à Namur, Vente & pose",
     metaDescription:
@@ -72,7 +72,7 @@ export const CITIES: CityData[] = [
     intro:
       "Cité ardente, Liège est un mix dense de logements anciens (Outremeuse, Saint-Léonard, Sclessin) et de quartiers résidentiels modernes (Cointe, Sart-Tilman). On y intervient régulièrement, 60 km de Fernelmont, 50 minutes.",
     context:
-      "Liège a une particularité : beaucoup de copropriétés dans les anciennes maisons mosanes divisées en appartements. Les modèles étanches EK63 (ventouse façade) sont parfaits dans ce cas, sous réserve d'avoir l'accord du syndic. Pour les maisons individuelles, mix entre canalisable et hydro selon la surface.",
+      "Liège a une particularité : beaucoup de copropriétés dans les anciennes maisons mosanes divisées en appartements. Les poêles étanches s'y prêtent bien, sous réserve d'avoir l'accord du syndic. Selon la marque, les fumées sortent par une ventouse concentrique ou par un conduit qui monte au-dessus du toit : avec EK63, c'est toujours le conduit. Pour les maisons individuelles, mix entre canalisable et hydro selon la surface.",
     recommendedModels: ["ek63-like-80", "edilkamin-blade-9kw", "edilkamin-mood-plus-11kw"],
     metaTitle: "Poêle à pellets à Liège, Vente & pose",
     metaDescription:

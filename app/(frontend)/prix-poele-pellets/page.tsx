@@ -190,8 +190,10 @@ export default async function PrixPoelePelletsPage() {
           </div>
           <p className="mp-measure mt-4 text-center text-sm text-mp-ink-soft">
             Au-delà de {HAUTEUR.seuilAcces} m de conduit, il faut une nacelle ({eur(TARIFS.options.nacelle * 1.06)}{" "}
-            la journée) ou un échafaudage, chiffré sur devis. Logement de moins de 10 ans ou
-            construction neuve : TVA à 21 %. Un mur très épais, un étage ou la canalisation
+            la journée) ou un échafaudage, chiffré sur devis.{" "}
+            {installs.some((it) => it.key === "ventouse-facade") &&
+              "La ventouse demande un poêle étanche raccordé en concentrique, hors Edilkamin et EK63. "}
+            Logement de moins de 10 ans ou construction neuve : TVA à 21 %. Un mur très épais, un étage ou la canalisation
             d&apos;air chaud ajoutent un supplément.
           </p>
         </div>

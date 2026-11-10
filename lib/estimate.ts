@@ -29,6 +29,7 @@ import {
   vatRate,
   withVat,
   type EstimateLine,
+  type InstallType,
   type IsoKey,
   type PoseState,
 } from "./pose/moteur";
@@ -256,5 +257,16 @@ export function filterByKind(products: EstimateProduct[], kind: StoveKind): Esti
   const types = STOVE_KINDS[kind].productTypes as readonly string[];
   return products.filter((p) => types.includes(p.productType));
 }
+
+/**
+ * Marques sans ventouse : les notices Edilkamin interdisent la sortie murale
+ * directe, modèles étanches compris (relu le 09/11/2026), et EK63 est une
+ * gamme Edilkamin. Avec elles, le conduit monte au-dessus du toit.
+ */
+export const MARQUES_SANS_VENTOUSE: readonly string[] = ["Edilkamin", "EK63"];
+
+/** Le poêle accepte-t-il l'évacuation choisie ? */
+export const acceptsInstall = (product: Pick<EstimateProduct, "brand">, installType: InstallType): boolean =>
+  installType !== "ventouse-facade" || !MARQUES_SANS_VENTOUSE.includes(product.brand);
 
 export const eur = (n: number) => Math.round(n).toLocaleString("fr-BE") + " €";

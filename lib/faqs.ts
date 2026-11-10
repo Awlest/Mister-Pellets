@@ -128,14 +128,14 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Peut-on installer un poêle à pellets sans cheminée existante ?",
     answer:
-      "Oui, deux options. Première : ventouse en façade, possible uniquement avec les modèles étanches certifiés. C'est la solution la plus simple et la moins chère (pas de tubage en toiture, pas de complexité d'étanchéité). Deuxième : un conduit neuf, le long de la façade ou à travers la maison jusqu'au toit, utilisable avec tous les modèles. Le conduit neuf se chiffre au forfait pour 10 m, puis au mètre en plus ou en moins : les montants à jour sont sur notre page prix et dans l'estimation en ligne. Le diagnostic à domicile valide quelle option est techniquement faisable chez vous.",
+      "Oui, deux options. Première : une ventouse concentrique, avec un poêle étanche. Les fumées sortent par le tube central, l'air de combustion entre par l'anneau autour. C'est la solution la moins chère, sans travaux en toiture. Une sortie murale simple, sans concentrique, n'est pas admise, et Edilkamin et EK63 refusent la ventouse dans leurs notices. Deuxième : un conduit neuf double paroi, le long de la façade ou à travers la maison jusqu'au-dessus du toit, utilisable avec tous les modèles. Il se chiffre au forfait pour 10 m, puis au mètre en plus ou en moins : les montants à jour sont sur notre page prix et dans l'estimation en ligne. Le diagnostic à domicile valide quelle option est techniquement faisable chez vous.",
   },
   {
     id: "choisir-etanche",
     category: "choisir",
     question: "Quelle différence entre un poêle étanche et un poêle non étanche ?",
     answer:
-      "Un poêle étanche prend l'air comburant directement à l'extérieur via un tuyau dédié (concentrique avec la sortie de fumée le plus souvent), donc il ne consomme pas l'air de la pièce. Un poêle non étanche puise l'air dans la pièce d'installation. Les modèles étanches sont indispensables en maison passive, BBC ou avec VMC double flux, et fortement recommandés en logement bien isolé. Ils permettent aussi le passage en ventouse façade. Surcoût typique : 200 à 400 € sur le matériel.",
+      "Un poêle étanche prend l'air comburant directement à l'extérieur via un tuyau dédié (concentrique avec la sortie de fumée le plus souvent), donc il ne consomme pas l'air de la pièce. Un poêle non étanche puise l'air dans la pièce d'installation. Les modèles étanches sont indispensables en maison passive, BBC ou avec VMC double flux, et fortement recommandés en logement bien isolé. Ce sont aussi les seuls qui acceptent une ventouse, en concentrique et hors Edilkamin et EK63. Surcoût typique : 200 à 400 € sur le matériel.",
   },
   {
     id: "choisir-canalisable-vs-hydro",
@@ -280,7 +280,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Peut-on poser un poêle dans un appartement ?",
     answer:
-      "Oui, à condition d'avoir un conduit de fumée existant ou de pouvoir tirer une ventouse en façade (modèles étanches). Vérifications préalables : autorisation du syndic de copropriété (souvent obligatoire pour percer la façade), respect du règlement de copropriété, contrôle des distances de sécurité dans une pièce souvent plus contrainte qu'en maison. Sur les anciens appartements bruxellois et liégeois avec conduit existant, c'est la configuration la plus simple. Sur les appartements neufs, tout dépend de la façade.",
+      "Oui, à condition d'avoir un conduit de fumée existant ou de pouvoir poser une ventouse concentrique, avec un poêle étanche (hors Edilkamin et EK63). Vérifications préalables : autorisation du syndic de copropriété (souvent obligatoire pour percer la façade), respect du règlement de copropriété, contrôle des distances de sécurité dans une pièce souvent plus contrainte qu'en maison. Sur les anciens appartements bruxellois et liégeois avec conduit existant, c'est la configuration la plus simple. Sur les appartements neufs, tout dépend de la façade.",
   },
   {
     id: "installation-conduit-existant",

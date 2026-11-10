@@ -320,7 +320,7 @@ export default function StyleguidePage() {
         items={[
           { question: "Combien coûte un poêle pellets installé ?", answer: "Entre 4 500 et 7 500 € pose comprise selon le modèle." },
           { question: "Combien de temps pour la pose ?", answer: "Une journée pour la pose elle-même. 2-4 semaines au total." },
-          { question: "Et si je n'ai pas de cheminée ?", answer: "Pas un problème, on tire une ventouse en façade ou toiture." },
+          { question: "Et si je n'ai pas de cheminée ?", answer: "Pas un problème : ventouse concentrique avec un poêle étanche, ou conduit neuf." },
         ]}
       />
       <CTAFinal />

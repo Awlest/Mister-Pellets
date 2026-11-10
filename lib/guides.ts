@@ -7,6 +7,22 @@
  * 6 marques mises en avant : MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel.
  */
 
+import { INSTALL_TYPES, VAT, evacuationPrice, formatEur, withVat, type InstallType } from "./pose/moteur";
+import { REMISES, TARIFS } from "./pose/tarifs";
+
+/**
+ * Surcoût d'une évacuation par rapport au simple raccordement d'un conduit
+ * déjà tubé, TVAC à 6 %, arrondi à la dizaine : mêmes tarifs et mêmes remises
+ * que /estimation (lib/pose/tarifs.ts).
+ */
+function surcoutEvacuation(type: InstallType, hauteurM: number): string {
+  const ht =
+    evacuationPrice(type, hauteurM, TARIFS, REMISES).amountHT +
+    INSTALL_TYPES[type].percements * TARIFS.percementRenforceHT -
+    TARIFS.raccordementHT;
+  return formatEur(Math.round(withVat(ht, VAT.reduced).total / 10) * 10);
+}
+
 export interface GuideSection {
   heading: string;
   paragraphs?: string[];
@@ -154,8 +170,8 @@ export const GUIDES: GuideData[] = [
       {
         heading: "4. Conduit existant ou pas ?",
         paragraphs: [
-          "Si vous avez un conduit existant et conforme : la pose est plus simple et moins chère (4 000 à 5 500 € tout compris). Si le conduit est trop ancien (avant 1980, ou non chemisé), il faudra le tuber : prévoyez environ 700 à 1 400 € TVAC de plus selon la hauteur (TVA à 6 %).",
-          "Si vous n'avez pas de conduit, deux options : ventouse en façade (modèles étanches uniquement, le plus simple) ou conduit neuf en façade ou par le toit (environ 1 800 à 2 200 € TVAC de plus pour 6 m de conduit). Dans tous les cas, le diagnostic à domicile précise le devis.",
+          `Si vous avez un conduit existant et conforme : la pose est plus simple et moins chère (4 000 à 5 500 € tout compris). Si le conduit est trop ancien (avant 1980, ou non chemisé), il faudra le tuber : au tarif du moment, comptez environ ${surcoutEvacuation("tubage", 6)} TVAC de plus pour 6 m et ${surcoutEvacuation("tubage", 10)} pour 10 m (TVA à 6 %).`,
+          `Si vous n'avez pas de conduit, deux options. La ventouse concentrique, avec un poêle étanche : les fumées sortent par le tube central et l'air de combustion entre autour, pour environ ${surcoutEvacuation("ventouse-facade", 0)} TVAC de plus. Une sortie murale simple n'est pas admise, et Edilkamin et EK63 refusent la ventouse. L'autre option convient à tous les poêles : un conduit neuf double paroi qui monte au-dessus du toit, en façade ou par l'intérieur, environ ${surcoutEvacuation("conduit-exterieur", 6)} TVAC de plus pour 6 m en façade. Dans tous les cas, le diagnostic à domicile précise le devis.`,
         ],
       },
       {

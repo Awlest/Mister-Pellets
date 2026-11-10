@@ -1090,7 +1090,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Ce qu'on vérifie à la visite technique",
         paragraphs: [
-          "Avant de poser un EK63 étanche, on contrôle le tracé de la prise d'air et de l'évacuation des fumées, souvent en ventouse pour ce type de maison. On valide aussi l'emplacement et la compatibilité avec votre VMC.",
+          "Avant de poser un EK63 étanche, on contrôle le tracé de la prise d'air et celui du conduit de fumée, qui doit monter au-dessus du toit : Edilkamin, qui fabrique les EK63, interdit la sortie murale directe, même sur ses modèles étanches. On valide aussi l'emplacement et la compatibilité avec votre VMC.",
           "C'est l'étape qui garantit une installation propre et conforme. Le devis chiffré arrive sous 48 h après cette visite.",
         ],
       },
@@ -1109,7 +1109,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Faut-il une sortie en toiture ou une ventouse ?",
         answer:
-          "Les deux sont possibles selon votre maison. En maison BBC ou passive, la ventouse est fréquente. On valide le tracé à la visite technique.",
+          "Une sortie au-dessus du toit. Les notices Edilkamin interdisent la sortie murale directe, modèles étanches compris, donc pas de ventouse avec un EK63. Sans cheminée, on pose un conduit double paroi isolé, le long de la façade ou par l'intérieur. On valide le tracé à la visite technique.",
       },
       {
         question: "L'étanchéité change-t-elle l'entretien du poêle ?",
@@ -1474,7 +1474,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le prérequis : un passage de fumée correct",
         paragraphs: [
-          "Le seul vrai point à valider, c'est l'évacuation des fumées. Comme pour tout poêle, il faut un conduit ou une ventouse correctement dimensionné à l'emplacement choisi.",
+          "Le seul vrai point à valider, c'est l'évacuation des fumées. Comme pour tout EK63, il faut un conduit correctement dimensionné qui monte au-dessus du toit : Edilkamin n'accepte pas la ventouse.",
           "On vérifie ça à la visite technique. Sur le terrain, on a posé l'Entity 90+ dans plusieurs couloirs et halls wallons : quand le passage de fumée est bon, ça fonctionne très bien.",
         ],
       },

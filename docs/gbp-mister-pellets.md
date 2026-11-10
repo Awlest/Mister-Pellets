@@ -32,8 +32,8 @@ les gammes Edilkamin, EK63 et Girolami : poêles classiques, canalisables pour
 chauffer plusieurs pièces, hydro raccordés aux radiateurs, inserts pour une
 cheminée existante.
 
-Nous prenons en charge toute la partie technique : tubage de cheminée, sortie
-ventouse, conduit neuf, raccordement, mise en service et réglage de la
+Nous prenons en charge toute la partie technique : tubage de cheminée, ventouse
+concentrique, conduit neuf, raccordement, mise en service et réglage de la
 combustion.
 
 La TVA à 6 % s'applique aux logements de plus de 10 ans, et nous vous aidons à
@@ -49,7 +49,7 @@ Un service par ligne, avec la description courte associée.
 
 - Installation de poêle à pellets — livraison, pose, raccordement et mise en service.
 - Tubage de cheminée — tubage inox flexible dans un conduit maçonné existant.
-- Sortie ventouse — sortie horizontale en façade quand il n'y a pas de cheminée.
+- Sortie ventouse — sortie concentrique en façade pour un poêle étanche, quand il n'y a pas de cheminée (hors Edilkamin et EK63).
 - Conduit de fumée neuf — conduit isolé double paroi, en façade ou par l'intérieur.
 - Poêle à pellets canalisable — diffusion de l'air chaud vers plusieurs pièces par gaines.
 - Poêle à pellets hydro — raccordement aux radiateurs ou au plancher chauffant.
@@ -104,8 +104,9 @@ Bouton : « En savoir plus » → https://mister-pellets.be/estimation
    surface et de votre isolation : https://mister-pellets.be/estimation
 
 2. Faut-il une cheminée pour installer un poêle à pellets ?
-   Non. S'il n'y a pas de conduit, nous posons une sortie ventouse en façade ou
-   un conduit double paroi. S'il y a une cheminée maçonnée, nous la tubons.
+   Non. S'il n'y a pas de conduit, nous posons une ventouse concentrique pour
+   un poêle étanche, ou un conduit double paroi qui monte au-dessus du toit.
+   S'il y a une cheminée maçonnée, nous la tubons.
 
 3. Ai-je droit à la TVA à 6 % ?
    Oui pour un logement privé de plus de 10 ans, quand la pose est facturée par

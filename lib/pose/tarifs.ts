@@ -21,7 +21,8 @@ export const TARIFS: TarifsPose = {
   // 150 € par mètre en plus ou en moins. Même prix en façade ou par
   // l'intérieur, qui ajoute ses deux percements renforcés.
   doubleParoi: { baseHT: 3780, hauteurRefM: 10, moinsParMetreHT: 150, plusParMetreHT: 150 },
-  // Sortie ventouse, pose tout compris.
+  // Ventouse concentrique pour poêle étanche, pose tout compris. Jamais avec
+  // Edilkamin ni EK63 (MARQUES_SANS_VENTOUSE, lib/estimate.ts), choix du 09/11/2026.
   ventouseHT: 2150,
   percementRenforceHT: 180,
   canalisationParPieceHT: 300,
