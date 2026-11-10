@@ -94,7 +94,7 @@ function poseEvacuation(type: InstallType, hauteurM = HAUTEUR.defaut): string[] 
   return [formatEur(ht), formatEur(withVat(ht, VAT.reduced).total)];
 }
 
-const REMISE_POSE_EN_COURS = (["tubage", "double-paroi"] as const).some((p) => activeDiscount(p, REMISES));
+const REMISE_POSE_EN_COURS = (["tubage", "double-paroi", "ventouse"] as const).some((p) => activeDiscount(p, REMISES));
 
 // =====================================================================
 // 5 ARTICLES PILIERS GEO, chacun ~1500-2000 mots, format réponse directe
@@ -110,19 +110,21 @@ export const ARTICLES: ArticleData[] = [
   // guide Poujoulat « Tubage et raccordement » (11/2019) ; CoDT, art. R.IV.1-1,
   // rubrique A.11 (Wallex, version du 01/05/2025) ; AGW du 29/01/2009 (NBN
   // B 61-002 citée pour les seules chaudières de chauffage central). Prix :
-  // poseEvacuation() ci-dessus. Ventouse en façade : règles des fabricants,
-  // choix de Dorian du 09/11/2026 (le configurateur reste à revoir à part).
+  // poseEvacuation() ci-dessus. Ventouse : choix de Dorian du 10/11/2026,
+  // concentrique sur poêle étanche admise, sortie murale simple refusée (la FAQ
+  // MCZ vise celle-là, confirmé par Dorian), jamais avec Edilkamin ni EK63
+  // (MARQUES_SANS_VENTOUSE, lib/estimate.ts).
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "evacuation-fumees-poele-pellets",
     title: "Évacuation d'un poêle à pellets : tubage, conduit en façade ou par l'intérieur ?",
     metaTitle: "Évacuation d'un poêle à pellets : tubage, conduit, ventouse",
     metaDescription:
-      "Tubage, conduit double paroi en façade ou par l'intérieur, sortie murale : ce qu'imposent les fabricants, les règles en Wallonie et le prix posé.",
+      "Tubage, conduit double paroi en façade ou par l'intérieur, ventouse concentrique : ce qu'imposent les fabricants, les règles en Wallonie et le prix posé.",
     excerpt:
       "Sans une évacuation conforme, ni bon tirage ni garantie. Les solutions que nous posons, ce que demandent les notices MCZ, Edilkamin et Cadel, et ce que coûte chacune.",
     tldr:
-      "Un poêle à pellets évacue ses fumées par un conduit qui débouche au-dessus du toit. Avec une cheminée existante, on la tube en inox ; sans cheminée, on pose un conduit isolé double paroi, le long de la façade ou à travers les étages. La sortie murale directe, souvent appelée ventouse, est interdite par les notices MCZ, Edilkamin et Cadel, et MCZ prévient qu'elle fait perdre la garantie. Le raccord doit être étanche : le poêle pousse ses fumées avec un ventilateur.",
+      "Un poêle à pellets évacue ses fumées par un conduit qui débouche au-dessus du toit, ou par une ventouse concentrique s'il est étanche. Avec une cheminée existante, on la tube en inox ; sans cheminée, on pose un conduit isolé double paroi, le long de la façade ou à travers les étages, ou une ventouse concentrique. Une sortie murale simple, sans concentrique, n'est pas admise, et MCZ prévient qu'elle fait perdre la garantie. Edilkamin et EK63 refusent toute sortie murale, ventouse comprise. Le raccord doit être étanche : le poêle pousse ses fumées avec un ventilateur.",
     category: "installation",
     tags: ["évacuation", "tubage", "conduit double paroi", "ventouse", "installation"],
     readingTimeMinutes: 9,
@@ -148,7 +150,7 @@ export const ARTICLES: ArticleData[] = [
             "Un tronçon vertical d'au moins 1,5 m (Edilkamin ; Cadel en Ø 80), 2 m chez Cadel en Ø 100.",
             "Au pied du conduit, un té avec une chambre visitable qui recueille la suie et les condensats.",
             "Pas de flexible aluminium ni de fibrociment pour le raccord (MCZ).",
-            "Un débouché au-dessus du toit, hors de la zone de reflux, que chaque notice impose.",
+            "Un débouché au-dessus du toit, hors de la zone de reflux, ou une ventouse concentrique si le poêle est étanche et que sa notice la prévoit (jamais chez Edilkamin).",
           ],
         },
         callout: {
@@ -157,12 +159,13 @@ export const ARTICLES: ArticleData[] = [
         },
       },
       {
-        heading: "La ventouse en façade : ce que disent les fabricants",
+        heading: "La ventouse en façade : concentrique, ou rien",
         paragraphs: [
-          "Une ventouse, c'est une sortie horizontale à travers le mur : les fumées débouchent en façade sans monter jusqu'au toit. La solution paraît simple, mais MCZ, Edilkamin et Cadel la refusent.",
-          "Edilkamin interdit l'évacuation murale directe dans ses notices, modèles étanches compris. MCZ et Cadel interdisent toute évacuation dirigée vers un mur. Dans sa foire aux questions belge, MCZ va plus loin : une sortie de fumée murale est « absolument déconseillée », et les fabricants font tomber la garantie des poêles installés ainsi.",
-          "En France, la sortie en façade existe sous avis technique, avec des distances précises aux fenêtres, au sol et aux voisins. Aucun texte belge public ne l'organise. La règle que nous suivons est donc celle des notices : un conduit qui monte au-dessus du toit, même quand il traverse d'abord le mur.",
-          "Un poêle étanche garde tout son intérêt dans une maison très isolée : il prend son air dehors, par une arrivée d'air dédiée ou par un conduit concentrique, et ne dépend pas de la ventilation de la maison. C'est la sortie des fumées qui doit monter, pas l'arrivée d'air.",
+          "Une ventouse, c'est une sortie horizontale à travers le mur : les fumées débouchent en façade sans monter jusqu'au toit. Sur un poêle à pellets, elle n'est admise qu'en concentrique, avec un poêle étanche et le kit prévu par son fabricant : les fumées sortent par le tube central, l'air de combustion entre par l'anneau qui l'entoure.",
+          "Une sortie murale simple, un tube de fumée seul à travers le mur, n'est pas admise. MCZ et Cadel interdisent toute évacuation dirigée vers un mur. Dans sa foire aux questions belge, MCZ juge une sortie de fumée murale « absolument déconseillée », et les fabricants font tomber la garantie des poêles installés ainsi.",
+          "Edilkamin va plus loin : ses notices interdisent l'évacuation murale directe, modèles étanches compris. Avec un Edilkamin ou un EK63, pas de ventouse, même concentrique : le conduit monte au-dessus du toit.",
+          "En France, la sortie en façade existe sous avis technique, avec des distances précises aux fenêtres, au sol et aux voisins. Aucun texte belge public ne l'organise : l'emplacement du terminal suit la notice du poêle, et nous le validons à la visite technique. Si la façade ne s'y prête pas, on passe au conduit.",
+          "Un poêle étanche garde tout son intérêt dans une maison très isolée : il prend son air dehors, par une arrivée d'air dédiée ou par un conduit concentrique, et ne dépend pas de la ventilation de la maison. C'est aussi lui qui ouvre la porte à la ventouse.",
         ],
       },
       {
@@ -190,7 +193,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Ce que coûte chaque solution chez nous",
         paragraphs: [
-          `Ces montants sortent du même calcul que notre estimation en ligne, pour 10 m de conduit${REMISE_POSE_EN_COURS ? ", remises en cours comprises" : ""}. Le tubage et le conduit double paroi sont ensuite ajustés au mètre réel. Au-delà de ${HAUTEUR.seuilAcces} m, il faut une nacelle (${formatEur(TARIFS.options.nacelle)} HTVA la journée) ou un échafaudage, chiffré sur devis.`,
+          `Ces montants sortent du même calcul que notre estimation en ligne, pour 10 m de conduit${REMISE_POSE_EN_COURS ? ", remises en cours comprises" : ""}. Le tubage et le conduit double paroi sont ensuite ajustés au mètre réel ; la ventouse est au forfait. Au-delà de ${HAUTEUR.seuilAcces} m, il faut une nacelle (${formatEur(TARIFS.options.nacelle)} HTVA la journée) ou un échafaudage, chiffré sur devis.`,
         ],
         table: {
           headers: ["Évacuation", "Pose et raccordement HTVA", "TVAC à 6 %"],
@@ -199,6 +202,7 @@ export const ARTICLES: ArticleData[] = [
             ["Tubage d'une cheminée existante, 10 m", ...poseEvacuation("tubage")],
             ["Conduit double paroi en façade, 10 m", ...poseEvacuation("conduit-exterieur")],
             ["Conduit double paroi par l'intérieur, 10 m, deux percements compris", ...poseEvacuation("conduit-toiture")],
+            ["Ventouse concentrique, poêle étanche (hors Edilkamin et EK63)", ...poseEvacuation("ventouse-facade")],
           ],
           caption:
             "Hors poêle. TVA à 6 % pour un logement de plus de 10 ans, sinon 21 %. Le prix ferme suit la visite technique.",
@@ -211,6 +215,7 @@ export const ARTICLES: ArticleData[] = [
             "La cheminée existante : état, section, aucun autre appareil raccordé, accès pour le ramonage.",
             "La hauteur jusqu'au faîte et le débouché, selon la pente et la couverture du toit.",
             "Le passage du mur ou des planchers, et les distances aux matériaux combustibles.",
+            "Pour une ventouse : un poêle étanche, et la place du terminal en façade, loin des fenêtres, du sol et des voisins.",
             "La ventilation de la maison : VMC, hotte, autre appareil à combustion, qui décident d'un poêle étanche.",
             "La place du poêle par rapport au conduit, qui fixe la sortie arrière ou dessus et le nombre de coudes.",
           ],
@@ -224,7 +229,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Peut-on installer un poêle à pellets sans conduit de fumée ?",
         answer:
-          "Non. Une sortie murale directe est interdite par les notices MCZ, Edilkamin et Cadel, et MCZ écrit que les fabricants font alors tomber la garantie. Sans cheminée, on pose un conduit double paroi isolé qui monte au-dessus du toit, en façade ou par l'intérieur.",
+          "Oui, avec une ventouse concentrique, si le poêle est étanche et que sa notice la prévoit : les fumées sortent par le tube central, l'air de combustion entre autour. Une sortie murale simple n'est pas admise, et MCZ écrit que les fabricants font alors tomber la garantie. Edilkamin et EK63 refusent toute sortie murale. Sinon, on pose un conduit double paroi isolé qui monte au-dessus du toit, en façade ou par l'intérieur.",
       },
       {
         question: "Tubage ou conduit double paroi, quelle différence ?",
