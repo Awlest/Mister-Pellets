@@ -88,7 +88,7 @@ export function ContactForm({ request = null }: { request?: { slug: string; name
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       {request && (
-        <p className="rounded-xl border border-mp-sand/40 bg-mp-beige p-4 text-sm text-mp-ink">
+        <p className="rounded-2xl border border-mp-sand/40 bg-mp-beige p-4 text-sm text-mp-ink">
           <strong className="text-mp-green-deep">
             Demande de prix{request.name ? ` : ${request.name}` : ""}.
           </strong>{" "}

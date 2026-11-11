@@ -627,7 +627,7 @@ function EstimateForm({
               exacte (sur devis, ou pas encore dans l'estimation) et les deux
               issues, aux trois premières étapes (la 3e est celle du modèle). */}
           {absentModel && step <= 3 && (
-            <p className="mb-5 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm leading-relaxed text-mp-ink">
+            <p className="mb-5 rounded-2xl border border-mp-sand/40 bg-mp-cream p-4 text-sm leading-relaxed text-mp-ink">
               <strong className="text-mp-green-deep">
                 {absentModel.status === "quote-only"
                   ? "Ce modèle est chiffré sur devis."
