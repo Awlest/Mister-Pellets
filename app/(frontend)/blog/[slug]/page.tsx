@@ -8,6 +8,7 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { InlineText } from "@/components/ui/inline-text";
 import {
   ARTICLES,
   CATEGORY_LABELS,
@@ -86,7 +87,9 @@ function CalloutBox({ variant, text }: { variant: "info" | "warning" | "success"
   return (
     <div className={`my-8 p-5 md:p-6 rounded-2xl border ${config.bg} flex gap-4`}>
       <Icon className={`h-5 w-5 shrink-0 mt-0.5 ${config.iconColor}`} />
-      <p className="text-mp-ink leading-relaxed text-base">{text}</p>
+      <p className="text-mp-ink leading-relaxed text-base">
+        <InlineText text={text} />
+      </p>
     </div>
   );
 }
@@ -100,7 +103,7 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
 
       {section.paragraphs?.map((p, i) => (
         <p key={i} className="text-lg text-mp-ink leading-relaxed mb-4">
-          {p}
+          <InlineText text={p} />
         </p>
       ))}
 
@@ -112,7 +115,9 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
                 <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-ink font-bold text-xs shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <span>{item}</span>
+                <span>
+                  <InlineText text={item} />
+                </span>
               </li>
             ))}
           </ol>
@@ -121,7 +126,9 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
             {section.list.items.map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-mp-ink leading-relaxed">
                 <span className="h-1.5 w-1.5 rounded-full bg-mp-orange-flame shrink-0 mt-2.5" />
-                <span>{item}</span>
+                <span>
+                  <InlineText text={item} />
+                </span>
               </li>
             ))}
           </ul>
@@ -273,7 +280,7 @@ export default async function ArticlePage({ params }: Props) {
               </span>
             </div>
             <p className="text-base md:text-lg text-mp-ink leading-relaxed">
-              {article.tldr}
+              <InlineText text={article.tldr} />
             </p>
           </Card>
         </div>

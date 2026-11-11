@@ -273,6 +273,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Quelle distance entre le poêle et un mur en bois ?",
     answer:
+      // check-catalogue: allow (comparaison)
       "La distance minimale réglementaire dépend du modèle et figure sur la fiche constructeur. Typiquement, comptez 20 cm latéralement et 30 à 40 cm à l'arrière pour un poêle à pellets moderne (ces distances sont nettement réduites par rapport aux poêles à bois grâce à l'enveloppe mieux isolée). Pour un mur sensible (bois, papier peint, placo non protégé), une plaque de protection murale incombustible est ajoutée si la distance ne peut pas être respectée.",
   },
   {

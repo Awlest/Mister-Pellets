@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, ArrowLeft } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
+import { InlineText } from "@/components/ui/inline-text";
+import { plainText } from "@/lib/inline-text";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { Badge } from "@/components/ui/badge";
@@ -78,7 +80,7 @@ export default async function GuidePage({ params }: Props) {
       mainEntity: guide.faq.map((q) => ({
         "@type": "Question",
         name: q.question,
-        acceptedAnswer: { "@type": "Answer", text: q.answer },
+        acceptedAnswer: { "@type": "Answer", text: plainText(q.answer) },
       })),
     });
   }
@@ -112,7 +114,7 @@ export default async function GuidePage({ params }: Props) {
 
                 {section.paragraphs?.map((p, k) => (
                   <p key={k} className="text-lg text-mp-ink leading-relaxed mb-4">
-                    {p}
+                    <InlineText text={p} />
                   </p>
                 ))}
 
@@ -123,7 +125,9 @@ export default async function GuidePage({ params }: Props) {
                         <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-ink font-bold text-xs shrink-0 mt-0.5">
                           {k + 1}
                         </span>
-                        <span>{item}</span>
+                        <span>
+                          <InlineText text={item} />
+                        </span>
                       </li>
                     ))}
                   </ul>

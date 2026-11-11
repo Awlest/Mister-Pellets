@@ -1,5 +1,6 @@
 import { CITIES } from "@/lib/cities";
 import { FAQS } from "@/lib/faqs";
+import { plainText } from "@/lib/inline-text";
 import { FAMILY_SITES, PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
 import { SITE_URL } from "@/lib/seo";
 
@@ -23,7 +24,7 @@ export function GET() {
   const villes = CITIES.map((c) => `${c.name} (${c.distanceFromFernelmont} km)`).join(", ");
 
   const faqExtract = FAQS.slice(0, 15)
-    .map((f) => `- ${f.question}\n  ${line(f.answer)}`)
+    .map((f) => `- ${f.question}\n  ${line(plainText(f.answer))}`)
     .join("\n");
 
   const body = `# Mister Pellets

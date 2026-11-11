@@ -284,6 +284,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Pourquoi MCZ, et pourquoi en premier ?",
         paragraphs: [
           "Sur le terrain, la question n'est jamais « quelle marque ? », c'est « quel poêle pour cette maison-là ? ». Une pièce de vie ouverte, un couloir d'un mètre, deux chambres à chauffer à l'étage, une vieille cheminée, des radiateurs à alimenter : il faut un modèle qui colle, pas un modèle qu'on force. MCZ est la marque qui a le plus de réponses, avec une centaine de versions en pellets.",
+          // check-catalogue: allow (histoire du fabricant)
           "MCZ a été fondée en 1975 par la famille Zanette à Vigonovo di Fontanafredda, près de Pordenone, dans le nord-est de l'Italie, où se trouvent toujours le siège et l'usine. Foyers en 1982, poêles à bois en 1998, premier poêle à pellets, l'Antares, en 2002, premier poêle à pellets piloté par smartphone en 2014. Le groupe possède aussi Cadel, une marque qu'on pose depuis le début du mois. Edilkamin, EK63, Girolami, Austroflamm et Cadel restent au catalogue : MCZ passe simplement devant.",
         ],
       },
@@ -469,6 +470,7 @@ export const ARTICLES: ArticleData[] = [
     faqs: [
       {
         question: "Les poêles Austroflamm sans ventilateur dans la pièce chauffent-ils assez ?",
+        // check-catalogue: allow (comparaison)
         answer: "Oui, la chaleur se diffuse par convection naturelle et par rayonnement, comme avec un poêle à bois. La pièce monte un peu moins vite en température qu'avec un poêle ventilé, mais sans bruit de soufflerie. Pour plusieurs pièces, on regarde un modèle canalisable avec kit, comme le Ruby 2.0 ou un Duo.",
       },
       {
@@ -671,7 +673,7 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "warning",
-          text: "Un insert à bois et un insert à pellets ne se raccordent pas de la même façon. Si votre cheminée a déjà reçu un insert à bois, son conduit n'est pas forcément adapté au pellet : on le vérifie à la visite.",
+          text: "Un insert à bois et un insert à pellets ne se raccordent pas de la même façon. Si votre cheminée a déjà reçu un insert à bois, son conduit n'est pas forcément adapté au pellet : on le vérifie à la visite. Si vous préférez rester au bois bûche, les inserts à bois sont chez [Mister Bois](https://mister-bois.be/inserts-a-bois).",
         },
       },
     ],

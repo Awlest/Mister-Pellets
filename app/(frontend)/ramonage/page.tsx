@@ -111,6 +111,7 @@ export default function RamonagePage() {
         },
         {
           q: "Vous ramonez aussi les cheminées classiques et les chaudières ?",
+          // check-catalogue: allow (ce que le service ne couvre pas)
           a: "Non. On intervient uniquement sur les conduits raccordés à un poêle ou un insert à pellets. Pour une cheminée à bois bûches ou une chaudière mazout, il faut passer par un ramoneur généraliste.",
         },
         {

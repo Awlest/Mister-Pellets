@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { plainText } from "./inline-text";
 
 /**
  * Helpers SEO centralisés (Phase 6).
@@ -114,7 +115,8 @@ export function buildBreadcrumbSchema(
 }
 
 /**
- * Schema FAQPage factorisé.
+ * Schema FAQPage factorisé. Les réponses peuvent porter des liens
+ * `[texte](adresse)` (lib/inline-text.ts) : le balisage reçoit le texte seul.
  */
 export function buildFAQSchema(
   faqs: { question: string; answer: string }[]
@@ -125,7 +127,7 @@ export function buildFAQSchema(
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
+      acceptedAnswer: { "@type": "Answer", text: plainText(f.answer) },
     })),
   };
 }

@@ -55,7 +55,7 @@ const COMPARISON: {
     mcz: "Pellet",
     edilkamin: "Pellet",
     ek63: "Pellet",
-    girolami: "Pellet, bois, hybride",
+    girolami: "Pellet, hybride bois-pellet",
     austroflamm: "Pellet, mixte bois-pellet",
     cadel: "Pellet",
   },

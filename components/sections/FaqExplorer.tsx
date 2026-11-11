@@ -3,6 +3,8 @@
 import * as React from "react";
 import { Search, ChevronDown, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { InlineText } from "@/components/ui/inline-text";
+import { plainText } from "@/lib/inline-text";
 import {
   FAQS,
   FAQ_CATEGORIES,
@@ -44,7 +46,7 @@ export function FaqExplorer() {
       if (q === "") return true;
       return (
         normalizeText(f.question).includes(q) ||
-        normalizeText(f.answer).includes(q)
+        normalizeText(plainText(f.answer)).includes(q)
       );
     });
   }, [query, category]);
@@ -271,7 +273,7 @@ function FaqItemRow({
       {isOpen && (
         <div className="px-4 md:px-5 pb-5">
           <p className="text-mp-ink leading-relaxed text-sm md:text-base">
-            {item.answer}
+            <InlineText text={item.answer} />
           </p>
         </div>
       )}

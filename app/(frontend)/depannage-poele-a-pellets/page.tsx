@@ -84,6 +84,7 @@ export default function DepannagePage() {
                 plus, et on vous annonce leur prix avant de les poser. La majorité des
                 interventions tient dans la première heure.
               </p>
+              {/* check-catalogue: allow (ce que le service ne couvre pas) */}
               <p>
                 Le dépannage concerne uniquement les poêles et inserts à pellets. Pour une
                 chaudière, une cuisinière ou un poêle à bûches, il faut passer par un autre

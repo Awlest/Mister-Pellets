@@ -2,6 +2,7 @@ import { useId } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
+import { InlineText } from "@/components/ui/inline-text";
 
 interface FAQItem {
   question: string;
@@ -60,7 +61,10 @@ export function FAQAccordion({
                   aria-hidden
                 />
               </summary>
-              <div className="pb-5 pr-8 leading-relaxed text-mp-ink-soft">{item.answer}</div>
+              <div className="pb-5 pr-8 leading-relaxed text-mp-ink-soft">
+                {/* Une réponse en texte peut porter des liens (lib/inline-text.ts). */}
+                {typeof item.answer === "string" ? <InlineText text={item.answer} /> : item.answer}
+              </div>
             </details>
           ))}
         </div>

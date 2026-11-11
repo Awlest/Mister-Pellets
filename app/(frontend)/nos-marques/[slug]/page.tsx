@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { InlineText } from "@/components/ui/inline-text";
+import { plainText } from "@/lib/inline-text";
 import {
   BRANDS,
   BRAND_LIST,
@@ -56,7 +58,7 @@ export default async function BrandPage({ params }: Props) {
     "@type": "Brand",
     "@id": `https://mister-pellets.be/nos-marques/${brand.slug}/#brand`,
     name: brand.name,
-    description: brand.intro,
+    description: plainText(brand.intro),
     countryOfOrigin: brand.country,
     sameAs: [brand.officialUrl],
   };
@@ -72,7 +74,7 @@ export default async function BrandPage({ params }: Props) {
         mainEntity: brand.faq.map((f) => ({
           "@type": "Question",
           name: f.question,
-          acceptedAnswer: { "@type": "Answer", text: f.answer },
+          acceptedAnswer: { "@type": "Answer", text: plainText(f.answer) },
         })),
       }
     : null;
@@ -139,7 +141,9 @@ export default async function BrandPage({ params }: Props) {
             </h2>
             <div className="mp-measure space-y-4 text-lg text-mp-ink leading-relaxed">
               {brand.whyWeLove.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
+                <p key={i}>
+                  <InlineText text={paragraph} />
+                </p>
               ))}
             </div>
           </div>
