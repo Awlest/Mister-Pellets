@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { Check } from "lucide-react";
-import { cn, formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
+import { cn, formatPrice, formatPriceHT } from "@/lib/utils";
+import { reducedVatPrice } from "@/lib/product-price";
 import type { AccessoryCategory, ProductAccessory } from "@/lib/products-demo";
 
 /** Ordre et libellés des groupes de compléments sur la fiche. */
@@ -171,7 +172,7 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
               </span>
               <span className="block text-sm text-mp-ink-soft">soit {formatPriceHT(totalTTC)} HTVA</span>
               <p className="mt-2 text-sm text-mp-green-deep">
-                <span className="font-semibold">{formatPriceReducedVat(totalTTC)} TVAC</span> si nous
+                <span className="font-semibold">{formatPrice(reducedVatPrice(totalTTC))} TVAC</span> si nous
                 posons le tout sur une habitation de plus de 10 ans
                 <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
               </p>

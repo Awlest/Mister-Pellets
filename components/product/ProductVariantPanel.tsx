@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
+import { formatPrice, formatPriceHT } from "@/lib/utils";
+import { reducedVatPrice } from "@/lib/product-price";
 import { BONUS, bonusBadgeFor, bonusLabelFor } from "@/lib/bonus";
 import { typo } from "@/lib/typo";
 import { ProductAccessories } from "@/components/product/ProductAccessories";
@@ -254,7 +255,7 @@ export function ProductVariantPanel({
                 soit {formatPriceHT(ttc)} HTVA
               </span>
               <p className="mt-3 text-sm text-mp-green-deep">
-                <span className="font-semibold">{formatPriceReducedVat(ttc)} TVAC</span> si
+                <span className="font-semibold">{formatPrice(reducedVatPrice(ttc))} TVAC</span> si
                 nous le posons sur une habitation de plus de 10 ans
                 <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
               </p>

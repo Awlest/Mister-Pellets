@@ -24,12 +24,12 @@ import {
 import { isHybrid, misterBoisCanonical } from "@/lib/catalog-scope";
 import { REDIRECTED_PRODUCT_SLUGS } from "@/config/redirects";
 import { BRANDS, TOP_TIER_BRANDS } from "@/lib/brands";
-import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
+import { formatPrice, formatPriceHT } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { BONUS, bonusLabelFor } from "@/lib/bonus";
 import { typo } from "@/lib/typo";
 import { productFamily, productNeighbours } from "@/lib/product-neighbours";
-import { guaranteeLine, priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
+import { guaranteeLine, priceBadge, reducedVatPrice, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { formatKw } from "@/lib/power";
 import { categoriesOf } from "@/lib/categories";
 import { ACTION_LABELS, ROUTES } from "@/config/navigation";
@@ -393,7 +393,7 @@ export default async function ProductPage({ params }: Props) {
                       </span>
                       <p className="mt-3 text-sm text-mp-green-deep">
                         <span className="font-semibold">
-                          {formatPriceReducedVat(shownTTC ?? product.priceTTC)} TVAC
+                          {formatPrice(reducedVatPrice(shownTTC ?? product.priceTTC))} TVAC
                         </span>{" "}
                         si nous le posons sur une habitation de plus de 10 ans
                         <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.

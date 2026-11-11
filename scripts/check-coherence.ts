@@ -17,8 +17,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { ACTION_LABELS } from "@/config/navigation";
 import { brusselsMidnightISO } from "@/lib/availability";
-import { requestedModel, type EstimateProduct } from "@/lib/estimate";
-import { estimateOptions, isEstimable } from "@/lib/estimable";
+import { DEFAULT_STATE, estimate, requestedModel, type EstimateProduct } from "@/lib/estimate";
+import { estimateOptions, isEstimable, type EstimableRow } from "@/lib/estimable";
 import {
   PRICE_REQUEST_SUBJECT,
   priceRequestHref,
@@ -32,7 +32,7 @@ import { getGuideBySlug } from "@/lib/guides";
 import { getArticleBySlug } from "@/lib/articles";
 import { NBSP, NNBSP } from "@/lib/typo";
 import { PROJECT_LEAD_TIME } from "@/lib/services";
-import { guaranteeLine, shownDeliveryDelay } from "@/lib/product-price";
+import { fichePrices, guaranteeLine, reducedVatPrice, shownDeliveryDelay, shownPriceTTC, stoveListPrice } from "@/lib/product-price";
 
 let ko = 0;
 function check(label: string, got: unknown, want: unknown) {
@@ -309,6 +309,55 @@ check("Bruxelles : lendemain du passage", brusselsMidnightISO(new Date("2027-03-
 check("Bruxelles : jour du retour à l'heure d'hiver", brusselsMidnightISO(new Date("2026-10-25T10:00:00Z")), "2026-10-25T00:00:00+02:00");
 check("Bruxelles : date civile locale, pas UTC", brusselsMidnightISO(new Date("2026-12-31T23:30:00Z")), "2027-01-01T00:00:00+01:00");
 assert("flux : plus de décalage écrit en dur", !/T00:00:00\+0[12]:00/.test(readFileSync("app/api/feed/google-merchant/route.ts", "utf8")));
+
+// ---------------------------------------------------------------------------
+// 8. Prix du poêle : fiche et estimation au même montant, bonus compris
+// ---------------------------------------------------------------------------
+{
+  // Instantané du catalogue du dépôt (sans base), plus des cas construits :
+  // promo plus basse, promo plus haute (ignorée), prix HT seul.
+  const snapshot = (
+    JSON.parse(readFileSync("backups/products-before-2026-05-15T16-50-07-583Z.json", "utf8")) as {
+      products: (EstimableRow & { slug: string; brand: string; productType: string })[];
+    }
+  ).products;
+  const rows = [
+    ...snapshot,
+    { slug: "cas-zefiro", brand: "Cadel", productType: "insert", power: 9, priceTTC: 4017 },
+    { slug: "cas-promo", brand: "EK63", productType: "standard", power: 8, priceTTC: 2990, promoPrice: 2690 },
+    { slug: "cas-promo-haute", brand: "EK63", productType: "standard", power: 8, priceTTC: 2990, promoPrice: 3190 },
+  ];
+  const gaps: string[] = [];
+  let compared = 0;
+  for (const row of rows) {
+    if (row.hiddenFromBoutique) continue;
+    for (const opt of estimateOptions(row)) {
+      // Fiche simple seulement : sur une fiche à puissances, la fiche affiche
+      // « à partir de » et l'estimation le prix de chaque puissance.
+      if (opt.fromVariant) continue;
+      const product = { key: row.slug, slug: row.slug, name: row.slug, brand: row.brand, productType: row.productType, powerKw: opt.kw, priceHT: opt.ht, priceTTC: opt.ttc ?? undefined } as EstimateProduct;
+      for (const bonus of [false, true]) {
+        const shown = shownPriceTTC({ brand: row.brand, ...fichePrices(row, bonus) });
+        if (!shown) continue;
+        compared++;
+        const fiche6 = reducedVatPrice(shown);
+        const list6 = stoveListPrice(product, { bonus, reduced: true });
+        const list21 = stoveListPrice(product, { bonus, reduced: false });
+        // Récapitulatif : poêle moins la ligne de bonus = hors TVA du prix affiché.
+        const r = estimate({ ...DEFAULT_STATE, housingOver10Years: true, productKey: product.key }, product, { bonus });
+        const netHT = r.materialHT - r.bonusHT;
+        if (fiche6 !== list6 || shown !== list21 || netHT !== Math.round(shown / 1.21) || Math.round(netHT * 1.06) !== list6)
+          gaps.push(`${row.slug}${bonus ? " (bonus)" : ""} : fiche ${shown}/${fiche6}, liste ${list21}/${list6}, net HT ${netHT}`);
+      }
+    }
+  }
+  assert(`prix : ${compared} comparaisons fiche / estimation (instantané + cas)`, compared > 150);
+  check("prix : fiche et liste de l'estimation identiques, récapitulatif cohérent", gaps, []);
+  // Le cas relevé à la recette : Cadel Zefiro 9, bonus -10 %, TVA 6 %.
+  const zef = { key: "z", slug: "z", name: "z", brand: "Cadel", productType: "insert", powerKw: 9, priceHT: 3320, priceTTC: 4017 } as EstimateProduct;
+  check("prix : Zefiro 9 à 6 %, bonus déduit", stoveListPrice(zef, { bonus: true, reduced: true }), 3167);
+  assert("estimation : la liste des modèles passe par stoveListPrice", readFileSync("components/forms/EstimateConfigurator.tsx", "utf8").includes("stoveListPrice(p, { bonus: bonusActive"));
+}
 
 if (ko > 0) {
   console.error(`\n${ko} contrôle(s) en échec.`);

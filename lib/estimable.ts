@@ -102,16 +102,20 @@ function powerOptions(row: EstimableRow): Array<{ kw: number; ttc: number | null
  * Une puissance sans prix exploitable est écartée.
  */
 export function estimateOptions(row: EstimableRow): EstimateOption[] {
-  const promoTTC = row.promoPrice && row.promoPrice > 0 ? row.promoPrice : null;
-  const baseTTC = promoTTC ?? (row.priceTTC && row.priceTTC > 0 ? row.priceTTC : null);
+  // Promo : comme sur la fiche (lib/product-price.ts, fichePrices), seulement
+  // si elle est plus basse que le prix catalogue.
+  const catalogTTC = row.priceTTC && row.priceTTC > 0 ? row.priceTTC : null;
+  const promoTTC =
+    row.promoPrice && row.promoPrice > 0 && (catalogTTC == null || row.promoPrice < catalogTTC) ? row.promoPrice : null;
+  const baseTTC = promoTTC ?? catalogTTC;
+  // Le prix TTC affiché sur la fiche fait foi : son hors TVA d'abord, le HT
+  // saisi seulement sans TTC (fiche et estimation au même montant).
   const baseHT =
-    promoTTC != null
-      ? Math.round(promoTTC / 1.21)
+    baseTTC != null
+      ? Math.round(baseTTC / 1.21)
       : row.priceHT && row.priceHT > 0
         ? Math.round(row.priceHT)
-        : baseTTC != null
-          ? Math.round(baseTTC / 1.21)
-          : 0;
+        : 0;
   const out: EstimateOption[] = [];
   for (const opt of powerOptions(row)) {
     const ttc = opt.ttc ?? baseTTC ?? null;

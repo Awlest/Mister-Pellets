@@ -1,5 +1,6 @@
 import "server-only";
 import { isEstimable } from "./estimable";
+import { fichePrices } from "./product-price";
 import { getPayloadClient } from "./payload-client";
 import { bonusPrice, isBonusPeriod } from "./bonus";
 import { formatKw, parseKw } from "./power";
@@ -404,21 +405,8 @@ function payloadToDemo(raw: PayloadProduct): ProductDemo {
   // 6 776 € pour une version pellet à 5 324 €) ou plus bas que toutes les
   // variantes (EK63 Like 80), et un prix posé sur une finition n'apparaissait
   // pas sur la carte tant que le parent restait vide.
-  const variantPrices = p.hasVariants
-    ? (p.variants ?? [])
-        .map((v) => (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price))
-        .filter((n): n is number => typeof n === "number" && n > 0)
-    : [];
-  const variantMinTTC = variantPrices.length > 0 ? Math.min(...variantPrices) : undefined;
-  const catalogTTC = variantMinTTC ?? (p.priceTTC && p.priceTTC > 0 ? p.priceTTC : undefined);
-  const promoTTC =
-    variantMinTTC == null &&
-    p.promoPrice &&
-    p.promoPrice > 0 &&
-    (catalogTTC == null || p.promoPrice < catalogTTC)
-      ? p.promoPrice
-      : undefined;
-  const effectiveTTC = promoTTC ?? catalogTTC;
+  // Règle commune à la fiche et à l'estimation : lib/product-price.ts.
+  const prices = fichePrices(p, bonusActive);
 
   return {
     slug: p.slug,
@@ -435,9 +423,9 @@ function payloadToDemo(raw: PayloadProduct): ProductDemo {
     heatedVolume,
     powers,
     heatedVolumes,
-    priceTTC: catalogTTC,
-    promoPriceTTC: promoTTC,
-    bonusPriceTTC: bonusActive && effectiveTTC ? bonusPrice(effectiveTTC, p.brand) : undefined,
+    priceTTC: prices.priceTTC,
+    promoPriceTTC: prices.promoPriceTTC,
+    bonusPriceTTC: prices.bonusPriceTTC,
     stockStatus: p.stockStatus ?? undefined,
     deliveryDelay: p.deliveryDelay?.trim() || undefined,
     // Même règle que le catalogue de l'estimation (lib/estimable.ts).

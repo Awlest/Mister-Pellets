@@ -50,17 +50,6 @@ export function formatPriceHT(amountTTC: number): string {
 }
 
 /**
- * Prix TVAC au taux réduit de 6 %, applicable quand le poêle est posé par nos
- * soins sur une habitation privée de plus de 10 ans. C'est le prix réellement
- * payé par la grande majorité des clients, et le seul argument tarifaire
- * honnête face aux concurrents qui affichent du HTVA.
- * Ex. 3182 (TTC 21 %) → 2 630 HTVA → "2 788 €" (TVAC 6 %).
- */
-export function formatPriceReducedVat(amountTTC: number): string {
-  return formatPrice((amountTTC / VAT_RATE) * VAT_RATE_REDUCED);
-}
-
-/**
  * Slugifie une string (pour URL produits, etc.)
  */
 export function slugify(input: string): string {

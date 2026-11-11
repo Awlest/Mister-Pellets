@@ -53,6 +53,7 @@ import { DiscountedPrice } from "./DiscountedPrice";
 import { BONUS, bonusLabelFor, isBonusPeriod } from "@/lib/bonus";
 import { typo } from "@/lib/typo";
 import { priceRequestHref } from "@/lib/price-request";
+import { stoveListPrice } from "@/lib/product-price";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
 import { BRAND_PARAMS, EVENTS, trackEvent } from "@/lib/analytics";
@@ -904,7 +905,9 @@ function EstimateForm({
                       {shownModels.map((p) => {
                         const active = s.productKey === p.key;
                         const fit = p.powerKw >= needKw * 0.75 && p.powerKw <= needKw * 1.45;
-                        const ttc = Math.round(p.priceHT * (s.housingOver10Years ? 1.06 : 1.21));
+                        // Prix de la fiche, au taux choisi, bonus de saison compris s'il
+                        // court (lib/product-price.ts) : le bandeau dit « déjà déduit ».
+                        const ttc = stoveListPrice(p, { bonus: bonusActive, reduced: s.housingOver10Years });
                         return (
                           <label key={p.key} className={cn(cardCls(active), "items-center p-3 sm:gap-4 sm:p-4")}>
                             <input

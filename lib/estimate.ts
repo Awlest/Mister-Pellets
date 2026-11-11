@@ -16,7 +16,8 @@
  * de plus de 10 ans, 21 % sinon), sur le matériel comme sur la pose.
  */
 
-import { bonusRateFor, isBonusPeriod } from "./bonus";
+import { isBonusPeriod } from "./bonus";
+import { stoveNetHT } from "./product-price";
 import {
   DEFAULT_POSE,
   SURFACE,
@@ -224,7 +225,10 @@ export function estimate(
   const labor = sumLines(lines);
   const material = product?.priceHT ?? 0;
   const subtotalHT = roundCents(material + labor);
-  const bonusHT = (opts?.bonus ?? isBonusPeriod()) ? Math.round(material * bonusRateFor(product?.brand)) : 0;
+  // Bonus : la différence entre le poêle au prix catalogue et le poêle au prix
+  // affiché sur la fiche (lib/product-price.ts), pour que le net hors TVA soit
+  // celui de la fiche et de la liste des modèles.
+  const bonusHT = (opts?.bonus ?? isBonusPeriod()) && product ? material - stoveNetHT(product, true) : 0;
   const netHT = subtotalHT - bonusHT;
   const rate = vatRate(s.housingOver10Years);
   const { vat, total } = withVat(netHT, rate);
