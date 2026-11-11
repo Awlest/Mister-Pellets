@@ -176,7 +176,14 @@ export function Analytics() {
               centaine de pixels et laisse voir le bouton principal de la page. */}
           <p className="text-xs leading-snug text-mp-ink sm:hidden">
             Cookies Google pour mesurer visites et annonces, avec votre accord.{" "}
-            <Link href="/politique-cookies" className="whitespace-nowrap underline hover:text-mp-orange-ink">
+            {/* Cible de 44 px de haut sans changer le texte ni les boutons : une
+                zone invisible autour du lien (::after), étendue surtout vers le
+                haut ; vers le bas, 7 px seulement, moins que l'écart de 8 px
+                avec les boutons (recette du lot 3 : 35 x 15 px). */}
+            <Link
+              href="/politique-cookies"
+              className="relative inline-block whitespace-nowrap underline after:absolute after:-inset-x-2 after:-top-[22px] after:-bottom-[7px] after:content-[''] hover:text-mp-orange-ink"
+            >
               Détails
             </Link>
           </p>
