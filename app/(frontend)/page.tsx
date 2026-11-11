@@ -157,7 +157,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 mp-measure mx-auto">
-              MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
+              Des poêles à pellets, qu&apos;on appelle aussi poêles à granulés : MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
               Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
               TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
               provinces wallonnes depuis 2016.

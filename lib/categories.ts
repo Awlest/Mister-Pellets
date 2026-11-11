@@ -87,7 +87,7 @@ export const CATEGORIES: CategoryData[] = [
     metaTitle: "Poêles à pellets canalisables en Wallonie",
     metaDescription:
       "Poêles à pellets canalisables posés en Wallonie : un seul poêle chauffe la pièce de vie et une ou deux pièces voisines par gaines. Modèles et prix.",
-    intro: `Un poêle à pellets canalisable chauffe la pièce où il est posé et envoie une partie de l'air chaud vers une ou deux pièces voisines, par des gaines isolées passées dans un mur, un faux plafond ou les combles. C'est ce qu'on pose le plus souvent dans une maison à étage de 100 à 180 m² : un seul appareil et un seul conduit de fumées. La canalisation se chiffre à part de la pose, ${formatEur(TARIFS.canalisationParPieceHT)} HTVA par pièce desservie, ${TARIFS.canalisationPiecesMax} pièces au plus. Pour chauffer toute la maison, on regarde plutôt un poêle hydro raccordé aux radiateurs.`,
+    intro: `Un poêle à pellets canalisable, ou poêle à granulés canalisable, chauffe la pièce où il est posé et envoie une partie de l'air chaud vers une ou deux pièces voisines, par des gaines isolées passées dans un mur, un faux plafond ou les combles. C'est ce qu'on pose le plus souvent dans une maison à étage de 100 à 180 m² : un seul appareil et un seul conduit de fumées. La canalisation se chiffre à part de la pose, ${formatEur(TARIFS.canalisationParPieceHT)} HTVA par pièce desservie, ${TARIFS.canalisationPiecesMax} pièces au plus. Pour chauffer toute la maison, on regarde plutôt un poêle hydro raccordé aux radiateurs.`,
     guide: { href: "/guides/poele-pellets-canalisable", label: "Le guide du poêle canalisable" },
     modifiedAt: "2026-11-11",
     sections: [
@@ -137,7 +137,7 @@ export const CATEGORIES: CategoryData[] = [
     metaDescription:
       "Poêles à pellets hydro raccordés aux radiateurs ou au plancher chauffant, pour remplacer une chaudière au mazout. Modèles et puissances, pose en Wallonie.",
     intro:
-      "Un poêle à pellets hydro chauffe l'eau d'un circuit : il alimente vos radiateurs ou votre plancher chauffant, comme une chaudière, tout en chauffant la pièce où il se trouve. C'est le choix quand on remplace une chaudière au mazout ou au gaz et qu'on garde le chauffage central. La pose ajoute un raccordement hydraulique au conduit de fumées : comptez un à deux jours de chantier selon l'installation en place. Raccordé au chauffage central, l'appareil se contrôle chaque année, comme le prévoit l'arrêté wallon du 29 janvier 2009.",
+      "Un poêle à pellets hydro, ou thermopoêle à granulés, chauffe l'eau d'un circuit : il alimente vos radiateurs ou votre plancher chauffant, comme une chaudière, tout en chauffant la pièce où il se trouve. C'est le choix quand on remplace une chaudière au mazout ou au gaz et qu'on garde le chauffage central. La pose ajoute un raccordement hydraulique au conduit de fumées : comptez un à deux jours de chantier selon l'installation en place. Raccordé au chauffage central, l'appareil se contrôle chaque année, comme le prévoit l'arrêté wallon du 29 janvier 2009.",
     guide: { href: "/guides/poele-pellets-hydro", label: "Le guide du poêle hydro" },
     modifiedAt: "2026-11-11",
     sections: [
@@ -189,7 +189,7 @@ export const CATEGORIES: CategoryData[] = [
     metaDescription:
       "Inserts et foyers à pellets à encastrer dans une cheminée existante : modèles à air, canalisables et hydro, posés en Wallonie par Mister Pellets.",
     intro:
-      "Un insert à pellets s'encastre dans une cheminée existante, à la place du foyer ouvert ou d'un ancien insert. Vous gardez la cheminée et son habillage, et vous gagnez un chauffage qui se programme et s'alimente seul depuis son réservoir. Le conduit en place doit convenir au pellet : on contrôle son état et son diamètre à la visite technique, avant de chiffrer. Certains inserts sont canalisables et envoient de l'air chaud vers une pièce voisine. Les foyers hydro, eux, se raccordent au chauffage central et alimentent les radiateurs.",
+      "Un insert à pellets, ou insert à granulés, s'encastre dans une cheminée existante, à la place du foyer ouvert ou d'un ancien insert. Vous gardez la cheminée et son habillage, et vous gagnez un chauffage qui se programme et s'alimente seul depuis son réservoir. Le conduit en place doit convenir au pellet : on contrôle son état et son diamètre à la visite technique, avant de chiffrer. Certains inserts sont canalisables et envoient de l'air chaud vers une pièce voisine. Les foyers hydro, eux, se raccordent au chauffage central et alimentent les radiateurs.",
     guide: { href: "/blog/insert-pellets-cheminee-existante", label: "Poser un insert à pellets dans une cheminée" },
     modifiedAt: "2026-11-11",
     sections: [
@@ -240,7 +240,7 @@ export const CATEGORIES: CategoryData[] = [
     metaDescription:
       "Poêles à pellets étanches pour maison bien isolée ou ventilation double flux : l'air de combustion vient de l'extérieur. Modèles posés en Wallonie.",
     intro:
-      "Un poêle à pellets étanche prend l'air de sa combustion à l'extérieur, par une arrivée dédiée, et pas dans la pièce. Il ne perturbe donc pas une ventilation double flux et convient aux maisons récentes ou rénovées, bien isolées. Selon la marque, les fumées sortent par une ventouse concentrique en façade ou par un conduit qui monte au-dessus du toit : avec Edilkamin et EK63, c'est toujours le conduit vertical. La puissance se choisit avec la surface et l'isolation, et le configurateur la calcule en deux minutes.",
+      "Un poêle à pellets étanche, ou poêle à granulés étanche, prend l'air de sa combustion à l'extérieur, par une arrivée dédiée, et pas dans la pièce. Il ne perturbe donc pas une ventilation double flux et convient aux maisons récentes ou rénovées, bien isolées. Selon la marque, les fumées sortent par une ventouse concentrique en façade ou par un conduit qui monte au-dessus du toit : avec Edilkamin et EK63, c'est toujours le conduit vertical. La puissance se choisit avec la surface et l'isolation, et le configurateur la calcule en deux minutes.",
     guide: { href: "/blog/evacuation-fumees-poele-pellets", label: "Tubage, conduit ou ventouse : l'évacuation des fumées" },
     modifiedAt: "2026-11-11",
     sections: [

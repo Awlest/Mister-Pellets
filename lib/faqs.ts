@@ -216,6 +216,13 @@ export const FAQS: FaqItem[] = [
       "Pour une maison wallonne PEB B-C de 120 m² avec un poêle 10 kW en chauffage principal, comptez 1,5 à 2 tonnes par saison de chauffe (octobre à avril). En appoint sur les 3 mois d'hiver les plus froids, plutôt 600 à 900 kg. La consommation réelle dépend de l'isolation, de la température de consigne, du nombre d'occupants, et de la rigueur de l'hiver. Sur 5 ans, un Wallon moyen consomme entre 7 et 10 tonnes de pellets pour un usage chauffage principal.",
   },
   {
+    id: "pellets-granules",
+    category: "pellets",
+    question: "Pellets ou granulés : est-ce la même chose ?",
+    answer:
+      "Oui. « Pellets » et « granulés de bois » désignent le même combustible : de la sciure compactée en petits cylindres de 6 mm de diamètre. Un poêle à pellets et un poêle à granulés sont donc le même appareil. Ce qui compte, c'est la certification du sac, ENplus A1 ou DINplus A1 : voyez la question suivante.",
+  },
+  {
     id: "pellets-enplus-vs-dinplus",
     category: "pellets",
     question: "ENplus A1 ou DINplus : quelle différence ?",

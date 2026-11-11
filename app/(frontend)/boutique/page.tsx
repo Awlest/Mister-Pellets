@@ -50,7 +50,7 @@ export default async function BoutiquePage() {
             Tous les <span className="mp-italic">poêles à pellets</span>
           </>
         }
-        description="Le catalogue complet, filtrable par marque, puissance, type de diffusion et couleur. Tous nos poêles respectent le règlement européen d'écoconception en vigueur depuis 2022."
+        description="Le catalogue complet de nos poêles à pellets, ou à granulés, filtrable par marque, puissance, type de diffusion et couleur. Tous nos poêles respectent le règlement européen d'écoconception en vigueur depuis 2022."
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Boutique" },
