@@ -9,6 +9,7 @@
 
 import { INSTALL_TYPES, ISO, POWER_WINDOW, VAT, evacuationPrice, formatEur, recommendedKw, withVat, type InstallType, type IsoKey } from "./pose/moteur";
 import { REMISES, TARIFS } from "./pose/tarifs";
+import { POSE_DURATIONS } from "./services";
 
 /**
  * Surcoût d'une évacuation par rapport au simple raccordement d'un conduit
@@ -301,7 +302,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         heading: "La pose et ce qu'elle coûte",
         paragraphs: [
           `La canalisation se chiffre en plus de la pose du poêle et de son évacuation : ${CANAL_PIECE} par pièce desservie, matériel et main d'œuvre compris, ${TARIFS.canalisationPiecesMax} pièces au plus. La TVA à 6 % vaut pour un logement de plus de 10 ans.`,
-          "Une pose avec des gaines vers d'autres pièces prend un jour et demi en moyenne, contre une journée pour un poêle à air sur un conduit existant. Sur une maison récente avec des gaines techniques prévues, le passage est presque invisible ; dans une maison ancienne, il faut parfois ouvrir un coffrage. Le déroulé complet est sur la page [installation d'un poêle à pellets](/installation-poele-a-pellets).",
+          `Une pose avec des gaines vers d'autres pièces prend ${POSE_DURATIONS.canalisable}, contre ${POSE_DURATIONS.standard} pour un poêle à air sur un conduit existant. Sur une maison récente avec des gaines techniques prévues, le passage est presque invisible ; dans une maison ancienne, il faut parfois ouvrir un coffrage. Le déroulé complet est sur la page [installation d'un poêle à pellets](/installation-poele-a-pellets).`,
         ],
       },
       {
@@ -360,7 +361,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
     excerpt:
       "Un poêle hydro chauffe la pièce où il est posé et l'eau de votre chauffage central. Bien choisi, il remplace une chaudière ; mal dimensionné, il déçoit. Voici comment il fonctionne et ce qu'on vérifie avant d'en poser un.",
     directAnswer:
-      "Un poêle à pellets hydro, ou thermopoêle à granulés, chauffe l'eau du chauffage central en plus de la pièce où il est posé : il alimente radiateurs ou plancher chauffant, comme une chaudière. Il se choisit sur la puissance rendue à l'eau, se raccorde en un à deux jours et se fait contrôler chaque année.",
+      `Un poêle à pellets hydro, ou thermopoêle à granulés, chauffe l'eau du chauffage central en plus de la pièce où il est posé : il alimente radiateurs ou plancher chauffant, comme une chaudière. Il se choisit sur la puissance rendue à l'eau, se raccorde en ${POSE_DURATIONS.hydro} et se fait contrôler chaque année.`,
     sections: [
       {
         heading: "Le principe : l'eau d'abord, l'air ensuite",
@@ -391,7 +392,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         heading: "Le raccordement au chauffage central",
         paragraphs: [
           "Le poêle se pose dans une pièce de vie et se raccorde au circuit existant : départ et retour vers les radiateurs ou le plancher chauffant, sécurités du circuit, et selon le cas un ballon pour l'eau chaude. Il garde aussi son évacuation de fumées, comme tout poêle à pellets : tubage d'une cheminée, conduit au-dessus du toit ou ventouse concentrique sur un modèle étanche qui la prévoit (jamais avec Edilkamin ni EK63).",
-          "Le chantier dure un à deux jours selon l'installation en place, parfois plus quand le circuit doit être nettoyé. Avant de chiffrer, on relève à la visite l'état des radiateurs, la place du poêle et le trajet jusqu'au circuit. Le déroulé d'une pose est sur la page [installation d'un poêle à pellets](/installation-poele-a-pellets).",
+          `Le chantier dure ${POSE_DURATIONS.hydro}, désembouage du circuit compris. Avant de chiffrer, on relève à la visite l'état des radiateurs, la place du poêle et le trajet jusqu'au circuit. Le déroulé d'une pose est sur la page [installation d'un poêle à pellets](/installation-poele-a-pellets).`,
         ],
       },
       {

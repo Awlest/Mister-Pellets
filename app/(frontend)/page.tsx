@@ -13,6 +13,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { DEFAULT_OG_IMAGE, SITE_LOCALE, SITE_NAME, SITE_URL, buildFAQSchema } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
 import { typo } from "@/lib/typo";
+import { POSE_DURATIONS } from "@/lib/services";
 
 /**
  * Régénération horaire : l'annonce du bonus de saison dépend de la date. Le
@@ -64,8 +65,7 @@ const FAQ_HOMEPAGE = [
   },
   {
     question: "Combien de temps prend la pose d'un poêle à pellets ?",
-    answer:
-      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours.",
+    answer: `Une pose standard sur conduit existant se fait en ${POSE_DURATIONS.standard}, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend ${POSE_DURATIONS.canalisable}. Un hydro complet avec raccordement aux radiateurs et désembouage compte ${POSE_DURATIONS.hydro}.`,
   },
   {
     question: "Existe-t-il encore une prime pour un poêle à pellets en Wallonie ?",

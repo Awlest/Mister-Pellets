@@ -3,6 +3,7 @@ import { isHybrid } from "./catalog-scope";
 import { REMISES, TARIFS } from "./pose/tarifs";
 import { evacuationPrice, formatEur, HAUTEUR, INSTALL_TYPES, VAT, withVat, type InstallType } from "./pose/moteur";
 import { shownPriceTTC } from "./product-price";
+import { POSE_DURATIONS } from "./services";
 
 /**
  * Pages catégories du catalogue : une vraie page par famille de poêles, avec
@@ -137,7 +138,7 @@ export const CATEGORIES: CategoryData[] = [
     metaDescription:
       "Poêles à pellets hydro raccordés aux radiateurs ou au plancher chauffant, pour remplacer une chaudière au mazout. Modèles et puissances, pose en Wallonie.",
     intro:
-      "Un poêle à pellets hydro, ou thermopoêle à granulés, chauffe l'eau d'un circuit : il alimente vos radiateurs ou votre plancher chauffant, comme une chaudière, tout en chauffant la pièce où il se trouve. C'est le choix quand on remplace une chaudière au mazout ou au gaz et qu'on garde le chauffage central. La pose ajoute un raccordement hydraulique au conduit de fumées : comptez un à deux jours de chantier selon l'installation en place. Raccordé au chauffage central, l'appareil se contrôle chaque année, comme le prévoit l'arrêté wallon du 29 janvier 2009.",
+      `Un poêle à pellets hydro, ou thermopoêle à granulés, chauffe l'eau d'un circuit : il alimente vos radiateurs ou votre plancher chauffant, comme une chaudière, tout en chauffant la pièce où il se trouve. C'est le choix quand on remplace une chaudière au mazout ou au gaz et qu'on garde le chauffage central. La pose ajoute un raccordement hydraulique au conduit de fumées : comptez ${POSE_DURATIONS.hydro} de chantier. Raccordé au chauffage central, l'appareil se contrôle chaque année, comme le prévoit l'arrêté wallon du 29 janvier 2009.`,
     guide: { href: "/guides/poele-pellets-hydro", label: "Le guide du poêle hydro" },
     modifiedAt: "2026-11-11",
     sections: [
@@ -145,7 +146,7 @@ export const CATEGORIES: CategoryData[] = [
         heading: "Comment choisir un poêle à pellets hydro",
         paragraphs: [
           "Un poêle hydro se dimensionne sur les besoins de toute la maison, pas sur la pièce où il est posé. Sa puissance se partage entre l'eau du circuit et l'air de la pièce, et chaque fiche donne la part rendue à l'eau : c'est elle qui doit couvrir vos radiateurs ou votre plancher chauffant. Le tableau ci-dessus donne la plage de puissance de chaque marque ; la visite technique fixe la bonne valeur pour votre maison.",
-          "Regardez ensuite l'installation en place. Radiateurs ou plancher chauffant, ballon d'eau chaude, vase d'expansion, place pour le poêle dans une pièce de vie : tout se relève à la visite. La pose ajoute un raccordement hydraulique à l'évacuation des fumées, et le chantier dure un à deux jours selon ce qui existe. Si vous gardez l'ancienne chaudière en secours, dites-le dès la visite : son raccordement se prévoit dans le devis.",
+          `Regardez ensuite l'installation en place. Radiateurs ou plancher chauffant, ballon d'eau chaude, vase d'expansion, place pour le poêle dans une pièce de vie : tout se relève à la visite. La pose ajoute un raccordement hydraulique à l'évacuation des fumées, et le chantier dure ${POSE_DURATIONS.hydro} : le déroulé est sur la page [installation d'un poêle à pellets](/installation-poele-a-pellets). Si vous gardez l'ancienne chaudière en secours, dites-le dès la visite : son raccordement se prévoit dans le devis.`,
           "Pensez à l'autonomie. Le réservoir des hydros du catalogue contient de 14 à 30 kg de pellets selon le modèle : une grosse journée en régime doux, quelques heures à pleine puissance. En plein hiver, un silo relié au poêle évite de le remplir chaque jour.",
           "Choisissez aussi entre un modèle étanche, qui prend son air dehors et convient à une maison équipée d'une ventilation double flux, et un modèle qui puise son air dans la pièce. Les deux existent en hydro au catalogue.",
           "Côté budget, le prix affiché est celui de l'appareil, TVA comprise ; une fiche sans prix est sur devis. Le kit hydraulique, le raccordement et l'évacuation s'ajoutent : l'[estimation en ligne](/estimation) compose le total, et la page des [prix d'un poêle à pellets posé](/prix-poele-pellets) détaille les forfaits. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026 : l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans (voir [nos aides](/aides-poele-a-pellets-wallonie)).",

@@ -14,7 +14,7 @@ import { eur } from "@/lib/estimate";
 import { getInstallPrices, heightNote } from "@/lib/price-examples";
 import { OPTIONS, VAT, formatEur, withVat } from "@/lib/pose/moteur";
 import { TARIFS } from "@/lib/pose/tarifs";
-import { getService } from "@/lib/services";
+import { POSE_DURATIONS, getService } from "@/lib/services";
 import { ORGANIZATION_ID, SITE_URL, buildFAQSchema, buildPageMetadata } from "@/lib/seo";
 import { typo } from "@/lib/typo";
 
@@ -54,7 +54,7 @@ export default function InstallationPage() {
   const ventouse = installs.find((it) => it.key === "ventouse-facade");
   const discounted = installs.some((it) => it.discountPct > 0);
 
-  const directAnswer = `Nous installons votre poêle à pellets en quatre temps : visite technique gratuite chez vous, devis ferme sous 48 heures, pose en une journée sur une cheminée en bon état, puis mise en service avec vous. La pose coûte de ${eur(minLabor)} à ${eur(maxLabor)} TVAC à 6 % selon l'évacuation des fumées${discounted ? ", remises en cours comprises" : ""}, poêle en plus.`;
+  const directAnswer = `Nous installons votre poêle à pellets en quatre temps : visite technique gratuite chez vous, devis ferme sous 48 heures, pose en ${POSE_DURATIONS.standard} sur une cheminée en bon état, puis mise en service avec vous. La pose coûte de ${eur(minLabor)} à ${eur(maxLabor)} TVAC à 6 % selon l'évacuation des fumées${discounted ? ", remises en cours comprises" : ""}, poêle en plus.`;
 
   const options = (Object.keys(OPTIONS) as (keyof typeof OPTIONS)[]).filter((k) =>
     TARIFS.optionsProposees.includes(k),
@@ -67,8 +67,7 @@ export default function InstallationPage() {
     },
     {
       question: "Combien de temps dure la pose d'un poêle à pellets ?",
-      answer:
-        "Une journée pour une pose sur un conduit existant, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec des gaines vers d'autres pièces prend un jour et demi en moyenne, un hydro raccordé aux radiateurs deux à trois jours.",
+      answer: `Comptez ${POSE_DURATIONS.standard} pour une pose sur un conduit existant, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec des gaines vers d'autres pièces prend ${POSE_DURATIONS.canalisable}, un hydro raccordé aux radiateurs ${POSE_DURATIONS.hydro}.`,
     },
     {
       question: "Peut-on installer un poêle à pellets sans cheminée ?",
@@ -151,8 +150,7 @@ export default function InstallationPage() {
           },
           {
             title: "Pose en une journée",
-            description:
-              "Sur un conduit existant : l'équipe arrive entre 8 h et 9 h, protège la pièce, pose le poêle, le raccorde et rend le conduit étanche. Un canalisable ou un hydro demande plus de temps.",
+            description: `Sur un conduit existant : l'équipe arrive entre 8 h et 9 h, protège la pièce, pose le poêle, le raccorde et rend le conduit étanche. Un canalisable demande ${POSE_DURATIONS.canalisable}, un hydro ${POSE_DURATIONS.hydro}.`,
           },
           {
             title: "Mise en service avec vous",

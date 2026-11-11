@@ -14,6 +14,7 @@
  */
 
 import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
+import { POSE_DURATIONS } from "@/lib/services";
 
 export type FaqCategory =
   | "general"
@@ -259,7 +260,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Combien de temps prend la pose d'un poêle à pellets ?",
     answer:
-      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours. L'équipe arrive entre 8h et 9h, prépare la zone (bâches, plaques de protection), pose, raccorde, étanchéifie, met en service.",
+      `Une pose standard sur conduit existant se fait en ${POSE_DURATIONS.standard}, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend ${POSE_DURATIONS.canalisable}. Un hydro complet avec raccordement aux radiateurs et désembouage compte ${POSE_DURATIONS.hydro}. L'équipe arrive entre 8h et 9h, prépare la zone (bâches, plaques de protection), pose, raccorde, étanchéifie, met en service.`,
   },
   {
     id: "installation-plafond",
