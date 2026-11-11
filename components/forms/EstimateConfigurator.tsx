@@ -891,7 +891,7 @@ function EstimateForm({
                             {/* Sélection marquée par la pastille radio, à côté de
                                 la vignette et non posée dessus (DESIGN.md). */}
                             <RadioDot active={active} />
-                            <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-mp-beige-warm sm:h-16 sm:w-16">
+                            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-mp-beige-warm sm:h-16 sm:w-16">
                               {p.imageSrc ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
@@ -918,8 +918,14 @@ function EstimateForm({
                                 {p.powerKw.toString().replace(".", ",")} kW
                                 {fit && <span className="text-mp-green-mid"> · bien dimensionné</span>}
                               </span>
+                              {/* Sous 640 px, le prix passe sous le nom : en colonne à
+                                  droite, il coinçait le nom sur 3 ou 4 lignes à 375 px. */}
+                              <span className="block text-sm text-mp-ink-soft sm:hidden">
+                                {p.fromVariant ? "Poêle seul dès " : "Poêle seul : "}
+                                <span className="font-semibold tabular-nums text-mp-green-deep">{eur(ttc)}</span>
+                              </span>
                             </span>
-                            <span className="shrink-0 text-right">
+                            <span className="hidden shrink-0 text-right sm:block">
                               <span className="block font-semibold tabular-nums text-mp-green-deep">{eur(ttc)}</span>
                               <span className="block text-xs text-mp-ink-soft">
                                 {p.fromVariant ? "poêle seul, dès" : "poêle seul"}
