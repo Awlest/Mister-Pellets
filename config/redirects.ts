@@ -61,6 +61,10 @@ const LEGACY_REDIRECTS: SiteRedirect[] = [
   { source: "/wallonie", destination: "/zones-d-intervention", permanent: true },
 ];
 
+/** Marques et provinces des anciennes pages /installation/<marque>/<province>. */
+export const RETIRED_LOCAL_BRANDS = ["mcz", "edilkamin", "ek63", "girolami", "austroflamm", "cadel"] as const;
+export const RETIRED_LOCAL_PROVINCES = ["namur", "brabant-wallon", "hainaut", "liege", "luxembourg"] as const;
+
 /**
  * Règles à motif. Elles passent APRÈS les adresses exactes : Next applique la
  * première règle qui correspond, et une fiche bois demandée par son ancienne
@@ -77,6 +81,15 @@ const PATTERN_REDIRECTS: SiteRedirect[] = [
   // redirections à l'adresse demandée, avant les réécritures, et ne les
   // rejoue pas sur l'adresse réécrite.
   { source: "/poeles-pellets/:ville", destination: "/poeles-pellets-:ville", permanent: true },
+  // Pages « installation marque × province » retirées le 11/11/2026 (décision
+  // du client) : chacune des 30 renvoie vers la page de sa marque. Marques et
+  // provinces énumérées : une autre adresse reste en 404, sans passer par
+  // /nos-marques/dielle ou /nos-marques/ferlux, elles-mêmes redirigées.
+  {
+    source: `/installation/:brand(${RETIRED_LOCAL_BRANDS.join("|")})/:province(${RETIRED_LOCAL_PROVINCES.join("|")})`,
+    destination: "/nos-marques/:brand",
+    permanent: true,
+  },
 ];
 
 const isPattern = (source: string): boolean => /[:*(]/.test(source);

@@ -5,8 +5,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { CITIES } from "@/lib/cities";
-import { TOP_TIER_BRANDS } from "@/lib/brands";
-import { PROVINCES } from "@/lib/local-seo";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -151,36 +149,8 @@ export default function ZonesDInterventionPage() {
         </div>
       </section>
 
-      {/* Pose par marque et par province */}
-      <section className="bg-mp-cream mp-band">
-        <div className="mp-shell">
-          <h2 className="mp-measure mx-auto mb-8 text-center text-3xl md:text-4xl font-semibold text-mp-green-deep">
-            La pose par marque, province par province
-          </h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {PROVINCES.map((province) => (
-              <Card key={province.slug} className="p-6">
-                <h3 className="mb-3 text-xl font-semibold text-mp-green-deep">{province.areaName}</h3>
-                <ul className="flex flex-wrap gap-x-4">
-                  {TOP_TIER_BRANDS.map((brand) => (
-                    <li key={brand.slug}>
-                      <Link
-                        href={`/installation/${brand.slug}/${province.slug}`}
-                        className="inline-flex min-h-11 items-center text-sm font-medium text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink"
-                      >
-                        {brand.name}
-                        <span className="sr-only"> {province.inLabel}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <CTAFinal
+        tone="cream"
         title="Votre commune n'est pas listée ?"
         description="Tapez votre code postal dans le devis, on vous dit immédiatement si on intervient et combien ça coûte."
       />

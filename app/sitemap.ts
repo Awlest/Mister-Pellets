@@ -3,7 +3,6 @@ import { SITE_URL } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
 import { GUIDES } from "@/lib/guides";
 import { TOP_TIER_BRANDS } from "@/lib/brands";
-import { PROVINCES } from "@/lib/local-seo";
 import { ARTICLES } from "@/lib/articles";
 import { CATEGORIES } from "@/lib/categories";
 import { ROUTES } from "@/config/navigation";
@@ -128,15 +127,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // ===== PAGES SEO LOCALES (installation marque × province) =====
-  const localPages: MetadataRoute.Sitemap = TOP_TIER_BRANDS.flatMap((brand) =>
-    PROVINCES.map((province) => ({
-      url: `${SITE_URL}/installation/${brand.slug}/${province.slug}`,
-      lastModified: day(CATALOGUE_PAGES_DATE),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
-  );
 
   // ===== PAGES VILLES (avec rewrite vers /poeles-pellets-{slug}) =====
   const cityPages: MetadataRoute.Sitemap = CITIES.map((city) => ({
@@ -212,7 +202,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticPages,
     ...categoryPages,
     ...brandPages,
-    ...localPages,
     ...cityPages,
     ...guidePages,
     ...blogPages,

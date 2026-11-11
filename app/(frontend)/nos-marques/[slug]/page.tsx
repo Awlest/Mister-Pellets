@@ -19,7 +19,6 @@ import {
 } from "@/lib/brands";
 import { buildPageMetadata } from "@/lib/seo";
 import { getAllProducts } from "@/lib/products";
-import { PROVINCES } from "@/lib/local-seo";
 import { CatalogueListing } from "@/components/product/ProductListing";
 import { encodeListing, sortForGrid } from "@/lib/catalogue-listing";
 
@@ -359,18 +358,17 @@ export default async function BrandPage({ params }: Props) {
             <h2 className="mb-4 text-2xl md:text-3xl font-semibold text-mp-green-deep">
               Où nous posons les {brand.name}
             </h2>
-            <ul className="flex flex-wrap justify-center gap-x-6">
-              {PROVINCES.map((province) => (
-                <li key={province.slug}>
-                  <Link
-                    href={`/installation/${brand.slug}/${province.slug}`}
-                    className="inline-flex min-h-11 items-center text-sm font-medium text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink"
-                  >
-                    {province.areaName}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <p className="mp-measure mx-auto text-base md:text-lg text-mp-ink-soft leading-relaxed">
+              Dans les cinq provinces wallonnes : Namur, Liège, Hainaut, Brabant wallon et Luxembourg,
+              depuis notre atelier de Fernelmont. Villes desservies et frais de livraison :{" "}
+              <Link
+                href="/zones-d-intervention"
+                className="font-medium text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink"
+              >
+                nos zones d&apos;intervention
+              </Link>
+              .
+            </p>
           </div>
         </section>
       )}

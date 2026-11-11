@@ -11,11 +11,14 @@
  * marques) : carte, ligne compacte et entrée de données d'une fiche, total
  * estimé pour 250 fiches.
  *
+ * Et il garde retirées les 30 pages /installation/<marque>/<province>
+ * (11/11/2026) : une redirection vers la page marque, aucune route, aucun lien.
+ *
  * pnpm check:catalogue
  */
 
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, posix } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -35,7 +38,13 @@ import {
   MISTER_BOIS,
   MISTER_BOIS_URL,
 } from "@/config/mister-bois";
-import { REDIRECTED_PRODUCT_SLUGS, SITE_REDIRECTS, resolveRedirectChains } from "@/config/redirects";
+import {
+  REDIRECTED_PRODUCT_SLUGS,
+  RETIRED_LOCAL_BRANDS,
+  RETIRED_LOCAL_PROVINCES,
+  SITE_REDIRECTS,
+  resolveRedirectChains,
+} from "@/config/redirects";
 import {
   COMBUSTIBLES_HORS_CATALOGUE,
   inCatalogueWhere,
@@ -81,10 +90,14 @@ const bySource = new Map(SITE_REDIRECTS.map((r) => [r.source, r]));
 /** Source à motif (`/product-page/:slug`) en expression régulière. */
 function patternToRegExp(source: string): RegExp | null {
   if (!/[:*(]/.test(source)) return null;
-  const body = source
-    .replace(/[.+?^${}|[\]\\]/g, "\\$&")
+  // Paramètre à liste (`:brand(mcz|cadel)`) : la liste est gardée telle quelle.
+  const groups: string[] = [];
+  const marked = source.replace(/:[A-Za-z_]+\(([^)]+)\)/g, (_, group: string) => `@@${groups.push(group) - 1}@@`);
+  const body = marked
+    .replace(/[.+?^${}|()[\]\\]/g, "\\$&")
     .replace(/:[A-Za-z_]+\*/g, ".*")
-    .replace(/:[A-Za-z_]+/g, "[^/]+");
+    .replace(/:[A-Za-z_]+/g, "[^/]+")
+    .replace(/@@(\d+)@@/g, (_, i: string) => `(?:${groups[Number(i)]})`);
   return new RegExp(`^${body}$`);
 }
 
@@ -437,6 +450,26 @@ const checks: [string, () => void][] = [
         ]).map((r) => r.destination),
         ["https://mister-bois.be/c", "https://mister-bois.be/c"],
       );
+    },
+  ],
+  [
+    "pages /installation/<marque>/<province> retirées : un saut vers la page marque, plus aucun lien",
+    () => {
+      const local = SITE_REDIRECTS.filter((r) => r.source.startsWith("/installation/"));
+      assert.equal(local.length, 1, "une seule règle pour les 30 anciennes pages");
+      const re = patternToRegExp(local[0]!.source)!;
+      for (const brand of RETIRED_LOCAL_BRANDS) {
+        assert.ok(TOP_TIER_BRANDS.some((b) => b.slug === brand), `/nos-marques/${brand} n'existe pas`);
+        const destination = local[0]!.destination.replace(":brand", brand);
+        assert.ok(!bySource.has(destination), `chaîne : ${destination} est redirigée`);
+        for (const province of RETIRED_LOCAL_PROVINCES) assert.ok(re.test(`/installation/${brand}/${province}`));
+      }
+      // Une marque masquée (Dielle) ne passe pas par /nos-marques/dielle, lui-même redirigé.
+      assert.ok(!re.test("/installation/dielle/namur") && !re.test("/installation/mcz/bruxelles"));
+      assert.ok(!existsSync(join(ROOT, "app/(frontend)/installation")), "la route /installation existe encore");
+      for (const file of [...sources("app"), ...sources("components"), ...sources("lib")]) {
+        assert.ok(!read(file).includes("/installation/"), `${file} cite encore /installation/`);
+      }
     },
   ],
   [
