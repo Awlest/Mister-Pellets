@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Clock, MapPin, ArrowRight, CalendarDays, Droplet, Flame, Fuel, Wind } from "lucide-react";
+import { Clock, MapPin, ArrowRight, CalendarDays, ChevronDown, Droplet, Flame, Fuel, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -443,7 +443,9 @@ export default function HomePage() {
 
       <BrandsGrid />
 
-      {/* SECTION COÛT */}
+      {/* SECTION COÛT : les pavés déjà repris par /prix-poele-pellets et
+          /installation-poele-a-pellets sont repliés (texte gardé dans le HTML),
+          l'accueil mesurait 17 700 px sur un téléphone (vérification du 11/11/2026). */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
@@ -455,18 +457,6 @@ export default function HomePage() {
               plus souvent à {typo(rangeText(PRICE_RANGES.standard))} TVAC tout compris (matériel, pose et
               raccordement). Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin
               d&apos;entrée de gamme.
-            </p>
-            <p>
-              Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
-              comptez {typo(rangeText(PRICE_RANGES.canalisable))} TVAC. C'est la majorité de notre activité, sur des maisons à
-              étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
-            </p>
-            <p>
-              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez{" "}
-              {typo(rangeText(PRICE_RANGES.hydro))} TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
-              démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
-              aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
-              typiquement).
             </p>
             <p>
               La pose varie surtout avec l&apos;évacuation : conduit déjà tubé, conduit à tuber, ventouse en
@@ -482,15 +472,35 @@ export default function HomePage() {
               </Link>
               .
             </p>
-            <p>
-              Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
-              l'écrasante majorité des logements wallons concernés ont plus de 10 ans. Cette TVA
-              réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
-              La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
-              désormais par des prêts (Rénopack, Rénoprêt) réservés aux maisons classées E, F ou G
-              qui font un saut de label, à demander avant de signer le moindre devis. Certaines
-              communes gardent une prime énergie, à vérifier auprès d'elles.
-            </p>
+            <details className="group">
+              <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 text-base font-semibold text-mp-green-deep underline decoration-mp-sand underline-offset-4 hover:text-mp-orange-ink [&::-webkit-details-marker]:hidden">
+                Canalisable, hydro et TVA : le détail
+                <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
+              </summary>
+              <div className="mt-4 space-y-4">
+              <p>
+                Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
+                comptez {typo(rangeText(PRICE_RANGES.canalisable))} TVAC. C'est la majorité de notre activité, sur des maisons à
+                étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
+              </p>
+              <p>
+                Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez{" "}
+                {typo(rangeText(PRICE_RANGES.hydro))} TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
+                démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
+                aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
+                typiquement).
+              </p>
+              <p>
+                Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
+                l'écrasante majorité des logements wallons concernés ont plus de 10 ans. Cette TVA
+                réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
+                La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
+                désormais par des prêts (Rénopack, Rénoprêt) réservés aux maisons classées E, F ou G
+                qui font un saut de label, à demander avant de signer le moindre devis. Certaines
+                communes gardent une prime énergie, à vérifier auprès d'elles.
+              </p>
+              </div>
+            </details>
           </div>
         </div>
       </section>
@@ -532,18 +542,33 @@ export default function HomePage() {
               Le devis tombe sous 48 heures ouvrées après visite.
             </p>
             <p>
-              Une fois le devis signé, on commande le matériel (stock atelier ou usine selon
-              modèle). Les modèles courants sont disponibles sous 5 à 10 jours. Pour les
-              configurations spécifiques (couleurs rares, hydros sur-mesure), prévoyez 3 à 5 semaines.
-              On vous donne une date de pose ferme dans le devis.
+              Le déroulé complet, de la visite technique au premier feu, est sur la page{" "}
+              <Link href="/installation-poele-a-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+                installation d&apos;un poêle à pellets
+              </Link>
+              .
             </p>
-            <p>
-              Le jour de la pose, l'équipe arrive entre 8 h et 9 h, démonte l'ancien appareil le
-              cas échéant, prépare la zone (bâches, plaques de protection). Le poêle est mis en
-              place, raccordé, étanchéifié. Le premier feu se fait avec vous en fin d'après-midi,
-              avec la formation à l'app si le poêle est connecté et le réglage de la programmation
-              hebdomadaire selon votre rythme de vie.
-            </p>
+            <details className="group">
+              <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 text-base font-semibold text-mp-green-deep underline decoration-mp-sand underline-offset-4 hover:text-mp-orange-ink [&::-webkit-details-marker]:hidden">
+                Commande du matériel et jour de la pose
+                <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
+              </summary>
+              <div className="mt-4 space-y-4">
+              <p>
+                Une fois le devis signé, on commande le matériel (stock atelier ou usine selon
+                modèle). Les modèles courants sont disponibles sous 5 à 10 jours. Pour les
+                configurations spécifiques (couleurs rares, hydros sur-mesure), prévoyez 3 à 5 semaines.
+                On vous donne une date de pose ferme dans le devis.
+              </p>
+              <p>
+                Le jour de la pose, l'équipe arrive entre 8 h et 9 h, démonte l'ancien appareil le
+                cas échéant, prépare la zone (bâches, plaques de protection). Le poêle est mis en
+                place, raccordé, étanchéifié. Le premier feu se fait avec vous en fin d'après-midi,
+                avec la formation à l'app si le poêle est connecté et le réglage de la programmation
+                hebdomadaire selon votre rythme de vie.
+              </p>
+              </div>
+            </details>
           </div>
         </div>
       </section>
