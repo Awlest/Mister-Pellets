@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { BONUS, isBonusPeriod } from "@/lib/bonus";
+import { typo } from "@/lib/typo";
 
 /**
  * « 24 décembre », tiré de BONUS.to : la date de fin n'est écrite qu'à un
@@ -39,7 +40,7 @@ export function BonusAnnouncement() {
       <span className="flex shrink-0 flex-col items-center rounded-lg bg-mp-orange-flame px-3 py-1.5 text-mp-green-darkest">
         <span className="text-xs font-semibold uppercase leading-none tracking-wide">jusqu&apos;à</span>
         <span className="mt-1 whitespace-nowrap font-display text-xl font-semibold leading-none tabular-nums sm:text-2xl">
-          {BONUS.badge}
+          {typo(BONUS.badge)}
         </span>
       </span>
       <span className="min-w-0">

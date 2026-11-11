@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowDownUp, ChevronDown, SlidersHorizontal } from "lucide-react";
+import { ArrowDownUp, ChevronDown, List, SlidersHorizontal } from "lucide-react";
 import { ProductFeatureLegend } from "@/components/product/ProductFeatureBadges";
-import { ProductListing } from "@/components/product/ProductListing";
+import { ProductListing, type ListingMode } from "@/components/product/ProductListing";
 import { LISTING_PAGE_SIZE, decodeEntry, type CatalogueEntry, type ListedProduct } from "@/lib/catalogue-listing";
 import { DEFAULT_SORT, SORTS, hasPrice, isSortKey, listedPrice, sortProducts, type SortKey } from "@/lib/boutique-sort";
 import {
@@ -119,8 +119,9 @@ const PRICE_FILTERS = [
 ];
 
 /**
- * 44 px de haut sur écran tactile (30 px avant, sous la cible minimale), format
- * compact d'origine à la souris (`pointer-fine`).
+ * 44 px de haut partout (DESIGN.md) : à la souris, le format compact
+ * descendait à 32 px, sous la cible minimale sur un ordinateur tactile.
+ * Seuls le corps et les marges latérales restent resserrés à la souris.
  */
 function FilterPill({
   active,
@@ -143,7 +144,7 @@ function FilterPill({
       className={cn(
         "disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-mp-cream disabled:hover:text-mp-green-deep",
         "inline-flex min-h-11 items-center gap-1 rounded-full px-4 text-sm font-semibold transition-colors",
-        "pointer-fine:min-h-8 pointer-fine:px-3.5 pointer-fine:text-xs",
+        "pointer-fine:px-3.5 pointer-fine:text-xs",
         active
           ? "bg-mp-orange-flame text-mp-green-darkest"
           : "bg-mp-cream border border-mp-sand text-mp-green-deep hover:bg-mp-orange-light hover:text-mp-ink",
@@ -166,6 +167,8 @@ export function BoutiqueExplorer({
   const [current, setCurrent] = useState<Filters>(DEFAULT);
   const [sort, setSort] = useState<SortKey>(DEFAULT_SORT);
   const [visible, setVisible] = useState(LISTING_PAGE_SIZE);
+  // Cartes (photos, « Voir plus ») ou liste compacte de tous les modèles.
+  const [view, setView] = useState<ListingMode>("cartes");
   // Sur mobile, les six groupes de filtres occupaient deux écrans avant le
   // premier poêle (1er modèle à 1 750 px du haut à 375 px) : ils se replient
   // derrière un bouton « Filtres ». Toujours dépliés à partir de 768 px.
@@ -355,7 +358,7 @@ export function BoutiqueExplorer({
               <button
                 type="button"
                 onClick={reset}
-                className="inline-flex min-h-11 items-center text-sm font-semibold text-mp-orange-ink underline hover:no-underline pointer-fine:min-h-0 pointer-fine:text-xs"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-mp-orange-ink underline hover:no-underline pointer-fine:text-xs"
               >
                 Réinitialiser les filtres ({activeCount} actif{activeCount > 1 ? "s" : ""})
               </button>
@@ -364,11 +367,29 @@ export function BoutiqueExplorer({
         </div>
 
         {/* aria-live : un lecteur d'écran annonce le nouveau total après un filtre. */}
-        <p className="[grid-area:count] text-sm text-mp-ink-soft" aria-live="polite">
-          <strong className="text-mp-green-deep">{filtered.length}</strong>{" "}
-          {filtered.length === 1 ? "modèle" : "modèles"}
-          {activeCount > 0 && " correspondant à votre sélection"}
-        </p>
+        <div className="[grid-area:count] flex min-w-0 items-center justify-between gap-3">
+          <p className="min-w-0 text-sm text-mp-ink-soft" aria-live="polite">
+            <strong className="text-mp-green-deep">{filtered.length}</strong>{" "}
+            {filtered.length === 1 ? "modèle" : "modèles"}
+            {activeCount > 0 && " correspondant à votre sélection"}
+          </p>
+          {/* Une seule bascule : en cartes, « Voir plus » montre la suite ; en
+              liste, tous les modèles tiennent en lignes (nom, puissance, prix). */}
+          {filtered.length > 1 && (
+            <button
+              type="button"
+              onClick={() => setView((v) => (v === "cartes" ? "liste" : "cartes"))}
+              aria-pressed={view === "liste"}
+              className={cn(
+                "inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border-2 border-mp-green-deep px-4 text-sm font-semibold transition-colors",
+                view === "liste" ? "bg-mp-green-deep text-white" : "text-mp-green-deep hover:bg-mp-green-deep hover:text-white",
+              )}
+            >
+              <List className="h-4 w-4" aria-hidden />
+              Vue en liste
+            </button>
+          )}
+        </div>
 
         {/* Select natif : clavier, lecteurs d'écran et sélecteur mobile gérés par
             le système. 44 px de haut (cible tactile), 16 px sur mobile pour
@@ -421,8 +442,9 @@ export function BoutiqueExplorer({
         </div>
       ) : (
         <>
-          {/* Légende des pastilles des photos, juste avant les premiers poêles. */}
-          <ProductFeatureLegend className="mb-6" />
+          {/* Légende des pastilles des photos, juste avant les premiers poêles.
+              La vue en liste n'a ni photo ni pastille. */}
+          {view === "cartes" && <ProductFeatureLegend className="mb-6" />}
           {/* Titre de la grille pour les lecteurs d'écran : sans lui, les noms
               de poêles (h3) suivaient directement le h1. */}
           <h2 className="sr-only">Modèles</h2>
@@ -431,6 +453,7 @@ export function BoutiqueExplorer({
             visible={visible}
             onShowMore={() => setVisible((v) => v + LISTING_PAGE_SIZE)}
             priority
+            mode={view}
           />
         </>
       )}

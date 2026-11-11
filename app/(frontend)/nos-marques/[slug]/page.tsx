@@ -282,14 +282,15 @@ export default async function BrandPage({ params }: Props) {
                     <Badge variant="primary">{model.power}</Badge>
                     {model.type && <Badge variant="outline">{model.type}</Badge>}
                   </div>
+                  {/* 44 px de haut, lien compris : le titre seul en faisait 25. */}
                   <h3
-                    className="text-xl font-semibold text-mp-green-deep mt-1"
+                    className="flex min-h-11 items-center text-xl font-semibold text-mp-green-deep"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {model.slug && visibleSlugs.has(model.slug) ? (
                       <Link
                         href={`/produit/${model.slug}`}
-                        className="hover:text-mp-orange-ink underline-offset-4 hover:underline"
+                        className="inline-flex min-h-11 items-center hover:text-mp-orange-ink underline-offset-4 hover:underline"
                       >
                         {brand.name} {model.name}
                       </Link>

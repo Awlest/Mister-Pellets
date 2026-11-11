@@ -8,6 +8,7 @@ import { BoutiqueExplorer } from "@/components/boutique/BoutiqueExplorer";
 import { DEFAULT_SORT, sortProducts, withRecency } from "@/lib/boutique-sort";
 import { encodeListing } from "@/lib/catalogue-listing";
 import { BONUS, isBonusPeriod } from "@/lib/bonus";
+import { typo } from "@/lib/typo";
 
 export const metadata = buildPageMetadata({
   title: "Boutique poêles à pellets en Wallonie",
@@ -67,7 +68,7 @@ export default async function BoutiquePage() {
             <details className="group mb-4 rounded-2xl border border-mp-orange-flame/40 bg-mp-orange-light/50 px-4 text-sm text-mp-ink">
               <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
                 <span>
-                  <strong className="text-mp-green-deep">{BONUS.label}</strong> : prix déjà remisés.
+                  <strong className="text-mp-green-deep">{typo(BONUS.label)}</strong> : prix déjà remisés.
                 </span>
                 <span className="shrink-0 text-xs font-semibold text-mp-orange-ink underline underline-offset-2">
                   Conditions

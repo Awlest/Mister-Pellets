@@ -27,6 +27,8 @@ import { BRANDS, TOP_TIER_BRANDS } from "@/lib/brands";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { BONUS, bonusLabelFor } from "@/lib/bonus";
+import { typo } from "@/lib/typo";
+import { productFamily, productNeighbours } from "@/lib/product-neighbours";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { formatKw } from "@/lib/power";
 import { categoriesOf } from "@/lib/categories";
@@ -115,14 +117,6 @@ function priceSentence(product: ProductDemo): string {
   return `${from}${formatPrice(shown)} TVAC, hors pose.`;
 }
 
-/** Famille d'un appareil, pour proposer des modèles comparables d'une autre marque. */
-function family(p: ProductDemo): "insert" | "hydro" | "canalisable" | "air" {
-  if (p.type === "insert" || p.appliance === "insert" || p.appliance === "foyer") return "insert";
-  if (p.isHydro || p.type === "hydro" || p.type === "hybride-hydro") return "hydro";
-  if (p.isCanalizable || p.type === "canalisable") return "canalisable";
-  return "air";
-}
-
 /** Libellé lisible du type, à la place de la valeur technique (« standard », « hybride-hydro »). */
 const TYPE_TITLES: Record<ProductType, string> = {
   standard: "Poêle à air",
@@ -135,7 +129,7 @@ const TYPE_TITLES: Record<ProductType, string> = {
 
 /** Guide ou article qui détaille le type de l'appareil, quand il existe. */
 function typeGuide(p: ProductDemo): { href: string; label: string } | undefined {
-  switch (family(p)) {
+  switch (productFamily(p)) {
     case "canalisable":
       return { href: "/guides/poele-pellets-canalisable", label: "Guide du poêle canalisable" };
     case "hydro":
@@ -165,28 +159,10 @@ export default async function ProductPage({ params }: Props) {
     ? `${ROUTES.brands}/${brandSlug}`
     : ROUTES.brands;
 
-  // Modèles voisins : 3 de la même marque, puis 3 d'une autre marque, de même
-  // famille (air, canalisable, hydro, insert) et de puissance proche. Chaque
-  // fiche reçoit ainsi des liens d'autres fiches, pas seulement de sa marque.
-  // getAllProducts renvoie les fiches de la plus récente à la plus ancienne :
-  // on montre d'abord celles qui ont une photo et le même combustible.
-  const allProducts = (await getAllProducts()).filter((p) => p.slug !== product.slug);
-  const fit = (p: ProductDemo) => (p.imageSrc ? 2 : 0) + (p.combustible === product.combustible ? 1 : 0);
-  const closeness = (p: ProductDemo) => Math.abs(p.powerKw - product.powerKw);
-  const sameBrand = allProducts
-    .filter((p) => p.brand === product.brand)
-    .map((p, i) => ({ p, i }))
-    .sort((a, b) => fit(b.p) - fit(a.p) || Number(family(b.p) === family(product)) - Number(family(a.p) === family(product)) || a.i - b.i)
-    .slice(0, 3)
-    .map(({ p }) => p);
-  const otherBrands = allProducts
-    .filter((p) => p.brand !== product.brand && family(p) === family(product))
-    .map((p, i) => ({ p, i }))
-    .sort((a, b) => fit(b.p) - fit(a.p) || closeness(a.p) - closeness(b.p) || a.i - b.i)
-    // Une fiche par marque d'abord, pour varier les propositions.
-    .filter(({ p }, index, list) => list.findIndex((x) => x.p.brand === p.brand) === index)
-    .slice(0, 3)
-    .map(({ p }) => p);
+  // Modèles voisins : 3 de la même marque, puis 3 d'autres marques, de même
+  // famille (air, canalisable, hydro, insert) et de puissance proche
+  // (lib/product-neighbours.ts).
+  const { sameBrand, otherBrands } = productNeighbours(product, await getAllProducts());
 
   // Prix de la fiche : bonus de saison, sinon promo admin, sinon catalogue, avec
   // le prix précédent barré (lib/product-price.ts).
@@ -420,7 +396,7 @@ export default async function ProductPage({ params }: Props) {
                       </p>
                       {product.bonusPriceTTC ? (
                         <p className="mt-2 text-sm text-mp-ink-soft">
-                          {bonusLabelFor(product.brand)} déduit. {BONUS.conditions}
+                          {typo(bonusLabelFor(product.brand))} déduit. {BONUS.conditions}
                         </p>
                       ) : null}
                     </div>

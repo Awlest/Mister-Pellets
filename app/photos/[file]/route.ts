@@ -1,5 +1,6 @@
 import { after } from "next/server";
 import { put } from "@vercel/blob";
+import { mediaStoreBase } from "@/lib/media-file";
 import { WEBP_QUALITY, notFound, parsePhotoName, servePhoto } from "@/lib/photo-webp";
 
 /**
@@ -24,13 +25,10 @@ import { WEBP_QUALITY, notFound, parsePhotoName, servePhoto } from "@/lib/photo-
  * fichier converti par URL, aucune variante créée à la demande.
  */
 
-/** Base des fichiers : Blob public (même règle que @payloadcms/storage-vercel-blob). */
+/** Base des fichiers : Blob public, la même que la route des médias (lib/media-file.ts). */
 function sourceBase(): string {
-  if (process.env.STORAGE_VERCEL_BLOB_BASE_URL) return process.env.STORAGE_VERCEL_BLOB_BASE_URL;
-  const storeId = process.env.BLOB_READ_WRITE_TOKEN?.match(/^vercel_blob_rw_([a-z\d]+)_[a-z\d]+$/i)?.[1];
-  if (storeId) return `https://${storeId.toLowerCase()}.public.blob.vercel-storage.com`;
   // Sans Blob (poste de développement) : les fichiers de la prod, en lecture.
-  return "https://mister-pellets.be/api/media/file";
+  return mediaStoreBase() ?? "https://mister-pellets.be/api/media/file";
 }
 
 /** Copie rangée dans le Blob ; un échec ne touche pas la réponse déjà partie. */
