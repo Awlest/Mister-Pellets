@@ -83,6 +83,21 @@ export const POSE_DURATIONS = {
   hydro: "deux à trois jours",
 } as const;
 
+/**
+ * Délai d'un projet, du premier contact à la mise en service : la valeur de
+ * la FAQ « general-delai », de l'accueil et de la page installation, reprise
+ * par les pages ville (qui écrivaient « Pose 2-3 semaines », vérification du
+ * 11/11/2026). Une seule source ; durée à confirmer par le propriétaire.
+ */
+export const PROJECT_LEAD_TIME = {
+  /** « 3 à 6 semaines » : pastille et phrases courtes. */
+  range: "3 à 6 semaines",
+  /** Ce que mesure le délai, à écrire à côté. */
+  scope: "du premier contact à la mise en service",
+  /** Réserve de saison. */
+  season: "en saison normale, plus long de septembre à décembre",
+} as const;
+
 export const PHONE_DISPLAY = "081 13 83 09";
 export const PHONE_HREF = "tel:+3281138309";
 

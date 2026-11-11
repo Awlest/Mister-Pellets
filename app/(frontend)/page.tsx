@@ -13,7 +13,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { DEFAULT_OG_IMAGE, SITE_LOCALE, SITE_NAME, SITE_URL, buildFAQSchema } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
 import { typo } from "@/lib/typo";
-import { POSE_DURATIONS } from "@/lib/services";
+import { POSE_DURATIONS, PROJECT_LEAD_TIME } from "@/lib/services";
 import { POWER_RULE, kwFor } from "@/lib/power";
 import { ALL_PELLET_RANGE, PRICE_RANGES, rangeText } from "@/lib/price-ranges";
 
@@ -526,8 +526,8 @@ export default function HomePage() {
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
-              Du premier contact à la mise en service, comptez 3 à 6 semaines en saison normale, un
-              peu plus long de septembre à décembre où la demande est forte. Le diagnostic à
+              Comptez {PROJECT_LEAD_TIME.range} {PROJECT_LEAD_TIME.scope}, {PROJECT_LEAD_TIME.season},
+              quand la demande est forte. Le diagnostic à
               domicile peut être planifié dans la semaine qui suit votre appel ou votre formulaire.
               Le devis tombe sous 48 heures ouvrées après visite.
             </p>

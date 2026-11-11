@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CITIES, getCityBySlug } from "@/lib/cities";
 import { getAllProducts } from "@/lib/products";
+import { PROJECT_LEAD_TIME } from "@/lib/services";
 import { ORGANIZATION_ID, buildPageMetadata } from "@/lib/seo";
 
 interface Props {
@@ -128,7 +129,8 @@ export default async function CityPage({ params }: Props) {
               </Badge>
             )}
             <Badge variant="default">
-              <Clock className="h-3.5 w-3.5" /> Pose 2-3 semaines
+              {/* Même délai que l'accueil, la FAQ et la page installation (lib/services.ts). */}
+              <Clock className="h-3.5 w-3.5" /> Projet en {PROJECT_LEAD_TIME.range}
             </Badge>
             <Badge variant="default">CP : {city.postalCodes.join(", ")}</Badge>
           </div>
@@ -217,7 +219,7 @@ export default async function CityPage({ params }: Props) {
         title={`Devis pour ${city.name}, gratuit, en 60 secondes`}
         description={
           free
-            ? "Livraison gratuite incluse, pose en 2-3 semaines après signature du devis."
+            ? `Livraison gratuite incluse. Comptez ${PROJECT_LEAD_TIME.range} ${PROJECT_LEAD_TIME.scope}.`
             : "Pas dans la zone gratuite des 20 km, mais on couvre : forfait livraison transparent dans le devis (50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre)."
         }
       />

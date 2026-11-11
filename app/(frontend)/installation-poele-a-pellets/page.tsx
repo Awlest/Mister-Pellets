@@ -14,7 +14,7 @@ import { eur } from "@/lib/estimate";
 import { getInstallPrices, heightNote } from "@/lib/price-examples";
 import { HAUTEUR, OPTIONS, VAT, formatEur, withVat } from "@/lib/pose/moteur";
 import { TARIFS } from "@/lib/pose/tarifs";
-import { POSE_DURATIONS, getService } from "@/lib/services";
+import { POSE_DURATIONS, PROJECT_LEAD_TIME, getService } from "@/lib/services";
 import { ORGANIZATION_ID, SITE_URL, buildFAQSchema, buildPageMetadata } from "@/lib/seo";
 import { typo } from "@/lib/typo";
 
@@ -81,7 +81,7 @@ export default function InstallationPage() {
     {
       question: "Quel délai entre la demande et la pose ?",
       answer:
-        "Comptez 3 à 6 semaines en saison normale, plus longtemps de septembre à décembre. La visite technique se planifie dans la semaine qui suit votre demande et le devis arrive sous 48 heures ouvrées. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours.",
+        `Comptez ${PROJECT_LEAD_TIME.range} ${PROJECT_LEAD_TIME.scope}, ${PROJECT_LEAD_TIME.season}. La visite technique se planifie dans la semaine qui suit votre demande et le devis arrive sous 48 heures ouvrées. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours.`,
     },
   ];
 

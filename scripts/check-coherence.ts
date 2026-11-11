@@ -10,6 +10,8 @@
  * 2. Fourchettes de prix d'un poêle posé : une seule source
  *    (lib/price-ranges.ts) pour l'accueil, la FAQ, le guide d'achat, llms.txt
  *    et llms-full.txt ; aucun montant de fourchette écrit à la main à côté.
+ * 3. Délai d'un projet : la constante de lib/services.ts, reprise par la FAQ,
+ *    l'accueil, la page installation et les pages ville.
  */
 import { readFileSync } from "node:fs";
 import { requestedModel, type EstimateProduct } from "@/lib/estimate";
@@ -24,6 +26,7 @@ import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
 import { FAQS } from "@/lib/faqs";
 import { getGuideBySlug } from "@/lib/guides";
 import { NBSP, NNBSP } from "@/lib/typo";
+import { PROJECT_LEAD_TIME } from "@/lib/services";
 
 let ko = 0;
 function check(label: string, got: unknown, want: unknown) {
@@ -117,6 +120,21 @@ for (const [file, allowed] of Object.entries(ALLOWED)) {
 }
 for (const file of ["app/(frontend)/page.tsx", "app/llms.txt/route.ts"]) {
   assert(`${file} : lit lib/price-ranges.ts`, readFileSync(file, "utf8").includes("@/lib/price-ranges"));
+}
+
+// ---------------------------------------------------------------------------
+// 3. Délai d'un projet
+// ---------------------------------------------------------------------------
+const delayFaq = FAQS.find((f) => f.id === "general-delai")?.answer ?? "";
+assert("FAQ délai : constante de lib/services.ts", delayFaq.includes(PROJECT_LEAD_TIME.range));
+for (const file of [
+  "app/(frontend)/page.tsx",
+  "app/(frontend)/installation-poele-a-pellets/page.tsx",
+  "app/(frontend)/poeles-pellets/[ville]/page.tsx",
+]) {
+  const text = readFileSync(file, "utf8");
+  assert(`${file} : lit PROJECT_LEAD_TIME`, text.includes("PROJECT_LEAD_TIME.range"));
+  assert(`${file} : aucun délai de pose écrit à la main`, !/(?:Pose|pose)[ \u00a0]+(?:en[ \u00a0]+)?\d+[-\u00a0 à]+\d+[ \u00a0]semaines/.test(text));
 }
 
 if (ko > 0) {
