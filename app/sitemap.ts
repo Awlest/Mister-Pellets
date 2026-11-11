@@ -41,6 +41,7 @@ export const revalidate = 3600; // 1h ISR
 const CONTENT_DATES = {
   // Lot du 11/11/2026 : catalogue recentré sur le pellet, maillage, données structurées.
   [ROUTES.home]: "2026-11-11",
+  [ROUTES.installation]: "2026-11-11",
   [ROUTES.shop]: "2026-11-11",
   [ROUTES.pellets]: "2026-11-11",
   [ROUTES.quoteForm]: "2026-11-11",
@@ -100,6 +101,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     page(ROUTES.booking, "yearly", 0.7),
     // Prestations d'entretien : pages d'arrivée du groupe d'annonces « services »
     // et cibles des requêtes « ramonage / entretien / dépannage poêle à pellets ».
+    page(ROUTES.installation, "monthly", 0.9),
     page(ROUTES.sweeping, "monthly", 0.8),
     page(ROUTES.maintenance, "monthly", 0.8),
     page(ROUTES.repair, "monthly", 0.8),
@@ -114,7 +116,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ===== CATÉGORIES DU CATALOGUE =====
   const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((category) => ({
     url: `${SITE_URL}${category.path}`,
-    lastModified: day(CATALOGUE_PAGES_DATE),
+    lastModified: day(category.modifiedAt),
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));

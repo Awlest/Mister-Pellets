@@ -9,13 +9,13 @@ import { ROUTES } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BONUS, bonusBadgeFor } from "@/lib/bonus";
-import { HAUTEUR, TARIFS, eur, eurCents } from "@/lib/estimate";
+import { HAUTEUR, TARIFS, eur } from "@/lib/estimate";
 import { DiscountedPrice } from "@/components/forms/DiscountedPrice";
 import {
   EXAMPLE_INSTALL_LABEL,
   FROM_INSTALL_LABEL,
   getPricePageData,
-  type InstallPrice,
+  heightNote,
   type PriceExample,
 } from "@/lib/price-examples";
 import { formatKw } from "@/lib/power";
@@ -423,14 +423,6 @@ function ExampleCard({ ex, bonus }: { ex: PriceExample; bonus: boolean }) {
 }
 
 /** « Forfait pour 10 m, 127,20 € par mètre en plus ou en moins. » */
-function heightNote(it: InstallPrice): string {
-  const base = `Forfait pour ${it.heightM} m`;
-  if (it.lessPerMeterTTC === it.morePerMeterTTC) {
-    return `${base}, ${eurCents(it.morePerMeterTTC)} par mètre en plus ou en moins.`;
-  }
-  return `${base}, ${eurCents(it.lessPerMeterTTC)} de moins par mètre en dessous, ${eurCents(it.morePerMeterTTC)} de plus par mètre au-dessus.`;
-}
-
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between gap-3">

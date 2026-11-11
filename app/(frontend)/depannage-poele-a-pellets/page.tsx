@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ServiceLanding } from "@/components/sections/ServiceLanding";
 import { getService } from "@/lib/services";
 import { buildPageMetadata } from "@/lib/seo";
@@ -53,7 +54,12 @@ export default function DepannagePage() {
                 <strong>Un code erreur s&apos;affiche.</strong> Notez-le et donnez-le nous au
                 téléphone. Chaque fabricant a sa nomenclature, et le code oriente déjà le
                 diagnostic, parfois même vers quelque chose que vous pouvez régler seul en
-                cinq minutes, auquel cas on vous le dira sans nous déplacer.
+                cinq minutes, auquel cas on vous le dira sans nous déplacer. Ce que disent les
+                notices :{" "}
+                <Link href="/guides/codes-erreur-poele-pellets" className="text-mp-orange-ink underline hover:no-underline">
+                  codes d&apos;erreur d&apos;un poêle à pellets
+                </Link>
+                .
               </p>
             </>
           ),

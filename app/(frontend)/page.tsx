@@ -13,6 +13,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { DEFAULT_OG_IMAGE, SITE_LOCALE, SITE_NAME, SITE_URL, buildFAQSchema } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
 import { typo } from "@/lib/typo";
+import { POSE_DURATIONS } from "@/lib/services";
+import { POWER_RULE, kwFor } from "@/lib/power";
 
 /**
  * Régénération horaire : l'annonce du bonus de saison dépend de la date. Le
@@ -59,13 +61,11 @@ const FAQ_HOMEPAGE = [
   },
   {
     question: "Quelle puissance de poêle pour quelle surface ?",
-    answer:
-      "La règle de base en Wallonie : 1 kW pour 10 m² si la maison est PEB B, 1 kW pour 12-15 m² en PEB A, 1 kW pour 7-8 m² en PEB E ou pire. Une maison de 100 m² PEB C demande donc autour de 12 kW. On affine toujours sur place avant le devis : surface, isolation, hauteur sous plafond, conduit existant, mode de vie.",
+    answer: `Comptez ${POWER_RULE}. Une maison de 100 m² en PEB C demande donc environ ${kwFor(100, "bonne")} kW. On affine toujours sur place avant le devis : surface, isolation, hauteur sous plafond, conduit existant, mode de vie. Le calcul complet est dans le [guide de la puissance](/guides/quelle-puissance-poele-pellets).`,
   },
   {
     question: "Combien de temps prend la pose d'un poêle à pellets ?",
-    answer:
-      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours.",
+    answer: `Une pose standard sur conduit existant se fait en ${POSE_DURATIONS.standard}, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend ${POSE_DURATIONS.canalisable}. Un hydro complet avec raccordement aux radiateurs et désembouage compte ${POSE_DURATIONS.hydro}.`,
   },
   {
     question: "Existe-t-il encore une prime pour un poêle à pellets en Wallonie ?",
@@ -160,7 +160,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 mp-measure mx-auto">
-              MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
+              Des poêles à pellets, qu&apos;on appelle aussi poêles à granulés. MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
               Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
               TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
               provinces wallonnes depuis 2016.
@@ -245,9 +245,7 @@ export default function HomePage() {
               tampon.
             </p>
             <p>
-              La règle de dimensionnement la plus simple, valable pour le climat wallon : multipliez
-              votre surface par 0,10 si la PEB est bonne (A-B), par 0,12 si elle est moyenne (C-D), et
-              par 0,15 si elle est faible (E-G). Vous obtenez la puissance cible en kW. Sur le terrain
+              {typo(`La règle de dimensionnement de notre estimation en ligne : ${POWER_RULE}. Multipliez par la surface, vous obtenez la puissance cible.`)} Sur le terrain
               on affine toujours en regardant la maison : sous-dimensionner brûle le matériel,
               sur-dimensionner provoque encrassement et inconfort.
             </p>
@@ -472,6 +470,10 @@ export default function HomePage() {
               exemples chiffrés sont sur la page{" "}
               <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
                 prix d&apos;un poêle à pellets posé
+              </Link>
+              . Le déroulé de la pose, de la visite technique au premier feu, est sur la page{" "}
+              <Link href="/installation-poele-a-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+                installation d&apos;un poêle à pellets
               </Link>
               .
             </p>

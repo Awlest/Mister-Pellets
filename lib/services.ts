@@ -68,6 +68,21 @@ export interface Service {
   isLead?: false;
 }
 
+/**
+ * Durées de chantier annoncées sur tout le site (FAQ, accueil, page
+ * installation, catégorie et guide hydro, guide canalisable) : les valeurs de
+ * la FAQ « installation-duree », en place avant le lot du 11/11/2026. Une
+ * seule source : changer ici change partout.
+ */
+export const POSE_DURATIONS = {
+  /** Poêle à air sur un conduit existant. */
+  standard: "une journée",
+  /** Canalisable avec gaines vers d'autres pièces. */
+  canalisable: "un jour et demi en moyenne",
+  /** Hydro raccordé aux radiateurs, désembouage compris. */
+  hydro: "deux à trois jours",
+} as const;
+
 export const PHONE_DISPLAY = "081 13 83 09";
 export const PHONE_HREF = "tel:+3281138309";
 

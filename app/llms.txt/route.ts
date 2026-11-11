@@ -10,6 +10,7 @@ import { COMFO, PALLET_NET_KG, PELLET_OFFER, formatEuro, isPelletLaunchPeriod, l
 import { FROM_INSTALL_LABEL, getPricePageData, type PricePageData } from "@/lib/price-examples";
 import { errorInfo } from "@/lib/log-error";
 import { AIDES_VERIFIED_AT } from "@/lib/aides";
+import { POWER_RULE, kwFor } from "@/lib/power";
 
 /**
  * /llms.txt : résumé en texte brut destiné aux assistants (ChatGPT, Claude,
@@ -183,13 +184,12 @@ ${priceLines(prices)}
   conditions et l'exemple représentatif sont affichés dans le configurateur.
   Attention, emprunter de l'argent coûte aussi de l'argent.
 
-## Dimensionnement, règle de base en Wallonie
+## Dimensionnement (grille de l'estimation en ligne)
 
-- 1 kW pour 10 m² en PEB B.
-- 1 kW pour 12 à 15 m² en PEB A.
-- 1 kW pour 7 à 8 m² en PEB E ou moins bon.
-- Une maison de 100 m² en PEB C demande donc autour de 12 kW. Le calcul est
+- Besoin de chauffe : ${POWER_RULE}, pour 2,50 m sous plafond.
+- Une maison de 100 m² en PEB C demande donc environ ${kwFor(100, "bonne")} kW. Le calcul est
   affiné sur place : isolation, hauteur sous plafond, conduit existant, mode de vie.
+- Tableaux complets : ${SITE_URL}${ROUTES.guides}/quelle-puissance-poele-pellets
 
 ## Garanties et cadre
 
@@ -210,14 +210,19 @@ ${priceLines(prices)}
 
 ## Pages de référence
 
+Texte complet des pages de contenu : ${SITE_URL}/llms-full.txt. Chaque guide, article et page marque existe aussi en Markdown (adresse suivie de « .md »).
+
+
 - Accueil : ${SITE_URL}/
 - Prix d'un poêle à pellets posé : ${SITE_URL}${ROUTES.prices}
+- Installation et pose (déroulé, forfaits par évacuation, TVA à 6 %) : ${SITE_URL}${ROUTES.installation}
 - Configurateur, prix tout compris : ${SITE_URL}${ROUTES.configurator}
 - Prise de rendez-vous en ligne : ${SITE_URL}${ROUTES.booking}
 - Boutique : ${SITE_URL}${ROUTES.shop}
 - Palette de pellets Comfo : ${SITE_URL}${ROUTES.pellets}
 - Prix des pellets en Wallonie, relevé mensuel de ValBiom et prix du kWh : ${SITE_URL}${ROUTES.blog}/prix-pellets-belgique
 - Poêle à pellets et coupure de courant (consommation, onduleur, redémarrage) : ${SITE_URL}${ROUTES.blog}/poele-pellets-sans-electricite-coupure-courant
+- Codes d'erreur et alarmes d'un poêle à pellets (table Cadel, réarmement) : ${SITE_URL}${ROUTES.guides}/codes-erreur-poele-pellets
 - Entretien annuel : ${SITE_URL}${ROUTES.maintenance}
 - Ramonage : ${SITE_URL}${ROUTES.sweeping}
 - Dépannage : ${SITE_URL}${ROUTES.repair}
@@ -250,6 +255,7 @@ ${faqExtract}
   return new Response(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
+      "X-Robots-Tag": "noindex",
       "Cache-Control": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800",
     },
   });

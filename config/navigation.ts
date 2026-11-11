@@ -23,6 +23,8 @@ export const ROUTES = {
   prices: "/prix-poele-pellets",
   product: "/produit",
   brands: "/nos-marques",
+  /** Page de service : déroulé de la pose, forfaits par évacuation, TVA. */
+  installation: "/installation-poele-a-pellets",
   maintenance: "/entretien-poele-a-pellets",
   sweeping: "/ramonage",
   repair: "/depannage-poele-a-pellets",
@@ -63,6 +65,7 @@ export const PUBLISHED: ReadonlySet<string> = new Set<string>([
   ROUTES.airtight,
   ROUTES.prices,
   ROUTES.brands,
+  ROUTES.installation,
   ROUTES.maintenance,
   ROUTES.sweeping,
   ROUTES.repair,
@@ -140,6 +143,7 @@ export const BRAND_LINKS: readonly NavLink[] = [
 
 /** Services : pose et suivi, puis les deux portes d'entrée d'un projet. */
 export const SERVICE_LINKS: readonly NavLink[] = [
+  { href: ROUTES.installation, label: "Installation et pose", short: "Installation", desc: "Visite, pose, mise en service" },
   { href: ROUTES.maintenance, label: "Entretien annuel", short: "Entretien", desc: "Révision complète, par téléphone" },
   { href: ROUTES.sweeping, label: "Ramonage", short: "Ramonage", desc: "Certificat remis sur place" },
   { href: ROUTES.repair, label: "Dépannage", short: "Dépannage", desc: "Panne, code erreur, extinction" },
@@ -184,7 +188,7 @@ export type NavEntry = { key: FamilyNavKey; label: string; href: string; childre
 export const MAIN_NAV: readonly NavEntry[] = [
   { key: "catalogue", label: "Catalogue", href: ROUTES.shop, children: CATALOGUE_LINKS },
   { key: "marques", label: "Marques", href: ROUTES.brands, children: BRAND_LINKS },
-  { key: "services", label: "Services", href: ROUTES.maintenance, children: SERVICE_LINKS.slice(0, 3) },
+  { key: "services", label: "Services", href: ROUTES.maintenance, children: SERVICE_LINKS.slice(0, 4) },
   { key: "aides", label: "Aides", href: ROUTES.grants },
   { key: "realisations", label: "Réalisations", href: ROUTES.realisations },
   { key: "conseils", label: "Conseils", href: ROUTES.guides, children: ADVICE_LINKS },

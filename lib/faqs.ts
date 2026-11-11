@@ -14,6 +14,8 @@
  */
 
 import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
+import { POSE_DURATIONS } from "@/lib/services";
+import { POWER_RULE, kwFor } from "@/lib/power";
 
 export type FaqCategory =
   | "general"
@@ -100,14 +102,14 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Quelle puissance de poêle pour 100 m² bien isolés ?",
     answer:
-      "Pour 100 m² PEB B, visez 8 à 10 kW. Pour la même surface en PEB A (passif ou quasi-passif), 7 à 8 kW suffisent. Pour PEB C-D, montez à 10-12 kW. Pour PEB E ou pire, prévoyez 12 à 15 kW. Multipliez votre surface par 0,10 si la PEB est bonne (A-B), par 0,12 si moyenne (C-D), par 0,15 si faible (E-G). Ajoutez 10 % par 25 cm de plafond au-dessus de 2,50 m. Sur le terrain, on affine toujours en regardant la maison.",
+      `Pour 100 m², environ ${kwFor(100, "recent")} kW en PEB A ou B, ${kwFor(100, "bonne")} kW en PEB C ou D, ${kwFor(100, "moyenne")} kW en PEB E et ${kwFor(100, "ancienne")} kW en PEB F ou G. C'est la grille de notre estimation en ligne : ${POWER_RULE}, pour une hauteur sous plafond de 2,50 m environ. Plafond haut ou volume ouvert : comparez le volume de la pièce au volume de chauffe de la fiche. Le détail est dans le [guide de la puissance](/guides/quelle-puissance-poele-pellets), et la visite technique affine.`,
   },
   {
     id: "choisir-puissance-150",
     category: "choisir",
     question: "Quelle puissance pour 150 m² mal isolés ?",
     answer:
-      "Pour 150 m² en PEB E ou F, visez 18 à 22 kW. À ce niveau de puissance et de surface, mieux vaut passer sur un canalisable qui distribue la chaleur dans plusieurs pièces, voire un hydro raccordé aux radiateurs si la maison a déjà un circuit central. Un seul poêle d'air à 22 kW dans une grande maison mal isolée chauffera essentiellement la pièce d'installation et laissera les autres au froid. Le diagnostic à domicile valide la stratégie avant signature du devis.",
+      `Pour 150 m², comptez environ ${kwFor(150, "moyenne")} kW en PEB E et ${kwFor(150, "ancienne")} kW en PEB F ou G, selon la grille de notre estimation en ligne. À ce niveau, ni un poêle à air ni un canalisable ne conviennent : c'est le travail d'un [poêle hydro](/poeles-a-pellets-hydro) raccordé aux radiateurs, si la maison a un chauffage central. Isoler d'abord fait aussi baisser la puissance nécessaire. Le diagnostic à domicile valide la solution avant le devis.`,
   },
   {
     id: "choisir-poele-vs-chaudiere",
@@ -216,6 +218,13 @@ export const FAQS: FaqItem[] = [
       "Pour une maison wallonne PEB B-C de 120 m² avec un poêle 10 kW en chauffage principal, comptez 1,5 à 2 tonnes par saison de chauffe (octobre à avril). En appoint sur les 3 mois d'hiver les plus froids, plutôt 600 à 900 kg. La consommation réelle dépend de l'isolation, de la température de consigne, du nombre d'occupants, et de la rigueur de l'hiver. Sur 5 ans, un Wallon moyen consomme entre 7 et 10 tonnes de pellets pour un usage chauffage principal.",
   },
   {
+    id: "pellets-granules",
+    category: "pellets",
+    question: "Pellets ou granulés : est-ce la même chose ?",
+    answer:
+      "Oui. « Pellets » et « granulés de bois » désignent le même combustible : de la sciure compactée en petits cylindres de 6 mm de diamètre. Un poêle à pellets et un poêle à granulés sont donc le même appareil. Ce qui compte, c'est la certification du sac, ENplus A1 ou DINplus A1 : voyez la question suivante.",
+  },
+  {
     id: "pellets-enplus-vs-dinplus",
     category: "pellets",
     question: "ENplus A1 ou DINplus : quelle différence ?",
@@ -252,7 +261,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Combien de temps prend la pose d'un poêle à pellets ?",
     answer:
-      "Une pose standard sur conduit existant se fait en une journée, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend 1,5 jour en moyenne. Un hydro complet avec raccordement aux radiateurs et désembouage compte 2 à 3 jours. L'équipe arrive entre 8h et 9h, prépare la zone (bâches, plaques de protection), pose, raccorde, étanchéifie, met en service.",
+      `Une pose standard sur conduit existant se fait en ${POSE_DURATIONS.standard}, du démontage de l'ancien appareil au premier feu avec vous en fin d'après-midi. Un canalisable avec gaines vers d'autres pièces prend ${POSE_DURATIONS.canalisable}. Un hydro complet avec raccordement aux radiateurs et désembouage compte ${POSE_DURATIONS.hydro}. L'équipe arrive entre 8h et 9h, prépare la zone (bâches, plaques de protection), pose, raccorde, étanchéifie, met en service.`,
   },
   {
     id: "installation-plafond",

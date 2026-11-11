@@ -6,6 +6,7 @@ import {
   INSTALL_TYPES,
   VAT,
   estimate,
+  eurCents,
   type EstimateProduct,
   type EstimateState,
   type InstallType,
@@ -152,25 +153,13 @@ function pickExamples(pool: EstimateProduct[]): EstimateProduct[] {
     .filter((p): p is EstimateProduct => p !== undefined);
 }
 
-export async function getPricePageData(now: Date = new Date()): Promise<PricePageData> {
-  const bonus = isBonusPeriod(now);
-  const catalog = await getEstimateCatalog();
-
-  // Poêles à pellets classiques seulement : ni bois, ni hybride, ni hydro, ni
-  // appareil désigné autrement qu'en poêle (foyer, chaudière).
-  const standard = catalog.filter(
-    (p) =>
-      p.productType === "standard" &&
-      !p.isHydro &&
-      (p.combustible ?? "pellet") === "pellet" &&
-      (!p.appliance || p.appliance === "poele"),
-  );
-  const inRange = standard.filter((p) => p.powerKw >= POWER_MIN_KW && p.powerKw <= POWER_MAX_KW);
-  const pool = cheapestPerSlug(inRange.length > 0 ? inRange : standard);
-
-  // Forfaits de pose : mêmes prix et mêmes remises que le configurateur, à la
-  // hauteur de référence du forfait.
-  const installs: InstallPrice[] = TARIFS.evacuationsProposees.map((key) => {
+/**
+ * Forfaits de pose par évacuation : mêmes prix et mêmes remises que le
+ * configurateur, à la hauteur de référence du forfait. Sans lecture du
+ * catalogue : la page /installation-poele-a-pellets les lit aussi.
+ */
+export function getInstallPrices(): InstallPrice[] {
+  return TARIFS.evacuationsProposees.map((key) => {
     const t = INSTALL_TYPES[key];
     const rule = heightRule(key, TARIFS);
     const price = evacuationPrice(key, rule?.hauteurRefM ?? HAUTEUR.defaut, TARIFS, REMISES);
@@ -191,14 +180,40 @@ export async function getPricePageData(now: Date = new Date()): Promise<PricePag
       percements: t.percements,
     };
   });
+}
+
+export async function getPricePageData(now: Date = new Date()): Promise<PricePageData> {
+  const bonus = isBonusPeriod(now);
+  const catalog = await getEstimateCatalog();
+
+  // Poêles à pellets classiques seulement : ni bois, ni hybride, ni hydro, ni
+  // appareil désigné autrement qu'en poêle (foyer, chaudière).
+  const standard = catalog.filter(
+    (p) =>
+      p.productType === "standard" &&
+      !p.isHydro &&
+      (p.combustible ?? "pellet") === "pellet" &&
+      (!p.appliance || p.appliance === "poele"),
+  );
+  const inRange = standard.filter((p) => p.powerKw >= POWER_MIN_KW && p.powerKw <= POWER_MAX_KW);
+  const pool = cheapestPerSlug(inRange.length > 0 ? inRange : standard);
 
   const cheapest = pool[0];
   return {
     bonus,
     from: cheapest ? priceExample(cheapest, FROM_INSTALL, bonus) : null,
     examples: pickExamples(pool).map((p) => priceExample(p, EXAMPLE_INSTALL, bonus)),
-    installs,
+    installs: getInstallPrices(),
   };
+}
+
+/** Règle de hauteur d'un forfait, en une phrase : « Forfait pour 10 m, … ». */
+export function heightNote(it: InstallPrice): string {
+  const base = `Forfait pour ${it.heightM} m`;
+  if (it.lessPerMeterTTC === it.morePerMeterTTC) {
+    return `${base}, ${eurCents(it.morePerMeterTTC)} par mètre en plus ou en moins.`;
+  }
+  return `${base}, ${eurCents(it.lessPerMeterTTC)} de moins par mètre en dessous, ${eurCents(it.morePerMeterTTC)} de plus par mètre au-dessus.`;
 }
 
 export const EXAMPLE_INSTALL_LABEL = INSTALL_TYPES[EXAMPLE_INSTALL].label;

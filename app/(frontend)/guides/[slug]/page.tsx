@@ -57,7 +57,7 @@ export default async function GuidePage({ params }: Props) {
   const schemas: Record<string, unknown>[] = [
     buildArticleSchema({
       headline: guide.title,
-      description: guide.description,
+      description: guide.directAnswer ? plainText(guide.directAnswer) : guide.description,
       url: `${SITE_URL}/guides/${guide.slug}`,
       imageUrl: `${SITE_URL}${ogImagePath("guides", guide.slug)}`,
       datePublished: guide.publishedAt,
@@ -110,6 +110,11 @@ export default async function GuidePage({ params }: Props) {
               )}
               <span>Par l&apos;équipe Mister Pellets</span>
             </p>
+            {guide.directAnswer && (
+              <p className="mb-10 border-l-4 border-mp-orange-flame pl-4 text-lg font-medium leading-relaxed text-mp-ink md:text-xl">
+                <InlineText text={guide.directAnswer} />
+              </p>
+            )}
               {guide.sections.map((section, i) => (
               <section key={i} className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 mt-2">
@@ -121,6 +126,65 @@ export default async function GuidePage({ params }: Props) {
                     <InlineText text={p} />
                   </p>
                 ))}
+
+                {section.table && (
+                  <div className="mb-4">
+                    <div className="hidden overflow-x-auto rounded-[20px] border border-mp-sand/40 bg-white md:block">
+                      <table className="w-full text-left text-base">
+                        {section.table.caption && <caption className="sr-only">{typo(section.table.caption)}</caption>}
+                        <thead>
+                          <tr className="border-b border-mp-sand/40 text-mp-green-deep">
+                            {section.table.headers.map((h) => (
+                              <th key={h} scope="col" className="px-4 py-3 font-semibold">
+                                {typo(h)}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {section.table.rows.map((row, r) => (
+                            <tr key={r} className="border-b border-mp-sand/40 last:border-b-0">
+                              {row.map((cell, c) =>
+                                c === 0 ? (
+                                  <th key={c} scope="row" className="px-4 py-3 font-medium text-mp-ink">
+                                    <InlineText text={cell} />
+                                  </th>
+                                ) : (
+                                  <td key={c} className="px-4 py-3 tabular-nums text-mp-ink">
+                                    <InlineText text={cell} />
+                                  </td>
+                                ),
+                              )}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    {/* Sur téléphone, une carte par ligne : aucune colonne cachée hors de l'écran. */}
+                    <ul className="divide-y divide-mp-sand/40 rounded-[20px] border border-mp-sand/40 bg-white md:hidden">
+                      {section.table.rows.map((row, r) => (
+                        <li key={r} className="min-w-0 p-4">
+                          <p className="font-semibold text-mp-green-deep">
+                            <InlineText text={row[0] ?? ""} />
+                          </p>
+                          <dl className="mt-2 space-y-1 text-sm">
+                            {section.table!.headers.slice(1).map((h, c) => (
+                              <div key={h} className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3">
+                                <dt className="text-mp-ink-soft">{typo(h)}</dt>
+                                <dd className="min-w-0 tabular-nums text-mp-ink">
+                                  <InlineText text={row[c + 1] ?? ""} />
+                                </dd>
+                              </div>
+                            ))}
+                          </dl>
+                        </li>
+                      ))}
+                    </ul>
+                    {section.table.caption && (
+                      <p className="mt-2 text-xs leading-relaxed text-mp-ink-soft">{typo(section.table.caption)}</p>
+                    )}
+                  </div>
+                )}
 
                 {section.list && (
                   <ul className="space-y-3">
@@ -138,6 +202,19 @@ export default async function GuidePage({ params }: Props) {
                 )}
               </section>
             ))}
+
+            {guide.sources && guide.sources.length > 0 && (
+              <section className="border-t border-mp-sand/40 pt-8">
+                <h2 className="mb-4 text-xl font-semibold text-mp-green-deep">Sources</h2>
+                <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-mp-ink-soft">
+                  {guide.sources.map((src) => (
+                    <li key={src.label}>
+                      {src.href ? <InlineText text={`[${src.label}](${src.href})`} /> : typo(src.label)}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
           </div>
         </div>
       </article>

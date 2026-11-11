@@ -7,8 +7,10 @@
  * 6 marques mises en avant : MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel.
  */
 
-import { INSTALL_TYPES, VAT, evacuationPrice, formatEur, withVat, type InstallType } from "./pose/moteur";
+import { INSTALL_TYPES, ISO, POWER_WINDOW, VAT, evacuationPrice, formatEur, recommendedKw, withVat, type InstallType, type IsoKey } from "./pose/moteur";
 import { REMISES, TARIFS } from "./pose/tarifs";
+import { POSE_DURATIONS } from "./services";
+import { POWER_RULE } from "./power";
 
 /**
  * Surcoût d'une évacuation par rapport au simple raccordement d'un conduit
@@ -23,10 +25,35 @@ function surcoutEvacuation(type: InstallType, hauteurM: number): string {
   return formatEur(Math.round(withVat(ht, VAT.reduced).total / 10) * 10);
 }
 
+/** Puissance en kW à la française : 7.5 → « 7,5 ». */
+const kwFr = (kw: number): string => String(kw).replace(".", ",");
+
+/** Grille de besoin de l'estimation en ligne (lib/pose/moteur.ts), de la maison la mieux isolée à la moins isolée. */
+const ISO_ORDER: IsoKey[] = ["recent", "bonne", "moyenne", "ancienne"];
+const ISO_HEADERS = ISO_ORDER.map((k) => `${ISO[k].desc} (${ISO[k].wattsPerM2} W/m²)`);
+/** Surface (m², arrondie à 5) couverte par une puissance donnée. */
+const surfaceFor = (kw: number, iso: IsoKey): number => Math.round((kw * 1000) / ISO[iso].wattsPerM2 / 5) * 5;
+const POWER_BY_SURFACE: string[][] = [60, 80, 100, 120, 150, 180, 200].map((m2) => [
+  `${m2} m²`,
+  ...ISO_ORDER.map((k) => `${kwFr(recommendedKw(m2, k))} kW`),
+]);
+const SURFACE_BY_POWER: string[][] = [6, 8, 10, 12, 15, 18, 24].map((kw) => [
+  `${kw} kW`,
+  ...ISO_ORDER.map((k) => `${surfaceFor(kw, k)} m²`),
+]);
+/** Fenêtre « bien dimensionné » de l'estimation en ligne, en % du besoin. */
+const WIN_MIN = Math.round(POWER_WINDOW.min * 100);
+const WIN_MAX = Math.round(POWER_WINDOW.max * 100);
+
+/** Canalisation d'une pièce, HTVA et TVAC à 6 %. */
+const CANAL_PIECE = `${formatEur(TARIFS.canalisationParPieceHT)} HTVA (${formatEur(withVat(TARIFS.canalisationParPieceHT, VAT.reduced).total)} TVAC à 6 %)`;
+
 export interface GuideSection {
   heading: string;
   paragraphs?: string[];
   list?: string[];
+  /** Tableau HTML, après les paragraphes ; cellules avec liens [texte](adresse) permis. */
+  table?: { headers: string[]; rows: string[][]; caption?: string };
 }
 
 export interface GuideData {
@@ -45,7 +72,11 @@ export interface GuideData {
   publishedAt: string;
   modifiedAt: string;
   excerpt: string;
+  /** Réponse directe de 40 à 60 mots, sous le titre (et description du JSON-LD). */
+  directAnswer?: string;
   sections: GuideSection[];
+  /** Sources lues : notices, textes officiels, pages de fabricant, avec date de lecture. */
+  sources?: { label: string; href?: string }[];
   faq?: { question: string; answer: string }[];
   metaTitle: string;
   metaDescription: string;
@@ -166,8 +197,8 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
       {
         heading: "2. Dimensionner la puissance",
         paragraphs: [
-          "La règle empirique : 1 kW pour 10 m² bien isolés (PEB B ou mieux). 1 kW pour 15 m² si la maison est très bien isolée (PEB A). 1 kW pour 7 m² si l'isolation est faible (PEB E à G).",
-          "Donc pour une maison de 100 m² PEB B, visez 10 kW. Pour 150 m² PEB D, visez 18-20 kW (et là vous passez plutôt sur un hydro). Sous-dimensionner, c'est devoir tourner à plein régime tout le temps : usure prématurée et surconsommation.",
+          `La grille de notre estimation en ligne : ${POWER_RULE}. Le [guide de la puissance](/guides/quelle-puissance-poele-pellets) donne les tableaux surface par surface.`,
+          `Donc pour une maison de 100 m² en PEB B, visez environ ${kwFr(recommendedKw(100, "recent"))} kW. Pour 150 m² en PEB D, environ ${kwFr(recommendedKw(150, "bonne"))} kW. Sous-dimensionner, c'est devoir tourner à plein régime tout le temps : usure prématurée et surconsommation.`,
           "Le combustible se budgète à part. Le prix du sac de 15 kg change chaque mois : voyez [notre relevé du prix des pellets en Wallonie](/blog/prix-pellets-belgique), avec ce que coûte une saison selon votre usage.",
         ],
       },
@@ -219,212 +250,572 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
   {
     slug: "poele-pellets-canalisable",
     publishedAt: "2026-05-02",
-    modifiedAt: "2026-10-03",
-    title: "Poêle à pellets canalisable : le guide complet",
-    description: "Comment un canalisable fonctionne, quelles puissances pour quelles surfaces, exemples d'installations en maisons wallonnes typiques.",
+    modifiedAt: "2026-11-11",
+    title: "Poêle à pellets canalisable : fonctionnement, gaines, prix de pose",
+    description:
+      "Comment un poêle à pellets canalisable envoie l'air chaud dans une ou deux pièces, la longueur de gaine admise, la puissance à viser et le prix de la canalisation.",
     category: "Technique",
     excerpt:
-      "Le canalisable est la solution qu'on installe le plus en Wallonie après l'air pulsé classique. Elle permet de chauffer plusieurs pièces avec un seul appareil, sans casser tout le bâti.",
+      "Le canalisable est le poêle qu'on pose le plus dans les maisons à étage : un seul appareil, un seul conduit, et de l'air chaud qui part par des gaines vers une chambre ou un bureau. Voici ce qu'il fait bien, ses limites et ce qu'il coûte.",
+    directAnswer: `Un poêle à pellets canalisable, ou à granulés, chauffe sa pièce et souffle une partie de son air chaud vers une ou deux autres pièces par des gaines isolées. MCZ annonce environ 8 m de gaine par sortie. Chez nous, la canalisation coûte ${formatEur(TARIFS.canalisationParPieceHT)} HTVA par pièce, ${TARIFS.canalisationPiecesMax} pièces au plus.`,
     sections: [
       {
-        heading: "Comment ça marche",
+        heading: "Comment fonctionne un poêle canalisable",
         paragraphs: [
-          "Un poêle canalisable a une sortie d'air principale (frontale) ET une ou plusieurs sorties latérales/arrière vers des gaines. Ces gaines transportent l'air chaud jusqu'à 5-8 mètres dans des pièces voisines (chambres, bureau, salle de bain).",
-          "L'utilisateur règle la répartition via la commande du poêle : par exemple 60% dans la pièce principale, 40% à l'étage. Certains modèles ont un volet motorisé pour piloter cette répartition automatiquement.",
+          "Un poêle à air classique a une seule sortie d'air chaud, en façade. Le canalisable en ajoute une ou deux, à l'arrière ou sur le dessus, avec leur propre ventilateur. On y raccorde une gaine isolée qui passe dans une cloison, un faux plafond ou les combles et débouche par une bouche dans la pièce à chauffer.",
+          "Vous réglez la répartition depuis la commande du poêle ou son application : plus de chaleur dans le séjour le soir, un peu dans la chambre avant le coucher. Selon le modèle, chaque sortie se règle à part ou suit le réglage général : la fiche et la notice le précisent.",
+          "Le poêle reste un seul appareil, avec un seul conduit de fumées et un seul réservoir de pellets. C'est ce qui le rend intéressant face à deux poêles ou à un chauffage central complet.",
         ],
       },
       {
-        heading: "Pour quelle surface et quelle config",
+        heading: "Pour quelles maisons",
         paragraphs: [
-          "Le canalisable est la solution naturelle pour les maisons à étage de 100-180 m². Modèles typiques : EK63 Tweed 90+ (9,2 kW) et Spy 110+ (10,5 kW), Edilkamin Cherie 11++ Evo (11 kW), et le Girolami Vert, [canalisable à trois ventilateurs indépendants](/blog/girolami-canalisable-intelligent-trois-ventilateurs).",
-          "Pour les très grandes maisons (180+ m²) ou pour vraiment chauffer toutes les pièces, on passe plutôt sur un hydro avec radiateurs ou plancher chauffant. Le canalisable a ses limites : 2-3 pièces secondaires max, à 5-8m de distance.",
+          "Le canalisable convient bien à une maison à étage de 100 à 180 m², quand la pièce de vie est au rez-de-chaussée et qu'une ou deux chambres restent froides. Il convient aussi à un plain-pied en longueur, quand une pièce est trop loin du poêle pour profiter de sa chaleur.",
+          "Il a ses limites. Au-delà de deux pièces desservies, l'air arrive tiède et le ventilateur force. Et une pièce fermée loin du poêle, au bout d'un long trajet, ne sera jamais aussi chaude que le séjour. Pour chauffer toutes les pièces, un [poêle à pellets hydro](/poeles-a-pellets-hydro) raccordé aux radiateurs fait mieux le travail.",
         ],
       },
       {
-        heading: "Pose et travaux",
+        heading: "La longueur de gaine : le point qui décide",
         paragraphs: [
-          "Les gaines isolées sont passées dans les murs, faux-plafonds ou combles. Sur une maison existante, c'est parfois plus invasif : on doit ouvrir un passage. Sur une maison récente avec gaines techniques prévues, c'est presque transparent.",
-          "Un canalisable typique avec 2 gaines vers chambres : comptez 1.5 jours de pose au lieu de 1 jour pour un air classique. Et 800 à 1 500 € de plus en main d'œuvre + matériel gaines.",
+          "Plus la gaine est longue, plus l'air perd de chaleur et de débit en route. MCZ annonce environ 8 m par sortie avec son kit Comfort Air, en précisant que la longueur réelle dépend du trajet, des coudes et de l'isolation de la gaine. Les autres fabricants fixent leur propre limite dans la notice de chaque modèle.",
+          "Nous traçons le trajet à la visite technique, bouche par bouche : passage dans une cloison, dans un faux plafond ou par les combles, nombre de coudes, traversée d'un plancher. Un trajet court et droit vaut mieux qu'un poêle plus puissant.",
+        ],
+      },
+      {
+        heading: "Quelle puissance pour un canalisable",
+        paragraphs: [
+          "La puissance se calcule sur toute la surface chauffée, pièces desservies comprises. Notre [guide de la puissance](/guides/quelle-puissance-poele-pellets) donne le besoin selon la surface et l'isolation : une maison de 130 m² correctement isolée demande autour de 13 kW, une maison de 100 m² récente autour de 7 kW.",
+          "Le tableau ci-dessous reprend quelques canalisables du catalogue avec leur puissance et le volume de chauffe annoncé par le fabricant. Toutes les fiches sont sur la page des [poêles à pellets canalisables](/poeles-a-pellets-canalisables), avec leurs prix.",
+        ],
+        table: {
+          headers: ["Modèle", "Puissance", "Volume de chauffe", "Étanche"],
+          rows: [
+            ["[EK63 Tweed 90+ Evo](/produit/ek63-tweed-90)", "9,2 kW", "240 m³", "oui"],
+            ["[Cadel Luce Plus 9 Up-Twin](/produit/cadel-luce-plus-9-up-twin)", "8,5 kW", "238 m³", "oui"],
+            ["[EK63 Spy 110+ Evo](/produit/ek63-spy-110)", "10,5 kW", "275 m³", "oui"],
+            ["[Edilkamin Cherie 11++ Evo](/produit/edilkamin-cherie-11-evo)", "11 kW", "285 m³", "non"],
+            ["[EK63 Monday 130++ Evo](/produit/ek63-monday-130)", "12,6 kW", "330 m³", "oui"],
+          ],
+          caption: "Données des fiches du catalogue au 11/11/2026, reprises des fiches techniques des fabricants.",
+        },
+      },
+      {
+        heading: "La pose et ce qu'elle coûte",
+        paragraphs: [
+          `La canalisation se chiffre en plus de la pose du poêle et de son évacuation : ${CANAL_PIECE} par pièce desservie, matériel et main d'œuvre compris, ${TARIFS.canalisationPiecesMax} pièces au plus. La TVA à 6 % vaut pour un logement de plus de 10 ans.`,
+          `Une pose avec des gaines vers d'autres pièces prend ${POSE_DURATIONS.canalisable}, contre ${POSE_DURATIONS.standard} pour un poêle à air sur un conduit existant. Sur une maison récente avec des gaines techniques prévues, le passage est presque invisible ; dans une maison ancienne, il faut parfois ouvrir un coffrage. Le déroulé complet est sur la page [installation d'un poêle à pellets](/installation-poele-a-pellets).`,
+        ],
+      },
+      {
+        heading: "Canalisable et maison bien isolée",
+        paragraphs: [
+          "La plupart des canalisables du catalogue sont aussi étanches : ils prennent leur air de combustion dehors et conviennent à une maison isolée équipée d'une ventilation double flux. Dans ce cas, l'évacuation se choisit avec le poêle : ventouse concentrique si sa notice la prévoit (jamais avec Edilkamin ni EK63), sinon conduit au-dessus du toit. Les règles sont détaillées dans notre article sur [l'évacuation des fumées](/blog/evacuation-fumees-poele-pellets).",
+        ],
+      },
+      {
+        heading: "Les erreurs qu'on voit le plus",
+        list: [
+          "Choisir la puissance sur le seul séjour, et oublier les pièces desservies.",
+          "Prévoir une gaine trop longue ou pleine de coudes, qui livre un air tiède.",
+          "Vouloir desservir trois ou quatre pièces : c'est le travail d'un poêle hydro.",
+          "Poser la bouche haut dans une pièce à plafond haut, où l'air chaud reste sous le plafond.",
         ],
       },
     ],
     faq: [
       {
-        question: "Le canalisable est-il bruyant ?",
+        question: "Combien de pièces peut chauffer un poêle à pellets canalisable ?",
+        answer: `La pièce où il est posé, plus une ou deux pièces voisines par des gaines. Nous canalisons ${TARIFS.canalisationPiecesMax} pièces au plus. Pour toute la maison, un [poêle hydro](/poeles-a-pellets-hydro) convient mieux.`,
+      },
+      {
+        question: "Quelle longueur maximale pour une gaine de poêle canalisable ?",
         answer:
-          "Légèrement plus que l'air classique (le ventilateur force davantage). Sur les modèles modernes (EK63, Edilkamin, Girolami), c'est minimal, entre 35 et 45 dB en fonctionnement, soit moins qu'une conversation normale. Et le Girolami peut couper la soufflerie en mode silencieux.",
+          "Celle de la notice du modèle. MCZ annonce environ 8 m par sortie avec son kit Comfort Air, selon le trajet, les coudes et l'isolation. Plus la gaine est courte, plus l'air arrive chaud.",
       },
       {
         question: "Peut-on canaliser à l'étage ?",
         answer:
-          "Oui, c'est la configuration la plus fréquente. La gaine monte verticalement dans une cloison ou dans un coffrage, puis se distribue à l'étage. Comptez 5-8m max de longueur de gaine pour conserver une bonne température en sortie.",
+          "Oui, c'est la configuration la plus fréquente. La gaine monte dans une cloison ou un coffrage, puis débouche dans une chambre ou un bureau de l'étage.",
+      },
+      {
+        question: "Combien coûte la canalisation d'un poêle à pellets ?",
+        answer: `${CANAL_PIECE} par pièce desservie chez nous, matériel et main d'œuvre compris, en plus de la pose du poêle. L'[estimation en ligne](/estimation) fait le total pour votre maison.`,
       },
     ],
-    metaTitle: "Poêle à pellets canalisable : le guide",
+    sources: [
+      { label: "MCZ, foire aux questions belge : canalisation Comfort Air « jusqu'à environ 8 mètres », lue le 11/11/2026", href: "https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions" },
+      { label: "Fiches techniques des fabricants (puissance, volume de chauffe, étanchéité), reprises sur les fiches du catalogue au 11/11/2026" },
+      { label: "Tarifs de pose de Mister Pellets (canalisation, durées de pose), relevés le 11/11/2026" },
+    ],
+    metaTitle: "Poêle à pellets canalisable : gaines et prix",
     metaDescription:
-      "Tout sur les poêles à pellets canalisables : fonctionnement, puissances, exemples wallons. EK63 Tweed et Spy, Edilkamin Cherie. Conseil Mister Pellets.",
+      "Poêle à pellets canalisable : comment il chauffe une ou deux pièces de plus, la longueur de gaine admise, la puissance à viser et le prix de la canalisation.",
   },
   {
     slug: "poele-pellets-hydro",
     publishedAt: "2026-05-02",
-    modifiedAt: "2026-10-03",
-    title: "Poêle hydro : remplacer une chaudière mazout par des pellets",
-    description: "Le hydro chauffe un circuit d'eau et peut remplacer une chaudière classique. Cas d'usage, marques, dimensionnement.",
+    modifiedAt: "2026-11-11",
+    title: "Poêle à pellets hydro : fonctionnement, puissance et pose",
+    description:
+      "Comment un poêle à pellets hydro chauffe l'eau des radiateurs, la puissance à viser, le réservoir et le silo, le raccordement, l'entretien obligatoire et la TVA.",
     category: "Technique",
     excerpt:
-      "Si vous avez une chaudière mazout vieillissante et un système radiateur ou plancher chauffant, l'hydro pellets est la solution la plus rentable pour passer aux énergies renouvelables, souvent rentabilisé en 5 à 9 ans.",
+      "Un poêle hydro chauffe la pièce où il est posé et l'eau de votre chauffage central. Bien choisi, il remplace une chaudière ; mal dimensionné, il déçoit. Voici comment il fonctionne et ce qu'on vérifie avant d'en poser un.",
+    directAnswer:
+      `Un poêle à pellets hydro, ou thermopoêle à granulés, chauffe l'eau du chauffage central en plus de la pièce où il est posé : il alimente radiateurs ou plancher chauffant, comme une chaudière. Il se choisit sur la puissance rendue à l'eau, se raccorde en ${POSE_DURATIONS.hydro} et se fait contrôler chaque année.`,
     sections: [
       {
-        heading: "Le principe",
+        heading: "Le principe : l'eau d'abord, l'air ensuite",
         paragraphs: [
-          "Un poêle hydro a un échangeur de chaleur interne qui chauffe l'eau d'un circuit. Cette eau alimente ensuite vos radiateurs, votre plancher chauffant, et éventuellement le ballon d'eau chaude sanitaire (ECS).",
-          "Concrètement : vous débranchez votre vieille chaudière mazout, on pose le hydro dans une pièce de vie ou en cave, on le raccorde au circuit existant via un kit hydraulique. Comptez 1 à 2 jours de pose selon l'existant.",
+          "Un poêle hydro a un échangeur dans lequel circule l'eau du chauffage central. Une part de la chaleur des pellets passe dans cette eau, qui part vers les radiateurs, le plancher chauffant et, selon l'installation, le ballon d'eau chaude. Le reste chauffe la pièce où il est posé, par la vitre et le corps du poêle.",
+          "Chaque fabricant donne les deux puissances sur la fiche technique : la puissance totale et la part rendue à l'eau. C'est la seconde qui compte pour chauffer la maison. Un poêle annoncé à 24 kW ne livre pas 24 kW aux radiateurs.",
         ],
       },
       {
-        heading: "Marques et modèles",
+        heading: "Quelle puissance pour un poêle hydro",
         paragraphs: [
-          "Girolami (Italie, depuis 1970) a fait du raccordement hydro une vraie spécialité : la gamme Soft, des thermopoêles en quatre versions jusqu'à 24 kW, en hybride bois-pellet ou en pellet seul, chauffe le circuit d'eau de la maison (radiateurs ou plancher) et remplace une chaudière mazout. Son alimentation Source Feeding autonettoyante évite le nettoyage quotidien, et la version hybride accepte aussi les bûches. Edilkamin (Italie, depuis 1963) propose également des modèles hydro (suffixe H), compatibles radiateurs, plancher chauffant et solaire thermique, avec la finition et la fiabilité premium de la marque.",
-          "EK63 a aussi ses hydros, du Spot 100 H (10 kW) aux Monday H 190 et 230 (19 et 23 kW). On choisit selon le budget et la maison : un Girolami Soft pour l'option bois et le brasier propre, un EK63 pour un prix plus doux, un Edilkamin hydro pour le haut de gamme. Ce dernier cas est détaillé dans [remplacer une chaudière mazout par un Edilkamin hydro](/blog/remplacer-chaudiere-mazout-edilkamin-hydro).",
+          "On part du besoin de toute la maison, pas de la pièce du poêle. Notre [guide de la puissance](/guides/quelle-puissance-poele-pellets) donne l'ordre de grandeur selon la surface et l'isolation : une maison de 200 m² correctement isolée demande autour de 20 kW. La visite technique le recoupe avec l'installation en place et, si vous l'avez, avec votre consommation de mazout ou de gaz des derniers hivers.",
+          "Le tableau ci-dessous reprend quelques hydros du catalogue. Toutes les fiches sont sur la page des [poêles à pellets hydro](/poeles-a-pellets-hydro).",
+        ],
+        table: {
+          headers: ["Modèle", "Puissance", "Volume de chauffe", "Réservoir"],
+          rows: [
+            ["[EK63 Spot 100 H Evo](/produit/ek63-spot-100h)", "10,1 kW", "265 m³", "14 kg"],
+            ["[MCZ Ego Hydro Matic 12 R](/produit/mcz-ego-hydro-matic-12-r)", "12,1 kW", "346 m³", "20 kg"],
+            ["[MCZ Thea Hydro 18 R](/produit/mcz-thea-hydro-18-r)", "18 kW", "514 m³", "28 kg"],
+            ["[EK63 Monday H 190 Evo](/produit/ek63-monday-190h)", "19,2 kW", "500 m³", "30 kg"],
+            ["[EK63 Monday H 230 Evo](/produit/ek63-monday-230h)", "22,8 kW", "595 m³", "30 kg"],
+          ],
+          caption: "Données des fiches du catalogue au 11/11/2026, reprises des fiches techniques des fabricants. La part rendue à l'eau figure sur chaque fiche technique.",
+        },
+      },
+      {
+        heading: "Le raccordement au chauffage central",
+        paragraphs: [
+          "Le poêle se pose dans une pièce de vie et se raccorde au circuit existant : départ et retour vers les radiateurs ou le plancher chauffant, sécurités du circuit, et selon le cas un ballon pour l'eau chaude. Il garde aussi son évacuation de fumées, comme tout poêle à pellets : tubage d'une cheminée, conduit au-dessus du toit ou ventouse concentrique sur un modèle étanche qui la prévoit (jamais avec Edilkamin ni EK63).",
+          `Le chantier dure ${POSE_DURATIONS.hydro}, désembouage du circuit compris. Avant de chiffrer, on relève à la visite l'état des radiateurs, la place du poêle et le trajet jusqu'au circuit. Le déroulé d'une pose est sur la page [installation d'un poêle à pellets](/installation-poele-a-pellets).`,
         ],
       },
       {
-        heading: "Coûts et aides",
+        heading: "Le réservoir et le silo",
         paragraphs: [
-          "Un hydro complet (poêle, kit hydraulique, ballon, raccordement et main d'œuvre) coûte 8 000 à 14 000 € TVAC selon la puissance et la complexité. Il n'y a plus de prime régionale depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, voyez le Rénopack avant de signer un devis : l'hydro n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte, car la liste officielle des travaux ne nomme pas les poêles. Sinon, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
-          "Face au mazout, le retour sur investissement tourne autour de 5 à 9 ans pour une maison qui en brûlait 2 000 litres par an, aux prix d'octobre 2026. Au-delà, c'est de l'économie nette tous les hivers.",
+          "Les hydros du catalogue ont un réservoir de 14 à 30 kg de pellets selon le modèle : une grosse journée en régime doux, quelques heures à pleine puissance. En plein hiver, quand le poêle chauffe toute la maison, il faut donc remplir souvent.",
+          "Un silo relié au poêle évite le remplissage quotidien. Il se prévoit dès le devis, parce qu'il demande de la place et un passage pour l'alimentation. Un sac de 15 kg reste la façon la plus simple de commencer, avec une [palette de pellets Comfo](/palette-pellets-comfo) retirée à Fernelmont.",
+        ],
+      },
+      {
+        heading: "L'entretien : annuel, et contrôlé",
+        paragraphs: [
+          "Raccordé au chauffage central, un poêle hydro entre dans la règle wallonne. L'arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central impose à l'utilisateur une inspection périodique, annuelle quand le combustible est solide, ce qui est le cas des pellets (articles 10, 4°, et 13). Elle est faite par une personne qualifiée, agréée quand l'arrêté l'exige, qui remet une attestation de contrôle à conserver. Le texte est cité dans les sources en bas de page.",
+          "L'entretien de l'appareil est une obligation d'un autre ordre, celle du fabricant : MCZ demande un entretien chaque année par un technicien agréé, normalement à la fin de l'hiver.",
+          "Notre [entretien annuel](/entretien-poele-a-pellets) coûte 175 € TVAC, ramonage du conduit compris : c'est un nettoyage et un réglage de l'appareil, présenté sur sa page. Entre deux entretiens, vous videz le brasier et les cendres comme sur un poêle à air : le [guide de l'entretien](/guides/comment-entretenir-poele-pellets) donne la liste. Les modèles MCZ « Matic » ont un brasier qui se nettoie seul.",
+        ],
+      },
+      {
+        heading: "Budget, TVA et aides",
+        paragraphs: [
+          "Le prix d'un hydro posé dépend de la puissance, du raccordement et de l'évacuation. L'[estimation en ligne](/estimation) compose le total avec le poêle choisi, et la visite technique le rend ferme. Les fiches sans prix affiché sont sur devis.",
+          "La prime Habitation s'est arrêtée le 30 septembre 2026. L'aide qui joue presque toujours est la TVA à 6 % au lieu de 21 %, quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans. Pour les petits revenus, la subvention MEBAR passe par le CPAS avant les travaux. Le détail est sur [notre page des aides](/aides-poele-a-pellets-wallonie).",
+        ],
+      },
+      {
+        heading: "Vous remplacez une chaudière au mazout ?",
+        paragraphs: [
+          "Le poêle hydro est une des solutions, pas la seule. Le calendrier wallon du mazout, le sort de la citerne et le budget d'un remplacement sont détaillés dans notre article [remplacer une chaudière au mazout par un poêle hydro](/blog/remplacer-chaudiere-mazout-poele-hydro). Pour un Edilkamin en particulier, voyez [le cas d'un Edilkamin hydro](/blog/remplacer-chaudiere-mazout-edilkamin-hydro).",
         ],
       },
     ],
     faq: [
       {
-        question: "Faut-il garder une chaudière en backup ?",
+        question: "Un poêle à pellets hydro peut-il chauffer toute une maison ?",
         answer:
-          "Pas obligatoire. Les hydros modernes sont fiables. Mais beaucoup gardent une vieille chaudière fioul ou gaz comme secours pour les très grands froids ou les pannes, utile mais pas indispensable. À discuter avec nous selon votre cas.",
+          "Oui, quand la puissance qu'il rend à l'eau couvre le besoin de la maison et que le circuit de radiateurs ou de plancher chauffant est en état. La visite technique le vérifie avant tout devis.",
       },
       {
-        question: "Combien d'autonomie en pellets ?",
+        question: "Faut-il garder l'ancienne chaudière en secours ?",
         answer:
-          "Le réservoir des hydros que nous posons contient 14 à 30 kg : de quelques heures à pleine puissance à une grosse journée en régime doux. Pour ne pas remplir tous les jours en plein hiver, beaucoup ajoutent un silo externe relié par aspiration : 500 à 2 000 kg de stock, plusieurs semaines d'autonomie.",
+          "Ce n'est pas obligatoire. Certains clients la gardent pour les très grands froids ou une panne. Dites-le à la visite : le raccordement des deux appareils se prévoit dans le devis.",
+      },
+      {
+        question: "Combien de temps tient le réservoir d'un poêle hydro ?",
+        answer:
+          "Les hydros du catalogue ont un réservoir de 14 à 30 kg : de quelques heures à pleine puissance à une grosse journée en régime doux. Un silo relié au poêle évite de remplir chaque jour.",
+      },
+      {
+        question: "Un poêle hydro doit-il être entretenu chaque année ?",
+        answer:
+          "Deux règles s'ajoutent. Raccordé au chauffage central, il doit passer une inspection périodique annuelle, avec une attestation de contrôle (arrêté wallon du 29 janvier 2009, articles 10 et 13). Et MCZ demande un entretien annuel de l'appareil par un technicien agréé : chez nous, 175 € TVAC, ramonage compris.",
       },
     ],
-    metaTitle: "Poêle hydro : remplacer une chaudière au mazout",
+    sources: [
+      { label: "Arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central, consolidation officieuse de Wallex en vigueur depuis le 24/02/2023, art. 10, 4°, et art. 13, lue le 11/11/2026", href: "https://wallex.wallonie.be/files/pdfs/19/6833_Arr%C3%AAt%C3%A9_du_Gouvernement_wallon_tendant_%C3%A0_pr%C3%A9venir_la_pollution_atmosph%C3%A9rique_provoqu%C3%A9e_par_les_installations_de_chauffage_central_destin%C3%A9es_au_chauffage_de_b%C3%A2timents_ou_%C3%A0_la_production_d'eau_chaud_24-02-2023-.pdf" },
+      { label: "MCZ, foire aux questions belge : entretien annuel par un technicien agréé, brasier autonettoyant des modèles Matic, lue le 11/11/2026", href: "https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions" },
+      { label: "Fiches techniques des fabricants (puissance, volume de chauffe, réservoir), reprises sur les fiches du catalogue au 11/11/2026" },
+    ],
+    metaTitle: "Poêle à pellets hydro : fonctionnement et pose",
     metaDescription:
-      "Le guide complet du poêle hydro pour remplacer une chaudière mazout : marques (Girolami, Edilkamin, EK63), dimensionnement, coûts, aides. Conseil Mister Pellets.",
+      "Poêle à pellets hydro : comment il chauffe les radiateurs, la puissance à viser, réservoir et silo, raccordement, entretien annuel et TVA à 6 %.",
   },
   {
     slug: "comment-entretenir-poele-pellets",
     publishedAt: "2026-05-02",
-    modifiedAt: "2026-10-25",
-    title: "L'entretien d'un poêle à pellets : la check-list complète",
-    description: "Que faire au quotidien, chaque semaine, chaque saison, et quand appeler un pro. Le guide pour faire durer votre poêle 15+ ans.",
+    modifiedAt: "2026-11-11",
+    title: "L'entretien d'un poêle à pellets : ce que vous faites, ce que fait le technicien",
+    description:
+      "Au quotidien, chaque semaine, en début et fin de saison, puis une fois par an par un technicien : la liste des gestes, leur fréquence, ce qui est obligatoire et ce que ça coûte.",
     category: "Entretien",
     excerpt:
-      "Un poêle à pellets bien entretenu dure 15-20 ans sans souci majeur. Mal entretenu, il commence à perdre du rendement après 2-3 ans, et tombe en panne après 5-7 ans. Voici ce qu'il faut vraiment faire.",
+      "Un poêle à pellets s'encrasse vite s'il est négligé : vitre noire, allumages ratés, extinctions. Quelques minutes de votre part, un entretien par an par un technicien, et il tourne sans histoire. Voici qui fait quoi.",
+    directAnswer:
+      "Entretenir un poêle à pellets, ou poêle à granulés, tient en deux parts. Vous videz le brasier et les cendres, et vous nettoyez la vitre, de chaque jour à chaque semaine selon l'usage. Un technicien démonte et nettoie l'appareil une fois par an : MCZ l'impose, l'assurance demande le ramonage. Chez nous, 175 € TVAC, ramonage compris.",
     sections: [
       {
-        heading: "Au quotidien (3 minutes)",
-        list: [
-          "Vider le bac à cendres si plus d'1/3 plein",
-          "Brosser légèrement la vitre avec un chiffon sec si elle commence à noircir",
-          "Vérifier que le réservoir n'est pas vide ou trop bas (déclenchement raté à froid)",
-        ],
-      },
-      {
-        heading: "Chaque semaine (15 minutes)",
-        list: [
-          "Aspirer le foyer froid à l'aspirateur cendres",
-          "Démonter et brosser le brûleur (l'orifice par où tombent les pellets)",
-          "Vérifier qu'aucun pellet n'est resté coincé dans la vis sans fin",
-          "Nettoyer la vitre avec un produit dédié ou du papier journal humide + cendres fines",
-        ],
-      },
-      {
-        heading: "En début et fin de saison (1 heure)",
-        list: [
-          "Aspirer l'échangeur thermique en démontant le déflecteur arrière",
-          "Vérifier l'état des joints de porte et de visu",
-          "Tester le fonctionnement à vide (allumage, ventilation, extraction)",
-          "Faire le plein de pellets pour la saison à venir (en début de saison) ou vider et stocker (en fin)",
-        ],
-      },
-      {
-        heading: "Une fois par an, par un pro",
+        heading: "Qui fait quoi, et quand",
         paragraphs: [
-          "Pour un poêle à air, aucune loi ne l'impose. Les fabricants l'exigent pour maintenir leur garantie, et votre assurance incendie vous demandera la preuve du ramonage. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 sur le chauffage central prévoit un contrôle chaque année pour les générateurs au combustible solide.",
-          "On démonte tout : foyer, échangeur, brûleur, ventilateur d'extraction, conduit. On nettoie en profondeur, on remplace les joints fatigués, on vérifie les capteurs et la combustion. Chez Mister Pellets, l'entretien complet coûte 175 € TVAC, ramonage du conduit compris. Poêle qui s'éteint, délai d'intervention, gestes de chaque jour : les réponses sont dans [les questions fréquentes sur l'entretien et le SAV](/faq).",
+          "Le tableau résume la répartition. Les fréquences dépendent de l'usage et des pellets : un poêle qui chauffe la maison tout l'hiver s'encrasse plus vite qu'un appoint du soir. La notice de votre modèle fait foi.",
+        ],
+        table: {
+          headers: ["Quand", "Qui", "Quoi"],
+          rows: [
+            ["Chaque jour ou tous les deux jours", "Vous", "Vider le brasier s'il s'encrasse, vérifier le niveau du réservoir, coup de brosse sèche sur la vitre"],
+            ["Chaque semaine", "Vous", "Aspirer le foyer froid, vider le bac à cendres, vérifier qu'aucun corps étranger n'est tombé dans le réservoir"],
+            ["Début et fin de saison", "Vous", "Contrôler les joints de porte, dégager la prise d'air et le terminal extérieur, vider le réservoir en fin d'hiver"],
+            ["Une fois par an", "Technicien", "Démontage, échangeur, extracteur de fumées, capteurs, joints, combustion, ramonage du conduit et certificat"],
+          ],
+          caption: "Répartition courante des gestes d'entretien ; la notice du fabricant fixe les fréquences de votre modèle.",
+        },
+      },
+      {
+        heading: "Au quotidien : quelques minutes",
+        list: [
+          "Videz le brasier quand des résidus durcis bouchent ses trous : l'air de combustion passe mal et l'allumage rate. MCZ demande simplement de retirer les incrustations du brasero.",
+          "Vérifiez le réservoir : un poêle qui manque de pellets s'arrête en alarme.",
+          "Passez une brosse sèche sur la vitre : d'après MCZ, seule une fine couche de cendre s'y dépose quand la combustion est bonne. Un nettoyant pour vitre s'utilise avec modération, loin des parties peintes et du joint de porte.",
+        ],
+      },
+      {
+        heading: "Chaque semaine : le foyer et les cendres",
+        list: [
+          "Poêle éteint et froid, aspirez le foyer avec un aspirateur à cendres, jamais un aspirateur ménager.",
+          "Videz le bac à cendres avant qu'il ne déborde.",
+          "Regardez dans le réservoir : un caillou ou une agrafe venue d'un sac peut bloquer la vis sans fin.",
+        ],
+      },
+      {
+        heading: "En début et en fin de saison",
+        paragraphs: [
+          "À l'automne, avant le premier feu : réservoir, creuset, prise d'air et terminal extérieur, comme le détaille notre guide [remettre son poêle en route à l'automne](/guides/remettre-en-route-poele-pellets-automne). Au printemps : videz le réservoir, pour que les pellets ne reprennent pas l'humidité pendant l'été, et faites faire l'entretien annuel si ce n'est pas encore fait.",
+        ],
+      },
+      {
+        heading: "Une fois par an : l'entretien par un technicien",
+        paragraphs: [
+          "MCZ écrit qu'une fois par an, normalement à la fin de l'hiver, il faut s'adresser à un technicien agréé pour l'entretien ordinaire. Cadel demande, au moins une fois par an, de faire nettoyer la chambre de combustion, vérifier les joints, nettoyer moteurs et ventilateurs et contrôler la carte électronique, par son service technique agréé. Le technicien démonte le poêle, nettoie l'échangeur et l'extracteur de fumées, contrôle les capteurs et les joints, règle la combustion et ramone le conduit.",
+          "Aucune loi wallonne n'impose le ramonage d'un poêle à air, mais la plupart des contrats d'assurance incendie l'exigent chaque année : gardez le certificat. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 impose une inspection périodique annuelle des installations au combustible solide, avec une attestation de contrôle (articles 10 et 13).",
+          "Cette inspection est distincte de l'entretien de l'appareil. Chez Mister Pellets, l'[entretien annuel](/entretien-poele-a-pellets) coûte 175 € TVAC, ramonage du conduit compris, et le [ramonage seul](/ramonage) 90 € TVAC, certificat compris.",
+        ],
+      },
+      {
+        heading: "Les pellets font la moitié de l'entretien",
+        paragraphs: [
+          "MCZ conseille de n'utiliser que des pellets certifiés (ENplus, DINplus et équivalents) et prévient que les dégâts dus à un pellet inadapté ne sont pas couverts par la garantie. Un pellet de faible qualité salit vite le poêle, qu'il faut alors nettoyer plus souvent. Stockez les sacs au sec : un pellet qui a pris l'humidité gonfle, s'effrite et encrasse le brasier.",
+          "Notre article [ENplus A1 ou DINplus](/blog/pellets-enplus-a1-vs-dinplus) compare les deux certifications, et le relevé du [prix des pellets](/blog/prix-pellets-belgique) donne le prix du sac mois par mois.",
+        ],
+      },
+      {
+        heading: "Les poêles qui demandent moins d'entretien",
+        paragraphs: [
+          "Certains modèles nettoient leur brasier seuls. Chez MCZ, les modèles « Matic » ont un brasero autonettoyant, comme le [MCZ Ego Hydro Matic 8 R](/produit/mcz-ego-hydro-matic-8-r). Chez Cadel, les versions « Autoclean » ont la même fonction, comme le [Cadel Prince 11 Autoclean](/produit/cadel-prince-11-autoclean) ou le [Cadel Vesta Plus 11 Autoclean](/produit/cadel-vesta-plus-11-autoclean). Girolami pousse le pellet sous le brasier avec son système Source Feeding, qui le garde propre, sur des poêles comme le [Girolami Split](/produit/girolami-split).",
+          "Ils ne dispensent pas de l'entretien annuel ni du bac à cendres, mais ils espacent les gestes du quotidien.",
+        ],
+      },
+      {
+        heading: "Quand appeler plutôt que nettoyer",
+        list: [
+          "Une odeur de fumée dans la pièce ou l'alarme du détecteur de monoxyde de carbone : éteignez, aérez, sortez et appelez.",
+          "Une vitre qui noircit en quelques heures malgré un brasier propre et des pellets secs.",
+          "Le même code d'erreur qui revient après un réarmement, ou deux allumages ratés de suite avec un réservoir plein.",
+          "Un bruit nouveau : vis sans fin qui grince, ventilateur qui frotte.",
+        ],
+        paragraphs: [
+          "Notre service de [dépannage](/depannage-poele-a-pellets) intervient sur toutes les marques, à 110 € TVAC la première heure, déplacement inclus.",
         ],
       },
     ],
     faq: [
       {
-        question: "Quels pellets pour minimiser l'entretien ?",
+        question: "L'entretien annuel d'un poêle à pellets est-il obligatoire ?",
         answer:
-          "Toujours privilégier les pellets ENplus A1 ou DINplus, en sacs de 15 kg sous emballage propre (nous en vendons en palette : [la palette de pellets Comfo](/palette-pellets-comfo)). Les pellets bon marché ou humides encrassent beaucoup plus, génèrent plus de cendres, et peuvent même endommager le brûleur sur le long terme.",
+          "Aucune loi wallonne ne l'impose pour un poêle à air, mais les fabricants le demandent pour la garantie (MCZ parle d'entretien annuel par un technicien agréé) et l'assurance incendie exige souvent le certificat de ramonage. Un poêle hydro raccordé au chauffage central doit en plus passer l'inspection périodique annuelle prévue par l'arrêté wallon du 29 janvier 2009, avec attestation de contrôle.",
+      },
+      {
+        question: "Combien coûte l'entretien d'un poêle à pellets ?",
+        answer:
+          "Chez nous, 175 € TVAC, ramonage du conduit compris, déplacement inclus dans la zone d'intervention. Le ramonage seul coûte 90 € TVAC, certificat compris.",
+      },
+      {
+        question: "À quelle fréquence nettoyer le brasier d'un poêle à pellets ?",
+        answer:
+          "Dès que des résidus durcis bouchent ses trous : chaque jour ou tous les deux jours en plein hiver, moins souvent avec de bons pellets ou un brasier autonettoyant. La notice de votre modèle donne la fréquence.",
       },
       {
         question: "Que faire si le poêle s'éteint tout seul ?",
         answer:
-          "Causes courantes : réservoir vide, brûleur encrassé, capteur de tirage défaillant, fusible thermique qui a sauté à cause d'une surchauffe. Vérifiez dans cet ordre. Si ça persiste, appelez-nous, c'est rarement grave mais ça nécessite un diagnostic.",
+          "Vérifiez le réservoir, le brasier et la porte, laissez refroidir, puis relancez une fois. Si l'arrêt revient, appelez : notre article [poêle qui s'éteint tout seul](/blog/poele-pellets-eteint-tout-seul-causes) détaille les causes.",
       },
     ],
-    metaTitle: "Entretien d'un poêle à pellets : la check-list",
+    sources: [
+      { label: "MCZ, foire aux questions belge : nettoyage du brasero et de la vitre, entretien annuel par un technicien agréé, pellets certifiés et garantie, lue le 11/11/2026", href: "https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions" },
+      { label: "Arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central, consolidation officieuse de Wallex en vigueur depuis le 24/02/2023, art. 10, 4°, et art. 13, lue le 11/11/2026", href: "https://wallex.wallonie.be/files/pdfs/19/6833_Arr%C3%AAt%C3%A9_du_Gouvernement_wallon_tendant_%C3%A0_pr%C3%A9venir_la_pollution_atmosph%C3%A9rique_provoqu%C3%A9e_par_les_installations_de_chauffage_central_destin%C3%A9es_au_chauffage_de_b%C3%A2timents_ou_%C3%A0_la_production_d'eau_chaud_24-02-2023-.pdf" },
+      { label: "Cadel, manuel de l'utilisateur « Poêle à granulés », réf. 89023068A (©2025), § 13 (nettoyage), lu le 11/11/2026", href: "https://grp.cadelsrl.com/documents/89023068A.pdf" },
+      { label: "Tarifs d'entretien, de ramonage et de dépannage de Mister Pellets au 11/11/2026" },
+    ],
+    metaTitle: "Entretien d'un poêle à pellets : qui fait quoi",
     metaDescription:
-      "Comment entretenir votre poêle à pellets jour, semaine, saison, année. Check-list complète des techniciens Mister Pellets pour faire durer votre appareil.",
+      "Entretien d'un poêle à pellets : gestes du quotidien, de la semaine et de la saison, entretien annuel par un technicien, obligations et tarifs en Wallonie.",
   },
   {
     slug: "quelle-puissance-poele-pellets",
     publishedAt: "2026-05-02",
-    modifiedAt: "2026-10-03",
-    title: "Quelle puissance de poêle à pellets pour ma maison ?",
-    description: "Calcul rapide selon la surface et le PEB. Tableau de correspondance pour une vingtaine de cas typiques wallons.",
+    modifiedAt: "2026-11-11",
+    title: "Quelle puissance de poêle à pellets pour votre maison ?",
+    description:
+      "Le besoin par m² selon l'isolation, les tableaux surface et puissance (6, 8, 10, 12 kW…), la correction des plafonds hauts et trois exemples chiffrés en Wallonie.",
     category: "Choix",
     excerpt:
-      "Sous-dimensionner votre poêle, c'est devoir tourner à plein régime en permanence. Sur-dimensionner, c'est de l'argent gaspillé. Voici comment caler la puissance correctement.",
+      "Trop faible, le poêle tourne à fond tout l'hiver ; trop fort, il tourne au ralenti et s'encrasse. Le calcul tient en deux chiffres, la surface et l'isolation, puis se vérifie chez vous.",
+    directAnswer: `La puissance d'un poêle à pellets se calcule sur la surface chauffée et l'isolation : environ ${ISO.recent.wattsPerM2} W par m² en PEB A ou B, ${ISO.bonne.wattsPerM2} W en PEB C ou D, ${ISO.moyenne.wattsPerM2} W en PEB E et ${ISO.ancienne.wattsPerM2} W en PEB F ou G. Pour 100 m² en PEB C : ${kwFr(recommendedKw(100, "bonne"))} kW.`,
     sections: [
       {
         heading: "La règle de calcul",
         paragraphs: [
-          "Formule de base : 1 kW pour 10 m² bien isolés (PEB A-B) avec hauteur sous plafond standard (2.5m). On adapte ensuite selon 4 paramètres.",
-          "Maison très bien isolée (PEB A) : 1 kW pour 12-15 m². Maison moyenne (PEB C-D) : 1 kW pour 8-10 m². Maison mal isolée (PEB E-G) : 1 kW pour 6-8 m². Hauteur sous plafond > 3m : ajouter 15-20% à la puissance calculée.",
+          "Multipliez la surface à chauffer (en m²) par le besoin de votre maison (en W par m²), puis divisez par 1 000 : vous avez la puissance en kW. Le besoin dépend surtout de l'isolation, que le certificat PEB résume en une lettre. Ce sont les valeurs de notre [estimation en ligne](/estimation), qui propose ensuite les poêles du catalogue proches du besoin.",
+          "Ces valeurs supposent une hauteur sous plafond courante, autour de 2,50 m, et une maison chauffée normalement, à 19 ou 20 °C. Ce sont des ordres de grandeur : la visite technique les affine avec l'orientation, les volumes ouverts et l'usage.",
+        ],
+        table: {
+          headers: ["Surface chauffée", ...ISO_HEADERS],
+          rows: POWER_BY_SURFACE,
+          caption: "Puissance conseillée, arrondie à 0,1 kW, selon la grille de notre estimation en ligne. Hauteur sous plafond de 2,50 m environ.",
+        },
+      },
+      {
+        heading: "6, 8, 10, 12 kW : pour combien de m² ?",
+        paragraphs: [
+          "Vous avez repéré un modèle et vous voulez savoir s'il suffit ? Lisez le tableau dans l'autre sens : chaque puissance couvre une surface qui dépend de l'isolation.",
+        ],
+        table: {
+          headers: ["Puissance du poêle", ...ISO_HEADERS],
+          rows: SURFACE_BY_POWER,
+          caption: "Surface couverte, arrondie à 5 m², même grille. Les poêles de 18 kW et plus sont des hydros raccordés aux radiateurs.",
+        },
+      },
+      {
+        heading: "Trop fort ou trop faible : la marge à respecter",
+        paragraphs: [
+          `Un poêle trop faible tourne à plein régime pour suivre la demande : il consomme plus, s'use plus vite et ne tient pas la température par grand froid. Un poêle trop fort tourne au ralenti, s'allume et s'éteint souvent, encrasse son brasier et sa vitre. Notre estimation en ligne retient comme bien dimensionné un poêle entre ${WIN_MIN} % et ${WIN_MAX} % du besoin calculé.`,
+          "Entre deux puissances, prenez la plus proche du besoin plutôt que la plus forte. Une marge raisonnable suffit : les poêles à pellets modulent leur puissance, du ralenti au maximum.",
         ],
       },
       {
-        heading: "Tableau de correspondance",
+        heading: "Plafond haut, mezzanine, pièce ouverte",
         paragraphs: [
-          "Studio 40 m² PEB B : 4-5 kW (rare, plutôt un poêle d'appoint).",
-          "Maison 80 m² PEB C : 8-9 kW (EK63 Like 90+, Edilkamin Cherie 9+ Evo, Girolami Split).",
-          "Maison 100 m² PEB B : 9-10 kW (EK63 Tweed 90+, Edilkamin Rise 9+, Girolami Vert 9).",
-          "Maison 130 m² PEB D : 13-15 kW (EK63 Monday 130++, Edilkamin Vyda 13++ Evo, Girolami Vert 14).",
-          "Maison 160 m² PEB C : 14-16 kW (en hydro : Girolami Soft 14 ou EK63 Monday H 190).",
-          "Maison 200 m² PEB D : 18-22 kW (passer sur hydro : Girolami Soft 22 ou EK63 Monday H 230).",
-          "Maison 280 m² PEB D-E : 25-30 kW (hydro Girolami Soft 26, ou poêle + chaudière en complément).",
+          "La grille suppose 2,50 m sous plafond. Avec une mezzanine, un plafond cathédrale ou une ancienne grange à 4 m, il y a plus d'air à chauffer pour la même surface. Raisonnez alors en volume : chaque fiche du catalogue donne le volume de chauffe annoncé par le fabricant, en m³. Comparez-le au volume de votre pièce (surface multipliée par la hauteur moyenne).",
+          "Un escalier ouvert fait monter la chaleur à l'étage, mais sans la répartir : les chambres du fond restent fraîches. Dans ce cas, un [poêle canalisable](/poeles-a-pellets-canalisables) qui souffle dans une ou deux pièces vaut mieux qu'un poêle plus puissant.",
         ],
       },
       {
-        heading: "Cas particuliers",
+        heading: "Poêle à air, canalisable ou hydro selon la puissance",
+        list: [
+          "Une pièce de vie ouverte, bien isolée : un poêle à air de 6 à 10 kW suffit le plus souvent.",
+          "Une maison à étage avec une ou deux chambres froides : un [canalisable](/poeles-a-pellets-canalisables), de 8 à 13 kW selon la surface.",
+          "Toute la maison, avec des radiateurs ou un plancher chauffant : un [poêle hydro](/poeles-a-pellets-hydro), dont la puissance rendue à l'eau couvre le besoin de la maison.",
+          "Une cheminée existante à reprendre : un [insert à pellets](/inserts-a-pellets), avec la même règle de puissance.",
+        ],
+      },
+      {
+        heading: "Trois exemples chiffrés",
         paragraphs: [
-          "Maison à étage avec escalier ouvert : la chaleur monte naturellement, donc un poêle puissant en bas peut chauffer le haut. Mais attention au tirage : si l'étage est juste réchauffé partiellement, c'est inconfortable. Préférez le canalisable.",
-          "Pièce ouverte avec mezzanine ou grand volume : appliquez la règle de la hauteur sous plafond (+15-20%) et envisagez une ventilation horizontale plus puissante.",
-          "Plusieurs pièces fermées (chambres, bureau) : canalisable obligatoire. Un poêle classique ne chauffera que la pièce où il est installé, peu importe sa puissance.",
+          `Maison récente de 100 m², PEB B : 100 × ${ISO.recent.wattsPerM2} W = ${kwFr(recommendedKw(100, "recent"))} kW. Un poêle à air de 7 kW environ convient, comme le [Cadel Perla 7](/produit/cadel-perla-7) ou l'[EK63 Zone 80 Evo](/produit/ek63-zone-80) (7,6 kW). Les deux sont étanches, utile si la maison a une ventilation double flux.`,
+          `Maison à étage de 130 m², PEB D : 130 × ${ISO.bonne.wattsPerM2} W = ${kwFr(recommendedKw(130, "bonne"))} kW. Si le séjour s'ouvre sur l'escalier et que deux chambres restent froides, un canalisable de 12 à 13 kW fait le travail, comme l'[EK63 Monday 130++ Evo](/produit/ek63-monday-130) ou l'[Edilkamin Vyda 13++ Evo](/produit/edilkamin-vyda-13), tous deux à 12,6 kW.`,
+          `Maison de 200 m² avec radiateurs, PEB C : 200 × ${ISO.bonne.wattsPerM2} W = ${kwFr(recommendedKw(200, "bonne"))} kW. C'est le domaine du poêle hydro, comme l'[EK63 Monday H 190 Evo](/produit/ek63-monday-190h) (19,2 kW). La part rendue à l'eau, indiquée par le fabricant, se compare au besoin des radiateurs à la visite.`,
+        ],
+      },
+      {
+        heading: "Après une rénovation, refaire le calcul",
+        paragraphs: [
+          "Isoler la toiture ou changer les châssis fait baisser le besoin. Si vous prévoyez ces travaux dans les deux ou trois ans, dimensionnez le poêle pour la maison rénovée, pas pour la maison d'aujourd'hui : il tournera un peu plus fort au début, puis à son régime normal. Dites-le à la visite technique, on en tient compte.",
         ],
       },
     ],
     faq: [
       {
-        question: "Que se passe-t-il si je sous-dimensionne ?",
-        answer:
-          "Le poêle tourne à plein régime tout le temps. Conséquences : usure accélérée du brûleur et de la vis sans fin, surconsommation de pellets, vitre qui noircit vite, et confort insuffisant lors des grands froids. Vous remplacez votre poêle au bout de 5-7 ans au lieu de 15-20.",
+        question: "Quelle puissance de poêle à pellets pour 100 m² ?",
+        answer: `${kwFr(recommendedKw(100, "recent"))} kW si la maison est récente ou bien isolée (PEB A ou B), ${kwFr(recommendedKw(100, "bonne"))} kW en PEB C ou D, ${kwFr(recommendedKw(100, "moyenne"))} kW en PEB E et ${kwFr(recommendedKw(100, "ancienne"))} kW en PEB F ou G, pour 2,50 m sous plafond.`,
       },
       {
-        question: "Et si je sur-dimensionne ?",
+        question: "Un poêle à pellets de 8 kW chauffe combien de m² ?",
+        answer: `Environ ${surfaceFor(8, "recent")} m² dans une maison récente, ${surfaceFor(8, "bonne")} m² en PEB C ou D, ${surfaceFor(8, "moyenne")} m² en PEB E et ${surfaceFor(8, "ancienne")} m² en PEB F ou G.`,
+      },
+      {
+        question: "Peut-on chauffer toute une maison avec un seul poêle à pellets ?",
         answer:
-          "Vous payez plus cher à l'achat (différence ~500-1500 €), et le poêle tourne presque toujours en mode mini. Pas idéal pour la combustion (rendement moindre, plus de cendres). Mais moins grave que le sous-dimensionnement.",
+          "Oui, avec un canalisable pour une ou deux pièces de plus, ou avec un poêle hydro raccordé aux radiateurs pour toutes les pièces. Un poêle à air chauffe la pièce où il est posé et les pièces ouvertes sur elle.",
+      },
+      {
+        question: "Vaut-il mieux prendre un poêle plus puissant, par sécurité ?",
+        answer:
+          "Non. Un poêle trop fort tourne au ralenti, s'allume et s'éteint souvent et s'encrasse plus vite. Prenez la puissance la plus proche du besoin calculé.",
+      },
+      {
+        question: "Et si je rénove après l'installation ?",
+        answer:
+          "Le besoin baisse et le poêle tournera plus bas. Si les travaux sont prévus, dimensionnez pour la maison rénovée et signalez-les à la visite technique.",
       },
     ],
-    metaTitle: "Quelle puissance de poêle à pellets pour ma maison ?",
+    sources: [
+      { label: "Grille de besoin de chauffe de l'estimation en ligne Mister Pellets (W par m² selon le PEB), état du 11/11/2026" },
+      { label: "Fiches techniques des fabricants (puissance nominale, volume de chauffe), reprises sur les fiches du catalogue au 11/11/2026" },
+    ],
+    metaTitle: "Quelle puissance de poêle à pellets ? Tableaux",
     metaDescription:
-      "Calculer la puissance de poêle à pellets selon votre surface et votre PEB. Tableau de correspondance pour 20 cas typiques wallons. Conseil Mister Pellets.",
+      "Quelle puissance de poêle à pellets selon la surface et le PEB : tableaux 6, 8, 10, 12 kW, plafonds hauts, trois exemples chiffrés en Wallonie.",
+  },
+  // Codes d'erreur (11/11/2026). Seules les notices officielles lues ce jour-là
+  // sont reprises : Cadel, manuel de l'utilisateur réf. 89023068A (©2025, Sweet,
+  // Perla, Cristal, One, Beam, Accent, Sharp, Lee, Chrome, Round, Sound, Bold 7
+  // Up Twin, Brio 7, Bi Flux), § 12 et 12.10-12.11, sur grp.cadelsrl.com ; FAQ
+  // belge de MCZ (réarmement). Les tableaux MCZ, Edilkamin, EK63, Girolami et
+  // Austroflamm restent à écrire, notice officielle en main.
+  {
+    slug: "codes-erreur-poele-pellets",
+    publishedAt: "2026-11-11",
+    modifiedAt: "2026-11-11",
+    title: "Codes d'erreur et pannes d'un poêle à pellets : que faire ?",
+    description:
+      "Ce que veut dire une alarme de poêle à pellets, la table des codes Cadel d'après la notice officielle, comment réarmer, ce qu'il ne faut pas faire et quand appeler.",
+    category: "Entretien",
+    excerpt:
+      "Un poêle à pellets qui s'arrête affiche presque toujours un code. Ce code dit quel organe de sécurité l'a arrêté. Voici comment le lire, les gestes permis, et la table complète des codes Cadel, tirée de la notice du fabricant.",
+    directAnswer:
+      "Un code d'erreur indique quelle sécurité a arrêté le poêle à pellets, ou poêle à granulés : allumage raté, flamme éteinte, surchauffe, dépression dans le conduit, sonde ou ventilateur en panne. Notez le code, laissez refroidir, videz le brasier, vérifiez le réservoir et la porte, puis réarmez une seule fois. Si l'alarme revient, appelez un technicien.",
+    sections: [
+      {
+        heading: "Lire un code d'erreur",
+        paragraphs: [
+          "Quand le poêle détecte un fonctionnement anormal, il coupe l'arrivée de pellets, passe en phase de refroidissement et affiche un code sur son écran, sa télécommande ou son application. Chez Cadel, les codes commencent par « A » suivi de deux chiffres ; d'autres marques ont leur propre nomenclature. Le code ne dit pas toujours la cause exacte, mais il dit quelle sécurité a réagi : c'est ce qui oriente la vérification.",
+          "Notez le code et la marque du poêle avant tout. Au téléphone, c'est la première chose qu'on vous demandera, et elle évite souvent un déplacement inutile.",
+        ],
+      },
+      {
+        heading: "Les familles d'alarmes, toutes marques",
+        paragraphs: [
+          "La notice Cadel décrit ces sécurités une à une. On retrouve les mêmes familles sur la plupart des poêles à pellets, sous d'autres codes.",
+        ],
+        table: {
+          headers: ["Famille", "Ce qui se passe", "Vérification possible"],
+          rows: [
+            ["Allumage raté", "Aucune flamme ne se développe pendant la phase d'allumage", "Brasier propre et bien en place, pellets dans le réservoir, porte et couvercle fermés"],
+            ["Extinction anormale", "La flamme s'éteint en cours de fonctionnement", "Niveau de pellets dans le réservoir"],
+            ["Dépression, pressostat", "La pression dans le conduit sort des limites : conduit bouché, vent fort, porte ou réservoir ouvert, joints usés", "Porte, couvercle, joints ; le conduit, lui, se contrôle par un professionnel"],
+            ["Surchauffe", "Les fumées, le réservoir ou l'eau dépassent leur seuil de sécurité", "Laisser refroidir, dégager les grilles d'aération"],
+            ["Sonde ou ventilateur", "Sonde des fumées en panne, ventilateur des fumées à l'arrêt", "Aucune : appeler"],
+            ["Coupure de courant", "Le poêle s'arrête et redémarre selon sa notice", "Attendre la fin du cycle de reprise"],
+          ],
+          caption: "D'après la notice Cadel réf. 89023068A, § 12 (dispositifs de sécurité et alarmes).",
+        },
+      },
+      {
+        heading: "Codes Cadel : la table de la notice",
+        paragraphs: [
+          "Cadel publie la table suivante dans le manuel de l'utilisateur de ses poêles Sweet, Perla, Cristal, One, Beam, Accent, Sharp, Lee, Chrome, Round, Sound, Bold, Brio et Bi Flux. D'autres gammes Cadel peuvent avoir une table légèrement différente : vérifiez dans la notice de votre modèle. Parmi les poêles du catalogue, le [Cadel Perla 7](/produit/cadel-perla-7) et le [Cadel Sweet 7](/produit/cadel-sweet-7) relèvent de ce manuel.",
+        ],
+        table: {
+          headers: ["Code", "Ce que dit la notice", "Ce que la notice demande"],
+          rows: [
+            ["A01", "Défaut d'allumage du feu", "Contrôler la propreté et la position du brasier, le niveau de pellets, la fermeture du couvercle et de la porte. Causes possibles aussi : conduit bouché, résistance d'allumage endommagée"],
+            ["A02", "Extinction anormale du feu", "Contrôler le niveau de pellets dans le réservoir"],
+            ["A03", "Alarme thermostats : le réservoir de pellets ou l'eau dépasse le seuil de sécurité", "Attendre la fin du refroidissement, annuler l'alarme, rallumer avec le dosage de pellets au minimum, vérifier que la poussière ne bouche pas la grille d'aération arrière"],
+            ["A04", "Surchauffe des fumées", "Réduire le chargement de pellets (dosage)"],
+            ["A05", "Alarme pressostat : intervention du pressostat des fumées", "Vérifier conduit, porte, réservoir, joints, conduits latéraux des fumées ; causes possibles : cheminée trop longue, météo défavorable, poêle bouché"],
+            ["A06", "Alarme de nettoyage : nettoyeur bloqué (brasier autonettoyant seulement)", "Nettoyer le brasier et retirer ce qui bloque la rotation"],
+            ["A08", "Fonctionnement anormal du ventilateur des fumées", "Contacter le service après-vente si l'alarme persiste"],
+            ["A09", "Panne de la sonde des fumées", "Contacter le service après-vente si l'alarme persiste"],
+            ["SERVICE", "Avis de maintenance périodique, non bloquant", "Les heures de fonctionnement prévues avant l'entretien sont écoulées : appeler pour l'entretien"],
+          ],
+          caption: "Cadel, manuel de l'utilisateur réf. 89023068A, § 12.10, lu le 11/11/2026. Résumé ; la notice de votre modèle fait foi.",
+        },
+      },
+      {
+        heading: "Réarmer après une alarme",
+        paragraphs: [
+          "Chez Cadel, la notice demande d'appuyer quelques instants sur la touche 1 (ESC). Le poêle contrôle alors si la cause persiste : si oui, l'alarme revient ; sinon, il se met à l'arrêt et vous pouvez le rallumer. MCZ, dans sa foire aux questions belge, indique de maintenir enfoncé quelques secondes le bouton marche-arrêt, ou de suivre la notice.",
+          "Avant de relancer, laissez le poêle finir son refroidissement et videz le brasier s'il est plein de pellets non brûlés. Rallumer sur un tas de pellets, c'est risquer un départ de flamme brutal dans le foyer.",
+        ],
+      },
+      {
+        heading: "Après une coupure de courant",
+        paragraphs: [
+          "La notice Cadel distingue deux cas. Une coupure de moins de 10 secondes : le poêle reprend où il en était. Plus longue, poêle allumé ou en phase d'allumage : au retour du courant, il fait un refroidissement complet, affiché « ON BLACK OUT », puis un nouvel allumage. Les autres marques ont leur propre comportement, décrit dans leur notice ; notre article [poêle à pellets et coupure de courant](/blog/poele-pellets-sans-electricite-coupure-courant) donne la consommation et les conseils des fabricants.",
+        ],
+      },
+      {
+        heading: "Ce qu'il ne faut jamais faire",
+        list: [
+          "Relancer en boucle : une alarme qui revient signale une cause qui persiste, et chaque allumage raté remplit le brasier.",
+          "Allumer avec un allume-feu, du papier ou de l'alcool : la résistance d'allumage s'en charge.",
+          "Ouvrir la porte ou le réservoir pendant le refroidissement.",
+          "Démonter la vis sans fin, la carte électronique ou le ventilateur des fumées : c'est le travail d'un technicien, et la garantie du fabricant en dépend.",
+        ],
+      },
+      {
+        heading: "Quand appeler, et combien coûte un dépannage",
+        paragraphs: [
+          "Appelez quand la même alarme revient après un réarmement, quand une alarme de sonde ou de ventilateur s'affiche, ou à la moindre odeur de fumée dans la pièce. Notre [dépannage](/depannage-poele-a-pellets) intervient sur toutes les marques, à 110 € TVAC la première heure puis 60 € TVAC par heure, déplacement inclus, pièces en plus.",
+          "Beaucoup d'alarmes viennent d'un poêle encrassé ou de pellets de mauvaise qualité. L'[entretien annuel](/entretien-poele-a-pellets), à 175 € TVAC ramonage compris, en évite une bonne part ; notre [guide de l'entretien](/guides/comment-entretenir-poele-pellets) donne les gestes du quotidien. Si votre poêle s'arrête sans afficher de code, lisez [pourquoi un poêle à pellets s'éteint tout seul](/blog/poele-pellets-eteint-tout-seul-causes).",
+        ],
+      },
+      {
+        heading: "Les autres marques que nous posons",
+        paragraphs: [
+          "MCZ, Edilkamin, EK63, Girolami et Austroflamm ont leur propre table de codes, propre à chaque gamme. Nous ne les reprenons ici qu'après lecture de la notice officielle de chaque fabricant : en attendant, la notice papier de votre poêle, ou son application, donne la signification du code. Donnez-nous le code au téléphone, nous vous dirons ce qu'il veut dire.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: "Que veut dire A01 sur un poêle à pellets ?",
+        answer:
+          "Chez Cadel, A01 signale un défaut d'allumage : aucune flamme pendant la phase d'allumage. La notice demande de contrôler le brasier, le niveau de pellets et la fermeture de la porte et du couvercle ; un conduit bouché ou une résistance d'allumage usée peuvent aussi en être la cause. Sur une autre marque, le même code peut vouloir dire autre chose : lisez votre notice.",
+      },
+      {
+        question: "Que veut dire A05 sur un poêle Cadel ?",
+        answer:
+          "L'intervention du pressostat des fumées : la pression dans le conduit sort des limites. La notice cite une cheminée obstruée, une porte ou un réservoir ouvert, des joints qui fuient, des conduits de fumées encrassés, un conduit trop long ou une météo défavorable.",
+      },
+      {
+        question: "Comment réarmer un poêle à pellets en alarme ?",
+        answer:
+          "Chez Cadel, appui de quelques instants sur la touche 1 (ESC) ; chez MCZ, appui de quelques secondes sur le bouton marche-arrêt, d'après sa foire aux questions. Laissez d'abord le poêle refroidir et videz le brasier. Réarmez une fois : si l'alarme revient, appelez.",
+      },
+      {
+        question: "Mon poêle à pellets se met en sécurité tout seul, que faire ?",
+        answer:
+          "Notez le code affiché, laissez refroidir, vérifiez le réservoir, le brasier, la porte et le couvercle, puis réarmez une fois. Si l'arrêt se répète, faites appel à un technicien : notre [dépannage](/depannage-poele-a-pellets) coûte 110 € TVAC la première heure.",
+      },
+      {
+        question: "Le message SERVICE bloque-t-il le poêle ?",
+        answer:
+          "Non, chez Cadel c'est un avis de maintenance périodique, non bloquant : les heures de fonctionnement prévues avant l'entretien sont écoulées. Prenez rendez-vous pour l'[entretien annuel](/entretien-poele-a-pellets).",
+      },
+    ],
+    sources: [
+      { label: "Cadel, manuel de l'utilisateur « Poêle à granulés », réf. 89023068A (©2025), § 12, 12.9, 12.10 et 12.11, lu le 11/11/2026", href: "https://grp.cadelsrl.com/documents/89023068A.pdf" },
+      { label: "MCZ, foire aux questions belge : réinitialiser une alarme, lue le 11/11/2026", href: "https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions" },
+      { label: "Tarifs de dépannage et d'entretien de Mister Pellets au 11/11/2026" },
+    ],
+    metaTitle: "Codes d'erreur d'un poêle à pellets : que faire ?",
+    metaDescription:
+      "Codes d'erreur d'un poêle à pellets : ce que dit l'alarme, les codes Cadel d'après la notice, comment réarmer, les gestes à éviter, quand appeler.",
   },
 ];
 
@@ -432,7 +823,13 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
 function wordCount(guide: Omit<GuideData, "readingTime">): number {
   const texts = [
     guide.excerpt,
-    ...guide.sections.flatMap((section) => [section.heading, ...(section.paragraphs ?? []), ...(section.list ?? [])]),
+    guide.directAnswer ?? "",
+    ...guide.sections.flatMap((section) => [
+      section.heading,
+      ...(section.paragraphs ?? []),
+      ...(section.list ?? []),
+      ...(section.table ? [...section.table.headers, ...section.table.rows.flat()] : []),
+    ]),
     ...(guide.faq ?? []).flatMap((q) => [q.question, q.answer]),
   ];
   return texts.join(" ").split(/\s+/).filter(Boolean).length;
