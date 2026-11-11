@@ -34,7 +34,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Combien coûte un poêle à pellets installé en Wallonie ?",
     answer:
-      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. Dans un logement de plus de 10 ans, la TVA passe à 6 % au lieu de 21 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026.",
+      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. Dans un logement de plus de 10 ans, la TVA passe à 6 % au lieu de 21 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026. Les forfaits de pose et des exemples chiffrés sont sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets).",
   },
   {
     question: "Quelle puissance de poêle pour quelle surface ?",
@@ -421,6 +421,15 @@ export default function HomePage() {
               Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin d'entrée de gamme.
             </p>
             <p>
+              Ces fourchettes comptent le poêle, la pose et le tubage du conduit existant, avec la TVA à
+              6 % d&apos;un logement de plus de 10 ans. Avec un conduit déjà tubé, la facture descend : le
+              prix de départ du moment, les forfaits de pose et des exemples chiffrés sont sur la page{" "}
+              <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+                prix d&apos;un poêle à pellets posé
+              </Link>
+              .
+            </p>
+            <p>
               Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
               compte 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
               étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
@@ -605,7 +614,7 @@ export default function HomePage() {
 
       <CTAFinal
         title="Chiffrez votre installation en 2 minutes"
-        description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris et la mensualité à 0 %. Le prix ferme est confirmé après la visite technique, sans engagement."
+        description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris et la mensualité. Le prix ferme est confirmé après la visite technique, sans engagement."
         secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous#reserver" }}
       />
     </>

@@ -21,10 +21,10 @@ import {
  * liens et date de vérification : lib/aides.ts.
  */
 export const metadata = buildPageMetadata({
-  title: "Prime poêle à pellets Wallonie : les aides après le 1er octobre 2026",
+  title: "Aides poêle à pellets en Wallonie après le 1er octobre 2026",
   description:
     "Plus de prime régionale pour un poêle à pellets depuis le 1er octobre 2026. Ce qui reste : TVA à 6 %, Rénopack et Rénoprêt (PEB E, F, G), MEBAR.",
-  path: "/primes-energie-wallonie-2026",
+  path: "/aides-poele-a-pellets-wallonie",
 });
 
 const LINK = "font-semibold text-mp-green-deep underline hover:no-underline";

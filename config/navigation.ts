@@ -33,7 +33,7 @@ export const ROUTES = {
   bookingWidget: "/prendre-rendez-vous#reserver",
   /** Visite technique à domicile : page d'arrivée des annonces, agenda en tête. */
   visit: "/visite-technique",
-  grants: "/primes-energie-wallonie-2026",
+  grants: "/aides-poele-a-pellets-wallonie",
   realisations: "/realisations",
   guides: "/guides",
   blog: "/blog",

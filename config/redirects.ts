@@ -41,10 +41,13 @@ const LEGACY_REDIRECTS: SiteRedirect[] = [
   { source: "/cookies", destination: "/politique-cookies", permanent: true },
 
   // Primes / aides
-  { source: "/primes", destination: "/primes-energie-wallonie-2026", permanent: true },
-  { source: "/primes-wallonie", destination: "/primes-energie-wallonie-2026", permanent: true },
-  { source: "/aides", destination: "/primes-energie-wallonie-2026", permanent: true },
-  { source: "/aides-wallonie", destination: "/primes-energie-wallonie-2026", permanent: true },
+  // La page des aides a perdu son millésime le 11/11/2026 : l'ancienne adresse
+  // et les raccourcis pointent tous droit sur la nouvelle.
+  { source: "/primes-energie-wallonie-2026", destination: "/aides-poele-a-pellets-wallonie", permanent: true },
+  { source: "/primes", destination: "/aides-poele-a-pellets-wallonie", permanent: true },
+  { source: "/primes-wallonie", destination: "/aides-poele-a-pellets-wallonie", permanent: true },
+  { source: "/aides", destination: "/aides-poele-a-pellets-wallonie", permanent: true },
+  { source: "/aides-wallonie", destination: "/aides-poele-a-pellets-wallonie", permanent: true },
 
   // Guides — redirection des vieilles URLs courantes
   { source: "/guide-achat", destination: "/guides/guide-achat-poele-pellets-wallonie", permanent: true },

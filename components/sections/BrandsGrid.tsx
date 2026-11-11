@@ -21,10 +21,13 @@ interface BrandsGridProps {
  */
 export function BrandsGrid({
   tone = "beige",
-  title = "Les 5 marques que nous distribuons",
+  title: titleProp,
   description = "Chaque marque a son créneau. Notre rôle est de vous diriger vers celle qui colle vraiment à votre maison et à votre budget.",
   brands = TOP_TIER_BRANDS,
 }: BrandsGridProps) {
+  // Sans titre fourni, le nombre annoncé est celui des marques affichées :
+  // « Les 5 marques » restait écrit au-dessus de six cartes.
+  const title = titleProp ?? `Les ${brands.length} marques que nous posons`;
   return (
     <section className={cn("mp-band", toneClass(tone))}>
       <div className="mp-shell">

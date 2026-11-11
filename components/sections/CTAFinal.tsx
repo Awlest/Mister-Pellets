@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn, formatPhone } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
 
 interface CTAFinalProps {
@@ -15,7 +16,6 @@ interface CTAFinalProps {
   showPhone?: boolean;
 }
 
-const PHONE = "081 13 83 09";
 
 /**
  * Bloc CTA final sur fond uni (crème ou beige selon l'alternance de la page),
@@ -51,11 +51,11 @@ export function CTAFinal({
           )}
           {showPhone && (
             <a
-              href={`tel:${formatPhone(PHONE)}`}
+              href={PHONE_HREF}
               className="inline-flex min-h-11 items-center gap-2 text-base font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
             >
               <Phone className="h-5 w-5" />
-              {PHONE}
+              {PHONE_DISPLAY}
             </a>
           )}
         </div>

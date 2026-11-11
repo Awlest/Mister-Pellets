@@ -34,7 +34,7 @@ export const FAQ_CATEGORY_LABELS: Record<FaqCategory, string> = {
   installation: "Installation",
   primes: "Primes & aides",
   entretien: "Entretien & SAV",
-  boutique: "Boutique en ligne",
+  boutique: "Commande & livraison",
   showroom: "Showroom & RDV",
 };
 
@@ -220,14 +220,14 @@ export const FAQS: FaqItem[] = [
     category: "pellets",
     question: "ENplus A1 ou DINplus : quelle différence ?",
     answer:
-      "Pour un poêle domestique, aucune : les deux certifications reprennent la classe A1 de la norme ISO 17225-2, avec les mêmes seuils. Au moins 4,6 kWh/kg, 0,7 % de cendres au maximum, 10 % d'humidité au maximum, 6 mm de diamètre à 1 mm près. ENplus est la plus répandue dans les magasins wallons, DINplus vient d'Allemagne. Prenez celle qui est disponible au meilleur prix, et refusez un sac sans certification : vous ne savez pas ce que vous brûlez.",
+      "Pour un poêle domestique, aucune : les deux certifications reprennent la classe A1 de la norme ISO 17225-2, avec les mêmes seuils. Au moins 4,6 kWh/kg, 0,7 % de cendres au maximum, 10 % d'humidité au maximum, 6 mm de diamètre à 1 mm près. ENplus est la plus répandue dans les magasins wallons, DINplus vient d'Allemagne. Prenez celle qui est disponible au meilleur prix, et refusez un sac sans certification : vous ne savez pas ce que vous brûlez. Les pellets Comfo que nous vendons sont certifiés DINplus A1 : [la palette de pellets Comfo](/palette-pellets-comfo).",
   },
   {
     id: "pellets-prix-tonne",
     category: "pellets",
     question: "Combien coûte une tonne de pellets en Wallonie en 2026 ?",
     answer:
-      "Autour de 410 € la tonne en sacs. En août 2026, ValBiom relevait en moyenne 6,19 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est 13 % de plus qu'en août 2025 (5,48 €). Le sac acheté à l'unité coûte plus cher. ValBiom ne s'attend pas à une baisse pour l'hiver 2026-2027 : si vous avez la place, faire son stock à l'automne reste le bon réflexe.",
+      "Autour de 410 € la tonne en sacs. En août 2026, ValBiom relevait en moyenne 6,19 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est 13 % de plus qu'en août 2025 (5,48 €). Le sac acheté à l'unité coûte plus cher. ValBiom ne s'attend pas à une baisse pour l'hiver 2026-2027 : si vous avez la place, faire son stock à l'automne reste le bon réflexe. Nous vendons aussi des pellets Comfo certifiés DINplus A1 en palette, à retirer à Fernelmont : [la palette de pellets Comfo](/palette-pellets-comfo).",
   },
   {
     id: "pellets-stockage",
@@ -384,7 +384,7 @@ export const FAQS: FaqItem[] = [
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // BOUTIQUE EN LIGNE
+  // COMMANDE ET LIVRAISON (le paiement en ligne a été retiré le 04/09/2026)
   // ───────────────────────────────────────────────────────────────────
   {
     id: "boutique-livraison",
@@ -396,9 +396,9 @@ export const FAQS: FaqItem[] = [
   {
     id: "boutique-pose-en-ligne",
     category: "boutique",
-    question: "Puis-je acheter le poêle en ligne et le faire poser par Mister Pellets ?",
+    question: "Comment se passe une commande chez Mister Pellets ?",
     answer:
-      "Oui, c'est même la configuration la plus fréquente. Vous chiffrez votre installation sur le configurateur, on cale une visite technique, et c'est elle qui transforme l'estimation en prix ferme : on valide le conduit, les distances et l'accès avant tout engagement. Quand nous fournissons et posons le poêle dans un logement de plus de 10 ans, toute la facture est à 6 % de TVA, poêle compris. Un poêle livré sans pose reste à 21 %. Une fois le devis accepté, vous recevez la facture d'acompte et on planifie la pose.",
+      "En trois étapes. Vous chiffrez votre installation sur [le configurateur](/estimation) ou vous demandez un devis. On cale ensuite une visite technique, et c'est elle qui transforme l'estimation en prix ferme : on valide le conduit, les distances et l'accès avant tout engagement. Une fois le devis accepté, vous recevez la facture d'acompte et on planifie la pose. Quand nous fournissons et posons le poêle dans un logement de plus de 10 ans, toute la facture est à 6 % de TVA, poêle compris. Un poêle livré sans pose reste à 21 %.",
   },
   {
     id: "boutique-paiement",
@@ -410,9 +410,9 @@ export const FAQS: FaqItem[] = [
   {
     id: "boutique-retour",
     category: "boutique",
-    question: "Quel est le droit de rétractation sur un achat en ligne ?",
+    question: "Peut-on commander et payer un poêle en ligne ?",
     answer:
-      "Conformément au Code de droit économique belge, vous disposez d'un délai de 14 jours à compter de la réception du produit pour exercer votre droit de rétractation, sans avoir à motiver votre décision. Les frais de retour sont à votre charge. Ce droit ne s'applique pas aux produits déjà installés ni aux prestations de pose déjà exécutées. Pour les commandes en ligne sans pose, le retour est simple : vous nous contactez, on récupère.",
+      "Non. Le paiement en ligne a été retiré en septembre 2026 : un poêle ne se vend pas sans avoir vu le conduit. Le site sert à choisir un modèle et à chiffrer l'installation. La commande passe par un devis signé après la visite technique, puis par une facture d'acompte. Les conditions de vente complètes sont dans [nos conditions générales](/cgv).",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -423,7 +423,7 @@ export const FAQS: FaqItem[] = [
     category: "showroom",
     question: "Où se trouve votre showroom ?",
     answer:
-      `Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). On vous y reçoit uniquement sur rendez-vous, ${VISIT_HOURS_LONG}.`,
+      `Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons. On vous y reçoit uniquement sur rendez-vous, ${VISIT_HOURS_LONG}.`,
   },
   {
     id: "showroom-sans-rendez-vous",

@@ -889,7 +889,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Leonardo et la qualité des pellets",
         paragraphs: [
           "Tous les sacs de pellets ne se valent pas. Sur un poêle classique, un lot un peu différent peut décaler la combustion et encrasser plus vite. Avec Leonardo, le poêle absorbe une bonne partie de cet écart.",
-          "Ça ne dispense pas d'acheter des pellets certifiés ENplus A1, c'est la base. Mais le système pardonne les variations normales d'un lot à l'autre.",
+          "Ça ne dispense pas d'acheter des pellets certifiés ENplus A1 ou DINplus, c'est la base. Mais le système pardonne les variations normales d'un lot à l'autre.",
         ],
       },
       {
@@ -914,7 +914,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Leonardo fonctionne avec n'importe quels pellets ?",
         answer:
-          "Il encaisse bien les variations entre lots, mais on conseille toujours des pellets certifiés ENplus A1. Un bon combustible reste la base d'une combustion saine.",
+          "Il encaisse bien les variations entre lots, mais on conseille toujours des pellets certifiés ENplus A1 ou DINplus. Un bon combustible reste la base d'une combustion saine.",
       },
       {
         question: "EK63 a-t-il aussi la technologie Leonardo ?",
@@ -1075,7 +1075,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Source Feeding et tolérance aux pellets",
         paragraphs: [
           "Comme le brasier ne s'encrasse pas de la même manière, le système encaisse mieux les pellets de qualité variable. La combustion reste régulière même si un lot est un peu différent.",
-          "On conseille quand même des pellets certifiés ENplus A1 : un bon combustible reste le meilleur allié de votre poêle, quel que soit le système d'alimentation.",
+          "On conseille quand même des pellets certifiés ENplus A1 ou DINplus : un bon combustible reste le meilleur allié de votre poêle, quel que soit le système d'alimentation.",
         ],
       },
       {
@@ -1884,7 +1884,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "La règle simple à retenir",
         paragraphs: [
-          "Logo ENplus A1 ou DINplus visible avec son numéro, prix cohérent avec le marché (autour de 6 € le sac de 15 kg à la palette en 2026), revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Le reste, c'est jouer avec votre matériel.",
+          "Logo ENplus A1 ou DINplus visible avec son numéro, prix cohérent avec le marché (autour de 6 € le sac de 15 kg à la palette en 2026), revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Le reste, c'est jouer avec votre matériel. Nous vendons aussi des pellets Comfo certifiés DINplus A1 en palette, à retirer à Fernelmont : [la palette de pellets Comfo](/palette-pellets-comfo).",
         ],
       },
     ],
@@ -2266,7 +2266,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Mon poêle à pellets s'éteint au bout de 30 minutes, que faire ?",
         answer:
-          "C'est typique d'un creuset encrassé qui ne laisse plus passer l'air primaire. Videz le creuset à froid, brossez les trous avec une brosse métallique, et vérifiez que les pellets sont certifiés ENplus A1. Si le problème persiste après 2-3 cycles, contrôlez la sonde de fumée.",
+          "C'est typique d'un creuset encrassé qui ne laisse plus passer l'air primaire. Videz le creuset à froid, brossez les trous avec une brosse métallique, et vérifiez que les pellets sont certifiés ENplus A1 ou DINplus. Si le problème persiste après 2-3 cycles, contrôlez la sonde de fumée.",
       },
       {
         question: "Combien coûte une intervention SAV en Wallonie ?",

@@ -358,7 +358,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
       {
         question: "Quels pellets pour minimiser l'entretien ?",
         answer:
-          "Toujours privilégier les pellets ENplus A1 ou DINplus, en sacs de 15 kg sous emballage propre. Les pellets bon marché ou humides encrassent beaucoup plus, génèrent plus de cendres, et peuvent même endommager le brûleur sur le long terme.",
+          "Toujours privilégier les pellets ENplus A1 ou DINplus, en sacs de 15 kg sous emballage propre (nous en vendons en palette : [la palette de pellets Comfo](/palette-pellets-comfo)). Les pellets bon marché ou humides encrassent beaucoup plus, génèrent plus de cendres, et peuvent même endommager le brûleur sur le long terme.",
       },
       {
         question: "Que faire si le poêle s'éteint tout seul ?",

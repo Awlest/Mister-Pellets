@@ -55,7 +55,7 @@ export default function DevisPage() {
             </h2>
             <p className="mb-4 text-sm text-mp-ink-soft">
               Notre estimation en ligne compose votre installation à partir des poêles du catalogue :
-              prix du modèle, pose, TVA et mensualité à 0 %, affichés en direct.
+              prix du modèle, pose, TVA et mensualité, affichés en direct.
             </p>
             <Button asChild variant="primary" size="default">
               <Link href="/estimation">Estimer mon installation →</Link>

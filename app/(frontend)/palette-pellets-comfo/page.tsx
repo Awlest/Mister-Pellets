@@ -44,16 +44,28 @@ export function generateMetadata(): Metadata {
   });
 }
 
-const FAQ = [
+/**
+ * La question sur le prix dépend de la date : pendant l'offre de lancement,
+ * elle dit jusqu'à quand le prix réduit s'applique ; après, elle dit seulement
+ * que le prix retenu est celui du jour de la réservation. Écrite en dur, elle
+ * annonçait encore le prix de lancement après sa fin.
+ */
+const buildFaq = (launch: boolean) => [
   {
     question: "Livrez-vous la palette ?",
     answer:
       "Non. La palette se retire au showroom de Fernelmont, sur rendez-vous, et se paie sur place au moment de l'enlèvement.",
   },
-  {
-    question: "Quel prix s'applique si je réserve le 2 novembre pour un retrait plus tard ?",
-    answer: `Le prix retenu est celui du jour où vous réservez. Une réservation faite au plus tard le ${launchLastDayLabel} se paie ${formatEuro(PELLET_OFFER.launch.priceTTC)} la palette, même si vous passez la prendre la semaine suivante. Le prix est rappelé dans l'e-mail de confirmation.`,
-  },
+  launch
+    ? {
+        question: `Quel prix s'applique si je réserve avant le ${launchLastDayLabel} pour un retrait plus tard ?`,
+        answer: `Le prix retenu est celui du jour où vous réservez. Une réservation faite au plus tard le ${launchLastDayLabel} se paie ${formatEuro(PELLET_OFFER.launch.priceTTC)} la palette, même si vous passez la prendre la semaine suivante. Le prix est rappelé dans l'e-mail de confirmation.`,
+      }
+    : {
+        question: "Le prix peut-il changer entre la réservation et le retrait ?",
+        answer:
+          "Non. Le prix retenu est celui du jour où vous réservez, même si vous passez prendre la palette plus tard. Il est rappelé dans l'e-mail de confirmation.",
+      },
   {
     question: "Ces pellets conviennent-ils à mon poêle ?",
     answer: COMFO.compatibilityAnswer,
@@ -100,7 +112,7 @@ export default function PalettePelletsComfoPage() {
 
   return (
     <>
-      <JsonLd data={[productSchema, buildFAQSchema(FAQ)]} />
+      <JsonLd data={[productSchema, buildFAQSchema(buildFaq(launch))]} />
 
       {/* Produit : photo à gauche, achat à droite dès 1 024 px. Empilés en
           mobile : nom et pastilles, photo réduite, puis le prix, qui tient
@@ -319,7 +331,7 @@ export default function PalettePelletsComfoPage() {
         </div>
       </section>
 
-      <FAQAccordion tone="beige" items={FAQ} />
+      <FAQAccordion tone="beige" items={buildFaq(launch)} />
     </>
   );
 }

@@ -142,7 +142,7 @@ export const CITIES: CityData[] = [
     intro:
       "Tournai, à la frontière française, est à 110 km de Fernelmont. La ville est connue pour son patrimoine médiéval (cathédrale Notre-Dame Unesco). On intervient régulièrement dans le grand Tournaisis.",
     context:
-      "Tournai a beaucoup d'habitat ancien (maisons mitoyennes en briques rouges, centre historique). Le tubage est fréquent. En périphérie, des fermettes rénovées préfèrent souvent l'hydro pour remplacer le mazout. Le climat océanique adoucit l'usage : pellets de qualité ENplus A1 recommandés contre l'humidité.",
+      "Tournai a beaucoup d'habitat ancien (maisons mitoyennes en briques rouges, centre historique). Le tubage est fréquent. En périphérie, des fermettes rénovées préfèrent souvent l'hydro pour remplacer le mazout. Le climat océanique adoucit l'usage : pellets certifiés ENplus A1 ou DINplus recommandés contre l'humidité.",
     recommendedModels: ["edilkamin-lena-9-evo", "ek63-monday-190h", "mcz-club-comfort-air-matic-12-core-r"],
     metaTitle: "Poêle à pellets à Tournai, Vente & pose",
     metaDescription:

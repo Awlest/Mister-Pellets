@@ -1,6 +1,6 @@
 /**
  * Aides au chauffage en Wallonie : SOURCE UNIQUE des chiffres et des liens
- * officiels affichés sur /primes-energie-wallonie-2026, dans le bloc
+ * officiels affichés sur /aides-poele-a-pellets-wallonie, dans le bloc
  * PrimesBlock (accueil, pages ville) et dans llms.txt.
  *
  * Situation vérifiée le 03/10/2026 :

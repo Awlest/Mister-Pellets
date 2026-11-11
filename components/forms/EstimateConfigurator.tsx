@@ -1034,7 +1034,7 @@ function EstimateForm({
                 Si votre maison est classée PEB E, F ou G et que vous préparez une rénovation plus
                 large, le Rénopack peut financer le poêle avec le reste des travaux.{" "}
                 <Link
-                  href="/primes-energie-wallonie-2026"
+                  href="/aides-poele-a-pellets-wallonie"
                   className="font-semibold text-mp-green-deep underline hover:no-underline"
                 >
                   Les aides qui restent

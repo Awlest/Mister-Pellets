@@ -56,7 +56,7 @@ interface PrimesBlockProps {
   title?: string;
   description?: string;
   aides?: AideRow[];
-  /** Bouton vers /primes-energie-wallonie-2026 (inutile sur cette page même). */
+  /** Bouton vers la page des aides (inutile sur cette page même). */
   showLink?: boolean;
 }
 
@@ -145,7 +145,7 @@ export function PrimesBlock({
         {showLink && (
           <div className="flex justify-center">
             <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link href="/primes-energie-wallonie-2026">
+              <Link href="/aides-poele-a-pellets-wallonie">
                 Toutes les aides et leurs conditions
               </Link>
             </Button>
