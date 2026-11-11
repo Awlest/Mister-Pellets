@@ -137,6 +137,16 @@ for (const file of [
   assert(`${file} : aucun délai de pose écrit à la main`, !/(?:Pose|pose)[ \u00a0]+(?:en[ \u00a0]+)?\d+[-\u00a0 à]+\d+[ \u00a0]semaines/.test(text));
 }
 
+// ---------------------------------------------------------------------------
+// 4. Estimation : « TVAC » partout, détail en HTVA
+// ---------------------------------------------------------------------------
+{
+  const conf = readFileSync("components/forms/EstimateConfigurator.tsx", "utf8");
+  // Texte affiché seulement : les noms de variables (totalTTC) ne comptent pas.
+  assert("estimation : aucun « TTC » affiché", !/[ "]TTC\b(?!\()/.test(conf.replace(/\b\w+TTC\b/g, "")));
+  assert("estimation : détail marqué HTVA", conf.includes("Montants HTVA") && conf.includes("Sous-total HTVA"));
+}
+
 if (ko > 0) {
   console.error(`\n${ko} contrôle(s) en échec.`);
   process.exit(1);

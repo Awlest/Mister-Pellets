@@ -31,6 +31,7 @@ import {
   acceptsInstall,
   estimate,
   eur,
+  eurCents,
   filterByKind,
   pinModelFirst,
   isCanalisable,
@@ -510,7 +511,7 @@ function EstimateForm({
           {product ? ` autour du ${product.name}` : ""}.
         </p>
         <p className="mb-8 text-xl font-semibold">
-          Estimation : {eur(r.totalTTC)} TTC
+          Estimation : {eur(r.totalTTC)} TVAC
         </p>
 
         {/*
@@ -1118,7 +1119,7 @@ function EstimateForm({
                       {eur(monthly ?? 0)}/mois
                     </span>
                     <span className="mt-1 block text-sm text-mp-ink-soft">
-                      sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TTC
+                      sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TVAC
                       {r.bonusHT > 0 ? ", bonus de saison déduit" : ""}. {FIN_NOTE}
                     </span>
                   </p>
@@ -1141,7 +1142,7 @@ function EstimateForm({
               <StepHeading ref={headingRef}>Voulez-vous qu&apos;on vous recontacte ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft">
                 Votre estimation est prête :{" "}
-                <strong className="whitespace-nowrap text-mp-green-deep">{eur(r.totalTTC)} TTC</strong>,
+                <strong className="whitespace-nowrap text-mp-green-deep">{eur(r.totalTTC)} TVAC</strong>,
                 pose comprise{r.onQuote ? ", échafaudage en plus sur devis" : ""}. Elle est calculée
                 sans avoir vu votre maison. Pendant la visite
                 technique, gratuite, il nous arrive de trouver moins cher : un conduit existant qui
@@ -1376,7 +1377,7 @@ function EstimateForm({
                 className="-my-1 min-h-11 min-w-0 flex-1 rounded-xl py-1 pr-2 text-left lg:hidden"
               >
                 <span className="block text-xs font-medium text-mp-ink-soft">
-                  {product ? "Total posé, TTC" : "Pose estimée, TTC"}
+                  {product ? "Total posé, TVAC" : "Pose estimée, TVAC"}
                   {r.onQuote ? ", hors échafaudage" : ""}
                 </span>
                 <span className="flex items-center gap-1 text-lg font-semibold leading-tight tabular-nums text-mp-green-deep">
@@ -1731,7 +1732,15 @@ function Recap({
         )}
       </div>
 
+      {/* Les lignes du détail sont hors TVA, la TVA s'ajoute à la fin : écrit
+          en tête de colonne et sur le sous-total, pour que le total TVAC de
+          l'étape 1 et ce détail se lisent sans contradiction (recette du
+          11/11/2026 : « 2 317,50 € » ici, « 2 457 € TVAC » à l'étape 1). */}
       <dl className="mt-5 space-y-1 border-t border-mp-sand/40 pt-4 text-sm">
+        <div className="flex justify-between gap-3 pb-1 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
+          <dt>Détail</dt>
+          <dd>Montants HTVA</dd>
+        </div>
         <Row
           label={product ? `Poêle ${product.brand}` : "Poêle"}
           value={r.materialHT > 0 ? eur(r.materialHT) : "à choisir"}
@@ -1751,12 +1760,13 @@ function Recap({
             muted
           />
         ))}
+        <Row label="Sous-total HTVA" value={eurCents(r.totalTTC - r.vatAmount)} />
         <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
       </dl>
 
       <div className="mt-4 flex items-end justify-between border-t border-mp-sand/40 pt-4">
         <span className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
-          Total TTC posé
+          Total posé, TVAC
         </span>
         <span className="text-2xl font-semibold tabular-nums text-mp-green-deep">{eur(r.totalTTC)}</span>
       </div>
@@ -1772,8 +1782,8 @@ function Recap({
       )}
 
       <p className="mt-4 text-xs leading-relaxed text-mp-ink-soft">
-        Estimation indicative TTC, matériel et pose compris, TVA{" "}
-        {Math.round(r.vatRate * 100)} %. Détail de la pose hors TVA. Les forfaits de pose sont des
+        Estimation indicative TVAC, matériel et pose compris, TVA{" "}
+        {Math.round(r.vatRate * 100)} %. Lignes du détail hors TVA (HTVA). Les forfaits de pose sont des
         budgets moyens : le prix ferme est établi après la visite technique gratuite.
         {r.bonusHT > 0 && ` ${typo(bonusLabelFor(product?.brand))} déduit. ${BONUS.conditions}`}
       </p>
