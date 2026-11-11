@@ -418,12 +418,12 @@ export default async function ProductPage({ params }: Props) {
                         <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
                       </p>
                       {product.bonusPriceTTC ? (
-                        <p className="mt-2 text-xs text-mp-ink-soft">
+                        <p className="mt-2 text-sm text-mp-ink-soft">
                           {bonusLabelFor(product.brand)} déduit. {BONUS.conditions}
                         </p>
                       ) : null}
                     </div>
-                    <ul className="text-xs text-mp-ink-soft space-y-1 leading-relaxed">
+                    <ul className="text-sm text-mp-ink-soft space-y-1 leading-relaxed">
                       <li>
                         <span className="font-semibold">Pose non incluse</span> : devis chiffré
                         sous 48 h.
@@ -476,7 +476,7 @@ export default async function ProductPage({ params }: Props) {
                 d'acompte. Ne PAS réintroduire de bouton « acheter » ni de
                 mention de paiement tant que ce n'est pas redevenu vrai.
               */}
-              <p className="text-xs text-mp-ink-soft mt-4 text-center">
+              <p className="text-sm text-mp-ink-soft mt-4 text-center">
                 Prix du matériel seul. La pose se chiffre après une visite sur
                 place : c'est là qu'on valide le conduit, l'évacuation et
                 l'accès. La TVA à 6 % (logement de plus de 10 ans) est calculée dans le devis.
@@ -669,6 +669,34 @@ export default async function ProductPage({ params }: Props) {
         title={`Devis avec pose pour le modèle ${product.name}`}
         description="On chiffre le poêle et la pose en 48 heures. Sans engagement avant signature."
       />
+
+      {/* Barre d'action du téléphone (sous 1 024 px) : le prix et le bouton
+          principal restent à portée dès le premier écran. Sur une fiche, le
+          prix tombait au 2e écran et le bouton au 3e. Dernier élément de la
+          page et en `sticky` : elle colle au bas de l'écran pendant la
+          lecture, puis reprend sa place avant le pied de page, sans script.
+          Fond opaque et filet, ni flou ni ombre (DESIGN.md) ; mp-actionbar :
+          le bandeau cookies se pose au-dessus (globals.css). */}
+      <div className="mp-actionbar sticky bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-20 min-h-[var(--mp-actionbar-h)] border-t border-mp-sand/40 bg-mp-cream px-4 py-3 lg:hidden">
+        <div className="flex items-center justify-between gap-3">
+          <p className="min-w-0">
+            <span className="block truncate text-xs text-mp-ink-soft">{product.name}</span>
+            <span
+              className="block text-lg font-semibold tabular-nums text-mp-green-deep"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {product.priceTTC && shownTTC
+                ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownTTC)} TVAC`
+                : "Prix sur devis"}
+            </span>
+          </p>
+          <Button asChild variant="primary" className="shrink-0">
+            <Link href={estimateHref} rel="nofollow">
+              Chiffrer la pose
+            </Link>
+          </Button>
+        </div>
+      </div>
     </>
   );
 }

@@ -149,6 +149,8 @@ export function NavbarSticky() {
             ? "translate-y-0 opacity-100 duration-(--mp-duration-enter)"
             : "translate-y-[120%] opacity-0 pointer-events-none duration-(--mp-duration-exit)"
         )}
+        // Masquée au défilement : ses liens, invisibles, ne doivent plus recevoir le focus.
+        inert={!effectiveVisible}
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       >
         <nav

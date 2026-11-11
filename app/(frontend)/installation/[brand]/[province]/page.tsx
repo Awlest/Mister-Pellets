@@ -93,6 +93,11 @@ export default async function InstallationLocalePage({ params }: Props) {
           </>
         }
         description={`${brand.tagline}. On le livre, on le pose et on le règle ${province.inLabel}, au taux de TVA réduit quand votre logement a plus de 10 ans.`}
+        actions={
+          <Button asChild variant="primary" size="lg">
+            <Link href="/estimation">Chiffrer mon installation</Link>
+          </Button>
+        }
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Nos marques", href: "/nos-marques" },

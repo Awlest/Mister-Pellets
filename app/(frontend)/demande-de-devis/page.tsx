@@ -27,9 +27,10 @@ export default function DevisPage() {
           { label: "Accueil", href: "/" },
           { label: "Demande de devis" },
         ]}
+        compact
       />
 
-      <section className="bg-mp-cream mp-band">
+      <section className="bg-mp-cream pt-6 pb-14 md:py-20">
         <div className="mp-shell">
           {/* Trust strip */}
           <div className="mp-measure flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mb-8 text-sm text-mp-ink-soft">
@@ -47,9 +48,13 @@ export default function DevisPage() {
             </span>
           </div>
 
+          <div className="mp-measure">
+            <QuoteForm />
+          </div>
+
           {/* Parcours alternatif : celui qui sait déjà quel poêle l'intéresse
               préfère souvent voir un chiffre tout de suite. */}
-          <div className="mp-measure mb-8 rounded-2xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-5 md:p-6 text-center">
+          <div className="mp-measure mt-10 rounded-2xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-5 md:p-6 text-center">
             <h2 className="mb-1 text-lg font-semibold text-mp-green-deep">
               Vous voulez un chiffre tout de suite ?
             </h2>
@@ -62,9 +67,6 @@ export default function DevisPage() {
             </Button>
           </div>
 
-          <div className="mp-measure">
-            <QuoteForm />
-          </div>
 
           <p className="mp-measure text-xs text-mp-ink-soft mt-8 text-center">
             Vos réponses sont sauvegardées localement, vous pouvez fermer la page et revenir, le formulaire repartira où vous en étiez.

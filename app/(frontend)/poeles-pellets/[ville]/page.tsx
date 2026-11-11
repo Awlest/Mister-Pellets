@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { MapPin, Truck, Star, Clock } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
@@ -96,6 +97,11 @@ export default async function CityPage({ params }: Props) {
           </>
         }
         description={city.intro}
+        actions={
+          <Button asChild variant="primary" size="lg">
+            <Link href="/estimation">Chiffrer mon installation</Link>
+          </Button>
+        }
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Zones d'intervention", href: "/zones-d-intervention" },

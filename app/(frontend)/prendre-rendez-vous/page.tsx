@@ -75,6 +75,36 @@ export default function PrendreRendezVousPage() {
         }
       />
 
+      {/* Rendez-vous commerciaux : réservables en ligne. L'ancre #reserver est
+        * la cible de tous les boutons « Prendre rendez-vous » du site : le
+        * visiteur arrive sur l'agenda, pas sur la présentation du showroom.
+        * scroll-mt-16 : la hauteur du header collant, sur grand écran. */}
+      <section id="reserver" className="bg-mp-beige mp-band scroll-mt-16">
+        <div className="mp-shell">
+          <div className="mp-measure mb-10 text-center">
+            <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
+              Réserver un rendez-vous en ligne
+            </h2>
+            <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed">
+              Pour chiffrer un projet ou venir voir les modèles, choisissez votre créneau
+              directement dans notre agenda. La confirmation arrive aussitôt par e-mail, avec de
+              quoi l&apos;ajouter au vôtre.
+            </p>
+          </div>
+
+          <BookingWidget
+            services={ONLINE_SERVICES.map((s) => ({
+              slug: s.slug,
+              name: s.name,
+              durationLabel: s.durationLabel,
+              location: s.location,
+            }))}
+            phoneDisplay={PHONE_DISPLAY}
+            phoneHref={PHONE_HREF}
+          />
+        </div>
+      </section>
+
       {/* Présentation du showroom */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
@@ -119,38 +149,8 @@ export default function PrendreRendezVousPage() {
         </div>
       </section>
 
-      {/* Rendez-vous commerciaux : réservables en ligne. L'ancre #reserver est
-        * la cible de tous les boutons « Prendre rendez-vous » du site : le
-        * visiteur arrive sur l'agenda, pas sur la présentation du showroom.
-        * scroll-mt-16 : la hauteur du header collant, sur grand écran. */}
-      <section id="reserver" className="bg-mp-beige mp-band scroll-mt-16">
-        <div className="mp-shell">
-          <div className="mp-measure mb-10 text-center">
-            <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
-              Réserver un rendez-vous en ligne
-            </h2>
-            <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed">
-              Pour chiffrer un projet ou venir voir les modèles, choisissez votre créneau
-              directement dans notre agenda. La confirmation arrive aussitôt par e-mail, avec de
-              quoi l&apos;ajouter au vôtre.
-            </p>
-          </div>
-
-          <BookingWidget
-            services={ONLINE_SERVICES.map((s) => ({
-              slug: s.slug,
-              name: s.name,
-              durationLabel: s.durationLabel,
-              location: s.location,
-            }))}
-            phoneDisplay={PHONE_DISPLAY}
-            phoneHref={PHONE_HREF}
-          />
-        </div>
-      </section>
-
       {/* Interventions techniques : par téléphone uniquement */}
-      <section className="bg-mp-cream mp-band">
+      <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <div className="mp-measure mb-10 text-center">
             <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
@@ -216,11 +216,11 @@ export default function PrendreRendezVousPage() {
         </div>
       </section>
 
-      {/* Beige : sépare les deux sections crème qui l'entourent. */}
-      <GoogleReviews tone="beige" />
+      {/* Crème : sépare les deux sections beiges qui l'entourent. */}
+      <GoogleReviews tone="cream" />
 
       {/* Alternative téléphone (toujours utile pour qui n'aime pas le formulaire) */}
-      <section className="bg-mp-cream mp-band">
+      <section className="bg-mp-beige mp-band">
         <div className="mp-shell text-center">
           <h2 className="mp-measure mx-auto text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
             Plus simple : appelez-nous
@@ -249,6 +249,7 @@ export default function PrendreRendezVousPage() {
       </section>
 
       <CTAFinal
+        tone="cream"
         title="Pas envie de venir au showroom ?"
         description="On peut aussi se voir en visio (15 minutes) ou directement chez vous pour un diagnostic. Au choix selon ce qui vous arrange."
         primaryCta={{ label: "Demander un devis", href: "/demande-de-devis" }}

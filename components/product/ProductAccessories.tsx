@@ -81,7 +81,9 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
         Compléments en option
       </h2>
       <p className="mt-1 text-sm text-mp-ink-soft">
-        Cochez ceux qui vous intéressent pour voir le total. Prix TVAC du complément seul.
+        {accessories.some((a) => a.priceTTC != null)
+          ? "Cochez ceux qui vous intéressent pour voir le total. Prix TVAC du complément seul."
+          : "Cochez ce qui vous intéresse, nous le chiffrons dans le devis."}
       </p>
 
       <ul className="mt-4 space-y-2">

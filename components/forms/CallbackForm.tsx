@@ -174,7 +174,7 @@ export function CallbackForm() {
             disabled={disabled}
             aria-invalid={!!errors.consent}
             aria-describedby={describedBy("consent")}
-            className="mt-1 h-4 w-4 rounded border-mp-sand accent-mp-orange-flame"
+            className="mt-3 h-5 w-5 shrink-0 rounded border-mp-sand accent-mp-orange-flame"
           />
           <span>
             J&apos;accepte que mes données soient utilisées pour me recontacter, conformément à la{" "}

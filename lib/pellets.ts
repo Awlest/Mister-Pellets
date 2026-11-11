@@ -159,7 +159,7 @@ export const COMFO = {
     { label: "Code EAN du sac", value: "5425035000002" },
   ],
   specsNote:
-    "Le fabricant publie ces valeurs pour l'ensemble de ses pellets, Comfo compris. Sources : sa fiche « Notre gamme de pellets » et le registre DIN CERTCO, consultés le 27 octobre 2026. Ces pellets ne portent pas le label ENplus.",
+    "Le fabricant publie ces valeurs pour l'ensemble de ses pellets, Comfo compris. Sources : sa fiche « Notre gamme de pellets » et le registre DIN CERTCO, consultés le 27 octobre 2026.",
   compatibilityAnswer:
-    "Ce sont des pellets de 6 mm de classe A1, certifiés DINplus, la qualité que demandent la plupart des notices de poêles à pellets. Ils ne portent pas le label ENplus : si la notice ou la garantie de votre poêle l'exige, vérifiez avant d'acheter, ou appelez-nous avec la marque et le modèle.",
+    "Ce sont des pellets de 6 mm de classe A1, certifiés DINplus, la qualité que demandent la plupart des notices de poêles à pellets. Si la notice ou la garantie de votre poêle exige une autre certification, vérifiez avant d'acheter, ou appelez-nous avec la marque et le modèle.",
 } as const;

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock, Calendar, AlertTriangle, Info, CheckCircle2 } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
@@ -239,6 +240,11 @@ export default async function ArticlePage({ params }: Props) {
         eyebrow={`${CATEGORY_LABELS[article.category]} · ${article.readingTimeMinutes} min de lecture`}
         title={article.title}
         description={article.excerpt}
+        actions={
+          <Button asChild variant="primary" size="lg">
+            <Link href="/estimation">Chiffrer mon installation</Link>
+          </Button>
+        }
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Blog", href: "/blog" },

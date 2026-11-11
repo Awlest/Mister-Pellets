@@ -107,21 +107,23 @@ export default function HomePage() {
           * le titre, les boutons et la ligne de preuves n'apparaissaient
           * qu'après un défilement. Sur du trafic payant, c'est un visiteur
           * acheté puis perdu avant d'avoir lu la proposition. */}
+        {/* 11/11/2026 : logo de 64 px sur téléphone (il prenait 190 px et
+          * repoussait le bouton principal sous le bandeau cookies), 80 px sur
+          * tablette, absent à partir de 1 280 px où l'en-tête le porte déjà. */}
         <div
-          className="flex justify-center"
-          style={{ paddingTop: "17.5px", paddingBottom: "17.5px" }}
+          className="flex justify-center py-3 xl:hidden"
         >
-          {/* fetchPriority high : React en fait aussi un préchargement dans le
-              <head>, comme le faisait `priority` de next/image. */}
+          {/* Plus de fetchPriority : petit, le logo n'est plus l'élément le
+              plus grand de l'écran, et son préchargement partait aussi sur
+              ordinateur, où il n'est pas affiché. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo-mister-pellets-full.svg"
             alt="Mister Pellets"
             width={400}
             height={400}
-            fetchPriority="high"
             decoding="async"
-            className="h-[160px] w-[160px] md:h-[200px] md:w-[200px] object-contain"
+            className="h-16 w-16 md:h-20 md:w-20 object-contain"
           />
         </div>
 
@@ -153,13 +155,15 @@ export default function HomePage() {
               <Button asChild variant="primary" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
                 <Link href="/estimation">Chiffrer mon installation</Link>
               </Button>
-              <Button asChild variant="secondary" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
+              {/* Sous 1 280 px, le rendez-vous et le catalogue sont dans la barre
+                  du bas : le héros garde un seul bouton et le téléphone. */}
+              <Button asChild variant="secondary" size="lg" className="hidden xl:inline-flex">
                 <Link href="/prendre-rendez-vous#reserver">
                   <CalendarDays aria-hidden />
                   Prendre rendez-vous
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
+              <Button asChild variant="outline" size="lg" className="hidden xl:inline-flex">
                 <Link href="/boutique">Voir la boutique</Link>
               </Button>
             </div>

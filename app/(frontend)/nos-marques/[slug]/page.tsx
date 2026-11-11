@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { ArrowRight, Award, Calendar, MapPin } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
@@ -119,6 +120,11 @@ export default async function BrandPage({ params }: Props) {
           </>
         }
         description={brand.heroSubtitle ?? brand.intro}
+        actions={
+          <Button asChild variant="primary" size="lg">
+            <Link href="/estimation">Chiffrer mon installation</Link>
+          </Button>
+        }
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Nos marques", href: "/nos-marques" },

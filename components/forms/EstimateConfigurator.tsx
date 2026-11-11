@@ -415,7 +415,10 @@ function EstimateForm({
     }
     if (step === 3 && !product) {
       setProductMissing(true);
-      document.getElementById("est-models")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      // Haut du bloc, où s'affiche le message : centré, il sortait de l'écran
+      // (la liste des modèles est plus haute que l'écran d'un téléphone).
+      document.getElementById("est-models")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => document.getElementById("est-models-error")?.focus({ preventScroll: true }), 0);
       return;
     }
     // Poêle canalisable : rien n'est coché d'office, le client répond.
@@ -830,7 +833,12 @@ function EstimateForm({
                   <span className="font-normal text-mp-ink-soft">({eligible.length} disponibles)</span>
                 </legend>
                 {productMissing && !product && (
-                  <p role="alert" className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
+                  <p
+                    id="est-models-error"
+                    role="alert"
+                    tabIndex={-1}
+                    className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700"
+                  >
                     Choisissez un modèle pour continuer.
                   </p>
                 )}

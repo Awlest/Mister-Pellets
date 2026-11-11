@@ -225,8 +225,10 @@ export function ProductGallery({
           </span>
         </button>
 
-        {/* Vignettes cliquables */}
-        <div className="grid grid-cols-4 gap-2 mt-4">
+        {/* Vignettes cliquables : celles qui existent seulement (des cases
+            vides se lisaient comme des images cassées), et aucune rangée
+            quand la fiche n'a qu'une photo. */}
+        <div className={allImages.length > 1 ? "grid grid-cols-4 gap-2 mt-4" : "hidden"}>
           {allImages.slice(0, 8).map((img, i) => {
             const isActive = i === activeImageIdx;
             return (
@@ -257,12 +259,6 @@ export function ProductGallery({
               </button>
             );
           })}
-          {Array.from({ length: Math.max(0, 4 - allImages.length) }).map((_, i) => (
-            <div
-              key={`empty-${i}`}
-              className="aspect-square rounded-xl bg-mp-beige border border-mp-sand/40"
-            />
-          ))}
         </div>
 
         {/* Sélecteur de couleur si déclinaisons définies */}
