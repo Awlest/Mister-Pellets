@@ -191,7 +191,7 @@ export default function PalettePelletsComfoPage() {
                 </span>
                 {launch ? (
                   <p className="mt-3 text-sm text-mp-green-deep">
-                    À partir du {launchNextDayLabel} :{" "}
+                    À partir du {launchNextDayLabel} :{" "}
                     <span className="font-semibold">{formatEuro(PELLET_OFFER.priceTTC)} TVAC</span> la
                     palette. Le prix retenu est celui du jour de votre réservation.
                   </p>
@@ -297,7 +297,7 @@ export default function PalettePelletsComfoPage() {
             <p className="text-lg text-mp-ink-soft leading-relaxed">
               Choisissez le jour, l&apos;heure et le nombre de palettes. La confirmation part aussitôt
               par e-mail. Plus de {PELLET_OFFER.maxPerBooking}&nbsp;palettes, ou pas de créneau qui
-              vous convient ? Appelez le{" "}
+              vous convient ? Appelez le{" "}
               <a href={PHONE_HREF} className="font-semibold text-mp-orange-ink underline hover:no-underline">
                 {PHONE_DISPLAY}
               </a>

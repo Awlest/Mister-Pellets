@@ -7,6 +7,7 @@ import { ROUTES } from "@/config/navigation";
 import { encodeListing, sortForGrid } from "@/lib/catalogue-listing";
 import { productsInCategory, type CategoryData } from "@/lib/categories";
 import { getAllProducts } from "@/lib/products";
+import { typo } from "@/lib/typo";
 
 const LINK =
   "inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink";
@@ -40,7 +41,7 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
       <section className="bg-mp-cream mp-band-sm">
         <div className="mp-shell">
           <div className="mp-measure">
-            <p className="text-lg text-mp-ink leading-relaxed">{category.intro}</p>
+            <p className="text-lg text-mp-ink leading-relaxed">{typo(category.intro)}</p>
             <ul className="mt-4 flex flex-col gap-x-6 sm:flex-row sm:flex-wrap">
               {category.guide && (
                 <li>
@@ -93,10 +94,10 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
             <div className="mp-measure">
               {category.sections.map((section) => (
                 <div key={section.heading} className="mb-10 last:mb-0">
-                  <h2 className="mb-4 text-2xl font-semibold text-mp-green-deep md:text-3xl">{section.heading}</h2>
+                  <h2 className="mb-4 text-2xl font-semibold text-mp-green-deep md:text-3xl">{typo(section.heading)}</h2>
                   {section.paragraphs.map((p, i) => (
                     <p key={i} className="mb-4 text-lg text-mp-ink leading-relaxed">
-                      {p}
+                      {typo(p)}
                     </p>
                   ))}
                 </div>

@@ -5,6 +5,7 @@ import { Clock, ArrowLeft } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { InlineText } from "@/components/ui/inline-text";
 import { plainText } from "@/lib/inline-text";
+import { typo } from "@/lib/typo";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { Badge } from "@/components/ui/badge";
@@ -112,7 +113,7 @@ export default async function GuidePage({ params }: Props) {
               {guide.sections.map((section, i) => (
               <section key={i} className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 mt-2">
-                  {section.heading}
+                  {typo(section.heading)}
                 </h2>
 
                 {section.paragraphs?.map((p, k) => (

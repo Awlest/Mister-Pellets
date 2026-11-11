@@ -95,7 +95,7 @@ export function CallbackForm() {
         <h3 className="mb-2 text-2xl font-semibold">C&apos;est noté, on vous rappelle</h3>
         <p className="leading-relaxed">
           Un technicien vous appelle dans la journée ouvrée pour vous donner un prix et fixer, si
-          vous le souhaitez, la visite technique gratuite. Pressé ? Appelez directement le{" "}
+          vous le souhaitez, la visite technique gratuite. Pressé ? Appelez directement le{" "}
           <a href={PHONE_HREF} className="font-semibold underline hover:no-underline">
             {PHONE_DISPLAY}
           </a>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { typo } from "@/lib/typo";
 import { cn } from "@/lib/utils";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
@@ -34,10 +35,10 @@ export function CTAFinal({
       <div className="mp-shell text-center">
         <div className="mx-auto mp-measure">
         <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
-          {title}
+          {typo(title)}
         </h2>
         <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 mp-measure mx-auto">
-          {description}
+          {typo(description)}
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">

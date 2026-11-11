@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { typo } from "@/lib/typo";
 import { cn } from "@/lib/utils";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
 import { AIDES_VERIFIED_AT, LOAN_MAX, MEBAR_MAX } from "@/lib/aides";
@@ -74,10 +75,10 @@ export function PrimesBlock({
       <div className="mp-shell">
         <div className="mp-measure mb-12 text-center">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
-            {title}
+            {typo(title)}
           </h2>
           {description && (
-            <p className="text-lg text-mp-ink-soft leading-relaxed">{description}</p>
+            <p className="text-lg text-mp-ink-soft leading-relaxed">{typo(description)}</p>
           )}
         </div>
 
@@ -96,13 +97,13 @@ export function PrimesBlock({
                 className="text-4xl md:text-5xl font-semibold text-mp-orange-display mb-2 tabular-nums"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                {aide.amount}
+                {typo(aide.amount)}
               </span>
               <span className="text-base font-semibold text-mp-green-deep">
                 {aide.audience}
               </span>
               {aide.detail && (
-                <span className="text-xs text-mp-ink-soft mt-1">{aide.detail}</span>
+                <span className="text-xs text-mp-ink-soft mt-1">{typo(aide.detail)}</span>
               )}
             </Card>
           ))}
@@ -115,7 +116,7 @@ export function PrimesBlock({
               <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
                 Prime poêle à pellets
               </span>
-              Terminée : demandes closes le 30 septembre 2026 à 23 h 59
+              Terminée : demandes closes le 30 septembre 2026 à 23 h 59
             </div>
             <div>
               <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
@@ -139,7 +140,7 @@ export function PrimesBlock({
               <span className="flex items-center justify-center h-5 w-5 rounded-full bg-mp-green-light/20 text-mp-green-mid shrink-0 mt-0.5">
                 <Check className="h-3 w-3" />
               </span>
-              {c}
+              {typo(c)}
             </div>
           ))}
         </div>

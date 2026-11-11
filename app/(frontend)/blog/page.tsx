@@ -49,7 +49,7 @@ export default function BlogHubPage() {
         eyebrow="Blog éditorial"
         title={
           <>
-            Blog poêle à pellets : <span className="mp-italic">conseils d&apos;installateur</span>
+            Blog poêle à pellets : <span className="mp-italic">conseils d&apos;installateur</span>
           </>
         }
         description="Articles techniques sur le poêle à pellets : données chiffrées, retours terrain, aides Wallonie 2026. Du concret, pas des généralités."
@@ -106,7 +106,7 @@ export default function BlogHubPage() {
       <section className="bg-mp-beige mp-band-sm">
         <div className="mp-shell">
           <div className="flex flex-wrap gap-2 items-center justify-center">
-            <span className="text-sm font-semibold text-mp-ink mr-2">Catégories :</span>
+            <span className="text-sm font-semibold text-mp-ink mr-2">Catégories :</span>
             {ARTICLE_CATEGORIES.map((cat) => {
               const count = ARTICLES.filter((a) => a.category === cat.value).length;
               if (count === 0) return null;

@@ -173,7 +173,7 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
               <p className="mt-2 text-sm text-mp-green-deep">
                 <span className="font-semibold">{formatPriceReducedVat(totalTTC)} TVAC</span> si nous
                 posons le tout sur une habitation de plus de 10 ans
-                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
+                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
               </p>
             </>
           ) : (

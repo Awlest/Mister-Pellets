@@ -71,12 +71,12 @@ export default async function EstimationPage() {
               <strong className="text-mp-green-deep">Ce que couvre l&apos;estimation.</strong>{" "}Le
               poêle au prix de notre catalogue, la pose et le raccordement selon votre type
               d&apos;évacuation, les fournitures courantes, la mise en service et le réglage de la
-              combustion. Les forfaits de pose sont des budgets moyens : une configuration
+              combustion. Les forfaits de pose sont des budgets moyens : une configuration
               inhabituelle (accès compliqué, conduit hors normes, maçonnerie à reprendre) se chiffre
               après la visite technique gratuite.
             </p>
             <p>
-              <strong className="text-mp-green-deep">Pas envie de choisir un modèle ?</strong>{" "}
+              <strong className="text-mp-green-deep">Pas envie de choisir un modèle ?</strong>{" "}
               <Link
                 href="/demande-de-devis"
                 className="text-mp-orange-ink underline hover:no-underline"

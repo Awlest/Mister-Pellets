@@ -304,11 +304,11 @@ export default async function ProductPage({ params }: Props) {
               ) : product.heatedVolume ? (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
                   {brand?.tagline}. {product.power} pour chauffer {product.heatedVolume}. Pose par
-                  Mister Pellets en une journée, TVA à 6 % en rénovation et garantie légale de 2 ans, pose comprise.
+                  Mister Pellets en une journée, TVA à 6 % en rénovation et garantie légale de 2 ans, pose comprise.
                 </p>
               ) : (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
-                  {brand?.tagline}. Pose par Mister Pellets en une journée, TVA à 6 % en rénovation
+                  {brand?.tagline}. Pose par Mister Pellets en une journée, TVA à 6 % en rénovation
                   et garantie légale de 2 ans, pose comprise.
                 </p>
               )}
@@ -415,7 +415,7 @@ export default async function ProductPage({ params }: Props) {
                           {formatPriceReducedVat(shownTTC ?? product.priceTTC)} TVAC
                         </span>{" "}
                         si nous le posons sur une habitation de plus de 10 ans
-                        <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
+                        <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
                       </p>
                       {product.bonusPriceTTC ? (
                         <p className="mt-2 text-sm text-mp-ink-soft">
@@ -425,13 +425,13 @@ export default async function ProductPage({ params }: Props) {
                     </div>
                     <ul className="text-sm text-mp-ink-soft space-y-1 leading-relaxed">
                       <li>
-                        <span className="font-semibold">Pose non incluse</span> : devis chiffré
+                        <span className="font-semibold">Pose non incluse</span> : devis chiffré
                         sous 48 h.
                       </li>
                       <li>
                         <span className="font-semibold">Livraison gratuite</span> dans un rayon
-                        de 20 km autour de Fernelmont. Au-delà : 50 € en Wallonie, 100 € à
-                        Bruxelles, 100 € en Flandre.
+                        de 20 km autour de Fernelmont. Au-delà : 50 € en Wallonie, 100 € à
+                        Bruxelles, 100 € en Flandre.
                       </li>
                     </ul>
                   </div>
@@ -478,8 +478,8 @@ export default async function ProductPage({ params }: Props) {
               */}
               <p className="text-sm text-mp-ink-soft mt-4 text-center">
                 Prix du matériel seul. La pose se chiffre après une visite sur
-                place : c'est là qu'on valide le conduit, l'évacuation et
-                l'accès. La TVA à 6 % (logement de plus de 10 ans) est calculée dans le devis.
+                place : c'est là qu'on valide le conduit, l'évacuation et
+                l'accès. La TVA à 6 % (logement de plus de 10 ans) est calculée dans le devis.
               </p>
                 </>
               )}
@@ -523,7 +523,7 @@ export default async function ProductPage({ params }: Props) {
                 <table className="w-full text-left text-sm md:text-base">
                   <caption className="caption-bottom px-4 py-3 text-left text-xs text-mp-ink-soft">
                     Caractéristiques du modèle {product.name}, publiées par {product.brand}. Elles peuvent
-                    évoluer : la fiche technique du fabricant fait foi.
+                    évoluer : la fiche technique du fabricant fait foi.
                   </caption>
                   <tbody>
                     {specs.map((row) => (

@@ -44,7 +44,7 @@ export default function DevisPage() {
             </span>
             <span className="inline-flex items-center gap-2">
               <FileCheck className="h-4 w-4 text-mp-orange-flame" />
-              TVA à 6 % si éligible
+              TVA à 6 % si éligible
             </span>
           </div>
 
@@ -56,10 +56,10 @@ export default function DevisPage() {
               préfère souvent voir un chiffre tout de suite. */}
           <div className="mp-measure mt-10 rounded-2xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-5 md:p-6 text-center">
             <h2 className="mb-1 text-lg font-semibold text-mp-green-deep">
-              Vous voulez un chiffre tout de suite ?
+              Vous voulez un chiffre tout de suite ?
             </h2>
             <p className="mb-4 text-sm text-mp-ink-soft">
-              Notre estimation en ligne compose votre installation à partir des poêles du catalogue :
+              Notre estimation en ligne compose votre installation à partir des poêles du catalogue :
               prix du modèle, pose, TVA et mensualité, affichés en direct.
             </p>
             <Button asChild variant="primary" size="default">

@@ -359,8 +359,8 @@ export default async function BrandPage({ params }: Props) {
               Où nous posons les {brand.name}
             </h2>
             <p className="mp-measure mx-auto text-base md:text-lg text-mp-ink-soft leading-relaxed">
-              Dans les cinq provinces wallonnes : Namur, Liège, Hainaut, Brabant wallon et Luxembourg,
-              depuis notre atelier de Fernelmont. Villes desservies et frais de livraison :{" "}
+              Dans les cinq provinces wallonnes : Namur, Liège, Hainaut, Brabant wallon et Luxembourg,
+              depuis notre atelier de Fernelmont. Villes desservies et frais de livraison :{" "}
               <Link
                 href="/zones-d-intervention"
                 className="font-medium text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink"

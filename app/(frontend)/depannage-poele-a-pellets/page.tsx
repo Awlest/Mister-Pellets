@@ -46,7 +46,7 @@ export default function DepannagePage() {
               </p>
               <p>
                 <strong>Il ne prend plus de pellets.</strong>{" "}Le motoréducteur de la vis sans
-                fin, ou un corps étranger coincé dans la vis : il arrive qu&apos;un caillou ou
+                fin, ou un corps étranger coincé dans la vis : il arrive qu&apos;un caillou ou
                 une agrafe passe avec un sac de mauvaise qualité.
               </p>
               <p>
@@ -76,12 +76,12 @@ export default function DepannagePage() {
             <>
               <p>
                 On intervient sous 48 à 72 heures dans la zone de 50 km autour de Fernelmont.
-                En plein pic de froid, ce délai peut s&apos;allonger : c&apos;est le moment où
+                En plein pic de froid, ce délai peut s&apos;allonger : c&apos;est le moment où
                 tout le monde appelle en même temps, et on préfère l&apos;annoncer honnêtement
                 plutôt que de promettre le lendemain.
               </p>
               <p>
-                Côté tarif&nbsp;: 110 € TVAC la première heure, puis 60 € TVAC par heure
+                Côté tarif&nbsp;: 110 € TVAC la première heure, puis 60 € TVAC par heure
                 supplémentaire, déplacement compris. Les pièces remplacées sont facturées en
                 plus, et on vous annonce leur prix avant de les poser. La majorité des
                 interventions tient dans la première heure.

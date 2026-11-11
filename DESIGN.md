@@ -227,6 +227,7 @@ exposées en classes Tailwind (`bg-mp-cream`, `text-mp-green-deep`, etc.).
 - **Body** (400, 16 px, jamais moins sur mobile ; interligne 1,625 `leading-relaxed`) : paragraphes, colonne de 720 px max (`.mp-measure`). Chapô en 18 à 20 px (`text-lg md:text-xl`), encre douce.
 - **Label** (600, 12 px, capitales, `tracking-wider`) : marque au-dessus d'un nom, en-têtes de filtres, pastille d'accroche.
 - **Prix** : Fraunces 600, `tabular-nums`, toujours le TVAC en premier.
+- **Montants et ponctuation** : un montant ne se coupe jamais en fin de ligne, ni au milieu du nombre ni avant « € ». Un montant calculé passe par `formatEuros` (`lib/typo.ts`, repris par `formatPrice`, `eur` et `formatEuro`) ; un texte écrit à la main passe par `typo` au rendu (`InlineText`, héros, FAQ, tableaux d'article), qui lie aussi « % », « : », « ; », « ? », « ! », les guillemets et les fourchettes « X à Y € ». Dans le texte JSX d'une page, l'espace insécable se tape telle quelle (U+00A0, U+202F entre les milliers).
 
 ### Named Rules
 **La règle du mot braise.** Un grand titre porte au plus un groupe de mots en `.mp-italic` (italique, orange-display, graisse 500). Jamais dans un texte courant.

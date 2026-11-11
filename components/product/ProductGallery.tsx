@@ -401,7 +401,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
         </span>
         {activeName && (
           <span className="text-xs text-mp-green-deep font-semibold">
-            Sélection : {activeName}
+            Sélection : {activeName}
           </span>
         )}
       </div>

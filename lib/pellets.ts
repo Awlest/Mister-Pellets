@@ -1,4 +1,5 @@
 import { brusselsDay } from "@/lib/bonus";
+import { formatEuros } from "@/lib/typo";
 
 /**
  * Palette de pellets Comfo : prix, offre de lancement, stock et retrait.
@@ -65,17 +66,8 @@ export const isPelletSwitchDay = (now: Date = new Date()): boolean => {
   return brusselsDay(now) === d.toISOString().slice(0, 10);
 };
 
-const euro = (value: number, digits: 0 | 2) =>
-  new Intl.NumberFormat("fr-BE", {
-    style: "currency",
-    currency: "EUR",
-    minimumFractionDigits: digits,
-    maximumFractionDigits: digits,
-  }).format(value);
-
-/** « 435 € » (prix ronds) ou « 6,69 € » (prix unitaires). */
-export const formatEuro = (value: number): string =>
-  euro(value, Number.isInteger(value) ? 0 : 2);
+/** « 435 € » (prix ronds) ou « 6,69 € » (prix unitaires), insécable (lib/typo.ts). */
+export const formatEuro = (value: number): string => formatEuros(value, { cents: "auto" });
 
 /** Prix HTVA d'un prix TVAC à 6 %, arrondi au cent : 435 € donne 410,38 €. */
 export const pelletPriceHT = (ttc: number): number =>

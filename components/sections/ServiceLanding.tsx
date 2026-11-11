@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { SITE_URL } from "@/lib/seo";
 import { PHONE_DISPLAY, PHONE_HREF, type Service } from "@/lib/services";
 import { PHONE_HOURS } from "@/config/site";
+import { typo } from "@/lib/typo";
 
 export interface ServiceLandingProps {
   service: Service;
@@ -115,7 +116,7 @@ export function ServiceLanding({
               </p>
               <p className="text-mp-cream/75 text-sm mt-1">
                 On vérifie d&apos;abord le modèle et l&apos;accès au conduit, puis on cale un
-                créneau. Téléphone : {PHONE_HOURS}.
+                créneau. Téléphone : {PHONE_HOURS}.
               </p>
             </div>
             <Button asChild variant="primary" size="lg" className="shrink-0">
@@ -175,7 +176,7 @@ export function ServiceLanding({
                     </span>
                     {service.priceDetail && (
                       <p className="text-sm text-mp-ink-soft mt-2 leading-relaxed">
-                        {service.priceDetail}
+                        {typo(service.priceDetail)}
                       </p>
                     )}
                   </div>

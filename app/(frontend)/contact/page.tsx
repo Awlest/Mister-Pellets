@@ -101,8 +101,8 @@ export default function ContactPage() {
                 <div>
                   <span className="text-xs text-mp-ink-soft uppercase tracking-wider block mb-1">Horaires du téléphone</span>
                   <ul className="text-mp-ink space-y-1 leading-relaxed">
-                    <li>Lundi au vendredi : 9&nbsp;h à 19&nbsp;h</li>
-                    <li className="text-mp-ink-soft">Samedi et dimanche : fermé, répondeur</li>
+                    <li>Lundi au vendredi : 9&nbsp;h à 19&nbsp;h</li>
+                    <li className="text-mp-ink-soft">Samedi et dimanche : fermé, répondeur</li>
                   </ul>
                   <p className="mt-3 text-sm text-mp-ink-soft">
                     Visites du showroom uniquement sur rendez-vous, {VISIT_HOURS_LONG}.

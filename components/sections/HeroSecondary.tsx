@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildBreadcrumbSchema } from "@/lib/seo";
+import { typo } from "@/lib/typo";
 import { cn } from "@/lib/utils";
 
 interface BreadcrumbItem {
@@ -87,7 +88,7 @@ export function HeroSecondary({
         <div className="mp-measure text-center">
           {eyebrow && (
             <Badge variant="eyebrow" className={compact ? "mb-2 sm:mb-4" : "mb-4"}>
-              {eyebrow}
+              {typo(eyebrow)}
             </Badge>
           )}
           <h1
@@ -98,7 +99,7 @@ export function HeroSecondary({
                 : "text-3xl md:text-5xl lg:text-6xl leading-[1.1] mb-4",
             )}
           >
-            {title}
+            {typeof title === "string" ? typo(title) : title}
           </h1>
           {description && (
             <p
@@ -107,7 +108,7 @@ export function HeroSecondary({
                 compact && "hidden sm:block",
               )}
             >
-              {description}
+              {typo(description)}
             </p>
           )}
           {actions && (

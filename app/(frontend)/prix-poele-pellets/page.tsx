@@ -9,7 +9,7 @@ import { ROUTES } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BONUS, bonusBadgeFor } from "@/lib/bonus";
-import { HAUTEUR, TARIFS, eur, formatEur } from "@/lib/estimate";
+import { HAUTEUR, TARIFS, eur, eurCents } from "@/lib/estimate";
 import { DiscountedPrice } from "@/components/forms/DiscountedPrice";
 import {
   EXAMPLE_INSTALL_LABEL,
@@ -25,6 +25,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { FAQS } from "@/lib/faqs";
 import { PHONE_HOURS } from "@/config/site";
+import { typo } from "@/lib/typo";
 
 export const metadata = buildPageMetadata({
   title: "Prix d'un poêle à pellets posé en Wallonie",
@@ -47,8 +48,8 @@ export const revalidate = 60;
 
 export default async function PrixPoelePelletsPage() {
   const { bonus, from, examples, installs } = await getPricePageData();
-  const vatNote = "TVA à 6 % comprise (maison de plus de 10 ans)";
-  const vatShort = "TVA à 6 % comprise";
+  const vatNote = typo("TVA à 6 % comprise (maison de plus de 10 ans)");
+  const vatShort = typo("TVA à 6 % comprise");
   // Conditions du prix d'appel, à côté du chiffre et visibles sur téléphone :
   // le héros compact masque sa description sous 640 px.
   const fromConditions = from
@@ -138,11 +139,11 @@ export default async function PrixPoelePelletsPage() {
         <div className="mp-shell">
           {directAnswer && (
             <p className="mp-measure mb-4 text-center text-lg leading-relaxed text-mp-ink md:text-xl">
-              {directAnswer}
+              {typo(directAnswer)}
             </p>
           )}
           <p className="mp-measure mb-6 text-center text-base leading-relaxed text-mp-ink-soft md:text-lg">
-            {fromConditions}
+            {typo(fromConditions)}
           </p>
           <Card className="mp-measure mb-6 bg-white p-5 md:p-6">
             <div className="flex items-start gap-4">
@@ -154,7 +155,7 @@ export default async function PrixPoelePelletsPage() {
                   Visite technique gratuite chez vous
                 </h2>
                 <p className="mt-1 text-sm leading-relaxed text-mp-ink-soft md:text-base">
-                  Une heure sur place : on regarde la pièce et le conduit. Devis ferme sous 48 heures.
+                  Une heure sur place : on regarde la pièce et le conduit. Devis ferme sous 48 heures.
                 </p>
                 <NextSlot service="devis-sur-place" className="mt-2 min-h-10 sm:min-h-5" />
               </div>
@@ -178,7 +179,7 @@ export default async function PrixPoelePelletsPage() {
             </Button>
           </div>
           <p className="mp-measure mt-4 text-center text-sm text-mp-ink-soft">
-            Téléphone : {PHONE_HOURS}. Vous préférez chiffrer vous-même ?{" "}
+            Téléphone : {PHONE_HOURS}. Vous préférez chiffrer vous-même ?{" "}
             <Link href="/estimation" className="text-mp-orange-ink underline hover:no-underline">
               Estimation en ligne en 2 minutes
             </Link>
@@ -186,7 +187,7 @@ export default async function PrixPoelePelletsPage() {
           </p>
           {bonus ? (
             <p className="mp-measure mt-6 rounded-2xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-4 text-center text-sm text-mp-ink">
-              <strong className="text-mp-green-deep">{BONUS.label}</strong>. {BONUS.conditions}
+              <strong className="text-mp-green-deep">{typo(BONUS.label)}</strong>. {BONUS.conditions}
             </p>
           ) : null}
         </div>
@@ -213,30 +214,30 @@ export default async function PrixPoelePelletsPage() {
             <div className="mp-measure mt-10 overflow-x-auto rounded-[20px] border border-mp-sand/40 bg-white">
               <table className="w-full text-left text-sm md:text-base">
                 <caption className="caption-bottom px-4 py-3 text-left text-xs text-mp-ink-soft">
-                  Exemples de prix posés, relevés le {relevedOn} : poêle et pose avec un{" "}
+                  Exemples de prix posés, relevés le {relevedOn} : poêle et pose avec un{" "}
                   {EXAMPLE_INSTALL_LABEL.toLowerCase()} de {HAUTEUR.defaut} m, {vatNote}
                   {bonus ? ", bonus de saison déduit" : ""}.
                 </caption>
                 <thead>
                   <tr className="border-b border-mp-sand/40 text-mp-green-deep">
-                    <th scope="col" className="px-4 py-3 font-semibold">Modèle</th>
-                    <th scope="col" className="px-4 py-3 text-right font-semibold">Poêle</th>
-                    <th scope="col" className="px-4 py-3 text-right font-semibold">Pose</th>
-                    <th scope="col" className="px-4 py-3 text-right font-semibold">Total TVAC</th>
+                    <th scope="col" className="px-3 py-3 font-semibold sm:px-4">Modèle</th>
+                    <th scope="col" className="px-2 py-3 text-right font-semibold sm:px-4">Poêle</th>
+                    <th scope="col" className="px-2 py-3 text-right font-semibold sm:px-4">Pose</th>
+                    <th scope="col" className="px-3 py-3 text-right font-semibold sm:px-4">Total TVAC</th>
                   </tr>
                 </thead>
                 <tbody>
                   {examples.map((ex) => (
                     <tr key={ex.slug} className="border-b border-mp-sand/40 last:border-b-0">
-                      <th scope="row" className="px-4 py-3 font-medium text-mp-ink">
+                      <th scope="row" className="px-3 py-3 font-medium text-mp-ink sm:px-4">
                         <Link href={`/produit/${ex.slug}`} className="underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink">
                           {ex.fullName}
                         </Link>{" "}
-                        <span className="text-mp-ink-soft">({formatKw(ex.powerKw)} kW)</span>
+                        <span className="whitespace-nowrap text-mp-ink-soft max-sm:hidden">({formatKw(ex.powerKw)} kW)</span>
                       </th>
-                      <td className="px-4 py-3 text-right tabular-nums">{eur(ex.stoveTTC - ex.bonusTTC)}</td>
-                      <td className="px-4 py-3 text-right tabular-nums">{eur(ex.laborTTC)}</td>
-                      <td className="px-4 py-3 text-right font-semibold tabular-nums text-mp-green-deep">{eur(ex.totalTTC)}</td>
+                      <td className="whitespace-nowrap px-2 py-3 text-right tabular-nums sm:px-4">{eur(ex.stoveTTC - ex.bonusTTC)}</td>
+                      <td className="whitespace-nowrap px-2 py-3 text-right tabular-nums sm:px-4">{eur(ex.laborTTC)}</td>
+                      <td className="whitespace-nowrap px-3 py-3 text-right font-semibold tabular-nums text-mp-green-deep sm:px-4">{eur(ex.totalTTC)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -300,7 +301,7 @@ export default async function PrixPoelePelletsPage() {
             la journée) ou un échafaudage, chiffré sur devis.{" "}
             {installs.some((it) => it.key === "ventouse-facade") &&
               "La ventouse demande un poêle étanche raccordé en concentrique, hors Edilkamin et EK63. "}
-            Logement de moins de 10 ans ou construction neuve : TVA à 21 %. Un mur très épais, un étage ou la canalisation
+            Logement de moins de 10 ans ou construction neuve : TVA à 21 %. Un mur très épais, un étage ou la canalisation
             d&apos;air chaud ajoutent un supplément.
           </p>
         </div>
@@ -313,7 +314,7 @@ export default async function PrixPoelePelletsPage() {
               Votre prix, au téléphone
             </h2>
             <p className="mb-8 text-lg leading-relaxed text-mp-ink-soft">
-              Laissez votre numéro : un technicien vous rappelle dans la journée ouvrée, pose quelques
+              Laissez votre numéro : un technicien vous rappelle dans la journée ouvrée, pose quelques
               questions sur votre maison et vous donne un prix. Aucune obligation.
             </p>
             <Card className="bg-mp-cream p-5 md:p-8">
@@ -401,13 +402,13 @@ function ExampleCard({ ex, bonus }: { ex: PriceExample; bonus: boolean }) {
           </dd>
         </div>
         {bonus && ex.bonusTTC > 0 ? (
-          <Row label={`Bonus de saison ${bonusBadgeFor(ex.brand)}`} value={`- ${eur(ex.bonusTTC)}`} />
+          <Row label={typo(`Bonus de saison ${bonusBadgeFor(ex.brand)}`)} value={`- ${eur(ex.bonusTTC)}`} />
         ) : null}
       </dl>
       <div className="mt-auto border-t border-mp-sand/40 pt-4">
         <p className="flex items-baseline justify-between gap-3">
           <span className="text-sm text-mp-ink-soft">Total posé</span>
-          <span className="text-2xl font-semibold text-mp-green-deep">{eur(ex.totalTTC)}</span>
+          <span className="whitespace-nowrap text-2xl font-semibold text-mp-green-deep">{eur(ex.totalTTC)}</span>
         </p>
         <Link
           href={`/produit/${ex.slug}`}
@@ -425,16 +426,16 @@ function ExampleCard({ ex, bonus }: { ex: PriceExample; bonus: boolean }) {
 function heightNote(it: InstallPrice): string {
   const base = `Forfait pour ${it.heightM} m`;
   if (it.lessPerMeterTTC === it.morePerMeterTTC) {
-    return `${base}, ${formatEur(it.morePerMeterTTC)} par mètre en plus ou en moins.`;
+    return `${base}, ${eurCents(it.morePerMeterTTC)} par mètre en plus ou en moins.`;
   }
-  return `${base}, ${formatEur(it.lessPerMeterTTC)} de moins par mètre en dessous, ${formatEur(it.morePerMeterTTC)} de plus par mètre au-dessus.`;
+  return `${base}, ${eurCents(it.lessPerMeterTTC)} de moins par mètre en dessous, ${eurCents(it.morePerMeterTTC)} de plus par mètre au-dessus.`;
 }
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between gap-3">
       <dt className="text-mp-ink-soft">{label}</dt>
-      <dd className="font-medium text-mp-ink">{value}</dd>
+      <dd className="whitespace-nowrap font-medium text-mp-ink">{value}</dd>
     </div>
   );
 }

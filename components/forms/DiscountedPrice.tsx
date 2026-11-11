@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { formatEur } from "@/lib/pose/moteur";
+import { eurCents } from "@/lib/estimate";
 
 /**
  * Prix d'une prestation remisée (lib/pose/tarifs.ts, REMISES) : prix remisé,
@@ -12,7 +12,7 @@ export function DiscountedPrice({
   full,
   pct,
   showStrike,
-  format = formatEur,
+  format = eurCents,
   className,
 }: {
   amount: number;

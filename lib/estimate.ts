@@ -34,6 +34,7 @@ import {
   type PoseState,
 } from "./pose/moteur";
 import { REMISES, TARIFS } from "./pose/tarifs";
+import { formatEuros } from "./typo";
 
 export {
   ACCESS_MODES,
@@ -269,4 +270,7 @@ export const MARQUES_SANS_VENTOUSE: readonly string[] = ["Edilkamin", "EK63"];
 export const acceptsInstall = (product: Pick<EstimateProduct, "brand">, installType: InstallType): boolean =>
   installType !== "ventouse-facade" || !MARQUES_SANS_VENTOUSE.includes(product.brand);
 
-export const eur = (n: number) => Math.round(n).toLocaleString("fr-BE") + " €";
+/** Montant arrondi à l'euro, insécable (lib/typo.ts). */
+export const eur = (n: number) => formatEuros(n);
+/** Le même, au cent quand le montant n'est pas rond : « 127,20 € ». */
+export const eurCents = (n: number) => formatEuros(n, { cents: "auto" });

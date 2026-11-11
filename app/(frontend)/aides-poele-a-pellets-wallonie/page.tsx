@@ -12,6 +12,7 @@ import {
   MEBAR_MAX,
   RENOPACK_CATEGORIES,
 } from "@/lib/aides";
+import { typo } from "@/lib/typo";
 
 /**
  * Aides pour un poêle à pellets en Wallonie, page réécrite le 03/10/2026,
@@ -117,26 +118,26 @@ export default function PrimesPage() {
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-lg">
             <p>
               Jusqu&apos;au 30 septembre 2026, un poêle à pellets ouvrait le droit à une prime
-              Habitation, calculée selon vos revenus. Ce régime temporaire est fini : les travaux
+              Habitation, calculée selon vos revenus. Ce régime temporaire est fini : les travaux
               devaient être terminés et la demande introduite ce jour-là, avant 23 h 59. Depuis le
               1er octobre, la Région n&apos;accorde plus de prime par poste de travaux pour un
               nouveau projet.
             </p>
             <p>
               Le soutien passe maintenant par deux prêts gérés par la Société wallonne du Crédit
-              social (SWCS) et le Fonds du Logement de Wallonie : le Rénopack, à 0 % avec une partie
-              effacée de 10 à 50 % selon vos revenus et les matériaux d&apos;isolation, et le
+              social (SWCS) et le Fonds du Logement de Wallonie : le Rénopack, à 0 % avec une partie
+              effacée de 10 à 50 % selon vos revenus et les matériaux d&apos;isolation, et le
               Rénoprêt, à taux préférentiel. Ils visent les maisons classées E, F ou G, avec un audit
               avant les travaux et un saut de label à atteindre. La demande de prêt passe avant tout
               devis signé et tout acompte, et selon la SWCS le dispositif devrait être pleinement
               opérationnel au début de 2027. Le poêle n&apos;est pas nommé dans la liste officielle
-              des travaux : il n&apos;est financé que si l&apos;audit le retient et que
+              des travaux : il n&apos;est financé que si l&apos;audit le retient et que
               l&apos;organisme prêteur l&apos;accepte.
             </p>
             <p>
-              Ce qui ne change pas : la TVA à 6 % au lieu de 21 % quand nous posons le poêle dans un
+              Ce qui ne change pas : la TVA à 6 % au lieu de 21 % quand nous posons le poêle dans un
               logement de plus de 10 ans, directement sur la facture. Et pour les ménages aux
-              revenus les plus modestes, la subvention MEBAR (jusqu&apos;à {MEBAR_MAX}) passe
+              revenus les plus modestes, la subvention MEBAR (jusqu&apos;à {typo(MEBAR_MAX)}) passe
               toujours par le CPAS.
             </p>
           </div>
@@ -159,11 +160,11 @@ export default function PrimesPage() {
               prime.
             </p>
             <p>
-              Une exception : les ménages qui disposent d&apos;un devis signé ou d&apos;un bon de
+              Une exception : les ménages qui disposent d&apos;un devis signé ou d&apos;un bon de
               commande définitif datant au plus tard du 13 février 2025 peuvent encore demander la
               prime aux anciennes conditions, jusqu&apos;au 30 septembre 2027. L&apos;arrêté du
               Gouvernement wallon du 24 septembre 2026, adopté définitivement, l&apos;a prévu en
-              levant au passage l&apos;obligation d&apos;avoir versé un acompte de 20 %. Le 1718
+              levant au passage l&apos;obligation d&apos;avoir versé un acompte de 20 %. Le 1718
               vous dira si votre dossier entre dans ce cas.{" "}
               <a
                 href={AIDES_SOURCES.transitoire}
@@ -183,11 +184,11 @@ export default function PrimesPage() {
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
-            Rénopack et Rénoprêt : qui y a droit
+            Rénopack et Rénoprêt : qui y a droit
           </h2>
           <div className="mp-measure space-y-8 text-mp-ink leading-relaxed">
             <p className="text-lg">
-              Les deux prêts suivent la même logique : la Région finance un projet qui fait monter
+              Les deux prêts suivent la même logique : la Région finance un projet qui fait monter
               la maison de classe PEB, pas un appareil. La part effacée dépend des revenus du ménage.
             </p>
 
@@ -195,25 +196,29 @@ export default function PrimesPage() {
               <table className="w-full text-sm border-collapse rounded-2xl overflow-hidden bg-mp-cream border border-mp-sand/40">
                 <thead className="bg-mp-green-deep text-mp-cream">
                   <tr>
-                    <th scope="col" className="p-3 md:p-4 text-left font-semibold">Catégorie</th>
-                    <th scope="col" className="p-3 md:p-4 text-left font-semibold">Revenus du ménage</th>
-                    <th scope="col" className="p-3 md:p-4 text-left font-semibold">Prêt</th>
-                    <th scope="col" className="p-3 md:p-4 text-left font-semibold">Part non remboursée</th>
+                    <th scope="col" className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 text-left font-semibold">
+                      {/* « Cat. » sur téléphone : la colonne des revenus garde ses montants entiers. */}
+                      <span aria-hidden className="sm:hidden">Cat.</span>
+                      <span className="max-sm:sr-only">Catégorie</span>
+                    </th>
+                    <th scope="col" className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 text-left font-semibold">Revenus du ménage</th>
+                    <th scope="col" className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 text-left font-semibold">Prêt</th>
+                    <th scope="col" className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 text-left font-semibold">Part non remboursée</th>
                   </tr>
                 </thead>
                 <tbody>
                   {RENOPACK_CATEGORIES.map((row, i) => (
                     <tr key={row.category} className={i % 2 === 0 ? "bg-mp-beige/40" : "bg-mp-cream"}>
-                      <th scope="row" className="p-3 md:p-4 border-t border-mp-sand/30 text-left font-semibold text-mp-green-deep">
+                      <th scope="row" className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 border-t border-mp-sand/30 text-left font-semibold text-mp-green-deep">
                         {row.category}
                       </th>
-                      <td className="p-3 md:p-4 border-t border-mp-sand/30">{row.income}</td>
-                      <td className="p-3 md:p-4 border-t border-mp-sand/30">{row.loan}</td>
-                      <td className="p-3 md:p-4 border-t border-mp-sand/30 tabular-nums">
-                        {row.forgiven}
+                      <td className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 border-t border-mp-sand/30">{typo(row.income)}</td>
+                      <td className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 border-t border-mp-sand/30">{typo(row.loan)}</td>
+                      <td className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 border-t border-mp-sand/30 tabular-nums">
+                        {typo(row.forgiven)}
                         {row.forgivenEco && (
                           <span className="block text-mp-ink-soft">
-                            {row.forgivenEco} avec écomatériaux
+                            {typo(row.forgivenEco)} avec écomatériaux
                           </span>
                         )}
                       </td>
@@ -222,9 +227,9 @@ export default function PrimesPage() {
                 </tbody>
               </table>
               <figcaption className="text-xs text-mp-ink-soft italic mt-2 px-4 md:px-0">
-                Montants indexés au 1er janvier 2026, diminués de 5 000 € par personne à charge. La
+                Montants indexés au 1er janvier 2026, diminués de 5 000 € par personne à charge. La
                 part non remboursée gagne 5 points si toute l&apos;isolation de l&apos;enveloppe est
-                réalisée en écomatériaux, et elle ne porte que sur les travaux éligibles. Sources :{" "}
+                réalisée en écomatériaux, et elle ne porte que sur les travaux éligibles. Sources :{" "}
                 <a href={AIDES_SOURCES.regime} target="_blank" rel="noopener noreferrer" className="underline">
                   wallonie.be
                 </a>
@@ -248,8 +253,8 @@ export default function PrimesPage() {
                 <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Un audit logement réalisé ou actualisé moins d&apos;un an avant la demande de prêt. C&apos;est lui qui fixe le label de départ et la liste des travaux.</li>
                 <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Pour le Rénopack, un droit réel sur le logement (propriétaire, usufruitier) et l&apos;engagement d&apos;y habiter au plus tard 24 mois après l&apos;octroi du prêt.</li>
                 <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Pour la part non remboursée du Rénopack, un bâtiment de plus de 15 ans et un demandeur qui n&apos;est propriétaire d&apos;aucun autre logement. Elle ne se cumule avec aucune autre aide wallonne pour le même investissement.</li>
-                <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Un emprunt plafonné à {LOAN_MAX.house} pour une maison unifamiliale et à {LOAN_MAX.apartment} par appartement.</li>
-                <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> <span>Une demande de prêt introduite avant tout engagement : aucun devis signé, aucun acompte et aucun début de travaux avant la signature du contrat de crédit. Le Fonds du Logement l&apos;a rappelé le 12 octobre 2026 dans un{" "}<a href={AIDES_SOURCES.flwVigilance} target="_blank" rel="noopener noreferrer" className={LINK}>appel à la vigilance</a>.</span></li>
+                <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> Un emprunt plafonné à {typo(LOAN_MAX.house)} pour une maison unifamiliale et à {typo(LOAN_MAX.apartment)} par appartement.</li>
+                <li className="flex gap-3"><span className="text-mp-orange-ink">•</span> <span>Une demande de prêt introduite avant tout engagement : aucun devis signé, aucun acompte et aucun début de travaux avant la signature du contrat de crédit. Le Fonds du Logement l&apos;a rappelé le 12 octobre 2026 dans un{" "}<a href={AIDES_SOURCES.flwVigilance} target="_blank" rel="noopener noreferrer" className={LINK}>appel à la vigilance</a>.</span></li>
               </ul>
             </div>
 
@@ -257,7 +262,7 @@ export default function PrimesPage() {
               Des dérogations existent quand le label visé est impossible à atteindre pour des
               raisons techniques, fonctionnelles ou économiques. Les taux et les durées du Rénoprêt
               sont fixés par la SWCS et le Fonds du Logement, qui instruisent les demandes. Selon la
-              SWCS, le dispositif devrait être pleinement opérationnel au début de 2027 : la
+              SWCS, le dispositif devrait être pleinement opérationnel au début de 2027 : la
               préinscription est ouverte, les modalités de demande sont en cours de finalisation.
             </p>
           </div>
@@ -268,11 +273,11 @@ export default function PrimesPage() {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
-            Et le poêle à pellets, dans tout ça ?
+            Et le poêle à pellets, dans tout ça ?
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-lg">
             <p>
-              Soyons francs : pour la plupart de nos clients, le Rénopack ne change rien. Une maison
+              Soyons francs : pour la plupart de nos clients, le Rénopack ne change rien. Une maison
               en C ou en D n&apos;est pas visée. Une maison en E, F ou G l&apos;est, mais elle doit
               gagner au moins deux classes, et ce saut demande en général d&apos;isoler le toit, les
               murs ou les châssis en plus de changer le chauffage.
@@ -289,7 +294,7 @@ export default function PrimesPage() {
                 préinscription sur le site de la SWCS
               </a>
               , qui ne vaut pas demande d&apos;aide mais permet à leurs équipes de vous recontacter.
-              Puis la demande de prêt, avant tout engagement : ne signez aucun devis, le nôtre
+              Puis la demande de prêt, avant tout engagement : ne signez aucun devis, le nôtre
               compris, et ne versez aucun acompte avant la signature du contrat de crédit.
             </p>
             <p>
@@ -302,13 +307,13 @@ export default function PrimesPage() {
               >
                 liste officielle des travaux finançables
               </a>{" "}
-              parle de « systèmes de chauffage et/ou eau chaude performants, décarbonés » sans nommer
+              parle de « systèmes de chauffage et/ou eau chaude performants, décarbonés » sans nommer
               les poêles. Il n&apos;est financé que si l&apos;audit le retient et que
-              l&apos;organisme prêteur l&apos;accepte : faites-le confirmer avant de vous engager.
+              l&apos;organisme prêteur l&apos;accepte : faites-le confirmer avant de vous engager.
             </p>
             <p>
               Parlez-nous de l&apos;audit avant de choisir le poêle. Une maison qu&apos;on isole perd
-              moins de chaleur : la puissance doit correspondre à la maison après les travaux, pas
+              moins de chaleur : la puissance doit correspondre à la maison après les travaux, pas
               avant. Un poêle choisi pour la maison d&apos;aujourd&apos;hui tournerait au ralenti
               toute l&apos;année, et s&apos;encrasserait.
             </p>
@@ -320,27 +325,27 @@ export default function PrimesPage() {
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-3xl md:text-5xl font-semibold text-mp-green-deep mb-8">
-            La TVA à 6 % ne bouge pas
+            La TVA à 6 % ne bouge pas
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-lg">
             <p>
-              C&apos;est l&apos;aide qui joue sur presque tous nos chantiers, et elle est fédérale :
+              C&apos;est l&apos;aide qui joue sur presque tous nos chantiers, et elle est fédérale :
               la réforme wallonne n&apos;y touche pas. Quand nous fournissons et posons le poêle dans
-              un logement privé de plus de 10 ans, toute la facture passe à 6 % au lieu de 21 %,
-              poêle compris. Sur un projet à 6 000 € hors TVA, ça fait 900 € de différence.
+              un logement privé de plus de 10 ans, toute la facture passe à 6 % au lieu de 21 %,
+              poêle compris. Sur un projet à 6 000 € hors TVA, ça fait 900 € de différence.
             </p>
             <p>
-              Les conditions du SPF Finances : après les travaux, le logement sert d&apos;habitation
-              privée pour plus de la moitié ; sa première occupation remonte à au moins dix ans avant
-              la première facture ; et c&apos;est l&apos;entrepreneur qui fournit et facture les
+              Les conditions du SPF Finances : après les travaux, le logement sert d&apos;habitation
+              privée pour plus de la moitié ; sa première occupation remonte à au moins dix ans avant
+              la première facture ; et c&apos;est l&apos;entrepreneur qui fournit et facture les
               travaux au particulier qui l&apos;occupe, propriétaire ou locataire. Il n&apos;y a plus
-              d&apos;attestation à signer depuis le 1er juillet 2022 : la facture porte une mention
+              d&apos;attestation à signer depuis le 1er juillet 2022 : la facture porte une mention
               légale, et vous avez un mois pour la contester par écrit si elle est inexacte.
             </p>
             <p>
               Depuis le 29 juillet 2025, les appareils au gaz, au mazout ou au charbon sont repassés
-              à 21 %. Ceux qui brûlent uniquement du bois ou des pellets gardent le 6 %. Un poêle
-              livré sans pose, lui, reste à 21 %.{" "}
+              à 21 %. Ceux qui brûlent uniquement du bois ou des pellets gardent le 6 %. Un poêle
+              livré sans pose, lui, reste à 21 %.{" "}
               <a href={AIDES_SOURCES.tva} target="_blank" rel="noopener noreferrer" className={LINK}>
                 Les règles sur fin.belgium.be
               </a>
@@ -354,14 +359,14 @@ export default function PrimesPage() {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
-            MEBAR : l&apos;aide des revenus modestes
+            MEBAR : l&apos;aide des revenus modestes
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-lg">
             <p>
               La subvention MEBAR reste ouverte aux ménages dont les revenus ne dépassent pas le
-              revenu d&apos;intégration sociale majoré de 30 %. Elle finance des travaux qui font
+              revenu d&apos;intégration sociale majoré de 30 %. Elle finance des travaux qui font
               baisser la facture d&apos;énergie, dont l&apos;installation d&apos;un poêle,
-              jusqu&apos;à {MEBAR_MAX}.
+              jusqu&apos;à {typo(MEBAR_MAX)}.
             </p>
             <p>
               La demande passe par le CPAS de votre commune, avant tout achat et avant les travaux.
@@ -384,11 +389,11 @@ export default function PrimesPage() {
           </h2>
           <ul className="mp-measure space-y-3 text-mp-ink leading-relaxed text-lg">
             <li>
-              <strong className="text-mp-green-deep">Numéro gratuit du Service public de Wallonie :</strong>{" "}
+              <strong className="text-mp-green-deep">Numéro gratuit du Service public de Wallonie :</strong>{" "}
               <a href="tel:1718" className={LINK}>1718</a>, les jours ouvrables de 8 h 30 à 17 h.
             </li>
             <li>
-              <strong className="text-mp-green-deep">Guichets Énergie Wallonie :</strong> conseil
+              <strong className="text-mp-green-deep">Guichets Énergie Wallonie :</strong> conseil
               gratuit près de chez vous,{" "}
               <a href={AIDES_SOURCES.guichets} target="_blank" rel="noopener noreferrer" className={LINK}>
                 liste des guichets
@@ -396,7 +401,7 @@ export default function PrimesPage() {
               .
             </li>
             <li>
-              <strong className="text-mp-green-deep">Société wallonne du Crédit social :</strong>{" "}
+              <strong className="text-mp-green-deep">Société wallonne du Crédit social :</strong>{" "}
               <a href={`tel:${AIDES_PHONES.swcs.tel}`} className={LINK}>{AIDES_PHONES.swcs.label}</a>,{" "}
               <a href={AIDES_SOURCES.swcs} target="_blank" rel="noopener noreferrer" className={LINK}>
                 réforme des aides et préinscription
@@ -404,7 +409,7 @@ export default function PrimesPage() {
               .
             </li>
             <li>
-              <strong className="text-mp-green-deep">Fonds du Logement de Wallonie :</strong>{" "}
+              <strong className="text-mp-green-deep">Fonds du Logement de Wallonie :</strong>{" "}
               <a href={`tel:${AIDES_PHONES.flw.tel}`} className={LINK}>{AIDES_PHONES.flw.label}</a>,{" "}
               <a href={AIDES_SOURCES.flw} target="_blank" rel="noopener noreferrer" className={LINK}>
                 flw.be
@@ -412,7 +417,7 @@ export default function PrimesPage() {
               .
             </li>
             <li>
-              <strong className="text-mp-green-deep">MEBAR :</strong> le CPAS de votre commune.
+              <strong className="text-mp-green-deep">MEBAR :</strong> le CPAS de votre commune.
             </li>
           </ul>
         </div>

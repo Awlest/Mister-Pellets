@@ -5,6 +5,7 @@ import { Search, ChevronDown, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { InlineText } from "@/components/ui/inline-text";
 import { plainText } from "@/lib/inline-text";
+import { typo } from "@/lib/typo";
 import {
   FAQS,
   FAQ_CATEGORIES,
@@ -230,7 +231,7 @@ function FaqItemRow({ item, hidden }: { item: FaqItem; hidden: boolean }) {
       >
         <summary className="flex cursor-pointer list-none items-start justify-between gap-3 p-4 text-left md:p-5 [&::-webkit-details-marker]:hidden">
           <h3 className="text-base md:text-lg font-semibold text-mp-green-deep leading-snug">
-            {item.question}
+            {typo(item.question)}
           </h3>
           <ChevronDown
             className="h-5 w-5 shrink-0 mt-0.5 text-mp-orange-flame transition-transform group-open:rotate-180"

@@ -122,7 +122,7 @@ export default function PrendreRendezVousPage() {
               La sélection en exposition tourne régulièrement selon les nouveautés de saison et les
               modèles que nous testons en condition réelle. Pour cette raison, on ne peut pas
               garantir à l'avance qu'un modèle précis sera physiquement présent au moment de votre
-              visite. Si vous visez un modèle particulier, prenez rendez-vous : on vous confirme la
+              visite. Si vous visez un modèle particulier, prenez rendez-vous : on vous confirme la
               veille les références effectivement en exposition, et au besoin on en sort un du
               stock atelier pour votre visite.
             </p>
@@ -159,7 +159,7 @@ export default function PrendreRendezVousPage() {
             <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed">
               Ces trois interventions se calent <strong className="text-mp-green-deep">par
               téléphone</strong>, et pas en ligne. On a besoin de connaître la marque, le modèle
-              et l&apos;accès au conduit avant de bloquer un créneau : c&apos;est ce qui permet
+              et l&apos;accès au conduit avant de bloquer un créneau : c&apos;est ce qui permet
               d&apos;arriver avec les bonnes pièces et le bon matériel.
             </p>
           </div>
@@ -223,7 +223,7 @@ export default function PrendreRendezVousPage() {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell text-center">
           <h2 className="mp-measure mx-auto text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
-            Plus simple : appelez-nous
+            Plus simple : appelez-nous
           </h2>
           <p className="mp-measure mx-auto text-base md:text-lg text-mp-ink-soft mb-8 leading-relaxed">
             Si vous préférez le téléphone (souvent plus rapide), on cale un créneau en 30 secondes.
@@ -243,7 +243,7 @@ export default function PrendreRendezVousPage() {
           </div>
 
           <p className="mp-measure mx-auto text-sm text-mp-ink-soft mt-8">
-            Téléphone : {PHONE_HOURS}
+            Téléphone : {PHONE_HOURS}
           </p>
         </div>
       </section>

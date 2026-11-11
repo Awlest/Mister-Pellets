@@ -250,7 +250,7 @@ export function ProductVariantPanel({
               <p className="mt-3 text-sm text-mp-green-deep">
                 <span className="font-semibold">{formatPriceReducedVat(ttc)} TVAC</span> si
                 nous le posons sur une habitation de plus de 10 ans
-                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
+                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
               </p>
             </>
           ) : null;
@@ -319,7 +319,7 @@ export function ProductVariantPanel({
       {/* Le paiement en ligne a été retiré le 04/09/2026 : ne pas
           réintroduire de bouton d'achat ni de mention de paiement ici. */}
       <p className="text-xs text-mp-ink-soft text-center">
-        Pose non incluse : devis chiffré sous 48 h, après la visite sur place.
+        Pose non incluse : devis chiffré sous 48 h, après la visite sur place.
       </p>
     </div>
   );

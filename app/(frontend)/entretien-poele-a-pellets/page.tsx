@@ -44,7 +44,7 @@ export default function EntretienPage() {
               <p>
                 L&apos;autre effet, moins visible, c&apos;est la panne évitée. La grande
                 majorité des dépannages qu&apos;on fait en plein hiver concernent des appareils
-                qui n&apos;ont pas été révisés : sonde de fumée encrassée, joints durcis,
+                qui n&apos;ont pas été révisés : sonde de fumée encrassée, joints durcis,
                 ventilateur d&apos;extraction plein de cendres. Ce sont des pièces qu&apos;on
                 nettoie en entretien et qui lâchent quand on ne le fait pas.
               </p>
@@ -58,7 +58,7 @@ export default function EntretienPage() {
               <p>
                 Sur les poêles que nous installons, la garantie légale de 2 ans couvre le poêle
                 et la pose, sans condition d&apos;entretien. La garantie du fabricant, elle, est
-                presque toujours subordonnée à un entretien annuel par un professionnel : c&apos;est
+                presque toujours subordonnée à un entretien annuel par un professionnel : c&apos;est
                 écrit dans leurs notices, et nos conditions générales appliquent la même règle à
                 notre garantie d&apos;installation.
               </p>
@@ -74,12 +74,12 @@ export default function EntretienPage() {
           heading: "Quand le faire",
           body: (
             <p>
-              Le forfait est de 175 € TVAC, ramonage compris, déplacement inclus dans notre
-              zone d&apos;intervention. L&apos;idéal est de le faire avant la saison de chauffe, entre mai et septembre :
+              Le forfait est de 175 € TVAC, ramonage compris, déplacement inclus dans notre
+              zone d&apos;intervention. L&apos;idéal est de le faire avant la saison de chauffe, entre mai et septembre :
               les délais sont courts et vous démarrez l&apos;hiver sur un appareil propre. À
               partir d&apos;octobre, la demande grimpe et les créneaux se remplissent. Si votre
               poêle tourne toute l&apos;année ou chauffe une grande surface, un second passage
-              en milieu de saison peut se justifier : on vous le dira franchement si c&apos;est
+              en milieu de saison peut se justifier : on vous le dira franchement si c&apos;est
               votre cas, et pas autrement.
             </p>
           ),

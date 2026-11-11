@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { InlineText } from "@/components/ui/inline-text";
+import { typo } from "@/lib/typo";
 import {
   ARTICLES,
   CATEGORY_LABELS,
@@ -100,7 +101,7 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
   return (
     <section className="mb-12">
       <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 mt-2 leading-snug">
-        {section.heading}
+        {typo(section.heading)}
       </h2>
 
       {section.paragraphs?.map((p, i) => (
@@ -143,8 +144,8 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
             <thead className="bg-mp-green-deep text-mp-cream">
               <tr>
                 {section.table.headers.map((h, i) => (
-                  <th key={i} className="p-3 md:p-4 text-left font-semibold">
-                    {h}
+                  <th key={i} className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 text-left font-semibold">
+                    {typo(h)}
                   </th>
                 ))}
               </tr>
@@ -156,8 +157,8 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
                   className={i % 2 === 0 ? "bg-mp-beige/40" : "bg-mp-cream"}
                 >
                   {row.map((cell, j) => (
-                    <td key={j} className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">
-                      {cell}
+                    <td key={j} className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 border-t border-mp-sand/30 text-mp-ink">
+                      {typo(cell)}
                     </td>
                   ))}
                 </tr>
@@ -166,7 +167,7 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
           </table>
           {section.table.caption && (
             <figcaption className="text-xs text-mp-ink-soft italic mt-2 px-4 md:px-0">
-              {section.table.caption}
+              {typo(section.table.caption)}
             </figcaption>
           )}
         </figure>
@@ -300,7 +301,7 @@ export default async function ArticlePage({ params }: Props) {
             {article.tags.length > 0 && (
               <div className="mt-12 pt-8 border-t border-mp-sand/40">
                 <span className="text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mr-2">
-                  Sujets :
+                  Sujets :
                 </span>
                 {article.tags.map((tag) => (
                   <Badge key={tag} variant="secondary" className="mr-2 mb-2">
@@ -389,7 +390,7 @@ export default async function ArticlePage({ params }: Props) {
                 {relatedCities.length > 0 && (
                   <div>
                     <span className="block text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mb-2">
-                      Notre service dans :
+                      Notre service dans :
                     </span>
                     <div className="flex flex-wrap justify-center gap-2">
                       {relatedCities.map((c) => (
@@ -408,7 +409,7 @@ export default async function ArticlePage({ params }: Props) {
                 {relatedBrands.length > 0 && (
                   <div>
                     <span className="block text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mb-2">
-                      Marques mentionnées :
+                      Marques mentionnées :
                     </span>
                     <div className="flex flex-wrap justify-center gap-2">
                       {relatedBrands.map((b) => (

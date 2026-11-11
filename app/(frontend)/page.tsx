@@ -12,6 +12,7 @@ import { BonusAnnouncement } from "@/components/sections/BonusAnnouncement";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { DEFAULT_OG_IMAGE, SITE_LOCALE, SITE_NAME, SITE_URL, buildFAQSchema } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
+import { typo } from "@/lib/typo";
 
 /**
  * Régénération horaire : l'annonce du bonus de saison dépend de la date. Le
@@ -156,9 +157,9 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 mp-measure mx-auto">
-              MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
+              MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
               Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
-              TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
+              TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
               provinces wallonnes depuis 2016.
             </p>
 
@@ -189,7 +190,7 @@ export default function HomePage() {
             </div>
 
             <p className="mb-7 text-sm text-mp-ink-soft">
-              Vous préférez parler à quelqu&apos;un ? Appelez le{" "}
+              Vous préférez parler à quelqu&apos;un ? Appelez le{" "}
               <a
                 href="tel:+3281138309"
                 className="whitespace-nowrap font-semibold text-mp-green-deep underline underline-offset-4 hover:text-mp-orange-flame"
@@ -223,11 +224,11 @@ export default function HomePage() {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
-            Comment choisir son poêle à pellets en Wallonie ?
+            Comment choisir son poêle à pellets en Wallonie ?
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
-              Le bon choix dépend de quatre paramètres concrets : la surface à chauffer, le niveau
+              Le bon choix dépend de quatre paramètres concrets : la surface à chauffer, le niveau
               d'isolation (PEB), la présence ou non d'un conduit existant, et l'usage principal
               (chauffage d'appoint d'une pièce de vie, chauffage central de la maison, ou
               remplacement d'une vieille chaudière mazout).
@@ -241,10 +242,10 @@ export default function HomePage() {
               tampon.
             </p>
             <p>
-              La règle de dimensionnement la plus simple, valable pour le climat wallon : multipliez
+              La règle de dimensionnement la plus simple, valable pour le climat wallon : multipliez
               votre surface par 0,10 si la PEB est bonne (A-B), par 0,12 si elle est moyenne (C-D), et
               par 0,15 si elle est faible (E-G). Vous obtenez la puissance cible en kW. Sur le terrain
-              on affine toujours en regardant la maison : sous-dimensionner brûle le matériel,
+              on affine toujours en regardant la maison : sous-dimensionner brûle le matériel,
               sur-dimensionner provoque encrassement et inconfort.
             </p>
             <p>
@@ -321,34 +322,35 @@ export default function HomePage() {
           </p>
 
           {(() => {
+            // typo : une fourchette « 8 000 à 14 000 € » reste d'un seul tenant (lib/typo.ts).
             const rows = [
               {
                 solution: "Poêle à pellets",
                 icon: Flame,
                 highlight: true,
-                investissement: "4 000 à 14 000 €",
-                coutAnnuel: "700 à 1 100 €",
+                investissement: typo("4 000 à 14 000 €"),
+                coutAnnuel: typo("700 à 1 100 €"),
                 autonomie: "2 à 7 jours",
               },
               {
                 solution: "Chaudière mazout",
                 icon: Droplet,
-                investissement: "8 000 à 15 000 €",
-                coutAnnuel: "2 200 à 2 800 €",
+                investissement: typo("8 000 à 15 000 €"),
+                coutAnnuel: typo("2 200 à 2 800 €"),
                 autonomie: "Cuve 2 à 3 ans",
               },
               {
                 solution: "Chaudière gaz",
                 icon: Fuel,
-                investissement: "5 000 à 12 000 €",
-                coutAnnuel: "1 600 à 2 200 €",
+                investissement: typo("5 000 à 12 000 €"),
+                coutAnnuel: typo("1 600 à 2 200 €"),
                 autonomie: "Réseau continu",
               },
               {
                 solution: "Pompe à chaleur air-eau",
                 icon: Wind,
-                investissement: "12 000 à 22 000 €",
-                coutAnnuel: "800 à 1 400 €",
+                investissement: typo("12 000 à 22 000 €"),
+                coutAnnuel: typo("800 à 1 400 €"),
                 autonomie: "Réseau continu",
               },
             ];
@@ -426,7 +428,7 @@ export default function HomePage() {
             Le pellet et la pompe à chaleur sortent en tête sur le coût d'usage. La pompe à chaleur
             demande plus d'investissement initial mais s'amortit sur 8 à 12 ans. Le pellet a l'avantage
             du combustible local et d'une autonomie sans contrat fournisseur. Le prix du sac de
-            pellets change chaque mois :{" "}
+            pellets change chaque mois :{" "}
             <Link href="/blog/prix-pellets-belgique" className="text-mp-orange-ink underline hover:no-underline">
               relevé du prix des pellets en Wallonie
             </Link>
@@ -441,28 +443,28 @@ export default function HomePage() {
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
-            Combien coûte un poêle à pellets installé ?
+            Combien coûte un poêle à pellets installé ?
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
               Le ticket d'entrée pour un poêle à air pulsé étanche posé en Wallonie démarre autour
-              de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
+              de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
               Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin d'entrée de gamme.
             </p>
             <p>
               Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
-              comptez 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
+              comptez 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
               étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
             </p>
             <p>
-              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez 8 000 à
-              14 000 € TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
+              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez
+              8 000 à 14 000 € TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
               démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
               aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
               typiquement).
             </p>
             <p>
-              La pose varie surtout avec l&apos;évacuation : conduit déjà tubé, conduit à tuber, ventouse en
+              La pose varie surtout avec l&apos;évacuation : conduit déjà tubé, conduit à tuber, ventouse en
               façade ou nouveau conduit par l&apos;extérieur ou la toiture. Le prix de départ du moment, les forfaits de pose par type de conduit et des
               exemples chiffrés sont sur la page{" "}
               <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
@@ -471,10 +473,10 @@ export default function HomePage() {
               .
             </p>
             <p>
-              Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
+              Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
               l'écrasante majorité des logements wallons concernés ont plus de 10 ans. Cette TVA
               réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
-              La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
+              La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
               désormais par des prêts (Rénopack, Rénoprêt) réservés aux maisons classées E, F ou G
               qui font un saut de label, à demander avant de signer le moindre devis. Certaines
               communes gardent une prime énergie, à vérifier auprès d'elles.
