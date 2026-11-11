@@ -12,7 +12,8 @@ interface CTAFinalProps {
   tone?: SectionTone;
   title?: string;
   description?: string;
-  primaryCta?: { label: string; href: string };
+  /** `rel` : « nofollow » pour un lien à paramètres (demande de prix d'une fiche). */
+  primaryCta?: { label: string; href: string; rel?: string };
   /**
    * Classes ajoutées au bouton principal : une page qui porte déjà un aplat
    * orange à l'écran (barre d'action d'une fiche produit) le passe au vert.
@@ -50,7 +51,7 @@ export function CTAFinal({
 
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Button asChild variant="primary" size="lg" className={primaryClassName}>
-            <Link href={primaryCta.href}>{primaryCta.label}</Link>
+            <Link href={primaryCta.href} rel={primaryCta.rel}>{primaryCta.label}</Link>
           </Button>
           {secondaryCta && (
             <Button asChild variant="outline" size="lg">

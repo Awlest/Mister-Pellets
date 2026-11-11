@@ -660,7 +660,7 @@ export default async function ProductPage({ params }: Props) {
         primaryClassName={YIELDS_TO_ACTION_BAR}
         // Fiche sur devis : la demande de prix du modèle, pas une estimation
         // où il ne figure pas.
-        primaryCta={primary.kind === "price-request" ? { label: primary.label, href: primary.href } : undefined}
+        primaryCta={primary.kind === "price-request" ? { label: primary.label, href: primary.href, rel: "nofollow" } : undefined}
       />
 
       {/* Barre d'action du téléphone (sous 1 024 px), dernier élément de la

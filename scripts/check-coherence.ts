@@ -76,6 +76,7 @@ assert("message : nomme le modèle", priceRequestMessage({ slug: "a-b", name: "M
 assert("message : lien de la fiche", priceRequestMessage({ slug: "a-b" }).includes("mister-pellets.be/produit/a-b"));
 check("sujet présélectionné", PRICE_REQUEST_SUBJECT, "info-produit");
 check("demande sans nom", priceRequestHref("a-b"), "/contact?modele=a-b");
+assert("fiche : bloc final de la demande de prix en nofollow", readFileSync("app/(frontend)/produit/[slug]/page.tsx", "utf8").includes('href: primary.href, rel: "nofollow"'));
 
 const catalogue = [
   { key: "cadel-zefiro-9", slug: "cadel-zefiro-9", name: "Zefiro 9", brand: "Cadel", productType: "standard", powerKw: 9, priceHT: 2471 },
