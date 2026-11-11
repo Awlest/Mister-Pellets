@@ -41,12 +41,36 @@ export const priceBadge = (p: PricedProduct): string | undefined =>
 /**
  * Ligne sobre sous le prix d'une fiche : la garantie légale, dans les mots de
  * la FAQ (« Quelles garanties offrez-vous ? ») et de la page des garanties,
- * puis le délai de livraison saisi dans l'admin quand il existe. Rien n'est
- * inventé : sans délai saisi, la garantie seule.
+ * puis le délai de livraison saisi dans l'admin, à des conditions strictes.
  */
 export const LEGAL_GUARANTEE = "Garantie légale de 2 ans sur le poêle et la pose";
 
-export function guaranteeLine(deliveryDelay?: string): string {
-  const delay = deliveryDelay?.trim();
+/**
+ * Valeur par défaut du champ `deliveryDelay` (collections/Products.ts et
+ * colonne SQL) : une fiche jamais retouchée la porte sans que personne l'ait
+ * choisie. Elle ne vaut donc pas un délai annoncé.
+ */
+export const DEFAULT_DELIVERY_DELAY = "48-72h";
+
+/**
+ * Délai de livraison à afficher, ou undefined. Seulement s'il a été saisi
+ * (différent de la valeur par défaut), que la fiche montre un prix et que le
+ * poêle est en stock : une fiche sur devis ou en commande spéciale n'a pas de
+ * délai à promettre (relecture du lot 3, 11/11/2026).
+ */
+export function shownDeliveryDelay(p: {
+  deliveryDelay?: string;
+  priceTTC?: number;
+  stockStatus?: string;
+}): string | undefined {
+  const delay = p.deliveryDelay?.trim();
+  if (!delay || delay.replace(/\s+/g, "").toLowerCase() === DEFAULT_DELIVERY_DELAY.toLowerCase()) return undefined;
+  if (!p.priceTTC || p.priceTTC <= 0) return undefined;
+  if (p.stockStatus && p.stockStatus !== "in_stock") return undefined;
+  return delay;
+}
+
+export function guaranteeLine(p: { deliveryDelay?: string; priceTTC?: number; stockStatus?: string }): string {
+  const delay = shownDeliveryDelay(p);
   return delay ? `${LEGAL_GUARANTEE} · délai de livraison indicatif : ${delay}` : LEGAL_GUARANTEE;
 }

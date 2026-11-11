@@ -30,7 +30,7 @@ import { FAQS } from "@/lib/faqs";
 import { getGuideBySlug } from "@/lib/guides";
 import { NBSP, NNBSP } from "@/lib/typo";
 import { PROJECT_LEAD_TIME } from "@/lib/services";
-import { guaranteeLine } from "@/lib/product-price";
+import { guaranteeLine, shownDeliveryDelay } from "@/lib/product-price";
 
 let ko = 0;
 function check(label: string, got: unknown, want: unknown) {
@@ -152,9 +152,18 @@ for (const file of [
 }
 
 // 5. Fiche : garantie légale, délai seulement s'il est saisi
-check("fiche : garantie seule sans délai", guaranteeLine(undefined), "Garantie légale de 2 ans sur le poêle et la pose");
-check("fiche : délai vide ignoré", guaranteeLine("  "), "Garantie légale de 2 ans sur le poêle et la pose");
-check("fiche : délai saisi", guaranteeLine("4-6 sem."), "Garantie légale de 2 ans sur le poêle et la pose · délai de livraison indicatif : 4-6 sem.");
+{
+  const priced = { priceTTC: 2990, stockStatus: "in_stock" };
+  check("fiche : garantie seule sans délai", shownDeliveryDelay({ ...priced }), undefined);
+  check("fiche : délai vide ignoré", shownDeliveryDelay({ ...priced, deliveryDelay: "  " }), undefined);
+  check("fiche : valeur par défaut « 48-72h » ignorée", shownDeliveryDelay({ ...priced, deliveryDelay: "48-72h" }), undefined);
+  check("fiche : valeur par défaut, autre écriture", shownDeliveryDelay({ ...priced, deliveryDelay: "48-72H " }), undefined);
+  check("fiche sur devis : pas de délai", shownDeliveryDelay({ deliveryDelay: "4-6 sem." }), undefined);
+  check("fiche en commande : pas de délai", shownDeliveryDelay({ ...priced, stockStatus: "on_order", deliveryDelay: "4-6 sem." }), undefined);
+  check("fiche chiffrée en stock : délai saisi", shownDeliveryDelay({ ...priced, deliveryDelay: "4-6 sem." }), "4-6 sem.");
+  assert("fiche : la ligne commence par la garantie", guaranteeLine({}).startsWith("Garantie légale de 2 ans"));
+  assert("fiche : la page affiche la ligne de garantie", readFileSync("app/(frontend)/produit/[slug]/page.tsx", "utf8").includes("guaranteeLine(product)"));
+}
 
 // ---------------------------------------------------------------------------
 // 6. Libellés d'action : un par action, liens de rendez-vous indexables
