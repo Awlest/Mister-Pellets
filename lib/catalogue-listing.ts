@@ -25,6 +25,14 @@ import { formatPrice } from "./utils";
 /** Cartes complètes d'une liste, puis par clic sur « Voir plus ». */
 export const LISTING_PAGE_SIZE = 24;
 
+/**
+ * Cartes complètes d'une page catégorie : 12, puis les lignes compactes. Ces
+ * pages portent aussi un tableau, un texte et une FAQ ; à 24 cartes, la
+ * catégorie canalisable mesurait plus de 20 000 px sur un téléphone
+ * (vérification du 11/11/2026).
+ */
+export const CATEGORY_PAGE_SIZE = 12;
+
 /** Fiche d'une liste : la carte, et ce que lisent les filtres et le tri de la boutique. */
 export interface ListedProduct extends ProductCardData {
   type: ProductType;
@@ -219,8 +227,12 @@ export function sortForGrid<T extends ProductCardData & { isFeatured?: boolean }
 }
 
 /** Entrées d'une liste déjà triée : complètes pour les fiches montrées en cartes d'emblée. */
-export function encodeListing(products: readonly ListedProduct[], options: Pick<EncodeOptions, "shop"> = {}): CatalogueEntry[] {
-  return products.map((p, i) => encodeEntry(p, { ...options, full: i < LISTING_PAGE_SIZE }));
+export function encodeListing(
+  products: readonly ListedProduct[],
+  options: Pick<EncodeOptions, "shop"> & { pageSize?: number } = {},
+): CatalogueEntry[] {
+  const { pageSize = LISTING_PAGE_SIZE, ...rest } = options;
+  return products.map((p, i) => encodeEntry(p, { ...rest, full: i < pageSize }));
 }
 
 /**

@@ -7,7 +7,7 @@ import { CatalogueListing } from "@/components/product/ProductListing";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { InlineText } from "@/components/ui/inline-text";
 import { ROUTES } from "@/config/navigation";
-import { encodeListing, sortForGrid } from "@/lib/catalogue-listing";
+import { CATEGORY_PAGE_SIZE, encodeListing, sortForGrid } from "@/lib/catalogue-listing";
 import { productsInCategory, summarizeCategory, type CategoryData } from "@/lib/categories";
 import { formatKw } from "@/lib/power";
 import { shownPriceTTC } from "@/lib/product-price";
@@ -104,8 +104,13 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
           <h2 className="mp-measure mx-auto mb-10 text-center text-3xl font-semibold text-mp-green-deep md:text-5xl">
             Les modèles
           </h2>
+          {/* 12 cartes puis les lignes compactes : tous les liens restent dans le HTML. */}
           {products.length > 0 ? (
-            <CatalogueListing entries={encodeListing(products)} priority />
+            <CatalogueListing
+              entries={encodeListing(products, { pageSize: CATEGORY_PAGE_SIZE })}
+              pageSize={CATEGORY_PAGE_SIZE}
+              priority
+            />
           ) : (
             <p className="mp-measure text-center text-lg text-mp-ink-soft">
               Aucune fiche pour le moment.{" "}
