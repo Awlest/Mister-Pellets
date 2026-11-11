@@ -139,7 +139,7 @@ export const CATEGORIES: CategoryData[] = [
     metaDescription:
       "Poêles à pellets hydro raccordés aux radiateurs ou au plancher chauffant, pour remplacer une chaudière au mazout. Modèles et puissances, pose en Wallonie.",
     intro:
-      `Un poêle à pellets hydro, ou thermopoêle à granulés, chauffe l'eau d'un circuit : il alimente vos radiateurs ou votre plancher chauffant, comme une chaudière, tout en chauffant la pièce où il se trouve. C'est le choix quand on remplace une chaudière au mazout ou au gaz et qu'on garde le chauffage central. La pose ajoute un raccordement hydraulique au conduit de fumées : comptez ${POSE_DURATIONS.hydro} de chantier. Raccordé au chauffage central, l'appareil se contrôle chaque année, comme le prévoit l'arrêté wallon du 29 janvier 2009.`,
+      `Un poêle à pellets hydro, ou thermopoêle à granulés, chauffe l'eau d'un circuit : il alimente vos radiateurs ou votre plancher chauffant, comme une chaudière, tout en chauffant la pièce où il se trouve. C'est le choix quand on remplace une chaudière au mazout ou au gaz et qu'on garde le chauffage central. La pose ajoute un raccordement hydraulique au conduit de fumées : comptez ${POSE_DURATIONS.hydro} de chantier. Raccordé au chauffage central, il entre dans la règle wallonne de l'inspection annuelle des installations au combustible solide (voir les questions plus bas).`,
     guide: { href: "/guides/poele-pellets-hydro", label: "Le guide du poêle hydro" },
     modifiedAt: "2026-11-11",
     sections: [
@@ -163,7 +163,7 @@ export const CATEGORIES: CategoryData[] = [
       {
         question: "Faut-il faire contrôler un poêle hydro chaque année ?",
         answer:
-          "Oui. Raccordé au chauffage central, il entre dans l'arrêté du Gouvernement wallon du 29 janvier 2009, qui prévoit un contrôle périodique des générateurs au combustible solide. Notre [entretien](/entretien-poele-a-pellets) coûte 175 € TVAC, ramonage du conduit compris.",
+          "Oui. L'arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central impose à l'utilisateur une inspection périodique, annuelle quand le combustible est solide, ce qui est le cas des pellets (articles 10, 4°, et 13). Elle est faite par une personne qualifiée, agréée quand l'arrêté l'exige, qui remet une attestation de contrôle à conserver. Le texte est sur [Wallex](https://wallex.wallonie.be/files/pdfs/19/6833_Arr%C3%AAt%C3%A9_du_Gouvernement_wallon_tendant_%C3%A0_pr%C3%A9venir_la_pollution_atmosph%C3%A9rique_provoqu%C3%A9e_par_les_installations_de_chauffage_central_destin%C3%A9es_au_chauffage_de_b%C3%A2timents_ou_%C3%A0_la_production_d'eau_chaud_24-02-2023-.pdf) (consolidation lue le 11/11/2026). L'entretien de l'appareil est une autre chose : le nôtre, à 175 € TVAC ramonage compris, est décrit sur la page [entretien](/entretien-poele-a-pellets).",
       },
       {
         question: "Combien de temps tient le réservoir d'un poêle hydro ?",

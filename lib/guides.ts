@@ -406,8 +406,9 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
       {
         heading: "L'entretien : annuel, et contrôlé",
         paragraphs: [
-          "Raccordé au chauffage central, un poêle hydro relève de l'arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central, qui prévoit un contrôle périodique des générateurs au combustible solide. MCZ demande de son côté un entretien chaque année par un technicien agréé, normalement à la fin de l'hiver.",
-          "Chez nous, l'[entretien annuel](/entretien-poele-a-pellets) coûte 175 € TVAC, ramonage du conduit compris. Entre deux entretiens, vous videz le brasier et les cendres comme sur un poêle à air : le [guide de l'entretien](/guides/comment-entretenir-poele-pellets) donne la liste. Les modèles MCZ « Matic » ont un brasier qui se nettoie seul.",
+          "Raccordé au chauffage central, un poêle hydro entre dans la règle wallonne. L'arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central impose à l'utilisateur une inspection périodique, annuelle quand le combustible est solide, ce qui est le cas des pellets (articles 10, 4°, et 13). Elle est faite par une personne qualifiée, agréée quand l'arrêté l'exige, qui remet une attestation de contrôle à conserver. Le texte est cité dans les sources en bas de page.",
+          "L'entretien de l'appareil est une obligation d'un autre ordre, celle du fabricant : MCZ demande un entretien chaque année par un technicien agréé, normalement à la fin de l'hiver.",
+          "Notre [entretien annuel](/entretien-poele-a-pellets) coûte 175 € TVAC, ramonage du conduit compris : c'est un nettoyage et un réglage de l'appareil, présenté sur sa page. Entre deux entretiens, vous videz le brasier et les cendres comme sur un poêle à air : le [guide de l'entretien](/guides/comment-entretenir-poele-pellets) donne la liste. Les modèles MCZ « Matic » ont un brasier qui se nettoie seul.",
         ],
       },
       {
@@ -443,11 +444,11 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
       {
         question: "Un poêle hydro doit-il être entretenu chaque année ?",
         answer:
-          "Oui. Raccordé au chauffage central, il relève de l'arrêté wallon du 29 janvier 2009, et MCZ demande un entretien annuel par un technicien agréé. Notre entretien coûte 175 € TVAC, ramonage compris.",
+          "Deux règles s'ajoutent. Raccordé au chauffage central, il doit passer une inspection périodique annuelle, avec une attestation de contrôle (arrêté wallon du 29 janvier 2009, articles 10 et 13). Et MCZ demande un entretien annuel de l'appareil par un technicien agréé : chez nous, 175 € TVAC, ramonage compris.",
       },
     ],
     sources: [
-      { label: "Arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central (contrôle périodique des générateurs au combustible solide)" },
+      { label: "Arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central, consolidation officieuse de Wallex en vigueur depuis le 24/02/2023, art. 10, 4°, et art. 13, lue le 11/11/2026", href: "https://wallex.wallonie.be/files/pdfs/19/6833_Arr%C3%AAt%C3%A9_du_Gouvernement_wallon_tendant_%C3%A0_pr%C3%A9venir_la_pollution_atmosph%C3%A9rique_provoqu%C3%A9e_par_les_installations_de_chauffage_central_destin%C3%A9es_au_chauffage_de_b%C3%A2timents_ou_%C3%A0_la_production_d'eau_chaud_24-02-2023-.pdf" },
       { label: "MCZ, foire aux questions belge : entretien annuel par un technicien agréé, brasier autonettoyant des modèles Matic, lue le 11/11/2026", href: "https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions" },
       { label: "Fiches techniques des fabricants (puissance, volume de chauffe, réservoir), reprises sur les fiches du catalogue au 11/11/2026" },
     ],
@@ -510,8 +511,8 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         heading: "Une fois par an : l'entretien par un technicien",
         paragraphs: [
           "MCZ écrit qu'une fois par an, normalement à la fin de l'hiver, il faut s'adresser à un technicien agréé pour l'entretien ordinaire. Les autres fabricants demandent eux aussi un entretien annuel pour garder la garantie. Le technicien démonte le poêle, nettoie l'échangeur et l'extracteur de fumées, contrôle les capteurs et les joints, règle la combustion et ramone le conduit.",
-          "Aucune loi wallonne n'impose le ramonage d'un poêle à air, mais la plupart des contrats d'assurance incendie l'exigent chaque année : gardez le certificat. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 prévoit un contrôle périodique des générateurs au combustible solide.",
-          "Chez Mister Pellets, l'[entretien annuel](/entretien-poele-a-pellets) coûte 175 € TVAC, ramonage du conduit compris, et le [ramonage seul](/ramonage) 90 € TVAC, certificat compris.",
+          "Aucune loi wallonne n'impose le ramonage d'un poêle à air, mais la plupart des contrats d'assurance incendie l'exigent chaque année : gardez le certificat. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 impose une inspection périodique annuelle des installations au combustible solide, avec une attestation de contrôle (articles 10 et 13).",
+          "Cette inspection est distincte de l'entretien de l'appareil. Chez Mister Pellets, l'[entretien annuel](/entretien-poele-a-pellets) coûte 175 € TVAC, ramonage du conduit compris, et le [ramonage seul](/ramonage) 90 € TVAC, certificat compris.",
         ],
       },
       {
@@ -545,7 +546,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
       {
         question: "L'entretien annuel d'un poêle à pellets est-il obligatoire ?",
         answer:
-          "Aucune loi wallonne ne l'impose pour un poêle à air, mais les fabricants le demandent pour la garantie (MCZ parle d'entretien annuel par un technicien agréé) et l'assurance incendie exige souvent le certificat de ramonage. Un poêle hydro raccordé au chauffage central relève en plus de l'arrêté wallon du 29 janvier 2009.",
+          "Aucune loi wallonne ne l'impose pour un poêle à air, mais les fabricants le demandent pour la garantie (MCZ parle d'entretien annuel par un technicien agréé) et l'assurance incendie exige souvent le certificat de ramonage. Un poêle hydro raccordé au chauffage central doit en plus passer l'inspection périodique annuelle prévue par l'arrêté wallon du 29 janvier 2009, avec attestation de contrôle.",
       },
       {
         question: "Combien coûte l'entretien d'un poêle à pellets ?",
@@ -565,7 +566,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
     ],
     sources: [
       { label: "MCZ, foire aux questions belge : nettoyage du brasero et de la vitre, entretien annuel par un technicien agréé, pellets certifiés et garantie, lue le 11/11/2026", href: "https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions" },
-      { label: "Arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central (contrôle périodique des générateurs au combustible solide)" },
+      { label: "Arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central, consolidation officieuse de Wallex en vigueur depuis le 24/02/2023, art. 10, 4°, et art. 13, lue le 11/11/2026", href: "https://wallex.wallonie.be/files/pdfs/19/6833_Arr%C3%AAt%C3%A9_du_Gouvernement_wallon_tendant_%C3%A0_pr%C3%A9venir_la_pollution_atmosph%C3%A9rique_provoqu%C3%A9e_par_les_installations_de_chauffage_central_destin%C3%A9es_au_chauffage_de_b%C3%A2timents_ou_%C3%A0_la_production_d'eau_chaud_24-02-2023-.pdf" },
       { label: "Tarifs d'entretien, de ramonage et de dépannage de Mister Pellets au 11/11/2026" },
     ],
     metaTitle: "Entretien d'un poêle à pellets : qui fait quoi",
