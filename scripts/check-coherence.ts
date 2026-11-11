@@ -250,6 +250,7 @@ for (const file of ["app/(frontend)/page.tsx"]) {
   // Texte affiché seulement : les noms de variables (totalTTC) ne comptent pas.
   assert("estimation : aucun « TTC » affiché", !/[ "]TTC\b(?!\()/.test(conf.replace(/\b\w+TTC\b/g, "")));
   assert("estimation : détail marqué HTVA", conf.includes("Montants HTVA") && conf.includes("Sous-total HTVA"));
+  assert("estimation : sous-total = somme des lignes HTVA", conf.includes("eurCents(r.subtotalHT - r.bonusHT)"));
 }
 
 // 5. Fiche : garantie légale, délai seulement s'il est saisi

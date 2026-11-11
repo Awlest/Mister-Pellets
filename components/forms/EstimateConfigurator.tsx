@@ -1775,7 +1775,9 @@ function Recap({
             muted
           />
         ))}
-        <Row label="Sous-total HTVA" value={eurCents(r.totalTTC - r.vatAmount)} />
+        {/* Somme exacte des lignes affichées (poêle, bonus, pose), au cent : pas la
+            différence de deux montants arrondis à l'euro. */}
+        <Row label="Sous-total HTVA" value={eurCents(r.subtotalHT - r.bonusHT)} />
         <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
       </dl>
 
