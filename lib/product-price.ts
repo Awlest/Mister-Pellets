@@ -43,7 +43,9 @@ export const priceBadge = (p: PricedProduct): string | undefined =>
  * la FAQ (« Quelles garanties offrez-vous ? ») et de la page des garanties,
  * puis le délai de livraison saisi dans l'admin, à des conditions strictes.
  */
-export const LEGAL_GUARANTEE = "Garantie légale de 2 ans sur le poêle et la pose";
+// L'appareil seul : la ligne est affichée à côté de « Pose non incluse », et la
+// garantie de la pose ne vaut que si nous la faisons (relecture du lot 3).
+export const LEGAL_GUARANTEE = "Garantie légale de 2 ans sur le poêle";
 
 /**
  * Valeur par défaut du champ `deliveryDelay` (collections/Products.ts et

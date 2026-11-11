@@ -264,7 +264,7 @@ for (const file of ["app/(frontend)/page.tsx"]) {
   check("fiche sur devis : pas de délai", shownDeliveryDelay({ deliveryDelay: "4-6 sem." }), undefined);
   check("fiche en commande : pas de délai", shownDeliveryDelay({ ...priced, stockStatus: "on_order", deliveryDelay: "4-6 sem." }), undefined);
   check("fiche chiffrée en stock : délai saisi", shownDeliveryDelay({ ...priced, deliveryDelay: "4-6 sem." }), "4-6 sem.");
-  assert("fiche : la ligne commence par la garantie", guaranteeLine({}).startsWith("Garantie légale de 2 ans"));
+  check("fiche : garantie de l'appareil seul", guaranteeLine({}), "Garantie légale de 2 ans sur le poêle");
   assert("fiche : la page affiche la ligne de garantie", readFileSync("app/(frontend)/produit/[slug]/page.tsx", "utf8").includes("guaranteeLine(product)"));
 }
 
