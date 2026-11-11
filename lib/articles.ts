@@ -549,7 +549,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le kWh de pellet face au mazout, début octobre 2026",
         paragraphs: [
-          "Au prix ValBiom d'août, 6,19 € le sac, un kilo de pellets coûte 41 centimes. À 4,6 kWh par kilo, le kWh revient à 9 centimes. Le mazout était à 1,53 € le litre au tarif maximum du SPF Économie du 3 octobre 2026, à partir de 2 000 litres commandés. À 10 kWh par litre, le kWh revient à 15 centimes.",
+          "Au prix ValBiom d'août, 6,19 € le sac, un kilo de pellets coûte 41 centimes. À 4,6 kWh par kilo, le kWh revient à 9 centimes. Le mazout était à 1,53 € le litre au tarif maximum du SPF Économie du 3 octobre 2026, à partir de 2 000 litres commandés. À 10 kWh par litre, le kWh revient à 15 centimes. Pour le prix du poêle et de sa pose, voyez la page [prix d'un poêle à pellets posé](/prix-poele-pellets).",
           "À chaleur égale, le pellet coûte donc un peu moins de 60 % du mazout. Pour le gaz et l'électricité, regardez le prix du kWh sur votre propre facture : les contrats varient trop d'un ménage à l'autre pour qu'un chiffre unique veuille dire quelque chose.",
         ],
         callout: {

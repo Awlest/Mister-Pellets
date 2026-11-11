@@ -189,7 +189,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         heading: "5. Compter les aides",
         paragraphs: [
           "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Depuis le 1er octobre, la Wallonie aide la rénovation par deux prêts : le Rénopack, à 0 % avec 15 à 50 % effacés selon les revenus, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent le label exigé après un audit. Un poêle seul y donne rarement accès. Tout le détail est sur notre page consacrée aux aides.",
-          "L'aide qui joue presque à chaque fois, c'est la TVA : 6 % au lieu de 21 % quand l'installateur fournit et pose le poêle dans un logement de plus de 10 ans. Pour les petits revenus, la subvention MEBAR (jusqu'à 2 000 €) passe par le CPAS, avant les travaux. Et demandez à votre commune : certaines gardent une prime énergie.",
+          "L'aide qui joue presque à chaque fois, c'est la TVA : 6 % au lieu de 21 % quand l'installateur fournit et pose le poêle dans un logement de plus de 10 ans. Pour les petits revenus, la subvention MEBAR (jusqu'à 2 000 €) passe par le CPAS, avant les travaux. Et demandez à votre commune : certaines gardent une prime énergie. Les forfaits de pose et des exemples chiffrés sont sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets).",
         ],
       },
     ],

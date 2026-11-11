@@ -32,7 +32,7 @@ export default async function EstimationPage() {
             Votre poêle à pellets posé, <span className="mp-italic">chiffré en direct</span>
           </>
         }
-        description="Vous choisissez le poêle dans notre catalogue, nous ajoutons la pose, la TVA applicable et la mensualité à 0 %. Le tout sans attendre un rappel."
+        description="Vous choisissez le poêle dans notre catalogue, nous ajoutons la pose, la TVA applicable et la mensualité. Le tout sans attendre un rappel."
         breadcrumbs={[{ label: "Accueil", href: "/" }, { label: "Estimation en ligne" }]}
         compact
       />
@@ -111,8 +111,14 @@ function TrustPoints({ className }: { className?: string }) {
       </span>
       <span className="inline-flex items-center gap-2">
         <PiggyBank className="h-4 w-4 text-mp-orange-flame" aria-hidden />
-        TVA et 0 % simulés
+        TVA et mensualité simulées
       </span>
+      <Link
+        href="/prix-poele-pellets"
+        className="inline-flex min-h-11 items-center font-semibold text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink"
+      >
+        Prix posés par type de conduit
+      </Link>
     </div>
   );
 }
