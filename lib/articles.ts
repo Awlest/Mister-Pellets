@@ -332,7 +332,7 @@ export const ARTICLES: ArticleData[] = [
           items: [
             "Une centaine de modèles MCZ en plus dans la boutique, avec leurs caractéristiques, leurs finitions et les photos du fabricant.",
             "Même parcours qu'avec nos autres marques : visite technique, devis sous 48 heures, pose en une journée dans la plupart des cas, TVA à 6 % sur les logements de plus de 10 ans.",
-            "Même équipe et même SAV : on pose, on met en service, on fait l'entretien annuel et on intervient sous 48 à 72 h dans notre zone.",
+            "Même équipe et même SAV : [notre équipe de Fernelmont](/a-propos) pose, met en service, fait l'entretien annuel et intervient sous 48 à 72 h dans notre zone.",
             "Bonus de saison jusqu'au 24 décembre 2026 : -10 % sur le prix des poêles MCZ dès qu'il est affiché, pose au tarif normal.",
           ],
         },
@@ -428,7 +428,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Cadel : le connecté accessible du groupe MCZ",
         paragraphs: [
-          "Cadel fabrique des poêles depuis plus de soixante ans à Santa Lucia di Piave, près de Trévise. Depuis 2013, la marque fait partie du groupe MCZ. Le parallèle avec EK63, marque du groupe Edilkamin, est le bon : des poêles modernes, connectés, à un prix plus doux que la marque phare du groupe. Les poêles sortent d'une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006, où la tôle est découpée, soudée, peinte et assemblée.",
+          "Cadel fabrique des poêles depuis plus de soixante ans à Santa Lucia di Piave, près de Trévise. Depuis 2013, la marque fait partie du groupe MCZ, dont [nous posons aussi toute la gamme pellets depuis octobre 2026](/blog/mcz-arrive-chez-mister-pellets). Le parallèle avec EK63, marque du groupe Edilkamin, est le bon : des poêles modernes, connectés, à un prix plus doux que la marque phare du groupe. Les poêles sortent d'une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006, où la tôle est découpée, soudée, peinte et assemblée.",
           "Les poêles à pellets Cadel se pilotent depuis le téléphone avec l'appli gratuite Easy Connect Plus, en Wi-Fi ou en Bluetooth. Sur les modèles récents, le brasero Autoclean se vide à chaque allumage : le nettoyage passe de tous les jours à une fois par semaine, voire moins, selon Cadel. Presque toute la gamme a une chambre de combustion étanche, et elle est en classe A+ (A++ pour une partie des hydros).",
           "La gamme est très large : poêles plats de 27 à 33 cm de profondeur (Grace, Spirit, Baggy, Luce, Elle, Vesta), canalisables à une ou deux sorties (gamme Plus), inserts pour cheminée ouverte (Ponente, Zefiro), thermopoêles et inserts hydro pour les radiateurs (Maya Idro, River Idro, Saturno). En 2026, le Spin Plus 9 a reçu un iF Design Award.",
         ],
@@ -742,7 +742,7 @@ export const ARTICLES: ArticleData[] = [
         paragraphs: [
           "Edilkamin a plus de 60 ans. Son usine historique est à Gabbioneta Binanuova, près de Crémone, sa recherche à Lavagno, près de Vérone, et le groupe produit aussi en Hongrie, à Sárvár. C'est la marque qu'on recommande quand le critère numéro un, c'est la longévité.",
           "Sa technologie Leonardo surveille en continu la combustion et l'adapte au conduit, à la météo et aux pellets. La combustion reste stable même quand vous changez de marque de sacs ou quand l'humidité varie. Sur le terrain, les Edilkamin qu'on a posés tiennent couramment 15 à 20 ans.",
-          "Le revers, c'est le prix catalogue : Edilkamin est dans le haut de la fourchette. Mais ramené à la durée de vie réelle, le coût annuel reste bas, et le SAV pièces reste disponible longtemps après l'arrêt d'un modèle.",
+          "Le revers, c'est le prix catalogue : Edilkamin est dans le haut de la fourchette. Mais ramené à [la durée de vie réelle d'un poêle Edilkamin](/blog/duree-de-vie-poele-edilkamin), le coût annuel reste bas, et le SAV pièces reste disponible longtemps après l'arrêt d'un modèle.",
         ],
       },
       {
@@ -2261,7 +2261,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Si rien ne fonctionne : appelez votre SAV",
         paragraphs: [
           "Si vous avez vérifié les 7 points ci-dessus sans succès, c'est probablement une panne matérielle : résistance d'allumage HS (durée de vie typique 4-7 ans), motoréducteur de vis sans fin, carte électronique. Ces réparations dépassent les compétences classiques d'un utilisateur, appelez votre installateur.",
-          "Mister Pellets intervient en SAV dans les 50 km autour de Fernelmont. Pour les clients hors zone, on conseille toujours un installateur certifié local. Les pièces détachées Edilkamin, EK63 et Girolami sont disponibles en stock chez nous sous 48 h.",
+          "Mister Pellets intervient en SAV dans les 50 km autour de Fernelmont. Pour les clients hors zone, on conseille toujours un installateur certifié local. Les pièces détachées Edilkamin, EK63 et Girolami sont disponibles en stock chez nous sous 48 h. Les questions qu'on nous pose le plus sur les pannes, l'entretien et le SAV sont réunies dans [la FAQ des poêles à pellets](/faq).",
         ],
       },
     ],

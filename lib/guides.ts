@@ -234,7 +234,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
       {
         heading: "Pour quelle surface et quelle config",
         paragraphs: [
-          "Le canalisable est la solution naturelle pour les maisons à étage de 100-180 m². Modèles typiques : EK63 Tweed 90+ (9,2 kW) et Spy 110+ (10,5 kW), Edilkamin Cherie 11++ Evo (11 kW), Girolami Vert canalisable.",
+          "Le canalisable est la solution naturelle pour les maisons à étage de 100-180 m². Modèles typiques : EK63 Tweed 90+ (9,2 kW) et Spy 110+ (10,5 kW), Edilkamin Cherie 11++ Evo (11 kW), et le Girolami Vert, [canalisable à trois ventilateurs indépendants](/blog/girolami-canalisable-intelligent-trois-ventilateurs).",
           "Pour les très grandes maisons (180+ m²) ou pour vraiment chauffer toutes les pièces, on passe plutôt sur un hydro avec radiateurs ou plancher chauffant. Le canalisable a ses limites : 2-3 pièces secondaires max, à 5-8m de distance.",
         ],
       },
@@ -283,7 +283,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         heading: "Marques et modèles",
         paragraphs: [
           "Girolami (Italie, depuis 1970) a fait du raccordement hydro une vraie spécialité : la gamme Soft, des thermopoêles en quatre versions jusqu'à 24 kW, en hybride bois-pellet ou en pellet seul, chauffe le circuit d'eau de la maison (radiateurs ou plancher) et remplace une chaudière mazout. Son alimentation Source Feeding autonettoyante évite le nettoyage quotidien, et la version hybride accepte aussi les bûches. Edilkamin (Italie, depuis 1963) propose également des modèles hydro (suffixe H), compatibles radiateurs, plancher chauffant et solaire thermique, avec la finition et la fiabilité premium de la marque.",
-          "EK63 a aussi ses hydros, du Spot 100 H (10 kW) aux Monday H 190 et 230 (19 et 23 kW). On choisit selon le budget et la maison : un Girolami Soft pour l'option bois et le brasier propre, un EK63 pour un prix plus doux, un Edilkamin hydro pour le haut de gamme.",
+          "EK63 a aussi ses hydros, du Spot 100 H (10 kW) aux Monday H 190 et 230 (19 et 23 kW). On choisit selon le budget et la maison : un Girolami Soft pour l'option bois et le brasier propre, un EK63 pour un prix plus doux, un Edilkamin hydro pour le haut de gamme. Ce dernier cas est détaillé dans [remplacer une chaudière mazout par un Edilkamin hydro](/blog/remplacer-chaudiere-mazout-edilkamin-hydro).",
         ],
       },
       {
@@ -350,7 +350,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         heading: "Une fois par an, par un pro",
         paragraphs: [
           "Pour un poêle à air, aucune loi ne l'impose. Les fabricants l'exigent pour maintenir leur garantie, et votre assurance incendie vous demandera la preuve du ramonage. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 sur le chauffage central prévoit un contrôle chaque année pour les générateurs au combustible solide.",
-          "On démonte tout : foyer, échangeur, brûleur, ventilateur d'extraction, conduit. On nettoie en profondeur, on remplace les joints fatigués, on vérifie les capteurs et la combustion. Chez Mister Pellets, l'entretien complet coûte 175 € TVAC, ramonage du conduit compris.",
+          "On démonte tout : foyer, échangeur, brûleur, ventilateur d'extraction, conduit. On nettoie en profondeur, on remplace les joints fatigués, on vérifie les capteurs et la combustion. Chez Mister Pellets, l'entretien complet coûte 175 € TVAC, ramonage du conduit compris. Poêle qui s'éteint, délai d'intervention, gestes de chaque jour : les réponses sont dans [les questions fréquentes sur l'entretien et le SAV](/faq).",
         ],
       },
     ],
