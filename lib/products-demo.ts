@@ -133,6 +133,8 @@ export interface ProductDemo extends ProductCardData {
   stockStatus?: VariantStockStatus;
   /** Délai de livraison indicatif saisi dans l'admin (« 4-6 sem. »). */
   deliveryDelay?: string;
+  /** La fiche figure dans l'estimation en ligne (lib/estimable.ts). */
+  isEstimable?: boolean;
   /**
    * Système de variantes générique multi-axes (matériau, sortie des fumées…).
    * Indépendant de colorVariants. Activé via la case « Ce produit a des

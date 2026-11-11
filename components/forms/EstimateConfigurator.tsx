@@ -231,11 +231,16 @@ const serverSearch = () => "";
  * visiteur qui revenait. Pas de setState dans un effet (audit V20260503
  * §2.H.2) : le choix du brouillon est mémorisé une fois pour toutes.
  */
+const NO_SLUGS: string[] = [];
+
 export function EstimateConfigurator({
   products,
+  quoteOnlySlugs = NO_SLUGS,
   bonusAtRender = false,
 }: {
   products: EstimateProduct[];
+  /** Fiches visibles sans aucun prix : « Ce modèle est chiffré sur devis ». */
+  quoteOnlySlugs?: string[];
   /**
    * Bonus de saison actif au moment du rendu serveur (ISR). Sert d'instantané
    * serveur : le HTML et l'hydratation lisent la même valeur, donc aucun
@@ -253,7 +258,11 @@ export function EstimateConfigurator({
   const search = React.useSyncExternalStore(noopSubscribe, readSearch, serverSearch);
   // Modèle absent du catalogue chiffré (fiche sur devis) : pas de
   // présélection, un encart l'explique au-dessus des questions.
-  const requested = React.useMemo(() => requestedModel(products, search), [products, search]);
+  const quoteOnlySet = React.useMemo(() => new Set(quoteOnlySlugs), [quoteOnlySlugs]);
+  const requested = React.useMemo(
+    () => requestedModel(products, search, quoteOnlySet),
+    [products, search, quoteOnlySet],
+  );
   const preselected = requested.status === "priced" ? requested : null;
   const initialState = React.useMemo<EstimateState>(() => {
     const base = draft ?? DEFAULT_STATE;
@@ -275,7 +284,7 @@ export function EstimateConfigurator({
       products={products}
       initialState={initialState}
       pinned={preselected?.option ?? null}
-      unpricedSlug={requested.status === "unpriced" ? requested.slug : null}
+      absentModel={requested.status === "quote-only" || requested.status === "not-estimable" ? requested : null}
       bonusAtRender={bonusAtRender}
     />
   );
@@ -299,15 +308,15 @@ function EstimateForm({
   products,
   initialState,
   pinned,
-  unpricedSlug,
+  absentModel,
   bonusAtRender,
 }: {
   products: EstimateProduct[];
   initialState: EstimateState;
   /** Poêle demandé par l'adresse : il ouvre la liste de l'étape 3. */
   pinned: EstimateProduct | null;
-  /** Modèle demandé par l'adresse mais chiffré sur devis : absent de la liste. */
-  unpricedSlug: string | null;
+  /** Modèle demandé par l'adresse mais absent de la liste, avec le motif. */
+  absentModel: { status: "quote-only" | "not-estimable"; slug: string } | null;
   bonusAtRender: boolean;
 }) {
   const [step, setStep] = React.useState(1);
@@ -614,17 +623,22 @@ function EstimateForm({
         </div>
 
         <div className="p-4 sm:p-6 md:min-h-[420px] md:p-10">
-          {/* Modèle sur devis demandé par l'adresse : une phrase et les deux
+          {/* Modèle demandé par l'adresse mais absent de la liste : une phrase
+              exacte (sur devis, ou pas encore dans l'estimation) et les deux
               issues, aux trois premières étapes (la 3e est celle du modèle). */}
-          {unpricedSlug && step <= 3 && (
+          {absentModel && step <= 3 && (
             <p className="mb-5 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm leading-relaxed text-mp-ink">
-              <strong className="text-mp-green-deep">Ce modèle est chiffré sur devis.</strong>{" "}
+              <strong className="text-mp-green-deep">
+                {absentModel.status === "quote-only"
+                  ? "Ce modèle est chiffré sur devis."
+                  : "Ce modèle n'est pas encore dans l'estimation en ligne."}
+              </strong>{" "}
               Poursuivez avec un modèle chiffré de notre catalogue, ou{" "}
               <Link
-                href={priceRequestHref(unpricedSlug)}
+                href={priceRequestHref(absentModel.slug)}
                 className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline"
               >
-                demandez-nous son prix
+                {absentModel.status === "quote-only" ? "demandez-nous son prix" : "demandez-nous un devis pour ce modèle"}
               </Link>
               .
             </p>

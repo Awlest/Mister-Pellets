@@ -18,6 +18,7 @@ import { join } from "node:path";
 import { ACTION_LABELS } from "@/config/navigation";
 import { brusselsMidnightISO } from "@/lib/availability";
 import { requestedModel, type EstimateProduct } from "@/lib/estimate";
+import { estimateOptions, isEstimable } from "@/lib/estimable";
 import {
   PRICE_REQUEST_SUBJECT,
   priceRequestHref,
@@ -46,7 +47,7 @@ function assert(label: string, cond: boolean) {
 // 1. Fiche sur devis et estimation
 // ---------------------------------------------------------------------------
 const labels = { estimate: "Estimer" };
-const priced = productPrimaryAction({ slug: "cadel-zefiro-9", name: "Cadel Zefiro 9", priceTTC: 2990 }, labels);
+const priced = productPrimaryAction({ slug: "cadel-zefiro-9", name: "Cadel Zefiro 9", priceTTC: 2990, isEstimable: true }, labels);
 check("fiche chiffrée : estimation sur le modèle", [priced.kind, priced.href], ["estimate", "/estimation?modele=cadel-zefiro-9"]);
 const quote = productPrimaryAction({ slug: "mcz-ego-air-8-r", name: "MCZ Ego Air 8 R" }, labels);
 check("fiche sur devis : demande de prix", quote.kind, "price-request");
@@ -70,10 +71,45 @@ const catalogue = [
 ] as unknown as EstimateProduct[];
 check("estimation : sans modèle", requestedModel(catalogue, "").status, "none");
 check("estimation : modèle chiffré", requestedModel(catalogue, "?modele=cadel-zefiro-9").status, "priced");
-check("estimation : modèle sur devis", requestedModel(catalogue, "?modele=mcz-ego-air-8-r"), {
-  status: "unpriced",
+const quoteOnly = new Set(["mcz-ego-air-8-r"]);
+check("estimation : modèle sur devis", requestedModel(catalogue, "?modele=mcz-ego-air-8-r", quoteOnly), {
+  status: "quote-only",
   slug: "mcz-ego-air-8-r",
 });
+check("estimation : modèle chiffré absent de l'estimation", requestedModel(catalogue, "?modele=edilkamin-x", quoteOnly), {
+  status: "not-estimable",
+  slug: "edilkamin-x",
+});
+
+// Règle « dans l'estimation » partagée par la fiche et le catalogue (lib/estimable.ts).
+check("estimable : prix et puissance", isEstimable({ priceTTC: 2990, power: 9 }), true);
+check("estimable : prix sans puissance", isEstimable({ priceTTC: 2990, power: 0 }), false);
+check("estimable : masquée", isEstimable({ priceTTC: 2990, power: 9, hiddenFromBoutique: true }), false);
+check("estimable : sans prix", isEstimable({ power: 9 }), false);
+check(
+  "estimable : variantes chiffrées sans axe Puissance, parent vide",
+  isEstimable({ power: 9, hasVariants: true, variants: [{ price: 3200, optionValues: [1] }] }),
+  false,
+);
+check(
+  "estimable : axe Puissance chiffré",
+  estimateOptions({
+    hasVariants: true,
+    variantOptions: [{ optionType: { id: 1, slug: "puissance" }, values: [{ id: 7, label: "9 kW" }] }],
+    variants: [{ price: 3630, optionValues: [7] }],
+  }),
+  [{ kw: 9, ttc: 3630, ht: 3000, fromVariant: true }],
+);
+// Fiche chiffrée hors estimation : elle garde l'estimation, sans modèle prérempli.
+check(
+  "fiche chiffrée hors estimation : estimation sans modèle",
+  productPrimaryAction({ slug: "x", name: "X", priceTTC: 3200, isEstimable: false }, labels),
+  { href: "/estimation", label: "Estimer", kind: "estimate" },
+);
+assert(
+  "estimation : la page passe les fiches sur devis au configurateur",
+  readFileSync("app/(frontend)/estimation/page.tsx", "utf8").includes("quoteOnlySlugs"),
+);
 
 // ---------------------------------------------------------------------------
 // 2. Fourchettes de prix

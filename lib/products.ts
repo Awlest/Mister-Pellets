@@ -1,4 +1,5 @@
 import "server-only";
+import { isEstimable } from "./estimable";
 import { getPayloadClient } from "./payload-client";
 import { bonusPrice, isBonusPeriod } from "./bonus";
 import { formatKw, parseKw } from "./power";
@@ -439,6 +440,8 @@ function payloadToDemo(raw: PayloadProduct): ProductDemo {
     bonusPriceTTC: bonusActive && effectiveTTC ? bonusPrice(effectiveTTC, p.brand) : undefined,
     stockStatus: p.stockStatus ?? undefined,
     deliveryDelay: p.deliveryDelay?.trim() || undefined,
+    // Même règle que le catalogue de l'estimation (lib/estimable.ts).
+    isEstimable: isEstimable(p),
     isBestseller: p.isBestseller ?? false,
     isFeatured: p.isFeatured ?? false,
     isNew: p.isNew ?? false,

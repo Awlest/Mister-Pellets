@@ -62,19 +62,26 @@ export function priceRequestMessage(req: { slug: string; name?: string }): strin
 }
 
 /**
- * Bouton principal d'une fiche : l'estimation en ligne ouverte sur le modèle
- * quand la fiche affiche un prix, la demande de prix sinon.
+ * Bouton principal d'une fiche, selon la règle partagée avec l'estimation
+ * (lib/estimable.ts) :
+ * - fiche dans l'estimation : l'estimation ouverte sur ce modèle ;
+ * - fiche chiffrée mais absente de l'estimation (sans puissance exploitable,
+ *   masquée) : l'estimation sans modèle prérempli, la fiche garde son prix ;
+ * - fiche sans prix : la demande de prix du modèle.
  */
 export function productPrimaryAction(
-  product: { slug: string; name: string; priceTTC?: number | null },
+  product: { slug: string; name: string; priceTTC?: number | null; isEstimable?: boolean },
   labels: { estimate: string },
 ): { href: string; label: string; kind: "estimate" | "price-request" } {
-  if (product.priceTTC && product.priceTTC > 0) {
+  if (product.isEstimable) {
     return {
       href: `${ROUTES.configurator}?modele=${encodeURIComponent(product.slug)}`,
       label: labels.estimate,
       kind: "estimate",
     };
+  }
+  if (product.priceTTC && product.priceTTC > 0) {
+    return { href: ROUTES.configurator, label: labels.estimate, kind: "estimate" };
   }
   return {
     href: priceRequestHref(product.slug, product.name),

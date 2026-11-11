@@ -297,7 +297,9 @@ export const eurCents = (n: number) => formatEuros(n, { cents: "auto" });
  * Modèle demandé par l'adresse (`/estimation?modele=<slug>`) :
  * - `priced` : il est dans le catalogue chiffré, l'estimation s'ouvre dessus
  *   (une fiche à plusieurs puissances ouvre sur la plus petite) ;
- * - `unpriced` : l'adresse nomme un modèle absent du catalogue chiffré (fiche
+ * - `quote-only` : fiche sans aucun prix (« Sur devis ») ; l'estimation écrit
+ *   « Ce modèle est chiffré sur devis » ;
+ * - `not-estimable` : tout autre modèle absent du catalogue chiffré (fiche
  *   sur devis, fiche masquée, lien ancien) ; l'estimation le dit et propose un
  *   modèle chiffré ou la demande de prix, au lieu de bloquer à l'étape du
  *   modèle sans explication (vérification du 11/11/2026) ;
@@ -306,9 +308,19 @@ export const eurCents = (n: number) => formatEuros(n, { cents: "auto" });
 export type RequestedModel =
   | { status: "none" }
   | { status: "priced"; option: EstimateProduct; kind: StoveKind }
-  | { status: "unpriced"; slug: string };
+  | { status: "quote-only" | "not-estimable"; slug: string };
 
-export function requestedModel(products: EstimateProduct[], search: string): RequestedModel {
+/**
+ * `quoteOnly` : slugs des fiches visibles sans aucun prix
+ * (getEstimateCatalogData, lib/estimate-catalog.ts). Seules celles-là sont
+ * dites « chiffrées sur devis » ; une fiche chiffrée absente de l'estimation
+ * (sans puissance exploitable, masquée) n'y est « pas encore ».
+ */
+export function requestedModel(
+  products: EstimateProduct[],
+  search: string,
+  quoteOnly: ReadonlySet<string> = new Set(),
+): RequestedModel {
   const slug = new URLSearchParams(search).get("modele")?.trim();
   if (!slug) return { status: "none" };
   const option = products.find((p) => p.slug === slug);
@@ -317,5 +329,6 @@ export function requestedModel(products: EstimateProduct[], search: string): Req
         (STOVE_KINDS[k].productTypes as readonly string[]).includes(option.productType),
       )
     : undefined;
-  return option && kind ? { status: "priced", option, kind } : { status: "unpriced", slug };
+  if (option && kind) return { status: "priced", option, kind };
+  return { status: quoteOnly.has(slug) ? "quote-only" : "not-estimable", slug };
 }
