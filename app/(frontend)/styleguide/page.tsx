@@ -14,6 +14,7 @@ import { CTAFinal } from "@/components/sections/CTAFinal";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
+import { PROJECT_LEAD_TIME } from "@/lib/services";
 
 export const metadata = {
   title: "Styleguide, composants UI",
@@ -320,7 +321,7 @@ export default function StyleguidePage() {
       <FAQAccordion
         items={[
           { question: "Combien coûte un poêle pellets installé ?", answer: `${rangeText(PRICE_RANGES.standard)} pose comprise sur un conduit existant, TVA à 6 %.` },
-          { question: "Combien de temps pour la pose ?", answer: "Une journée pour la pose elle-même. 2-4 semaines au total." },
+          { question: "Combien de temps pour la pose ?", answer: `Une journée pour la pose elle-même. Comptez ${PROJECT_LEAD_TIME.range} ${PROJECT_LEAD_TIME.scope}.` },
           { question: "Et si je n'ai pas de cheminée ?", answer: "Pas un problème : ventouse concentrique avec un poêle étanche, ou conduit neuf." },
         ]}
       />

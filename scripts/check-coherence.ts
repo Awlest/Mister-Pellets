@@ -42,6 +42,14 @@ function check(label: string, got: unknown, want: unknown) {
 function assert(label: string, cond: boolean) {
   check(label, cond, true);
 }
+/** Fichiers .ts et .tsx des dossiers donnés, récursivement. */
+function sourceFiles(dirs: string[]): string[] {
+  const walk = (dir: string): string[] =>
+    readdirSync(dir, { withFileTypes: true }).flatMap((d) =>
+      d.isDirectory() ? walk(join(dir, d.name)) : /\.tsx?$/.test(d.name) ? [join(dir, d.name)] : [],
+    );
+  return dirs.flatMap(walk);
+}
 
 // ---------------------------------------------------------------------------
 // 1. Fiche sur devis et estimation
@@ -173,9 +181,35 @@ for (const file of [
   "app/(frontend)/page.tsx",
   "app/(frontend)/installation-poele-a-pellets/page.tsx",
   "app/(frontend)/poeles-pellets/[ville]/page.tsx",
+  "app/(frontend)/zones-d-intervention/page.tsx",
 ]) {
+  assert(`${file} : lit PROJECT_LEAD_TIME`, readFileSync(file, "utf8").includes("PROJECT_LEAD_TIME.range"));
+}
+/**
+ * Tout app/ et lib/ : une fourchette de semaines dans une phrase qui parle de
+ * la pose, du projet ou d'un total est écrite à la main (« Pose 2-3 semaines »,
+ * « 2 à 3 semaines entre le devis signé et la pose »). Seule lib/services.ts
+ * porte le délai. Les autres délais (matériel en commande, livraison des CGV,
+ * entretien) ne sont pas visés.
+ */
+{
+  const WEEKS = new RegExp(`\\d+${SP}*(?:-|à)${SP}*\\d+${SP}+semaines`, "g");
+  const ABOUT_PROJECT = /\bpose\b|\bprojet\b|au total|mise en service|premier contact/i;
+  const stray: string[] = [];
+  for (const file of sourceFiles(["app", "lib"])) {
+    if (file === join("lib", "services.ts")) continue;
+    const text = readFileSync(file, "utf8");
+    for (const m of text.matchAll(WEEKS)) {
+      // La phrase autour : jusqu'au point, au guillemet ou à la fin de ligne.
+      const before = text.slice(0, m.index).split(/[.!?"`\n]/).pop() ?? "";
+      const after = text.slice(m.index + m[0].length).split(/[.!?"`\n]/)[0] ?? "";
+      if (ABOUT_PROJECT.test(before + m[0] + after)) stray.push(`${file} : ${m[0]}`);
+    }
+  }
+  check("app/ et lib/ : aucun délai de projet écrit à la main", stray, []);
+}
+for (const file of ["app/(frontend)/page.tsx"]) {
   const text = readFileSync(file, "utf8");
-  assert(`${file} : lit PROJECT_LEAD_TIME`, text.includes("PROJECT_LEAD_TIME.range"));
   assert(`${file} : aucun délai de pose écrit à la main`, !/(?:Pose|pose)[ \u00a0]+(?:en[ \u00a0]+)?\d+[-\u00a0 à]+\d+[ \u00a0]semaines/.test(text));
 }
 

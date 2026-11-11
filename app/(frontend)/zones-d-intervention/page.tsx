@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { CITIES } from "@/lib/cities";
 import { buildPageMetadata } from "@/lib/seo";
+import { PROJECT_LEAD_TIME } from "@/lib/services";
 
 export const metadata = buildPageMetadata({
   title: "Zones d'intervention en Wallonie",
@@ -66,7 +67,10 @@ export default function ZonesDInterventionPage() {
                 Délai d'intervention
               </h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
-                2 à 3 semaines entre le devis signé et la pose pour les villes proches. 3 à 4 semaines pour les plus éloignées (regroupement RDV).
+                {/* Même délai que l'accueil, la FAQ et les pages ville (lib/services.ts) :
+                    aucune donnée du dépôt ne fonde un délai « devis signé → pose ». */}
+                Comptez {PROJECT_LEAD_TIME.range} {PROJECT_LEAD_TIME.scope}, {PROJECT_LEAD_TIME.season}.
+                Dans les villes les plus éloignées, nous regroupons les rendez-vous.
               </p>
             </Card>
 
