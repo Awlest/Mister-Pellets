@@ -130,6 +130,10 @@ export default buildConfig({
       },
       token: process.env.BLOB_READ_WRITE_TOKEN ?? "",
       // Pas besoin d'addRandomSuffix : Payload gère déjà des filenames uniques.
+      // Les fichiers sont servis par app/api/media/file/[filename]/route.ts,
+      // qui les relit à la racine du Blob sans passer par Payload ni par la
+      // base. Un `prefix`, des `clientUploads` ou une lecture restreinte de la
+      // collection Media demandent d'adapter cette route (lib/media-file.ts).
     }),
   ],
 

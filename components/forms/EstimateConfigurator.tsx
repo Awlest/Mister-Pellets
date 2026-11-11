@@ -32,6 +32,7 @@ import {
   estimate,
   eur,
   filterByKind,
+  pinModelFirst,
   isCanalisable,
   rankProducts,
   recommendedKw,
@@ -48,6 +49,7 @@ import {
 import { evacuationPrice, heightRule, missingAnswers, needsAccess, optionShown } from "@/lib/pose/moteur";
 import { DiscountedPrice } from "./DiscountedPrice";
 import { BONUS, bonusLabelFor, isBonusPeriod } from "@/lib/bonus";
+import { typo } from "@/lib/typo";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
 import { BRAND_PARAMS, EVENTS, trackEvent } from "@/lib/analytics";
@@ -285,6 +287,7 @@ export function EstimateConfigurator({
       key={preselected ? `modele-${preselected.option.key}` : draft ? "brouillon" : "neuf"}
       products={products}
       initialState={initialState}
+      pinned={preselected?.option ?? null}
       bonusAtRender={bonusAtRender}
     />
   );
@@ -307,10 +310,13 @@ export function EstimateConfigurator({
 function EstimateForm({
   products,
   initialState,
+  pinned,
   bonusAtRender,
 }: {
   products: EstimateProduct[];
   initialState: EstimateState;
+  /** Poêle demandé par l'adresse : il ouvre la liste de l'étape 3. */
+  pinned: EstimateProduct | null;
   bonusAtRender: boolean;
 }) {
   const [step, setStep] = React.useState(1);
@@ -398,8 +404,8 @@ function EstimateForm({
     [products, s.installType],
   );
   const eligible = React.useMemo(
-    () => rankProducts(filterByKind(forPose, s.stoveKind), needKw),
-    [forPose, s.stoveKind, needKw],
+    () => pinModelFirst(rankProducts(filterByKind(forPose, s.stoveKind), needKw), pinned),
+    [forPose, s.stoveKind, needKw, pinned],
   );
   const product = React.useMemo(
     () => forPose.find((p) => p.key === s.productKey) ?? null,
@@ -623,11 +629,11 @@ function EstimateForm({
             <details className="group mb-5 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 text-sm text-mp-ink">
               <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 [&::-webkit-details-marker]:hidden">
                 <span>
-                  <strong className="text-mp-green-deep">Jusqu&apos;à {BONUS.badge}</strong>, déjà déduit du total
+                  <strong className="text-mp-green-deep">Jusqu&apos;à {typo(BONUS.badge)}</strong>, déjà déduit du total
                 </span>
                 <ChevronDown className="h-4 w-4 shrink-0 text-mp-ink-soft transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
               </summary>
-              <p className="px-4 pb-3 leading-relaxed">{BONUS.label}. {BONUS.conditions}</p>
+              <p className="px-4 pb-3 leading-relaxed">{typo(BONUS.label)}. {BONUS.conditions}</p>
             </details>
           )}
 
@@ -1725,7 +1731,7 @@ function Recap({
           label={product ? `Poêle ${product.brand}` : "Poêle"}
           value={r.materialHT > 0 ? eur(r.materialHT) : "à choisir"}
         />
-        {r.bonusHT > 0 && <Row label={bonusLabelFor(product?.brand)} value={`-${eur(r.bonusHT)}`} />}
+        {r.bonusHT > 0 && <Row label={typo(bonusLabelFor(product?.brand))} value={`-${eur(r.bonusHT)}`} />}
         {r.laborLines.map((l) => (
           <Row
             key={l.key}
@@ -1764,7 +1770,7 @@ function Recap({
         Estimation indicative TTC, matériel et pose compris, TVA{" "}
         {Math.round(r.vatRate * 100)} %. Détail de la pose hors TVA. Les forfaits de pose sont des
         budgets moyens : le prix ferme est établi après la visite technique gratuite.
-        {r.bonusHT > 0 && ` ${bonusLabelFor(product?.brand)} déduit. ${BONUS.conditions}`}
+        {r.bonusHT > 0 && ` ${typo(bonusLabelFor(product?.brand))} déduit. ${BONUS.conditions}`}
       </p>
       {monthly != null && (
         <p className="mt-2 text-xs leading-relaxed text-mp-ink-soft">

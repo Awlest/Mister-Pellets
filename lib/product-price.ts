@@ -1,4 +1,5 @@
 import { bonusBadgeFor } from "./bonus";
+import { typo } from "./typo";
 
 /**
  * Prix TTC d'une fiche produit, dans l'ordre où la boutique les applique :
@@ -30,6 +31,9 @@ export const struckPriceTTC = (p: PricedProduct): number | undefined => {
   return undefined;
 };
 
-/** Pastille à côté du prix : bonus de saison, sinon promo admin, sinon rien. */
+/**
+ * Pastille à côté du prix : bonus de saison, sinon promo admin, sinon rien.
+ * Texte d'affichage : « -15 % » passe par `typo`, il ne se coupe pas avant « % ».
+ */
 export const priceBadge = (p: PricedProduct): string | undefined =>
-  p.bonusPriceTTC != null ? bonusBadgeFor(p.brand) : p.promoPriceTTC != null ? "Promo" : undefined;
+  p.bonusPriceTTC != null ? typo(bonusBadgeFor(p.brand)) : p.promoPriceTTC != null ? "Promo" : undefined;

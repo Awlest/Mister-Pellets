@@ -2,7 +2,8 @@
  * Banc des correctifs de sécurité du 06/11/2026 : JSON-LD échappé, salutation
  * des e-mails, champs avec un lien, plafonds de réservation (sur une base
  * simulée en mémoire), règles d'accès par rôle, lecture publique des articles
- * et secret du cron.
+ * et secret du cron. Depuis le 11/11/2026 : fichiers de la médiathèque servis
+ * sans base (noms admis, en-têtes rendus, pannes du Blob).
  *
  *   node --import tsx scripts/check-securite.ts
  */
@@ -14,7 +15,9 @@ import { clip, hasLink, oneLine } from "@/lib/form-text";
 import { errorInfo } from "@/lib/log-error";
 import { BOOKING_LIMITS, normalizePhone, reserveBookingQuota } from "@/lib/booking-limits";
 import { canEditLeads, isAdminOrSelf, isAdminUser } from "@/lib/access";
+import { mediaNameFromPath, mediaStoreBase, serveMediaFile } from "@/lib/media-file";
 import { Articles } from "@/collections/Articles";
+import { Media } from "@/collections/Media";
 import { Users } from "@/collections/Users";
 
 let ko = 0;
@@ -197,8 +200,122 @@ async function cronScenarios() {
   check("cron : bon secret, accepté", [200, "levée"].includes(await call("Bearer secret-de-test")), true);
 }
 
+// 9. Médiathèque servie sans base (lib/media-file.ts) : seuls les noms de la
+// racine du Blob, seuls les en-têtes utiles, jamais l'adresse du Blob.
+async function mediaScenarios() {
+  check("médias : collection toujours publique (sinon revoir la route)", asAccess(Media.access?.read)({ req: { user: null } }), true);
+
+  const P = "/api/media/file/";
+  check("nom : simple", mediaNameFromPath(`${P}16_Fiche_Rise.pdf`), "16_Fiche_Rise.pdf");
+  check("nom : espace et accent décodés", mediaNameFromPath(`${P}po%C3%AAle%20noir-400x400.webp`), "poêle noir-400x400.webp");
+  check("nom : décodé une seule fois", mediaNameFromPath(`${P}a%2520b.pdf`), "a%20b.pdf");
+  check("nom : dossier refusé", mediaNameFromPath(`${P}photos-webp/v1/x.webp`), null);
+  check("nom : dossier encodé refusé", mediaNameFromPath(`${P}photos-webp%2Fv1%2Fx.webp`), null);
+  check(
+    "nom : remontées refusées",
+    ["..", ".", "%2e%2e", "..%2Fsecret.pdf", "..%5Csecret.pdf", "x%5C..%5Cy"].map((n) => mediaNameFromPath(P + n)),
+    [null, null, null, null, null, null],
+  );
+  check("nom : caractères de contrôle refusés", ["a%00b.pdf", "a%0D%0Ab.pdf", "a%C2%85b.pdf"].map((n) => mediaNameFromPath(P + n)), [null, null, null]);
+  check("nom : encodage cassé refusé", mediaNameFromPath(`${P}a%zz.pdf`), null);
+  check("nom : vide refusé", mediaNameFromPath(P), null);
+  check("nom : 255 caractères admis, 256 refusés", [mediaNameFromPath(P + "a".repeat(255))?.length, mediaNameFromPath(P + "a".repeat(256))], [255, null]);
+  check("nom : autre route refusée", mediaNameFromPath("/api/users/file/x.pdf"), null);
+
+  check("base : tirée du jeton", mediaStoreBase({ BLOB_READ_WRITE_TOKEN: "vercel_blob_rw_AbC123_xyz789" }), "https://abc123.public.blob.vercel-storage.com");
+  check("base : adresse imposée, sans barre finale", mediaStoreBase({ STORAGE_VERCEL_BLOB_BASE_URL: "http://127.0.0.1:9000/" }), "http://127.0.0.1:9000");
+  check("base : sans Blob", [mediaStoreBase({}), mediaStoreBase({ BLOB_READ_WRITE_TOKEN: "autre" })], [null, null]);
+
+  const BASE = "https://store-de-test.public.blob.vercel-storage.com";
+  type Call = { url: string; method: string; headers: Record<string, string> };
+  const fake = (reply: (call: Call) => Response) => {
+    const calls: Call[] = [];
+    const fn = (async (input: RequestInfo | URL, init?: RequestInit) => {
+      const call = {
+        url: String(input),
+        method: init?.method ?? "GET",
+        headers: Object.fromEntries(new Headers(init?.headers).entries()),
+      };
+      calls.push(call);
+      return reply(call);
+    }) as typeof fetch;
+    return { fn, calls };
+  };
+  const ask = (name: string, f: typeof fetch, headers: Record<string, string> = {}, method: "GET" | "HEAD" = "GET") =>
+    serveMediaFile(name, BASE, { method, headers: new Headers(headers) }, f);
+  const headersOf = (r: Response) => Object.fromEntries(r.headers.entries());
+
+  // Réponse ordinaire : fichier relayé, en-têtes triés, cache d'un an.
+  const ok = fake(
+    () =>
+      new Response("%PDF-", {
+        headers: {
+          "content-type": "application/pdf",
+          "content-length": "5",
+          "content-disposition": 'inline; filename="fiche.pdf"',
+          etag: '"abc"',
+          "last-modified": "Mon, 14 Sep 2026 14:35:24 GMT",
+          "accept-ranges": "bytes",
+          "cache-control": "public, max-age=60",
+          "set-cookie": "x=1",
+          "x-vercel-id": "fra1::abc",
+          server: "Vercel",
+        },
+      }),
+  );
+  const r200 = await ask("poêle noir.pdf", ok.fn, { cookie: "payload-token=secret", authorization: "JWT secret", "user-agent": "x" });
+  check("200 : statut et corps", [r200.status, await r200.text()], [200, "%PDF-"]);
+  check("200 : fichier lu à la racine du Blob, nom encodé", ok.calls[0]?.url, `${BASE}/po%C3%AAle%20noir.pdf`);
+  check("200 : ni cookie ni autorisation envoyés au Blob", ok.calls[0]?.headers, {});
+  check("200 : en-têtes rendus", headersOf(r200), {
+    "accept-ranges": "bytes",
+    "cache-control": "public, max-age=31536000",
+    "cdn-cache-control": "public, max-age=31536000",
+    "content-disposition": 'inline; filename="fiche.pdf"',
+    "content-length": "5",
+    "content-type": "application/pdf",
+    etag: '"abc"',
+    "last-modified": "Mon, 14 Sep 2026 14:35:24 GMT",
+  });
+  check("200 : adresse du Blob absente de la réponse", JSON.stringify(headersOf(r200)).includes("blob.vercel-storage"), false);
+
+  // Lecture partielle (lecteurs PDF) et revalidation.
+  const part = fake(() => new Response("%P", { status: 206, headers: { "content-type": "application/pdf", "content-range": "bytes 0-1/5", "content-length": "2" } }));
+  const r206 = await ask("fiche.pdf", part.fn, { range: "bytes=0-1" });
+  check("206 : plage transmise et rendue", [part.calls[0]?.headers, r206.status, r206.headers.get("content-range"), await r206.text()], [{ range: "bytes=0-1" }, 206, "bytes 0-1/5", "%P"]);
+  const same = fake(() => new Response(null, { status: 304, headers: { etag: '"abc"' } }));
+  const r304 = await ask("fiche.pdf", same.fn, { "if-none-match": '"abc"' });
+  check("304 : validateur transmis, réponse sans corps", [same.calls[0]?.headers, r304.status, r304.headers.get("cache-control"), await r304.text()], [{ "if-none-match": '"abc"' }, 304, "public, max-age=31536000", ""]);
+  const r416 = await ask("fiche.pdf", fake(() => new Response(null, { status: 416, headers: { "content-range": "bytes */5" } })).fn, { range: "bytes=9-" });
+  check("416 : rendue sans cache", [r416.status, r416.headers.get("content-range"), r416.headers.get("cache-control")], [416, "bytes */5", "no-store"]);
+
+  // HEAD : même question au Blob, pas de corps.
+  const head = fake(() => new Response(null, { headers: { "content-type": "image/webp", "content-length": "1234" } }));
+  const rHead = await ask("photo.webp", head.fn, {}, "HEAD");
+  check("HEAD : transmise telle quelle", [head.calls[0]?.method, rHead.status, rHead.headers.get("content-type"), rHead.headers.get("content-length"), await rHead.text()], ["HEAD", 200, "image/webp", "1234", ""]);
+
+  // Fichier compressé par le Blob : la taille annoncée ne vaut plus.
+  const r200z = await ask("logo.svg", fake(() => new Response("<svg/>", { headers: { "content-type": "image/svg+xml", "content-encoding": "br", "content-length": "3" } })).fn);
+  check("compressé : taille non recopiée", r200z.headers.get("content-length"), null);
+  check("SVG : aucun script exécuté", r200z.headers.get("content-security-policy"), "script-src 'none'; frame-src 'none'; object-src 'none'");
+  check("PDF : pas de règle ajoutée (lecteur du navigateur)", r200.headers.get("content-security-policy"), null);
+  const bare = await ask("x.bin", fake(() => new Response(new Uint8Array([1]))).fn);
+  check("type absent : fichier binaire, jamais deviné", bare.headers.get("content-type"), "application/octet-stream");
+
+  // Absences et pannes : jamais de fichier vide en 200, jamais de cache long.
+  const r404 = await ask("absent.pdf", fake(() => new Response("Not found", { status: 404 })).fn);
+  check("404 : rendue, cache court", [r404.status, r404.headers.get("cache-control"), await r404.text()], [404, "public, max-age=300", ""]);
+  for (const status of [302, 403, 500, 503]) {
+    const r = await ask("fiche.pdf", fake(() => new Response("x", { status, headers: { location: "https://ailleurs.example/x" } })).fn);
+    check(`${status} du Blob : 502 sans cache, rien de recopié`, [r.status, r.headers.get("cache-control"), r.headers.get("location")], [502, "no-store", null]);
+  }
+  const down = await ask("fiche.pdf", (async () => { throw new TypeError("fetch failed"); }) as unknown as typeof fetch);
+  check("Blob injoignable : 502 sans cache", [down.status, down.headers.get("cache-control")], [502, "no-store"]);
+}
+
 await bookingScenarios();
 await cronScenarios();
+await mediaScenarios();
 
 console.log(ko === 0 ? "\nTout est bon." : `\n${ko} contrôle(s) en échec.`);
 process.exit(ko === 0 ? 0 : 1);

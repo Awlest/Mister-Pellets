@@ -253,6 +253,24 @@ export function estimate(
 export const rankProducts = (products: EstimateProduct[], needKw: number): EstimateProduct[] =>
   rankByNeed(products, needKw);
 
+/**
+ * Le modèle demandé par l'adresse (`/estimation?modele=<slug>`) en tête de
+ * liste, suivi de ses autres puissances ; le reste garde son rang. Sans cela,
+ * le poêle choisi sur la fiche se retrouvait au milieu d'une liste dépliée en
+ * entier (recette du 11/11/2026).
+ */
+export function pinModelFirst(
+  products: EstimateProduct[],
+  pinned: Pick<EstimateProduct, "key" | "slug"> | null | undefined,
+): EstimateProduct[] {
+  if (!pinned) return products;
+  const rank = (p: EstimateProduct) => (p.key === pinned.key ? 0 : p.slug === pinned.slug ? 1 : 2);
+  return products
+    .map((p, i) => ({ p, i }))
+    .sort((a, b) => rank(a.p) - rank(b.p) || a.i - b.i)
+    .map(({ p }) => p);
+}
+
 /** Poêles compatibles avec le type d'installation choisi. */
 export function filterByKind(products: EstimateProduct[], kind: StoveKind): EstimateProduct[] {
   const types = STOVE_KINDS[kind].productTypes as readonly string[];

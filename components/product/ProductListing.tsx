@@ -10,12 +10,19 @@ import { cn } from "@/lib/utils";
 /**
  * Liste de fiches du catalogue : boutique, pages catégorie, pages marque.
  *
- * Les `visible` premières fiches sont des cartes (photo, pastilles, prix).
- * Toutes les autres sont des lignes compactes dans un <details> natif : un
- * vrai lien par fiche dans le HTML servi, lisible sans JavaScript et suivi par
- * les robots, sans image ni pictogramme. « Voir plus » change les lignes
- * suivantes en cartes. Le calcul des poids est dans lib/catalogue-listing.ts.
+ * Vue « cartes » : les `visible` premières fiches sont des cartes (photo,
+ * pastilles, prix). Toutes les autres sont des lignes compactes dans un
+ * <details> natif : un vrai lien par fiche dans le HTML servi, lisible sans
+ * JavaScript et suivi par les robots, sans image ni pictogramme. Dès que la
+ * page répond aux clics, « Voir plus » change les lignes suivantes en cartes
+ * et la liste dépliable s'efface : un seul moyen de voir la suite, au lieu de
+ * deux pour les mêmes fiches (recette du 11/11/2026). Elle reste dans la page.
+ *
+ * Vue « liste » (boutique) : toutes les fiches en lignes compactes, dans
+ * l'ordre du tri. Le calcul des poids est dans lib/catalogue-listing.ts.
  */
+
+export type ListingMode = "cartes" | "liste";
 
 const GRID = "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3";
 
@@ -24,10 +31,14 @@ const GRID = "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3";
  * classe, pour rester autour de 150 octets (246 fiches sur la boutique).
  * 44 px de haut au moins, le nom passe à la ligne, puissance et prix restent
  * entiers à droite.
+ *
+ * Colonnes de texte, pas une grille : la liste se lit de haut en bas, une
+ * colonne après l'autre, dans l'ordre du tri. En grille, l'ordre filait de
+ * gauche à droite et chaque colonne sautait deux fiches sur trois.
  */
 const LINES = cn(
-  "mt-2 grid grid-cols-1 gap-x-8 text-left text-sm sm:grid-cols-2 lg:grid-cols-3",
-  "[&>li]:min-w-0 [&>li]:border-b [&>li]:border-mp-sand/40",
+  "mt-2 gap-x-8 text-left text-sm sm:columns-2 lg:columns-3",
+  "[&>li]:min-w-0 [&>li]:break-inside-avoid [&>li]:border-b [&>li]:border-mp-sand/40",
   "[&_a]:flex [&_a]:min-h-11 [&_a]:items-center [&_a]:gap-x-3 [&_a]:py-2 [&_a]:font-semibold [&_a]:leading-snug [&_a]:text-mp-green-deep [&_a:hover]:text-mp-orange-ink",
   "[&_span]:shrink-0 [&_span]:whitespace-nowrap [&_span]:font-normal [&_span]:tabular-nums [&_span]:text-mp-ink-soft",
   "[&_span:first-of-type]:ml-auto [&_span:last-of-type]:font-semibold [&_span:last-of-type]:text-mp-ink",
@@ -67,10 +78,19 @@ interface ProductListingProps {
   onShowMore: () => void;
   /** Première photo chargée en priorité : seulement si la liste ouvre la page. */
   priority?: boolean;
+  /** « liste » : toutes les fiches en lignes compactes (bascule de la boutique). */
+  mode?: ListingMode;
   className?: string;
 }
 
-export function ProductListing({ products, visible, onShowMore, priority = false, className }: ProductListingProps) {
+export function ProductListing({
+  products,
+  visible,
+  onShowMore,
+  priority = false,
+  mode = "cartes",
+  className,
+}: ProductListingProps) {
   // Faux au rendu serveur et pendant l'hydratation : sans script, pas de bouton
   // qui ne ferait rien, la liste dépliable suffit.
   const hydrated = useSyncExternalStore(subscribeNothing, () => true, () => false);
@@ -92,6 +112,14 @@ export function ProductListing({ products, visible, onShowMore, priority = false
     focusFrom.current = null;
     link?.focus({ preventScroll: true });
   }, [visible]);
+
+  if (mode === "liste") {
+    return (
+      <div className={className}>
+        <ProductLines products={products} className="mt-0" />
+      </div>
+    );
+  }
 
   return (
     <div className={className}>
@@ -115,7 +143,9 @@ export function ProductListing({ products, visible, onShowMore, priority = false
               </button>
             </div>
           )}
-          <details className="group mt-6 text-center">
+          {/* Sans script : le seul moyen de voir la suite. Avec, le bouton la
+              remplace ; les liens restent dans la page pour les robots. */}
+          <details hidden={hydrated} className="group mt-6 text-center">
             <summary className="mx-auto flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 text-sm font-semibold text-mp-green-deep underline decoration-mp-sand underline-offset-4 hover:text-mp-orange-ink [&::-webkit-details-marker]:hidden">
               {lines.length > 1 ? `Les ${lines.length} autres modèles en liste` : "Le dernier modèle en liste"}
               <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden />
