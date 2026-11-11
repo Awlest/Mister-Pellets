@@ -9,6 +9,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductVariantPanel } from "@/components/product/ProductVariantPanel";
 import { ProductAccessories } from "@/components/product/ProductAccessories";
+import { ProductActionBar, YIELDS_TO_ACTION_BAR } from "@/components/product/ProductActionBar";
 import { ProductColorProvider } from "@/components/product/ProductColorContext";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
@@ -367,7 +368,7 @@ export default async function ProductPage({ params }: Props) {
                     accessories={product.accessories}
                   />
                   <div className="mt-3 flex flex-col gap-3">
-                    <Button asChild variant="primary" size="lg" className="w-full">
+                    <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
                       <Link href={estimateHref} rel="nofollow">
                         Chiffrer mon installation
                       </Link>
@@ -457,7 +458,7 @@ export default async function ProductPage({ params }: Props) {
               ) : null}
 
               <div className="flex flex-col gap-3">
-                <Button asChild variant="primary" size="lg" className="w-full">
+                <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
                   <Link href={estimateHref} rel="nofollow">
                         Chiffrer mon installation
                       </Link>
@@ -668,35 +669,22 @@ export default async function ProductPage({ params }: Props) {
         tone="cream"
         title={`Devis avec pose pour le modèle ${product.name}`}
         description="On chiffre le poêle et la pose en 48 heures. Sans engagement avant signature."
+        primaryClassName={YIELDS_TO_ACTION_BAR}
       />
 
-      {/* Barre d'action du téléphone (sous 1 024 px) : le prix et le bouton
-          principal restent à portée dès le premier écran. Sur une fiche, le
-          prix tombait au 2e écran et le bouton au 3e. Dernier élément de la
-          page et en `sticky` : elle colle au bas de l'écran pendant la
-          lecture, puis reprend sa place avant le pied de page, sans script.
-          Fond opaque et filet, ni flou ni ombre (DESIGN.md) ; mp-actionbar :
-          le bandeau cookies se pose au-dessus (globals.css). */}
-      <div className="mp-actionbar sticky bottom-[calc(var(--mp-bottomnav-offset)_+_0.5rem)] z-20 min-h-[var(--mp-actionbar-h)] border-t border-mp-sand/40 bg-mp-cream px-4 py-3 lg:hidden">
-        <div className="flex items-center justify-between gap-3">
-          <p className="min-w-0">
-            <span className="block truncate text-xs text-mp-ink-soft">{product.name}</span>
-            <span
-              className="block text-lg font-semibold tabular-nums text-mp-green-deep"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              {product.priceTTC && shownTTC
-                ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownTTC)} TVAC`
-                : "Prix sur devis"}
-            </span>
-          </p>
-          <Button asChild variant="primary" className="shrink-0">
-            <Link href={estimateHref} rel="nofollow">
-              Chiffrer la pose
-            </Link>
-          </Button>
-        </div>
-      </div>
+      {/* Barre d'action du téléphone (sous 1 024 px), dernier élément de la
+          page : elle remplace la barre de navigation du bas et porte le seul
+          aplat orange de l'écran (les boutons « Chiffrer mon installation »
+          de la page passent au vert, YIELDS_TO_ACTION_BAR). */}
+      <ProductActionBar
+        name={product.name}
+        price={
+          product.priceTTC && shownTTC
+            ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownTTC)} TVAC`
+            : "Prix sur devis"
+        }
+        href={estimateHref}
+      />
     </>
   );
 }

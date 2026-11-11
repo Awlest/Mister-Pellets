@@ -12,6 +12,11 @@ interface CTAFinalProps {
   title?: string;
   description?: string;
   primaryCta?: { label: string; href: string };
+  /**
+   * Classes ajoutées au bouton principal : une page qui porte déjà un aplat
+   * orange à l'écran (barre d'action d'une fiche produit) le passe au vert.
+   */
+  primaryClassName?: string;
   /** Action secondaire, typiquement la réservation en ligne d'un créneau. */
   secondaryCta?: { label: string; href: string };
   showPhone?: boolean;
@@ -27,6 +32,7 @@ export function CTAFinal({
   title = "Une question ? Un projet ?",
   description = "Devis gratuit en 60 secondes, ou échange direct au téléphone. Notre équipe répond personnellement, on est basés à Fernelmont.",
   primaryCta = { label: "Chiffrer mon installation", href: "/estimation" },
+  primaryClassName,
   secondaryCta,
   showPhone = true,
 }: CTAFinalProps) {
@@ -42,7 +48,7 @@ export function CTAFinal({
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button asChild variant="primary" size="lg">
+          <Button asChild variant="primary" size="lg" className={primaryClassName}>
             <Link href={primaryCta.href}>{primaryCta.label}</Link>
           </Button>
           {secondaryCta && (

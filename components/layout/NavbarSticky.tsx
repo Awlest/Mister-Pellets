@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { CalendarCheck, ShoppingBag, Flame, Phone, Menu as MenuIcon } from "lucide-react";
 import { MOBILE_TABS, ROUTES, isCataloguePath, type MobileTabId } from "@/config/navigation";
+import { OPEN_MENU_EVENT } from "./MenuTrigger";
 
 /**
  * Navbar FLOTTANTE sticky bottom, mobile ET tablette (jusqu'à xl / 1280 px).
@@ -25,6 +26,12 @@ import { MOBILE_TABS, ROUTES, isCataloguePath, type MobileTabId } from "@/config
  *   plus de 40 Ko de JavaScript sur chaque page (audit mobile du 11/10/2026).
  * - Libellé et icône de l'onglet actif en vert le plus sombre : le blanc sur
  *   l'orange flamme ne fait que 2,5:1, le vert 6,2:1.
+ *
+ * Fiche produit sous 1 024 px : la barre d'action de la fiche (prix, bouton
+ * « Chiffrer la pose », entrée Menu) remplace cette barre, masquée en CSS
+ * (.mp-bottomnav, globals.css). Deux barres empilées couvraient 18 % de
+ * l'écran, avec deux aplats orange. Le volet Menu reste monté ici : l'entrée
+ * Menu de la fiche l'ouvre par l'événement OPEN_MENU_EVENT (MenuTrigger.tsx).
  *
  * Poids : la barre est sur chaque page, son JavaScript aussi. Le drawer du
  * 5e onglet vit dans MenuSheet.tsx, téléchargé au premier geste vers l'onglet,
@@ -67,7 +74,7 @@ export function NavbarSticky() {
   // l'animation de fermeture se joue.
   const [MenuSheet, setMenuSheet] = React.useState<typeof import("./MenuSheet").default | null>(null);
 
-  const openMenu = () => {
+  const openMenu = React.useCallback(() => {
     // La pastille part tout de suite vers Menu, le drawer suit dès que son
     // code est là (déjà en route depuis le doigt posé sur l'onglet).
     setMenuOpen(true);
@@ -79,7 +86,13 @@ export function NavbarSticky() {
       // plutôt que de rester bloquée sur Menu.
       () => setMenuOpen(false),
     );
-  };
+  }, [MenuSheet]);
+
+  // Entrée « Menu » d'une barre d'action (MenuTrigger) : même volet, même ouverture.
+  React.useEffect(() => {
+    window.addEventListener(OPEN_MENU_EVENT, openMenu);
+    return () => window.removeEventListener(OPEN_MENU_EVENT, openMenu);
+  }, [openMenu]);
 
   React.useEffect(() => {
     const SCROLL_THRESHOLD = 8; // ignore micro-scrolls (rebond iOS, trackpad)
@@ -139,7 +152,7 @@ export function NavbarSticky() {
       {/* WRAPPER FLOTTANT : marges externes + safe-area iOS */}
       <div
         className={clsx(
-          "fixed inset-x-0 bottom-0 z-30 xl:hidden",
+          "mp-bottomnav fixed inset-x-0 bottom-0 z-30 xl:hidden",
           "px-3 pb-3",
           // translate-y-* écrit la propriété translate (Tailwind 4), d'où
           // transition-[translate,opacity]. Retour en --mp-duration-enter,
