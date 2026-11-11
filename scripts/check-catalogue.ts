@@ -12,7 +12,9 @@
  * estimé pour 250 fiches.
  *
  * Il vérifie enfin que le tri par prix et le filtre de budget de la boutique
- * portent sur le prix affiché (bonus de saison compris), pas sur le prix barré.
+ * portent sur le prix affiché (bonus de saison compris), pas sur le prix barré,
+ * et que les finitions s'affichent en français (relevé des libellés du
+ * catalogue, scripts/releve-finitions.ts).
  *
  * Et il garde retirées les 30 pages /installation/<marque>/<province>
  * (11/11/2026) : une redirection vers la page marque, aucune route, aucun lien.
@@ -57,9 +59,11 @@ import {
   misterBoisDestination,
 } from "@/lib/catalog-scope";
 import { hasPrice, listedPrice, sortProducts } from "@/lib/boutique-sort";
+import { FOREIGN_COLOUR_WORD, displayOptionLabel } from "@/lib/option-labels";
 import { productKindLabel } from "@/lib/product-kind";
 import { COMBUSTIBLE_LABELS, type Appliance, type ProductDemo, type ProductType } from "@/lib/products-demo";
 import { BRANDS, TOP_TIER_BRANDS } from "@/lib/brands";
+import { RELEVE_FINITIONS } from "./releve-finitions";
 import { CITIES } from "@/lib/cities";
 import { CATEGORIES, categoriesOf } from "@/lib/categories";
 import { PUBLISHED } from "@/config/navigation";
@@ -619,6 +623,38 @@ const checks: [string, () => void][] = [
       const explorer = read("components/boutique/BoutiqueExplorer.tsx");
       assert.ok(/case "budget": \{[^}]*listedPrice\(p\)/.test(explorer), "le filtre de budget doit lire listedPrice");
       assert.ok(!explorer.includes("effectivePriceTTC"), "BoutiqueExplorer ne lit plus le prix d'avant bonus");
+    },
+  ],
+  [
+    "finitions : aucun mot de couleur anglais ou italien à l'affichage",
+    () => {
+      const shown = RELEVE_FINITIONS.map((label) => [label, displayOptionLabel(label)] as const);
+      const untranslated = shown.filter(([, french]) => FOREIGN_COLOUR_WORD.test(french));
+      const translated = shown.filter(([label, french]) => french !== label.trim()).length;
+      console.log(`      ${RELEVE_FINITIONS.length} libellés relevés, ${translated} traduits, ${untranslated.length} non traduit(s)`);
+      assert.deepEqual(
+        untranslated.map(([label, french]) => `${label.trim()} (affiché « ${french} »)`),
+        [],
+        "libellés à ajouter à la table de lib/option-labels.ts",
+      );
+      // Quelques cas du relevé, mot à mot, accord compris.
+      assert.equal(displayOptionLabel("Métal White"), "Métal Blanc");
+      assert.equal(displayOptionLabel("Céramique Warm Grey"), "Céramique Gris chaud");
+      assert.equal(displayOptionLabel("Céramique White + Métal Dark"), "Céramique Blanche + Métal Foncé");
+      assert.equal(displayOptionLabel("Materia Tortora"), "Materia Tourterelle");
+      assert.equal(displayOptionLabel("Acier Anthracite-titanium"), "Acier Anthracite-titane");
+      // Ce qui n'est pas une couleur reste tel quel, comme un mot qui en contient une.
+      for (const kept of ["Pierre Serpentino", "Materia Corten", "Céramique Line Bordeaux", "Blackline"]) {
+        assert.equal(displayOptionLabel(kept), kept);
+      }
+      // Affichage seulement : données structurées et flux Merchant gardent le nom de l'admin.
+      for (const file of ["lib/product-seo.ts", "app/api/feed/google-merchant/route.ts"]) {
+        assert.ok(!read(file).includes("displayOptionLabel"), `${file} ne traduit pas les finitions`);
+      }
+      // La galerie, la carte et le sélecteur de la fiche passent par la table.
+      for (const file of ["components/product/ProductGallery.tsx", "components/product/ProductCard.tsx", "components/product/ProductVariantPanel.tsx"]) {
+        assert.ok(read(file).includes("displayOptionLabel("), `${file} doit afficher les finitions par displayOptionLabel`);
+      }
     },
   ],
 ];

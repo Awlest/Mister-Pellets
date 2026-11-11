@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { displayOptionLabel } from "@/lib/option-labels";
 import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-image";
 import { useProductColor } from "./ProductColorContext";
 
@@ -391,7 +392,7 @@ interface ColorPickerProps {
 
 function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
   const activeName =
-    activeIdx >= 0 && variants[activeIdx] ? variants[activeIdx].colorName : null;
+    activeIdx >= 0 && variants[activeIdx] ? displayOptionLabel(variants[activeIdx].colorName) : null;
 
   return (
     <div className="mt-6">
@@ -420,7 +421,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
                   ? "border-mp-orange-flame bg-mp-orange-light text-mp-ink"
                   : "border-mp-sand bg-mp-cream text-mp-green-deep hover:border-mp-orange-flame/60"
               )}
-              aria-label={`Sélectionner la couleur ${v.colorName}`}
+              aria-label={`Sélectionner la couleur ${displayOptionLabel(v.colorName)}`}
               aria-pressed={isActive}
               data-gtin={v.gtin}
             >
@@ -429,7 +430,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
                 style={{ backgroundColor: swatch }}
                 aria-hidden="true"
               />
-              {v.colorName}
+              {displayOptionLabel(v.colorName)}
             </button>
           );
         })}

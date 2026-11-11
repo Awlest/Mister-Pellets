@@ -2,6 +2,7 @@ import "server-only";
 import { getPayloadClient } from "./payload-client";
 import { bonusPrice, isBonusPeriod } from "./bonus";
 import { formatKw, parseKw } from "./power";
+import { displayOptionLabel } from "./option-labels";
 import {
   inCatalogueWhere,
   isHybrid,
@@ -464,7 +465,8 @@ function payloadToDemo(raw: PayloadProduct): ProductDemo {
       ? p.colorVariants
           .filter((cv) => cv && cv.colorName)
           .map<ProductColorVariant>((cv) => {
-            const variantAlt = `${p.name}, ${cv.colorName}`;
+            // Texte alternatif en français ; le nom de la finition, lui, reste celui de l'admin.
+            const variantAlt = `${p.name}, ${displayOptionLabel(cv.colorName as string)}`;
             const variantMainImage = mapMedia(cv.mainImage, variantAlt);
             const variantGallery = Array.isArray(cv.galleryImages)
               ? cv.galleryImages
