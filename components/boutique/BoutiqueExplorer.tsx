@@ -60,11 +60,32 @@ interface Filters {
   combustible: string;
   chauffage: string;
   puissance: string;
+  /** Budget pour le poêle seul, TVAC (prix affiché sur la carte). */
+  budget: string;
+  /** « affiche » : seulement les fiches dont le prix est affiché. */
+  prix: string;
   diffusion: string;
   couleur: string;
 }
 
-const DEFAULT: Filters = { marque: "all", combustible: "all", chauffage: "all", puissance: "all", diffusion: "all", couleur: "all" };
+const DEFAULT: Filters = {
+  marque: "all",
+  combustible: "all",
+  chauffage: "all",
+  puissance: "all",
+  budget: "all",
+  prix: "all",
+  diffusion: "all",
+  couleur: "all",
+};
+
+/** Tranches de budget, sur le prix du poêle seul affiché sur la carte (TVAC, hors pose). */
+const BUDGETS = [
+  { value: "0-3000", label: "Moins de 3 000 €", min: 0, max: 3000 },
+  { value: "3000-4500", label: "3 000 à 4 500 €", min: 3000, max: 4500 },
+  { value: "4500-6000", label: "4 500 à 6 000 €", min: 4500, max: 6000 },
+  { value: "6000+", label: "6 000 € et plus", min: 6000, max: Infinity },
+] as const;
 const PAGE_SIZE = 24;
 
 const subscribeNothing = () => () => {};
@@ -129,26 +150,97 @@ function sortProducts(list: BoutiqueProduct[], sort: SortKey): BoutiqueProduct[]
       // numeric : « Rise 7 » se classe avant « Rise 11 ».
       return sorted.sort((a, b) => a.name.localeCompare(b.name, "fr", { numeric: true, sensitivity: "base" }));
     default:
-      return sorted.sort((a, b) => featuredScore(b) - featuredScore(a) || byRecent(a, b));
+      return pricedFirstWithinBrand(sorted.sort((a, b) => featuredScore(b) - featuredScore(a) || byRecent(a, b)));
   }
+}
+
+/**
+ * À marque égale, les fiches dont le prix est affiché passent devant. L'ordre
+ * des marques ne bouge pas (MCZ reste en tête) : chaque marque garde ses
+ * places dans la liste, elle y range d'abord ses fiches chiffrées. Sans cela,
+ * les cartes « Sur devis » occupaient les dix premiers écrans de la boutique.
+ */
+function pricedFirstWithinBrand(list: BoutiqueProduct[]): BoutiqueProduct[] {
+  const queues = new Map<string, BoutiqueProduct[]>();
+  for (const p of list) queues.set(p.brand, [...(queues.get(p.brand) ?? []), p]);
+  for (const [brand, items] of queues) {
+    queues.set(brand, [...items.filter(hasPrice), ...items.filter((p) => !hasPrice(p))]);
+  }
+  return list.map((p) => queues.get(p.brand)!.shift()!);
+}
+
+/** La fiche passe-t-elle un filtre donné ? */
+function passes(p: BoutiqueProduct, key: keyof Filters, value: string): boolean {
+  if (value === "all") return true;
+  switch (key) {
+    case "marque":
+      return p.brand === value;
+    case "combustible":
+      return p.combustible === value;
+    case "chauffage":
+      return (p.isHydro ? "hydro" : "ventile") === value;
+    case "puissance": {
+      // Fiche regroupée multi-puissances : elle correspond au filtre si
+      // l'UNE de ses puissances tombe dans la tranche choisie (sinon le
+      // client cherchant 12/14 kW ne trouverait pas un modèle parent à 9 kW).
+      const tranches = p.powers && p.powers.length > 0 ? p.powers.map((kw) => powerToTranche(kw)) : [powerToTranche(p.powerKw)];
+      return tranches.includes(value);
+    }
+    case "budget": {
+      const budget = BUDGETS.find((b) => b.value === value);
+      const price = effectivePriceTTC(p) ?? 0;
+      return Boolean(budget) && price > 0 && price >= budget!.min && price < budget!.max;
+    }
+    case "prix":
+      return hasPrice(p);
+    case "diffusion":
+      return p.diffusion === value;
+    case "couleur":
+      return p.color === value;
+  }
+}
+
+const FILTER_KEYS: (keyof Filters)[] = ["marque", "combustible", "chauffage", "puissance", "budget", "prix", "diffusion", "couleur"];
+
+/** La fiche passe tous les filtres, sauf éventuellement celui du groupe qu'on est en train de compter. */
+function passesAll(p: BoutiqueProduct, filters: Filters, except?: keyof Filters): boolean {
+  return FILTER_KEYS.every((key) => key === except || passes(p, key, filters[key]));
 }
 
 const CHAUFFAGE_FILTERS = [{ value: "all", label: "Tous" }, ...Object.entries(CHAUFFAGE_LABELS).map(([value, label]) => ({ value, label }))];
 const DIFFUSION_FILTERS = [{ value: "all", label: "Toutes" }, ...(Object.entries(DIFFUSION_LABELS) as [Diffusion, string][]).map(([value, label]) => ({ value, label }))];
 const COLOR_FILTERS = [{ value: "all", label: "Toutes" }, ...(Object.entries(COLOR_LABELS) as [ColorCategory, string][]).map(([value, label]) => ({ value, label }))];
 const POWER_FILTERS = [{ value: "all", label: "Toutes" }, ...POWER_TRANCHES.map((t) => ({ value: t.value, label: t.label }))];
+const BUDGET_FILTERS = [{ value: "all", label: "Tous" }, ...BUDGETS.map((b) => ({ value: b.value, label: b.label }))];
+const PRICE_FILTERS = [
+  { value: "all", label: "Tous" },
+  { value: "affiche", label: "Avec prix affiché" },
+];
 
 /**
  * 44 px de haut sur écran tactile (30 px avant, sous la cible minimale), format
  * compact d'origine à la souris (`pointer-fine`).
  */
-function FilterPill({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+function FilterPill({
+  active,
+  disabled = false,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  /** Option sans aucun résultat avec les autres filtres choisis. */
+  disabled?: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
+      disabled={disabled}
       className={cn(
+        "disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-mp-cream disabled:hover:text-mp-green-deep",
         "inline-flex min-h-11 items-center gap-1 rounded-full px-4 text-sm font-semibold transition-colors",
         "pointer-fine:min-h-8 pointer-fine:px-3.5 pointer-fine:text-xs",
         active
@@ -211,6 +303,8 @@ export function BoutiqueExplorer({
       combustible: combustible && combustibleFilters.some((f) => f.value === combustible) ? combustible : "all",
       chauffage: p.get("chauffage") ?? "all",
       puissance: p.get("puissance") ?? "all",
+      budget: p.get("budget") ?? "all",
+      prix: p.get("prix") ?? "all",
       diffusion: p.get("diffusion") ?? "all",
       couleur: p.get("couleur") ?? "all",
     });
@@ -252,28 +346,15 @@ export function BoutiqueExplorer({
     syncUrl(DEFAULT, sort);
   }
 
-  const filtered = useMemo(
-    () =>
-      products.filter((p) => {
-        if (current.marque !== "all" && p.brand !== current.marque) return false;
-        if (current.combustible !== "all" && p.combustible !== (current.combustible as Combustible)) return false;
-        if (current.chauffage !== "all" && (p.isHydro ? "hydro" : "ventile") !== current.chauffage) return false;
-        if (current.puissance !== "all") {
-          // Fiche regroupée multi-puissances : elle correspond au filtre si
-          // l'UNE de ses puissances tombe dans la tranche choisie (sinon le
-          // client cherchant 12/14 kW ne trouverait pas un modèle parent à 9 kW).
-          const tranches =
-            p.powers && p.powers.length > 0
-              ? p.powers.map((kw) => powerToTranche(kw))
-              : [powerToTranche(p.powerKw)];
-          if (!tranches.includes(current.puissance)) return false;
-        }
-        if (current.diffusion !== "all" && p.diffusion !== (current.diffusion as Diffusion)) return false;
-        if (current.couleur !== "all" && p.color !== (current.couleur as ColorCategory)) return false;
-        return true;
-      }),
-    [products, current],
-  );
+  const filtered = useMemo(() => products.filter((p) => passesAll(p, current)), [products, current]);
+
+  /**
+   * Nombre de fiches qu'une option donnerait, les autres filtres restant
+   * choisis : affiché sur chaque puce, et une option à zéro est désactivée
+   * (plus de « Voir les 0 modèles »).
+   */
+  const optionCount = (key: keyof Filters, value: string): number =>
+    products.filter((p) => passesAll(p, current, key) && passes(p, key, value)).length;
 
   const sorted = useMemo(() => sortProducts(filtered, sort), [filtered, sort]);
 
@@ -298,6 +379,8 @@ export function BoutiqueExplorer({
     { label: "Combustible", key: "combustible", options: combustibleFilters },
     { label: "Chauffage", key: "chauffage", options: CHAUFFAGE_FILTERS },
     { label: "Puissance", key: "puissance", options: POWER_FILTERS },
+    { label: "Budget (poêle seul, TVAC)", key: "budget", options: BUDGET_FILTERS },
+    { label: "Prix", key: "prix", options: PRICE_FILTERS },
     { label: "Diffusion de chaleur", key: "diffusion", options: DIFFUSION_FILTERS },
     { label: "Couleur", key: "couleur", options: COLOR_FILTERS },
   ];
@@ -342,22 +425,40 @@ export function BoutiqueExplorer({
 
         <div
           id="boutique-filtres"
-          className={cn("[grid-area:panel] space-y-5", !filtersOpen && "hidden md:block")}
+          // Ordinateur : les groupes sur deux ou trois colonnes, pour que les
+          // premiers poêles arrivent plus haut (six groupes empilés : 470 px).
+          className={cn(
+            "[grid-area:panel] space-y-5 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-5 md:space-y-0 xl:grid-cols-3",
+            !filtersOpen && "hidden md:grid",
+          )}
         >
           {GROUPS.map((g) => (
             <div key={g.key}>
               <span className="text-xs uppercase tracking-wider text-mp-ink-soft font-semibold mb-2 block">{g.label}</span>
               <div className="flex flex-wrap gap-2">
-                {g.options.map((f) => (
-                  <FilterPill key={f.value} active={current[g.key] === f.value} onClick={() => setFilter(g.key, f.value)}>
-                    {f.label}
-                  </FilterPill>
-                ))}
+                {g.options.map((f) => {
+                  const active = current[g.key] === f.value;
+                  const count = optionCount(g.key, f.value);
+                  return (
+                    <FilterPill
+                      key={f.value}
+                      active={active}
+                      disabled={count === 0 && !active}
+                      onClick={() => setFilter(g.key, f.value)}
+                    >
+                      {f.label}
+                      <span className={cn("text-xs tabular-nums", active ? "text-mp-green-darkest" : "text-mp-ink-soft")}>
+                        {count}
+                        <span className="sr-only">{count > 1 ? " modèles" : " modèle"}</span>
+                      </span>
+                    </FilterPill>
+                  );
+                })}
               </div>
             </div>
           ))}
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 md:col-span-full">
             {/* Mobile : refermer le volet et voir les résultats sans remonter. */}
             <button
               type="button"

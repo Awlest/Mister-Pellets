@@ -109,10 +109,19 @@ export default async function BoutiquePage() {
             la grille pour que les poêles arrivent plus haut. */}
         <div className="mp-shell flex flex-col">
           {bonusActive ? (
-            <div className="mb-4 rounded-xl border border-mp-orange-flame/40 bg-mp-orange-light/50 p-4 text-sm text-mp-ink">
-              <strong className="text-mp-green-deep">{BONUS.label}.</strong> {BONUS.conditions}{" "}
-              Les prix ci-dessous sont déjà remisés, le prix catalogue reste indiqué à côté.
-            </div>
+            <details className="group mb-4 rounded-2xl border border-mp-orange-flame/40 bg-mp-orange-light/50 px-4 text-sm text-mp-ink">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
+                <span>
+                  <strong className="text-mp-green-deep">{BONUS.label}</strong> : prix déjà remisés.
+                </span>
+                <span className="shrink-0 text-xs font-semibold text-mp-orange-ink underline underline-offset-2">
+                  Conditions
+                </span>
+              </summary>
+              <p className="pb-3">
+                {BONUS.conditions} Les prix ci-dessous sont déjà remisés, le prix catalogue reste indiqué à côté.
+              </p>
+            </details>
           ) : null}
 
           {/* Note devis : on couvre toute la gamme, même les références non listées. */}

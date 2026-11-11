@@ -1,5 +1,5 @@
-import { useId, type ComponentType, type SVGProps } from "react";
-import { AirVent, Droplet, ShieldCheck } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import { AirVent, ChevronDown, Droplet, ShieldCheck } from "lucide-react";
 import type { Combustible, ProductType } from "@/lib/products-demo";
 import { cn } from "@/lib/utils";
 
@@ -190,19 +190,19 @@ export function ProductFeatureBadges({ className, ...flags }: ProductFeatureBadg
 }
 
 /**
- * Légende des pastilles, affichée juste avant la grille de la boutique. Même
- * liste et mêmes ronds que sur les cartes, pour que le visiteur retrouve
- * chaque icône d'un regard.
+ * Légende des pastilles, juste avant la grille de la boutique. Repliée par
+ * défaut dans un <details> natif : ouverte, elle repoussait le premier poêle
+ * sous le premier écran d'un téléphone. Même liste et mêmes ronds que sur les
+ * cartes, pour que le visiteur retrouve chaque icône d'un regard.
  */
 export function ProductFeatureLegend({ className }: { className?: string }) {
-  const titleId = useId();
-
   return (
-    <div className={cn("rounded-2xl border border-mp-sand/40 bg-mp-beige/60 px-4 py-4 text-center", className)}>
-      <p id={titleId} className="mb-3 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
+    <details className={cn("group rounded-2xl border border-mp-sand/40 bg-mp-beige/60 px-4", className)}>
+      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft [&::-webkit-details-marker]:hidden">
         Légende des pastilles
-      </p>
-      <ul aria-labelledby={titleId} className="flex flex-wrap justify-center gap-x-5 gap-y-2.5">
+        <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden />
+      </summary>
+      <ul aria-label="Légende des pastilles" className="flex flex-wrap justify-center gap-x-5 gap-y-2.5 pb-4">
         {PRODUCT_FEATURE_LEGEND.map(({ key, label, Icon }) => (
           <li key={key} className="flex items-center gap-2 text-sm text-mp-ink">
             <ProductFeatureIcon Icon={Icon} size="sm" />
@@ -210,6 +210,6 @@ export function ProductFeatureLegend({ className }: { className?: string }) {
           </li>
         ))}
       </ul>
-    </div>
+    </details>
   );
 }
