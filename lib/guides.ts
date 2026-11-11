@@ -11,7 +11,7 @@ import { INSTALL_TYPES, ISO, POWER_WINDOW, VAT, evacuationPrice, formatEur, reco
 import { REMISES, TARIFS } from "./pose/tarifs";
 import { POSE_DURATIONS } from "./services";
 import { POWER_RULE } from "./power";
-import { PRICE_RANGES, rangeText } from "./price-ranges";
+import { PRICE_RANGES, RANGES_VAT_NOTE, rangeText } from "./price-ranges";
 
 /**
  * Surcoût d'une évacuation par rapport au simple raccordement d'un conduit
@@ -186,7 +186,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
     category: "Choix",
     // Encadré repris sur /guides, les guides voisins et des articles : la
     // fourchette et son hypothèse viennent de lib/price-ranges.ts.
-    excerpt: `Un poêle à air posé sur un conduit existant revient le plus souvent à ${rangeText(PRICE_RANGES.standard)} TVAC, pose comprise. Voici comment ne pas se tromper, marque par marque, étape par étape.`,
+    excerpt: `Pour un poêle à air posé sur un conduit existant, comptez le plus souvent ${rangeText(PRICE_RANGES.standard)} TVAC, pose comprise, ${RANGES_VAT_NOTE}. Voici comment ne pas se tromper, marque par marque, étape par étape.`,
     sections: [
       {
         heading: "1. Comprendre les 4 grandes familles",

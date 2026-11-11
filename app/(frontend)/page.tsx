@@ -15,7 +15,7 @@ import { CITIES } from "@/lib/cities";
 import { typo } from "@/lib/typo";
 import { POSE_DURATIONS, PROJECT_LEAD_TIME } from "@/lib/services";
 import { POWER_RULE, kwFor } from "@/lib/power";
-import { ALL_PELLET_RANGE, PRICE_RANGES, rangeText } from "@/lib/price-ranges";
+import { ALL_PELLET_RANGE, PRICE_RANGES, RANGES_VAT_NOTE, rangeText } from "@/lib/price-ranges";
 import { ACTION_LABELS } from "@/config/navigation";
 
 /**
@@ -454,9 +454,9 @@ export default function HomePage() {
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
-              Un poêle à air posé en Wallonie sur un conduit existant, tubé ou à tuber, revient le
-              plus souvent à {typo(rangeText(PRICE_RANGES.standard))} TVAC tout compris (matériel, pose et
-              raccordement). Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin
+              Pour un poêle à air posé en Wallonie sur un conduit existant, tubé ou à tuber, comptez
+              le plus souvent {typo(rangeText(PRICE_RANGES.standard))} TVAC tout compris (matériel, pose et
+              raccordement), {typo(RANGES_VAT_NOTE)}. Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin
               d&apos;entrée de gamme.
             </p>
             <p>

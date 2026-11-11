@@ -26,7 +26,7 @@ import {
   productPrimaryAction,
   readPriceRequest,
 } from "@/lib/price-request";
-import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
+import { PRICE_RANGES, RANGES_VAT_NOTE, rangeText } from "@/lib/price-ranges";
 import { FAQS } from "@/lib/faqs";
 import { getGuideBySlug } from "@/lib/guides";
 import { NBSP, NNBSP } from "@/lib/typo";
@@ -120,6 +120,8 @@ assert("FAQ canalisable ou hydro : fourchette canalisable de la source", canalFa
 assert("FAQ canalisable ou hydro : fourchette hydro de la source", canalFaq.includes(rangeText(PRICE_RANGES.hydro)));
 const achat = getGuideBySlug("guide-achat-poele-pellets-wallonie");
 assert("guide d'achat : encadré sur la fourchette de la source", Boolean(achat?.excerpt.includes(rangeText(PRICE_RANGES.standard))));
+assert("guide d'achat : encadré avec la TVA de l'hypothèse", Boolean(achat?.excerpt.includes(`${rangeText(PRICE_RANGES.standard)} TVAC, pose comprise, ${RANGES_VAT_NOTE}`)));
+assert("accueil : TVA de l'hypothèse à côté de la fourchette", readFileSync("app/(frontend)/page.tsx", "utf8").includes("{typo(RANGES_VAT_NOTE)}"));
 const achatFaq = achat?.faq?.find((q) => q.question.startsWith("Combien coûte"))?.answer ?? "";
 for (const k of ["standard", "canalisable", "hydro"] as const) {
   assert(`guide d'achat, FAQ prix : ${k}`, achatFaq.includes(rangeText(PRICE_RANGES[k])));
