@@ -32,7 +32,7 @@ import { productFamily, productNeighbours } from "@/lib/product-neighbours";
 import { guaranteeLine, priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { formatKw } from "@/lib/power";
 import { categoriesOf } from "@/lib/categories";
-import { ROUTES } from "@/config/navigation";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 import {
   productDescription,
   productImages,
@@ -180,7 +180,7 @@ export default async function ProductPage({ params }: Props) {
   // Bouton principal : fiche chiffrée, le configurateur s'ouvre sur ce modèle
   // (EstimateConfigurator lit `modele`) ; fiche sur devis, ce modèle n'est pas
   // dans l'estimation, le bouton demande son prix (lib/price-request.ts).
-  const primary = productPrimaryAction(product, { estimate: "Chiffrer mon installation" });
+  const primary = productPrimaryAction(product, { estimate: ACTION_LABELS.estimate });
 
   return (
     <>
@@ -354,7 +354,7 @@ export default async function ProductPage({ params }: Props) {
                       </Link>
                     </Button>
                     <Button asChild variant="outline" size="lg" className="w-full">
-                      <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
+                      <Link href="/prendre-rendez-vous#reserver">{ACTION_LABELS.booking}</Link>
                     </Button>
                   </div>
                   <GoogleRatingNote className="mt-4" />
@@ -446,7 +446,7 @@ export default async function ProductPage({ params }: Props) {
                       </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
-                  <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
+                  <Link href="/prendre-rendez-vous#reserver">{ACTION_LABELS.booking}</Link>
                 </Button>
               </div>
 
@@ -665,7 +665,7 @@ export default async function ProductPage({ params }: Props) {
 
       {/* Barre d'action du téléphone (sous 1 024 px), dernier élément de la
           page : elle remplace la barre de navigation du bas et porte le seul
-          aplat orange de l'écran (les boutons « Chiffrer mon installation »
+          aplat orange de l'écran (les boutons « Estimer mon projet »
           de la page passent au vert, YIELDS_TO_ACTION_BAR). */}
       <ProductActionBar
         name={product.name}

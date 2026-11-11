@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { getService, PHONE_DISPLAY, PHONE_HREF } from "@/lib/services";
 import { buildPageMetadata } from "@/lib/seo";
 import { PHONE_HOURS_LONG } from "@/config/site";
+import { ACTION_LABELS } from "@/config/navigation";
 
 /*
  * Page d'arrivée des annonces Google « visite technique » (01/11/2026).
@@ -114,7 +115,7 @@ export default function VisiteTechniquePage() {
             <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto">
               <a href="#reserver">
                 <CalendarCheck aria-hidden />
-                Choisir mon créneau
+                {ACTION_LABELS.booking}
               </a>
             </Button>
           </div>

@@ -8,7 +8,7 @@ import { DiscountedPrice } from "@/components/forms/DiscountedPrice";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { InlineText } from "@/components/ui/inline-text";
 import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/config/navigation";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 import { CATEGORIES } from "@/lib/categories";
 import { eur } from "@/lib/estimate";
 import { getInstallPrices, heightNote } from "@/lib/price-examples";
@@ -123,13 +123,13 @@ export default function InstallationPage() {
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="primary" size="lg" className="w-full sm:w-auto">
-                <Link href={ROUTES.visit}>
+                <Link href={ROUTES.bookingWidget}>
                   <CalendarCheck aria-hidden />
-                  Réserver la visite technique
+                  {ACTION_LABELS.booking}
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-                <Link href={ROUTES.configurator}>Estimer mon installation</Link>
+                <Link href={ROUTES.configurator}>{ACTION_LABELS.estimate}</Link>
               </Button>
             </div>
           </div>

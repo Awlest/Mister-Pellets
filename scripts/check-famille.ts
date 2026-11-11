@@ -11,7 +11,7 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { FAMILY_NAV_KEYS, MAIN_NAV, MOBILE_TABS, PUBLISHED, ROUTES, visibleNav } from "@/config/navigation";
+import { ACTION_LABELS, FAMILY_NAV_KEYS, MAIN_NAV, MOBILE_TABS, PUBLISHED, ROUTES, visibleNav } from "@/config/navigation";
 import { FAMILY_HOSTS, FAMILY_SITES, PARENT_BRAND, PHONE_HREF } from "@/config/site";
 import { EVENTS } from "@/lib/analytics";
 
@@ -55,7 +55,11 @@ const checks: [string, () => void][] = [
     () => {
       const sheet = readFileSync(join(process.cwd(), "components", "layout", "MenuSheet.tsx"), "utf8");
       assert.ok(sheet.includes("visibleNav()"));
-      const order = ["Appeler le {PHONE_DISPLAY}", "Prendre rendez-vous", "Estimer mon projet"].map((t) => sheet.lastIndexOf(t));
+      // Libellés des actions : constantes ACTION_LABELS (config/navigation.ts),
+      // dont la valeur reste « Prendre rendez-vous » et « Estimer mon projet ».
+      assert.equal(ACTION_LABELS.booking, "Prendre rendez-vous");
+      assert.equal(ACTION_LABELS.estimate, "Estimer mon projet");
+      const order = ["Appeler le {PHONE_DISPLAY}", "{ACTION_LABELS.booking}", "{ACTION_LABELS.estimate}"].map((t) => sheet.lastIndexOf(t));
       assert.ok(order.every((i) => i > 0));
       assert.deepEqual([...order].sort((a, b) => a - b), order);
     },

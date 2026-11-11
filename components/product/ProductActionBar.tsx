@@ -53,7 +53,7 @@ export function ProductActionBar({
         </p>
         <Button asChild variant="primary" className="shrink-0 px-4">
           <Link href={href} rel="nofollow">
-            {/* Sous 360 px, « Chiffrer » seul à l'écran : le prix garde sa place.
+            {/* Sous 360 px, « Estimer » seul à l'écran : le prix garde sa place.
                 Un seul enfant : le bouton est en flex, deux enfants seraient
                 écartés par son `gap`. */}
             {action === "price-request" ? (
@@ -62,7 +62,7 @@ export function ProductActionBar({
               </span>
             ) : (
               <span>
-                Chiffrer<span className="max-[359px]:sr-only"> la pose</span>
+                Estimer<span className="max-[359px]:sr-only"> mon projet</span>
               </span>
             )}
           </Link>

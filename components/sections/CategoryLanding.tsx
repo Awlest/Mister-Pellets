@@ -6,7 +6,7 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CatalogueListing } from "@/components/product/ProductListing";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { InlineText } from "@/components/ui/inline-text";
-import { ROUTES } from "@/config/navigation";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 import { CATEGORY_PAGE_SIZE, encodeListing, sortForGrid } from "@/lib/catalogue-listing";
 import { productsInCategory, summarizeCategory, type CategoryData } from "@/lib/categories";
 import { formatKw } from "@/lib/power";
@@ -90,7 +90,7 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
               </li>
               <li>
                 <Link href={ROUTES.configurator} className={LINK}>
-                  Estimer mon installation
+                  {ACTION_LABELS.estimate}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </li>

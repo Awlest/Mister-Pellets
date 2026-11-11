@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ROUTES, isFilterLink, visibleNav } from "@/config/navigation";
+import { ACTION_LABELS, ROUTES, isFilterLink, visibleNav } from "@/config/navigation";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { HeaderShell } from "./HeaderShell";
@@ -129,10 +129,10 @@ export function Header() {
             {PHONE_DISPLAY}
           </a>
           <Button asChild variant="outline" size="default">
-            <Link href={ROUTES.bookingWidget}>Rendez-vous</Link>
+            <Link href={ROUTES.bookingWidget}>{ACTION_LABELS.bookingShort}</Link>
           </Button>
           <Button asChild variant="primary" size="default">
-            <Link href={ROUTES.configurator}>Estimer mon projet</Link>
+            <Link href={ROUTES.configurator}>{ACTION_LABELS.estimate}</Link>
           </Button>
         </div>
       </div>

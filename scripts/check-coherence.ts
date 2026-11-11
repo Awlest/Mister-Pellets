@@ -13,7 +13,9 @@
  * 3. Délai d'un projet : la constante de lib/services.ts, reprise par la FAQ,
  *    l'accueil, la page installation et les pages ville.
  */
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
+import { ACTION_LABELS } from "@/config/navigation";
 import { requestedModel, type EstimateProduct } from "@/lib/estimate";
 import {
   PRICE_REQUEST_SUBJECT,
@@ -152,6 +154,26 @@ for (const file of [
 check("fiche : garantie seule sans délai", guaranteeLine(undefined), "Garantie légale de 2 ans sur le poêle et la pose");
 check("fiche : délai vide ignoré", guaranteeLine("  "), "Garantie légale de 2 ans sur le poêle et la pose");
 check("fiche : délai saisi", guaranteeLine("4-6 sem."), "Garantie légale de 2 ans sur le poêle et la pose · délai de livraison indicatif : 4-6 sem.");
+
+// ---------------------------------------------------------------------------
+// 6. Libellés d'action : un par action, liens de rendez-vous indexables
+// ---------------------------------------------------------------------------
+{
+  const OLD_LABELS = /Chiffrer mon installation|Chiffrer la pose|Estimer mon installation|Choisir (?:un|mon) créneau|Réserver (?:une|la) visite (?:en ligne|technique)/;
+  const walk = (dir: string): string[] =>
+    readdirSync(dir, { withFileTypes: true }).flatMap((d) =>
+      d.isDirectory() ? walk(join(dir, d.name)) : /\.tsx?$/.test(d.name) ? [join(dir, d.name)] : [],
+    );
+  const files = [...walk("app"), ...walk("components")];
+  const stale = files.filter((f) => OLD_LABELS.test(readFileSync(f, "utf8")));
+  check("libellés : aucun ancien libellé d'action", stale, []);
+  // /visite-technique est en noindex : seule sa propre page y renvoie.
+  const toVisit = files.filter(
+    (f) => !f.includes("visite-technique") && /href=["{](?:"\/visite-technique"|ROUTES\.visit\b)|href="\/visite-technique"/.test(readFileSync(f, "utf8")),
+  );
+  check("rendez-vous : aucun lien vers /visite-technique (noindex)", toVisit, []);
+  check("en-tête : libellé de référence de l'estimation", ACTION_LABELS.estimate, "Estimer mon projet");
+}
 
 if (ko > 0) {
   console.error(`\n${ko} contrôle(s) en échec.`);

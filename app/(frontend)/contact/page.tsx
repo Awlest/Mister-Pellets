@@ -4,6 +4,7 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { formatPhone } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
+import { ACTION_LABELS } from "@/config/navigation";
 
 export const metadata = buildPageMetadata({
   title: "Contact et rendez-vous à Fernelmont",
@@ -82,7 +83,7 @@ export default function ContactPage() {
                       href="/prendre-rendez-vous#reserver"
                       className="inline-flex min-h-11 items-center text-sm font-semibold text-mp-orange-ink underline hover:no-underline"
                     >
-                      Réserver une visite en ligne
+                      {ACTION_LABELS.booking}
                     </a>
                     <a
                       href={MAPS_URL}

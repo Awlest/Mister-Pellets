@@ -28,7 +28,7 @@ import { OPEN_MENU_EVENT } from "./MenuTrigger";
  *   l'orange flamme ne fait que 2,5:1, le vert 6,2:1.
  *
  * Fiche produit sous 1 024 px : la barre d'action de la fiche (prix, bouton
- * « Chiffrer la pose », entrée Menu) remplace cette barre, masquée en CSS
+ * « Estimer mon projet », entrée Menu) remplace cette barre, masquée en CSS
  * (.mp-bottomnav, globals.css). Deux barres empilées couvraient 18 % de
  * l'écran, avec deux aplats orange. Le volet Menu reste monté ici : l'entrée
  * Menu de la fiche l'ouvre par l'événement OPEN_MENU_EVENT (MenuTrigger.tsx).

@@ -5,6 +5,7 @@ import { typo } from "@/lib/typo";
 import { cn } from "@/lib/utils";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
+import { ACTION_LABELS } from "@/config/navigation";
 
 interface CTAFinalProps {
   /** Fond de la section. La page decide de l alternance creme / beige. */
@@ -31,7 +32,7 @@ export function CTAFinal({
   tone = "beige",
   title = "Une question ? Un projet ?",
   description = "Devis gratuit en 60 secondes, ou échange direct au téléphone. Notre équipe répond personnellement, on est basés à Fernelmont.",
-  primaryCta = { label: "Chiffrer mon installation", href: "/estimation" },
+  primaryCta = { label: ACTION_LABELS.estimate, href: "/estimation" },
   primaryClassName,
   secondaryCta,
   showPhone = true,

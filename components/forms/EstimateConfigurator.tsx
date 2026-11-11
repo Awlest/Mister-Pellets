@@ -56,6 +56,7 @@ import { priceRequestHref } from "@/lib/price-request";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
 import { BRAND_PARAMS, EVENTS, trackEvent } from "@/lib/analytics";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 
 const STORAGE_KEY = "mp_estimate_draft";
 
@@ -528,7 +529,7 @@ function EstimateForm({
               <span>
                 On vous rappelle sous 48 h ouvrées pour caler la{" "}
                 <strong>visite technique</strong>. Vous pouvez aussi{" "}
-                <Link href="/visite-technique" className="text-mp-orange-ink underline underline-offset-2 hover:no-underline">
+                <Link href={ROUTES.bookingWidget} className="text-mp-orange-ink underline underline-offset-2 hover:no-underline">
                   choisir votre créneau tout de suite
                 </Link>
                 .
@@ -561,7 +562,7 @@ function EstimateForm({
 
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild variant="primary" size="default" className="w-full max-w-xs sm:w-auto">
-            <Link href="/visite-technique">Choisir mon créneau</Link>
+            <Link href={ROUTES.bookingWidget}>{ACTION_LABELS.booking}</Link>
           </Button>
           <Button asChild variant="outline" size="default" className="w-full max-w-xs sm:w-auto">
             <Link href="/">Retour à l&apos;accueil</Link>
@@ -1173,7 +1174,7 @@ function EstimateForm({
                       081 13 83 09
                     </a>{" "}
                     ou{" "}
-                    <Link href="/visite-technique" className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline">
+                    <Link href={ROUTES.bookingWidget} className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline">
                       réservez la visite en ligne
                     </Link>
                     .

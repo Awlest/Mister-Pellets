@@ -16,6 +16,7 @@ import { typo } from "@/lib/typo";
 import { POSE_DURATIONS, PROJECT_LEAD_TIME } from "@/lib/services";
 import { POWER_RULE, kwFor } from "@/lib/power";
 import { ALL_PELLET_RANGE, PRICE_RANGES, rangeText } from "@/lib/price-ranges";
+import { ACTION_LABELS } from "@/config/navigation";
 
 /**
  * Régénération horaire : l'annonce du bonus de saison dépend de la date. Le
@@ -179,14 +180,14 @@ export default function HomePage() {
               * Sur mobile, les trois boutons s'empilent à la même largeur. */}
             <div className="flex flex-wrap gap-3 justify-center mb-4">
               <Button asChild variant="primary" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
-                <Link href="/estimation">Chiffrer mon installation</Link>
+                <Link href="/estimation">{ACTION_LABELS.estimate}</Link>
               </Button>
               {/* Sous 1 280 px, le rendez-vous et le catalogue sont dans la barre
                   du bas : le héros garde un seul bouton et le téléphone. */}
               <Button asChild variant="secondary" size="lg" className="hidden xl:inline-flex">
                 <Link href="/prendre-rendez-vous#reserver">
                   <CalendarDays aria-hidden />
-                  Prendre rendez-vous
+                  {ACTION_LABELS.booking}
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="hidden xl:inline-flex">
@@ -616,7 +617,7 @@ export default function HomePage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Button asChild variant="primary" size="lg">
-                <Link href="/prendre-rendez-vous#reserver">Choisir mon créneau</Link>
+                <Link href="/prendre-rendez-vous#reserver">{ACTION_LABELS.booking}</Link>
               </Button>
               <a
                 href="tel:+3281138309"
@@ -681,7 +682,7 @@ export default function HomePage() {
       <CTAFinal
         title="Chiffrez votre installation en 2 minutes"
         description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris et la mensualité. Le prix ferme est confirmé après la visite technique, sans engagement."
-        secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous#reserver" }}
+        secondaryCta={{ label: ACTION_LABELS.booking, href: "/prendre-rendez-vous#reserver" }}
       />
     </>
   );

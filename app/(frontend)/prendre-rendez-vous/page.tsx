@@ -10,6 +10,7 @@ import { JsonLd, ORGANIZATION_ID } from "@/components/seo/JsonLd";
 import { formatPhone } from "@/lib/utils";
 import { BookingWidget } from "@/components/booking/BookingWidget";
 import { PHONE_HOURS, VISIT_HOURS } from "@/config/site";
+import { ACTION_LABELS } from "@/config/navigation";
 import {
   SERVICES,
   ONLINE_SERVICES,
@@ -69,7 +70,7 @@ export default function PrendreRendezVousPage() {
           <Button asChild variant="primary" size="lg" className="w-full sm:w-auto">
             <a href="#reserver">
               <CalendarCheck aria-hidden />
-              Choisir un créneau
+              {ACTION_LABELS.booking}
             </a>
           </Button>
         }
