@@ -614,7 +614,7 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["insert-pellets-cheminee-existante", "dimensionner-poele-pellets-surface-wallonie", "ek63-etanche-maison-passive-bbc"],
+      articles: ["insert-pellets-cheminee-existante", "ek63-etanche-maison-passive-bbc"],
       guides: ["guide-achat-poele-pellets-wallonie", "comment-entretenir-poele-pellets"],
       cities: ["namur", "liege", "charleroi", "fernelmont"],
       brands: ["mcz", "edilkamin", "cadel"],
@@ -734,7 +734,7 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["austroflamm-cadel-nouvelles-marques-mister-pellets", "dimensionner-poele-pellets-surface-wallonie", "edilkamin-ek63-girolami-quelle-marque-choisir"],
+      articles: ["austroflamm-cadel-nouvelles-marques-mister-pellets", "edilkamin-ek63-girolami-quelle-marque-choisir"],
       brands: ["mcz", "cadel", "edilkamin"],
       cities: ["namur", "charleroi", "liege"],
     },
@@ -853,7 +853,7 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["edilkamin-ek63-girolami-quelle-marque-choisir", "dimensionner-poele-pellets-surface-wallonie", "ek63-entity-90-poele-31-cm-couloir"],
+      articles: ["edilkamin-ek63-girolami-quelle-marque-choisir", "ek63-entity-90-poele-31-cm-couloir"],
       brands: ["austroflamm", "cadel"],
       cities: ["namur", "charleroi", "liege"],
     },
@@ -966,7 +966,6 @@ export const ARTICLES: ArticleData[] = [
         "prix-pellets-belgique",
         "pellets-enplus-a1-vs-dinplus",
         "remplacer-chaudiere-mazout-poele-hydro",
-        "dimensionner-poele-pellets-surface-wallonie",
       ],
       guides: ["remettre-en-route-poele-pellets-automne", "quelle-puissance-poele-pellets"],
       cities: ["namur", "charleroi", "liege"],
@@ -1068,7 +1067,7 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["dimensionner-poele-pellets-surface-wallonie", "budget-hiver-poele-pellets-consommation-2026"],
+      articles: ["budget-hiver-poele-pellets-consommation-2026"],
       guides: ["guide-achat-poele-pellets-wallonie", "poele-pellets-canalisable"],
       brands: ["edilkamin", "ek63", "girolami"],
     },
@@ -1195,7 +1194,7 @@ export const ARTICLES: ArticleData[] = [
     ],
     related: {
       articles: [
-        "austroflamm-cadel-nouvelles-marques-mister-pellets","dimensionner-poele-pellets-surface-wallonie"],
+        "austroflamm-cadel-nouvelles-marques-mister-pellets",],
       brands: ["edilkamin", "ek63", "girolami"],
     },
   },
@@ -1680,8 +1679,8 @@ export const ARTICLES: ArticleData[] = [
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "remplacer-chaudiere-mazout-edilkamin-hydro",
-    title: "Remplacer une chaudière mazout par un poêle Edilkamin hydro",
-    metaTitle: "Remplacer une chaudière mazout par un Edilkamin hydro",
+    title: "Edilkamin hydro : les modèles pour remplacer une chaudière au mazout",
+    metaTitle: "Edilkamin hydro à la place d'une chaudière au mazout",
     metaDescription:
       "Un poêle Edilkamin hydro se raccorde à vos radiateurs comme une chaudière. Principe, modèles, ballon tampon, eau chaude sanitaire et aides en 2026.",
     excerpt:
@@ -1700,6 +1699,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Pourquoi remplacer le mazout maintenant",
         paragraphs: [
+          "Cet article parle des hydros Edilkamin. Pour le remplacement du mazout en général (calendrier, cuve, budget), voyez [du mazout aux pellets](/blog/remplacer-chaudiere-mazout-poele-hydro) ; pour le fonctionnement et la puissance d'un hydro, [le guide du poêle à pellets hydro](/guides/poele-pellets-hydro).",
           "Le mazout coûte cher et son prix reste volatil. Les vieilles chaudières au fioul perdent en rendement avec les années, et leur entretien devient un poste régulier.",
           "Beaucoup de maisons wallonnes en sont encore équipées, et le calendrier se resserre : à partir du 1er janvier 2031, on ne pourra plus installer ni remplacer une chaudière au mazout dans une maison existante en Wallonie. Passer au pellet, c'est un combustible produit en Belgique, dont le prix ne suit pas celui du pétrole.",
         ],
@@ -2059,121 +2059,6 @@ export const ARTICLES: ArticleData[] = [
     },
   },
 
-  // ───────────────────────────────────────────────────────────────────
-  // 1. DIMENSIONNEMENT (intent : "quelle puissance poêle pellets ?")
-  // ───────────────────────────────────────────────────────────────────
-  {
-    slug: "dimensionner-poele-pellets-surface-wallonie",
-    title: "Comment dimensionner son poêle à pellets selon la surface en Wallonie",
-    metaTitle: "Quelle puissance de poêle à pellets selon la surface ?",
-    metaDescription:
-      "1 kW pour 10 m² PEB B, 1 kW pour 15 m² PEB A, 1 kW pour 7 m² PEB E. Méthode complète, exemples chiffrés, erreurs à éviter en Wallonie.",
-    excerpt:
-      "La règle simple, 1 kW pour 10 m², ne suffit pas. Voici le calcul exact selon votre PEB, votre plafond et votre zone climatique en Wallonie.",
-    tldr:
-      "Pour une maison wallonne PEB B de 100 m² avec hauteur sous plafond standard (2,50 m), un poêle de 8 à 10 kW suffit. Le calcul tient en un coefficient appliqué à la surface : 0,10 quand la PEB est bonne (A-B), 0,12 pour une isolation moyenne (C-D), jusqu'à 0,15 si elle est faible (E-G). Ajoutez 10 % par mètre au-dessus de 2,50 m de plafond. Sous-dimensionner brûle le matériel ; sur-dimensionner provoque encrassement et inconfort.",
-    category: "guide-achat",
-    tags: ["dimensionnement", "puissance", "PEB", "kW", "surface"],
-    readingTimeMinutes: 9,
-    publishedAt: "2026-04-15",
-    modifiedAt: "2026-04-29",
-    authorName: "Équipe technique Mister Pellets",
-    authorRole: "Techniciens certifiés Wallonie",
-    coverImageAlt: "Schéma de dimensionnement d'un poêle à pellets selon la surface et la PEB",
-    sections: [
-      {
-        heading: "La méthode rapide : 3 multiplicateurs selon la PEB",
-        paragraphs: [
-          "Le calcul de base part de la surface chauffée et d'un coefficient lié à l'isolation thermique de la maison (PEB en Belgique). Plus la PEB est mauvaise, plus la maison perd des calories par les murs et la toiture, et plus le poêle doit avoir de réserve de puissance.",
-          "Multipliez la surface en m² par le coefficient correspondant à votre PEB pour obtenir la puissance cible en kW. C'est volontairement simplifié : sur du résidentiel wallon classique, cette méthode donne un résultat à ±15 % de la charge thermique réelle.",
-        ],
-        table: {
-          headers: ["PEB du logement", "Coefficient", "Exemple 100 m²", "Exemple 150 m²"],
-          rows: [
-            ["A, passif / quasi-passif", "0,07-0,08 kW/m²", "7-8 kW", "10-12 kW"],
-            ["B, performant", "0,10 kW/m²", "10 kW", "15 kW"],
-            ["C, D, standard", "0,12 kW/m²", "12 kW", "18 kW"],
-            ["E, F, moyen", "0,13-0,14 kW/m²", "13-14 kW", "20-21 kW"],
-            ["G, ancien non rénové", "0,15-0,18 kW/m²", "15-18 kW", "22-27 kW"],
-          ],
-          caption: "Coefficients indicatifs pour la Wallonie (climat tempéré, 2 500 DJU). Hauteur sous plafond 2,50 m.",
-        },
-      },
-      {
-        heading: "Pourquoi sur-dimensionner est aussi grave que sous-dimensionner",
-        paragraphs: [
-          "Beaucoup de clients arrivent avec l'idée qu'un poêle plus puissant chauffera mieux. C'est faux. Un poêle dimensionné trop large tourne en permanence en cycle bas, rejette plus d'imbrûlés, encrasse l'échangeur, et inconforte la pièce (chaud-froid, ronflement de ventilateur).",
-          "À l'inverse, un poêle sous-dimensionné tourne à plein régime en continu pour suivre la demande. Résultat : la résistance d'allumage, le motoréducteur de vis sans fin et le ventilateur fument 20 à 30 % plus vite que prévu. Au bout de 4-5 ans, c'est une révision lourde au lieu d'un entretien annuel.",
-        ],
-        callout: {
-          variant: "warning",
-          text: "Selon les techniciens Mister Pellets, sur le terrain, environ 1 poêle sur 4 vu en SAV est mal dimensionné, le plus souvent surdimensionné parce que vendu sur surface brute sans tenir compte de la PEB.",
-        },
-      },
-      {
-        heading: "Hauteur sous plafond : la correction qu'on oublie tout le temps",
-        paragraphs: [
-          "Le calcul standard suppose 2,50 m sous plafond. Si vous avez 3 m (rénovations dans des fermettes, lofts, vieux corps de logis namurois), vous devez ajouter 10 % de puissance par 25 cm supplémentaires. Un volume plus grand, c'est plus d'air à brasser et à maintenir en température.",
-          "Cas classique : une maison de 90 m² PEB C avec mezzanine ouverte sous toit à 4,50 m. Sur le papier, 11 kW suffisent. En réalité, il faut 13-14 kW pour stabiliser la température sans bruit excessif. C'est typiquement le genre de cas où on conseille un canalisable plutôt qu'un air pulsé.",
-        ],
-      },
-      {
-        heading: "Air pulsé, canalisable ou hydro : à quelle puissance ça change quoi ?",
-        paragraphs: [
-          "Sous 12 kW, l'air pulsé classique chauffe une pièce de vie ouverte sans souci. Au-dessus, mieux vaut un canalisable qui répartit la chaleur dans 1 ou 2 pièces supplémentaires via des gaines isolées en plénum.",
-          "À partir de 16-18 kW, on passe en hydro : le poêle chauffe un ballon tampon ou directement le circuit de radiateurs. C'est aussi le seuil typique pour remplacer une chaudière mazout sur une maison rénovée 4 façades en Wallonie.",
-        ],
-        list: {
-          ordered: false,
-          items: [
-            "Pièce de vie unique 60-100 m² → air pulsé 6 à 10 kW",
-            "Maison à étage 100-150 m² → canalisable 10 à 14 kW",
-            "Maison 4 façades 150-220 m² avec radiateurs → hydro 18 à 24 kW",
-            "Lofts hauts plafonds → ajouter 10 % par 25 cm au-delà de 2,50 m",
-          ],
-        },
-      },
-      {
-        heading: "Exemple chiffré : maison à Namur, PEB D, 130 m²",
-        paragraphs: [
-          "Prenons une maison 4 façades de 1985 à Bouge (Namur), classée D, avec 130 m² chauffés, 2,55 m sous plafond et un conduit déjà tubé.",
-          "Calcul : 130 × 0,12 = 15,6 kW. La correction de plafond est négligeable, on cible 13 à 16 kW. Si le séjour s'ouvre sur l'escalier, un canalisable de 12 à 13 kW (EK63 Monday 130++ ou Edilkamin Vyda 13++ Evo) avec des gaines vers deux chambres fait le travail ; sinon, on regarde du côté d'un hydro raccordé aux radiateurs. Budget d'un canalisable posé sur conduit existant : 5 500 à 7 500 € TVAC, TVA à 6 % comprise.",
-        ],
-        callout: {
-          variant: "info",
-          text: "Avant tout devis, Mister Pellets fait un diagnostic gratuit à domicile dans les 50 km autour de Fernelmont. Mesure des volumes, vérification du conduit, contrôle de l'arrivée d'air comburant, sans engagement.",
-        },
-      },
-    ],
-    faqs: [
-      {
-        question: "Quelle puissance de poêle à pellets pour 100 m² ?",
-        answer:
-          "Pour 100 m² en Wallonie, visez 7-8 kW si la maison est très bien isolée (PEB A), 10 kW pour une PEB B, 12 kW pour une PEB C-D, et 13-15 kW pour une PEB E-F. Ajoutez 10 % par 25 cm de plafond au-dessus de 2,50 m.",
-      },
-      {
-        question: "Peut-on chauffer toute une maison avec un seul poêle à pellets ?",
-        answer:
-          "Oui, à condition de choisir un canalisable (gaines vers 2-3 pièces) ou un hydro (raccordé aux radiateurs). En air pulsé classique, la chaleur reste dans la pièce d'installation et au mieux dans les pièces communicantes ouvertes.",
-      },
-      {
-        question: "Vaut-il mieux surdimensionner pour avoir une marge ?",
-        answer:
-          "Non. Un poêle surdimensionné tourne en permanence à bas régime, encrasse l'échangeur 30 % plus vite, rejette plus d'imbrûlés et inconforte la pièce. Mieux vaut viser juste avec une marge de 10-15 % maximum.",
-      },
-      {
-        question: "Faut-il refaire le calcul si je rénove après l'installation ?",
-        answer:
-          "Si la PEB s'améliore significativement (passage de F à C par exemple), oui, le poêle deviendra trop puissant. Une révision technique permet d'adapter la programmation et le débit de pellets, mais au-delà d'une marge de 25 %, il faut envisager le remplacement.",
-      },
-    ],
-    related: {
-      articles: ["pellets-enplus-a1-vs-dinplus", "remplacer-chaudiere-mazout-poele-hydro", "budget-hiver-poele-pellets-consommation-2026"],
-      guides: ["quelle-puissance-poele-pellets", "guide-achat-poele-pellets-wallonie"],
-      cities: ["namur", "charleroi", "liege"],
-      brands: ["edilkamin", "ek63"],
-    },
-  },
 
   // ───────────────────────────────────────────────────────────────────
   // 2. PELLETS ENPlus A1 vs DINplus (intent : "quels pellets choisir")
@@ -2285,157 +2170,14 @@ export const ARTICLES: ArticleData[] = [
     },
   },
 
-  // ───────────────────────────────────────────────────────────────────
-  // 3. AIDES WALLONIE, réécrit le 03/10/2026 : la prime Habitation (régime
-  //    temporaire 14/02/2025 → 30/09/2026) est terminée. Revu le 25/10/2026 :
-  //    parts non remboursées de l'arrêté du 24/09/2026, poêle absent de la
-  //    liste des travaux, demande de prêt avant tout devis signé. Chiffres et
-  //    liens : lib/aides.ts. Slug conservé pour les liens entrants et Google.
-  // ───────────────────────────────────────────────────────────────────
-  {
-    slug: "primes-wallonie-2026-poele-pellets-combien-recuperer",
-    title: "Prime poêle à pellets en Wallonie : ce qui reste après le 1er octobre 2026",
-    metaTitle: "Prime poêle à pellets en Wallonie : ce qui reste fin 2026",
-    metaDescription:
-      "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Rénopack, Rénoprêt, TVA à 6 %, MEBAR : ce qui reste, et pour qui.",
-    excerpt:
-      "La prime a disparu le 30 septembre. Ce qui la remplace ne vise pas le même public : voici, sans détour, ce que vous pouvez encore obtenir pour un poêle.",
-    tldr:
-      "Il n'y a plus de prime régionale pour un poêle à pellets depuis le 1er octobre 2026. Le régime temporaire des primes Habitation s'est arrêté le 30 septembre, et la Wallonie aide désormais la rénovation par deux prêts : le Rénopack, à 0 % avec 10 à 50 % effacés selon les revenus et les matériaux d'isolation, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent au moins deux classes PEB après un audit, et la demande de prêt passe avant tout devis signé. Pour un poêle posé seul, il reste la TVA à 6 % dans un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes.",
-    category: "primes",
-    tags: ["aides", "Wallonie", "Rénopack", "Rénoprêt", "TVA 6 %", "MEBAR"],
-    readingTimeMinutes: 8,
-    publishedAt: "2026-02-10",
-    modifiedAt: "2026-10-25",
-    authorName: "Équipe Mister Pellets",
-    authorRole: "Conseillers chauffage biomasse",
-    coverImageAlt: "Récapitulatif des aides pour un poêle à pellets en Wallonie après la fin de la prime Habitation",
-    sections: [
-      {
-        heading: "Ce qui s'est arrêté le 30 septembre 2026",
-        paragraphs: [
-          "Depuis le 14 février 2025, la Région wallonne appliquait un régime temporaire de primes Habitation, et le poêle à pellets en faisait partie. Ce régime s'est arrêté le 30 septembre 2026 à 23 h 59. Pour toucher la prime, les travaux devaient être terminés et la demande introduite avant cette heure-là.",
-          "Une facture de septembre sans dossier déposé à temps ne donne donc plus rien. Si vous êtes dans ce cas, le 1718 vous dira si une exception vous concerne, mais il n'existe pas de rattrapage général.",
-        ],
-        callout: {
-          variant: "info",
-          text: "L'exception : les projets avec un devis signé ou un bon de commande définitif datant au plus tard du 13 février 2025. L'arrêté du Gouvernement wallon du 24 septembre 2026, adopté définitivement, leur permet de demander encore la prime aux anciennes conditions jusqu'au 30 septembre 2027, sans l'acompte de 20 % exigé jusque-là.",
-        },
-      },
-      {
-        heading: "Ce qui la remplace : le Rénopack et le Rénoprêt",
-        paragraphs: [
-          "Depuis le 1er octobre 2026, la Wallonie n'accorde plus de prime par poste de travaux pour un nouveau projet. Elle finance des projets de rénovation par deux prêts, gérés par la Société wallonne du Crédit social (SWCS) et le Fonds du Logement de Wallonie. Selon la SWCS, le dispositif devrait être pleinement opérationnel au début de 2027 : la préinscription est ouverte, les modalités de demande sont en cours de finalisation.",
-          "Le Rénopack est un prêt à 0 % dont une partie ne se rembourse pas : 45, 35 ou 10 % selon la catégorie, portés à 50, 40 ou 15 % si toute l'isolation de l'enveloppe est réalisée en écomatériaux, et seulement sur les travaux éligibles. Il vise les catégories de revenus C1 à C3, propriétaires ou titulaires d'un autre droit réel, qui habiteront le logement au plus tard 24 mois après l'octroi. La part non remboursée demande en plus un bâtiment de plus de 15 ans et un demandeur qui n'est propriétaire d'aucun autre logement, et elle ne se cumule avec aucune autre aide wallonne pour le même investissement. Le Rénoprêt, à taux préférentiel, s'adresse à la catégorie C4, aux propriétaires bailleurs et aux copropriétés.",
-        ],
-        table: {
-          headers: ["Catégorie", "Revenus du ménage", "Prêt", "Part non remboursée"],
-          rows: [
-            ["C1", "Jusqu'à 28 900 €", "Rénopack à 0 %", "45 % (50 % avec écomatériaux)"],
-            ["C2", "De 28 900 à 41 100 €", "Rénopack à 0 %", "35 % (40 % avec écomatériaux)"],
-            ["C3", "De 41 100 à 67 100 €", "Rénopack à 0 %", "10 % (15 % avec écomatériaux)"],
-            ["C4", "De 67 100 à 122 800 €", "Rénoprêt à taux préférentiel", "Aucune"],
-          ],
-          caption: "Montants indexés au 1er janvier 2026, diminués de 5 000 € par personne à charge. Sources : wallonie.be, mis à jour le 25 septembre 2026, et arrêté du Gouvernement wallon du 24 septembre 2026.",
-        },
-      },
-      {
-        heading: "Les conditions qui changent tout",
-        paragraphs: [
-          "Le prêt finance un projet complet. Voici ce qu'il exige.",
-        ],
-        list: {
-          ordered: true,
-          items: [
-            "Une maison classée G ou F qui atteint au moins le label D après travaux, ou classée E qui atteint au moins le label C.",
-            "Un audit logement réalisé ou actualisé moins d'un an avant la demande de prêt. C'est lui qui fixe le label de départ et la liste des travaux.",
-            "Une demande de prêt introduite avant tout engagement avec l'entrepreneur : aucun devis signé, aucun acompte et aucun début de travaux avant la signature du contrat de crédit. Le Fonds du Logement l'a rappelé le 12 octobre 2026 dans un « appel à la vigilance ».",
-            "Un emprunt sous 75 000 € pour une maison unifamiliale, 60 000 € par appartement.",
-          ],
-        },
-        callout: {
-          variant: "warning",
-          text: "Une maison classée C ou D n'est pas visée, même si elle a besoin d'un nouveau chauffage. Des dérogations existent quand le label visé est impossible à atteindre pour des raisons techniques, fonctionnelles ou économiques.",
-        },
-      },
-      {
-        heading: "Le poêle à pellets peut-il entrer dans un Rénopack ?",
-        paragraphs: [
-          "Rien ne le garantit. La liste officielle des travaux finançables (article 6 de l'arrêté du Gouvernement wallon du 24 septembre 2026) parle de « systèmes de chauffage et/ou eau chaude performants, décarbonés » et ne nomme pas les poêles. Un poêle n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte. Et un poêle seul fait rarement gagner deux classes PEB à une maison : le saut demande en général d'isoler le toit, les murs ou les châssis.",
-          "Si c'est votre cas, commencez par l'audit, puis la préinscription sur le site de la SWCS, qui ne vaut pas demande d'aide mais permet à leurs équipes de vous recontacter. Vient ensuite la demande de prêt, avant tout engagement : ne signez aucun devis, le nôtre compris, et ne versez aucun acompte avant la signature du contrat de crédit. Et parlez-nous de l'audit avant de choisir le poêle : une maison isolée perd moins de chaleur, la puissance doit correspondre à la maison après travaux. Un poêle calibré sur la maison d'avant tournerait au ralenti tout l'hiver.",
-        ],
-      },
-      {
-        heading: "La TVA à 6 %, l'aide de presque tous les chantiers",
-        paragraphs: [
-          "Elle est fédérale, et la réforme wallonne n'y change rien. Quand nous fournissons et posons le poêle dans un logement privé occupé depuis plus de 10 ans, toute la facture est à 6 % au lieu de 21 %, poêle compris. Sur 6 000 € hors TVA, l'écart fait 900 €.",
-          "Il n'y a plus d'attestation à signer depuis le 1er juillet 2022 : la facture porte une mention légale, et vous avez un mois pour la contester par écrit si elle est fausse. Depuis le 29 juillet 2025, les appareils au gaz, au mazout ou au charbon sont repassés à 21 %. Les poêles qui brûlent uniquement du bois ou des pellets gardent le 6 %.",
-        ],
-      },
-      {
-        heading: "MEBAR et primes communales",
-        paragraphs: [
-          "Pour les revenus modestes, la subvention MEBAR reste ouverte. Elle vise les ménages dont les revenus ne dépassent pas le revenu d'intégration sociale majoré de 30 %, et finance jusqu'à 2 000 € de travaux qui font baisser la facture d'énergie, dont l'installation d'un poêle. La demande passe par le CPAS de la commune, avant tout achat.",
-          "Certaines communes ont leur propre prime énergie. Beaucoup étaient calquées sur la prime régionale qui vient de disparaître : appelez votre commune avant d'en tenir compte dans votre budget.",
-        ],
-      },
-      {
-        heading: "Trois cas pour s'y retrouver",
-        paragraphs: [
-          "Prenons une maison de 1985 à Andenne, classée C, et un ménage en catégorie C2. Un canalisable EK63 posé sur conduit existant à 5 800 € hors TVA revient à 6 148 € TVAC avec la TVA à 6 %, au lieu de 7 018 € à 21 %. Pas de Rénopack : la maison n'est pas visée.",
-          "Prenons une fermette de 1962 près de Ciney, classée F, et un ménage en catégorie C1. L'audit prévoit d'isoler la toiture et les murs, de changer les châssis et de remplacer la chaudière au mazout par un poêle hydro. Si l'ensemble fait passer la maison en D, le Rénopack peut financer les travaux éligibles, et 45 % du prêt ne se rembourse pas (50 % si toute l'isolation est en écomatériaux). Le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et rien ne se signe avant le contrat de crédit.",
-          "Prenons enfin une maison de 2002 à Wavre, classée D, avec des revenus au-delà de 122 800 €. Ni prime, ni Rénopack, ni Rénoprêt. Reste la TVA à 6 %, puisque la maison a plus de 10 ans.",
-        ],
-      },
-      {
-        heading: "Ce que Mister Pellets fait pour votre dossier",
-        paragraphs: [
-          "Nous vous remettons un devis détaillé poste par poste, utile à l'auditeur comme à l'organisme prêteur, puis la facture et l'attestation de conformité de l'installation après la pose. La demande de prêt, elle, se fait chez la SWCS ou au Fonds du Logement, et elle passe avant tout engagement : si un Rénopack est en vue, ne signez pas notre devis et ne versez aucun acompte avant la signature de votre contrat de crédit.",
-          "Pour une question sur votre situation, le 1718 répond gratuitement les jours ouvrables de 8 h 30 à 17 h, et les Guichets Énergie Wallonie conseillent sans frais près de chez vous. Notre page consacrée aux aides reprend tout le détail, avec les liens officiels.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "Peut-on encore obtenir une prime pour un poêle à pellets en Wallonie ?",
-        answer:
-          "Non, plus depuis le 1er octobre 2026, sauf la subvention MEBAR pour les ménages à très petits revenus, via le CPAS. La prime Habitation s'est arrêtée le 30 septembre 2026. Les prêts qui la remplacent, Rénopack et Rénoprêt, visent les maisons classées E, F ou G qui gagnent le label exigé après travaux, et se demandent avant tout devis signé ou acompte.",
-      },
-      {
-        question: "Mon poêle a été posé en septembre : est-il trop tard ?",
-        answer:
-          "Oui, si la demande n'a pas été introduite au plus tard le 30 septembre 2026 à 23 h 59. Seuls les projets avec un devis signé ou un bon de commande définitif datant au plus tard du 13 février 2025 peuvent encore passer par les anciennes conditions, jusqu'au 30 septembre 2027.",
-      },
-      {
-        question: "Le Rénopack rembourse-t-il une partie du poêle ?",
-        answer:
-          "Le Rénopack ne rembourse pas un appareil : c'est un prêt à 0 % pour un projet complet, dont 10 à 50 % ne se remboursent pas selon vos revenus et les matériaux d'isolation. La liste officielle des travaux ne nomme pas les poêles : le vôtre n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, dans une maison classée E, F ou G qui gagne le label exigé.",
-      },
-      {
-        question: "Faut-il encore un audit logement ?",
-        answer:
-          "Pour un poêle seul, non. Pour un Rénopack ou un Rénoprêt, oui : l'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, qui passe elle-même avant tout devis signé.",
-      },
-      {
-        question: "La TVA à 6 % s'applique-t-elle toujours ?",
-        answer:
-          "Oui, dans un logement privé de plus de 10 ans, quand l'installateur fournit et pose le poêle. Les appareils au gaz, au mazout ou au charbon sont à 21 % depuis le 29 juillet 2025, pas les poêles à pellets.",
-      },
-    ],
-    related: {
-      articles: ["remplacer-chaudiere-mazout-poele-hydro", "budget-hiver-poele-pellets-consommation-2026"],
-      guides: ["guide-achat-poele-pellets-wallonie"],
-      cities: ["namur", "charleroi", "liege", "wavre", "andenne"],
-    },
-  },
 
   // ───────────────────────────────────────────────────────────────────
   // 4. REMPLACER CHAUDIÈRE MAZOUT (intent : "remplacer mazout pellets")
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "remplacer-chaudiere-mazout-poele-hydro",
-    title: "Remplacer sa chaudière mazout par un poêle hydro à pellets : ce qu'il faut savoir",
-    metaTitle: "Remplacer mazout par poêle pellets hydro, guide 2026",
+    title: "Du mazout aux pellets : remplacer sa chaudière par un poêle hydro",
+    metaTitle: "Remplacer une chaudière au mazout par des pellets",
     metaDescription:
       "Coût total, aides, retour sur investissement, raccordement aux radiateurs, cuve à mettre hors service : passer du mazout au pellet hydro, expliqué par Mister Pellets.",
     excerpt:
@@ -2454,6 +2196,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Pourquoi le pellet hydro remplace bien le mazout",
         paragraphs: [
+          "Cet article traite du remplacement : calendrier du mazout, cuve, budget et pièges. Le fonctionnement du poêle hydro, sa puissance et sa pose sont dans [le guide du poêle à pellets hydro](/guides/poele-pellets-hydro), et le cas d'un Edilkamin dans [remplacer une chaudière par un Edilkamin hydro](/blog/remplacer-chaudiere-mazout-edilkamin-hydro).",
           "Une chaudière mazout chauffe un circuit d'eau qui alimente les radiateurs et l'eau chaude sanitaire. Un poêle hydro à pellets fait exactement la même chose : il chauffe le même circuit, branché de la même manière. La transition technique est plus simple qu'on ne l'imagine.",
           "Côté combustible, le pellet se produit en Belgique, qui en fabrique plus qu'elle n'en consomme selon ValBiom. En août 2026, le sac de 15 kg valait 6,19 € en moyenne en Wallonie. Le mazout, lui, dépassait 1,50 € le litre au tarif maximum du SPF Économie début octobre 2026.",
           "Et la réglementation tourne. Depuis le 1er janvier 2026, une maison neuve ne peut plus recevoir de chaudière au mazout. À partir du 1er janvier 2031, on ne pourra plus en installer ni en remplacer dans une maison existante ; seul le remplacement du brûleur restera permis jusqu'à fin 2034.",
@@ -2537,8 +2280,7 @@ export const ARTICLES: ArticleData[] = [
     related: {
       articles: [
         "budget-hiver-poele-pellets-consommation-2026",
-        "primes-wallonie-2026-poele-pellets-combien-recuperer",
-        "dimensionner-poele-pellets-surface-wallonie",
+        "remplacer-chaudiere-mazout-edilkamin-hydro",
       ],
       guides: ["poele-pellets-hydro", "guide-achat-poele-pellets-wallonie"],
       cities: ["namur", "charleroi", "wavre", "andenne"],

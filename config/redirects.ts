@@ -12,6 +12,11 @@ import { misterBoisRedirects, type SiteRedirect } from "./mister-bois";
 
 /** Anciennes adresses (Wix, WordPress) et pages renommées. */
 const LEGACY_REDIRECTS: SiteRedirect[] = [
+  // Doublons internes fondus le 11/11/2026 (constat MP-51) : la puissance dans
+  // son guide, les aides dans leur page de référence.
+  { source: "/blog/dimensionner-poele-pellets-surface-wallonie", destination: "/guides/quelle-puissance-poele-pellets", permanent: true },
+  { source: "/blog/primes-wallonie-2026-poele-pellets-combien-recuperer", destination: "/aides-poele-a-pellets-wallonie", permanent: true },
+
   // Anciennes URLs marques
   { source: "/marques", destination: "/nos-marques", permanent: true },
   { source: "/edilkamin", destination: "/nos-marques/edilkamin", permanent: true },

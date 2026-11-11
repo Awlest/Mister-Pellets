@@ -351,6 +351,22 @@ export default function PrimesPage() {
               </a>
               .
             </p>
+            <h3 className="pt-4 text-xl font-semibold text-mp-green-deep">Trois cas pour s&apos;y retrouver</h3>
+            <p>
+              {typo(
+                "Une maison de 1985 classée C, un ménage en catégorie C2, un poêle posé seul : pas de Rénopack, la maison n'est pas visée. Reste la TVA à 6 %, puisque la maison a plus de 10 ans.",
+              )}
+            </p>
+            <p>
+              {typo(
+                "Une fermette de 1962 classée F, un ménage en catégorie C1 : l'audit prévoit d'isoler la toiture et les murs, de changer les châssis et de remplacer la chaudière au mazout par un poêle hydro. Si l'ensemble fait gagner le label exigé, le Rénopack peut financer les travaux éligibles, avec la part non remboursée de la catégorie. Le poêle n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et rien ne se signe avant le contrat de crédit.",
+              )}
+            </p>
+            <p>
+              {typo(
+                "Une maison de 2002 classée D, des revenus au-delà du plafond de la catégorie C4 : ni prime, ni Rénopack, ni Rénoprêt. Reste la TVA à 6 %.",
+              )}
+            </p>
           </div>
         </div>
       </section>
