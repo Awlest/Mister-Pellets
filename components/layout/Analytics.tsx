@@ -10,6 +10,7 @@ import {
   clearConsent,
   clearGoogleCookies,
   readConsent,
+  setGoogleSending,
   trackEvent,
   updateConsent,
   writeConsent,
@@ -19,18 +20,18 @@ import { FAMILY_HOSTS } from "@/config/site";
 import { buttonVariants } from "@/components/ui/button-variants";
 
 /**
- * Mesure d'audience GA4 avec mode consentement Google (v2).
+ * Mesure d'audience GA4 et conversions Google Ads, chargées après accord.
  *
- * Le script se charge dès le départ, mais avec tous les consentements refusés
- * par défaut : aucun cookie ni identifiant n'est stocké tant que le visiteur
- * n'a pas accepté. Google reçoit alors des signaux anonymes qui lui permettent
- * de modéliser les conversions manquantes, ce qui évite de piloter des
- * campagnes sur des chiffres amputés de la moitié du trafic. Le passage à
- * `granted` ne se fait qu'après un clic explicite sur Accepter.
+ * Décision du 11/11/2026 : aucune balise Google avant un clic sur « Accepter ».
+ * Avant, gtag.js se chargeait d'emblée en mode consentement « avancé » et
+ * envoyait des signaux sans cookie pour que Google modélise les conversions
+ * des visiteurs qui refusent ; ces conversions modélisées sont abandonnées.
  *
- * L'amorce (dataLayer, consentement par défaut, restauration du choix stocké)
- * vit dans app/(frontend)/layout.tsx, rendue en clair dans le `<head>` : c'est la seule
- * façon de garantir qu'elle s'exécute avant la bibliothèque Google.
+ * L'amorce (dataLayer, consentement refusé par défaut, restauration du choix
+ * mémorisé, configuration) vit dans app/(frontend)/layout.tsx, rendue en clair
+ * dans le `<head>`. Elle ne fait que remplir une file en mémoire : rien ne
+ * part tant que la bibliothèque n'est pas chargée, et elle ne l'est qu'ici,
+ * quand le choix vaut « granted ».
  */
 
 /**
@@ -69,6 +70,8 @@ function reopenConsent(from: HTMLElement) {
   reopenedFrom = from;
   clearConsent();
   updateConsent("denied");
+  // La bibliothèque peut être déjà chargée dans cette page : plus aucun envoi.
+  setGoogleSending(false);
   notify();
   // Après le rendu qui remonte le bandeau (setTimeout et non
   // requestAnimationFrame : figé dans un onglet en arrière-plan).
@@ -124,32 +127,26 @@ export function Analytics() {
   const decide = (value: ConsentChoice) => {
     writeConsent(value);
     updateConsent(value);
+    setGoogleSending(value === "granted");
+    document.documentElement.setAttribute("data-consent", value);
     if (value === "denied") clearGoogleCookies();
     notify();
     if (reopenedFrom?.isConnected) reopenedFrom.focus({ preventScroll: true });
     reopenedFrom = null;
   };
 
-  // Visite issue d'une annonce : l'amorce du <head> a déjà lancé gtag.js
-  // (lib/analytics.ts), il ne faut pas le charger une seconde fois. Lu au
-  // rendu : faux côté serveur, et <Script lazyOnload> ne produit aucun HTML,
-  // donc rien ne diffère à l'hydratation.
-  const gtagEarly = typeof window !== "undefined" && window.__gtagEarly === true;
-
   return (
     <>
-      {/* L'amorce du consentement est rendue en <head> par app/(frontend)/layout.tsx :
-        * elle doit s'exécuter avant cette bibliothèque, pas après.
-        * lazyOnload et non afterInteractive : avec afterInteractive, Next
-        * précharge gtag.js dans le <head>, en priorité haute, et ses 176 Ko
-        * partaient en même temps que la feuille de style et les polices,
-        * suivis du script Google Ads (195 Ko) qu'il charge à son tour.
-        * Lighthouse les comptait avant le premier affichage (LCP mobile de
-        * 4,1 à 6,7 s, mesuré le 12/10/2026). Chargé quand le navigateur est
-        * inactif, après la page : les appels faits avant son arrivée
-        * (consentement, configuration, conversions) attendent dans
-        * dataLayer, puisque l'amorce définit gtag() d'emblée. */}
-      {!gtagEarly && (
+      {/* Les balises Google (GA4 et Google Ads) ne se chargent QU'APRÈS
+        * l'accord du visiteur : sans lui, aucune requête ne part vers
+        * googletagmanager.com, google-analytics.com, googleadservices.com ni
+        * doubleclick.net. Accord donné à l'instant ou déjà mémorisé : gtag.js
+        * arrive en lazyOnload, quand le navigateur est inactif, hors du
+        * chemin critique (176 Ko, plus le script Google Ads qu'il charge à
+        * son tour). Il lit alors la file préparée par l'amorce du <head> :
+        * consentement accordé, puis configuration, donc le page_view de la
+        * page courante. Les conversions suivent par trackEvent. */}
+      {choice === "granted" && (
         <Script
           id="ga-lib"
           strategy="lazyOnload"
@@ -173,16 +170,24 @@ export function Analytics() {
           // flottante (--mp-bottomnav-offset) et, sur /estimation, de la
           // barre d'action du configurateur (--mp-actionbar-space, globals.css) :
           // il recouvrait le bouton Suivant (relevé à 375 px le 19/10/2026).
-          className="mp-consent-banner fixed inset-x-3 bottom-[calc(var(--mp-bottomnav-offset)_+_var(--mp-actionbar-space)_+_0.5rem)] z-50 rounded-2xl border border-mp-sand bg-mp-cream p-4 shadow-lg sm:p-5 lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
+          className="mp-consent-banner fixed inset-x-3 bottom-[calc(var(--mp-bottomnav-offset)_+_var(--mp-actionbar-space)_+_0.5rem)] z-50 rounded-2xl border border-mp-sand bg-mp-cream p-3 shadow-lg sm:p-5 lg:inset-x-auto lg:bottom-6 lg:left-6 lg:max-w-md"
         >
-          <p className="text-sm leading-relaxed text-mp-ink">
+          {/* Téléphone : une phrase courte, pour que le bandeau tienne en une
+              centaine de pixels et laisse voir le bouton principal de la page. */}
+          <p className="text-xs leading-snug text-mp-ink sm:hidden">
+            Cookies Google pour mesurer visites et annonces, avec votre accord.{" "}
+            <Link href="/politique-cookies" className="whitespace-nowrap underline hover:text-mp-orange-ink">
+              Détails
+            </Link>
+          </p>
+          <p className="hidden text-sm leading-relaxed text-mp-ink sm:block">
             Les cookies Google nous montrent comment vous nous avez trouvés, et donc quelle pub
-            vaut la peine. Sans votre accord, on n&apos;en dépose aucun.{" "}
-            <Link href="/politique-cookies" className="whitespace-nowrap underline hover:text-mp-orange-flame">
+            vaut la peine. Sans votre accord, aucune balise Google n&apos;est chargée.{" "}
+            <Link href="/politique-cookies" className="whitespace-nowrap underline hover:text-mp-orange-ink">
               Politique cookies
             </Link>
           </p>
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-4 sm:flex">
+          <div className="mt-2 grid grid-cols-2 gap-2 sm:mt-4 sm:flex">
             <button type="button" onClick={() => decide("granted")} className={CHOICE_BUTTON}>
               Accepter
             </button>
