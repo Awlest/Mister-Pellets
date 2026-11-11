@@ -1,10 +1,11 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
-import { postgresAdapter } from "@payloadcms/db-postgres";
+import { postgresAdapter, type PostgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { resendAdapter } from "@payloadcms/email-resend";
+import { attachDatabasePool } from "@vercel/functions";
 import sharp from "sharp";
 
 import { Users } from "./collections/Users";
@@ -42,6 +43,16 @@ const EMAIL_FROM_INTERNAL =
 const fromMatch = /^(.*)<([^>]+)>\s*$/.exec(EMAIL_FROM_INTERNAL);
 const fromName = fromMatch?.[1]?.trim().replace(/^"|"$/g, "") || "Mister Pellets";
 const fromAddress = fromMatch?.[2]?.trim() || EMAIL_FROM_INTERNAL;
+
+// Taille du pool Postgres de chaque instance. Sur Vercel, chaque instance ouvre
+// le sien : sans plafond (10 par défaut dans pg), un pic de trafic remplit le
+// pooler Supabase, qui refuse alors toute nouvelle connexion (erreur
+// EMAXCONN). Avec un petit pool, les requêtes patientent au lieu d'échouer.
+// Jamais moins de 3 : Payload garde une connexion dès son démarrage, et un
+// enregistrement dans l'admin en tient une pour sa transaction pendant que la
+// lecture du verrou du document en demande une autre. À 2, chaque
+// enregistrement attend une connexion qui ne se libère pas, puis échoue.
+const DB_POOL_MAX = Math.max(3, Number(process.env.DB_POOL_MAX) || 5);
 
 export default buildConfig({
   serverURL: SITE_URL,
@@ -93,6 +104,13 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI ?? "",
+      max: DB_POOL_MAX,
+      // Connexions inactives fermées après 5 s. Sur Vercel, ce délai ne court
+      // pas pendant qu'une instance est suspendue : voir onInit plus bas.
+      idleTimeoutMillis: 5_000,
+      // Pool plein ou base injoignable : la requête attend jusqu'à 15 s, puis
+      // échoue avec une erreur lisible au lieu de rester en suspens.
+      connectionTimeoutMillis: 15_000,
     },
     // Garde-fou : on DÉSACTIVE le push automatique de schéma. Tout changement
     // de schéma DOIT passer par un fichier de migration explicite (dossier
@@ -101,6 +119,16 @@ export default buildConfig({
     // exactement ce que le protocole de migration interdit.
     push: false,
   }),
+
+  // Fluid compute suspend une instance dès sa réponse envoyée. Ses connexions
+  // inactives restent alors ouvertes au pooler Supabase tant que l'instance
+  // existe, car le délai de 5 s ne court plus. attachDatabasePool garde
+  // l'instance éveillée le temps que le pool les ferme. Sans effet hors Vercel
+  // (poste local, scripts, payload migrate).
+  onInit: (payload) => {
+    const { pool } = payload.db as unknown as Pick<PostgresAdapter, "pool">;
+    if (pool) attachDatabasePool(pool);
+  },
 
   sharp,
 
