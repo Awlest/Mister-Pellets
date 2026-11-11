@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbSchema } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 interface BreadcrumbItem {
@@ -53,6 +55,11 @@ export function HeroSecondary({
         {/* Breadcrumbs : liens agrandis à 44 px de haut sans changer la mise en
             page (marges négatives), c'est le seul retour arrière visible sur
             mobile, où il n'y a pas d'en-tête. */}
+        {/* Le fil d'Ariane affiché est aussi balisé (BreadcrumbList), sur toutes
+            les pages qui passent par ce héros. */}
+        {breadcrumbs && breadcrumbs.length > 0 && (
+          <JsonLd data={buildBreadcrumbSchema(breadcrumbs.map((item) => ({ name: item.label, url: item.href })))} />
+        )}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav aria-label="Fil d'Ariane" className={compact ? "mb-3 sm:mb-6" : "mb-6"}>
             <ol className="flex flex-wrap items-center justify-center gap-x-1.5 text-sm text-mp-ink-soft">

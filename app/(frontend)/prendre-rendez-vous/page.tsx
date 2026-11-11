@@ -19,9 +19,9 @@ import {
 } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Prendre rendez-vous, Showroom Fernelmont & services Mister Pellets",
+  title: { absolute: "Prendre rendez-vous : showroom, visite, entretien" },
   description:
-    "Showroom Fernelmont (5380), uniquement sur rendez-vous, modèles d'exposition tournants. Devis sur place, visite, entretien annuel, dépannage, ramonage : 5 services Mister Pellets pour poêles à pellets en Wallonie.",
+    "Showroom de Fernelmont sur rendez-vous, visite technique à domicile, entretien annuel, ramonage et dépannage : choisissez votre créneau en ligne.",
   alternates: { canonical: "https://mister-pellets.be/prendre-rendez-vous" },
 };
 

@@ -12,7 +12,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Zones d'intervention en Wallonie",
   description:
-    "Mister Pellets intervient à Namur, Charleroi, Liège, Wavre, Mons, Arlon, Tournai, Verviers, Gembloux, Dinant. Livraison gratuite dans 20 km autour de Fernelmont.",
+    "Mister Pellets pose des poêles à pellets à Namur, Charleroi, Liège, Wavre, Mons, Arlon, Tournai, Verviers, Gembloux et Dinant, depuis Fernelmont.",
   path: "/zones-d-intervention",
 });
 

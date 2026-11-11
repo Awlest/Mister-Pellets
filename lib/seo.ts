@@ -25,6 +25,29 @@ export const DEFAULT_OG_IMAGE = "/opengraph-image";
 /** Suffixe posé par le gabarit de titre de app/(frontend)/layout.tsx. */
 export const TITLE_SUFFIX = " | Mister Pellets";
 export const TITLE_MAX = 60;
+export const DESCRIPTION_MAX = 158;
+/** @id de l'entreprise (components/seo/JsonLd.tsx) : auteur, éditeur, prestataire et vendeur le citent. */
+export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+
+/** Image de partage d'un article ou d'un guide, construite par app/og/[type]/[slug]/route.tsx. */
+export function ogImagePath(type: "blog" | "guides", slug: string): string {
+  return `/og/${type}/${slug}`;
+}
+
+/** Coupe un texte à la dernière phrase entière qui tient, sinon au dernier mot. */
+export function fitText(text: string, max: number): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return clean;
+  const sentences = clean.match(/[^.!?]+[.!?]+/g) ?? [];
+  let out = "";
+  for (const sentence of sentences) {
+    if ((out + sentence).trim().length > max) break;
+    out += sentence;
+  }
+  if (out.trim().length >= 40) return out.trim();
+  const cut = clean.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:]$/, "")}…`;
+}
 
 interface SEOPageMetaInput {
   title: string;
@@ -67,9 +90,13 @@ export function buildPageMetadata(input: SEOPageMetaInput): Metadata {
   // ne tient pas, le titre est servi sans suffixe plutôt que coupé par Google.
   const withoutSuffix = input.absoluteTitle || input.title.length + TITLE_SUFFIX.length > TITLE_MAX;
 
+  // Description de 158 caractères au plus : au-delà, on garde les phrases
+  // entières qui tiennent.
+  const description = fitText(input.description, DESCRIPTION_MAX);
+
   return {
     title: withoutSuffix ? { absolute: input.title } : input.title,
-    description: input.description,
+    description,
     keywords: input.keywords,
     authors: input.authors?.map((name) => ({ name })),
     alternates: {
@@ -85,7 +112,7 @@ export function buildPageMetadata(input: SEOPageMetaInput): Metadata {
       siteName: SITE_NAME,
       url,
       title: input.title,
-      description: input.description,
+      description,
       images: [
         {
           url: image,
@@ -101,7 +128,7 @@ export function buildPageMetadata(input: SEOPageMetaInput): Metadata {
     twitter: {
       card: "summary_large_image",
       title: input.title,
-      description: input.description,
+      description,
       images: [image],
     },
   };
@@ -165,20 +192,9 @@ export function buildArticleSchema(input: ArticleSchemaInput): Record<string, un
     image: input.imageUrl ?? `${SITE_URL}${DEFAULT_OG_IMAGE}`,
     datePublished: input.datePublished,
     dateModified: input.dateModified ?? input.datePublished,
-    author: {
-      "@type": "Organization",
-      name: input.authorName ?? SITE_NAME,
-      url: SITE_URL,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/logo-mister-pellets-full.svg`,
-      },
-    },
+    // Auteur et éditeur : l'entreprise, citée par son @id (jamais redécrite).
+    author: { "@type": "Organization", "@id": ORGANIZATION_ID, name: SITE_NAME, url: SITE_URL },
+    publisher: { "@id": ORGANIZATION_ID },
     mainEntityOfPage: input.url,
   };
 }
@@ -200,11 +216,7 @@ export function buildServiceSchema(input: ServiceSchemaInput): Record<string, un
     serviceType: input.serviceName,
     name: input.serviceName,
     description: input.description,
-    provider: {
-      "@type": "HomeAndConstructionBusiness",
-      "@id": `${SITE_URL}/#organization`,
-      name: SITE_NAME,
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "City",
       name: input.cityName,

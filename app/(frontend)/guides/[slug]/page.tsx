@@ -10,7 +10,7 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { GUIDES, getGuideBySlug } from "@/lib/guides";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildArticleSchema, buildPageMetadata, ogImagePath, SITE_URL } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -32,45 +32,36 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
   if (!guide) return { title: "Guide introuvable", robots: { index: false } };
-  // Certains metaTitle de guides contiennent déjà " | Mister Pellets" : dans ce
-  // cas on passe le titre en absolu pour éviter le double suffixe du template racine.
-  const hasBrandSuffix = guide.metaTitle.includes("| Mister Pellets");
   return buildPageMetadata({
     title: guide.metaTitle,
-    absoluteTitle: hasBrandSuffix,
     description: guide.metaDescription,
     path: `/guides/${slug}`,
+    image: ogImagePath("guides", guide.slug),
     type: "article",
+    publishedTime: guide.publishedAt,
+    modifiedTime: guide.modifiedAt,
   });
 }
+
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("fr-BE", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
 export default async function GuidePage({ params }: Props) {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
   if (!guide) notFound();
 
-  // Schema Article + éventuel FAQPage
+  // Schema Article (dates réelles, image propre au guide) + éventuel FAQPage.
+  // Le fil d'Ariane est balisé par HeroSecondary.
   const schemas: Record<string, unknown>[] = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
+    buildArticleSchema({
       headline: guide.title,
       description: guide.description,
-      author: {
-        "@type": "Organization",
-        name: "Mister Pellets",
-        url: "https://mister-pellets.be",
-      },
-      publisher: {
-        "@type": "Organization",
-        name: "Mister Pellets",
-        logo: {
-          "@type": "ImageObject",
-          url: "https://mister-pellets.be/logo-mister-pellets-full.svg",
-        },
-      },
-      mainEntityOfPage: `https://mister-pellets.be/guides/${guide.slug}`,
-    },
+      url: `${SITE_URL}/guides/${guide.slug}`,
+      imageUrl: `${SITE_URL}${ogImagePath("guides", guide.slug)}`,
+      datePublished: guide.publishedAt,
+      dateModified: guide.modifiedAt,
+    }),
   ];
 
   if (guide.faq && guide.faq.length > 0) {
@@ -106,6 +97,18 @@ export default async function GuidePage({ params }: Props) {
       <article className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <div className="mp-measure">
+            {/* Dates réelles du guide : le lecteur sait de quand datent les chiffres. */}
+            <p className="mb-10 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-mp-ink-soft">
+              <span>
+                Publié le <time dateTime={guide.publishedAt}>{formatDate(guide.publishedAt)}</time>
+              </span>
+              {guide.modifiedAt > guide.publishedAt && (
+                <span>
+                  Mis à jour le <time dateTime={guide.modifiedAt}>{formatDate(guide.modifiedAt)}</time>
+                </span>
+              )}
+              <span>Par l&apos;équipe Mister Pellets</span>
+            </p>
               {guide.sections.map((section, i) => (
               <section key={i} className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 mt-2">

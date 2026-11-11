@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildPageMetadata({
   title: "Estimation en ligne, poêle à pellets posé",
   description:
-    "Composez votre installation en 2 minutes : le poêle de notre catalogue, la pose, la TVA 6 % et la mensualité à 0 %. Estimation immédiate, prix ferme après visite technique.",
+    "Composez votre installation en 2 minutes : le poêle de notre catalogue, la pose et la TVA à 6 %. Estimation immédiate, prix ferme après la visite technique.",
   path: "/estimation",
 });
 

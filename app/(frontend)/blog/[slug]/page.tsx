@@ -21,9 +21,9 @@ import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { CITIES } from "@/lib/cities";
 import {
   buildPageMetadata,
-  buildBreadcrumbSchema,
   buildFAQSchema,
   buildArticleSchema,
+  ogImagePath,
   SITE_URL,
 } from "@/lib/seo";
 
@@ -52,6 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.metaTitle,
     description: article.metaDescription,
     path: `/blog/${article.slug}`,
+    image: ogImagePath("blog", article.slug),
     type: "article",
     publishedTime: article.publishedAt,
     modifiedTime: article.modifiedAt,
@@ -184,23 +185,18 @@ export default async function ArticlePage({ params }: Props) {
   const article = getArticleBySlug(slug);
   if (!article) notFound();
 
-  // ---------- Schemas Schema.org ----------
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: "Accueil", url: "/" },
-    { name: "Blog", url: "/blog" },
-    { name: article.title, url: `/blog/${article.slug}` },
-  ]);
-
+  // ---------- Schemas Schema.org (le fil d'Ariane est balisé par HeroSecondary) ----------
   const articleSchema = buildArticleSchema({
     headline: article.title,
     description: article.metaDescription,
     url: `${SITE_URL}/blog/${article.slug}`,
+    imageUrl: `${SITE_URL}${ogImagePath("blog", article.slug)}`,
     datePublished: article.publishedAt,
     dateModified: article.modifiedAt,
     authorName: article.authorName,
   });
 
-  const schemas: Record<string, unknown>[] = [breadcrumb, articleSchema];
+  const schemas: Record<string, unknown>[] = [articleSchema];
   if (article.faqs.length > 0) {
     schemas.push(buildFAQSchema(article.faqs));
   }

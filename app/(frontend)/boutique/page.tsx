@@ -10,7 +10,7 @@ import { BONUS, isBonusPeriod } from "@/lib/bonus";
 export const metadata = buildPageMetadata({
   title: "Boutique poêles à pellets en Wallonie",
   description:
-    "Catalogue Mister Pellets : MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, TVA à 6 % en rénovation.",
+    "Catalogue Mister Pellets : poêles à pellets MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel. Filtres par marque, type et puissance, pose en Wallonie.",
   path: "/boutique",
 });
 
@@ -117,11 +117,15 @@ export default async function BoutiquePage() {
 
           {/* Note devis : on couvre toute la gamme, même les références non listées. */}
           <div className="order-last mt-10 rounded-xl bg-mp-orange-light/50 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink md:order-none md:mt-0 md:mb-8">
-            <strong>Besoin d&apos;un modèle précis ?</strong> On distribue toute la gamme Edilkamin, EK63
-            et Girolami, même les références qui ne sont pas encore listées ici. Pour un chiffrage
-            complet (poêle, pose et TVA), passez par le{" "}
+            <strong>Besoin d&apos;un modèle précis ?</strong> On pose toute la gamme pellets de MCZ,
+            Edilkamin, EK63, Girolami, Austroflamm et Cadel, même les références qui ne sont pas encore
+            listées ici. Pour un chiffrage complet (poêle, pose et TVA), passez par le{" "}
             <Link href="/demande-de-devis" className="text-mp-orange-ink underline hover:no-underline font-semibold">
               formulaire de devis
+            </Link>
+            . Les forfaits de pose par type de conduit sont sur la page{" "}
+            <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+              prix d&apos;un poêle à pellets posé
             </Link>
             .
           </div>

@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   // Suffixe écrit en toutes lettres : le template de titre de
   // app/(frontend)/layout.tsx ne s'applique qu'aux segments enfants, pas à
   // cette page, qui est dans le même segment que lui.
-  title: { absolute: "Poêle à pellets en Wallonie, vente, pose, entretien | Mister Pellets" },
+  title: { absolute: "Poêle à pellets en Wallonie : vente et pose | Mister Pellets" },
   description:
-    "MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
+    "Poêles à pellets MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel, vendus et posés en Wallonie. TVA à 6 % sur les logements de plus de 10 ans.",
 };
 
 const FAQ_HOMEPAGE = [

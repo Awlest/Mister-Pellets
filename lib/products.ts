@@ -686,7 +686,7 @@ export async function getAllProductSlugs(): Promise<string[]> {
  * mister-bois.be (canonical vers l'autre site, ou noindex tant que la fiche
  * équivalente n'est pas connue : voir lib/catalog-scope.ts).
  */
-export type ProductSitemapEntry = { slug: string; updatedAt?: string };
+export type ProductSitemapEntry = { slug: string; updatedAt?: string; image?: string };
 
 export async function getProductSitemapEntries(): Promise<ProductSitemapEntry[]> {
   const payload = await getPayloadClient();
@@ -696,7 +696,8 @@ export async function getProductSitemapEntries(): Promise<ProductSitemapEntry[]>
     // `pagination: false` et couperait le sitemap.
     pagination: false,
     overrideAccess: false,
-    select: { slug: true, updatedAt: true, combustible: true, productType: true },
+    depth: 1, // hydrate mainImage pour la balise image du sitemap
+    select: { slug: true, updatedAt: true, combustible: true, productType: true, mainImage: true },
     where: {
       and: [{ hiddenFromBoutique: { not_equals: true } }, ...inCatalogueWhere()],
     },
@@ -705,5 +706,8 @@ export async function getProductSitemapEntries(): Promise<ProductSitemapEntry[]>
   return (result.docs as unknown as Array<PayloadProduct & { updatedAt?: string }>)
     .filter((doc) => !isOffCatalogue(doc.combustible))
     .filter((doc) => !isHybrid({ combustible: doc.combustible, type: doc.productType }))
-    .map((doc) => ({ slug: doc.slug, updatedAt: doc.updatedAt }));
+    .map((doc) => {
+      const image = mapMedia(doc.mainImage, doc.slug);
+      return { slug: doc.slug, updatedAt: doc.updatedAt, image: image?.sizes?.full ?? image?.url };
+    });
 }

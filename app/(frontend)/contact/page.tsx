@@ -6,9 +6,9 @@ import { buildPageMetadata } from "@/lib/seo";
 import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
 
 export const metadata = buildPageMetadata({
-  title: "Contact, Mister Pellets Wallonie",
+  title: "Contact et rendez-vous à Fernelmont",
   description:
-    "Contactez Mister Pellets à Fernelmont : téléphone, email, adresse et horaires. Showroom uniquement sur rendez-vous. On répond dans la journée pendant les heures ouvrées.",
+    "Contactez Mister Pellets à Fernelmont : téléphone, e-mail et adresse. Showroom uniquement sur rendez-vous, réponse dans la journée aux heures de bureau.",
   path: "/contact",
 });
 

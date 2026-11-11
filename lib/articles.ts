@@ -265,7 +265,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "mcz-arrive-chez-mister-pellets",
     title: "MCZ arrive chez Mister Pellets : toute la gamme pellets posée en Wallonie",
-    metaTitle: "MCZ chez Mister Pellets : poêles à pellets Core, canalisables et hydro",
+    metaTitle: "MCZ arrive : poêles à pellets Core, canalisables et hydro",
     metaDescription:
       "Depuis octobre 2026, Mister Pellets pose toute la gamme pellets MCZ en Wallonie : combustion Core, Wi-Fi Maestro+, canalisables Comfort Air, hydros, foyers et inserts. Ce qui change pour vous.",
     excerpt:
@@ -383,7 +383,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "austroflamm-cadel-nouvelles-marques-mister-pellets",
     title: "Austroflamm et Cadel arrivent chez Mister Pellets",
-    metaTitle: "Austroflamm et Cadel : deux nouvelles marques de poêles à pellets en Wallonie",
+    metaTitle: "Austroflamm et Cadel : deux nouvelles marques de poêles",
     metaDescription:
       "Depuis octobre 2026, Mister Pellets pose Austroflamm (Autriche, haut de gamme, pellets sans ventilateur dans la pièce et mixtes Duo) et Cadel (Italie, groupe MCZ, Wi-Fi intégré). Ce qui change pour vous.",
     excerpt:
@@ -501,7 +501,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "budget-hiver-poele-pellets-consommation-2026",
     title: "Combien coûte un hiver au pellet ? Le calcul pour 2026-2027",
-    metaTitle: "Consommation d'un poêle à pellets : combien de sacs pour l'hiver 2026-2027 ?",
+    metaTitle: "Poêle à pellets : combien de sacs pour l'hiver 2026-2027 ?",
     metaDescription:
       "Combien de pellets pour un hiver, ce que ça coûte en 2026 et comment le calculer chez vous à partir de votre ancienne facture. Prix ValBiom et SPF Économie.",
     excerpt:
@@ -614,7 +614,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "insert-pellets-cheminee-existante",
     title: "Transformer une cheminée ouverte en insert à pellets : ce qu'on vérifie avant de poser",
-    metaTitle: "Insert à pellets dans une cheminée existante : faisabilité, tubage, réservoir",
+    metaTitle: "Insert à pellets dans une cheminée existante : le guide",
     metaDescription:
       "Votre feu ouvert chauffe surtout le conduit. Un insert à pellets récupère la cheminée : dimensions, tubage, électricité, réservoir, canalisation. Le point avant devis.",
     excerpt:
@@ -934,7 +934,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "ek63-wifi-serie-poele-pellets-connecte",
     title: "EK63 : pourquoi le Wi-Fi de série change la vie au quotidien",
-    metaTitle: "EK63 Wi-Fi de série : poêle à pellets connecté sans abonnement",
+    metaTitle: "EK63 Wi-Fi de série : le poêle à pellets sans abonnement",
     metaDescription:
       "Le Wi-Fi Smart est intégré de série sur la majorité des EK63, sans abonnement. Allumage à distance, programmation, suivi conso. Ce que ça change vraiment.",
     excerpt:
@@ -1031,7 +1031,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "source-feeding-girolami-brasier-auto-nettoyant",
     title: "Source Feeding Girolami : pourquoi le brasier reste propre tout seul",
-    metaTitle: "Source Feeding Girolami : le brasier de poêle qui se nettoie seul",
+    metaTitle: "Source Feeding Girolami : le brasier qui se nettoie seul",
     metaDescription:
       "Le brevet Source Feeding de Girolami pousse le pellet par le bas et chasse les cendres dans un bac. Fini le nettoyage quotidien du brasier. Explications.",
     excerpt:
@@ -1213,7 +1213,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "ek63-etanche-maison-passive-bbc",
     title: "Maison passive ou BBC : quel poêle EK63 étanche choisir",
-    metaTitle: "Poêle EK63 étanche pour maison passive ou BBC : lequel choisir",
+    metaTitle: "Poêle EK63 étanche pour maison passive ou BBC : lequel ?",
     metaDescription:
       "En maison passive ou BBC, le poêle doit être étanche. Quel modèle EK63 selon la surface : Like 80, Zone 80, Tweed 90+, Spy 110+, Daily 130++, Entity 90+.",
     excerpt:
@@ -1406,7 +1406,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "girolami-canalisable-intelligent-trois-ventilateurs",
     title: "Trois ventilateurs, trois pièces : le canalisable intelligent Girolami",
-    metaTitle: "Girolami canalisable : trois ventilateurs indépendants par pièce",
+    metaTitle: "Girolami canalisable : trois ventilateurs indépendants",
     metaDescription:
       "Le canalisable Girolami pilote trois ventilateurs indépendants, un par pièce, chacun ajusté à sa température. Thermostats sans fil TriKey. Explications.",
     excerpt:
@@ -1697,7 +1697,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "dimensionner-poele-pellets-surface-wallonie",
     title: "Comment dimensionner son poêle à pellets selon la surface en Wallonie",
-    metaTitle: "Quelle puissance de poêle à pellets selon la surface ? (2026)",
+    metaTitle: "Quelle puissance de poêle à pellets selon la surface ?",
     metaDescription:
       "1 kW pour 10 m² PEB B, 1 kW pour 15 m² PEB A, 1 kW pour 7 m² PEB E. Méthode complète, exemples chiffrés, erreurs à éviter en Wallonie.",
     excerpt:
@@ -1925,7 +1925,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "primes-wallonie-2026-poele-pellets-combien-recuperer",
     title: "Prime poêle à pellets en Wallonie : ce qui reste après le 1er octobre 2026",
-    metaTitle: "Prime poêle à pellets Wallonie : fin au 30/09/2026, ce qui reste",
+    metaTitle: "Prime poêle à pellets en Wallonie : ce qui reste fin 2026",
     metaDescription:
       "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Rénopack, Rénoprêt, TVA à 6 %, MEBAR : ce qui reste, et pour qui.",
     excerpt:
@@ -2181,7 +2181,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "poele-pellets-eteint-tout-seul-causes",
     title: "Pourquoi mon poêle à pellets s'éteint tout seul ? 7 causes courantes",
-    metaTitle: "Poêle pellets qui s'éteint seul, 7 causes et solutions (2026)",
+    metaTitle: "Poêle à pellets qui s'éteint seul : 7 causes et solutions",
     metaDescription:
       "Creuset bouché, pellets humides, sonde encrassée, conduit obstrué… Voici comment diagnostiquer un poêle pellets qui s'arrête tout seul.",
     excerpt:

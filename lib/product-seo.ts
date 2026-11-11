@@ -3,6 +3,7 @@ import { BONUS } from "./bonus";
 import { formatKw } from "./power";
 import { productFuel, productKindLabel } from "./product-kind";
 import { shownPriceTTC } from "./product-price";
+import { fitText } from "./seo";
 import type { ProductDemo, ProductVariantData } from "./products-demo";
 import {
   FREE_ZONE_POSTAL_CODES,
@@ -65,21 +66,6 @@ export function productTitle(p: ProductDemo): string {
 /** Le suffixe de marque tient-il derrière ce titre ? */
 export function titleFitsSuffix(title: string): boolean {
   return title.length + SUFFIX.length <= TITLE_MAX;
-}
-
-/** Coupe un texte à la dernière phrase entière qui tient, sinon au dernier mot. */
-export function fitText(text: string, max: number): string {
-  const clean = text.replace(/\s+/g, " ").trim();
-  if (clean.length <= max) return clean;
-  const sentences = clean.match(/[^.!?]+[.!?]+/g) ?? [];
-  let out = "";
-  for (const sentence of sentences) {
-    if ((out + sentence).trim().length > max) break;
-    out += sentence;
-  }
-  if (out.trim().length >= 40) return out.trim();
-  const cut = clean.slice(0, max - 1);
-  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:]$/, "")}…`;
 }
 
 /**

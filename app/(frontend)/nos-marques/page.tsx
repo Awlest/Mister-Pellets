@@ -7,9 +7,9 @@ import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
   title:
-    "Nos marques de poêles à pellets : MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel",
+    "Nos marques de poêles à pellets en Wallonie",
   description:
-    "Les 6 marques posées par Mister Pellets en Wallonie : MCZ (gamme complète, combustion Core), Edilkamin (référence depuis 1963), EK63 (groupe Edilkamin, Wi-Fi de série), Girolami (brasier auto-nettoyant), Austroflamm (haut de gamme autrichien) et Cadel (groupe MCZ, Wi-Fi intégré).",
+    "Les 6 marques posées par Mister Pellets en Wallonie : MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel. Ce qui les distingue et pour quelle maison.",
   path: "/nos-marques",
 });
 

@@ -26,7 +26,7 @@ import { PHONE_HOURS } from "@/config/site";
 export const metadata = buildPageMetadata({
   title: "Prix d'un poêle à pellets posé en Wallonie",
   description:
-    "Combien coûte un poêle à pellets posé ? Exemples chiffrés avec la pose et la TVA à 6 %, forfaits de pose selon votre cheminée. Rappel gratuit avec un prix, visite technique offerte.",
+    "Combien coûte un poêle à pellets posé ? Exemples chiffrés avec la pose et la TVA à 6 %, forfaits de pose selon votre cheminée, visite technique offerte.",
   path: "/prix-poele-pellets",
 });
 

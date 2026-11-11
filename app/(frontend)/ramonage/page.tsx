@@ -5,7 +5,7 @@ import { getService } from "@/lib/services";
 export const metadata: Metadata = {
   title: "Ramonage de poêle à pellets à Namur et en Wallonie",
   description:
-    "Ramonage de poêle à pellets à 90 € TVAC, certificat remis sur place. Namur, Andenne, Gembloux, Huy, 50 km autour de Fernelmont. Rendez-vous au 081 13 83 09.",
+    "Ramonage de poêle à pellets à 90 € TVAC, certificat remis sur place. Namur, Andenne, Gembloux, Huy et 50 km autour de Fernelmont, sur rendez-vous.",
   alternates: { canonical: "https://mister-pellets.be/ramonage" },
 };
 

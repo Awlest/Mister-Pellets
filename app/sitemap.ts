@@ -5,6 +5,8 @@ import { GUIDES } from "@/lib/guides";
 import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { PROVINCES } from "@/lib/local-seo";
 import { ARTICLES } from "@/lib/articles";
+import { CATEGORIES } from "@/lib/categories";
+import { ROUTES } from "@/config/navigation";
 import { getPayloadClient } from "@/lib/payload-client";
 import { getProductSitemapEntries } from "@/lib/products";
 import { errorInfo } from "@/lib/log-error";
@@ -15,52 +17,113 @@ import { errorInfo } from "@/lib/log-error";
  *
  * Hiérarchie de priorité :
  * - 1.0 : homepage
- * - 0.9 : pages structurantes (boutique, devis, primes)
+ * - 0.9 : pages structurantes (boutique, catégories, devis, prix, aides)
  * - 0.8 : pages services (installation, contact, etc.) + zones-d-intervention
  * - 0.7 : pages produits + pages marques
  * - 0.6 : pages locales (villes) + guides
  * - 0.5 : articles blog
  * - 0.3 : pages légales
+ *
+ * N'y figurent que des adresses indexables, non redirigées et canoniques sur
+ * elles-mêmes : ni fiche masquée, ni fiche bois (redirigée vers
+ * mister-bois.be), ni hybride (canonical vers mister-bois.be).
  */
 
 export const revalidate = 3600; // 1h ISR
 
+/**
+ * Dernière modification du CONTENU de chaque page, tenue à la main
+ * (AAAA-MM-JJ). Jamais l'heure de génération : un `lastmod` qui change toutes
+ * les heures ne dit rien à un moteur, qui finit par l'ignorer. Mettez la date
+ * à jour quand le texte, les prix ou les liens d'une page changent. Les fiches
+ * produit prennent la date de l'admin, les articles et les guides leur
+ * `modifiedAt`.
+ */
+const CONTENT_DATES = {
+  // Lot du 11/11/2026 : catalogue recentré sur le pellet, maillage, données structurées.
+  [ROUTES.home]: "2026-11-11",
+  [ROUTES.shop]: "2026-11-11",
+  [ROUTES.pellets]: "2026-11-11",
+  [ROUTES.quoteForm]: "2026-11-11",
+  [ROUTES.configurator]: "2026-11-11",
+  [ROUTES.prices]: "2026-11-11",
+  [ROUTES.grants]: "2026-11-11",
+  [ROUTES.brands]: "2026-11-11",
+  [ROUTES.zones]: "2026-11-11",
+  [ROUTES.blog]: "2026-11-11",
+  [ROUTES.contact]: "2026-11-11",
+  [ROUTES.faq]: "2026-11-11",
+  [ROUTES.booking]: "2026-11-11",
+  [ROUTES.sweeping]: "2026-11-11",
+  [ROUTES.about]: "2026-11-11",
+  [ROUTES.legal]: "2026-11-11",
+  [ROUTES.guides]: "2026-10-17",
+  [ROUTES.maintenance]: "2026-10-25",
+  [ROUTES.repair]: "2026-10-25",
+  [ROUTES.reviews]: "2026-11-01",
+  [ROUTES.terms]: "2026-10-25",
+  [ROUTES.privacy]: "2026-10-25",
+  [ROUTES.cookies]: "2026-10-25",
+} as const satisfies Record<string, string>;
+
+/** Pages marque, installation, ville et catégories : gabarits et données revus le 11/11/2026. */
+const CATALOGUE_PAGES_DATE = "2026-11-11";
+
+const day = (iso: string): Date => new Date(`${iso.slice(0, 10)}T00:00:00.000Z`);
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
+  const page = (
+    path: keyof typeof CONTENT_DATES,
+    changeFrequency: "weekly" | "monthly" | "yearly",
+    priority: number,
+  ): MetadataRoute.Sitemap[number] => ({
+    url: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
+    lastModified: day(CONTENT_DATES[path]),
+    changeFrequency,
+    priority,
+  });
 
   // ===== PAGES STATIQUES =====
   const staticPages: MetadataRoute.Sitemap = [
-    { url: SITE_URL,                                       lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
-    { url: `${SITE_URL}/boutique`,                          lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${SITE_URL}/palette-pellets-comfo`,             lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
-    { url: `${SITE_URL}/demande-de-devis`,                  lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/estimation`,                        lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${SITE_URL}/prix-poele-pellets`,                lastModified: now, changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${SITE_URL}/primes-energie-wallonie-2026`,      lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/nos-marques`,                       lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/guides`,                            lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
-    { url: `${SITE_URL}/zones-d-intervention`,              lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/blog`,                              lastModified: now, changeFrequency: "weekly",  priority: 0.8 },
-    { url: `${SITE_URL}/contact`,                           lastModified: now, changeFrequency: "yearly",  priority: 0.7 },
-    { url: `${SITE_URL}/faq`,                               lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/prendre-rendez-vous`,               lastModified: now, changeFrequency: "yearly",  priority: 0.7 },
+    page(ROUTES.home, "weekly", 1.0),
+    page(ROUTES.shop, "weekly", 0.9),
+    page(ROUTES.pellets, "weekly", 0.8),
+    page(ROUTES.quoteForm, "monthly", 0.9),
+    page(ROUTES.configurator, "weekly", 0.9),
+    page(ROUTES.prices, "weekly", 0.9),
+    page(ROUTES.grants, "monthly", 0.9),
+    page(ROUTES.brands, "monthly", 0.8),
+    page(ROUTES.guides, "weekly", 0.8),
+    page(ROUTES.zones, "monthly", 0.8),
+    page(ROUTES.blog, "weekly", 0.8),
+    page(ROUTES.contact, "yearly", 0.7),
+    page(ROUTES.faq, "monthly", 0.8),
+    page(ROUTES.booking, "yearly", 0.7),
     // Prestations d'entretien : pages d'arrivée du groupe d'annonces « services »
     // et cibles des requêtes « ramonage / entretien / dépannage poêle à pellets ».
-    { url: `${SITE_URL}/ramonage`,                          lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/entretien-poele-a-pellets`,         lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/depannage-poele-a-pellets`,         lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/avis-clients`,                      lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE_URL}/a-propos`,                          lastModified: now, changeFrequency: "yearly",  priority: 0.6 },
-    { url: `${SITE_URL}/mentions-legales`,                  lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
-    { url: `${SITE_URL}/cgv`,                               lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
-    { url: `${SITE_URL}/politique-confidentialite`,         lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
-    { url: `${SITE_URL}/politique-cookies`,                 lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
+    page(ROUTES.sweeping, "monthly", 0.8),
+    page(ROUTES.maintenance, "monthly", 0.8),
+    page(ROUTES.repair, "monthly", 0.8),
+    page(ROUTES.reviews, "monthly", 0.6),
+    page(ROUTES.about, "yearly", 0.6),
+    page(ROUTES.legal, "yearly", 0.3),
+    page(ROUTES.terms, "yearly", 0.3),
+    page(ROUTES.privacy, "yearly", 0.3),
+    page(ROUTES.cookies, "yearly", 0.3),
   ];
+
+  // ===== CATÉGORIES DU CATALOGUE =====
+  const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((category) => ({
+    url: `${SITE_URL}${category.path}`,
+    lastModified: day(CATALOGUE_PAGES_DATE),
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  }));
 
   // ===== PAGES MARQUES =====
   const brandPages: MetadataRoute.Sitemap = TOP_TIER_BRANDS.map((brand) => ({
     url: `${SITE_URL}/nos-marques/${brand.slug}`,
-    lastModified: now,
+    lastModified: day(CATALOGUE_PAGES_DATE),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
@@ -69,7 +132,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const localPages: MetadataRoute.Sitemap = TOP_TIER_BRANDS.flatMap((brand) =>
     PROVINCES.map((province) => ({
       url: `${SITE_URL}/installation/${brand.slug}/${province.slug}`,
-      lastModified: now,
+      lastModified: day(CATALOGUE_PAGES_DATE),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
@@ -78,15 +141,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ===== PAGES VILLES (avec rewrite vers /poeles-pellets-{slug}) =====
   const cityPages: MetadataRoute.Sitemap = CITIES.map((city) => ({
     url: `${SITE_URL}/poeles-pellets-${city.slug}`,
-    lastModified: now,
+    lastModified: day(CATALOGUE_PAGES_DATE),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
-  // ===== GUIDES =====
+  // ===== GUIDES : date de dernière modification du texte (lib/guides.ts) =====
   const guidePages: MetadataRoute.Sitemap = GUIDES.map((guide) => ({
     url: `${SITE_URL}/guides/${guide.slug}`,
-    lastModified: now,
+    lastModified: day(guide.modifiedAt),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
@@ -99,13 +162,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // ===== PRODUITS : on s'aligne EXACTEMENT sur la boutique.
-  // getProductSitemapEntries filtre hiddenFromBoutique (produits masques
-  // exclus) et desactive la pagination (plus de plafond a 100). Le sitemap ne
-  // doit lister QUE les produits reellement vendables : les masques (ex.
-  // Dielle/Ferlux/Girolami en cours d'encodage) en sont exclus tant qu'ils ne
-  // sont pas publies. lastmod = updatedAt Payload (vrai signal de fraicheur
-  // pour Google, plutot que la date de generation du sitemap). =====
+  // ===== PRODUITS : on s'aligne sur ce que la boutique référence ici.
+  // getProductSitemapEntries écarte les fiches masquées, les fiches bois et les
+  // hybrides, et désactive la pagination (plus de plafond à 100). lastmod =
+  // updatedAt Payload (vrai signal de fraîcheur) ; sans date, pas de lastmod
+  // plutôt que l'heure de génération. Photo principale en <image:image>. =====
   let payloadProductPages: MetadataRoute.Sitemap = [];
   let payloadArticlePages: MetadataRoute.Sitemap = [];
   try {
@@ -114,9 +175,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((e) => Boolean(e.slug))
       .map((e) => ({
         url: `${SITE_URL}/produit/${e.slug}`,
-        lastModified: e.updatedAt ? new Date(e.updatedAt) : now,
+        ...(e.updatedAt ? { lastModified: new Date(e.updatedAt) } : {}),
         changeFrequency: "monthly" as const,
         priority: 0.7,
+        ...(e.image ? { images: [e.image.startsWith("http") ? e.image : `${SITE_URL}${e.image}`] } : {}),
       }));
   } catch (err) {
     console.warn("[sitemap] produits non joignables :", errorInfo(err));
@@ -138,7 +200,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((a) => Boolean(a.slug))
       .map((a) => ({
         url: `${SITE_URL}/blog/${a.slug}`,
-        lastModified: a.updatedAt ? new Date(a.updatedAt) : now,
+        ...(a.updatedAt ? { lastModified: new Date(a.updatedAt) } : {}),
         changeFrequency: "monthly" as const,
         priority: 0.6,
       }));
@@ -148,6 +210,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const merged = [
     ...staticPages,
+    ...categoryPages,
     ...brandPages,
     ...localPages,
     ...cityPages,

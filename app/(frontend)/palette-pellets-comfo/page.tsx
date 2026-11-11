@@ -36,7 +36,7 @@ export function generateMetadata(): Metadata {
   const launch = isPelletLaunchPeriod();
   const price = formatEuro(pelletPriceTTC());
   return buildPageMetadata({
-    title: `Palette de pellets Comfo ${PALLET_NET_KG} kg à ${price} TVAC, retrait à Fernelmont`,
+    title: `Palette de pellets Comfo ${PALLET_NET_KG} kg à ${price} TVAC`,
     description: launch
       ? `${PELLET_OFFER.bags} sacs de ${PELLET_OFFER.bagKg} kg de pellets Comfo ${COMFO.certificationsShort}, ${price} TVAC la palette jusqu'au ${launchLastDayLabel}, puis ${formatEuro(PELLET_OFFER.priceTTC)}. Retrait sur rendez-vous à Fernelmont, paiement sur place.`
       : `${PELLET_OFFER.bags} sacs de ${PELLET_OFFER.bagKg} kg de pellets Comfo ${COMFO.certificationsShort}, ${price} TVAC la palette. Retrait sur rendez-vous à Fernelmont, paiement sur place.`,

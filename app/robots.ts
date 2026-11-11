@@ -2,34 +2,57 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 
 /**
+ * Robots de recherche et d'IA nommés, en plus de `*`.
+ *
+ * Un robot qui trouve un groupe à son nom n'applique QUE ce groupe : il ignore
+ * celui de `*`. Les quatre robots d'IA nommés auparavant (« Allow: / » seul)
+ * n'avaient donc plus aucun `Disallow` et pouvaient lire /api/. Tous les
+ * robots partagent maintenant un seul groupe, avec les mêmes règles. Même
+ * liste sur les quatre sites d'Awlest.
+ */
+const USER_AGENTS = [
+  "*",
+  "Googlebot",
+  "Bingbot",
+  "GPTBot",
+  "OAI-SearchBot",
+  "ChatGPT-User",
+  "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
+  "PerplexityBot",
+  "Perplexity-User",
+  "Google-Extended",
+  "Applebot",
+  "Applebot-Extended",
+  "Amazonbot",
+  "meta-externalagent",
+  "MistralAI-User",
+  "DuckAssistBot",
+  "CCBot",
+];
+
+/**
  * robots.txt dynamique. Bloque tout en preview (Vercel),
  * autorise tout en prod via NEXT_PUBLIC_ALLOW_INDEXING=true.
- * Cf. brief §9.3.
+ * Cf. brief §9.3. Pas de directive `Host` : ni Google ni Bing ne la lisent.
  */
 export default function robots(): MetadataRoute.Robots {
   const allowIndex = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
 
   if (!allowIndex) {
-    // Preview / staging : on bloque tout
     return {
-      rules: [{ userAgent: "*", disallow: "/" }],
-      host: SITE_URL,
+      rules: [{ userAgent: USER_AGENTS, disallow: "/" }],
     };
   }
 
-  // Production
   return {
     rules: [
       {
-        userAgent: "*",
-        // L'ordre des Allow / Disallow respecte le longest-match : on autorise
-        // explicitement /api/media/ (images produit Payload) et le flux
-        // Google Merchant, puis on bloque le reste de /api/ et /admin/.
-        // /_next/ n'est PAS bloqué : les images produit sont servies par
-        // /_next/image et le CSS/JS par /_next/static. Les bloquer empêchait
-        // Googlebot de rendre les pages et d'indexer les visuels.
+        userAgent: USER_AGENTS,
         allow: [
           "/",
+          // Photos des fiches (servies par l'API Payload) et flux Merchant.
           "/api/media/",
           "/api/feed/",
         ],
@@ -39,21 +62,7 @@ export default function robots(): MetadataRoute.Robots {
           "/*.json$",
         ],
       },
-      // Googlebot-Image doit pouvoir crawler les images servies par Payload
-      // (chemin /api/media/file/...) pour valider les annonces Merchant,
-      // ainsi que les images optimisées par Next (/_next/image?url=...).
-      {
-        userAgent: "Googlebot-Image",
-        allow: ["/", "/api/media/", "/_next/image"],
-        disallow: ["/admin/"],
-      },
-      // Bloquer les bots aggressifs (optionnel)
-      { userAgent: "GPTBot", allow: "/" },         // Autorise OpenAI (GEO friendly)
-      { userAgent: "Google-Extended", allow: "/" }, // Autorise Google AI (GEO friendly)
-      { userAgent: "PerplexityBot", allow: "/" },   // Autorise Perplexity (GEO friendly)
-      { userAgent: "ClaudeBot", allow: "/" },       // Autorise Claude (GEO friendly)
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
-    host: SITE_URL,
   };
 }

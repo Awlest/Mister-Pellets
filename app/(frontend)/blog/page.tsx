@@ -7,12 +7,12 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ARTICLES, ARTICLE_CATEGORIES, CATEGORY_LABELS } from "@/lib/articles";
-import { buildPageMetadata, buildBreadcrumbSchema, SITE_URL } from "@/lib/seo";
+import { buildPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Blog poêle à pellets, articles techniques & guides Wallonie",
+  title: "Blog poêle à pellets : conseils d'installateur",
   description:
-    "Guides d'achat, comparatifs marques, aides Wallonie 2026, dépannage et entretien. Le blog technique de Mister Pellets : du concret et des chiffres à jour pour la Wallonie.",
+    "Guides d'achat, comparatifs de marques, aides en Wallonie, entretien et dépannage : le blog de Mister Pellets, avec des chiffres à jour.",
   path: "/blog",
   keywords: [
     "blog poêle à pellets",
@@ -28,12 +28,7 @@ export default function BlogHubPage() {
   const featured = sorted[0];
   const others = sorted.slice(1);
 
-  // Schemas : Breadcrumb + ItemList des articles
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: "Accueil", url: "/" },
-    { name: "Blog", url: "/blog" },
-  ]);
-
+  // Schema : ItemList des articles (le fil d'Ariane est balisé par HeroSecondary)
   const itemList = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -48,13 +43,13 @@ export default function BlogHubPage() {
 
   return (
     <>
-      <JsonLd data={[breadcrumb, itemList]} />
+      <JsonLd data={itemList} />
 
       <HeroSecondary
         eyebrow="Blog éditorial"
         title={
           <>
-            Le savoir-faire pellets, <span className="mp-italic">sans bullshit</span>
+            Blog poêle à pellets : <span className="mp-italic">conseils d&apos;installateur</span>
           </>
         }
         description="Articles techniques sur le poêle à pellets : données chiffrées, retours terrain, aides Wallonie 2026. Du concret, pas des généralités."

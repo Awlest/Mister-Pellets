@@ -160,9 +160,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur MCZ, aux conditions remises par écrit avec le devis. Elle suppose une pose par un professionnel et un entretien annuel : on s'occupe des deux, avec intervention sous 48 à 72 h.",
     tags: ["Italie", "Depuis 1975", "Combustion Core", "Maestro+ Wi-Fi", "Comfort Air"],
     officialUrl: "https://www.mcz.it/fr-be",
-    metaTitle: "MCZ en Wallonie, poêles à pellets Core, canalisables et hydro | Mister Pellets",
+    metaTitle: "MCZ en Wallonie : poêles à pellets Core et hydro",
     metaDescription:
-      "MCZ, pionnier italien du pellet : combustion Core, Wi-Fi Maestro+ de série, canalisation Comfort Air, hydros jusqu'à 24 kW, foyers et inserts. Toute la gamme posée en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "MCZ, pionnier italien du pellet : combustion Core, Wi-Fi Maestro+ de série, canalisation Comfort Air, hydros jusqu'à 24 kW. Pose en Wallonie.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -222,9 +222,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur Edilkamin. Mister Pellets assure le SAV pièces localement : intervention sous 48 à 72 h et stock des consommables courants en atelier.",
     tags: ["Italie", "Depuis 1963", "Gamme très large", "Technologie Leonardo"],
     officialUrl: "https://www.edilkamin.com/",
-    metaTitle: "Edilkamin en Wallonie, revendeur officiel poêles italiens | Mister Pellets",
+    metaTitle: "Edilkamin en Wallonie : poêles à pellets italiens",
     metaDescription:
-      "Edilkamin, marque italienne fondée en 1963, siège à Lainate près de Milan. Poêles à pellets premium, technologie Leonardo. Pose en 1 jour par Mister Pellets, TVA à 6 % en rénovation.",
+      "Edilkamin, marque italienne fondée en 1963 près de Milan : poêles à pellets, technologie Leonardo. Pose par Mister Pellets, TVA à 6 % en rénovation.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -283,9 +283,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur EK63 : 2 ans. Mister Pellets ajoute son service local : intervention sous 48 à 72 h et stock des pièces courantes en atelier.",
     tags: ["Italie", "Groupe Edilkamin", "Wi-Fi Smart", "Étanche"],
     officialUrl: "https://www.ek-63.com/",
-    metaTitle: "EK63 en Wallonie, poêles à pellets Wi-Fi du groupe Edilkamin | Mister Pellets",
+    metaTitle: "EK63 en Wallonie : poêles à pellets Wi-Fi et étanches",
     metaDescription:
-      "EK63, marque connectée du groupe Edilkamin. Poêles à pellets étanches, Wi-Fi Smart de série, design moderne, prix accessible. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "EK63, marque connectée du groupe Edilkamin : poêles à pellets étanches, Wi-Fi Smart de série, prix accessible. Pose en Wallonie par Mister Pellets.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -344,9 +344,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur Girolami. Mister Pellets assure le SAV pièces localement : intervention sous 48 à 72 h et stock des consommables courants en atelier.",
     tags: ["Italie", "Depuis 1970", "Source Feeding breveté", "Hybride bois-pellet"],
     officialUrl: "https://www.girolami.eu/",
-    metaTitle: "Girolami en Wallonie, poêle hybride bois-pellet auto-nettoyant | Mister Pellets",
+    metaTitle: "Girolami en Wallonie : poêles à pellets autonettoyants",
     metaDescription:
-      "Girolami, fabricant italien familial depuis 1970, brevet Source Feeding auto-nettoyant. Hybrides bois-pellet, canalisables, hydro. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "Girolami, fabricant italien familial depuis 1970 : brevet Source Feeding autonettoyant, poêles canalisables, hydro et hybrides. Pose en Wallonie.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -499,9 +499,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Austroflamm garantit le corps de chauffe 6 ans et les autres pièces en acier et en fonte 2 ans en Autriche et en Allemagne ; en Belgique, les conditions de l'importateur s'appliquent et on vous les remet par écrit avec le devis. Elles supposent une pose par un professionnel et un entretien annuel : on s'occupe des deux, avec intervention sous 48 à 72 h.",
     tags: ["Autriche", "Depuis 1983", "Sans convection forcée", "Mixte bois-pellets"],
     officialUrl: "https://www.austroflamm.com/",
-    metaTitle: "Austroflamm en Wallonie, poêles à pellets haut de gamme et mixtes Duo | Mister Pellets",
+    metaTitle: "Austroflamm en Wallonie : poêles à pellets haut de gamme",
     metaDescription:
-      "Austroflamm, marque autrichienne haut de gamme depuis 1983 : poêles à pellets sans convection forcée, mixtes bois-pellets Duo, design Cesare Monti. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "Austroflamm, marque autrichienne depuis 1983 : poêles à pellets sans convection forcée, mixtes Duo, design Cesare Monti. Pose en Wallonie.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -572,9 +572,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur Cadel : 2 ans à partir de la date d'achat, facture faisant foi, sur les pièces défectueuses d'origine (joints, vitre et pièces amovibles du foyer exclus). Elle suppose une installation par un professionnel : on pose, on met en service et on assure le SAV, avec intervention sous 48 à 72 h.",
     tags: ["Italie", "Plus de 60 ans", "Groupe MCZ", "Wi-Fi intégré", "Autoclean"],
     officialUrl: "https://cadelsrl.com/",
-    metaTitle: "Cadel en Wallonie, poêles à pellets Wi-Fi du groupe MCZ | Mister Pellets",
+    metaTitle: "Cadel en Wallonie : poêles à pellets Wi-Fi, groupe MCZ",
     metaDescription:
-      "Cadel, fabricant italien près de Trévise, groupe MCZ : poêles à pellets Wi-Fi et Bluetooth intégrés, brasero Autoclean, poêles plats, canalisables et hydro. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "Cadel, fabricant italien du groupe MCZ : poêles à pellets Wi-Fi et Bluetooth, brasero Autoclean, poêles plats, canalisables et hydro. Pose en Wallonie.",
   },
 };
 

@@ -34,7 +34,16 @@ export interface GuideData {
   title: string;
   description: string;
   category: "Choix" | "Technique" | "Entretien" | "Aide";
-  readingTime: string; // "8 min"
+  /** Temps de lecture, calculé sur le texte du guide (200 mots par minute) : « 3 min ». */
+  readingTime: string;
+  /**
+   * Première mise en ligne et dernière modification du texte (AAAA-MM-JJ),
+   * relevées dans l'historique git de ce fichier. À mettre à jour quand le
+   * contenu du guide change : la date s'affiche sur la page et part dans le
+   * JSON-LD et le sitemap.
+   */
+  publishedAt: string;
+  modifiedAt: string;
   excerpt: string;
   sections: GuideSection[];
   faq?: { question: string; answer: string }[];
@@ -42,16 +51,17 @@ export interface GuideData {
   metaDescription: string;
 }
 
-export const GUIDES: GuideData[] = [
+const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
   // Guide de saison (03/10/2026), placé en tête pendant la saison de chauffe :
   // la page /guides et le bloc « Continuer sur le sujet » suivent l'ordre du tableau.
   {
     slug: "remettre-en-route-poele-pellets-automne",
+    publishedAt: "2026-10-03",
+    modifiedAt: "2026-10-03",
     title: "Remettre son poêle à pellets en route à l'automne : le guide de début de saison",
     description:
       "Ce qu'on vérifie avant le premier feu, comment rallumer sans panne, régler le poêle pour l'hiver et faire son stock de pellets. Le guide de saison des techniciens Mister Pellets.",
     category: "Entretien",
-    readingTime: "7 min",
     excerpt:
       "Après six mois d'arrêt, un poêle à pellets se rallume rarement du premier coup sans un peu de préparation. Voici l'ordre dans lequel on fait les choses, et les signes qui doivent vous faire appeler.",
     sections: [
@@ -131,16 +141,17 @@ export const GUIDES: GuideData[] = [
           "19 à 20 °C dans la pièce de vie. Au-delà, chaque degré se paie tout l'hiver. La nuit, une baisse programmée vaut souvent mieux qu'un arrêt complet, sauf si la maison garde bien la chaleur.",
       },
     ],
-    metaTitle: "Remettre son poêle à pellets en route à l'automne, le guide de saison",
+    metaTitle: "Remettre son poêle à pellets en route à l'automne",
     metaDescription:
       "Vérifications avant le premier feu, premier allumage sans échec, réglages d'hiver, stock de pellets et signes d'alerte. Le guide de début de saison Mister Pellets.",
   },
   {
     slug: "guide-achat-poele-pellets-wallonie",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-11-10",
     title: "Le guide d'achat 2026 du poêle à pellets en Wallonie",
     description: "Tout savoir avant d'acheter : technologies, marques, aides, pose, entretien. Le guide complet par les techniciens Mister Pellets.",
     category: "Choix",
-    readingTime: "12 min",
     excerpt:
       "Acheter un poêle à pellets représente un investissement de 4 000 à 8 000 € pose comprise. Voici comment ne pas se tromper, marque par marque, étape par étape.",
     sections: [
@@ -199,16 +210,17 @@ export const GUIDES: GuideData[] = [
           "Pour un poêle seul, non : la prime qui l'exigeait s'est arrêtée le 30 septembre 2026. L'audit logement redevient indispensable si vous visez un Rénopack ou un Rénoprêt : il doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui dit quels travaux font gagner le label exigé.",
       },
     ],
-    metaTitle: "Guide d'achat poêle à pellets en Wallonie 2026, Mister Pellets",
+    metaTitle: "Guide d'achat du poêle à pellets en Wallonie (2026)",
     metaDescription:
       "Le guide complet pour choisir votre poêle à pellets en Wallonie : technologies, marques, aides, pose, entretien. Conseils des techniciens Mister Pellets.",
   },
   {
     slug: "poele-pellets-canalisable",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-10-03",
     title: "Poêle à pellets canalisable : le guide complet",
     description: "Comment un canalisable fonctionne, quelles puissances pour quelles surfaces, exemples d'installations en maisons wallonnes typiques.",
     category: "Technique",
-    readingTime: "8 min",
     excerpt:
       "Le canalisable est la solution qu'on installe le plus en Wallonie après l'air pulsé classique. Elle permet de chauffer plusieurs pièces avec un seul appareil, sans casser tout le bâti.",
     sections: [
@@ -246,16 +258,17 @@ export const GUIDES: GuideData[] = [
           "Oui, c'est la configuration la plus fréquente. La gaine monte verticalement dans une cloison ou dans un coffrage, puis se distribue à l'étage. Comptez 5-8m max de longueur de gaine pour conserver une bonne température en sortie.",
       },
     ],
-    metaTitle: "Poêle à pellets canalisable, Le guide complet",
+    metaTitle: "Poêle à pellets canalisable : le guide",
     metaDescription:
       "Tout sur les poêles à pellets canalisables : fonctionnement, puissances, exemples wallons. EK63 Tweed et Spy, Edilkamin Cherie. Conseil Mister Pellets.",
   },
   {
     slug: "poele-pellets-hydro",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-10-03",
     title: "Poêle hydro : remplacer une chaudière mazout par des pellets",
     description: "Le hydro chauffe un circuit d'eau et peut remplacer une chaudière classique. Cas d'usage, marques, dimensionnement.",
     category: "Technique",
-    readingTime: "10 min",
     excerpt:
       "Si vous avez une chaudière mazout vieillissante et un système radiateur ou plancher chauffant, l'hydro pellets est la solution la plus rentable pour passer aux énergies renouvelables, souvent rentabilisé en 5 à 9 ans.",
     sections: [
@@ -293,16 +306,17 @@ export const GUIDES: GuideData[] = [
           "Le réservoir des hydros que nous posons contient 14 à 30 kg : de quelques heures à pleine puissance à une grosse journée en régime doux. Pour ne pas remplir tous les jours en plein hiver, beaucoup ajoutent un silo externe relié par aspiration : 500 à 2 000 kg de stock, plusieurs semaines d'autonomie.",
       },
     ],
-    metaTitle: "Poêle hydro pour remplacer chaudière mazout, Guide",
+    metaTitle: "Poêle hydro : remplacer une chaudière au mazout",
     metaDescription:
       "Le guide complet du poêle hydro pour remplacer une chaudière mazout : marques (Girolami, Edilkamin, EK63), dimensionnement, coûts, aides. Conseil Mister Pellets.",
   },
   {
     slug: "comment-entretenir-poele-pellets",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-10-25",
     title: "L'entretien d'un poêle à pellets : la check-list complète",
     description: "Que faire au quotidien, chaque semaine, chaque saison, et quand appeler un pro. Le guide pour faire durer votre poêle 15+ ans.",
     category: "Entretien",
-    readingTime: "9 min",
     excerpt:
       "Un poêle à pellets bien entretenu dure 15-20 ans sans souci majeur. Mal entretenu, il commence à perdre du rendement après 2-3 ans, et tombe en panne après 5-7 ans. Voici ce qu'il faut vraiment faire.",
     sections: [
@@ -352,16 +366,17 @@ export const GUIDES: GuideData[] = [
           "Causes courantes : réservoir vide, brûleur encrassé, capteur de tirage défaillant, fusible thermique qui a sauté à cause d'une surchauffe. Vérifiez dans cet ordre. Si ça persiste, appelez-nous, c'est rarement grave mais ça nécessite un diagnostic.",
       },
     ],
-    metaTitle: "Entretien d'un poêle à pellets, Check-list complète | Mister Pellets",
+    metaTitle: "Entretien d'un poêle à pellets : la check-list",
     metaDescription:
       "Comment entretenir votre poêle à pellets jour, semaine, saison, année. Check-list complète des techniciens Mister Pellets pour faire durer votre appareil.",
   },
   {
     slug: "quelle-puissance-poele-pellets",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-10-03",
     title: "Quelle puissance de poêle à pellets pour ma maison ?",
     description: "Calcul rapide selon la surface et le PEB. Tableau de correspondance pour une vingtaine de cas typiques wallons.",
     category: "Choix",
-    readingTime: "6 min",
     excerpt:
       "Sous-dimensionner votre poêle, c'est devoir tourner à plein régime en permanence. Sur-dimensionner, c'est de l'argent gaspillé. Voici comment caler la puissance correctement.",
     sections: [
@@ -410,6 +425,21 @@ export const GUIDES: GuideData[] = [
       "Calculer la puissance de poêle à pellets selon votre surface et votre PEB. Tableau de correspondance pour 20 cas typiques wallons. Conseil Mister Pellets.",
   },
 ];
+
+/** Mots du guide : chapô, intertitres, paragraphes, listes et FAQ. */
+function wordCount(guide: Omit<GuideData, "readingTime">): number {
+  const texts = [
+    guide.excerpt,
+    ...guide.sections.flatMap((section) => [section.heading, ...(section.paragraphs ?? []), ...(section.list ?? [])]),
+    ...(guide.faq ?? []).flatMap((q) => [q.question, q.answer]),
+  ];
+  return texts.join(" ").split(/\s+/).filter(Boolean).length;
+}
+
+export const GUIDES: GuideData[] = GUIDE_SOURCES.map((guide) => ({
+  ...guide,
+  readingTime: `${Math.max(1, Math.round(wordCount(guide) / 200))} min`,
+}));
 
 export function getGuideBySlug(slug: string): GuideData | undefined {
   return GUIDES.find((g) => g.slug === slug);
