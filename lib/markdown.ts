@@ -90,7 +90,7 @@ export function brandMarkdown(brand: BrandData): string {
   return join(
     `# ${brand.name} : ${brand.tagline}`,
     `> ${md(brand.intro)}`,
-    `Pays : ${brand.country}. ${brand.positioning}. Garantie : ${brand.warranty}. Site du fabricant : ${brand.officialUrl}`,
+    `Pays : ${brand.country}. ${brand.positioning}. Garantie : ${brand.warranty.replace(/\.\s*$/, "").replace(/^./, (c) => c.toLowerCase())}. Site du fabricant : ${brand.officialUrl}`,
     brand.whyWeLove && brand.whyWeLove.length > 0 ? join("## Pourquoi nous la posons", ...brand.whyWeLove.map(md)) : null,
     brand.distinctions && brand.distinctions.length > 0
       ? join("## Ce qui la distingue", brand.distinctions.map((d) => `- **${d.title}** : ${md(d.description)}`).join("\n"))

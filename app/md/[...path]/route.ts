@@ -27,6 +27,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ pat
   return new Response(`${body}\n`, {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
+      // Lisible par les assistants, pas indexé comme un doublon de la page HTML.
+      "X-Robots-Tag": "noindex",
       Link: `<${SITE_URL}${pagePath}>; rel="canonical"`,
     },
   });

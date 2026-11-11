@@ -415,7 +415,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         heading: "Budget, TVA et aides",
         paragraphs: [
           "Le prix d'un hydro posé dépend de la puissance, du raccordement et de l'évacuation. L'[estimation en ligne](/estimation) compose le total avec le poêle choisi, et la visite technique le rend ferme. Les fiches sans prix affiché sont sur devis.",
-          "Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026. L'aide qui joue presque toujours est la TVA à 6 % au lieu de 21 %, quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans. Pour les petits revenus, la subvention MEBAR passe par le CPAS avant les travaux. Le détail est sur [notre page des aides](/aides-poele-a-pellets-wallonie).",
+          "La prime Habitation s'est arrêtée le 30 septembre 2026. L'aide qui joue presque toujours est la TVA à 6 % au lieu de 21 %, quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans. Pour les petits revenus, la subvention MEBAR passe par le CPAS avant les travaux. Le détail est sur [notre page des aides](/aides-poele-a-pellets-wallonie).",
         ],
       },
       {
@@ -510,7 +510,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
       {
         heading: "Une fois par an : l'entretien par un technicien",
         paragraphs: [
-          "MCZ écrit qu'une fois par an, normalement à la fin de l'hiver, il faut s'adresser à un technicien agréé pour l'entretien ordinaire. Les autres fabricants demandent eux aussi un entretien annuel pour garder la garantie. Le technicien démonte le poêle, nettoie l'échangeur et l'extracteur de fumées, contrôle les capteurs et les joints, règle la combustion et ramone le conduit.",
+          "MCZ écrit qu'une fois par an, normalement à la fin de l'hiver, il faut s'adresser à un technicien agréé pour l'entretien ordinaire. Cadel demande, au moins une fois par an, de faire nettoyer la chambre de combustion, vérifier les joints, nettoyer moteurs et ventilateurs et contrôler la carte électronique, par son service technique agréé. Le technicien démonte le poêle, nettoie l'échangeur et l'extracteur de fumées, contrôle les capteurs et les joints, règle la combustion et ramone le conduit.",
           "Aucune loi wallonne n'impose le ramonage d'un poêle à air, mais la plupart des contrats d'assurance incendie l'exigent chaque année : gardez le certificat. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 impose une inspection périodique annuelle des installations au combustible solide, avec une attestation de contrôle (articles 10 et 13).",
           "Cette inspection est distincte de l'entretien de l'appareil. Chez Mister Pellets, l'[entretien annuel](/entretien-poele-a-pellets) coûte 175 € TVAC, ramonage du conduit compris, et le [ramonage seul](/ramonage) 90 € TVAC, certificat compris.",
         ],
@@ -567,6 +567,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
     sources: [
       { label: "MCZ, foire aux questions belge : nettoyage du brasero et de la vitre, entretien annuel par un technicien agréé, pellets certifiés et garantie, lue le 11/11/2026", href: "https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions" },
       { label: "Arrêté du Gouvernement wallon du 29 janvier 2009 sur les installations de chauffage central, consolidation officieuse de Wallex en vigueur depuis le 24/02/2023, art. 10, 4°, et art. 13, lue le 11/11/2026", href: "https://wallex.wallonie.be/files/pdfs/19/6833_Arr%C3%AAt%C3%A9_du_Gouvernement_wallon_tendant_%C3%A0_pr%C3%A9venir_la_pollution_atmosph%C3%A9rique_provoqu%C3%A9e_par_les_installations_de_chauffage_central_destin%C3%A9es_au_chauffage_de_b%C3%A2timents_ou_%C3%A0_la_production_d'eau_chaud_24-02-2023-.pdf" },
+      { label: "Cadel, manuel de l'utilisateur « Poêle à granulés », réf. 89023068A (©2025), § 13 (nettoyage), lu le 11/11/2026", href: "https://grp.cadelsrl.com/documents/89023068A.pdf" },
       { label: "Tarifs d'entretien, de ramonage et de dépannage de Mister Pellets au 11/11/2026" },
     ],
     metaTitle: "Entretien d'un poêle à pellets : qui fait quoi",
@@ -754,7 +755,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
       {
         heading: "Après une coupure de courant",
         paragraphs: [
-          "La notice Cadel distingue deux cas. Une coupure de moins de 10 secondes : le poêle reprend où il en était. Plus longue, poêle allumé ou en phase d'allumage : au retour du courant, il fait un refroidissement complet, affiché « ON BLACK OUT », puis un nouvel allumage. Les autres marques ont leur propre comportement ; notre article [poêle à pellets et coupure de courant](/blog/poele-pellets-sans-electricite-coupure-courant) le détaille marque par marque.",
+          "La notice Cadel distingue deux cas. Une coupure de moins de 10 secondes : le poêle reprend où il en était. Plus longue, poêle allumé ou en phase d'allumage : au retour du courant, il fait un refroidissement complet, affiché « ON BLACK OUT », puis un nouvel allumage. Les autres marques ont leur propre comportement, décrit dans leur notice ; notre article [poêle à pellets et coupure de courant](/blog/poele-pellets-sans-electricite-coupure-courant) donne la consommation et les conseils des fabricants.",
         ],
       },
       {

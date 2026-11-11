@@ -12,7 +12,7 @@ import { ROUTES } from "@/config/navigation";
 import { CATEGORIES } from "@/lib/categories";
 import { eur } from "@/lib/estimate";
 import { getInstallPrices, heightNote } from "@/lib/price-examples";
-import { OPTIONS, VAT, formatEur, withVat } from "@/lib/pose/moteur";
+import { HAUTEUR, OPTIONS, VAT, formatEur, withVat } from "@/lib/pose/moteur";
 import { TARIFS } from "@/lib/pose/tarifs";
 import { POSE_DURATIONS, getService } from "@/lib/services";
 import { ORGANIZATION_ID, SITE_URL, buildFAQSchema, buildPageMetadata } from "@/lib/seo";
@@ -81,7 +81,7 @@ export default function InstallationPage() {
     {
       question: "Quel délai entre la demande et la pose ?",
       answer:
-        "Comptez 3 à 6 semaines en saison normale, plus de septembre à décembre. La visite technique se planifie dans la semaine qui suit votre demande et le devis arrive sous 48 heures ouvrées. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours.",
+        "Comptez 3 à 6 semaines en saison normale, plus longtemps de septembre à décembre. La visite technique se planifie dans la semaine qui suit votre demande et le devis arrive sous 48 heures ouvrées. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours.",
     },
   ];
 
@@ -212,6 +212,11 @@ export default function InstallationPage() {
               </tbody>
             </table>
           </div>
+          <p className="mp-measure mt-4 text-sm text-mp-ink-soft">
+            {typo(
+              `Au-delà de ${HAUTEUR.seuilAcces} m de conduit, il faut une nacelle (${eur(withVat(TARIFS.options.nacelle, VAT.reduced).total)} TVAC la journée) ou un échafaudage, chiffré sur devis.`,
+            )}
+          </p>
         </div>
       </section>
 
@@ -249,7 +254,7 @@ export default function InstallationPage() {
             <h3 className="mb-3 text-xl font-semibold text-mp-green-deep">La TVA à 6 %</h3>
             <p className="mb-4 text-lg leading-relaxed text-mp-ink">
               {typo(
-                "Quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans, toute la facture passe à 6 % au lieu de 21 % : le poêle, la pose, l'évacuation et les options. Dans un logement de moins de 10 ans ou une construction neuve, c'est 21 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026.",
+                "Quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans, toute la facture passe à 6 % au lieu de 21 % : le poêle, la pose, l'évacuation et les options. Dans un logement de moins de 10 ans ou une construction neuve, c'est 21 %. La prime Habitation s'est arrêtée le 30 septembre 2026.",
               )}{" "}
               <Link href={ROUTES.grants} className="text-mp-orange-ink underline hover:no-underline">
                 Ce qui reste comme aides

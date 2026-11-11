@@ -12,6 +12,10 @@ import { misterBoisRedirects, type SiteRedirect } from "./mister-bois";
 
 /** Anciennes adresses (Wix, WordPress) et pages renommées. */
 const LEGACY_REDIRECTS: SiteRedirect[] = [
+  // Adresse interne des versions Markdown (rewrite /:path+.md → /md/:path+,
+  // next.config.ts) : appelée en direct, elle renvoie vers l'adresse publique.
+  { source: "/md/:path+", destination: "/:path+.md", permanent: true },
+
   // Doublons internes fondus le 11/11/2026 (constat MP-51) : la puissance dans
   // son guide, les aides dans leur page de référence.
   { source: "/blog/dimensionner-poele-pellets-surface-wallonie", destination: "/guides/quelle-puissance-poele-pellets", permanent: true },
