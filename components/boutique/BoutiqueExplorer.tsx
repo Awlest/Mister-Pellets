@@ -6,7 +6,7 @@ import { ArrowDownUp, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { ProductFeatureLegend } from "@/components/product/ProductFeatureBadges";
 import { ProductListing } from "@/components/product/ProductListing";
 import { LISTING_PAGE_SIZE, decodeEntry, type CatalogueEntry, type ListedProduct } from "@/lib/catalogue-listing";
-import { DEFAULT_SORT, SORTS, hasPrice, isSortKey, sortProducts, type SortKey } from "@/lib/boutique-sort";
+import { DEFAULT_SORT, SORTS, hasPrice, isSortKey, listedPrice, sortProducts, type SortKey } from "@/lib/boutique-sort";
 import {
   COMBUSTIBLE_LABELS,
   CHAUFFAGE_LABELS,
@@ -19,7 +19,6 @@ import {
   type ColorCategory,
 } from "@/lib/products-demo";
 import { cn } from "@/lib/utils";
-import { effectivePriceTTC } from "@/lib/product-price";
 
 /**
  * Exploration boutique : filtrage CÔTÉ NAVIGATEUR.
@@ -89,7 +88,8 @@ function passes(p: ListedProduct, key: keyof Filters, value: string): boolean {
     }
     case "budget": {
       const budget = BUDGETS.find((b) => b.value === value);
-      const price = effectivePriceTTC(p) ?? 0;
+      // Le prix affiché sur la carte, bonus compris : le même que le tri par prix.
+      const price = listedPrice(p);
       return Boolean(budget) && price > 0 && price >= budget!.min && price < budget!.max;
     }
     case "prix":

@@ -1,5 +1,5 @@
 import type { ListedProduct } from "./catalogue-listing";
-import { effectivePriceTTC } from "./product-price";
+import { shownPriceTTC } from "./product-price";
 
 /**
  * Tri de la boutique (paramètre d'URL `tri`). Module sans « use client » : le
@@ -26,8 +26,14 @@ export type SortKey = (typeof SORTS)[number]["value"];
 export const DEFAULT_SORT: SortKey = "mis-en-avant";
 export const isSortKey = (v: string | null): v is SortKey => SORTS.some((s) => s.value === v);
 
-// Prix de tri = prix réellement pratiqué (promo admin comprise), comme sur la carte.
-export const hasPrice = (p: ListedProduct): boolean => (effectivePriceTTC(p) ?? 0) > 0;
+/**
+ * Prix de tri et de filtre : celui que la carte affiche (bonus de saison, sinon
+ * promo admin, sinon catalogue), jamais le prix barré. Le bonus varie selon la
+ * marque : trié sur le prix d'avant bonus, « Prix croissant » affichait
+ * 2 102 € avant 2 006 € (recette du 11/11/2026). 0 : fiche « Sur devis ».
+ */
+export const listedPrice = (p: ListedProduct): number => shownPriceTTC(p) ?? 0;
+export const hasPrice = (p: ListedProduct): boolean => listedPrice(p) > 0;
 // Fiche regroupée multi-puissances : la plus petite sert au tri croissant, la
 // plus grande au tri décroissant (sinon un 9-26 kW se classerait comme un 9 kW).
 const minPower = (p: ListedProduct): number => (p.powers && p.powers.length > 0 ? Math.min(...p.powers) : p.powerKw);
@@ -64,7 +70,7 @@ export function sortProducts<T extends ListedProduct>(list: readonly T[], sort: 
         const pb = hasPrice(b);
         if (pa !== pb) return pa ? -1 : 1;
         if (!pa) return 0;
-        return dir * ((effectivePriceTTC(a) as number) - (effectivePriceTTC(b) as number));
+        return dir * (listedPrice(a) - listedPrice(b));
       });
     }
     case "puissance-asc":

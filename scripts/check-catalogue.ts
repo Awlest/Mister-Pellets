@@ -11,6 +11,9 @@
  * marques) : carte, ligne compacte et entrée de données d'une fiche, total
  * estimé pour 250 fiches.
  *
+ * Il vérifie enfin que le tri par prix et le filtre de budget de la boutique
+ * portent sur le prix affiché (bonus de saison compris), pas sur le prix barré.
+ *
  * Et il garde retirées les 30 pages /installation/<marque>/<province>
  * (11/11/2026) : une redirection vers la page marque, aucune route, aucun lien.
  *
@@ -53,6 +56,7 @@ import {
   misterBoisCanonical,
   misterBoisDestination,
 } from "@/lib/catalog-scope";
+import { hasPrice, listedPrice, sortProducts } from "@/lib/boutique-sort";
 import { productKindLabel } from "@/lib/product-kind";
 import { COMBUSTIBLE_LABELS, type Appliance, type ProductDemo, type ProductType } from "@/lib/products-demo";
 import { BRANDS, TOP_TIER_BRANDS } from "@/lib/brands";
@@ -579,6 +583,42 @@ const checks: [string, () => void][] = [
       assert.ok(t.full <= 900, `entrée complète de ${t.full} o (900 au plus)`);
       assert.ok(t.short <= 380, `entrée courte de ${t.short} o (380 au plus)`);
       assert.ok(total <= LISTING_BUDGET, `liste de 250 fiches estimée à ${Math.round(total / 1024)} Ko (450 au plus)`);
+    },
+  ],
+  [
+    "boutique : tri par prix et budget sur le prix affiché, fiches sans prix en fin de liste",
+    () => {
+      type Prices = Pick<ListedProduct, "priceTTC" | "promoPriceTTC" | "bonusPriceTTC">;
+      const listed = (slug: string, brand: string, prices: Prices): ListedProduct => ({
+        ...typicalListed(0),
+        priceTTC: undefined,
+        bonusPriceTTC: undefined,
+        slug,
+        name: slug,
+        brand,
+        ...prices,
+      });
+      // Le cas de la recette du 11/11/2026 : bonus de -10 % (Cadel) et de -15 %
+      // (EK63). Triés sur le prix barré, 2 102 € passait avant 2 006 €.
+      const list = [
+        listed("cadel", "Cadel", { priceTTC: 2336, bonusPriceTTC: 2102 }),
+        listed("devis", "MCZ", {}),
+        listed("ek63", "EK63", { priceTTC: 2360, bonusPriceTTC: 2006 }),
+        listed("promo", "Edilkamin", { priceTTC: 3000, promoPriceTTC: 2050 }),
+        listed("catalogue", "Girolami", { priceTTC: 2400 }),
+      ];
+      const order = (sort: "prix-asc" | "prix-desc"): string =>
+        sortProducts(list, sort)
+          .map((p) => p.slug)
+          .join(" ");
+      assert.equal(order("prix-asc"), "ek63 promo cadel catalogue devis", "prix croissant : sur le prix affiché");
+      assert.equal(order("prix-desc"), "catalogue cadel promo ek63 devis", "prix décroissant : sur le prix affiché");
+      assert.deepEqual(list.map(listedPrice), [2102, 0, 2006, 2050, 2400], "prix d'une fiche : celui de la carte");
+      assert.deepEqual(list.map(hasPrice), [true, false, true, true, true]);
+      // Le filtre de budget lit le même prix que le tri.
+      const explorer = read("components/boutique/BoutiqueExplorer.tsx");
+      assert.ok(/case "budget": \{[^}]*listedPrice\(p\)/.test(explorer), "le filtre de budget doit lire listedPrice");
+      assert.ok(!explorer.includes("effectivePriceTTC"), "BoutiqueExplorer ne lit plus le prix d'avant bonus");
     },
   ],
 ];
