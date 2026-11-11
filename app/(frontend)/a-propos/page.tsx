@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/seo";
 const LINK = "text-mp-orange-ink underline hover:no-underline";
 
 export const metadata = buildPageMetadata({
-  title: "À propos, Mister Pellets, installateur poêles à pellets en Wallonie",
+  title: "À propos : installateur de poêles à pellets",
   description:
     "Mister Pellets installe des poêles à pellets en Wallonie depuis 2016. Plus de 800 poêles vendus et installés. Basés à Fernelmont (Awlest SRL).",
   path: "/a-propos",
@@ -61,7 +61,7 @@ export default function AProposPage() {
         title="Quelques chiffres"
         stats={[
           { value: "+800", label: "poêles vendus et installés", detail: "depuis 2016" },
-          { value: "9 ans", label: "d'expérience", detail: "spécialisés pellets" },
+          { value: "2016", label: "année de création", detail: "spécialisés pellets" },
           { value: "2 ans", label: "de garantie légale", detail: "poêle et pose compris" },
           { value: "20 km", label: "autour de Fernelmont", detail: "livraison gratuite" },
         ]}
@@ -71,7 +71,7 @@ export default function AProposPage() {
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-6">
-            Mister Pellets et Awlest, c'est quoi le lien ?
+            Mister Pellets et Awlest, c'est quoi le lien ?
           </h2>
           <div className="mp-measure space-y-5 text-mp-ink leading-relaxed text-lg">
             <p>
@@ -82,7 +82,7 @@ export default function AProposPage() {
             </p>
             <p>
               Mister Pellets, c'est le visage métier. Awlest, c'est la structure légale derrière. Même équipe,
-              même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale : une seule
+              même showroom à Fernelmont, même numéro de TVA (BE 0656.514.212). Pas de filiale : une seule
               société répond de votre chantier.
             </p>
             <p>
@@ -127,8 +127,8 @@ export default function AProposPage() {
               ce que vous cherchez. Ensuite seulement on parle de modèles.
             </p>
             <p>
-              <strong>On dit ce qu'on pense.</strong> Si votre maison n'a pas besoin d'un 14 kW connecté à 5 000 €, on vous
-              le dit. Un EK63 d'entrée de gamme autour de 2 000 € peut suffire. Notre rôle n'est pas de vendre le maximum, c'est de vous
+              <strong>On dit ce qu'on pense.</strong> Si votre maison n'a pas besoin d'un 14 kW connecté à 5 000 €, on vous
+              le dit. Un EK63 d'entrée de gamme autour de 2 000 € peut suffire. Notre rôle n'est pas de vendre le maximum, c'est de vous
               diriger vers ce qui va marcher chez vous pendant 15 ans.
             </p>
             <p>
@@ -159,7 +159,7 @@ export default function AProposPage() {
             </p>
             <p>
               Côté matériel, on ne distribue que des poêles conformes au règlement européen
-              d'écoconception (UE) 2015/1185, appliqué depuis le 1er janvier 2022 : au moins 79 % de
+              d'écoconception (UE) 2015/1185, appliqué depuis le 1er janvier 2022 : au moins 79 % de
               rendement saisonnier pour un poêle à pellets, et des plafonds d'émissions pour les
               particules, le monoxyde de carbone et les oxydes d'azote. Pas de stock B, pas de modèles
               déclassés.
@@ -167,8 +167,8 @@ export default function AProposPage() {
             <p>
               À la fin du chantier, vous recevez la facture détaillée, l'attestation de conformité de
               l'installation et le récapitulatif technique (puissance, type d'évacuation, modèle exact).
-              Gardez-les : votre assureur, un auditeur logement ou la SWCS, si vous financez le poêle par
-              un Rénopack, vous les demanderont.
+              Gardez-les : votre assureur, un auditeur logement ou un organisme prêteur, si le poêle entre
+              dans un projet financé par un Rénopack, vous les demanderont.
             </p>
           </div>
         </div>

@@ -95,7 +95,7 @@ export function CallbackForm() {
         <h3 className="mb-2 text-2xl font-semibold">C&apos;est noté, on vous rappelle</h3>
         <p className="leading-relaxed">
           Un technicien vous appelle dans la journée ouvrée pour vous donner un prix et fixer, si
-          vous le souhaitez, la visite technique gratuite. Pressé ? Appelez directement le{" "}
+          vous le souhaitez, la visite technique gratuite. Pressé ? Appelez directement le{" "}
           <a href={PHONE_HREF} className="font-semibold underline hover:no-underline">
             {PHONE_DISPLAY}
           </a>
@@ -174,7 +174,7 @@ export function CallbackForm() {
             disabled={disabled}
             aria-invalid={!!errors.consent}
             aria-describedby={describedBy("consent")}
-            className="mt-1 h-4 w-4 rounded border-mp-sand accent-mp-orange-flame"
+            className="mt-3 h-5 w-5 shrink-0 rounded border-mp-sand accent-mp-orange-flame"
           />
           <span>
             J&apos;accepte que mes données soient utilisées pour me recontacter, conformément à la{" "}

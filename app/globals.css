@@ -352,6 +352,35 @@ body {
   }
 }
 
+/* === FICHE PRODUIT : LA BARRE D'ACTION REMPLACE LA BARRE DU BAS ===
+ * Sous 1 024 px, la fiche produit porte une barre d'action (.mp-actionbar-nav :
+ * entrée Menu, prix, bouton « Chiffrer la pose »). Empilée sur la barre du
+ * bas, elle couvrait 18 % de l'écran avec deux aplats orange (recette du
+ * 11/11/2026). Sur ce gabarit, la barre du bas n'est donc pas affichée : sa
+ * hauteur et son décalage tombent à zéro, ce qui cale aussi le bandeau cookies
+ * (au-dessus de la barre d'action) et la réserve du pied de page. Le menu
+ * s'ouvre depuis la barre d'action (components/layout/MenuTrigger.tsx). La
+ * barre d'action colle alors au ras de l'écran et réserve elle-même la zone de
+ * sécurité iOS. Sans :has() (navigateurs anciens), les deux barres restent
+ * empilées comme avant, la barre d'action posée sur la barre du bas. */
+.mp-actionbar-nav {
+  bottom: calc(var(--mp-bottomnav-offset) + 0.5rem);
+  padding-bottom: 0.75rem;
+}
+@media (max-width: 1023.98px) {
+  :root:has(.mp-actionbar-nav) {
+    --mp-bottomnav-h: 0px;
+    --mp-bottomnav-offset: env(safe-area-inset-bottom);
+  }
+  :root:has(.mp-actionbar-nav) .mp-bottomnav {
+    display: none;
+  }
+  :root:has(.mp-actionbar-nav) .mp-actionbar-nav {
+    bottom: 0;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+}
+
 @layer base {
   /* Typographie de marque, dans @layer base pour que toute classe utility
    * Tailwind (text-mp-cream, text-white, text-mp-orange-flame, etc.) puisse

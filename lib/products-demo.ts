@@ -143,6 +143,24 @@ export interface ProductDemo extends ProductCardData {
   variants?: ProductVariantData[];
   /** Compléments en option (thermostat, Wi-Fi, kits…), collection « Compléments ». */
   accessories?: ProductAccessory[];
+  /** Caractéristiques techniques saisies dans l'admin (données du fabricant). */
+  specs?: ProductSpecs;
+  /** Dernière modification de la fiche dans l'admin (ISO). */
+  updatedAt?: string;
+}
+
+/** Caractéristiques d'une fiche ; chaque valeur est absente si elle n'est pas saisie. */
+export interface ProductSpecs {
+  /** Rendement, en %. */
+  efficiency?: number;
+  energyClass?: string;
+  /** Réservoir à pellets, en kg. */
+  hopperKg?: number;
+  weightKg?: number;
+  /** Dimensions externes, en cm. */
+  widthCm?: number;
+  heightCm?: number;
+  depthCm?: number;
 }
 
 /** Catégorie d'un complément (regroupement sur la fiche produit). */
@@ -393,10 +411,14 @@ export const TYPE_LABELS: Record<ProductType, string> = {
   insert:      "Insert encastrable",
 };
 
-/** Filtre « Combustible » (V1.4) — remplace une partie de l'ancien « Type ». */
-export const COMBUSTIBLE_LABELS: Record<Combustible, string> = {
+/**
+ * Filtre « Combustible » (V1.4) — remplace une partie de l'ancien « Type ».
+ * Pas de bois bûche : le site ne vend que du pellet et des hybrides
+ * (lib/catalog-scope.ts). La boutique n'affiche une option que si une fiche
+ * visible la porte.
+ */
+export const COMBUSTIBLE_LABELS: Record<Exclude<Combustible, "bois">, string> = {
   pellet:  "Pellets",
-  bois:    "Bois",
   hybride: "Hybride bois + pellets",
 };
 

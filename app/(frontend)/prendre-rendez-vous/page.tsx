@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, ORGANIZATION_ID } from "@/components/seo/JsonLd";
 import { formatPhone } from "@/lib/utils";
 import { BookingWidget } from "@/components/booking/BookingWidget";
 import { PHONE_HOURS, VISIT_HOURS } from "@/config/site";
@@ -19,9 +19,9 @@ import {
 } from "@/lib/services";
 
 export const metadata: Metadata = {
-  title: "Prendre rendez-vous, Showroom Fernelmont & services Mister Pellets",
+  title: { absolute: "Prendre rendez-vous : showroom, visite, entretien" },
   description:
-    "Showroom Fernelmont (5380), uniquement sur rendez-vous, modèles d'exposition tournants. Devis sur place, visite, entretien annuel, dépannage, ramonage : 5 services Mister Pellets pour poêles à pellets en Wallonie.",
+    "Showroom de Fernelmont sur rendez-vous, visite technique à domicile, entretien annuel, ramonage et dépannage : choisissez votre créneau en ligne.",
   alternates: { canonical: "https://mister-pellets.be/prendre-rendez-vous" },
 };
 
@@ -40,7 +40,7 @@ export default function PrendreRendezVousPage() {
       description: s.shortDescription,
       provider: {
         "@type": "HomeAndConstructionBusiness",
-        "@id": "https://mister-pellets.be/#organization",
+        "@id": ORGANIZATION_ID,
       },
       areaServed: {
         "@type": "AdministrativeArea",
@@ -75,50 +75,6 @@ export default function PrendreRendezVousPage() {
         }
       />
 
-      {/* Présentation du showroom */}
-      <section className="bg-mp-cream mp-band">
-        <div className="mp-shell">
-          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
-            Showroom Mister Pellets à Fernelmont
-          </h2>
-          <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
-            <p>
-              Notre showroom est situé Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre
-              et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On
-              y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63,
-              Girolami).
-            </p>
-            <p>
-              La sélection en exposition tourne régulièrement selon les nouveautés de saison et les
-              modèles que nous testons en condition réelle. Pour cette raison, on ne peut pas
-              garantir à l'avance qu'un modèle précis sera physiquement présent au moment de votre
-              visite. Si vous visez un modèle particulier, prenez rendez-vous : on vous confirme la
-              veille les références effectivement en exposition, et au besoin on en sort un du
-              stock atelier pour votre visite.
-            </p>
-            <p>
-              <strong className="text-mp-green-deep">Le showroom se visite uniquement sur rendez-vous.</strong>{" "}
-              C&apos;est ce qui garantit qu&apos;un conseiller est là pour vous, avec le temps de répondre
-              à vos questions (et un café, accessoirement).
-            </p>
-          </div>
-
-          <div className="mt-8 flex flex-col gap-2 items-center justify-center text-sm text-mp-ink-soft sm:flex-row sm:flex-wrap sm:gap-3">
-            <span className="inline-flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-mp-orange-flame" />
-              Rue des Fagotis 3A, 5380 Fernelmont
-            </span>
-            <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
-            <span className="inline-flex items-center gap-2">
-              <Clock className="h-4 w-4 text-mp-orange-flame" />
-              Visites {VISIT_HOURS}
-            </span>
-            <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
-            <span className="font-medium text-mp-orange-ink">Sur rendez-vous uniquement</span>
-          </div>
-        </div>
-      </section>
-
       {/* Rendez-vous commerciaux : réservables en ligne. L'ancre #reserver est
         * la cible de tous les boutons « Prendre rendez-vous » du site : le
         * visiteur arrive sur l'agenda, pas sur la présentation du showroom.
@@ -149,8 +105,52 @@ export default function PrendreRendezVousPage() {
         </div>
       </section>
 
-      {/* Interventions techniques : par téléphone uniquement */}
+      {/* Présentation du showroom */}
       <section className="bg-mp-cream mp-band">
+        <div className="mp-shell">
+          <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
+            Showroom Mister Pellets à Fernelmont
+          </h2>
+          <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
+            <p>
+              Notre showroom est situé Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre
+              et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On
+              y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63,
+              Girolami).
+            </p>
+            <p>
+              La sélection en exposition tourne régulièrement selon les nouveautés de saison et les
+              modèles que nous testons en condition réelle. Pour cette raison, on ne peut pas
+              garantir à l'avance qu'un modèle précis sera physiquement présent au moment de votre
+              visite. Si vous visez un modèle particulier, prenez rendez-vous : on vous confirme la
+              veille les références effectivement en exposition, et au besoin on en sort un du
+              stock atelier pour votre visite.
+            </p>
+            <p>
+              <strong className="text-mp-green-deep">Le showroom se visite uniquement sur rendez-vous.</strong>{" "}
+              C&apos;est ce qui garantit qu&apos;un conseiller est là pour vous, avec le temps de répondre
+              à vos questions (et un café, accessoirement).
+            </p>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-2 items-center justify-center text-sm text-mp-ink-soft sm:flex-row sm:flex-wrap sm:gap-3">
+            <span className="inline-flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-mp-orange-flame" />
+              Rue des Fagotis 3A, 5380 Fernelmont
+            </span>
+            <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
+            <span className="inline-flex items-center gap-2">
+              <Clock className="h-4 w-4 text-mp-orange-flame" />
+              Visites {VISIT_HOURS}
+            </span>
+            <span className="hidden text-mp-sand sm:inline" aria-hidden>·</span>
+            <span className="font-medium text-mp-orange-ink">Sur rendez-vous uniquement</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Interventions techniques : par téléphone uniquement */}
+      <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <div className="mp-measure mb-10 text-center">
             <h2 className="text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
@@ -159,7 +159,7 @@ export default function PrendreRendezVousPage() {
             <p className="text-base md:text-lg text-mp-ink-soft leading-relaxed">
               Ces trois interventions se calent <strong className="text-mp-green-deep">par
               téléphone</strong>, et pas en ligne. On a besoin de connaître la marque, le modèle
-              et l&apos;accès au conduit avant de bloquer un créneau : c&apos;est ce qui permet
+              et l&apos;accès au conduit avant de bloquer un créneau : c&apos;est ce qui permet
               d&apos;arriver avec les bonnes pièces et le bon matériel.
             </p>
           </div>
@@ -216,14 +216,14 @@ export default function PrendreRendezVousPage() {
         </div>
       </section>
 
-      {/* Beige : sépare les deux sections crème qui l'entourent. */}
-      <GoogleReviews tone="beige" />
+      {/* Crème : sépare les deux sections beiges qui l'entourent. */}
+      <GoogleReviews tone="cream" />
 
       {/* Alternative téléphone (toujours utile pour qui n'aime pas le formulaire) */}
-      <section className="bg-mp-cream mp-band">
+      <section className="bg-mp-beige mp-band">
         <div className="mp-shell text-center">
           <h2 className="mp-measure mx-auto text-2xl md:text-4xl font-semibold text-mp-green-deep mb-4">
-            Plus simple : appelez-nous
+            Plus simple : appelez-nous
           </h2>
           <p className="mp-measure mx-auto text-base md:text-lg text-mp-ink-soft mb-8 leading-relaxed">
             Si vous préférez le téléphone (souvent plus rapide), on cale un créneau en 30 secondes.
@@ -243,12 +243,13 @@ export default function PrendreRendezVousPage() {
           </div>
 
           <p className="mp-measure mx-auto text-sm text-mp-ink-soft mt-8">
-            Téléphone : {PHONE_HOURS}
+            Téléphone : {PHONE_HOURS}
           </p>
         </div>
       </section>
 
       <CTAFinal
+        tone="cream"
         title="Pas envie de venir au showroom ?"
         description="On peut aussi se voir en visio (15 minutes) ou directement chez vous pour un diagnostic. Au choix selon ce qui vous arrange."
         primaryCta={{ label: "Demander un devis", href: "/demande-de-devis" }}

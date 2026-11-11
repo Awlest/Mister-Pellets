@@ -5,8 +5,12 @@ import type { Appliance, Combustible, ProductType } from "./products-demo";
  * hydro), tirée des champs saisis dans l'admin Payload. Source unique du
  * libellé repris par le titre et le schéma Product de la fiche
  * (app/(frontend)/produit/[slug]) et par le flux Google Merchant
- * (app/api/feed/google-merchant) : un insert à bois ne doit plus sortir en
- * « poêle à pellets ».
+ * (app/api/feed/google-merchant).
+ *
+ * Mister Pellets ne vend pas d'appareil à bois bûche (lib/catalog-scope.ts) :
+ * aucun libellé « à bois » n'existe ici. Une fiche bois n'atteint jamais ces
+ * fonctions ; si cela arrivait, le libellé se réduit au nom de l'appareil
+ * (« insert », « foyer »), sans combustible.
  *
  * L'appareil vient de la case « Nature de l'appareil » ; vide, il se déduit du
  * type (« Insert encastrable » donne un insert, le reste un poêle). Pour le
@@ -34,9 +38,8 @@ const APPLIANCE_LABEL: Record<Appliance, string> = {
   chaudiere: "chaudière",
 };
 
-const FUEL_LABEL: Record<Combustible, string> = {
+const FUEL_LABEL: Record<Exclude<Combustible, "bois">, string> = {
   pellet: "à pellets",
-  bois: "à bois",
   hybride: "hybride bois/pellets",
 };
 
@@ -52,14 +55,16 @@ export function productFuel(p: ProductKindFields): Combustible {
 }
 
 /**
- * « poêle à pellets », « insert à bois », « insert hybride bois/pellets
- * hydro », « foyer à bois »… En minuscules : la majuscule se met là où le
- * libellé ouvre une phrase.
+ * « poêle à pellets », « insert à pellets », « insert hybride bois/pellets
+ * hydro »… En minuscules : la majuscule se met là où le libellé ouvre une
+ * phrase.
  */
 export function productKindLabel(p: ProductKindFields): string {
   const appliance = productAppliance(p);
   // Une chaudière chauffe l'eau par définition : « hydro » n'y ajoute rien.
   const hydro =
     appliance !== "chaudiere" && (p.isHydro || HYDRO_TYPES.has(p.type)) ? " hydro" : "";
-  return `${APPLIANCE_LABEL[appliance]} ${FUEL_LABEL[productFuel(p)]}${hydro}`;
+  const fuel = productFuel(p);
+  const fuelLabel = fuel === "bois" ? "" : ` ${FUEL_LABEL[fuel]}`;
+  return `${APPLIANCE_LABEL[appliance]}${fuelLabel}${hydro}`;
 }

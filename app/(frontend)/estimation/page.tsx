@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildPageMetadata({
   title: "Estimation en ligne, poêle à pellets posé",
   description:
-    "Composez votre installation en 2 minutes : le poêle de notre catalogue, la pose, la TVA 6 % et la mensualité à 0 %. Estimation immédiate, prix ferme après visite technique.",
+    "Composez votre installation en 2 minutes : le poêle de notre catalogue, la pose et la TVA à 6 %. Estimation immédiate, prix ferme après la visite technique.",
   path: "/estimation",
 });
 
@@ -32,7 +32,7 @@ export default async function EstimationPage() {
             Votre poêle à pellets posé, <span className="mp-italic">chiffré en direct</span>
           </>
         }
-        description="Vous choisissez le poêle dans notre catalogue, nous ajoutons la pose, la TVA applicable et la mensualité à 0 %. Le tout sans attendre un rappel."
+        description="Vous choisissez le poêle dans notre catalogue, nous ajoutons la pose, la TVA applicable et la mensualité. Le tout sans attendre un rappel."
         breadcrumbs={[{ label: "Accueil", href: "/" }, { label: "Estimation en ligne" }]}
         compact
       />
@@ -71,12 +71,12 @@ export default async function EstimationPage() {
               <strong className="text-mp-green-deep">Ce que couvre l&apos;estimation.</strong>{" "}Le
               poêle au prix de notre catalogue, la pose et le raccordement selon votre type
               d&apos;évacuation, les fournitures courantes, la mise en service et le réglage de la
-              combustion. Les forfaits de pose sont des budgets moyens : une configuration
+              combustion. Les forfaits de pose sont des budgets moyens : une configuration
               inhabituelle (accès compliqué, conduit hors normes, maçonnerie à reprendre) se chiffre
               après la visite technique gratuite.
             </p>
             <p>
-              <strong className="text-mp-green-deep">Pas envie de choisir un modèle ?</strong>{" "}
+              <strong className="text-mp-green-deep">Pas envie de choisir un modèle ?</strong>{" "}
               <Link
                 href="/demande-de-devis"
                 className="text-mp-orange-ink underline hover:no-underline"
@@ -111,8 +111,14 @@ function TrustPoints({ className }: { className?: string }) {
       </span>
       <span className="inline-flex items-center gap-2">
         <PiggyBank className="h-4 w-4 text-mp-orange-flame" aria-hidden />
-        TVA et 0 % simulés
+        TVA et mensualité simulées
       </span>
+      <Link
+        href="/prix-poele-pellets"
+        className="inline-flex min-h-11 items-center font-semibold text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink"
+      >
+        Prix posés par type de conduit
+      </Link>
     </div>
   );
 }

@@ -34,7 +34,7 @@ export const FAQ_CATEGORY_LABELS: Record<FaqCategory, string> = {
   installation: "Installation",
   primes: "Primes & aides",
   entretien: "Entretien & SAV",
-  boutique: "Boutique en ligne",
+  boutique: "Commande & livraison",
   showroom: "Showroom & RDV",
 };
 
@@ -121,7 +121,7 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Mon poêle peut-il fonctionner pendant une coupure de courant ?",
     answer:
-      "Non. Un poêle à pellets a besoin d'électricité pour faire fonctionner sa résistance d'allumage, son motoréducteur de vis sans fin et son ventilateur d'extraction des fumées. En cas de coupure, le poêle s'éteint en sécurité et redémarre tout seul au retour du courant si vous l'aviez laissé en mode automatique. Pour une autonomie totale, il faudrait coupler avec un onduleur ou un groupe électrogène, ce qu'on déconseille pour un usage résidentiel classique.",
+      "Non. Un poêle à pellets a besoin d'électricité pour sa résistance d'allumage, le moteur de sa vis sans fin et son extracteur de fumées. En cas de coupure, il s'arrête et se met en sécurité. Au retour du courant, tout dépend de la marque : d'après leurs notices, un MCZ ou un Cadel refroidit puis se rallume seul, alors qu'un Edilkamin Cherie reste éteint jusqu'à ce que vous le relanciez. Un onduleur peut garder le poêle sous tension, mais dans la plupart des maisons il ne vaut pas la dépense. Le détail, marque par marque : [poêle à pellets et coupure de courant](/blog/poele-pellets-sans-electricite-coupure-courant).",
   },
   {
     id: "choisir-sans-cheminee",
@@ -220,14 +220,14 @@ export const FAQS: FaqItem[] = [
     category: "pellets",
     question: "ENplus A1 ou DINplus : quelle différence ?",
     answer:
-      "Pour un poêle domestique, aucune : les deux certifications reprennent la classe A1 de la norme ISO 17225-2, avec les mêmes seuils. Au moins 4,6 kWh/kg, 0,7 % de cendres au maximum, 10 % d'humidité au maximum, 6 mm de diamètre à 1 mm près. ENplus est la plus répandue dans les magasins wallons, DINplus vient d'Allemagne. Prenez celle qui est disponible au meilleur prix, et refusez un sac sans certification : vous ne savez pas ce que vous brûlez.",
+      "Pour un poêle domestique, aucune : les deux certifications reprennent la classe A1 de la norme ISO 17225-2, avec les mêmes seuils. Au moins 4,6 kWh/kg, 0,7 % de cendres au maximum, 10 % d'humidité au maximum, 6 mm de diamètre à 1 mm près. ENplus est la plus répandue dans les magasins wallons, DINplus vient d'Allemagne. Prenez celle qui est disponible au meilleur prix, et refusez un sac sans certification : vous ne savez pas ce que vous brûlez. Les pellets Comfo que nous vendons sont certifiés DINplus A1 : [la palette de pellets Comfo](/palette-pellets-comfo).",
   },
   {
     id: "pellets-prix-tonne",
     category: "pellets",
     question: "Combien coûte une tonne de pellets en Wallonie en 2026 ?",
     answer:
-      "Autour de 410 € la tonne en sacs. En août 2026, ValBiom relevait en moyenne 6,19 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est 13 % de plus qu'en août 2025 (5,48 €). Le sac acheté à l'unité coûte plus cher. ValBiom ne s'attend pas à une baisse pour l'hiver 2026-2027 : si vous avez la place, faire son stock à l'automne reste le bon réflexe.",
+      "Autour de 470 € la tonne en sacs. En octobre 2026, ValBiom relevait en moyenne 7,02 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est 24 % de plus qu'en octobre 2025 (5,64 €). Le sac acheté à l'unité coûte plus cher. ValBiom ne s'attend pas à une baisse pour l'hiver 2026-2027 : achetez maintenant ce qu'il vous faut jusqu'au printemps, et faites le stock de l'hiver suivant entre mai et août. Le prix de chaque mois depuis janvier 2025 est dans [notre relevé du prix des pellets en Wallonie](/blog/prix-pellets-belgique). Nous vendons aussi des pellets Comfo certifiés DINplus A1 en palette, à retirer à Fernelmont : [la palette de pellets Comfo](/palette-pellets-comfo).",
   },
   {
     id: "pellets-stockage",
@@ -273,6 +273,7 @@ export const FAQS: FaqItem[] = [
     category: "installation",
     question: "Quelle distance entre le poêle et un mur en bois ?",
     answer:
+      // check-catalogue: allow (comparaison)
       "La distance minimale réglementaire dépend du modèle et figure sur la fiche constructeur. Typiquement, comptez 20 cm latéralement et 30 à 40 cm à l'arrière pour un poêle à pellets moderne (ces distances sont nettement réduites par rapport aux poêles à bois grâce à l'enveloppe mieux isolée). Pour un mur sensible (bois, papier peint, placo non protégé), une plaque de protection murale incombustible est ajoutée si la distance ne peut pas être respectée.",
   },
   {
@@ -298,49 +299,49 @@ export const FAQS: FaqItem[] = [
     category: "primes",
     question: "Existe-t-il encore une prime pour un poêle à pellets en 2026 ?",
     answer:
-      "Non, plus depuis le 1er octobre 2026, sauf pour les ménages à très petits revenus (subvention MEBAR, via le CPAS). La prime Habitation, qui couvrait le poêle à pellets, s'est arrêtée le 30 septembre 2026 : travaux terminés et demande introduite ce jour-là au plus tard. La Wallonie soutient désormais la rénovation par deux prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui gagnent le label exigé après travaux. Pour un poêle posé seul, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
+      "Non, plus depuis le 1er octobre 2026, sauf pour les ménages à très petits revenus (subvention MEBAR, via le CPAS). La prime Habitation, qui couvrait le poêle à pellets, s'est arrêtée le 30 septembre 2026 : travaux terminés et demande introduite ce jour-là au plus tard. La Wallonie n'accorde plus de prime pour un nouveau projet et soutient désormais la rénovation par deux prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui gagnent le label exigé après travaux, et à demander avant tout devis signé ou acompte. Pour un poêle posé seul, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
   },
   {
     id: "primes-categorie",
     category: "primes",
     question: "Comment savoir dans quelle catégorie de revenus je tombe pour le Rénopack ?",
     answer:
-      "Quatre catégories, selon les revenus du ménage : C1 jusqu'à 28 900 €, C2 jusqu'à 41 100 €, C3 jusqu'à 67 100 € et C4 jusqu'à 122 800 €. Les seuils sont indexés au 1er janvier 2026 et baissent de 5 000 € par personne à charge. En C1, la moitié du Rénopack ne se rembourse pas, 40 % en C2 et 15 % en C3 ; la C4 a droit au Rénoprêt, sans part effacée. La SWCS, le Fonds du Logement ou le 1718 (gratuit) vous situent précisément.",
+      "Quatre catégories, selon les revenus du ménage : C1 jusqu'à 28 900 €, C2 jusqu'à 41 100 €, C3 jusqu'à 67 100 € et C4 jusqu'à 122 800 €. Les seuils sont indexés au 1er janvier 2026 et baissent de 5 000 € par personne à charge. En C1, 45 % du Rénopack ne se rembourse pas, 35 % en C2 et 10 % en C3, avec 5 points de plus si toute l'isolation de l'enveloppe est réalisée en écomatériaux ; la C4 a droit au Rénoprêt, à taux préférentiel, sans part effacée. La SWCS, le Fonds du Logement ou le 1718 (gratuit) vous situent précisément.",
   },
   {
     id: "primes-audit-obligatoire",
     category: "primes",
     question: "Faut-il un audit logement ?",
     answer:
-      "Pour un poêle seul, non : il n'y a plus de prime à demander. Pour un Rénopack ou un Rénoprêt, oui. L'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui fixe le label PEB de départ et la liste des travaux. Si un tel projet est en vue, parlez-nous de l'audit avant de choisir le poêle : sa puissance doit correspondre à la maison une fois isolée.",
+      "Pour un poêle seul, non : il n'y a plus de prime à demander. Pour un Rénopack ou un Rénoprêt, oui. L'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui fixe le label PEB de départ et la liste des travaux. La demande de prêt, elle, passe avant tout devis signé ou acompte. Si un tel projet est en vue, parlez-nous de l'audit avant de choisir le poêle : sa puissance doit correspondre à la maison une fois isolée.",
   },
   {
     id: "primes-eligible",
     category: "primes",
     question: "Mon poêle doit-il figurer sur une liste officielle ?",
     answer:
-      "Plus pour une prime, puisqu'elle a pris fin. Tous les poêles vendus en Europe depuis le 1er janvier 2022 doivent respecter le règlement d'écoconception (UE) 2015/1185 : au moins 79 % de rendement saisonnier pour un poêle à pellets, et des plafonds d'émissions de particules, de monoxyde de carbone et d'oxydes d'azote. Les modèles que nous posons y répondent. Si vous financez le poêle par un Rénopack, la SWCS vous dira si elle impose d'autres critères.",
+      "Plus pour une prime, puisqu'elle a pris fin. Tous les poêles vendus en Europe depuis le 1er janvier 2022 doivent respecter le règlement d'écoconception (UE) 2015/1185 : au moins 79 % de rendement saisonnier pour un poêle à pellets, et des plafonds d'émissions de particules, de monoxyde de carbone et d'oxydes d'azote. Les modèles que nous posons y répondent. Pour un projet Rénopack, la liste officielle des travaux ne nomme pas les poêles : c'est l'audit et l'organisme prêteur qui décident si le vôtre est retenu.",
   },
   {
     id: "primes-delai-versement",
     category: "primes",
     question: "Mon poêle a été posé en septembre 2026 : puis-je encore demander la prime ?",
     answer:
-      "Seulement si la demande a été introduite au plus tard le 30 septembre 2026 à 23 h 59, la date limite du régime temporaire. Une exception concerne les projets lancés avant le 14 février 2025, avec un devis daté et signé avant cette date : ils peuvent demander la prime aux anciennes conditions jusqu'au 30 septembre 2027, une fois la mesure publiée au Moniteur belge. Le 1718 (gratuit) vous renseignera sur votre cas.",
+      "Seulement si la demande a été introduite au plus tard le 30 septembre 2026 à 23 h 59, la date limite du régime temporaire. Une exception concerne les projets avec un devis signé ou un bon de commande définitif datant au plus tard du 13 février 2025 : ils peuvent demander la prime aux anciennes conditions jusqu'au 30 septembre 2027. Le 1718 (gratuit) vous renseignera sur votre cas.",
   },
   {
     id: "primes-cumul-tva",
     category: "primes",
     question: "Puis-je cumuler la TVA à 6 % et le Rénopack ?",
     answer:
-      "Oui, l'un n'empêche pas l'autre. La TVA réduite est fédérale : elle s'applique sur la facture quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans. Le Rénopack est un prêt régional qui finance des travaux, poêle compris, si le projet remplit ses conditions (maison classée E, F ou G, audit de moins d'un an, saut de label).",
+      "Oui, l'un n'empêche pas l'autre. La TVA réduite est fédérale : elle s'applique sur la facture quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans. Le Rénopack est un prêt régional qui finance les travaux éligibles d'un projet qui remplit ses conditions (maison classée E, F ou G, audit de moins d'un an, saut de label). Le poêle n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et la demande de prêt passe avant tout devis signé ou acompte.",
   },
   {
     id: "primes-r5",
     category: "primes",
     question: "Et si les revenus du ménage dépassent 122 800 € ?",
     answer:
-      "Pour un ménage qui occupe son logement, les prêts régionaux s'arrêtent là : ni Rénopack ni Rénoprêt. Il reste la TVA à 6 % sur un logement de plus de 10 ans, poêle et pose compris, et les économies de combustible si vous quittez le mazout. Si vous louez le logement, le Rénoprêt est ouvert aux propriétaires bailleurs : la SWCS vous dira à quelles conditions.",
+      "Pour un ménage qui occupe son logement, les prêts régionaux s'arrêtent là : ni Rénopack ni Rénoprêt. Il reste la TVA à 6 % sur un logement de plus de 10 ans, poêle et pose compris, et les économies de combustible si vous quittez le mazout. Si vous louez le logement, le Rénoprêt est ouvert aux propriétaires bailleurs : la SWCS vous dira à quelles conditions, et la demande passe avant tout devis signé.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -383,7 +384,7 @@ export const FAQS: FaqItem[] = [
   },
 
   // ───────────────────────────────────────────────────────────────────
-  // BOUTIQUE EN LIGNE
+  // COMMANDE ET LIVRAISON (le paiement en ligne a été retiré le 04/09/2026)
   // ───────────────────────────────────────────────────────────────────
   {
     id: "boutique-livraison",
@@ -395,23 +396,23 @@ export const FAQS: FaqItem[] = [
   {
     id: "boutique-pose-en-ligne",
     category: "boutique",
-    question: "Puis-je acheter le poêle en ligne et le faire poser par Mister Pellets ?",
+    question: "Comment se passe une commande chez Mister Pellets ?",
     answer:
-      "Oui, c'est même la configuration la plus fréquente. Vous chiffrez votre installation sur le configurateur, on cale une visite technique, et c'est elle qui transforme l'estimation en prix ferme : on valide le conduit, les distances et l'accès avant tout engagement. Quand nous fournissons et posons le poêle dans un logement de plus de 10 ans, toute la facture est à 6 % de TVA, poêle compris. Un poêle livré sans pose reste à 21 %. Une fois le devis accepté, vous recevez la facture d'acompte et on planifie la pose.",
+      "En trois étapes. Vous chiffrez votre installation sur [le configurateur](/estimation) ou vous demandez un devis. On cale ensuite une visite technique, et c'est elle qui transforme l'estimation en prix ferme : on valide le conduit, les distances et l'accès avant tout engagement. Une fois le devis accepté, vous recevez la facture d'acompte et on planifie la pose. Quand nous fournissons et posons le poêle dans un logement de plus de 10 ans, toute la facture est à 6 % de TVA, poêle compris. Un poêle livré sans pose reste à 21 %.",
   },
   {
     id: "boutique-paiement",
     category: "boutique",
     question: "Quels moyens de paiement acceptez-vous ?",
     answer:
-      "Rien ne se paie en ligne. Après la visite technique et l'acceptation du devis, vous recevez une facture d'acompte de 30 %, puis le solde à la fin de la pose. Virement, carte ou Bancontact. Si votre projet entre dans les conditions du Rénopack ou du Rénoprêt (logement classé E, F ou G, audit, saut de label), le prêt de la SWCS ou du Fonds du Logement peut financer la facture.",
+      "Rien ne se paie en ligne. Après la visite technique et l'acceptation du devis, vous recevez une facture d'acompte de 30 %, puis le solde à la fin de la pose. Virement, carte ou Bancontact. Si vous visez un Rénopack ou un Rénoprêt (logement classé E, F ou G, audit, saut de label), dites-le-nous avant d'accepter le devis : la demande de prêt passe avant tout engagement, donc ni devis signé ni acompte avant la signature de votre contrat de crédit auprès de la SWCS ou du Fonds du Logement.",
   },
   {
     id: "boutique-retour",
     category: "boutique",
-    question: "Quel est le droit de rétractation sur un achat en ligne ?",
+    question: "Peut-on commander et payer un poêle en ligne ?",
     answer:
-      "Conformément au Code de droit économique belge, vous disposez d'un délai de 14 jours à compter de la réception du produit pour exercer votre droit de rétractation, sans avoir à motiver votre décision. Les frais de retour sont à votre charge. Ce droit ne s'applique pas aux produits déjà installés ni aux prestations de pose déjà exécutées. Pour les commandes en ligne sans pose, le retour est simple : vous nous contactez, on récupère.",
+      "Non. Le paiement en ligne a été retiré en septembre 2026 : un poêle ne se vend pas sans avoir vu le conduit. Le site sert à choisir un modèle et à chiffrer l'installation. La commande passe par un devis signé après la visite technique, puis par une facture d'acompte. Les conditions de vente complètes sont dans [nos conditions générales](/cgv).",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -422,7 +423,7 @@ export const FAQS: FaqItem[] = [
     category: "showroom",
     question: "Où se trouve votre showroom ?",
     answer:
-      `Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons (Edilkamin, EK63, Girolami). On vous y reçoit uniquement sur rendez-vous, ${VISIT_HOURS_LONG}.`,
+      `Rue des Fagotis 3A, 5380 Fernelmont, à 17 km de Namur centre et accessible par la N4. Parking devant le bâtiment, accès PMR au rez-de-chaussée. On y expose plusieurs modèles des marques que nous distribuons. On vous y reçoit uniquement sur rendez-vous, ${VISIT_HOURS_LONG}.`,
   },
   {
     id: "showroom-sans-rendez-vous",

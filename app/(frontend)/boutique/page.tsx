@@ -4,13 +4,15 @@ import { CTAFinal } from "@/components/sections/CTAFinal";
 import { getAllProducts } from "@/lib/products";
 import { BRAND_LIST } from "@/lib/brands";
 import { buildPageMetadata } from "@/lib/seo";
-import { BoutiqueExplorer, type BoutiqueProduct } from "@/components/boutique/BoutiqueExplorer";
+import { BoutiqueExplorer } from "@/components/boutique/BoutiqueExplorer";
+import { DEFAULT_SORT, sortProducts, withRecency } from "@/lib/boutique-sort";
+import { encodeListing } from "@/lib/catalogue-listing";
 import { BONUS, isBonusPeriod } from "@/lib/bonus";
 
 export const metadata = buildPageMetadata({
   title: "Boutique poêles à pellets en Wallonie",
   description:
-    "Catalogue Mister Pellets : MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel. Filtres marque, type (standard, canalisable, hydro, hybride, insert), puissance, diffusion, couleur. Pose en Wallonie, TVA à 6 % en rénovation.",
+    "Catalogue Mister Pellets : poêles à pellets MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel. Filtres par marque, type et puissance, pose en Wallonie.",
   path: "/boutique",
 });
 
@@ -33,38 +35,11 @@ export default async function BoutiquePage() {
   ];
   const bonusActive = isBonusPeriod();
 
-  // Shape allégé (carte + filtres uniquement) pour réduire le payload envoyé
-  // au navigateur — on ne sérialise pas variantes/galerie/features.
-  const lean: BoutiqueProduct[] = products.map((p) => ({
-    slug: p.slug,
-    name: p.name,
-    brand: p.brand,
-    power: p.power,
-    heatedVolume: p.heatedVolume,
-    powers: p.powers,
-    heatedVolumes: p.heatedVolumes,
-    priceTTC: p.priceTTC,
-    promoPriceTTC: p.promoPriceTTC,
-    bonusPriceTTC: p.bonusPriceTTC,
-    imageSrc: p.imageSrc,
-    imageAlt: p.imageAlt,
-    imageFocalX: p.imageFocalX,
-    imageFocalY: p.imageFocalY,
-    image: p.image,
-    createdAt: p.createdAt,
-    isFeatured: p.isFeatured,
-    isBestseller: p.isBestseller,
-    isNew: p.isNew,
-    colorVariants: p.colorVariants?.map((c) => ({ colorName: c.colorName, colorHex: c.colorHex })),
-    type: p.type,
-    combustible: p.combustible,
-    isHydro: p.isHydro,
-    isCanalizable: p.isCanalizable,
-    isAirtight: p.isAirtight,
-    powerKw: p.powerKw,
-    diffusion: p.diffusion,
-    color: p.color,
-  }));
+  // Entrées compactes (lib/catalogue-listing.ts), dans l'ordre du tri par
+  // défaut : les 24 premières, montrées en cartes d'emblée, gardent la photo
+  // en srcset ; les autres partent en lignes de texte avec une seule adresse
+  // de photo, pour les cartes de « Voir plus », des filtres et du tri.
+  const entries = encodeListing(sortProducts(withRecency(products), DEFAULT_SORT), { shop: true });
 
   return (
     <>
@@ -89,24 +64,37 @@ export default async function BoutiquePage() {
             la grille pour que les poêles arrivent plus haut. */}
         <div className="mp-shell flex flex-col">
           {bonusActive ? (
-            <div className="mb-4 rounded-xl border border-mp-orange-flame/40 bg-mp-orange-light/50 p-4 text-sm text-mp-ink">
-              <strong className="text-mp-green-deep">{BONUS.label}.</strong> {BONUS.conditions}{" "}
-              Les prix ci-dessous sont déjà remisés, le prix catalogue reste indiqué à côté.
-            </div>
+            <details className="group mb-4 rounded-2xl border border-mp-orange-flame/40 bg-mp-orange-light/50 px-4 text-sm text-mp-ink">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
+                <span>
+                  <strong className="text-mp-green-deep">{BONUS.label}</strong> : prix déjà remisés.
+                </span>
+                <span className="shrink-0 text-xs font-semibold text-mp-orange-ink underline underline-offset-2">
+                  Conditions
+                </span>
+              </summary>
+              <p className="pb-3">
+                {BONUS.conditions} Les prix ci-dessous sont déjà remisés, le prix catalogue reste indiqué à côté.
+              </p>
+            </details>
           ) : null}
 
           {/* Note devis : on couvre toute la gamme, même les références non listées. */}
           <div className="order-last mt-10 rounded-xl bg-mp-orange-light/50 border border-mp-orange-warm/40 p-4 text-sm text-mp-ink md:order-none md:mt-0 md:mb-8">
-            <strong>Besoin d&apos;un modèle précis ?</strong> On distribue toute la gamme Edilkamin, EK63
-            et Girolami, même les références qui ne sont pas encore listées ici. Pour un chiffrage
-            complet (poêle, pose et TVA), passez par le{" "}
+            <strong>Besoin d&apos;un modèle précis ?</strong> On pose toute la gamme pellets de MCZ,
+            Edilkamin, EK63, Girolami, Austroflamm et Cadel, même les références qui ne sont pas encore
+            listées ici. Pour un chiffrage complet (poêle, pose et TVA), passez par le{" "}
             <Link href="/demande-de-devis" className="text-mp-orange-ink underline hover:no-underline font-semibold">
               formulaire de devis
+            </Link>
+            . Les forfaits de pose par type de conduit sont sur la page{" "}
+            <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+              prix d&apos;un poêle à pellets posé
             </Link>
             .
           </div>
 
-          <BoutiqueExplorer products={lean} brandFilters={brandFilters} />
+          <BoutiqueExplorer entries={entries} brandFilters={brandFilters} />
         </div>
       </section>
 

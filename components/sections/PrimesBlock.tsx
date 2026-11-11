@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { typo } from "@/lib/typo";
 import { cn } from "@/lib/utils";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
 import { AIDES_VERIFIED_AT, LOAN_MAX, MEBAR_MAX } from "@/lib/aides";
@@ -27,9 +28,9 @@ const DEFAULT_AIDES: AideRow[] = [
     highlight: true,
   },
   {
-    amount: "50 %",
+    amount: "45 %",
     audience: "Rénopack",
-    detail: "Part du prêt effacée en C1 (40 % en C2, 15 % en C3)",
+    detail: "Part du prêt effacée en C1 (35 % en C2, 10 % en C3), 5 points de plus avec des écomatériaux",
   },
   {
     amount: LOAN_MAX.house,
@@ -47,7 +48,9 @@ const CONDITIONS = [
   "Maison classée PEB E, F ou G",
   "Audit logement de moins d'un an",
   "Label D (ou C) atteint après travaux",
+  "Rénopack : maison de plus de 15 ans, aucun autre logement en propriété",
   "Demande à la SWCS ou au Fonds du Logement",
+  "Aucun devis signé ni acompte avant le contrat de crédit",
 ];
 
 interface PrimesBlockProps {
@@ -56,14 +59,14 @@ interface PrimesBlockProps {
   title?: string;
   description?: string;
   aides?: AideRow[];
-  /** Bouton vers /primes-energie-wallonie-2026 (inutile sur cette page même). */
+  /** Bouton vers la page des aides (inutile sur cette page même). */
   showLink?: boolean;
 }
 
 export function PrimesBlock({
   tone = "cream",
   title = "Les aides en 2026, après la fin de la prime",
-  description = "Depuis le 1er octobre 2026, la Wallonie ne verse plus de prime pour un poêle à pellets. Voici ce qui reste pour alléger la facture, et à quelles conditions.",
+  description = "Depuis le 1er octobre 2026, la Wallonie n'accorde plus de prime pour un nouveau projet de poêle à pellets. Voici ce qui reste pour alléger la facture, et à quelles conditions.",
   aides = DEFAULT_AIDES,
   showLink = true,
 }: PrimesBlockProps) {
@@ -72,10 +75,10 @@ export function PrimesBlock({
       <div className="mp-shell">
         <div className="mp-measure mb-12 text-center">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
-            {title}
+            {typo(title)}
           </h2>
           {description && (
-            <p className="text-lg text-mp-ink-soft leading-relaxed">{description}</p>
+            <p className="text-lg text-mp-ink-soft leading-relaxed">{typo(description)}</p>
           )}
         </div>
 
@@ -94,13 +97,13 @@ export function PrimesBlock({
                 className="text-4xl md:text-5xl font-semibold text-mp-orange-display mb-2 tabular-nums"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                {aide.amount}
+                {typo(aide.amount)}
               </span>
               <span className="text-base font-semibold text-mp-green-deep">
                 {aide.audience}
               </span>
               {aide.detail && (
-                <span className="text-xs text-mp-ink-soft mt-1">{aide.detail}</span>
+                <span className="text-xs text-mp-ink-soft mt-1">{typo(aide.detail)}</span>
               )}
             </Card>
           ))}
@@ -113,7 +116,7 @@ export function PrimesBlock({
               <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
                 Prime poêle à pellets
               </span>
-              Terminée : demandes closes le 30 septembre 2026 à 23 h 59
+              Terminée : demandes closes le 30 septembre 2026 à 23 h 59
             </div>
             <div>
               <span className="block text-xs font-semibold uppercase tracking-wider text-mp-green-deep mb-1">
@@ -137,7 +140,7 @@ export function PrimesBlock({
               <span className="flex items-center justify-center h-5 w-5 rounded-full bg-mp-green-light/20 text-mp-green-mid shrink-0 mt-0.5">
                 <Check className="h-3 w-3" />
               </span>
-              {c}
+              {typo(c)}
             </div>
           ))}
         </div>
@@ -145,7 +148,7 @@ export function PrimesBlock({
         {showLink && (
           <div className="flex justify-center">
             <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-              <Link href="/primes-energie-wallonie-2026">
+              <Link href="/aides-poele-a-pellets-wallonie">
                 Toutes les aides et leurs conditions
               </Link>
             </Button>
@@ -153,9 +156,10 @@ export function PrimesBlock({
         )}
 
         <p className="mt-6 text-xs text-mp-ink-soft italic mp-measure text-center">
-          Situation vérifiée le {AIDES_VERIFIED_AT} sur wallonie.be, swcs.be et fin.belgium.be.
-          Les taux et durées des prêts sont fixés par la SWCS et le Fonds du Logement de
-          Wallonie. Renseignements gratuits au 1718.
+          Situation vérifiée le {AIDES_VERIFIED_AT} sur wallonie.be, swcs.be, flw.be et
+          fin.belgium.be. Selon la SWCS, le dispositif des prêts devrait être pleinement
+          opérationnel au début de 2027. Les taux et durées des prêts sont fixés par la SWCS et le
+          Fonds du Logement de Wallonie. Renseignements gratuits au 1718.
         </p>
       </div>
     </section>

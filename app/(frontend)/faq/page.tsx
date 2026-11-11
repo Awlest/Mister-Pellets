@@ -7,9 +7,9 @@ import { FAQS } from "@/lib/faqs";
 import { FaqExplorer } from "@/components/sections/FaqExplorer";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "FAQ Mister Pellets, toutes vos questions sur les poêles à pellets en Wallonie",
+  title: "FAQ poêle à pellets en Wallonie",
   description:
-    "Plus de 40 questions et réponses sur les poêles à pellets en Wallonie. Choix du modèle, marques, aides 2026, installation, entretien, boutique. Recherche et filtres par catégorie.",
+    "Les réponses aux questions qu'on nous pose sur les poêles à pellets en Wallonie : choix du modèle, marques, aides, installation, entretien et pellets.",
   path: "/faq",
   keywords: [
     "FAQ poêle à pellets",

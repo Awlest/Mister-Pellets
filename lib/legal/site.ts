@@ -11,8 +11,8 @@ import type { LegalSite } from "./types";
  *   store Blob mister-pellets-next-blob en fra1, e-mails Resend (eu-west-1)
  *   vers info@awlest.com, rendez-vous dans Google Agenda ;
  * - mesure : G-XZH50KSFW4, G-S7R1T5NQ58 (propriété liée à la balise Ads) et
- *   AW-17614035512, mode consentement avancé et url_passthrough
- *   (lib/analytics.ts), ad_personalization toujours refusé ; conservation GA
+ *   AW-17614035512, balises chargées après accord seulement depuis le
+ *   11/11/2026 (lib/analytics.ts), ad_personalization toujours refusé ; conservation GA
  *   réglée à 2 mois (événements) et 14 mois (utilisateur) ;
  * - stockage : mp-consent, mp_estimate_draft, mp_quote_draft ; le cookie
  *   payload-token ne sert qu'à l'équipe sur /admin.
@@ -39,16 +39,16 @@ export const SITE: LegalSite = {
     "Les prix des poêles affichés sur le site et le résultat de l'estimation en ligne sont indicatifs : ils ne constituent pas une offre. Le prix ferme figure au devis, établi après la visite technique.",
     "Les caractéristiques techniques des poêles sont celles publiées par les fabricants. Elles sont données à titre indicatif et peuvent évoluer.",
   ],
-  manufacturers: "MCZ, Edilkamin, EK63, Girolami, Dielle, Ferlux, Austroflamm, Cadel",
+  manufacturers: "MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel",
   collected: [
     "**Estimation, demande de devis, demande de rappel, contact et rendez-vous** : nom, e-mail, téléphone, code postal, et l'adresse de la visite quand nous venons chez vous.",
     "**Votre projet** : surface, isolation ou PEB, type de conduit, âge du logement, poêle choisi. Ce sont vos réponses à l'estimation ou à la demande de devis ; sans elles, pas de prix qui tienne la route.",
     "**L'origine d'une demande de rappel** : si vous arrivez par une de nos annonces, le formulaire de rappel ajoute « Google Ads » et le nom de la campagne à votre demande.",
-    "**Votre visite sur le site** : pages vues, provenance, type d'appareil et de navigateur. Si vous acceptez les cookies, Google Analytics et Google Ads relient ces informations à un identifiant rangé dans votre navigateur. Si vous refusez, ou tant que vous n'avez pas répondu, Google ne dépose rien sur votre appareil mais reçoit des signaux sans cookie, détaillés dans la politique cookies.",
+    "**Votre visite sur le site** : pages vues, provenance, type d'appareil et de navigateur. Si vous acceptez les cookies, Google Analytics et Google Ads relient ces informations à un identifiant rangé dans votre navigateur. Si vous refusez, ou tant que vous n'avez pas répondu, les balises Google ne sont pas chargées : rien n'est déposé sur votre appareil et rien n'est envoyé à Google Analytics ni à Google Ads.",
   ],
   purposes: [
     "**Mesurer l'audience du site pour l'améliorer** : votre consentement aux cookies de mesure d'audience.",
-    "**Savoir quelles annonces Google nous amènent des demandes** : votre consentement aux cookies de mesure publicitaire ; pour les signaux sans cookie envoyés sans votre accord, notre intérêt légitime à savoir si nos annonces valent ce qu'elles coûtent. Même si vous acceptez, Google ne peut pas se servir de votre visite pour vous montrer nos annonces sur d'autres sites.",
+    "**Savoir quelles annonces Google nous amènent des demandes** : votre consentement aux cookies de mesure publicitaire. Même si vous acceptez, Google ne peut pas se servir de votre visite pour vous montrer nos annonces sur d'autres sites.",
   ],
   processors: [
     "**Vercel** héberge le site. Vos formulaires passent par ses serveurs de Dublin.",
@@ -118,12 +118,9 @@ export const SITE: LegalSite = {
     {
       p: "Si vous acceptez, Google peut aussi lire ou déposer ses propres cookies sur ses domaines (google.com, doubleclick.net), selon ses règles. Accepter sert à la mesure, pas à la publicité personnalisée : le site indique à Google qu'il ne peut pas se servir de votre visite pour vous montrer nos annonces ailleurs.",
     },
-    { h3: "Ce qui part chez Google sans votre accord" },
+    { h3: "Sans votre accord, rien ne part chez Google" },
     {
-      p: "Le site utilise le mode consentement « avancé » de Google. Tant que vous n'avez pas répondu, ou si vous refusez, aucun cookie Google n'est déposé. Les pages envoient quand même à Google des signaux sans cookie : page vue, demande envoyée, heure, type de navigateur et, comme pour toute connexion, votre adresse IP. Google s'en sert pour estimer, quand il a assez de données, les visites et les demandes qu'il ne peut pas compter une à une.",
-    },
-    {
-      p: "Si vous arrivez par une de nos annonces, le numéro de ce clic (gclid) et un code de Google (_gl) peuvent aussi rester dans l'adresse des pages suivantes. Une demande envoyée plus loin dans la visite est ainsi reliée à l'annonce, sans rien enregistrer sur votre appareil.",
+      p: "Tant que vous n'avez pas répondu, ou si vous refusez, le site ne charge aucune balise Google : aucun cookie n'est déposé et aucune information sur votre visite n'est envoyée à Google Analytics ni à Google Ads. Les balises ne se chargent qu'après un clic sur « Accepter », et votre visite n'est mesurée qu'à partir de ce moment.",
     },
   ],
   consentBanner: true,

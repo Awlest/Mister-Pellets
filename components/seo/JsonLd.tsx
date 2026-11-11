@@ -1,3 +1,5 @@
+import { ORGANIZATION_ID } from "@/lib/seo";
+
 interface JsonLdProps {
   data: Record<string, unknown> | Array<Record<string, unknown>>;
 }
@@ -101,10 +103,16 @@ export const AWLEST_ORGANIZATION = {
   address: ADDRESS,
 };
 
+/** @id de l'entreprise : tout `provider`, `seller`, `publisher` ou `author` du site le cite au lieu de redécrire l'entreprise. */
+export { ORGANIZATION_ID };
+
+/** Coordonnées du bâtiment de Fernelmont, les mêmes sur les quatre sites d'Awlest (fiche Google). */
+export const GEO = { latitude: 50.5364246, longitude: 4.9778922 } as const;
+
 export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
-  "@id": "https://mister-pellets.be/#organization",
+  "@id": ORGANIZATION_ID,
   name: "Mister Pellets",
   legalName: "Awlest SRL",
   alternateName: ["Mister Pellets", "Awlest", "Awlest SRL"],
@@ -122,11 +130,7 @@ export const ORGANIZATION_SCHEMA = {
   parentOrganization: AWLEST_ORGANIZATION,
   ...(SAME_AS.length > 0 ? { sameAs: SAME_AS } : {}),
   address: ADDRESS,
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 50.55,
-    longitude: 5.0167,
-  },
+  geo: { "@type": "GeoCoordinates", ...GEO },
   hasMap:
     "https://www.google.com/maps/search/?api=1&query=Mister+Pellets+Rue+des+Fagotis+3A+5380+Fernelmont",
   contactPoint: {

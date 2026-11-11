@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { revalidatePath } from "next/cache";
+import { ROUTES } from "../config/navigation";
 import { triggerDeployHook } from "../lib/deploy-hook";
 import { errorInfo } from "../lib/log-error";
 
@@ -73,6 +74,9 @@ export const Products: CollectionConfig = {
           revalidatePath("/boutique");
           // Pages villes qui peuvent référencer ce produit
           revalidatePath("/poeles-pellets/[ville]", "page");
+          // Grilles de fiches des pages marque et des catégories
+          revalidatePath("/nos-marques/[slug]", "page");
+          for (const path of [ROUTES.ductable, ROUTES.hydro, ROUTES.inserts, ROUTES.airtight]) revalidatePath(path);
         } catch (err) {
           // En dev local le revalidatePath peut échouer ; ne bloque pas le save
           console.warn("[products afterChange] revalidate failed:", errorInfo(err));
@@ -231,12 +235,12 @@ export const Products: CollectionConfig = {
       defaultValue: "pellet",
       options: [
         { label: "Pellets", value: "pellet" },
-        { label: "Bois (bûches)", value: "bois" },
+        { label: "Bois (bûches) : hors catalogue, jamais affiché", value: "bois" },
         { label: "Hybride (bois + pellets)", value: "hybride" },
       ],
       admin: {
         description:
-          "Combustible — filtre boutique. Pour un modèle proposé en plusieurs combustibles, choisir le combustible principal (le choix pellet/hybride à l'achat se gère en variante). Le caractère hydro/ventilé se règle via la case « Hydro » ci-dessous.",
+          "Combustible — filtre boutique. Pour un modèle proposé en plusieurs combustibles, choisir le combustible principal (le choix pellet/hybride à l'achat se gère en variante). Le caractère hydro/ventilé se règle via la case « Hydro » ci-dessous. Une fiche « Bois » n'apparaît nulle part sur mister-pellets.be : son adresse renvoie vers mister-bois.be (lib/catalog-scope.ts).",
       },
     },
     {

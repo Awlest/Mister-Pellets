@@ -7,9 +7,9 @@ import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
   title:
-    "Nos marques de poêles à pellets : MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel",
+    "Nos marques de poêles à pellets en Wallonie",
   description:
-    "Les 6 marques posées par Mister Pellets en Wallonie : MCZ (gamme complète, combustion Core), Edilkamin (référence depuis 1963), EK63 (groupe Edilkamin, Wi-Fi de série), Girolami (brasier auto-nettoyant), Austroflamm (haut de gamme autrichien) et Cadel (groupe MCZ, Wi-Fi intégré).",
+    "Les 6 marques posées par Mister Pellets en Wallonie : MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel. Ce qui les distingue et pour quelle maison.",
   path: "/nos-marques",
 });
 
@@ -55,7 +55,7 @@ const COMPARISON: {
     mcz: "Pellet",
     edilkamin: "Pellet",
     ek63: "Pellet",
-    girolami: "Pellet, bois, hybride",
+    girolami: "Pellet, hybride bois-pellet",
     austroflamm: "Pellet, mixte bois-pellet",
     cadel: "Pellet",
   },
@@ -163,7 +163,7 @@ export default function NosMarquesHubPage() {
         <div className="mp-shell">
           <div className="mp-measure mb-10 text-center">
             <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
-              Nos six marques : le comparatif
+              Nos six marques : le comparatif
             </h2>
             <p className="text-lg text-mp-ink-soft leading-relaxed">
               MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel, côte à côte. Aucune n&apos;écrase les autres,
@@ -225,13 +225,13 @@ export default function NosMarquesHubPage() {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-12 mp-measure text-center">
-            Vous hésitez ? On résume
+            Vous hésitez ? On résume
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {ADVICE.map((a) => (
               <Card key={a.brand} className="p-6 flex flex-col gap-3">
                 <p className="text-mp-ink-soft leading-relaxed italic">
-                  « {a.need} »
+                  « {a.need} »
                 </p>
                 <Link
                   href={`/nos-marques/${a.brand.toLowerCase()}`}

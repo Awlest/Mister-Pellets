@@ -2,6 +2,13 @@ import "server-only";
 import { getPayloadClient } from "./payload-client";
 import { bonusPrice, isBonusPeriod } from "./bonus";
 import { formatKw, parseKw } from "./power";
+import { displayOptionLabel } from "./option-labels";
+import {
+  inCatalogueWhere,
+  isHybrid,
+  isOffCatalogue,
+  misterBoisDestination,
+} from "./catalog-scope";
 import type {
   ProductDemo,
   ProductColorVariant,
@@ -79,6 +86,12 @@ interface PayloadProduct {
   isNew?: boolean | null;
   hiddenFromBoutique?: boolean | null;
   createdAt?: string | null;
+  updatedAt?: string | null;
+  efficiency?: number | null;
+  energyClass?: string | null;
+  hopperCapacity?: number | null;
+  weight?: number | null;
+  dimensions?: { width?: number | null; height?: number | null; depth?: number | null } | null;
   shortDescription?: string | null;
   features?: Array<{ title?: string | null; description?: string | null }> | null;
   mainImage?: number | PayloadMedia | null;
@@ -324,7 +337,14 @@ function variantBonusPrice(price: number | null | undefined, salePrice: number |
  * Convertit un document Payload `products` vers le shape ProductDemo
  * attendu par les composants UI existants (ProductCard, filtres boutique).
  */
-function payloadToDemo(p: PayloadProduct): ProductDemo {
+/** Nombre strictement positif, sinon undefined (une case vide vaut null ou 0). */
+const positive = (n: number | null | undefined): number | undefined =>
+  typeof n === "number" && n > 0 ? n : undefined;
+
+function payloadToDemo(raw: PayloadProduct): ProductDemo {
+  // Nom sans espace en trop : cinq fiches EK63 se terminent par une espace,
+  // qui donnait « EK63 Tweed 90+ Evo , Poêle à pellets » dans le titre.
+  const p: PayloadProduct = { ...raw, name: raw.name.replace(/\s+/g, " ").trim() };
   // Volume de chauffe MAX en m³ — donnée constructeur saisie directement par
   // l'équipe Awlest dans l'admin Payload. Pas de conversion.
   const heatedVolume =
@@ -445,7 +465,8 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
       ? p.colorVariants
           .filter((cv) => cv && cv.colorName)
           .map<ProductColorVariant>((cv) => {
-            const variantAlt = `${p.name}, ${cv.colorName}`;
+            // Texte alternatif en français ; le nom de la finition, lui, reste celui de l'admin.
+            const variantAlt = `${p.name}, ${displayOptionLabel(cv.colorName as string)}`;
             const variantMainImage = mapMedia(cv.mainImage, variantAlt);
             const variantGallery = Array.isArray(cv.galleryImages)
               ? cv.galleryImages
@@ -527,6 +548,18 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
 
     // ===== COMPLÉMENTS EN OPTION =====
     accessories: mapAccessories(p.accessories),
+
+    // ===== CARACTÉRISTIQUES =====
+    specs: {
+      efficiency: positive(p.efficiency),
+      energyClass: p.energyClass ?? undefined,
+      hopperKg: positive(p.hopperCapacity),
+      weightKg: positive(p.weight),
+      widthCm: positive(p.dimensions?.width),
+      heightCm: positive(p.dimensions?.height),
+      depthCm: positive(p.dimensions?.depth),
+    },
+    updatedAt: p.updatedAt ?? undefined,
   };
 }
 
@@ -535,6 +568,11 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
  * Filtre les produits avec hiddenFromBoutique=true (cochés "Masquer de la
  * boutique" par l'équipe Awlest). Ces produits restent accessibles via leur
  * URL directe /produit/{slug} mais n'apparaissent plus dans le listing.
+ *
+ * Écarte aussi les combustibles hors catalogue (bois bûche, voir
+ * lib/catalog-scope.ts) : dans la requête, puis une seconde fois sur le
+ * résultat, pour qu'aucune fiche bois n'atteigne une page, le flux Merchant
+ * ou une liste de modèles voisins.
  *
  * Pas de `limit` : avec `pagination: false`, Payload renvoie tous les produits
  * visibles (boutique, pages villes, modèles similaires, flux Google Merchant).
@@ -552,19 +590,27 @@ export async function getAllProducts(): Promise<ProductDemo[]> {
     // inutile de les charger pour la boutique, les villes et le flux.
     select: { accessories: false },
     where: {
-      // Les produits sans hiddenFromBoutique=true sont visibles (gère NULL,
-      // false, et undefined — utile pour les produits créés avant la migration)
-      hiddenFromBoutique: { not_equals: true },
+      and: [
+        // Les produits sans hiddenFromBoutique=true sont visibles (gère NULL,
+        // false, et undefined — utile pour les produits créés avant la migration)
+        { hiddenFromBoutique: { not_equals: true } },
+        ...inCatalogueWhere(),
+      ],
     },
   });
 
-  return result.docs.map((d) => payloadToDemo(d as unknown as PayloadProduct));
+  return (result.docs as unknown as PayloadProduct[])
+    .filter((d) => !isOffCatalogue(d.combustible))
+    .map(payloadToDemo);
 }
 
 /**
  * Retourne un produit par son slug, ou undefined si pas trouvé.
  * Pas de filtre sur hiddenFromBoutique — l'URL directe doit rester accessible
  * même pour les produits masqués (favoris, liens externes, etc.).
+ *
+ * Une fiche hors catalogue (bois bûche) n'est jamais renvoyée : la page
+ * produit demande alors sa destination à getOffCatalogueRedirect.
  */
 export async function getProductBySlug(slug: string): Promise<ProductDemo | undefined> {
   const payload = await getPayloadClient();
@@ -578,14 +624,44 @@ export async function getProductBySlug(slug: string): Promise<ProductDemo | unde
     overrideAccess: false,
   });
 
-  if (result.docs.length === 0) return undefined;
-  return payloadToDemo(result.docs[0] as unknown as PayloadProduct);
+  const doc = result.docs[0] as unknown as PayloadProduct | undefined;
+  if (!doc || isOffCatalogue(doc.combustible)) return undefined;
+  return payloadToDemo(doc);
+}
+
+/**
+ * Adresse de mister-bois.be où envoyer le visiteur d'une fiche hors catalogue,
+ * ou undefined si le slug n'est pas celui d'une telle fiche. Les fiches bois
+ * connues sont déjà redirigées par config/redirects.ts avant d'arriver à la
+ * page : cette fonction est le filet pour une fiche bois créée plus tard dans
+ * l'admin.
+ */
+export async function getOffCatalogueRedirect(slug: string): Promise<string | undefined> {
+  const payload = await getPayloadClient();
+  const result = await payload.find({
+    collection: "products",
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 0,
+    overrideAccess: false,
+    select: { slug: true, combustible: true, appliance: true, productType: true },
+  });
+  const doc = result.docs[0] as unknown as
+    | Pick<PayloadProduct, "slug" | "combustible" | "appliance" | "productType">
+    | undefined;
+  if (!doc || !isOffCatalogue(doc.combustible)) return undefined;
+  return misterBoisDestination({ slug: doc.slug, appliance: doc.appliance, type: doc.productType });
 }
 
 /**
  * Retourne les slugs de TOUS les produits, masqués compris. Sert à
  * generateStaticParams() de la page produit : la route refuse tout slug hors
  * de cette liste (dynamicParams = false), une fiche oubliée répondrait 404.
+ *
+ * Les fiches hors catalogue (bois) y restent : leur page ne rend jamais la
+ * fiche, elle répond par une redirection permanente vers mister-bois.be
+ * (getOffCatalogueRedirect). Les retirer d'ici donnerait une 404 à une fiche
+ * bois créée après le relevé de config/mister-bois.ts.
  *
  * Pas de `limit` : avec `pagination: false`, Payload renvoie tout, alors
  * qu'une limite explicite s'appliquerait quand même (Payload 3.84).
@@ -606,8 +682,13 @@ export async function getAllProductSlugs(): Promise<string[]> {
  * Slug + date de dernière modification des produits visibles en boutique.
  * Utilisé par sitemap.ts pour émettre un lastmod réel (updatedAt Payload)
  * plutôt que la date de génération du sitemap.
+ *
+ * Hors sitemap : les fiches masquées, les combustibles hors catalogue (bois)
+ * et les hybrides bois + pellets, dont la page de référence est sur
+ * mister-bois.be (canonical vers l'autre site, ou noindex tant que la fiche
+ * équivalente n'est pas connue : voir lib/catalog-scope.ts).
  */
-export type ProductSitemapEntry = { slug: string; updatedAt?: string };
+export type ProductSitemapEntry = { slug: string; updatedAt?: string; image?: string };
 
 export async function getProductSitemapEntries(): Promise<ProductSitemapEntry[]> {
   const payload = await getPayloadClient();
@@ -617,14 +698,18 @@ export async function getProductSitemapEntries(): Promise<ProductSitemapEntry[]>
     // `pagination: false` et couperait le sitemap.
     pagination: false,
     overrideAccess: false,
-    select: { slug: true, updatedAt: true },
+    depth: 1, // hydrate mainImage pour la balise image du sitemap
+    select: { slug: true, updatedAt: true, combustible: true, productType: true, mainImage: true },
     where: {
-      hiddenFromBoutique: { not_equals: true },
+      and: [{ hiddenFromBoutique: { not_equals: true } }, ...inCatalogueWhere()],
     },
   });
 
-  return result.docs.map((d) => {
-    const doc = d as unknown as PayloadProduct & { updatedAt?: string };
-    return { slug: doc.slug, updatedAt: doc.updatedAt };
-  });
+  return (result.docs as unknown as Array<PayloadProduct & { updatedAt?: string }>)
+    .filter((doc) => !isOffCatalogue(doc.combustible))
+    .filter((doc) => !isHybrid({ combustible: doc.combustible, type: doc.productType }))
+    .map((doc) => {
+      const image = mapMedia(doc.mainImage, doc.slug);
+      return { slug: doc.slug, updatedAt: doc.updatedAt, image: image?.sizes?.full ?? image?.url };
+    });
 }

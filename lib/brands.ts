@@ -113,7 +113,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     heroSubtitle:
       "Fondée en 1975 par la famille Zanette, premier poêle à pellets en 2002, canalisation Comfort Air brevetée en 2007, premier poêle à pellets piloté par smartphone en 2014. Aujourd'hui, la combustion Core, le Wi-Fi de série et des hydros jusqu'à 24 kW. C'est la marque qu'on met désormais en premier quand on cherche le bon poêle pour une maison wallonne.",
     whyWeLove: [
-      "MCZ, c'est la profondeur de gamme. Une centaine de versions en pellets, du petit poêle de 6 kW pour une pièce bien isolée au foyer hydro de 24 kW qui alimente les radiateurs. Entre les deux : des poêles plats de 27,5 cm pour un couloir, des ronds qui se placent en angle, des canalisables qui chauffent une ou deux pièces de plus, des inserts pour une vieille cheminée. Quand on arrive chez vous, on a presque toujours un MCZ qui colle à la maison, sans forcer.",
+      "MCZ, c'est la profondeur de gamme. Une centaine de versions en pellets, du petit poêle de 6 kW pour une pièce bien isolée au foyer hydro de 24 kW qui alimente les radiateurs. Entre les deux : des poêles plats de 27,5 cm pour un couloir, des ronds qui se placent en angle, des canalisables qui chauffent une ou deux pièces de plus, des inserts pour une vieille cheminée. Quand on arrive chez vous, on a presque toujours un MCZ qui colle à la maison, sans forcer. C'est pour cela qu'elle passe en tête de notre catalogue depuis octobre 2026 : nous l'expliquons dans [l'arrivée de MCZ chez Mister Pellets](/blog/mcz-arrive-chez-mister-pellets).",
       "Ensuite, la technique. La combustion Core fonctionne par gazéification : MCZ annonce 55 % d'émissions en moins que les limites européennes Ecodesign, une flamme plus calme, une vitre qui reste propre plus longtemps et un brasero qui se nettoie seul, avec un nettoyage du foyer une fois par semaine. Le pilotage Maestro+ met le Wi-Fi et le Bluetooth de série : on règle et on programme le poêle depuis le téléphone, à la maison ou à distance, et le logiciel se met à jour tout seul.",
       "Enfin, le confort de toute la maison. Le système Comfort Air, breveté par MCZ, envoie l'air chaud par des gaines jusqu'à 8 m, à une température de sortie qui peut monter à 80 °C, avec des diffuseurs qu'on peut placer bas sur le mur. Et pour ceux qui veulent un budget plus serré, la ligne Easy garde la fonte (dessus, porte, brasero) et une utilisation très simple.",
     ],
@@ -147,6 +147,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { name: "Qbox 70 Air 8", power: "7,8 kW", type: "Insert pour cheminée", forWhom: "Transforme une cheminée existante en chauffage aux pellets, sans gros travaux.", slug: "mcz-qbox-70-air-8" },
     ],
     faq: [
+      // check-catalogue: allow (histoire du fabricant)
       { question: "MCZ, c'est qui ?", answer: "Un fabricant italien fondé en 1975 par la famille Zanette à Vigonovo di Fontanafredda, près de Pordenone, où se trouvent toujours le siège et l'usine. Foyers en 1982, poêles à bois en 1998, premier poêle à pellets en 2002. Le groupe MCZ possède aussi Cadel, une autre marque qu'on pose, et compte 673 personnes selon ses chiffres de 2021." },
       { question: "La combustion Core, ça change quoi au quotidien ?", answer: "Trois choses. Moins de nettoyage : le brasero se nettoie seul et le foyer se nettoie une fois par semaine. Une vitre qui reste propre plus longtemps. Et moins de pellets brûlés pour la même chaleur, jusqu'à 15 % selon MCZ, avec 55 % d'émissions en moins que les limites Ecodesign. Elle équipe les Ego, Eiko, Club, Suite, Musa, Feel, Curve, Mood et Mako marqués Core." },
       { question: "Peut-on piloter un MCZ depuis son téléphone ?", answer: "Oui. Sur les modèles Maestro+, le Wi-Fi et le Bluetooth sont de série : allumage, programmation, réglage de la ventilation et suivi de la consommation depuis l'appli, à la maison ou à distance. Les poêles de la ligne Easy se pilotent avec leur panneau, et depuis le téléphone avec le kit Wi-Fi en option." },
@@ -159,9 +160,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur MCZ, aux conditions remises par écrit avec le devis. Elle suppose une pose par un professionnel et un entretien annuel : on s'occupe des deux, avec intervention sous 48 à 72 h.",
     tags: ["Italie", "Depuis 1975", "Combustion Core", "Maestro+ Wi-Fi", "Comfort Air"],
     officialUrl: "https://www.mcz.it/fr-be",
-    metaTitle: "MCZ en Wallonie, poêles à pellets Core, canalisables et hydro | Mister Pellets",
+    metaTitle: "MCZ en Wallonie : poêles à pellets Core et hydro",
     metaDescription:
-      "MCZ, pionnier italien du pellet : combustion Core, Wi-Fi Maestro+ de série, canalisation Comfort Air, hydros jusqu'à 24 kW, foyers et inserts. Toute la gamme posée en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "MCZ, pionnier italien du pellet : combustion Core, Wi-Fi Maestro+ de série, canalisation Comfort Air, hydros jusqu'à 24 kW. Pose en Wallonie.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -177,12 +178,12 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     tagline: "Le poêle italien qui ne fait pas de bruit",
     badge: "Marque premium italienne",
     intro:
-      "Edilkamin est une référence italienne du chauffage biomasse depuis 1963, basée à Lainate dans la région de Milan. La marque couvre toute la gamme : poêles air, canalisables, étanches, hydro, inserts et poêles à bois. Le pilotage Wi-Fi est intégré sur la plupart des modèles récents.",
+      "Edilkamin est une référence italienne du chauffage biomasse depuis 1963, basée à Lainate dans la région de Milan. En pellets, la marque couvre toute la gamme : poêles à air, canalisables, étanches, hydro et inserts. Le pilotage Wi-Fi est intégré sur la plupart des modèles récents.",
     heroSubtitle:
       "Fondée en 1963 par Francesco Borsatti, Edilkamin est la référence du chauffage biomasse italien. On la pose depuis le début de l'atelier. C'est notre choix par défaut quand on cherche un poêle qui dure 20 ans sans broncher.",
     whyWeLove: [
       "Edilkamin, c'est la référence du poêle italien fiable. La marque a plus de 60 ans : siège à Lainate, près de Milan, usine historique à Gabbioneta Binanuova (province de Crémone), pôle technique et laboratoire de recherche à Lavagno, près de Vérone, et une seconde usine à Sárvár, en Hongrie. Résultat concret : des poêles qui chauffent vraiment, qui se règlent finement et qui supportent les hivers wallons sans broncher.",
-      "On en pose depuis le début de l'atelier, et on a vu passer toutes les configurations possibles. Insert encastré dans une vieille cheminée, poêle d'angle dans un séjour ouvert, hydro pour chauffage central avec ballon tampon. Les retours après 5 à 10 ans d'utilisation sont systématiquement bons. Le SAV pièces est rapide en Belgique, c'est un point qui compte énormément quand on choisit pour 20 ans.",
+      "On en pose depuis les débuts de [notre atelier de Fernelmont, en 2016](/a-propos), et on a vu passer toutes les configurations possibles. Insert encastré dans une vieille cheminée, poêle d'angle dans un séjour ouvert, [hydro raccordé au chauffage central à la place d'une chaudière mazout](/blog/remplacer-chaudiere-mazout-edilkamin-hydro), avec ballon tampon. Les retours après 5 à 10 ans d'utilisation sont systématiquement bons. Le SAV pièces est rapide en Belgique, c'est un point qui compte énormément quand on choisit pour 20 ans.",
       "C'est la marque qu'on recommande quand on veut un poêle qui sera encore là dans deux décennies, sans avoir à y penser tous les hivers.",
     ],
     milestones: [
@@ -201,28 +202,29 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { emoji: "🛡", title: "SAV pièces Europe", description: "Réseau de 450+ centres d'assistance dans le monde. Stock pièces rapide via le réseau belge. Joints, bougies, sondes, ventilateurs courants disponibles sous 48 à 72 h." },
     ],
     modelsTable: [
-      { name: "Cherie 9+ Evo", power: "9 kW", type: "Canalisable", forWhom: "80 à 100 m², best-seller de la gamme." },
-      { name: "Blade 12++ Evo", power: "12 kW", type: "Ventilé", forWhom: "Ventilation puissante pour grands volumes." },
+      { name: "Cherie 9+ Evo", power: "9 kW", type: "Canalisable", forWhom: "80 à 100 m², best-seller de la gamme.", slug: "edilkamin-cherie-9-evo" },
+      { name: "Blade 12++ Evo", power: "12 kW", type: "Ventilé", forWhom: "Ventilation puissante pour grands volumes.", slug: "edilkamin-blade-12-evo" },
       { name: "Cherie H 14 Evo", power: "14 kW", type: "Hydro", forWhom: "Chauffage central et eau chaude sanitaire." },
-      { name: "Lena 9+ Evo", power: "9 kW", type: "Compact", forWhom: "Pièces moyennes, format discret." },
+      { name: "Lena 9+ Evo", power: "9 kW", type: "Compact", forWhom: "Pièces moyennes, format discret.", slug: "edilkamin-lena-9-evo" },
       { name: "Kira2 Evo", power: "13 kW", type: "Canalisable double flux", forWhom: "Jusqu'à 12 m de gaines, deux pièces." },
       { name: "Dania AT C Plus", power: "8 kW", type: "Étanche", forWhom: "Classe A+, air de combustion pris dehors, maisons BBC." },
     ],
     faq: [
-      { question: "Edilkamin, c'est cher par rapport aux autres marques ?", answer: "Sur le tarif catalogue oui, c'est dans le haut de la fourchette. Mais quand on intègre la durée de vie réelle (15 à 20 ans courants chez nos clients), le coût ramené à l'année est plus bas qu'un poêle d'entrée de gamme qu'il faut remplacer après 8 ans. Et le SAV pièces reste dispo 15 ans après l'arrêt du modèle." },
+      { question: "Edilkamin, c'est cher par rapport aux autres marques ?", answer: "Sur le tarif catalogue oui, c'est dans le haut de la fourchette. Mais quand on intègre [la durée de vie réelle d'un Edilkamin](/blog/duree-de-vie-poele-edilkamin) (15 à 20 ans courants chez nos clients), le coût ramené à l'année est plus bas qu'un poêle d'entrée de gamme qu'il faut remplacer après 8 ans. Et le SAV pièces reste dispo 15 ans après l'arrêt du modèle." },
       { question: "Les pièces détachées, c'est facile à trouver ?", answer: "Edilkamin a un réseau de 450+ centres d'assistance dans le monde. En Belgique, les consommables courants (joints, bougies, sondes, ventilateurs) sont chez nous en stock. Les pièces spécifiques arrivent en 48 à 72 h." },
       { question: "Quelle différence entre la gamme Cherie et la gamme Blade ?", answer: "Cherie est le format compact à poser contre un mur, design céramique chaleureux. Blade est plus large, plus puissant, avec une face vitrée imposante. Cherie convient à une pièce, Blade à un grand volume ouvert." },
       { question: "La technologie Leonardo, c'est utile en pratique ?", answer: "Très utile. Concrètement, le poêle s'auto-règle quand vous changez de marque de pellets, quand l'humidité ambiante varie, quand il fait très froid dehors. Vous n'avez rien à toucher dans le menu, la combustion reste optimale." },
       { question: "Edilkamin est compatible avec une cheminée ancienne ?", answer: "Oui dans la majorité des cas, avec un tubage inox flexible ou rigide. On vérifie la géométrie du conduit à la visite technique pour valider le diamètre minimum (80 mm pour la plupart des modèles, 100 mm pour les hydro)." },
       { question: "Est-ce qu'Edilkamin propose des modèles canalisables ?", answer: "Oui, la majorité de la gamme l'est. Le Kira2 Evo distribue même l'air chaud sur deux gaines indépendantes. Pratique pour chauffer une chambre à l'étage en plus du salon." },
+      { question: "Et les poêles et inserts à bois Edilkamin ?", answer: "Mister Pellets ne présente que les Edilkamin à pellets. Les poêles, inserts et foyers à bois bûche de la marque sont sur [Mister Bois](https://mister-bois.be/nos-marques/edilkamin), l'autre site de notre société, Awlest." },
     ],
     warranty:
       "Garantie constructeur Edilkamin. Mister Pellets assure le SAV pièces localement : intervention sous 48 à 72 h et stock des consommables courants en atelier.",
     tags: ["Italie", "Depuis 1963", "Gamme très large", "Technologie Leonardo"],
     officialUrl: "https://www.edilkamin.com/",
-    metaTitle: "Edilkamin en Wallonie, revendeur officiel poêles italiens | Mister Pellets",
+    metaTitle: "Edilkamin en Wallonie : poêles à pellets italiens",
     metaDescription:
-      "Edilkamin, marque italienne fondée en 1963, siège à Lainate près de Milan. Poêles à pellets premium, technologie Leonardo. Pose en 1 jour par Mister Pellets, TVA à 6 % en rénovation.",
+      "Edilkamin, marque italienne fondée en 1963 près de Milan : poêles à pellets, technologie Leonardo. Pose par Mister Pellets, TVA à 6 % en rénovation.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -262,12 +264,12 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { emoji: "✅", title: "Certifications complètes", description: "CE, EN 14785, Ecodesign 2022, classe environnementale 5 étoiles D.M. 186." },
     ],
     modelsTable: [
-      { name: "Tweed 90+", power: "9,2 kW", type: "Canalisable étanche", forWhom: "Best-seller Wallonie, 240 m³, rendement 90,9 %." },
-      { name: "Like 80", power: "7,6 kW", type: "Étanche air", forWhom: "Appartements et petites pièces." },
-      { name: "Zone 80", power: "7,6 kW", type: "Étanche air", forWhom: "Pièces compactes, 74 m² maxi." },
-      { name: "Spy 110+", power: "10,5 kW", type: "Canalisable étanche", forWhom: "Volume polyvalent, design moderne." },
-      { name: "Daily 130++", power: "12,5 kW", type: "Canalisable étanche", forWhom: "120 m², jusqu'à classe A+." },
-      { name: "Entity 90+", power: "8,7 kW", type: "Canalisable ultra-fin", forWhom: "Couloirs et petits espaces, 31 cm de profondeur." },
+      { name: "Tweed 90+", power: "9,2 kW", type: "Canalisable étanche", forWhom: "Best-seller Wallonie, 240 m³, rendement 90,9 %.", slug: "ek63-tweed-90" },
+      { name: "Like 80", power: "7,6 kW", type: "Étanche air", forWhom: "Appartements et petites pièces.", slug: "ek63-like-80" },
+      { name: "Zone 80", power: "7,6 kW", type: "Étanche air", forWhom: "Pièces compactes, 74 m² maxi.", slug: "ek63-zone-80" },
+      { name: "Spy 110+", power: "10,5 kW", type: "Canalisable étanche", forWhom: "Volume polyvalent, design moderne.", slug: "ek63-spy-110" },
+      { name: "Daily 130++", power: "12,5 kW", type: "Canalisable étanche", forWhom: "120 m², jusqu'à classe A+.", slug: "ek63-daily-130" },
+      { name: "Entity 90+", power: "8,7 kW", type: "Canalisable ultra-fin", forWhom: "Couloirs et petits espaces, 31 cm de profondeur.", slug: "ek63-entity-90" },
     ],
     faq: [
       { question: "EK63 et Edilkamin, c'est la même chose ?", answer: "Pas tout à fait. EK63 est une marque distincte du groupe Edilkamin, créée pour proposer des poêles modernes connectés à un prix plus accessible. La plateforme industrielle et le SAV sont communs. Le design et certaines technologies (Leonardo notamment) restent l'apanage d'Edilkamin." },
@@ -281,9 +283,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur EK63 : 2 ans. Mister Pellets ajoute son service local : intervention sous 48 à 72 h et stock des pièces courantes en atelier.",
     tags: ["Italie", "Groupe Edilkamin", "Wi-Fi Smart", "Étanche"],
     officialUrl: "https://www.ek-63.com/",
-    metaTitle: "EK63 en Wallonie, poêles à pellets Wi-Fi du groupe Edilkamin | Mister Pellets",
+    metaTitle: "EK63 en Wallonie : poêles à pellets Wi-Fi et étanches",
     metaDescription:
-      "EK63, marque connectée du groupe Edilkamin. Poêles à pellets étanches, Wi-Fi Smart de série, design moderne, prix accessible. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "EK63, marque connectée du groupe Edilkamin : poêles à pellets étanches, Wi-Fi Smart de série, prix accessible. Pose en Wallonie par Mister Pellets.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -322,11 +324,11 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { emoji: "🇮🇹", title: "100 % fabriqué en interne", description: "Toutes les phases (idée, conception, fonderie, assemblage, tests) se déroulent dans l'usine de Sant'Oreste, près de Rome. Tradition familiale, deux générations, Good Design Award 2022." },
     ],
     modelsTable: [
-      { name: "Soft", power: "4 versions, jusqu'à 24,1 kW", type: "Hybride bois-pellet hydro", forWhom: "Best-seller, Good Design Award 2022, remplacement chaudière." },
-      { name: "Vert", power: "8,3 à 13 kW", type: "Pellet canalisable", forWhom: "Maison ouverte qui veut canaliser deux pièces." },
-      { name: "Flow", power: "8,3 à 13 kW", type: "Pellet design moderne", forWhom: "Intérieur contemporain, lignes droites." },
-      { name: "Curvy", power: "8,3 à 13 kW", type: "Pellet maïolique galbée", forWhom: "Intérieur classique ou bohème." },
-      { name: "Split", power: "3 puissances", type: "Pellet céramique", forWhom: "Rendement 94,1 %, chambre céramique haut rendement." },
+      { name: "Soft", power: "4 versions, jusqu'à 24,1 kW", type: "Hybride bois-pellet hydro", forWhom: "Best-seller, Good Design Award 2022, remplacement chaudière.", slug: "girolami-soft" },
+      { name: "Vert", power: "8,3 à 13 kW", type: "Pellet canalisable", forWhom: "Maison ouverte qui veut canaliser deux pièces.", slug: "girolami-vert" },
+      { name: "Flow", power: "8,3 à 13 kW", type: "Pellet design moderne", forWhom: "Intérieur contemporain, lignes droites.", slug: "girolami-flow" },
+      { name: "Curvy", power: "8,3 à 13 kW", type: "Pellet maïolique galbée", forWhom: "Intérieur classique ou bohème.", slug: "girolami-curvy" },
+      { name: "Split", power: "3 puissances", type: "Pellet céramique", forWhom: "Rendement 94,1 %, chambre céramique haut rendement.", slug: "girolami-split" },
       { name: "Biotec", power: "26 à 34 kW", type: "Chaudière pellet ou hybride", forWhom: "Grandes maisons, ECS, remplacement chaudière fioul." },
     ],
     faq: [
@@ -335,15 +337,16 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { question: "Un Girolami peut-il fonctionner au pellet et au bois ?", answer: "Oui, sur la gamme hybride (Soft notamment). Le Fuel Convert System détecte automatiquement le combustible chargé. Vous mettez du pellet, ça fonctionne au pellet. Vous mettez des bûches, ça bascule en mode bois. Sans toucher au menu." },
       { question: "C'est silencieux ?", answer: "La fonction SuperSilent coupe les ventilateurs et fait diffuser la chaleur par convection naturelle, sans aucun souffle audible. Utile le soir, dans un séjour ouvert sur les chambres." },
       { question: "On peut piloter un Girolami depuis le smartphone ?", answer: "Oui. Wi-Fi de série sur les modèles modernes (Vert, Flow, Curvy). Application smartphone, programmation horaire, commande vocale via Alexa." },
-      { question: "Quel modèle pour une maison de 150 m² ?", answer: "Pour un chauffage à air, un Vert canalisable de 10,8 ou 13 kW couvre confortablement, avec deux pièces canalisées. Pour un raccordement aux radiateurs, un Soft hydro de 15 ou 18,1 kW est mieux adapté. On dimensionne ça gratuitement lors du diagnostic à domicile." },
+      { question: "Quel modèle pour une maison de 150 m² ?", answer: "Pour un chauffage à air, un Vert canalisable de 10,8 ou 13 kW couvre confortablement, avec deux pièces canalisées, chacune servie par [un ventilateur réglé sur sa propre température](/blog/girolami-canalisable-intelligent-trois-ventilateurs). Pour un raccordement aux radiateurs, un Soft hydro de 15 ou 18,1 kW est mieux adapté. On dimensionne ça gratuitement lors du diagnostic à domicile." },
+      { question: "Et les inserts et foyers à bois Girolami ?", answer: "Vous trouvez ici les Girolami à pellets et les hybrides bois + pellets. Les inserts Vision Evo et les foyers TC EVO, qui ne brûlent que des bûches, sont sur [Mister Bois](https://mister-bois.be/nos-marques/girolami), l'autre site de notre société, Awlest." },
     ],
     warranty:
       "Garantie constructeur Girolami. Mister Pellets assure le SAV pièces localement : intervention sous 48 à 72 h et stock des consommables courants en atelier.",
     tags: ["Italie", "Depuis 1970", "Source Feeding breveté", "Hybride bois-pellet"],
     officialUrl: "https://www.girolami.eu/",
-    metaTitle: "Girolami en Wallonie, poêle hybride bois-pellet auto-nettoyant | Mister Pellets",
+    metaTitle: "Girolami en Wallonie : poêles à pellets autonettoyants",
     metaDescription:
-      "Girolami, fabricant italien familial depuis 1970, brevet Source Feeding auto-nettoyant. Hybrides bois-pellet, canalisables, hydro. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "Girolami, fabricant italien familial depuis 1970 : brevet Source Feeding autonettoyant, poêles canalisables, hydro et hybrides. Pose en Wallonie.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -358,6 +361,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     positioning: "Combustion brevetée par alimentation par le bas, gamme complète",
     tagline: "Une flamme plus naturelle, un brasero qui se nettoie tout seul",
     intro:
+      // check-catalogue: allow (comparaison)
       "Dielle se distingue par un système de combustion qu'elle a breveté : les pellets sont alimentés par le bas du brasero, et non par le haut comme la majorité des poêles. Concrètement, ça donne une flamme plus naturelle et plus calme (proche d'un poêle à bois traditionnel), un auto-nettoyage du brasero (donc moins d'entretien), et une tolérance aux pellets de qualité variable. Le fonctionnement est aussi plus silencieux. La gamme est complète : poêles air, canalisables, hydro pour le chauffage central, inserts, et même un modèle hybride qui fonctionne au pellets ET au bois.",
     history: [
       "Fabricant italien établi de poêles à pellets, basé en Italie.",
@@ -449,6 +453,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     heroSubtitle:
       "Fondée en 1983 par Ferdinand Huemer en Haute-Autriche, toujours indépendante et dirigée par son fondateur. Des poêles dessinés par Cesare Monti, des portes en fonte massive, des pellets qui chauffent sans souffler d'air dans la pièce. C'est la marque haut de gamme qui rejoint notre sélection en octobre 2026.",
     whyWeLove: [
+      // check-catalogue: allow (comparaison)
       "Austroflamm, c'est d'abord le silence. La plupart des poêles à pellets soufflent l'air chaud avec un ventilateur, et ce ronronnement finit par s'entendre dans un séjour calme. Les poêles à pellets Austroflamm n'en ont pas : la chaleur sort par convection naturelle, comme sur un poêle à bois. Il reste l'extracteur de fumées, indispensable sur tout poêle à pellets, mais plus de soufflerie dans la pièce. Le soir, devant la télé ou un livre, ça change tout.",
       "Ensuite, la finition. Austroflamm est une entreprise familiale, fondée en 1983 par Ferdinand Huemer, qui la dirige encore. Les poêles sont dessinés par Cesare Monti, un designer italien qui travaille exclusivement pour la marque. Portes en fonte massive, grande vitre ronde sur la série Clou, habillages en céramique ou en pierre naturelle selon les modèles. Le foyer est garni de Keramott, un matériau breveté développé et produit par Austroflamm. La marque ne vend que par des revendeurs agréés, qui posent et mettent en service.",
       "Enfin, les poêles mixtes Duo, et c'est souvent pour eux qu'on nous appelle. Vous allumez aux pellets le matin, vous chargez des bûches le soir pour le plaisir du feu de bois. Le poêle le détecte, règle l'air tout seul, et quand les bûches ont fini de brûler, il repart aux pellets sans que vous touchiez à rien. En cas de coupure de courant, le mode bois continue de chauffer.",
@@ -473,15 +478,16 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { name: "Clou Pellet 8", power: "8 kW", type: "Pellets, sans convection forcée", forWhom: "Vitre ronde, réservoir de 36 kg et jusqu'à 60 h d'autonomie. Rendement de 90 %, pour 98 à 255 m³.", slug: "austroflamm-clou-pellet-8" },
       { name: "Clou Pellet 10", power: "10 kW", type: "Pellets, sans convection forcée", forWhom: "La même carrosserie que le 8 kW, pour les maisons plus grandes : jusqu'à 350 m³.", slug: "austroflamm-clou-pellet-10" },
       { name: "Clou Compact Pellet", power: "6 kW", type: "Pellets, compact", forWhom: "52 cm de large pour 49,9 cm de profondeur : la place d'un petit meuble.", slug: "austroflamm-clou-compact-pellet" },
-      { name: "Ruby 2.0", power: "8 kW", type: "Pellets, canalisable avec kit", forWhom: "Porte arrondie en fonte, poignée en bois, acier ou céramique. Rendement de 90 %.", slug: "austroflamm-ruby" },
+      { name: "Ruby 2.0", power: "8 kW", type: "Pellets, canalisable avec kit", forWhom: "Porte arrondie en fonte, poignée en bois, acier ou céramique. Rendement de 90 %." },
       { name: "Ella", power: "7,7 kW", type: "Pellets, rond", forWhom: "Vitre bombée, habillage acier ou céramique blanche, grille basculante pour vider le brûleur.", slug: "austroflamm-ella" },
-      { name: "Perry", power: "7,5 kW", type: "Pellets, lignes droites", forWhom: "Acier ou céramique, programmation hebdomadaire de série, 53,5 cm de large.", slug: "austroflamm-perry" },
+      { name: "Perry", power: "7,5 kW", type: "Pellets, lignes droites", forWhom: "Acier ou céramique, programmation hebdomadaire de série, 53,5 cm de large." },
       { name: "Clou Duo", power: "7 kW pellets, 6,8 kW bois", type: "Mixte bois-pellets", forWhom: "43 cm de profondeur pour 81 cm de large, bascule automatique du bois aux pellets.", slug: "austroflamm-clou-duo" },
       { name: "Mo Duo Cook", power: "9,4 kW", type: "Mixte bois-pellets, plaque de cuisson", forWhom: "On chauffe et on cuisine sur le dessus, aux pellets comme au bois.", slug: "austroflamm-mo-duo-cook" },
       { name: "Quadra Duo", power: "8,3 kW pellets, 6,3 kW bois", type: "Mixte bois-pellets", forWhom: "Lignes carrées, 41 cm de profondeur, habillage acier ou pierre naturelle.", slug: "austroflamm-quadra-duo" },
     ],
     faq: [
-      { question: "Austroflamm, c'est qui ?", answer: "Une entreprise familiale autrichienne, fondée en 1983 par Ferdinand Huemer, qui la dirige toujours. Le siège est à Krenglbach, en Haute-Autriche. Elle fabrique des poêles à bois, à pellets et mixtes bois-pellets, vendus uniquement par des revendeurs agréés. Le premier poêle à pellets de la marque date de 1995." },
+      { question: "Austroflamm, c'est qui ?", answer: "Une entreprise familiale autrichienne, fondée en 1983 par Ferdinand Huemer, qui la dirige toujours. Le siège est à Krenglbach, en Haute-Autriche. Elle fabrique des poêles à bois, à pellets et mixtes bois-pellets, vendus uniquement par des revendeurs agréés. Le premier poêle à pellets de la marque date de 1995. Ici, vous trouvez ses poêles à pellets et ses mixtes Duo ; ses poêles et foyers à bois sont sur [Mister Bois](https://mister-bois.be/nos-marques/austroflamm)." },
+      // check-catalogue: allow (comparaison)
       { question: "Un poêle à pellets sans ventilateur dans la pièce, ça chauffe vraiment ?", answer: "Oui. La chaleur se diffuse par convection naturelle et par rayonnement, comme avec un poêle à bois. La pièce monte un peu moins vite en température qu'avec un poêle ventilé, mais la chaleur est plus douce et vous n'entendez plus de soufflerie. Pour une maison très ouverte ou plusieurs pièces à chauffer, on regarde ensemble s'il vaut mieux un modèle canalisable." },
       { question: "Comment fonctionne un poêle mixte Duo ?", answer: "Il brûle des pellets ou des bûches dans le même foyer. Vous chargez du bois, le poêle le détecte et règle l'air de combustion tout seul. Quand les bûches ont brûlé, il redémarre aux pellets si vous ne l'avez pas éteint, donc la maison reste chauffée même si vous êtes sortis. En cas de coupure de courant, le mode bois continue de fonctionner." },
       { question: "Un Austroflamm convient-il à une maison basse énergie ou passive ?", answer: "Les poêles à pellets Austroflamm ont tous un raccord d'air extérieur de série : l'air de combustion vient du dehors, pas de la pièce. Les Clou Duo, Mo Duo et Scotty Duo ont l'agrément allemand DIBt pour le fonctionnement indépendant de l'air ambiant, valable jusqu'en 2028. On vérifie toujours la compatibilité avec votre ventilation lors de la visite technique." },
@@ -493,9 +499,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Austroflamm garantit le corps de chauffe 6 ans et les autres pièces en acier et en fonte 2 ans en Autriche et en Allemagne ; en Belgique, les conditions de l'importateur s'appliquent et on vous les remet par écrit avec le devis. Elles supposent une pose par un professionnel et un entretien annuel : on s'occupe des deux, avec intervention sous 48 à 72 h.",
     tags: ["Autriche", "Depuis 1983", "Sans convection forcée", "Mixte bois-pellets"],
     officialUrl: "https://www.austroflamm.com/",
-    metaTitle: "Austroflamm en Wallonie, poêles à pellets haut de gamme et mixtes Duo | Mister Pellets",
+    metaTitle: "Austroflamm en Wallonie : poêles à pellets haut de gamme",
     metaDescription:
-      "Austroflamm, marque autrichienne haut de gamme depuis 1983 : poêles à pellets sans convection forcée, mixtes bois-pellets Duo, design Cesare Monti. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "Austroflamm, marque autrichienne depuis 1983 : poêles à pellets sans convection forcée, mixtes Duo, design Cesare Monti. Pose en Wallonie.",
   },
 
   // ───────────────────────────────────────────────────────────────────
@@ -521,6 +527,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
     heroSubtitle:
       "Plus de soixante ans de poêles, entrée dans le groupe MCZ en 2013, usine neuve en 2023 près de Trévise. Wi-Fi et Bluetooth intégrés, brasero autonettoyant sur les modèles récents, des poêles plats qui tiennent dans un couloir, à un prix qui reste raisonnable. Cadel joue chez nous le même rôle qu'EK63.",
     whyWeLove: [
+      // check-catalogue: allow (histoire du fabricant)
       "Cadel, c'est d'abord une histoire de famille, commencée il y a plus de soixante ans à Santa Lucia di Piave, près de Trévise, avec des cuisinières et des poêles à bois, avant le passage au pellet. Depuis 2013, la marque fait partie du groupe MCZ, un des grands noms italiens du chauffage au bois et aux pellets. Le parallèle avec EK63 et Edilkamin est assez juste : Cadel profite du savoir-faire d'un grand groupe, avec des poêles plus simples et un prix plus doux.",
       "La fabrication se fait dans une usine inaugurée en mars 2023 : 15 000 m² de production, dix lignes d'assemblage, découpe et pliage de la tôle, soudure, peinture et montage sur place, 400 kW de panneaux photovoltaïques sur les toits. L'entreprise est certifiée ISO 9001 depuis 2006. En 2022, Cadel a vendu 45 000 poêles, et selon la presse économique italienne, la Belgique fait partie de ses premiers marchés à l'export.",
       "Sur le terrain, ce qu'on apprécie, c'est d'avoir une réponse pour presque chaque maison. Un couloir de 1 m de large : un Grace de 27 cm de profondeur. Deux chambres à chauffer en plus : un Vesta Plus ou un Mithos Plus à deux sorties d'air chaud. Une vieille cheminée ouverte : un insert Zefiro. Des radiateurs à alimenter : un River Idro. Et sur tous, le pilotage depuis le téléphone avec l'appli gratuite Easy Connect Plus, même sans Wi-Fi grâce au Bluetooth.",
@@ -546,11 +553,11 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { name: "Spin Plus 9 Up-Twin Autoclean", power: "8,5 kW", type: "Canalisable, iF Design Award 2026", forWhom: "Brasero rotatif autonettoyant, sortie des fumées par le haut, design primé.", slug: "cadel-spin-plus-9-up-twin-autoclean" },
       { name: "Vesta Plus 11 Autoclean", power: "10,5 kW", type: "Plat, deux sorties d'air chaud", forWhom: "33 cm de profondeur pour 10,5 kW, deux pièces voisines chauffées en plus.", slug: "cadel-vesta-plus-11-autoclean" },
       { name: "Grace 7", power: "6,9 kW", type: "Plat, 27 cm", forWhom: "Pour un couloir ou un hall, au sol ou fixé au mur.", slug: "cadel-grace-7" },
-      { name: "Mithos Plus 14 Ps", power: "13,7 kW", type: "Canalisable, deux sorties", forWhom: "Un des plus puissants de la gamme à air : jusqu'à 390 m³ et deux pièces canalisées.", slug: "cadel-mithos-plus-14-ps" },
+      { name: "Mithos Plus 14 Ps", power: "13,7 kW", type: "Canalisable, deux sorties", forWhom: "Un des plus puissants de la gamme à air : jusqu'à 390 m³ et deux pièces canalisées." },
       { name: "Sound 7 Up-Twin", power: "7 kW", type: "Rond, vitre Magic Glass", forWhom: "La vitre s'assombrit quand le poêle est éteint. Sortie des fumées par le haut.", slug: "cadel-sound-7-up-twin" },
       { name: "Zefiro 9", power: "9 kW", type: "Insert pour cheminée", forWhom: "Transforme une cheminée ouverte en chauffage aux pellets, canalisable avec kit.", slug: "cadel-zefiro-9" },
-      { name: "River Idro 18 Autoclean", power: "18 kW", type: "Hydro, classe A++", forWhom: "13,2 kW pour les radiateurs ou le plancher chauffant, brasero autonettoyant.", slug: "cadel-river-idro-18-autoclean" },
-      { name: "Saturno 24", power: "24,7 kW", type: "Insert hydro", forWhom: "Dans une cheminée existante, 19 kW cédés à l'eau, réservoir de 40 kg.", slug: "cadel-saturno-24" },
+      { name: "River Idro 18 Autoclean", power: "18 kW", type: "Hydro, classe A++", forWhom: "13,2 kW pour les radiateurs ou le plancher chauffant, brasero autonettoyant." },
+      { name: "Saturno 24", power: "24,7 kW", type: "Insert hydro", forWhom: "Dans une cheminée existante, 19 kW cédés à l'eau, réservoir de 40 kg." },
     ],
     faq: [
       { question: "Cadel, c'est qui ?", answer: "Un fabricant italien de Santa Lucia di Piave, près de Trévise, qui fait des poêles depuis plus de soixante ans. Depuis 2013, Cadel fait partie du groupe MCZ, de la famille Zanette. Les poêles sont fabriqués dans une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006." },
@@ -565,9 +572,9 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       "Garantie constructeur Cadel : 2 ans à partir de la date d'achat, facture faisant foi, sur les pièces défectueuses d'origine (joints, vitre et pièces amovibles du foyer exclus). Elle suppose une installation par un professionnel : on pose, on met en service et on assure le SAV, avec intervention sous 48 à 72 h.",
     tags: ["Italie", "Plus de 60 ans", "Groupe MCZ", "Wi-Fi intégré", "Autoclean"],
     officialUrl: "https://cadelsrl.com/",
-    metaTitle: "Cadel en Wallonie, poêles à pellets Wi-Fi du groupe MCZ | Mister Pellets",
+    metaTitle: "Cadel en Wallonie : poêles à pellets Wi-Fi, groupe MCZ",
     metaDescription:
-      "Cadel, fabricant italien près de Trévise, groupe MCZ : poêles à pellets Wi-Fi et Bluetooth intégrés, brasero Autoclean, poêles plats, canalisables et hydro. Pose en Wallonie par Mister Pellets, TVA à 6 % en rénovation.",
+      "Cadel, fabricant italien du groupe MCZ : poêles à pellets Wi-Fi et Bluetooth, brasero Autoclean, poêles plats, canalisables et hydro. Pose en Wallonie.",
   },
 };
 

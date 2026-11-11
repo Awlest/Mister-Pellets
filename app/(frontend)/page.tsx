@@ -10,8 +10,9 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { BonusAnnouncement } from "@/components/sections/BonusAnnouncement";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { buildFAQSchema } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE, SITE_LOCALE, SITE_NAME, SITE_URL, buildFAQSchema } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
+import { typo } from "@/lib/typo";
 
 /**
  * Régénération horaire : l'annonce du bonus de saison dépend de la date. Le
@@ -21,20 +22,40 @@ import { CITIES } from "@/lib/cities";
  */
 export const revalidate = 3600;
 
+const HOME_TITLE = "Poêle à pellets en Wallonie : vente et pose | Mister Pellets";
+const HOME_DESCRIPTION =
+  "Poêles à pellets MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel, vendus et posés en Wallonie. TVA à 6 % sur les logements de plus de 10 ans.";
+
 export const metadata: Metadata = {
   // Suffixe écrit en toutes lettres : le template de titre de
   // app/(frontend)/layout.tsx ne s'applique qu'aux segments enfants, pas à
   // cette page, qui est dans le même segment que lui.
-  title: { absolute: "Poêle à pellets en Wallonie, vente, pose, entretien | Mister Pellets" },
-  description:
-    "MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel : poêles à pellets vendus et posés en Wallonie. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
+  // L'openGraph d'une page remplace celui du gabarit en entier : tous les
+  // champs sont repris.
+  openGraph: {
+    type: "website",
+    locale: SITE_LOCALE,
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Mister Pellets, poêles à pellets en Wallonie" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
+  },
 };
 
 const FAQ_HOMEPAGE = [
   {
     question: "Combien coûte un poêle à pellets installé en Wallonie ?",
     answer:
-      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. Dans un logement de plus de 10 ans, la TVA passe à 6 % au lieu de 21 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026.",
+      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. Dans un logement de plus de 10 ans, la TVA passe à 6 % au lieu de 21 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026. Les forfaits de pose et des exemples chiffrés sont sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets).",
   },
   {
     question: "Quelle puissance de poêle pour quelle surface ?",
@@ -49,7 +70,7 @@ const FAQ_HOMEPAGE = [
   {
     question: "Existe-t-il encore une prime pour un poêle à pellets en Wallonie ?",
     answer:
-      "Plus depuis le 1er octobre 2026. La prime Habitation s'est arrêtée le 30 septembre 2026, et la Région passe à des prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui font un saut de label après un audit. Pour un poêle seul, il reste la TVA à 6 % sur un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes, via le CPAS.",
+      "Plus pour un nouveau projet depuis le 1er octobre 2026. La prime Habitation s'est arrêtée le 30 septembre 2026, et la Région passe à des prêts, le Rénopack et le Rénoprêt, réservés aux maisons classées E, F ou G qui font un saut de label après un audit, et à demander avant tout devis signé ou acompte. Pour un poêle seul, il reste la TVA à 6 % sur un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes, via le CPAS.",
   },
   {
     question: "Le SAV est-il assuré après la pose ?",
@@ -107,21 +128,23 @@ export default function HomePage() {
           * le titre, les boutons et la ligne de preuves n'apparaissaient
           * qu'après un défilement. Sur du trafic payant, c'est un visiteur
           * acheté puis perdu avant d'avoir lu la proposition. */}
+        {/* 11/11/2026 : logo de 64 px sur téléphone (il prenait 190 px et
+          * repoussait le bouton principal sous le bandeau cookies), 80 px sur
+          * tablette, absent à partir de 1 280 px où l'en-tête le porte déjà. */}
         <div
-          className="flex justify-center"
-          style={{ paddingTop: "17.5px", paddingBottom: "17.5px" }}
+          className="flex justify-center py-3 xl:hidden"
         >
-          {/* fetchPriority high : React en fait aussi un préchargement dans le
-              <head>, comme le faisait `priority` de next/image. */}
+          {/* Plus de fetchPriority : petit, le logo n'est plus l'élément le
+              plus grand de l'écran, et son préchargement partait aussi sur
+              ordinateur, où il n'est pas affiché. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo-mister-pellets-full.svg"
             alt="Mister Pellets"
             width={400}
             height={400}
-            fetchPriority="high"
             decoding="async"
-            className="h-[160px] w-[160px] md:h-[200px] md:w-[200px] object-contain"
+            className="h-16 w-16 md:h-20 md:w-20 object-contain"
           />
         </div>
 
@@ -134,9 +157,9 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base md:text-xl text-mp-ink-soft leading-relaxed mb-7 mp-measure mx-auto">
-              MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
+              MCZ en tête, puis Edilkamin, EK63, Girolami, Austroflamm et Cadel : six marques qu&apos;on connaît à fond, et on ne pose que celles-là.
               Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une journée,
-              TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
+              TVA à 6 % sur les logements de plus de 10 ans. Basés à Fernelmont, on couvre les 5
               provinces wallonnes depuis 2016.
             </p>
 
@@ -153,19 +176,21 @@ export default function HomePage() {
               <Button asChild variant="primary" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
                 <Link href="/estimation">Chiffrer mon installation</Link>
               </Button>
-              <Button asChild variant="secondary" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
+              {/* Sous 1 280 px, le rendez-vous et le catalogue sont dans la barre
+                  du bas : le héros garde un seul bouton et le téléphone. */}
+              <Button asChild variant="secondary" size="lg" className="hidden xl:inline-flex">
                 <Link href="/prendre-rendez-vous#reserver">
                   <CalendarDays aria-hidden />
                   Prendre rendez-vous
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
+              <Button asChild variant="outline" size="lg" className="hidden xl:inline-flex">
                 <Link href="/boutique">Voir la boutique</Link>
               </Button>
             </div>
 
             <p className="mb-7 text-sm text-mp-ink-soft">
-              Vous préférez parler à quelqu&apos;un ? Appelez le{" "}
+              Vous préférez parler à quelqu&apos;un ? Appelez le{" "}
               <a
                 href="tel:+3281138309"
                 className="whitespace-nowrap font-semibold text-mp-green-deep underline underline-offset-4 hover:text-mp-orange-flame"
@@ -199,11 +224,11 @@ export default function HomePage() {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
-            Comment choisir son poêle à pellets en Wallonie ?
+            Comment choisir son poêle à pellets en Wallonie ?
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
-              Le bon choix dépend de quatre paramètres concrets : la surface à chauffer, le niveau
+              Le bon choix dépend de quatre paramètres concrets : la surface à chauffer, le niveau
               d'isolation (PEB), la présence ou non d'un conduit existant, et l'usage principal
               (chauffage d'appoint d'une pièce de vie, chauffage central de la maison, ou
               remplacement d'une vieille chaudière mazout).
@@ -217,10 +242,10 @@ export default function HomePage() {
               tampon.
             </p>
             <p>
-              La règle de dimensionnement la plus simple, valable pour le climat wallon : multipliez
+              La règle de dimensionnement la plus simple, valable pour le climat wallon : multipliez
               votre surface par 0,10 si la PEB est bonne (A-B), par 0,12 si elle est moyenne (C-D), et
               par 0,15 si elle est faible (E-G). Vous obtenez la puissance cible en kW. Sur le terrain
-              on affine toujours en regardant la maison : sous-dimensionner brûle le matériel,
+              on affine toujours en regardant la maison : sous-dimensionner brûle le matériel,
               sur-dimensionner provoque encrassement et inconfort.
             </p>
             <p>
@@ -297,34 +322,35 @@ export default function HomePage() {
           </p>
 
           {(() => {
+            // typo : une fourchette « 8 000 à 14 000 € » reste d'un seul tenant (lib/typo.ts).
             const rows = [
               {
                 solution: "Poêle à pellets",
                 icon: Flame,
                 highlight: true,
-                investissement: "4 000 à 14 000 €",
-                coutAnnuel: "700 à 1 100 €",
+                investissement: typo("4 000 à 14 000 €"),
+                coutAnnuel: typo("700 à 1 100 €"),
                 autonomie: "2 à 7 jours",
               },
               {
                 solution: "Chaudière mazout",
                 icon: Droplet,
-                investissement: "8 000 à 15 000 €",
-                coutAnnuel: "2 200 à 2 800 €",
+                investissement: typo("8 000 à 15 000 €"),
+                coutAnnuel: typo("2 200 à 2 800 €"),
                 autonomie: "Cuve 2 à 3 ans",
               },
               {
                 solution: "Chaudière gaz",
                 icon: Fuel,
-                investissement: "5 000 à 12 000 €",
-                coutAnnuel: "1 600 à 2 200 €",
+                investissement: typo("5 000 à 12 000 €"),
+                coutAnnuel: typo("1 600 à 2 200 €"),
                 autonomie: "Réseau continu",
               },
               {
                 solution: "Pompe à chaleur air-eau",
                 icon: Wind,
-                investissement: "12 000 à 22 000 €",
-                coutAnnuel: "800 à 1 400 €",
+                investissement: typo("12 000 à 22 000 €"),
+                coutAnnuel: typo("800 à 1 400 €"),
                 autonomie: "Réseau continu",
               },
             ];
@@ -401,7 +427,12 @@ export default function HomePage() {
             * Estimation pour une maison wallonne 130 m² PEB C, prix combustibles avril 2026.
             Le pellet et la pompe à chaleur sortent en tête sur le coût d'usage. La pompe à chaleur
             demande plus d'investissement initial mais s'amortit sur 8 à 12 ans. Le pellet a l'avantage
-            du combustible local et d'une autonomie sans contrat fournisseur.
+            du combustible local et d'une autonomie sans contrat fournisseur. Le prix du sac de
+            pellets change chaque mois :{" "}
+            <Link href="/blog/prix-pellets-belgique" className="text-mp-orange-ink underline hover:no-underline">
+              relevé du prix des pellets en Wallonie
+            </Link>
+            .
           </p>
         </div>
       </section>
@@ -412,34 +443,43 @@ export default function HomePage() {
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
-            Combien coûte un poêle à pellets installé ?
+            Combien coûte un poêle à pellets installé ?
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
               Le ticket d'entrée pour un poêle à air pulsé étanche posé en Wallonie démarre autour
-              de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
+              de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
               Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin d'entrée de gamme.
             </p>
             <p>
               Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
-              compte 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
+              comptez 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
               étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
             </p>
             <p>
-              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez 8 000 à
-              14 000 € TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
+              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez
+              8 000 à 14 000 € TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
               démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
               aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
               typiquement).
             </p>
             <p>
-              Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
+              La pose varie surtout avec l&apos;évacuation : conduit déjà tubé, conduit à tuber, ventouse en
+              façade ou nouveau conduit par l&apos;extérieur ou la toiture. Le prix de départ du moment, les forfaits de pose par type de conduit et des
+              exemples chiffrés sont sur la page{" "}
+              <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+                prix d&apos;un poêle à pellets posé
+              </Link>
+              .
+            </p>
+            <p>
+              Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
               l'écrasante majorité des logements wallons concernés ont plus de 10 ans. Cette TVA
               réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
-              La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
+              La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
               désormais par des prêts (Rénopack, Rénoprêt) réservés aux maisons classées E, F ou G
-              qui font un saut de label. Certaines communes gardent une prime énergie, à vérifier
-              auprès d'elles.
+              qui font un saut de label, à demander avant de signer le moindre devis. Certaines
+              communes gardent une prime énergie, à vérifier auprès d'elles.
             </p>
           </div>
         </div>
@@ -572,7 +612,7 @@ export default function HomePage() {
             {CITIES.map((city) => (
               <li key={city.slug}>
                 <Link
-                  href={`/poeles-pellets/${city.slug}`}
+                  href={`/poeles-pellets-${city.slug}`}
                   className="flex min-h-11 items-center justify-between gap-2 rounded-full border border-mp-sand/60 bg-mp-cream px-4 text-sm font-medium text-mp-ink transition-colors hover:border-mp-orange-flame hover:text-mp-orange-ink sm:inline-flex sm:justify-start"
                 >
                   <span>
@@ -605,7 +645,7 @@ export default function HomePage() {
 
       <CTAFinal
         title="Chiffrez votre installation en 2 minutes"
-        description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris et la mensualité à 0 %. Le prix ferme est confirmé après la visite technique, sans engagement."
+        description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris et la mensualité. Le prix ferme est confirmé après la visite technique, sans engagement."
         secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous#reserver" }}
       />
     </>

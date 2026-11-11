@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { displayOptionLabel } from "@/lib/option-labels";
 import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-image";
 import { useProductColor } from "./ProductColorContext";
 
@@ -225,8 +226,10 @@ export function ProductGallery({
           </span>
         </button>
 
-        {/* Vignettes cliquables */}
-        <div className="grid grid-cols-4 gap-2 mt-4">
+        {/* Vignettes cliquables : celles qui existent seulement (des cases
+            vides se lisaient comme des images cassées), et aucune rangée
+            quand la fiche n'a qu'une photo. */}
+        <div className={allImages.length > 1 ? "grid grid-cols-4 gap-2 mt-4" : "hidden"}>
           {allImages.slice(0, 8).map((img, i) => {
             const isActive = i === activeImageIdx;
             return (
@@ -257,12 +260,6 @@ export function ProductGallery({
               </button>
             );
           })}
-          {Array.from({ length: Math.max(0, 4 - allImages.length) }).map((_, i) => (
-            <div
-              key={`empty-${i}`}
-              className="aspect-square rounded-xl bg-mp-beige border border-mp-sand/40"
-            />
-          ))}
         </div>
 
         {/* Sélecteur de couleur si déclinaisons définies */}
@@ -395,7 +392,7 @@ interface ColorPickerProps {
 
 function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
   const activeName =
-    activeIdx >= 0 && variants[activeIdx] ? variants[activeIdx].colorName : null;
+    activeIdx >= 0 && variants[activeIdx] ? displayOptionLabel(variants[activeIdx].colorName) : null;
 
   return (
     <div className="mt-6">
@@ -405,7 +402,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
         </span>
         {activeName && (
           <span className="text-xs text-mp-green-deep font-semibold">
-            Sélection : {activeName}
+            Sélection : {activeName}
           </span>
         )}
       </div>
@@ -424,7 +421,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
                   ? "border-mp-orange-flame bg-mp-orange-light text-mp-ink"
                   : "border-mp-sand bg-mp-cream text-mp-green-deep hover:border-mp-orange-flame/60"
               )}
-              aria-label={`Sélectionner la couleur ${v.colorName}`}
+              aria-label={`Sélectionner la couleur ${displayOptionLabel(v.colorName)}`}
               aria-pressed={isActive}
               data-gtin={v.gtin}
             >
@@ -433,7 +430,7 @@ function ColorPicker({ variants, activeIdx, onChange }: ColorPickerProps) {
                 style={{ backgroundColor: swatch }}
                 aria-hidden="true"
               />
-              {v.colorName}
+              {displayOptionLabel(v.colorName)}
             </button>
           );
         })}

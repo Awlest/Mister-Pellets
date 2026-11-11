@@ -179,7 +179,7 @@ export function ContactForm() {
           type="checkbox"
           required
           disabled={state === "loading"}
-          className="mt-1 h-4 w-4 rounded border-mp-sand text-mp-orange-flame focus:ring-mp-orange-flame"
+          className="mt-3 h-5 w-5 shrink-0 rounded border-mp-sand text-mp-orange-flame focus:ring-mp-orange-flame"
         />
         <span>
           J'accepte que mes données soient utilisées pour répondre à ma demande, conformément à la{" "}

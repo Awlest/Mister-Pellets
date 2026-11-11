@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn, formatPhone } from "@/lib/utils";
+import { typo } from "@/lib/typo";
+import { cn } from "@/lib/utils";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
 
 interface CTAFinalProps {
@@ -10,12 +12,16 @@ interface CTAFinalProps {
   title?: string;
   description?: string;
   primaryCta?: { label: string; href: string };
+  /**
+   * Classes ajoutées au bouton principal : une page qui porte déjà un aplat
+   * orange à l'écran (barre d'action d'une fiche produit) le passe au vert.
+   */
+  primaryClassName?: string;
   /** Action secondaire, typiquement la réservation en ligne d'un créneau. */
   secondaryCta?: { label: string; href: string };
   showPhone?: boolean;
 }
 
-const PHONE = "081 13 83 09";
 
 /**
  * Bloc CTA final sur fond uni (crème ou beige selon l'alternance de la page),
@@ -26,6 +32,7 @@ export function CTAFinal({
   title = "Une question ? Un projet ?",
   description = "Devis gratuit en 60 secondes, ou échange direct au téléphone. Notre équipe répond personnellement, on est basés à Fernelmont.",
   primaryCta = { label: "Chiffrer mon installation", href: "/estimation" },
+  primaryClassName,
   secondaryCta,
   showPhone = true,
 }: CTAFinalProps) {
@@ -34,14 +41,14 @@ export function CTAFinal({
       <div className="mp-shell text-center">
         <div className="mx-auto mp-measure">
         <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
-          {title}
+          {typo(title)}
         </h2>
         <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 mp-measure mx-auto">
-          {description}
+          {typo(description)}
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button asChild variant="primary" size="lg">
+          <Button asChild variant="primary" size="lg" className={primaryClassName}>
             <Link href={primaryCta.href}>{primaryCta.label}</Link>
           </Button>
           {secondaryCta && (
@@ -51,11 +58,11 @@ export function CTAFinal({
           )}
           {showPhone && (
             <a
-              href={`tel:${formatPhone(PHONE)}`}
+              href={PHONE_HREF}
               className="inline-flex min-h-11 items-center gap-2 text-base font-semibold text-mp-green-deep hover:text-mp-orange-flame transition-colors"
             >
               <Phone className="h-5 w-5" />
-              {PHONE}
+              {PHONE_DISPLAY}
             </a>
           )}
         </div>

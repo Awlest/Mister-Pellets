@@ -3,14 +3,18 @@ import { getPayloadClient } from "./payload-client";
 import type { EstimateProduct } from "./estimate";
 import { webpUrl } from "./product-image";
 import { parseKw } from "./power";
+import { inCatalogueWhere, isOffCatalogue } from "./catalog-scope";
 
 /**
  * Catalogue vu par le configurateur d'estimation (/estimation).
  *
- * On repart des mêmes produits que la boutique (ceux qui ne sont pas masqués),
- * mais on ne garde que ce qui est chiffrable : un prix ET une puissance. Un
- * poêle sans prix saisi dans l'admin ne peut pas produire d'estimation, il est
- * donc écarté du sélecteur plutôt que d'afficher un total faux.
+ * On repart des mêmes produits que la boutique (ceux qui ne sont pas masqués,
+ * hors combustibles que le site ne vend pas : lib/catalog-scope.ts), mais on
+ * ne garde que ce qui est chiffrable : un prix ET une puissance. Un poêle sans
+ * prix saisi dans l'admin ne peut pas produire d'estimation, il est donc
+ * écarté du sélecteur plutôt que d'afficher un total faux. Les forfaits de
+ * pose sont ceux d'un appareil à pellets : un appareil à bois bûche n'a pas à
+ * être chiffré ici.
  *
  * Le prix de référence est le HT (le TTC dépend du taux de TVA du chantier :
  * 6 % en rénovation d'un logement de plus de 10 ans, 21 % sinon). Si seul le
@@ -152,12 +156,15 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
     pagination: false,
     depth: 1, // hydrate mainImage
     overrideAccess: false, // respecte la règle read publique
-    where: { hiddenFromBoutique: { not_equals: true } },
+    where: { and: [{ hiddenFromBoutique: { not_equals: true } }, ...inCatalogueWhere()] },
   });
 
   const products: EstimateProduct[] = [];
 
   for (const doc of result.docs as unknown as PayloadEstimateRow[]) {
+    // Seconde barrière après la requête : jamais d'appareil hors catalogue.
+    if (isOffCatalogue(doc.combustible)) continue;
+
     // Prix de la fiche : une promo saisie prime sur le prix catalogue (promoPrice
     // et priceTTC sont des TTC à 21 %). Sert de repli quand la variante n'a pas
     // de prix propre.

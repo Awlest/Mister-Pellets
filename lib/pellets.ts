@@ -1,4 +1,5 @@
 import { brusselsDay } from "@/lib/bonus";
+import { formatEuros } from "@/lib/typo";
 
 /**
  * Palette de pellets Comfo : prix, offre de lancement, stock et retrait.
@@ -65,17 +66,8 @@ export const isPelletSwitchDay = (now: Date = new Date()): boolean => {
   return brusselsDay(now) === d.toISOString().slice(0, 10);
 };
 
-const euro = (value: number, digits: 0 | 2) =>
-  new Intl.NumberFormat("fr-BE", {
-    style: "currency",
-    currency: "EUR",
-    minimumFractionDigits: digits,
-    maximumFractionDigits: digits,
-  }).format(value);
-
-/** « 435 € » (prix ronds) ou « 6,69 € » (prix unitaires). */
-export const formatEuro = (value: number): string =>
-  euro(value, Number.isInteger(value) ? 0 : 2);
+/** « 435 € » (prix ronds) ou « 6,69 € » (prix unitaires), insécable (lib/typo.ts). */
+export const formatEuro = (value: number): string => formatEuros(value, { cents: "auto" });
 
 /** Prix HTVA d'un prix TVAC à 6 %, arrondi au cent : 435 € donne 410,38 €. */
 export const pelletPriceHT = (ttc: number): number =>
@@ -132,6 +124,9 @@ export const COMFO = {
   originBadge: "Fabriqué en Belgique",
   badges: ["DINplus A1", "100 % résineux", "6 mm", `Sacs de ${PELLET_OFFER.bagKg} kg`],
   intro: `Des granulés 100 % résineux fabriqués à Bertrix, dans les Ardennes belges, par ERDA. Ils sont certifiés DINplus en classe A1 et vendus en sacs de ${PELLET_OFFER.bagKg} kg, ${PELLET_OFFER.bags} sacs par palette.`,
+  /** Renvoi vers le relevé mensuel des prix du marché (article du blog). */
+  marketNote:
+    "Pour comparer avec le marché : ValBiom relève chaque mois le prix moyen du sac de 15 kg en Wallonie, et nous le reportons dans [notre relevé du prix des pellets, mois par mois](/blog/prix-pellets-belgique).",
   photoAlt: `Palette de sacs de pellets Comfo de ${PELLET_OFFER.bagKg} kg, avec des granulés en gros plan`,
   schemaDescription: `Granulés de bois 100 % résineux de 6 mm, certifiés DINplus A1 (n° 7A149), fabriqués en Belgique par ERDA à Bertrix. Palette de ${PELLET_OFFER.bags} sacs de ${PELLET_OFFER.bagKg} kg.`,
   gtin13: "5425035000002",
@@ -159,7 +154,7 @@ export const COMFO = {
     { label: "Code EAN du sac", value: "5425035000002" },
   ],
   specsNote:
-    "Le fabricant publie ces valeurs pour l'ensemble de ses pellets, Comfo compris. Sources : sa fiche « Notre gamme de pellets » et le registre DIN CERTCO, consultés le 27 octobre 2026. Ces pellets ne portent pas le label ENplus.",
+    "Le fabricant publie ces valeurs pour l'ensemble de ses pellets, Comfo compris. Sources : sa fiche « Notre gamme de pellets » et le registre DIN CERTCO, consultés le 27 octobre 2026.",
   compatibilityAnswer:
-    "Ce sont des pellets de 6 mm de classe A1, certifiés DINplus, la qualité que demandent la plupart des notices de poêles à pellets. Ils ne portent pas le label ENplus : si la notice ou la garantie de votre poêle l'exige, vérifiez avant d'acheter, ou appelez-nous avec la marque et le modèle.",
+    "Ce sont des pellets de 6 mm de classe A1, certifiés DINplus, la qualité que demandent la plupart des notices de poêles à pellets. Si la notice ou la garantie de votre poêle exige une autre certification, vérifiez avant d'acheter, ou appelez-nous avec la marque et le modèle.",
 } as const;

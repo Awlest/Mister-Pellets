@@ -79,8 +79,6 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: GtagArgs) => void;
-    /** gtag.js déjà lancé par l'amorce du <head> (visite issue d'une annonce). */
-    __gtagEarly?: boolean;
   }
 }
 
@@ -92,6 +90,9 @@ declare global {
  */
 export function trackEvent(name: string, params?: Record<string, unknown>): void {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  // Sans accord, rien n'est mis en file : un événement ne part chez Google que
+  // si le visiteur a accepté la mesure (décision du 11/11/2026).
+  if (readConsent() !== "granted") return;
   try {
     window.gtag("event", name, params);
     const sendTo = ADS_CONVERSIONS[name];
@@ -118,6 +119,17 @@ export function updateConsent(choice: ConsentChoice): void {
     ad_personalization: "denied",
     analytics_storage: choice,
   });
+}
+
+/**
+ * Coupe ou rétablit tout envoi vers Google dans la page en cours. Sert quand
+ * le visiteur retire son accord alors que la bibliothèque est déjà chargée :
+ * l'indicateur officiel `ga-disable-<identifiant>` arrête les envois de GA4,
+ * et les conversions Ads ne partent que par trackEvent, déjà fermé sans accord.
+ */
+export function setGoogleSending(enabled: boolean): void {
+  if (typeof window === "undefined") return;
+  (window as unknown as Record<string, boolean>)[`ga-disable-${GA_MEASUREMENT_ID}`] = !enabled;
 }
 
 export function readConsent(): ConsentChoice | null {
@@ -199,24 +211,14 @@ export function clearGoogleCookies(): void {
  * enregistré : le bandeau cookies, rendu dans le HTML, est alors masqué par
  * CSS avant le premier affichage (components/layout/Analytics.tsx).
  *
- * Pour une visite issue d'une annonce ou d'une campagne (gclid, utm_…), il
- * lance aussi gtag.js tout de suite et le signale par `window.__gtagEarly`.
- * Sinon la bibliothèque n'arrive qu'après le chargement de la page
- * (Analytics.tsx) : un clic sur un lien interne avant son arrivée effacerait
- * ces paramètres de l'adresse, et la conversion ne serait plus attribuée à
- * l'annonce.
- *
- * Sans consentement, aucun cookie ne garde le clic d'annonce. gtag lit le
- * gclid dans l'adresse d'arrivée et le garde en mémoire tant que la page vit,
- * navigations internes de Next comprises, même quand le visiteur change de
- * page avant l'arrivée de gtag.js (contrôlé le 19/10/2026 : chaque conversion
- * repart avec le gclid). `url_passthrough` couvre le reste : il recopie gclid
- * et wbraid dans les liens internes au moment du clic, si bien qu'un
- * rechargement complet (lien <a> ordinaire, nouvel onglet, page rechargée)
- * ne perd plus le clic. Il doit précéder les `config`.
- * Pas d'`ads_data_redaction` : quand le visiteur refuse, cette option retire
- * l'identifiant de clic des appels Google Ads, la conversion ne serait plus
- * reliée à l'annonce.
+ * Depuis le 11/11/2026, cette amorce ne déclenche plus aucun chargement :
+ * elle remplit seulement la file dataLayer (consentement, configuration).
+ * gtag.js n'est chargé que par components/layout/Analytics.tsx, après
+ * l'accord du visiteur ; il lit alors la file et envoie le page_view de la
+ * page courante. Plus de lancement anticipé pour les visites issues d'une
+ * annonce ni de url_passthrough : sans accord, rien ne part chez Google, et
+ * le clic d'annonce n'est attribué que si l'accord est donné tant que
+ * l'adresse porte encore le gclid (page d'arrivée).
  * L'accord restauré laisse `ad_personalization` au refus par défaut (voir
  * updateConsent).
  */
@@ -231,7 +233,6 @@ gtag('consent', 'default', {
   analytics_storage: 'denied',
   wait_for_update: 500
 });
-gtag('set', 'url_passthrough', true);
 try {
   var mpConsent = localStorage.getItem('${CONSENT_KEY}');
   if (mpConsent === 'granted' || mpConsent === 'denied') {
@@ -248,11 +249,4 @@ try {
 gtag('js', new Date());
 gtag('config', '${GA_MEASUREMENT_ID}');
 gtag('config', '${ADS_ID}');
-if (/[?&](gclid|gbraid|wbraid|dclid|gad_source|srsltid|utm_[a-z]+)=/i.test(location.search)) {
-  window.__gtagEarly = true;
-  var gs = document.createElement('script');
-  gs.async = true;
-  gs.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}';
-  document.head.appendChild(gs);
-}
 `;

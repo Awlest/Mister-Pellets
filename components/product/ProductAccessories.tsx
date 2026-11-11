@@ -81,7 +81,9 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
         Compléments en option
       </h2>
       <p className="mt-1 text-sm text-mp-ink-soft">
-        Cochez ceux qui vous intéressent pour voir le total. Prix TVAC du complément seul.
+        {accessories.some((a) => a.priceTTC != null)
+          ? "Cochez ceux qui vous intéressent pour voir le total. Prix TVAC du complément seul."
+          : "Cochez ce qui vous intéresse, nous le chiffrons dans le devis."}
       </p>
 
       <ul className="mt-4 space-y-2">
@@ -171,7 +173,7 @@ export function ProductAccessories({ accessories, basePriceTTC, missingBaseHint 
               <p className="mt-2 text-sm text-mp-green-deep">
                 <span className="font-semibold">{formatPriceReducedVat(totalTTC)} TVAC</span> si nous
                 posons le tout sur une habitation de plus de 10 ans
-                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
+                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
               </p>
             </>
           ) : (

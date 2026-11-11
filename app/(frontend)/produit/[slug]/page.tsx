@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { Check, Flame, Award, Wifi, Wind, Droplet } from "lucide-react";
+import { notFound, permanentRedirect } from "next/navigation";
+import { ArrowRight, Check, Flame, Award, Wifi, Wind, Droplet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductVariantPanel } from "@/components/product/ProductVariantPanel";
 import { ProductAccessories } from "@/components/product/ProductAccessories";
+import { ProductActionBar, YIELDS_TO_ACTION_BAR } from "@/components/product/ProductActionBar";
 import { ProductColorProvider } from "@/components/product/ProductColorContext";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { CTAFinal } from "@/components/sections/CTAFinal";
@@ -17,20 +18,34 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   getAllProducts,
   getAllProductSlugs,
+  getOffCatalogueRedirect,
   getProductBySlug,
 } from "@/lib/products";
-import { BRANDS } from "@/lib/brands";
+import { isHybrid, misterBoisCanonical } from "@/lib/catalog-scope";
+import { REDIRECTED_PRODUCT_SLUGS } from "@/config/redirects";
+import { BRANDS, TOP_TIER_BRANDS } from "@/lib/brands";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
-import { schemaAvailability } from "@/lib/availability";
 import { BONUS, bonusLabelFor } from "@/lib/bonus";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
-import { productKindLabel } from "@/lib/product-kind";
 import { formatKw } from "@/lib/power";
+import { categoriesOf } from "@/lib/categories";
+import { ROUTES } from "@/config/navigation";
+import {
+  productDescription,
+  productImages,
+  productJsonLd,
+  productSpecs,
+  productTitle,
+} from "@/lib/product-seo";
+import type { ProductDemo, ProductType } from "@/lib/products-demo";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
+
+const MORE_LINK =
+  "inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink";
 
 /**
  * ISR : régénération max toutes les 60s pour que les modifications admin
@@ -54,9 +69,12 @@ export const revalidate = 60;
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  // Query Payload au build : tous les produits, masqués compris.
+  // Query Payload au build : tous les produits, masqués compris, sauf ceux
+  // dont l'adresse est déjà redirigée par config/redirects.ts (fiches bois
+  // parties sur mister-bois.be, anciennes fiches Girolami) : la redirection
+  // passe avant la page, qui ne serait jamais servie.
   const slugs = await getAllProductSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return slugs.filter((slug) => !REDIRECTED_PRODUCT_SLUGS.has(slug)).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -67,160 +85,129 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // La page répond alors 404 (notFound() plus bas), en noindex.
   if (!product)
     return { title: "Produit introuvable", robots: { index: false, follow: false } };
-  // Libellé tiré du combustible et du type, comme dans le flux Merchant.
-  const kind = productKindLabel(product);
+  // Hybride bois + pellets : la fiche de référence est celle de mister-bois.be
+  // (décision du 11/11/2026). La page reste affichée ici, avec un canonical
+  // vers l'autre site ; sans fiche équivalente connue, elle sort de l'index.
+  const hybrid = isHybrid(product);
+  const referenceUrl = hybrid ? misterBoisCanonical(product.slug) : undefined;
+  // Titre et description bâtis sur les données de la fiche (lib/product-seo.ts).
+  // Les champs metaTitle et metaDescription de l'admin ne sont pas repris :
+  // une partie promet encore une prime ou une livraison qui n'existent plus.
   return buildPageMetadata({
-    title: `${product.name}, ${kind.charAt(0).toUpperCase()}${kind.slice(1)} ${product.power}`,
-    description: `${product.name} : ${product.power}${product.heatedVolume ? ` pour ${product.heatedVolume}` : ""}. ${product.priceTTC ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets.`,
+    title: productTitle(product),
+    description: productDescription(product, priceSentence(product)),
+    // Photo de la fiche à la place de l'image générique du site.
+    image: productImages(product)[0],
+    type: "product",
     path: `/produit/${product.slug}`,
+    canonical: referenceUrl,
     // Fiche masquée de la boutique : joignable par son URL (liens, favoris)
     // mais hors de Google, comme elle l'est déjà du sitemap et du flux.
-    noindex: product.hiddenFromBoutique,
+    noindex: product.hiddenFromBoutique || (hybrid && !referenceUrl),
   });
+}
+
+/** « Dès 2 856 € TVAC, hors pose. » ou « Prix sur devis. » : fin de la description. */
+function priceSentence(product: ProductDemo): string {
+  const shown = shownPriceTTC(product);
+  if (!product.priceTTC || !shown) return "Prix sur devis.";
+  const from = product.hasVariants && product.variants?.length ? "Dès " : "";
+  return `${from}${formatPrice(shown)} TVAC, hors pose.`;
+}
+
+/** Famille d'un appareil, pour proposer des modèles comparables d'une autre marque. */
+function family(p: ProductDemo): "insert" | "hydro" | "canalisable" | "air" {
+  if (p.type === "insert" || p.appliance === "insert" || p.appliance === "foyer") return "insert";
+  if (p.isHydro || p.type === "hydro" || p.type === "hybride-hydro") return "hydro";
+  if (p.isCanalizable || p.type === "canalisable") return "canalisable";
+  return "air";
+}
+
+/** Libellé lisible du type, à la place de la valeur technique (« standard », « hybride-hydro »). */
+const TYPE_TITLES: Record<ProductType, string> = {
+  standard: "Poêle à air",
+  canalisable: "Poêle canalisable",
+  hydro: "Poêle hydro",
+  hybride: "Hybride bois + pellets",
+  "hybride-hydro": "Hybride raccordé au chauffage central",
+  insert: "Insert encastrable",
+};
+
+/** Guide ou article qui détaille le type de l'appareil, quand il existe. */
+function typeGuide(p: ProductDemo): { href: string; label: string } | undefined {
+  switch (family(p)) {
+    case "canalisable":
+      return { href: "/guides/poele-pellets-canalisable", label: "Guide du poêle canalisable" };
+    case "hydro":
+      return { href: "/guides/poele-pellets-hydro", label: "Guide du poêle hydro" };
+    case "insert":
+      return { href: "/blog/insert-pellets-cheminee-existante", label: "Poser un insert à pellets" };
+    default:
+      return undefined;
+  }
 }
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  if (!product) notFound();
+  if (!product) {
+    // Fiche à bois bûche : hors catalogue (lib/catalog-scope.ts). Elle n'est
+    // jamais affichée ici, le visiteur part sur mister-bois.be.
+    const elsewhere = await getOffCatalogueRedirect(slug);
+    if (elsewhere) permanentRedirect(elsewhere);
+    notFound();
+  }
 
   const brandSlug = product.brand.toLowerCase() as keyof typeof BRANDS;
   const brand = BRANDS[brandSlug];
+  // Page de la marque, si elle est affichée (Dielle et Ferlux n'en ont plus).
+  const brandHref = TOP_TIER_BRANDS.some((b) => b.slug === brandSlug)
+    ? `${ROUTES.brands}/${brandSlug}`
+    : ROUTES.brands;
 
-  // Modèles similaires (même marque, autres modèles). getAllProducts renvoie
-  // les fiches de la plus récente à la plus ancienne : sans tri, les dernières
-  // fiches encodées, souvent encore sans photo, prenaient les 3 places sur
-  // toutes les fiches de la marque. On montre d'abord les fiches avec photo,
-  // puis celles du même combustible, en gardant l'ordre d'origine à égalité.
-  const allProducts = await getAllProducts();
-  const related = allProducts
-    .filter((p) => p.brand === product.brand && p.slug !== product.slug)
-    .map((p, i) => ({
-      p,
-      i,
-      score: (p.imageSrc ? 2 : 0) + (p.combustible === product.combustible ? 1 : 0),
-    }))
-    .sort((a, b) => b.score - a.score || a.i - b.i)
+  // Modèles voisins : 3 de la même marque, puis 3 d'une autre marque, de même
+  // famille (air, canalisable, hydro, insert) et de puissance proche. Chaque
+  // fiche reçoit ainsi des liens d'autres fiches, pas seulement de sa marque.
+  // getAllProducts renvoie les fiches de la plus récente à la plus ancienne :
+  // on montre d'abord celles qui ont une photo et le même combustible.
+  const allProducts = (await getAllProducts()).filter((p) => p.slug !== product.slug);
+  const fit = (p: ProductDemo) => (p.imageSrc ? 2 : 0) + (p.combustible === product.combustible ? 1 : 0);
+  const closeness = (p: ProductDemo) => Math.abs(p.powerKw - product.powerKw);
+  const sameBrand = allProducts
+    .filter((p) => p.brand === product.brand)
+    .map((p, i) => ({ p, i }))
+    .sort((a, b) => fit(b.p) - fit(a.p) || Number(family(b.p) === family(product)) - Number(family(a.p) === family(product)) || a.i - b.i)
+    .slice(0, 3)
+    .map(({ p }) => p);
+  const otherBrands = allProducts
+    .filter((p) => p.brand !== product.brand && family(p) === family(product))
+    .map((p, i) => ({ p, i }))
+    .sort((a, b) => fit(b.p) - fit(a.p) || closeness(a.p) - closeness(b.p) || a.i - b.i)
+    // Une fiche par marque d'abord, pour varier les propositions.
+    .filter(({ p }, index, list) => list.findIndex((x) => x.p.brand === p.brand) === index)
     .slice(0, 3)
     .map(({ p }) => p);
 
-  // Schema.org Product : si le produit a des déclinaisons de couleur avec
-  // GTIN, on émet un AggregateOffer + un Offer par variante (chacune avec
-  // son propre GTIN, son nom et son URL #couleur). Sinon, un seul Offer.
-  const productPageUrl = `https://mister-pellets.be/produit/${product.slug}`;
-  const variantsWithGtin = (product.colorVariants ?? []).filter((v) => Boolean(v.gtin));
-  const genericVariants = product.hasVariants ? (product.variants ?? []) : [];
-
-  // Merchant : priceValidUntil + politique de retour (droit de rétractation
-  // belge 14 jours) ajoutés à chaque Offer. La livraison, elle, est déclarée
-  // par article dans le flux (`g:shipping`, cf. app/api/feed/google-merchant)
-  // à partir de lib/shipping.ts, la même source que le panier.
-  // La disponibilité vient de lib/availability.ts pour rester identique à
-  // celle du flux : un écart entre les deux fait refuser le compte Merchant.
-  // Pendant le bonus de saison, le prix annoncé vaut jusqu'à la fin du bonus.
-  const bonusActive = product.bonusPriceTTC != null;
   // Prix de la fiche : bonus de saison, sinon promo admin, sinon catalogue, avec
   // le prix précédent barré (lib/product-price.ts).
   const shownTTC = shownPriceTTC(product);
   const struckTTC = struckPriceTTC(product);
   const badge = priceBadge(product);
-  const priceValidUntil = bonusActive ? BONUS.to : `${new Date().getFullYear()}-12-31`;
-  const offerExtras = {
-    priceValidUntil,
-    hasMerchantReturnPolicy: {
-      "@type": "MerchantReturnPolicy",
-      applicableCountry: "BE",
-      returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-      merchantReturnDays: 14,
-      returnMethod: "https://schema.org/ReturnByMail",
-      returnFees: "https://schema.org/ReturnShippingFees",
-    },
-  };
 
-  let offers: object | undefined;
-  if (genericVariants.length > 0) {
-    // Mode variantes : un AggregateOffer + un Offer par combinaison réelle.
-    const variantPrices = genericVariants
-      .map((v) => v.bonusPrice ?? (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price))
-      .filter((n) => n > 0);
-    offers = {
-      "@type": "AggregateOffer",
-      priceCurrency: "EUR",
-      lowPrice: variantPrices.length > 0 ? Math.min(...variantPrices) : undefined,
-      highPrice: variantPrices.length > 0 ? Math.max(...variantPrices) : undefined,
-      offerCount: genericVariants.length,
-      offers: genericVariants.map((v) => ({
-        "@type": "Offer",
-        ...(v.sku ? { sku: v.sku } : {}),
-        ...(v.gtin ? { gtin13: v.gtin } : {}),
-        ...(v.mpn ? { mpn: v.mpn } : {}),
-        url: productPageUrl,
-        priceCurrency: "EUR",
-        price: v.bonusPrice ?? (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price),
-        availability: schemaAvailability(v.stockStatus ?? product.stockStatus),
-        itemCondition: "https://schema.org/NewCondition",
-        ...offerExtras,
-      })),
-    };
-  } else if (product.priceTTC) {
-    if (variantsWithGtin.length > 0) {
-      offers = {
-        "@type": "AggregateOffer",
-        priceCurrency: "EUR",
-        price: shownTTC,
-        offerCount: variantsWithGtin.length,
-        offers: variantsWithGtin.map((v) => ({
-          "@type": "Offer",
-          name: `${product.name}, ${v.colorName}`,
-          gtin13: v.gtin,
-          url: `${productPageUrl}#${encodeURIComponent(v.colorName.toLowerCase())}`,
-          priceCurrency: "EUR",
-          price: shownTTC,
-          availability: schemaAvailability(product.stockStatus),
-          itemCondition: "https://schema.org/NewCondition",
-        ...offerExtras,
-        })),
-      };
-    } else {
-      offers = {
-        "@type": "Offer",
-        url: productPageUrl,
-        priceCurrency: "EUR",
-        price: shownTTC,
-        availability: schemaAvailability(product.stockStatus),
-        itemCondition: "https://schema.org/NewCondition",
-        ...offerExtras,
-      };
-    }
-  }
-
-  // Images absolues : recommande pour Schema.org Product.image et PREREQUIS
-  // Google Merchant (image_link). Les URLs produits sont stockees en relatif
-  // (same-origin pour Next/Image), on les repasse en absolu ici.
-  const schemaImages = [
-    product.imageSrc,
-    ...(product.galleryImages ?? []).map((g) => g.url),
-  ]
-    .filter((u): u is string => Boolean(u))
-    .map((u) => (u.startsWith("http") ? u : `https://mister-pellets.be${u}`));
-
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    ...(schemaImages.length > 0 ? { image: schemaImages } : {}),
-    description:
-      product.shortDescription ||
-      `${product.name} : ${productKindLabel(product)}${
-        product.type === "canalisable" ? " canalisable" : ""
-      } de ${product.power}${product.heatedVolume ? ` pour chauffer ${product.heatedVolume}` : ""}.`,
-    brand: { "@type": "Brand", name: product.brand },
-    offers,
-  };
+  // Données structurées (lib/product-seo.ts) : Product avec ses seules offres
+  // chiffrées, ou WebPage quand la fiche est « Sur devis ».
+  const productSchema = productJsonLd(product, productDescription(product, priceSentence(product)));
+  const specs = productSpecs(product);
+  const guide = typeGuide(product);
+  const categories = categoriesOf(product);
+  // Le configurateur s'ouvre sur ce modèle (EstimateConfigurator lit `modele`).
+  const estimateHref = `${ROUTES.configurator}?modele=${encodeURIComponent(product.slug)}`;
 
   return (
     <>
       <JsonLd data={productSchema} />
+      {/* og:type « product » : absent de l'API Metadata de Next, posé ici (React le remonte dans le <head>). */}
+      <meta property="og:type" content="product" />
 
       {/* Breadcrumb + content */}
       <section className="bg-mp-cream pt-8 pb-12 md:pb-16 border-b border-mp-sand/30">
@@ -229,7 +216,7 @@ export default async function ProductPage({ params }: Props) {
             items={[
               { label: "Accueil", href: "/" },
               { label: "Boutique", href: "/boutique" },
-              { label: product.brand, href: `/boutique?marque=${product.brand}` },
+              { label: product.brand, href: brandHref },
               { label: product.name },
             ]}
             className="mb-8"
@@ -248,7 +235,7 @@ export default async function ProductPage({ params }: Props) {
             <div className="lg:col-start-2 lg:row-start-1">
               <div className="flex flex-wrap items-center gap-2 mb-2 lg:mb-3">
                 <Link
-                  href={`/nos-marques/${brandSlug}`}
+                  href={brandHref}
                   className="-my-3 inline-flex min-h-11 min-w-11 items-center text-xs font-semibold uppercase tracking-wider text-mp-orange-ink hover:underline"
                 >
                   {product.brand}
@@ -318,11 +305,11 @@ export default async function ProductPage({ params }: Props) {
               ) : product.heatedVolume ? (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
                   {brand?.tagline}. {product.power} pour chauffer {product.heatedVolume}. Pose par
-                  Mister Pellets en une journée, TVA à 6 % en rénovation et garantie légale de 2 ans, pose comprise.
+                  Mister Pellets en une journée, TVA à 6 % en rénovation et garantie légale de 2 ans, pose comprise.
                 </p>
               ) : (
                 <p className="text-lg text-mp-ink-soft mb-6 leading-relaxed">
-                  {brand?.tagline}. Pose par Mister Pellets en une journée, TVA à 6 % en rénovation
+                  {brand?.tagline}. Pose par Mister Pellets en une journée, TVA à 6 % en rénovation
                   et garantie légale de 2 ans, pose comprise.
                 </p>
               )}
@@ -350,11 +337,7 @@ export default async function ProductPage({ params }: Props) {
                 ) : (
                   product.heatedVolume && <Badge variant="default">{product.heatedVolume}</Badge>
                 )}
-                {product.type && (
-                  <Badge variant="default" className="capitalize">
-                    {product.type}
-                  </Badge>
-                )}
+                {product.type && <Badge variant="default">{TYPE_TITLES[product.type]}</Badge>}
                 {product.isAirtight && (
                   <Badge variant="default">
                     <Wind className="h-3.5 w-3.5" /> Étanche
@@ -385,8 +368,10 @@ export default async function ProductPage({ params }: Props) {
                     accessories={product.accessories}
                   />
                   <div className="mt-3 flex flex-col gap-3">
-                    <Button asChild variant="primary" size="lg" className="w-full">
-                      <Link href="/estimation">Chiffrer mon installation</Link>
+                    <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
+                      <Link href={estimateHref} rel="nofollow">
+                        Chiffrer mon installation
+                      </Link>
                     </Button>
                     <Button asChild variant="outline" size="lg" className="w-full">
                       <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
@@ -431,23 +416,23 @@ export default async function ProductPage({ params }: Props) {
                           {formatPriceReducedVat(shownTTC ?? product.priceTTC)} TVAC
                         </span>{" "}
                         si nous le posons sur une habitation de plus de 10 ans
-                        <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
+                        <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
                       </p>
                       {product.bonusPriceTTC ? (
-                        <p className="mt-2 text-xs text-mp-ink-soft">
+                        <p className="mt-2 text-sm text-mp-ink-soft">
                           {bonusLabelFor(product.brand)} déduit. {BONUS.conditions}
                         </p>
                       ) : null}
                     </div>
-                    <ul className="text-xs text-mp-ink-soft space-y-1 leading-relaxed">
+                    <ul className="text-sm text-mp-ink-soft space-y-1 leading-relaxed">
                       <li>
-                        <span className="font-semibold">Pose non incluse</span> : devis chiffré
+                        <span className="font-semibold">Pose non incluse</span> : devis chiffré
                         sous 48 h.
                       </li>
                       <li>
                         <span className="font-semibold">Livraison gratuite</span> dans un rayon
-                        de 20 km autour de Fernelmont. Au-delà : 50 € en Wallonie, 100 € à
-                        Bruxelles, 100 € en Flandre.
+                        de 20 km autour de Fernelmont. Au-delà : 50 € en Wallonie, 100 € à
+                        Bruxelles, 100 € en Flandre.
                       </li>
                     </ul>
                   </div>
@@ -473,8 +458,10 @@ export default async function ProductPage({ params }: Props) {
               ) : null}
 
               <div className="flex flex-col gap-3">
-                <Button asChild variant="primary" size="lg" className="w-full">
-                  <Link href="/estimation">Chiffrer mon installation</Link>
+                <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
+                  <Link href={estimateHref} rel="nofollow">
+                        Chiffrer mon installation
+                      </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
                   <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
@@ -490,10 +477,10 @@ export default async function ProductPage({ params }: Props) {
                 d'acompte. Ne PAS réintroduire de bouton « acheter » ni de
                 mention de paiement tant que ce n'est pas redevenu vrai.
               */}
-              <p className="text-xs text-mp-ink-soft mt-4 text-center">
+              <p className="text-sm text-mp-ink-soft mt-4 text-center">
                 Prix du matériel seul. La pose se chiffre après une visite sur
-                place : c'est là qu'on valide le conduit, l'évacuation et
-                l'accès. La TVA à 6 % (logement de plus de 10 ans) est calculée dans le devis.
+                place : c'est là qu'on valide le conduit, l'évacuation et
+                l'accès. La TVA à 6 % (logement de plus de 10 ans) est calculée dans le devis.
               </p>
                 </>
               )}
@@ -505,7 +492,7 @@ export default async function ProductPage({ params }: Props) {
           {product.features && product.features.length > 0 && (
             <div className="mt-12 lg:mt-16">
               <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 text-center">
-                Les points forts du {product.name}
+                Points forts du modèle {product.name}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {product.features.map((f, i) => (
@@ -525,11 +512,68 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Caractéristiques : mêmes lignes que additionalProperty dans le JSON-LD */}
+      {specs.length > 0 && (
+        <section className="bg-mp-beige mp-band" id="caracteristiques">
+          <div className="mp-shell">
+            <div className="mp-measure">
+              <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 text-center">
+                Caractéristiques techniques
+              </h2>
+              <div className="overflow-x-auto rounded-2xl border border-mp-sand/40 bg-mp-cream">
+                <table className="w-full text-left text-sm md:text-base">
+                  <caption className="caption-bottom px-4 py-3 text-left text-xs text-mp-ink-soft">
+                    Caractéristiques du modèle {product.name}, publiées par {product.brand}. Elles peuvent
+                    évoluer : la fiche technique du fabricant fait foi.
+                  </caption>
+                  <tbody>
+                    {specs.map((row) => (
+                      <tr key={row.label} className="border-b border-mp-sand/40 last:border-b-0 even:bg-mp-beige/40">
+                        <th scope="row" className="w-1/2 px-4 py-3 font-medium text-mp-ink-soft align-top">
+                          {row.label}
+                        </th>
+                        <td className="px-4 py-3 text-mp-ink">{row.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Pour aller plus loin : prix posé, catégorie, guide du type */}
+              <ul className="mt-6 flex flex-col gap-x-6 sm:flex-row sm:flex-wrap sm:justify-center">
+                <li>
+                  <Link href={ROUTES.prices} className={MORE_LINK}>
+                    Prix d&apos;un poêle à pellets posé
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </Link>
+                </li>
+                {categories.map((c) => (
+                  <li key={c.slug}>
+                    <Link href={c.path} className={MORE_LINK}>
+                      {c.label}
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Link>
+                  </li>
+                ))}
+                {guide && (
+                  <li>
+                    <Link href={guide.href} className={MORE_LINK}>
+                      {guide.label}
+                      <ArrowRight className="h-4 w-4" aria-hidden />
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Pourquoi ce modèle */}
-      <section className="bg-mp-beige mp-band">
+      <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-10 mp-measure text-center">
-            Pourquoi choisir le {product.name}
+            Pourquoi choisir le modèle {product.name}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -567,9 +611,7 @@ export default async function ProductPage({ params }: Props) {
               ) : (
                 <Flame className="h-8 w-8 text-mp-orange-flame" />
               )}
-              <h3 className="text-lg font-semibold text-mp-green-deep capitalize">
-                Modèle {product.type.replace("-", " ")}
-              </h3>
+              <h3 className="text-lg font-semibold text-mp-green-deep">{TYPE_TITLES[product.type]}</h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
                 {product.type === "hydro" &&
                   "Raccordé au circuit de chauffage central. Idéal pour remplacer une chaudière au mazout ou au gaz."}
@@ -589,25 +631,59 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Modèles similaires */}
-      {related.length > 0 && (
-        <section className="bg-mp-cream mp-band">
+      {/* Modèles voisins : même marque, puis autres marques */}
+      {(sameBrand.length > 0 || otherBrands.length > 0) && (
+        <section className="bg-mp-beige mp-band">
           <div className="mp-shell">
-            <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10 text-center">
-              Autres modèles de la marque {product.brand}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {related.map((p) => (
-                <ProductCard key={p.slug} product={p} />
-              ))}
-            </div>
+            {sameBrand.length > 0 && (
+              <>
+                <h2 className="text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10 text-center">
+                  Autres modèles de la marque {product.brand}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {sameBrand.map((p) => (
+                    <ProductCard key={p.slug} product={p} />
+                  ))}
+                </div>
+              </>
+            )}
+            {otherBrands.length > 0 && (
+              <>
+                <h2
+                  className={`text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10 text-center ${sameBrand.length > 0 ? "mt-16" : ""}`}
+                >
+                  Modèles comparables d&apos;autres marques
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {otherBrands.map((p) => (
+                    <ProductCard key={p.slug} product={p} />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </section>
       )}
 
       <CTAFinal
-        title={`Devis avec pose pour le ${product.name}`}
+        tone="cream"
+        title={`Devis avec pose pour le modèle ${product.name}`}
         description="On chiffre le poêle et la pose en 48 heures. Sans engagement avant signature."
+        primaryClassName={YIELDS_TO_ACTION_BAR}
+      />
+
+      {/* Barre d'action du téléphone (sous 1 024 px), dernier élément de la
+          page : elle remplace la barre de navigation du bas et porte le seul
+          aplat orange de l'écran (les boutons « Chiffrer mon installation »
+          de la page passent au vert, YIELDS_TO_ACTION_BAR). */}
+      <ProductActionBar
+        name={product.name}
+        price={
+          product.priceTTC && shownTTC
+            ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownTTC)} TVAC`
+            : "Prix sur devis"
+        }
+        href={estimateHref}
       />
     </>
   );

@@ -208,6 +208,36 @@ function parseDraft(json: string | null): EstimateState | null {
 }
 
 /**
+ * Poêle demandé par l'adresse (`?modele=<slug>`, lien « Chiffrer mon
+ * installation » d'une fiche produit), s'il est chiffrable. Une fiche à
+ * plusieurs puissances ouvre sur la plus petite : le visiteur la change à
+ * l'étape du modèle.
+ */
+function preselectedModel(
+  products: EstimateProduct[],
+  search: string,
+): { option: EstimateProduct; kind: StoveKind } | null {
+  const slug = new URLSearchParams(search).get("modele");
+  if (!slug) return null;
+  const option = products.find((p) => p.slug === slug);
+  if (!option) return null;
+  const kind = (Object.keys(STOVE_KINDS) as StoveKind[]).find((k) =>
+    (STOVE_KINDS[k].productTypes as readonly string[]).includes(option.productType),
+  );
+  return kind ? { option, kind } : null;
+}
+
+/**
+ * Paramètres de l'adresse, lus comme une valeur externe. En navigation
+ * interne (bouton d'une fiche), Next n'écrit la nouvelle adresse qu'à la
+ * validation du rendu : React relit l'instantané juste après et relance le
+ * rendu si l'adresse a changé, sans setState dans un effet. Le serveur et
+ * l'hydratation lisent une chaîne vide.
+ */
+const readSearch = () => window.location.search;
+const serverSearch = () => "";
+
+/**
  * Le brouillon n'est lu qu'après l'hydratation : le premier rendu client
  * reproduit le HTML du serveur (état par défaut), puis le formulaire est
  * remonté avec le brouillon via `key`. Avant, l'état initial lisait le brouillon
@@ -231,11 +261,30 @@ export function EstimateConfigurator({
 }) {
   const hydrated = React.useSyncExternalStore(noopSubscribe, () => true, () => false);
   const draft = React.useMemo(() => (hydrated ? parseDraft(readDraft()) : null), [hydrated]);
+  // Arrivée depuis une fiche produit (`/estimation?modele=<slug>`) : le poêle
+  // de la fiche est déjà choisi, avec son type. Même mécanique que le
+  // brouillon : lu après l'hydratation, appliqué par un remontage du formulaire.
+  const search = React.useSyncExternalStore(noopSubscribe, readSearch, serverSearch);
+  const preselected = React.useMemo(() => preselectedModel(products, search), [products, search]);
+  const initialState = React.useMemo<EstimateState>(() => {
+    const base = draft ?? DEFAULT_STATE;
+    if (!preselected) return base;
+    return {
+      ...base,
+      stoveKind: preselected.kind,
+      productKey: preselected.option.key,
+      // Brouillon en ventouse et poêle Edilkamin ou EK63 demandé : le poêle
+      // de la fiche prime, l'évacuation revient au choix par défaut.
+      installType: acceptsInstall(preselected.option, base.installType)
+        ? base.installType
+        : DEFAULT_STATE.installType,
+    };
+  }, [draft, preselected]);
   return (
     <EstimateForm
-      key={draft ? "brouillon" : "neuf"}
+      key={preselected ? `modele-${preselected.option.key}` : draft ? "brouillon" : "neuf"}
       products={products}
-      initialState={draft ?? DEFAULT_STATE}
+      initialState={initialState}
       bonusAtRender={bonusAtRender}
     />
   );
@@ -386,7 +435,10 @@ function EstimateForm({
     }
     if (step === 3 && !product) {
       setProductMissing(true);
-      document.getElementById("est-models")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      // Haut du bloc, où s'affiche le message : centré, il sortait de l'écran
+      // (la liste des modèles est plus haute que l'écran d'un téléphone).
+      document.getElementById("est-models")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => document.getElementById("est-models-error")?.focus({ preventScroll: true }), 0);
       return;
     }
     // Poêle canalisable : rien n'est coché d'office, le client répond.
@@ -463,7 +515,7 @@ function EstimateForm({
           {product ? ` autour du ${product.name}` : ""}.
         </p>
         <p className="mb-8 text-xl font-semibold">
-          Estimation : {eur(r.totalTTC)} TTC
+          Estimation : {eur(r.totalTTC)} TTC
         </p>
 
         {/*
@@ -503,7 +555,7 @@ function EstimateForm({
             </li>
           </ol>
           <p className="mt-4 text-sm text-mp-ink-soft">
-            Une question dans l&apos;intervalle ?{" "}
+            Une question dans l&apos;intervalle ?{" "}
             <a href="tel:+3281138309" className="whitespace-nowrap font-semibold text-mp-green-deep underline underline-offset-2">
               081 13 83 09
             </a>
@@ -582,7 +634,7 @@ function EstimateForm({
           {/* ---------- 1. Évacuation des fumées ---------- */}
           {step === 1 && (
             <>
-              <StepHeading ref={headingRef}>Comment sortent les fumées chez vous ?</StepHeading>
+              <StepHeading ref={headingRef}>Comment sortent les fumées chez vous ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft md:mb-8">
                 C&apos;est ce qui pèse le plus dans le coût de la pose. Si vous hésitez entre deux
                 réponses, prenez la plus probable, nous vérifions tout lors de la visite.
@@ -623,10 +675,10 @@ function EstimateForm({
 
               {s.installType === "ventouse-facade" && (
                 <p className="mt-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
-                  La ventouse demande un poêle étanche raccordé en concentrique : les fumées sortent
+                  La ventouse demande un poêle étanche raccordé en concentrique : les fumées sortent
                   par le tube central, l&apos;air de combustion entre par l&apos;anneau autour. Une
                   sortie murale simple n&apos;est pas admise. Edilkamin et EK63 refusent la
-                  ventouse : avec ces marques, il faut un conduit.
+                  ventouse : avec ces marques, il faut un conduit.
                 </p>
               )}
 
@@ -645,8 +697,8 @@ function EstimateForm({
                     incLabel="Augmenter la hauteur de conduit"
                   >
                     <p className="mt-2 text-sm text-mp-ink-soft">
-                      Forfait calculé pour {rule.hauteurRefM} m, puis ajusté au mètre. En général : un
-                      rez seul, 5 à 6 m ; un rez + un étage, 8 à 10 m.
+                      Forfait calculé pour {rule.hauteurRefM} m, puis ajusté au mètre. En général : un
+                      rez seul, 5 à 6 m ; un rez + un étage, 8 à 10 m.
                     </p>
                   </RangeField>
                 </div>
@@ -752,7 +804,7 @@ function EstimateForm({
                 ]}
                 hint={
                   <p className="mt-3 text-sm text-mp-ink-soft">
-                    La TVA à 6 % s&apos;applique aux logements privés de plus de 10 ans quand
+                    La TVA à 6 % s&apos;applique aux logements privés de plus de 10 ans quand
                     l&apos;installateur fournit et pose le poêle. Nous le confirmons sur le devis.
                   </p>
                 }
@@ -763,7 +815,7 @@ function EstimateForm({
           {/* ---------- 3. Le poêle ---------- */}
           {step === 3 && (
             <>
-              <StepHeading ref={headingRef}>Quel type de poêle, et lequel ?</StepHeading>
+              <StepHeading ref={headingRef}>Quel type de poêle, et lequel ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft">
                 Pour {s.surface} m² avec cette isolation, comptez environ{" "}
                 <strong className="text-mp-green-deep">
@@ -791,7 +843,7 @@ function EstimateForm({
               {s.installType === "ventouse-facade" && (
                 <p className="mb-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
                   Avec une ventouse, prenez un modèle étanche. Edilkamin et EK63 ne sont pas dans la
-                  liste : leurs notices interdisent la sortie murale.
+                  liste : leurs notices interdisent la sortie murale.
                 </p>
               )}
 
@@ -801,7 +853,12 @@ function EstimateForm({
                   <span className="font-normal text-mp-ink-soft">({eligible.length} disponibles)</span>
                 </legend>
                 {productMissing && !product && (
-                  <p role="alert" className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
+                  <p
+                    id="est-models-error"
+                    role="alert"
+                    tabIndex={-1}
+                    className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700"
+                  >
                     Choisissez un modèle pour continuer.
                   </p>
                 )}
@@ -834,7 +891,7 @@ function EstimateForm({
                             {/* Sélection marquée par la pastille radio, à côté de
                                 la vignette et non posée dessus (DESIGN.md). */}
                             <RadioDot active={active} />
-                            <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-mp-beige-warm sm:h-16 sm:w-16">
+                            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-mp-beige-warm sm:h-16 sm:w-16">
                               {p.imageSrc ? (
                                 // eslint-disable-next-line @next/next/no-img-element
                                 <img
@@ -861,8 +918,14 @@ function EstimateForm({
                                 {p.powerKw.toString().replace(".", ",")} kW
                                 {fit && <span className="text-mp-green-mid"> · bien dimensionné</span>}
                               </span>
+                              {/* Sous 640 px, le prix passe sous le nom : en colonne à
+                                  droite, il coinçait le nom sur 3 ou 4 lignes à 375 px. */}
+                              <span className="block text-sm text-mp-ink-soft sm:hidden">
+                                {p.fromVariant ? "Poêle seul dès " : "Poêle seul : "}
+                                <span className="font-semibold tabular-nums text-mp-green-deep">{eur(ttc)}</span>
+                              </span>
                             </span>
-                            <span className="shrink-0 text-right">
+                            <span className="hidden shrink-0 text-right sm:block">
                               <span className="block font-semibold tabular-nums text-mp-green-deep">{eur(ttc)}</span>
                               <span className="block text-xs text-mp-ink-soft">
                                 {p.fromVariant ? "poêle seul, dès" : "poêle seul"}
@@ -913,7 +976,7 @@ function EstimateForm({
                   {s.ducts === "oui" && (
                     <div className="mt-4">
                       <p id="est-ducts-label" className={legendCls}>
-                        Combien de pièces à desservir par les gaines ?
+                        Combien de pièces à desservir par les gaines ?
                       </p>
                       <div className="inline-flex items-center gap-2" role="group" aria-labelledby="est-ducts-label">
                         <StepButton
@@ -944,7 +1007,7 @@ function EstimateForm({
           {/* ---------- 4. Options ---------- */}
           {step === 4 && (
             <>
-              <StepHeading ref={headingRef}>Quelque chose à ajouter ?</StepHeading>
+              <StepHeading ref={headingRef}>Quelque chose à ajouter ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft md:mb-8">
                 Cochez ce qui s&apos;applique. Rien n&apos;est définitif, nous ajustons après la
                 visite technique.
@@ -980,7 +1043,7 @@ function EstimateForm({
                 </div>
               </fieldset>
               <p className="mt-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
-                Compris d&apos;office dans nos poses : la mise en service, le réglage de la
+                Compris d&apos;office dans nos poses : la mise en service, le réglage de la
                 combustion, le nettoyage du chantier et la remise du certificat de conformité.
               </p>
             </>
@@ -996,16 +1059,18 @@ function EstimateForm({
               <StepHeading ref={headingRef}>Payer en plusieurs fois</StepHeading>
               <p className="mb-6 text-mp-ink-soft md:mb-8">
                 Le total comprend déjà la TVA qui s&apos;applique chez vous (étape 2). Vous pouvez
-                l&apos;étaler à 0 %.
+                l&apos;étaler à 0 %.
               </p>
 
               <div className="mb-8 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm leading-relaxed text-mp-ink">
-                <strong className="text-mp-green-deep">Et la prime Wallonie ?</strong>{" "}
-                Elle a pris fin le 30 septembre 2026 : il n&apos;y a plus de prime régionale à déduire pour un poêle.
+                <strong className="text-mp-green-deep">Et la prime Wallonie ?</strong>{" "}
+                Elle a pris fin le 30 septembre 2026 : il n&apos;y a plus de prime régionale à déduire pour un poêle.
                 Si votre maison est classée PEB E, F ou G et que vous préparez une rénovation plus
-                large, le Rénopack peut financer le poêle avec le reste des travaux.{" "}
+                large, renseignez-vous sur le Rénopack avant de vous engager : la demande de prêt passe
+                avant tout devis signé ou acompte, et le poêle n&apos;est financé que si l&apos;audit le
+                retient et que l&apos;organisme prêteur l&apos;accepte.{" "}
                 <Link
-                  href="/primes-energie-wallonie-2026"
+                  href="/aides-poele-a-pellets-wallonie"
                   className="font-semibold text-mp-green-deep underline hover:no-underline"
                 >
                   Les aides qui restent
@@ -1015,7 +1080,7 @@ function EstimateForm({
 
               {isFinanceable(r.totalTTC) && durations.length > 0 ? (
                 <fieldset className="min-w-0">
-                  <legend className={legendCls}>Étaler le paiement à 0 %</legend>
+                  <legend className={legendCls}>Étaler le paiement à 0 %</legend>
                   <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">
                     {durations.map((m) => {
                       const active = months === m;
@@ -1042,14 +1107,14 @@ function EstimateForm({
                       {eur(monthly ?? 0)}/mois
                     </span>
                     <span className="mt-1 block text-sm text-mp-ink-soft">
-                      sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TTC
+                      sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TTC
                       {r.bonusHT > 0 ? ", bonus de saison déduit" : ""}. {FIN_NOTE}
                     </span>
                   </p>
                 </fieldset>
               ) : (
                 <p className="rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
-                  Le financement s&apos;applique de 200 à 50 000 €. Choisissez d&apos;abord votre
+                  Le financement s&apos;applique de 200 à 50 000 €. Choisissez d&apos;abord votre
                   poêle à l&apos;étape précédente pour voir la mensualité.
                 </p>
               )}
@@ -1062,13 +1127,13 @@ function EstimateForm({
           {/* ---------- 6. La suite : recontact ou non ---------- */}
           {step === 6 && (
             <>
-              <StepHeading ref={headingRef}>Voulez-vous qu&apos;on vous recontacte ?</StepHeading>
+              <StepHeading ref={headingRef}>Voulez-vous qu&apos;on vous recontacte ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft">
-                Votre estimation est prête :{" "}
+                Votre estimation est prête :{" "}
                 <strong className="whitespace-nowrap text-mp-green-deep">{eur(r.totalTTC)} TTC</strong>,
                 pose comprise{r.onQuote ? ", échafaudage en plus sur devis" : ""}. Elle est calculée
                 sans avoir vu votre maison. Pendant la visite
-                technique, gratuite, il nous arrive de trouver moins cher : un conduit existant qui
+                technique, gratuite, il nous arrive de trouver moins cher : un conduit existant qui
                 suffit, un poêle un cran moins puissant, un trajet plus court pour les fumées.
               </p>
               <ChoiceGroup
@@ -1088,10 +1153,10 @@ function EstimateForm({
                 >
                   <p>
                     C&apos;est noté, nous ne vous recontacterons pas. Votre configuration reste
-                    enregistrée dans ce navigateur : vous la retrouverez en revenant sur cette page.
+                    enregistrée dans ce navigateur : vous la retrouverez en revenant sur cette page.
                   </p>
                   <p className="mt-3">
-                    Si vous changez d&apos;avis, choisissez « Oui » ci-dessus, appelez le{" "}
+                    Si vous changez d&apos;avis, choisissez « Oui » ci-dessus, appelez le{" "}
                     <a href="tel:+3281138309" className="whitespace-nowrap font-semibold text-mp-green-deep underline underline-offset-2">
                       081 13 83 09
                     </a>{" "}
@@ -1632,7 +1697,7 @@ function Recap({
         <>
           <h3 className="mt-2 text-xl font-semibold text-mp-green-deep">Modèle à choisir</h3>
           <p className="text-sm text-mp-ink-soft">
-            Étape 3 : choisissez le poêle, le total se met à jour.
+            Étape 3 : choisissez le poêle, le total se met à jour.
           </p>
         </>
       )}
@@ -1645,7 +1710,7 @@ function Recap({
             : "border-mp-green-light/40 bg-mp-green-light/10 text-mp-green-deep",
         )}
       >
-        Besoin estimé : {needKw.toString().replace(".", ",")} kW pour {s.surface} m².
+        Besoin estimé : {needKw.toString().replace(".", ",")} kW pour {s.surface} m².
         {r.wellSized === false && product && (
           <>
             {" "}
@@ -1691,14 +1756,14 @@ function Recap({
       {monthly != null && (
         <p className="mt-3 rounded-xl border border-mp-orange-flame/30 bg-mp-orange-light/30 p-3 text-sm text-mp-ink">
           ou <strong className="text-mp-green-deep">{eur(monthly)}/mois</strong> sur {months} mois
-          à 0 %
+          à 0 %
         </p>
       )}
 
       <p className="mt-4 text-xs leading-relaxed text-mp-ink-soft">
         Estimation indicative TTC, matériel et pose compris, TVA{" "}
-        {Math.round(r.vatRate * 100)} %. Détail de la pose hors TVA. Les forfaits de pose sont des
-        budgets moyens : le prix ferme est établi après la visite technique gratuite.
+        {Math.round(r.vatRate * 100)} %. Détail de la pose hors TVA. Les forfaits de pose sont des
+        budgets moyens : le prix ferme est établi après la visite technique gratuite.
         {r.bonusHT > 0 && ` ${bonusLabelFor(product?.brand)} déduit. ${BONUS.conditions}`}
       </p>
       {monthly != null && (

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { BONUS, bonusBadgeFor, bonusLabelFor } from "@/lib/bonus";
 import { ProductAccessories } from "@/components/product/ProductAccessories";
+import { displayOptionLabel } from "@/lib/option-labels";
 import type {
   VariantOptionAxis,
   VariantOptionValueData,
@@ -162,7 +163,7 @@ export function ProductVariantPanel({
     valueId: number | null | undefined,
   ): string {
     if (valueId == null) return "";
-    return axis.values.find((v) => v.id === valueId)?.label ?? "";
+    return displayOptionLabel(axis.values.find((v) => v.id === valueId)?.label ?? "");
   }
 
   return (
@@ -249,7 +250,7 @@ export function ProductVariantPanel({
               <p className="mt-3 text-sm text-mp-green-deep">
                 <span className="font-semibold">{formatPriceReducedVat(ttc)} TVAC</span> si
                 nous le posons sur une habitation de plus de 10 ans
-                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
+                <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
               </p>
             </>
           ) : null;
@@ -318,7 +319,7 @@ export function ProductVariantPanel({
       {/* Le paiement en ligne a été retiré le 04/09/2026 : ne pas
           réintroduire de bouton d'achat ni de mention de paiement ici. */}
       <p className="text-xs text-mp-ink-soft text-center">
-        Pose non incluse : devis chiffré sous 48 h, après la visite sur place.
+        Pose non incluse : devis chiffré sous 48 h, après la visite sur place.
       </p>
     </div>
   );
@@ -339,7 +340,7 @@ function VariantValueButton({
   onClick: () => void;
 }) {
   const disabled = !available && !selected;
-  const title = disabled ? "Combinaison non disponible" : value.label;
+  const title = disabled ? "Combinaison non disponible" : displayOptionLabel(value.label);
 
   // Mode pastille couleur : pastille de 32 px dans une zone de clic de 44 px
   // (la pastille seule faisait 32 px, sous la cible tactile minimale).
@@ -350,7 +351,7 @@ function VariantValueButton({
         onClick={onClick}
         disabled={disabled}
         title={title}
-        aria-label={value.label}
+        aria-label={displayOptionLabel(value.label)}
         aria-pressed={selected}
         className={[
           "group/swatch -m-1 grid h-11 w-11 place-items-center rounded-full",
@@ -400,7 +401,7 @@ function VariantValueButton({
           }}
         />
         <span className="text-xs leading-tight text-mp-ink-soft text-center">
-          {value.label}
+          {displayOptionLabel(value.label)}
         </span>
       </button>
     );
@@ -424,7 +425,7 @@ function VariantValueButton({
           : "cursor-pointer hover:border-mp-green-deep",
       ].join(" ")}
     >
-      {value.label}
+      {displayOptionLabel(value.label)}
     </button>
   );
 }

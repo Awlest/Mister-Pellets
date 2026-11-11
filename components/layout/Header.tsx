@@ -73,8 +73,11 @@ export function Header() {
             <div key={item.key} className="group/item relative">
               <Link
                 href={item.href}
+                // Le sous-menu s'ouvre en CSS, au survol et au focus : il est au
+                // moins annoncé aux lecteurs d'écran.
+                aria-haspopup={item.children ? "true" : undefined}
                 className={cn(
-                  "inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium 2xl:px-4",
+                  "inline-flex min-h-11 items-center gap-1 rounded-full px-3 py-2 text-sm font-medium 2xl:px-4",
                   // whitespace-nowrap : sans ça, un libellé comme « Nos marques »
                   // se casse en colonne dès que la barre manque de place.
                   "whitespace-nowrap text-mp-ink hover:text-mp-orange-flame transition-colors"

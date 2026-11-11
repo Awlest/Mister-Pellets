@@ -102,6 +102,372 @@ const REMISE_POSE_EN_COURS = (["tubage", "double-paroi", "ventouse"] as const).s
 
 export const ARTICLES: ArticleData[] = [
   // ───────────────────────────────────────────────────────────────────
+  // PELLETS : relevé mensuel des prix (11/11/2026), page tenue à jour chaque mois
+  // Sources lues le 11/11/2026 : ValBiom, « Suivi mensuel des prix des
+  // combustibles bois », mise à jour du 21/10/2026 (tableau « Prix moyen observé
+  // en Wallonie », image tableau-oct-26.jpg, et graphique en c€/kWh TVAC) ;
+  // CREG, tableau de bord d'octobre 2026 (Wallonie : électricité 45,89 c€/kWh
+  // pour 3 500 kWh/an, gaz 13,57 c€/kWh pour 17 000 kWh/an) ; SPF Économie,
+  // tarif officiel n° 2026/217 valable à partir du 11/11/2026 (gasoil de
+  // chauffage H0/H7 : 1,4442 €/l sous 2 000 l, 1,4011 €/l à partir de 2 000 l) ;
+  // SPW, guide Walloreno 2026, p. 7 (1 litre de mazout = 10 kWh) ; DIN CERTCO
+  // 2 PfG C 0444/02.25, annexe 1 (PCI ≥ 4,6 kWh/kg) ; ENplus
+  // ST 1001:2022, tableau des classes (PCI ≥ 4,6 kWh/kg) ; Test-Achats, article
+  // du 25/09/2026 ; notices MCZ Cute Air 8 M1, Edilkamin Cherie 9+ Evo, Cadel
+  // Grace 7 et Austroflamm Clou Pellet (rendements et consommations horaires).
+  // Palette Comfo : lib/pellets.ts (470 € TVAC, 65 sacs de 15 kg).
+  // Mise à jour mensuelle : première ligne du tableau « mois par mois », tldr,
+  // section 1, section 5, tableau du kWh, FAQ, puis modifiedAt.
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "prix-pellets-belgique",
+    title: "Prix des pellets en Belgique : le relevé mois par mois",
+    metaTitle: "Prix des pellets en Belgique, mois par mois",
+    metaDescription:
+      "Prix du sac de pellets de 15 kg en Wallonie, mois par mois depuis janvier 2025 : 7,02 € en octobre 2026 (ValBiom). Budget d'une saison, kWh, quand acheter.",
+    excerpt:
+      "Le sac de 15 kg est passé de 5,64 € à 7,02 € en un an. Le relevé mensuel de ValBiom depuis janvier 2025, ce que coûte une saison de chauffe, et le kWh de pellet face au mazout, au gaz et à l'électricité.",
+    tldr:
+      "En octobre 2026, le sac de 15 kg de pellets certifiés coûtait en moyenne 7,02 € en Wallonie, acheté par palette et hors livraison, selon le relevé mensuel de ValBiom. Cela fait 468 € la tonne et environ 10 centimes le kWh. Un an plus tôt, le même sac valait 5,64 € ; en août 2026, 6,19 €.",
+    category: "pellets",
+    tags: ["prix des pellets", "sac de 15 kg", "palette de pellets", "ValBiom", "prix du kWh"],
+    readingTimeMinutes: 7,
+    publishedAt: "2026-11-11",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Conseillers combustible",
+    coverImageAlt: "Sacs de pellets de 15 kg empilés sur une palette, sous housse",
+    sections: [
+      {
+        heading: "Le prix du sac, de la palette et du kWh en octobre 2026",
+        paragraphs: [
+          "L'asbl ValBiom relève chaque mois le prix moyen des pellets en Wallonie. Son dernier chiffre, publié le 21 octobre 2026 : 7,02 € le sac de 15 kg, TVA comprise. Ce prix vaut pour des pellets certifiés DINplus ou ENplus, achetés par palette entière, sans la livraison.",
+          "À ce prix, le kilo revient à 47 centimes, la tonne en sacs à 468 € et une palette de 65 sacs à 456 €. Un kilo de pellet certifié contient au moins 4,6 kWh : le kWh coûte donc 10,2 centimes. En octobre 2025, le sac valait 5,64 € : il a pris 24 % en un an.",
+          "C'est une moyenne, et les écarts entre vendeurs sont larges. En septembre 2026, Test-Achats trouvait des sacs de 5,50 € à plus de 8,50 € selon le vendeur et la quantité commandée, pour une moyenne de 6,75 €.",
+        ],
+      },
+      {
+        heading: "Le relevé mois par mois depuis janvier 2025",
+        paragraphs: [
+          "Le prix du sac est celui du tableau de ValBiom. Les deux colonnes de droite sont nos calculs : la tonne en sacs, soit le prix du sac divisé par 15 et multiplié par 1 000, et le kWh, à 4,6 kWh par kilo.",
+        ],
+        table: {
+          headers: ["Mois", "Sac de 15 kg", "Tonne en sacs", "Prix du kWh"],
+          rows: [
+            ["Octobre 2026", "7,02 €", "468 €", "10,2 centimes"],
+            ["Septembre 2026", "6,64 €", "443 €", "9,6 centimes"],
+            ["Août 2026", "6,19 €", "413 €", "9,0 centimes"],
+            ["Juillet 2026", "6,15 €", "410 €", "8,9 centimes"],
+            ["Juin 2026", "6,13 €", "409 €", "8,9 centimes"],
+            ["Mai 2026", "6,11 €", "407 €", "8,9 centimes"],
+            ["Avril 2026", "6,12 €", "408 €", "8,9 centimes"],
+            ["Mars 2026", "6,05 €", "403 €", "8,8 centimes"],
+            ["Février 2026", "6,02 €", "401 €", "8,7 centimes"],
+            ["Janvier 2026", "5,99 €", "399 €", "8,7 centimes"],
+            ["Décembre 2025", "5,84 €", "389 €", "8,5 centimes"],
+            ["Novembre 2025", "5,86 €", "391 €", "8,5 centimes"],
+            ["Octobre 2025", "5,64 €", "376 €", "8,2 centimes"],
+            ["Septembre 2025", "5,54 €", "369 €", "8,0 centimes"],
+            ["Août 2025", "5,48 €", "365 €", "7,9 centimes"],
+            ["Juillet 2025", "5,43 €", "362 €", "7,9 centimes"],
+            ["Juin 2025", "5,43 €", "362 €", "7,9 centimes"],
+            ["Mai 2025", "5,48 €", "365 €", "7,9 centimes"],
+            ["Avril 2025", "5,69 €", "379 €", "8,2 centimes"],
+            ["Mars 2025", "5,70 €", "380 €", "8,3 centimes"],
+            ["Février 2025", "5,66 €", "377 €", "8,2 centimes"],
+            ["Janvier 2025", "5,61 €", "374 €", "8,1 centimes"],
+          ],
+          caption:
+            "Source : ValBiom, « Suivi mensuel des prix des combustibles bois », prix moyen observé en Wallonie, mise à jour du 21 octobre 2026. Pellets certifiés DINplus ou ENplus, une palette au minimum, hors livraison. Tonne et kWh : calculs Mister Pellets.",
+        },
+      },
+      {
+        heading: "Ce que coûte une saison de chauffe",
+        paragraphs: [
+          "Un kilo de pellet certifié contient au moins 4,6 kWh. Les notices des poêles que nous posons annoncent 89 à 93 % de rendement (MCZ Cute Air 8, Edilkamin Cherie 9+ Evo, Cadel Grace 7, Austroflamm Clou Pellet) : avec 90 %, un kilo laisse 4,1 kWh de chaleur dans la maison. Pour 1 000 kWh de chaleur, il faut donc 242 kg de pellets, 16 sacs, soit 113 € au prix d'octobre 2026.",
+          "L'isolation de la maison pèse plus que la puissance du poêle. Le plus sûr est de partir de votre ancienne facture de mazout ou de gaz : la méthode est dans [notre calcul du budget d'un hiver au pellet](/blog/budget-hiver-poele-pellets-consommation-2026). Pour le poêle lui-même, voyez [le prix d'un poêle à pellets posé](/prix-poele-pellets).",
+          "À l'heure, un poêle de 8 kW brûle de 0,5 kg au ralenti à 1,8 kg à pleine puissance (MCZ Cute Air 8), un 9 kW de 0,8 à 2,1 kg (Edilkamin Cherie 9+ Evo). Sur la saison, voici les fourchettes que nous donnons en rendez-vous, recalculées au prix d'octobre.",
+        ],
+        table: {
+          headers: ["Votre cas", "Chaleur à fournir", "Pellets par saison", "Sacs de 15 kg", "Budget à 7,02 € le sac"],
+          rows: [
+            ["Appoint le soir et le week-end, poêle de 7 à 9 kW", "2 500 à 3 700 kWh", "600 à 900 kg", "40 à 60", "280 à 420 €"],
+            ["Chauffage principal, maison de 120 m² en PEB B ou C, poêle de 10 kW", "6 200 à 8 300 kWh", "1,5 à 2 tonnes", "100 à 135", "700 à 950 €"],
+            ["Poêle hydro qui remplace une chaudière, maison de 150 à 180 m²", "12 400 à 16 600 kWh", "3 à 4 tonnes", "200 à 270", "1 400 à 1 900 €"],
+          ],
+          caption:
+            "Hypothèses : 4,6 kWh par kilo, 90 % de rendement, saison d'octobre à avril, sac à 7,02 € (ValBiom, octobre 2026), livraison non comprise. Fourchettes indicatives : l'isolation et la consigne de température les font varier.",
+        },
+      },
+      {
+        heading: "Sac à l'unité, palette ou vrac",
+        paragraphs: [
+          "Le relevé de ValBiom porte sur l'achat d'une palette entière, livraison non comprise. Une palette, c'est un peu moins d'une tonne. Si vous vous faites livrer, ajoutez le transport au prix du sac avant de comparer deux offres.",
+          "À l'unité ou par petites quantités, le prix au sac grimpe : la fourchette de Test-Achats, de 5,50 € à plus de 8,50 €, dépend autant de la quantité commandée que du vendeur.",
+          "Le vrac, soufflé par camion dans un silo, est le format des chaudières à pellets. Un poêle se remplit au sac. ValBiom suit aussi le vrac sur son graphique, en centimes par kWh : sa courbe suit celle du sac, un peu en dessous. Son tableau ne donne pas le prix du vrac à la tonne, et nous ne publions pas un chiffre que nous n'avons pas lu.",
+          "Nous vendons une palette de pellets Comfo, certifiés DINplus A1 : 65 sacs de 15 kg pour 470 € TVA comprise, soit 7,23 € le sac, à retirer sur rendez-vous à Fernelmont. Tout est sur la page [palette de pellets Comfo](/palette-pellets-comfo).",
+        ],
+      },
+      {
+        heading: "Quand acheter vos pellets",
+        paragraphs: [
+          "En 2025, le prix a suivi la saison : 5,43 € le sac en juin et en juillet, 5,86 € en novembre. Sur une palette de 65 sacs, l'écart fait 28 €.",
+          "En 2026, le creux d'été n'a pas eu lieu. Le sac est monté presque chaque mois, de 5,99 € en janvier à 6,19 € en août, puis il a pris 83 centimes en deux mois : 54 € de plus par palette entre août et octobre.",
+          "ValBiom avance deux explications. La construction tourne au ralenti, les scieries débitent moins de résineux et produisent moins de sciure, la matière première du pellet. Et la hausse du pétrole, liée au conflit au Moyen-Orient, pousse davantage de ménages vers le bois. Pour l'hiver 2026-2027, l'association juge un recul marqué des prix improbable et retient un scénario de stabilité, tant que l'offre et la demande restent en équilibre.",
+          "Notre avis : achetez votre saison en une fois, entre mai et août, si vous avez un endroit sec pour la stocker. Attendre l'automne n'a payé ni en 2025 ni en 2026. Et en novembre, n'attendez pas une baisse pour remplir le garage : prenez ce qu'il vous faut pour finir l'hiver.",
+        ],
+      },
+      {
+        heading: "Le kWh de pellet face au mazout, au gaz et à l'électricité",
+        paragraphs: [
+          "Pour comparer, nous ramenons chaque énergie au prix d'un kWh contenu dans le combustible, avant les pertes de l'appareil. Les prix sont les derniers publiés, à la date indiquée dans le tableau.",
+          "Le pellet reste l'énergie la moins chère du tableau, 27 à 30 % sous le mazout. L'écart s'est resserré : en août, à 6,19 € le sac, son kWh valait 9 centimes. Avec un poêle à 90 % de rendement, le kWh de chaleur rendu dans la pièce revient à 11,3 centimes.",
+          "Le prix de l'électricité est celui d'un radiateur électrique. Une pompe à chaleur consomme plusieurs fois moins pour la même chaleur, et se compare avec son rendement saisonnier.",
+        ],
+        table: {
+          headers: ["Énergie", "Prix relevé", "Prix du kWh", "Source et date"],
+          rows: [
+            ["Pellets en sacs", "7,02 € le sac de 15 kg", "10,2 centimes", "ValBiom, octobre 2026"],
+            ["Gaz naturel", "13,57 centimes le kWh, tout compris", "13,6 centimes", "CREG, Wallonie, octobre 2026"],
+            ["Mazout de chauffage, à partir de 2 000 litres", "1,4011 € le litre", "14,0 centimes", "SPF Économie, tarif du 11 novembre 2026"],
+            ["Mazout de chauffage, moins de 2 000 litres", "1,4442 € le litre", "14,4 centimes", "SPF Économie, tarif du 11 novembre 2026"],
+            ["Électricité", "45,89 centimes le kWh, tout compris", "45,9 centimes", "CREG, Wallonie, octobre 2026"],
+          ],
+          caption:
+            "Pellets : 4,6 kWh par kilo au moins (ENplus A1 et DINplus). Mazout : prix maximum officiel, 10 kWh par litre (Service public de Wallonie). Gaz et électricité : prix moyens de la CREG pour un ménage de 17 000 kWh de gaz et de 3 500 kWh d'électricité par an.",
+        },
+      },
+      {
+        heading: "Sources et mises à jour",
+        paragraphs: [
+          "Chiffres relus à la source le 11 novembre 2026. Le relevé de novembre n'était pas encore publié. ValBiom met son tableau à jour une fois par mois : nous ajoutons alors la ligne, et la date de mise à jour s'affiche en haut de la page.",
+          "ValBiom convertit le prix du sac avec environ 5 kWh par kilo : dans son analyse de juin 2024, 5,57 € le sac donnaient 7,43 centimes le kWh. Nous gardons 4,6 kWh, le minimum garanti par les certifications : notre kWh de pellet sort donc un peu plus cher que le sien.",
+        ],
+        list: {
+          items: [
+            "ValBiom, « Suivi mensuel des prix des combustibles bois », mise à jour du 21 octobre 2026 : [valbiom.be](https://www.valbiom.be/actualites/suivi-mensuel-des-prix-des-combustibles-bois).",
+            "CREG, tableau de bord mensuel de l'électricité et du gaz naturel, octobre 2026 : [creg.be](https://www.creg.be/fr/professionnels/fonctionnement-et-monitoring-du-marche/tableau-de-bord).",
+            "SPF Économie, tarif officiel des produits pétroliers n° 2026/217, valable à partir du 11 novembre 2026 : [economie.fgov.be](https://economie.fgov.be/fr/themes/energie/prix-de-lenergie/prix-maximum-des-produits/tarif-officiel-des-produits).",
+            "Test-Achats, « Voici pourquoi acheter votre pellet avant la fin du mois de septembre », 25 septembre 2026 : [test-achats.be](https://www.test-achats.be/maison-energie/pellets/news/prix-avantageux-pellet-belgique).",
+            "ValBiom, « Suivi des prix des combustibles bois », analyse de juin 2024 : [valbiom.be](https://www.valbiom.be/sites/default/files/tool/file/valbiom-analyse-suivi-des-prix-des-combustibles-bois-juin-2024.pdf).",
+            "ENplus, norme ST 1001:2022, exigences de qualité des pellets : [enplus-pellets.eu](https://enplus-pellets.eu/wp-content/uploads/Documents/ENplus-ST-1001-ENplus-wood-pellets-Requirements-for-companies-5.pdf). DIN CERTCO, programme DINplus, annexe 1 (édition 02-2025) : [dincertco.de](https://www.dincertco.de/media/dincertco/dokumente_1/certification_schemes/2-pfg-c-0444_annex-1_en_wood-pellets.pdf).",
+            "Service public de Wallonie, guide pratique Walloreno 2026, page 7 : [energie.wallonie.be](https://energie.wallonie.be/files/PEB/B%C3%A2timents%20r%C3%A9sidentiels/R%C3%A9novation/Outils/Publications/Walloreno/brochureWalloreno_2026.pdf).",
+          ],
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Quel est le prix d'un sac de pellets de 15 kg en Belgique ?",
+        answer:
+          "En octobre 2026, 7,02 € en moyenne en Wallonie, selon le relevé mensuel de ValBiom : pellets certifiés, achetés par palette, hors livraison. À l'unité, comptez plus. En septembre 2026, Test-Achats relevait des sacs de 5,50 € à plus de 8,50 € selon le vendeur et la quantité.",
+      },
+      {
+        question: "Quel est le prix d'une palette de pellets ?",
+        answer:
+          "Au prix moyen d'octobre 2026, une palette de 65 sacs de 15 kg revient à 456 €, hors livraison, et la tonne en sacs à 468 €. Un an plus tôt, la même palette coûtait 367 €.",
+      },
+      {
+        question: "Le prix des pellets va-t-il baisser cet hiver ?",
+        answer:
+          "ValBiom ne le prévoit pas. Dans sa mise à jour du 21 octobre 2026, l'association juge un recul marqué improbable pour l'hiver 2026-2027 et retient un scénario de prix stables, sauf rupture entre l'offre et la demande.",
+      },
+      {
+        question: "Quand acheter vos pellets pour les payer moins cher ?",
+        answer:
+          "Entre mai et août. En 2025, le sac valait 5,43 € en juin et en juillet, contre 5,86 € en novembre. En 2026, il n'y a pas eu de baisse d'été, mais le sac d'août, à 6,19 €, coûtait encore 83 centimes de moins que celui d'octobre.",
+      },
+      {
+        question: "Les pellets sont-ils encore moins chers que le mazout ?",
+        answer:
+          "Oui. Au relevé d'octobre 2026 (7,02 € le sac de 15 kg), le kWh de pellet revient à 10,2 centimes, contre 14,0 à 14,4 centimes pour le mazout au prix maximum du SPF Économie du 11 novembre 2026, soit 1,4011 à 1,4442 € le litre selon la quantité.",
+      },
+    ],
+    related: {
+      articles: [
+        "budget-hiver-poele-pellets-consommation-2026",
+        "pellets-enplus-a1-vs-dinplus",
+        "remplacer-chaudiere-mazout-poele-hydro",
+      ],
+      guides: ["quelle-puissance-poele-pellets", "remettre-en-route-poele-pellets-automne"],
+      cities: ["namur", "charleroi", "liege"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // GUIDE D'ACHAT : poêle à pellets et électricité (11/11/2026)
+  // Sources lues le 11/11/2026 : MCZ, manuel du Cute Air 8 M1, partie 1
+  // (réf. 8902204900, p. 25 : 67 W, 38 W, 340 W, 3 W) et partie 2
+  // (réf. 8902205000, p. 48 « Défaut temporaire de courant », p. 53), fiche
+  // technique rév. 2019052901, FAQ mcz.it/fr-be (onduleur), page
+  // mcz.it/fr/consommation-electrique-poeles (85 kWh/an, étude Amoès) ;
+  // Edilkamin, manuel Cherie 9+ Evo / 11++ Evo, cod. 942786-FR I 02.25/A (§ 6.5
+  // données électriques, § 17.6 Black-out) ; Cadel, manuel de l'installateur
+  // Grace 7 et autres, réf. 89022193B (345 W max, résistance 300 W, ASI 210 V),
+  // manuel de l'utilisateur Wall3 Plus / Tile3 Plus / Moon, réf. 89022051A
+  // (§ 8.10, 12.7, 12.9) ; Austroflamm, notices Clou Pellet V1.0 du 06/08/2024
+  // (p. 18, 62, 76) et Clou Duo V2.0 du 20/12/2024 (p. 11, 17, 76, 80) ; Bronpi,
+  // fiche Free-6 et notice « Manual Free v.300925 » ; CREG, tableau de bord
+  // d'octobre 2026 (Wallonie, 45,89 c€/kWh).
+  // À confirmer par Dorian : aucun poêle à pellets sans électricité au catalogue.
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "poele-pellets-sans-electricite-coupure-courant",
+    title: "Poêle à pellets sans électricité : ce qui existe vraiment",
+    metaTitle: "Poêle à pellets sans électricité : le point",
+    metaDescription:
+      "Coupure de courant, consommation électrique d'après les notices MCZ, Edilkamin, Cadel et Austroflamm, onduleur, poêles à pellets sans électricité : le point.",
+    excerpt:
+      "Un poêle à pellets s'arrête quand le courant saute. Ce qu'il consomme d'après les notices, ce qui se passe pendant la coupure, quel onduleur brancher, et les rares modèles qui se passent de prise.",
+    tldr:
+      "Un poêle à pellets a besoin de courant : la vis sans fin, l'allumage, l'extracteur de fumées et la carte électronique sont électriques. À la coupure, il s'arrête et se met en sécurité. Il consomme peu : 9 à 177 W en marche, jusqu'à 345 W à l'allumage. Des poêles à pellets sans électricité existent, mais nous n'en posons pas.",
+    category: "guide-achat",
+    tags: ["coupure de courant", "consommation électrique", "onduleur", "poêle sans électricité", "poêle mixte"],
+    readingTimeMinutes: 8,
+    publishedAt: "2026-11-11",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens poseurs",
+    coverImageAlt: "Poêle à pellets allumé dans un séjour, câble d'alimentation branché sur une prise murale",
+    sections: [
+      {
+        heading: "Pourquoi un poêle à pellets a besoin de courant",
+        paragraphs: [
+          "Quatre organes tournent à l'électricité. La vis sans fin amène les pellets du réservoir au creuset. Une résistance les allume. Un extracteur aspire les fumées et les pousse dans le conduit : Cadel range ses poêles parmi les appareils « à tirage forcé ». Une carte électronique règle le tout, avec les sondes et les sécurités. La plupart des poêles ont en plus un ventilateur qui souffle l'air chaud dans la pièce.",
+          "Les Austroflamm chauffent par convection naturelle, sans ventilateur d'air chaud. Ils restent des poêles électriques : la notice du Clou Pellet prévoit une alimentation en 230 V et un ventilateur de tirage pour les fumées. « Convection naturelle » ne veut pas dire « sans électricité ».",
+        ],
+      },
+      {
+        heading: "Ce qu'il consomme, d'après les notices",
+        paragraphs: [
+          "C'est à l'allumage qu'un poêle à pellets tire le plus, quand la résistance chauffe : 340 W au maximum sur un MCZ Cute Air 8, 345 W sur un Cadel Grace 7, dont 300 W pour la seule résistance. Une fois la flamme prise, la consommation tombe à quelques dizaines de watts. Le poêle sans ventilateur d'air chaud est aussi celui qui consomme le moins.",
+          "Sur une saison, prenons 1 500 heures de marche, soit 7 heures par jour d'octobre à avril. Le Cute Air 8 consomme alors 57 à 100 kWh, le Cherie 9+ Evo 102 à 266 kWh, le Clou Pellet 14 à 27 kWh. Au prix moyen de l'électricité en Wallonie en octobre 2026, 45,89 centimes le kWh selon la CREG, cela fait de 6 à 122 € par hiver selon le poêle, hors allumages. MCZ cite de son côté une mesure du bureau d'études Amoès : 85 kWh par an pour un de ses poêles dans une maison de 72 m², soit 39 €.",
+          "La veille compte aussi : 3 W toute l'année font 26 kWh, soit 12 €. MCZ et Cadel conseillent de débrancher le poêle hors saison.",
+        ],
+        table: {
+          headers: ["Poêle", "À l'allumage", "À puissance nominale", "À puissance réduite", "En veille"],
+          rows: [
+            ["MCZ Cute Air 8 (8 kW, ventilé)", "340 W au maximum", "67 W", "38 W", "3 W"],
+            ["Edilkamin Cherie 9+ Evo (9 kW, canalisable)", "non précisé", "177 W", "68 W", "3 W"],
+            ["Cadel Grace 7 (7 kW)", "345 W au maximum, dont 300 W de résistance", "non précisé", "non précisé", "non précisé"],
+            ["Austroflamm Clou Pellet 8 et 10 kW (convection naturelle)", "non précisé", "15 et 18 W", "9 W", "3 W"],
+            ["Austroflamm Clou Duo (mixte bois et pellets, 7 kW)", "non précisé", "15 W", "11 W", "5 W"],
+          ],
+          caption:
+            "Puissance électrique absorbée, d'après les notices et fiches techniques des fabricants lues le 11 novembre 2026 (références en fin d'article). « Non précisé » : la notice ne donne pas la valeur ou renvoie à la plaque signalétique.",
+        },
+      },
+      {
+        heading: "Ce qui se passe pendant une coupure de courant",
+        paragraphs: [
+          "Le courant saute, tout s'arrête d'un coup : plus de pellets, plus d'air soufflé, plus d'extraction. Les pellets déjà dans le creuset finissent de brûler, et leurs fumées ne sont plus poussées dehors. Elles sortent si le conduit tire tout seul. Austroflamm l'écrit dans la notice du Clou Pellet : le conduit doit fournir un tirage de 3 à 12 Pa au minimum pour évacuer les gaz en cas de panne de courant. C'est une des raisons pour lesquelles nous tenons à [un conduit qui monte au-dessus du toit](/blog/evacuation-fumees-poele-pellets).",
+          "Si de la fumée s'échappe dans la pièce, appliquez la consigne que MCZ donne pour toute fumée anormale : ouvrez les fenêtres et laissez la porte du foyer fermée.",
+          "Au retour du courant, tout dépend de la marque.",
+        ],
+        list: {
+          items: [
+            "MCZ (Cute Air 8) : le poêle passe en refroidissement, puis se rallume de lui-même.",
+            "Cadel (Wall3 Plus, Tile3 Plus, Moon) : après une coupure de moins de 10 secondes, il reprend où il en était. Au-delà, il affiche « ON BLACK OUT », refroidit à fond, puis relance un allumage.",
+            "Edilkamin (Cherie 9+ Evo et 11++ Evo) : l'écran alterne « Black Out » et « OFF » pendant l'extinction, puis le poêle reste éteint, « Black Out » affiché. Prévoyez de le rallumer vous-même.",
+            "Austroflamm (Clou Pellet) : une pile CR2032 garde l'heure et la programmation pendant la coupure. La notice demande de la remplacer tous les 2 ans.",
+          ],
+        },
+        callout: {
+          variant: "info",
+          text: "Si le poêle ne repart pas ou affiche une alarme après la coupure, n'enchaînez pas les allumages. Notez le message à l'écran et appelez [notre service de dépannage](/depannage-poele-a-pellets).",
+        },
+      },
+      {
+        heading: "Onduleur, batterie, groupe électrogène",
+        paragraphs: [
+          "Un onduleur (une ASI, alimentation sans interruption) garde le poêle sous tension pendant la coupure. MCZ précise lequel dans sa foire aux questions : un modèle à onde sinusoïdale pure, en 230 V et 50 Hz, d'une puissance au moins égale à la puissance électrique maximale de la fiche technique du poêle, soit 340 W pour un Cute Air 8. Cadel demande une tension d'au moins 210 V sans fluctuations, et prévient qu'il ne garantit pas le fonctionnement du poêle sur ces appareils, vu la variété du marché.",
+          "L'autonomie se calcule : l'énergie de la batterie, en wattheures, divisée par la puissance du poêle, en watts.",
+          "Un groupe électrogène ou une batterie domestique doivent tenir la même exigence : une onde sinusoïdale pure et une tension stable. Une batterie domestique ne prend le relais pendant une coupure que si l'installation a été prévue pour : demandez-le à l'installateur qui l'a posée.",
+          "Notre avis : pour la plupart des maisons, l'onduleur ne vaut pas la dépense. Le poêle se met en sécurité tout seul et une coupure d'une heure se passe avec un pull. Il se justifie si les coupures reviennent souvent chez vous, ou si le poêle est votre seul chauffage. Dans ce cas, prenez de la marge sur la puissance et vérifiez la mention « onde sinusoïdale pure » sur la fiche.",
+        ],
+        table: {
+          headers: ["Énergie de la batterie", "Poêle à 38 W", "Poêle à 67 W", "Poêle à 177 W"],
+          rows: [
+            ["500 Wh", "13 heures", "7 heures", "3 heures"],
+            ["1 000 Wh", "26 heures", "15 heures", "6 heures"],
+            ["2 000 Wh", "53 heures", "30 heures", "11 heures"],
+          ],
+          caption:
+            "Autonomie théorique, arrondie à l'heure : énergie de la batterie divisée par la puissance du poêle (38 et 67 W : MCZ Cute Air 8 à puissance réduite et nominale ; 177 W : Edilkamin Cherie 9+ Evo à puissance nominale). En pratique, comptez moins : l'onduleur a ses pertes et chaque allumage tire jusqu'à 340 W.",
+        },
+      },
+      {
+        heading: "Les poêles à pellets vraiment sans électricité",
+        paragraphs: [
+          "Ils existent. Le fabricant espagnol Bronpi en propose deux, les Free-6 et Free-11. Les pellets descendent du réservoir par gravité quand vous ouvrez un levier, et l'air arrive par le seul tirage du conduit. Le Free-6 annonce 6 kW, 91 % de rendement et un réservoir de 7 kg, pour 5,8 à 11,6 heures d'autonomie.",
+          "Ce que vous perdez se lit dans la notice. L'allumage se fait à la main, avec un cube allume-feu et une allumette. La puissance se règle avec un registre de tirage, sans thermostat ni programmation. Le conduit doit tirer juste, 12 Pa à 2 Pa près, et Bronpi déconseille les pièces équipées d'une hotte ou d'une ventilation qui gêneraient ce tirage.",
+          "Nous n'en avons pas au catalogue. Avec un poêle à pellets, vous achetez un feu qui s'allume seul, tient la température demandée et se programme. Sans courant, ces trois avantages disparaissent.",
+        ],
+      },
+      {
+        heading: "L'alternative : un poêle mixte bois et pellets",
+        paragraphs: [
+          "Si la coupure de courant vous inquiète vraiment, regardez les poêles mixtes. L'Austroflamm Clou Duo brûle des pellets en temps normal, et sa notice prévoit un mode de secours : sans courant, il fonctionne aux bûches. Le conduit doit alors tirer à 12 Pa au moins, le clapet d'air reste grand ouvert sans réglage possible, et Austroflamm prévient que les performances ne sont pas celles du fonctionnement normal. Les Duo sont sur [notre page Austroflamm](/nos-marques/austroflamm).",
+          "Et si vous voulez un chauffage qui ne dépend jamais d'une prise, choisissez un poêle à bois bûche : vous les trouverez chez [Mister Bois](https://mister-bois.be/poeles-a-bois).",
+        ],
+      },
+      {
+        heading: "Les documents que nous avons lus",
+        paragraphs: [
+          "Notices, fiches techniques et pages officielles consultées le 11 novembre 2026.",
+        ],
+        list: {
+          items: [
+            "MCZ, manuel d'installation et d'utilisation du Cute Air 8 M1 (réf. 8902204900 et 8902205000) et fiche technique : [documents techniques MCZ](https://www.mcz.it/fr-be/service-support-poeles-cheminees/zone-de-telechargement/documents-techniques?article=7122002).",
+            "MCZ, foire aux questions, entrée sur les onduleurs : [mcz.it](https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions).",
+            "MCZ, « La consommation électrique des poêles à granulés » : [mcz.it](https://www.mcz.it/fr/consommation-electrique-poeles).",
+            "Edilkamin, manuel Cherie 9+ Evo et 11++ Evo (cod. 942786-FR, 02.25/A) : [manuels Edilkamin](https://st.edilkamin.com:4433/ek_schede_download.aspx?lang=fr).",
+            "Cadel, manuel de l'installateur Grace 7 (réf. 89022193B) : [cadelsrl.com](https://grp.cadelsrl.com/documents/89022193B.pdf). Manuel de l'utilisateur Wall3 Plus, Tile3 Plus et Moon (réf. 89022051A) : [cadelsrl.com](https://grp.cadelsrl.com/documents/89022051A.pdf).",
+            "Austroflamm, notice du Clou Pellet (version 1.0 du 6 août 2024) : [austroflamm.com](https://www.austroflamm.com/products/Clou-pellet_2.0/technical-data/Clou-Pellet-Notice-d-instructions-fr-803101-945185-V1.0.pdf). Notice du Clou Duo (version 2.0 du 20 décembre 2024) : [austroflamm.com](https://www.austroflamm.com/products/Clou-Duo-Pelletbetrieb/technical-data/Clou-Duo-Notice-d-instructions-fr-810001-945083-V2.0.pdf).",
+            "Bronpi, fiche et notice du Free-6 : [bronpi.com](https://bronpi.com/fr/produit/free-6/).",
+            "CREG, tableau de bord d'octobre 2026 : [creg.be](https://www.creg.be/fr/professionnels/fonctionnement-et-monitoring-du-marche/tableau-de-bord).",
+          ],
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Un poêle à pellets peut-il fonctionner sans électricité ?",
+        answer:
+          "Non, pas un poêle à pellets classique : la vis sans fin, la résistance d'allumage, l'extracteur de fumées et la carte électronique sont électriques. Il existe des poêles à pellets à gravité, sans prise, comme les Bronpi Free, mais ils s'allument à la main et ne se programment pas.",
+      },
+      {
+        question: "Que se passe-t-il pendant une coupure de courant avec un poêle à pellets ?",
+        answer:
+          "Le poêle s'arrête : plus d'alimentation en pellets, plus d'extraction. Les pellets du creuset finissent de brûler et les fumées partent par le tirage naturel du conduit. Au retour du courant, un MCZ ou un Cadel refroidit puis se rallume seul ; un Edilkamin Cherie reste éteint et affiche « Black Out ».",
+      },
+      {
+        question: "Quelle est la consommation électrique d'un poêle à pellets ?",
+        answer:
+          "D'après les notices, de 9 à 177 W en marche selon le modèle et le régime, 3 à 5 W en veille et jusqu'à 345 W pendant l'allumage. Sur 1 500 heures de chauffe, cela fait 14 à 266 kWh, soit 6 à 122 € au prix moyen wallon d'octobre 2026.",
+      },
+      {
+        question: "Quel onduleur pour un poêle à pellets ?",
+        answer:
+          "MCZ demande un onduleur à onde sinusoïdale pure, en 230 V et 50 Hz, d'une puissance au moins égale à la puissance électrique maximale du poêle, 340 W pour un Cute Air 8. Avec 500 Wh de batterie, ce poêle tient environ 7 heures à puissance nominale, moins s'il doit se rallumer.",
+      },
+      {
+        question: "Un poêle à pellets à convection naturelle fonctionne-t-il sans courant ?",
+        answer:
+          "Non. La convection naturelle supprime le ventilateur d'air chaud, pas l'électricité : un Austroflamm Clou Pellet garde une vis, un allumage et un extracteur électriques. Il consomme simplement moins, 15 à 18 W à puissance nominale selon sa notice.",
+      },
+    ],
+    related: {
+      articles: [
+        "poele-pellets-eteint-tout-seul-causes",
+        "evacuation-fumees-poele-pellets",
+        "girolami-hybride-bois-pellet-fuel-convert",
+      ],
+      guides: ["guide-achat-poele-pellets-wallonie", "comment-entretenir-poele-pellets"],
+      cities: ["namur", "charleroi", "liege"],
+      brands: ["mcz", "edilkamin", "cadel", "austroflamm"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
   // INSTALLATION : évacuation des fumées (09/11/2026)
   // Sources lues le 09/11/2026 : notices MCZ (PAD Hydromatic M2, réf.
   // 8902137901), Edilkamin (cod. 942415-FR 11.23/C) et Cadel (89022051B,
@@ -265,7 +631,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "mcz-arrive-chez-mister-pellets",
     title: "MCZ arrive chez Mister Pellets : toute la gamme pellets posée en Wallonie",
-    metaTitle: "MCZ chez Mister Pellets : poêles à pellets Core, canalisables et hydro",
+    metaTitle: "MCZ arrive : poêles à pellets Core, canalisables et hydro",
     metaDescription:
       "Depuis octobre 2026, Mister Pellets pose toute la gamme pellets MCZ en Wallonie : combustion Core, Wi-Fi Maestro+, canalisables Comfort Air, hydros, foyers et inserts. Ce qui change pour vous.",
     excerpt:
@@ -284,6 +650,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Pourquoi MCZ, et pourquoi en premier ?",
         paragraphs: [
           "Sur le terrain, la question n'est jamais « quelle marque ? », c'est « quel poêle pour cette maison-là ? ». Une pièce de vie ouverte, un couloir d'un mètre, deux chambres à chauffer à l'étage, une vieille cheminée, des radiateurs à alimenter : il faut un modèle qui colle, pas un modèle qu'on force. MCZ est la marque qui a le plus de réponses, avec une centaine de versions en pellets.",
+          // check-catalogue: allow (histoire du fabricant)
           "MCZ a été fondée en 1975 par la famille Zanette à Vigonovo di Fontanafredda, près de Pordenone, dans le nord-est de l'Italie, où se trouvent toujours le siège et l'usine. Foyers en 1982, poêles à bois en 1998, premier poêle à pellets, l'Antares, en 2002, premier poêle à pellets piloté par smartphone en 2014. Le groupe possède aussi Cadel, une marque qu'on pose depuis le début du mois. Edilkamin, EK63, Girolami, Austroflamm et Cadel restent au catalogue : MCZ passe simplement devant.",
         ],
       },
@@ -331,7 +698,7 @@ export const ARTICLES: ArticleData[] = [
           items: [
             "Une centaine de modèles MCZ en plus dans la boutique, avec leurs caractéristiques, leurs finitions et les photos du fabricant.",
             "Même parcours qu'avec nos autres marques : visite technique, devis sous 48 heures, pose en une journée dans la plupart des cas, TVA à 6 % sur les logements de plus de 10 ans.",
-            "Même équipe et même SAV : on pose, on met en service, on fait l'entretien annuel et on intervient sous 48 à 72 h dans notre zone.",
+            "Même équipe et même SAV : [notre équipe de Fernelmont](/a-propos) pose, met en service, fait l'entretien annuel et intervient sous 48 à 72 h dans notre zone.",
             "Bonus de saison jusqu'au 24 décembre 2026 : -10 % sur le prix des poêles MCZ dès qu'il est affiché, pose au tarif normal.",
           ],
         },
@@ -382,7 +749,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "austroflamm-cadel-nouvelles-marques-mister-pellets",
     title: "Austroflamm et Cadel arrivent chez Mister Pellets",
-    metaTitle: "Austroflamm et Cadel : deux nouvelles marques de poêles à pellets en Wallonie",
+    metaTitle: "Austroflamm et Cadel : deux nouvelles marques de poêles",
     metaDescription:
       "Depuis octobre 2026, Mister Pellets pose Austroflamm (Autriche, haut de gamme, pellets sans ventilateur dans la pièce et mixtes Duo) et Cadel (Italie, groupe MCZ, Wi-Fi intégré). Ce qui change pour vous.",
     excerpt:
@@ -427,7 +794,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Cadel : le connecté accessible du groupe MCZ",
         paragraphs: [
-          "Cadel fabrique des poêles depuis plus de soixante ans à Santa Lucia di Piave, près de Trévise. Depuis 2013, la marque fait partie du groupe MCZ. Le parallèle avec EK63, marque du groupe Edilkamin, est le bon : des poêles modernes, connectés, à un prix plus doux que la marque phare du groupe. Les poêles sortent d'une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006, où la tôle est découpée, soudée, peinte et assemblée.",
+          "Cadel fabrique des poêles depuis plus de soixante ans à Santa Lucia di Piave, près de Trévise. Depuis 2013, la marque fait partie du groupe MCZ, dont [nous posons aussi toute la gamme pellets depuis octobre 2026](/blog/mcz-arrive-chez-mister-pellets). Le parallèle avec EK63, marque du groupe Edilkamin, est le bon : des poêles modernes, connectés, à un prix plus doux que la marque phare du groupe. Les poêles sortent d'une usine inaugurée en 2023 sur la même commune, certifiée ISO 9001 depuis 2006, où la tôle est découpée, soudée, peinte et assemblée.",
           "Les poêles à pellets Cadel se pilotent depuis le téléphone avec l'appli gratuite Easy Connect Plus, en Wi-Fi ou en Bluetooth. Sur les modèles récents, le brasero Autoclean se vide à chaque allumage : le nettoyage passe de tous les jours à une fois par semaine, voire moins, selon Cadel. Presque toute la gamme a une chambre de combustion étanche, et elle est en classe A+ (A++ pour une partie des hydros).",
           "La gamme est très large : poêles plats de 27 à 33 cm de profondeur (Grace, Spirit, Baggy, Luce, Elle, Vesta), canalisables à une ou deux sorties (gamme Plus), inserts pour cheminée ouverte (Ponente, Zefiro), thermopoêles et inserts hydro pour les radiateurs (Maya Idro, River Idro, Saturno). En 2026, le Spin Plus 9 a reçu un iF Design Award.",
         ],
@@ -469,6 +836,7 @@ export const ARTICLES: ArticleData[] = [
     faqs: [
       {
         question: "Les poêles Austroflamm sans ventilateur dans la pièce chauffent-ils assez ?",
+        // check-catalogue: allow (comparaison)
         answer: "Oui, la chaleur se diffuse par convection naturelle et par rayonnement, comme avec un poêle à bois. La pièce monte un peu moins vite en température qu'avec un poêle ventilé, mais sans bruit de soufflerie. Pour plusieurs pièces, on regarde un modèle canalisable avec kit, comme le Ruby 2.0 ou un Duo.",
       },
       {
@@ -499,7 +867,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "budget-hiver-poele-pellets-consommation-2026",
     title: "Combien coûte un hiver au pellet ? Le calcul pour 2026-2027",
-    metaTitle: "Consommation d'un poêle à pellets : combien de sacs pour l'hiver 2026-2027 ?",
+    metaTitle: "Poêle à pellets : combien de sacs pour l'hiver 2026-2027 ?",
     metaDescription:
       "Combien de pellets pour un hiver, ce que ça coûte en 2026 et comment le calculer chez vous à partir de votre ancienne facture. Prix ValBiom et SPF Économie.",
     excerpt:
@@ -547,12 +915,12 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le kWh de pellet face au mazout, début octobre 2026",
         paragraphs: [
-          "Au prix ValBiom d'août, 6,19 € le sac, un kilo de pellets coûte 41 centimes. À 4,6 kWh par kilo, le kWh revient à 9 centimes. Le mazout était à 1,53 € le litre au tarif maximum du SPF Économie du 3 octobre 2026, à partir de 2 000 litres commandés. À 10 kWh par litre, le kWh revient à 15 centimes.",
+          "Au prix ValBiom d'août, 6,19 € le sac, un kilo de pellets coûte 41 centimes. À 4,6 kWh par kilo, le kWh revient à 9 centimes. Le mazout était à 1,53 € le litre au tarif maximum du SPF Économie du 3 octobre 2026, à partir de 2 000 litres commandés. À 10 kWh par litre, le kWh revient à 15 centimes. Pour le prix du poêle et de sa pose, voyez la page [prix d'un poêle à pellets posé](/prix-poele-pellets).",
           "À chaleur égale, le pellet coûte donc un peu moins de 60 % du mazout. Pour le gaz et l'électricité, regardez le prix du kWh sur votre propre facture : les contrats varient trop d'un ménage à l'autre pour qu'un chiffre unique veuille dire quelque chose.",
         ],
         callout: {
           variant: "info",
-          text: "Le SPF Économie publie chaque jour ouvrable le prix maximum du mazout, et ValBiom publie chaque mois le prix moyen des pellets en Wallonie. Deux sources gratuites pour refaire le calcul quand les prix bougent.",
+          text: "Le SPF Économie publie chaque jour ouvrable le prix maximum du mazout, et ValBiom publie chaque mois le prix moyen des pellets en Wallonie. Deux sources gratuites pour refaire le calcul quand les prix bougent. Nous reportons chaque relevé de ValBiom dans [notre suivi du prix des pellets, mois par mois](/blog/prix-pellets-belgique), avec le kWh face au mazout, au gaz et à l'électricité.",
         },
       },
       {
@@ -595,6 +963,7 @@ export const ARTICLES: ArticleData[] = [
     ],
     related: {
       articles: [
+        "prix-pellets-belgique",
         "pellets-enplus-a1-vs-dinplus",
         "remplacer-chaudiere-mazout-poele-hydro",
         "dimensionner-poele-pellets-surface-wallonie",
@@ -612,7 +981,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "insert-pellets-cheminee-existante",
     title: "Transformer une cheminée ouverte en insert à pellets : ce qu'on vérifie avant de poser",
-    metaTitle: "Insert à pellets dans une cheminée existante : faisabilité, tubage, réservoir",
+    metaTitle: "Insert à pellets dans une cheminée existante : le guide",
     metaDescription:
       "Votre feu ouvert chauffe surtout le conduit. Un insert à pellets récupère la cheminée : dimensions, tubage, électricité, réservoir, canalisation. Le point avant devis.",
     excerpt:
@@ -623,6 +992,7 @@ export const ARTICLES: ArticleData[] = [
     tags: ["insert", "cheminée", "tubage", "Pellkamin", "Pellek"],
     readingTimeMinutes: 7,
     publishedAt: "2026-10-03",
+    modifiedAt: "2026-11-11",
     authorName: "Équipe technique Mister Pellets",
     authorRole: "Techniciens pose et conduits",
     coverImageAlt: "Insert à pellets encastré dans une ancienne cheminée ouverte",
@@ -671,7 +1041,7 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "warning",
-          text: "Un insert à bois et un insert à pellets ne se raccordent pas de la même façon. Si votre cheminée a déjà reçu un insert à bois, son conduit n'est pas forcément adapté au pellet : on le vérifie à la visite.",
+          text: "Un insert à bois et un insert à pellets ne se raccordent pas de la même façon. Si votre cheminée a déjà reçu un insert à bois, son conduit n'est pas forcément adapté au pellet : on le vérifie à la visite. Si vous préférez rester au bois bûche, les inserts à bois sont chez [Mister Bois](https://mister-bois.be/inserts-a-bois).",
         },
       },
     ],
@@ -694,7 +1064,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Un insert à pellets fonctionne-t-il sans électricité ?",
         answer:
-          "Non. Bougie d'allumage, vis sans fin et ventilateurs ont besoin de courant. Pendant une coupure, l'insert s'éteint en sécurité et redémarre au retour du courant s'il était en mode automatique.",
+          "Non. Bougie d'allumage, vis sans fin et ventilateurs ont besoin de courant. Pendant une coupure, l'insert s'arrête en sécurité. Au retour du courant, selon la marque, il se rallume seul ou reste éteint jusqu'à ce que vous le relanciez : la notice le précise. Le détail, marque par marque : [poêle à pellets et coupure de courant](/blog/poele-pellets-sans-electricite-coupure-courant).",
       },
     ],
     related: {
@@ -740,7 +1110,7 @@ export const ARTICLES: ArticleData[] = [
         paragraphs: [
           "Edilkamin a plus de 60 ans. Son usine historique est à Gabbioneta Binanuova, près de Crémone, sa recherche à Lavagno, près de Vérone, et le groupe produit aussi en Hongrie, à Sárvár. C'est la marque qu'on recommande quand le critère numéro un, c'est la longévité.",
           "Sa technologie Leonardo surveille en continu la combustion et l'adapte au conduit, à la météo et aux pellets. La combustion reste stable même quand vous changez de marque de sacs ou quand l'humidité varie. Sur le terrain, les Edilkamin qu'on a posés tiennent couramment 15 à 20 ans.",
-          "Le revers, c'est le prix catalogue : Edilkamin est dans le haut de la fourchette. Mais ramené à la durée de vie réelle, le coût annuel reste bas, et le SAV pièces reste disponible longtemps après l'arrêt d'un modèle.",
+          "Le revers, c'est le prix catalogue : Edilkamin est dans le haut de la fourchette. Mais ramené à [la durée de vie réelle d'un poêle Edilkamin](/blog/duree-de-vie-poele-edilkamin), le coût annuel reste bas, et le SAV pièces reste disponible longtemps après l'arrêt d'un modèle.",
         ],
       },
       {
@@ -887,7 +1257,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Leonardo et la qualité des pellets",
         paragraphs: [
           "Tous les sacs de pellets ne se valent pas. Sur un poêle classique, un lot un peu différent peut décaler la combustion et encrasser plus vite. Avec Leonardo, le poêle absorbe une bonne partie de cet écart.",
-          "Ça ne dispense pas d'acheter des pellets certifiés ENplus A1, c'est la base. Mais le système pardonne les variations normales d'un lot à l'autre.",
+          "Ça ne dispense pas d'acheter des pellets certifiés ENplus A1 ou DINplus, c'est la base. Mais le système pardonne les variations normales d'un lot à l'autre.",
         ],
       },
       {
@@ -912,7 +1282,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Leonardo fonctionne avec n'importe quels pellets ?",
         answer:
-          "Il encaisse bien les variations entre lots, mais on conseille toujours des pellets certifiés ENplus A1. Un bon combustible reste la base d'une combustion saine.",
+          "Il encaisse bien les variations entre lots, mais on conseille toujours des pellets certifiés ENplus A1 ou DINplus. Un bon combustible reste la base d'une combustion saine.",
       },
       {
         question: "EK63 a-t-il aussi la technologie Leonardo ?",
@@ -932,7 +1302,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "ek63-wifi-serie-poele-pellets-connecte",
     title: "EK63 : pourquoi le Wi-Fi de série change la vie au quotidien",
-    metaTitle: "EK63 Wi-Fi de série : poêle à pellets connecté sans abonnement",
+    metaTitle: "EK63 Wi-Fi de série : le poêle à pellets sans abonnement",
     metaDescription:
       "Le Wi-Fi Smart est intégré de série sur la majorité des EK63, sans abonnement. Allumage à distance, programmation, suivi conso. Ce que ça change vraiment.",
     excerpt:
@@ -1029,7 +1399,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "source-feeding-girolami-brasier-auto-nettoyant",
     title: "Source Feeding Girolami : pourquoi le brasier reste propre tout seul",
-    metaTitle: "Source Feeding Girolami : le brasier de poêle qui se nettoie seul",
+    metaTitle: "Source Feeding Girolami : le brasier qui se nettoie seul",
     metaDescription:
       "Le brevet Source Feeding de Girolami pousse le pellet par le bas et chasse les cendres dans un bac. Fini le nettoyage quotidien du brasier. Explications.",
     excerpt:
@@ -1073,7 +1443,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Source Feeding et tolérance aux pellets",
         paragraphs: [
           "Comme le brasier ne s'encrasse pas de la même manière, le système encaisse mieux les pellets de qualité variable. La combustion reste régulière même si un lot est un peu différent.",
-          "On conseille quand même des pellets certifiés ENplus A1 : un bon combustible reste le meilleur allié de votre poêle, quel que soit le système d'alimentation.",
+          "On conseille quand même des pellets certifiés ENplus A1 ou DINplus : un bon combustible reste le meilleur allié de votre poêle, quel que soit le système d'alimentation.",
         ],
       },
       {
@@ -1211,7 +1581,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "ek63-etanche-maison-passive-bbc",
     title: "Maison passive ou BBC : quel poêle EK63 étanche choisir",
-    metaTitle: "Poêle EK63 étanche pour maison passive ou BBC : lequel choisir",
+    metaTitle: "Poêle EK63 étanche pour maison passive ou BBC : lequel ?",
     metaDescription:
       "En maison passive ou BBC, le poêle doit être étanche. Quel modèle EK63 selon la surface : Like 80, Zone 80, Tweed 90+, Spy 110+, Daily 130++, Entity 90+.",
     excerpt:
@@ -1356,7 +1726,7 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "success",
-          text: "La prime Habitation qui couvrait ce remplacement s'est arrêtée le 30 septembre 2026. Si votre maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer l'hydro avec le reste des travaux. Sinon, comptez sur la TVA à 6 %.",
+          text: "La prime Habitation qui couvrait ce remplacement s'est arrêtée le 30 septembre 2026. Si votre maison est classée E, F ou G et que vous la rénovez plus largement, voyez le Rénopack avant de signer un devis : la liste officielle des travaux ne nomme pas les poêles, et l'hydro n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte. Sinon, comptez sur la TVA à 6 %.",
         },
       },
       {
@@ -1386,7 +1756,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Le remplacement donne-t-il droit à une prime ?",
         answer:
-          "Plus de prime régionale depuis le 1er octobre 2026. Le Rénopack peut financer le remplacement si la maison est classée E, F ou G et que l'ensemble des travaux la fait monter de label, avec un audit préalable. Dans tous les cas, la TVA est à 6 % dans un logement de plus de 10 ans.",
+          "Plus de prime régionale pour un nouveau projet depuis le 1er octobre 2026. Le Rénopack peut financer une rénovation si la maison est classée E, F ou G et que l'ensemble des travaux la fait monter de label, avec un audit préalable et une demande de prêt avant tout devis signé. Le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte. Dans tous les cas, la TVA est à 6 % dans un logement de plus de 10 ans.",
       },
     ],
     related: {
@@ -1404,7 +1774,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "girolami-canalisable-intelligent-trois-ventilateurs",
     title: "Trois ventilateurs, trois pièces : le canalisable intelligent Girolami",
-    metaTitle: "Girolami canalisable : trois ventilateurs indépendants par pièce",
+    metaTitle: "Girolami canalisable : trois ventilateurs indépendants",
     metaDescription:
       "Le canalisable Girolami pilote trois ventilateurs indépendants, un par pièce, chacun ajusté à sa température. Thermostats sans fil TriKey. Explications.",
     excerpt:
@@ -1695,7 +2065,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "dimensionner-poele-pellets-surface-wallonie",
     title: "Comment dimensionner son poêle à pellets selon la surface en Wallonie",
-    metaTitle: "Quelle puissance de poêle à pellets selon la surface ? (2026)",
+    metaTitle: "Quelle puissance de poêle à pellets selon la surface ?",
     metaDescription:
       "1 kW pour 10 m² PEB B, 1 kW pour 15 m² PEB A, 1 kW pour 7 m² PEB E. Méthode complète, exemples chiffrés, erreurs à éviter en Wallonie.",
     excerpt:
@@ -1822,7 +2192,7 @@ export const ARTICLES: ArticleData[] = [
     tags: ["pellets", "ENplus", "DINplus", "qualité", "combustible"],
     readingTimeMinutes: 7,
     publishedAt: "2026-03-22",
-    modifiedAt: "2026-10-03",
+    modifiedAt: "2026-11-11",
     authorName: "Équipe technique Mister Pellets",
     authorRole: "Conseillers combustible",
     coverImageAlt: "Sac de pellets certifiés ENplus A1 à côté d'un sac DINplus",
@@ -1860,7 +2230,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Combien coûte un sac en 2026 et comment le stocker",
         paragraphs: [
-          "En août 2026, ValBiom relevait en moyenne 6,19 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette (66 sacs, 990 kg), livraison non comprise. C'est environ 413 € la tonne, et 13 % de plus qu'un an plus tôt. Le sac acheté à l'unité coûte plus cher.",
+          "En octobre 2026, ValBiom relevait en moyenne 7,02 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est environ 468 € la tonne, et 24 % de plus qu'un an plus tôt. Le sac acheté à l'unité coûte plus cher. Le prix de chaque mois depuis janvier 2025 est dans [notre relevé du prix des pellets](/blog/prix-pellets-belgique).",
           "Pour le stockage, une seule règle : au sec. C'est l'humidité qui abîme les pellets, pas le froid. Une palette tient sur moins d'un mètre carré ; posez-la dans un garage ou un abri sain, jamais dans une cave humide, où le pellet reprend l'eau et perd son pouvoir calorifique.",
         ],
         list: {
@@ -1875,14 +2245,14 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Quelle marque de pellets choisir ?",
         paragraphs: [
-          "Mister Pellets ne vend pas de pellets et ne touche rien sur leur vente, alors on vous le dit simplement : prenez un sac certifié A1, chez un revendeur qui stocke à l'abri.",
+          "La règle tient en une ligne : prenez un sac certifié A1, chez un revendeur qui stocke à l'abri. Nous vendons une palette de pellets Comfo, certifiés DINplus A1, à retirer à Fernelmont ; si votre notice ne demande rien de plus, un autre pellet certifié A1 fera aussi bien l'affaire.",
           "Ensuite, si votre poêle tourne bien avec une marque, gardez-la. À chaque changement de lot, la combustion se recale. Les poêles autorégulés, comme les Edilkamin équipés de Leonardo, encaissent mieux ces écarts, mais un poêle qui brûle toujours le même pellet reste plus régulier.",
         ],
       },
       {
         heading: "La règle simple à retenir",
         paragraphs: [
-          "Logo ENplus A1 ou DINplus visible avec son numéro, prix cohérent avec le marché (autour de 6 € le sac de 15 kg à la palette en 2026), revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Le reste, c'est jouer avec votre matériel.",
+          "Logo ENplus A1 ou DINplus visible avec son numéro, prix cohérent avec le marché (autour de 7 € le sac de 15 kg à la palette fin 2026), revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Le reste, c'est jouer avec votre matériel. Nous vendons aussi des pellets Comfo certifiés DINplus A1 en palette, à retirer à Fernelmont : [la palette de pellets Comfo](/palette-pellets-comfo).",
         ],
       },
     ],
@@ -1917,24 +2287,26 @@ export const ARTICLES: ArticleData[] = [
 
   // ───────────────────────────────────────────────────────────────────
   // 3. AIDES WALLONIE, réécrit le 03/10/2026 : la prime Habitation (régime
-  //    temporaire 14/02/2025 → 30/09/2026) est terminée. Chiffres et liens :
-  //    lib/aides.ts. Slug conservé pour les liens entrants et Google.
+  //    temporaire 14/02/2025 → 30/09/2026) est terminée. Revu le 25/10/2026 :
+  //    parts non remboursées de l'arrêté du 24/09/2026, poêle absent de la
+  //    liste des travaux, demande de prêt avant tout devis signé. Chiffres et
+  //    liens : lib/aides.ts. Slug conservé pour les liens entrants et Google.
   // ───────────────────────────────────────────────────────────────────
   {
     slug: "primes-wallonie-2026-poele-pellets-combien-recuperer",
     title: "Prime poêle à pellets en Wallonie : ce qui reste après le 1er octobre 2026",
-    metaTitle: "Prime poêle à pellets Wallonie : fin au 30/09/2026, ce qui reste",
+    metaTitle: "Prime poêle à pellets en Wallonie : ce qui reste fin 2026",
     metaDescription:
       "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Rénopack, Rénoprêt, TVA à 6 %, MEBAR : ce qui reste, et pour qui.",
     excerpt:
       "La prime a disparu le 30 septembre. Ce qui la remplace ne vise pas le même public : voici, sans détour, ce que vous pouvez encore obtenir pour un poêle.",
     tldr:
-      "Il n'y a plus de prime régionale pour un poêle à pellets depuis le 1er octobre 2026. Le régime temporaire des primes Habitation s'est arrêté le 30 septembre, et la Wallonie aide désormais la rénovation par deux prêts : le Rénopack, à 0 % avec 15 à 50 % effacés selon les revenus, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent au moins deux classes PEB après un audit. Pour un poêle posé seul, il reste la TVA à 6 % dans un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes.",
+      "Il n'y a plus de prime régionale pour un poêle à pellets depuis le 1er octobre 2026. Le régime temporaire des primes Habitation s'est arrêté le 30 septembre, et la Wallonie aide désormais la rénovation par deux prêts : le Rénopack, à 0 % avec 10 à 50 % effacés selon les revenus et les matériaux d'isolation, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent au moins deux classes PEB après un audit, et la demande de prêt passe avant tout devis signé. Pour un poêle posé seul, il reste la TVA à 6 % dans un logement de plus de 10 ans, et la subvention MEBAR pour les revenus modestes.",
     category: "primes",
     tags: ["aides", "Wallonie", "Rénopack", "Rénoprêt", "TVA 6 %", "MEBAR"],
     readingTimeMinutes: 8,
     publishedAt: "2026-02-10",
-    modifiedAt: "2026-10-03",
+    modifiedAt: "2026-10-25",
     authorName: "Équipe Mister Pellets",
     authorRole: "Conseillers chauffage biomasse",
     coverImageAlt: "Récapitulatif des aides pour un poêle à pellets en Wallonie après la fin de la prime Habitation",
@@ -1947,24 +2319,24 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "info",
-          text: "L'exception : les projets lancés avant le 14 février 2025, avec un devis daté et signé avant cette date. Le Gouvernement wallon a décidé le 24 septembre 2026 qu'ils pourraient encore demander la prime aux anciennes conditions jusqu'au 30 septembre 2027, sans l'acompte de 20 % exigé jusque-là. La mesure s'applique après sa publication au Moniteur belge.",
+          text: "L'exception : les projets avec un devis signé ou un bon de commande définitif datant au plus tard du 13 février 2025. L'arrêté du Gouvernement wallon du 24 septembre 2026, adopté définitivement, leur permet de demander encore la prime aux anciennes conditions jusqu'au 30 septembre 2027, sans l'acompte de 20 % exigé jusque-là.",
         },
       },
       {
         heading: "Ce qui la remplace : le Rénopack et le Rénoprêt",
         paragraphs: [
-          "Depuis le 1er octobre 2026, la Wallonie ne verse plus de prime par poste de travaux. Elle finance des projets de rénovation par deux prêts, gérés par la Société wallonne du Crédit social (SWCS) et le Fonds du Logement de Wallonie.",
-          "Le Rénopack est un prêt à 0 % dont une partie ne se rembourse pas. Il vise les catégories de revenus C1 à C3, propriétaires ou titulaires d'un autre droit réel, qui habiteront le logement au plus tard 24 mois après l'octroi. Le Rénoprêt, à taux zéro ou préférentiel, s'adresse à la catégorie C4, aux propriétaires bailleurs et aux copropriétés.",
+          "Depuis le 1er octobre 2026, la Wallonie n'accorde plus de prime par poste de travaux pour un nouveau projet. Elle finance des projets de rénovation par deux prêts, gérés par la Société wallonne du Crédit social (SWCS) et le Fonds du Logement de Wallonie. Selon la SWCS, le dispositif devrait être pleinement opérationnel au début de 2027 : la préinscription est ouverte, les modalités de demande sont en cours de finalisation.",
+          "Le Rénopack est un prêt à 0 % dont une partie ne se rembourse pas : 45, 35 ou 10 % selon la catégorie, portés à 50, 40 ou 15 % si toute l'isolation de l'enveloppe est réalisée en écomatériaux, et seulement sur les travaux éligibles. Il vise les catégories de revenus C1 à C3, propriétaires ou titulaires d'un autre droit réel, qui habiteront le logement au plus tard 24 mois après l'octroi. La part non remboursée demande en plus un bâtiment de plus de 15 ans et un demandeur qui n'est propriétaire d'aucun autre logement, et elle ne se cumule avec aucune autre aide wallonne pour le même investissement. Le Rénoprêt, à taux préférentiel, s'adresse à la catégorie C4, aux propriétaires bailleurs et aux copropriétés.",
         ],
         table: {
           headers: ["Catégorie", "Revenus du ménage", "Prêt", "Part non remboursée"],
           rows: [
-            ["C1", "Jusqu'à 28 900 €", "Rénopack à 0 %", "50 %"],
-            ["C2", "De 28 900 à 41 100 €", "Rénopack à 0 %", "40 %"],
-            ["C3", "De 41 100 à 67 100 €", "Rénopack à 0 %", "15 %"],
-            ["C4", "De 67 100 à 122 800 €", "Rénoprêt, taux zéro ou préférentiel", "Aucune"],
+            ["C1", "Jusqu'à 28 900 €", "Rénopack à 0 %", "45 % (50 % avec écomatériaux)"],
+            ["C2", "De 28 900 à 41 100 €", "Rénopack à 0 %", "35 % (40 % avec écomatériaux)"],
+            ["C3", "De 41 100 à 67 100 €", "Rénopack à 0 %", "10 % (15 % avec écomatériaux)"],
+            ["C4", "De 67 100 à 122 800 €", "Rénoprêt à taux préférentiel", "Aucune"],
           ],
-          caption: "Montants indexés au 1er janvier 2026, diminués de 5 000 € par personne à charge. Source : wallonie.be, mis à jour le 25 septembre 2026.",
+          caption: "Montants indexés au 1er janvier 2026, diminués de 5 000 € par personne à charge. Sources : wallonie.be, mis à jour le 25 septembre 2026, et arrêté du Gouvernement wallon du 24 septembre 2026.",
         },
       },
       {
@@ -1977,6 +2349,7 @@ export const ARTICLES: ArticleData[] = [
           items: [
             "Une maison classée G ou F qui atteint au moins le label D après travaux, ou classée E qui atteint au moins le label C.",
             "Un audit logement réalisé ou actualisé moins d'un an avant la demande de prêt. C'est lui qui fixe le label de départ et la liste des travaux.",
+            "Une demande de prêt introduite avant tout engagement avec l'entrepreneur : aucun devis signé, aucun acompte et aucun début de travaux avant la signature du contrat de crédit. Le Fonds du Logement l'a rappelé le 12 octobre 2026 dans un « appel à la vigilance ».",
             "Un emprunt sous 75 000 € pour une maison unifamiliale, 60 000 € par appartement.",
           ],
         },
@@ -1988,8 +2361,8 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Le poêle à pellets peut-il entrer dans un Rénopack ?",
         paragraphs: [
-          "Oui : la SWCS cite l'installation d'un poêle biomasse parmi les travaux qu'elle finance. Mais un poêle seul fait rarement gagner deux classes PEB à une maison. Le saut demande en général d'isoler le toit, les murs ou les châssis, et le chauffage vient compléter le projet.",
-          "Si c'est votre cas, commencez par l'audit, puis la préinscription sur le site de la SWCS, qui ne vaut pas demande d'aide mais permet à leurs équipes de vous recontacter. Et parlez-nous de l'audit avant de choisir le poêle : une maison isolée perd moins de chaleur, la puissance doit correspondre à la maison après travaux. Un poêle calibré sur la maison d'avant tournerait au ralenti tout l'hiver.",
+          "Rien ne le garantit. La liste officielle des travaux finançables (article 6 de l'arrêté du Gouvernement wallon du 24 septembre 2026) parle de « systèmes de chauffage et/ou eau chaude performants, décarbonés » et ne nomme pas les poêles. Un poêle n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte. Et un poêle seul fait rarement gagner deux classes PEB à une maison : le saut demande en général d'isoler le toit, les murs ou les châssis.",
+          "Si c'est votre cas, commencez par l'audit, puis la préinscription sur le site de la SWCS, qui ne vaut pas demande d'aide mais permet à leurs équipes de vous recontacter. Vient ensuite la demande de prêt, avant tout engagement : ne signez aucun devis, le nôtre compris, et ne versez aucun acompte avant la signature du contrat de crédit. Et parlez-nous de l'audit avant de choisir le poêle : une maison isolée perd moins de chaleur, la puissance doit correspondre à la maison après travaux. Un poêle calibré sur la maison d'avant tournerait au ralenti tout l'hiver.",
         ],
       },
       {
@@ -2010,14 +2383,14 @@ export const ARTICLES: ArticleData[] = [
         heading: "Trois cas pour s'y retrouver",
         paragraphs: [
           "Prenons une maison de 1985 à Andenne, classée C, et un ménage en catégorie C2. Un canalisable EK63 posé sur conduit existant à 5 800 € hors TVA revient à 6 148 € TVAC avec la TVA à 6 %, au lieu de 7 018 € à 21 %. Pas de Rénopack : la maison n'est pas visée.",
-          "Prenons une fermette de 1962 près de Ciney, classée F, et un ménage en catégorie C1. L'audit prévoit d'isoler la toiture et les murs, de changer les châssis et de remplacer la chaudière au mazout par un poêle hydro. Si l'ensemble fait passer la maison en D, le Rénopack peut financer tout le projet, poêle compris, et la moitié du prêt ne se rembourse pas.",
+          "Prenons une fermette de 1962 près de Ciney, classée F, et un ménage en catégorie C1. L'audit prévoit d'isoler la toiture et les murs, de changer les châssis et de remplacer la chaudière au mazout par un poêle hydro. Si l'ensemble fait passer la maison en D, le Rénopack peut financer les travaux éligibles, et 45 % du prêt ne se rembourse pas (50 % si toute l'isolation est en écomatériaux). Le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et rien ne se signe avant le contrat de crédit.",
           "Prenons enfin une maison de 2002 à Wavre, classée D, avec des revenus au-delà de 122 800 €. Ni prime, ni Rénopack, ni Rénoprêt. Reste la TVA à 6 %, puisque la maison a plus de 10 ans.",
         ],
       },
       {
         heading: "Ce que Mister Pellets fait pour votre dossier",
         paragraphs: [
-          "On vous remet un devis détaillé poste par poste, utile à l'auditeur comme à la SWCS, puis la facture et l'attestation de conformité de l'installation après la pose. La demande de prêt, elle, se fait chez la SWCS ou au Fonds du Logement.",
+          "Nous vous remettons un devis détaillé poste par poste, utile à l'auditeur comme à l'organisme prêteur, puis la facture et l'attestation de conformité de l'installation après la pose. La demande de prêt, elle, se fait chez la SWCS ou au Fonds du Logement, et elle passe avant tout engagement : si un Rénopack est en vue, ne signez pas notre devis et ne versez aucun acompte avant la signature de votre contrat de crédit.",
           "Pour une question sur votre situation, le 1718 répond gratuitement les jours ouvrables de 8 h 30 à 17 h, et les Guichets Énergie Wallonie conseillent sans frais près de chez vous. Notre page consacrée aux aides reprend tout le détail, avec les liens officiels.",
         ],
       },
@@ -2026,22 +2399,22 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Peut-on encore obtenir une prime pour un poêle à pellets en Wallonie ?",
         answer:
-          "Non, plus depuis le 1er octobre 2026, sauf la subvention MEBAR pour les ménages à très petits revenus, via le CPAS. La prime Habitation s'est arrêtée le 30 septembre 2026. Les prêts qui la remplacent, Rénopack et Rénoprêt, visent les maisons classées E, F ou G qui gagnent le label exigé après travaux.",
+          "Non, plus depuis le 1er octobre 2026, sauf la subvention MEBAR pour les ménages à très petits revenus, via le CPAS. La prime Habitation s'est arrêtée le 30 septembre 2026. Les prêts qui la remplacent, Rénopack et Rénoprêt, visent les maisons classées E, F ou G qui gagnent le label exigé après travaux, et se demandent avant tout devis signé ou acompte.",
       },
       {
         question: "Mon poêle a été posé en septembre : est-il trop tard ?",
         answer:
-          "Oui, si la demande n'a pas été introduite au plus tard le 30 septembre 2026 à 23 h 59. Seuls les projets avec un devis daté et signé avant le 14 février 2025 peuvent encore passer par les anciennes conditions, jusqu'au 30 septembre 2027.",
+          "Oui, si la demande n'a pas été introduite au plus tard le 30 septembre 2026 à 23 h 59. Seuls les projets avec un devis signé ou un bon de commande définitif datant au plus tard du 13 février 2025 peuvent encore passer par les anciennes conditions, jusqu'au 30 septembre 2027.",
       },
       {
         question: "Le Rénopack rembourse-t-il une partie du poêle ?",
         answer:
-          "Le Rénopack ne rembourse pas un appareil : c'est un prêt à 0 % pour un projet complet, dont 15 à 50 % ne se remboursent pas selon vos revenus. Le poêle peut en faire partie si la maison, classée E, F ou G, gagne le label exigé après les travaux.",
+          "Le Rénopack ne rembourse pas un appareil : c'est un prêt à 0 % pour un projet complet, dont 10 à 50 % ne se remboursent pas selon vos revenus et les matériaux d'isolation. La liste officielle des travaux ne nomme pas les poêles : le vôtre n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, dans une maison classée E, F ou G qui gagne le label exigé.",
       },
       {
         question: "Faut-il encore un audit logement ?",
         answer:
-          "Pour un poêle seul, non. Pour un Rénopack ou un Rénoprêt, oui : l'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt.",
+          "Pour un poêle seul, non. Pour un Rénopack ou un Rénoprêt, oui : l'audit doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, qui passe elle-même avant tout devis signé.",
       },
       {
         question: "La TVA à 6 % s'applique-t-elle toujours ?",
@@ -2143,7 +2516,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien coûte le passage du mazout au poêle hydro à pellets ?",
         answer:
-          "Comptez 8 000 à 14 000 € TVAC tout compris en Wallonie, avec la TVA à 6 % dans un logement de plus de 10 ans : poêle, ballon tampon, désembouage du circuit, raccordement et mise hors service de la cuve. Il n'y a plus de prime régionale depuis le 1er octobre 2026 ; si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer le projet.",
+          "Comptez 8 000 à 14 000 € TVAC tout compris en Wallonie, avec la TVA à 6 % dans un logement de plus de 10 ans : poêle, ballon tampon, désembouage du circuit, raccordement et mise hors service de la cuve. Il n'y a plus de prime régionale pour un nouveau projet depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer les travaux éligibles ; le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et la demande de prêt passe avant tout devis signé.",
       },
       {
         question: "Faut-il garder une chaudière d'appoint en plus du poêle hydro ?",
@@ -2179,7 +2552,7 @@ export const ARTICLES: ArticleData[] = [
   {
     slug: "poele-pellets-eteint-tout-seul-causes",
     title: "Pourquoi mon poêle à pellets s'éteint tout seul ? 7 causes courantes",
-    metaTitle: "Poêle pellets qui s'éteint seul, 7 causes et solutions (2026)",
+    metaTitle: "Poêle à pellets qui s'éteint seul : 7 causes et solutions",
     metaDescription:
       "Creuset bouché, pellets humides, sonde encrassée, conduit obstrué… Voici comment diagnostiquer un poêle pellets qui s'arrête tout seul.",
     excerpt:
@@ -2256,7 +2629,7 @@ export const ARTICLES: ArticleData[] = [
         heading: "Si rien ne fonctionne : appelez votre SAV",
         paragraphs: [
           "Si vous avez vérifié les 7 points ci-dessus sans succès, c'est probablement une panne matérielle : résistance d'allumage HS (durée de vie typique 4-7 ans), motoréducteur de vis sans fin, carte électronique. Ces réparations dépassent les compétences classiques d'un utilisateur, appelez votre installateur.",
-          "Mister Pellets intervient en SAV dans les 50 km autour de Fernelmont. Pour les clients hors zone, on conseille toujours un installateur certifié local. Les pièces détachées Edilkamin, EK63 et Girolami sont disponibles en stock chez nous sous 48 h.",
+          "Mister Pellets intervient en SAV dans les 50 km autour de Fernelmont. Pour les clients hors zone, on conseille toujours un installateur certifié local. Les pièces détachées Edilkamin, EK63 et Girolami sont disponibles en stock chez nous sous 48 h. Les questions qu'on nous pose le plus sur les pannes, l'entretien et le SAV sont réunies dans [la FAQ des poêles à pellets](/faq).",
         ],
       },
     ],
@@ -2264,7 +2637,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Mon poêle à pellets s'éteint au bout de 30 minutes, que faire ?",
         answer:
-          "C'est typique d'un creuset encrassé qui ne laisse plus passer l'air primaire. Videz le creuset à froid, brossez les trous avec une brosse métallique, et vérifiez que les pellets sont certifiés ENplus A1. Si le problème persiste après 2-3 cycles, contrôlez la sonde de fumée.",
+          "C'est typique d'un creuset encrassé qui ne laisse plus passer l'air primaire. Videz le creuset à froid, brossez les trous avec une brosse métallique, et vérifiez que les pellets sont certifiés ENplus A1 ou DINplus. Si le problème persiste après 2-3 cycles, contrôlez la sonde de fumée.",
       },
       {
         question: "Combien coûte une intervention SAV en Wallonie ?",
@@ -2283,7 +2656,11 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["pellets-enplus-a1-vs-dinplus", "budget-hiver-poele-pellets-consommation-2026"],
+      articles: [
+        "poele-pellets-sans-electricite-coupure-courant",
+        "pellets-enplus-a1-vs-dinplus",
+        "budget-hiver-poele-pellets-consommation-2026",
+      ],
       guides: ["remettre-en-route-poele-pellets-automne", "comment-entretenir-poele-pellets"],
       cities: ["namur", "charleroi", "liege", "fernelmont"],
       brands: ["edilkamin", "ek63", "girolami"],

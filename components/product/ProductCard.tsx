@@ -4,11 +4,13 @@ import { buildSrcSet, pickImageSrc, type ProductImage } from "@/lib/product-imag
 import { Badge } from "@/components/ui/badge";
 import { formatPrice, formatPriceHT } from "@/lib/utils";
 import { formatKw } from "@/lib/power";
+import { displayOptionLabel } from "@/lib/option-labels";
 import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { ProductFeatureBadges, type ProductFeatureFlags } from "@/components/product/ProductFeatureBadges";
 
 export interface ProductColorPreview {
-  colorName: string;
+  /** Infobulle de la pastille ; absent des entrées courtes des listes (lib/catalogue-listing.ts). */
+  colorName?: string;
   colorHex?: string;
 }
 
@@ -233,7 +235,7 @@ export function ProductCard({ product, className, priority = false }: ProductCar
               {visibleSwatches.map((v, i) => (
                 <span
                   key={i}
-                  title={v.colorName}
+                  title={v.colorName ? displayOptionLabel(v.colorName) : undefined}
                   className="inline-block h-3.5 w-3.5 rounded-full border border-mp-sand/60"
                   style={{ backgroundColor: v.colorHex }}
                   aria-hidden="true"

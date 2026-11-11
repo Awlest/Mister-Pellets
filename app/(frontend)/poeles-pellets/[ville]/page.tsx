@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { MapPin, Truck, Star, Clock } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
@@ -12,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CITIES, getCityBySlug } from "@/lib/cities";
 import { getAllProducts } from "@/lib/products";
-import { buildPageMetadata } from "@/lib/seo";
+import { ORGANIZATION_ID, buildPageMetadata } from "@/lib/seo";
 
 interface Props {
   // Pattern : /poeles-pellets-[ville]/, Next.js capture le segment après le préfixe.
@@ -67,7 +68,7 @@ export default async function CityPage({ params }: Props) {
     description: city.metaDescription,
     provider: {
       "@type": "HomeAndConstructionBusiness",
-      "@id": "https://mister-pellets.be/#organization",
+      "@id": ORGANIZATION_ID,
       name: "Mister Pellets",
       address: {
         "@type": "PostalAddress",
@@ -96,6 +97,11 @@ export default async function CityPage({ params }: Props) {
           </>
         }
         description={city.intro}
+        actions={
+          <Button asChild variant="primary" size="lg">
+            <Link href="/estimation">Chiffrer mon installation</Link>
+          </Button>
+        }
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Zones d'intervention", href: "/zones-d-intervention" },
@@ -118,7 +124,7 @@ export default async function CityPage({ params }: Props) {
             <Badge variant="default">
               <Clock className="h-3.5 w-3.5" /> Pose 2-3 semaines
             </Badge>
-            <Badge variant="default">CP : {city.postalCodes.join(", ")}</Badge>
+            <Badge variant="default">CP : {city.postalCodes.join(", ")}</Badge>
           </div>
         </div>
       </section>
@@ -144,7 +150,7 @@ export default async function CityPage({ params }: Props) {
                 ))}
               </div>
               <blockquote className="text-xl md:text-2xl text-mp-ink leading-relaxed italic mb-4">
-                « {city.testimonial.quote} »
+                « {city.testimonial.quote} »
               </blockquote>
               <div className="text-sm font-semibold text-mp-green-deep">
                 {city.testimonial.name}

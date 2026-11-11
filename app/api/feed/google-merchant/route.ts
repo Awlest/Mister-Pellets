@@ -27,8 +27,9 @@ import type {
  *  - produit simple → une ligne <item> unique.
  *  Les lignes d'un même produit sont regroupées via `item_group_id`.
  *
- * Ne référence que les produits visibles en boutique (getAllProducts filtre
- * déjà hiddenFromBoutique).
+ * Ne référence que les produits visibles en boutique : getAllProducts écarte
+ * les fiches masquées et les appareils à bois bûche, hors catalogue
+ * (lib/catalog-scope.ts). Les hybrides bois + pellets restent dans le flux.
  */
 
 export const revalidate = 3600; // 1 h — le catalogue bouge peu
@@ -68,12 +69,7 @@ function googleCategory(p: ProductDemo): string {
 /** `g:product_type` : taxonomie interne libre, utile pour segmenter les campagnes. */
 function productTypePath(p: ProductDemo): string {
   if (p.type === "insert") return "Inserts";
-  const family =
-    p.combustible === "bois"
-      ? "Poêles à bois"
-      : p.combustible === "hybride"
-        ? "Poêles hybrides"
-        : "Poêles à pellets";
+  const family = p.combustible === "hybride" ? "Poêles hybrides" : "Poêles à pellets";
   if (p.type === "canalisable") return `${family} > Canalisable`;
   if (p.type === "hydro" || p.type === "hybride-hydro") return `${family} > Hydro`;
   return family;

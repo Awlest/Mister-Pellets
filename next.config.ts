@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 import { withPayload } from "@payloadcms/next/withPayload";
-import { girolamiVariantRedirects } from "./config/girolami-variant-redirects";
+import { SITE_REDIRECTS } from "./config/redirects";
 
 // =====================================================================
 // HEADERS HTTP DE SÉCURITÉ (cf. audit V20260503 §3.BLOQUANT.1)
@@ -99,64 +99,13 @@ const nextConfig: NextConfig = {
   },
 
   /**
-   * Redirections 301 — anciennes URLs (Wix + WordPress legacy) → nouvelles URLs Next.js.
-   * Préserve le SEO et évite les 404 pour les utilisateurs qui suivent un ancien lien.
-   * Cf. brief §9.4.
+   * Redirections permanentes : anciennes adresses (Wix, WordPress), fiches
+   * Girolami regroupées, fiches bois parties sur mister-bois.be. La liste vit
+   * dans config/redirects.ts, qui retire les chaînes ; scripts/check-catalogue.ts
+   * la contrôle.
    */
   async redirects() {
-    return [
-      // Wix Stores legacy
-      { source: "/product-page/:slug", destination: "/produit/:slug", permanent: true },
-
-      // Anciennes URLs marques
-      { source: "/marques", destination: "/nos-marques", permanent: true },
-      { source: "/edilkamin", destination: "/nos-marques/edilkamin", permanent: true },
-      { source: "/ek63", destination: "/nos-marques/ek63", permanent: true },
-      { source: "/dielle", destination: "/nos-marques/dielle", permanent: true },
-      { source: "/ferlux", destination: "/nos-marques/ferlux", permanent: true },
-
-      // Anciennes URLs WP courantes
-      // Le panier a été retiré avec le paiement en ligne : les anciennes URL
-      // de panier et de checkout renvoient vers le chiffrage.
-      { source: "/cart", destination: "/estimation", permanent: true },
-      { source: "/panier", destination: "/estimation", permanent: true },
-      { source: "/checkout", destination: "/estimation", permanent: true },
-      { source: "/shop", destination: "/boutique", permanent: true },
-      { source: "/devis", destination: "/demande-de-devis", permanent: true },
-      { source: "/quote", destination: "/demande-de-devis", permanent: true },
-      { source: "/rdv", destination: "/prendre-rendez-vous", permanent: true },
-      { source: "/appointment", destination: "/prendre-rendez-vous", permanent: true },
-      { source: "/about", destination: "/a-propos", permanent: true },
-      { source: "/legal", destination: "/mentions-legales", permanent: true },
-      { source: "/terms", destination: "/cgv", permanent: true },
-      { source: "/privacy", destination: "/politique-confidentialite", permanent: true },
-      { source: "/cookies", destination: "/politique-cookies", permanent: true },
-
-      // Primes / aides
-      { source: "/primes", destination: "/primes-energie-wallonie-2026", permanent: true },
-      { source: "/primes-wallonie", destination: "/primes-energie-wallonie-2026", permanent: true },
-      { source: "/aides", destination: "/primes-energie-wallonie-2026", permanent: true },
-      { source: "/aides-wallonie", destination: "/primes-energie-wallonie-2026", permanent: true },
-
-      // Guides — redirection des vieilles URLs courantes
-      { source: "/guide-achat", destination: "/guides/guide-achat-poele-pellets-wallonie", permanent: true },
-      { source: "/canalisable", destination: "/guides/poele-pellets-canalisable", permanent: true },
-      { source: "/hydro", destination: "/guides/poele-pellets-hydro", permanent: true },
-      { source: "/entretien", destination: "/guides/comment-entretenir-poele-pellets", permanent: true },
-      { source: "/dimensionnement", destination: "/guides/quelle-puissance-poele-pellets", permanent: true },
-
-      // Zones d'intervention legacy
-      { source: "/zones", destination: "/zones-d-intervention", permanent: true },
-      { source: "/wallonie", destination: "/zones-d-intervention", permanent: true },
-
-      // FAQ : page créée en V1.3 §P2, plus de redirection vers /contact
-
-      // Anciennes fiches Girolami (par puissance/canalisation/coaxiale/combustible)
-      // regroupées en produits à variantes le 2026-06-12 → 301 vers le parent.
-      ...girolamiVariantRedirects,
-
-      // Trailing slash normalization (Vercel le gère mais redirect explicite OK)
-    ];
+    return SITE_REDIRECTS;
   },
 
   images: {

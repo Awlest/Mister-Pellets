@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock, Calendar, AlertTriangle, Info, CheckCircle2 } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
@@ -8,6 +9,8 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { InlineText } from "@/components/ui/inline-text";
+import { typo } from "@/lib/typo";
 import {
   ARTICLES,
   CATEGORY_LABELS,
@@ -16,13 +19,13 @@ import {
   type ArticleSection,
 } from "@/lib/articles";
 import { GUIDES } from "@/lib/guides";
-import { BRAND_LIST } from "@/lib/brands";
+import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { CITIES } from "@/lib/cities";
 import {
   buildPageMetadata,
-  buildBreadcrumbSchema,
   buildFAQSchema,
   buildArticleSchema,
+  ogImagePath,
   SITE_URL,
 } from "@/lib/seo";
 
@@ -51,6 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.metaTitle,
     description: article.metaDescription,
     path: `/blog/${article.slug}`,
+    image: ogImagePath("blog", article.slug),
     type: "article",
     publishedTime: article.publishedAt,
     modifiedTime: article.modifiedAt,
@@ -86,7 +90,9 @@ function CalloutBox({ variant, text }: { variant: "info" | "warning" | "success"
   return (
     <div className={`my-8 p-5 md:p-6 rounded-2xl border ${config.bg} flex gap-4`}>
       <Icon className={`h-5 w-5 shrink-0 mt-0.5 ${config.iconColor}`} />
-      <p className="text-mp-ink leading-relaxed text-base">{text}</p>
+      <p className="text-mp-ink leading-relaxed text-base">
+        <InlineText text={text} />
+      </p>
     </div>
   );
 }
@@ -95,12 +101,12 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
   return (
     <section className="mb-12">
       <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 mt-2 leading-snug">
-        {section.heading}
+        {typo(section.heading)}
       </h2>
 
       {section.paragraphs?.map((p, i) => (
         <p key={i} className="text-lg text-mp-ink leading-relaxed mb-4">
-          {p}
+          <InlineText text={p} />
         </p>
       ))}
 
@@ -112,7 +118,9 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
                 <span className="flex items-center justify-center h-6 w-6 rounded-full bg-mp-orange-light text-mp-orange-ink font-bold text-xs shrink-0 mt-0.5">
                   {i + 1}
                 </span>
-                <span>{item}</span>
+                <span>
+                  <InlineText text={item} />
+                </span>
               </li>
             ))}
           </ol>
@@ -121,7 +129,9 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
             {section.list.items.map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-mp-ink leading-relaxed">
                 <span className="h-1.5 w-1.5 rounded-full bg-mp-orange-flame shrink-0 mt-2.5" />
-                <span>{item}</span>
+                <span>
+                  <InlineText text={item} />
+                </span>
               </li>
             ))}
           </ul>
@@ -134,8 +144,8 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
             <thead className="bg-mp-green-deep text-mp-cream">
               <tr>
                 {section.table.headers.map((h, i) => (
-                  <th key={i} className="p-3 md:p-4 text-left font-semibold">
-                    {h}
+                  <th key={i} className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 text-left font-semibold">
+                    {typo(h)}
                   </th>
                 ))}
               </tr>
@@ -147,8 +157,8 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
                   className={i % 2 === 0 ? "bg-mp-beige/40" : "bg-mp-cream"}
                 >
                   {row.map((cell, j) => (
-                    <td key={j} className="p-3 md:p-4 border-t border-mp-sand/30 text-mp-ink">
-                      {cell}
+                    <td key={j} className="px-2 py-3 first:pl-3 last:pr-3 md:p-4 md:first:pl-4 md:last:pr-4 border-t border-mp-sand/30 text-mp-ink">
+                      {typo(cell)}
                     </td>
                   ))}
                 </tr>
@@ -157,7 +167,7 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
           </table>
           {section.table.caption && (
             <figcaption className="text-xs text-mp-ink-soft italic mt-2 px-4 md:px-0">
-              {section.table.caption}
+              {typo(section.table.caption)}
             </figcaption>
           )}
         </figure>
@@ -177,23 +187,18 @@ export default async function ArticlePage({ params }: Props) {
   const article = getArticleBySlug(slug);
   if (!article) notFound();
 
-  // ---------- Schemas Schema.org ----------
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: "Accueil", url: "/" },
-    { name: "Blog", url: "/blog" },
-    { name: article.title, url: `/blog/${article.slug}` },
-  ]);
-
+  // ---------- Schemas Schema.org (le fil d'Ariane est balisé par HeroSecondary) ----------
   const articleSchema = buildArticleSchema({
     headline: article.title,
     description: article.metaDescription,
     url: `${SITE_URL}/blog/${article.slug}`,
+    imageUrl: `${SITE_URL}${ogImagePath("blog", article.slug)}`,
     datePublished: article.publishedAt,
     dateModified: article.modifiedAt,
     authorName: article.authorName,
   });
 
-  const schemas: Record<string, unknown>[] = [breadcrumb, articleSchema];
+  const schemas: Record<string, unknown>[] = [articleSchema];
   if (article.faqs.length > 0) {
     schemas.push(buildFAQSchema(article.faqs));
   }
@@ -209,7 +214,7 @@ export default async function ArticlePage({ params }: Props) {
     .filter((c): c is NonNullable<typeof c> => Boolean(c))
     .slice(0, 4);
   const relatedBrands = (article.related.brands ?? [])
-    .map((s) => BRAND_LIST.find((b) => b.slug === s))
+    .map((s) => TOP_TIER_BRANDS.find((b) => b.slug === s))
     .filter((b): b is NonNullable<typeof b> => Boolean(b))
     .slice(0, 4);
 
@@ -236,6 +241,11 @@ export default async function ArticlePage({ params }: Props) {
         eyebrow={`${CATEGORY_LABELS[article.category]} · ${article.readingTimeMinutes} min de lecture`}
         title={article.title}
         description={article.excerpt}
+        actions={
+          <Button asChild variant="primary" size="lg">
+            <Link href="/estimation">Chiffrer mon installation</Link>
+          </Button>
+        }
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Blog", href: "/blog" },
@@ -273,7 +283,7 @@ export default async function ArticlePage({ params }: Props) {
               </span>
             </div>
             <p className="text-base md:text-lg text-mp-ink leading-relaxed">
-              {article.tldr}
+              <InlineText text={article.tldr} />
             </p>
           </Card>
         </div>
@@ -291,7 +301,7 @@ export default async function ArticlePage({ params }: Props) {
             {article.tags.length > 0 && (
               <div className="mt-12 pt-8 border-t border-mp-sand/40">
                 <span className="text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mr-2">
-                  Sujets :
+                  Sujets :
                 </span>
                 {article.tags.map((tag) => (
                   <Badge key={tag} variant="secondary" className="mr-2 mb-2">
@@ -380,7 +390,7 @@ export default async function ArticlePage({ params }: Props) {
                 {relatedCities.length > 0 && (
                   <div>
                     <span className="block text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mb-2">
-                      Notre service dans :
+                      Notre service dans :
                     </span>
                     <div className="flex flex-wrap justify-center gap-2">
                       {relatedCities.map((c) => (
@@ -399,7 +409,7 @@ export default async function ArticlePage({ params }: Props) {
                 {relatedBrands.length > 0 && (
                   <div>
                     <span className="block text-xs font-semibold text-mp-ink-soft uppercase tracking-wider mb-2">
-                      Marques mentionnées :
+                      Marques mentionnées :
                     </span>
                     <div className="flex flex-wrap justify-center gap-2">
                       {relatedBrands.map((b) => (

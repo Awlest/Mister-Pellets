@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { Phone, Check, MapPin, Clock, ArrowRight } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, GEO, ORGANIZATION_ID } from "@/components/seo/JsonLd";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SITE_URL } from "@/lib/seo";
 import { PHONE_DISPLAY, PHONE_HREF, type Service } from "@/lib/services";
 import { PHONE_HOURS } from "@/config/site";
+import { typo } from "@/lib/typo";
 
 export interface ServiceLandingProps {
   service: Service;
@@ -48,25 +49,11 @@ export function ServiceLanding({
       description: intro,
       serviceType: service.name,
       url,
-      provider: {
-        "@type": "LocalBusiness",
-        name: "Mister Pellets",
-        telephone: "+3281138309",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Rue des Fagotis 3A",
-          postalCode: "5380",
-          addressLocality: "Fernelmont",
-          addressCountry: "BE",
-        },
-      },
+      // L'entreprise est décrite une fois, sur tout le site (JsonLd.tsx) : on la cite.
+      provider: { "@id": ORGANIZATION_ID },
       areaServed: {
         "@type": "GeoCircle",
-        geoMidpoint: {
-          "@type": "GeoCoordinates",
-          latitude: 50.5364,
-          longitude: 4.9779,
-        },
+        geoMidpoint: { "@type": "GeoCoordinates", ...GEO },
         geoRadius: 50000,
       },
       // Tarifs TTC annoncés publiquement. Pour le dépannage, facturé au temps
@@ -129,7 +116,7 @@ export function ServiceLanding({
               </p>
               <p className="text-mp-cream/75 text-sm mt-1">
                 On vérifie d&apos;abord le modèle et l&apos;accès au conduit, puis on cale un
-                créneau. Téléphone : {PHONE_HOURS}.
+                créneau. Téléphone : {PHONE_HOURS}.
               </p>
             </div>
             <Button asChild variant="primary" size="lg" className="shrink-0">
@@ -189,7 +176,7 @@ export function ServiceLanding({
                     </span>
                     {service.priceDetail && (
                       <p className="text-sm text-mp-ink-soft mt-2 leading-relaxed">
-                        {service.priceDetail}
+                        {typo(service.priceDetail)}
                       </p>
                     )}
                   </div>

@@ -10,7 +10,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Zones d'intervention en Wallonie",
   description:
-    "Mister Pellets intervient à Namur, Charleroi, Liège, Wavre, Mons, Arlon, Tournai, Verviers, Gembloux, Dinant. Livraison gratuite dans 20 km autour de Fernelmont.",
+    "Mister Pellets pose des poêles à pellets à Namur, Charleroi, Liège, Wavre, Mons, Arlon, Tournai, Verviers, Gembloux et Dinant, depuis Fernelmont.",
   path: "/zones-d-intervention",
 });
 
@@ -51,7 +51,7 @@ export default function ZonesDInterventionPage() {
                 Livraison gratuite 20 km
               </h3>
               <p className="text-sm text-mp-ink-soft leading-relaxed">
-                Gratuite dans 20 km autour de Fernelmont (Namur et communes voisines). Au-delà : 50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre.
+                Gratuite dans 20 km autour de Fernelmont (Namur et communes voisines). Au-delà : 50 € en Wallonie, 100 € à Bruxelles, 100 € en Flandre.
               </p>
             </Card>
 
@@ -124,7 +124,7 @@ export default function ZonesDInterventionPage() {
                     </div>
 
                     <p className="text-xs text-mp-ink-soft">
-                      Codes postaux : {city.postalCodes.slice(0, 3).join(", ")}
+                      Codes postaux : {city.postalCodes.slice(0, 3).join(", ")}
                       {city.postalCodes.length > 3 && "…"}
                     </p>
                   </Card>
@@ -139,7 +139,7 @@ export default function ZonesDInterventionPage() {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell text-center">
           <h2 className="mp-measure mx-auto text-3xl md:text-4xl font-semibold text-mp-green-deep mb-4">
-            Et les autres communes ?
+            Et les autres communes ?
           </h2>
           <p className="mp-measure mx-auto text-lg text-mp-ink-soft leading-relaxed mb-6">
             On intervient aussi sur Andenne, Eghezée, Jodoigne, Huy, Marche-en-Famenne, Bastogne,
@@ -150,6 +150,7 @@ export default function ZonesDInterventionPage() {
       </section>
 
       <CTAFinal
+        tone="cream"
         title="Votre commune n'est pas listée ?"
         description="Tapez votre code postal dans le devis, on vous dit immédiatement si on intervient et combien ça coûte."
       />

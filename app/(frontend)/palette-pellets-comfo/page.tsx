@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { InlineText } from "@/components/ui/inline-text";
 import { SHOWROOM_ADDRESS, SHOWROOM_MAPS_URL } from "@/lib/booking-calendar";
 import {
   COMFO,
@@ -22,7 +23,7 @@ import {
   pelletPriceTTC,
 } from "@/lib/pellets";
 import { PELLET_PICKUP, PHONE_DISPLAY, PHONE_HREF } from "@/lib/services";
-import { SITE_URL, buildFAQSchema, buildPageMetadata } from "@/lib/seo";
+import { ORGANIZATION_ID, SITE_URL, buildFAQSchema, buildPageMetadata } from "@/lib/seo";
 
 // Le prix change à minuit le dernier jour du lancement : le cron
 // app/api/cron/bonus invalide la page cette nuit-là, et ce délai d'une heure
@@ -36,7 +37,7 @@ export function generateMetadata(): Metadata {
   const launch = isPelletLaunchPeriod();
   const price = formatEuro(pelletPriceTTC());
   return buildPageMetadata({
-    title: `Palette de pellets Comfo ${PALLET_NET_KG} kg à ${price} TVAC, retrait à Fernelmont`,
+    title: `Palette de pellets Comfo ${PALLET_NET_KG} kg à ${price} TVAC`,
     description: launch
       ? `${PELLET_OFFER.bags} sacs de ${PELLET_OFFER.bagKg} kg de pellets Comfo ${COMFO.certificationsShort}, ${price} TVAC la palette jusqu'au ${launchLastDayLabel}, puis ${formatEuro(PELLET_OFFER.priceTTC)}. Retrait sur rendez-vous à Fernelmont, paiement sur place.`
       : `${PELLET_OFFER.bags} sacs de ${PELLET_OFFER.bagKg} kg de pellets Comfo ${COMFO.certificationsShort}, ${price} TVAC la palette. Retrait sur rendez-vous à Fernelmont, paiement sur place.`,
@@ -44,16 +45,28 @@ export function generateMetadata(): Metadata {
   });
 }
 
-const FAQ = [
+/**
+ * La question sur le prix dépend de la date : pendant l'offre de lancement,
+ * elle dit jusqu'à quand le prix réduit s'applique ; après, elle dit seulement
+ * que le prix retenu est celui du jour de la réservation. Écrite en dur, elle
+ * annonçait encore le prix de lancement après sa fin.
+ */
+const buildFaq = (launch: boolean) => [
   {
     question: "Livrez-vous la palette ?",
     answer:
       "Non. La palette se retire au showroom de Fernelmont, sur rendez-vous, et se paie sur place au moment de l'enlèvement.",
   },
-  {
-    question: "Quel prix s'applique si je réserve le 2 novembre pour un retrait plus tard ?",
-    answer: `Le prix retenu est celui du jour où vous réservez. Une réservation faite au plus tard le ${launchLastDayLabel} se paie ${formatEuro(PELLET_OFFER.launch.priceTTC)} la palette, même si vous passez la prendre la semaine suivante. Le prix est rappelé dans l'e-mail de confirmation.`,
-  },
+  launch
+    ? {
+        question: `Quel prix s'applique si je réserve avant le ${launchLastDayLabel} pour un retrait plus tard ?`,
+        answer: `Le prix retenu est celui du jour où vous réservez. Une réservation faite au plus tard le ${launchLastDayLabel} se paie ${formatEuro(PELLET_OFFER.launch.priceTTC)} la palette, même si vous passez la prendre la semaine suivante. Le prix est rappelé dans l'e-mail de confirmation.`,
+      }
+    : {
+        question: "Le prix peut-il changer entre la réservation et le retrait ?",
+        answer:
+          "Non. Le prix retenu est celui du jour où vous réservez, même si vous passez prendre la palette plus tard. Il est rappelé dans l'e-mail de confirmation.",
+      },
   {
     question: "Ces pellets conviennent-ils à mon poêle ?",
     answer: COMFO.compatibilityAnswer,
@@ -94,13 +107,13 @@ export default function PalettePelletsComfoPage() {
       availability: "https://schema.org/LimitedAvailability",
       itemCondition: "https://schema.org/NewCondition",
       availableDeliveryMethod: "https://schema.org/OnSitePickup",
-      seller: { "@id": `${SITE_URL}/#organization` },
+      seller: { "@id": ORGANIZATION_ID },
     },
   };
 
   return (
     <>
-      <JsonLd data={[productSchema, buildFAQSchema(FAQ)]} />
+      <JsonLd data={[productSchema, buildFAQSchema(buildFaq(launch))]} />
 
       {/* Produit : photo à gauche, achat à droite dès 1 024 px. Empilés en
           mobile : nom et pastilles, photo réduite, puis le prix, qui tient
@@ -178,7 +191,7 @@ export default function PalettePelletsComfoPage() {
                 </span>
                 {launch ? (
                   <p className="mt-3 text-sm text-mp-green-deep">
-                    À partir du {launchNextDayLabel} :{" "}
+                    À partir du {launchNextDayLabel} :{" "}
                     <span className="font-semibold">{formatEuro(PELLET_OFFER.priceTTC)} TVAC</span> la
                     palette. Le prix retenu est celui du jour de votre réservation.
                   </p>
@@ -218,6 +231,9 @@ export default function PalettePelletsComfoPage() {
               </div>
 
               <p className="mt-8 text-lg text-mp-ink-soft leading-relaxed">{COMFO.intro}</p>
+              <p className="mt-4 text-mp-ink-soft leading-relaxed">
+                <InlineText text={COMFO.marketNote} />
+              </p>
             </div>
           </div>
         </div>
@@ -281,7 +297,7 @@ export default function PalettePelletsComfoPage() {
             <p className="text-lg text-mp-ink-soft leading-relaxed">
               Choisissez le jour, l&apos;heure et le nombre de palettes. La confirmation part aussitôt
               par e-mail. Plus de {PELLET_OFFER.maxPerBooking}&nbsp;palettes, ou pas de créneau qui
-              vous convient ? Appelez le{" "}
+              vous convient ? Appelez le{" "}
               <a href={PHONE_HREF} className="font-semibold text-mp-orange-ink underline hover:no-underline">
                 {PHONE_DISPLAY}
               </a>
@@ -319,7 +335,7 @@ export default function PalettePelletsComfoPage() {
         </div>
       </section>
 
-      <FAQAccordion tone="beige" items={FAQ} />
+      <FAQAccordion tone="beige" items={buildFaq(launch)} />
     </>
   );
 }

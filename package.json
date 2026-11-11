@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "check:catalogue": "node --import tsx scripts/check-catalogue.ts",
     "check:design": "node scripts/check-design.mjs",
     "check:detoure": "node --import tsx scripts/check-detoure.ts",
     "check:famille": "node --import tsx scripts/check-famille.ts",

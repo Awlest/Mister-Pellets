@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { formatEuros } from "./typo";
 
 /**
  * Combine class names with conditional logic + tailwind-merge to dedupe conflicting classes.
@@ -20,15 +21,11 @@ export function formatPhone(phone: string): string {
 }
 
 /**
- * Formate un prix en EUR (ex. 2890 → "2 890 €")
+ * Formate un prix en EUR, arrondi à l'euro (ex. 2890 → "2 890 €"). Le montant
+ * ne se coupe pas en fin de ligne : lib/typo.ts.
  */
 export function formatPrice(amountInEuros: number): string {
-  return new Intl.NumberFormat("fr-BE", {
-    style: "currency",
-    currency: "EUR",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(amountInEuros);
+  return formatEuros(amountInEuros);
 }
 
 /**

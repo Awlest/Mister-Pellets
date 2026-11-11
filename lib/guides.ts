@@ -34,7 +34,16 @@ export interface GuideData {
   title: string;
   description: string;
   category: "Choix" | "Technique" | "Entretien" | "Aide";
-  readingTime: string; // "8 min"
+  /** Temps de lecture, calculé sur le texte du guide (200 mots par minute) : « 3 min ». */
+  readingTime: string;
+  /**
+   * Première mise en ligne et dernière modification du texte (AAAA-MM-JJ),
+   * relevées dans l'historique git de ce fichier. À mettre à jour quand le
+   * contenu du guide change : la date s'affiche sur la page et part dans le
+   * JSON-LD et le sitemap.
+   */
+  publishedAt: string;
+  modifiedAt: string;
   excerpt: string;
   sections: GuideSection[];
   faq?: { question: string; answer: string }[];
@@ -42,16 +51,17 @@ export interface GuideData {
   metaDescription: string;
 }
 
-export const GUIDES: GuideData[] = [
+const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
   // Guide de saison (03/10/2026), placé en tête pendant la saison de chauffe :
   // la page /guides et le bloc « Continuer sur le sujet » suivent l'ordre du tableau.
   {
     slug: "remettre-en-route-poele-pellets-automne",
+    publishedAt: "2026-10-03",
+    modifiedAt: "2026-10-03",
     title: "Remettre son poêle à pellets en route à l'automne : le guide de début de saison",
     description:
       "Ce qu'on vérifie avant le premier feu, comment rallumer sans panne, régler le poêle pour l'hiver et faire son stock de pellets. Le guide de saison des techniciens Mister Pellets.",
     category: "Entretien",
-    readingTime: "7 min",
     excerpt:
       "Après six mois d'arrêt, un poêle à pellets se rallume rarement du premier coup sans un peu de préparation. Voici l'ordre dans lequel on fait les choses, et les signes qui doivent vous faire appeler.",
     sections: [
@@ -131,16 +141,17 @@ export const GUIDES: GuideData[] = [
           "19 à 20 °C dans la pièce de vie. Au-delà, chaque degré se paie tout l'hiver. La nuit, une baisse programmée vaut souvent mieux qu'un arrêt complet, sauf si la maison garde bien la chaleur.",
       },
     ],
-    metaTitle: "Remettre son poêle à pellets en route à l'automne, le guide de saison",
+    metaTitle: "Remettre son poêle à pellets en route à l'automne",
     metaDescription:
       "Vérifications avant le premier feu, premier allumage sans échec, réglages d'hiver, stock de pellets et signes d'alerte. Le guide de début de saison Mister Pellets.",
   },
   {
     slug: "guide-achat-poele-pellets-wallonie",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-11-11",
     title: "Le guide d'achat 2026 du poêle à pellets en Wallonie",
     description: "Tout savoir avant d'acheter : technologies, marques, aides, pose, entretien. Le guide complet par les techniciens Mister Pellets.",
     category: "Choix",
-    readingTime: "12 min",
     excerpt:
       "Acheter un poêle à pellets représente un investissement de 4 000 à 8 000 € pose comprise. Voici comment ne pas se tromper, marque par marque, étape par étape.",
     sections: [
@@ -149,6 +160,7 @@ export const GUIDES: GuideData[] = [
         paragraphs: [
           "Le marché belge propose 4 grandes familles : air pulsé (le plus simple, l'air chaud sort par convection), canalisable (l'air est distribué dans plusieurs pièces via des gaines), hydro (chauffe un circuit d'eau, remplace une chaudière), et insert encastrable (s'intègre dans une cheminée existante).",
           "Notre conseil par défaut : un air pulsé étanche pour une pièce de vie de moins de 100 m² bien isolée. Un canalisable pour une maison à étage. Un hydro pour remplacer une chaudière mazout. Un insert si vous voulez préserver une cheminée d'origine.",
+          "Les quatre familles ont un point commun : elles ont besoin d'une prise 230 V pour la vis sans fin, l'allumage et l'extracteur de fumées. Ce qu'elles consomment et ce qui se passe quand le courant saute, marque par marque : [poêle à pellets sans électricité, ce qui existe vraiment](/blog/poele-pellets-sans-electricite-coupure-courant).",
         ],
       },
       {
@@ -156,6 +168,7 @@ export const GUIDES: GuideData[] = [
         paragraphs: [
           "La règle empirique : 1 kW pour 10 m² bien isolés (PEB B ou mieux). 1 kW pour 15 m² si la maison est très bien isolée (PEB A). 1 kW pour 7 m² si l'isolation est faible (PEB E à G).",
           "Donc pour une maison de 100 m² PEB B, visez 10 kW. Pour 150 m² PEB D, visez 18-20 kW (et là vous passez plutôt sur un hydro). Sous-dimensionner, c'est devoir tourner à plein régime tout le temps : usure prématurée et surconsommation.",
+          "Le combustible se budgète à part. Le prix du sac de 15 kg change chaque mois : voyez [notre relevé du prix des pellets en Wallonie](/blog/prix-pellets-belgique), avec ce que coûte une saison selon votre usage.",
         ],
       },
       {
@@ -177,8 +190,8 @@ export const GUIDES: GuideData[] = [
       {
         heading: "5. Compter les aides",
         paragraphs: [
-          "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Depuis le 1er octobre, la Wallonie aide la rénovation par deux prêts : le Rénopack, à 0 % avec 15 à 50 % effacés selon les revenus, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent le label exigé après un audit. Un poêle seul y donne rarement accès. Tout le détail est sur notre page consacrée aux aides.",
-          "L'aide qui joue presque à chaque fois, c'est la TVA : 6 % au lieu de 21 % quand l'installateur fournit et pose le poêle dans un logement de plus de 10 ans. Pour les petits revenus, la subvention MEBAR (jusqu'à 2 000 €) passe par le CPAS, avant les travaux. Et demandez à votre commune : certaines gardent une prime énergie.",
+          "La prime Habitation pour un poêle à pellets s'est arrêtée le 30 septembre 2026. Depuis le 1er octobre, la Wallonie aide la rénovation par deux prêts : le Rénopack, à 0 % avec 10 à 50 % effacés selon les revenus et les matériaux d'isolation, et le Rénoprêt. Ils sont réservés aux maisons classées E, F ou G qui gagnent le label exigé après un audit, et la demande de prêt passe avant tout devis signé ou acompte. Leur liste officielle de travaux ne nomme pas le poêle : il n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte. Tout le détail est sur notre page consacrée aux aides.",
+          "L'aide qui joue presque à chaque fois, c'est la TVA : 6 % au lieu de 21 % quand l'installateur fournit et pose le poêle dans un logement de plus de 10 ans. Pour les petits revenus, la subvention MEBAR (jusqu'à 2 000 €) passe par le CPAS, avant les travaux. Et demandez à votre commune : certaines gardent une prime énergie. Les forfaits de pose et des exemples chiffrés sont sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets).",
         ],
       },
     ],
@@ -196,19 +209,20 @@ export const GUIDES: GuideData[] = [
       {
         question: "Faut-il un audit énergétique ?",
         answer:
-          "Pour un poêle seul, non : la prime qui l'exigeait s'est arrêtée le 30 septembre 2026. L'audit logement redevient indispensable si vous visez un Rénopack ou un Rénoprêt : il doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui dit quels travaux font gagner le label exigé.",
+          "Pour un poêle seul, non : la prime qui l'exigeait s'est arrêtée le 30 septembre 2026. L'audit logement redevient indispensable si vous visez un Rénopack ou un Rénoprêt : il doit avoir été réalisé ou actualisé moins d'un an avant la demande de prêt, et c'est lui qui dit quels travaux font gagner le label exigé. La demande de prêt passe ensuite avant tout devis signé ou acompte.",
       },
     ],
-    metaTitle: "Guide d'achat poêle à pellets en Wallonie 2026, Mister Pellets",
+    metaTitle: "Guide d'achat du poêle à pellets en Wallonie (2026)",
     metaDescription:
       "Le guide complet pour choisir votre poêle à pellets en Wallonie : technologies, marques, aides, pose, entretien. Conseils des techniciens Mister Pellets.",
   },
   {
     slug: "poele-pellets-canalisable",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-10-03",
     title: "Poêle à pellets canalisable : le guide complet",
     description: "Comment un canalisable fonctionne, quelles puissances pour quelles surfaces, exemples d'installations en maisons wallonnes typiques.",
     category: "Technique",
-    readingTime: "8 min",
     excerpt:
       "Le canalisable est la solution qu'on installe le plus en Wallonie après l'air pulsé classique. Elle permet de chauffer plusieurs pièces avec un seul appareil, sans casser tout le bâti.",
     sections: [
@@ -222,7 +236,7 @@ export const GUIDES: GuideData[] = [
       {
         heading: "Pour quelle surface et quelle config",
         paragraphs: [
-          "Le canalisable est la solution naturelle pour les maisons à étage de 100-180 m². Modèles typiques : EK63 Tweed 90+ (9,2 kW) et Spy 110+ (10,5 kW), Edilkamin Cherie 11++ Evo (11 kW), Girolami Vert canalisable.",
+          "Le canalisable est la solution naturelle pour les maisons à étage de 100-180 m². Modèles typiques : EK63 Tweed 90+ (9,2 kW) et Spy 110+ (10,5 kW), Edilkamin Cherie 11++ Evo (11 kW), et le Girolami Vert, [canalisable à trois ventilateurs indépendants](/blog/girolami-canalisable-intelligent-trois-ventilateurs).",
           "Pour les très grandes maisons (180+ m²) ou pour vraiment chauffer toutes les pièces, on passe plutôt sur un hydro avec radiateurs ou plancher chauffant. Le canalisable a ses limites : 2-3 pièces secondaires max, à 5-8m de distance.",
         ],
       },
@@ -246,16 +260,17 @@ export const GUIDES: GuideData[] = [
           "Oui, c'est la configuration la plus fréquente. La gaine monte verticalement dans une cloison ou dans un coffrage, puis se distribue à l'étage. Comptez 5-8m max de longueur de gaine pour conserver une bonne température en sortie.",
       },
     ],
-    metaTitle: "Poêle à pellets canalisable, Le guide complet",
+    metaTitle: "Poêle à pellets canalisable : le guide",
     metaDescription:
       "Tout sur les poêles à pellets canalisables : fonctionnement, puissances, exemples wallons. EK63 Tweed et Spy, Edilkamin Cherie. Conseil Mister Pellets.",
   },
   {
     slug: "poele-pellets-hydro",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-10-03",
     title: "Poêle hydro : remplacer une chaudière mazout par des pellets",
     description: "Le hydro chauffe un circuit d'eau et peut remplacer une chaudière classique. Cas d'usage, marques, dimensionnement.",
     category: "Technique",
-    readingTime: "10 min",
     excerpt:
       "Si vous avez une chaudière mazout vieillissante et un système radiateur ou plancher chauffant, l'hydro pellets est la solution la plus rentable pour passer aux énergies renouvelables, souvent rentabilisé en 5 à 9 ans.",
     sections: [
@@ -270,13 +285,13 @@ export const GUIDES: GuideData[] = [
         heading: "Marques et modèles",
         paragraphs: [
           "Girolami (Italie, depuis 1970) a fait du raccordement hydro une vraie spécialité : la gamme Soft, des thermopoêles en quatre versions jusqu'à 24 kW, en hybride bois-pellet ou en pellet seul, chauffe le circuit d'eau de la maison (radiateurs ou plancher) et remplace une chaudière mazout. Son alimentation Source Feeding autonettoyante évite le nettoyage quotidien, et la version hybride accepte aussi les bûches. Edilkamin (Italie, depuis 1963) propose également des modèles hydro (suffixe H), compatibles radiateurs, plancher chauffant et solaire thermique, avec la finition et la fiabilité premium de la marque.",
-          "EK63 a aussi ses hydros, du Spot 100 H (10 kW) aux Monday H 190 et 230 (19 et 23 kW). On choisit selon le budget et la maison : un Girolami Soft pour l'option bois et le brasier propre, un EK63 pour un prix plus doux, un Edilkamin hydro pour le haut de gamme.",
+          "EK63 a aussi ses hydros, du Spot 100 H (10 kW) aux Monday H 190 et 230 (19 et 23 kW). On choisit selon le budget et la maison : un Girolami Soft pour l'option bois et le brasier propre, un EK63 pour un prix plus doux, un Edilkamin hydro pour le haut de gamme. Ce dernier cas est détaillé dans [remplacer une chaudière mazout par un Edilkamin hydro](/blog/remplacer-chaudiere-mazout-edilkamin-hydro).",
         ],
       },
       {
         heading: "Coûts et aides",
         paragraphs: [
-          "Un hydro complet (poêle, kit hydraulique, ballon, raccordement et main d'œuvre) coûte 8 000 à 14 000 € TVAC selon la puissance et la complexité. Il n'y a plus de prime régionale depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer l'hydro avec le reste des travaux ; sinon, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
+          "Un hydro complet (poêle, kit hydraulique, ballon, raccordement et main d'œuvre) coûte 8 000 à 14 000 € TVAC selon la puissance et la complexité. Il n'y a plus de prime régionale depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, voyez le Rénopack avant de signer un devis : l'hydro n'est financé que si l'audit le retient et que l'organisme prêteur l'accepte, car la liste officielle des travaux ne nomme pas les poêles. Sinon, l'aide qui reste est la TVA à 6 % dans un logement de plus de 10 ans.",
           "Face au mazout, le retour sur investissement tourne autour de 5 à 9 ans pour une maison qui en brûlait 2 000 litres par an, aux prix d'octobre 2026. Au-delà, c'est de l'économie nette tous les hivers.",
         ],
       },
@@ -293,16 +308,17 @@ export const GUIDES: GuideData[] = [
           "Le réservoir des hydros que nous posons contient 14 à 30 kg : de quelques heures à pleine puissance à une grosse journée en régime doux. Pour ne pas remplir tous les jours en plein hiver, beaucoup ajoutent un silo externe relié par aspiration : 500 à 2 000 kg de stock, plusieurs semaines d'autonomie.",
       },
     ],
-    metaTitle: "Poêle hydro pour remplacer chaudière mazout, Guide",
+    metaTitle: "Poêle hydro : remplacer une chaudière au mazout",
     metaDescription:
       "Le guide complet du poêle hydro pour remplacer une chaudière mazout : marques (Girolami, Edilkamin, EK63), dimensionnement, coûts, aides. Conseil Mister Pellets.",
   },
   {
     slug: "comment-entretenir-poele-pellets",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-10-25",
     title: "L'entretien d'un poêle à pellets : la check-list complète",
     description: "Que faire au quotidien, chaque semaine, chaque saison, et quand appeler un pro. Le guide pour faire durer votre poêle 15+ ans.",
     category: "Entretien",
-    readingTime: "9 min",
     excerpt:
       "Un poêle à pellets bien entretenu dure 15-20 ans sans souci majeur. Mal entretenu, il commence à perdre du rendement après 2-3 ans, et tombe en panne après 5-7 ans. Voici ce qu'il faut vraiment faire.",
     sections: [
@@ -336,7 +352,7 @@ export const GUIDES: GuideData[] = [
         heading: "Une fois par an, par un pro",
         paragraphs: [
           "Pour un poêle à air, aucune loi ne l'impose. Les fabricants l'exigent pour maintenir leur garantie, et votre assurance incendie vous demandera la preuve du ramonage. Un poêle hydro raccordé au chauffage central est un cas à part : l'arrêté wallon du 29 janvier 2009 sur le chauffage central prévoit un contrôle chaque année pour les générateurs au combustible solide.",
-          "On démonte tout : foyer, échangeur, brûleur, ventilateur d'extraction, conduit. On nettoie en profondeur, on remplace les joints fatigués, on vérifie les capteurs et la combustion. Chez Mister Pellets, l'entretien complet coûte 175 € TVAC, ramonage du conduit compris.",
+          "On démonte tout : foyer, échangeur, brûleur, ventilateur d'extraction, conduit. On nettoie en profondeur, on remplace les joints fatigués, on vérifie les capteurs et la combustion. Chez Mister Pellets, l'entretien complet coûte 175 € TVAC, ramonage du conduit compris. Poêle qui s'éteint, délai d'intervention, gestes de chaque jour : les réponses sont dans [les questions fréquentes sur l'entretien et le SAV](/faq).",
         ],
       },
     ],
@@ -344,7 +360,7 @@ export const GUIDES: GuideData[] = [
       {
         question: "Quels pellets pour minimiser l'entretien ?",
         answer:
-          "Toujours privilégier les pellets ENplus A1 ou DINplus, en sacs de 15 kg sous emballage propre. Les pellets bon marché ou humides encrassent beaucoup plus, génèrent plus de cendres, et peuvent même endommager le brûleur sur le long terme.",
+          "Toujours privilégier les pellets ENplus A1 ou DINplus, en sacs de 15 kg sous emballage propre (nous en vendons en palette : [la palette de pellets Comfo](/palette-pellets-comfo)). Les pellets bon marché ou humides encrassent beaucoup plus, génèrent plus de cendres, et peuvent même endommager le brûleur sur le long terme.",
       },
       {
         question: "Que faire si le poêle s'éteint tout seul ?",
@@ -352,16 +368,17 @@ export const GUIDES: GuideData[] = [
           "Causes courantes : réservoir vide, brûleur encrassé, capteur de tirage défaillant, fusible thermique qui a sauté à cause d'une surchauffe. Vérifiez dans cet ordre. Si ça persiste, appelez-nous, c'est rarement grave mais ça nécessite un diagnostic.",
       },
     ],
-    metaTitle: "Entretien d'un poêle à pellets, Check-list complète | Mister Pellets",
+    metaTitle: "Entretien d'un poêle à pellets : la check-list",
     metaDescription:
       "Comment entretenir votre poêle à pellets jour, semaine, saison, année. Check-list complète des techniciens Mister Pellets pour faire durer votre appareil.",
   },
   {
     slug: "quelle-puissance-poele-pellets",
+    publishedAt: "2026-05-02",
+    modifiedAt: "2026-10-03",
     title: "Quelle puissance de poêle à pellets pour ma maison ?",
     description: "Calcul rapide selon la surface et le PEB. Tableau de correspondance pour une vingtaine de cas typiques wallons.",
     category: "Choix",
-    readingTime: "6 min",
     excerpt:
       "Sous-dimensionner votre poêle, c'est devoir tourner à plein régime en permanence. Sur-dimensionner, c'est de l'argent gaspillé. Voici comment caler la puissance correctement.",
     sections: [
@@ -410,6 +427,21 @@ export const GUIDES: GuideData[] = [
       "Calculer la puissance de poêle à pellets selon votre surface et votre PEB. Tableau de correspondance pour 20 cas typiques wallons. Conseil Mister Pellets.",
   },
 ];
+
+/** Mots du guide : chapô, intertitres, paragraphes, listes et FAQ. */
+function wordCount(guide: Omit<GuideData, "readingTime">): number {
+  const texts = [
+    guide.excerpt,
+    ...guide.sections.flatMap((section) => [section.heading, ...(section.paragraphs ?? []), ...(section.list ?? [])]),
+    ...(guide.faq ?? []).flatMap((q) => [q.question, q.answer]),
+  ];
+  return texts.join(" ").split(/\s+/).filter(Boolean).length;
+}
+
+export const GUIDES: GuideData[] = GUIDE_SOURCES.map((guide) => ({
+  ...guide,
+  readingTime: `${Math.max(1, Math.round(wordCount(guide) / 200))} min`,
+}));
 
 export function getGuideBySlug(slug: string): GuideData | undefined {
   return GUIDES.find((g) => g.slug === slug);

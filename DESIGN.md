@@ -227,6 +227,7 @@ exposées en classes Tailwind (`bg-mp-cream`, `text-mp-green-deep`, etc.).
 - **Body** (400, 16 px, jamais moins sur mobile ; interligne 1,625 `leading-relaxed`) : paragraphes, colonne de 720 px max (`.mp-measure`). Chapô en 18 à 20 px (`text-lg md:text-xl`), encre douce.
 - **Label** (600, 12 px, capitales, `tracking-wider`) : marque au-dessus d'un nom, en-têtes de filtres, pastille d'accroche.
 - **Prix** : Fraunces 600, `tabular-nums`, toujours le TVAC en premier.
+- **Montants et ponctuation** : un montant ne se coupe jamais en fin de ligne, ni au milieu du nombre ni avant « € ». Un montant calculé passe par `formatEuros` (`lib/typo.ts`, repris par `formatPrice`, `eur` et `formatEuro`) ; un texte écrit à la main passe par `typo` au rendu (`InlineText`, héros, FAQ, tableaux d'article), qui lie aussi « % », « : », « ; », « ? », « ! », les guillemets et les fourchettes « X à Y € ». Dans le texte JSX d'une page, l'espace insécable se tape telle quelle (U+00A0, U+202F entre les milliers).
 
 ### Named Rules
 **La règle du mot braise.** Un grand titre porte au plus un groupe de mots en `.mp-italic` (italique, orange-display, graisse 500). Jamais dans un texte courant.
@@ -244,8 +245,8 @@ Mobile d'abord, grille Tailwind par défaut : `sm` 640, `md` 768, `lg` 1024, `xl
 - **Rythme vertical** : deux valeurs seulement. `.mp-band` (56 px puis 80 px) pour une section, `.mp-band-sm` (40 px puis 56 px) pour un bandeau utilitaire.
 - **Alternance des fonds** : prop `tone` (`cream`, `beige`, `green`) de `lib/section-tone.ts`. Deux sections consécutives n'ont jamais le même fond.
 - **Grilles** : `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6` (ou `lg:grid-cols-4`). `min-w-0` sur toute colonne de grille ou de flex qui contient du texte long, un champ ou un défilement horizontal (et sur un `<fieldset>`).
-- **Navigation** : sous 1 280 px, pas d'en-tête ; barre flottante du bas (`NavbarSticky`, 5 onglets). À partir de 1 280 px, en-tête collant (`Header`), barre du bas masquée.
-- **Réserve de place** : la barre du bas occupe `--mp-bottomnav-h` ; le pied de page la réserve (`.footer-mp`). Une barre d'action collante se cale à `--mp-bottomnav-offset` du bas. Une ancre sous l'en-tête desktop prend `scroll-mt-16` (ou plus).
+- **Navigation** : sous 1 280 px, pas d'en-tête ; barre flottante du bas (`NavbarSticky`, 5 onglets). À partir de 1 280 px, en-tête collant (`Header`), barre du bas masquée. Exception : sur une fiche produit sous 1 024 px, la barre d'action de la fiche (`ProductActionBar` : entrée Menu, prix, « Chiffrer la pose ») remplace la barre du bas, masquée en CSS (`.mp-actionbar-nav`, `globals.css`). Jamais deux barres empilées.
+- **Réserve de place** : la barre du bas occupe `--mp-bottomnav-h` ; le pied de page la réserve (`.footer-mp`). Une barre d'action collante se cale à `--mp-bottomnav-offset` du bas (celle d'une fiche produit, qui remplace la barre du bas, colle au ras de l'écran). Quand une barre d'action porte le bouton orange, les boutons principaux de la page passent au vert sur les mêmes largeurs (`YIELDS_TO_ACTION_BAR`, prop `primaryClassName` de `CTAFinal`) : un seul aplat orange par écran. Une ancre sous l'en-tête desktop prend `scroll-mt-16` (ou plus).
 - **Aucun défilement horizontal** à 320 et 375 px : `overflow-x: clip` sur `html, body` (pas `hidden`, qui casse `sticky`). Un tableau large défile dans son propre conteneur (`-mx-4 md:mx-0 overflow-x-auto`).
 - **Cibles tactiles** : 44 px minimum (`min-h-11`), 8 px entre deux cibles.
 
@@ -288,6 +289,10 @@ Réutiliser ces composants pour toute nouvelle page. En créer un nouveau seulem
 | Carte | `Card`, `CardHeader`, `CardTitle`, `CardContent` | `components/ui/card.tsx` |
 | Badge, accroche | `Badge` (`default`, `primary`, `secondary`, `outline`, `success`, `eyebrow`) | `components/ui/badge.tsx` |
 | Carte produit et pastilles | `ProductCard`, `ProductFeatureBadges`, `ProductFeatureLegend` | `components/product/` |
+| Barre d'action d'une fiche produit (sous 1 024 px, à la place de la barre du bas) ; entrée Menu hors de la barre du bas | `ProductActionBar`, `MenuTrigger` | `components/product/ProductActionBar.tsx`, `components/layout/MenuTrigger.tsx` |
+| Liste de fiches (boutique, catégories, marques) : 24 cartes, puis une ligne de texte par fiche (lien, marque, modèle, puissance, prix TVAC ou « Sur devis », sans image ni pictogramme) dans un `<details>` ; « Voir plus » change les lignes suivantes en cartes. Données en entrées compactes, poids borné par `check:catalogue` | `ProductListing`, `CatalogueListing`, `ProductLines` ; `encodeListing`, `sortForGrid` | `components/product/ProductListing.tsx`, `lib/catalogue-listing.ts` |
+| Page catégorie du catalogue | `CategoryLanding` (données : `lib/categories.ts`) | `components/sections/CategoryLanding.tsx` |
+| Texte de contenu avec liens `[texte](adresse)` (articles, guides, FAQ, pages marque) | `InlineText` ; texte brut : `plainText` | `components/ui/inline-text.tsx`, `lib/inline-text.ts` |
 | Volet (menu, détail) | `Sheet`, `SheetContent` | `components/ui/sheet.tsx` |
 | Étapes numérotées | `ProcessSteps` | `components/sections/ProcessSteps.tsx` |
 | FAQ (avec `buildFAQSchema`) | `FAQAccordion` ; page FAQ complète : `FaqExplorer` | `components/sections/` |

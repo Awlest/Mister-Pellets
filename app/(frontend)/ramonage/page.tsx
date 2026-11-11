@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
 import { ServiceLanding } from "@/components/sections/ServiceLanding";
 import { getService } from "@/lib/services";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+// Titre utile de 50 caractères ou plus : avec « | Mister Pellets » il dépasserait
+// 60, buildPageMetadata le sert donc sans suffixe plutôt que coupé.
+export const metadata = buildPageMetadata({
   title: "Ramonage de poêle à pellets à Namur et en Wallonie",
   description:
-    "Ramonage de poêle à pellets à 90 € TVAC, certificat remis sur place. Namur, Andenne, Gembloux, Huy, 50 km autour de Fernelmont. Rendez-vous au 081 13 83 09.",
-  alternates: { canonical: "https://mister-pellets.be/ramonage" },
-};
+    "Ramonage de poêle à pellets à 90 € TVAC, certificat remis sur place. Namur, Andenne, Gembloux, Huy et 50 km autour de Fernelmont, sur rendez-vous.",
+  path: "/ramonage",
+});
 
 export default function RamonagePage() {
   const service = getService("ramonage");
@@ -32,10 +34,10 @@ export default function RamonagePage() {
           body: (
             <>
               <p>
-                Beaucoup de sites disent le contraire, alors précisons : aucune loi
+                Beaucoup de sites disent le contraire, alors précisons : aucune loi
                 wallonne ni fédérale n&apos;impose de ramoner un poêle chaque année. Le
                 ministre wallon de l&apos;Énergie l&apos;a confirmé au Parlement en janvier
-                2022. L&apos;obligation existe pourtant, ailleurs : dans la plupart des
+                2022. L&apos;obligation existe pourtant, ailleurs : dans la plupart des
                 contrats d&apos;assurance incendie, dans le bail si vous êtes locataire, dans
                 la notice du fabricant, et dans le règlement de police de certaines
                 communes.
@@ -50,7 +52,7 @@ export default function RamonagePage() {
                 courrier trois semaines plus tard.
               </p>
               <p>
-                Et même sans contrat, une fois par an reste le bon rythme : un conduit
+                Et même sans contrat, une fois par an reste le bon rythme : un conduit
                 encrassé tire mal, la combustion se dégrade et le risque de feu de cheminée
                 augmente.
               </p>
@@ -68,7 +70,7 @@ export default function RamonagePage() {
                 parcours longs ou avec des coudes.
               </p>
               <p>
-                Un conduit qui se bouche progressivement se signale toujours de la même façon :
+                Un conduit qui se bouche progressivement se signale toujours de la même façon :
                 le poêle s&apos;encrasse plus vite, il faut nettoyer le creuset plus souvent, et
                 finissent par apparaître des extinctions en pleine chauffe. Quand on en arrive
                 là, le ramonage seul ne suffit plus et il faut aussi un entretien complet.
@@ -85,9 +87,9 @@ export default function RamonagePage() {
                 se font au même rythme, une fois par an.
               </p>
               <p>
-                Le calcul est vite fait&nbsp;: le ramonage seul est à 90 € TVAC, et notre
-                entretien complet à <strong>175 € TVAC comprend déjà le ramonage</strong>. Pour
-                85 € de plus, vous ajoutez la révision de l&apos;appareil sur le même passage :
+                Le calcul est vite fait&nbsp;: le ramonage seul est à 90 € TVAC, et notre
+                entretien complet à <strong>175 € TVAC comprend déjà le ramonage</strong>. Pour
+                85 € de plus, vous ajoutez la révision de l&apos;appareil sur le même passage :
                 nettoyage de l&apos;échangeur, contrôle de la sonde de fumée, réglage de la
                 combustion, remplacement des joints usés. C&apos;est ce que prennent la plupart
                 de nos clients.
@@ -111,6 +113,7 @@ export default function RamonagePage() {
         },
         {
           q: "Vous ramonez aussi les cheminées classiques et les chaudières ?",
+          // check-catalogue: allow (ce que le service ne couvre pas)
           a: "Non. On intervient uniquement sur les conduits raccordés à un poêle ou un insert à pellets. Pour une cheminée à bois bûches ou une chaudière mazout, il faut passer par un ramoneur généraliste.",
         },
         {

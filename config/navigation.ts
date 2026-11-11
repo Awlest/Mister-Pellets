@@ -14,6 +14,13 @@ export const ROUTES = {
   home: "/",
   shop: "/boutique",
   pellets: "/palette-pellets-comfo",
+  /** Catégories du catalogue (lib/categories.ts). */
+  ductable: "/poeles-a-pellets-canalisables",
+  hydro: "/poeles-a-pellets-hydro",
+  inserts: "/inserts-a-pellets",
+  airtight: "/poeles-a-pellets-etanches",
+  /** Prix posés par type de conduit, exemples chiffrés. */
+  prices: "/prix-poele-pellets",
   product: "/produit",
   brands: "/nos-marques",
   maintenance: "/entretien-poele-a-pellets",
@@ -26,7 +33,7 @@ export const ROUTES = {
   bookingWidget: "/prendre-rendez-vous#reserver",
   /** Visite technique à domicile : page d'arrivée des annonces, agenda en tête. */
   visit: "/visite-technique",
-  grants: "/primes-energie-wallonie-2026",
+  grants: "/aides-poele-a-pellets-wallonie",
   realisations: "/realisations",
   guides: "/guides",
   blog: "/blog",
@@ -50,6 +57,11 @@ export const PUBLISHED: ReadonlySet<string> = new Set<string>([
   ROUTES.home,
   ROUTES.shop,
   ROUTES.pellets,
+  ROUTES.ductable,
+  ROUTES.hydro,
+  ROUTES.inserts,
+  ROUTES.airtight,
+  ROUTES.prices,
   ROUTES.brands,
   ROUTES.maintenance,
   ROUTES.sweeping,
@@ -97,12 +109,23 @@ export function isFilterLink(href: string): boolean {
 
 export type NavLink = { href: string; label: string; desc?: string; short?: string };
 
-/** Catalogue : toute la boutique, puis les familles les plus demandées. */
+/**
+ * Catalogue : toute la boutique, puis une vraie page par famille
+ * (lib/categories.ts), le prix posé et les pellets. Plus de lien vers la
+ * boutique filtrée (`?chauffage=hydro`) présenté comme une catégorie : ces
+ * adresses servent la page de la boutique, sans titre ni contenu propres.
+ * Seule exception, les hybrides bois + pellets : ils restent affichés ici mais
+ * leur page de référence est sur mister-bois.be, ils n'ont donc pas de
+ * catégorie indexable sur ce site.
+ */
 export const CATALOGUE_LINKS: readonly NavLink[] = [
   { href: ROUTES.shop, label: "Tous nos poêles", short: "Tous les poêles", desc: "Prix TVAC, pose sur devis" },
-  { href: `${ROUTES.shop}?chauffage=ventile`, label: "Poêles à air", short: "À air", desc: "Chauffer la pièce de vie" },
-  { href: `${ROUTES.shop}?chauffage=hydro`, label: "Poêles hydro", short: "Hydro", desc: "Raccordés aux radiateurs" },
+  { href: ROUTES.ductable, label: "Poêles canalisables", short: "Canalisables", desc: "Chauffer une ou deux pièces de plus" },
+  { href: ROUTES.hydro, label: "Poêles hydro", short: "Hydro", desc: "Raccordés aux radiateurs" },
+  { href: ROUTES.inserts, label: "Inserts à pellets", short: "Inserts", desc: "Dans une cheminée existante" },
+  { href: ROUTES.airtight, label: "Poêles étanches", short: "Étanches", desc: "Maison isolée, ventilation double flux" },
   { href: `${ROUTES.shop}?combustible=hybride`, label: "Poêles hybrides bois et pellets", short: "Hybrides", desc: "Bûches ou pellets, au choix" },
+  { href: ROUTES.prices, label: "Prix d'un poêle posé", short: "Prix posé", desc: "Poêle, conduit et pose, TVA comprise" },
   { href: ROUTES.pellets, label: "Pellets Comfo en palette", short: "Pellets", desc: "975 kg, retrait à Fernelmont" },
 ];
 

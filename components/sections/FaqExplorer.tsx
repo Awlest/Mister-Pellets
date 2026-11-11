@@ -3,6 +3,9 @@
 import * as React from "react";
 import { Search, ChevronDown, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { InlineText } from "@/components/ui/inline-text";
+import { plainText } from "@/lib/inline-text";
+import { typo } from "@/lib/typo";
 import {
   FAQS,
   FAQ_CATEGORIES,
@@ -18,6 +21,13 @@ import {
  * - Accordéons : un seul ouvert à la fois (UX mobile)
  * - Catégorie + recherche se cumulent
  * - Bouton reset si au moins un filtre actif
+ *
+ * Toutes les réponses sont dans le HTML servi : chaque question est un
+ * <details> natif, comme FAQAccordion. Avant, la réponse n'était créée qu'au
+ * clic, alors que le balisage FAQPage de la page les annonçait toutes : un
+ * moteur ou une IA sans JavaScript lisait 53 questions sans réponse. La
+ * recherche et les catégories masquent les questions écartées (attribut
+ * `hidden`), elles ne les retirent pas de la page.
  *
  * Composant client (interactivité React state). La page parent /faq fournit
  * le Schema.org FAQPage au build (côté serveur).
@@ -35,7 +45,6 @@ function normalizeText(input: string): string {
 export function FaqExplorer() {
   const [query, setQuery] = React.useState("");
   const [category, setCategory] = React.useState<CategoryFilter>("all");
-  const [openId, setOpenId] = React.useState<string | null>(null);
 
   const filtered = React.useMemo(() => {
     const q = normalizeText(query);
@@ -44,28 +53,20 @@ export function FaqExplorer() {
       if (q === "") return true;
       return (
         normalizeText(f.question).includes(q) ||
-        normalizeText(f.answer).includes(q)
+        normalizeText(plainText(f.answer)).includes(q)
       );
     });
   }, [query, category]);
 
-  // Regroupement par catégorie pour l'affichage quand "Toutes" est sélectionnée
-  const groupedByCategory = React.useMemo(() => {
-    const groups = new Map<FaqCategory, FaqItem[]>();
-    for (const item of filtered) {
-      const list = groups.get(item.category) ?? [];
-      list.push(item);
-      groups.set(item.category, list);
-    }
-    return groups;
-  }, [filtered]);
+  // Questions gardées par la recherche et la catégorie ; les autres restent
+  // dans la page, masquées.
+  const shown = React.useMemo(() => new Set(filtered.map((f) => f.id)), [filtered]);
 
   const hasFilters = query !== "" || category !== "all";
 
   const reset = () => {
     setQuery("");
     setCategory("all");
-    setOpenId(null);
   };
 
   return (
@@ -148,8 +149,8 @@ export function FaqExplorer() {
           )}
         </div>
 
-        {/* Liste */}
-        {filtered.length === 0 ? (
+        {/* Liste : toutes les questions, groupées par catégorie, toujours dans le HTML */}
+        {filtered.length === 0 && (
           <div className="rounded-2xl bg-mp-beige border border-mp-sand/40 p-8 text-center">
             <p className="text-mp-ink mb-3">
               Aucune question ne correspond à cette recherche.
@@ -165,40 +166,25 @@ export function FaqExplorer() {
               .
             </p>
           </div>
-        ) : category === "all" && query === "" ? (
-          // Vue groupée par catégorie quand pas de filtre actif
-          <div className="space-y-8">
-            {Array.from(groupedByCategory.entries()).map(([cat, items]) => (
-              <div key={cat}>
+        )}
+        <div className="space-y-8">
+          {FAQ_CATEGORIES.filter((c) => c.count > 0).map((c) => {
+            const items = FAQS.filter((f) => f.category === c.value);
+            const visible = items.filter((f) => shown.has(f.id)).length;
+            return (
+              <div key={c.value} hidden={visible === 0}>
                 <h2 className="text-xs font-bold uppercase tracking-wider text-mp-orange-ink mb-3">
-                  {FAQ_CATEGORIES.find((c) => c.value === cat)?.label} ({items.length})
+                  {c.label} ({visible})
                 </h2>
                 <ul className="space-y-2">
                   {items.map((item) => (
-                    <FaqItemRow
-                      key={item.id}
-                      item={item}
-                      isOpen={openId === item.id}
-                      onToggle={() => setOpenId(openId === item.id ? null : item.id)}
-                    />
+                    <FaqItemRow key={item.id} item={item} hidden={!shown.has(item.id)} />
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
-        ) : (
-          // Vue à plat quand un filtre est actif
-          <ul className="space-y-2">
-            {filtered.map((item) => (
-              <FaqItemRow
-                key={item.id}
-                item={item}
-                isOpen={openId === item.id}
-                onToggle={() => setOpenId(openId === item.id ? null : item.id)}
-              />
-            ))}
-          </ul>
-        )}
+            );
+          })}
+        </div>
         </div>
       </div>
     </section>
@@ -235,46 +221,29 @@ function CategoryPill({
   );
 }
 
-function FaqItemRow({
-  item,
-  isOpen,
-  onToggle,
-}: {
-  item: FaqItem;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
+function FaqItemRow({ item, hidden }: { item: FaqItem; hidden: boolean }) {
   return (
-    <li
-      className={cn(
-        "rounded-2xl border bg-white transition-colors",
-        isOpen ? "border-mp-orange-flame/40" : "border-mp-sand/40 hover:border-mp-sand",
-      )}
-    >
-      <button
-        type="button"
-        onClick={onToggle}
-        className="w-full flex items-start justify-between gap-3 text-left p-4 md:p-5"
-        aria-expanded={isOpen}
+    <li hidden={hidden}>
+      {/* `name` : une seule question ouverte à la fois, sans script. */}
+      <details
+        name="faq"
+        className="mp-faq-item group rounded-2xl border border-mp-sand/40 bg-white transition-colors hover:border-mp-sand open:border-mp-orange-flame/40"
       >
-        <h3 className="text-base md:text-lg font-semibold text-mp-green-deep leading-snug">
-          {item.question}
-        </h3>
-        <ChevronDown
-          className={cn(
-            "h-5 w-5 shrink-0 mt-0.5 text-mp-orange-flame transition-transform",
-            isOpen && "rotate-180",
-          )}
-          aria-hidden
-        />
-      </button>
-      {isOpen && (
+        <summary className="flex cursor-pointer list-none items-start justify-between gap-3 p-4 text-left md:p-5 [&::-webkit-details-marker]:hidden">
+          <h3 className="text-base md:text-lg font-semibold text-mp-green-deep leading-snug">
+            {typo(item.question)}
+          </h3>
+          <ChevronDown
+            className="h-5 w-5 shrink-0 mt-0.5 text-mp-orange-flame transition-transform group-open:rotate-180"
+            aria-hidden
+          />
+        </summary>
         <div className="px-4 md:px-5 pb-5">
           <p className="text-mp-ink leading-relaxed text-sm md:text-base">
-            {item.answer}
+            <InlineText text={item.answer} />
           </p>
         </div>
-      )}
+      </details>
     </li>
   );
 }
