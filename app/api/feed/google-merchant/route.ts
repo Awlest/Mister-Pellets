@@ -5,7 +5,7 @@ import {
   SHIPPING_LOCAL,
   SHIPPING_PREFIXES,
 } from "@/lib/shipping";
-import { merchantAvailability as availability } from "@/lib/availability";
+import { brusselsMidnightISO, merchantAvailability as availability } from "@/lib/availability";
 import { BONUS, bonusPhase, bonusPrice, type BonusPhase } from "@/lib/bonus";
 import { productKindLabel } from "@/lib/product-kind";
 import type {
@@ -128,10 +128,8 @@ const BACKORDER_LEAD_DAYS = 35;
  */
 function availabilityDate(status: string | undefined): string | undefined {
   if (availability(status) !== "backorder") return undefined;
-  const d = new Date();
-  d.setDate(d.getDate() + BACKORDER_LEAD_DAYS);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T00:00:00+02:00`;
+  // Décalage de Bruxelles à cette date : +01:00 en hiver, +02:00 en été.
+  return brusselsMidnightISO(new Date(), BACKORDER_LEAD_DAYS);
 }
 
 /** Pour une variante, retourne la valeur choisie sur chaque axe. */

@@ -16,6 +16,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { ACTION_LABELS } from "@/config/navigation";
+import { brusselsMidnightISO } from "@/lib/availability";
 import { requestedModel, type EstimateProduct } from "@/lib/estimate";
 import {
   PRICE_REQUEST_SUBJECT,
@@ -174,6 +175,15 @@ check("fiche : délai saisi", guaranteeLine("4-6 sem."), "Garantie légale de 2 
   check("rendez-vous : aucun lien vers /visite-technique (noindex)", toVisit, []);
   check("en-tête : libellé de référence de l'estimation", ACTION_LABELS.estimate, "Estimer mon projet");
 }
+
+// 7. Flux Merchant : availability_date au décalage de Bruxelles de la date
+check("Bruxelles : hiver", brusselsMidnightISO(new Date("2026-11-11T20:00:00Z"), 35), "2026-12-16T00:00:00+01:00");
+check("Bruxelles : été", brusselsMidnightISO(new Date("2026-06-01T10:00:00Z")), "2026-06-01T00:00:00+02:00");
+check("Bruxelles : jour du passage à l'heure d'été", brusselsMidnightISO(new Date("2027-03-28T10:00:00Z")), "2027-03-28T00:00:00+01:00");
+check("Bruxelles : lendemain du passage", brusselsMidnightISO(new Date("2027-03-29T10:00:00Z")), "2027-03-29T00:00:00+02:00");
+check("Bruxelles : jour du retour à l'heure d'hiver", brusselsMidnightISO(new Date("2026-10-25T10:00:00Z")), "2026-10-25T00:00:00+02:00");
+check("Bruxelles : date civile locale, pas UTC", brusselsMidnightISO(new Date("2026-12-31T23:30:00Z")), "2027-01-01T00:00:00+01:00");
+assert("flux : plus de décalage écrit en dur", !/T00:00:00\+0[12]:00/.test(readFileSync("app/api/feed/google-merchant/route.ts", "utf8")));
 
 if (ko > 0) {
   console.error(`\n${ko} contrôle(s) en échec.`);
