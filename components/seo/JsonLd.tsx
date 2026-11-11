@@ -120,7 +120,10 @@ export const ORGANIZATION_SCHEMA = {
   description:
     "Vente et installation de poêles à pellets en Wallonie (MCZ, Edilkamin, EK63, Girolami, Austroflamm, Cadel) : tubage de cheminée, sortie ventouse concentrique, conduit neuf, entretien annuel, ramonage et dépannage. Showroom à Fernelmont accessible uniquement sur rendez-vous.",
   url: "https://mister-pellets.be",
-  logo: "https://mister-pellets.be/logo-mister-pellets-full.svg",
+  // Logo en PNG (400 x 169, celui des e-mails) : Google n'accepte pas le SVG
+  // pour le logo d'une organisation. L'image reste le logo tant qu'il n'y a
+  // pas de photo réelle publiée.
+  logo: "https://mister-pellets.be/email/logo-mister-pellets.png",
   image: "https://mister-pellets.be/logo-mister-pellets-full.svg",
   telephone: "+3281138309",
   email: "info@awlest.com",
