@@ -137,6 +137,11 @@ export function ProductVariantPanel({
     [variants],
   );
 
+  // Aucune variante chiffrée ni prix de fiche : la fiche est sur devis, quelle
+  // que soit la configuration. Rien n'invite alors à en choisir une « pour
+  // voir le prix » (137 fiches MCZ et Cadel le 11/11/2026).
+  const anyPriced = Number.isFinite(minPrice) || (basePriceTTC != null && basePriceTTC > 0);
+
   // Bonus de saison (calculé côté serveur dans lib/products.ts) : le prix
   // catalogue reste affiché barré à côté du prix remisé.
   const bonusActive = variants.some((v) => v.bonusPrice != null);
@@ -300,22 +305,26 @@ export function ProductVariantPanel({
           accessories={accessories}
           basePriceTTC={activeVariant && activePriced ? shownPrice(activeVariant) : null}
           missingBaseHint={
-            activeVariant
-              ? "Cette configuration du poêle se chiffre sur devis."
-              : "Choisissez la configuration du poêle pour voir le total."
+            !anyPriced
+              ? "Le poêle se chiffre sur devis."
+              : activeVariant
+                ? "Cette configuration du poêle se chiffre sur devis."
+                : "Choisissez la configuration du poêle pour voir le total."
           }
         />
       ) : null}
 
       {/* La configuration choisie sert au chiffrage, pas à un panier :
           la pose se confirme lors de la visite technique. */}
-      <p className="text-sm text-mp-ink-soft">
-        {activeVariant
-          ? activePriced
-            ? "Configuration disponible. Le prix de la pose se chiffre après la visite sur place."
-            : "Cette configuration se chiffre sur devis."
-          : "Sélectionnez une configuration pour voir le prix."}
-      </p>
+      {anyPriced && (
+        <p className="text-sm text-mp-ink-soft">
+          {activeVariant
+            ? activePriced
+              ? "Configuration disponible. Le prix de la pose se chiffre après la visite sur place."
+              : "Cette configuration se chiffre sur devis."
+            : "Sélectionnez une configuration pour voir le prix."}
+        </p>
+      )}
 
       {/* Le paiement en ligne a été retiré le 04/09/2026 : ne pas
           réintroduire de bouton d'achat ni de mention de paiement ici. */}
