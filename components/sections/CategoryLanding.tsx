@@ -8,12 +8,12 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { InlineText } from "@/components/ui/inline-text";
 import { ROUTES } from "@/config/navigation";
 import { encodeListing, sortForGrid } from "@/lib/catalogue-listing";
-import { productsInCategory, summarizeCategory, type CategoryData, type CategorySummaryRow } from "@/lib/categories";
+import { productsInCategory, summarizeCategory, type CategoryData } from "@/lib/categories";
 import { formatKw } from "@/lib/power";
 import { shownPriceTTC } from "@/lib/product-price";
 import { getAllProducts } from "@/lib/products";
 import { buildFAQSchema } from "@/lib/seo";
-import { formatEuros, typo } from "@/lib/typo";
+import { NBSP, formatEuros, typo } from "@/lib/typo";
 
 const LINK =
   "inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink";
@@ -21,19 +21,19 @@ const LINK =
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("fr-BE", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
-const kwRange = (row: CategorySummaryRow): string =>
-  row.minKw == null || row.maxKw == null
-    ? "-"
-    : row.minKw === row.maxKw
-      ? `${formatKw(row.minKw)} kW`
-      : `${formatKw(row.minKw)} à ${formatKw(row.maxKw)} kW`;
+/** Fourchette « 5,1 à 24 kW » : sur téléphone, elle passe sur deux lignes avant « à », jamais au milieu d'une valeur. */
+function Range({ min, max, format }: { min?: number; max?: number; format: (n: number) => string }) {
+  if (min == null || max == null) return null;
+  if (min === max) return <span className="whitespace-nowrap">{format(min)}</span>;
+  return (
+    <>
+      <span className="whitespace-nowrap">{format(min)}</span>{" "}
+      <span className="whitespace-nowrap">à {format(max)}</span>
+    </>
+  );
+}
 
-const priceRange = (row: CategorySummaryRow): string =>
-  row.minPrice == null || row.maxPrice == null
-    ? "Sur devis"
-    : row.minPrice === row.maxPrice
-      ? formatEuros(row.minPrice)
-      : `${formatEuros(row.minPrice)} à ${formatEuros(row.maxPrice)}`;
+const kwLabel = (n: number) => `${formatKw(n)}${NBSP}kW`;
 
 /**
  * Page d'une catégorie du catalogue (lib/categories.ts) : chapô, liste
@@ -127,19 +127,19 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
                   <h2 className="mb-4 text-2xl font-semibold text-mp-green-deep md:text-3xl">
                     {typo(`Le catalogue en chiffres : ${category.label.toLowerCase()}`)}
                   </h2>
-                  <div className="-mx-4 overflow-x-auto md:mx-0 md:rounded-[20px] md:border md:border-mp-sand/40 bg-white">
-                    <table className="w-full min-w-[34rem] text-left text-sm md:text-base">
-                      <caption className="caption-bottom px-4 py-3 text-left text-xs text-mp-ink-soft">
+                  <div className="overflow-x-auto rounded-[20px] border border-mp-sand/40 bg-white">
+                    <table className="w-full text-left text-sm md:text-base">
+                      <caption className="sr-only">
                         Fiches visibles au catalogue, calculées à l&apos;affichage de la page. Prix de
                         l&apos;appareil seul, TVA à 21 % comprise, tels qu&apos;affichés sur les fiches ; une fiche sans
                         prix est sur devis. Pose et évacuation en plus.
                       </caption>
                       <thead>
                         <tr className="border-b border-mp-sand/40 text-mp-green-deep">
-                          <th scope="col" className="px-4 py-3 font-semibold">Marque</th>
-                          <th scope="col" className="px-3 py-3 text-right font-semibold">Modèles</th>
-                          <th scope="col" className="px-3 py-3 font-semibold">Puissance</th>
-                          <th scope="col" className="px-4 py-3 text-right font-semibold">Prix affichés</th>
+                          <th scope="col" className="py-3 pl-3 pr-1 font-semibold sm:px-4">Marque</th>
+                          <th scope="col" className="px-1 py-3 text-right font-semibold sm:px-3">Modèles</th>
+                          <th scope="col" className="px-2 py-3 font-semibold sm:px-3">Puissance</th>
+                          <th scope="col" className="py-3 pl-1 pr-3 text-right font-semibold sm:px-4">Prix affichés</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -152,11 +152,13 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
                                 isTotal ? "font-semibold text-mp-green-deep" : "border-b border-mp-sand/40"
                               }
                             >
-                              <th scope="row" className="px-4 py-3 font-medium">{row.brand}</th>
-                              <td className="px-3 py-3 text-right tabular-nums">{row.models}</td>
-                              <td className="whitespace-nowrap px-3 py-3 tabular-nums">{kwRange(row)}</td>
-                              <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">
-                                {priceRange(row)}
+                              <th scope="row" className="py-3 pl-3 pr-1 font-medium sm:px-4">{row.brand}</th>
+                              <td className="px-1 py-3 text-right tabular-nums sm:px-3">{row.models}</td>
+                              <td className="px-2 py-3 tabular-nums sm:px-3">
+                                {row.minKw == null ? "-" : <Range min={row.minKw} max={row.maxKw} format={kwLabel} />}
+                              </td>
+                              <td className="py-3 pl-1 pr-3 text-right tabular-nums sm:px-4">
+                                {row.minPrice == null ? "Sur devis" : <Range min={row.minPrice} max={row.maxPrice} format={formatEuros} />}
                                 {row.priced > 0 && row.priced < row.models && (
                                   <span className="block text-xs font-normal text-mp-ink-soft">
                                     {row.priced} {row.priced > 1 ? "fiches" : "fiche"} sur {row.models}
@@ -169,6 +171,9 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
                       </tbody>
                     </table>
                   </div>
+                  <p className="mt-2 text-xs leading-relaxed text-mp-ink-soft">Fiches visibles au catalogue, calculées à l&apos;affichage de la page. Prix de
+                        l&apos;appareil seul, TVA à 21 % comprise, tels qu&apos;affichés sur les fiches ; une fiche sans
+                        prix est sur devis. Pose et évacuation en plus.</p>
                   <p className="mt-3 text-sm text-mp-ink-soft">
                     Texte mis à jour le <time dateTime={category.modifiedAt}>{formatDate(category.modifiedAt)}</time>.
                   </p>
@@ -190,7 +195,7 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
                 <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
                   {featured.length > 0 && (
                     <div className="min-w-0">
-                      <h2 className="mb-3 text-xl font-semibold text-mp-green-deep">Trois modèles à regarder</h2>
+                      <h2 className="mb-3 text-xl font-semibold text-mp-green-deep">Modèles à regarder</h2>
                       <ul>
                         {featured.map((p) => {
                           const price = shownPriceTTC(p);
