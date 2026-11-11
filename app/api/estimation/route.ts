@@ -229,7 +229,7 @@ export async function POST(request: Request) {
     `Matériel : ${r.materialHT} € HT`,
     r.bonusHT > 0 ? `${bonusLabelFor(product.brand)} : -${r.bonusHT} € HT (${BONUS.conditions})` : "",
     ...r.laborLines.map((l) => `${l.label} : ${lineValue(l)}`),
-    `TVA ${Math.round(r.vatRate * 100)} % : ${r.vatAmount} €`,
+    `TVA ${Math.round(r.vatRate * 100)} % : ${r.vatAmount.toFixed(2).replace(".", ",")} €`,
     `TOTAL : ${r.totalTTC} € TTC${r.onQuote ? " (échafaudage en plus, sur devis)" : ""}`,
     monthly ? `Financement 0 % : ${monthly} €/mois sur ${months} mois` : "",
   ]

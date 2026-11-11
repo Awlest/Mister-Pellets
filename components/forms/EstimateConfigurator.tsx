@@ -1785,12 +1785,13 @@ function Recap({
         {/* Somme exacte des lignes affichées (poêle, bonus, pose), au cent : pas la
             différence de deux montants arrondis à l'euro. */}
         <Row label="Sous-total HTVA" value={eurCents(r.subtotalHT - r.bonusHT)} />
-        <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
+        <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eurCents(r.vatAmount)} muted />
+        <Row label="Total TVAC" value={eurCents(r.totalCents)} />
       </dl>
 
       <div className="mt-4 flex items-end justify-between border-t border-mp-sand/40 pt-4">
         <span className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
-          Total posé, TVAC
+          Total posé, TVAC, arrondi à l&apos;euro
         </span>
         <span className="text-2xl font-semibold tabular-nums text-mp-green-deep">{eur(r.totalTTC)}</span>
       </div>

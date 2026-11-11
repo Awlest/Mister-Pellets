@@ -28,7 +28,6 @@ import {
   roundCents,
   sumLines,
   vatRate,
-  withVat,
   type EstimateLine,
   type InstallType,
   type IsoKey,
@@ -182,7 +181,11 @@ export interface EstimateResult {
   /** Bonus de saison déduit du prix HT du poêle (le bonus ne touche pas la pose), 0 hors période. */
   bonusHT: number;
   vatRate: number;
+  /** TVA au cent, sur le net hors TVA. */
   vatAmount: number;
+  /** Total TVAC au cent : net hors TVA + TVA, la somme des lignes du détail. */
+  totalCents: number;
+  /** Total TVAC arrondi à l'euro : le montant mis en avant (barre, e-mails, conversion). */
   totalTTC: number;
   /** Une ligne reste sur devis (échafaudage) : le total ne la comprend pas. */
   onQuote: boolean;
@@ -231,7 +234,12 @@ export function estimate(
   const bonusHT = (opts?.bonus ?? isBonusPeriod()) && product ? material - stoveNetHT(product, true) : 0;
   const netHT = subtotalHT - bonusHT;
   const rate = vatRate(s.housingOver10Years);
-  const { vat, total } = withVat(netHT, rate);
+  // TVA au cent, pour que sous-total + TVA = total du détail à l'œil ; le
+  // grand total est ce total arrondi à l'euro (recette du lot 3 : 5 855,50 +
+  // 351 affichés pour 6 207 €).
+  const vat = roundCents(netHT * rate);
+  const totalCents = roundCents(netHT + vat);
+  const total = Math.round(totalCents);
   const needKw = recommendedKw(s.surface, s.iso);
 
   return {
@@ -242,6 +250,7 @@ export function estimate(
     bonusHT,
     vatRate: rate,
     vatAmount: vat,
+    totalCents,
     totalTTC: total,
     onQuote: lines.some((l) => l.onQuote),
     needKw,

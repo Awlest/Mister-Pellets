@@ -359,6 +359,11 @@ assert("flux : plus de décalage écrit en dur", !/T00:00:00\+0[12]:00/.test(rea
   // Le cas relevé à la recette : Cadel Zefiro 9, bonus -10 %, TVA 6 %.
   const zef = { key: "z", slug: "z", name: "z", brand: "Cadel", productType: "insert", powerKw: 9, priceHT: 3320, priceTTC: 4017 } as EstimateProduct;
   check("prix : Zefiro 9 à 6 %, bonus déduit", stoveListPrice(zef, { bonus: true, reduced: true }), 3167);
+  // Récapitulatif : les lignes s'additionnent au cent, le grand total est leur arrondi.
+  const rz = estimate({ ...DEFAULT_STATE, installType: "tubage", conduitM: 10, stoveKind: "insert", housingOver10Years: true, productKey: "z" }, zef, { bonus: true });
+  const net = Math.round((rz.subtotalHT - rz.bonusHT) * 100);
+  check("récapitulatif : sous-total + TVA = total du détail", net + Math.round(rz.vatAmount * 100), Math.round(rz.totalCents * 100));
+  check("récapitulatif : grand total = total du détail arrondi", rz.totalTTC, Math.round(rz.totalCents));
   assert("estimation : la liste des modèles passe par stoveListPrice", readFileSync("components/forms/EstimateConfigurator.tsx", "utf8").includes("stoveListPrice(p, { bonus: bonusActive"));
 }
 
