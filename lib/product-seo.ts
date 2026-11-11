@@ -3,7 +3,7 @@ import { BONUS } from "./bonus";
 import { formatKw } from "./power";
 import { productFuel, productKindLabel } from "./product-kind";
 import { shownPriceTTC } from "./product-price";
-import { fitText } from "./seo";
+import { ORGANIZATION_ID, fitText } from "./seo";
 import type { ProductDemo, ProductVariantData } from "./products-demo";
 
 /**
@@ -15,7 +15,6 @@ import type { ProductDemo, ProductVariantData } from "./products-demo";
  */
 
 const SITE = "https://mister-pellets.be";
-const ORGANIZATION_ID = `${SITE}/#organization`;
 const SUFFIX = " | Mister Pellets";
 export const TITLE_MAX = 60;
 export const DESCRIPTION_MAX = 158;

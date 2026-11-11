@@ -22,7 +22,7 @@ import {
   pelletPriceTTC,
 } from "@/lib/pellets";
 import { PELLET_PICKUP, PHONE_DISPLAY, PHONE_HREF } from "@/lib/services";
-import { SITE_URL, buildFAQSchema, buildPageMetadata } from "@/lib/seo";
+import { ORGANIZATION_ID, SITE_URL, buildFAQSchema, buildPageMetadata } from "@/lib/seo";
 
 // Le prix change à minuit le dernier jour du lancement : le cron
 // app/api/cron/bonus invalide la page cette nuit-là, et ce délai d'une heure
@@ -106,7 +106,7 @@ export default function PalettePelletsComfoPage() {
       availability: "https://schema.org/LimitedAvailability",
       itemCondition: "https://schema.org/NewCondition",
       availableDeliveryMethod: "https://schema.org/OnSitePickup",
-      seller: { "@id": `${SITE_URL}/#organization` },
+      seller: { "@id": ORGANIZATION_ID },
     },
   };
 

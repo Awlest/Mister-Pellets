@@ -1,3 +1,5 @@
+import { ORGANIZATION_ID } from "@/lib/seo";
+
 interface JsonLdProps {
   data: Record<string, unknown> | Array<Record<string, unknown>>;
 }
@@ -102,7 +104,7 @@ export const AWLEST_ORGANIZATION = {
 };
 
 /** @id de l'entreprise : tout `provider`, `seller`, `publisher` ou `author` du site le cite au lieu de redécrire l'entreprise. */
-export const ORGANIZATION_ID = "https://mister-pellets.be/#organization";
+export { ORGANIZATION_ID };
 
 /** Coordonnées du bâtiment de Fernelmont, les mêmes sur les quatre sites d'Awlest (fiche Google). */
 export const GEO = { latitude: 50.5364246, longitude: 4.9778922 } as const;

@@ -9,7 +9,7 @@ import { Analytics } from "@/components/layout/Analytics";
 import { SmoothMotion } from "@/components/layout/SmoothMotion";
 import { JsonLd, ORGANIZATION_SCHEMA } from "@/components/seo/JsonLd";
 import { GA_BOOTSTRAP } from "@/lib/analytics";
-import { SITE_URL, SITE_NAME, SITE_LOCALE, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { SITE_URL, SITE_NAME, SITE_LOCALE, DEFAULT_OG_IMAGE, ORGANIZATION_ID } from "@/lib/seo";
 
 // Mise en page racine du site public. Pas d'app/layout.tsx : l'admin Payload
 // (app/(payload)) rend son propre <html> dans son RootLayout, et une mise en
@@ -98,9 +98,9 @@ export const metadata: Metadata = {
     locale: SITE_LOCALE,
     siteName: SITE_NAME,
     url: SITE_URL,
-    title: "Poêle à pellets en Wallonie, Vente & pose | Mister Pellets",
+    title: "Poêle à pellets en Wallonie : vente et pose | Mister Pellets",
     description:
-      "MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel. Pose en 1 jour, TVA à 6 % sur les logements de plus de 10 ans, livraison gratuite dans 20 km autour de Fernelmont.",
+      "Poêles à pellets MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel, vendus et posés en Wallonie. TVA à 6 % sur les logements de plus de 10 ans.",
     images: [
       {
         url: DEFAULT_OG_IMAGE,
@@ -112,8 +112,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mister Pellets, Poêle à pellets Wallonie",
-    description: "Vente, pose et entretien de poêles à pellets en Wallonie.",
+    title: "Poêle à pellets en Wallonie : vente et pose | Mister Pellets",
+    description:
+      "Poêles à pellets MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel, vendus et posés en Wallonie. TVA à 6 % sur les logements de plus de 10 ans.",
     images: [DEFAULT_OG_IMAGE],
   },
   alternates: {
@@ -144,7 +145,7 @@ const WEBSITE_SCHEMA = {
   url: SITE_URL,
   name: SITE_NAME,
   description: "Vente, installation et entretien de poêles à pellets en Wallonie.",
-  publisher: { "@id": `${SITE_URL}/#organization` },
+  publisher: { "@id": ORGANIZATION_ID },
   inLanguage: "fr-BE",
   // SearchAction retiré : la page /recherche n'existe pas encore, et un
   // SearchAction qui pointe vers une 404 est signalé en erreur par Google

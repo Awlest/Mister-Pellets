@@ -42,7 +42,9 @@ function priceLines(data: PricePageData | null): string {
     );
   }
   for (const install of data.installs) {
-    lines.push(`- Pose seule, ${install.label.toLowerCase()} (${install.heightM} m) : ${eur(install.laborTTC)} TVAC à 6 %.`);
+    // heightM vaut 0 pour une pose sans hauteur de référence (conduit déjà tubé, ventouse).
+    const height = install.heightM > 0 ? ` (${String(install.heightM).replace(".", ",")} m)` : "";
+    lines.push(`- Pose seule, ${install.label.toLowerCase()}${height} : ${eur(install.laborTTC)} TVAC à 6 %.`);
   }
   lines.push(`- Détail, exemples chiffrés et hypothèses : ${SITE_URL}${ROUTES.prices}`);
   return lines.join("\n");
@@ -138,8 +140,7 @@ Base : Fernelmont (5380), province de Namur.
 ## Prix (calculés le ${updated}, comme sur la page des prix)
 
 ${priceLines(prices)}
-- Ordres de grandeur, poêle, pose et tubage du conduit existant compris, TVA à
-  6 % : canalisable de 10 à 14 kW, 5 500 à 7 500 € ; hydro de 18 à 24 kW
+- Ordres de grandeur, poêle et pose compris, TVA à 6 % : canalisable de 10 à 14 kW, 5 500 à 7 500 € ; hydro de 18 à 24 kW
   raccordé aux radiateurs, 8 000 à 14 000 € selon la puissance, le ballon tampon
   et le démantèlement éventuel d'une cuve à mazout.
 - Le configurateur en ligne donne une estimation tout compris, TVA comprise ;

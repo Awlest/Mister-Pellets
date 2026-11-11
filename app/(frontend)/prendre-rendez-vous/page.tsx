@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, ORGANIZATION_ID } from "@/components/seo/JsonLd";
 import { formatPhone } from "@/lib/utils";
 import { BookingWidget } from "@/components/booking/BookingWidget";
 import { PHONE_HOURS, VISIT_HOURS } from "@/config/site";
@@ -40,7 +40,7 @@ export default function PrendreRendezVousPage() {
       description: s.shortDescription,
       provider: {
         "@type": "HomeAndConstructionBusiness",
-        "@id": "https://mister-pellets.be/#organization",
+        "@id": ORGANIZATION_ID,
       },
       areaServed: {
         "@type": "AdministrativeArea",

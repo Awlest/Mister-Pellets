@@ -26,8 +26,12 @@ export const DEFAULT_OG_IMAGE = "/opengraph-image";
 export const TITLE_SUFFIX = " | Mister Pellets";
 export const TITLE_MAX = 60;
 export const DESCRIPTION_MAX = 158;
-/** @id de l'entreprise (components/seo/JsonLd.tsx) : auteur, éditeur, prestataire et vendeur le citent. */
-export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+/**
+ * @id de l'entreprise (nœud décrit par components/seo/JsonLd.tsx) : auteur,
+ * éditeur, prestataire et vendeur le citent. Adresse écrite en dur, la seule
+ * du site : elle ne dépend pas de NEXT_PUBLIC_SITE_URL (www, barre finale).
+ */
+export const ORGANIZATION_ID = "https://mister-pellets.be/#organization";
 
 /** Image de partage d'un article ou d'un guide, construite par app/og/[type]/[slug]/route.tsx. */
 export function ogImagePath(type: "blog" | "guides", slug: string): string {

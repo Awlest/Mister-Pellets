@@ -10,7 +10,7 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { BonusAnnouncement } from "@/components/sections/BonusAnnouncement";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { buildFAQSchema } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE, SITE_LOCALE, SITE_NAME, SITE_URL, buildFAQSchema } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
 
 /**
@@ -21,13 +21,33 @@ import { CITIES } from "@/lib/cities";
  */
 export const revalidate = 3600;
 
+const HOME_TITLE = "Poêle à pellets en Wallonie : vente et pose | Mister Pellets";
+const HOME_DESCRIPTION =
+  "Poêles à pellets MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel, vendus et posés en Wallonie. TVA à 6 % sur les logements de plus de 10 ans.";
+
 export const metadata: Metadata = {
   // Suffixe écrit en toutes lettres : le template de titre de
   // app/(frontend)/layout.tsx ne s'applique qu'aux segments enfants, pas à
   // cette page, qui est dans le même segment que lui.
-  title: { absolute: "Poêle à pellets en Wallonie : vente et pose | Mister Pellets" },
-  description:
-    "Poêles à pellets MCZ, Edilkamin, EK63, Girolami, Austroflamm et Cadel, vendus et posés en Wallonie. TVA à 6 % sur les logements de plus de 10 ans.",
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
+  // L'openGraph d'une page remplace celui du gabarit en entier : tous les
+  // champs sont repris.
+  openGraph: {
+    type: "website",
+    locale: SITE_LOCALE,
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Mister Pellets, poêles à pellets en Wallonie" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
+  },
 };
 
 const FAQ_HOMEPAGE = [
@@ -425,17 +445,8 @@ export default function HomePage() {
               Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin d'entrée de gamme.
             </p>
             <p>
-              Ces fourchettes comptent le poêle, la pose et le tubage du conduit existant, avec la TVA à
-              6 % d&apos;un logement de plus de 10 ans. Avec un conduit déjà tubé, la facture descend : le
-              prix de départ du moment, les forfaits de pose et des exemples chiffrés sont sur la page{" "}
-              <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
-                prix d&apos;un poêle à pellets posé
-              </Link>
-              .
-            </p>
-            <p>
               Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
-              compte 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
+              comptez 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
               étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
             </p>
             <p>
@@ -444,6 +455,15 @@ export default function HomePage() {
               démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
               aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
               typiquement).
+            </p>
+            <p>
+              La pose varie surtout avec l&apos;évacuation : conduit déjà tubé, conduit à tuber, ventouse en
+              façade ou nouveau conduit par l&apos;extérieur ou la toiture. Le prix de départ du moment, les forfaits de pose par type de conduit et des
+              exemples chiffrés sont sur la page{" "}
+              <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+                prix d&apos;un poêle à pellets posé
+              </Link>
+              .
             </p>
             <p>
               Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que

@@ -71,9 +71,12 @@ export default async function PrixPoelePelletsPage() {
   const directAnswer =
     from && laborPrices.length > 0
       ? `En Wallonie, un poêle à pellets posé coûte à partir de ${eur(from.totalTTC)} TVAC avec un ${FROM_INSTALL_LABEL.toLowerCase()}${
-          exampleTotals.length > 0
-            ? `, et de ${eur(Math.min(...exampleTotals))} à ${eur(Math.max(...exampleTotals))} pour nos trois exemples avec un ${EXAMPLE_INSTALL_LABEL.toLowerCase()}`
-            : ""
+          // pickExamples rend un à trois poêles selon le lot : le nombre suit.
+          exampleTotals.length > 1
+            ? `, et de ${eur(Math.min(...exampleTotals))} à ${eur(Math.max(...exampleTotals))} pour nos ${exampleTotals.length === 2 ? "deux" : "trois"} exemples avec un ${EXAMPLE_INSTALL_LABEL.toLowerCase()}`
+            : exampleTotals.length === 1
+              ? `, et ${eur(exampleTotals[0]!)} pour notre exemple avec un ${EXAMPLE_INSTALL_LABEL.toLowerCase()}`
+              : ""
         }. La pose seule va de ${eur(Math.min(...laborPrices))} à ${eur(Math.max(...laborPrices))} selon la sortie des fumées. ${vatNote}${bonus ? ", bonus de saison déduit" : ""}.`
       : null;
 

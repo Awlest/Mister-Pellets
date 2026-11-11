@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CITIES, getCityBySlug } from "@/lib/cities";
 import { getAllProducts } from "@/lib/products";
-import { buildPageMetadata } from "@/lib/seo";
+import { ORGANIZATION_ID, buildPageMetadata } from "@/lib/seo";
 
 interface Props {
   // Pattern : /poeles-pellets-[ville]/, Next.js capture le segment après le préfixe.
@@ -68,7 +68,7 @@ export default async function CityPage({ params }: Props) {
     description: city.metaDescription,
     provider: {
       "@type": "HomeAndConstructionBusiness",
-      "@id": "https://mister-pellets.be/#organization",
+      "@id": ORGANIZATION_ID,
       name: "Mister Pellets",
       address: {
         "@type": "PostalAddress",
