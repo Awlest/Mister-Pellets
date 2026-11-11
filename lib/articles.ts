@@ -2315,6 +2315,7 @@ export const ARTICLES: ArticleData[] = [
         paragraphs: [
           "C'est la cause la plus fréquente. Le creuset (la coupelle où brûlent les pellets) accumule du mâchefer, résidu vitrifié de cendres et de minéraux, qui finit par boucher les trous d'admission d'air primaire. Sans air, la flamme s'étouffe et le poêle déclenche son extinction de sécurité.",
           "Diagnostic : à froid, sortez le creuset. Si vous voyez des amas durs et brillants comme du verre, c'est du mâchefer. Solution : frappez le creuset à l'envers sur une surface dure pour décoller, brossez les trous avec une brosse métallique, vérifiez qu'aucun trou n'est obstrué.",
+          "Si le poêle affiche un code au moment de s'éteindre, notez-le : notre guide des [codes d'erreur d'un poêle à pellets](/guides/codes-erreur-poele-pellets) dit ce qu'il signifie d'après la notice du fabricant.",
         ],
         callout: {
           variant: "info",

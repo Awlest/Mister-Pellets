@@ -219,6 +219,7 @@ ${priceLines(prices)}
 - Palette de pellets Comfo : ${SITE_URL}${ROUTES.pellets}
 - Prix des pellets en Wallonie, relevé mensuel de ValBiom et prix du kWh : ${SITE_URL}${ROUTES.blog}/prix-pellets-belgique
 - Poêle à pellets et coupure de courant (consommation, onduleur, redémarrage) : ${SITE_URL}${ROUTES.blog}/poele-pellets-sans-electricite-coupure-courant
+- Codes d'erreur et alarmes d'un poêle à pellets (table Cadel, réarmement) : ${SITE_URL}${ROUTES.guides}/codes-erreur-poele-pellets
 - Entretien annuel : ${SITE_URL}${ROUTES.maintenance}
 - Ramonage : ${SITE_URL}${ROUTES.sweeping}
 - Dépannage : ${SITE_URL}${ROUTES.repair}

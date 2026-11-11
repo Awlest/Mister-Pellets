@@ -676,6 +676,143 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
     metaDescription:
       "Quelle puissance de poêle à pellets selon la surface et le PEB : tableaux 6, 8, 10, 12 kW, plafonds hauts, trois exemples chiffrés en Wallonie.",
   },
+  // Codes d'erreur (11/11/2026). Seules les notices officielles lues ce jour-là
+  // sont reprises : Cadel, manuel de l'utilisateur réf. 89023068A (©2025, Sweet,
+  // Perla, Cristal, One, Beam, Accent, Sharp, Lee, Chrome, Round, Sound, Bold 7
+  // Up Twin, Brio 7, Bi Flux), § 12 et 12.10-12.11, sur grp.cadelsrl.com ; FAQ
+  // belge de MCZ (réarmement). Les tableaux MCZ, Edilkamin, EK63, Girolami et
+  // Austroflamm restent à écrire, notice officielle en main.
+  {
+    slug: "codes-erreur-poele-pellets",
+    publishedAt: "2026-11-11",
+    modifiedAt: "2026-11-11",
+    title: "Codes d'erreur et pannes d'un poêle à pellets : que faire ?",
+    description:
+      "Ce que veut dire une alarme de poêle à pellets, la table des codes Cadel d'après la notice officielle, comment réarmer, ce qu'il ne faut pas faire et quand appeler.",
+    category: "Entretien",
+    excerpt:
+      "Un poêle à pellets qui s'arrête affiche presque toujours un code. Ce code dit quel organe de sécurité l'a arrêté. Voici comment le lire, les gestes permis, et la table complète des codes Cadel, tirée de la notice du fabricant.",
+    directAnswer:
+      "Un code d'erreur indique quelle sécurité a arrêté le poêle à pellets, ou poêle à granulés : allumage raté, flamme éteinte, surchauffe, dépression dans le conduit, sonde ou ventilateur en panne. Notez le code, laissez refroidir, videz le brasier, vérifiez le réservoir et la porte, puis réarmez une seule fois. Si l'alarme revient, appelez un technicien.",
+    sections: [
+      {
+        heading: "Lire un code d'erreur",
+        paragraphs: [
+          "Quand le poêle détecte un fonctionnement anormal, il coupe l'arrivée de pellets, passe en phase de refroidissement et affiche un code sur son écran, sa télécommande ou son application. Chez Cadel, les codes commencent par « A » suivi de deux chiffres ; d'autres marques ont leur propre nomenclature. Le code ne dit pas toujours la cause exacte, mais il dit quelle sécurité a réagi : c'est ce qui oriente la vérification.",
+          "Notez le code et la marque du poêle avant tout. Au téléphone, c'est la première chose qu'on vous demandera, et elle évite souvent un déplacement inutile.",
+        ],
+      },
+      {
+        heading: "Les familles d'alarmes, toutes marques",
+        paragraphs: [
+          "La notice Cadel décrit ces sécurités une à une. On retrouve les mêmes familles sur la plupart des poêles à pellets, sous d'autres codes.",
+        ],
+        table: {
+          headers: ["Famille", "Ce qui se passe", "Vérification possible"],
+          rows: [
+            ["Allumage raté", "Aucune flamme ne se développe pendant la phase d'allumage", "Brasier propre et bien en place, pellets dans le réservoir, porte et couvercle fermés"],
+            ["Extinction anormale", "La flamme s'éteint en cours de fonctionnement", "Niveau de pellets dans le réservoir"],
+            ["Dépression, pressostat", "La pression dans le conduit sort des limites : conduit bouché, vent fort, porte ou réservoir ouvert, joints usés", "Porte, couvercle, joints ; le conduit, lui, se contrôle par un professionnel"],
+            ["Surchauffe", "Les fumées, le réservoir ou l'eau dépassent leur seuil de sécurité", "Laisser refroidir, dégager les grilles d'aération"],
+            ["Sonde ou ventilateur", "Sonde des fumées en panne, ventilateur des fumées à l'arrêt", "Aucune : appeler"],
+            ["Coupure de courant", "Le poêle s'arrête et redémarre selon sa notice", "Attendre la fin du cycle de reprise"],
+          ],
+          caption: "D'après la notice Cadel réf. 89023068A, § 12 (dispositifs de sécurité et alarmes).",
+        },
+      },
+      {
+        heading: "Codes Cadel : la table de la notice",
+        paragraphs: [
+          "Cadel publie la table suivante dans le manuel de l'utilisateur de ses poêles Sweet, Perla, Cristal, One, Beam, Accent, Sharp, Lee, Chrome, Round, Sound, Bold, Brio et Bi Flux. D'autres gammes Cadel peuvent avoir une table légèrement différente : vérifiez dans la notice de votre modèle. Parmi les poêles du catalogue, le [Cadel Perla 7](/produit/cadel-perla-7) et le [Cadel Sweet 7](/produit/cadel-sweet-7) relèvent de ce manuel.",
+        ],
+        table: {
+          headers: ["Code", "Ce que dit la notice", "Ce que la notice demande"],
+          rows: [
+            ["A01", "Défaut d'allumage du feu", "Contrôler la propreté et la position du brasier, le niveau de pellets, la fermeture du couvercle et de la porte. Causes possibles aussi : conduit bouché, résistance d'allumage endommagée"],
+            ["A02", "Extinction anormale du feu", "Contrôler le niveau de pellets dans le réservoir"],
+            ["A03", "Alarme thermostats : le réservoir de pellets ou l'eau dépasse le seuil de sécurité", "Attendre la fin du refroidissement, annuler l'alarme, rallumer avec le dosage de pellets au minimum, vérifier que la poussière ne bouche pas la grille d'aération arrière"],
+            ["A04", "Surchauffe des fumées", "Réduire le chargement de pellets (dosage)"],
+            ["A05", "Alarme pressostat : intervention du pressostat des fumées", "Vérifier conduit, porte, réservoir, joints, conduits latéraux des fumées ; causes possibles : cheminée trop longue, météo défavorable, poêle bouché"],
+            ["A06", "Alarme de nettoyage : nettoyeur bloqué (brasier autonettoyant seulement)", "Nettoyer le brasier et retirer ce qui bloque la rotation"],
+            ["A08", "Fonctionnement anormal du ventilateur des fumées", "Contacter le service après-vente si l'alarme persiste"],
+            ["A09", "Panne de la sonde des fumées", "Contacter le service après-vente si l'alarme persiste"],
+            ["SERVICE", "Avis de maintenance périodique, non bloquant", "Les heures de fonctionnement prévues avant l'entretien sont écoulées : appeler pour l'entretien"],
+          ],
+          caption: "Cadel, manuel de l'utilisateur réf. 89023068A, § 12.10, lu le 11/11/2026. Résumé ; la notice de votre modèle fait foi.",
+        },
+      },
+      {
+        heading: "Réarmer après une alarme",
+        paragraphs: [
+          "Chez Cadel, la notice demande d'appuyer quelques instants sur la touche 1 (ESC). Le poêle contrôle alors si la cause persiste : si oui, l'alarme revient ; sinon, il se met à l'arrêt et vous pouvez le rallumer. MCZ, dans sa foire aux questions belge, indique de maintenir enfoncé quelques secondes le bouton marche-arrêt, ou de suivre la notice.",
+          "Avant de relancer, laissez le poêle finir son refroidissement et videz le brasier s'il est plein de pellets non brûlés. Rallumer sur un tas de pellets, c'est risquer un départ de flamme brutal dans le foyer.",
+        ],
+      },
+      {
+        heading: "Après une coupure de courant",
+        paragraphs: [
+          "La notice Cadel distingue deux cas. Une coupure de moins de 10 secondes : le poêle reprend où il en était. Plus longue, poêle allumé ou en phase d'allumage : au retour du courant, il fait un refroidissement complet, affiché « ON BLACK OUT », puis un nouvel allumage. Les autres marques ont leur propre comportement ; notre article [poêle à pellets et coupure de courant](/blog/poele-pellets-sans-electricite-coupure-courant) le détaille marque par marque.",
+        ],
+      },
+      {
+        heading: "Ce qu'il ne faut jamais faire",
+        list: [
+          "Relancer en boucle : une alarme qui revient signale une cause qui persiste, et chaque allumage raté remplit le brasier.",
+          "Allumer avec un allume-feu, du papier ou de l'alcool : la résistance d'allumage s'en charge.",
+          "Ouvrir la porte ou le réservoir pendant le refroidissement.",
+          "Démonter la vis sans fin, la carte électronique ou le ventilateur des fumées : c'est le travail d'un technicien, et la garantie du fabricant en dépend.",
+        ],
+      },
+      {
+        heading: "Quand appeler, et combien coûte un dépannage",
+        paragraphs: [
+          "Appelez quand la même alarme revient après un réarmement, quand une alarme de sonde ou de ventilateur s'affiche, ou à la moindre odeur de fumée dans la pièce. Notre [dépannage](/depannage-poele-a-pellets) intervient sur toutes les marques, à 110 € TVAC la première heure puis 60 € TVAC par heure, déplacement inclus, pièces en plus.",
+          "Beaucoup d'alarmes viennent d'un poêle encrassé ou de pellets de mauvaise qualité. L'[entretien annuel](/entretien-poele-a-pellets), à 175 € TVAC ramonage compris, en évite une bonne part ; notre [guide de l'entretien](/guides/comment-entretenir-poele-pellets) donne les gestes du quotidien. Si votre poêle s'arrête sans afficher de code, lisez [pourquoi un poêle à pellets s'éteint tout seul](/blog/poele-pellets-eteint-tout-seul-causes).",
+        ],
+      },
+      {
+        heading: "Les autres marques que nous posons",
+        paragraphs: [
+          "MCZ, Edilkamin, EK63, Girolami et Austroflamm ont leur propre table de codes, propre à chaque gamme. Nous ne les reprenons ici qu'après lecture de la notice officielle de chaque fabricant : en attendant, la notice papier de votre poêle, ou son application, donne la signification du code. Donnez-nous le code au téléphone, nous vous dirons ce qu'il veut dire.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: "Que veut dire A01 sur un poêle à pellets ?",
+        answer:
+          "Chez Cadel, A01 signale un défaut d'allumage : aucune flamme pendant la phase d'allumage. La notice demande de contrôler le brasier, le niveau de pellets et la fermeture de la porte et du couvercle ; un conduit bouché ou une résistance d'allumage usée peuvent aussi en être la cause. Sur une autre marque, le même code peut vouloir dire autre chose : lisez votre notice.",
+      },
+      {
+        question: "Que veut dire A05 sur un poêle Cadel ?",
+        answer:
+          "L'intervention du pressostat des fumées : la pression dans le conduit sort des limites. La notice cite une cheminée obstruée, une porte ou un réservoir ouvert, des joints qui fuient, des conduits de fumées encrassés, un conduit trop long ou une météo défavorable.",
+      },
+      {
+        question: "Comment réarmer un poêle à pellets en alarme ?",
+        answer:
+          "Chez Cadel, appui de quelques instants sur la touche 1 (ESC) ; chez MCZ, appui de quelques secondes sur le bouton marche-arrêt, d'après sa foire aux questions. Laissez d'abord le poêle refroidir et videz le brasier. Réarmez une fois : si l'alarme revient, appelez.",
+      },
+      {
+        question: "Mon poêle à pellets se met en sécurité tout seul, que faire ?",
+        answer:
+          "Notez le code affiché, laissez refroidir, vérifiez le réservoir, le brasier, la porte et le couvercle, puis réarmez une fois. Si l'arrêt se répète, faites appel à un technicien : notre [dépannage](/depannage-poele-a-pellets) coûte 110 € TVAC la première heure.",
+      },
+      {
+        question: "Le message SERVICE bloque-t-il le poêle ?",
+        answer:
+          "Non, chez Cadel c'est un avis de maintenance périodique, non bloquant : les heures de fonctionnement prévues avant l'entretien sont écoulées. Prenez rendez-vous pour l'[entretien annuel](/entretien-poele-a-pellets).",
+      },
+    ],
+    sources: [
+      { label: "Cadel, manuel de l'utilisateur « Poêle à granulés », réf. 89023068A (©2025), § 12, 12.9, 12.10 et 12.11, lu le 11/11/2026", href: "https://grp.cadelsrl.com/documents/89023068A.pdf" },
+      { label: "MCZ, foire aux questions belge : réinitialiser une alarme, lue le 11/11/2026", href: "https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions" },
+      { label: "Tarifs de dépannage et d'entretien de Mister Pellets au 11/11/2026" },
+    ],
+    metaTitle: "Codes d'erreur d'un poêle à pellets : que faire ?",
+    metaDescription:
+      "Codes d'erreur d'un poêle à pellets : ce que dit l'alarme, les codes Cadel d'après la notice, comment réarmer, les gestes à éviter, quand appeler.",
+  },
 ];
 
 /** Mots du guide : chapô, intertitres, paragraphes, listes et FAQ. */
