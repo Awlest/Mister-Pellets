@@ -8,13 +8,13 @@ import { DiscountedPrice } from "@/components/forms/DiscountedPrice";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { InlineText } from "@/components/ui/inline-text";
 import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/config/navigation";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 import { CATEGORIES } from "@/lib/categories";
 import { eur } from "@/lib/estimate";
 import { getInstallPrices, heightNote } from "@/lib/price-examples";
 import { HAUTEUR, OPTIONS, VAT, formatEur, withVat } from "@/lib/pose/moteur";
 import { TARIFS } from "@/lib/pose/tarifs";
-import { POSE_DURATIONS, getService } from "@/lib/services";
+import { POSE_DURATIONS, PROJECT_LEAD_TIME, getService } from "@/lib/services";
 import { ORGANIZATION_ID, SITE_URL, buildFAQSchema, buildPageMetadata } from "@/lib/seo";
 import { typo } from "@/lib/typo";
 
@@ -81,7 +81,7 @@ export default function InstallationPage() {
     {
       question: "Quel délai entre la demande et la pose ?",
       answer:
-        "Comptez 3 à 6 semaines en saison normale, plus longtemps de septembre à décembre. La visite technique se planifie dans la semaine qui suit votre demande et le devis arrive sous 48 heures ouvrées. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours.",
+        `Comptez ${PROJECT_LEAD_TIME.range} ${PROJECT_LEAD_TIME.scope}, ${PROJECT_LEAD_TIME.season}. La visite technique se planifie dans la semaine qui suit votre demande et le devis arrive sous 48 heures ouvrées. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours.`,
     },
   ];
 
@@ -123,13 +123,13 @@ export default function InstallationPage() {
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="primary" size="lg" className="w-full sm:w-auto">
-                <Link href={ROUTES.visit}>
+                <Link href={ROUTES.bookingWidget}>
                   <CalendarCheck aria-hidden />
-                  Réserver la visite technique
+                  {ACTION_LABELS.booking}
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-                <Link href={ROUTES.configurator}>Estimer mon installation</Link>
+                <Link href={ROUTES.configurator}>{ACTION_LABELS.estimate}</Link>
               </Button>
             </div>
           </div>

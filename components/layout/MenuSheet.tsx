@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight, Calculator, CalendarDays, ChevronRight, Phone, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { Sheet, SheetClose, SheetContent } from "@/components/ui/sheet";
-import { INFO_LINKS, ROUTES, isFilterLink, visibleNav, type NavLink } from "@/config/navigation";
+import { ACTION_LABELS, INFO_LINKS, ROUTES, isFilterLink, visibleNav, type NavLink } from "@/config/navigation";
 import { FAMILY_SITES, PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -174,13 +174,13 @@ export default function MenuSheet({
           <SheetClose asChild>
             <Link href={ROUTES.bookingWidget} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full")}>
               <CalendarDays aria-hidden />
-              Prendre rendez-vous
+              {ACTION_LABELS.booking}
             </Link>
           </SheetClose>
           <SheetClose asChild>
             <Link href={ROUTES.configurator} className={cn(buttonVariants({ variant: "primary", size: "lg" }), "w-full")}>
               <Calculator aria-hidden />
-              Estimer mon projet
+              {ACTION_LABELS.estimate}
             </Link>
           </SheetClose>
         </div>

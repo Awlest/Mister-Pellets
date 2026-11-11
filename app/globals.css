@@ -354,7 +354,7 @@ body {
 
 /* === FICHE PRODUIT : LA BARRE D'ACTION REMPLACE LA BARRE DU BAS ===
  * Sous 1 024 px, la fiche produit porte une barre d'action (.mp-actionbar-nav :
- * entrée Menu, prix, bouton « Chiffrer la pose »). Empilée sur la barre du
+ * entrée Menu, prix, bouton « Estimer mon projet »). Empilée sur la barre du
  * bas, elle couvrait 18 % de l'écran avec deux aplats orange (recette du
  * 11/11/2026). Sur ce gabarit, la barre du bas n'est donc pas affichée : sa
  * hauteur et son décalage tombent à zéro, ce qui cale aussi le bandeau cookies

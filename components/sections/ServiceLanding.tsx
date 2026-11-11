@@ -8,6 +8,7 @@ import { SITE_URL } from "@/lib/seo";
 import { PHONE_DISPLAY, PHONE_HREF, type Service } from "@/lib/services";
 import { PHONE_HOURS } from "@/config/site";
 import { typo } from "@/lib/typo";
+import { ACTION_LABELS } from "@/config/navigation";
 
 export interface ServiceLandingProps {
   service: Service;
@@ -225,7 +226,7 @@ export function ServiceLanding({
                 </p>
                 <Button asChild variant="outline" size="default" className="w-full justify-center">
                   <Link href="/prendre-rendez-vous#reserver">
-                    Prendre rendez-vous
+                    {ACTION_LABELS.booking}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>

@@ -592,14 +592,14 @@ export async function notifyInternalEstimate(est: {
     { label: "Délai souhaité", valueHtml: escapeHtml(est.delay) },
   ];
 
-  const total = `${fmtEuros(est.totalTTC)} TTC (TVA ${Math.round(est.vatRate * 100)} %)${
+  const total = `${fmtEuros(est.totalTTC)} TVAC (TVA ${Math.round(est.vatRate * 100)} %)${
     est.quoteNote ? `, ${est.quoteNote}` : ""
   }${est.monthly ? ` · ${fmtEuros(est.monthly)}/mois sur ${est.months} mois` : ""}`;
 
   const html = brandedEmailHtml({
     audience: "equipe",
     title: "Nouvelle estimation configurée en ligne",
-    preheader: `${est.productName}, ${fmtEuros(est.totalTTC)} TTC, ${est.postalCode}`,
+    preheader: `${est.productName}, ${fmtEuros(est.totalTTC)} TVAC, ${est.postalCode}`,
     eyebrow: "Nouvelle estimation en ligne",
     heading: escapeHtml(est.name),
     lead: escapeHtml(total),
@@ -645,7 +645,7 @@ export async function confirmCustomerEstimate(est: {
     { label: "Poêle choisi", valueHtml: `<strong>${escapeHtml(est.productName)}</strong>` },
     {
       label: "Estimation",
-      valueHtml: `<span class="mp-serif" style="font-family:${SERIF};font-size:21px;font-weight:600;color:${C.greenDeep}">${fmtEuros(est.totalTTC)} TTC</span><br>poêle et pose compris${
+      valueHtml: `<span class="mp-serif" style="font-family:${SERIF};font-size:21px;font-weight:600;color:${C.greenDeep}">${fmtEuros(est.totalTTC)} TVAC</span><br>poêle et pose compris${
         credit ? `<br><span style="color:${C.inkSoft}">${escapeHtml(credit)}</span>` : ""
       }`,
     },
@@ -655,10 +655,10 @@ export async function confirmCustomerEstimate(est: {
 
   const html = brandedEmailHtml({
     title: "Votre estimation Mister Pellets",
-    preheader: `${est.productName} : ${fmtEuros(est.totalTTC)} TTC, poêle et pose compris.`,
+    preheader: `${est.productName} : ${fmtEuros(est.totalTTC)} TVAC, poêle et pose compris.`,
     eyebrow: "Estimation enregistrée",
     heading: "Merci pour votre configuration",
-    lead: escapeHtml(`${est.productName} : ${fmtEuros(est.totalTTC)} TTC, poêle et pose compris.`),
+    lead: escapeHtml(`${est.productName} : ${fmtEuros(est.totalTTC)} TVAC, poêle et pose compris.`),
     bodyHtml: `${emailParagraph(escapeHtml(hello))}
     ${emailParagraph(escapeHtml(thanks), 22)}
     ${emailRecap(recapRows)}
@@ -676,7 +676,7 @@ export async function confirmCustomerEstimate(est: {
     thanks,
     "",
     `Poêle choisi : ${est.productName}`,
-    `Estimation : ${fmtEuros(est.totalTTC)} TTC, poêle et pose compris.`,
+    `Estimation : ${fmtEuros(est.totalTTC)} TVAC, poêle et pose compris.`,
     ...(credit ? [credit, creditWarning] : []),
     ...(est.bonusNote ? [`Bonus : ${est.bonusNote}`] : []),
     ...(est.quoteNote ? [`Sur devis : ${est.quoteNote}`] : []),

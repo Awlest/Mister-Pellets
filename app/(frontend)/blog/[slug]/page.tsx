@@ -22,6 +22,7 @@ import {
 import { GUIDES } from "@/lib/guides";
 import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { CITIES } from "@/lib/cities";
+import { ACTION_LABELS } from "@/config/navigation";
 import {
   buildPageMetadata,
   buildFAQSchema,
@@ -248,7 +249,7 @@ export default async function ArticlePage({ params }: Props) {
         description={article.excerpt}
         actions={
           <Button asChild variant="primary" size="lg">
-            <Link href="/estimation">Chiffrer mon installation</Link>
+            <Link href="/estimation">{ACTION_LABELS.estimate}</Link>
           </Button>
         }
         breadcrumbs={[

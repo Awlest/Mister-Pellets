@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
+import { formatPrice, formatPriceHT } from "@/lib/utils";
+import { reducedVatPrice } from "@/lib/product-price";
 import { BONUS, bonusBadgeFor, bonusLabelFor } from "@/lib/bonus";
 import { typo } from "@/lib/typo";
 import { ProductAccessories } from "@/components/product/ProductAccessories";
@@ -25,6 +26,8 @@ interface Props {
   variants: ProductVariantData[];
   /** Compléments en option : leur total s'ajoute à la configuration choisie. */
   accessories?: ProductAccessory[];
+  /** Ligne de garantie (lib/product-price.ts, guaranteeLine), juste sous le prix comme sur une fiche simple. */
+  guarantee?: string;
 }
 
 const STOCK_LABELS: Record<VariantStockStatus, string> = {
@@ -63,6 +66,7 @@ export function ProductVariantPanel({
   variantOptions,
   variants,
   accessories,
+  guarantee,
 }: Props) {
   // Axes triés par sortOrder (ordre d'affichage défini dans l'admin).
   const axes = React.useMemo(
@@ -136,6 +140,11 @@ export function ProductVariantPanel({
     () => Math.min(...variants.map(shownPrice).filter((n) => n > 0)),
     [variants],
   );
+
+  // Aucune variante chiffrée ni prix de fiche : la fiche est sur devis, quelle
+  // que soit la configuration. Rien n'invite alors à en choisir une « pour
+  // voir le prix » (137 fiches MCZ et Cadel le 11/11/2026).
+  const anyPriced = Number.isFinite(minPrice) || (basePriceTTC != null && basePriceTTC > 0);
 
   // Bonus de saison (calculé côté serveur dans lib/products.ts) : le prix
   // catalogue reste affiché barré à côté du prix remisé.
@@ -249,7 +258,7 @@ export function ProductVariantPanel({
                 soit {formatPriceHT(ttc)} HTVA
               </span>
               <p className="mt-3 text-sm text-mp-green-deep">
-                <span className="font-semibold">{formatPriceReducedVat(ttc)} TVAC</span> si
+                <span className="font-semibold">{formatPrice(reducedVatPrice(ttc))} TVAC</span> si
                 nous le posons sur une habitation de plus de 10 ans
                 <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
               </p>
@@ -262,6 +271,8 @@ export function ProductVariantPanel({
             {typo(bonusLabelFor(productBrand))} déduit. {BONUS.conditions}
           </p>
         ) : null}
+
+        {guarantee ? <p className="mt-2 text-sm text-mp-ink-soft">{typo(guarantee)}</p> : null}
 
         {activeVariant && (
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-mp-ink-soft">
@@ -300,22 +311,26 @@ export function ProductVariantPanel({
           accessories={accessories}
           basePriceTTC={activeVariant && activePriced ? shownPrice(activeVariant) : null}
           missingBaseHint={
-            activeVariant
-              ? "Cette configuration du poêle se chiffre sur devis."
-              : "Choisissez la configuration du poêle pour voir le total."
+            !anyPriced
+              ? "Le poêle se chiffre sur devis."
+              : activeVariant
+                ? "Cette configuration du poêle se chiffre sur devis."
+                : "Choisissez la configuration du poêle pour voir le total."
           }
         />
       ) : null}
 
       {/* La configuration choisie sert au chiffrage, pas à un panier :
           la pose se confirme lors de la visite technique. */}
-      <p className="text-sm text-mp-ink-soft">
-        {activeVariant
-          ? activePriced
-            ? "Configuration disponible. Le prix de la pose se chiffre après la visite sur place."
-            : "Cette configuration se chiffre sur devis."
-          : "Sélectionnez une configuration pour voir le prix."}
-      </p>
+      {anyPriced && (
+        <p className="text-sm text-mp-ink-soft">
+          {activeVariant
+            ? activePriced
+              ? "Configuration disponible. Le prix de la pose se chiffre après la visite sur place."
+              : "Cette configuration se chiffre sur devis."
+            : "Sélectionnez une configuration pour voir le prix."}
+        </p>
+      )}
 
       {/* Le paiement en ligne a été retiré le 04/09/2026 : ne pas
           réintroduire de bouton d'achat ni de mention de paiement ici. */}

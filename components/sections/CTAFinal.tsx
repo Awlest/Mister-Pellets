@@ -5,13 +5,15 @@ import { typo } from "@/lib/typo";
 import { cn } from "@/lib/utils";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { toneClass, type SectionTone } from "@/lib/section-tone";
+import { ACTION_LABELS } from "@/config/navigation";
 
 interface CTAFinalProps {
   /** Fond de la section. La page decide de l alternance creme / beige. */
   tone?: SectionTone;
   title?: string;
   description?: string;
-  primaryCta?: { label: string; href: string };
+  /** `rel` : « nofollow » pour un lien à paramètres (demande de prix d'une fiche). */
+  primaryCta?: { label: string; href: string; rel?: string };
   /**
    * Classes ajoutées au bouton principal : une page qui porte déjà un aplat
    * orange à l'écran (barre d'action d'une fiche produit) le passe au vert.
@@ -31,7 +33,7 @@ export function CTAFinal({
   tone = "beige",
   title = "Une question ? Un projet ?",
   description = "Devis gratuit en 60 secondes, ou échange direct au téléphone. Notre équipe répond personnellement, on est basés à Fernelmont.",
-  primaryCta = { label: "Chiffrer mon installation", href: "/estimation" },
+  primaryCta = { label: ACTION_LABELS.estimate, href: "/estimation" },
   primaryClassName,
   secondaryCta,
   showPhone = true,
@@ -49,7 +51,7 @@ export function CTAFinal({
 
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Button asChild variant="primary" size="lg" className={primaryClassName}>
-            <Link href={primaryCta.href}>{primaryCta.label}</Link>
+            <Link href={primaryCta.href} rel={primaryCta.rel}>{primaryCta.label}</Link>
           </Button>
           {secondaryCta && (
             <Button asChild variant="outline" size="lg">

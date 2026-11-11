@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ROUTES } from "@/config/navigation";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { ArrowRight, Award, Calendar, MapPin } from "lucide-react";
@@ -124,7 +124,7 @@ export default async function BrandPage({ params }: Props) {
         actions={
           <>
             <Button asChild variant="primary" size="lg">
-              <Link href="/estimation">Chiffrer mon installation</Link>
+              <Link href="/estimation">{ACTION_LABELS.estimate}</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
               <Link href={ROUTES.installation}>Installation et pose</Link>

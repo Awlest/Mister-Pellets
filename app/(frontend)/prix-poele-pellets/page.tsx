@@ -5,7 +5,7 @@ import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
 import { CallbackForm } from "@/components/forms/CallbackForm";
 import { NextSlot } from "@/components/booking/NextSlot";
-import { ROUTES } from "@/config/navigation";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BONUS, bonusBadgeFor } from "@/lib/bonus";
@@ -161,9 +161,9 @@ export default async function PrixPoelePelletsPage() {
               </div>
             </div>
             <Button asChild variant="secondary" size="lg" className="mt-4 w-full">
-              <Link href={ROUTES.visit}>
+              <Link href={ROUTES.bookingWidget}>
                 <CalendarCheck aria-hidden />
-                Choisir mon créneau
+                {ACTION_LABELS.booking}
               </Link>
             </Button>
           </Card>
@@ -351,9 +351,9 @@ export default async function PrixPoelePelletsPage() {
           </ol>
           <div className="mt-10 flex justify-center">
             <Button asChild variant="secondary" size="default">
-              <Link href={ROUTES.visit}>
+              <Link href={ROUTES.bookingWidget}>
                 <CalendarCheck aria-hidden />
-                Réserver la visite en ligne
+                {ACTION_LABELS.booking}
               </Link>
             </Button>
           </div>

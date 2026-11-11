@@ -165,19 +165,22 @@ export function ProductListing({
 export function CatalogueListing({
   entries,
   priority = false,
+  pageSize = LISTING_PAGE_SIZE,
   className,
 }: {
   entries: CatalogueEntry[];
   priority?: boolean;
+  /** Cartes montrées d'emblée, puis ajoutées par « Voir plus » (12 sur une catégorie). */
+  pageSize?: number;
   className?: string;
 }) {
   const products = useMemo(() => entries.map(decodeEntry), [entries]);
-  const [visible, setVisible] = useState(LISTING_PAGE_SIZE);
+  const [visible, setVisible] = useState(pageSize);
   return (
     <ProductListing
       products={products}
       visible={visible}
-      onShowMore={() => setVisible((v) => v + LISTING_PAGE_SIZE)}
+      onShowMore={() => setVisible((v) => v + pageSize)}
       priority={priority}
       className={className}
     />

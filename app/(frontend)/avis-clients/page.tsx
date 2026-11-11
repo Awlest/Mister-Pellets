@@ -4,6 +4,7 @@ import { CTAFinal } from "@/components/sections/CTAFinal";
 import { EMAIL } from "@/config/site";
 import { formatCheckedAt, formatRating, getGoogleReviews } from "@/lib/google-reviews";
 import { buildPageMetadata } from "@/lib/seo";
+import { ACTION_LABELS } from "@/config/navigation";
 
 const LINK = "text-mp-orange-ink underline hover:no-underline";
 
@@ -118,7 +119,7 @@ export default async function AvisClientsPage() {
         tone="beige"
         title="Votre poêle chiffré en 2 minutes"
         description="Surface, usage, conduit : le configurateur donne un prix tout compris. Le prix ferme est confirmé après la visite technique, sans engagement."
-        secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous#reserver" }}
+        secondaryCta={{ label: ACTION_LABELS.booking, href: "/prendre-rendez-vous#reserver" }}
       />
     </>
   );

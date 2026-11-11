@@ -14,8 +14,9 @@
  */
 
 import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
-import { POSE_DURATIONS } from "@/lib/services";
+import { POSE_DURATIONS, PROJECT_LEAD_TIME } from "@/lib/services";
 import { POWER_RULE, kwFor } from "@/lib/power";
+import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
 
 export type FaqCategory =
   | "general"
@@ -70,7 +71,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Combien de temps entre la demande de devis et la pose ?",
     answer:
-      "Comptez 3 à 6 semaines en saison normale, plus long de septembre à décembre où la demande est forte. Le diagnostic à domicile est planifiable dans la semaine qui suit votre demande. Le devis tombe sous 48 heures ouvrées après visite. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours, les configurations spécifiques (couleurs rares, hydros sur-mesure) en 3 à 5 semaines.",
+      `Comptez ${PROJECT_LEAD_TIME.range} ${PROJECT_LEAD_TIME.scope}, ${PROJECT_LEAD_TIME.season}, quand la demande est forte. Le diagnostic à domicile est planifiable dans la semaine qui suit votre demande. Le devis tombe sous 48 heures ouvrées après visite. Une fois le devis signé, les modèles courants sont disponibles en 5 à 10 jours, les configurations spécifiques (couleurs rares, hydros sur-mesure) en 3 à 5 semaines.`,
   },
   {
     id: "general-volume",
@@ -144,7 +145,7 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Canalisable ou hydro, comment choisir ?",
     answer:
-      "Canalisable si vous voulez chauffer votre pièce de vie principale plus 1 ou 2 pièces secondaires (chambres, bureau) via un réseau de gaines isolées. Hydro si vous voulez chauffer toute la maison via le circuit existant de radiateurs ou de plancher chauffant, typiquement en remplacement d'une chaudière mazout. Hydro est nettement plus cher (8 000 à 14 000 € posé contre 5 500 à 8 000 € pour un canalisable) mais c'est la seule solution pour un chauffage central complet.",
+      `Canalisable si vous voulez chauffer votre pièce de vie principale plus 1 ou 2 pièces secondaires (chambres, bureau) via un réseau de gaines isolées. Hydro si vous voulez chauffer toute la maison via le circuit existant de radiateurs ou de plancher chauffant, typiquement en remplacement d'une chaudière mazout. Hydro est nettement plus cher (${rangeText(PRICE_RANGES.hydro)} posé contre ${rangeText(PRICE_RANGES.canalisable)} pour un canalisable, TVA à 6 % comprise) mais c'est la seule solution pour un chauffage central complet.`,
   },
 
   // ───────────────────────────────────────────────────────────────────

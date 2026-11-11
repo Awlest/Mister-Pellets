@@ -161,6 +161,12 @@ export default function PalettePelletsComfoPage() {
                   width={666}
                   height={1254}
                   alt={COMFO.photoAlt}
+                  // loading="lazy" : sans lui, React annonce l'image en préchargement
+                  // sur toute page qui précharge cette route par un lien (bandeau,
+                  // menu) ; elle était téléchargée sans être affichée sur 14 des 26
+                  // pages vues (vérification du 11/11/2026). En haut de sa page, elle
+                  // part dès la mise en page, avec la priorité haute.
+                  loading="lazy"
                   fetchPriority="high"
                   className="h-auto max-h-64 w-auto sm:max-h-[28rem] lg:max-h-[44rem]"
                 />

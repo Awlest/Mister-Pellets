@@ -24,15 +24,15 @@ import {
 import { isHybrid, misterBoisCanonical } from "@/lib/catalog-scope";
 import { REDIRECTED_PRODUCT_SLUGS } from "@/config/redirects";
 import { BRANDS, TOP_TIER_BRANDS } from "@/lib/brands";
-import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
+import { formatPrice, formatPriceHT } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { BONUS, bonusLabelFor } from "@/lib/bonus";
 import { typo } from "@/lib/typo";
 import { productFamily, productNeighbours } from "@/lib/product-neighbours";
-import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
+import { guaranteeLine, priceBadge, reducedVatPrice, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { formatKw } from "@/lib/power";
 import { categoriesOf } from "@/lib/categories";
-import { ROUTES } from "@/config/navigation";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 import {
   productDescription,
   productImages,
@@ -41,6 +41,7 @@ import {
   productTitle,
 } from "@/lib/product-seo";
 import type { ProductDemo, ProductType } from "@/lib/products-demo";
+import { productPrimaryAction } from "@/lib/price-request";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -176,8 +177,10 @@ export default async function ProductPage({ params }: Props) {
   const specs = productSpecs(product);
   const guide = typeGuide(product);
   const categories = categoriesOf(product);
-  // Le configurateur s'ouvre sur ce modèle (EstimateConfigurator lit `modele`).
-  const estimateHref = `${ROUTES.configurator}?modele=${encodeURIComponent(product.slug)}`;
+  // Bouton principal : fiche chiffrée, le configurateur s'ouvre sur ce modèle
+  // (EstimateConfigurator lit `modele`) ; fiche sur devis, ce modèle n'est pas
+  // dans l'estimation, le bouton demande son prix (lib/price-request.ts).
+  const primary = productPrimaryAction(product, { estimate: ACTION_LABELS.estimate });
 
   return (
     <>
@@ -342,15 +345,16 @@ export default async function ProductPage({ params }: Props) {
                     variantOptions={product.variantOptions ?? []}
                     variants={product.variants}
                     accessories={product.accessories}
+                    guarantee={guaranteeLine(product)}
                   />
                   <div className="mt-3 flex flex-col gap-3">
                     <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
-                      <Link href={estimateHref} rel="nofollow">
-                        Chiffrer mon installation
+                      <Link href={primary.href} rel="nofollow">
+                        {primary.label}
                       </Link>
                     </Button>
                     <Button asChild variant="outline" size="lg" className="w-full">
-                      <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
+                      <Link href="/prendre-rendez-vous#reserver">{ACTION_LABELS.booking}</Link>
                     </Button>
                   </div>
                   <GoogleRatingNote className="mt-4" />
@@ -389,7 +393,7 @@ export default async function ProductPage({ params }: Props) {
                       </span>
                       <p className="mt-3 text-sm text-mp-green-deep">
                         <span className="font-semibold">
-                          {formatPriceReducedVat(shownTTC ?? product.priceTTC)} TVAC
+                          {formatPrice(reducedVatPrice(shownTTC ?? product.priceTTC))} TVAC
                         </span>{" "}
                         si nous le posons sur une habitation de plus de 10 ans
                         <span className="text-mp-ink-soft"> (TVA 6 % au lieu de 21 %)</span>.
@@ -399,6 +403,7 @@ export default async function ProductPage({ params }: Props) {
                           {typo(bonusLabelFor(product.brand))} déduit. {BONUS.conditions}
                         </p>
                       ) : null}
+                      <p className="mt-2 text-sm text-mp-ink-soft">{typo(guaranteeLine(product))}</p>
                     </div>
                     <ul className="text-sm text-mp-ink-soft space-y-1 leading-relaxed">
                       <li>
@@ -420,6 +425,7 @@ export default async function ProductPage({ params }: Props) {
                     Prix dépendant de la configuration de pose (tubage, ventouse, raccordement
                     hydro, etc.).
                   </p>
+                  <p className="text-sm text-mp-ink-soft mt-2">{typo(guaranteeLine(product))}</p>
                 </div>
               )}
 
@@ -435,12 +441,12 @@ export default async function ProductPage({ params }: Props) {
 
               <div className="flex flex-col gap-3">
                 <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
-                  <Link href={estimateHref} rel="nofollow">
-                        Chiffrer mon installation
+                  <Link href={primary.href} rel="nofollow">
+                        {primary.label}
                       </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
-                  <Link href="/prendre-rendez-vous#reserver">Prendre rendez-vous</Link>
+                  <Link href="/prendre-rendez-vous#reserver">{ACTION_LABELS.booking}</Link>
                 </Button>
               </div>
 
@@ -652,11 +658,14 @@ export default async function ProductPage({ params }: Props) {
         title={`Devis avec pose pour le modèle ${product.name}`}
         description="On chiffre le poêle et la pose en 48 heures. Sans engagement avant signature."
         primaryClassName={YIELDS_TO_ACTION_BAR}
+        // Fiche sur devis : la demande de prix du modèle, pas une estimation
+        // où il ne figure pas.
+        primaryCta={primary.kind === "price-request" ? { label: primary.label, href: primary.href, rel: "nofollow" } : undefined}
       />
 
       {/* Barre d'action du téléphone (sous 1 024 px), dernier élément de la
           page : elle remplace la barre de navigation du bas et porte le seul
-          aplat orange de l'écran (les boutons « Chiffrer mon installation »
+          aplat orange de l'écran (les boutons « Estimer mon projet »
           de la page passent au vert, YIELDS_TO_ACTION_BAR). */}
       <ProductActionBar
         name={product.name}
@@ -665,7 +674,8 @@ export default async function ProductPage({ params }: Props) {
             ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownTTC)} TVAC`
             : "Prix sur devis"
         }
-        href={estimateHref}
+        href={primary.href}
+        action={primary.kind}
       />
     </>
   );

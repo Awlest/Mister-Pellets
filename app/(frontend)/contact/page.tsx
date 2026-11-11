@@ -4,6 +4,7 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { formatPhone } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
+import { ACTION_LABELS } from "@/config/navigation";
 
 export const metadata = buildPageMetadata({
   title: "Contact et rendez-vous à Fernelmont",
@@ -17,6 +18,11 @@ const EMAIL = "info@awlest.com";
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Mister+Pellets+Rue+des+Fagotis+3A+5380+Fernelmont";
 
+/**
+ * Page statique, servie par le CDN : aucune API dynamique (ni searchParams,
+ * ni headers(), ni cookies()). La demande de prix d'une fiche
+ * (`?modele=<slug>`) est lue par le formulaire, dans le navigateur.
+ */
 export default function ContactPage() {
   return (
     <>
@@ -82,7 +88,7 @@ export default function ContactPage() {
                       href="/prendre-rendez-vous#reserver"
                       className="inline-flex min-h-11 items-center text-sm font-semibold text-mp-orange-ink underline hover:no-underline"
                     >
-                      Réserver une visite en ligne
+                      {ACTION_LABELS.booking}
                     </a>
                     <a
                       href={MAPS_URL}

@@ -31,11 +31,13 @@ import {
   acceptsInstall,
   estimate,
   eur,
+  eurCents,
   filterByKind,
   pinModelFirst,
   isCanalisable,
   rankProducts,
   recommendedKw,
+  requestedModel,
   type AccessMode,
   type DuctsChoice,
   type EstimateProduct,
@@ -50,9 +52,12 @@ import { evacuationPrice, heightRule, missingAnswers, needsAccess, optionShown }
 import { DiscountedPrice } from "./DiscountedPrice";
 import { BONUS, bonusLabelFor, isBonusPeriod } from "@/lib/bonus";
 import { typo } from "@/lib/typo";
+import { priceRequestHref } from "@/lib/price-request";
+import { stoveListPrice } from "@/lib/product-price";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
 import { BRAND_PARAMS, EVENTS, trackEvent } from "@/lib/analytics";
+import { ACTION_LABELS, ROUTES } from "@/config/navigation";
 
 const STORAGE_KEY = "mp_estimate_draft";
 
@@ -210,26 +215,6 @@ function parseDraft(json: string | null): EstimateState | null {
 }
 
 /**
- * Poêle demandé par l'adresse (`?modele=<slug>`, lien « Chiffrer mon
- * installation » d'une fiche produit), s'il est chiffrable. Une fiche à
- * plusieurs puissances ouvre sur la plus petite : le visiteur la change à
- * l'étape du modèle.
- */
-function preselectedModel(
-  products: EstimateProduct[],
-  search: string,
-): { option: EstimateProduct; kind: StoveKind } | null {
-  const slug = new URLSearchParams(search).get("modele");
-  if (!slug) return null;
-  const option = products.find((p) => p.slug === slug);
-  if (!option) return null;
-  const kind = (Object.keys(STOVE_KINDS) as StoveKind[]).find((k) =>
-    (STOVE_KINDS[k].productTypes as readonly string[]).includes(option.productType),
-  );
-  return kind ? { option, kind } : null;
-}
-
-/**
  * Paramètres de l'adresse, lus comme une valeur externe. En navigation
  * interne (bouton d'une fiche), Next n'écrit la nouvelle adresse qu'à la
  * validation du rendu : React relit l'instantané juste après et relance le
@@ -247,11 +232,19 @@ const serverSearch = () => "";
  * visiteur qui revenait. Pas de setState dans un effet (audit V20260503
  * §2.H.2) : le choix du brouillon est mémorisé une fois pour toutes.
  */
+const NO_SLUGS: string[] = [];
+
 export function EstimateConfigurator({
   products,
+  quoteOnlySlugs = NO_SLUGS,
+  notEstimableSlugs = NO_SLUGS,
   bonusAtRender = false,
 }: {
   products: EstimateProduct[];
+  /** Fiches visibles sans aucun prix : « Ce modèle est chiffré sur devis ». */
+  quoteOnlySlugs?: string[];
+  /** Fiches chiffrées absentes de l'estimation : « pas encore dans l'estimation ». */
+  notEstimableSlugs?: string[];
   /**
    * Bonus de saison actif au moment du rendu serveur (ISR). Sert d'instantané
    * serveur : le HTML et l'hydratation lisent la même valeur, donc aucun
@@ -267,7 +260,15 @@ export function EstimateConfigurator({
   // de la fiche est déjà choisi, avec son type. Même mécanique que le
   // brouillon : lu après l'hydratation, appliqué par un remontage du formulaire.
   const search = React.useSyncExternalStore(noopSubscribe, readSearch, serverSearch);
-  const preselected = React.useMemo(() => preselectedModel(products, search), [products, search]);
+  // Modèle absent du catalogue chiffré (fiche sur devis) : pas de
+  // présélection, un encart l'explique au-dessus des questions.
+  const quoteOnlySet = React.useMemo(() => new Set(quoteOnlySlugs), [quoteOnlySlugs]);
+  const notEstimableSet = React.useMemo(() => new Set(notEstimableSlugs), [notEstimableSlugs]);
+  const requested = React.useMemo(
+    () => requestedModel(products, search, quoteOnlySet, notEstimableSet),
+    [products, search, quoteOnlySet, notEstimableSet],
+  );
+  const preselected = requested.status === "priced" ? requested : null;
   const initialState = React.useMemo<EstimateState>(() => {
     const base = draft ?? DEFAULT_STATE;
     if (!preselected) return base;
@@ -288,6 +289,7 @@ export function EstimateConfigurator({
       products={products}
       initialState={initialState}
       pinned={preselected?.option ?? null}
+      absentModel={requested.status === "quote-only" || requested.status === "not-estimable" ? requested : null}
       bonusAtRender={bonusAtRender}
     />
   );
@@ -311,12 +313,15 @@ function EstimateForm({
   products,
   initialState,
   pinned,
+  absentModel,
   bonusAtRender,
 }: {
   products: EstimateProduct[];
   initialState: EstimateState;
   /** Poêle demandé par l'adresse : il ouvre la liste de l'étape 3. */
   pinned: EstimateProduct | null;
+  /** Modèle demandé par l'adresse mais absent de la liste, avec le motif. */
+  absentModel: { status: "quote-only" | "not-estimable"; slug: string } | null;
   bonusAtRender: boolean;
 }) {
   const [step, setStep] = React.useState(1);
@@ -521,7 +526,7 @@ function EstimateForm({
           {product ? ` autour du ${product.name}` : ""}.
         </p>
         <p className="mb-8 text-xl font-semibold">
-          Estimation : {eur(r.totalTTC)} TTC
+          Estimation : {eur(r.totalTTC)} TVAC
         </p>
 
         {/*
@@ -538,7 +543,7 @@ function EstimateForm({
               <span>
                 On vous rappelle sous 48 h ouvrées pour caler la{" "}
                 <strong>visite technique</strong>. Vous pouvez aussi{" "}
-                <Link href="/visite-technique" className="text-mp-orange-ink underline underline-offset-2 hover:no-underline">
+                <Link href={ROUTES.bookingWidget} className="text-mp-orange-ink underline underline-offset-2 hover:no-underline">
                   choisir votre créneau tout de suite
                 </Link>
                 .
@@ -571,7 +576,7 @@ function EstimateForm({
 
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild variant="primary" size="default" className="w-full max-w-xs sm:w-auto">
-            <Link href="/visite-technique">Choisir mon créneau</Link>
+            <Link href={ROUTES.bookingWidget}>{ACTION_LABELS.booking}</Link>
           </Button>
           <Button asChild variant="outline" size="default" className="w-full max-w-xs sm:w-auto">
             <Link href="/">Retour à l&apos;accueil</Link>
@@ -623,6 +628,27 @@ function EstimateForm({
         </div>
 
         <div className="p-4 sm:p-6 md:min-h-[420px] md:p-10">
+          {/* Modèle demandé par l'adresse mais absent de la liste : une phrase
+              exacte (sur devis, ou pas encore dans l'estimation) et les deux
+              issues, aux trois premières étapes (la 3e est celle du modèle). */}
+          {absentModel && step <= 3 && (
+            <p className="mb-5 rounded-2xl border border-mp-sand/40 bg-mp-cream p-4 text-sm leading-relaxed text-mp-ink">
+              <strong className="text-mp-green-deep">
+                {absentModel.status === "quote-only"
+                  ? "Ce modèle est chiffré sur devis."
+                  : "Ce modèle n'est pas encore dans l'estimation en ligne."}
+              </strong>{" "}
+              Poursuivez avec un modèle chiffré de notre catalogue, ou{" "}
+              <Link
+                href={priceRequestHref(absentModel.slug)}
+                className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline"
+              >
+                {absentModel.status === "quote-only" ? "demandez-nous son prix" : "demandez-nous un devis pour ce modèle"}
+              </Link>
+              .
+            </p>
+          )}
+
           {/* Bonus de saison : replié sur une ligne, conditions à un geste. Il
               occupait 5 lignes au-dessus de chaque question sur mobile. */}
           {bonusActive && (
@@ -883,7 +909,9 @@ function EstimateForm({
                       {shownModels.map((p) => {
                         const active = s.productKey === p.key;
                         const fit = p.powerKw >= needKw * 0.75 && p.powerKw <= needKw * 1.45;
-                        const ttc = Math.round(p.priceHT * (s.housingOver10Years ? 1.06 : 1.21));
+                        // Prix de la fiche, au taux choisi, bonus de saison compris s'il
+                        // court (lib/product-price.ts) : le bandeau dit « déjà déduit ».
+                        const ttc = stoveListPrice(p, { bonus: bonusActive, reduced: s.housingOver10Years });
                         return (
                           <label key={p.key} className={cn(cardCls(active), "items-center p-3 sm:gap-4 sm:p-4")}>
                             <input
@@ -1113,7 +1141,7 @@ function EstimateForm({
                       {eur(monthly ?? 0)}/mois
                     </span>
                     <span className="mt-1 block text-sm text-mp-ink-soft">
-                      sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TTC
+                      sur {months} mois, TAEG 0 %, pour {eur(r.totalTTC)} TVAC
                       {r.bonusHT > 0 ? ", bonus de saison déduit" : ""}. {FIN_NOTE}
                     </span>
                   </p>
@@ -1136,7 +1164,7 @@ function EstimateForm({
               <StepHeading ref={headingRef}>Voulez-vous qu&apos;on vous recontacte ?</StepHeading>
               <p className="mb-6 text-mp-ink-soft">
                 Votre estimation est prête :{" "}
-                <strong className="whitespace-nowrap text-mp-green-deep">{eur(r.totalTTC)} TTC</strong>,
+                <strong className="whitespace-nowrap text-mp-green-deep">{eur(r.totalTTC)} TVAC</strong>,
                 pose comprise{r.onQuote ? ", échafaudage en plus sur devis" : ""}. Elle est calculée
                 sans avoir vu votre maison. Pendant la visite
                 technique, gratuite, il nous arrive de trouver moins cher : un conduit existant qui
@@ -1167,7 +1195,7 @@ function EstimateForm({
                       081 13 83 09
                     </a>{" "}
                     ou{" "}
-                    <Link href="/visite-technique" className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline">
+                    <Link href={ROUTES.bookingWidget} className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline">
                       réservez la visite en ligne
                     </Link>
                     .
@@ -1371,7 +1399,7 @@ function EstimateForm({
                 className="-my-1 min-h-11 min-w-0 flex-1 rounded-xl py-1 pr-2 text-left lg:hidden"
               >
                 <span className="block text-xs font-medium text-mp-ink-soft">
-                  {product ? "Total posé, TTC" : "Pose estimée, TTC"}
+                  {product ? "Total posé, TVAC" : "Pose estimée, TVAC"}
                   {r.onQuote ? ", hors échafaudage" : ""}
                 </span>
                 <span className="flex items-center gap-1 text-lg font-semibold leading-tight tabular-nums text-mp-green-deep">
@@ -1726,7 +1754,15 @@ function Recap({
         )}
       </div>
 
+      {/* Les lignes du détail sont hors TVA, la TVA s'ajoute à la fin : écrit
+          en tête de colonne et sur le sous-total, pour que le total TVAC de
+          l'étape 1 et ce détail se lisent sans contradiction (recette du
+          11/11/2026 : « 2 317,50 € » ici, « 2 457 € TVAC » à l'étape 1). */}
       <dl className="mt-5 space-y-1 border-t border-mp-sand/40 pt-4 text-sm">
+        <div className="flex justify-between gap-3 pb-1 text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
+          <dt>Détail</dt>
+          <dd>Montants HTVA</dd>
+        </div>
         <Row
           label={product ? `Poêle ${product.brand}` : "Poêle"}
           value={r.materialHT > 0 ? eur(r.materialHT) : "à choisir"}
@@ -1746,12 +1782,16 @@ function Recap({
             muted
           />
         ))}
-        <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eur(r.vatAmount)} muted />
+        {/* Somme exacte des lignes affichées (poêle, bonus, pose), au cent : pas la
+            différence de deux montants arrondis à l'euro. */}
+        <Row label="Sous-total HTVA" value={eurCents(r.subtotalHT - r.bonusHT)} />
+        <Row label={`TVA ${Math.round(r.vatRate * 100)} %`} value={eurCents(r.vatAmount)} muted />
+        <Row label="Total TVAC" value={eurCents(r.totalCents)} />
       </dl>
 
       <div className="mt-4 flex items-end justify-between border-t border-mp-sand/40 pt-4">
         <span className="text-xs font-semibold uppercase tracking-wider text-mp-ink-soft">
-          Total TTC posé
+          Total posé, TVAC, arrondi à l&apos;euro
         </span>
         <span className="text-2xl font-semibold tabular-nums text-mp-green-deep">{eur(r.totalTTC)}</span>
       </div>
@@ -1767,8 +1807,8 @@ function Recap({
       )}
 
       <p className="mt-4 text-xs leading-relaxed text-mp-ink-soft">
-        Estimation indicative TTC, matériel et pose compris, TVA{" "}
-        {Math.round(r.vatRate * 100)} %. Détail de la pose hors TVA. Les forfaits de pose sont des
+        Estimation indicative TVAC, matériel et pose compris, TVA{" "}
+        {Math.round(r.vatRate * 100)} %. Lignes du détail hors TVA (HTVA). Les forfaits de pose sont des
         budgets moyens : le prix ferme est établi après la visite technique gratuite.
         {r.bonusHT > 0 && ` ${typo(bonusLabelFor(product?.brand))} déduit. ${BONUS.conditions}`}
       </p>

@@ -11,6 +11,7 @@ import { INSTALL_TYPES, ISO, POWER_WINDOW, VAT, evacuationPrice, formatEur, reco
 import { REMISES, TARIFS } from "./pose/tarifs";
 import { POSE_DURATIONS } from "./services";
 import { POWER_RULE } from "./power";
+import { PRICE_RANGES, RANGES_VAT_NOTE, rangeText } from "./price-ranges";
 
 /**
  * Surcoût d'une évacuation par rapport au simple raccordement d'un conduit
@@ -183,8 +184,9 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
     title: "Le guide d'achat 2026 du poêle à pellets en Wallonie",
     description: "Tout savoir avant d'acheter : technologies, marques, aides, pose, entretien. Le guide complet par les techniciens Mister Pellets.",
     category: "Choix",
-    excerpt:
-      "Acheter un poêle à pellets représente un investissement de 4 000 à 8 000 € pose comprise. Voici comment ne pas se tromper, marque par marque, étape par étape.",
+    // Encadré repris sur /guides, les guides voisins et des articles : la
+    // fourchette et son hypothèse viennent de lib/price-ranges.ts.
+    excerpt: `Pour un poêle à air posé sur un conduit existant, comptez le plus souvent ${rangeText(PRICE_RANGES.standard)} TVAC, pose comprise, ${RANGES_VAT_NOTE}. Voici comment ne pas se tromper, marque par marque, étape par étape.`,
     sections: [
       {
         heading: "1. Comprendre les 4 grandes familles",
@@ -229,8 +231,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
     faq: [
       {
         question: "Combien coûte un poêle à pellets installé en 2026 ?",
-        answer:
-          "Comptez 4 000 à 8 000 € tout compris pour une maison standard avec conduit existant. Hydro complet : 8 000 à 14 000 €. Dans un logement de plus de 10 ans, ces montants comprennent la TVA à 6 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026.",
+        answer: `Comptez ${rangeText(PRICE_RANGES.standard)} tout compris pour un poêle à air sur un conduit existant, tubé ou à tuber. Canalisable avec gaines : ${rangeText(PRICE_RANGES.canalisable)}. Hydro complet : ${rangeText(PRICE_RANGES.hydro)}. Dans un logement de plus de 10 ans, ces montants comprennent la TVA à 6 %. Le prix de départ du moment, calculé sur le poêle le moins cher du catalogue posé sur un conduit déjà tubé, est sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets). Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026.`,
       },
       {
         question: "Quelle marque est la plus fiable ?",

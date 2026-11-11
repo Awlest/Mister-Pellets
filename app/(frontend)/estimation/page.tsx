@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Calculator, PiggyBank, Wrench } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { EstimateConfigurator } from "@/components/forms/EstimateConfigurator";
-import { getEstimateCatalog } from "@/lib/estimate-catalog";
+import { getEstimateCatalogData } from "@/lib/estimate-catalog";
 import { isBonusPeriod } from "@/lib/bonus";
 import { buildPageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,7 @@ export const metadata = buildPageMetadata({
 export const revalidate = 60;
 
 export default async function EstimationPage() {
-  const products = await getEstimateCatalog();
+  const { products, quoteOnlySlugs, notEstimableSlugs } = await getEstimateCatalogData();
 
   return (
     <>
@@ -61,7 +61,9 @@ export default async function EstimationPage() {
               </p>
             </div>
           ) : (
-            <EstimateConfigurator products={products} bonusAtRender={isBonusPeriod()} />
+            <EstimateConfigurator products={products} quoteOnlySlugs={quoteOnlySlugs}
+              notEstimableSlugs={notEstimableSlugs}
+              bonusAtRender={isBonusPeriod()} />
           )}
 
           <TrustPoints className="mt-8 lg:hidden" />

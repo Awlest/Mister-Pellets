@@ -113,6 +113,22 @@ export function isFilterLink(href: string): boolean {
 export type NavLink = { href: string; label: string; desc?: string; short?: string };
 
 /**
+ * Un libellé par action sur tout le site (vérification du 11/11/2026 : six
+ * libellés pour deux actions). Référence : l'en-tête. La forme courte ne sert
+ * que là où la place manque (bouton de l'en-tête, barres du bas et de la
+ * fiche) et reprend les mêmes mots. scripts/check-coherence.ts refuse les
+ * anciens libellés.
+ */
+export const ACTION_LABELS = {
+  /** Configurateur d'estimation (/estimation). */
+  estimate: "Estimer mon projet",
+  estimateShort: "Estimer",
+  /** Agenda en ligne (/prendre-rendez-vous#reserver). */
+  booking: "Prendre rendez-vous",
+  bookingShort: "Rendez-vous",
+} as const;
+
+/**
  * Catalogue : toute la boutique, puis une vraie page par famille
  * (lib/categories.ts), le prix posé et les pellets. Plus de lien vers la
  * boutique filtrée (`?chauffage=hydro`) présenté comme une catégorie : ces
@@ -148,8 +164,8 @@ export const SERVICE_LINKS: readonly NavLink[] = [
   { href: ROUTES.sweeping, label: "Ramonage", short: "Ramonage", desc: "Certificat remis sur place" },
   { href: ROUTES.repair, label: "Dépannage", short: "Dépannage", desc: "Panne, code erreur, extinction" },
   { href: ROUTES.zones, label: "Zones d'intervention", desc: "Les villes où nous posons" },
-  { href: ROUTES.booking, label: "Prendre rendez-vous", desc: "Devis à domicile ou showroom" },
-  { href: ROUTES.configurator, label: "Estimer mon projet", desc: "Prix de votre installation en 2 minutes" },
+  { href: ROUTES.booking, label: ACTION_LABELS.booking, desc: "Devis à domicile ou showroom" },
+  { href: ROUTES.configurator, label: ACTION_LABELS.estimate, desc: "Prix de votre installation en 2 minutes" },
 ];
 
 /** Conseils : sous-menu commun Guides, Blog, FAQ. */
@@ -225,8 +241,8 @@ export type MobileTabId = (typeof MOBILE_TAB_IDS)[number];
 /** `short` : libellé affiché sous 370 px (téléphones de 320 à 360 px), où « Rendez-vous » passait sur deux lignes. */
 export const MOBILE_TABS: readonly { id: MobileTabId; label: string; short?: string; href?: string }[] = [
   { id: "catalogue", label: "Catalogue", href: ROUTES.shop },
-  { id: "estimate", label: "Estimer", href: ROUTES.configurator },
-  { id: "booking", label: "Rendez-vous", short: "RDV", href: ROUTES.bookingWidget },
+  { id: "estimate", label: ACTION_LABELS.estimateShort, href: ROUTES.configurator },
+  { id: "booking", label: ACTION_LABELS.bookingShort, short: "RDV", href: ROUTES.bookingWidget },
   { id: "call", label: "Appeler", href: PHONE_HREF },
   { id: "menu", label: "Menu" },
 ];

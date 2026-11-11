@@ -4,6 +4,7 @@ import { Clock, Shield, FileCheck } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { QuoteForm } from "@/components/forms/QuoteForm";
 import { Button } from "@/components/ui/button";
+import { ACTION_LABELS } from "@/config/navigation";
 
 export const metadata: Metadata = {
   title: "Devis gratuit, Poêle à pellets en Wallonie",
@@ -63,7 +64,7 @@ export default function DevisPage() {
               prix du modèle, pose, TVA et mensualité, affichés en direct.
             </p>
             <Button asChild variant="primary" size="default">
-              <Link href="/estimation">Estimer mon installation →</Link>
+              <Link href="/estimation">{ACTION_LABELS.estimate} →</Link>
             </Button>
           </div>
 

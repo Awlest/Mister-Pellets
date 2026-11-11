@@ -2,7 +2,7 @@ import "server-only";
 import { getPayloadClient } from "./payload-client";
 import type { EstimateProduct } from "./estimate";
 import { webpUrl } from "./product-image";
-import { parseKw } from "./power";
+import { estimateOptions, isEstimable } from "./estimable";
 import { inCatalogueWhere, isOffCatalogue } from "./catalog-scope";
 
 /**
@@ -58,56 +58,6 @@ interface PayloadEstimateRow {
 }
 
 /**
- * Prix TTC le plus bas parmi les variantes portant une valeur d'option donnée.
- * Les variantes croisent plusieurs axes (puissance × couleur × matériau) : pour
- * une puissance, plusieurs prix coexistent, on retient le plus bas — c'est un
- * « à partir de », la finition exacte se choisit au devis.
- */
-function lowestVariantTTC(row: PayloadEstimateRow, valueId: number): number | null {
-  let best: number | null = null;
-  for (const v of row.variants ?? []) {
-    const ids = (v.optionValues ?? []).map((o) => (typeof o === "object" && o ? o.id : o));
-    if (!ids.includes(valueId)) continue;
-    const price = v.salePrice && v.salePrice > 0 ? v.salePrice : v.price;
-    if (!price || price <= 0) continue;
-    if (best == null || price < best) best = price;
-  }
-  return best;
-}
-
-/**
- * Les puissances proposées par une fiche : soit l'axe de variantes
- * « Puissance » (avec le prix de chaque puissance), soit la puissance unique du
- * champ principal.
- */
-function powerOptions(row: PayloadEstimateRow): Array<{ kw: number; ttc: number | null; fromVariant: boolean }> {
-  const axis = (row.variantOptions ?? []).find((vo) => {
-    const t = vo.optionType;
-    return t && typeof t === "object" && (t.slug === "puissance" || t.label === "Puissance");
-  });
-
-  if (row.hasVariants && axis && Array.isArray(axis.values)) {
-    const out: Array<{ kw: number; ttc: number | null; fromVariant: boolean }> = [];
-    for (const value of axis.values) {
-      if (!value || typeof value !== "object") continue;
-      const kw = parseKw(value.label);
-      if (kw == null) continue;
-      out.push({ kw, ttc: lowestVariantTTC(row, value.id), fromVariant: true });
-    }
-    if (out.length > 0) {
-      // Dédoublonne (deux valeurs au même libellé) et trie par puissance.
-      const seen = new Set<number>();
-      return out
-        .filter((o) => (seen.has(o.kw) ? false : (seen.add(o.kw), true)))
-        .sort((a, b) => a.kw - b.kw);
-    }
-  }
-
-  const kw = row.power ?? 0;
-  return kw > 0 ? [{ kw, ttc: null, fromVariant: false }] : [];
-}
-
-/**
  * Hôtes distants acceptés pour les vignettes (les mêmes que
  * images.remotePatterns dans next.config.ts). La liste protégeait next/image,
  * qui levait une erreur au rendu pour tout autre hôte et plantait le
@@ -147,7 +97,29 @@ function toImageSrc(rawUrl: string): string | undefined {
   }
 }
 
-export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
+/** Catalogue de l'estimation, plus les fiches qu'elle ne connaît pas, par motif. */
+export interface EstimateCatalogData {
+  products: EstimateProduct[];
+  /**
+   * Fiches visibles sans aucun prix (« Sur devis ») : l'estimation ouverte sur
+   * l'une d'elles écrit « Ce modèle est chiffré sur devis ». Toute autre fiche
+   * absente (chiffrée mais sans puissance exploitable, masquée, lien ancien) :
+   * « Ce modèle n'est pas encore dans l'estimation en ligne ».
+   */
+  quoteOnlySlugs: string[];
+  /** Fiches visibles chiffrées mais absentes de l'estimation (sans puissance exploitable). */
+  notEstimableSlugs: string[];
+}
+
+/** Prix affiché sur la fiche : variante chiffrée ou prix de la fiche (même règle que lib/products.ts). */
+function hasShownPrice(doc: PayloadEstimateRow): boolean {
+  const variantPriced =
+    Boolean(doc.hasVariants) &&
+    (doc.variants ?? []).some((v) => ((v.salePrice && v.salePrice > 0 ? v.salePrice : v.price) ?? 0) > 0);
+  return variantPriced || (doc.priceTTC ?? 0) > 0;
+}
+
+export async function getEstimateCatalogData(): Promise<EstimateCatalogData> {
   const payload = await getPayloadClient();
   const result = await payload.find({
     collection: "products",
@@ -160,24 +132,17 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
   });
 
   const products: EstimateProduct[] = [];
+  const quoteOnlySlugs: string[] = [];
+  const notEstimableSlugs: string[] = [];
 
   for (const doc of result.docs as unknown as PayloadEstimateRow[]) {
     // Seconde barrière après la requête : jamais d'appareil hors catalogue.
     if (isOffCatalogue(doc.combustible)) continue;
-
-    // Prix de la fiche : une promo saisie prime sur le prix catalogue (promoPrice
-    // et priceTTC sont des TTC à 21 %). Sert de repli quand la variante n'a pas
-    // de prix propre.
-    const promoTTC = doc.promoPrice && doc.promoPrice > 0 ? doc.promoPrice : null;
-    const baseTTC = promoTTC ?? (doc.priceTTC && doc.priceTTC > 0 ? doc.priceTTC : null);
-    const baseHT =
-      promoTTC != null
-        ? Math.round(promoTTC / 1.21)
-        : doc.priceHT && doc.priceHT > 0
-          ? Math.round(doc.priceHT)
-          : baseTTC != null
-            ? Math.round(baseTTC / 1.21)
-            : 0;
+    // Règle partagée avec la fiche produit (lib/estimable.ts).
+    if (!isEstimable(doc)) {
+      (hasShownPrice(doc) ? notEstimableSlugs : quoteOnlySlugs).push(doc.slug);
+      continue;
+    }
 
     // Vignette 64 px dans le configurateur : la taille « card » (400 px)
     // pré-générée par Payload suffit, l'original (souvent > 300 Ko) alourdirait
@@ -192,16 +157,10 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
     // Ancienne déclinaison JPEG ou PNG : servie en WebP (lib/product-image.ts).
     const imageSrc = relSrc ? webpUrl(relSrc) : undefined;
 
-    const options = powerOptions(doc);
+    const options = estimateOptions(doc);
     const multi = options.length > 1;
 
     for (const opt of options) {
-      // Prix de la puissance : celui de sa variante si saisi, sinon celui de la
-      // fiche. Une puissance sans prix exploitable est écartée du configurateur.
-      const ttc = opt.ttc ?? baseTTC ?? null;
-      const ht = opt.ttc != null ? Math.round(opt.ttc / 1.21) : baseHT;
-      if (ht <= 0) continue;
-
       products.push({
         key: multi ? `${doc.slug}::${opt.kw}` : doc.slug,
         slug: doc.slug,
@@ -212,8 +171,8 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
         appliance: doc.appliance ?? undefined,
         powerKw: opt.kw,
         fromVariant: opt.fromVariant && multi,
-        priceHT: ht,
-        priceTTC: ttc ?? undefined,
+        priceHT: opt.ht,
+        priceTTC: opt.ttc ?? undefined,
         installationHT:
           doc.installationPrice && doc.installationPrice > 0 ? doc.installationPrice : undefined,
         imageSrc,
@@ -225,9 +184,12 @@ export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
 
   // Tri stable par marque puis puissance : le configurateur reclasse ensuite
   // selon le besoin en kW du visiteur (rankProducts).
-  return products.sort(
-    (a, b) => a.brand.localeCompare(b.brand, "fr") || a.powerKw - b.powerKw,
-  );
+  products.sort((a, b) => a.brand.localeCompare(b.brand, "fr") || a.powerKw - b.powerKw);
+  return { products, quoteOnlySlugs, notEstimableSlugs };
+}
+
+export async function getEstimateCatalog(): Promise<EstimateProduct[]> {
+  return (await getEstimateCatalogData()).products;
 }
 
 /** Une option chiffrable par sa clé (revalidation côté serveur). */

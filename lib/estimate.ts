@@ -16,7 +16,8 @@
  * de plus de 10 ans, 21 % sinon), sur le matériel comme sur la pose.
  */
 
-import { bonusRateFor, isBonusPeriod } from "./bonus";
+import { isBonusPeriod } from "./bonus";
+import { stoveNetHT } from "./product-price";
 import {
   DEFAULT_POSE,
   SURFACE,
@@ -27,7 +28,6 @@ import {
   roundCents,
   sumLines,
   vatRate,
-  withVat,
   type EstimateLine,
   type InstallType,
   type IsoKey,
@@ -181,7 +181,11 @@ export interface EstimateResult {
   /** Bonus de saison déduit du prix HT du poêle (le bonus ne touche pas la pose), 0 hors période. */
   bonusHT: number;
   vatRate: number;
+  /** TVA au cent, sur le net hors TVA. */
   vatAmount: number;
+  /** Total TVAC au cent : net hors TVA + TVA, la somme des lignes du détail. */
+  totalCents: number;
+  /** Total TVAC arrondi à l'euro : le montant mis en avant (barre, e-mails, conversion). */
   totalTTC: number;
   /** Une ligne reste sur devis (échafaudage) : le total ne la comprend pas. */
   onQuote: boolean;
@@ -224,10 +228,18 @@ export function estimate(
   const labor = sumLines(lines);
   const material = product?.priceHT ?? 0;
   const subtotalHT = roundCents(material + labor);
-  const bonusHT = (opts?.bonus ?? isBonusPeriod()) ? Math.round(material * bonusRateFor(product?.brand)) : 0;
+  // Bonus : la différence entre le poêle au prix catalogue et le poêle au prix
+  // affiché sur la fiche (lib/product-price.ts), pour que le net hors TVA soit
+  // celui de la fiche et de la liste des modèles.
+  const bonusHT = (opts?.bonus ?? isBonusPeriod()) && product ? material - stoveNetHT(product, true) : 0;
   const netHT = subtotalHT - bonusHT;
   const rate = vatRate(s.housingOver10Years);
-  const { vat, total } = withVat(netHT, rate);
+  // TVA au cent, pour que sous-total + TVA = total du détail à l'œil ; le
+  // grand total est ce total arrondi à l'euro (recette du lot 3 : 5 855,50 +
+  // 351 affichés pour 6 207 €).
+  const vat = roundCents(netHT * rate);
+  const totalCents = roundCents(netHT + vat);
+  const total = Math.round(totalCents);
   const needKw = recommendedKw(s.surface, s.iso);
 
   return {
@@ -238,6 +250,7 @@ export function estimate(
     bonusHT,
     vatRate: rate,
     vatAmount: vat,
+    totalCents,
     totalTTC: total,
     onQuote: lines.some((l) => l.onQuote),
     needKw,
@@ -292,3 +305,47 @@ export const acceptsInstall = (product: Pick<EstimateProduct, "brand">, installT
 export const eur = (n: number) => formatEuros(n);
 /** Le même, au cent quand le montant n'est pas rond : « 127,20 € ». */
 export const eurCents = (n: number) => formatEuros(n, { cents: "auto" });
+
+/**
+ * Modèle demandé par l'adresse (`/estimation?modele=<slug>`) :
+ * - `priced` : il est dans le catalogue chiffré, l'estimation s'ouvre dessus
+ *   (une fiche à plusieurs puissances ouvre sur la plus petite) ;
+ * - `quote-only` : fiche sans aucun prix (« Sur devis ») ; l'estimation écrit
+ *   « Ce modèle est chiffré sur devis » ;
+ * - `not-estimable` : tout autre modèle absent du catalogue chiffré (fiche
+ *   sur devis, fiche masquée, lien ancien) ; l'estimation le dit et propose un
+ *   modèle chiffré ou la demande de prix, au lieu de bloquer à l'étape du
+ *   modèle sans explication (vérification du 11/11/2026) ;
+ * - `none` : pas de modèle demandé.
+ */
+export type RequestedModel =
+  | { status: "none" }
+  | { status: "priced"; option: EstimateProduct; kind: StoveKind }
+  | { status: "quote-only" | "not-estimable"; slug: string };
+
+/**
+ * `quoteOnly` : slugs des fiches visibles sans aucun prix ; `notEstimable` :
+ * fiches visibles chiffrées mais absentes de l'estimation
+ * (getEstimateCatalogData, lib/estimate-catalog.ts). Un slug inconnu des deux
+ * listes (fiche retirée, faute de frappe) ne donne aucun message : pas de
+ * demande de prix vers une fiche en 404 (recette du lot 3).
+ */
+export function requestedModel(
+  products: EstimateProduct[],
+  search: string,
+  quoteOnly: ReadonlySet<string> = new Set(),
+  notEstimable: ReadonlySet<string> = new Set(),
+): RequestedModel {
+  const slug = new URLSearchParams(search).get("modele")?.trim();
+  if (!slug) return { status: "none" };
+  const option = products.find((p) => p.slug === slug);
+  const kind = option
+    ? (Object.keys(STOVE_KINDS) as StoveKind[]).find((k) =>
+        (STOVE_KINDS[k].productTypes as readonly string[]).includes(option.productType),
+      )
+    : undefined;
+  if (option && kind) return { status: "priced", option, kind };
+  if (quoteOnly.has(slug)) return { status: "quote-only", slug };
+  if (notEstimable.has(slug)) return { status: "not-estimable", slug };
+  return { status: "none" };
+}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Clock, MapPin, ArrowRight, CalendarDays, Droplet, Flame, Fuel, Wind } from "lucide-react";
+import { Clock, MapPin, ArrowRight, CalendarDays, ChevronDown, Droplet, Flame, Fuel, Wind } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BrandsGrid } from "@/components/sections/BrandsGrid";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
@@ -13,8 +13,10 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { DEFAULT_OG_IMAGE, SITE_LOCALE, SITE_NAME, SITE_URL, buildFAQSchema } from "@/lib/seo";
 import { CITIES } from "@/lib/cities";
 import { typo } from "@/lib/typo";
-import { POSE_DURATIONS } from "@/lib/services";
+import { POSE_DURATIONS, PROJECT_LEAD_TIME } from "@/lib/services";
 import { POWER_RULE, kwFor } from "@/lib/power";
+import { ALL_PELLET_RANGE, PRICE_RANGES, RANGES_VAT_NOTE, rangeText } from "@/lib/price-ranges";
+import { ACTION_LABELS } from "@/config/navigation";
 
 /**
  * Régénération horaire : l'annonce du bonus de saison dépend de la date. Le
@@ -56,8 +58,9 @@ export const metadata: Metadata = {
 const FAQ_HOMEPAGE = [
   {
     question: "Combien coûte un poêle à pellets installé en Wallonie ?",
-    answer:
-      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. Dans un logement de plus de 10 ans, la TVA passe à 6 % au lieu de 21 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026. Les forfaits de pose et des exemples chiffrés sont sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets).",
+    // Fourchettes : lib/price-ranges.ts, la même source que le texte de
+    // l'accueil, la FAQ du site, le guide d'achat et llms.txt.
+    answer: `Pour un poêle à air posé sur un conduit existant, tubé ou à tuber, comptez ${rangeText(PRICE_RANGES.standard)} tout compris (poêle, pose et raccordement). Un canalisable de 10 à 14 kW avec gaines revient à ${rangeText(PRICE_RANGES.canalisable)}. Un hydro complet pour remplacer une chaudière coûte ${rangeText(PRICE_RANGES.hydro)} selon la puissance et la complexité du raccordement aux radiateurs. Ces montants comptent la TVA à 6 %, celle d'un logement de plus de 10 ans (21 % sinon). Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026. Le prix de départ du moment, calculé sur le poêle le moins cher du catalogue posé sur un conduit déjà tubé, les forfaits de pose et des exemples chiffrés sont sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets).`,
   },
   {
     question: "Quelle puissance de poêle pour quelle surface ?",
@@ -177,14 +180,14 @@ export default function HomePage() {
               * Sur mobile, les trois boutons s'empilent à la même largeur. */}
             <div className="flex flex-wrap gap-3 justify-center mb-4">
               <Button asChild variant="primary" size="lg" className="w-full max-w-xs sm:w-auto sm:max-w-none">
-                <Link href="/estimation">Chiffrer mon installation</Link>
+                <Link href="/estimation">{ACTION_LABELS.estimate}</Link>
               </Button>
               {/* Sous 1 280 px, le rendez-vous et le catalogue sont dans la barre
                   du bas : le héros garde un seul bouton et le téléphone. */}
               <Button asChild variant="secondary" size="lg" className="hidden xl:inline-flex">
                 <Link href="/prendre-rendez-vous#reserver">
                   <CalendarDays aria-hidden />
-                  Prendre rendez-vous
+                  {ACTION_LABELS.booking}
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="hidden xl:inline-flex">
@@ -323,13 +326,14 @@ export default function HomePage() {
           </p>
 
           {(() => {
-            // typo : une fourchette « 8 000 à 14 000 € » reste d'un seul tenant (lib/typo.ts).
+            // typo : une fourchette de montants reste d'un seul tenant (lib/typo.ts).
+            // Ligne du pellet : lib/price-ranges.ts ; autres modes : estimations de cette page.
             const rows = [
               {
                 solution: "Poêle à pellets",
                 icon: Flame,
                 highlight: true,
-                investissement: typo("4 000 à 14 000 €"),
+                investissement: typo(rangeText(ALL_PELLET_RANGE)),
                 coutAnnuel: typo("700 à 1 100 €"),
                 autonomie: "2 à 7 jours",
               },
@@ -440,7 +444,9 @@ export default function HomePage() {
 
       <BrandsGrid />
 
-      {/* SECTION COÛT */}
+      {/* SECTION COÛT : les pavés déjà repris par /prix-poele-pellets et
+          /installation-poele-a-pellets sont repliés (texte gardé dans le HTML),
+          l'accueil mesurait 17 700 px sur un téléphone (vérification du 11/11/2026). */}
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-2xl md:text-4xl font-semibold text-mp-green-deep mb-5">
@@ -448,25 +454,15 @@ export default function HomePage() {
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
-              Le ticket d'entrée pour un poêle à air pulsé étanche posé en Wallonie démarre autour
-              de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
-              Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin d'entrée de gamme.
-            </p>
-            <p>
-              Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
-              comptez 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
-              étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
-            </p>
-            <p>
-              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez
-              8 000 à 14 000 € TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
-              démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
-              aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
-              typiquement).
+              Pour un poêle à air posé en Wallonie sur un conduit existant, tubé ou à tuber, comptez
+              le plus souvent {typo(rangeText(PRICE_RANGES.standard))} TVAC tout compris (matériel, pose et
+              raccordement), {typo(RANGES_VAT_NOTE)}. Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin
+              d&apos;entrée de gamme.
             </p>
             <p>
               La pose varie surtout avec l&apos;évacuation : conduit déjà tubé, conduit à tuber, ventouse en
-              façade ou nouveau conduit par l&apos;extérieur ou la toiture. Le prix de départ du moment, les forfaits de pose par type de conduit et des
+              façade ou nouveau conduit par l&apos;extérieur ou la toiture. Le prix de départ du moment
+              (le poêle le moins cher du catalogue, posé sur un conduit déjà tubé), les forfaits de pose par type de conduit et des
               exemples chiffrés sont sur la page{" "}
               <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
                 prix d&apos;un poêle à pellets posé
@@ -477,15 +473,35 @@ export default function HomePage() {
               </Link>
               .
             </p>
-            <p>
-              Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
-              l'écrasante majorité des logements wallons concernés ont plus de 10 ans. Cette TVA
-              réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
-              La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
-              désormais par des prêts (Rénopack, Rénoprêt) réservés aux maisons classées E, F ou G
-              qui font un saut de label, à demander avant de signer le moindre devis. Certaines
-              communes gardent une prime énergie, à vérifier auprès d'elles.
-            </p>
+            <details className="group">
+              <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 text-base font-semibold text-mp-green-deep underline decoration-mp-sand underline-offset-4 hover:text-mp-orange-ink [&::-webkit-details-marker]:hidden">
+                Canalisable, hydro et TVA : le détail
+                <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
+              </summary>
+              <div className="mt-4 space-y-4">
+              <p>
+                Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
+                comptez {typo(rangeText(PRICE_RANGES.canalisable))} TVAC. C'est la majorité de notre activité, sur des maisons à
+                étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
+              </p>
+              <p>
+                Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez{" "}
+                {typo(rangeText(PRICE_RANGES.hydro))} TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
+                démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
+                aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
+                typiquement).
+              </p>
+              <p>
+                Sur l'ensemble de ces fourchettes, la TVA est de 6 % au lieu de 21 % parce que
+                l'écrasante majorité des logements wallons concernés ont plus de 10 ans. Cette TVA
+                réduite est appliquée d'office par l'installateur, ce n'est pas une prime à demander.
+                La prime Habitation, elle, s'est arrêtée le 30 septembre 2026 : la Région passe
+                désormais par des prêts (Rénopack, Rénoprêt) réservés aux maisons classées E, F ou G
+                qui font un saut de label, à demander avant de signer le moindre devis. Certaines
+                communes gardent une prime énergie, à vérifier auprès d'elles.
+              </p>
+              </div>
+            </details>
           </div>
         </div>
       </section>
@@ -521,24 +537,39 @@ export default function HomePage() {
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
-              Du premier contact à la mise en service, comptez 3 à 6 semaines en saison normale, un
-              peu plus long de septembre à décembre où la demande est forte. Le diagnostic à
+              Comptez {PROJECT_LEAD_TIME.range} {PROJECT_LEAD_TIME.scope}, {PROJECT_LEAD_TIME.season},
+              quand la demande est forte. Le diagnostic à
               domicile peut être planifié dans la semaine qui suit votre appel ou votre formulaire.
               Le devis tombe sous 48 heures ouvrées après visite.
             </p>
             <p>
-              Une fois le devis signé, on commande le matériel (stock atelier ou usine selon
-              modèle). Les modèles courants sont disponibles sous 5 à 10 jours. Pour les
-              configurations spécifiques (couleurs rares, hydros sur-mesure), prévoyez 3 à 5 semaines.
-              On vous donne une date de pose ferme dans le devis.
+              Le déroulé complet, de la visite technique au premier feu, est sur la page{" "}
+              <Link href="/installation-poele-a-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+                installation d&apos;un poêle à pellets
+              </Link>
+              .
             </p>
-            <p>
-              Le jour de la pose, l'équipe arrive entre 8 h et 9 h, démonte l'ancien appareil le
-              cas échéant, prépare la zone (bâches, plaques de protection). Le poêle est mis en
-              place, raccordé, étanchéifié. Le premier feu se fait avec vous en fin d'après-midi,
-              avec la formation à l'app si le poêle est connecté et le réglage de la programmation
-              hebdomadaire selon votre rythme de vie.
-            </p>
+            <details className="group">
+              <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 text-base font-semibold text-mp-green-deep underline decoration-mp-sand underline-offset-4 hover:text-mp-orange-ink [&::-webkit-details-marker]:hidden">
+                Commande du matériel et jour de la pose
+                <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
+              </summary>
+              <div className="mt-4 space-y-4">
+              <p>
+                Une fois le devis signé, on commande le matériel (stock atelier ou usine selon
+                modèle). Les modèles courants sont disponibles sous 5 à 10 jours. Pour les
+                configurations spécifiques (couleurs rares, hydros sur-mesure), prévoyez 3 à 5 semaines.
+                On vous donne une date de pose ferme dans le devis.
+              </p>
+              <p>
+                Le jour de la pose, l'équipe arrive entre 8 h et 9 h, démonte l'ancien appareil le
+                cas échéant, prépare la zone (bâches, plaques de protection). Le poêle est mis en
+                place, raccordé, étanchéifié. Le premier feu se fait avec vous en fin d'après-midi,
+                avec la formation à l'app si le poêle est connecté et le réglage de la programmation
+                hebdomadaire selon votre rythme de vie.
+              </p>
+              </div>
+            </details>
           </div>
         </div>
       </section>
@@ -586,7 +617,7 @@ export default function HomePage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <Button asChild variant="primary" size="lg">
-                <Link href="/prendre-rendez-vous#reserver">Choisir mon créneau</Link>
+                <Link href="/prendre-rendez-vous#reserver">{ACTION_LABELS.booking}</Link>
               </Button>
               <a
                 href="tel:+3281138309"
@@ -651,7 +682,7 @@ export default function HomePage() {
       <CTAFinal
         title="Chiffrez votre installation en 2 minutes"
         description="Surface, usage, contraintes du conduit : le configurateur vous donne un prix tout compris et la mensualité. Le prix ferme est confirmé après la visite technique, sans engagement."
-        secondaryCta={{ label: "Choisir mon créneau", href: "/prendre-rendez-vous#reserver" }}
+        secondaryCta={{ label: ACTION_LABELS.booking, href: "/prendre-rendez-vous#reserver" }}
       />
     </>
   );

@@ -35,6 +35,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { CatalogueListing, ProductLines, ProductListing } from "@/components/product/ProductListing";
 import {
   LISTING_PAGE_SIZE,
+  CATEGORY_PAGE_SIZE,
   decodeEntry,
   encodeEntry,
   encodeListing,
@@ -563,6 +564,17 @@ const checks: [string, () => void][] = [
       const links = new Set([...html.matchAll(/<a [^>]*href="\/produit\/([^"]+)"/g)].map((m) => m[1]));
       assert.equal(links.size, products.length, "une fiche sans lien dans la liste");
       assert.equal((html.match(/<img /g) ?? []).length, LISTING_PAGE_SIZE, "photos hors des cartes du premier écran");
+
+      // Page catégorie : 12 cartes, puis les lignes ; toujours un lien par fiche.
+      const catHtml = renderToStaticMarkup(
+        createElement(CatalogueListing, {
+          entries: encodeListing(products, { pageSize: CATEGORY_PAGE_SIZE }),
+          pageSize: CATEGORY_PAGE_SIZE,
+        }),
+      );
+      const catLinks = new Set([...catHtml.matchAll(/<a [^>]*href="\/produit\/([^"]+)"/g)].map((m) => m[1]));
+      assert.equal(catLinks.size, products.length, "catégorie : une fiche sans lien");
+      assert.equal((catHtml.match(/<img /g) ?? []).length, CATEGORY_PAGE_SIZE, "catégorie : 12 cartes avant les lignes");
 
       // Poids d'une carte, d'une ligne (sans classe, sans image ni svg), d'une entrée.
       const weigh = (p: ListedProduct) => {

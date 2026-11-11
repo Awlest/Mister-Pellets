@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { getAllProducts } from "@/lib/products";
+import { isHybrid } from "@/lib/catalog-scope";
 import { BRAND_LIST } from "@/lib/brands";
 import { buildPageMetadata } from "@/lib/seo";
 import { BoutiqueExplorer } from "@/components/boutique/BoutiqueExplorer";
@@ -45,7 +46,11 @@ export default async function BoutiquePage() {
   return (
     <>
       <HeroSecondary
-        eyebrow={`${products.length} modèles · ${brandsInShop.length} marques · pellets uniquement`}
+        // La boutique affiche aussi les hybrides bois + pellets (filtre « Hybride ») :
+        // « pellets uniquement » n'est vrai que sans eux.
+        eyebrow={`${products.length} modèles · ${brandsInShop.length} marques · ${
+          products.some(isHybrid) ? "poêles à pellets et hybrides" : "pellets uniquement"
+        }`}
         title={
           <>
             Tous les <span className="mp-italic">poêles à pellets</span>
