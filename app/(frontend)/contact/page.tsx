@@ -4,6 +4,9 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { formatPhone } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
 import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
+import { readModelParam } from "@/lib/price-request";
+import { getProductBySlug } from "@/lib/products";
+import { errorInfo } from "@/lib/log-error";
 import { ACTION_LABELS } from "@/config/navigation";
 
 export const metadata = buildPageMetadata({
@@ -18,7 +21,29 @@ const EMAIL = "info@awlest.com";
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Mister+Pellets+Rue+des+Fagotis+3A+5380+Fernelmont";
 
-export default function ContactPage() {
+/**
+ * Demande de prix d'une fiche sur devis (`?modele=<slug>`) : le nom du modèle
+ * vient du catalogue, jamais de l'adresse. Slug inconnu, fiche hors catalogue
+ * ou base injoignable : formulaire vierge.
+ */
+async function priceRequestFor(value: string | string[] | undefined) {
+  const slug = readModelParam(value);
+  if (!slug) return null;
+  try {
+    const product = await getProductBySlug(slug);
+    return product ? { slug: product.slug, name: product.name } : null;
+  } catch (err) {
+    console.warn("[contact] modèle non joignable :", errorInfo(err));
+    return null;
+  }
+}
+
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ modele?: string | string[] }>;
+}) {
+  const request = await priceRequestFor((await searchParams).modele);
   return (
     <>
       <HeroSecondary
@@ -124,7 +149,7 @@ export default function ContactPage() {
                 </a>
                 , c'est plus précis. Ce formulaire de contact est pour les questions générales.
               </p>
-              <ContactForm />
+              <ContactForm request={request} />
             </div>
           </div>
         </div>

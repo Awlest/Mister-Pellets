@@ -24,7 +24,7 @@ import {
   priceRequestHref,
   priceRequestMessage,
   productPrimaryAction,
-  readPriceRequest,
+  readModelParam,
 } from "@/lib/price-request";
 import { PRICE_RANGES, RANGES_VAT_NOTE, rangeText } from "@/lib/price-ranges";
 import { FAQS } from "@/lib/faqs";
@@ -60,16 +60,18 @@ const priced = productPrimaryAction({ slug: "cadel-zefiro-9", name: "Cadel Zefir
 check("fiche chiffrée : estimation sur le modèle", [priced.kind, priced.href], ["estimate", "/estimation?modele=cadel-zefiro-9"]);
 const quote = productPrimaryAction({ slug: "mcz-ego-air-8-r", name: "MCZ Ego Air 8 R" }, labels);
 check("fiche sur devis : demande de prix", quote.kind, "price-request");
-check("fiche sur devis : adresse", quote.href, "/contact?modele=mcz-ego-air-8-r&nom=MCZ+Ego+Air+8+R");
+check("fiche sur devis : adresse sans nom", quote.href, "/contact?modele=mcz-ego-air-8-r");
 check("fiche à 0 € : demande de prix", productPrimaryAction({ slug: "x", name: "X", priceTTC: 0 }, labels).kind, "price-request");
 
-check("formulaire : modèle relu", readPriceRequest("?modele=mcz-ego-air-8-r&nom=MCZ+Ego+Air+8+R"), {
-  slug: "mcz-ego-air-8-r",
-  name: "MCZ Ego Air 8 R",
-});
-check("formulaire : slug invalide ignoré", readPriceRequest("?modele=../admin"), null);
-check("formulaire : sans modèle", readPriceRequest(""), null);
-check("formulaire : nom sur une ligne", readPriceRequest("?modele=a-b&nom=A%0AB")?.name, "A B");
+check("formulaire : slug relu", readModelParam("mcz-ego-air-8-r"), "mcz-ego-air-8-r");
+check("formulaire : slug invalide ignoré", readModelParam("../admin"), null);
+check("formulaire : texte libre ignoré", readModelParam("Remboursement : appelez le 04"), null);
+check("formulaire : sans modèle", readModelParam(undefined), null);
+check("formulaire : premier des paramètres répétés", readModelParam(["a-b", "c"]), "a-b");
+{
+  const contact = readFileSync("app/(frontend)/contact/page.tsx", "utf8");
+  assert("contact : le nom vient du catalogue", contact.includes("getProductBySlug(slug)") && !/\bnom\b/.test(readFileSync("lib/price-request.ts", "utf8").replace(/\/\*[\s\S]*?\*\//g, "")));
+}
 assert("message : nomme le modèle", priceRequestMessage({ slug: "a-b", name: "MCZ Ego" }).includes("du modèle MCZ Ego"));
 assert("message : lien de la fiche", priceRequestMessage({ slug: "a-b" }).includes("mister-pellets.be/produit/a-b"));
 check("sujet présélectionné", PRICE_REQUEST_SUBJECT, "info-produit");

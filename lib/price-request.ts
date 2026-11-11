@@ -25,29 +25,24 @@ export const PRICE_REQUEST_LABEL = "Demander le prix de ce modèle";
 
 /** Un slug de fiche : minuscules, chiffres et tirets, comme dans l'admin. */
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const NAME_MAX = 120;
+const SLUG_MAX = 120;
 
-/** Nom de modèle lisible, sur une ligne, borné. */
-function cleanName(raw: string | null): string | undefined {
-  if (!raw) return undefined;
-  const one = raw.replace(/[\u0000-\u001f\u007f]+/g, " ").replace(/\s+/g, " ").trim();
-  return one ? one.slice(0, NAME_MAX) : undefined;
+/**
+ * Adresse de la demande de prix d'un modèle : `/contact?modele=<slug>`. Le
+ * nom n'y passe plus : la page le retrouve dans le catalogue à partir du
+ * slug, et un lien forgé ne peut pas faire écrire un texte libre sur le site
+ * (relecture du lot 3).
+ */
+export function priceRequestHref(slug: string): string {
+  return `${PRICE_REQUEST_PATH}?${new URLSearchParams({ modele: slug }).toString()}`;
 }
 
-/** Adresse de la demande de prix d'un modèle : `/contact?modele=<slug>&nom=<nom>`. */
-export function priceRequestHref(slug: string, name?: string): string {
-  const params = new URLSearchParams({ modele: slug });
-  const n = cleanName(name ?? null);
-  if (n) params.set("nom", n);
-  return `${PRICE_REQUEST_PATH}?${params.toString()}`;
-}
-
-/** Modèle demandé par l'adresse du formulaire, ou null si elle n'en porte pas de valide. */
-export function readPriceRequest(search: string): { slug: string; name?: string } | null {
-  const params = new URLSearchParams(search);
-  const slug = params.get("modele")?.trim().toLowerCase();
-  if (!slug || slug.length > NAME_MAX || !SLUG_RE.test(slug)) return null;
-  return { slug, name: cleanName(params.get("nom")) };
+/** Slug lu dans le paramètre `modele`, ou null s'il n'a pas la forme d'un slug. */
+export function readModelParam(value: string | string[] | undefined): string | null {
+  const raw = Array.isArray(value) ? value[0] : value;
+  const slug = raw?.trim().toLowerCase();
+  if (!slug || slug.length > SLUG_MAX || !SLUG_RE.test(slug)) return null;
+  return slug;
 }
 
 /** Message prérempli du formulaire de contact pour ce modèle. */
@@ -84,7 +79,7 @@ export function productPrimaryAction(
     return { href: ROUTES.configurator, label: labels.estimate, kind: "estimate" };
   }
   return {
-    href: priceRequestHref(product.slug, product.name),
+    href: priceRequestHref(product.slug),
     label: PRICE_REQUEST_LABEL,
     kind: "price-request",
   };

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { PRICE_REQUEST_SUBJECT, priceRequestMessage, readPriceRequest } from "@/lib/price-request";
+import { PRICE_REQUEST_SUBJECT, priceRequestMessage } from "@/lib/price-request";
 
 type State = "idle" | "loading" | "success" | "error";
 
@@ -15,25 +15,14 @@ const SUBJECTS = [
   { value: "info-other", label: "Autre" },
 ];
 
-const noopSubscribe = () => () => {};
-/** Adresse lue après l'hydratation : le serveur et le premier rendu lisent "". */
-const readSearch = () => window.location.search;
-const serverSearch = () => "";
-
 /**
  * Formulaire de contact. Ouvert depuis une fiche « sur devis »
- * (`/contact?modele=<slug>&nom=<nom>`, lib/price-request.ts), il arrive avec
- * le sujet « Question sur un produit » et un message qui nomme le modèle.
- * Le préremplissage passe par un remontage (`key`) après l'hydratation : pas
- * d'écart entre le HTML du serveur et le premier rendu du navigateur.
+ * (`/contact?modele=<slug>`, lib/price-request.ts), il arrive avec le sujet
+ * « Question sur un produit » et un message qui nomme le modèle. Le modèle
+ * est retrouvé par la page, côté serveur, dans le catalogue : un slug
+ * inconnu ne préremplit rien.
  */
-export function ContactForm() {
-  const search = React.useSyncExternalStore(noopSubscribe, readSearch, serverSearch);
-  const request = React.useMemo(() => readPriceRequest(search), [search]);
-  return <ContactFormInner key={request ? `prix-${request.slug}` : "libre"} request={request} />;
-}
-
-function ContactFormInner({ request }: { request: { slug: string; name?: string } | null }) {
+export function ContactForm({ request = null }: { request?: { slug: string; name: string } | null }) {
   const [state, setState] = React.useState<State>("idle");
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
