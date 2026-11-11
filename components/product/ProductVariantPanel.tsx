@@ -26,6 +26,8 @@ interface Props {
   variants: ProductVariantData[];
   /** Compléments en option : leur total s'ajoute à la configuration choisie. */
   accessories?: ProductAccessory[];
+  /** Ligne de garantie (lib/product-price.ts, guaranteeLine), juste sous le prix comme sur une fiche simple. */
+  guarantee?: string;
 }
 
 const STOCK_LABELS: Record<VariantStockStatus, string> = {
@@ -64,6 +66,7 @@ export function ProductVariantPanel({
   variantOptions,
   variants,
   accessories,
+  guarantee,
 }: Props) {
   // Axes triés par sortOrder (ordre d'affichage défini dans l'admin).
   const axes = React.useMemo(
@@ -268,6 +271,8 @@ export function ProductVariantPanel({
             {typo(bonusLabelFor(productBrand))} déduit. {BONUS.conditions}
           </p>
         ) : null}
+
+        {guarantee ? <p className="mt-2 text-sm text-mp-ink-soft">{typo(guarantee)}</p> : null}
 
         {activeVariant && (
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-mp-ink-soft">

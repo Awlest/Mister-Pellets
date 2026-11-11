@@ -282,6 +282,7 @@ for (const file of ["app/(frontend)/page.tsx"]) {
   check("fiche chiffrée en stock : délai saisi", shownDeliveryDelay({ ...priced, deliveryDelay: "4-6 sem." }), "4-6 sem.");
   check("fiche : garantie de l'appareil seul", guaranteeLine({}), "Garantie légale de 2 ans sur le poêle");
   assert("fiche : la page affiche la ligne de garantie", readFileSync("app/(frontend)/produit/[slug]/page.tsx", "utf8").includes("guaranteeLine(product)"));
+  assert("fiche à configurations : garantie passée au panneau, sous le prix", readFileSync("app/(frontend)/produit/[slug]/page.tsx", "utf8").includes("guarantee={guaranteeLine(product)}"));
 }
 
 // ---------------------------------------------------------------------------

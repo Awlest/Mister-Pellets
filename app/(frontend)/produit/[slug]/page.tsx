@@ -345,8 +345,8 @@ export default async function ProductPage({ params }: Props) {
                     variantOptions={product.variantOptions ?? []}
                     variants={product.variants}
                     accessories={product.accessories}
+                    guarantee={guaranteeLine(product)}
                   />
-                  <p className="mt-3 text-sm text-mp-ink-soft">{typo(guaranteeLine(product))}</p>
                   <div className="mt-3 flex flex-col gap-3">
                     <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
                       <Link href={primary.href} rel="nofollow">
