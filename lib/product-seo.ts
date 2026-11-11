@@ -5,13 +5,6 @@ import { productFuel, productKindLabel } from "./product-kind";
 import { shownPriceTTC } from "./product-price";
 import { fitText } from "./seo";
 import type { ProductDemo, ProductVariantData } from "./products-demo";
-import {
-  FREE_ZONE_POSTAL_CODES,
-  SHIPPING_BRUSSELS_FLANDERS,
-  SHIPPING_LOCAL,
-  SHIPPING_PREFIXES,
-  SHIPPING_WALLONIA,
-} from "./shipping";
 
 /**
  * Titre, description et données structurées d'une fiche produit.
@@ -169,27 +162,6 @@ export function productImages(p: ProductDemo): string[] {
   return [...new Set([main, ...gallery].filter((u): u is string => Boolean(u)).map(absolute))];
 }
 
-const price = (amountTTC: number) => ({ "@type": "MonetaryAmount", value: amountTTC, currency: "EUR" });
-
-/**
- * Frais de livraison, mêmes montants et mêmes zones que lib/shipping.ts et le
- * flux Merchant : offerte dans les communes proches de Fernelmont, forfait en
- * Wallonie, forfait à Bruxelles et en Flandre.
- */
-export function shippingDetails(): Record<string, unknown>[] {
-  const prefixes = (amount: number) => SHIPPING_PREFIXES.filter((p) => p.price === amount).map((p) => p.prefix);
-  const zone = (amount: number, region: Record<string, unknown>) => ({
-    "@type": "OfferShippingDetails",
-    shippingRate: price(amount),
-    shippingDestination: { "@type": "DefinedRegion", addressCountry: "BE", ...region },
-  });
-  return [
-    zone(SHIPPING_LOCAL, { postalCode: [...FREE_ZONE_POSTAL_CODES].sort((a, b) => a - b).map(String) }),
-    zone(SHIPPING_WALLONIA, { postalCodePrefix: prefixes(SHIPPING_WALLONIA) }),
-    zone(SHIPPING_BRUSSELS_FLANDERS, { postalCodePrefix: prefixes(SHIPPING_BRUSSELS_FLANDERS) }),
-  ];
-}
-
 /** Prix réellement affiché d'une variante : bonus de saison, sinon promo, sinon catalogue. 0 = pas de prix. */
 export function variantPrice(v: ProductVariantData): number {
   const shown = v.bonusPrice ?? (v.salePrice && v.salePrice > 0 ? v.salePrice : v.price);
@@ -213,6 +185,14 @@ function variantLabel(p: ProductDemo, v: ProductVariantData): string {
  * Pas de politique de retour : le site ne vend plus en ligne (paiement retiré
  * le 04/09/2026), la commande passe par un devis signé. À rétablir seulement
  * avec une politique écrite dans les CGV.
+ *
+ * Pas de livraison (`shippingDetails`) : le flux Merchant la déclare par
+ * préfixe postal (lib/shipping.ts). En JSON-LD, Google ne lit le code postal
+ * que pour l'Australie, le Canada et les États-Unis : trois tarifs belges sans
+ * zone lisible, dont un à 0 €, se liraient « livraison gratuite en Belgique ».
+ *
+ * Une fiche à variantes dont aucune n'est chiffrée affiche « À partir de » le
+ * prix de la fiche : une seule offre à ce prix.
  */
 export function productOffers(p: ProductDemo, now: Date = new Date()): Record<string, unknown>[] {
   const url = `${SITE}/produit/${p.slug}`;
@@ -231,7 +211,7 @@ export function productOffers(p: ProductDemo, now: Date = new Date()): Record<st
 
   let offers: Record<string, unknown>[] = [];
   const variants = p.hasVariants ? (p.variants ?? []) : [];
-  if (variants.length > 0) {
+  if (variants.some((v) => variantPrice(v) > 0)) {
     offers = variants
       .filter((v) => variantPrice(v) > 0)
       .map((v) => {
@@ -254,16 +234,11 @@ export function productOffers(p: ProductDemo, now: Date = new Date()): Record<st
       const colours = (p.colorVariants ?? []).filter((c) => validGtin(c.gtin));
       offers =
         colours.length > 0
-          ? colours.map((c) => offer(shown, { name: `${p.name.trim()}, ${c.colorName}`, gtin: validGtin(c.gtin), color: c.colorName }, p.stockStatus))
+          ? colours.map((c) => offer(shown, { name: `${p.name.trim()}, ${c.colorName}`, gtin: validGtin(c.gtin) }, p.stockStatus))
           : [offer(shown, {}, p.stockStatus)];
     }
   }
-  // Livraison : décrite une fois, sur la première offre, puis citée par son @id.
-  const shippingId = `${url}#livraison`;
-  return offers.map((o, i) => ({
-    ...o,
-    shippingDetails: i === 0 ? shippingDetails().map((d, n) => ({ "@id": `${shippingId}-${n + 1}`, ...d })) : shippingDetails().map((_, n) => ({ "@id": `${shippingId}-${n + 1}` })),
-  }));
+  return offers;
 }
 
 /**

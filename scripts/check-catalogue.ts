@@ -286,7 +286,7 @@ const checks: [string, () => void][] = [
     },
   ],
   [
-    "fiche produit : jamais de prix à 0, pas de Product sans offre, pas de politique de retour",
+    "fiche produit : jamais de prix à 0, pas de Product sans offre, ni retour ni livraison balisés",
     () => {
       const variant = (price: number, extra = {}) => ({ id: String(price), optionValueIds: [], price, ...extra });
       const quote = sample({ hasVariants: true, variants: [variant(0), variant(0)] });
@@ -305,7 +305,13 @@ const checks: [string, () => void][] = [
       const json = JSON.stringify(product);
       assert.ok(!/"price":0[,}]/.test(json) && !json.includes("AggregateOffer") && !json.includes("MerchantReturnPolicy"));
       assert.ok(!/aggregateRating|"review"/.test(json));
-      assert.ok(json.includes("OfferShippingDetails") && json.includes(`"seller":{"@id":"https://mister-pellets.be/#organization"}`));
+      // Livraison : déclarée par le flux Merchant seul (codes postaux illisibles par Google en Belgique).
+      assert.ok(!json.includes("shippingDetails") && json.includes(`"seller":{"@id":"https://mister-pellets.be/#organization"}`));
+      assert.ok(!/"color"/.test(json), "color appartient à Product, pas à Offer");
+
+      // Variantes toutes « sur devis », fiche chiffrée : « À partir de » ce prix, une offre.
+      const parentOnly = productOffers(sample({ hasVariants: true, priceTTC: 3450, variants: [variant(0)] }));
+      assert.deepEqual(parentOnly.map((o) => o.price), [3450]);
 
       const simple = productJsonLd(sample({ priceTTC: 2105 }), "Description.");
       assert.equal((simple.offers as Record<string, unknown>).price, 2105);
