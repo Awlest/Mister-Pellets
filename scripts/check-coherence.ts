@@ -101,9 +101,12 @@ check("estimation : modèle sur devis", requestedModel(catalogue, "?modele=mcz-e
   status: "quote-only",
   slug: "mcz-ego-air-8-r",
 });
-check("estimation : modèle chiffré absent de l'estimation", requestedModel(catalogue, "?modele=edilkamin-x", quoteOnly), {
+check("estimation : modèle chiffré absent de l'estimation", requestedModel(catalogue, "?modele=edilkamin-x", quoteOnly, new Set(["edilkamin-x"])), {
   status: "not-estimable",
   slug: "edilkamin-x",
+});
+check("estimation : slug inconnu des deux listes, aucun message", requestedModel(catalogue, "?modele=inconnu-xyz", quoteOnly, new Set(["edilkamin-x"])), {
+  status: "none",
 });
 
 // Règle « dans l'estimation » partagée par la fiche et le catalogue (lib/estimable.ts).

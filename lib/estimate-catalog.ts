@@ -107,6 +107,8 @@ export interface EstimateCatalogData {
    * « Ce modèle n'est pas encore dans l'estimation en ligne ».
    */
   quoteOnlySlugs: string[];
+  /** Fiches visibles chiffrées mais absentes de l'estimation (sans puissance exploitable). */
+  notEstimableSlugs: string[];
 }
 
 /** Prix affiché sur la fiche : variante chiffrée ou prix de la fiche (même règle que lib/products.ts). */
@@ -131,13 +133,14 @@ export async function getEstimateCatalogData(): Promise<EstimateCatalogData> {
 
   const products: EstimateProduct[] = [];
   const quoteOnlySlugs: string[] = [];
+  const notEstimableSlugs: string[] = [];
 
   for (const doc of result.docs as unknown as PayloadEstimateRow[]) {
     // Seconde barrière après la requête : jamais d'appareil hors catalogue.
     if (isOffCatalogue(doc.combustible)) continue;
     // Règle partagée avec la fiche produit (lib/estimable.ts).
     if (!isEstimable(doc)) {
-      if (!hasShownPrice(doc)) quoteOnlySlugs.push(doc.slug);
+      (hasShownPrice(doc) ? notEstimableSlugs : quoteOnlySlugs).push(doc.slug);
       continue;
     }
 
@@ -182,7 +185,7 @@ export async function getEstimateCatalogData(): Promise<EstimateCatalogData> {
   // Tri stable par marque puis puissance : le configurateur reclasse ensuite
   // selon le besoin en kW du visiteur (rankProducts).
   products.sort((a, b) => a.brand.localeCompare(b.brand, "fr") || a.powerKw - b.powerKw);
-  return { products, quoteOnlySlugs };
+  return { products, quoteOnlySlugs, notEstimableSlugs };
 }
 
 export async function getEstimateCatalog(): Promise<EstimateProduct[]> {

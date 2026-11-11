@@ -315,15 +315,17 @@ export type RequestedModel =
   | { status: "quote-only" | "not-estimable"; slug: string };
 
 /**
- * `quoteOnly` : slugs des fiches visibles sans aucun prix
- * (getEstimateCatalogData, lib/estimate-catalog.ts). Seules celles-là sont
- * dites « chiffrées sur devis » ; une fiche chiffrée absente de l'estimation
- * (sans puissance exploitable, masquée) n'y est « pas encore ».
+ * `quoteOnly` : slugs des fiches visibles sans aucun prix ; `notEstimable` :
+ * fiches visibles chiffrées mais absentes de l'estimation
+ * (getEstimateCatalogData, lib/estimate-catalog.ts). Un slug inconnu des deux
+ * listes (fiche retirée, faute de frappe) ne donne aucun message : pas de
+ * demande de prix vers une fiche en 404 (recette du lot 3).
  */
 export function requestedModel(
   products: EstimateProduct[],
   search: string,
   quoteOnly: ReadonlySet<string> = new Set(),
+  notEstimable: ReadonlySet<string> = new Set(),
 ): RequestedModel {
   const slug = new URLSearchParams(search).get("modele")?.trim();
   if (!slug) return { status: "none" };
@@ -334,5 +336,7 @@ export function requestedModel(
       )
     : undefined;
   if (option && kind) return { status: "priced", option, kind };
-  return { status: quoteOnly.has(slug) ? "quote-only" : "not-estimable", slug };
+  if (quoteOnly.has(slug)) return { status: "quote-only", slug };
+  if (notEstimable.has(slug)) return { status: "not-estimable", slug };
+  return { status: "none" };
 }

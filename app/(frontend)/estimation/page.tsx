@@ -21,7 +21,7 @@ export const metadata = buildPageMetadata({
 export const revalidate = 60;
 
 export default async function EstimationPage() {
-  const { products, quoteOnlySlugs } = await getEstimateCatalogData();
+  const { products, quoteOnlySlugs, notEstimableSlugs } = await getEstimateCatalogData();
 
   return (
     <>
@@ -61,7 +61,9 @@ export default async function EstimationPage() {
               </p>
             </div>
           ) : (
-            <EstimateConfigurator products={products} quoteOnlySlugs={quoteOnlySlugs} bonusAtRender={isBonusPeriod()} />
+            <EstimateConfigurator products={products} quoteOnlySlugs={quoteOnlySlugs}
+              notEstimableSlugs={notEstimableSlugs}
+              bonusAtRender={isBonusPeriod()} />
           )}
 
           <TrustPoints className="mt-8 lg:hidden" />

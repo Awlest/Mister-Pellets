@@ -237,11 +237,14 @@ const NO_SLUGS: string[] = [];
 export function EstimateConfigurator({
   products,
   quoteOnlySlugs = NO_SLUGS,
+  notEstimableSlugs = NO_SLUGS,
   bonusAtRender = false,
 }: {
   products: EstimateProduct[];
   /** Fiches visibles sans aucun prix : « Ce modèle est chiffré sur devis ». */
   quoteOnlySlugs?: string[];
+  /** Fiches chiffrées absentes de l'estimation : « pas encore dans l'estimation ». */
+  notEstimableSlugs?: string[];
   /**
    * Bonus de saison actif au moment du rendu serveur (ISR). Sert d'instantané
    * serveur : le HTML et l'hydratation lisent la même valeur, donc aucun
@@ -260,9 +263,10 @@ export function EstimateConfigurator({
   // Modèle absent du catalogue chiffré (fiche sur devis) : pas de
   // présélection, un encart l'explique au-dessus des questions.
   const quoteOnlySet = React.useMemo(() => new Set(quoteOnlySlugs), [quoteOnlySlugs]);
+  const notEstimableSet = React.useMemo(() => new Set(notEstimableSlugs), [notEstimableSlugs]);
   const requested = React.useMemo(
-    () => requestedModel(products, search, quoteOnlySet),
-    [products, search, quoteOnlySet],
+    () => requestedModel(products, search, quoteOnlySet, notEstimableSet),
+    [products, search, quoteOnlySet, notEstimableSet],
   );
   const preselected = requested.status === "priced" ? requested : null;
   const initialState = React.useMemo<EstimateState>(() => {
