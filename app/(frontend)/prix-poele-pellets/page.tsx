@@ -20,7 +20,10 @@ import {
 } from "@/lib/price-examples";
 import { formatKw } from "@/lib/power";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/services";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildFAQSchema, buildPageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { FAQAccordion } from "@/components/sections/FAQAccordion";
+import { FAQS } from "@/lib/faqs";
 import { PHONE_HOURS } from "@/config/site";
 
 export const metadata = buildPageMetadata({
@@ -54,8 +57,61 @@ export default async function PrixPoelePelletsPage() {
       }. Prix ferme après la visite technique gratuite.`
     : "Pose, raccordement et mise en service compris. Prix ferme après la visite technique gratuite.";
 
+  // Date du relevé : les prix sont recalculés à chaque régénération de la page.
+  const relevedOn = new Date().toLocaleDateString("fr-BE", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "Europe/Brussels",
+  });
+  const laborPrices = installs.map((it) => it.laborTTC);
+  const exampleTotals = examples.map((ex) => ex.totalTTC);
+  // Réponse directe en tête de page (40 à 60 mots), pour le visiteur pressé
+  // comme pour un moteur ou une IA qui cherche le chiffre.
+  const directAnswer =
+    from && laborPrices.length > 0
+      ? `En Wallonie, un poêle à pellets posé coûte à partir de ${eur(from.totalTTC)} TVAC avec un ${FROM_INSTALL_LABEL.toLowerCase()}${
+          exampleTotals.length > 0
+            ? `, et de ${eur(Math.min(...exampleTotals))} à ${eur(Math.max(...exampleTotals))} pour nos trois exemples avec un ${EXAMPLE_INSTALL_LABEL.toLowerCase()}`
+            : ""
+        }. La pose seule va de ${eur(Math.min(...laborPrices))} à ${eur(Math.max(...laborPrices))} selon la sortie des fumées. ${vatNote}${bonus ? ", bonus de saison déduit" : ""}.`
+      : null;
+
+  const delay = FAQS.find((q) => q.id === "general-delai");
+  // Cinq questions de prix, réponses reprises du site (pose, TVA, bonus ou
+  // aides, financement, délai).
+  const faq = [
+    {
+      question: "Pourquoi le prix de la pose change-t-il d'une maison à l'autre ?",
+      answer:
+        "Surtout à cause de la sortie des fumées. Avec une cheminée en bon état, la pose se fait en une journée. Sans cheminée, il faut créer un conduit. Un mur très épais, un étage ou la canalisation d'air chaud ajoutent un supplément. Le prix ferme figure au devis, après la visite technique gratuite.",
+    },
+    {
+      question: "Quelle TVA s'applique à un poêle à pellets posé ?",
+      answer:
+        "6 % au lieu de 21 % quand nous fournissons et posons le poêle dans un logement privé de plus de 10 ans : le taux réduit s'applique d'office, sur le poêle comme sur la pose. Logement de moins de 10 ans ou construction neuve : 21 %.",
+    },
+    bonus
+      ? {
+          question: "Le bonus de saison est-il déjà déduit des prix de cette page ?",
+          answer: `Oui. ${BONUS.label}. ${BONUS.conditions}`,
+        }
+      : {
+          question: "Existe-t-il encore une prime pour un poêle à pellets en Wallonie ?",
+          answer:
+            "Non. La prime Habitation s'est arrêtée le 30 septembre 2026. Il reste la TVA à 6 % sur les logements de plus de 10 ans et, sous conditions, les prêts Rénopack et Rénoprêt : le détail est sur la page [aides pour un poêle à pellets](/aides-poele-a-pellets-wallonie).",
+        },
+    {
+      question: "Peut-on payer son poêle en plusieurs fois ?",
+      answer:
+        "Un financement est possible par Cofidis, sous réserve d'acceptation du prêteur. Les durées, la mensualité et l'exemple représentatif s'affichent dans [le configurateur](/estimation). Attention, emprunter de l'argent coûte aussi de l'argent.",
+    },
+    ...(delay ? [{ question: delay.question, answer: delay.answer }] : []),
+  ];
+
   return (
     <>
+      <JsonLd data={buildFAQSchema(faq)} />
       <HeroSecondary
         eyebrow="Prix posé"
         title={
@@ -77,6 +133,11 @@ export default async function PrixPoelePelletsPage() {
           visite technique d'abord : c'est elle qui rend le prix ferme. */}
       <section className="bg-mp-cream pb-10 md:pb-14">
         <div className="mp-shell">
+          {directAnswer && (
+            <p className="mp-measure mb-4 text-center text-lg leading-relaxed text-mp-ink md:text-xl">
+              {directAnswer}
+            </p>
+          )}
           <p className="mp-measure mb-6 text-center text-base leading-relaxed text-mp-ink-soft md:text-lg">
             {fromConditions}
           </p>
@@ -146,6 +207,38 @@ export default async function PrixPoelePelletsPage() {
                 <ExampleCard key={ex.slug} ex={ex} bonus={bonus} />
               ))}
             </div>
+            <div className="mp-measure mt-10 overflow-x-auto rounded-[20px] border border-mp-sand/40 bg-white">
+              <table className="w-full text-left text-sm md:text-base">
+                <caption className="caption-bottom px-4 py-3 text-left text-xs text-mp-ink-soft">
+                  Exemples de prix posés, relevés le {relevedOn} : poêle et pose avec un{" "}
+                  {EXAMPLE_INSTALL_LABEL.toLowerCase()} de {HAUTEUR.defaut} m, {vatNote}
+                  {bonus ? ", bonus de saison déduit" : ""}.
+                </caption>
+                <thead>
+                  <tr className="border-b border-mp-sand/40 text-mp-green-deep">
+                    <th scope="col" className="px-4 py-3 font-semibold">Modèle</th>
+                    <th scope="col" className="px-4 py-3 text-right font-semibold">Poêle</th>
+                    <th scope="col" className="px-4 py-3 text-right font-semibold">Pose</th>
+                    <th scope="col" className="px-4 py-3 text-right font-semibold">Total TVAC</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {examples.map((ex) => (
+                    <tr key={ex.slug} className="border-b border-mp-sand/40 last:border-b-0">
+                      <th scope="row" className="px-4 py-3 font-medium text-mp-ink">
+                        <Link href={`/produit/${ex.slug}`} className="underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink">
+                          {ex.fullName}
+                        </Link>{" "}
+                        <span className="text-mp-ink-soft">({formatKw(ex.powerKw)} kW)</span>
+                      </th>
+                      <td className="px-4 py-3 text-right tabular-nums">{eur(ex.stoveTTC - ex.bonusTTC)}</td>
+                      <td className="px-4 py-3 text-right tabular-nums">{eur(ex.laborTTC)}</td>
+                      <td className="px-4 py-3 text-right font-semibold tabular-nums text-mp-green-deep">{eur(ex.totalTTC)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       ) : null}
@@ -162,31 +255,42 @@ export default async function PrixPoelePelletsPage() {
               fournitures et mise en service, {vatShort}.
             </p>
           </div>
-          <div className="mp-measure overflow-hidden rounded-[20px] border border-mp-sand/40 bg-white">
-            <ul className="divide-y divide-mp-sand/40">
-              {installs.map((it) => (
-                <li key={it.key} className="flex items-start justify-between gap-4 p-4 md:p-5">
-                  <div className="min-w-0">
-                    <p className="font-semibold text-mp-green-deep">{it.label}</p>
-                    <p className="text-sm text-mp-ink-soft">
-                      {it.desc}
-                      {it.percements > 0 ? `, ${it.percements} percements renforcés compris` : ""}.
-                      {it.heightM > 0 ? ` ${heightNote(it)}` : ""}
-                    </p>
-                  </div>
-                  <p className="shrink-0 text-right font-semibold text-mp-ink">
-                    <DiscountedPrice
-                      amount={it.laborTTC}
-                      full={it.fullTTC}
-                      pct={it.discountPct}
-                      showStrike={it.showStrike}
-                      format={eur}
-                      className="max-w-36"
-                    />
-                  </p>
-                </li>
-              ))}
-            </ul>
+          <div className="mp-measure overflow-x-auto rounded-[20px] border border-mp-sand/40 bg-white">
+            <table className="w-full text-left">
+              <caption className="caption-bottom px-4 py-3 text-left text-xs text-mp-ink-soft md:px-5">
+                Forfaits de pose relevés le {relevedOn}, fournitures et mise en service comprises, {vatShort}.
+              </caption>
+              <thead className="sr-only">
+                <tr>
+                  <th scope="col">Type de pose</th>
+                  <th scope="col">Prix TVAC</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-mp-sand/40">
+                {installs.map((it) => (
+                  <tr key={it.key}>
+                    <th scope="row" className="min-w-0 p-4 align-top font-normal md:p-5">
+                      <span className="block font-semibold text-mp-green-deep">{it.label}</span>
+                      <span className="block text-sm text-mp-ink-soft">
+                        {it.desc}
+                        {it.percements > 0 ? `, ${it.percements} percements renforcés compris` : ""}.
+                        {it.heightM > 0 ? ` ${heightNote(it)}` : ""}
+                      </span>
+                    </th>
+                    <td className="p-4 text-right align-top font-semibold text-mp-ink md:p-5">
+                      <DiscountedPrice
+                        amount={it.laborTTC}
+                        full={it.fullTTC}
+                        pct={it.discountPct}
+                        showStrike={it.showStrike}
+                        format={eur}
+                        className="max-w-36"
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           <p className="mp-measure mt-4 text-center text-sm text-mp-ink-soft">
             Au-delà de {HAUTEUR.seuilAcces} m de conduit, il faut une nacelle ({eur(TARIFS.options.nacelle * 1.06)}{" "}
@@ -253,6 +357,8 @@ export default async function PrixPoelePelletsPage() {
       </section>
 
       <GoogleReviews tone="beige" />
+
+      <FAQAccordion title="Questions fréquentes sur le prix" items={faq} />
     </>
   );
 }
