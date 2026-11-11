@@ -213,21 +213,29 @@ function parseDraft(json: string | null): EstimateState | null {
  * plusieurs puissances ouvre sur la plus petite : le visiteur la change à
  * l'étape du modèle.
  */
-function preselectedModel(products: EstimateProduct[]): { key: string; kind: StoveKind } | null {
-  let slug: string | null = null;
-  try {
-    slug = new URLSearchParams(window.location.search).get("modele");
-  } catch {
-    return null;
-  }
+function preselectedModel(
+  products: EstimateProduct[],
+  search: string,
+): { option: EstimateProduct; kind: StoveKind } | null {
+  const slug = new URLSearchParams(search).get("modele");
   if (!slug) return null;
   const option = products.find((p) => p.slug === slug);
   if (!option) return null;
   const kind = (Object.keys(STOVE_KINDS) as StoveKind[]).find((k) =>
     (STOVE_KINDS[k].productTypes as readonly string[]).includes(option.productType),
   );
-  return kind ? { key: option.key, kind } : null;
+  return kind ? { option, kind } : null;
 }
+
+/**
+ * Paramètres de l'adresse, lus comme une valeur externe. En navigation
+ * interne (bouton d'une fiche), Next n'écrit la nouvelle adresse qu'à la
+ * validation du rendu : React relit l'instantané juste après et relance le
+ * rendu si l'adresse a changé, sans setState dans un effet. Le serveur et
+ * l'hydratation lisent une chaîne vide.
+ */
+const readSearch = () => window.location.search;
+const serverSearch = () => "";
 
 /**
  * Le brouillon n'est lu qu'après l'hydratation : le premier rendu client
@@ -256,13 +264,25 @@ export function EstimateConfigurator({
   // Arrivée depuis une fiche produit (`/estimation?modele=<slug>`) : le poêle
   // de la fiche est déjà choisi, avec son type. Même mécanique que le
   // brouillon : lu après l'hydratation, appliqué par un remontage du formulaire.
-  const preselected = React.useMemo(() => (hydrated ? preselectedModel(products) : null), [hydrated, products]);
-  const initialState = preselected
-    ? { ...(draft ?? DEFAULT_STATE), stoveKind: preselected.kind, productKey: preselected.key }
-    : (draft ?? DEFAULT_STATE);
+  const search = React.useSyncExternalStore(noopSubscribe, readSearch, serverSearch);
+  const preselected = React.useMemo(() => preselectedModel(products, search), [products, search]);
+  const initialState = React.useMemo<EstimateState>(() => {
+    const base = draft ?? DEFAULT_STATE;
+    if (!preselected) return base;
+    return {
+      ...base,
+      stoveKind: preselected.kind,
+      productKey: preselected.option.key,
+      // Brouillon en ventouse et poêle Edilkamin ou EK63 demandé : le poêle
+      // de la fiche prime, l'évacuation revient au choix par défaut.
+      installType: acceptsInstall(preselected.option, base.installType)
+        ? base.installType
+        : DEFAULT_STATE.installType,
+    };
+  }, [draft, preselected]);
   return (
     <EstimateForm
-      key={preselected ? `modele-${preselected.key}` : draft ? "brouillon" : "neuf"}
+      key={preselected ? `modele-${preselected.option.key}` : draft ? "brouillon" : "neuf"}
       products={products}
       initialState={initialState}
       bonusAtRender={bonusAtRender}
