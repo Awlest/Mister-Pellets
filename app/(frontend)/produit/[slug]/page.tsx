@@ -41,6 +41,7 @@ import {
   productTitle,
 } from "@/lib/product-seo";
 import type { ProductDemo, ProductType } from "@/lib/products-demo";
+import { productPrimaryAction } from "@/lib/price-request";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -176,8 +177,10 @@ export default async function ProductPage({ params }: Props) {
   const specs = productSpecs(product);
   const guide = typeGuide(product);
   const categories = categoriesOf(product);
-  // Le configurateur s'ouvre sur ce modèle (EstimateConfigurator lit `modele`).
-  const estimateHref = `${ROUTES.configurator}?modele=${encodeURIComponent(product.slug)}`;
+  // Bouton principal : fiche chiffrée, le configurateur s'ouvre sur ce modèle
+  // (EstimateConfigurator lit `modele`) ; fiche sur devis, ce modèle n'est pas
+  // dans l'estimation, le bouton demande son prix (lib/price-request.ts).
+  const primary = productPrimaryAction(product, { estimate: "Chiffrer mon installation" });
 
   return (
     <>
@@ -345,8 +348,8 @@ export default async function ProductPage({ params }: Props) {
                   />
                   <div className="mt-3 flex flex-col gap-3">
                     <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
-                      <Link href={estimateHref} rel="nofollow">
-                        Chiffrer mon installation
+                      <Link href={primary.href} rel="nofollow">
+                        {primary.label}
                       </Link>
                     </Button>
                     <Button asChild variant="outline" size="lg" className="w-full">
@@ -435,8 +438,8 @@ export default async function ProductPage({ params }: Props) {
 
               <div className="flex flex-col gap-3">
                 <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
-                  <Link href={estimateHref} rel="nofollow">
-                        Chiffrer mon installation
+                  <Link href={primary.href} rel="nofollow">
+                        {primary.label}
                       </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full">
@@ -652,6 +655,9 @@ export default async function ProductPage({ params }: Props) {
         title={`Devis avec pose pour le modèle ${product.name}`}
         description="On chiffre le poêle et la pose en 48 heures. Sans engagement avant signature."
         primaryClassName={YIELDS_TO_ACTION_BAR}
+        // Fiche sur devis : la demande de prix du modèle, pas une estimation
+        // où il ne figure pas.
+        primaryCta={primary.kind === "price-request" ? { label: primary.label, href: primary.href } : undefined}
       />
 
       {/* Barre d'action du téléphone (sous 1 024 px), dernier élément de la
@@ -665,7 +671,8 @@ export default async function ProductPage({ params }: Props) {
             ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownTTC)} TVAC`
             : "Prix sur devis"
         }
-        href={estimateHref}
+        href={primary.href}
+        action={primary.kind}
       />
     </>
   );

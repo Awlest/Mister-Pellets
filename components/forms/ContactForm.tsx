@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { PRICE_REQUEST_SUBJECT, priceRequestMessage, readPriceRequest } from "@/lib/price-request";
 
 type State = "idle" | "loading" | "success" | "error";
 
@@ -14,7 +15,25 @@ const SUBJECTS = [
   { value: "info-other", label: "Autre" },
 ];
 
+const noopSubscribe = () => () => {};
+/** Adresse lue après l'hydratation : le serveur et le premier rendu lisent "". */
+const readSearch = () => window.location.search;
+const serverSearch = () => "";
+
+/**
+ * Formulaire de contact. Ouvert depuis une fiche « sur devis »
+ * (`/contact?modele=<slug>&nom=<nom>`, lib/price-request.ts), il arrive avec
+ * le sujet « Question sur un produit » et un message qui nomme le modèle.
+ * Le préremplissage passe par un remontage (`key`) après l'hydratation : pas
+ * d'écart entre le HTML du serveur et le premier rendu du navigateur.
+ */
 export function ContactForm() {
+  const search = React.useSyncExternalStore(noopSubscribe, readSearch, serverSearch);
+  const request = React.useMemo(() => readPriceRequest(search), [search]);
+  return <ContactFormInner key={request ? `prix-${request.slug}` : "libre"} request={request} />;
+}
+
+function ContactFormInner({ request }: { request: { slug: string; name?: string } | null }) {
   const [state, setState] = React.useState<State>("idle");
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
@@ -79,6 +98,15 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {request && (
+        <p className="rounded-xl border border-mp-sand/40 bg-mp-beige p-4 text-sm text-mp-ink">
+          <strong className="text-mp-green-deep">
+            Demande de prix{request.name ? ` : ${request.name}` : ""}.
+          </strong>{" "}
+          Ce modèle est chiffré sur devis. Indiquez votre code postal et votre conduit : nous
+          revenons vers vous avec le prix du poêle et de la pose.
+        </p>
+      )}
       {/* Honeypot anti-spam (audit V20260503 §3.BLOQUANT.2) */}
       <div aria-hidden="true" className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
         <label htmlFor="hp-contact-website">Ne pas remplir ce champ</label>
@@ -143,7 +171,7 @@ export function ContactForm() {
             required
             disabled={state === "loading"}
             className={inputClass}
-            defaultValue=""
+            defaultValue={request ? PRICE_REQUEST_SUBJECT : ""}
           >
             <option value="" disabled>
               Choisissez un sujet…
@@ -167,6 +195,7 @@ export function ContactForm() {
           required
           rows={5}
           disabled={state === "loading"}
+          defaultValue={request ? priceRequestMessage(request) : undefined}
           className={cn(inputClass, "resize-y")}
           placeholder="Décrivez votre question, votre projet, ou tout ce qui pourrait nous aider à vous répondre."
         />

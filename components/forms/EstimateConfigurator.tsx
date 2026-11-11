@@ -36,6 +36,7 @@ import {
   isCanalisable,
   rankProducts,
   recommendedKw,
+  requestedModel,
   type AccessMode,
   type DuctsChoice,
   type EstimateProduct,
@@ -50,6 +51,7 @@ import { evacuationPrice, heightRule, missingAnswers, needsAccess, optionShown }
 import { DiscountedPrice } from "./DiscountedPrice";
 import { BONUS, bonusLabelFor, isBonusPeriod } from "@/lib/bonus";
 import { typo } from "@/lib/typo";
+import { priceRequestHref } from "@/lib/price-request";
 import { FIN_LEGAL, FIN_NOTE, SLOGAN_CREDIT, durationsFor, isFinanceable, monthly0 } from "@/lib/financing";
 
 import { BRAND_PARAMS, EVENTS, trackEvent } from "@/lib/analytics";
@@ -210,26 +212,6 @@ function parseDraft(json: string | null): EstimateState | null {
 }
 
 /**
- * Poêle demandé par l'adresse (`?modele=<slug>`, lien « Chiffrer mon
- * installation » d'une fiche produit), s'il est chiffrable. Une fiche à
- * plusieurs puissances ouvre sur la plus petite : le visiteur la change à
- * l'étape du modèle.
- */
-function preselectedModel(
-  products: EstimateProduct[],
-  search: string,
-): { option: EstimateProduct; kind: StoveKind } | null {
-  const slug = new URLSearchParams(search).get("modele");
-  if (!slug) return null;
-  const option = products.find((p) => p.slug === slug);
-  if (!option) return null;
-  const kind = (Object.keys(STOVE_KINDS) as StoveKind[]).find((k) =>
-    (STOVE_KINDS[k].productTypes as readonly string[]).includes(option.productType),
-  );
-  return kind ? { option, kind } : null;
-}
-
-/**
  * Paramètres de l'adresse, lus comme une valeur externe. En navigation
  * interne (bouton d'une fiche), Next n'écrit la nouvelle adresse qu'à la
  * validation du rendu : React relit l'instantané juste après et relance le
@@ -267,7 +249,10 @@ export function EstimateConfigurator({
   // de la fiche est déjà choisi, avec son type. Même mécanique que le
   // brouillon : lu après l'hydratation, appliqué par un remontage du formulaire.
   const search = React.useSyncExternalStore(noopSubscribe, readSearch, serverSearch);
-  const preselected = React.useMemo(() => preselectedModel(products, search), [products, search]);
+  // Modèle absent du catalogue chiffré (fiche sur devis) : pas de
+  // présélection, un encart l'explique au-dessus des questions.
+  const requested = React.useMemo(() => requestedModel(products, search), [products, search]);
+  const preselected = requested.status === "priced" ? requested : null;
   const initialState = React.useMemo<EstimateState>(() => {
     const base = draft ?? DEFAULT_STATE;
     if (!preselected) return base;
@@ -288,6 +273,7 @@ export function EstimateConfigurator({
       products={products}
       initialState={initialState}
       pinned={preselected?.option ?? null}
+      unpricedSlug={requested.status === "unpriced" ? requested.slug : null}
       bonusAtRender={bonusAtRender}
     />
   );
@@ -311,12 +297,15 @@ function EstimateForm({
   products,
   initialState,
   pinned,
+  unpricedSlug,
   bonusAtRender,
 }: {
   products: EstimateProduct[];
   initialState: EstimateState;
   /** Poêle demandé par l'adresse : il ouvre la liste de l'étape 3. */
   pinned: EstimateProduct | null;
+  /** Modèle demandé par l'adresse mais chiffré sur devis : absent de la liste. */
+  unpricedSlug: string | null;
   bonusAtRender: boolean;
 }) {
   const [step, setStep] = React.useState(1);
@@ -623,6 +612,22 @@ function EstimateForm({
         </div>
 
         <div className="p-4 sm:p-6 md:min-h-[420px] md:p-10">
+          {/* Modèle sur devis demandé par l'adresse : une phrase et les deux
+              issues, aux trois premières étapes (la 3e est celle du modèle). */}
+          {unpricedSlug && step <= 3 && (
+            <p className="mb-5 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm leading-relaxed text-mp-ink">
+              <strong className="text-mp-green-deep">Ce modèle est chiffré sur devis.</strong>{" "}
+              Poursuivez avec un modèle chiffré de notre catalogue, ou{" "}
+              <Link
+                href={priceRequestHref(unpricedSlug)}
+                className="font-semibold text-mp-orange-ink underline underline-offset-2 hover:no-underline"
+              >
+                demandez-nous son prix
+              </Link>
+              .
+            </p>
+          )}
+
           {/* Bonus de saison : replié sur une ligne, conditions à un geste. Il
               occupait 5 lignes au-dessus de chaque question sur mobile. */}
           {bonusActive && (

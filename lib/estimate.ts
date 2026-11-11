@@ -292,3 +292,30 @@ export const acceptsInstall = (product: Pick<EstimateProduct, "brand">, installT
 export const eur = (n: number) => formatEuros(n);
 /** Le même, au cent quand le montant n'est pas rond : « 127,20 € ». */
 export const eurCents = (n: number) => formatEuros(n, { cents: "auto" });
+
+/**
+ * Modèle demandé par l'adresse (`/estimation?modele=<slug>`) :
+ * - `priced` : il est dans le catalogue chiffré, l'estimation s'ouvre dessus
+ *   (une fiche à plusieurs puissances ouvre sur la plus petite) ;
+ * - `unpriced` : l'adresse nomme un modèle absent du catalogue chiffré (fiche
+ *   sur devis, fiche masquée, lien ancien) ; l'estimation le dit et propose un
+ *   modèle chiffré ou la demande de prix, au lieu de bloquer à l'étape du
+ *   modèle sans explication (vérification du 11/11/2026) ;
+ * - `none` : pas de modèle demandé.
+ */
+export type RequestedModel =
+  | { status: "none" }
+  | { status: "priced"; option: EstimateProduct; kind: StoveKind }
+  | { status: "unpriced"; slug: string };
+
+export function requestedModel(products: EstimateProduct[], search: string): RequestedModel {
+  const slug = new URLSearchParams(search).get("modele")?.trim();
+  if (!slug) return { status: "none" };
+  const option = products.find((p) => p.slug === slug);
+  const kind = option
+    ? (Object.keys(STOVE_KINDS) as StoveKind[]).find((k) =>
+        (STOVE_KINDS[k].productTypes as readonly string[]).includes(option.productType),
+      )
+    : undefined;
+  return option && kind ? { status: "priced", option, kind } : { status: "unpriced", slug };
+}

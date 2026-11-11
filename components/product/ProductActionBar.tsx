@@ -28,12 +28,15 @@ export function ProductActionBar({
   name,
   price,
   href,
+  action = "estimate",
 }: {
   name: string;
   /** « Dès 2 283 € TVAC », déjà formaté, ou « Prix sur devis ». */
   price: string;
-  /** Configurateur ouvert sur ce modèle. */
+  /** Configurateur ouvert sur ce modèle, ou demande de prix d'une fiche sur devis. */
   href: string;
+  /** Fiche sur devis : le bouton demande le prix (lib/price-request.ts). */
+  action?: "estimate" | "price-request";
 }) {
   return (
     <div className="mp-actionbar mp-actionbar-nav sticky z-20 min-h-[var(--mp-actionbar-h)] border-t border-mp-sand/40 bg-mp-cream px-3 pt-3 lg:hidden">
@@ -53,9 +56,15 @@ export function ProductActionBar({
             {/* Sous 360 px, « Chiffrer » seul à l'écran : le prix garde sa place.
                 Un seul enfant : le bouton est en flex, deux enfants seraient
                 écartés par son `gap`. */}
-            <span>
-              Chiffrer<span className="max-[359px]:sr-only"> la pose</span>
-            </span>
+            {action === "price-request" ? (
+              <span>
+                Demander<span className="max-[359px]:sr-only"> le prix</span>
+              </span>
+            ) : (
+              <span>
+                Chiffrer<span className="max-[359px]:sr-only"> la pose</span>
+              </span>
+            )}
           </Link>
         </Button>
       </div>
