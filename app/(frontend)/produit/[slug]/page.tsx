@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Check, Flame, Award, Wifi, Wind, Droplet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -17,8 +17,11 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   getAllProducts,
   getAllProductSlugs,
+  getOffCatalogueRedirect,
   getProductBySlug,
 } from "@/lib/products";
+import { isHybrid, misterBoisCanonical } from "@/lib/catalog-scope";
+import { REDIRECTED_PRODUCT_SLUGS } from "@/config/redirects";
 import { BRANDS } from "@/lib/brands";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { buildPageMetadata } from "@/lib/seo";
@@ -54,9 +57,12 @@ export const revalidate = 60;
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  // Query Payload au build : tous les produits, masqués compris.
+  // Query Payload au build : tous les produits, masqués compris, sauf ceux
+  // dont l'adresse est déjà redirigée par config/redirects.ts (fiches bois
+  // parties sur mister-bois.be, anciennes fiches Girolami) : la redirection
+  // passe avant la page, qui ne serait jamais servie.
   const slugs = await getAllProductSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return slugs.filter((slug) => !REDIRECTED_PRODUCT_SLUGS.has(slug)).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -69,20 +75,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Produit introuvable", robots: { index: false, follow: false } };
   // Libellé tiré du combustible et du type, comme dans le flux Merchant.
   const kind = productKindLabel(product);
+  // Hybride bois + pellets : la fiche de référence est celle de mister-bois.be
+  // (décision du 11/11/2026). La page reste affichée ici, avec un canonical
+  // vers l'autre site ; sans fiche équivalente connue, elle sort de l'index.
+  const hybrid = isHybrid(product);
+  const referenceUrl = hybrid ? misterBoisCanonical(product.slug) : undefined;
   return buildPageMetadata({
     title: `${product.name}, ${kind.charAt(0).toUpperCase()}${kind.slice(1)} ${product.power}`,
     description: `${product.name} : ${product.power}${product.heatedVolume ? ` pour ${product.heatedVolume}` : ""}. ${product.priceTTC ? `${product.hasVariants && product.variants?.length ? "Dès " : ""}${formatPrice(shownPriceTTC(product) ?? product.priceTTC)} TVAC` : "Prix sur devis"}. Pose Mister Pellets.`,
     path: `/produit/${product.slug}`,
+    canonical: referenceUrl,
     // Fiche masquée de la boutique : joignable par son URL (liens, favoris)
     // mais hors de Google, comme elle l'est déjà du sitemap et du flux.
-    noindex: product.hiddenFromBoutique,
+    noindex: product.hiddenFromBoutique || (hybrid && !referenceUrl),
   });
 }
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  if (!product) notFound();
+  if (!product) {
+    // Fiche à bois bûche : hors catalogue (lib/catalog-scope.ts). Elle n'est
+    // jamais affichée ici, le visiteur part sur mister-bois.be.
+    const elsewhere = await getOffCatalogueRedirect(slug);
+    if (elsewhere) permanentRedirect(elsewhere);
+    notFound();
+  }
 
   const brandSlug = product.brand.toLowerCase() as keyof typeof BRANDS;
   const brand = BRANDS[brandSlug];

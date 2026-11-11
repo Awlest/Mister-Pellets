@@ -393,10 +393,14 @@ export const TYPE_LABELS: Record<ProductType, string> = {
   insert:      "Insert encastrable",
 };
 
-/** Filtre « Combustible » (V1.4) — remplace une partie de l'ancien « Type ». */
-export const COMBUSTIBLE_LABELS: Record<Combustible, string> = {
+/**
+ * Filtre « Combustible » (V1.4) — remplace une partie de l'ancien « Type ».
+ * Pas de bois bûche : le site ne vend que du pellet et des hybrides
+ * (lib/catalog-scope.ts). La boutique n'affiche une option que si une fiche
+ * visible la porte.
+ */
+export const COMBUSTIBLE_LABELS: Record<Exclude<Combustible, "bois">, string> = {
   pellet:  "Pellets",
-  bois:    "Bois",
   hybride: "Hybride bois + pellets",
 };
 

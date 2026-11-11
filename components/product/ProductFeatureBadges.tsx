@@ -4,8 +4,9 @@ import type { Combustible, ProductType } from "@/lib/products-demo";
 import { cn } from "@/lib/utils";
 
 /**
- * Pastilles rondes de la carte produit : le combustible d'abord (pellets, bois
- * ou hybride, une seule par fiche), puis ce qui change le projet de chauffage
+ * Pastilles rondes de la carte produit : le combustible d'abord (pellets ou
+ * hybride, une seule par fiche ; pas de pastille « bois », le site ne vend pas
+ * d'appareil à bois bûche), puis ce qui change le projet de chauffage
  * (hydro, canalisable, insert, étanche). Tout vient des champs déjà saisis dans
  * l'admin Payload (collections/Products.ts), rien de neuf à encoder. La légende
  * de la boutique (ProductFeatureLegend) lit la même liste FEATURES, donc les
@@ -58,18 +59,6 @@ function PelletsIcon(props: IconProps) {
   );
 }
 
-/** Trois bûches vues en bout. */
-function LogsIcon(props: IconProps) {
-  return (
-    <IconBase {...props}>
-      <circle cx="12" cy="7.5" r="4.5" />
-      <circle cx="7" cy="16" r="4.5" />
-      <circle cx="17" cy="16" r="4.5" />
-      <path d="M12 7.5h.01M7 16h.01M17 16h.01" />
-    </IconBase>
-  );
-}
-
 /** Une bûche et deux granulés : bois + pellets. */
 function HybridIcon(props: IconProps) {
   return (
@@ -104,10 +93,9 @@ export interface ProductFeatureBadge {
   Icon: ComponentType<IconProps>;
 }
 
-/** Les sept pastilles possibles, dans l'ordre d'affichage (carte et légende). */
+/** Les six pastilles possibles, dans l'ordre d'affichage (carte et légende). */
 const FEATURES = [
   { key: "pellets", label: "Pellets", Icon: PelletsIcon },
-  { key: "bois", label: "Bois (bûches)", Icon: LogsIcon },
   { key: "hybride", label: "Hybride bois + pellets", Icon: HybridIcon },
   { key: "hydro", label: "Hydro (chauffage central)", Icon: Droplet },
   { key: "canalisable", label: "Canalisable", Icon: AirVent },
@@ -139,8 +127,9 @@ export function productFeatureBadges(p: ProductFeatureFlags): ProductFeatureBadg
   const hybrid = p.combustible === "hybride" || (p.type !== undefined && HYBRID_TYPES.has(p.type));
 
   if (hybrid) keys.push("hybride");
-  else if (p.combustible === "bois") keys.push("bois");
-  else if (hasData) keys.push("pellets");
+  // Une fiche bois n'arrive jamais jusqu'ici (lib/catalog-scope.ts) ; elle ne
+  // recevrait de toute façon pas la pastille « Pellets ».
+  else if (hasData && p.combustible !== "bois") keys.push("pellets");
 
   if (p.isHydro || (p.type !== undefined && HYDRO_TYPES.has(p.type))) keys.push("hydro");
   if (p.isCanalizable || p.type === "canalisable") keys.push("canalisable");

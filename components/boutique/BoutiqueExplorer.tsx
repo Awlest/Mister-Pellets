@@ -124,7 +124,6 @@ function sortProducts(list: BoutiqueProduct[], sort: SortKey): BoutiqueProduct[]
   }
 }
 
-const COMBUSTIBLE_FILTERS = [{ value: "all", label: "Tous" }, ...(Object.entries(COMBUSTIBLE_LABELS) as [Combustible, string][]).map(([value, label]) => ({ value, label }))];
 const CHAUFFAGE_FILTERS = [{ value: "all", label: "Tous" }, ...Object.entries(CHAUFFAGE_LABELS).map(([value, label]) => ({ value, label }))];
 const DIFFUSION_FILTERS = [{ value: "all", label: "Toutes" }, ...(Object.entries(DIFFUSION_LABELS) as [Diffusion, string][]).map(([value, label]) => ({ value, label }))];
 const COLOR_FILTERS = [{ value: "all", label: "Toutes" }, ...(Object.entries(COLOR_LABELS) as [ColorCategory, string][]).map(([value, label]) => ({ value, label }))];
@@ -168,6 +167,18 @@ export function BoutiqueExplorer({
   // derrière un bouton « Filtres ». Toujours dépliés à partir de 768 px.
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  // Une option de combustible n'existe que si une fiche affichée la porte,
+  // comme les marques (brandFilters) : pas de filtre qui ne mène à rien.
+  const combustibleFilters = useMemo(
+    () => [
+      { value: "all", label: "Tous" },
+      ...(Object.entries(COMBUSTIBLE_LABELS) as [Combustible, string][])
+        .filter(([value]) => products.some((p) => p.combustible === value))
+        .map(([value, label]) => ({ value, label })),
+    ],
+    [products],
+  );
+
   // Au montage : initialise les filtres depuis l'URL (liens partageables).
   // Évite le hook useSearchParams (qui forcerait la page en dynamique).
   //
@@ -177,10 +188,13 @@ export function BoutiqueExplorer({
   // uniquement quand la page est ouverte avec des filtres dans l'URL.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
+    // Un ancien lien `?combustible=bois` (option retirée) ouvre toute la
+    // boutique plutôt qu'une grille vide.
+    const combustible = p.get("combustible");
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrent({
       marque: p.get("marque") ?? "all",
-      combustible: p.get("combustible") ?? "all",
+      combustible: combustible && combustibleFilters.some((f) => f.value === combustible) ? combustible : "all",
       chauffage: p.get("chauffage") ?? "all",
       puissance: p.get("puissance") ?? "all",
       diffusion: p.get("diffusion") ?? "all",
@@ -188,6 +202,8 @@ export function BoutiqueExplorer({
     });
     const tri = p.get("tri");
     if (isSortKey(tri)) setSort(tri);
+    // Lecture de l'URL au montage seulement : la liste des options ne change pas ensuite.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** Filtres + tri dans l'URL (lien partageable), sans aller-retour serveur. */
@@ -252,7 +268,7 @@ export function BoutiqueExplorer({
 
   const GROUPS: { label: string; key: keyof Filters; options: { value: string; label: string }[] }[] = [
     { label: "Marque", key: "marque", options: brandFilters },
-    { label: "Combustible", key: "combustible", options: COMBUSTIBLE_FILTERS },
+    { label: "Combustible", key: "combustible", options: combustibleFilters },
     { label: "Chauffage", key: "chauffage", options: CHAUFFAGE_FILTERS },
     { label: "Puissance", key: "puissance", options: POWER_FILTERS },
     { label: "Diffusion de chaleur", key: "diffusion", options: DIFFUSION_FILTERS },

@@ -26,6 +26,12 @@ interface SEOPageMetaInput {
   title: string;
   description: string;
   path?: string;             // ex: "/boutique" → canonical = SITE_URL + path
+  /**
+   * Canonical vers une autre adresse que la page (URL absolue). Sert aux
+   * hybrides bois + pellets, dont la fiche de référence est sur mister-bois.be.
+   * og:url reste l'adresse de la page partagée.
+   */
+  canonical?: string;
   image?: string;            // override OG image
   type?: "website" | "article";
   noindex?: boolean;
@@ -56,7 +62,7 @@ export function buildPageMetadata(input: SEOPageMetaInput): Metadata {
     keywords: input.keywords,
     authors: input.authors?.map((name) => ({ name })),
     alternates: {
-      canonical: url,
+      canonical: input.canonical ?? url,
     },
     robots: {
       index: !input.noindex && allowIndex,
