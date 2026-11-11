@@ -2,27 +2,58 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { CTAFinal } from "@/components/sections/CTAFinal";
+import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CatalogueListing } from "@/components/product/ProductListing";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { InlineText } from "@/components/ui/inline-text";
 import { ROUTES } from "@/config/navigation";
 import { encodeListing, sortForGrid } from "@/lib/catalogue-listing";
-import { productsInCategory, type CategoryData } from "@/lib/categories";
+import { productsInCategory, summarizeCategory, type CategoryData, type CategorySummaryRow } from "@/lib/categories";
+import { formatKw } from "@/lib/power";
+import { shownPriceTTC } from "@/lib/product-price";
 import { getAllProducts } from "@/lib/products";
-import { typo } from "@/lib/typo";
+import { buildFAQSchema } from "@/lib/seo";
+import { formatEuros, typo } from "@/lib/typo";
 
 const LINK =
   "inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink";
 
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("fr-BE", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
+const kwRange = (row: CategorySummaryRow): string =>
+  row.minKw == null || row.maxKw == null
+    ? "-"
+    : row.minKw === row.maxKw
+      ? `${formatKw(row.minKw)} kW`
+      : `${formatKw(row.minKw)} à ${formatKw(row.maxKw)} kW`;
+
+const priceRange = (row: CategorySummaryRow): string =>
+  row.minPrice == null || row.maxPrice == null
+    ? "Sur devis"
+    : row.minPrice === row.maxPrice
+      ? formatEuros(row.minPrice)
+      : `${formatEuros(row.minPrice)} à ${formatEuros(row.maxPrice)}`;
+
 /**
- * Page d'une catégorie du catalogue (lib/categories.ts) : chapô, liens utiles
- * et liste complète des fiches (24 cartes, puis une ligne par fiche, toutes
- * en liens dans le HTML servi : ProductListing.tsx). Le texte long viendra
- * dans `category.sections`, affiché sous la grille.
+ * Page d'une catégorie du catalogue (lib/categories.ts) : chapô, liste
+ * complète des fiches (24 cartes, puis une ligne par fiche, toutes en liens
+ * dans le HTML servi : ProductListing.tsx), tableau par marque calculé au
+ * rendu, texte « comment choisir », fiches et guides liés, FAQ balisée.
  */
 export async function CategoryLanding({ category }: { category: CategoryData }) {
   const products = sortForGrid(productsInCategory(category, await getAllProducts()));
+  const summary = summarizeCategory(products);
+  const featured = (category.featured ?? [])
+    .map((slug) => products.find((p) => p.slug === slug))
+    .filter((p): p is (typeof products)[number] => Boolean(p));
+  const hasText = Boolean(category.sections && category.sections.length > 0);
+  const faq = category.faq ?? [];
 
   return (
     <>
+      {faq.length > 0 && <JsonLd data={buildFAQSchema(faq)} />}
+
       <HeroSecondary
         eyebrow={`${products.length} ${products.length > 1 ? "modèles" : "modèle"} au catalogue`}
         title={
@@ -87,28 +118,125 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
         </div>
       </section>
 
-      {/* Texte long de la catégorie : rempli dans un second temps (lib/categories.ts). */}
-      {category.sections && category.sections.length > 0 && (
+      {(products.length > 0 || hasText) && (
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
             <div className="mp-measure">
-              {category.sections.map((section) => (
+              {products.length > 0 && (
+                <div className="mb-12">
+                  <h2 className="mb-4 text-2xl font-semibold text-mp-green-deep md:text-3xl">
+                    {typo(`Le catalogue en chiffres : ${category.label.toLowerCase()}`)}
+                  </h2>
+                  <div className="-mx-4 overflow-x-auto md:mx-0 md:rounded-[20px] md:border md:border-mp-sand/40 bg-white">
+                    <table className="w-full min-w-[34rem] text-left text-sm md:text-base">
+                      <caption className="caption-bottom px-4 py-3 text-left text-xs text-mp-ink-soft">
+                        Fiches visibles au catalogue, calculées à l&apos;affichage de la page. Prix de
+                        l&apos;appareil seul, TVA à 21 % comprise, tels qu&apos;affichés sur les fiches ; une fiche sans
+                        prix est sur devis. Pose et évacuation en plus.
+                      </caption>
+                      <thead>
+                        <tr className="border-b border-mp-sand/40 text-mp-green-deep">
+                          <th scope="col" className="px-4 py-3 font-semibold">Marque</th>
+                          <th scope="col" className="px-3 py-3 text-right font-semibold">Modèles</th>
+                          <th scope="col" className="px-3 py-3 font-semibold">Puissance</th>
+                          <th scope="col" className="px-4 py-3 text-right font-semibold">Prix affichés</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[...summary.rows, summary.total].map((row, i, all) => {
+                          const isTotal = i === all.length - 1;
+                          return (
+                            <tr
+                              key={row.brand}
+                              className={
+                                isTotal ? "font-semibold text-mp-green-deep" : "border-b border-mp-sand/40"
+                              }
+                            >
+                              <th scope="row" className="px-4 py-3 font-medium">{row.brand}</th>
+                              <td className="px-3 py-3 text-right tabular-nums">{row.models}</td>
+                              <td className="whitespace-nowrap px-3 py-3 tabular-nums">{kwRange(row)}</td>
+                              <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums">
+                                {priceRange(row)}
+                                {row.priced > 0 && row.priced < row.models && (
+                                  <span className="block text-xs font-normal text-mp-ink-soft">
+                                    {row.priced} {row.priced > 1 ? "fiches" : "fiche"} sur {row.models}
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-3 text-sm text-mp-ink-soft">
+                    Texte mis à jour le <time dateTime={category.modifiedAt}>{formatDate(category.modifiedAt)}</time>.
+                  </p>
+                </div>
+              )}
+
+              {category.sections?.map((section) => (
                 <div key={section.heading} className="mb-10 last:mb-0">
                   <h2 className="mb-4 text-2xl font-semibold text-mp-green-deep md:text-3xl">{typo(section.heading)}</h2>
                   {section.paragraphs.map((p, i) => (
                     <p key={i} className="mb-4 text-lg text-mp-ink leading-relaxed">
-                      {typo(p)}
+                      <InlineText text={p} />
                     </p>
                   ))}
                 </div>
               ))}
+
+              {(featured.length > 0 || (category.readMore?.length ?? 0) > 0) && (
+                <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+                  {featured.length > 0 && (
+                    <div className="min-w-0">
+                      <h2 className="mb-3 text-xl font-semibold text-mp-green-deep">Trois modèles à regarder</h2>
+                      <ul>
+                        {featured.map((p) => {
+                          const price = shownPriceTTC(p);
+                          return (
+                            <li key={p.slug} className="border-b border-mp-sand/40 last:border-b-0">
+                              <Link
+                                href={`/produit/${p.slug}`}
+                                className="flex min-h-11 flex-wrap items-baseline justify-between gap-x-3 py-2 text-mp-green-deep hover:text-mp-orange-ink"
+                              >
+                                <span className="font-semibold underline underline-offset-4 decoration-mp-sand">{p.name}</span>
+                                <span className="text-sm tabular-nums text-mp-ink-soft">
+                                  {formatKw(p.powerKw)} kW · {price ? formatEuros(price) : "Sur devis"}
+                                </span>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <h2 className="mb-3 text-xl font-semibold text-mp-green-deep">À lire avant de choisir</h2>
+                    <ul>
+                      {[...(category.guide ? [category.guide] : []), ...(category.readMore ?? [])].map((g) => (
+                        <li key={g.href}>
+                          <Link href={g.href} className={LINK}>
+                            {g.label}
+                            <ArrowRight className="h-4 w-4" aria-hidden />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
       )}
 
+      {faq.length > 0 && (
+        <FAQAccordion tone="beige" title={`Questions fréquentes : ${category.label.toLowerCase()}`} items={faq} />
+      )}
+
       <CTAFinal
-        tone={category.sections && category.sections.length > 0 ? "beige" : "cream"}
+        tone={faq.length > 0 ? "cream" : products.length > 0 || hasText ? "beige" : "cream"}
         title="Besoin d'un avis sur le bon modèle ?"
         description="Décrivez votre maison et votre conduit : on vous propose deux ou trois modèles adaptés, pose et TVA comprises."
       />

@@ -114,7 +114,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ===== CATÉGORIES DU CATALOGUE =====
   const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((category) => ({
     url: `${SITE_URL}${category.path}`,
-    lastModified: day(CATALOGUE_PAGES_DATE),
+    lastModified: day(category.modifiedAt),
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));
