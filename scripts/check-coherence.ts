@@ -63,17 +63,30 @@ check("fiche sur devis : demande de prix", quote.kind, "price-request");
 check("fiche sur devis : adresse sans nom", quote.href, "/contact?modele=mcz-ego-air-8-r");
 check("fiche à 0 € : demande de prix", productPrimaryAction({ slug: "x", name: "X", priceTTC: 0 }, labels).kind, "price-request");
 
-check("formulaire : slug relu", readModelParam("mcz-ego-air-8-r"), "mcz-ego-air-8-r");
-check("formulaire : slug invalide ignoré", readModelParam("../admin"), null);
-check("formulaire : texte libre ignoré", readModelParam("Remboursement : appelez le 04"), null);
-check("formulaire : sans modèle", readModelParam(undefined), null);
-check("formulaire : premier des paramètres répétés", readModelParam(["a-b", "c"]), "a-b");
+check("formulaire : slug relu", readModelParam("?modele=mcz-ego-air-8-r"), "mcz-ego-air-8-r");
+check("formulaire : slug invalide ignoré", readModelParam("?modele=../admin"), null);
+check("formulaire : texte libre ignoré", readModelParam("?modele=Remboursement%20:%20appelez%20le%2004"), null);
+check("formulaire : majuscules refusées, pas corrigées", readModelParam("?modele=MCZ-Ego"), null);
+check("formulaire : 80 caractères au plus", readModelParam(`?modele=${"a".repeat(81)}`), null);
+check("formulaire : 80 caractères acceptés", readModelParam(`?modele=${"a".repeat(80)}`), "a".repeat(80));
+check("formulaire : sans modèle", readModelParam(""), null);
 {
-  const contact = readFileSync("app/(frontend)/contact/page.tsx", "utf8");
-  assert("contact : le nom vient du catalogue", contact.includes("getProductBySlug(slug)") && !/\bnom\b/.test(readFileSync("lib/price-request.ts", "utf8").replace(/\/\*[\s\S]*?\*\//g, "")));
+  // /contact reste statique (CDN, aucune lecture de la base) : pas d'API dynamique.
+  const contact = readFileSync("app/(frontend)/contact/page.tsx", "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+  check(
+    "contact : page statique, aucune API dynamique",
+    ["searchParams", "headers(", "cookies(", "getProductBySlug", "async function ContactPage"].filter((t) => contact.includes(t)),
+    [],
+  );
+  // Le formulaire n'affiche aucun texte venu de l'adresse : seulement le slug validé, dans un lien.
+  const form = readFileSync("components/forms/ContactForm.tsx", "utf8");
+  assert("formulaire : lit l'adresse par readModelParam seulement", form.includes("readModelParam(search)") && !/searchParams|URLSearchParams|location\.search\)\.get/.test(form));
 }
-assert("message : nomme le modèle", priceRequestMessage({ slug: "a-b", name: "MCZ Ego" }).includes("du modèle MCZ Ego"));
-assert("message : lien de la fiche", priceRequestMessage({ slug: "a-b" }).includes("mister-pellets.be/produit/a-b"));
+check(
+  "message : cite l'adresse de la fiche",
+  priceRequestMessage("a-b").split("\n")[0],
+  "Bonjour, je souhaite connaître le prix de ce modèle, pose comprise : https://mister-pellets.be/produit/a-b",
+);
 check("sujet présélectionné", PRICE_REQUEST_SUBJECT, "info-produit");
 check("demande sans nom", priceRequestHref("a-b"), "/contact?modele=a-b");
 assert("fiche : bloc final de la demande de prix en nofollow", readFileSync("app/(frontend)/produit/[slug]/page.tsx", "utf8").includes('href: primary.href, rel: "nofollow"'));

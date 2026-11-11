@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { PRICE_REQUEST_SUBJECT, priceRequestMessage } from "@/lib/price-request";
+import { PRICE_REQUEST_SUBJECT, priceRequestMessage, productUrl, readModelParam } from "@/lib/price-request";
 
 type State = "idle" | "loading" | "success" | "error";
 
@@ -15,14 +15,29 @@ const SUBJECTS = [
   { value: "info-other", label: "Autre" },
 ];
 
+const noopSubscribe = () => () => {};
+/** Adresse lue après le montage : le serveur et l'hydratation lisent "". */
+const readSearch = () => window.location.search;
+const serverSearch = () => "";
+
 /**
  * Formulaire de contact. Ouvert depuis une fiche « sur devis »
  * (`/contact?modele=<slug>`, lib/price-request.ts), il arrive avec le sujet
- * « Question sur un produit » et un message qui nomme le modèle. Le modèle
- * est retrouvé par la page, côté serveur, dans le catalogue : un slug
- * inconnu ne préremplit rien.
+ * « Question sur un produit » et un message qui cite l'adresse de la fiche.
+ *
+ * La page reste statique, servie par le CDN, sans lecture de la base : le
+ * slug est lu dans le navigateur après le montage, validé par une expression
+ * stricte, puis le formulaire est remonté (`key`) avec le préremplissage.
+ * Aucun texte libre de l'adresse n'est affiché ; slug absent ou invalide :
+ * formulaire vierge.
  */
-export function ContactForm({ request = null }: { request?: { slug: string; name: string } | null }) {
+export function ContactForm() {
+  const search = React.useSyncExternalStore(noopSubscribe, readSearch, serverSearch);
+  const slug = React.useMemo(() => readModelParam(search), [search]);
+  return <ContactFormInner key={slug ?? "libre"} slug={slug} />;
+}
+
+function ContactFormInner({ slug }: { slug: string | null }) {
   const [state, setState] = React.useState<State>("idle");
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
@@ -87,13 +102,14 @@ export function ContactForm({ request = null }: { request?: { slug: string; name
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      {request && (
+      {slug && (
         <p className="rounded-2xl border border-mp-sand/40 bg-mp-beige p-4 text-sm text-mp-ink">
-          <strong className="text-mp-green-deep">
-            Demande de prix{request.name ? ` : ${request.name}` : ""}.
-          </strong>{" "}
-          Ce modèle est chiffré sur devis. Indiquez votre code postal et votre conduit : nous
-          revenons vers vous avec le prix du poêle et de la pose.
+          <strong className="text-mp-green-deep">Demande de prix pour </strong>
+          <a href={productUrl(slug)} className="font-semibold text-mp-orange-ink underline hover:no-underline">
+            cette fiche
+          </a>
+          . Indiquez votre code postal et votre conduit : nous revenons vers vous avec le prix du
+          poêle et de la pose.
         </p>
       )}
       {/* Honeypot anti-spam (audit V20260503 §3.BLOQUANT.2) */}
@@ -160,7 +176,7 @@ export function ContactForm({ request = null }: { request?: { slug: string; name
             required
             disabled={state === "loading"}
             className={inputClass}
-            defaultValue={request ? PRICE_REQUEST_SUBJECT : ""}
+            defaultValue={slug ? PRICE_REQUEST_SUBJECT : ""}
           >
             <option value="" disabled>
               Choisissez un sujet…
@@ -184,7 +200,7 @@ export function ContactForm({ request = null }: { request?: { slug: string; name
           required
           rows={5}
           disabled={state === "loading"}
-          defaultValue={request ? priceRequestMessage(request) : undefined}
+          defaultValue={slug ? priceRequestMessage(slug) : undefined}
           className={cn(inputClass, "resize-y")}
           placeholder="Décrivez votre question, votre projet, ou tout ce qui pourrait nous aider à vous répondre."
         />

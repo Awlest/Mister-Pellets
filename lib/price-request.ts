@@ -13,6 +13,7 @@
  */
 
 import { ROUTES } from "@/config/navigation";
+import { SITE_URL } from "@/lib/seo";
 
 /** Formulaire qui reçoit la demande de prix. */
 export const PRICE_REQUEST_PATH = ROUTES.contact;
@@ -25,32 +26,37 @@ export const PRICE_REQUEST_LABEL = "Demander le prix de ce modèle";
 
 /** Un slug de fiche : minuscules, chiffres et tirets, comme dans l'admin. */
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const SLUG_MAX = 120;
+const SLUG_MAX = 80;
 
 /**
- * Adresse de la demande de prix d'un modèle : `/contact?modele=<slug>`. Le
- * nom n'y passe plus : la page le retrouve dans le catalogue à partir du
- * slug, et un lien forgé ne peut pas faire écrire un texte libre sur le site
- * (relecture du lot 3).
+ * Adresse de la demande de prix d'un modèle : `/contact?modele=<slug>`. Seul
+ * le slug passe, contrôlé par une expression stricte : un lien forgé ne peut
+ * pas faire écrire un texte libre sur le site (relecture du lot 3). La page
+ * reste statique : le formulaire lit l'adresse dans le navigateur.
  */
 export function priceRequestHref(slug: string): string {
   return `${PRICE_REQUEST_PATH}?${new URLSearchParams({ modele: slug }).toString()}`;
 }
 
-/** Slug lu dans le paramètre `modele`, ou null s'il n'a pas la forme d'un slug. */
-export function readModelParam(value: string | string[] | undefined): string | null {
-  const raw = Array.isArray(value) ? value[0] : value;
-  const slug = raw?.trim().toLowerCase();
+/**
+ * Slug lu dans le paramètre `modele` d'une adresse (`?modele=…`), ou null
+ * s'il n'a pas exactement la forme d'un slug (80 caractères au plus). Aucune
+ * mise en forme : une valeur hors norme est refusée, pas corrigée.
+ */
+export function readModelParam(search: string): string | null {
+  const slug = new URLSearchParams(search).get("modele");
   if (!slug || slug.length > SLUG_MAX || !SLUG_RE.test(slug)) return null;
   return slug;
 }
 
-/** Message prérempli du formulaire de contact pour ce modèle. */
-export function priceRequestMessage(req: { slug: string; name?: string }): string {
-  const model = req.name ? `du modèle ${req.name}` : "de ce modèle";
+/** Adresse de la fiche, construite sur l'URL du site. */
+export const productUrl = (slug: string): string => `${SITE_URL}${ROUTES.product}/${slug}`;
+
+/** Message prérempli du formulaire de contact : il cite l'adresse de la fiche, pas un nom. */
+export function priceRequestMessage(slug: string): string {
   return (
-    `Bonjour, je souhaite connaître le prix ${model}, pose comprise ` +
-    `(fiche : mister-pellets.be/produit/${req.slug}).\n` +
+    "Bonjour, je souhaite connaître le prix de ce modèle, pose comprise : " +
+    `${productUrl(slug)}\n` +
     "Mon code postal : \n" +
     "Mon conduit actuel (cheminée, ventouse, aucun) : "
   );
