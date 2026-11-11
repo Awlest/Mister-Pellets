@@ -4,6 +4,7 @@ import { REMISES, TARIFS } from "./pose/tarifs";
 import { evacuationPrice, formatEur, HAUTEUR, INSTALL_TYPES, VAT, withVat, type InstallType } from "./pose/moteur";
 import { shownPriceTTC } from "./product-price";
 import { POSE_DURATIONS } from "./services";
+import { POWER_RULE } from "./power";
 
 /**
  * Pages catégories du catalogue : une vraie page par famille de poêles, avec
@@ -249,7 +250,7 @@ export const CATEGORIES: CategoryData[] = [
         heading: "Comment choisir un poêle à pellets étanche",
         paragraphs: [
           "Un poêle étanche se justifie d'abord par la maison. S'il y a une ventilation double flux, une hotte puissante ou une construction très isolée et peu ventilée, le poêle ne doit pas puiser son air dans la pièce : l'étanche le prend dehors, par une arrivée d'air dédiée ou par un conduit concentrique. Dans une maison ancienne qui respire, un poêle non étanche avec une arrivée d'air suffit souvent.",
-          "Choisissez une puissance modeste. Une maison bien isolée demande peu : la règle courante est d'1 kW pour 12 à 15 m² dans une maison très bien isolée, contre 1 kW pour 10 m² dans une maison correctement isolée. Le tableau ci-dessus donne la plage de chaque marque, et notre [guide de la puissance](/guides/quelle-puissance-poele-pellets) détaille le calcul. Un poêle trop fort tournera au ralenti et s'encrassera.",
+          `Choisissez une puissance modeste. Une maison bien isolée demande peu : la grille de notre estimation en ligne compte ${POWER_RULE}. Le tableau ci-dessus donne la plage de chaque marque, et notre [guide de la puissance](/guides/quelle-puissance-poele-pellets) détaille le calcul. Un poêle trop fort tournera au ralenti et s'encrassera.`,
           `Décidez ensuite de l'évacuation. Étanche ne veut pas dire sans conduit : comme tout poêle à pellets, il pousse ses fumées avec un ventilateur, dans un conduit étanche. Sans cheminée, un poêle étanche peut sortir en façade par une ventouse concentrique, si sa notice la prévoit : ${evacuationTtc("ventouse-facade")} TVAC à 6 % chez nous, remise en cours comprise. Une sortie murale simple n'est pas admise, et avec Edilkamin et EK63 il n'y a jamais de ventouse : le conduit monte au-dessus du toit, ${evacuationTtc("conduit-exterieur")} TVAC pour 10 m de conduit double paroi en façade.`,
           "Regardez aussi le bruit et le diffuseur. Les poêles étanches du catalogue vont du petit poêle à air au canalisable et à l'hydro. Si le souffle d'un ventilateur vous gêne, Austroflamm chauffe par convection naturelle, sans ventilateur qui souffle dans la pièce.",
           "Le prix affiché sur chaque fiche est celui de l'appareil, TVA comprise ; une fiche sans prix est sur devis. La pose et l'évacuation s'ajoutent : voyez la page des [prix d'un poêle à pellets posé](/prix-poele-pellets) ou l'[estimation en ligne](/estimation).",

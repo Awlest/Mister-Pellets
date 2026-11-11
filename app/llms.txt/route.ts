@@ -10,6 +10,7 @@ import { COMFO, PALLET_NET_KG, PELLET_OFFER, formatEuro, isPelletLaunchPeriod, l
 import { FROM_INSTALL_LABEL, getPricePageData, type PricePageData } from "@/lib/price-examples";
 import { errorInfo } from "@/lib/log-error";
 import { AIDES_VERIFIED_AT } from "@/lib/aides";
+import { POWER_RULE, kwFor } from "@/lib/power";
 
 /**
  * /llms.txt : résumé en texte brut destiné aux assistants (ChatGPT, Claude,
@@ -183,13 +184,12 @@ ${priceLines(prices)}
   conditions et l'exemple représentatif sont affichés dans le configurateur.
   Attention, emprunter de l'argent coûte aussi de l'argent.
 
-## Dimensionnement, règle de base en Wallonie
+## Dimensionnement (grille de l'estimation en ligne)
 
-- 1 kW pour 10 m² en PEB B.
-- 1 kW pour 12 à 15 m² en PEB A.
-- 1 kW pour 7 à 8 m² en PEB E ou moins bon.
-- Une maison de 100 m² en PEB C demande donc autour de 12 kW. Le calcul est
+- Besoin de chauffe : ${POWER_RULE}, pour 2,50 m sous plafond.
+- Une maison de 100 m² en PEB C demande donc environ ${kwFor(100, "bonne")} kW. Le calcul est
   affiné sur place : isolation, hauteur sous plafond, conduit existant, mode de vie.
+- Tableaux complets : ${SITE_URL}${ROUTES.guides}/quelle-puissance-poele-pellets
 
 ## Garanties et cadre
 
