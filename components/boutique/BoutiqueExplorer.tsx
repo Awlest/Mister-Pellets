@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowDownUp, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { ProductCard, type ProductCardData } from "@/components/product/ProductCard";
@@ -46,6 +46,13 @@ export interface BoutiqueProduct extends ProductCardData {
  * Maintenant : la page est statique/ISR (cache HIT, ~150 ms), et le filtrage se
  * fait instantanément ici sans recharger. L'URL reste synchronisée (liens
  * partageables) via history.replaceState, sans aller-retour serveur.
+ *
+ * Toutes les cartes sont dans le HTML servi, avec leur lien vers la fiche :
+ * sans JavaScript, la grille entière est visible, et un robot suit chaque
+ * lien. Le découpage par 24 n'arrive qu'avec le script, qui masque les
+ * cartes suivantes (attribut `hidden`) jusqu'à « Voir plus ». Même principe
+ * que le catalogue de Mister Bois (CatalogueExplorer). Les photos hors écran
+ * et les cartes masquées ne sont pas téléchargées (`loading="lazy"`).
  */
 
 interface Filters {
@@ -59,6 +66,8 @@ interface Filters {
 
 const DEFAULT: Filters = { marque: "all", combustible: "all", chauffage: "all", puissance: "all", diffusion: "all", couleur: "all" };
 const PAGE_SIZE = 24;
+
+const subscribeNothing = () => () => {};
 
 /**
  * Tri de la grille, côté navigateur comme les filtres (paramètre d'URL `tri`).
@@ -162,6 +171,11 @@ export function BoutiqueExplorer({
   const [current, setCurrent] = useState<Filters>(DEFAULT);
   const [sort, setSort] = useState<SortKey>(DEFAULT_SORT);
   const [visible, setVisible] = useState(PAGE_SIZE);
+  // Faux au rendu serveur et pendant l'hydratation : la grille entière part
+  // dans le HTML. Vrai ensuite : les cartes au-delà de `visible` sont masquées.
+  const hydrated = useSyncExternalStore(subscribeNothing, () => true, () => false);
+  const gridRef = useRef<HTMLUListElement>(null);
+  const focusFrom = useRef<number | null>(null);
   // Sur mobile, les six groupes de filtres occupaient deux écrans avant le
   // premier poêle (1er modèle à 1 750 px du haut à 375 px) : ils se replient
   // derrière un bouton « Filtres ». Toujours dépliés à partir de 768 px.
@@ -264,7 +278,20 @@ export function BoutiqueExplorer({
   const sorted = useMemo(() => sortProducts(filtered, sort), [filtered, sort]);
 
   const activeCount = Object.values(current).filter((v) => v !== "all").length;
-  const shown = sorted.slice(0, visible);
+  const remaining = hydrated ? Math.max(0, sorted.length - visible) : 0;
+
+  // « Voir plus » : le focus passe à la première carte ajoutée, là où était le
+  // bouton, sinon le clavier repartirait du bas de la liste.
+  function showMore() {
+    focusFrom.current = visible;
+    setVisible((v) => v + PAGE_SIZE);
+  }
+  useEffect(() => {
+    if (focusFrom.current === null) return;
+    const link = gridRef.current?.children[focusFrom.current]?.querySelector("a");
+    focusFrom.current = null;
+    link?.focus({ preventScroll: true });
+  }, [visible]);
 
   const GROUPS: { label: string; key: keyof Filters; options: { value: string; label: string }[] }[] = [
     { label: "Marque", key: "marque", options: brandFilters },
@@ -414,19 +441,21 @@ export function BoutiqueExplorer({
           {/* Titre de la grille pour les lecteurs d'écran : sans lui, les noms
               de poêles (h3) suivaient directement le h1. */}
           <h2 className="sr-only">Modèles</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {shown.map((product, i) => (
-              <ProductCard key={product.slug} product={product} priority={i === 0} />
+          <ul ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sorted.map((product, i) => (
+              <li key={product.slug} className="min-w-0" hidden={hydrated && i >= visible}>
+                <ProductCard product={product} priority={i === 0} className="h-full" />
+              </li>
             ))}
-          </div>
-          {visible < filtered.length && (
+          </ul>
+          {remaining > 0 && (
             <div className="mt-10 text-center">
               <button
                 type="button"
-                onClick={() => setVisible((v) => v + PAGE_SIZE)}
+                onClick={showMore}
                 className="inline-flex items-center justify-center rounded-full bg-mp-green-deep px-7 h-12 text-sm font-semibold text-white transition-[background-color,scale] hover:bg-mp-green-mid active:scale-[0.98]"
               >
-                Voir plus de modèles ({filtered.length - visible} restant{filtered.length - visible > 1 ? "s" : ""})
+                Voir plus de modèles ({remaining} restant{remaining > 1 ? "s" : ""})
               </button>
             </div>
           )}

@@ -22,6 +22,15 @@ export const metadata = buildPageMetadata({
  */
 export const revalidate = 60;
 
+/** Retire les champs vides, `false` et les tableaux vides d'un objet à sérialiser. */
+function compact<T extends object>(value: T): T {
+  return Object.fromEntries(
+    Object.entries(value).filter(
+      ([, v]) => v !== undefined && v !== null && v !== false && !(Array.isArray(v) && v.length === 0),
+    ),
+  ) as T;
+}
+
 export default async function BoutiquePage() {
   const products = await getAllProducts();
   // Filtre par marque : seulement les marques qui ont au moins une fiche en
@@ -34,37 +43,48 @@ export default async function BoutiquePage() {
   const bonusActive = isBonusPeriod();
 
   // Shape allégé (carte + filtres uniquement) pour réduire le payload envoyé
-  // au navigateur — on ne sérialise pas variantes/galerie/features.
-  const lean: BoutiqueProduct[] = products.map((p) => ({
-    slug: p.slug,
-    name: p.name,
-    brand: p.brand,
-    power: p.power,
-    heatedVolume: p.heatedVolume,
-    powers: p.powers,
-    heatedVolumes: p.heatedVolumes,
-    priceTTC: p.priceTTC,
-    promoPriceTTC: p.promoPriceTTC,
-    bonusPriceTTC: p.bonusPriceTTC,
-    imageSrc: p.imageSrc,
-    imageAlt: p.imageAlt,
-    imageFocalX: p.imageFocalX,
-    imageFocalY: p.imageFocalY,
-    image: p.image,
-    createdAt: p.createdAt,
-    isFeatured: p.isFeatured,
-    isBestseller: p.isBestseller,
-    isNew: p.isNew,
-    colorVariants: p.colorVariants?.map((c) => ({ colorName: c.colorName, colorHex: c.colorHex })),
-    type: p.type,
-    combustible: p.combustible,
-    isHydro: p.isHydro,
-    isCanalizable: p.isCanalizable,
-    isAirtight: p.isAirtight,
-    powerKw: p.powerKw,
-    diffusion: p.diffusion,
-    color: p.color,
-  }));
+  // au navigateur — on ne sérialise pas variantes/galerie/features. Toutes les
+  // cartes sont rendues dans le HTML (BoutiqueExplorer) : ces données ne
+  // servent qu'à l'hydratation, au filtrage et au tri. On n'envoie donc ni
+  // champ vide (chaque `undefined` coûte une entrée dans la page), ni `false`,
+  // ni doublon de la photo (l'URL, le texte alternatif et le point focal sont
+  // lus une seule fois par ProductCard).
+  const lean: BoutiqueProduct[] = products.map((p) =>
+    compact({
+      slug: p.slug,
+      name: p.name,
+      brand: p.brand,
+      power: p.power,
+      heatedVolume: p.heatedVolume,
+      powers: p.powers,
+      heatedVolumes: p.heatedVolumes,
+      priceTTC: p.priceTTC,
+      promoPriceTTC: p.promoPriceTTC,
+      bonusPriceTTC: p.bonusPriceTTC,
+      imageSrc: p.image ? undefined : p.imageSrc,
+      imageAlt: p.imageAlt && p.imageAlt !== p.name ? p.imageAlt : undefined,
+      imageFocalX: p.imageFocalX,
+      imageFocalY: p.imageFocalY,
+      image: p.image
+        ? compact({ url: p.image.url, width: p.image.width, sizes: p.image.sizes })
+        : undefined,
+      createdAt: p.createdAt,
+      isFeatured: p.isFeatured,
+      isBestseller: p.isBestseller,
+      isNew: p.isNew,
+      colorVariants: p.colorVariants
+        ?.filter((c) => c.colorHex)
+        .map((c) => ({ colorName: c.colorName, colorHex: c.colorHex })),
+      type: p.type,
+      combustible: p.combustible,
+      isHydro: p.isHydro,
+      isCanalizable: p.isCanalizable,
+      isAirtight: p.isAirtight,
+      powerKw: p.powerKw,
+      diffusion: p.diffusion,
+      color: p.color,
+    }),
+  );
 
   return (
     <>

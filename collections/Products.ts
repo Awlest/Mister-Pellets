@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { revalidatePath } from "next/cache";
+import { ROUTES } from "../config/navigation";
 import { triggerDeployHook } from "../lib/deploy-hook";
 import { errorInfo } from "../lib/log-error";
 
@@ -73,6 +74,9 @@ export const Products: CollectionConfig = {
           revalidatePath("/boutique");
           // Pages villes qui peuvent référencer ce produit
           revalidatePath("/poeles-pellets/[ville]", "page");
+          // Grilles de fiches des pages marque et des catégories
+          revalidatePath("/nos-marques/[slug]", "page");
+          for (const path of [ROUTES.ductable, ROUTES.hydro, ROUTES.inserts, ROUTES.airtight]) revalidatePath(path);
         } catch (err) {
           // En dev local le revalidatePath peut échouer ; ne bloque pas le save
           console.warn("[products afterChange] revalidate failed:", errorInfo(err));

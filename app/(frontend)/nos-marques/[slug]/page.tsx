@@ -5,7 +5,6 @@ import { ArrowRight, Award, Calendar, MapPin } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -13,12 +12,14 @@ import { InlineText } from "@/components/ui/inline-text";
 import { plainText } from "@/lib/inline-text";
 import {
   BRANDS,
-  BRAND_LIST,
   TOP_TIER_BRANDS,
   brandFoundedLabel,
   type BrandData,
 } from "@/lib/brands";
 import { buildPageMetadata } from "@/lib/seo";
+import { getAllProducts } from "@/lib/products";
+import { PROVINCES } from "@/lib/local-seo";
+import { ProductGrid, sortForGrid } from "@/components/product/ProductGrid";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -30,8 +31,20 @@ interface Props {
  */
 export const dynamicParams = false;
 
+/**
+ * Régénération horaire, comme les pages ville : la grille des fiches reprend
+ * les prix du bonus de saison et les fiches ajoutées dans l'admin
+ * (collections/Products.ts force aussi la régénération à chaque sauvegarde).
+ */
+export const revalidate = 3600;
+
+/**
+ * Une page par marque affichée (TOP_TIER_BRANDS). Dielle et Ferlux, masquées,
+ * n'ont plus de page : leurs adresses sont redirigées vers /nos-marques
+ * (config/redirects.ts).
+ */
 export async function generateStaticParams() {
-  return BRAND_LIST.map((b) => ({ slug: b.slug }));
+  return TOP_TIER_BRANDS.map((b) => ({ slug: b.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -80,6 +93,13 @@ export default async function BrandPage({ params }: Props) {
     : null;
 
   const foundedDisplay = brandFoundedLabel(brand);
+
+  // Toutes les fiches visibles de la marque, en liens réels dans le HTML :
+  // c'est d'ici que chaque fiche reçoit un lien de sa page marque.
+  const products = sortForGrid((await getAllProducts()).filter((p) => p.brand === brand.name));
+  // Un modèle du tableau n'est lié que si sa fiche est visible : jamais de
+  // lien vers une fiche masquée, supprimée ou partie sur mister-bois.be.
+  const visibleSlugs = new Set(products.map((p) => p.slug));
 
   // Maillage : autres marques top tier (uniquement pour les marques top tier).
   const otherTopTier =
@@ -256,7 +276,7 @@ export default async function BrandPage({ params }: Props) {
                     className="text-xl font-semibold text-mp-green-deep mt-1"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
-                    {model.slug ? (
+                    {model.slug && visibleSlugs.has(model.slug) ? (
                       <Link
                         href={`/produit/${model.slug}`}
                         className="hover:text-mp-orange-ink underline-offset-4 hover:underline"
@@ -274,14 +294,6 @@ export default async function BrandPage({ params }: Props) {
                   </p>
                 </Card>
               ))}
-            </div>
-            <div className="mt-12 flex justify-center">
-              <Button asChild variant="outline" size="lg">
-                <Link href={`/boutique?marque=${brand.name}`}>
-                  Voir tous les modèles {brand.name}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
             </div>
           </div>
         </section>
@@ -313,17 +325,50 @@ export default async function BrandPage({ params }: Props) {
                 </Card>
               ))}
             </div>
-            <div className="mt-12 flex justify-center">
-              <Button asChild variant="outline" size="lg">
-                <Link href={`/boutique?marque=${brand.name}`}>
-                  Voir tous les modèles {brand.name}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
           </div>
         </section>
       ) : null}
+
+      {/* Toutes les fiches de la marque */}
+      {products.length > 0 && (
+        <section className="bg-mp-cream mp-band" id="modeles">
+          <div className="mp-shell">
+            <div className="mp-measure mb-10 text-center">
+              <h2 className="text-3xl md:text-5xl font-semibold text-mp-green-deep mb-4">
+                Tous les modèles {brand.name} au catalogue
+              </h2>
+              <p className="text-lg text-mp-ink-soft leading-relaxed">
+                {products.length} {products.length > 1 ? "fiches" : "fiche"}, avec la puissance et le prix
+                du poêle seul quand il est fixé. La pose se chiffre à part, selon votre conduit.
+              </p>
+            </div>
+            <ProductGrid products={products} moreLabel={`Afficher les autres modèles ${brand.name}`} />
+          </div>
+        </section>
+      )}
+
+      {/* Pose de la marque, province par province */}
+      {brand.tier === 1 && (
+        <section className="bg-mp-beige mp-band-sm">
+          <div className="mp-shell text-center">
+            <h2 className="mb-4 text-2xl md:text-3xl font-semibold text-mp-green-deep">
+              Où nous posons les {brand.name}
+            </h2>
+            <ul className="flex flex-wrap justify-center gap-x-6">
+              {PROVINCES.map((province) => (
+                <li key={province.slug}>
+                  <Link
+                    href={`/installation/${brand.slug}/${province.slug}`}
+                    className="inline-flex min-h-11 items-center text-sm font-medium text-mp-green-deep underline underline-offset-4 decoration-mp-sand hover:text-mp-orange-ink"
+                  >
+                    {province.areaName}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* FAQ */}
       {brand.faq && brand.faq.length > 0 && (
