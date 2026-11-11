@@ -8,7 +8,7 @@ import { SITE } from "@/lib/legal/site";
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
   description:
-    "Conditions générales de vente et d'installation d'Awlest SRL, communes à ses quatre marques, avec celles de Mister Pellets : acompte, livraison, service après-vente.",
+    "Conditions générales de vente et d'installation d'Awlest SRL, communes à ses quatre marques, et celles de Mister Pellets : acompte, livraison, après-vente.",
   alternates: { canonical: "https://mister-pellets.be/cgv" },
 };
 

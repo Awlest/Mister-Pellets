@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
 import { ServiceLanding } from "@/components/sections/ServiceLanding";
 import { getService } from "@/lib/services";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+// Titre utile de 50 caractères ou plus : avec « | Mister Pellets » il dépasserait
+// 60, buildPageMetadata le sert donc sans suffixe plutôt que coupé.
+export const metadata = buildPageMetadata({
   title: "Entretien de poêle à pellets à Namur et en Wallonie",
   description:
     "Entretien annuel de poêle à pellets à 175 € TVAC, ramonage et certificat compris. Namur et 50 km autour de Fernelmont. Rendez-vous au 081 13 83 09.",
-  alternates: { canonical: "https://mister-pellets.be/entretien-poele-a-pellets" },
-};
+  path: "/entretien-poele-a-pellets",
+});
 
 export default function EntretienPage() {
   const service = getService("entretien-annuel");

@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
 import { ServiceLanding } from "@/components/sections/ServiceLanding";
 import { getService } from "@/lib/services";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+// Titre utile de 50 caractères ou plus : avec « | Mister Pellets » il dépasserait
+// 60, buildPageMetadata le sert donc sans suffixe plutôt que coupé.
+export const metadata = buildPageMetadata({
   title: "Ramonage de poêle à pellets à Namur et en Wallonie",
   description:
     "Ramonage de poêle à pellets à 90 € TVAC, certificat remis sur place. Namur, Andenne, Gembloux, Huy et 50 km autour de Fernelmont, sur rendez-vous.",
-  alternates: { canonical: "https://mister-pellets.be/ramonage" },
-};
+  path: "/ramonage",
+});
 
 export default function RamonagePage() {
   const service = getService("ramonage");

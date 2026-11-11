@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
 import { ServiceLanding } from "@/components/sections/ServiceLanding";
 import { getService } from "@/lib/services";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+// Titre utile de 50 caractères ou plus : avec « | Mister Pellets » il dépasserait
+// 60, buildPageMetadata le sert donc sans suffixe plutôt que coupé.
+export const metadata = buildPageMetadata({
   title: "Dépannage de poêle à pellets à Namur et en Wallonie",
   description:
     "Poêle à pellets en panne ? Dépannage toutes marques à 110 € TVAC la première heure, déplacement inclus. Intervention sous 48 à 72 h. Appelez le 081 13 83 09.",
-  alternates: { canonical: "https://mister-pellets.be/depannage-poele-a-pellets" },
-};
+  path: "/depannage-poele-a-pellets",
+});
 
 export default function DepannagePage() {
   const service = getService("depannage");
