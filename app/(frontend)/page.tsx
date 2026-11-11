@@ -470,6 +470,10 @@ export default function HomePage() {
               <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
                 prix d&apos;un poêle à pellets posé
               </Link>
+              . Le déroulé de la pose, de la visite technique au premier feu, est sur la page{" "}
+              <Link href="/installation-poele-a-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
+                installation d&apos;un poêle à pellets
+              </Link>
               .
             </p>
             <p>

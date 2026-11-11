@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ROUTES } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { MapPin, Truck, Star, Clock } from "lucide-react";
@@ -98,9 +99,14 @@ export default async function CityPage({ params }: Props) {
         }
         description={city.intro}
         actions={
-          <Button asChild variant="primary" size="lg">
-            <Link href="/estimation">Chiffrer mon installation</Link>
-          </Button>
+          <>
+            <Button asChild variant="primary" size="lg">
+              <Link href="/estimation">Chiffrer mon installation</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href={ROUTES.installation}>Comment se passe la pose</Link>
+            </Button>
+          </>
         }
         breadcrumbs={[
           { label: "Accueil", href: "/" },

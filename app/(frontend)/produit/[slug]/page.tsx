@@ -547,6 +547,12 @@ export default async function ProductPage({ params }: Props) {
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
                 </li>
+                <li>
+                  <Link href={ROUTES.installation} className={MORE_LINK}>
+                    Installation et pose
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </Link>
+                </li>
                 {categories.map((c) => (
                   <li key={c.slug}>
                     <Link href={c.path} className={MORE_LINK}>

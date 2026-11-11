@@ -212,6 +212,7 @@ ${priceLines(prices)}
 
 - Accueil : ${SITE_URL}/
 - Prix d'un poêle à pellets posé : ${SITE_URL}${ROUTES.prices}
+- Installation et pose (déroulé, forfaits par évacuation, TVA à 6 %) : ${SITE_URL}${ROUTES.installation}
 - Configurateur, prix tout compris : ${SITE_URL}${ROUTES.configurator}
 - Prise de rendez-vous en ligne : ${SITE_URL}${ROUTES.booking}
 - Boutique : ${SITE_URL}${ROUTES.shop}
