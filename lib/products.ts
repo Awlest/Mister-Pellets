@@ -85,6 +85,12 @@ interface PayloadProduct {
   isNew?: boolean | null;
   hiddenFromBoutique?: boolean | null;
   createdAt?: string | null;
+  updatedAt?: string | null;
+  efficiency?: number | null;
+  energyClass?: string | null;
+  hopperCapacity?: number | null;
+  weight?: number | null;
+  dimensions?: { width?: number | null; height?: number | null; depth?: number | null } | null;
   shortDescription?: string | null;
   features?: Array<{ title?: string | null; description?: string | null }> | null;
   mainImage?: number | PayloadMedia | null;
@@ -330,7 +336,14 @@ function variantBonusPrice(price: number | null | undefined, salePrice: number |
  * Convertit un document Payload `products` vers le shape ProductDemo
  * attendu par les composants UI existants (ProductCard, filtres boutique).
  */
-function payloadToDemo(p: PayloadProduct): ProductDemo {
+/** Nombre strictement positif, sinon undefined (une case vide vaut null ou 0). */
+const positive = (n: number | null | undefined): number | undefined =>
+  typeof n === "number" && n > 0 ? n : undefined;
+
+function payloadToDemo(raw: PayloadProduct): ProductDemo {
+  // Nom sans espace en trop : cinq fiches EK63 se terminent par une espace,
+  // qui donnait « EK63 Tweed 90+ Evo , Poêle à pellets » dans le titre.
+  const p: PayloadProduct = { ...raw, name: raw.name.replace(/\s+/g, " ").trim() };
   // Volume de chauffe MAX en m³ — donnée constructeur saisie directement par
   // l'équipe Awlest dans l'admin Payload. Pas de conversion.
   const heatedVolume =
@@ -533,6 +546,18 @@ function payloadToDemo(p: PayloadProduct): ProductDemo {
 
     // ===== COMPLÉMENTS EN OPTION =====
     accessories: mapAccessories(p.accessories),
+
+    // ===== CARACTÉRISTIQUES =====
+    specs: {
+      efficiency: positive(p.efficiency),
+      energyClass: p.energyClass ?? undefined,
+      hopperKg: positive(p.hopperCapacity),
+      weightKg: positive(p.weight),
+      widthCm: positive(p.dimensions?.width),
+      heightCm: positive(p.dimensions?.height),
+      depthCm: positive(p.dimensions?.depth),
+    },
+    updatedAt: p.updatedAt ?? undefined,
   };
 }
 

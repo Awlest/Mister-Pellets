@@ -22,6 +22,9 @@ export const SITE_LOCALE = "fr_BE";
 // via @vercel/og. Le path stable est /opengraph-image (convention Next.js).
 // Cf. audit V20260503 §1.H.1 et §4.H.2.
 export const DEFAULT_OG_IMAGE = "/opengraph-image";
+/** Suffixe posé par le gabarit de titre de app/(frontend)/layout.tsx. */
+export const TITLE_SUFFIX = " | Mister Pellets";
+export const TITLE_MAX = 60;
 
 interface SEOPageMetaInput {
   title: string;
@@ -34,7 +37,11 @@ interface SEOPageMetaInput {
    */
   canonical?: string;
   image?: string;            // override OG image
-  type?: "website" | "article";
+  /**
+   * "product" : la fiche produit pose elle-même sa balise og:type (le type
+   * n'existe pas dans l'API Metadata de Next), aucun type n'est émis ici.
+   */
+  type?: "website" | "article" | "product";
   noindex?: boolean;
   /**
    * Si true, le titre n'est PAS passé dans le template "%s | Mister Pellets"
@@ -56,9 +63,12 @@ export function buildPageMetadata(input: SEOPageMetaInput): Metadata {
   const url = input.path ? `${SITE_URL}${input.path}` : SITE_URL;
   const image = input.image ?? DEFAULT_OG_IMAGE;
   const allowIndex = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
+  // Titre de 60 caractères au plus, suffixe « | Mister Pellets » compris : s'il
+  // ne tient pas, le titre est servi sans suffixe plutôt que coupé par Google.
+  const withoutSuffix = input.absoluteTitle || input.title.length + TITLE_SUFFIX.length > TITLE_MAX;
 
   return {
-    title: input.absoluteTitle ? { absolute: input.title } : input.title,
+    title: withoutSuffix ? { absolute: input.title } : input.title,
     description: input.description,
     keywords: input.keywords,
     authors: input.authors?.map((name) => ({ name })),
@@ -70,7 +80,7 @@ export function buildPageMetadata(input: SEOPageMetaInput): Metadata {
       follow: !input.noindex && allowIndex,
     },
     openGraph: {
-      type: input.type ?? "website",
+      ...(input.type === "product" ? {} : { type: input.type ?? "website" }),
       locale: SITE_LOCALE,
       siteName: SITE_NAME,
       url,
@@ -79,8 +89,9 @@ export function buildPageMetadata(input: SEOPageMetaInput): Metadata {
       images: [
         {
           url: image,
-          width: 1200,
-          height: 630,
+          // Dimensions connues pour l'image générée seulement ; une photo de
+          // fiche ou d'article garde les siennes.
+          ...(input.image ? {} : { width: 1200, height: 630 }),
           alt: input.title,
         },
       ],

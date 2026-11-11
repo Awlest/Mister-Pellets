@@ -30,7 +30,20 @@ import {
   misterBoisDestination,
 } from "@/lib/catalog-scope";
 import { productKindLabel } from "@/lib/product-kind";
-import { COMBUSTIBLE_LABELS, type Appliance, type ProductType } from "@/lib/products-demo";
+import { COMBUSTIBLE_LABELS, type Appliance, type ProductDemo, type ProductType } from "@/lib/products-demo";
+import { BRANDS, TOP_TIER_BRANDS } from "@/lib/brands";
+import { CITIES } from "@/lib/cities";
+import { CATEGORIES, categoriesOf } from "@/lib/categories";
+import { PUBLISHED } from "@/config/navigation";
+import {
+  DESCRIPTION_MAX,
+  TITLE_MAX,
+  productDescription,
+  productJsonLd,
+  productOffers,
+  productTitle,
+  validGtin,
+} from "@/lib/product-seo";
 
 const ROOT = process.cwd();
 const read = (file: string): string => readFileSync(join(ROOT, file), "utf8");
@@ -75,7 +88,122 @@ const TEXT_ROOTS = ["app/(frontend)", "app/llms.txt", "app/api/feed", "component
 /** Socle légal commun aux quatre sites d'Awlest : il décrit toute la société. */
 const TEXT_SKIP = /^lib\/legal\//;
 
+const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+/** Fiche d'essai pour les contrôles de titre et de données structurées. */
+function sample(over: Partial<ProductDemo>): ProductDemo {
+  return {
+    slug: "marque-modele",
+    name: "Marque Modèle 9",
+    brand: "Marque",
+    type: "standard",
+    combustible: "pellet",
+    isAirtight: true,
+    isConnected: true,
+    diffusion: "ventilation-forcee",
+    color: "dark",
+    powerKw: 9,
+    power: "9 kW",
+    sku: "MRQ-9",
+    mpn: "123456",
+    shortDescription: "Poêle à pellets de 9 kW pour 240 m³ max., étanche, Wi-Fi de série.",
+    ...over,
+  };
+}
+
 const checks: [string, () => void][] = [
+  [
+    "slugs cités dans les pages marque et ville : forme, marque, jamais une fiche redirigée",
+    () => {
+      // Le dépôt n'a pas d'instantané du catalogue : le contrôle porte sur la
+      // forme. La page marque ne lie de toute façon qu'une fiche visible, et la
+      // page ville n'affiche que les fiches trouvées.
+      for (const brand of Object.values(BRANDS))
+        for (const model of brand.modelsTable ?? []) {
+          if (!model.slug) continue;
+          assert.match(model.slug, SLUG, model.slug);
+          assert.ok(model.slug.startsWith(`${brand.slug}-`), `${model.slug} n'est pas une fiche ${brand.name}`);
+          assert.ok(!REDIRECTED_PRODUCT_SLUGS.has(model.slug), `${brand.slug} lie une fiche redirigée : ${model.slug}`);
+        }
+      const brandSlugs = TOP_TIER_BRANDS.map((b) => b.slug);
+      for (const city of CITIES) {
+        assert.equal(city.recommendedModels.length, 3, `${city.slug} : 3 fiches attendues`);
+        assert.equal(new Set(city.recommendedModels).size, 3, `${city.slug} : fiche en double`);
+        assert.ok(city.recommendedModels.some((slug) => slug.startsWith("mcz-")), `${city.slug} : aucune fiche MCZ`);
+        for (const slug of city.recommendedModels) {
+          assert.match(slug, SLUG, slug);
+          assert.ok(brandSlugs.some((b) => slug.startsWith(`${b}-`)), `${city.slug} : ${slug} n'est pas d'une marque affichée`);
+          assert.ok(!REDIRECTED_PRODUCT_SLUGS.has(slug), `${city.slug} recommande une fiche redirigée : ${slug}`);
+          assert.ok(!(slug in FICHES_HYBRIDES_SUR_MISTER_BOIS), `${city.slug} recommande un hybride : ${slug}`);
+        }
+      }
+    },
+  ],
+  [
+    "catégories : pages publiées, chapô de 80 à 120 mots, hybrides exclus",
+    () => {
+      for (const category of CATEGORIES) {
+        assert.equal(category.path, `/${category.slug}`);
+        assert.ok(PUBLISHED.has(category.path), `${category.path} absente de PUBLISHED`);
+        const words = category.intro.trim().split(/\s+/).length;
+        assert.ok(words >= 80 && words <= 120, `${category.slug} : chapô de ${words} mots`);
+        assert.ok(category.metaDescription.length >= 120 && category.metaDescription.length <= 158, `${category.slug} : description de ${category.metaDescription.length} caractères`);
+        assert.ok(category.metaTitle.length <= TITLE_MAX, category.metaTitle);
+        assert.ok(!/[—–]/.test(category.intro + category.metaDescription), `${category.slug} : tiret long`);
+      }
+      assert.deepEqual(categoriesOf(sample({ combustible: "hybride", type: "hybride-hydro", isHydro: true })), []);
+      assert.deepEqual(categoriesOf(sample({ type: "canalisable", isCanalizable: true })).map((c) => c.slug), [
+        "poeles-a-pellets-canalisables",
+        "poeles-a-pellets-etanches",
+      ]);
+    },
+  ],
+  [
+    "fiche produit : titre de 60 caractères au plus, description de 158 au plus",
+    () => {
+      const long = sample({ name: "Girolami TI Slim Panorama Maiolica Canalisable", type: "hybride-hydro", combustible: "hybride", appliance: "insert", isHydro: true, powers: [18.1, 22.1, 24.1] });
+      for (const p of [sample({}), sample({ type: "canalisable", isCanalizable: true }), sample({ type: "hydro", isHydro: true }), long]) {
+        const title = productTitle(p);
+        assert.ok(title.length <= TITLE_MAX, `${title.length} caractères : ${title}`);
+        assert.ok(title.includes(p.name), title);
+        for (const price of ["Prix sur devis.", "Dès 12 345 € TVAC, hors pose."]) {
+          const description = productDescription({ ...p, shortDescription: "x ".repeat(120) + "fin." }, price);
+          assert.ok(description.length <= DESCRIPTION_MAX, `${description.length} caractères`);
+          assert.ok(description.endsWith(price));
+        }
+      }
+      assert.equal(productTitle(sample({})), "Poêle à pellets Marque Modèle 9 9 kW");
+      assert.ok(productDescription(sample({}), "Prix sur devis.").startsWith("Marque Modèle 9 : poêle à pellets de 9 kW"));
+    },
+  ],
+  [
+    "fiche produit : jamais de prix à 0, pas de Product sans offre, pas de politique de retour",
+    () => {
+      const variant = (price: number, extra = {}) => ({ id: String(price), optionValueIds: [], price, ...extra });
+      const quote = sample({ hasVariants: true, variants: [variant(0), variant(0)] });
+      assert.deepEqual(productOffers(quote), []);
+      const page = productJsonLd(quote, "Description.");
+      assert.equal(page["@type"], "WebPage");
+      assert.ok(page.name && page.description && page.about && !("offers" in page));
+
+      const mixed = sample({ hasVariants: true, priceTTC: 2856, variants: [variant(0), variant(2856, { sku: "A", mpn: "817570", gtin: "816300" }), variant(3100, { salePrice: 2990 })] });
+      const product = productJsonLd(mixed, "Description.");
+      assert.equal(product["@type"], "Product");
+      assert.ok(product.sku && product.mpn && product.brand && product.category);
+      const offers = product.offers as Record<string, unknown>[];
+      assert.deepEqual(offers.map((o) => o.price), [2856, 2990]);
+      assert.ok(!("gtin" in offers[0]!), "une référence à 6 chiffres n'est pas un GTIN");
+      const json = JSON.stringify(product);
+      assert.ok(!/"price":0[,}]/.test(json) && !json.includes("AggregateOffer") && !json.includes("MerchantReturnPolicy"));
+      assert.ok(!/aggregateRating|"review"/.test(json));
+      assert.ok(json.includes("OfferShippingDetails") && json.includes(`"seller":{"@id":"https://mister-pellets.be/#organization"}`));
+
+      const simple = productJsonLd(sample({ priceTTC: 2105 }), "Description.");
+      assert.equal((simple.offers as Record<string, unknown>).price, 2105);
+      assert.equal(validGtin("816300"), undefined);
+      assert.equal(validGtin("8012345678901"), "8012345678901");
+    },
+  ],
   [
     "le bois bûche est hors catalogue, l'hybride y reste",
     () => {

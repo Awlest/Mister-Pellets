@@ -208,6 +208,28 @@ function parseDraft(json: string | null): EstimateState | null {
 }
 
 /**
+ * Poêle demandé par l'adresse (`?modele=<slug>`, lien « Chiffrer mon
+ * installation » d'une fiche produit), s'il est chiffrable. Une fiche à
+ * plusieurs puissances ouvre sur la plus petite : le visiteur la change à
+ * l'étape du modèle.
+ */
+function preselectedModel(products: EstimateProduct[]): { key: string; kind: StoveKind } | null {
+  let slug: string | null = null;
+  try {
+    slug = new URLSearchParams(window.location.search).get("modele");
+  } catch {
+    return null;
+  }
+  if (!slug) return null;
+  const option = products.find((p) => p.slug === slug);
+  if (!option) return null;
+  const kind = (Object.keys(STOVE_KINDS) as StoveKind[]).find((k) =>
+    (STOVE_KINDS[k].productTypes as readonly string[]).includes(option.productType),
+  );
+  return kind ? { key: option.key, kind } : null;
+}
+
+/**
  * Le brouillon n'est lu qu'après l'hydratation : le premier rendu client
  * reproduit le HTML du serveur (état par défaut), puis le formulaire est
  * remonté avec le brouillon via `key`. Avant, l'état initial lisait le brouillon
@@ -231,11 +253,18 @@ export function EstimateConfigurator({
 }) {
   const hydrated = React.useSyncExternalStore(noopSubscribe, () => true, () => false);
   const draft = React.useMemo(() => (hydrated ? parseDraft(readDraft()) : null), [hydrated]);
+  // Arrivée depuis une fiche produit (`/estimation?modele=<slug>`) : le poêle
+  // de la fiche est déjà choisi, avec son type. Même mécanique que le
+  // brouillon : lu après l'hydratation, appliqué par un remontage du formulaire.
+  const preselected = React.useMemo(() => (hydrated ? preselectedModel(products) : null), [hydrated, products]);
+  const initialState = preselected
+    ? { ...(draft ?? DEFAULT_STATE), stoveKind: preselected.kind, productKey: preselected.key }
+    : (draft ?? DEFAULT_STATE);
   return (
     <EstimateForm
-      key={draft ? "brouillon" : "neuf"}
+      key={preselected ? `modele-${preselected.key}` : draft ? "brouillon" : "neuf"}
       products={products}
-      initialState={draft ?? DEFAULT_STATE}
+      initialState={initialState}
       bonusAtRender={bonusAtRender}
     />
   );

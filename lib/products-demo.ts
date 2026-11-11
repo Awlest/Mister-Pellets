@@ -143,6 +143,24 @@ export interface ProductDemo extends ProductCardData {
   variants?: ProductVariantData[];
   /** Compléments en option (thermostat, Wi-Fi, kits…), collection « Compléments ». */
   accessories?: ProductAccessory[];
+  /** Caractéristiques techniques saisies dans l'admin (données du fabricant). */
+  specs?: ProductSpecs;
+  /** Dernière modification de la fiche dans l'admin (ISO). */
+  updatedAt?: string;
+}
+
+/** Caractéristiques d'une fiche ; chaque valeur est absente si elle n'est pas saisie. */
+export interface ProductSpecs {
+  /** Rendement, en %. */
+  efficiency?: number;
+  energyClass?: string;
+  /** Réservoir à pellets, en kg. */
+  hopperKg?: number;
+  weightKg?: number;
+  /** Dimensions externes, en cm. */
+  widthCm?: number;
+  heightCm?: number;
+  depthCm?: number;
 }
 
 /** Catégorie d'un complément (regroupement sur la fiche produit). */
