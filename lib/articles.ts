@@ -1699,7 +1699,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Pourquoi remplacer le mazout maintenant",
         paragraphs: [
-          "Cet article parle des hydros Edilkamin. Pour le remplacement du mazout en général (calendrier, cuve, budget), voyez [du mazout aux pellets](/blog/remplacer-chaudiere-mazout-poele-hydro) ; pour le fonctionnement et la puissance d'un hydro, [le guide du poêle à pellets hydro](/guides/poele-pellets-hydro).",
+          "Cet article parle des hydros Edilkamin. Pour comparer tous les hydros que nous posons, toutes marques, avec leur prix : [les poêles à pellets hydro](/poeles-a-pellets-hydro). Pour le fonctionnement et la puissance d'un hydro, [le guide du poêle à pellets hydro](/guides/poele-pellets-hydro) ; pour le remplacement du mazout en général (calendrier, cuve, budget), [du mazout aux pellets](/blog/remplacer-chaudiere-mazout-poele-hydro).",
           "Le mazout coûte cher et son prix reste volatil. Les vieilles chaudières au fioul perdent en rendement avec les années, et leur entretien devient un poste régulier.",
           "Beaucoup de maisons wallonnes en sont encore équipées, et le calendrier se resserre : à partir du 1er janvier 2031, on ne pourra plus installer ni remplacer une chaudière au mazout dans une maison existante en Wallonie. Passer au pellet, c'est un combustible produit en Belgique, dont le prix ne suit pas celui du pétrole.",
         ],
@@ -2196,7 +2196,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Pourquoi le pellet hydro remplace bien le mazout",
         paragraphs: [
-          "Cet article traite du remplacement : calendrier du mazout, cuve, budget et pièges. Le fonctionnement du poêle hydro, sa puissance et sa pose sont dans [le guide du poêle à pellets hydro](/guides/poele-pellets-hydro), et le cas d'un Edilkamin dans [remplacer une chaudière par un Edilkamin hydro](/blog/remplacer-chaudiere-mazout-edilkamin-hydro).",
+          "Cet article traite du remplacement : calendrier du mazout, cuve, budget et pièges. Pour choisir l'appareil, les modèles et leurs prix sont sur [les poêles à pellets hydro](/poeles-a-pellets-hydro). Le fonctionnement du poêle hydro, sa puissance et sa pose sont dans [le guide du poêle à pellets hydro](/guides/poele-pellets-hydro), et le cas d'un Edilkamin dans [remplacer une chaudière par un Edilkamin hydro](/blog/remplacer-chaudiere-mazout-edilkamin-hydro).",
           "Une chaudière mazout chauffe un circuit d'eau qui alimente les radiateurs et l'eau chaude sanitaire. Un poêle hydro à pellets fait exactement la même chose : il chauffe le même circuit, branché de la même manière. La transition technique est plus simple qu'on ne l'imagine.",
           "Côté combustible, le pellet se produit en Belgique, qui en fabrique plus qu'elle n'en consomme selon ValBiom. En août 2026, le sac de 15 kg valait 6,19 € en moyenne en Wallonie. Le mazout, lui, dépassait 1,50 € le litre au tarif maximum du SPF Économie début octobre 2026.",
           "Et la réglementation tourne. Depuis le 1er janvier 2026, une maison neuve ne peut plus recevoir de chaudière au mazout. À partir du 1er janvier 2031, on ne pourra plus en installer ni en remplacer dans une maison existante ; seul le remplacement du brûleur restera permis jusqu'à fin 2034.",
