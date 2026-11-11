@@ -7,12 +7,27 @@
  * présente un poêle, un insert ou un foyer à bois sans renvoyer vers
  * mister-bois.be. Il ne lit ni la base ni le réseau.
  *
+ * Il borne aussi le poids des listes du catalogue (boutique, catégories,
+ * marques) : carte, ligne compacte et entrée de données d'une fiche, total
+ * estimé pour 250 fiches.
+ *
  * pnpm check:catalogue
  */
 
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import { join, posix } from "node:path";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { ProductCard } from "@/components/product/ProductCard";
+import { CatalogueListing, ProductLines } from "@/components/product/ProductListing";
+import {
+  LISTING_PAGE_SIZE,
+  decodeEntry,
+  encodeEntry,
+  encodeListing,
+  type ListedProduct,
+} from "@/lib/catalogue-listing";
 import {
   FICHES_BOIS_SANS_EQUIVALENT,
   FICHES_BOIS_VERS_MISTER_BOIS,
@@ -110,6 +125,100 @@ function sample(over: Partial<ProductDemo>): ProductDemo {
     ...over,
   };
 }
+
+/**
+ * Fiche la plus lourde qu'une liste puisse porter : nom long, photo à trois
+ * tailles en adresse absolue, texte alternatif, trois couleurs, trois
+ * puissances, promo et bonus, toutes les pastilles et étiquettes.
+ */
+function heavyListed(i: number): ListedProduct {
+  const file = `https://mister-pellets.be/api/media/file/girolami-ti-slim-panorama-${i}`;
+  return {
+    slug: `girolami-ti-slim-panorama-comfort-air-canalisable-${i}`,
+    name: `Girolami TI Slim Panorama Comfort Air canalisable ${i}`,
+    brand: "Girolami",
+    type: "canalisable",
+    combustible: "pellet",
+    isHydro: true,
+    isCanalizable: true,
+    isAirtight: true,
+    isBestseller: true,
+    isNew: true,
+    isFeatured: true,
+    powerKw: 8.3,
+    power: "8,3 kW",
+    powers: [8.3, 10.8, 13],
+    heatedVolume: "276 m³",
+    heatedVolumes: [276, 320, 373],
+    priceTTC: 5990,
+    promoPriceTTC: 5490,
+    bonusPriceTTC: 4941,
+    diffusion: "convection-naturelle",
+    color: "natural",
+    recency: 245,
+    imageAlt: "Poêle Girolami TI Slim Panorama installé dans un salon",
+    imageFocalX: 100,
+    imageFocalY: 40,
+    image: {
+      url: `${file}.webp`,
+      width: 2400,
+      sizes: { card: `${file}-400x300.webp`, display: `${file}-800x600.webp`, full: `${file}-1600x1200.webp` },
+    },
+    colorVariants: [
+      { colorName: "Noir mat", colorHex: "#2B2B2B" },
+      { colorName: "Blanc ivoire", colorHex: "#E7E8EA" },
+      { colorName: "Bordeaux", colorHex: "#6E1F2B" },
+    ],
+  };
+}
+
+/**
+ * Fiche courante, plus chargée que la moyenne du build du 11/11/2026 (carte
+ * 4,3 Ko, ligne 122 o, entrée courte 290 o) : photo en adresse absolue, texte
+ * alternatif, trois couleurs, bonus de saison, deux pastilles.
+ */
+function typicalListed(i: number): ListedProduct {
+  const file = `https://mister-pellets.be/api/media/file/mcz-raam-108-${i}`;
+  return {
+    slug: `mcz-raam-comfort-air-8-up-${i}`,
+    name: `MCZ Raam Comfort Air 8 UP ${i}`,
+    brand: "MCZ",
+    type: "canalisable",
+    combustible: "pellet",
+    isCanalizable: true,
+    isAirtight: true,
+    powerKw: 7.8,
+    power: "7,8 kW",
+    heatedVolume: "223 m³",
+    priceTTC: 4290,
+    bonusPriceTTC: 3861,
+    diffusion: "ventilation-forcee",
+    color: "natural",
+    recency: 28,
+    imageAlt: "Poêle MCZ Raam installé dans une pièce de vie",
+    imageFocalX: 100,
+    image: {
+      url: `${file}.webp`,
+      width: 1600,
+      sizes: { card: `${file}-400x225.webp`, display: `${file}-800x450.webp`, full: `${file}-1600x900.webp` },
+    },
+    colorVariants: [
+      { colorName: "Gris Pierre", colorHex: "#737172" },
+      { colorName: "Blanc", colorHex: "#E7E8EA" },
+      { colorName: "Noir", colorHex: "#2B2B2B" },
+    ],
+  };
+}
+
+/** Octets d'une valeur passée à un composant client : JSON dans une chaîne JS du flux RSC, guillemets échappés. */
+const flightBytes = (value: unknown): number => Buffer.byteLength(JSON.stringify(JSON.stringify(value))) - 2;
+
+/**
+ * Page de liste hors fiches (en-tête, héros, filtres, textes, pied de page et
+ * leur flux) : 125 Ko sur /boutique au build du 11/11/2026, marge comprise.
+ */
+const LISTING_PAGE_OVERHEAD = 140 * 1024;
+const LISTING_BUDGET = 450 * 1024;
 
 const checks: [string, () => void][] = [
   [
@@ -380,6 +489,57 @@ const checks: [string, () => void][] = [
         assert.ok(WOOD_PRODUCT.test(sample), sample);
       for (const sample of ["poêle hybride bois et pellets", "mixte bois-pellets", "poêles à pellets et à bois"])
         assert.ok(!WOOD_PRODUCT.test(sample), sample);
+    },
+  ],
+  [
+    "listes du catalogue : un lien par fiche dans le HTML, poids sous 450 Ko pour 250 fiches",
+    () => {
+      const products = Array.from({ length: 250 }, (_, i) => heavyListed(i));
+      const entries = encodeListing(products, { shop: true });
+
+      // Les données relues donnent la même carte et les mêmes filtres.
+      const back = decodeEntry(entries[0]!);
+      for (const key of ["slug", "name", "brand", "power", "powers", "priceTTC", "promoPriceTTC", "bonusPriceTTC", "type", "combustible", "diffusion", "color", "recency", "isHydro", "isCanalizable", "isAirtight", "isBestseller", "isNew", "isFeatured", "imageAlt", "imageFocalX", "colorVariants"] as const)
+        assert.deepEqual(back[key], products[0]![key], `entrée relue : ${key}`);
+      assert.deepEqual(decodeEntry(encodeEntry({ ...products[0]!, image: undefined, power: "" })).power, "", "puissance vide");
+
+      // Le HTML servi : toutes les fiches en liens, des photos pour les cartes seulement.
+      const html = renderToStaticMarkup(createElement(CatalogueListing, { entries }));
+      const links = new Set([...html.matchAll(/<a [^>]*href="\/produit\/([^"]+)"/g)].map((m) => m[1]));
+      assert.equal(links.size, products.length, "une fiche sans lien dans la liste");
+      assert.equal((html.match(/<img /g) ?? []).length, LISTING_PAGE_SIZE, "photos hors des cartes du premier écran");
+
+      // Poids d'une carte, d'une ligne (sans classe, sans image ni svg), d'une entrée.
+      const weigh = (p: ListedProduct) => {
+        const lineHtml = renderToStaticMarkup(createElement(ProductLines, { products: [p] })).replace(/^<ul[^>]*>|<\/ul>$/g, "");
+        assert.ok(!/<svg|<img|class=/.test(lineHtml), `ligne avec image ou classe : ${lineHtml}`);
+        const card = renderToStaticMarkup(createElement("li", { className: "min-w-0" }, createElement(ProductCard, { product: p })));
+        return {
+          lineHtml,
+          card: Buffer.byteLength(card),
+          line: Buffer.byteLength(lineHtml),
+          full: flightBytes(encodeEntry(p, { full: true, shop: true })),
+          short: flightBytes(encodeEntry(p, { shop: true })),
+        };
+      };
+      const heavy = weigh(products[1]!);
+      // Espaces insécables de Intl (fr-BE) : \s les reconnaît.
+      assert.match(heavy.lineHtml, /4\s941\s€ TVAC/, "prix TVAC absent de la ligne");
+      assert.ok(heavy.card <= 6500, `carte lourde de ${heavy.card} o (6 500 au plus)`);
+      assert.ok(heavy.line <= 220, `ligne lourde de ${heavy.line} o (220 au plus)`);
+      assert.ok(heavy.short <= 520, `entrée courte lourde de ${heavy.short} o (520 au plus)`);
+
+      const t = weigh(typicalListed(1));
+      const total = LISTING_PAGE_SIZE * (t.card + t.full) + (250 - LISTING_PAGE_SIZE) * (t.line + t.short) + LISTING_PAGE_OVERHEAD;
+      console.log(
+        `      fiche courante : carte ${t.card} o, ligne ${t.line} o, entrée complète ${t.full} o, courte ${t.short} o ; ` +
+          `250 fiches : ${Math.round(total / 1024)} Ko, page comprise`,
+      );
+      assert.ok(t.card <= 5600, `carte de ${t.card} o (5 600 au plus)`);
+      assert.ok(t.line <= 160, `ligne de ${t.line} o (160 au plus)`);
+      assert.ok(t.full <= 900, `entrée complète de ${t.full} o (900 au plus)`);
+      assert.ok(t.short <= 380, `entrée courte de ${t.short} o (380 au plus)`);
+      assert.ok(total <= LISTING_BUDGET, `liste de 250 fiches estimée à ${Math.round(total / 1024)} Ko (450 au plus)`);
     },
   ],
 ];

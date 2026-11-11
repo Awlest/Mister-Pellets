@@ -20,7 +20,8 @@ import {
 import { buildPageMetadata } from "@/lib/seo";
 import { getAllProducts } from "@/lib/products";
 import { PROVINCES } from "@/lib/local-seo";
-import { ProductGrid, sortForGrid } from "@/components/product/ProductGrid";
+import { CatalogueListing } from "@/components/product/ProductListing";
+import { encodeListing, sortForGrid } from "@/lib/catalogue-listing";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -346,7 +347,7 @@ export default async function BrandPage({ params }: Props) {
                 du poêle seul quand il est fixé. La pose se chiffre à part, selon votre conduit.
               </p>
             </div>
-            <ProductGrid products={products} moreLabel={`Afficher les autres modèles ${brand.name}`} />
+            <CatalogueListing entries={encodeListing(products)} />
           </div>
         </section>
       )}

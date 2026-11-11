@@ -8,7 +8,8 @@ import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { ProductFeatureBadges, type ProductFeatureFlags } from "@/components/product/ProductFeatureBadges";
 
 export interface ProductColorPreview {
-  colorName: string;
+  /** Infobulle de la pastille ; absent des entrées courtes des listes (lib/catalogue-listing.ts). */
+  colorName?: string;
   colorHex?: string;
 }
 

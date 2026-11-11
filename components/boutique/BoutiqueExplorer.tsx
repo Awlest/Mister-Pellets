@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowDownUp, ChevronDown, SlidersHorizontal } from "lucide-react";
-import { ProductCard, type ProductCardData } from "@/components/product/ProductCard";
 import { ProductFeatureLegend } from "@/components/product/ProductFeatureBadges";
+import { ProductListing } from "@/components/product/ProductListing";
+import { LISTING_PAGE_SIZE, decodeEntry, type CatalogueEntry, type ListedProduct } from "@/lib/catalogue-listing";
+import { DEFAULT_SORT, SORTS, hasPrice, isSortKey, sortProducts, type SortKey } from "@/lib/boutique-sort";
 import {
   COMBUSTIBLE_LABELS,
   CHAUFFAGE_LABELS,
@@ -13,7 +15,6 @@ import {
   POWER_TRANCHES,
   powerToTranche,
   type Combustible,
-  type ProductType,
   type Diffusion,
   type ColorCategory,
 } from "@/lib/products-demo";
@@ -21,25 +22,7 @@ import { cn } from "@/lib/utils";
 import { effectivePriceTTC } from "@/lib/product-price";
 
 /**
- * Shape allégé envoyé au navigateur pour la boutique : juste ce qu'il faut pour
- * la carte + les filtres (pas de variantes/galerie/features → payload réduit).
- */
-export interface BoutiqueProduct extends ProductCardData {
-  type: ProductType;
-  combustible?: Combustible;
-  /** Raccordé à l'eau (thermo) → pilote le filtre « Chauffage ». */
-  isHydro?: boolean;
-  powerKw: number;
-  diffusion: Diffusion;
-  color: ColorCategory;
-  /** Date de création de la fiche (ISO) : tri « Derniers ajouts ». */
-  createdAt?: string;
-  /** Case « Mis en avant » de l'admin : pèse dans le tri par défaut. */
-  isFeatured?: boolean;
-}
-
-/**
- * Exploration boutique — filtrage 100% CÔTÉ NAVIGATEUR.
+ * Exploration boutique : filtrage CÔTÉ NAVIGATEUR.
  *
  * Avant : la page lisait les filtres dans l'URL (searchParams) → Next.js la
  * rendait dynamiquement à chaque visite (cache MISS, ~1,8 s, 958 Ko rechargés).
@@ -47,12 +30,12 @@ export interface BoutiqueProduct extends ProductCardData {
  * fait instantanément ici sans recharger. L'URL reste synchronisée (liens
  * partageables) via history.replaceState, sans aller-retour serveur.
  *
- * Toutes les cartes sont dans le HTML servi, avec leur lien vers la fiche :
- * sans JavaScript, la grille entière est visible, et un robot suit chaque
- * lien. Le découpage par 24 n'arrive qu'avec le script, qui masque les
- * cartes suivantes (attribut `hidden`) jusqu'à « Voir plus ». Même principe
- * que le catalogue de Mister Bois (CatalogueExplorer). Les photos hors écran
- * et les cartes masquées ne sont pas téléchargées (`loading="lazy"`).
+ * Chaque fiche a son lien dans le HTML servi : les 24 premières en cartes,
+ * toutes les autres en lignes de texte (ProductListing.tsx), lisibles sans
+ * JavaScript et suivies par les robots. Les fiches arrivent en entrées
+ * compactes (lib/catalogue-listing.ts) : 246 cartes complètes faisaient
+ * 1,4 Mo de HTML. Filtres, compteurs et tri portent sur toutes les fiches ;
+ * « Voir plus » change les lignes suivantes en cartes.
  */
 
 interface Filters {
@@ -86,91 +69,9 @@ const BUDGETS = [
   { value: "4500-6000", label: "4 500 à 6 000 €", min: 4500, max: 6000 },
   { value: "6000+", label: "6 000 € et plus", min: 6000, max: Infinity },
 ] as const;
-const PAGE_SIZE = 24;
-
-const subscribeNothing = () => () => {};
-
-/**
- * Tri de la grille, côté navigateur comme les filtres (paramètre d'URL `tri`).
- *
- * « Mis en avant » est l'ordre par défaut. Il ne prétend rien recommander : il
- * remonte les fiches cochées « Best-seller » puis « Mis en avant » dans l'admin,
- * fait passer les fiches avec photo avant celles qui n'en ont pas encore, et
- * départage le reste par date d'ajout. L'équipe pilote donc le haut de la
- * boutique depuis ces deux cases.
- */
-const SORTS = [
-  { value: "mis-en-avant", label: "Mis en avant" },
-  { value: "recent", label: "Derniers ajouts" },
-  { value: "prix-asc", label: "Prix croissant" },
-  { value: "prix-desc", label: "Prix décroissant" },
-  { value: "puissance-asc", label: "Puissance croissante" },
-  { value: "puissance-desc", label: "Puissance décroissante" },
-  { value: "nom", label: "Nom, de A à Z" },
-] as const;
-
-type SortKey = (typeof SORTS)[number]["value"];
-const DEFAULT_SORT: SortKey = "mis-en-avant";
-const isSortKey = (v: string | null): v is SortKey => SORTS.some((s) => s.value === v);
-
-const createdTime = (p: BoutiqueProduct): number => (p.createdAt ? Date.parse(p.createdAt) || 0 : 0);
-// Prix de tri = prix réellement pratiqué (promo admin comprise), comme sur la carte.
-const hasPrice = (p: BoutiqueProduct): boolean => (effectivePriceTTC(p) ?? 0) > 0;
-// Fiche regroupée multi-puissances : la plus petite sert au tri croissant, la
-// plus grande au tri décroissant (sinon un 9-26 kW se classerait comme un 9 kW).
-const minPower = (p: BoutiqueProduct): number => (p.powers && p.powers.length > 0 ? Math.min(...p.powers) : p.powerKw);
-const maxPower = (p: BoutiqueProduct): number => (p.powers && p.powers.length > 0 ? Math.max(...p.powers) : p.powerKw);
-const featuredScore = (p: BoutiqueProduct): number =>
-  (p.isBestseller ? 4 : 0) + (p.isFeatured ? 2 : 0) + (p.image?.url || p.imageSrc ? 1 : 0);
-
-function sortProducts(list: BoutiqueProduct[], sort: SortKey): BoutiqueProduct[] {
-  const byRecent = (a: BoutiqueProduct, b: BoutiqueProduct) => createdTime(b) - createdTime(a);
-  const sorted = [...list]; // Array.prototype.sort est stable : à égalité, l'ordre reçu est conservé.
-  switch (sort) {
-    case "recent":
-      return sorted.sort(byRecent);
-    case "prix-asc":
-    case "prix-desc": {
-      const dir = sort === "prix-asc" ? 1 : -1;
-      // Le prix trié est celui de la carte (« à partir de »). Les fiches « sur
-      // devis » n'ont pas de prix : elles restent en fin de liste dans les deux sens.
-      return sorted.sort((a, b) => {
-        const pa = hasPrice(a);
-        const pb = hasPrice(b);
-        if (pa !== pb) return pa ? -1 : 1;
-        if (!pa) return 0;
-        return dir * ((effectivePriceTTC(a) as number) - (effectivePriceTTC(b) as number));
-      });
-    }
-    case "puissance-asc":
-      return sorted.sort((a, b) => minPower(a) - minPower(b));
-    case "puissance-desc":
-      return sorted.sort((a, b) => maxPower(b) - maxPower(a));
-    case "nom":
-      // numeric : « Rise 7 » se classe avant « Rise 11 ».
-      return sorted.sort((a, b) => a.name.localeCompare(b.name, "fr", { numeric: true, sensitivity: "base" }));
-    default:
-      return pricedFirstWithinBrand(sorted.sort((a, b) => featuredScore(b) - featuredScore(a) || byRecent(a, b)));
-  }
-}
-
-/**
- * À marque égale, les fiches dont le prix est affiché passent devant. L'ordre
- * des marques ne bouge pas (MCZ reste en tête) : chaque marque garde ses
- * places dans la liste, elle y range d'abord ses fiches chiffrées. Sans cela,
- * les cartes « Sur devis » occupaient les dix premiers écrans de la boutique.
- */
-function pricedFirstWithinBrand(list: BoutiqueProduct[]): BoutiqueProduct[] {
-  const queues = new Map<string, BoutiqueProduct[]>();
-  for (const p of list) queues.set(p.brand, [...(queues.get(p.brand) ?? []), p]);
-  for (const [brand, items] of queues) {
-    queues.set(brand, [...items.filter(hasPrice), ...items.filter((p) => !hasPrice(p))]);
-  }
-  return list.map((p) => queues.get(p.brand)!.shift()!);
-}
 
 /** La fiche passe-t-elle un filtre donné ? */
-function passes(p: BoutiqueProduct, key: keyof Filters, value: string): boolean {
+function passes(p: ListedProduct, key: keyof Filters, value: string): boolean {
   if (value === "all") return true;
   switch (key) {
     case "marque":
@@ -203,7 +104,7 @@ function passes(p: BoutiqueProduct, key: keyof Filters, value: string): boolean 
 const FILTER_KEYS: (keyof Filters)[] = ["marque", "combustible", "chauffage", "puissance", "budget", "prix", "diffusion", "couleur"];
 
 /** La fiche passe tous les filtres, sauf éventuellement celui du groupe qu'on est en train de compter. */
-function passesAll(p: BoutiqueProduct, filters: Filters, except?: keyof Filters): boolean {
+function passesAll(p: ListedProduct, filters: Filters, except?: keyof Filters): boolean {
   return FILTER_KEYS.every((key) => key === except || passes(p, key, filters[key]));
 }
 
@@ -254,20 +155,17 @@ function FilterPill({
 }
 
 export function BoutiqueExplorer({
-  products,
+  entries,
   brandFilters,
 }: {
-  products: BoutiqueProduct[];
+  /** Fiches dans l'ordre du tri par défaut (app/(frontend)/boutique/page.tsx). */
+  entries: CatalogueEntry[];
   brandFilters: { value: string; label: string }[];
 }) {
+  const products = useMemo(() => entries.map(decodeEntry), [entries]);
   const [current, setCurrent] = useState<Filters>(DEFAULT);
   const [sort, setSort] = useState<SortKey>(DEFAULT_SORT);
-  const [visible, setVisible] = useState(PAGE_SIZE);
-  // Faux au rendu serveur et pendant l'hydratation : la grille entière part
-  // dans le HTML. Vrai ensuite : les cartes au-delà de `visible` sont masquées.
-  const hydrated = useSyncExternalStore(subscribeNothing, () => true, () => false);
-  const gridRef = useRef<HTMLUListElement>(null);
-  const focusFrom = useRef<number | null>(null);
+  const [visible, setVisible] = useState(LISTING_PAGE_SIZE);
   // Sur mobile, les six groupes de filtres occupaient deux écrans avant le
   // premier poêle (1er modèle à 1 750 px du haut à 375 px) : ils se replient
   // derrière un bouton « Filtres ». Toujours dépliés à partir de 768 px.
@@ -328,21 +226,21 @@ export function BoutiqueExplorer({
   function setFilter(key: keyof Filters, value: string) {
     const next = { ...current, [key]: value };
     setCurrent(next);
-    setVisible(PAGE_SIZE);
+    setVisible(LISTING_PAGE_SIZE);
     syncUrl(next, sort);
   }
 
   function changeSort(value: string) {
     if (!isSortKey(value)) return;
     setSort(value);
-    setVisible(PAGE_SIZE);
+    setVisible(LISTING_PAGE_SIZE);
     syncUrl(current, value);
   }
 
   // « Réinitialiser les filtres » ne touche pas au tri : ce n'est pas un filtre.
   function reset() {
     setCurrent(DEFAULT);
-    setVisible(PAGE_SIZE);
+    setVisible(LISTING_PAGE_SIZE);
     syncUrl(DEFAULT, sort);
   }
 
@@ -359,20 +257,6 @@ export function BoutiqueExplorer({
   const sorted = useMemo(() => sortProducts(filtered, sort), [filtered, sort]);
 
   const activeCount = Object.values(current).filter((v) => v !== "all").length;
-  const remaining = hydrated ? Math.max(0, sorted.length - visible) : 0;
-
-  // « Voir plus » : le focus passe à la première carte ajoutée, là où était le
-  // bouton, sinon le clavier repartirait du bas de la liste.
-  function showMore() {
-    focusFrom.current = visible;
-    setVisible((v) => v + PAGE_SIZE);
-  }
-  useEffect(() => {
-    if (focusFrom.current === null) return;
-    const link = gridRef.current?.children[focusFrom.current]?.querySelector("a");
-    focusFrom.current = null;
-    link?.focus({ preventScroll: true });
-  }, [visible]);
 
   const GROUPS: { label: string; key: keyof Filters; options: { value: string; label: string }[] }[] = [
     { label: "Marque", key: "marque", options: brandFilters },
@@ -542,24 +426,12 @@ export function BoutiqueExplorer({
           {/* Titre de la grille pour les lecteurs d'écran : sans lui, les noms
               de poêles (h3) suivaient directement le h1. */}
           <h2 className="sr-only">Modèles</h2>
-          <ul ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sorted.map((product, i) => (
-              <li key={product.slug} className="min-w-0" hidden={hydrated && i >= visible}>
-                <ProductCard product={product} priority={i === 0} className="h-full" />
-              </li>
-            ))}
-          </ul>
-          {remaining > 0 && (
-            <div className="mt-10 text-center">
-              <button
-                type="button"
-                onClick={showMore}
-                className="inline-flex items-center justify-center rounded-full bg-mp-green-deep px-7 h-12 text-sm font-semibold text-white transition-[background-color,scale] hover:bg-mp-green-mid active:scale-[0.98]"
-              >
-                Voir plus de modèles ({remaining} restant{remaining > 1 ? "s" : ""})
-              </button>
-            </div>
-          )}
+          <ProductListing
+            products={sorted}
+            visible={visible}
+            onShowMore={() => setVisible((v) => v + LISTING_PAGE_SIZE)}
+            priority
+          />
         </>
       )}
     </>

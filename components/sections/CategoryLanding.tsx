@@ -2,8 +2,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
 import { CTAFinal } from "@/components/sections/CTAFinal";
-import { ProductGrid, sortForGrid } from "@/components/product/ProductGrid";
+import { CatalogueListing } from "@/components/product/ProductListing";
 import { ROUTES } from "@/config/navigation";
+import { encodeListing, sortForGrid } from "@/lib/catalogue-listing";
 import { productsInCategory, type CategoryData } from "@/lib/categories";
 import { getAllProducts } from "@/lib/products";
 
@@ -12,7 +13,8 @@ const LINK =
 
 /**
  * Page d'une catégorie du catalogue (lib/categories.ts) : chapô, liens utiles
- * et grille complète des fiches, rendue par le serveur. Le texte long viendra
+ * et liste complète des fiches (24 cartes, puis une ligne par fiche, toutes
+ * en liens dans le HTML servi : ProductListing.tsx). Le texte long viendra
  * dans `category.sections`, affiché sous la grille.
  */
 export async function CategoryLanding({ category }: { category: CategoryData }) {
@@ -71,7 +73,7 @@ export async function CategoryLanding({ category }: { category: CategoryData }) 
             Les modèles
           </h2>
           {products.length > 0 ? (
-            <ProductGrid products={products} initial={12} priority />
+            <CatalogueListing entries={encodeListing(products)} priority />
           ) : (
             <p className="mp-measure text-center text-lg text-mp-ink-soft">
               Aucune fiche pour le moment.{" "}

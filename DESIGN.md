@@ -288,7 +288,7 @@ Réutiliser ces composants pour toute nouvelle page. En créer un nouveau seulem
 | Carte | `Card`, `CardHeader`, `CardTitle`, `CardContent` | `components/ui/card.tsx` |
 | Badge, accroche | `Badge` (`default`, `primary`, `secondary`, `outline`, `success`, `eyebrow`) | `components/ui/badge.tsx` |
 | Carte produit et pastilles | `ProductCard`, `ProductFeatureBadges`, `ProductFeatureLegend` | `components/product/` |
-| Grille de fiches rendue par le serveur (pages marque et catégories ; suite repliée dans un `<details>`) | `ProductGrid`, `sortForGrid` | `components/product/ProductGrid.tsx` |
+| Liste de fiches (boutique, catégories, marques) : 24 cartes, puis une ligne de texte par fiche (lien, marque, modèle, puissance, prix TVAC ou « Sur devis », sans image ni pictogramme) dans un `<details>` ; « Voir plus » change les lignes suivantes en cartes. Données en entrées compactes, poids borné par `check:catalogue` | `ProductListing`, `CatalogueListing`, `ProductLines` ; `encodeListing`, `sortForGrid` | `components/product/ProductListing.tsx`, `lib/catalogue-listing.ts` |
 | Page catégorie du catalogue | `CategoryLanding` (données : `lib/categories.ts`) | `components/sections/CategoryLanding.tsx` |
 | Texte de contenu avec liens `[texte](adresse)` (articles, guides, FAQ, pages marque) | `InlineText` ; texte brut : `plainText` | `components/ui/inline-text.tsx`, `lib/inline-text.ts` |
 | Volet (menu, détail) | `Sheet`, `SheetContent` | `components/ui/sheet.tsx` |
