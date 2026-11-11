@@ -27,9 +27,9 @@ const DEFAULT_AIDES: AideRow[] = [
     highlight: true,
   },
   {
-    amount: "50 %",
+    amount: "45 %",
     audience: "Rénopack",
-    detail: "Part du prêt effacée en C1 (40 % en C2, 15 % en C3)",
+    detail: "Part du prêt effacée en C1 (35 % en C2, 10 % en C3), 5 points de plus avec des écomatériaux",
   },
   {
     amount: LOAN_MAX.house,
@@ -47,7 +47,9 @@ const CONDITIONS = [
   "Maison classée PEB E, F ou G",
   "Audit logement de moins d'un an",
   "Label D (ou C) atteint après travaux",
+  "Rénopack : maison de plus de 15 ans, aucun autre logement en propriété",
   "Demande à la SWCS ou au Fonds du Logement",
+  "Aucun devis signé ni acompte avant le contrat de crédit",
 ];
 
 interface PrimesBlockProps {
@@ -63,7 +65,7 @@ interface PrimesBlockProps {
 export function PrimesBlock({
   tone = "cream",
   title = "Les aides en 2026, après la fin de la prime",
-  description = "Depuis le 1er octobre 2026, la Wallonie ne verse plus de prime pour un poêle à pellets. Voici ce qui reste pour alléger la facture, et à quelles conditions.",
+  description = "Depuis le 1er octobre 2026, la Wallonie n'accorde plus de prime pour un nouveau projet de poêle à pellets. Voici ce qui reste pour alléger la facture, et à quelles conditions.",
   aides = DEFAULT_AIDES,
   showLink = true,
 }: PrimesBlockProps) {
@@ -153,9 +155,10 @@ export function PrimesBlock({
         )}
 
         <p className="mt-6 text-xs text-mp-ink-soft italic mp-measure text-center">
-          Situation vérifiée le {AIDES_VERIFIED_AT} sur wallonie.be, swcs.be et fin.belgium.be.
-          Les taux et durées des prêts sont fixés par la SWCS et le Fonds du Logement de
-          Wallonie. Renseignements gratuits au 1718.
+          Situation vérifiée le {AIDES_VERIFIED_AT} sur wallonie.be, swcs.be, flw.be et
+          fin.belgium.be. Selon la SWCS, le dispositif des prêts devrait être pleinement
+          opérationnel au début de 2027. Les taux et durées des prêts sont fixés par la SWCS et le
+          Fonds du Logement de Wallonie. Renseignements gratuits au 1718.
         </p>
       </div>
     </section>

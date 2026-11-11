@@ -99,7 +99,7 @@ export default async function PrixPoelePelletsPage() {
       : {
           question: "Existe-t-il encore une prime pour un poêle à pellets en Wallonie ?",
           answer:
-            "Non. La prime Habitation s'est arrêtée le 30 septembre 2026. Il reste la TVA à 6 % sur les logements de plus de 10 ans et, sous conditions, les prêts Rénopack et Rénoprêt : le détail est sur la page [aides pour un poêle à pellets](/aides-poele-a-pellets-wallonie).",
+            "Non. La prime Habitation s'est arrêtée le 30 septembre 2026. Il reste la TVA à 6 % sur les logements de plus de 10 ans. Les prêts régionaux Rénopack et Rénoprêt visent une rénovation plus large, et leur liste de travaux ne nomme pas le poêle : le détail est sur la page [aides pour un poêle à pellets](/aides-poele-a-pellets-wallonie).",
         },
     {
       question: "Peut-on payer son poêle en plusieurs fois ?",
