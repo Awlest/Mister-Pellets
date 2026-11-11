@@ -90,12 +90,19 @@ const nextConfig: NextConfig = {
    * Next.js App Router (segment dynamique entièrement entre crochets).
    */
   async rewrites() {
-    return [
-      {
-        source: "/poeles-pellets-:ville",
-        destination: "/poeles-pellets/:ville",
-      },
-    ];
+    return {
+      // Version Markdown des guides, articles, pages marque et FAQ :
+      // /guides/x.md → /md/guides/x (app/md, lib/markdown.ts). « beforeFiles » :
+      // sinon les routes [slug] prendraient « x.md » pour un slug inconnu.
+      beforeFiles: [{ source: "/:path+.md", destination: "/md/:path+" }],
+      afterFiles: [
+        {
+          source: "/poeles-pellets-:ville",
+          destination: "/poeles-pellets/:ville",
+        },
+      ],
+      fallback: [],
+    };
   },
 
   /**

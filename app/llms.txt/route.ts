@@ -210,6 +210,9 @@ ${priceLines(prices)}
 
 ## Pages de référence
 
+Texte complet des pages de contenu : ${SITE_URL}/llms-full.txt. Chaque guide, article et page marque existe aussi en Markdown (adresse suivie de « .md »).
+
+
 - Accueil : ${SITE_URL}/
 - Prix d'un poêle à pellets posé : ${SITE_URL}${ROUTES.prices}
 - Installation et pose (déroulé, forfaits par évacuation, TVA à 6 %) : ${SITE_URL}${ROUTES.installation}
@@ -252,6 +255,7 @@ ${faqExtract}
   return new Response(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
+      "X-Robots-Tag": "noindex",
       "Cache-Control": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800",
     },
   });

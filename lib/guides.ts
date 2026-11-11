@@ -591,7 +591,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         table: {
           headers: ["Surface chauffée", ...ISO_HEADERS],
           rows: POWER_BY_SURFACE,
-          caption: "Puissance conseillée, arrondie à 0,1 kW, selon la grille de notre estimation en ligne (lib/pose/moteur.ts). Hauteur sous plafond de 2,50 m environ.",
+          caption: "Puissance conseillée, arrondie à 0,1 kW, selon la grille de notre estimation en ligne. Hauteur sous plafond de 2,50 m environ.",
         },
       },
       {
