@@ -57,7 +57,7 @@ export default async function GuidePage({ params }: Props) {
   const schemas: Record<string, unknown>[] = [
     buildArticleSchema({
       headline: guide.title,
-      description: guide.description,
+      description: guide.directAnswer ? plainText(guide.directAnswer) : guide.description,
       url: `${SITE_URL}/guides/${guide.slug}`,
       imageUrl: `${SITE_URL}${ogImagePath("guides", guide.slug)}`,
       datePublished: guide.publishedAt,
@@ -110,6 +110,11 @@ export default async function GuidePage({ params }: Props) {
               )}
               <span>Par l&apos;équipe Mister Pellets</span>
             </p>
+            {guide.directAnswer && (
+              <p className="mb-10 border-l-4 border-mp-orange-flame pl-4 text-lg font-medium leading-relaxed text-mp-ink md:text-xl">
+                <InlineText text={guide.directAnswer} />
+              </p>
+            )}
               {guide.sections.map((section, i) => (
               <section key={i} className="mb-12">
                 <h2 className="text-2xl md:text-3xl font-semibold text-mp-green-deep mb-6 mt-2">
@@ -121,6 +126,44 @@ export default async function GuidePage({ params }: Props) {
                     <InlineText text={p} />
                   </p>
                 ))}
+
+                {section.table && (
+                  <div className="-mx-4 mb-4 overflow-x-auto bg-white md:mx-0 md:rounded-[20px] md:border md:border-mp-sand/40">
+                    <table className="w-full min-w-[30rem] text-left text-sm md:text-base">
+                      {section.table.caption && (
+                        <caption className="caption-bottom px-4 py-3 text-left text-xs text-mp-ink-soft">
+                          {typo(section.table.caption)}
+                        </caption>
+                      )}
+                      <thead>
+                        <tr className="border-b border-mp-sand/40 text-mp-green-deep">
+                          {section.table.headers.map((h) => (
+                            <th key={h} scope="col" className="px-4 py-3 font-semibold">
+                              {typo(h)}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {section.table.rows.map((row, r) => (
+                          <tr key={r} className="border-b border-mp-sand/40 last:border-b-0">
+                            {row.map((cell, c) =>
+                              c === 0 ? (
+                                <th key={c} scope="row" className="px-4 py-3 font-medium text-mp-ink">
+                                  <InlineText text={cell} />
+                                </th>
+                              ) : (
+                                <td key={c} className="px-4 py-3 tabular-nums text-mp-ink">
+                                  <InlineText text={cell} />
+                                </td>
+                              ),
+                            )}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
 
                 {section.list && (
                   <ul className="space-y-3">
@@ -138,6 +181,19 @@ export default async function GuidePage({ params }: Props) {
                 )}
               </section>
             ))}
+
+            {guide.sources && guide.sources.length > 0 && (
+              <section className="border-t border-mp-sand/40 pt-8">
+                <h2 className="mb-4 text-xl font-semibold text-mp-green-deep">Sources</h2>
+                <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-mp-ink-soft">
+                  {guide.sources.map((src) => (
+                    <li key={src.label}>
+                      {src.href ? <InlineText text={`[${src.label}](${src.href})`} /> : typo(src.label)}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
           </div>
         </div>
       </article>
