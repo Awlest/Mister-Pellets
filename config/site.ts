@@ -43,20 +43,20 @@ export const LEGAL_ENTITY = {
 export const FAMILY_SITES = [
   { name: "Mister Bois", description: "Poêles, inserts et foyers à bois", href: "https://mister-bois.be" },
   { name: "Mister Clim", description: "Climatisation", href: "https://mister-clim.be" },
-  { name: "Awlest", description: "Pompe à chaleur, photovoltaïque, rénovation", href: "https://www.awlest.com" },
+  { name: "Awlest", description: "Pompe à chaleur, photovoltaïque, rénovation", href: "https://awlest.be" },
 ] as const;
 
 /**
  * Bande « Un service Awlest » du pied de page (plan écosystème v1.1, règle 1 :
  * les sites Mister présentent Awlest comme l'entreprise qui installe).
- * Lien vers l'accueil tant qu'awlest.com tourne sur Wix ; à passer sur
- * /a-propos à la mise en ligne du nouveau site (5 novembre 2026).
+ * Lien vers l'accueil d'awlest.be, le site de la société mère depuis la
+ * bascule de novembre 2026 (awlest.com, l'ancien site Wix, y redirige).
  */
 export const PARENT_BRAND = {
   name: "Awlest",
   since: "2016",
-  href: "https://www.awlest.com",
+  href: "https://awlest.be",
 } as const;
 
 /** Domaines de la famille : un clic vers l'un d'eux est mesuré (cross_brand_click). */
-export const FAMILY_HOSTS = ["mister-bois.be", "mister-clim.be", "awlest.com"] as const;
+export const FAMILY_HOSTS = ["mister-bois.be", "mister-clim.be", "awlest.be"] as const;
