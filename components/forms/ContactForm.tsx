@@ -198,7 +198,9 @@ function ContactFormInner({ slug }: { slug: string | null }) {
           id="message"
           name="message"
           required
-          rows={5}
+          // Message prérempli : 3 lignes qui en font 6 à 7 à 375 px (adresse de
+          // la fiche coupée), toutes visibles sans faire défiler la zone.
+          rows={slug ? 8 : 5}
           disabled={state === "loading"}
           defaultValue={slug ? priceRequestMessage(slug) : undefined}
           className={cn(inputClass, "resize-y")}
