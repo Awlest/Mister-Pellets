@@ -15,6 +15,7 @@ import { CITIES } from "@/lib/cities";
 import { typo } from "@/lib/typo";
 import { POSE_DURATIONS } from "@/lib/services";
 import { POWER_RULE, kwFor } from "@/lib/power";
+import { ALL_PELLET_RANGE, PRICE_RANGES, rangeText } from "@/lib/price-ranges";
 
 /**
  * Régénération horaire : l'annonce du bonus de saison dépend de la date. Le
@@ -56,8 +57,9 @@ export const metadata: Metadata = {
 const FAQ_HOMEPAGE = [
   {
     question: "Combien coûte un poêle à pellets installé en Wallonie ?",
-    answer:
-      "Pour une maison standard avec conduit existant, comptez entre 4 000 et 8 000 € tout compris (poêle + pose + raccordement). Un hydro complet pour remplacer une chaudière démarre plutôt à 8 000 € et peut monter à 14 000 € selon la puissance et la complexité du raccordement aux radiateurs. Dans un logement de plus de 10 ans, la TVA passe à 6 % au lieu de 21 %. Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026. Les forfaits de pose et des exemples chiffrés sont sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets).",
+    // Fourchettes : lib/price-ranges.ts, la même source que le texte de
+    // l'accueil, la FAQ du site, le guide d'achat et llms.txt.
+    answer: `Pour un poêle à air posé sur un conduit existant, tubé ou à tuber, comptez ${rangeText(PRICE_RANGES.standard)} tout compris (poêle, pose et raccordement). Un canalisable de 10 à 14 kW avec gaines revient à ${rangeText(PRICE_RANGES.canalisable)}. Un hydro complet pour remplacer une chaudière coûte ${rangeText(PRICE_RANGES.hydro)} selon la puissance et la complexité du raccordement aux radiateurs. Ces montants comptent la TVA à 6 %, celle d'un logement de plus de 10 ans (21 % sinon). Il n'y a plus de prime régionale pour un poêle depuis le 1er octobre 2026. Le prix de départ du moment, calculé sur le poêle le moins cher du catalogue posé sur un conduit déjà tubé, les forfaits de pose et des exemples chiffrés sont sur la page [prix d'un poêle à pellets posé](/prix-poele-pellets).`,
   },
   {
     question: "Quelle puissance de poêle pour quelle surface ?",
@@ -323,13 +325,14 @@ export default function HomePage() {
           </p>
 
           {(() => {
-            // typo : une fourchette « 8 000 à 14 000 € » reste d'un seul tenant (lib/typo.ts).
+            // typo : une fourchette de montants reste d'un seul tenant (lib/typo.ts).
+            // Ligne du pellet : lib/price-ranges.ts ; autres modes : estimations de cette page.
             const rows = [
               {
                 solution: "Poêle à pellets",
                 icon: Flame,
                 highlight: true,
-                investissement: typo("4 000 à 14 000 €"),
+                investissement: typo(rangeText(ALL_PELLET_RANGE)),
                 coutAnnuel: typo("700 à 1 100 €"),
                 autonomie: "2 à 7 jours",
               },
@@ -448,25 +451,27 @@ export default function HomePage() {
           </h2>
           <div className="mp-measure space-y-4 text-mp-ink leading-relaxed text-base md:text-lg">
             <p>
-              Le ticket d'entrée pour un poêle à air pulsé étanche posé en Wallonie démarre autour
-              de 4 000 € TVAC tout compris (matériel + pose + raccordement au conduit existant).
-              Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin d'entrée de gamme.
+              Un poêle à air posé en Wallonie sur un conduit existant, tubé ou à tuber, revient le
+              plus souvent à {typo(rangeText(PRICE_RANGES.standard))} TVAC tout compris (matériel, pose et
+              raccordement). Sur ce segment, on conseille typiquement un EK63 ou un Edilkamin
+              d&apos;entrée de gamme.
             </p>
             <p>
               Pour un canalisable de 10 à 14 kW qui chauffe 1 ou 2 pièces supplémentaires via gaines,
-              comptez 5 500 à 7 500 € TVAC. C'est la majorité de notre activité, sur des maisons à
+              comptez {typo(rangeText(PRICE_RANGES.canalisable))} TVAC. C'est la majorité de notre activité, sur des maisons à
               étage. Nos deux meilleures ventes, les EK63 Tweed 90+ et Spy 110+, sont sur ce segment.
             </p>
             <p>
-              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez
-              8 000 à 14 000 € TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
+              Pour un hydro complet de 18 à 24 kW raccordé aux radiateurs existants, prévoyez{" "}
+              {typo(rangeText(PRICE_RANGES.hydro))} TVAC selon la puissance, la complexité du circuit, le ballon tampon, et le
               démantèlement éventuel d'une cuve mazout. C'est le poste le plus important, mais c'est
               aussi celui où l'économie sur le combustible rentabilise le plus vite (5 à 9 ans
               typiquement).
             </p>
             <p>
               La pose varie surtout avec l&apos;évacuation : conduit déjà tubé, conduit à tuber, ventouse en
-              façade ou nouveau conduit par l&apos;extérieur ou la toiture. Le prix de départ du moment, les forfaits de pose par type de conduit et des
+              façade ou nouveau conduit par l&apos;extérieur ou la toiture. Le prix de départ du moment
+              (le poêle le moins cher du catalogue, posé sur un conduit déjà tubé), les forfaits de pose par type de conduit et des
               exemples chiffrés sont sur la page{" "}
               <Link href="/prix-poele-pellets" className="text-mp-orange-ink underline hover:no-underline font-semibold">
                 prix d&apos;un poêle à pellets posé

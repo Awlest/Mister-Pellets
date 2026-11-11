@@ -11,6 +11,7 @@ import { FROM_INSTALL_LABEL, getPricePageData, type PricePageData } from "@/lib/
 import { errorInfo } from "@/lib/log-error";
 import { AIDES_VERIFIED_AT } from "@/lib/aides";
 import { POWER_RULE, kwFor } from "@/lib/power";
+import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
 
 /**
  * /llms.txt : résumé en texte brut destiné aux assistants (ChatGPT, Claude,
@@ -141,9 +142,11 @@ Base : Fernelmont (5380), province de Namur.
 ## Prix (calculés le ${updated}, comme sur la page des prix)
 
 ${priceLines(prices)}
-- Ordres de grandeur, poêle et pose compris, TVA à 6 % : canalisable de 10 à 14 kW, 5 500 à 7 500 € ; hydro de 18 à 24 kW
-  raccordé aux radiateurs, 8 000 à 14 000 € selon la puissance, le ballon tampon
-  et le démantèlement éventuel d'une cuve à mazout.
+- Ordres de grandeur des projets courants, poêle et pose compris, TVA à 6 % (le
+  prix « à partir de » ci-dessus est le cas le moins cher, pas la moyenne) :
+  ${PRICE_RANGES.standard.hypothesis}, ${rangeText(PRICE_RANGES.standard)} ;
+  ${PRICE_RANGES.canalisable.hypothesis}, ${rangeText(PRICE_RANGES.canalisable)} ;
+  ${PRICE_RANGES.hydro.hypothesis}, ${rangeText(PRICE_RANGES.hydro)}.
 - Le configurateur en ligne donne une estimation tout compris, TVA comprise ;
   le prix ferme est confirmé après la visite technique.
 

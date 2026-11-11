@@ -7,7 +7,11 @@
  * 1. Fiche sur devis : le bouton principal demande le prix du modèle, et
  *    l'estimation ouverte sur un modèle absent du catalogue chiffré l'explique
  *    au lieu de bloquer (vérification du 11/11/2026).
+ * 2. Fourchettes de prix d'un poêle posé : une seule source
+ *    (lib/price-ranges.ts) pour l'accueil, la FAQ, le guide d'achat, llms.txt
+ *    et llms-full.txt ; aucun montant de fourchette écrit à la main à côté.
  */
+import { readFileSync } from "node:fs";
 import { requestedModel, type EstimateProduct } from "@/lib/estimate";
 import {
   PRICE_REQUEST_SUBJECT,
@@ -16,6 +20,10 @@ import {
   productPrimaryAction,
   readPriceRequest,
 } from "@/lib/price-request";
+import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
+import { FAQS } from "@/lib/faqs";
+import { getGuideBySlug } from "@/lib/guides";
+import { NBSP, NNBSP } from "@/lib/typo";
 
 let ko = 0;
 function check(label: string, got: unknown, want: unknown) {
@@ -59,6 +67,57 @@ check("estimation : modèle sur devis", requestedModel(catalogue, "?modele=mcz-e
   status: "unpriced",
   slug: "mcz-ego-air-8-r",
 });
+
+// ---------------------------------------------------------------------------
+// 2. Fourchettes de prix
+// ---------------------------------------------------------------------------
+check("source : canalisable", rangeText(PRICE_RANGES.canalisable), "5 500 à 8 000 €");
+const canalFaq = FAQS.find((f) => f.id === "choisir-canalisable-vs-hydro")?.answer ?? "";
+assert("FAQ canalisable ou hydro : fourchette canalisable de la source", canalFaq.includes(rangeText(PRICE_RANGES.canalisable)));
+assert("FAQ canalisable ou hydro : fourchette hydro de la source", canalFaq.includes(rangeText(PRICE_RANGES.hydro)));
+const achat = getGuideBySlug("guide-achat-poele-pellets-wallonie");
+assert("guide d'achat : encadré sur la fourchette de la source", Boolean(achat?.excerpt.includes(rangeText(PRICE_RANGES.standard))));
+const achatFaq = achat?.faq?.find((q) => q.question.startsWith("Combien coûte"))?.answer ?? "";
+for (const k of ["standard", "canalisable", "hydro"] as const) {
+  assert(`guide d'achat, FAQ prix : ${k}`, achatFaq.includes(rangeText(PRICE_RANGES[k])));
+}
+
+/**
+ * Fourchettes en euros écrites en dur dans les textes qui reprennent la
+ * source. Seules restent permises celles qui décrivent autre chose qu'un
+ * poêle posé (autres modes de chauffage, coût annuel, surcoût d'un matériel),
+ * ou un cas distinct nommé dans sa phrase.
+ */
+// Espace ordinaire, insécable (U+00A0) ou fine insécable (U+202F), écrites
+// par leur code (lib/typo.ts).
+const SP = `[ ${NBSP}${NNBSP}]`;
+const NUM = String.raw`\d{1,3}(?:` + SP + String.raw`\d{3})*`;
+const RANGE_RE = new RegExp(`${NUM}${SP}?(?:€${SP})?(?:à|et)${SP}${NUM}${SP}€`, "g");
+/** « autour de 4 000 € » : un prix d'appel approximatif, contredit par le prix calculé. */
+const ABOUT_PRICE_RE = new RegExp(`autour${SP}de${SP}${NUM}${SP}?€`);
+const ALLOWED: Record<string, string[]> = {
+  "app/(frontend)/page.tsx": [
+    // Comparatif : mazout, gaz, pompe à chaleur (investissement), coût annuel.
+    "8 000 à 15 000 €", "5 000 à 12 000 €", "12 000 à 22 000 €",
+    "700 à 1 100 €", "2 200 à 2 800 €", "1 600 à 2 200 €", "800 à 1 400 €",
+  ],
+  "app/llms.txt/route.ts": [],
+  "app/llms-full.txt/route.ts": [],
+  // Surcoût d'un poêle étanche ; coût annuel d'entretien.
+  "lib/faqs.ts": ["200 à 400 €", "700 à 1 400 €"],
+  // Conduit existant et conforme, sans tubage : cas nommé dans la phrase.
+  "lib/guides.ts": ["4 000 à 5 500 €"],
+};
+for (const [file, allowed] of Object.entries(ALLOWED)) {
+  const text = readFileSync(file, "utf8");
+  const found = [...text.matchAll(RANGE_RE)].map((m) => m[0].replace(new RegExp(SP, "g"), " "));
+  const stray = [...new Set(found)].filter((r) => !allowed.includes(r));
+  check(`${file} : aucune fourchette en dur hors liste`, stray, []);
+  assert(`${file} : pas de « autour de » devant un prix`, !ABOUT_PRICE_RE.test(text));
+}
+for (const file of ["app/(frontend)/page.tsx", "app/llms.txt/route.ts"]) {
+  assert(`${file} : lit lib/price-ranges.ts`, readFileSync(file, "utf8").includes("@/lib/price-ranges"));
+}
 
 if (ko > 0) {
   console.error(`\n${ko} contrôle(s) en échec.`);

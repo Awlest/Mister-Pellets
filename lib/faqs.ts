@@ -16,6 +16,7 @@
 import { PHONE_HOURS_LONG, VISIT_HOURS_LONG } from "@/config/site";
 import { POSE_DURATIONS } from "@/lib/services";
 import { POWER_RULE, kwFor } from "@/lib/power";
+import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
 
 export type FaqCategory =
   | "general"
@@ -144,7 +145,7 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Canalisable ou hydro, comment choisir ?",
     answer:
-      "Canalisable si vous voulez chauffer votre pièce de vie principale plus 1 ou 2 pièces secondaires (chambres, bureau) via un réseau de gaines isolées. Hydro si vous voulez chauffer toute la maison via le circuit existant de radiateurs ou de plancher chauffant, typiquement en remplacement d'une chaudière mazout. Hydro est nettement plus cher (8 000 à 14 000 € posé contre 5 500 à 8 000 € pour un canalisable) mais c'est la seule solution pour un chauffage central complet.",
+      `Canalisable si vous voulez chauffer votre pièce de vie principale plus 1 ou 2 pièces secondaires (chambres, bureau) via un réseau de gaines isolées. Hydro si vous voulez chauffer toute la maison via le circuit existant de radiateurs ou de plancher chauffant, typiquement en remplacement d'une chaudière mazout. Hydro est nettement plus cher (${rangeText(PRICE_RANGES.hydro)} posé contre ${rangeText(PRICE_RANGES.canalisable)} pour un canalisable, TVA à 6 % comprise) mais c'est la seule solution pour un chauffage central complet.`,
   },
 
   // ───────────────────────────────────────────────────────────────────

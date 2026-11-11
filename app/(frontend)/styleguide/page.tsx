@@ -13,6 +13,7 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Breadcrumb } from "@/components/seo/Breadcrumb";
+import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
 
 export const metadata = {
   title: "Styleguide, composants UI",
@@ -318,7 +319,7 @@ export default function StyleguidePage() {
       <GoogleReviews />
       <FAQAccordion
         items={[
-          { question: "Combien coûte un poêle pellets installé ?", answer: "Entre 4 500 et 7 500 € pose comprise selon le modèle." },
+          { question: "Combien coûte un poêle pellets installé ?", answer: `${rangeText(PRICE_RANGES.standard)} pose comprise sur un conduit existant, TVA à 6 %.` },
           { question: "Combien de temps pour la pose ?", answer: "Une journée pour la pose elle-même. 2-4 semaines au total." },
           { question: "Et si je n'ai pas de cheminée ?", answer: "Pas un problème : ventouse concentrique avec un poêle étanche, ou conduit neuf." },
         ]}
