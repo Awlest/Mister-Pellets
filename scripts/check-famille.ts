@@ -80,10 +80,10 @@ const checks: [string, () => void][] = [
     "famille, Awlest et les deux autres marques, domaines mesurés",
     () => {
       const hosts = FAMILY_SITES.map((s) => new URL(s.href).hostname.replace(/^www\./, ""));
-      for (const h of ["mister-bois.be", "mister-clim.be", "awlest.com"]) assert.ok(hosts.includes(h), h);
+      for (const h of ["mister-bois.be", "mister-clim.be", "awlest.be"]) assert.ok(hosts.includes(h), h);
       assert.ok(!hosts.includes("mister-pellets.be"));
       assert.deepEqual([...FAMILY_HOSTS].sort(), [...hosts].sort());
-      assert.equal(PARENT_BRAND.href, "https://www.awlest.com");
+      assert.equal(PARENT_BRAND.href, "https://awlest.be");
     },
   ],
   [

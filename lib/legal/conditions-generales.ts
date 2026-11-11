@@ -24,7 +24,7 @@ export function conditionsGenerales(site: LegalSite): LegalBlock[] {
 
   return [
     {
-      p: `Ces conditions sont celles d'AWLEST SRL. Elles sont identiques sur les sites de ses quatre marques (awlest.com, mister-pellets.be, mister-clim.be et mister-bois.be). Sous la marque ${site.brand}, nous ${site.activity}. Pour toute démarche prévue ci-dessous (rétractation, réclamation, signalement d'un dégât), vous pouvez nous joindre à ${contact}.`,
+      p: `Ces conditions sont celles d'AWLEST SRL. Elles sont identiques sur les sites de ses quatre marques (awlest.be, mister-pellets.be, mister-clim.be et mister-bois.be). Sous la marque ${site.brand}, nous ${site.activity}. Pour toute démarche prévue ci-dessous (rétractation, réclamation, signalement d'un dégât), vous pouvez nous joindre à ${contact}.`,
     },
     {
       p: `${C.name}, ${C.legalForm}, siège social ${C.seat}, BCE et TVA ${C.vat}, ${C.register}. Unité d'établissement, atelier, bureau et showroom : ${C.establishment}. Téléphone ${C.phone}, e-mail ${C.email}, site ${C.website}. Les présentes conditions s'appliquent à toutes les prestations fournies sous ce numéro d'entreprise, quelle que soit la marque utilisée : Awlest, Mister Pellets, Mister Clim ou Mister Bois. Les termes « AWLEST », « l'entreprise » ou « nous » désignent indistinctement AWLEST SRL et ces marques. Chaque marque a ses propres coordonnées, indiquées sur son site et sur le devis ; elles valent, comme celles du siège, pour toutes les démarches prévues aux présentes.`,

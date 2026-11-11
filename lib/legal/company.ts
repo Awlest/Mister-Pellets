@@ -23,12 +23,12 @@ export const COMPANY = {
   phone: "081 13 80 78",
   phoneHref: "+3281138078",
   email: "contact@awlest.com",
-  website: "www.awlest.com",
+  website: "awlest.be",
 } as const;
 
 /** Les quatre marques d'AWLEST SRL et leur site, dans l'ordre des pages légales. */
 export const BRANDS = [
-  { brand: "Awlest", domain: "awlest.com" },
+  { brand: "Awlest", domain: "awlest.be" },
   { brand: "Mister Pellets", domain: "mister-pellets.be" },
   { brand: "Mister Clim", domain: "mister-clim.be" },
   { brand: "Mister Bois", domain: "mister-bois.be" },
@@ -38,7 +38,7 @@ export const BRANDS = [
  * Version des pages légales, commune aux quatre sites : le même jour, la même
  * date partout. À changer à chaque modification d'un fichier commun.
  */
-export const LEGAL_UPDATED_ON = "25 octobre 2026";
+export const LEGAL_UPDATED_ON = "11 novembre 2026";
 
 /** Autorité de protection des données (adresse vérifiée sur son site). */
 export const DATA_AUTHORITY = {
