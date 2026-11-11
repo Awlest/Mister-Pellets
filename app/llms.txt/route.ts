@@ -56,8 +56,8 @@ ${FAMILY_SITES.map((s) => `- ${s.name} (${s.description.toLowerCase()}) : ${s.hr
 
 - Vente et installation de poêles à pellets : air pulsé, étanche, canalisable,
   hydraulique raccordé aux radiateurs, inserts.
-- Travaux de conduit : tubage de cheminée existante, sortie ventouse en façade,
-  conduit neuf.
+- Travaux de conduit : tubage de cheminée existante, ventouse concentrique pour
+  poêle étanche (hors Edilkamin et EK63), conduit neuf au-dessus du toit.
 - Entretien annuel, ramonage avec certificat, dépannage, y compris sur des
   appareils posés par d'autres.
 - Diagnostic à domicile gratuit, devis chiffré sous 48 heures, pose en une

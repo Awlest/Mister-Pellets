@@ -28,6 +28,7 @@ import {
   STOVE_KINDS,
   SURFACE,
   TARIFS,
+  acceptsInstall,
   estimate,
   eur,
   filterByKind,
@@ -341,13 +342,19 @@ function EstimateForm({
   const vatFactor = s.housingOver10Years ? 1.06 : 1.21;
   const ttc = (ht: number) => Math.round(ht * vatFactor);
   const needKw = recommendedKw(s.surface, s.iso);
+  // Avec une ventouse, Edilkamin et EK63 sortent de la liste. Un modèle déjà
+  // choisi de ces marques (brouillon, retour à l'étape 1) est oublié.
+  const forPose = React.useMemo(
+    () => products.filter((p) => acceptsInstall(p, s.installType)),
+    [products, s.installType],
+  );
   const eligible = React.useMemo(
-    () => rankProducts(filterByKind(products, s.stoveKind), needKw),
-    [products, s.stoveKind, needKw],
+    () => rankProducts(filterByKind(forPose, s.stoveKind), needKw),
+    [forPose, s.stoveKind, needKw],
   );
   const product = React.useMemo(
-    () => products.find((p) => p.key === s.productKey) ?? null,
-    [products, s.productKey],
+    () => forPose.find((p) => p.key === s.productKey) ?? null,
+    [forPose, s.productKey],
   );
   const canalisable = isCanalisable(product);
   const missing = missingAnswers(s, canalisable);
@@ -377,7 +384,7 @@ function EstimateForm({
       document.getElementById("est-access")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    if (step === 3 && !s.productKey) {
+    if (step === 3 && !product) {
       setProductMissing(true);
       document.getElementById("est-models")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
@@ -614,6 +621,15 @@ function EstimateForm({
                 })}
               />
 
+              {s.installType === "ventouse-facade" && (
+                <p className="mt-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
+                  La ventouse demande un poêle étanche raccordé en concentrique : les fumées sortent
+                  par le tube central, l&apos;air de combustion entre par l&apos;anneau autour. Une
+                  sortie murale simple n&apos;est pas admise. Edilkamin et EK63 refusent la
+                  ventouse : avec ces marques, il faut un conduit.
+                </p>
+              )}
+
               {cfg.hauteur && rule && (
                 <div className="mt-8">
                   <RangeField
@@ -767,17 +783,24 @@ function EstimateForm({
                     value: k,
                     label: STOVE_KINDS[k].label,
                     desc: STOVE_KINDS[k].desc,
-                    disabled: filterByKind(products, k).length === 0,
+                    disabled: filterByKind(forPose, k).length === 0,
                   }))}
                 />
               </div>
+
+              {s.installType === "ventouse-facade" && (
+                <p className="mb-6 rounded-xl border border-mp-sand/40 bg-mp-cream p-4 text-sm text-mp-ink-soft">
+                  Avec une ventouse, prenez un modèle étanche. Edilkamin et EK63 ne sont pas dans la
+                  liste : leurs notices interdisent la sortie murale.
+                </p>
+              )}
 
               <fieldset id="est-models" className="min-w-0 scroll-mt-6">
                 <legend className={legendCls}>
                   Choisissez votre modèle{" "}
                   <span className="font-normal text-mp-ink-soft">({eligible.length} disponibles)</span>
                 </legend>
-                {productMissing && !s.productKey && (
+                {productMissing && !product && (
                   <p role="alert" className="mb-3 rounded-lg bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
                     Choisissez un modèle pour continuer.
                   </p>

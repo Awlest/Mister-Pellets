@@ -10,6 +10,7 @@ import {
   LEVELS,
   STOVE_KINDS,
   SURFACE,
+  acceptsInstall,
   estimate,
   formatEur,
   isCanalisable,
@@ -169,6 +170,13 @@ export async function POST(request: Request) {
   if (!allowedTypes.includes(product.productType)) {
     return NextResponse.json(
       { error: "Le modèle choisi ne convient pas au type d'installation retenu. Revenez à l'étape 3 pour en choisir un autre." },
+      { status: 400 },
+    );
+  }
+  // Edilkamin et EK63 refusent la ventouse : même filtre que l'étape 3.
+  if (!acceptsInstall(product, config.installType)) {
+    return NextResponse.json(
+      { error: `${product.brand} n'accepte pas la ventouse. Choisissez un conduit à l'étape 1, ou un autre modèle à l'étape 3.` },
       { status: 400 },
     );
   }

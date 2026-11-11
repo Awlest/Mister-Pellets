@@ -206,7 +206,7 @@ export const BRANDS: Record<BrandData["slug"], BrandData> = {
       { name: "Cherie H 14 Evo", power: "14 kW", type: "Hydro", forWhom: "Chauffage central et eau chaude sanitaire." },
       { name: "Lena 9+ Evo", power: "9 kW", type: "Compact", forWhom: "Pièces moyennes, format discret." },
       { name: "Kira2 Evo", power: "13 kW", type: "Canalisable double flux", forWhom: "Jusqu'à 12 m de gaines, deux pièces." },
-      { name: "Dania AT C Plus", power: "8 kW", type: "Étanche", forWhom: "Classe A+, ventouse possible, maisons BBC." },
+      { name: "Dania AT C Plus", power: "8 kW", type: "Étanche", forWhom: "Classe A+, air de combustion pris dehors, maisons BBC." },
     ],
     faq: [
       { question: "Edilkamin, c'est cher par rapport aux autres marques ?", answer: "Sur le tarif catalogue oui, c'est dans le haut de la fourchette. Mais quand on intègre la durée de vie réelle (15 à 20 ans courants chez nos clients), le coût ramené à l'année est plus bas qu'un poêle d'entrée de gamme qu'il faut remplacer après 8 ans. Et le SAV pièces reste dispo 15 ans après l'arrêt du modèle." },

@@ -5,7 +5,7 @@
  *
  *   node --import tsx scripts/check-pose.ts
  */
-import { DEFAULT_STATE, estimate, type EstimateProduct, type EstimateState } from "@/lib/estimate";
+import { DEFAULT_STATE, acceptsInstall, estimate, type EstimateProduct, type EstimateState } from "@/lib/estimate";
 import {
   evacuationPrice,
   formatEur,
@@ -96,6 +96,21 @@ check(
 const raw = sanitizePose({ installType: "tubage", conduitM: 33, access: "grue", ducts: "peut-être", ductRooms: 9 }, TARIFS);
 check("API : hauteur bornée, réponses inconnues vidées", [raw?.conduitM, raw?.access, raw?.ducts, raw?.ductRooms], [20, "", "", 2]);
 check("API : évacuation inconnue refusée", sanitizePose({ installType: "fenetre" }, TARIFS), null);
+
+// 6 bis. Ventouse concentrique : pas avec Edilkamin ni EK63 (notices du 09/11/2026)
+check(
+  "ventouse : Edilkamin et EK63 refusés, MCZ et Cadel acceptés",
+  ["Edilkamin", "EK63", "MCZ", "Cadel"].map((brand) => acceptsInstall({ brand }, "ventouse-facade")),
+  [false, false, true, true],
+);
+check(
+  "ventouse : les autres évacuations restent ouvertes à Edilkamin et EK63",
+  TARIFS.evacuationsProposees
+    .filter((t) => t !== "ventouse-facade")
+    .every((t) => acceptsInstall({ brand: "Edilkamin" }, t) && acceptsInstall({ brand: "EK63" }, t)),
+  true,
+);
+check("ventouse : toujours proposée au client", TARIFS.evacuationsProposees.includes("ventouse-facade"), true);
 
 // 7. Remises coupées : tout repasse au plein tarif
 const saved = JSON.parse(JSON.stringify(REMISES));

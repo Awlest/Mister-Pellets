@@ -372,7 +372,8 @@ function Step3({ value, onChange }: { value: QuoteState["chimney"]; onChange: (v
         Vous avez déjà une cheminée ?
       </h2>
       <p className="text-mp-ink-soft mb-8">
-        Si oui, son diamètre intérieur. Sinon, pas de souci, on peut tirer une ventouse en façade ou en toiture.
+        Si oui, son diamètre intérieur. Sinon, pas de souci : une ventouse concentrique avec un poêle étanche, ou un
+        conduit neuf qui monte au-dessus du toit.
       </p>
       <ChoiceGrid<QuoteState["chimney"] & string>
         value={value}
@@ -381,7 +382,7 @@ function Step3({ value, onChange }: { value: QuoteState["chimney"]; onChange: (v
         options={[
           { value: "diam-80", label: "Oui, diamètre 80 mm", sub: "Standard moderne" },
           { value: "diam-100", label: "Oui, diamètre 100 mm", sub: "Cheminée plus ancienne" },
-          { value: "aucune", label: "Non, pas de cheminée", sub: "Ventouse en façade ou toiture" },
+          { value: "aucune", label: "Non, pas de cheminée", sub: "Ventouse concentrique ou conduit neuf" },
           { value: "ne-sais-pas", label: "Je ne sais pas", sub: "Diagnostic gratuit sur place" },
         ]}
       />

@@ -98,7 +98,7 @@ export default function VisiteTechniquePage() {
             <Point
               icon={<Ruler aria-hidden />}
               title="Le conduit"
-              text="Une cheminée en bon état se tube. Sans cheminée, on choisit avec vous entre une ventouse en façade et un conduit neuf."
+              text="Une cheminée en bon état se tube. Sans cheminée, on choisit avec vous entre une ventouse concentrique, pour un poêle étanche, et un conduit neuf."
             />
             <Point
               icon={<Flame aria-hidden />}
