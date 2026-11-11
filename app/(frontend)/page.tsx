@@ -134,15 +134,18 @@ export default function HomePage() {
         <div
           className="flex justify-center py-3 xl:hidden"
         >
-          {/* Plus de fetchPriority : petit, le logo n'est plus l'élément le
-              plus grand de l'écran, et son préchargement partait aussi sur
-              ordinateur, où il n'est pas affiché. */}
+          {/* Chargement différé : sans lui, React annonce ce logo (68 Ko) en
+              préchargement, et chaque page qui précharge l'accueil par un lien
+              le téléchargeait sans l'afficher, sur téléphone comme sur
+              ordinateur, où ce bloc est masqué. En haut de page, il se charge
+              aussitôt. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo-mister-pellets-full.svg"
             alt="Mister Pellets"
             width={400}
             height={400}
+            loading="lazy"
             decoding="async"
             className="h-16 w-16 md:h-20 md:w-20 object-contain"
           />

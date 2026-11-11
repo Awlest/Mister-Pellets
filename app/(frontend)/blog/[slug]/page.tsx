@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { InlineText } from "@/components/ui/inline-text";
+import { WideTable } from "@/components/ui/wide-table";
 import { typo } from "@/lib/typo";
 import {
   ARTICLES,
@@ -139,7 +140,10 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
       )}
 
       {section.table && (
-        <figure className="my-8 -mx-4 md:mx-0 overflow-x-auto">
+        <figure className="my-8">
+          {/* Le tableau garde la gouttière de la page : coupé au bord de
+              l'écran, il montre qu'il continue, et la mention le dit. */}
+          <WideTable label={`Tableau : ${section.table.caption ?? section.heading}`}>
           <table className="w-full text-sm border-collapse rounded-2xl overflow-hidden bg-mp-cream border border-mp-sand/40">
             <thead className="bg-mp-green-deep text-mp-cream">
               <tr>
@@ -165,8 +169,9 @@ function SectionRenderer({ section }: { section: ArticleSection }) {
               ))}
             </tbody>
           </table>
+          </WideTable>
           {section.table.caption && (
-            <figcaption className="text-xs text-mp-ink-soft italic mt-2 px-4 md:px-0">
+            <figcaption className="text-xs text-mp-ink-soft italic mt-2">
               {typo(section.table.caption)}
             </figcaption>
           )}

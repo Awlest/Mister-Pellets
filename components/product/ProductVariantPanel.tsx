@@ -4,6 +4,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { formatPrice, formatPriceHT, formatPriceReducedVat } from "@/lib/utils";
 import { BONUS, bonusBadgeFor, bonusLabelFor } from "@/lib/bonus";
+import { typo } from "@/lib/typo";
 import { ProductAccessories } from "@/components/product/ProductAccessories";
 import { displayOptionLabel } from "@/lib/option-labels";
 import type {
@@ -211,7 +212,7 @@ export function ProductVariantPanel({
             : "Prix du poêle seul, TVA comprise"}
           {bonusActive ? (
             <span className="ml-2 rounded-full bg-mp-orange-flame px-2 py-0.5 text-xs font-semibold text-mp-green-darkest">
-              {bonusBadgeFor(productBrand)}
+              {typo(bonusBadgeFor(productBrand))}
             </span>
           ) : null}
         </span>
@@ -258,7 +259,7 @@ export function ProductVariantPanel({
 
         {bonusActive ? (
           <p className="mt-2 text-xs text-mp-ink-soft">
-            {bonusLabelFor(productBrand)} déduit. {BONUS.conditions}
+            {typo(bonusLabelFor(productBrand))} déduit. {BONUS.conditions}
           </p>
         ) : null}
 

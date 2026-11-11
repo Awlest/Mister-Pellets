@@ -19,6 +19,10 @@
  * Et il garde retirées les 30 pages /installation/<marque>/<province>
  * (11/11/2026) : une redirection vers la page marque, aucune route, aucun lien.
  *
+ * Retouches de la recette du 11/11/2026 : trois modèles d'autres marques sous
+ * une fiche dès qu'ils existent, modèle demandé en tête de l'estimation, un
+ * seul « Voir plus » par liste, libellés du bonus insécables.
+ *
  * pnpm check:catalogue
  */
 
@@ -28,7 +32,7 @@ import { join, posix } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ProductCard } from "@/components/product/ProductCard";
-import { CatalogueListing, ProductLines } from "@/components/product/ProductListing";
+import { CatalogueListing, ProductLines, ProductListing } from "@/components/product/ProductListing";
 import {
   LISTING_PAGE_SIZE,
   decodeEntry,
@@ -59,6 +63,10 @@ import {
   misterBoisDestination,
 } from "@/lib/catalog-scope";
 import { hasPrice, listedPrice, sortProducts } from "@/lib/boutique-sort";
+import { pinModelFirst, type EstimateProduct } from "@/lib/estimate";
+import { productNeighbours } from "@/lib/product-neighbours";
+import { priceBadge } from "@/lib/product-price";
+import { NBSP } from "@/lib/typo";
 import { FOREIGN_COLOUR_WORD, displayOptionLabel } from "@/lib/option-labels";
 import { productKindLabel } from "@/lib/product-kind";
 import { COMBUSTIBLE_LABELS, type Appliance, type ProductDemo, type ProductType } from "@/lib/products-demo";
@@ -587,6 +595,94 @@ const checks: [string, () => void][] = [
       assert.ok(t.full <= 900, `entrée complète de ${t.full} o (900 au plus)`);
       assert.ok(t.short <= 380, `entrée courte de ${t.short} o (380 au plus)`);
       assert.ok(total <= LISTING_BUDGET, `liste de 250 fiches estimée à ${Math.round(total / 1024)} Ko (450 au plus)`);
+    },
+  ],
+  [
+    "fiche produit : trois modèles d'autres marques dès qu'ils existent, une marque chacun d'abord",
+    () => {
+      const hydro = (slug: string, brand: string, powerKw: number, over: Partial<ProductDemo> = {}): ProductDemo =>
+        sample({ slug, brand, powerKw, type: "hydro", isHydro: true, imageSrc: "/photo.webp", ...over });
+      // Le cas de la recette : un hybride raccordé au chauffage central, deux
+      // autres marques seulement dans sa famille. Le bloc s'arrêtait à 2 fiches.
+      const soft = hydro("girolami-soft", "Girolami", 18, { type: "hybride-hydro", combustible: "hybride" });
+      const catalogue = [
+        soft,
+        hydro("mcz-aki-hydro-24", "MCZ", 24),
+        hydro("mcz-aki-hydro-18", "MCZ", 18),
+        hydro("ek63-monday-h-190", "EK63", 19),
+        sample({ slug: "mcz-ego-air-8", brand: "MCZ", powerKw: 8, imageSrc: "/photo.webp" }),
+        hydro("girolami-klima-hydro", "Girolami", 20),
+      ];
+      const found = productNeighbours(soft, catalogue);
+      assert.deepEqual(
+        found.otherBrands.map((p) => p.slug),
+        ["mcz-aki-hydro-18", "ek63-monday-h-190", "mcz-aki-hydro-24"],
+        "deux marques dans la famille : une fiche chacune, puis la suivante du classement",
+      );
+      assert.deepEqual(found.sameBrand.map((p) => p.slug), ["girolami-klima-hydro"]);
+      // Trois marques ou plus : une fiche par marque, comme avant.
+      const wider = productNeighbours(soft, [...catalogue, hydro("edilkamin-blade-h-18", "Edilkamin", 18)]);
+      assert.deepEqual(wider.otherBrands.map((p) => p.brand).sort(), ["EK63", "Edilkamin", "MCZ"]);
+      // Rien à compléter : le bloc reste court, sans autre famille ni la fiche elle-même.
+      const short = productNeighbours(soft, [soft, hydro("mcz-aki-hydro-18", "MCZ", 18), sample({ slug: "ek63-berry-90", brand: "EK63" })]);
+      assert.deepEqual(short.otherBrands.map((p) => p.slug), ["mcz-aki-hydro-18"]);
+      const page = read("app/(frontend)/produit/[slug]/page.tsx");
+      assert.ok(page.includes("productNeighbours(product, await getAllProducts())"), "la fiche ne passe plus par lib/product-neighbours.ts");
+    },
+  ],
+  [
+    "estimation : le modèle demandé par l'adresse ouvre la liste, ses autres puissances ensuite",
+    () => {
+      const option = (key: string, slug: string): EstimateProduct => ({
+        key,
+        slug,
+        name: slug,
+        brand: "MCZ",
+        productType: "canalisable",
+        powerKw: 8,
+        priceHT: 2000,
+      });
+      const ranked = [option("a", "a"), option("b", "b"), option("c-10", "c"), option("d", "d"), option("c-8", "c")];
+      assert.deepEqual(
+        pinModelFirst(ranked, option("c-8", "c")).map((p) => p.key),
+        ["c-8", "c-10", "a", "b", "d"],
+      );
+      assert.equal(pinModelFirst(ranked, null), ranked, "sans modèle demandé, l'ordre du classement");
+      assert.deepEqual(pinModelFirst(ranked, option("z", "z")).map((p) => p.key), ["a", "b", "c-10", "d", "c-8"]);
+      const form = read("components/forms/EstimateConfigurator.tsx");
+      assert.ok(form.includes("pinModelFirst(rankProducts("), "la liste de l'étape 3 n'épingle plus le modèle demandé");
+    },
+  ],
+  [
+    "listes : un seul « Voir plus » en cartes, vue liste en colonnes, libellés du bonus insécables",
+    () => {
+      const products = Array.from({ length: 30 }, (_, i) => typicalListed(i));
+      const entries = encodeListing(products, { shop: true });
+
+      // HTML servi, avant tout script : pas de bouton, la liste dépliable seule.
+      const served = renderToStaticMarkup(createElement(CatalogueListing, { entries }));
+      assert.ok(!served.includes("<button"), "bouton « Voir plus » rendu sans script");
+      assert.match(served, /<details class=/, "liste dépliable absente du HTML servi");
+      // Dès que le bouton existe, la liste dépliable s'efface sans quitter la page.
+      const listing = read("components/product/ProductListing.tsx");
+      assert.ok(listing.includes("<details hidden={hydrated}"), "la liste dépliable double à nouveau le bouton « Voir plus »");
+
+      // Vue liste de la boutique : toutes les fiches en lignes, en colonnes de texte.
+      const lines = renderToStaticMarkup(
+        createElement(ProductListing, { products, visible: LISTING_PAGE_SIZE, onShowMore: () => {}, mode: "liste" }),
+      );
+      assert.equal((lines.match(/<li>/g) ?? []).length, products.length, "vue liste : une ligne par fiche");
+      assert.ok(!/<img |<button|<details/.test(lines), "vue liste : ni carte, ni bouton, ni liste dépliable");
+      assert.match(lines, /<ul class="[^"]*\blg:columns-3\b/, "vue liste : colonnes de texte, lues de haut en bas");
+      assert.ok(!/<ul class="[^"]*grid-cols/.test(lines), "vue liste : plus de grille lue de gauche à droite");
+
+      // Pastille du bonus : « -15 % » ne se coupe pas avant « % ».
+      assert.equal(priceBadge({ brand: "Edilkamin", priceTTC: 3000, bonusPriceTTC: 2550 }), `-15${NBSP}%`);
+      assert.equal(priceBadge({ brand: "MCZ", priceTTC: 3000, bonusPriceTTC: 2700 }), `-10${NBSP}%`);
+      // Aucun libellé du bonus rendu tel quel dans une page ou un composant.
+      const RAW = /(?<!\$)\{\s*(?:BONUS\.(?:label|badge)|bonus(?:Label|Badge)For\([^)]*\))\s*\}/;
+      const raw = [...sources("app/(frontend)"), ...sources("components")].filter((file) => RAW.test(read(file)));
+      assert.deepEqual(raw, [], "libellé du bonus affiché sans typo()");
     },
   ],
   [
