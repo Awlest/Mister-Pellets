@@ -3,19 +3,23 @@
  * des e-mails, champs avec un lien, plafonds de réservation (sur une base
  * simulée en mémoire), règles d'accès par rôle, lecture publique des articles
  * et secret du cron. Depuis le 11/11/2026 : fichiers de la médiathèque servis
- * sans base (noms admis, en-têtes rendus, pannes du Blob).
+ * sans base (noms admis, en-têtes rendus, pannes du Blob), et règle CSP de
+ * tout ce que sert /api.
  *
  *   node --import tsx scripts/check-securite.ts
  */
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { modifyRouteRegex } from "next/dist/lib/redirect-status";
+import { getPathMatch } from "next/dist/shared/lib/router/utils/path-match";
+import nextConfig from "../next.config";
 import { JsonLd, serializeJsonLd } from "@/components/seo/JsonLd";
 import { greeting } from "@/lib/email-layout";
 import { clip, hasLink, oneLine } from "@/lib/form-text";
 import { errorInfo } from "@/lib/log-error";
 import { BOOKING_LIMITS, normalizePhone, reserveBookingQuota } from "@/lib/booking-limits";
 import { canEditLeads, isAdminOrSelf, isAdminUser } from "@/lib/access";
-import { mediaNameFromPath, mediaStoreBase, serveMediaFile } from "@/lib/media-file";
+import { UPLOAD_CSP, mediaNameFromPath, mediaStoreBase, serveMediaFile } from "@/lib/media-file";
 import { Articles } from "@/collections/Articles";
 import { Media } from "@/collections/Media";
 import { Users } from "@/collections/Users";
@@ -297,8 +301,8 @@ async function mediaScenarios() {
   // Fichier compressé par le Blob : la taille annoncée ne vaut plus.
   const r200z = await ask("logo.svg", fake(() => new Response("<svg/>", { headers: { "content-type": "image/svg+xml", "content-encoding": "br", "content-length": "3" } })).fn);
   check("compressé : taille non recopiée", r200z.headers.get("content-length"), null);
-  check("SVG : aucun script exécuté", r200z.headers.get("content-security-policy"), "script-src 'none'; frame-src 'none'; object-src 'none'");
-  check("PDF : pas de règle ajoutée (lecteur du navigateur)", r200.headers.get("content-security-policy"), null);
+  check("SVG : la route envoie la règle des fichiers", r200z.headers.get("content-security-policy"), UPLOAD_CSP);
+  check("PDF : rien d'ajouté par la route (next.config.ts pose la règle sur tout /api)", r200.headers.get("content-security-policy"), null);
   const bare = await ask("x.bin", fake(() => new Response(new Uint8Array([1]))).fn);
   check("type absent : fichier binaire, jamais deviné", bare.headers.get("content-type"), "application/octet-stream");
 
@@ -313,9 +317,70 @@ async function mediaScenarios() {
   check("Blob injoignable : 502 sans cache", [down.status, down.headers.get("cache-control")], [502, "no-store"]);
 }
 
+// 10. Règles CSP de next.config.ts, appliquées comme le fait Next : dans
+// l'ordre, la dernière règle qui correspond l'emporte pour une même clé. Les
+// pages gardent leur règle ; tout ce que sert /api reçoit celle des fichiers.
+async function cspScenarios() {
+  const CSP = "Content-Security-Policy";
+  const rules = (await nextConfig.headers?.()) ?? [];
+  const compiled = rules.map((rule) => ({
+    rule,
+    match: getPathMatch(rule.source, {
+      strict: true,
+      removeUnnamedParams: true,
+      regexModifier: (regex: string) => modifyRouteRegex(regex),
+    }),
+  }));
+  const sent = (pathname: string) => {
+    const out: Record<string, string> = {};
+    for (const { rule, match } of compiled) {
+      if (!match(pathname)) continue;
+      for (const header of rule.headers) out[header.key] = header.value;
+    }
+    return out;
+  };
+  const directives = (csp: string | undefined) =>
+    Object.fromEntries((csp ?? "").split(";").map((d) => d.trim().split(/\s+/)).map(([name, ...values]) => [name, values.join(" ")]));
+
+  check(
+    "CSP : deux règles, celle des pages puis celle de /api, même clé",
+    rules.flatMap((r) => r.headers.filter((h) => h.key.toLowerCase() === CSP.toLowerCase()).map((h) => [r.source, h.key])),
+    [["/:path*", CSP], ["/api/:path*", CSP]],
+  );
+  check("CSP des fichiers : valeur", UPLOAD_CSP, "script-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'");
+  check("CSP des fichiers : ni exception ni sandbox", /unsafe|sandbox|\*|https?:/.test(UPLOAD_CSP), false);
+
+  const pages = ["/", "/contact", "/boutique", "/produit/ek63-berry-90", "/poeles-pellets-ath", "/admin", "/admin/login", "/apiculture", "/api-x/y", "/photos/x.jpg.webp", "/icon.svg"];
+  const pageCsp = sent("/")[CSP];
+  check("pages : scripts du site permis, comme avant", [directives(pageCsp)["default-src"], directives(pageCsp)["script-src"]?.startsWith("'self' 'unsafe-inline'")], ["'self'", true]);
+  check("pages : toutes sous la règle des pages", pages.filter((p) => sent(p)[CSP] !== pageCsp), []);
+
+  const api = [
+    "/api/media/file/logo.svg",
+    "/api/media/file/Fiche%20technique%20Tally%208.pdf",
+    "/api/media/file/po%C3%AAle-400x400.webp",
+    "/api/media/file/logo.svg/",
+    "/api/media/FILE/logo.svg",
+    "/api/Media/File/logo.svg",
+    "/api/media/fil%65/logo.svg",
+    "/api/medi%61/file/logo.svg",
+    "/API/media/file/logo.svg",
+    "/api",
+    "/api/users/me",
+    "/api/graphql",
+    "/api/feed/google-merchant",
+    "/api/rdv/ics",
+  ];
+  check("/api : tout sous la règle des fichiers, quelle que soit l'écriture de l'adresse", api.filter((p) => sent(p)[CSP] !== UPLOAD_CSP), []);
+  const kept = (p: string) => Object.keys(sent(p)).filter((k) => k !== CSP && k !== "X-Robots-Tag").sort();
+  check("/api : les autres en-têtes de sécurité restent", kept("/api/media/file/logo.svg"), kept("/"));
+  check("/api : type jamais deviné, cadre limité au site", [sent("/api/media/file/logo.svg")["X-Content-Type-Options"], sent("/api/media/file/logo.svg")["X-Frame-Options"]], ["nosniff", "SAMEORIGIN"]);
+}
+
 await bookingScenarios();
 await cronScenarios();
 await mediaScenarios();
+await cspScenarios();
 
 console.log(ko === 0 ? "\nTout est bon." : `\n${ko} contrôle(s) en échec.`);
 process.exit(ko === 0 ? 0 : 1);

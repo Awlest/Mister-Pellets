@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import { withPayload } from "@payloadcms/next/withPayload";
 import { SITE_REDIRECTS } from "./config/redirects";
+import { UPLOAD_CSP } from "./lib/media-file";
 
 // =====================================================================
 // HEADERS HTTP DE SÉCURITÉ (cf. audit V20260503 §3.BLOQUANT.1)
@@ -77,6 +78,20 @@ const nextConfig: NextConfig = {
             ? []
             : [{ key: "X-Robots-Tag", value: "noindex, nofollow" }]),
         ],
+      },
+      // Sous /api, rien n'est une page : fichiers de la médiathèque, JSON,
+      // flux. La règle CSP y est donc celle des fichiers envoyés, sans script
+      // ni formulaire (lib/media-file.ts), à la place de celle des pages.
+      // - Après la règle générale : pour une même clé, la dernière règle qui
+      //   correspond l'emporte. Les autres en-têtes de sécurité restent.
+      // - Sur tout /api et pas sur le seul dossier des fichiers : la règle ne
+      //   dépend pas de la façon dont l'adresse du fichier est écrite.
+      // - Ici et pas dans la route : Next n'ajoute pas l'en-tête d'une route
+      //   quand headers() l'a déjà posé.
+      // Contrôle : scripts/check-securite.ts.
+      {
+        source: "/api/:path*",
+        headers: [{ key: "Content-Security-Policy", value: UPLOAD_CSP }],
       },
     ];
   },

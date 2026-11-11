@@ -41,8 +41,21 @@ const RELAYED = [
 /** En-têtes de la demande transmis au Blob : lecture partielle (PDF) et revalidation. */
 const FORWARDED = ["range", "if-none-match", "if-modified-since"] as const;
 
-/** Celle que Payload pose sur un fichier XML ou SVG : aucun script exécuté. */
-const UPLOAD_CSP = "script-src 'none'; frame-src 'none'; object-src 'none'";
+/**
+ * Règle CSP des fichiers envoyés : ni script, ni cadre, ni greffon, ni
+ * formulaire. Les trois premières directives sont celles que Payload pose sur
+ * un fichier XML ou SVG ; les trois suivantes reprennent ce que la règle des
+ * pages garantit (base-uri, form-action, frame-ancestors) et qui ne retombe
+ * pas sur default-src. Pas de `sandbox` : les lecteurs PDF de Safari et de
+ * Firefox n'ont pas été vérifiés avec.
+ *
+ * next.config.ts la pose sur tout /api, où rien n'est une page : c'est cette
+ * règle-là qui arrive au navigateur, pour tous les fichiers. Pour un en-tête
+ * déjà posé par headers(), Next n'ajoute pas celui d'une route ; la route
+ * l'envoie quand même, pour un hébergement qui ferait l'inverse.
+ */
+export const UPLOAD_CSP =
+  "script-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'";
 
 /**
  * Base publique du Blob (même règle que @payloadcms/storage-vercel-blob), ou
