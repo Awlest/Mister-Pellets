@@ -40,13 +40,18 @@ async function catalogueSection(): Promise<string> {
 
 export async function GET() {
   const installs = getInstallPrices()
-    .map((it) => `- ${it.label}${it.heightM > 0 ? ` (${it.heightM} m)` : ""} : ${eur(it.laborTTC)} TVAC à 6 %, poêle non compris.`)
+    .map(
+      (it) =>
+        `- ${it.label}${it.heightM > 0 ? ` (${it.heightM} m)` : ""} : ${eur(it.laborTTC)} TVAC à 6 %${it.discountPct > 0 ? `, remise de ${it.discountPct} % en cours comprise` : ""}, poêle non compris${
+          it.key === "ventouse-facade" ? ". Poêle étanche dont la notice la prévoit seulement, jamais avec Edilkamin ni EK63 ; une sortie murale simple n'est pas admise" : ""
+        }.`,
+    )
     .join("\n");
   const intro = [
     "# Mister Pellets : contenu complet du site",
     "> Vente, installation, entretien et dépannage de poêles à pellets (ou à granulés) en Wallonie. Marque d'Awlest SRL, Fernelmont (province de Namur). Téléphone 081 13 83 09, info@awlest.com. Atelier sur rendez-vous.",
     `Ce fichier réunit le texte des pages de contenu, sans mise en page. Chaque page existe aussi seule en Markdown (adresse de la page suivie de « .md »). Résumé structuré : ${SITE_URL}/llms.txt.`,
-    `## Forfaits de pose par évacuation des fumées\n\n${installs}\n- Détail et exemples : ${SITE_URL}${ROUTES.prices} ; déroulé de la pose : ${SITE_URL}${ROUTES.installation}`,
+    `## Forfaits de pose par évacuation des fumées (tarifs du jour, remises en cours comprises)\n\n${installs}\n- Détail et exemples : ${SITE_URL}${ROUTES.prices} ; déroulé de la pose : ${SITE_URL}${ROUTES.installation}`,
     await catalogueSection(),
   ].join("\n\n");
   const pages = markdownPaths()
