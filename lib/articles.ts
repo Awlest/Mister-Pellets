@@ -992,6 +992,7 @@ export const ARTICLES: ArticleData[] = [
     tags: ["insert", "cheminée", "tubage", "Pellkamin", "Pellek"],
     readingTimeMinutes: 7,
     publishedAt: "2026-10-03",
+    modifiedAt: "2026-11-11",
     authorName: "Équipe technique Mister Pellets",
     authorRole: "Techniciens pose et conduits",
     coverImageAlt: "Insert à pellets encastré dans une ancienne cheminée ouverte",
@@ -1063,7 +1064,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Un insert à pellets fonctionne-t-il sans électricité ?",
         answer:
-          "Non. Bougie d'allumage, vis sans fin et ventilateurs ont besoin de courant. Pendant une coupure, l'insert s'éteint en sécurité et redémarre au retour du courant s'il était en mode automatique.",
+          "Non. Bougie d'allumage, vis sans fin et ventilateurs ont besoin de courant. Pendant une coupure, l'insert s'arrête en sécurité. Au retour du courant, selon la marque, il se rallume seul ou reste éteint jusqu'à ce que vous le relanciez : la notice le précise. Le détail, marque par marque : [poêle à pellets et coupure de courant](/blog/poele-pellets-sans-electricite-coupure-courant).",
       },
     ],
     related: {
@@ -2191,7 +2192,7 @@ export const ARTICLES: ArticleData[] = [
     tags: ["pellets", "ENplus", "DINplus", "qualité", "combustible"],
     readingTimeMinutes: 7,
     publishedAt: "2026-03-22",
-    modifiedAt: "2026-10-03",
+    modifiedAt: "2026-11-11",
     authorName: "Équipe technique Mister Pellets",
     authorRole: "Conseillers combustible",
     coverImageAlt: "Sac de pellets certifiés ENplus A1 à côté d'un sac DINplus",
@@ -2229,7 +2230,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Combien coûte un sac en 2026 et comment le stocker",
         paragraphs: [
-          "En août 2026, ValBiom relevait en moyenne 6,19 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette (66 sacs, 990 kg), livraison non comprise. C'est environ 413 € la tonne, et 13 % de plus qu'un an plus tôt. Le sac acheté à l'unité coûte plus cher.",
+          "En octobre 2026, ValBiom relevait en moyenne 7,02 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est environ 468 € la tonne, et 24 % de plus qu'un an plus tôt. Le sac acheté à l'unité coûte plus cher. Le prix de chaque mois depuis janvier 2025 est dans [notre relevé du prix des pellets](/blog/prix-pellets-belgique).",
           "Pour le stockage, une seule règle : au sec. C'est l'humidité qui abîme les pellets, pas le froid. Une palette tient sur moins d'un mètre carré ; posez-la dans un garage ou un abri sain, jamais dans une cave humide, où le pellet reprend l'eau et perd son pouvoir calorifique.",
         ],
         list: {
@@ -2244,14 +2245,14 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Quelle marque de pellets choisir ?",
         paragraphs: [
-          "Mister Pellets ne vend pas de pellets et ne touche rien sur leur vente, alors on vous le dit simplement : prenez un sac certifié A1, chez un revendeur qui stocke à l'abri.",
+          "La règle tient en une ligne : prenez un sac certifié A1, chez un revendeur qui stocke à l'abri. Nous vendons une palette de pellets Comfo, certifiés DINplus A1, à retirer à Fernelmont ; si votre notice ne demande rien de plus, un autre pellet certifié A1 fera aussi bien l'affaire.",
           "Ensuite, si votre poêle tourne bien avec une marque, gardez-la. À chaque changement de lot, la combustion se recale. Les poêles autorégulés, comme les Edilkamin équipés de Leonardo, encaissent mieux ces écarts, mais un poêle qui brûle toujours le même pellet reste plus régulier.",
         ],
       },
       {
         heading: "La règle simple à retenir",
         paragraphs: [
-          "Logo ENplus A1 ou DINplus visible avec son numéro, prix cohérent avec le marché (autour de 6 € le sac de 15 kg à la palette en 2026), revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Le reste, c'est jouer avec votre matériel. Nous vendons aussi des pellets Comfo certifiés DINplus A1 en palette, à retirer à Fernelmont : [la palette de pellets Comfo](/palette-pellets-comfo).",
+          "Logo ENplus A1 ou DINplus visible avec son numéro, prix cohérent avec le marché (autour de 7 € le sac de 15 kg à la palette fin 2026), revendeur établi : vous êtes à l'abri d'une mauvaise surprise. Le reste, c'est jouer avec votre matériel. Nous vendons aussi des pellets Comfo certifiés DINplus A1 en palette, à retirer à Fernelmont : [la palette de pellets Comfo](/palette-pellets-comfo).",
         ],
       },
     ],

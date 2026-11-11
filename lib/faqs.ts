@@ -121,7 +121,7 @@ export const FAQS: FaqItem[] = [
     category: "choisir",
     question: "Mon poêle peut-il fonctionner pendant une coupure de courant ?",
     answer:
-      "Non. Un poêle à pellets a besoin d'électricité pour faire fonctionner sa résistance d'allumage, son motoréducteur de vis sans fin et son ventilateur d'extraction des fumées. En cas de coupure, le poêle s'éteint en sécurité et redémarre tout seul au retour du courant si vous l'aviez laissé en mode automatique. Pour une autonomie totale, il faudrait coupler avec un onduleur ou un groupe électrogène, ce qu'on déconseille pour un usage résidentiel classique.",
+      "Non. Un poêle à pellets a besoin d'électricité pour sa résistance d'allumage, le moteur de sa vis sans fin et son extracteur de fumées. En cas de coupure, il s'arrête et se met en sécurité. Au retour du courant, tout dépend de la marque : d'après leurs notices, un MCZ ou un Cadel refroidit puis se rallume seul, alors qu'un Edilkamin Cherie reste éteint jusqu'à ce que vous le relanciez. Un onduleur peut garder le poêle sous tension, mais dans la plupart des maisons il ne vaut pas la dépense. Le détail, marque par marque : [poêle à pellets et coupure de courant](/blog/poele-pellets-sans-electricite-coupure-courant).",
   },
   {
     id: "choisir-sans-cheminee",
@@ -227,7 +227,7 @@ export const FAQS: FaqItem[] = [
     category: "pellets",
     question: "Combien coûte une tonne de pellets en Wallonie en 2026 ?",
     answer:
-      "Autour de 410 € la tonne en sacs. En août 2026, ValBiom relevait en moyenne 6,19 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est 13 % de plus qu'en août 2025 (5,48 €). Le sac acheté à l'unité coûte plus cher. ValBiom ne s'attend pas à une baisse pour l'hiver 2026-2027 : si vous avez la place, faire son stock à l'automne reste le bon réflexe. Le prix de chaque mois depuis janvier 2025 est dans [notre relevé du prix des pellets en Wallonie](/blog/prix-pellets-belgique). Nous vendons aussi des pellets Comfo certifiés DINplus A1 en palette, à retirer à Fernelmont : [la palette de pellets Comfo](/palette-pellets-comfo).",
+      "Autour de 470 € la tonne en sacs. En octobre 2026, ValBiom relevait en moyenne 7,02 € le sac de 15 kg en Wallonie, pour des pellets certifiés achetés par palette, livraison non comprise. C'est 24 % de plus qu'en octobre 2025 (5,64 €). Le sac acheté à l'unité coûte plus cher. ValBiom ne s'attend pas à une baisse pour l'hiver 2026-2027 : achetez maintenant ce qu'il vous faut jusqu'au printemps, et faites le stock de l'hiver suivant entre mai et août. Le prix de chaque mois depuis janvier 2025 est dans [notre relevé du prix des pellets en Wallonie](/blog/prix-pellets-belgique). Nous vendons aussi des pellets Comfo certifiés DINplus A1 en palette, à retirer à Fernelmont : [la palette de pellets Comfo](/palette-pellets-comfo).",
   },
   {
     id: "pellets-stockage",
