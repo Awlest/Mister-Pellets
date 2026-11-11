@@ -22,6 +22,8 @@ export interface PriceRange {
   max: number;
   /** Ce que couvre la fourchette, écrit à côté du montant. */
   hypothesis: string;
+  /** Puissances couvertes, quand la fourchette en dépend. */
+  power?: string;
 }
 
 export const PRICE_RANGES = {
@@ -35,12 +37,16 @@ export const PRICE_RANGES = {
   canalisable: {
     min: 5500,
     max: 8000,
+    power: "10 à 14 kW",
     hypothesis: "canalisable de 10 à 14 kW avec gaines vers 1 ou 2 pièces, pose comprise",
   },
   /** Hydro de 18 à 24 kW raccordé aux radiateurs existants. */
   hydro: {
     min: 8000,
     max: 14000,
+    // Plage de l'accueil, de llms.txt et du guide d'achat ; l'article mazout
+    // écrivait 16 à 24 kW, alignée ici (relecture du lot 3).
+    power: "18 à 24 kW",
     hypothesis:
       "hydro de 18 à 24 kW raccordé aux radiateurs existants, selon la puissance, le ballon tampon et la mise hors service éventuelle d'une cuve à mazout",
   },

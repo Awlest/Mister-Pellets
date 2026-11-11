@@ -25,6 +25,7 @@ import {
   type InstallType,
 } from "@/lib/pose/moteur";
 import { REMISES, TARIFS } from "@/lib/pose/tarifs";
+import { PRICE_RANGES, rangeText } from "@/lib/price-ranges";
 
 export type ArticleCategory =
   | "guide-achat"
@@ -2183,7 +2184,7 @@ export const ARTICLES: ArticleData[] = [
     excerpt:
       "Le mazout dépasse 1,50 € le litre, et la Wallonie interdira de remplacer une chaudière mazout à partir de 2031. Le pellet hydro est l'alternative la plus simple pour garder ses radiateurs.",
     tldr:
-      "Remplacer une chaudière mazout par un poêle hydro à pellets coûte 8 000 à 14 000 € TVAC posé, selon la puissance (16 à 24 kW) et le raccordement aux radiateurs existants. Il n'y a plus de prime régionale depuis le 1er octobre 2026, mais la TVA est à 6 % dans un logement de plus de 10 ans. Pour une maison qui brûlait 2 000 litres de mazout par an, l'économie tourne autour de 1 500 € par an aux prix d'octobre 2026 : l'installation se rembourse en 5 à 9 ans.",
+      `Remplacer une chaudière mazout par un poêle hydro à pellets coûte ${rangeText(PRICE_RANGES.hydro)} TVAC posé, selon la puissance (${PRICE_RANGES.hydro.power}) et le raccordement aux radiateurs existants. Il n'y a plus de prime régionale depuis le 1er octobre 2026, mais la TVA est à 6 % dans un logement de plus de 10 ans. Pour une maison qui brûlait 2 000 litres de mazout par an, l'économie tourne autour de 1 500 € par an aux prix d'octobre 2026 : l'installation se rembourse en 5 à 9 ans.`,
     category: "installation",
     tags: ["hydro", "mazout", "remplacement", "chaudière", "transition"],
     readingTimeMinutes: 10,
@@ -2231,7 +2232,7 @@ export const ARTICLES: ArticleData[] = [
       {
         heading: "Combien ça coûte, et combien ça rapporte",
         paragraphs: [
-          "Prenons une maison 4 façades de 1978 près de Sombreffe : 175 m², classée E, une chaudière mazout de 28 kW en fin de vie et une cuve de 3 000 litres. Le projet type comprend un Girolami Soft hydro, un ballon tampon de 500 litres, le désembouage du circuit, le raccordement, la mise en service et la mise hors service de la cuve. Avec la TVA à 6 %, il se situe dans le haut de notre fourchette hydro, entre 8 000 et 14 000 € TVAC selon l'état du circuit.",
+          `Prenons une maison 4 façades de 1978 près de Sombreffe : 175 m², classée E, une chaudière mazout de 28 kW en fin de vie et une cuve de 3 000 litres. Le projet type comprend un Girolami Soft hydro, un ballon tampon de 500 litres, le désembouage du circuit, le raccordement, la mise en service et la mise hors service de la cuve. Avec la TVA à 6 %, il se situe dans le haut de notre fourchette hydro, ${rangeText(PRICE_RANGES.hydro)} TVAC selon l'état du circuit.`,
           "Le calcul de l'économie. 2 000 litres de mazout contiennent environ 20 000 kWh ; une chaudière qui rend 80 % sur la saison en fait 16 000 kWh de chaleur. Pour produire la même chaleur, un hydro qui rend 90 % brûle environ 3,8 tonnes de pellets à 4,7 kWh par kilo.",
         ],
         callout: {
@@ -2259,7 +2260,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien coûte le passage du mazout au poêle hydro à pellets ?",
         answer:
-          "Comptez 8 000 à 14 000 € TVAC tout compris en Wallonie, avec la TVA à 6 % dans un logement de plus de 10 ans : poêle, ballon tampon, désembouage du circuit, raccordement et mise hors service de la cuve. Il n'y a plus de prime régionale pour un nouveau projet depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer les travaux éligibles ; le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et la demande de prêt passe avant tout devis signé.",
+          `Comptez ${rangeText(PRICE_RANGES.hydro)} TVAC tout compris en Wallonie, avec la TVA à 6 % dans un logement de plus de 10 ans : poêle, ballon tampon, désembouage du circuit, raccordement et mise hors service de la cuve. Il n'y a plus de prime régionale pour un nouveau projet depuis le 1er octobre 2026. Si la maison est classée E, F ou G et que vous la rénovez plus largement, le Rénopack peut financer les travaux éligibles ; le poêle hydro n'en fait partie que si l'audit le retient et que l'organisme prêteur l'accepte, et la demande de prêt passe avant tout devis signé.`,
       },
       {
         question: "Faut-il garder une chaudière d'appoint en plus du poêle hydro ?",
@@ -2269,7 +2270,7 @@ export const ARTICLES: ArticleData[] = [
       {
         question: "Combien de temps pour rentabiliser l'investissement ?",
         answer:
-          "Pour une maison qui brûlait 2 000 litres de mazout par an, comptez 5 à 9 ans aux prix d'octobre 2026 : environ 3 070 € de mazout contre 1 560 € de pellets, soit 1 500 € d'économie par an pour un investissement de 8 000 à 14 000 €. Si le mazout continue de grimper, ça va plus vite.",
+          `Pour une maison qui brûlait 2 000 litres de mazout par an, comptez 5 à 9 ans aux prix d'octobre 2026 : environ 3 070 € de mazout contre 1 560 € de pellets, soit 1 500 € d'économie par an pour un investissement de ${rangeText(PRICE_RANGES.hydro)}. Si le mazout continue de grimper, ça va plus vite.`,
       },
       {
         question: "Que faire de l'ancienne cuve mazout vide ?",

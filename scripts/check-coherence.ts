@@ -29,6 +29,7 @@ import {
 import { PRICE_RANGES, RANGES_VAT_NOTE, rangeText } from "@/lib/price-ranges";
 import { FAQS } from "@/lib/faqs";
 import { getGuideBySlug } from "@/lib/guides";
+import { getArticleBySlug } from "@/lib/articles";
 import { NBSP, NNBSP } from "@/lib/typo";
 import { PROJECT_LEAD_TIME } from "@/lib/services";
 import { guaranteeLine, shownDeliveryDelay } from "@/lib/product-price";
@@ -170,6 +171,32 @@ for (const [file, allowed] of Object.entries(ALLOWED)) {
 }
 for (const file of ["app/(frontend)/page.tsx", "app/llms.txt/route.ts"]) {
   assert(`${file} : lit lib/price-ranges.ts`, readFileSync(file, "utf8").includes("@/lib/price-ranges"));
+}
+/**
+ * Tout app/ et lib/ : une fourchette écrite à la main qui ressemble à une de
+ * la source (même bas de fourchette, haut à 2 000 € près) doit passer par
+ * lib/price-ranges.ts. Exception nommée : l'investissement d'une chaudière
+ * mazout dans le comparatif de l'accueil (8 000 à 15 000 €).
+ */
+{
+  const EXCEPTIONS = new Set([`${join("app", "(frontend)", "page.tsx")} : 8 000 à 15 000 €`]);
+  const amounts = (r: string) => (r.match(/\d{1,3}(?: \d{3})*/g) ?? []).map((n) => Number(n.replace(/ /g, "")));
+  const stray: string[] = [];
+  for (const file of sourceFiles(["app", "lib"])) {
+    if (file === join("lib", "price-ranges.ts")) continue;
+    for (const m of readFileSync(file, "utf8").matchAll(RANGE_RE)) {
+      const text = m[0].replace(new RegExp(SP, "g"), " ");
+      const [min, max] = amounts(text);
+      const lookalike = Object.values(PRICE_RANGES).some(
+        (r) => min === r.min && max != null && Math.abs(max - r.max) <= 2000,
+      );
+      const id = `${file} : ${text}`;
+      if (lookalike && !EXCEPTIONS.has(id)) stray.push(id);
+    }
+  }
+  check("app/ et lib/ : aucune fourchette de poêle posé écrite à la main", stray, []);
+  const mazout = getArticleBySlug("remplacer-chaudiere-mazout-poele-hydro")?.tldr ?? "";
+  assert("article mazout : fourchette et puissances hydro de la source", mazout.includes(`${rangeText(PRICE_RANGES.hydro)} TVAC posé, selon la puissance (${PRICE_RANGES.hydro.power})`));
 }
 
 // ---------------------------------------------------------------------------
