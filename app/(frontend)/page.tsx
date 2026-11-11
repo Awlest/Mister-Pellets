@@ -425,7 +425,12 @@ export default function HomePage() {
             * Estimation pour une maison wallonne 130 m² PEB C, prix combustibles avril 2026.
             Le pellet et la pompe à chaleur sortent en tête sur le coût d'usage. La pompe à chaleur
             demande plus d'investissement initial mais s'amortit sur 8 à 12 ans. Le pellet a l'avantage
-            du combustible local et d'une autonomie sans contrat fournisseur.
+            du combustible local et d'une autonomie sans contrat fournisseur. Le prix du sac de
+            pellets change chaque mois :{" "}
+            <Link href="/blog/prix-pellets-belgique" className="text-mp-orange-ink underline hover:no-underline">
+              relevé du prix des pellets en Wallonie
+            </Link>
+            .
           </p>
         </div>
       </section>

@@ -132,6 +132,9 @@ export const COMFO = {
   originBadge: "Fabriqué en Belgique",
   badges: ["DINplus A1", "100 % résineux", "6 mm", `Sacs de ${PELLET_OFFER.bagKg} kg`],
   intro: `Des granulés 100 % résineux fabriqués à Bertrix, dans les Ardennes belges, par ERDA. Ils sont certifiés DINplus en classe A1 et vendus en sacs de ${PELLET_OFFER.bagKg} kg, ${PELLET_OFFER.bags} sacs par palette.`,
+  /** Renvoi vers le relevé mensuel des prix du marché (article du blog). */
+  marketNote:
+    "Pour comparer avec le marché : ValBiom relève chaque mois le prix moyen du sac de 15 kg en Wallonie, et nous le reportons dans [notre relevé du prix des pellets, mois par mois](/blog/prix-pellets-belgique).",
   photoAlt: `Palette de sacs de pellets Comfo de ${PELLET_OFFER.bagKg} kg, avec des granulés en gros plan`,
   schemaDescription: `Granulés de bois 100 % résineux de 6 mm, certifiés DINplus A1 (n° 7A149), fabriqués en Belgique par ERDA à Bertrix. Palette de ${PELLET_OFFER.bags} sacs de ${PELLET_OFFER.bagKg} kg.`,
   gtin13: "5425035000002",

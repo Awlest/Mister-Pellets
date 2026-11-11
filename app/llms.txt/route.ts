@@ -216,6 +216,8 @@ ${priceLines(prices)}
 - Prise de rendez-vous en ligne : ${SITE_URL}${ROUTES.booking}
 - Boutique : ${SITE_URL}${ROUTES.shop}
 - Palette de pellets Comfo : ${SITE_URL}${ROUTES.pellets}
+- Prix des pellets en Wallonie, relevé mensuel de ValBiom et prix du kWh : ${SITE_URL}${ROUTES.blog}/prix-pellets-belgique
+- Poêle à pellets et coupure de courant (consommation, onduleur, redémarrage) : ${SITE_URL}${ROUTES.blog}/poele-pellets-sans-electricite-coupure-courant
 - Entretien annuel : ${SITE_URL}${ROUTES.maintenance}
 - Ramonage : ${SITE_URL}${ROUTES.sweeping}
 - Dépannage : ${SITE_URL}${ROUTES.repair}

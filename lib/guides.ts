@@ -160,6 +160,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         paragraphs: [
           "Le marché belge propose 4 grandes familles : air pulsé (le plus simple, l'air chaud sort par convection), canalisable (l'air est distribué dans plusieurs pièces via des gaines), hydro (chauffe un circuit d'eau, remplace une chaudière), et insert encastrable (s'intègre dans une cheminée existante).",
           "Notre conseil par défaut : un air pulsé étanche pour une pièce de vie de moins de 100 m² bien isolée. Un canalisable pour une maison à étage. Un hydro pour remplacer une chaudière mazout. Un insert si vous voulez préserver une cheminée d'origine.",
+          "Les quatre familles ont un point commun : elles ont besoin d'une prise 230 V pour la vis sans fin, l'allumage et l'extracteur de fumées. Ce qu'elles consomment et ce qui se passe quand le courant saute, marque par marque : [poêle à pellets sans électricité, ce qui existe vraiment](/blog/poele-pellets-sans-electricite-coupure-courant).",
         ],
       },
       {
@@ -167,6 +168,7 @@ const GUIDE_SOURCES: Omit<GuideData, "readingTime">[] = [
         paragraphs: [
           "La règle empirique : 1 kW pour 10 m² bien isolés (PEB B ou mieux). 1 kW pour 15 m² si la maison est très bien isolée (PEB A). 1 kW pour 7 m² si l'isolation est faible (PEB E à G).",
           "Donc pour une maison de 100 m² PEB B, visez 10 kW. Pour 150 m² PEB D, visez 18-20 kW (et là vous passez plutôt sur un hydro). Sous-dimensionner, c'est devoir tourner à plein régime tout le temps : usure prématurée et surconsommation.",
+          "Le combustible se budgète à part. Le prix du sac de 15 kg change chaque mois : voyez [notre relevé du prix des pellets en Wallonie](/blog/prix-pellets-belgique), avec ce que coûte une saison selon votre usage.",
         ],
       },
       {

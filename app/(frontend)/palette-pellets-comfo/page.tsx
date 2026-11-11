@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/seo/Breadcrumb";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { InlineText } from "@/components/ui/inline-text";
 import { SHOWROOM_ADDRESS, SHOWROOM_MAPS_URL } from "@/lib/booking-calendar";
 import {
   COMFO,
@@ -230,6 +231,9 @@ export default function PalettePelletsComfoPage() {
               </div>
 
               <p className="mt-8 text-lg text-mp-ink-soft leading-relaxed">{COMFO.intro}</p>
+              <p className="mt-4 text-mp-ink-soft leading-relaxed">
+                <InlineText text={COMFO.marketNote} />
+              </p>
             </div>
           </div>
         </div>

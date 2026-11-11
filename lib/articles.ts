@@ -102,6 +102,372 @@ const REMISE_POSE_EN_COURS = (["tubage", "double-paroi", "ventouse"] as const).s
 
 export const ARTICLES: ArticleData[] = [
   // ───────────────────────────────────────────────────────────────────
+  // PELLETS : relevé mensuel des prix (11/11/2026), page tenue à jour chaque mois
+  // Sources lues le 11/11/2026 : ValBiom, « Suivi mensuel des prix des
+  // combustibles bois », mise à jour du 21/10/2026 (tableau « Prix moyen observé
+  // en Wallonie », image tableau-oct-26.jpg, et graphique en c€/kWh TVAC) ;
+  // CREG, tableau de bord d'octobre 2026 (Wallonie : électricité 45,89 c€/kWh
+  // pour 3 500 kWh/an, gaz 13,57 c€/kWh pour 17 000 kWh/an) ; SPF Économie,
+  // tarif officiel n° 2026/217 valable à partir du 11/11/2026 (gasoil de
+  // chauffage H0/H7 : 1,4442 €/l sous 2 000 l, 1,4011 €/l à partir de 2 000 l) ;
+  // SPW, guide Walloreno 2026, p. 7 (1 litre de mazout = 10 kWh) ; DIN CERTCO
+  // 2 PfG C 0444/02.25, annexe 1 (PCI ≥ 4,6 kWh/kg) ; ENplus
+  // ST 1001:2022, tableau des classes (PCI ≥ 4,6 kWh/kg) ; Test-Achats, article
+  // du 25/09/2026 ; notices MCZ Cute Air 8 M1, Edilkamin Cherie 9+ Evo, Cadel
+  // Grace 7 et Austroflamm Clou Pellet (rendements et consommations horaires).
+  // Palette Comfo : lib/pellets.ts (470 € TVAC, 65 sacs de 15 kg).
+  // Mise à jour mensuelle : première ligne du tableau « mois par mois », tldr,
+  // section 1, section 5, tableau du kWh, FAQ, puis modifiedAt.
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "prix-pellets-belgique",
+    title: "Prix des pellets en Belgique : le relevé mois par mois",
+    metaTitle: "Prix des pellets en Belgique, mois par mois",
+    metaDescription:
+      "Prix du sac de pellets de 15 kg en Wallonie, mois par mois depuis janvier 2025 : 7,02 € en octobre 2026 (ValBiom). Budget d'une saison, kWh, quand acheter.",
+    excerpt:
+      "Le sac de 15 kg est passé de 5,64 € à 7,02 € en un an. Le relevé mensuel de ValBiom depuis janvier 2025, ce que coûte une saison de chauffe, et le kWh de pellet face au mazout, au gaz et à l'électricité.",
+    tldr:
+      "En octobre 2026, le sac de 15 kg de pellets certifiés coûtait en moyenne 7,02 € en Wallonie, acheté par palette et hors livraison, selon le relevé mensuel de ValBiom. Cela fait 468 € la tonne et environ 10 centimes le kWh. Un an plus tôt, le même sac valait 5,64 € ; en août 2026, 6,19 €.",
+    category: "pellets",
+    tags: ["prix des pellets", "sac de 15 kg", "palette de pellets", "ValBiom", "prix du kWh"],
+    readingTimeMinutes: 7,
+    publishedAt: "2026-11-11",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Conseillers combustible",
+    coverImageAlt: "Sacs de pellets de 15 kg empilés sur une palette, sous housse",
+    sections: [
+      {
+        heading: "Le prix du sac, de la palette et du kWh en octobre 2026",
+        paragraphs: [
+          "L'asbl ValBiom relève chaque mois le prix moyen des pellets en Wallonie. Son dernier chiffre, publié le 21 octobre 2026 : 7,02 € le sac de 15 kg, TVA comprise. Ce prix vaut pour des pellets certifiés DINplus ou ENplus, achetés par palette entière, sans la livraison.",
+          "À ce prix, le kilo revient à 47 centimes, la tonne en sacs à 468 € et une palette de 65 sacs à 456 €. Un kilo de pellet certifié contient au moins 4,6 kWh : le kWh coûte donc 10,2 centimes. En octobre 2025, le sac valait 5,64 € : il a pris 24 % en un an.",
+          "C'est une moyenne, et les écarts entre vendeurs sont larges. En septembre 2026, Test-Achats trouvait des sacs de 5,50 € à plus de 8,50 € selon le vendeur et la quantité commandée, pour une moyenne de 6,75 €.",
+        ],
+      },
+      {
+        heading: "Le relevé mois par mois depuis janvier 2025",
+        paragraphs: [
+          "Le prix du sac est celui du tableau de ValBiom. Les deux colonnes de droite sont nos calculs : la tonne en sacs, soit le prix du sac divisé par 15 et multiplié par 1 000, et le kWh, à 4,6 kWh par kilo.",
+        ],
+        table: {
+          headers: ["Mois", "Sac de 15 kg", "Tonne en sacs", "Prix du kWh"],
+          rows: [
+            ["Octobre 2026", "7,02 €", "468 €", "10,2 centimes"],
+            ["Septembre 2026", "6,64 €", "443 €", "9,6 centimes"],
+            ["Août 2026", "6,19 €", "413 €", "9,0 centimes"],
+            ["Juillet 2026", "6,15 €", "410 €", "8,9 centimes"],
+            ["Juin 2026", "6,13 €", "409 €", "8,9 centimes"],
+            ["Mai 2026", "6,11 €", "407 €", "8,9 centimes"],
+            ["Avril 2026", "6,12 €", "408 €", "8,9 centimes"],
+            ["Mars 2026", "6,05 €", "403 €", "8,8 centimes"],
+            ["Février 2026", "6,02 €", "401 €", "8,7 centimes"],
+            ["Janvier 2026", "5,99 €", "399 €", "8,7 centimes"],
+            ["Décembre 2025", "5,84 €", "389 €", "8,5 centimes"],
+            ["Novembre 2025", "5,86 €", "391 €", "8,5 centimes"],
+            ["Octobre 2025", "5,64 €", "376 €", "8,2 centimes"],
+            ["Septembre 2025", "5,54 €", "369 €", "8,0 centimes"],
+            ["Août 2025", "5,48 €", "365 €", "7,9 centimes"],
+            ["Juillet 2025", "5,43 €", "362 €", "7,9 centimes"],
+            ["Juin 2025", "5,43 €", "362 €", "7,9 centimes"],
+            ["Mai 2025", "5,48 €", "365 €", "7,9 centimes"],
+            ["Avril 2025", "5,69 €", "379 €", "8,2 centimes"],
+            ["Mars 2025", "5,70 €", "380 €", "8,3 centimes"],
+            ["Février 2025", "5,66 €", "377 €", "8,2 centimes"],
+            ["Janvier 2025", "5,61 €", "374 €", "8,1 centimes"],
+          ],
+          caption:
+            "Source : ValBiom, « Suivi mensuel des prix des combustibles bois », prix moyen observé en Wallonie, mise à jour du 21 octobre 2026. Pellets certifiés DINplus ou ENplus, une palette au minimum, hors livraison. Tonne et kWh : calculs Mister Pellets.",
+        },
+      },
+      {
+        heading: "Ce que coûte une saison de chauffe",
+        paragraphs: [
+          "Un kilo de pellet certifié contient au moins 4,6 kWh. Les notices des poêles que nous posons annoncent 89 à 93 % de rendement (MCZ Cute Air 8, Edilkamin Cherie 9+ Evo, Cadel Grace 7, Austroflamm Clou Pellet) : avec 90 %, un kilo laisse 4,1 kWh de chaleur dans la maison. Pour 1 000 kWh de chaleur, il faut donc 242 kg de pellets, 16 sacs, soit 113 € au prix d'octobre 2026.",
+          "L'isolation de la maison pèse plus que la puissance du poêle. Le plus sûr est de partir de votre ancienne facture de mazout ou de gaz : la méthode est dans [notre calcul du budget d'un hiver au pellet](/blog/budget-hiver-poele-pellets-consommation-2026). Pour le poêle lui-même, voyez [le prix d'un poêle à pellets posé](/prix-poele-pellets).",
+          "À l'heure, un poêle de 8 kW brûle de 0,5 kg au ralenti à 1,8 kg à pleine puissance (MCZ Cute Air 8), un 9 kW de 0,8 à 2,1 kg (Edilkamin Cherie 9+ Evo). Sur la saison, voici les fourchettes que nous donnons en rendez-vous, recalculées au prix d'octobre.",
+        ],
+        table: {
+          headers: ["Votre cas", "Chaleur à fournir", "Pellets par saison", "Sacs de 15 kg", "Budget à 7,02 € le sac"],
+          rows: [
+            ["Appoint le soir et le week-end, poêle de 7 à 9 kW", "2 500 à 3 700 kWh", "600 à 900 kg", "40 à 60", "280 à 420 €"],
+            ["Chauffage principal, maison de 120 m² en PEB B ou C, poêle de 10 kW", "6 200 à 8 300 kWh", "1,5 à 2 tonnes", "100 à 135", "700 à 950 €"],
+            ["Poêle hydro qui remplace une chaudière, maison de 150 à 180 m²", "12 400 à 16 600 kWh", "3 à 4 tonnes", "200 à 270", "1 400 à 1 900 €"],
+          ],
+          caption:
+            "Hypothèses : 4,6 kWh par kilo, 90 % de rendement, saison d'octobre à avril, sac à 7,02 € (ValBiom, octobre 2026), livraison non comprise. Fourchettes indicatives : l'isolation et la consigne de température les font varier.",
+        },
+      },
+      {
+        heading: "Sac à l'unité, palette ou vrac",
+        paragraphs: [
+          "Le relevé de ValBiom porte sur l'achat d'une palette entière, livraison non comprise. Une palette, c'est un peu moins d'une tonne. Si vous vous faites livrer, ajoutez le transport au prix du sac avant de comparer deux offres.",
+          "À l'unité ou par petites quantités, le prix au sac grimpe : la fourchette de Test-Achats, de 5,50 € à plus de 8,50 €, dépend autant de la quantité commandée que du vendeur.",
+          "Le vrac, soufflé par camion dans un silo, est le format des chaudières à pellets. Un poêle se remplit au sac. ValBiom suit aussi le vrac sur son graphique, en centimes par kWh : sa courbe suit celle du sac, un peu en dessous. Son tableau ne donne pas le prix du vrac à la tonne, et nous ne publions pas un chiffre que nous n'avons pas lu.",
+          "Nous vendons une palette de pellets Comfo, certifiés DINplus A1 : 65 sacs de 15 kg pour 470 € TVA comprise, soit 7,23 € le sac, à retirer sur rendez-vous à Fernelmont. Tout est sur la page [palette de pellets Comfo](/palette-pellets-comfo).",
+        ],
+      },
+      {
+        heading: "Quand acheter vos pellets",
+        paragraphs: [
+          "En 2025, le prix a suivi la saison : 5,43 € le sac en juin et en juillet, 5,86 € en novembre. Sur une palette de 65 sacs, l'écart fait 28 €.",
+          "En 2026, le creux d'été n'a pas eu lieu. Le sac est monté presque chaque mois, de 5,99 € en janvier à 6,19 € en août, puis il a pris 83 centimes en deux mois : 54 € de plus par palette entre août et octobre.",
+          "ValBiom avance deux explications. La construction tourne au ralenti, les scieries débitent moins de résineux et produisent moins de sciure, la matière première du pellet. Et la hausse du pétrole, liée au conflit au Moyen-Orient, pousse davantage de ménages vers le bois. Pour l'hiver 2026-2027, l'association juge un recul marqué des prix improbable et retient un scénario de stabilité, tant que l'offre et la demande restent en équilibre.",
+          "Notre avis : achetez votre saison en une fois, entre mai et août, si vous avez un endroit sec pour la stocker. Attendre l'automne n'a payé ni en 2025 ni en 2026. Et en novembre, n'attendez pas une baisse pour remplir le garage : prenez ce qu'il vous faut pour finir l'hiver.",
+        ],
+      },
+      {
+        heading: "Le kWh de pellet face au mazout, au gaz et à l'électricité",
+        paragraphs: [
+          "Pour comparer, nous ramenons chaque énergie au prix d'un kWh contenu dans le combustible, avant les pertes de l'appareil. Les prix sont les derniers publiés, à la date indiquée dans le tableau.",
+          "Le pellet reste l'énergie la moins chère du tableau, 27 à 30 % sous le mazout. L'écart s'est resserré : en août, à 6,19 € le sac, son kWh valait 9 centimes. Avec un poêle à 90 % de rendement, le kWh de chaleur rendu dans la pièce revient à 11,3 centimes.",
+          "Le prix de l'électricité est celui d'un radiateur électrique. Une pompe à chaleur consomme plusieurs fois moins pour la même chaleur, et se compare avec son rendement saisonnier.",
+        ],
+        table: {
+          headers: ["Énergie", "Prix relevé", "Prix du kWh", "Source et date"],
+          rows: [
+            ["Pellets en sacs", "7,02 € le sac de 15 kg", "10,2 centimes", "ValBiom, octobre 2026"],
+            ["Gaz naturel", "13,57 centimes le kWh, tout compris", "13,6 centimes", "CREG, Wallonie, octobre 2026"],
+            ["Mazout de chauffage, à partir de 2 000 litres", "1,4011 € le litre", "14,0 centimes", "SPF Économie, tarif du 11 novembre 2026"],
+            ["Mazout de chauffage, moins de 2 000 litres", "1,4442 € le litre", "14,4 centimes", "SPF Économie, tarif du 11 novembre 2026"],
+            ["Électricité", "45,89 centimes le kWh, tout compris", "45,9 centimes", "CREG, Wallonie, octobre 2026"],
+          ],
+          caption:
+            "Pellets : 4,6 kWh par kilo au moins (ENplus A1 et DINplus). Mazout : prix maximum officiel, 10 kWh par litre (Service public de Wallonie). Gaz et électricité : prix moyens de la CREG pour un ménage de 17 000 kWh de gaz et de 3 500 kWh d'électricité par an.",
+        },
+      },
+      {
+        heading: "Sources et mises à jour",
+        paragraphs: [
+          "Chiffres relus à la source le 11 novembre 2026. Le relevé de novembre n'était pas encore publié. ValBiom met son tableau à jour une fois par mois : nous ajoutons alors la ligne, et la date de mise à jour s'affiche en haut de la page.",
+          "ValBiom convertit le prix du sac avec environ 5 kWh par kilo : dans son analyse de juin 2024, 5,57 € le sac donnaient 7,43 centimes le kWh. Nous gardons 4,6 kWh, le minimum garanti par les certifications : notre kWh de pellet sort donc un peu plus cher que le sien.",
+        ],
+        list: {
+          items: [
+            "ValBiom, « Suivi mensuel des prix des combustibles bois », mise à jour du 21 octobre 2026 : [valbiom.be](https://www.valbiom.be/actualites/suivi-mensuel-des-prix-des-combustibles-bois).",
+            "CREG, tableau de bord mensuel de l'électricité et du gaz naturel, octobre 2026 : [creg.be](https://www.creg.be/fr/professionnels/fonctionnement-et-monitoring-du-marche/tableau-de-bord).",
+            "SPF Économie, tarif officiel des produits pétroliers n° 2026/217, valable à partir du 11 novembre 2026 : [economie.fgov.be](https://economie.fgov.be/fr/themes/energie/prix-de-lenergie/prix-maximum-des-produits/tarif-officiel-des-produits).",
+            "Test-Achats, « Voici pourquoi acheter votre pellet avant la fin du mois de septembre », 25 septembre 2026 : [test-achats.be](https://www.test-achats.be/maison-energie/pellets/news/prix-avantageux-pellet-belgique).",
+            "ValBiom, « Suivi des prix des combustibles bois », analyse de juin 2024 : [valbiom.be](https://www.valbiom.be/sites/default/files/tool/file/valbiom-analyse-suivi-des-prix-des-combustibles-bois-juin-2024.pdf).",
+            "ENplus, norme ST 1001:2022, exigences de qualité des pellets : [enplus-pellets.eu](https://enplus-pellets.eu/wp-content/uploads/Documents/ENplus-ST-1001-ENplus-wood-pellets-Requirements-for-companies-5.pdf). DIN CERTCO, programme DINplus, annexe 1 (édition 02-2025) : [dincertco.de](https://www.dincertco.de/media/dincertco/dokumente_1/certification_schemes/2-pfg-c-0444_annex-1_en_wood-pellets.pdf).",
+            "Service public de Wallonie, guide pratique Walloreno 2026, page 7 : [energie.wallonie.be](https://energie.wallonie.be/files/PEB/B%C3%A2timents%20r%C3%A9sidentiels/R%C3%A9novation/Outils/Publications/Walloreno/brochureWalloreno_2026.pdf).",
+          ],
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Quel est le prix d'un sac de pellets de 15 kg en Belgique ?",
+        answer:
+          "En octobre 2026, 7,02 € en moyenne en Wallonie, selon le relevé mensuel de ValBiom : pellets certifiés, achetés par palette, hors livraison. À l'unité, comptez plus. En septembre 2026, Test-Achats relevait des sacs de 5,50 € à plus de 8,50 € selon le vendeur et la quantité.",
+      },
+      {
+        question: "Quel est le prix d'une palette de pellets ?",
+        answer:
+          "Au prix moyen d'octobre 2026, une palette de 65 sacs de 15 kg revient à 456 €, hors livraison, et la tonne en sacs à 468 €. Un an plus tôt, la même palette coûtait 367 €.",
+      },
+      {
+        question: "Le prix des pellets va-t-il baisser cet hiver ?",
+        answer:
+          "ValBiom ne le prévoit pas. Dans sa mise à jour du 21 octobre 2026, l'association juge un recul marqué improbable pour l'hiver 2026-2027 et retient un scénario de prix stables, sauf rupture entre l'offre et la demande.",
+      },
+      {
+        question: "Quand acheter vos pellets pour les payer moins cher ?",
+        answer:
+          "Entre mai et août. En 2025, le sac valait 5,43 € en juin et en juillet, contre 5,86 € en novembre. En 2026, il n'y a pas eu de baisse d'été, mais le sac d'août, à 6,19 €, coûtait encore 83 centimes de moins que celui d'octobre.",
+      },
+      {
+        question: "Les pellets sont-ils encore moins chers que le mazout ?",
+        answer:
+          "Oui. Au relevé d'octobre 2026 (7,02 € le sac de 15 kg), le kWh de pellet revient à 10,2 centimes, contre 14,0 à 14,4 centimes pour le mazout au prix maximum du SPF Économie du 11 novembre 2026, soit 1,4011 à 1,4442 € le litre selon la quantité.",
+      },
+    ],
+    related: {
+      articles: [
+        "budget-hiver-poele-pellets-consommation-2026",
+        "pellets-enplus-a1-vs-dinplus",
+        "remplacer-chaudiere-mazout-poele-hydro",
+      ],
+      guides: ["quelle-puissance-poele-pellets", "remettre-en-route-poele-pellets-automne"],
+      cities: ["namur", "charleroi", "liege"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
+  // GUIDE D'ACHAT : poêle à pellets et électricité (11/11/2026)
+  // Sources lues le 11/11/2026 : MCZ, manuel du Cute Air 8 M1, partie 1
+  // (réf. 8902204900, p. 25 : 67 W, 38 W, 340 W, 3 W) et partie 2
+  // (réf. 8902205000, p. 48 « Défaut temporaire de courant », p. 53), fiche
+  // technique rév. 2019052901, FAQ mcz.it/fr-be (onduleur), page
+  // mcz.it/fr/consommation-electrique-poeles (85 kWh/an, étude Amoès) ;
+  // Edilkamin, manuel Cherie 9+ Evo / 11++ Evo, cod. 942786-FR I 02.25/A (§ 6.5
+  // données électriques, § 17.6 Black-out) ; Cadel, manuel de l'installateur
+  // Grace 7 et autres, réf. 89022193B (345 W max, résistance 300 W, ASI 210 V),
+  // manuel de l'utilisateur Wall3 Plus / Tile3 Plus / Moon, réf. 89022051A
+  // (§ 8.10, 12.7, 12.9) ; Austroflamm, notices Clou Pellet V1.0 du 06/08/2024
+  // (p. 18, 62, 76) et Clou Duo V2.0 du 20/12/2024 (p. 11, 17, 76, 80) ; Bronpi,
+  // fiche Free-6 et notice « Manual Free v.300925 » ; CREG, tableau de bord
+  // d'octobre 2026 (Wallonie, 45,89 c€/kWh).
+  // À confirmer par Dorian : aucun poêle à pellets sans électricité au catalogue.
+  // ───────────────────────────────────────────────────────────────────
+  {
+    slug: "poele-pellets-sans-electricite-coupure-courant",
+    title: "Poêle à pellets sans électricité : ce qui existe vraiment",
+    metaTitle: "Poêle à pellets sans électricité : le point",
+    metaDescription:
+      "Coupure de courant, consommation électrique d'après les notices MCZ, Edilkamin, Cadel et Austroflamm, onduleur, poêles à pellets sans électricité : le point.",
+    excerpt:
+      "Un poêle à pellets s'arrête quand le courant saute. Ce qu'il consomme d'après les notices, ce qui se passe pendant la coupure, quel onduleur brancher, et les rares modèles qui se passent de prise.",
+    tldr:
+      "Un poêle à pellets a besoin de courant : la vis sans fin, l'allumage, l'extracteur de fumées et la carte électronique sont électriques. À la coupure, il s'arrête et se met en sécurité. Il consomme peu : 9 à 177 W en marche, jusqu'à 345 W à l'allumage. Des poêles à pellets sans électricité existent, mais nous n'en posons pas.",
+    category: "guide-achat",
+    tags: ["coupure de courant", "consommation électrique", "onduleur", "poêle sans électricité", "poêle mixte"],
+    readingTimeMinutes: 8,
+    publishedAt: "2026-11-11",
+    authorName: "Équipe technique Mister Pellets",
+    authorRole: "Techniciens poseurs",
+    coverImageAlt: "Poêle à pellets allumé dans un séjour, câble d'alimentation branché sur une prise murale",
+    sections: [
+      {
+        heading: "Pourquoi un poêle à pellets a besoin de courant",
+        paragraphs: [
+          "Quatre organes tournent à l'électricité. La vis sans fin amène les pellets du réservoir au creuset. Une résistance les allume. Un extracteur aspire les fumées et les pousse dans le conduit : Cadel range ses poêles parmi les appareils « à tirage forcé ». Une carte électronique règle le tout, avec les sondes et les sécurités. La plupart des poêles ont en plus un ventilateur qui souffle l'air chaud dans la pièce.",
+          "Les Austroflamm chauffent par convection naturelle, sans ventilateur d'air chaud. Ils restent des poêles électriques : la notice du Clou Pellet prévoit une alimentation en 230 V et un ventilateur de tirage pour les fumées. « Convection naturelle » ne veut pas dire « sans électricité ».",
+        ],
+      },
+      {
+        heading: "Ce qu'il consomme, d'après les notices",
+        paragraphs: [
+          "C'est à l'allumage qu'un poêle à pellets tire le plus, quand la résistance chauffe : 340 W au maximum sur un MCZ Cute Air 8, 345 W sur un Cadel Grace 7, dont 300 W pour la seule résistance. Une fois la flamme prise, la consommation tombe à quelques dizaines de watts. Le poêle sans ventilateur d'air chaud est aussi celui qui consomme le moins.",
+          "Sur une saison, prenons 1 500 heures de marche, soit 7 heures par jour d'octobre à avril. Le Cute Air 8 consomme alors 57 à 100 kWh, le Cherie 9+ Evo 102 à 266 kWh, le Clou Pellet 14 à 27 kWh. Au prix moyen de l'électricité en Wallonie en octobre 2026, 45,89 centimes le kWh selon la CREG, cela fait de 6 à 122 € par hiver selon le poêle, hors allumages. MCZ cite de son côté une mesure du bureau d'études Amoès : 85 kWh par an pour un de ses poêles dans une maison de 72 m², soit 39 €.",
+          "La veille compte aussi : 3 W toute l'année font 26 kWh, soit 12 €. MCZ et Cadel conseillent de débrancher le poêle hors saison.",
+        ],
+        table: {
+          headers: ["Poêle", "À l'allumage", "À puissance nominale", "À puissance réduite", "En veille"],
+          rows: [
+            ["MCZ Cute Air 8 (8 kW, ventilé)", "340 W au maximum", "67 W", "38 W", "3 W"],
+            ["Edilkamin Cherie 9+ Evo (9 kW, canalisable)", "non précisé", "177 W", "68 W", "3 W"],
+            ["Cadel Grace 7 (7 kW)", "345 W au maximum, dont 300 W de résistance", "non précisé", "non précisé", "non précisé"],
+            ["Austroflamm Clou Pellet 8 et 10 kW (convection naturelle)", "non précisé", "15 et 18 W", "9 W", "3 W"],
+            ["Austroflamm Clou Duo (mixte bois et pellets, 7 kW)", "non précisé", "15 W", "11 W", "5 W"],
+          ],
+          caption:
+            "Puissance électrique absorbée, d'après les notices et fiches techniques des fabricants lues le 11 novembre 2026 (références en fin d'article). « Non précisé » : la notice ne donne pas la valeur ou renvoie à la plaque signalétique.",
+        },
+      },
+      {
+        heading: "Ce qui se passe pendant une coupure de courant",
+        paragraphs: [
+          "Le courant saute, tout s'arrête d'un coup : plus de pellets, plus d'air soufflé, plus d'extraction. Les pellets déjà dans le creuset finissent de brûler, et leurs fumées ne sont plus poussées dehors. Elles sortent si le conduit tire tout seul. Austroflamm l'écrit dans la notice du Clou Pellet : le conduit doit fournir un tirage de 3 à 12 Pa au minimum pour évacuer les gaz en cas de panne de courant. C'est une des raisons pour lesquelles nous tenons à [un conduit qui monte au-dessus du toit](/blog/evacuation-fumees-poele-pellets).",
+          "Si de la fumée s'échappe dans la pièce, appliquez la consigne que MCZ donne pour toute fumée anormale : ouvrez les fenêtres et laissez la porte du foyer fermée.",
+          "Au retour du courant, tout dépend de la marque.",
+        ],
+        list: {
+          items: [
+            "MCZ (Cute Air 8) : le poêle passe en refroidissement, puis se rallume de lui-même.",
+            "Cadel (Wall3 Plus, Tile3 Plus, Moon) : après une coupure de moins de 10 secondes, il reprend où il en était. Au-delà, il affiche « ON BLACK OUT », refroidit à fond, puis relance un allumage.",
+            "Edilkamin (Cherie 9+ Evo et 11++ Evo) : l'écran alterne « Black Out » et « OFF » pendant l'extinction, puis le poêle reste éteint, « Black Out » affiché. Prévoyez de le rallumer vous-même.",
+            "Austroflamm (Clou Pellet) : une pile CR2032 garde l'heure et la programmation pendant la coupure. La notice demande de la remplacer tous les 2 ans.",
+          ],
+        },
+        callout: {
+          variant: "info",
+          text: "Si le poêle ne repart pas ou affiche une alarme après la coupure, n'enchaînez pas les allumages. Notez le message à l'écran et appelez [notre service de dépannage](/depannage-poele-a-pellets).",
+        },
+      },
+      {
+        heading: "Onduleur, batterie, groupe électrogène",
+        paragraphs: [
+          "Un onduleur (une ASI, alimentation sans interruption) garde le poêle sous tension pendant la coupure. MCZ précise lequel dans sa foire aux questions : un modèle à onde sinusoïdale pure, en 230 V et 50 Hz, d'une puissance au moins égale à la puissance électrique maximale de la fiche technique du poêle, soit 340 W pour un Cute Air 8. Cadel demande une tension d'au moins 210 V sans fluctuations, et prévient qu'il ne garantit pas le fonctionnement du poêle sur ces appareils, vu la variété du marché.",
+          "L'autonomie se calcule : l'énergie de la batterie, en wattheures, divisée par la puissance du poêle, en watts.",
+          "Un groupe électrogène ou une batterie domestique doivent tenir la même exigence : une onde sinusoïdale pure et une tension stable. Une batterie domestique ne prend le relais pendant une coupure que si l'installation a été prévue pour : demandez-le à l'installateur qui l'a posée.",
+          "Notre avis : pour la plupart des maisons, l'onduleur ne vaut pas la dépense. Le poêle se met en sécurité tout seul et une coupure d'une heure se passe avec un pull. Il se justifie si les coupures reviennent souvent chez vous, ou si le poêle est votre seul chauffage. Dans ce cas, prenez de la marge sur la puissance et vérifiez la mention « onde sinusoïdale pure » sur la fiche.",
+        ],
+        table: {
+          headers: ["Énergie de la batterie", "Poêle à 38 W", "Poêle à 67 W", "Poêle à 177 W"],
+          rows: [
+            ["500 Wh", "13 heures", "7 heures", "3 heures"],
+            ["1 000 Wh", "26 heures", "15 heures", "6 heures"],
+            ["2 000 Wh", "53 heures", "30 heures", "11 heures"],
+          ],
+          caption:
+            "Autonomie théorique, arrondie à l'heure : énergie de la batterie divisée par la puissance du poêle (38 et 67 W : MCZ Cute Air 8 à puissance réduite et nominale ; 177 W : Edilkamin Cherie 9+ Evo à puissance nominale). En pratique, comptez moins : l'onduleur a ses pertes et chaque allumage tire jusqu'à 340 W.",
+        },
+      },
+      {
+        heading: "Les poêles à pellets vraiment sans électricité",
+        paragraphs: [
+          "Ils existent. Le fabricant espagnol Bronpi en propose deux, les Free-6 et Free-11. Les pellets descendent du réservoir par gravité quand vous ouvrez un levier, et l'air arrive par le seul tirage du conduit. Le Free-6 annonce 6 kW, 91 % de rendement et un réservoir de 7 kg, pour 5,8 à 11,6 heures d'autonomie.",
+          "Ce que vous perdez se lit dans la notice. L'allumage se fait à la main, avec un cube allume-feu et une allumette. La puissance se règle avec un registre de tirage, sans thermostat ni programmation. Le conduit doit tirer juste, 12 Pa à 2 Pa près, et Bronpi déconseille les pièces équipées d'une hotte ou d'une ventilation qui gêneraient ce tirage.",
+          "Nous n'en avons pas au catalogue. Avec un poêle à pellets, vous achetez un feu qui s'allume seul, tient la température demandée et se programme. Sans courant, ces trois avantages disparaissent.",
+        ],
+      },
+      {
+        heading: "L'alternative : un poêle mixte bois et pellets",
+        paragraphs: [
+          "Si la coupure de courant vous inquiète vraiment, regardez les poêles mixtes. L'Austroflamm Clou Duo brûle des pellets en temps normal, et sa notice prévoit un mode de secours : sans courant, il fonctionne aux bûches. Le conduit doit alors tirer à 12 Pa au moins, le clapet d'air reste grand ouvert sans réglage possible, et Austroflamm prévient que les performances ne sont pas celles du fonctionnement normal. Les Duo sont sur [notre page Austroflamm](/nos-marques/austroflamm).",
+          "Et si vous voulez un chauffage qui ne dépend jamais d'une prise, choisissez un poêle à bois bûche : vous les trouverez chez [Mister Bois](https://mister-bois.be/poeles-a-bois).",
+        ],
+      },
+      {
+        heading: "Les documents que nous avons lus",
+        paragraphs: [
+          "Notices, fiches techniques et pages officielles consultées le 11 novembre 2026.",
+        ],
+        list: {
+          items: [
+            "MCZ, manuel d'installation et d'utilisation du Cute Air 8 M1 (réf. 8902204900 et 8902205000) et fiche technique : [documents techniques MCZ](https://www.mcz.it/fr-be/service-support-poeles-cheminees/zone-de-telechargement/documents-techniques?article=7122002).",
+            "MCZ, foire aux questions, entrée sur les onduleurs : [mcz.it](https://www.mcz.it/fr-be/service-support-poeles-cheminees/foire-aux-questions).",
+            "MCZ, « La consommation électrique des poêles à granulés » : [mcz.it](https://www.mcz.it/fr/consommation-electrique-poeles).",
+            "Edilkamin, manuel Cherie 9+ Evo et 11++ Evo (cod. 942786-FR, 02.25/A) : [manuels Edilkamin](https://st.edilkamin.com:4433/ek_schede_download.aspx?lang=fr).",
+            "Cadel, manuel de l'installateur Grace 7 (réf. 89022193B) : [cadelsrl.com](https://grp.cadelsrl.com/documents/89022193B.pdf). Manuel de l'utilisateur Wall3 Plus, Tile3 Plus et Moon (réf. 89022051A) : [cadelsrl.com](https://grp.cadelsrl.com/documents/89022051A.pdf).",
+            "Austroflamm, notice du Clou Pellet (version 1.0 du 6 août 2024) : [austroflamm.com](https://www.austroflamm.com/products/Clou-pellet_2.0/technical-data/Clou-Pellet-Notice-d-instructions-fr-803101-945185-V1.0.pdf). Notice du Clou Duo (version 2.0 du 20 décembre 2024) : [austroflamm.com](https://www.austroflamm.com/products/Clou-Duo-Pelletbetrieb/technical-data/Clou-Duo-Notice-d-instructions-fr-810001-945083-V2.0.pdf).",
+            "Bronpi, fiche et notice du Free-6 : [bronpi.com](https://bronpi.com/fr/produit/free-6/).",
+            "CREG, tableau de bord d'octobre 2026 : [creg.be](https://www.creg.be/fr/professionnels/fonctionnement-et-monitoring-du-marche/tableau-de-bord).",
+          ],
+        },
+      },
+    ],
+    faqs: [
+      {
+        question: "Un poêle à pellets peut-il fonctionner sans électricité ?",
+        answer:
+          "Non, pas un poêle à pellets classique : la vis sans fin, la résistance d'allumage, l'extracteur de fumées et la carte électronique sont électriques. Il existe des poêles à pellets à gravité, sans prise, comme les Bronpi Free, mais ils s'allument à la main et ne se programment pas.",
+      },
+      {
+        question: "Que se passe-t-il pendant une coupure de courant avec un poêle à pellets ?",
+        answer:
+          "Le poêle s'arrête : plus d'alimentation en pellets, plus d'extraction. Les pellets du creuset finissent de brûler et les fumées partent par le tirage naturel du conduit. Au retour du courant, un MCZ ou un Cadel refroidit puis se rallume seul ; un Edilkamin Cherie reste éteint et affiche « Black Out ».",
+      },
+      {
+        question: "Quelle est la consommation électrique d'un poêle à pellets ?",
+        answer:
+          "D'après les notices, de 9 à 177 W en marche selon le modèle et le régime, 3 à 5 W en veille et jusqu'à 345 W pendant l'allumage. Sur 1 500 heures de chauffe, cela fait 14 à 266 kWh, soit 6 à 122 € au prix moyen wallon d'octobre 2026.",
+      },
+      {
+        question: "Quel onduleur pour un poêle à pellets ?",
+        answer:
+          "MCZ demande un onduleur à onde sinusoïdale pure, en 230 V et 50 Hz, d'une puissance au moins égale à la puissance électrique maximale du poêle, 340 W pour un Cute Air 8. Avec 500 Wh de batterie, ce poêle tient environ 7 heures à puissance nominale, moins s'il doit se rallumer.",
+      },
+      {
+        question: "Un poêle à pellets à convection naturelle fonctionne-t-il sans courant ?",
+        answer:
+          "Non. La convection naturelle supprime le ventilateur d'air chaud, pas l'électricité : un Austroflamm Clou Pellet garde une vis, un allumage et un extracteur électriques. Il consomme simplement moins, 15 à 18 W à puissance nominale selon sa notice.",
+      },
+    ],
+    related: {
+      articles: [
+        "poele-pellets-eteint-tout-seul-causes",
+        "evacuation-fumees-poele-pellets",
+        "girolami-hybride-bois-pellet-fuel-convert",
+      ],
+      guides: ["guide-achat-poele-pellets-wallonie", "comment-entretenir-poele-pellets"],
+      cities: ["namur", "charleroi", "liege"],
+      brands: ["mcz", "edilkamin", "cadel", "austroflamm"],
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────
   // INSTALLATION : évacuation des fumées (09/11/2026)
   // Sources lues le 09/11/2026 : notices MCZ (PAD Hydromatic M2, réf.
   // 8902137901), Edilkamin (cod. 942415-FR 11.23/C) et Cadel (89022051B,
@@ -554,7 +920,7 @@ export const ARTICLES: ArticleData[] = [
         ],
         callout: {
           variant: "info",
-          text: "Le SPF Économie publie chaque jour ouvrable le prix maximum du mazout, et ValBiom publie chaque mois le prix moyen des pellets en Wallonie. Deux sources gratuites pour refaire le calcul quand les prix bougent.",
+          text: "Le SPF Économie publie chaque jour ouvrable le prix maximum du mazout, et ValBiom publie chaque mois le prix moyen des pellets en Wallonie. Deux sources gratuites pour refaire le calcul quand les prix bougent. Nous reportons chaque relevé de ValBiom dans [notre suivi du prix des pellets, mois par mois](/blog/prix-pellets-belgique), avec le kWh face au mazout, au gaz et à l'électricité.",
         },
       },
       {
@@ -597,6 +963,7 @@ export const ARTICLES: ArticleData[] = [
     ],
     related: {
       articles: [
+        "prix-pellets-belgique",
         "pellets-enplus-a1-vs-dinplus",
         "remplacer-chaudiere-mazout-poele-hydro",
         "dimensionner-poele-pellets-surface-wallonie",
@@ -2288,7 +2655,11 @@ export const ARTICLES: ArticleData[] = [
       },
     ],
     related: {
-      articles: ["pellets-enplus-a1-vs-dinplus", "budget-hiver-poele-pellets-consommation-2026"],
+      articles: [
+        "poele-pellets-sans-electricite-coupure-courant",
+        "pellets-enplus-a1-vs-dinplus",
+        "budget-hiver-poele-pellets-consommation-2026",
+      ],
       guides: ["remettre-en-route-poele-pellets-automne", "comment-entretenir-poele-pellets"],
       cities: ["namur", "charleroi", "liege", "fernelmont"],
       brands: ["edilkamin", "ek63", "girolami"],
