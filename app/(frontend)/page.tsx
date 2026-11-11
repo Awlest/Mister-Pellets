@@ -572,7 +572,7 @@ export default function HomePage() {
             {CITIES.map((city) => (
               <li key={city.slug}>
                 <Link
-                  href={`/poeles-pellets/${city.slug}`}
+                  href={`/poeles-pellets-${city.slug}`}
                   className="flex min-h-11 items-center justify-between gap-2 rounded-full border border-mp-sand/60 bg-mp-cream px-4 text-sm font-medium text-mp-ink transition-colors hover:border-mp-orange-flame hover:text-mp-orange-ink sm:inline-flex sm:justify-start"
                 >
                   <span>

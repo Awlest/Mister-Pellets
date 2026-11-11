@@ -17,7 +17,7 @@ import {
   type ArticleSection,
 } from "@/lib/articles";
 import { GUIDES } from "@/lib/guides";
-import { BRAND_LIST } from "@/lib/brands";
+import { TOP_TIER_BRANDS } from "@/lib/brands";
 import { CITIES } from "@/lib/cities";
 import {
   buildPageMetadata,
@@ -216,7 +216,7 @@ export default async function ArticlePage({ params }: Props) {
     .filter((c): c is NonNullable<typeof c> => Boolean(c))
     .slice(0, 4);
   const relatedBrands = (article.related.brands ?? [])
-    .map((s) => BRAND_LIST.find((b) => b.slug === s))
+    .map((s) => TOP_TIER_BRANDS.find((b) => b.slug === s))
     .filter((b): b is NonNullable<typeof b> => Boolean(b))
     .slice(0, 4);
 

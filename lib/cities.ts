@@ -13,7 +13,13 @@ export interface CityData {
   population: number;
   intro: string;
   context: string;
-  recommendedModels: string[]; // slugs depuis products-demo
+  /**
+   * Trois fiches visibles du catalogue (slugs réels, combustible pellet), en
+   * accord avec le texte de la ville, dont au moins une MCZ.
+   * scripts/check-catalogue.ts en vérifie la forme ; une fiche masquée ou
+   * supprimée disparaît simplement de la page.
+   */
+  recommendedModels: string[];
   localPrime?: string;
   /**
    * ⚠️ UNIQUEMENT un avis réel, recopié tel quel depuis la fiche Google et
@@ -41,7 +47,7 @@ export const CITIES: CityData[] = [
       "Capitale wallonne, Namur regroupe un mix de logements anciens en pierre dans le centre historique et de quartiers résidentiels modernes en périphérie (Jambes, Belgrade, Bouge, Saint-Servais). On y intervient quasi quotidiennement depuis Fernelmont, 17 km, 20 minutes de route.",
     context:
       "Sur les maisons mitoyennes anciennes du centre, le tubage du conduit existant est souvent nécessaire, on a l'habitude. Sur les nouvelles constructions de Bouge ou Belgrade, ce sont les poêles étanches qui dominent, avec une ventouse concentrique ou un conduit neuf qui monte au-dessus du toit.",
-    recommendedModels: ["edilkamin-blade-9kw", "ek63-tweed-90", "edilkamin-lena-11kw"],
+    recommendedModels: ["mcz-ego-air-8-r", "ek63-tweed-90", "edilkamin-rise-7"],
     metaTitle: "Poêle à pellets à Namur, Vente & pose",
     metaDescription:
       "Poêle à pellets à Namur : conseil, vente et pose en 1 jour. 10+ modèles, TVA à 6 % en rénovation, à 17 km de Fernelmont. Devis gratuit en 60 sec.",
@@ -57,7 +63,7 @@ export const CITIES: CityData[] = [
       "Plus grande ville de Wallonie, Charleroi présente un parc de logements très varié : maisons ouvrières mitoyennes typiques du Pays Noir, immeubles de la métropole, lotissements pavillonnaires en périphérie (Jumet, Marchienne, Gilly). À 65 km de Fernelmont, on y est en 50 minutes.",
     context:
       "Beaucoup de remplacement de chaudières mazout par des hydros Girolami dans les maisons ouvrières des années 50-70. Sur les maisons modernes de Mont-sur-Marchienne ou Gilly, c'est le canalisable EK63 qui domine pour gérer plusieurs pièces sans gros chantier.",
-    recommendedModels: ["edilkamin-mood-plus-11kw", "ek63-tweed-90", "edilkamin-lena-11kw"],
+    recommendedModels: ["ek63-spy-110", "ek63-monday-190h", "mcz-musa-hydro-matic-18-r"],
     metaTitle: "Poêle à pellets à Charleroi, Vente & pose",
     metaDescription:
       "Poêle à pellets à Charleroi : pose en 1 jour, hydro pour remplacer mazout, étanche pour BBC. 10+ modèles. Pose Mister Pellets, TVA à 6 % en rénovation.",
@@ -73,7 +79,7 @@ export const CITIES: CityData[] = [
       "Cité ardente, Liège est un mix dense de logements anciens (Outremeuse, Saint-Léonard, Sclessin) et de quartiers résidentiels modernes (Cointe, Sart-Tilman). On y intervient régulièrement, 60 km de Fernelmont, 50 minutes.",
     context:
       "Liège a une particularité : beaucoup de copropriétés dans les anciennes maisons mosanes divisées en appartements. Les poêles étanches s'y prêtent bien, sous réserve d'avoir l'accord du syndic. Selon la marque, les fumées sortent par une ventouse concentrique ou par un conduit qui monte au-dessus du toit : avec EK63, c'est toujours le conduit. Pour les maisons individuelles, mix entre canalisable et hydro selon la surface.",
-    recommendedModels: ["ek63-like-80", "edilkamin-blade-9kw", "edilkamin-mood-plus-11kw"],
+    recommendedModels: ["ek63-like-80", "mcz-ego-air-8-r", "edilkamin-cherie-9-evo"],
     metaTitle: "Poêle à pellets à Liège, Vente & pose",
     metaDescription:
       "Poêle à pellets à Liège : étanche pour copros et BBC, hydro pour grandes maisons. Pose en 1 jour, TVA à 6 % en rénovation, conseil expert Mister Pellets.",
@@ -89,7 +95,7 @@ export const CITIES: CityData[] = [
       "Wavre est le centre du Brabant wallon, à 50 km au nord-ouest de Fernelmont. Tissu résidentiel haut de gamme, beaucoup de villas modernes BBC, et quelques maisons anciennes en centre-ville.",
     context:
       "Le Brabant wallon est marqué par des maisons modernes très bien isolées (PEB A ou B). Le poêle à pellets est souvent secondaire au système de chauffage principal (PAC ou gaz condensation). On installe surtout des étanches d'appoint dans les pièces de vie, Edilkamin Blade, EK63 Like.",
-    recommendedModels: ["edilkamin-blade-9kw", "ek63-like-80", "edilkamin-lena-11kw"],
+    recommendedModels: ["edilkamin-blade-12-evo", "ek63-like-80", "mcz-eiko-natural-matic-6-core-r"],
     metaTitle: "Poêle à pellets à Wavre, Vente & pose",
     metaDescription:
       "Poêle à pellets à Wavre : étanche pour villas BBC, design contemporain. 10+ modèles, pose Mister Pellets. À 50 km de notre atelier de Fernelmont.",
@@ -105,7 +111,7 @@ export const CITIES: CityData[] = [
       "Capitale culturelle du Hainaut, Mons est à 90 km de Fernelmont (1h15). On y intervient sur les communes du grand Mons (Cuesmes, Hyon, Jemappes) et la périphérie hennuyère.",
     context:
       "Mons a un patrimoine ancien marqué : centre historique (Grand-Place classée Unesco), maisons anciennes à toiture pentue. Les conduits existants sont fréquents et on les tube régulièrement. En périphérie, plus de modernisme avec étanches BBC.",
-    recommendedModels: ["edilkamin-lena-11kw", "ek63-spy-110", "edilkamin-blade-9kw"],
+    recommendedModels: ["mcz-ego-air-8-r", "ek63-spy-110", "edilkamin-lena-9-evo"],
     metaTitle: "Poêle à pellets à Mons, Vente & pose",
     metaDescription:
       "Poêle à pellets à Mons : tubage, étanche, hydro selon votre maison. 10+ modèles, pose Mister Pellets, TVA à 6 % en rénovation. À 90 km de Fernelmont.",
@@ -121,7 +127,7 @@ export const CITIES: CityData[] = [
       "Arlon est notre commune la plus éloignée à 130 km (1h30). On regroupe les interventions luxembourgeoises sur 1-2 journées pour optimiser. Maisons rurales en pierre, chalets, fermettes rénovées : la province de Luxembourg appelle des poêles puissants.",
     context:
       "Hivers rudes en province de Luxembourg : -10°C n'est pas rare. Les maisons sont souvent grandes et anciennes, avec des hauteurs sous plafond importantes. Les hydros 22-30 kW dominent en remplacement des chaudières mazout. Stocks de pellets à anticiper en hiver.",
-    recommendedModels: ["edilkamin-mood-plus-11kw", "ek63-spy-110", "edilkamin-lena-11kw"],
+    recommendedModels: ["mcz-musa-hydro-matic-24-r", "ek63-monday-230h", "mcz-club-hydro-matic-24-r"],
     metaTitle: "Poêle à pellets à Arlon, Vente & pose",
     metaDescription:
       "Poêle à pellets à Arlon : hydro Girolami pour grandes maisons, hivers luxembourgeois. Pose Mister Pellets sur RDV, TVA à 6 % en rénovation.",
@@ -137,7 +143,7 @@ export const CITIES: CityData[] = [
       "Tournai, à la frontière française, est à 110 km de Fernelmont. La ville est connue pour son patrimoine médiéval (cathédrale Notre-Dame Unesco). On intervient régulièrement dans le grand Tournaisis.",
     context:
       "Tournai a beaucoup d'habitat ancien (maisons mitoyennes en briques rouges, centre historique). Le tubage est fréquent. En périphérie, des fermettes rénovées préfèrent souvent l'hydro pour remplacer le mazout. Le climat océanique adoucit l'usage : pellets de qualité ENplus A1 recommandés contre l'humidité.",
-    recommendedModels: ["edilkamin-mood-plus-11kw", "edilkamin-lena-11kw", "ek63-spy-110"],
+    recommendedModels: ["edilkamin-lena-9-evo", "ek63-monday-190h", "mcz-club-comfort-air-matic-12-core-r"],
     metaTitle: "Poêle à pellets à Tournai, Vente & pose",
     metaDescription:
       "Poêle à pellets à Tournai : tubage et pose en 1-2 jours. Hydro pour fermettes rénovées, étanche pour modernes. Mister Pellets intervient en Tournaisis.",
@@ -152,8 +158,8 @@ export const CITIES: CityData[] = [
     intro:
       "Verviers, ville lainière historique, est nichée dans la vallée de la Vesdre à 80 km de Fernelmont. Centre dense, banlieues sur les hauteurs (Heusy, Stembert, Mangombroux). Climat un peu plus froid que la moyenne wallonne.",
     context:
-      "Habitat ancien avec beaucoup de maisons à étages serrées dans la vallée. Le canalisable Edilkamin Mood Plus ou EK63 Spy est très demandé pour gérer 3-4 pièces avec un seul appareil. Sur les hauteurs, plus de villas individuelles, mix entre étanche et hydro.",
-    recommendedModels: ["edilkamin-mood-plus-11kw", "ek63-spy-110", "edilkamin-lena-11kw"],
+      "Habitat ancien avec beaucoup de maisons à étages serrées dans la vallée. Le canalisable est très demandé pour chauffer deux ou trois pièces avec un seul appareil. Sur les hauteurs, plus de villas individuelles, mix entre étanche et hydro.",
+    recommendedModels: ["ek63-spy-110", "mcz-feel-comfort-air-matic-12-core-r", "edilkamin-cherie-11-evo"],
     metaTitle: "Poêle à pellets à Verviers, Vente & pose",
     metaDescription:
       "Poêle à pellets à Verviers : canalisable pour maisons à étages, hydro pour grandes villas. 10+ modèles, pose Mister Pellets. Devis sous 48h.",
@@ -169,7 +175,7 @@ export const CITIES: CityData[] = [
       "Gembloux est notre voisin direct à 22 km à l'ouest de Fernelmont (25 minutes). Ville étudiante (Faculté agronomique), centre médiéval mignon, grande couronne agricole. On y intervient très régulièrement, parfois deux fois par semaine.",
     context:
       "Gembloux mixe centre dense (immeubles d'étudiants, maisons mitoyennes) et campagne (fermes rénovées, lotissements modernes). La proximité avec Fernelmont nous permet de dépanner rapidement et de proposer des poses en 1-2 jours d'avance.",
-    recommendedModels: ["ek63-tweed-90", "edilkamin-blade-9kw", "ek63-like-80"],
+    recommendedModels: ["ek63-tweed-90", "mcz-ego-air-8-r", "ek63-like-80"],
     metaTitle: "Poêle à pellets à Gembloux, Vente & pose",
     metaDescription:
       "Poêle à pellets à Gembloux : à 22 km de Fernelmont, intervention rapide, dépannage prioritaire. Étanche, canalisable, hydro selon votre maison.",
@@ -185,7 +191,7 @@ export const CITIES: CityData[] = [
       "Dinant, ville mosane touristique adossée à sa falaise, est à 45 km au sud de Fernelmont (45 min). Habitat ancien dense en bord de Meuse, et villas plus modernes sur les hauteurs (Bouvignes, Foy-Notre-Dame).",
     context:
       "Climat plus froid en bord de Meuse, surtout en hiver avec les remontées d'humidité. Les hydros sont fréquents en remplacement des vieilles chaudières mazout des maisons mosanes. Les nouvelles constructions des hauteurs penchent plutôt vers l'étanche compact.",
-    recommendedModels: ["edilkamin-mood-plus-11kw", "edilkamin-lena-11kw", "ek63-like-80"],
+    recommendedModels: ["mcz-musa-hydro-matic-18-r", "ek63-monday-190h", "ek63-zone-80"],
     metaTitle: "Poêle à pellets à Dinant, Vente & pose",
     metaDescription:
       "Poêle à pellets à Dinant : hydro pour maisons mosanes, étanche pour modernes. 10+ modèles, pose Mister Pellets, TVA à 6 % en rénovation. Devis sous 48h.",

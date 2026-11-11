@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Phone, Check, MapPin, Clock, ArrowRight } from "lucide-react";
 import { HeroSecondary } from "@/components/sections/HeroSecondary";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, GEO, ORGANIZATION_ID } from "@/components/seo/JsonLd";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { SITE_URL } from "@/lib/seo";
@@ -48,25 +48,11 @@ export function ServiceLanding({
       description: intro,
       serviceType: service.name,
       url,
-      provider: {
-        "@type": "LocalBusiness",
-        name: "Mister Pellets",
-        telephone: "+3281138309",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Rue des Fagotis 3A",
-          postalCode: "5380",
-          addressLocality: "Fernelmont",
-          addressCountry: "BE",
-        },
-      },
+      // L'entreprise est décrite une fois, sur tout le site (JsonLd.tsx) : on la cite.
+      provider: { "@id": ORGANIZATION_ID },
       areaServed: {
         "@type": "GeoCircle",
-        geoMidpoint: {
-          "@type": "GeoCoordinates",
-          latitude: 50.5364,
-          longitude: 4.9779,
-        },
+        geoMidpoint: { "@type": "GeoCoordinates", ...GEO },
         geoRadius: 50000,
       },
       // Tarifs TTC annoncés publiquement. Pour le dépannage, facturé au temps

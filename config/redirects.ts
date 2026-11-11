@@ -16,8 +16,12 @@ const LEGACY_REDIRECTS: SiteRedirect[] = [
   { source: "/marques", destination: "/nos-marques", permanent: true },
   { source: "/edilkamin", destination: "/nos-marques/edilkamin", permanent: true },
   { source: "/ek63", destination: "/nos-marques/ek63", permanent: true },
-  { source: "/dielle", destination: "/nos-marques/dielle", permanent: true },
-  { source: "/ferlux", destination: "/nos-marques/ferlux", permanent: true },
+  // Dielle et Ferlux ne sont plus affichées : leurs pages et leurs anciennes
+  // adresses renvoient vers la liste des marques.
+  { source: "/dielle", destination: "/nos-marques", permanent: true },
+  { source: "/ferlux", destination: "/nos-marques", permanent: true },
+  { source: "/nos-marques/dielle", destination: "/nos-marques", permanent: true },
+  { source: "/nos-marques/ferlux", destination: "/nos-marques", permanent: true },
 
   // Anciennes URLs WP courantes
   // Le panier a été retiré avec le paiement en ligne : les anciennes URL
@@ -63,6 +67,13 @@ const LEGACY_REDIRECTS: SiteRedirect[] = [
 const PATTERN_REDIRECTS: SiteRedirect[] = [
   // Wix Stores legacy
   { source: "/product-page/:slug", destination: "/produit/:slug", permanent: true },
+  // Pages ville : une seule adresse, celle du sitemap et du canonical,
+  // `/poeles-pellets-<ville>`. La forme à barre est la route interne de Next,
+  // atteinte par la réécriture de next.config.ts ; demandée directement, elle
+  // renvoie vers la forme à tiret. Pas de boucle : Next applique les
+  // redirections à l'adresse demandée, avant les réécritures, et ne les
+  // rejoue pas sur l'adresse réécrite.
+  { source: "/poeles-pellets/:ville", destination: "/poeles-pellets-:ville", permanent: true },
 ];
 
 const isPattern = (source: string): boolean => /[:*(]/.test(source);

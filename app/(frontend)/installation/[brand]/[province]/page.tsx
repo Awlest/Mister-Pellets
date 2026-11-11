@@ -11,6 +11,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { BRANDS, TOP_TIER_BRANDS, type BrandData } from "@/lib/brands";
 import { PROVINCES, getProvince } from "@/lib/local-seo";
 import { buildPageMetadata } from "@/lib/seo";
+import { MARQUES_SANS_VENTOUSE } from "@/lib/estimate";
+import { ORGANIZATION_ID } from "@/components/seo/JsonLd";
 
 interface Props {
   params: Promise<{ brand: string; province: string }>;
@@ -38,10 +40,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = BRANDS[brandSlug as BrandData["slug"]];
   const province = getProvince(provinceSlug);
   if (!brand || !province) return { title: "Page introuvable", robots: { index: false } };
+  // Titre de 60 caractères au plus : « poêle » saute pour les noms les plus longs.
+  const longTitle = `Installation poêle ${brand.name} ${province.inLabel}`;
+  const base = `Poêle à pellets ${brand.name} posé ${province.inLabel} par Mister Pellets : visite technique, devis sous 48 h, TVA à 6 % en rénovation.`;
+  const withCities = `${base} ${province.cities.slice(0, 3).join(", ")} et environs.`;
   return buildPageMetadata({
-    // pas de suffixe " | Mister Pellets" ici : le template de app/(frontend)/layout.tsx l'ajoute déjà
-    title: `Installation poêle ${brand.name} en ${province.name}`,
-    description: `Pose de poêle à pellets ${brand.name} dans ${province.longName} par Mister Pellets : devis sous 48 h, TVA à 6 % en rénovation, équipes basées à Fernelmont. ${province.cities.slice(0, 4).join(", ")} et environs.`,
+    title: longTitle.length <= 60 ? longTitle : `Installation ${brand.name} ${province.inLabel}`,
+    description: withCities.length <= 158 ? withCities : base,
     path: `/installation/${brandSlug}/${provinceSlug}`,
   });
 }
@@ -55,25 +60,20 @@ export default async function InstallationLocalePage({ params }: Props) {
   if (!brand || brand.tier !== 1 || !province) notFound();
 
   const models = (brand.modelsTable ?? []).slice(0, 3);
+  // Edilkamin et EK63 n'acceptent pas la sortie en ventouse : leur page ne la promet pas.
+  const localAngle =
+    (MARQUES_SANS_VENTOUSE.includes(brand.name) ? province.localAngleWithoutVentouse : undefined) ??
+    province.localAngle;
 
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: `Installation de poêle à pellets ${brand.name}`,
-    provider: {
-      "@type": "LocalBusiness",
-      name: "Mister Pellets",
-      areaServed: province.name,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Fernelmont",
-        addressRegion: "Namur",
-        addressCountry: "BE",
-      },
-    },
+    // L'entreprise est décrite une fois, sur tout le site (JsonLd.tsx) : on la cite.
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: {
       "@type": "AdministrativeArea",
-      name: province.longName,
+      name: province.areaName,
     },
     brand: { "@type": "Brand", name: brand.name },
   };
@@ -83,21 +83,21 @@ export default async function InstallationLocalePage({ params }: Props) {
       <JsonLd data={serviceSchema} />
 
       <HeroSecondary
-        eyebrow={`Installation en ${province.name}`}
+        eyebrow={`Installation ${province.inLabel}`}
         title={
           <>
             <span className="block">Poêle {brand.name}</span>
             <span className="block text-mp-orange-display mt-1">
-              posé dans {province.longName}
+              posé {province.inLabel}
             </span>
           </>
         }
-        description={`${brand.tagline}. On le livre, on le pose et on le règle dans ${province.longName}, au taux de TVA réduit quand votre logement a plus de 10 ans.`}
+        description={`${brand.tagline}. On le livre, on le pose et on le règle ${province.inLabel}, au taux de TVA réduit quand votre logement a plus de 10 ans.`}
         breadcrumbs={[
           { label: "Accueil", href: "/" },
           { label: "Nos marques", href: "/nos-marques" },
           { label: brand.name, href: `/nos-marques/${brand.slug}` },
-          { label: `Installation en ${province.name}` },
+          { label: `Installation ${province.inLabel}` },
         ]}
       />
 
@@ -105,10 +105,10 @@ export default async function InstallationLocalePage({ params }: Props) {
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-3xl md:text-4xl font-semibold text-mp-green-deep mb-6">
-            Un {brand.name} dans {province.longName}
+            Un {brand.name} {province.inLabel}
           </h2>
           <div className="mp-measure space-y-4 text-lg text-mp-ink leading-relaxed">
-            <p>{province.localAngle}</p>
+            <p>{localAngle}</p>
             <p>{brand.whyWeLove?.[0] ?? brand.intro}</p>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default async function InstallationLocalePage({ params }: Props) {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-3xl md:text-4xl font-semibold text-mp-green-deep mb-4">
-            On vous installe votre {brand.name} partout en {province.name}
+            On vous installe votre {brand.name} partout {province.inLabel}
           </h2>
           <p className="text-lg text-mp-ink-soft leading-relaxed mb-8 mp-measure text-center">
             {province.delivery}
@@ -138,7 +138,7 @@ export default async function InstallationLocalePage({ params }: Props) {
         <section className="bg-mp-cream mp-band">
           <div className="mp-shell">
             <h2 className="mp-measure text-center text-3xl md:text-4xl font-semibold text-mp-green-deep mb-10">
-              Modèles {brand.name} qu&apos;on pose le plus en {province.name}
+              Modèles {brand.name} qu&apos;on pose le plus {province.inLabel}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {models.map((model) => (
@@ -178,7 +178,7 @@ export default async function InstallationLocalePage({ params }: Props) {
       <section className="bg-mp-beige mp-band">
         <div className="mp-shell">
           <h2 className="mp-measure text-center text-3xl md:text-4xl font-semibold text-mp-green-deep mb-8">
-            Notre service en {province.name}
+            Notre service {province.inLabel}
           </h2>
           <ul className="mp-measure space-y-3 text-lg text-mp-ink leading-relaxed">
             {[
@@ -197,7 +197,7 @@ export default async function InstallationLocalePage({ params }: Props) {
       </section>
 
       <CTAFinal
-        title={`Devis pour un ${brand.name} en ${province.name}`}
+        title={`Devis pour un ${brand.name} ${province.inLabel}`}
         description="Donnez-nous quelques infos sur votre maison, on chiffre la pose en 48h, TVA comprise."
       />
     </>
