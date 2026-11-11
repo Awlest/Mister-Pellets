@@ -29,7 +29,7 @@ import { buildPageMetadata } from "@/lib/seo";
 import { BONUS, bonusLabelFor } from "@/lib/bonus";
 import { typo } from "@/lib/typo";
 import { productFamily, productNeighbours } from "@/lib/product-neighbours";
-import { priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
+import { guaranteeLine, priceBadge, shownPriceTTC, struckPriceTTC } from "@/lib/product-price";
 import { formatKw } from "@/lib/power";
 import { categoriesOf } from "@/lib/categories";
 import { ROUTES } from "@/config/navigation";
@@ -346,6 +346,7 @@ export default async function ProductPage({ params }: Props) {
                     variants={product.variants}
                     accessories={product.accessories}
                   />
+                  <p className="mt-3 text-sm text-mp-ink-soft">{typo(guaranteeLine(product.deliveryDelay))}</p>
                   <div className="mt-3 flex flex-col gap-3">
                     <Button asChild variant="primary" size="lg" className={`w-full ${YIELDS_TO_ACTION_BAR}`}>
                       <Link href={primary.href} rel="nofollow">
@@ -402,6 +403,7 @@ export default async function ProductPage({ params }: Props) {
                           {typo(bonusLabelFor(product.brand))} déduit. {BONUS.conditions}
                         </p>
                       ) : null}
+                      <p className="mt-2 text-sm text-mp-ink-soft">{typo(guaranteeLine(product.deliveryDelay))}</p>
                     </div>
                     <ul className="text-sm text-mp-ink-soft space-y-1 leading-relaxed">
                       <li>
@@ -423,6 +425,7 @@ export default async function ProductPage({ params }: Props) {
                     Prix dépendant de la configuration de pose (tubage, ventouse, raccordement
                     hydro, etc.).
                   </p>
+                  <p className="text-sm text-mp-ink-soft mt-2">{typo(guaranteeLine(product.deliveryDelay))}</p>
                 </div>
               )}
 

@@ -76,6 +76,8 @@ interface PayloadProduct {
   mpn?: string | null;
   googleProductCategory?: string | null;
   stockStatus?: VariantStockStatus | null;
+  /** Délai de livraison saisi dans l'admin (« 4-6 sem. »), texte libre. */
+  deliveryDelay?: string | null;
   heatedVolumeM3?: number | null;
   isAirtight?: boolean | null;
   isCanalizable?: boolean | null;
@@ -436,6 +438,7 @@ function payloadToDemo(raw: PayloadProduct): ProductDemo {
     promoPriceTTC: promoTTC,
     bonusPriceTTC: bonusActive && effectiveTTC ? bonusPrice(effectiveTTC, p.brand) : undefined,
     stockStatus: p.stockStatus ?? undefined,
+    deliveryDelay: p.deliveryDelay?.trim() || undefined,
     isBestseller: p.isBestseller ?? false,
     isFeatured: p.isFeatured ?? false,
     isNew: p.isNew ?? false,

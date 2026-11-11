@@ -131,6 +131,8 @@ export interface ProductDemo extends ProductCardData {
   googleProductCategory?: string;
   /** Statut de stock au niveau produit (feed Merchant + page produit). */
   stockStatus?: VariantStockStatus;
+  /** Délai de livraison indicatif saisi dans l'admin (« 4-6 sem. »). */
+  deliveryDelay?: string;
   /**
    * Système de variantes générique multi-axes (matériau, sortie des fumées…).
    * Indépendant de colorVariants. Activé via la case « Ce produit a des

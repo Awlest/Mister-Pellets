@@ -37,3 +37,16 @@ export const struckPriceTTC = (p: PricedProduct): number | undefined => {
  */
 export const priceBadge = (p: PricedProduct): string | undefined =>
   p.bonusPriceTTC != null ? typo(bonusBadgeFor(p.brand)) : p.promoPriceTTC != null ? "Promo" : undefined;
+
+/**
+ * Ligne sobre sous le prix d'une fiche : la garantie légale, dans les mots de
+ * la FAQ (« Quelles garanties offrez-vous ? ») et de la page des garanties,
+ * puis le délai de livraison saisi dans l'admin quand il existe. Rien n'est
+ * inventé : sans délai saisi, la garantie seule.
+ */
+export const LEGAL_GUARANTEE = "Garantie légale de 2 ans sur le poêle et la pose";
+
+export function guaranteeLine(deliveryDelay?: string): string {
+  const delay = deliveryDelay?.trim();
+  return delay ? `${LEGAL_GUARANTEE} · délai de livraison indicatif : ${delay}` : LEGAL_GUARANTEE;
+}

@@ -27,6 +27,7 @@ import { FAQS } from "@/lib/faqs";
 import { getGuideBySlug } from "@/lib/guides";
 import { NBSP, NNBSP } from "@/lib/typo";
 import { PROJECT_LEAD_TIME } from "@/lib/services";
+import { guaranteeLine } from "@/lib/product-price";
 
 let ko = 0;
 function check(label: string, got: unknown, want: unknown) {
@@ -146,6 +147,11 @@ for (const file of [
   assert("estimation : aucun « TTC » affiché", !/[ "]TTC\b(?!\()/.test(conf.replace(/\b\w+TTC\b/g, "")));
   assert("estimation : détail marqué HTVA", conf.includes("Montants HTVA") && conf.includes("Sous-total HTVA"));
 }
+
+// 5. Fiche : garantie légale, délai seulement s'il est saisi
+check("fiche : garantie seule sans délai", guaranteeLine(undefined), "Garantie légale de 2 ans sur le poêle et la pose");
+check("fiche : délai vide ignoré", guaranteeLine("  "), "Garantie légale de 2 ans sur le poêle et la pose");
+check("fiche : délai saisi", guaranteeLine("4-6 sem."), "Garantie légale de 2 ans sur le poêle et la pose · délai de livraison indicatif : 4-6 sem.");
 
 if (ko > 0) {
   console.error(`\n${ko} contrôle(s) en échec.`);
