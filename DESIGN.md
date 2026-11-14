@@ -385,6 +385,7 @@ export default function NouvellePage() {
   - `variant="complet"` : mascotte en pied et nom sur deux lignes, mot en crème. Pied de page, 144 puis 160 px. Jamais sous 120 px : la mascotte en pied y devient un timbre.
 - **Mascotte seule** (`Mascot`) : page introuvable, au-dessus du titre, 176 puis 224 px, pleine opacité.
 - **Pas de médaillon :** le contour noir de la mascotte la détache du crème comme du vert.
+- **Flamme du i :** celle de Mister Bois, même dessin et mêmes couleurs, posée dans une coupe creusée au sommet du i. Elle reste en couleur sur la version inversée.
 - **Ailleurs :** favicon et icônes = la tête seule (`public/logo-mister-pellets-tete.svg`, `scripts/generate-favicons.ts`, `app/icon.svg`) ; e-mails = logo complet en PNG (`public/email/`) ; images de partage = logo en PNG (`public/brand/`, `lib/brand-images.ts`).
 - **Interdits :** ni ombre, ni contour ajouté, ni fond derrière le logo ; pas de recoloriage ; pas de logo posé sur une photo.
 

@@ -10,8 +10,8 @@ import { join } from "node:path";
 export const BRAND_PNG = {
   /** Logo complet, mascotte et nom, 1180 × 600. */
   full: { file: "mister-pellets-logo.png", width: 1180, height: 600 },
-  /** Tête et nom sur deux lignes, 360 × 128. */
-  compact: { file: "mister-pellets-logo-compact.png", width: 360, height: 128 },
+  /** Tête et nom sur deux lignes, 360 × 131. */
+  compact: { file: "mister-pellets-logo-compact.png", width: 360, height: 131 },
 } as const;
 
 const cache = new Map<string, string>();
