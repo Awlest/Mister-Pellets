@@ -5,6 +5,7 @@ import { ACTION_LABELS, ROUTES, isFilterLink, visibleNav } from "@/config/naviga
 import { PHONE_DISPLAY, PHONE_HREF } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { HeaderShell } from "./HeaderShell";
+import { Logo } from "./Logo";
 
 // Menu commun aux sites Mister (config/navigation.ts, MAIN_NAV, standard du
 // 17/10/2026) : Catalogue, Marques, Services, Aides, Réalisations, Conseils,
@@ -46,25 +47,11 @@ export function Header() {
       )}
     >
       <div className="mp-shell h-full flex items-center justify-between gap-4">
-        {/* Logo. Chargement différé : l'en-tête est masqué sous 1280 px, les
-            téléphones n'ont pas à télécharger ce fichier. */}
-        <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="Mister Pellets, accueil">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo-mister-pellets-mascotte.svg"
-            alt=""
-            width={44}
-            height={44}
-            loading="lazy"
-            decoding="async"
-            className="size-11 group-data-scrolled/header:size-9"
-          />
-          <span
-            className="font-semibold text-mp-green-deep hidden sm:inline text-xl group-data-scrolled/header:text-lg"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Mister Pellets
-          </span>
+        {/* Logo compact (tête + nom sur deux lignes) : 146 px de large à 52 px
+            de haut, la place que laisse la ligne du menu à 1280 px. Plus bas
+            quand l'en-tête se replie (44 px dans une barre de 64 px). */}
+        <Link href="/" className="flex shrink-0 items-center rounded-md" aria-label="Mister Pellets, accueil">
+          <Logo variant="compact" className="h-13 group-data-scrolled/header:h-11" />
         </Link>
 
         {/* Nav desktop */}

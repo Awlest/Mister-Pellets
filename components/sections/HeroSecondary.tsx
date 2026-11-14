@@ -49,7 +49,12 @@ export function HeroSecondary({
     <section
       className={cn(
         "bg-mp-cream border-b border-mp-sand/30",
-        compact ? "pt-5 pb-6 sm:pt-12 sm:pb-12 md:pt-16 md:pb-16" : "pt-12 pb-16 md:pt-20 md:pb-24",
+        // Sous 1280 px, le bandeau logo (MobileBrand, 52 px) précède le héros :
+        // sa marge haute est réduite d'autant. À partir de xl, l'en-tête porte
+        // le logo et la marge d'origine revient.
+        compact
+          ? "pt-2 pb-6 sm:pt-6 sm:pb-12 md:pt-10 md:pb-16 xl:pt-16"
+          : "pt-4 pb-16 md:pt-12 md:pb-24 xl:pt-20",
       )}
     >
       <div className="mp-shell">

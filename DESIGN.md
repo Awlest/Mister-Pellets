@@ -377,9 +377,20 @@ export default function NouvellePage() {
 - **Erreur :** bordure et texte rouge 700, message sous le champ, `role="alert"`.
 - **Cartes de choix :** bordure 2 px ; choisie = bordure orange braise, fond pêche `/40`, pastille radio dessinée (la sélection ne repose pas sur la seule couleur).
 
+### Logo
+- **Composant :** `components/layout/Logo.tsx`, fichiers dans `components/layout/logo/` (planche de marque du 14/11/2026, vectorisée ; originaux en pleine définition, PNG et favicon hors du dépôt, dossier `mister-pellets-logo-2026-11-14` d'Awlest). Même système que Mister Bois.
+- **Trois formats :**
+  - `variant="compact"` : tête de la mascotte et « Mister Pellets » sur deux lignes (2,8:1). En-tête ordinateur, 52 px de haut, 44 px en-tête replié.
+  - `variant="ligne"` : tête et nom sur une ligne (6:1). Bandeau en haut de page sous 1 280 px (`components/layout/MobileBrand.tsx`), 36 px de haut, sur toutes les pages, accueil compris.
+  - `variant="complet"` : mascotte en pied et nom sur deux lignes, mot en crème. Pied de page, 144 puis 160 px. Jamais sous 120 px : la mascotte en pied y devient un timbre.
+- **Mascotte seule** (`Mascot`) : page introuvable, au-dessus du titre, 176 puis 224 px, pleine opacité.
+- **Pas de médaillon :** le contour noir de la mascotte la détache du crème comme du vert.
+- **Ailleurs :** favicon et icônes = la tête seule (`public/logo-mister-pellets-tete.svg`, `scripts/generate-favicons.ts`, `app/icon.svg`) ; e-mails = logo complet en PNG (`public/email/`) ; images de partage = logo en PNG (`public/brand/`, `lib/brand-images.ts`).
+- **Interdits :** ni ombre, ni contour ajouté, ni fond derrière le logo ; pas de recoloriage ; pas de logo posé sur une photo.
+
 ### Navigation
 - **Barre du bas (< 1 280 px) :** pilule crème opaque, filet sable, `shadow-md`, 5 onglets, pastille orange derrière l'onglet actif (texte vert nuit). Se replie au défilement vers le bas, revient au défilement vers le haut.
-- **En-tête (≥ 1 280 px) :** collant, fond crème opaque ; au défilement il passe de 96 à 64 px et prend un filet sable, sans animation de hauteur. Sous-menus en CSS (survol et clavier), `shadow-lg`.
+- **En-tête (≥ 1 280 px) :** collant, fond crème opaque, logo compact à gauche ; au défilement il passe de 96 à 64 px et prend un filet sable, sans animation de hauteur. Sous-menus en CSS (survol et clavier), `shadow-lg`.
 
 ### Mouvement
 Jetons dans `app/globals.css` (`:root`), repris par Tailwind (`ease-out`, durée par défaut des `transition-*`) :

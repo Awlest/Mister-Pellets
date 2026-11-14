@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { brandPng } from "@/lib/brand-images";
 
 /**
  * Image Open Graph par défaut (DEFAULT_OG_IMAGE dans lib/seo.ts), cf. audit
@@ -17,8 +18,8 @@ import { ImageResponse } from "next/og";
  *   ligne est une <div>, chaque couleur un élément à part ;
  * - sans police fournie, seule Geist Regular est disponible : Georgia, le gras
  *   et l'italique ne s'appliquent pas ;
- * - l'emoji 🔥 est une image Twemoji téléchargée sur cdn.jsdelivr.net pendant
- *   le build.
+ * - une image se passe en data URI avec sa largeur et sa hauteur : le logo
+ *   est le PNG de public/brand, lu au build (lib/brand-images.ts).
  *
  * Fond crème uni, sans dégradé ni halo (DESIGN.md, 17/10/2026). Couleurs en
  * dur : Satori ne lit pas les variables CSS, ce sont les valeurs des jetons
@@ -30,6 +31,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
+  const logo = brandPng("full", 120);
   return new ImageResponse(
     (
       <div
@@ -45,41 +47,9 @@ export default async function OpengraphImage() {
           fontFamily: "Georgia, serif",
         }}
       >
-        {/* Bandeau identité (logo + wordmark) */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 24,
-            marginBottom: 48,
-          }}
-        >
-          <div
-            style={{
-              width: 72,
-              height: 72,
-              borderRadius: 16,
-              background: "#F28A20",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
-              color: "#FFFFFF",
-            }}
-          >
-            🔥
-          </div>
-          <div
-            style={{
-              fontSize: 56,
-              fontWeight: 600,
-              color: "#102916",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Mister Pellets
-          </div>
-        </div>
+        {/* Logo complet de la mascotte (public/brand, lib/brand-images.ts). */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img {...logo} alt="Mister Pellets" style={{ marginBottom: 36 }} />
 
         {/* Titre principal */}
         <div

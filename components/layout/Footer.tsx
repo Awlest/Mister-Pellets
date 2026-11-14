@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CATALOGUE_LINKS, INFO_LINKS, LEGAL_LINKS, ROUTES, SERVICE_LINKS, isFilterLink, published, type NavLink } from "@/config/navigation";
 import { ConsentSettingsButton } from "@/components/layout/Analytics";
+import { Logo } from "@/components/layout/Logo";
 import {
   ADDRESS,
   EMAIL,
@@ -97,20 +98,11 @@ export function Footer() {
       <div className="mp-shell">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
           <div className="max-w-xs">
-            {/* Le contour du logo est en vert sombre, le même que ce fond : posé
-              * à nu, il disparaît. Il repose donc sur un médaillon crème plein
-              * (pas de contour lumineux en drop-shadow, DESIGN.md). */}
-            <Link href="/" aria-label="Mister Pellets, accueil" className="inline-block rounded-[28px] bg-mp-cream p-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/logo-mister-pellets-ref.svg"
-                alt="Mister Pellets"
-                width={320}
-                height={320}
-                loading="lazy"
-                decoding="async"
-                className="h-24 w-24 object-contain"
-              />
+            {/* Logo complet, mot en crème : le contour noir de la mascotte la
+              * détache du vert, plus besoin du médaillon crème de l'ancien
+              * dessin (contour vert, qui disparaissait sur ce fond). */}
+            <Link href="/" aria-label="Mister Pellets, accueil" className="inline-flex rounded-md">
+              <Logo variant="complet" className="h-36 md:h-40" />
             </Link>
             <p className="mt-3 text-base text-mp-cream/85">Poêles à pellets vendus, posés et entretenus en Wallonie.</p>
             <div className="mt-4 flex flex-col items-start">
