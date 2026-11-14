@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Home, ShoppingBag, Phone } from "lucide-react";
+import { Mascot } from "@/components/layout/Logo";
 import { Button } from "@/components/ui/button";
 import { CTAFinal } from "@/components/sections/CTAFinal";
 
@@ -16,16 +17,7 @@ export default function NotFound() {
     <>
       <section className="bg-mp-cream mp-band">
         <div className="mp-shell text-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo-mister-pellets-mascotte.svg"
-            alt=""
-            width={120}
-            height={120}
-            loading="lazy"
-            decoding="async"
-            className="mx-auto mb-6 h-24 w-24 opacity-60"
-          />
+          <Mascot className="mb-6 h-44 md:h-56" />
           <p className="mp-measure mx-auto text-sm uppercase tracking-wider font-semibold text-mp-orange-ink mb-3">
             Erreur 404
           </p>

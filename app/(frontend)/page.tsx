@@ -123,38 +123,15 @@ export default function HomePage() {
     <>
       <JsonLd data={faqSchema} />
 
-      {/* HERO, logo central doublé + spacing 35 px max (cf. doc V1.3 §P7) */}
+      {/* HERO (spacing 35 px max, cf. doc V1.3 §P7) */}
       <section className="bg-mp-cream">
 
-        {/* Bloc logo dédié. Taille divisée par deux (320/400 → 160/200 px) :
-          * au format précédent, le premier écran ne contenait que le logo, et
-          * le titre, les boutons et la ligne de preuves n'apparaissaient
-          * qu'après un défilement. Sur du trafic payant, c'est un visiteur
-          * acheté puis perdu avant d'avoir lu la proposition. */}
-        {/* 11/11/2026 : logo de 64 px sur téléphone (il prenait 190 px et
-          * repoussait le bouton principal sous le bandeau cookies), 80 px sur
-          * tablette, absent à partir de 1 280 px où l'en-tête le porte déjà. */}
-        <div
-          className="flex justify-center py-3 xl:hidden"
-        >
-          {/* Chargement différé : sans lui, React annonce ce logo (68 Ko) en
-              préchargement, et chaque page qui précharge l'accueil par un lien
-              le téléchargeait sans l'afficher, sur téléphone comme sur
-              ordinateur, où ce bloc est masqué. En haut de page, il se charge
-              aussitôt. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/logo-mister-pellets-full.svg"
-            alt="Mister Pellets"
-            width={400}
-            height={400}
-            loading="lazy"
-            decoding="async"
-            className="h-16 w-16 md:h-20 md:w-20 object-contain"
-          />
-        </div>
+        {/* Le logo du haut de page sur téléphone et tablette vient du bandeau
+          * commun (components/layout/MobileBrand.tsx, format « ligne » de
+          * 36 px), comme sur les autres pages. Le logo complet de 64 à 80 px
+          * qui ouvrait ce héros a été retiré le 14/11/2026. */}
 
-        <div className="mp-shell pb-10 md:pb-16">
+        <div className="mp-shell pb-10 pt-3 md:pb-16 xl:pt-0">
           <div className="mp-measure mx-auto text-center">
             <BonusAnnouncement />
 

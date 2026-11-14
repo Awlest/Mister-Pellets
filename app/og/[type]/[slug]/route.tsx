@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { ARTICLES, CATEGORY_LABELS } from "@/lib/articles";
 import { GUIDES } from "@/lib/guides";
+import { brandPng } from "@/lib/brand-images";
 
 /**
  * Image de partage (Open Graph) d'un article ou d'un guide : son titre sur le
@@ -68,8 +69,9 @@ export async function GET(_request: Request, { params }: { params: Promise<{ typ
         >
           {title}
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28, color: INK_SOFT }}>
-          <div style={{ display: "flex", color: GREEN, fontWeight: 600 }}>Mister Pellets</div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", fontSize: 28, color: INK_SOFT }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img {...brandPng("compact", 64)} alt="Mister Pellets" />
           <div style={{ display: "flex" }}>mister-pellets.be</div>
         </div>
       </div>

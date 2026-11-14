@@ -312,7 +312,7 @@ export function brandedEmailHtml(o: BrandedEmailOptions): string {
           <tr>
             <td align="center" style="padding:0 0 22px">
               <a href="${EMAIL_SITE_URL}" target="_blank" style="text-decoration:none">
-                <img src="${EMAIL_SITE_URL}/email/logo-mister-pellets.png" width="${internal ? 150 : 190}" height="${internal ? 63 : 80}" alt="Mister Pellets"
+                <img src="${EMAIL_SITE_URL}/email/logo-mister-pellets.png" width="${internal ? 150 : 190}" height="${internal ? 76 : 97}" alt="Mister Pellets"
                      style="display:block;width:${internal ? 150 : 190}px;height:auto;max-width:${internal ? 150 : 190}px;border:0;color:${C.greenDeep};font-family:${SANS};font-size:22px;font-weight:bold">
               </a>
             </td>
