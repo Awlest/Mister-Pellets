@@ -255,7 +255,7 @@ export interface Product {
    */
   productType: 'standard' | 'canalisable' | 'hydro' | 'hybride' | 'hybride-hydro' | 'insert';
   /**
-   * Combustible — filtre boutique. Pour un modèle proposé en plusieurs combustibles, choisir le combustible principal (le choix pellet/hybride à l'achat se gère en variante). Le caractère hydro/ventilé se règle via la case « Hydro » ci-dessous.
+   * Combustible — filtre boutique. Pour un modèle proposé en plusieurs combustibles, choisir le combustible principal (le choix pellet/hybride à l'achat se gère en variante). Le caractère hydro/ventilé se règle via la case « Hydro » ci-dessous. Une fiche « Bois » n'apparaît nulle part sur mister-pellets.be : son adresse renvoie vers mister-bois.be (lib/catalog-scope.ts).
    */
   combustible: 'pellet' | 'bois' | 'hybride';
   /**

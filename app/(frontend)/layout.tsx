@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "../globals.css";
 import { Header } from "@/components/layout/Header";
+import { MobileBrand } from "@/components/layout/MobileBrand";
 import { Footer } from "@/components/layout/Footer";
 import { NavbarSticky } from "@/components/layout/NavbarSticky";
 import { PelletPromoBanner } from "@/components/layout/PelletPromoBanner";
@@ -183,6 +184,7 @@ export default function FrontendLayout({
         {/* Prix de lancement des pellets Comfo : rien hors période (lib/pellets.ts). */}
         <PelletPromoBanner />
         <Header />
+        <MobileBrand />
         <main id="main-content" className="flex-1">{children}</main>
         <Footer />
         <NavbarSticky />
